@@ -21,6 +21,7 @@
 #include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
 
+#include <cassert>
 #include <cstdint>
 #include <cstring>
 
@@ -80,7 +81,7 @@ static void set_attrib_pointer(unsigned int index, unsigned int format, unsigned
                                const void *data);
 static void draw_arrays(unsigned int mode, int start, int count);
 static int update_texture_memory(uint8_t *texture_memory, TextureFormatInfo format, int width, int height);
-static void save_framebuffer(const uint8_t *framebuffer, const TextureFormatInfo &format_info, const char *prefix);
+static void save_back_buffer(const TextureFormatInfo &format_info, const char *prefix);
 static void setup_texture_stages(const uint8_t *texture_memory, const TextureFormatInfo &format_info);
 static void send_shader_constants();
 
@@ -195,7 +196,6 @@ int main() {
   int update_texture_result =
       update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
 
-  uint8_t *framebuffer = XVideoGetFB();
   bool toggle_format_allowed = true;
   bool render_changed = true;
   bool automatic_forward_mode = false;
@@ -297,11 +297,6 @@ int main() {
       /* Wait for completion... */
     }
 
-    /* Swap buffers (if we can) */
-    while (pb_finished()) {
-      /* Not ready to swap yet */
-    }
-
     if (render_changed) {
       render_changed = false;
       const char *prefix = "";
@@ -310,7 +305,12 @@ int main() {
       } else if (automatic_backward_mode) {
         prefix = "auto_rev_";
       }
-      save_framebuffer(framebuffer, format_map[format_map_index], prefix);
+      save_back_buffer(format_map[format_map_index], prefix);
+    }
+
+    /* Swap buffers (if we can) */
+    while (pb_finished()) {
+      /* Not ready to swap yet */
     }
 
     if (automatic_forward_mode) {
@@ -346,14 +346,20 @@ int main() {
   return 0;
 }
 
-static void save_framebuffer(const uint8_t *framebuffer, const TextureFormatInfo &format_info, const char *prefix) {
+static void save_back_buffer(const TextureFormatInfo &format_info, const char *prefix) {
   char target_file[256] = {0};
-  snprintf(target_file, 255, "%s\\%s%s.bmp", kOutputDirectory, prefix, format_info.Name);
+  snprintf(target_file, 255, "%s\\%s%s.png", kOutputDirectory, prefix, format_info.Name);
   CreateDirectoryA(kOutputDirectory, nullptr);
 
-  SDL_Surface *surface = SDL_CreateRGBSurfaceWithFormatFrom((void *)framebuffer, 0, kFramebufferWidth,
-                                                            kFramebufferHeight, 32, SDL_PIXELFORMAT_RGBA8888);
-  int ret = SDL_SaveBMP(surface, target_file);
+  auto buffer = pb_back_buffer();
+  auto width = static_cast<int>(pb_back_buffer_width());
+  auto height = static_cast<int>(pb_back_buffer_height());
+  auto pitch = static_cast<int>(pb_back_buffer_pitch());
+
+  SDL_Surface *surface =
+      SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, width, height, 32, pitch, SDL_PIXELFORMAT_ARGB8888);
+  int ret = IMG_SavePNG(surface, target_file);
+  assert(ret == 0);
   SDL_FreeSurface(surface);
 }
 

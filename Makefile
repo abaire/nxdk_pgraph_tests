@@ -1,4 +1,4 @@
-XBE_TITLE = nxdk_texture_format_tests
+XBE_TITLE = nxdk_pgraph_tests
 GEN_XISO = $(XBE_TITLE).iso
 NXDK_DIR ?= $(CURDIR)/../nxdk
 NXDK_SDL = y
@@ -11,12 +11,9 @@ SRCS = \
 
 SHADER_OBJS = ps.inl vs.inl
 
-CFLAGS += -std=gnu++17
-
 DEVKIT ?= y
 ifeq ($(DEVKIT),y)
 CXXFLAGS += -DDEVKIT
 endif
 
 include $(NXDK_DIR)/Makefile
-

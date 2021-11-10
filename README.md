@@ -1,9 +1,9 @@
-texture-formats
+nxdk_pgraph_tests
 ====
 
 Various tests for nv2a rendering.
 
-Original code from https://github.com/Ernegien/nxdk/tree/test/texture-formats/samples/texture-formats
+Based on code from https://github.com/Ernegien/nxdk/tree/test/texture-formats/samples/texture-formats
 
 ## Running with CLion
 
