@@ -28,7 +28,11 @@
 #include "nxdk_missing_defines.h"
 #include "third_party/swizzle.h"
 
+#ifdef DEVKIT
+static constexpr const char *kOutputDirectory = "e:\\DEVKIT\\nxdk_texture_tests";
+#else
 static constexpr const char *kOutputDirectory = "e:\\nxdk_texture_tests";
+#endif
 
 typedef struct TextureFormatInfo {
   SDL_PixelFormatEnum SdlFormat;

@@ -11,5 +11,12 @@ SRCS = \
 
 SHADER_OBJS = ps.inl vs.inl
 
+CFLAGS += -std=gnu++17
+
+DEVKIT ?= y
+ifeq ($(DEVKIT),y)
+CXXFLAGS += -DDEVKIT
+endif
+
 include $(NXDK_DIR)/Makefile
 
