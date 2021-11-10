@@ -84,6 +84,8 @@ static int update_texture_memory(uint8_t *texture_memory, TextureFormatInfo form
 static void save_back_buffer(const TextureFormatInfo &format_info, const char *prefix);
 static void setup_texture_stages(const uint8_t *texture_memory, const TextureFormatInfo &format_info);
 static void send_shader_constants();
+static void render_and_save(uint32_t depth_buffer_format, const TextureFormatInfo &texture_format,
+                            uint8_t *texture_memory);
 
 static constexpr TextureFormatInfo format_map[] = {
 
@@ -144,6 +146,12 @@ static constexpr TextureFormatInfo format_map[] = {
 };
 static constexpr int kNumFormats = sizeof(format_map) / sizeof(format_map[0]);
 
+static constexpr uint32_t kDepthFormats[] = {
+    NV097_SET_SURFACE_FORMAT_ZETA_Z24S8,
+    NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+};
+static constexpr uint32_t kNumDepthFormats = sizeof(kDepthFormats) / sizeof(kDepthFormats[0]);
+
 // bitscan forward
 int bsf(int val) { __asm bsf eax, val }
 
@@ -155,21 +163,14 @@ int main() {
 
   if (!nxMountDrive('E', R"(\Device\Harddisk0\Partition1)")) {
     debugPrint("Failed to mount E:");
-    Sleep(2000);
-    return 1;
-  }
-
-  // initialize input for the first gamepad
-  SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
-  SDL_GameController *gameController = SDL_GameControllerOpen(0);
-  if (!gameController) {
-    debugPrint("Failed to initialize input for gamepad 0.");
+    pb_show_debug_screen();
     Sleep(2000);
     return 1;
   }
 
   if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
     debugPrint("Failed to initialize SDL_image PNG mode.");
+    pb_show_debug_screen();
     Sleep(2000);
     return 1;
   }
@@ -177,6 +178,7 @@ int main() {
   int status = pb_init();
   if (status) {
     debugPrint("pb_init Error %d\n", status);
+    pb_show_debug_screen();
     Sleep(2000);
     return 1;
   }
@@ -192,158 +194,99 @@ int main() {
   // allocate texture memory buffer large enough for all types
   auto texture_memory = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(
       kTextureWidth * kTextureHeight * 4, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
-  int format_map_index = 0;
-  int update_texture_result =
-      update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
 
-  bool toggle_format_allowed = true;
-  bool render_changed = true;
-  bool automatic_forward_mode = false;
-  bool automatic_backward_mode = false;
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "EndlessLoop"
-  while (true) {
-    SDL_GameControllerUpdate();
-    bool a_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_A);
-    bool b_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_B);
-    bool start_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_START);
-    bool back_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_BACK);
-    if (a_pressed || b_pressed || start_pressed || back_pressed) {
-      if (toggle_format_allowed && !automatic_forward_mode && !automatic_backward_mode) {
-        if (start_pressed) {
-          automatic_forward_mode = !automatic_forward_mode;
-          if (automatic_forward_mode) {
-            format_map_index = 0;
-            update_texture_result =
-                update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
-            render_changed = true;
-          }
-        } else if (back_pressed) {
-          automatic_backward_mode = !automatic_backward_mode;
-          if (automatic_backward_mode) {
-            format_map_index = kNumFormats - 1;
-            update_texture_result =
-                update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
-            render_changed = true;
-          }
-        } else {
-          if (a_pressed) {
-            format_map_index = (format_map_index + 1) % kNumFormats;
-          } else {
-            if (--format_map_index < 0) {
-              format_map_index = kNumFormats - 1;
-            }
-          }
-          update_texture_result =
-              update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
-          render_changed = true;
-        }
-      }
-      toggle_format_allowed = false;
-    } else {
-      toggle_format_allowed = true;
-    }
-
-    pb_wait_for_vbl();
-    pb_reset();
-    pb_target_back_buffer();
-
-    /* Clear depth & stencil buffers */
-    pb_erase_depth_stencil_buffer(0, 0, kFramebufferWidth, kFramebufferHeight);
-    pb_fill(0, 0, kFramebufferWidth, kFramebufferHeight, 0xff000000);
-    pb_erase_text_screen();
-
-    while (pb_busy()) {
-      /* Wait for completion... */
-    }
-
-    setup_texture_stages(texture_memory, format_map[format_map_index]);
-    send_shader_constants();
-
-    /*
-     * Setup vertex attributes
-     */
-
-    Vertex *vptr = format_map[format_map_index].XboxSwizzled ? alloc_vertices_swizzled : alloc_vertices;
-
-    /* Set vertex position attribute */
-    set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                       &vptr[0].pos);
-
-    /* Set texture coordinate attribute */
-    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                       &vptr[0].texcoord);
-
-    /* Set vertex normal attribute */
-    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                       &vptr[0].normal);
-
-    /* Begin drawing triangles */
-    draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, 0, kNumVertices);
-
-    /* Draw some text on the screen */
-    pb_print("N: %s\n", format_map[format_map_index].Name);
-    pb_print("F: 0x%x\n", format_map[format_map_index].XboxFormat);
-    pb_print("SZ: %d\n", format_map[format_map_index].XboxSwizzled);
-    pb_print("C: %d\n", format_map[format_map_index].RequireConversion);
-    pb_print("W: %d\n", kTextureWidth);
-    pb_print("H: %d\n", kTextureHeight);
-    pb_print("P: %d\n", format_map[format_map_index].XboxBpp * kTextureWidth);
-    pb_print("ERR: %d\n", update_texture_result);
-    pb_draw_text_screen();
-
-    while (pb_busy()) {
-      /* Wait for completion... */
-    }
-
-    if (render_changed) {
-      render_changed = false;
-      const char *prefix = "";
-      if (automatic_forward_mode) {
-        prefix = "auto_fwd_";
-      } else if (automatic_backward_mode) {
-        prefix = "auto_rev_";
-      }
-      save_back_buffer(format_map[format_map_index], prefix);
-    }
-
-    /* Swap buffers (if we can) */
-    while (pb_finished()) {
-      /* Not ready to swap yet */
-    }
-
-    if (automatic_forward_mode) {
-      if (++format_map_index == kNumFormats) {
-        format_map_index = kNumFormats - 1;
-        automatic_forward_mode = false;
-      } else {
-        update_texture_result =
-            update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
-        render_changed = true;
-      }
-    } else if (automatic_backward_mode) {
-      if (--format_map_index < 0) {
-        format_map_index = 0;
-        automatic_backward_mode = false;
-      } else {
-        update_texture_result =
-            update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
-        render_changed = true;
-      }
+  for (unsigned int depth_format : kDepthFormats) {
+    for (auto texture_format_idx : format_map) {
+      render_and_save(depth_format, texture_format_idx, texture_memory);
     }
   }
-#pragma clang diagnostic pop
 
-  /* Unreachable cleanup code */
-  SDL_GameControllerClose(gameController);
-  SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+  debugPrint("Results written to %s", kOutputDirectory);
+  pb_show_debug_screen();
+  Sleep(2000);
+
   MmFreeContiguousMemory(alloc_vertices);
   MmFreeContiguousMemory(alloc_vertices_swizzled);
   MmFreeContiguousMemory(texture_memory);
   pb_show_debug_screen();
   pb_kill();
   return 0;
+}
+
+static void render_and_save(uint32_t depth_buffer_format, const TextureFormatInfo &texture_format,
+                            uint8_t *texture_memory) {
+  int update_texture_result = update_texture_memory(texture_memory, texture_format, kTextureWidth, kTextureHeight);
+
+  pb_wait_for_vbl();
+  pb_reset();
+  pb_target_back_buffer();
+
+  // Override the values set in pb_init. Unfortunately this is not exposed
+  auto p = pb_begin();
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_W_YUV_FPZ_FLAGS, 0x00110001);
+  uint32_t color_format = NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8;
+  uint32_t frame_buffer_format = 0x100 | (depth_buffer_format << 4) | color_format;
+  uint32_t fbv_flag = 0;
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_BUFFER_FORMAT, frame_buffer_format | fbv_flag);
+  pb_end(p);
+
+  /* Clear depth & stencil buffers */
+  pb_erase_depth_stencil_buffer(0, 0, kFramebufferWidth, kFramebufferHeight);
+  pb_fill(0, 0, kFramebufferWidth, kFramebufferHeight, 0xff000000);
+  pb_erase_text_screen();
+
+  while (pb_busy()) {
+    /* Wait for completion... */
+  }
+
+  setup_texture_stages(texture_memory, texture_format);
+  send_shader_constants();
+
+  /*
+   * Setup vertex attributes
+   */
+
+  Vertex *vptr = texture_format.XboxSwizzled ? alloc_vertices_swizzled : alloc_vertices;
+
+  /* Set vertex position attribute */
+  set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                     &vptr[0].pos);
+
+  /* Set texture coordinate attribute */
+  set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
+                     &vptr[0].texcoord);
+
+  /* Set vertex normal attribute */
+  set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                     &vptr[0].normal);
+
+  /* Begin drawing triangles */
+  draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, 0, kNumVertices);
+
+  /* Draw some text on the screen */
+  pb_print("N: %s\n", texture_format.Name);
+  pb_print("F: 0x%x\n", texture_format.XboxFormat);
+  pb_print("SZ: %d\n", texture_format.XboxSwizzled);
+  pb_print("C: %d\n", texture_format.RequireConversion);
+  pb_print("W: %d\n", kTextureWidth);
+  pb_print("H: %d\n", kTextureHeight);
+  pb_print("P: %d\n", texture_format.XboxBpp * kTextureWidth);
+  pb_print("DPTH: %d\n", depth_buffer_format);
+  pb_print("ERR: %d\n", update_texture_result);
+  pb_draw_text_screen();
+
+  while (pb_busy()) {
+    /* Wait for completion... */
+  }
+
+  char prefix[32] = {0};
+  snprintf(prefix, 31, "depth_%d_", depth_buffer_format);
+  save_back_buffer(texture_format, prefix);
+
+  /* Swap buffers (if we can) */
+  while (pb_finished()) {
+    /* Not ready to swap yet */
+  }
 }
 
 static void save_back_buffer(const TextureFormatInfo &format_info, const char *prefix) {
