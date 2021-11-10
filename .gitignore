@@ -1,10 +1,12 @@
 *.cpp.d
+*.c.d
 *.obj
 *.iso
 *.lib
 *.exe
 *.xbe
 *.pdb
+*.inl
 
 .DS_Store
 .vscode/
