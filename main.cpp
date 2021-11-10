@@ -2,8 +2,6 @@
  * This sample provides a very basic demonstration of 3D rendering on the Xbox,
  * using pbkit. Based on the pbkit demo sources.
  */
-#include <hal/video.h>
-#include <hal/xbox.h>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedMacroInspection"
@@ -16,6 +14,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <hal/debug.h>
+#include <hal/video.h>
+#include <nxdk/mount.h>
 #include <pbkit/pbkit.h>
 #include <strings.h>
 #include <windows.h>
@@ -27,6 +27,8 @@
 #include "math3d.h"
 #include "nxdk_missing_defines.h"
 #include "third_party/swizzle.h"
+
+static constexpr const char *kOutputDirectory = "e:\\nxdk_texture_tests";
 
 typedef struct TextureFormatInfo {
   SDL_PixelFormatEnum SdlFormat;
@@ -74,7 +76,9 @@ static void set_attrib_pointer(unsigned int index, unsigned int format, unsigned
                                const void *data);
 static void draw_arrays(unsigned int mode, int start, int count);
 static int update_texture_memory(uint8_t *texture_memory, TextureFormatInfo format, int width, int height);
-static void save_framebuffer(uint8_t *framebuffer, int format_map_index);
+static void save_framebuffer(const uint8_t *framebuffer, const TextureFormatInfo &format_info, const char *prefix);
+static void setup_texture_stages(const uint8_t *texture_memory, const TextureFormatInfo &format_info);
+static void send_shader_constants();
 
 static constexpr TextureFormatInfo format_map[] = {
 
@@ -125,9 +129,9 @@ static constexpr TextureFormatInfo format_map[] = {
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_G8B8, true, true, "SZ_G8B8" },
     {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8, 2, false, true, "G8B8"},
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_D16, false, true, "D16" },    // TODO: implement in
-    //xemu
+    // xemu
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_LIN_F16, false, true, "LIN_F16" },    // TODO:
-    //implement in xemu
+    // implement in xemu
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8B8, true, true, "SZ_R8B8" },
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R6G5B5, true, true, "R6G5B5" }
 
@@ -143,6 +147,12 @@ int main() {
   uint32_t *p;
 
   XVideoSetMode(kFramebufferWidth, kFramebufferHeight, 32, REFRESH_DEFAULT);
+
+  if (!nxMountDrive('E', R"(\Device\Harddisk0\Partition1)")) {
+    debugPrint("Failed to mount E:");
+    Sleep(2000);
+    return 1;
+  }
 
   // initialize input for the first gamepad
   SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
@@ -172,6 +182,7 @@ int main() {
   init_shader();
 
   init_vertices();
+  init_matrices();
 
   // allocate texture memory buffer large enough for all types
   auto texture_memory = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(
@@ -180,32 +191,50 @@ int main() {
   int update_texture_result =
       update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
 
-  init_matrices();
+  uint8_t *framebuffer = XVideoGetFB();
+  bool toggle_format_allowed = true;
+  bool render_changed = true;
+  bool automatic_forward_mode = false;
+  bool automatic_backward_mode = false;
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
-
-  uint8_t *framebuffer = XVideoGetFB();
-
-  bool toggle_format_allowed = true;
-  bool render_changed = true;
   while (true) {
-    // cycle current texture based on A or B button presses
     SDL_GameControllerUpdate();
     bool a_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_A);
     bool b_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_B);
-    if (a_pressed || b_pressed) {
-      if (toggle_format_allowed) {
-        if (a_pressed) {
-          format_map_index = (format_map_index + 1) % kNumFormats;
-        } else {
-          if (--format_map_index < 0) {
-            format_map_index = kNumFormats - 1;
+    bool start_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_START);
+    bool back_pressed = SDL_GameControllerGetButton(gameController, SDL_CONTROLLER_BUTTON_BACK);
+    if (a_pressed || b_pressed || start_pressed || back_pressed) {
+      if (toggle_format_allowed && !automatic_forward_mode && !automatic_backward_mode) {
+        if (start_pressed) {
+          automatic_forward_mode = !automatic_forward_mode;
+          if (automatic_forward_mode) {
+            format_map_index = 0;
+            update_texture_result =
+                update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
+            render_changed = true;
           }
+        } else if (back_pressed) {
+          automatic_backward_mode = !automatic_backward_mode;
+          if (automatic_backward_mode) {
+            format_map_index = kNumFormats - 1;
+            update_texture_result =
+                update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
+            render_changed = true;
+          }
+        } else {
+          if (a_pressed) {
+            format_map_index = (format_map_index + 1) % kNumFormats;
+          } else {
+            if (--format_map_index < 0) {
+              format_map_index = kNumFormats - 1;
+            }
+          }
+          update_texture_result =
+              update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
+          render_changed = true;
         }
-        update_texture_result =
-            update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
-        render_changed = true;
       }
       toggle_format_allowed = false;
     } else {
@@ -225,151 +254,8 @@ int main() {
       /* Wait for completion... */
     }
 
-    /*
-     * Setup texture stages
-     */
-
-    /* Enable texture stage 0 */
-    /* FIXME: Use constants instead of the hardcoded values below */
-    p = pb_begin();
-
-    // first one seems to be needed
-    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-
-    // Enable alpha blending functionality
-    p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
-
-    // Set the alpha blend source (s) and destination (d) factors
-    p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
-    p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
-
-    // yuv requires color space conversion
-    if (format_map[format_map_index].XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
-        format_map[format_map_index].XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8) {
-      p = pb_push1(p, NV097_SET_CONTROL0,
-                   MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB));
-    }
-
-    DWORD format_mask =
-        MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
-        MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
-        MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, 2) |
-        MASK(NV097_SET_TEXTURE_FORMAT_COLOR, format_map[format_map_index].XboxFormat) |
-        MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, 1) |
-        MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, format_map[format_map_index].XboxSwizzled ? bsf(kTextureWidth) : 0) |
-        MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V,
-             format_map[format_map_index].XboxSwizzled ? bsf(kTextureHeight) : 0) |
-        MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, 0);
-
-    // set stage 0 texture address & format
-    p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(0), (DWORD)texture_memory & 0x03ffffff, format_mask);
-
-    if (!format_map[format_map_index].XboxSwizzled) {
-      // set stage 0 texture pitch (pitch<<16)
-      p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0),
-                   (format_map[format_map_index].XboxBpp * kTextureWidth) << 16);
-
-      // set stage 0 texture kFramebufferWidth & kFramebufferHeight
-      // ((width<<16)|kFramebufferHeight)
-      p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(0), (kTextureWidth << 16) | kTextureHeight);
-    }
-
-    // set stage 0 texture modes
-    // (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp 4=border 5=clamp to edge)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), 0x00030303);
-
-    // set stage 0 texture enable flags
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0), 0x4003ffc0);
-
-    // set stage 0 texture filters (AA!)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(0), 0x04074000);
-
-    pb_end(p);
-
-    /* Disable other texture stages */
-    p = pb_begin();
-
-    // set stage 1 texture enable flags (bit30 disabled)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(1), 0x0003ffc0);
-
-    // set stage 2 texture enable flags (bit30 disabled)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(2), 0x0003ffc0);
-
-    // set stage 3 texture enable flags (bit30 disabled)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(3), 0x0003ffc0);
-
-    // set stage 1 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
-    // 4=border 5=clamp to edge)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(1), 0x00030303);
-
-    // set stage 2 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
-    // 4=border 5=clamp to edge)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(2), 0x00030303);
-
-    // set stage 3 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
-    // 4=border 5=clamp to edge)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(3), 0x00030303);
-
-    // set stage 1 texture filters (no AA, stage not even used)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(1), 0x02022000);
-
-    // set stage 2 texture filters (no AA, stage not even used)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(2), 0x02022000);
-
-    // set stage 3 texture filters (no AA, stage not even used)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(3), 0x02022000);
-
-    pb_end(p);
-
-    /* Send shader constants
-     *
-     * WARNING: Changing shader source code may impact constant locations!
-     * Check the intermediate file (*.inl) for the expected locations after
-     * changing the code.
-     */
-    p = pb_begin();
-
-    /* Set shader constants cursor at C0 */
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96);
-
-    /* Send the model matrix */
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-    memcpy(p, m_model, 16 * 4);
-    p += 16;
-
-    /* Send the view matrix */
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-    memcpy(p, m_view, 16 * 4);
-    p += 16;
-
-    /* Send the projection matrix */
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-    memcpy(p, m_proj, 16 * 4);
-    p += 16;
-
-    /* Send camera position */
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-    memcpy(p, v_cam_pos, 4 * 4);
-    p += 4;
-
-    /* Send light direction */
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-    memcpy(p, v_light_dir, 4 * 4);
-    p += 4;
-
-    /* Send shader constants */
-    float constants_0[4] = {0, 0, 0, 0};
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-    memcpy(p, constants_0, 4 * 4);
-    p += 4;
-
-    /* Clear all attributes */
-    pb_push(p++, NV097_SET_VERTEX_DATA_ARRAY_FORMAT, 16);
-    for (auto i = 0; i < 16; i++) {
-      *(p++) = 2;
-    }
-    pb_end(p);
+    setup_texture_stages(texture_memory, format_map[format_map_index]);
+    send_shader_constants();
 
     /*
      * Setup vertex attributes
@@ -414,7 +300,33 @@ int main() {
 
     if (render_changed) {
       render_changed = false;
-      save_framebuffer(framebuffer, format_map_index);
+      const char *prefix = "";
+      if (automatic_forward_mode) {
+        prefix = "auto_fwd_";
+      } else if (automatic_backward_mode) {
+        prefix = "auto_rev_";
+      }
+      save_framebuffer(framebuffer, format_map[format_map_index], prefix);
+    }
+
+    if (automatic_forward_mode) {
+      if (++format_map_index == kNumFormats) {
+        format_map_index = kNumFormats - 1;
+        automatic_forward_mode = false;
+      } else {
+        update_texture_result =
+            update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
+        render_changed = true;
+      }
+    } else if (automatic_backward_mode) {
+      if (--format_map_index < 0) {
+        format_map_index = 0;
+        automatic_backward_mode = false;
+      } else {
+        update_texture_result =
+            update_texture_memory(texture_memory, format_map[format_map_index], kTextureWidth, kTextureHeight);
+        render_changed = true;
+      }
     }
   }
 #pragma clang diagnostic pop
@@ -430,7 +342,159 @@ int main() {
   return 0;
 }
 
-static void save_framebuffer(uint8_t *framebuffer, int format_map_index) {}
+static void save_framebuffer(const uint8_t *framebuffer, const TextureFormatInfo &format_info, const char *prefix) {
+  char target_file[256] = {0};
+  snprintf(target_file, 255, "%s\\%s%s.bmp", kOutputDirectory, prefix, format_info.Name);
+  CreateDirectoryA(kOutputDirectory, nullptr);
+
+  SDL_Surface *surface = SDL_CreateRGBSurfaceWithFormatFrom((void *)framebuffer, 0, kFramebufferWidth,
+                                                            kFramebufferHeight, 32, SDL_PIXELFORMAT_RGBA8888);
+  int ret = SDL_SaveBMP(surface, target_file);
+  SDL_FreeSurface(surface);
+}
+
+static void setup_texture_stages(const uint8_t *texture_memory, const TextureFormatInfo &format_info) {
+  /* Enable texture stage 0 */
+  /* FIXME: Use constants instead of the hardcoded values below */
+  auto p = pb_begin();
+
+  // first one seems to be needed
+  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
+
+  // Enable alpha blending functionality
+  p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
+
+  // Set the alpha blend source (s) and destination (d) factors
+  p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
+  p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
+
+  // yuv requires color space conversion
+  if (format_info.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
+      format_info.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8) {
+    p = pb_push1(p, NV097_SET_CONTROL0,
+                 MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB));
+  }
+
+  DWORD format_mask = MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, 2) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, format_info.XboxFormat) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, 1) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, format_info.XboxSwizzled ? bsf(kTextureWidth) : 0) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, format_info.XboxSwizzled ? bsf(kTextureHeight) : 0) |
+                      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, 0);
+
+  // set stage 0 texture address & format
+  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(0), (DWORD)texture_memory & 0x03ffffff, format_mask);
+
+  if (!format_info.XboxSwizzled) {
+    // set stage 0 texture pitch (pitch<<16)
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0), (format_info.XboxBpp * kTextureWidth) << 16);
+
+    // set stage 0 texture kFramebufferWidth & kFramebufferHeight
+    // ((width<<16)|kFramebufferHeight)
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(0), (kTextureWidth << 16) | kTextureHeight);
+  }
+
+  // set stage 0 texture modes
+  // (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp 4=border 5=clamp to edge)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), 0x00030303);
+
+  // set stage 0 texture enable flags
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0), 0x4003ffc0);
+
+  // set stage 0 texture filters (AA!)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(0), 0x04074000);
+
+  pb_end(p);
+
+  /* Disable other texture stages */
+  p = pb_begin();
+
+  // set stage 1 texture enable flags (bit30 disabled)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(1), 0x0003ffc0);
+
+  // set stage 2 texture enable flags (bit30 disabled)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(2), 0x0003ffc0);
+
+  // set stage 3 texture enable flags (bit30 disabled)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(3), 0x0003ffc0);
+
+  // set stage 1 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
+  // 4=border 5=clamp to edge)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(1), 0x00030303);
+
+  // set stage 2 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
+  // 4=border 5=clamp to edge)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(2), 0x00030303);
+
+  // set stage 3 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
+  // 4=border 5=clamp to edge)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(3), 0x00030303);
+
+  // set stage 1 texture filters (no AA, stage not even used)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(1), 0x02022000);
+
+  // set stage 2 texture filters (no AA, stage not even used)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(2), 0x02022000);
+
+  // set stage 3 texture filters (no AA, stage not even used)
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(3), 0x02022000);
+
+  pb_end(p);
+}
+
+static void send_shader_constants() {
+  /* Send shader constants
+   *
+   * WARNING: Changing shader source code may impact constant locations!
+   * Check the intermediate file (*.inl) for the expected locations after
+   * changing the code.
+   */
+  auto p = pb_begin();
+
+  /* Set shader constants cursor at C0 */
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96);
+
+  /* Send the model matrix */
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+  memcpy(p, m_model, 16 * 4);
+  p += 16;
+
+  /* Send the view matrix */
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+  memcpy(p, m_view, 16 * 4);
+  p += 16;
+
+  /* Send the projection matrix */
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+  memcpy(p, m_proj, 16 * 4);
+  p += 16;
+
+  /* Send camera position */
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
+  memcpy(p, v_cam_pos, 4 * 4);
+  p += 4;
+
+  /* Send light direction */
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
+  memcpy(p, v_light_dir, 4 * 4);
+  p += 4;
+
+  /* Send shader constants */
+  float constants_0[4] = {0, 0, 0, 0};
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
+  memcpy(p, constants_0, 4 * 4);
+  p += 4;
+
+  /* Clear all attributes */
+  pb_push(p++, NV097_SET_VERTEX_DATA_ARRAY_FORMAT, 16);
+  for (auto i = 0; i < 16; i++) {
+    *(p++) = 2;
+  }
+  pb_end(p);
+}
 
 static int update_texture_memory(uint8_t *texture_memory, TextureFormatInfo format, int width, int height) {
   // create source surface
