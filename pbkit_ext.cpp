@@ -28,7 +28,7 @@ void set_depth_stencil_buffer_region(uint32_t depth_value, uint8_t stencil_value
 
   // sets data used to fill in rectangle
   pb_push(p++, NV20_TCL_PRIMITIVE_3D_CLEAR_VALUE_DEPTH, 3);
-  *(p++) = ((depth_value & 0x00FFFFFF) << 8) | stencil_value;
+  *(p++) = (depth_value << 8) | stencil_value;
   *(p++) = 0;     // color - ignored due to mode flag below.
   *(p++) = 0x03;  // mode: depth & stencil.
 

@@ -11,20 +11,15 @@ unsigned long times(void *);
 
 // vector functions
 
-void vector_apply(VECTOR output, VECTOR input0, MATRIX input1) {
-  VECTOR work;
-
-  work[_X] = input0[_X] * input1[_11] + input0[_Y] * input1[_12] +
-             input0[_Z] * input1[_13] + input0[_W] * input1[_14];
-  work[_Y] = input0[_X] * input1[_21] + input0[_Y] * input1[_22] +
-             input0[_Z] * input1[_23] + input0[_W] * input1[_24];
-  work[_Z] = input0[_X] * input1[_31] + input0[_Y] * input1[_32] +
-             input0[_Z] * input1[_33] + input0[_W] * input1[_34];
-  work[_W] = input0[_X] * input1[_41] + input0[_Y] * input1[_42] +
-             input0[_Z] * input1[_43] + input0[_W] * input1[_44];
-
-  // Output the result.
-  vector_copy(output, work);
+void vector_apply(VECTOR output, const VECTOR input0, const MATRIX input1) {
+  output[_X] =
+      input0[_X] * input1[_11] + input0[_Y] * input1[_12] + input0[_Z] * input1[_13] + input0[_W] * input1[_14];
+  output[_Y] =
+      input0[_X] * input1[_21] + input0[_Y] * input1[_22] + input0[_Z] * input1[_23] + input0[_W] * input1[_24];
+  output[_Z] =
+      input0[_X] * input1[_31] + input0[_Y] * input1[_32] + input0[_Z] * input1[_33] + input0[_W] * input1[_34];
+  output[_W] =
+      input0[_X] * input1[_41] + input0[_Y] * input1[_42] + input0[_Z] * input1[_43] + input0[_W] * input1[_44];
 }
 
 void vector_clamp(VECTOR output, VECTOR input0, float min, float max) {
@@ -65,9 +60,7 @@ void vector_clamp(VECTOR output, VECTOR input0, float min, float max) {
   vector_copy(output, work);
 }
 
-void vector_copy(VECTOR output, VECTOR input0) {
-  memcpy(output, input0, sizeof(VECTOR));
-}
+void vector_copy(VECTOR output, VECTOR input0) { memcpy(output, input0, sizeof(VECTOR)); }
 
 float vector_innerproduct(VECTOR input0, VECTOR input1) {
   VECTOR work0, work1;
@@ -85,8 +78,7 @@ float vector_innerproduct(VECTOR input0, VECTOR input1) {
   work1[_W] = 1.00f;
 
   // Return the inner product.
-  return (work0[_X] * work1[_X]) + (work0[_Y] * work1[_Y]) +
-         (work0[_Z] * work1[_Z]);
+  return (work0[_X] * work1[_X]) + (work0[_Y] * work1[_Y]) + (work0[_Z] * work1[_Z]);
 }
 
 void vector_multiply(VECTOR output, VECTOR input0, VECTOR input1) {
@@ -105,8 +97,7 @@ void vector_multiply(VECTOR output, VECTOR input0, VECTOR input1) {
 void vector_normalize(VECTOR output, VECTOR input0) {
   float k;
 
-  k = 1.0f / sqrt(input0[_X] * input0[_X] + input0[_Y] * input0[_Y] +
-                  input0[_Z] * input0[_Z]);
+  k = 1.0f / sqrt(input0[_X] * input0[_X] + input0[_Y] * input0[_Y] + input0[_Z] * input0[_Z]);
   output[_X] *= k;
   output[_Y] *= k;
   output[_Z] *= k;
@@ -125,9 +116,7 @@ void vector_outerproduct(VECTOR output, VECTOR input0, VECTOR input1) {
 
 // matrices function
 
-void matrix_copy(MATRIX output, MATRIX input0) {
-  memcpy(output, input0, sizeof(MATRIX));
-}
+void matrix_copy(MATRIX output, MATRIX input0) { memcpy(output, input0, sizeof(MATRIX)); }
 
 void matrix_inverse(MATRIX output, MATRIX input0) {
   MATRIX work;
@@ -137,12 +126,9 @@ void matrix_inverse(MATRIX output, MATRIX input0) {
   work[_14] = 0.00f;
   work[_24] = 0.00f;
   work[_34] = 0.00f;
-  work[_41] = -(input0[_41] * work[_11] + input0[_42] * work[_21] +
-                input0[_43] * work[_31]);
-  work[_42] = -(input0[_41] * work[_12] + input0[_42] * work[_22] +
-                input0[_43] * work[_32]);
-  work[_43] = -(input0[_41] * work[_13] + input0[_42] * work[_23] +
-                input0[_43] * work[_33]);
+  work[_41] = -(input0[_41] * work[_11] + input0[_42] * work[_21] + input0[_43] * work[_31]);
+  work[_42] = -(input0[_41] * work[_12] + input0[_42] * work[_22] + input0[_43] * work[_32]);
+  work[_43] = -(input0[_41] * work[_13] + input0[_42] * work[_23] + input0[_43] * work[_33]);
   work[_44] = 1.00f;
 
   // Output the result.
@@ -152,38 +138,38 @@ void matrix_inverse(MATRIX output, MATRIX input0) {
 void matrix_multiply(MATRIX output, MATRIX input0, MATRIX input1) {
   MATRIX work;
 
-  work[_11] = input0[_11] * input1[_11] + input0[_12] * input1[_21] +
-              input0[_13] * input1[_31] + input0[_14] * input1[_41];
-  work[_12] = input0[_11] * input1[_12] + input0[_12] * input1[_22] +
-              input0[_13] * input1[_32] + input0[_14] * input1[_42];
-  work[_13] = input0[_11] * input1[_13] + input0[_12] * input1[_23] +
-              input0[_13] * input1[_33] + input0[_14] * input1[_43];
-  work[_14] = input0[_11] * input1[_14] + input0[_12] * input1[_24] +
-              input0[_13] * input1[_34] + input0[_14] * input1[_44];
-  work[_21] = input0[_21] * input1[_11] + input0[_22] * input1[_21] +
-              input0[_23] * input1[_31] + input0[_24] * input1[_41];
-  work[_22] = input0[_21] * input1[_12] + input0[_22] * input1[_22] +
-              input0[_23] * input1[_32] + input0[_24] * input1[_42];
-  work[_23] = input0[_21] * input1[_13] + input0[_22] * input1[_23] +
-              input0[_23] * input1[_33] + input0[_24] * input1[_43];
-  work[_24] = input0[_21] * input1[_14] + input0[_22] * input1[_24] +
-              input0[_23] * input1[_34] + input0[_24] * input1[_44];
-  work[_31] = input0[_31] * input1[_11] + input0[_32] * input1[_21] +
-              input0[_33] * input1[_31] + input0[_34] * input1[_41];
-  work[_32] = input0[_31] * input1[_12] + input0[_32] * input1[_22] +
-              input0[_33] * input1[_32] + input0[_34] * input1[_42];
-  work[_33] = input0[_31] * input1[_13] + input0[_32] * input1[_23] +
-              input0[_33] * input1[_33] + input0[_34] * input1[_43];
-  work[_34] = input0[_31] * input1[_14] + input0[_32] * input1[_24] +
-              input0[_33] * input1[_34] + input0[_34] * input1[_44];
-  work[_41] = input0[_41] * input1[_11] + input0[_42] * input1[_21] +
-              input0[_43] * input1[_31] + input0[_44] * input1[_41];
-  work[_42] = input0[_41] * input1[_12] + input0[_42] * input1[_22] +
-              input0[_43] * input1[_32] + input0[_44] * input1[_42];
-  work[_43] = input0[_41] * input1[_13] + input0[_42] * input1[_23] +
-              input0[_43] * input1[_33] + input0[_44] * input1[_43];
-  work[_44] = input0[_41] * input1[_14] + input0[_42] * input1[_24] +
-              input0[_43] * input1[_34] + input0[_44] * input1[_44];
+  work[_11] =
+      input0[_11] * input1[_11] + input0[_12] * input1[_21] + input0[_13] * input1[_31] + input0[_14] * input1[_41];
+  work[_12] =
+      input0[_11] * input1[_12] + input0[_12] * input1[_22] + input0[_13] * input1[_32] + input0[_14] * input1[_42];
+  work[_13] =
+      input0[_11] * input1[_13] + input0[_12] * input1[_23] + input0[_13] * input1[_33] + input0[_14] * input1[_43];
+  work[_14] =
+      input0[_11] * input1[_14] + input0[_12] * input1[_24] + input0[_13] * input1[_34] + input0[_14] * input1[_44];
+  work[_21] =
+      input0[_21] * input1[_11] + input0[_22] * input1[_21] + input0[_23] * input1[_31] + input0[_24] * input1[_41];
+  work[_22] =
+      input0[_21] * input1[_12] + input0[_22] * input1[_22] + input0[_23] * input1[_32] + input0[_24] * input1[_42];
+  work[_23] =
+      input0[_21] * input1[_13] + input0[_22] * input1[_23] + input0[_23] * input1[_33] + input0[_24] * input1[_43];
+  work[_24] =
+      input0[_21] * input1[_14] + input0[_22] * input1[_24] + input0[_23] * input1[_34] + input0[_24] * input1[_44];
+  work[_31] =
+      input0[_31] * input1[_11] + input0[_32] * input1[_21] + input0[_33] * input1[_31] + input0[_34] * input1[_41];
+  work[_32] =
+      input0[_31] * input1[_12] + input0[_32] * input1[_22] + input0[_33] * input1[_32] + input0[_34] * input1[_42];
+  work[_33] =
+      input0[_31] * input1[_13] + input0[_32] * input1[_23] + input0[_33] * input1[_33] + input0[_34] * input1[_43];
+  work[_34] =
+      input0[_31] * input1[_14] + input0[_32] * input1[_24] + input0[_33] * input1[_34] + input0[_34] * input1[_44];
+  work[_41] =
+      input0[_41] * input1[_11] + input0[_42] * input1[_21] + input0[_43] * input1[_31] + input0[_44] * input1[_41];
+  work[_42] =
+      input0[_41] * input1[_12] + input0[_42] * input1[_22] + input0[_43] * input1[_32] + input0[_44] * input1[_42];
+  work[_43] =
+      input0[_41] * input1[_13] + input0[_42] * input1[_23] + input0[_43] * input1[_33] + input0[_44] * input1[_43];
+  work[_44] =
+      input0[_41] * input1[_14] + input0[_42] * input1[_24] + input0[_43] * input1[_34] + input0[_44] * input1[_44];
 
   // Output the result.
   matrix_copy(output, work);
@@ -275,8 +261,7 @@ void matrix_unit(MATRIX output) {
 
 // creation functions
 
-void create_local_world(MATRIX local_world, VECTOR translation,
-                        VECTOR rotation) {
+void create_local_world(MATRIX local_world, VECTOR translation, VECTOR rotation) {
   // Create the local_world matrix.
   matrix_unit(local_world);
   matrix_rotate(local_world, local_world, rotation);
@@ -310,8 +295,7 @@ void create_world_view(MATRIX world_view, VECTOR translation, VECTOR rotation) {
   matrix_rotate(world_view, world_view, work1);
 }
 
-void create_view_screen(MATRIX view_screen, float aspect, float left,
-                        float right, float bottom, float top, float near,
+void create_view_screen(MATRIX view_screen, float aspect, float left, float right, float bottom, float top, float near,
                         float far) {
   /* We want to create a matrix that transforms
      field of view frustum (a truncated pyramid)
@@ -365,8 +349,7 @@ void create_view_screen(MATRIX view_screen, float aspect, float left,
   view_screen[_44] = 0.00f;
 }
 
-void create_local_screen(MATRIX local_screen, MATRIX local_world,
-                         MATRIX world_view, MATRIX view_screen) {
+void create_local_screen(MATRIX local_screen, MATRIX local_world, MATRIX world_view, MATRIX view_screen) {
   // Create the local_screen matrix.
   matrix_unit(local_screen);
   matrix_multiply(local_screen, local_screen, local_world);

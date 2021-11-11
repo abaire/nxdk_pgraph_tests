@@ -7,22 +7,21 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <hal/video.h>
 #include <strings.h>
 #include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
 
 #include <cassert>
+#include <utility>
 
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
-#include "resources/verts.h"
+#include "shaders/shader_program.h"
 #include "third_party/swizzle.h"
+#include "vertex_buffer.h"
 
-#define MASK(mask, val) (((val) << (ffs(mask) - 1)) & (mask))
 #define MAXRAM 0x03FFAFFF
 
-static void matrix_viewport(float out[4][4], float x, float y, float width, float height, float z_min, float z_max);
 static void set_attrib_pointer(uint32_t index, uint32_t format, unsigned int size, uint32_t stride, const void *data);
 static void draw_arrays(unsigned int mode, int start, int count);
 
@@ -31,100 +30,100 @@ static int bsf(int val){__asm bsf eax, val}
 
 TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t texture_width,
                    uint32_t texture_height)
-    : framebuffer_width(framebuffer_width),
-      framebuffer_height(framebuffer_height),
-      texture_width(texture_width),
-      texture_height(texture_height) {
-  init_vertices();
-  init_matrices();
-  init_shader();
-
+    : framebuffer_width_(framebuffer_width),
+      framebuffer_height_(framebuffer_height),
+      texture_width_(texture_width),
+      texture_height_(texture_height) {
   // allocate texture memory buffer large enough for all types
   texture_memory_ = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(texture_width * texture_height * 4, 0, MAXRAM,
                                                                         0, PAGE_WRITECOMBINE | PAGE_READWRITE));
   assert(texture_memory_ && "Failed to allocate texture memory.");
 }
 
-void TestHost::init_vertices() {
-  // real nv2a hardware seems to cache this and not honor updates? have separate
-  // vertex buffers for swizzled and linear for now...
-  uint32_t buffer_size = sizeof(Vertex) * kNumVertices;
-
-  alloc_vertices_ = static_cast<Vertex *>(
-      MmAllocateContiguousMemoryEx(buffer_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
-  alloc_vertices_swizzled_ = static_cast<Vertex *>(
-      MmAllocateContiguousMemoryEx(buffer_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
-
-  memcpy(alloc_vertices_, kBillboardQuad, buffer_size);
-  memcpy(alloc_vertices_swizzled_, kBillboardQuad, buffer_size);
-
-  for (int i = 0; i < kNumVertices; i++) {
-    alloc_vertices_[i].texcoord[0] *= static_cast<float>(texture_width);
-    alloc_vertices_[i].texcoord[1] *= static_cast<float>(texture_height);
+TestHost::~TestHost() {
+  vertex_buffer_.reset();
+  if (texture_memory_) {
+    MmFreeContiguousMemory(texture_memory_);
   }
 }
 
-void TestHost::init_matrices() {
-  /* Create view matrix (our camera is static) */
-  matrix_unit(m_view);
-  create_world_view(m_view, v_cam_pos, v_cam_rot);
-
-  /* Create projection matrix */
-  matrix_unit(m_proj);
-  create_view_screen(m_proj, (float)framebuffer_width / (float)framebuffer_height, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f,
-                     10000.0f);
-
-  /* Create viewport matrix, combine with projection */
-  {
-    float m_viewport[4][4];
-    matrix_viewport(m_viewport, 0, 0, (float)framebuffer_width, (float)framebuffer_height, 0, 65536.0f);
-    matrix_multiply(m_proj, m_proj, (float *)m_viewport);
+void TestHost::SetDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value, uint32_t left, uint32_t top,
+                                     uint32_t width, uint32_t height) const {
+  if (!width || width > framebuffer_width_) {
+    width = framebuffer_width_;
+  }
+  if (!height || height > framebuffer_height_) {
+    height = framebuffer_height_;
   }
 
-  /* Create local->world matrix given our updated object */
-  matrix_unit(m_model);
+  set_depth_stencil_buffer_region(depth_value, stencil_value, left, top, width, height);
 }
 
-void TestHost::Clear() {
-  set_depth_stencil_buffer_region(0xFFFFFFFF, 0, 0, 0, framebuffer_width, framebuffer_height);
-  pb_fill(0, 0, framebuffer_width, framebuffer_height, 0xff000000);
-  pb_erase_text_screen();
+void TestHost::SetFillColorRegion(uint32_t argb, uint32_t left, uint32_t top, uint32_t width, uint32_t height) const {
+  if (!width || width > framebuffer_width_) {
+    width = framebuffer_width_;
+  }
+  if (!height || height > framebuffer_height_) {
+    height = framebuffer_height_;
+  }
+  pb_fill(static_cast<int>(left), static_cast<int>(top), static_cast<int>(width), static_cast<int>(height), argb);
 }
 
-void TestHost::StartDraw() {
+void TestHost::EraseText() { pb_erase_text_screen(); }
+
+void TestHost::Clear(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) const {
+  SetDepthStencilRegion(depth_value, stencil_value);
+  SetFillColorRegion(argb);
+  EraseText();
+}
+
+void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) {
   pb_wait_for_vbl();
   pb_reset();
   pb_target_back_buffer();
 
-  set_depth_buffer_format(depth_buffer_format);
-  Clear();
+  set_depth_buffer_format(depth_buffer_format_);
+  Clear(argb, depth_value, stencil_value);
 
   while (pb_busy()) {
     /* Wait for completion... */
   }
 
   SetupTextureStages();
-  SendShaderConstants();
+  assert(shader_program_ && "SetShaderProgram must be called before PrepareDraw");
+  shader_program_->PrepareDraw();
+}
 
-  /*
-   * Setup vertex attributes
-   */
-  Vertex *vptr = texture_format.XboxSwizzled ? alloc_vertices_swizzled_ : alloc_vertices_;
+void TestHost::DrawVertices() {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
 
-  /* Set vertex position attribute */
+  Vertex *vptr = texture_format_.XboxSwizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
+
   set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                      &vptr[0].pos);
 
-  /* Set texture coordinate attribute */
   set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
                      &vptr[0].texcoord);
 
-  /* Set vertex normal attribute */
   set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                      &vptr[0].normal);
 
-  /* Begin drawing triangles */
-  draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, 0, kNumVertices);
+  set_attrib_pointer(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+                     &vptr[0].diffuse);
+
+  int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
+
+  // Looks like the count field is a single byte, so large vertex arrays need to be batched.
+  if (num_vertices < 252) {
+    draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, 0, num_vertices);
+  } else {
+    int start = 0;
+    while (start < num_vertices) {
+      int count = (num_vertices > 252 ? 252 : num_vertices);
+      draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, start, count);
+      start += count;
+    }
+  }
 }
 
 void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
@@ -153,7 +152,6 @@ void TestHost::SetupTextureStages() {
 
   // first one seems to be needed
   p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
 
   // Enable alpha blending functionality
   p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
@@ -162,9 +160,11 @@ void TestHost::SetupTextureStages() {
   p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
   p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
 
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
+
   // yuv requires color space conversion
-  if (texture_format.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
-      texture_format.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8) {
+  if (texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
+      texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8) {
     p = pb_push1(p, NV097_SET_CONTROL0,
                  MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB));
   }
@@ -173,22 +173,22 @@ void TestHost::SetupTextureStages() {
       MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
       MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
       MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, 2) |
-      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, texture_format.XboxFormat) |
+      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, texture_format_.XboxFormat) |
       MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, 1) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, texture_format.XboxSwizzled ? bsf(texture_width) : 0) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, texture_format.XboxSwizzled ? bsf(texture_height) : 0) |
+      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, texture_format_.XboxSwizzled ? bsf(texture_width_) : 0) |
+      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, texture_format_.XboxSwizzled ? bsf(texture_height_) : 0) |
       MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, 0);
 
   // set stage 0 texture address & format
   p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(0), (DWORD)texture_memory_ & 0x03ffffff, format_mask);
 
-  if (!texture_format.XboxSwizzled) {
+  if (!texture_format_.XboxSwizzled) {
     // set stage 0 texture pitch (pitch<<16)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0), (texture_format.XboxBpp * texture_width) << 16);
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0), (texture_format_.XboxBpp * texture_width_) << 16);
 
-    // set stage 0 texture framebuffer_width & framebuffer_height
-    // ((width<<16)|framebuffer_height)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(0), (texture_width << 16) | texture_height);
+    // set stage 0 texture framebuffer_width_ & framebuffer_height_
+    // ((width<<16)|framebuffer_height_)
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(0), (texture_width_ << 16) | texture_height_);
   }
 
   // set stage 0 texture modes
@@ -239,71 +239,20 @@ void TestHost::SetupTextureStages() {
   pb_end(p);
 }
 
-void TestHost::SendShaderConstants() {
-  /* Send shader constants
-   *
-   * WARNING: Changing shader source code may impact constant locations!
-   * Check the intermediate file (*.inl) for the expected locations after
-   * changing the code.
-   */
-  auto p = pb_begin();
+void TestHost::SetTextureFormat(const TextureFormatInfo &fmt) { texture_format_ = fmt; }
 
-  /* Set shader constants cursor at C0 */
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96);
-
-  /* Send the model matrix */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, m_model, 16 * 4);
-  p += 16;
-
-  /* Send the view matrix */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, m_view, 16 * 4);
-  p += 16;
-
-  /* Send the projection matrix */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, m_proj, 16 * 4);
-  p += 16;
-
-  /* Send camera position */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, v_cam_pos, 4 * 4);
-  p += 4;
-
-  /* Send light direction */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, v_light_dir, 4 * 4);
-  p += 4;
-
-  /* Send shader constants */
-  float constants_0[4] = {0, 0, 0, 0};
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, constants_0, 4 * 4);
-  p += 4;
-
-  /* Clear all attributes */
-  pb_push(p++, NV097_SET_VERTEX_DATA_ARRAY_FORMAT, 16);
-  for (auto i = 0; i < 16; i++) {
-    *(p++) = 2;
-  }
-  pb_end(p);
-}
-
-void TestHost::SetTextureFormat(const TextureFormatInfo &fmt) { texture_format = fmt; }
-
-void TestHost::SetDepthBufferFormat(uint32_t fmt) { depth_buffer_format = fmt; }
+void TestHost::SetDepthBufferFormat(uint32_t fmt) { depth_buffer_format_ = fmt; }
 
 int TestHost::SetTexture(SDL_Surface *gradient_surface) {
   auto pixels = static_cast<uint32_t *>(gradient_surface->pixels);
 
   // if conversion required, do so, otherwise use SDL to convert
-  if (texture_format.RequireConversion) {
+  if (texture_format_.RequireConversion) {
     uint8_t *dest = texture_memory_;
 
     // TODO: potential reference material -
     // https://github.com/scalablecory/colors/blob/master/color.c
-    switch (texture_format.XboxFormat) {
+    switch (texture_format_.XboxFormat) {
       case NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8:  // YUY2 aka
                                                                   // YUYV
       {
@@ -349,13 +298,13 @@ int TestHost::SetTexture(SDL_Surface *gradient_surface) {
     // TODO: swizzling
   } else {
     // standard SDL conversion to destination format
-    SDL_Surface *new_surf = SDL_ConvertSurfaceFormat(gradient_surface, texture_format.SdlFormat, 0);
+    SDL_Surface *new_surf = SDL_ConvertSurfaceFormat(gradient_surface, texture_format_.SdlFormat, 0);
     if (!new_surf) {
       return 4;
     }
 
     // copy pixels over to texture memory, swizzling if desired
-    if (texture_format.XboxSwizzled) {
+    if (texture_format_.XboxSwizzled) {
       swizzle_rect((uint8_t *)new_surf->pixels, new_surf->w, new_surf->h, texture_memory_, new_surf->pitch,
                    new_surf->format->BytesPerPixel);
     } else {
@@ -381,66 +330,14 @@ void TestHost::FinishDrawAndSave(const char *output_directory, const char *name)
   }
 }
 
-/* Construct a viewport transformation matrix */
-static void matrix_viewport(float out[4][4], float x, float y, float width, float height, float z_min, float z_max) {
-  memset(out, 0, 4 * 4 * sizeof(float));
-  out[0][0] = width / 2.0f;
-  out[1][1] = height / -2.0f;
-  out[2][2] = (z_max - z_min) / 2.0f;
-  out[3][3] = 1.0f;
-  out[3][0] = x + width / 2.0f;
-  out[3][1] = y + height / 2.0f;
-  out[3][2] = (z_min + z_max) / 2.0f;
+void TestHost::SetShaderProgram(std::shared_ptr<ShaderProgram> program) {
+  shader_program_ = std::move(program);
+  shader_program_->Activate();
 }
 
-void TestHost::init_shader() {
-  /* Load the shader we will render with */
-  uint32_t *p;
-  int i;
-
-  /* Setup vertex shader */
-  // clang format off
-  uint32_t vs_program[] = {
-#include "vs.inl"
-  };
-  // clang format on
-
-  p = pb_begin();
-
-  /* Set run address of shader */
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0);
-
-  /* Set execution mode */
-  p = pb_push1(
-      p, NV097_SET_TRANSFORM_EXECUTION_MODE,
-      MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_PROGRAM) |
-          MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
-
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0);
-  pb_end(p);
-
-  /* Set cursor and begin copying program */
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_LOAD, 0);
-  pb_end(p);
-
-  /* Copy program instructions (16-bytes each) */
-  for (i = 0; i < sizeof(vs_program) / 16; i++) {
-    p = pb_begin();
-    pb_push(p++, NV097_SET_TRANSFORM_PROGRAM, 4);
-    memcpy(p, &vs_program[i * 4], 4 * 4);
-    p += 4;
-    pb_end(p);
-  }
-
-  /* Setup fragment shader */
-  p = pb_begin();
-
-// clang format off
-#include "ps.inl"
-  // clang format on
-
-  pb_end(p);
+std::shared_ptr<VertexBuffer> TestHost::AllocateVertexBuffer(uint32_t num_vertices) {
+  vertex_buffer_ = std::make_shared<VertexBuffer>(num_vertices);
+  return vertex_buffer_;
 }
 
 /* Set an attribute pointer */

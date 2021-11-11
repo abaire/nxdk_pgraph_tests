@@ -1,18 +1,30 @@
 #include "texture_format_tests.h"
 
+#include <SDL.h>
 #include <pbkit/pbkit.h>
 
+#include <memory>
 #include <utility>
 
+#include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
+#include "vertex_buffer.h"
 
 static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height);
 
-TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
-    : host_(host), output_dir_(std::move(output_dir)) {}
+TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, uint32_t framebuffer_width,
+                                       uint32_t framebuffer_height)
+    : TestBase(host, std::move(output_dir)),
+      framebuffer_width_(framebuffer_width),
+      framebuffer_height_(framebuffer_height) {}
 
 void TextureFormatTests::Run() {
+  host_.SetShaderProgram(std::make_shared<PerspectiveVertexShader>(framebuffer_width_, framebuffer_height_));
+
+  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
+  buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
+
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
     Test(format);
@@ -30,9 +42,10 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
     SDL_FreeSurface(gradient_surface);
   }
 
-  host_.StartDraw();
+  host_.PrepareDraw();
+  host_.DrawVertices();
 
-  /* StartDraw some text on the screen */
+  /* PrepareDraw some text on the screen */
   pb_print("N: %s\n", texture_format.Name);
   pb_print("F: 0x%x\n", texture_format.XboxFormat);
   pb_print("SZ: %d\n", texture_format.XboxSwizzled);
@@ -43,7 +56,9 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   pb_print("ERR: %d\n", update_texture_result);
   pb_draw_text_screen();
 
-  host_.FinishDrawAndSave(output_dir_.c_str(), texture_format.Name);
+  std::string test_name = "TexFmt_";
+  test_name += texture_format.Name;
+  host_.FinishDrawAndSave(output_dir_.c_str(), test_name.c_str());
 }
 
 static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height) {
@@ -53,6 +68,8 @@ static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, 
   }
 
   if (SDL_LockSurface(*gradient_surface)) {
+    SDL_FreeSurface(*gradient_surface);
+    *gradient_surface = nullptr;
     return 2;
   }
 

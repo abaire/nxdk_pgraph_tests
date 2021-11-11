@@ -3,21 +3,22 @@
 
 #include <string>
 
+#include "test_base.h"
+
 class TestHost;
 struct TextureFormatInfo;
 
-class TextureFormatTests {
+class TextureFormatTests : TestBase {
  public:
-  TextureFormatTests(TestHost &host, std::string output_dir);
+  TextureFormatTests(TestHost &host, std::string output_dir, uint32_t framebuffer_width, uint32_t framebuffer_height);
 
-  void Run();
+  void Run() override;
 
  private:
   void Test(const TextureFormatInfo &texture_format);
 
- private:
-  TestHost &host_;
-  std::string output_dir_;
+  uint32_t framebuffer_width_;
+  uint32_t framebuffer_height_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_TESTS_H

@@ -36,7 +36,7 @@ typedef float MATRIX[16];
 
 // vector functions
 
-void vector_apply(VECTOR output, VECTOR input0, MATRIX input1);
+void vector_apply(VECTOR output, const VECTOR input0, const MATRIX input1);
 // Multiply a vector by a matrix, returning a vector.
 
 void vector_clamp(VECTOR output, VECTOR input0, float min, float max);
