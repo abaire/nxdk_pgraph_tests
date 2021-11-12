@@ -1,0 +1,7 @@
+struct vOut {
+  float4 col : COLOR;
+};
+
+float4 main(vOut I) : COLOR {
+  return I.col;
+}

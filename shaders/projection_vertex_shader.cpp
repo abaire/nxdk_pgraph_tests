@@ -24,6 +24,7 @@ ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint3
 void ProjectionVertexShader::Activate() {
   UpdateMatrices();
   LoadShaderProgram(kVertexShader, kVertexShaderSize);
+  LoadTexturedPixelShader();
 }
 
 void ProjectionVertexShader::PrepareDraw() {

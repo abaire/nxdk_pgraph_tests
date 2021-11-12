@@ -15,7 +15,7 @@ vOut main(vIn I) {
   vOut result;
 
   result.pos = float4(I.pos.xyz, 1.0);
-  result.col = float4(1.0);
+  result.col = I.diffuse;
   result.tex0 = I.tex;
 
   return result;

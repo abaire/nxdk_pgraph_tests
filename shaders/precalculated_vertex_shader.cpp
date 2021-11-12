@@ -10,9 +10,16 @@ static constexpr uint32_t kShader[] = {
 
 static constexpr uint32_t kShaderSize = sizeof(kShader);
 
-PrecalculatedVertexShader::PrecalculatedVertexShader() : ShaderProgram() {}
+PrecalculatedVertexShader::PrecalculatedVertexShader(bool enable_texture) : ShaderProgram(), enable_texture_(enable_texture) {}
 
-void PrecalculatedVertexShader::Activate() { LoadShaderProgram(kShader, kShaderSize); }
+void PrecalculatedVertexShader::Activate() {
+  LoadShaderProgram(kShader, kShaderSize);
+  if (enable_texture_) {
+    LoadTexturedPixelShader();
+  } else {
+    LoadUntexturedPixelShader();
+  }
+}
 
 void PrecalculatedVertexShader::PrepareDraw() {
   auto p = pb_begin();

@@ -18,8 +18,6 @@ constexpr uint32_t kDepthFormats[] = {
 
 constexpr uint32_t kNumDepthFormats = sizeof(kDepthFormats) / sizeof(kDepthFormats[0]);
 
-static SDL_Surface *generate_gradient_surface(uint32_t width, uint32_t height);
-
 DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir) : TestBase(host, std::move(output_dir)) {}
 
 void DepthFormatTests::Run() {
@@ -27,21 +25,8 @@ void DepthFormatTests::Run() {
   const TextureFormatInfo &texture_format = kTextureFormats[3];
   host_.SetTextureFormat(texture_format);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PrecalculatedVertexShader>(false);
   host_.SetShaderProgram(shader);
-
-  const uint32_t texture_width = host_.GetTextureWidth();
-  const uint32_t texture_height = host_.GetTextureHeight();
-  auto gradient_surface = generate_gradient_surface(texture_width, texture_height);
-  if (!gradient_surface) {
-    return;
-  }
-
-  int result = host_.SetTexture(gradient_surface);
-  SDL_FreeSurface(gradient_surface);
-  if (result) {
-    return;
-  }
 
   auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
   auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
@@ -69,23 +54,39 @@ void DepthFormatTests::Run() {
   uint32_t num_quads = 1 + quads_per_row * quads_per_col;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
 
-  float z_inc = static_cast<float>(0xFFFF / (num_quads + 1));
+  constexpr float max_depth = 65535.0f;
+  float z_inc = max_depth / (num_quads + 1.0f);
 
   // Quads are intentionally rendered from front to back to verify the behavior of the depth buffer.
   uint32_t idx = 0;
   float z_left = 0.0f;
   float z_right = 0.0f;
   float y = y_offset;
+  Color ul = {1.0, 1.0, 1.0, 1.0};
+  Color ll = {1.0, 1.0, 1.0, 1.0};
+  Color lr = {1.0, 1.0, 1.0, 1.0};
+  Color ur = {1.0, 1.0, 1.0, 1.0};
+
   for (int y_idx = 0; y_idx < quads_per_col; ++y_idx, y += kStep) {
     float x = x_offset;
     for (int x_idx = 0; x_idx < quads_per_row; ++x_idx, z_left += z_inc, z_right *= -1.0f, x += kStep) {
-      buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, z_left, z_left, z_right, z_right);
+      float left_color = 0.25f + (z_left / max_depth * 0.75f);
+      float right_color = 0.25f + (z_right / max_depth * 0.75f);
+      ul.SetGrey(left_color);
+      ll.SetGrey(left_color);
+      lr.SetGrey(right_color);
+      ur.SetGrey(right_color);
+      buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, z_left, z_left, z_right, z_right, ul, ll, lr, ur);
     }
 
     z_right *= 1.5f;
   }
 
-  buffer->DefineQuad(idx++, left, top, right, bottom, 65535.0f);
+  ul.SetRGB(0.0, 1.0, 0.0);
+  ll.SetRGB(1.0, 0.0, 0.0);
+  lr.SetRGB(0.0, 0.0, 1.0);
+  ur.SetRGB(0.3, 0.3, 0.3);
+  buffer->DefineQuad(idx++, left, top, right, bottom, max_depth, max_depth, max_depth, max_depth, ul, ll, lr, ur);
 
   constexpr uint32_t depth_cutoffs[] = {
       0x00FFFFFF, 0x007FFFFF, 0x0007FFFF, 0x00007FFF, 0x000007FF, 0x0000007F, 0x00000007, 0x00000000,
@@ -133,29 +134,4 @@ void DepthFormatTests::Test(uint32_t depth_format, bool compress_z, uint32_t dep
   host_.FinishDrawAndSave(output_dir_.c_str(), buf);
 
   Sleep(100);
-}
-
-SDL_Surface *generate_gradient_surface(uint32_t texture_width, uint32_t texture_height) {
-  SDL_Surface *gradient_surface = SDL_CreateRGBSurfaceWithFormat(
-      0, static_cast<int>(texture_width), static_cast<int>(texture_height), 32, SDL_PIXELFORMAT_RGBA8888);
-  if (!gradient_surface) {
-    return gradient_surface;
-  }
-
-  if (SDL_LockSurface(gradient_surface)) {
-    SDL_FreeSurface(gradient_surface);
-    return gradient_surface;
-  }
-
-  auto pixels = static_cast<uint32_t *>(gradient_surface->pixels);
-  for (int x = 0; x < texture_width; ++x) {
-    int normalized_x = static_cast<int>(static_cast<float>(x) * 255.0f / static_cast<float>(texture_width));
-    pixels[x] = SDL_MapRGB(gradient_surface->format, normalized_x, normalized_x, 64);
-  }
-  for (int y = 1; y < texture_height; ++y, pixels += texture_width) {
-    memcpy(pixels + texture_width, pixels, texture_width * 4);
-  }
-
-  SDL_UnlockSurface(gradient_surface);
-  return gradient_surface;
 }

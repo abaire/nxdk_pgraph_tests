@@ -52,34 +52,41 @@ void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float
 
 void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
                               float ll_z, float lr_z, float ur_z) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineQuad(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, diffuse, diffuse, diffuse, diffuse);
+}
 
-    assert(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
+void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                              float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
+                              const Color &lr_diffuse, const Color &ur_diffuse) {
 
-    Vertex *vb = normalized_vertex_buffer_ + (start_index * 6);
+  assert(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
 
-    auto set = [vb](int index, float x, float y, float z, float u, float v) {
-      vb[index].pos[0] = x;
-      vb[index].pos[1] = y;
-      vb[index].pos[2] = z;
+  Vertex *vb = normalized_vertex_buffer_ + (start_index * 6);
 
-      vb[index].texcoord[0] = u;
-      vb[index].texcoord[1] = v;
+  auto set = [vb](int index, float x, float y, float z, float u, float v, const Color& diffuse) {
+    vb[index].pos[0] = x;
+    vb[index].pos[1] = y;
+    vb[index].pos[2] = z;
 
-      vb[index].normal[0] = 0.0f;
-      vb[index].normal[1] = 0.0f;
-      vb[index].normal[2] = 1.0f;
+    vb[index].texcoord[0] = u;
+    vb[index].texcoord[1] = v;
 
-      vb[index].diffuse[0] = 1.0f;
-      vb[index].diffuse[1] = 1.0f;
-      vb[index].diffuse[2] = 1.0f;
-      vb[index].diffuse[3] = 1.0f;
-    };
+    vb[index].normal[0] = 0.0f;
+    vb[index].normal[1] = 0.0f;
+    vb[index].normal[2] = 1.0f;
 
-    set(0, left, top, ul_z, 0.0f, 0.0f);
-    set(1, right, bottom, lr_z, 1.0f, 1.0f);
-    set(2, right, top, ur_z, 1.0f, 0.0f);
+    vb[index].diffuse[0] = diffuse.r;
+    vb[index].diffuse[1] = diffuse.g;
+    vb[index].diffuse[2] = diffuse.b;
+    vb[index].diffuse[3] = diffuse.a;
+  };
 
-    set(3, left, top, ul_z, 0.0f, 0.0f);
-    set(4, left, bottom, ll_z, 0.0f, 1.0f);
-    set(5, right, bottom, lr_z, 1.0f, 1.0f);
+  set(0, left, top, ul_z, 0.0f, 0.0f, ul_diffuse);
+  set(1, right, bottom, lr_z, 1.0f, 1.0f, lr_diffuse);
+  set(2, right, top, ur_z, 1.0f, 0.0f, ur_diffuse);
+
+  set(3, left, top, ul_z, 0.0f, 0.0f, ul_diffuse);
+  set(4, left, bottom, ll_z, 0.0f, 1.0f, ll_diffuse);
+  set(5, right, bottom, lr_z, 1.0f, 1.0f, lr_diffuse);
 }

@@ -24,7 +24,8 @@ SRCS = \
 SHADER_OBJS = \
 	$(CURDIR)/shaders/precalculated_vertex_shader.inl \
 	$(CURDIR)/shaders/projection_vertex_shader.inl \
-	$(CURDIR)/shaders/pixelshader.inl
+	$(CURDIR)/shaders/textured_pixelshader.inl \
+	$(CURDIR)/shaders/untextured_pixelshader.inl
 
 DEBUG := y
 CFLAGS += -I$(CURDIR)

@@ -39,12 +39,25 @@ void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_si
     p += 4;
     pb_end(p);
   }
+}
 
+void ShaderProgram::LoadTexturedPixelShader() {
   /* Setup fragment shader */
-  p = pb_begin();
+  uint32_t *p = pb_begin();
 
 // clang format off
-#include "shaders/pixelshader.inl"
+#include "shaders/textured_pixelshader.inl"
+  // clang format on
+
+  pb_end(p);
+}
+
+void ShaderProgram::LoadUntexturedPixelShader() {
+  /* Setup fragment shader */
+  uint32_t *p = pb_begin();
+
+// clang format off
+#include "shaders/untextured_pixelshader.inl"
   // clang format on
 
   pb_end(p);

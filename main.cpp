@@ -60,10 +60,10 @@ int main() {
 
   TestHost host(kFramebufferWidth, kFramebufferHeight, kTextureWidth, kTextureHeight);
 
-  {
-    TextureFormatTests tests(host, kOutputDirectory, kFramebufferWidth, kFramebufferHeight);
-    tests.Run();
-  }
+//  {
+//    TextureFormatTests tests(host, kOutputDirectory, kFramebufferWidth, kFramebufferHeight);
+//    tests.Run();
+//  }
 
   {
     DepthFormatTests tests(host, kOutputDirectory);

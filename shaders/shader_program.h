@@ -10,6 +10,9 @@ class ShaderProgram {
 
  protected:
   static void LoadShaderProgram(const uint32_t *shader, uint32_t shader_size);
+
+  static void LoadTexturedPixelShader();
+  static void LoadUntexturedPixelShader();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADER_PROGRAM_H

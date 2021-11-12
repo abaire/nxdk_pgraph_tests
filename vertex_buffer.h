@@ -12,6 +12,22 @@ typedef struct Vertex {
 } Vertex;
 #pragma pack()
 
+struct Color {
+  void SetRGB(float red, float green, float blue) {
+    r = red;
+    g = green;
+    b = blue;
+  }
+
+  void SetGrey(float val) {
+    r = val;
+    g = val;
+    b = val;
+  }
+
+  float r, g, b, a;
+};
+
 class TestHost;
 
 class VertexBuffer {
@@ -27,6 +43,9 @@ class VertexBuffer {
   void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom);
   void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float z);
   void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z);
+  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom,
+                  float ul_z, float ll_z, float lr_z, float ur_z,
+                  const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse, const Color& ur_diffuse);
 
  private:
   friend class TestHost;
