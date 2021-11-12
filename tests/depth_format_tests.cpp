@@ -28,6 +28,9 @@ void DepthFormatTests::Run() {
   auto shader = std::make_shared<PrecalculatedVertexShader>(false);
   host_.SetShaderProgram(shader);
 
+  // Prepare a large quad at the maximum depth with a number of smaller quads on top of it with progressively higher
+  // z-buffer values.
+
   auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
   auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
 
@@ -54,8 +57,9 @@ void DepthFormatTests::Run() {
   uint32_t num_quads = 1 + quads_per_row * quads_per_col;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
 
-  constexpr float max_depth = 65535.0f;
-  float z_inc = max_depth / (num_quads + 1.0f);
+  constexpr uint32_t kMaxDepth = 0x00FFFFFF;
+  constexpr float kMaxDepthFloat = static_cast<float>(kMaxDepth);
+  float z_inc = kMaxDepthFloat / (num_quads + 1.0f);
 
   // Quads are intentionally rendered from front to back to verify the behavior of the depth buffer.
   uint32_t idx = 0;
@@ -70,8 +74,8 @@ void DepthFormatTests::Run() {
   for (int y_idx = 0; y_idx < quads_per_col; ++y_idx, y += kStep) {
     float x = x_offset;
     for (int x_idx = 0; x_idx < quads_per_row; ++x_idx, z_left += z_inc, z_right *= -1.0f, x += kStep) {
-      float left_color = 0.25f + (z_left / max_depth * 0.75f);
-      float right_color = 0.25f + (z_right / max_depth * 0.75f);
+      float left_color = 0.25f + (z_left / kMaxDepthFloat * 0.75f);
+      float right_color = 0.25f + (z_right / kMaxDepthFloat * 0.75f);
       ul.SetGrey(left_color);
       ll.SetGrey(left_color);
       lr.SetGrey(right_color);
@@ -79,23 +83,41 @@ void DepthFormatTests::Run() {
       buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, z_left, z_left, z_right, z_right, ul, ll, lr, ur);
     }
 
-    z_right *= 1.5f;
+    z_right *= 1.1f;
   }
 
   ul.SetRGB(0.0, 1.0, 0.0);
   ll.SetRGB(1.0, 0.0, 0.0);
   lr.SetRGB(0.0, 0.0, 1.0);
   ur.SetRGB(0.3, 0.3, 0.3);
-  buffer->DefineQuad(idx++, left, top, right, bottom, max_depth, max_depth, max_depth, max_depth, ul, ll, lr, ur);
+  constexpr float kBackDepth = kMaxDepthFloat - 2.0f;
+  constexpr float kFrontDepth = kBackDepth - (kBackDepth / 3.0f);
+  buffer->DefineQuad(
+      idx++,
+      left,
+      top,
+      right,
+      bottom,
+      kFrontDepth,
+      kBackDepth,
+      kBackDepth,
+      kFrontDepth,
+      ul,
+      ll,
+      lr,
+      ur);
 
-  constexpr uint32_t depth_cutoffs[] = {
-      0x00FFFFFF, 0x007FFFFF, 0x0007FFFF, 0x00007FFF, 0x000007FF, 0x0000007F, 0x00000007, 0x00000000,
-  };
+  constexpr uint32_t kNumDepthTests = 16;
+  constexpr uint32_t kDepthCutoffStep = kMaxDepth / kNumDepthTests;
 
   for (auto depth_format : kDepthFormats) {
-    for (auto cutoff : depth_cutoffs) {
-      Test(depth_format, false, cutoff);
+    uint32_t depth_cutoff = kMaxDepthFloat;
+    for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= kDepthCutoffStep) {
+      Test(depth_format, false, depth_cutoff);
     }
+
+    // This should always render black if the depth test mode is LESS.
+    Test(depth_format, false, 0);
   }
 }
 
@@ -132,6 +154,4 @@ void DepthFormatTests::Test(uint32_t depth_format, bool compress_z, uint32_t dep
   snprintf(buf, 63, "DepthFmt_DF_%d", depth_format);
 
   host_.FinishDrawAndSave(output_dir_.c_str(), buf);
-
-  Sleep(100);
 }
