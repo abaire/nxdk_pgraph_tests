@@ -24,6 +24,7 @@ void TextureFormatTests::Run() {
 
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
   buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
+  buffer->Linearize(host_.GetTextureWidth(), host_.GetTextureHeight());
 
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
