@@ -20,6 +20,7 @@ class TestHost {
 
   void SetTextureFormat(const TextureFormatInfo &fmt);
   void SetDepthBufferFormat(uint32_t fmt);
+  void SetDepthBufferFloatMode(bool enabled);
   int SetTexture(SDL_Surface *gradient_surface);
 
   uint32_t GetTextureWidth() const { return texture_width_; }
@@ -57,7 +58,8 @@ class TestHost {
   uint32_t texture_width_;
   uint32_t texture_height_;
 
-  uint32_t depth_buffer_format_ = NV097_SET_SURFACE_FORMAT_ZETA_Z24S8;
+  uint32_t depth_buffer_format_{NV097_SET_SURFACE_FORMAT_ZETA_Z24S8};
+  bool depth_buffer_mode_float_{false};
   std::shared_ptr<ShaderProgram> shader_program_;
 
   std::shared_ptr<VertexBuffer> vertex_buffer_;

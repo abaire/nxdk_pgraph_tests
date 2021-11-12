@@ -56,8 +56,45 @@ void set_depth_stencil_buffer_region(uint32_t depth_buffer_format, uint32_t dept
       assert(!"Invalid depth_buffer_format");
   }
 
-  depth_value &= 0x00FFFFFF;
   p = pb_push1(p, NV097_CLEAR_SURFACE, NV097_CLEAR_SURFACE_Z | NV097_CLEAR_SURFACE_STENCIL);
 
   pb_end(p);
+}
+
+uint16_t float_to_z16(float val) {
+  if (val == 0.0f) {
+    return 0;
+  }
+
+  auto int_val = reinterpret_cast<uint32_t*>(&val);
+  return (*int_val >> 11) - 0x3F8000;
+}
+
+float z16_to_float(uint32_t val) {
+  if (!val) {
+    return 0.0f;
+  }
+
+  val = (val << 11) + 0x3C000000;
+  return *(float*)&val;
+}
+
+uint32_t float_to_z24(float val) {
+  if (val == 0.0f) {
+    return 0;
+  }
+
+  auto int_val = reinterpret_cast<uint32_t*>(&val);
+  return ((*int_val >> 7) - 0x3000000) & 0x00FFFFFF;
+}
+
+float z24_to_float(uint32_t val) {
+  val &= 0x00FFFFFF;
+
+  if (!val) {
+    return 0.0f;
+  }
+
+  val <<= 7;
+  return *(float*)&val;
 }

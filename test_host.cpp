@@ -73,22 +73,16 @@ void TestHost::SetFillColorRegion(uint32_t argb, uint32_t left, uint32_t top, ui
 void TestHost::EraseText() { pb_erase_text_screen(); }
 
 void TestHost::Clear(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) const {
-  SetDepthStencilRegion(depth_value, stencil_value);
   SetFillColorRegion(argb);
+  SetDepthStencilRegion(depth_value, stencil_value);
   EraseText();
 }
 
 void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) {
+  assert(shader_program_ && "SetShaderProgram must be called before PrepareDraw");
+
   pb_wait_for_vbl();
   pb_reset();
-  pb_target_back_buffer();
-
-  set_depth_buffer_format(depth_buffer_format_);
-  Clear(argb, depth_value, stencil_value);
-
-  while (pb_busy()) {
-    /* Wait for completion... */
-  }
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
@@ -102,9 +96,17 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
   pb_end(p);
 
-  assert(shader_program_ && "SetShaderProgram must be called before PrepareDraw");
+  set_depth_buffer_format(depth_buffer_format_);
+
   SetupTextureStages();
+
+  Clear(argb, depth_value, stencil_value);
+
   shader_program_->PrepareDraw();
+
+  while (pb_busy()) {
+    /* Wait for completion... */
+  }
 }
 
 void TestHost::DrawVertices() {
@@ -157,12 +159,15 @@ void TestHost::SetupTextureStages() {
   bool requires_colorspace_conversion =
       texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
       texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8;
+
+  uint32_t control0 = NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE;
+  control0 |= MASK(NV097_SET_CONTROL0_Z_FORMAT,
+                   depth_buffer_mode_float_ ? NV097_SET_CONTROL0_Z_FORMAT_FLOAT : NV097_SET_CONTROL0_Z_FORMAT_FIXED);
+
   if (requires_colorspace_conversion) {
-    p = pb_push1(p, NV097_SET_CONTROL0,
-                 MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB));
-  } else {
-    p = pb_push1(p, NV097_SET_CONTROL0, 0);
+    control0 |= MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB);
   }
+  p = pb_push1(p, NV097_SET_CONTROL0, control0);
 
   uint32_t format_mask =
       MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
@@ -206,6 +211,8 @@ void TestHost::SetupTextureStages() {
 void TestHost::SetTextureFormat(const TextureFormatInfo &fmt) { texture_format_ = fmt; }
 
 void TestHost::SetDepthBufferFormat(uint32_t fmt) { depth_buffer_format_ = fmt; }
+
+void TestHost::SetDepthBufferFloatMode(bool enabled) { depth_buffer_mode_float_ = enabled; }
 
 int TestHost::SetTexture(SDL_Surface *gradient_surface) {
   auto pixels = static_cast<uint32_t *>(gradient_surface->pixels);

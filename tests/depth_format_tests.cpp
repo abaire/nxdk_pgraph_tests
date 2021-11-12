@@ -11,12 +11,7 @@
 #include "pbkit_ext.h"
 #include "vertex_buffer.h"
 
-struct DepthFormat {
-  uint32_t format;
-  uint32_t max_depth;
-};
-
-constexpr DepthFormat kDepthFormats[] = {
+constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
     {NV097_SET_SURFACE_FORMAT_ZETA_Z16, 0x0000FFFF},
     {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, 0x00FFFFFF},
 };
@@ -35,31 +30,33 @@ void DepthFormatTests::Run() {
   host_.SetShaderProgram(shader);
 
   constexpr bool kCompressionSettings[] = {false, true};
+  constexpr bool kZFloatSettings[] = {true, false};
+
   for (auto depth_format : kDepthFormats) {
-    uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
-    CreateGeometry(depth_format.max_depth);
+    for (auto z_float_enabled : kZFloatSettings) {
+      CreateGeometry(depth_format, z_float_enabled);
 
-    for (auto compression_enabled : kCompressionSettings) {
-      uint32_t depth_cutoff = depth_format.max_depth;
-      for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= depth_cutoff_step) {
-        Test(depth_format.format, compression_enabled, depth_cutoff);
+      uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
+      for (auto compression_enabled : kCompressionSettings) {
+        uint32_t depth_cutoff = depth_format.max_depth;
+        for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= depth_cutoff_step) {
+          Test(depth_format, compression_enabled, z_float_enabled, depth_cutoff);
+        }
+
+        // This should always render black if the depth test mode is LESS.
+        Test(depth_format, compression_enabled, z_float_enabled, 0);
       }
-
-      // This should always render black if the depth test mode is LESS.
-      Test(depth_format.format, compression_enabled, 0);
     }
   }
 }
 
-void DepthFormatTests::Test(uint32_t depth_format, bool compress_z, uint32_t depth_cutoff) {
-  host_.SetDepthBufferFormat(depth_format);
+void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, bool z_format_float, uint32_t depth_cutoff) {
+  host_.SetDepthBufferFormat(format.format);
+  host_.SetDepthBufferFloatMode(z_format_float);
+
   host_.PrepareDraw(0xFF000000, depth_cutoff, 0x00);
 
   auto p = pb_begin();
-  p = pb_push1(
-      p, NV097_SET_CONTROL0,
-      MASK(NV097_SET_CONTROL0_Z_FORMAT, NV097_SET_CONTROL0_Z_FORMAT_FIXED) | NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE);
-
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
   p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
   p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
@@ -75,22 +72,25 @@ void DepthFormatTests::Test(uint32_t depth_format, bool compress_z, uint32_t dep
 
   host_.DrawVertices();
 
-  pb_print("DF: %d\n", depth_format);
+  const char *format_name = format.format == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? "z16" : "z24";
+  pb_print("DF: %s\n", format_name);
   pb_print("CompZ: %s\n", compress_z ? "y" : "n");
+  pb_print("FloatZ: %s\n", z_format_float ? "y" : "n");
   pb_print("Max: %x\n", depth_cutoff);
   pb_draw_text_screen();
 
   char buf[128] = {0};
-  snprintf(buf, 127, "DepthFmt_DF%d_C%d_M%x", depth_format, compress_z, depth_cutoff);
+  snprintf(buf, 127, "DepthFmt_%s_C%s_FZ%s_M%x", format_name, compress_z ? "y" : "n", z_format_float ? "y" : "n",
+           depth_cutoff);
 
   host_.FinishDrawAndSave(output_dir_.c_str(), buf);
 }
 
-void DepthFormatTests::CreateGeometry(uint32_t max_depth) {
+void DepthFormatTests::CreateGeometry(const DepthFormat &format, bool z_format_float) {
   // Prepare a large quad at the maximum depth with a number of smaller quads on top of it with progressively higher
   // z-buffer values.
 
-  auto max_depth_float = static_cast<float>(max_depth);
+  auto max_depth_float = static_cast<float>(format.max_depth);
 
   auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
   auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
@@ -117,7 +117,7 @@ void DepthFormatTests::CreateGeometry(uint32_t max_depth) {
   float x_offset = left + kSmallSpacing + (big_quad_width - row_size) / 2.0f;
   float y_offset = top + kSmallSpacing + (big_quad_height - col_size) / 2.0f;
 
-  uint32_t num_quads = 1 + quads_per_row * quads_per_col;
+  uint32_t num_quads = 3 + quads_per_row * quads_per_col;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
 
   // Quads are intentionally rendered from front to back to verify the behavior of the depth buffer.
@@ -141,7 +141,10 @@ void DepthFormatTests::CreateGeometry(uint32_t max_depth) {
       ll.SetGrey(left_color);
       lr.SetGrey(right_color);
       ur.SetGrey(right_color);
-      buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, z_left, z_left, z_right, z_right, ul, ll, lr, ur);
+
+      float lz = z_left;
+      float rz = z_right;
+      buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, lz, lz, rz, rz, ul, ll, lr, ur);
 
       z_left += z_inc;
       right_offset *= -1.0f;
@@ -151,12 +154,46 @@ void DepthFormatTests::CreateGeometry(uint32_t max_depth) {
     y += kStep;
   }
 
+  ul.SetRGB(1.0, 0.0, 1.0);
+  ur.SetRGB(1.0, 0.0, 1.0);
+  ll.SetRGB(0.0, 1.0, 1.0);
+  lr.SetRGB(0.0, 1.0, 1.0);
+  float back_depth = max_depth_float - 5.0f;
+  float front_depth = 0.0f;
+  buffer->DefineQuad(idx++, left + 5, top, left + 15, bottom, front_depth, back_depth, back_depth, front_depth, ul, ll,
+                     lr, ur);
+
+  ll.SetRGB(1.0, 0.0, 1.0);
+  lr.SetRGB(1.0, 0.0, 1.0);
+  ul.SetRGB(0.0, 1.0, 1.0);
+  ur.SetRGB(0.0, 1.0, 1.0);
+  back_depth = (back_depth / 2.0f);
+  front_depth = 0.0f;
+  buffer->DefineQuad(idx++, right - 15, top, right - 5, bottom, back_depth, front_depth, front_depth, back_depth, ul,
+                     ll, lr, ur);
+
   ul.SetRGB(0.0, 1.0, 0.0);
   ll.SetRGB(1.0, 0.0, 0.0);
   lr.SetRGB(0.0, 0.0, 1.0);
   ur.SetRGB(0.3, 0.3, 0.3);
-  float back_depth = max_depth_float - 1.0f;
-  float front_depth = back_depth - (back_depth / 3.0f);
+  back_depth = max_depth_float - 1.0f;
+  front_depth = back_depth - (back_depth / 3.0f);
 
   buffer->DefineQuad(idx++, left, top, right, bottom, front_depth, back_depth, back_depth, front_depth, ul, ll, lr, ur);
+}
+
+float DepthFormatTests::DepthFormat::fixed_to_float(uint32_t val) const {
+  if (format == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
+    return z16_to_float(val);
+  }
+
+  return z24_to_float(val);
+}
+
+uint32_t DepthFormatTests::DepthFormat::float_to_fixed(float val) const {
+  if (format == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
+    return float_to_z16(val);
+  }
+
+  return float_to_z24(val);
 }
