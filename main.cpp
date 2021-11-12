@@ -72,9 +72,8 @@ int main() {
 
   debugPrint("Results written to %s", kOutputDirectory);
   pb_show_debug_screen();
-  Sleep(2000);
+  Sleep(15000);
 
-  pb_show_debug_screen();
   pb_kill();
   return 0;
 }

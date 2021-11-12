@@ -1,14 +1,13 @@
 #ifndef NXDK_PGRAPH_TESTS_DEPTH_FORMAT_TESTS_H
 #define NXDK_PGRAPH_TESTS_DEPTH_FORMAT_TESTS_H
 
+#include <memory>
 #include <string>
 
 #include "test_base.h"
 
-extern const uint32_t kDepthFormats[];
-extern const uint32_t kNumDepthFormats;
-
 class TestHost;
+class VertexBuffer;
 
 class DepthFormatTests : TestBase {
  public:
@@ -17,6 +16,7 @@ class DepthFormatTests : TestBase {
   void Run() override;
 
  private:
+  void CreateGeometry(uint32_t max_depth);
   void Test(uint32_t depth_format, bool compress_z, uint32_t depth_cutoff);
 };
 

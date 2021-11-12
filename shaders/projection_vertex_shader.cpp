@@ -16,15 +16,15 @@ static constexpr uint32_t kVertexShaderSize = sizeof(kVertexShader);
 
 static void matrix_viewport(MATRIX out, float x, float y, float width, float height, float z_min, float z_max);
 
-ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height)
-    : ShaderProgram(),
+ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height,
+                                               bool enable_texture)
+    : ShaderProgram(enable_texture),
       framebuffer_width_(static_cast<float>(framebuffer_width)),
       framebuffer_height_(static_cast<float>(framebuffer_height)) {}
 
 void ProjectionVertexShader::Activate() {
   UpdateMatrices();
   LoadShaderProgram(kVertexShader, kVertexShaderSize);
-  LoadTexturedPixelShader();
 }
 
 void ProjectionVertexShader::PrepareDraw() {

@@ -2,6 +2,6 @@ struct vOut {
   float4 col : COLOR;
 };
 
-float4 main(vOut I) : COLOR {
+float4 main(vOut I, uniform sampler2D colorMap, uniform sampler2D normalMap) : COLOR {
   return I.col;
 }

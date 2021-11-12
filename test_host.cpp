@@ -11,6 +11,7 @@
 #include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
 
+#include <algorithm>
 #include <cassert>
 #include <utility>
 
@@ -22,8 +23,8 @@
 
 #define MAXRAM 0x03FFAFFF
 
-static void set_attrib_pointer(uint32_t index, uint32_t format, unsigned int size, uint32_t stride, const void *data);
-static void draw_arrays(unsigned int mode, int start, int count);
+static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
+static void draw_arrays(uint32_t mode, int num_vertices);
 
 // bitscan forward
 static int bsf(int val){__asm bsf eax, val}
@@ -56,7 +57,7 @@ void TestHost::SetDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value
     height = framebuffer_height_;
   }
 
-  set_depth_stencil_buffer_region(depth_value, stencil_value, left, top, width, height);
+  set_depth_stencil_buffer_region(depth_buffer_format_, depth_value, stencil_value, left, top, width, height);
 }
 
 void TestHost::SetFillColorRegion(uint32_t argb, uint32_t left, uint32_t top, uint32_t width, uint32_t height) const {
@@ -89,15 +90,28 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
     /* Wait for completion... */
   }
 
-  SetupTextureStages();
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+
+  // Enable alpha blending functionality
+  p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
+
+  // Set the alpha blend source (s) and destination (d) factors
+  p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
+  p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
+  pb_end(p);
+
   assert(shader_program_ && "SetShaderProgram must be called before PrepareDraw");
+  SetupTextureStages();
   shader_program_->PrepareDraw();
 }
 
 void TestHost::DrawVertices() {
   assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
 
-  Vertex *vptr = texture_format_.XboxSwizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
+  Vertex *vptr =
+      texture_format_.XboxSwizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
 
   set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                      &vptr[0].pos);
@@ -113,17 +127,7 @@ void TestHost::DrawVertices() {
 
   int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
 
-  // Looks like the count field is a single byte, so large vertex arrays need to be batched.
-  if (num_vertices < 252) {
-    draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, 0, num_vertices);
-  } else {
-    int start = 0;
-    while (start < num_vertices) {
-      int count = (num_vertices > 252 ? 252 : num_vertices);
-      draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, start, count);
-      start += count;
-    }
-  }
+  draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, num_vertices);
 }
 
 void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
@@ -146,30 +150,21 @@ void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
 }
 
 void TestHost::SetupTextureStages() {
-  /* Enable texture stage 0 */
-  /* FIXME: Use constants instead of the hardcoded values below */
   auto p = pb_begin();
-
-  // first one seems to be needed
-  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
-
-  // Enable alpha blending functionality
-  p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
-
-  // Set the alpha blend source (s) and destination (d) factors
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
-
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
+  // FIXME: Use constants instead of the hardcoded values below
 
   // yuv requires color space conversion
-  if (texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
-      texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8) {
+  bool requires_colorspace_conversion =
+      texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
+      texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8;
+  if (requires_colorspace_conversion) {
     p = pb_push1(p, NV097_SET_CONTROL0,
                  MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB));
+  } else {
+    p = pb_push1(p, NV097_SET_CONTROL0, 0);
   }
 
-  DWORD format_mask =
+  uint32_t format_mask =
       MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
       MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
       MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, 2) |
@@ -201,40 +196,9 @@ void TestHost::SetupTextureStages() {
   // set stage 0 texture filters (AA!)
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(0), 0x04074000);
 
-  pb_end(p);
-
-  /* Disable other texture stages */
-  p = pb_begin();
-
-  // set stage 1 texture enable flags (bit30 disabled)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(1), 0x0003ffc0);
-
-  // set stage 2 texture enable flags (bit30 disabled)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(2), 0x0003ffc0);
-
-  // set stage 3 texture enable flags (bit30 disabled)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(3), 0x0003ffc0);
-
-  // set stage 1 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
-  // 4=border 5=clamp to edge)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(1), 0x00030303);
-
-  // set stage 2 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
-  // 4=border 5=clamp to edge)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(2), 0x00030303);
-
-  // set stage 3 texture modes (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp
-  // 4=border 5=clamp to edge)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(3), 0x00030303);
-
-  // set stage 1 texture filters (no AA, stage not even used)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(1), 0x02022000);
-
-  // set stage 2 texture filters (no AA, stage not even used)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(2), 0x02022000);
-
-  // set stage 3 texture filters (no AA, stage not even used)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(3), 0x02022000);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(1), 0);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(2), 0);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(3), 0);
 
   pb_end(p);
 }
@@ -317,6 +281,17 @@ int TestHost::SetTexture(SDL_Surface *gradient_surface) {
   return 0;
 }
 
+void TestHost::FinishDraw() {
+  while (pb_busy()) {
+    /* Wait for completion... */
+  }
+
+  /* Swap buffers (if we can) */
+  while (pb_finished()) {
+    /* Not ready to swap yet */
+  }
+}
+
 void TestHost::FinishDrawAndSave(const char *output_directory, const char *name) {
   while (pb_busy()) {
     /* Wait for completion... */
@@ -336,12 +311,13 @@ void TestHost::SetShaderProgram(std::shared_ptr<ShaderProgram> program) {
 }
 
 std::shared_ptr<VertexBuffer> TestHost::AllocateVertexBuffer(uint32_t num_vertices) {
+  vertex_buffer_.reset();
   vertex_buffer_ = std::make_shared<VertexBuffer>(num_vertices);
   return vertex_buffer_;
 }
 
 /* Set an attribute pointer */
-static void set_attrib_pointer(uint32_t index, uint32_t format, unsigned int size, uint32_t stride, const void *data) {
+static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();
   p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
                MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
@@ -352,15 +328,23 @@ static void set_attrib_pointer(uint32_t index, uint32_t format, unsigned int siz
 }
 
 /* Send draw commands for the triangles */
-static void draw_arrays(unsigned int mode, int start, int count) {
-  uint32_t *p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, mode);
+static void draw_arrays(uint32_t mode, int num_vertices) {
+  constexpr int vertices_per_push = 120;
+  int start = 0;
+  while (start < num_vertices) {
+    int count = std::min(num_vertices - start, vertices_per_push);
 
-  // bit 30 means all params go to same register 0x1810
-  p = pb_push1(p, 0x40000000 | NV097_DRAW_ARRAYS,
-               MASK(NV097_DRAW_ARRAYS_COUNT, (count - 1)) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
+    uint32_t *p = pb_begin();
+    p = pb_push1(p, NV097_SET_BEGIN_END, mode);
 
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+    // bit 30 means all params go to NV097_DRAW_ARRAYS
+    p = pb_push1(p, 0x40000000 | NV097_DRAW_ARRAYS,
+                 MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
 
-  pb_end(p);
+    p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+
+    pb_end(p);
+
+    start += count;
+  }
 }

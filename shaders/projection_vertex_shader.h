@@ -9,7 +9,7 @@
 
 class ProjectionVertexShader : public ShaderProgram {
  public:
-  ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height);
+  ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, bool enable_texture = true);
 
   void Activate() override;
   void PrepareDraw() override;
