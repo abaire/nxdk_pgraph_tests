@@ -64,7 +64,7 @@ void DepthFormatTests::Run() {
   // Quads are intentionally rendered from front to back to verify the behavior of the depth buffer.
   uint32_t idx = 0;
   float z_left = 0.0f;
-  float z_right = 0.0f;
+  float right_offset = 10.0f;
   float y = y_offset;
   Color ul = {1.0, 1.0, 1.0, 1.0};
   Color ll = {1.0, 1.0, 1.0, 1.0};
@@ -73,7 +73,8 @@ void DepthFormatTests::Run() {
 
   for (int y_idx = 0; y_idx < quads_per_col; ++y_idx, y += kStep) {
     float x = x_offset;
-    for (int x_idx = 0; x_idx < quads_per_row; ++x_idx, z_left += z_inc, z_right *= -1.0f, x += kStep) {
+    for (int x_idx = 0; x_idx < quads_per_row; ++x_idx, z_left += z_inc, right_offset *= -1.0f, x += kStep) {
+      float z_right = z_left + right_offset;
       float left_color = 0.25f + (z_left / kMaxDepthFloat * 0.75f);
       float right_color = 0.25f + (z_right / kMaxDepthFloat * 0.75f);
       ul.SetGrey(left_color);
@@ -82,8 +83,6 @@ void DepthFormatTests::Run() {
       ur.SetGrey(right_color);
       buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, z_left, z_left, z_right, z_right, ul, ll, lr, ur);
     }
-
-    z_right *= 1.1f;
   }
 
   ul.SetRGB(0.0, 1.0, 0.0);
@@ -110,14 +109,17 @@ void DepthFormatTests::Run() {
   constexpr uint32_t kNumDepthTests = 16;
   constexpr uint32_t kDepthCutoffStep = kMaxDepth / kNumDepthTests;
 
-  for (auto depth_format : kDepthFormats) {
-    uint32_t depth_cutoff = kMaxDepthFloat;
-    for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= kDepthCutoffStep) {
-      Test(depth_format, false, depth_cutoff);
-    }
+  constexpr bool kCompressionSettings[] = {false, true};
+  for (auto compression_enabled: kCompressionSettings) {
+    for (auto depth_format : kDepthFormats) {
+      uint32_t depth_cutoff = kMaxDepthFloat;
+      for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= kDepthCutoffStep) {
+        Test(depth_format, false, depth_cutoff);
+      }
 
-    // This should always render black if the depth test mode is LESS.
-    Test(depth_format, false, 0);
+      // This should always render black if the depth test mode is LESS.
+      Test(depth_format, compression_enabled, 0);
+    }
   }
 }
 
@@ -147,7 +149,8 @@ void DepthFormatTests::Test(uint32_t depth_format, bool compress_z, uint32_t dep
   host_.DrawVertices();
 
   pb_print("DF: %d\n", depth_format);
-  pb_print("C: %x\n", depth_cutoff);
+  pb_print("CompZ: %d\n", compress_z);
+  pb_print("Max: %x\n", depth_cutoff);
   pb_draw_text_screen();
 
   char buf[64] = {0};
