@@ -5,6 +5,26 @@ Various tests for nv2a rendering.
 
 Based on code from https://github.com/Ernegien/nxdk/tree/test/texture-formats/samples/texture-formats
 
+## Usage
+
+Tests will be executed automatically if no gamepad input is given within an initial timeout.
+
+Individual tests may be executed via the menu.
+
+### Controls
+
+DPAD:
+
+* Up - Move the menu cursor up. Inside of a test, go to the previous test in the active suite.
+* Down - Move the menu cursor down. Inside of a test, go to the previous test in the active suite.
+* Left - Move the menu cursor up by half a page.
+* Right - Move the menu cursor down by half a page.
+* A - Enter a submenu or test.
+* B - Go up one menu or leave a test. If pressed on the root menu, exit the application.
+* Start - Enter a submenu or test.
+* Back - Go up one menu or leave a test. If pressed on the root menu, exit the application.
+* Black - Exit the application.
+
 ## Running with CLion
 
 Create a build target
