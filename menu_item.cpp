@@ -41,6 +41,8 @@ void MenuItem::Draw() const {
 
   const char *cursor_prefix = "> ";
   const char *normal_prefix = "  ";
+  const char *cursor_suffix = " <";
+  const char *normal_suffix = "";
 
   uint32_t i = 0;
   if (cursor_position > kNumItemsPerHalfPage) {
@@ -62,7 +64,8 @@ void MenuItem::Draw() const {
 
   for (; i < i_end; ++i) {
     const char *prefix = i == cursor_position ? cursor_prefix : normal_prefix;
-    pb_print("%s%s\n", prefix, submenu[i]->name.c_str());
+    const char *suffix = i == cursor_position ? cursor_suffix : normal_suffix;
+    pb_print("%s%s%s\n", prefix, submenu[i]->name.c_str(), suffix);
   }
 
   if (i_end < submenu.size()) {
@@ -146,9 +149,8 @@ void MenuItem::CursorRight() {
     return;
   }
 
-  if (cursor_position < submenu.size() - kNumItemsPerHalfPage) {
-    cursor_position += kNumItemsPerHalfPage;
-  } else {
+  cursor_position += kNumItemsPerHalfPage;
+  if (cursor_position >= submenu.size()) {
     cursor_position = submenu.size() - 1;
   }
 }
