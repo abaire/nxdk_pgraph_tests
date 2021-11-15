@@ -2,10 +2,12 @@
 
 #include <pbkit/pbkit.h>
 
+#include <chrono>
 #include <utility>
 
 #include "tests/test_suite.h"
 
+static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
 static constexpr uint32_t kNumItemsPerPage = 12;
 static constexpr uint32_t kNumItemsPerHalfPage = kNumItemsPerPage >> 1;
 
@@ -210,13 +212,60 @@ MenuItemRoot::MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>> &suites
     child->parent = this;
     submenu.push_back(child);
   }
+
+  start_time = std::chrono::high_resolution_clock::now();
+}
+
+void MenuItemRoot::Draw() const {
+  if (!timer_cancelled) {
+    auto now = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
+    if (elapsed > kAutoTestAllTimeoutMilliseconds) {
+      on_run_all();
+      return;
+    }
+
+    char run_all[128] = {0};
+    snprintf(run_all, 127, "Run all and exit (automatic in %d ms)", kAutoTestAllTimeoutMilliseconds - elapsed);
+    submenu[0]->name = run_all;
+  } else {
+    submenu[0]->name = "Run all and exit";
+  }
+
+  MenuItem::Draw();
+}
+
+void MenuItemRoot::Activate() {
+  timer_cancelled = true;
+  MenuItem::Activate();
 }
 
 bool MenuItemRoot::Deactivate() {
+  timer_cancelled = true;
   if (!active_submenu) {
     on_exit();
     return false;
   }
 
   return MenuItem::Deactivate();
+}
+
+void MenuItemRoot::CursorUp() {
+  timer_cancelled = true;
+  MenuItem::CursorUp();
+}
+
+void MenuItemRoot::CursorDown() {
+  timer_cancelled = true;
+  MenuItem::CursorDown();
+}
+
+void MenuItemRoot::CursorLeft() {
+  timer_cancelled = true;
+  MenuItem::CursorLeft();
+}
+
+void MenuItemRoot::CursorRight() {
+  timer_cancelled = true;
+  MenuItem::CursorRight();
 }

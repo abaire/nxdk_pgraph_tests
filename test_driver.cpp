@@ -4,11 +4,7 @@
 #include <pbkit/pbkit.h>
 #include <windows.h>
 
-#include <chrono>
-
 #include "menu_item.h"
-
-static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
 
 TestDriver::TestDriver(const std::vector<std::shared_ptr<TestSuite>> &test_suites, uint32_t framebuffer_width,
                        uint32_t framebuffer_height)
@@ -27,9 +23,6 @@ TestDriver::~TestDriver() {
 }
 
 void TestDriver::Run() {
-  auto start_time = std::chrono::high_resolution_clock::now();
-  bool timer_cancelled = false;
-
   while (running_) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -45,21 +38,11 @@ void TestDriver::Run() {
         case SDL_CONTROLLERBUTTONDOWN:
           // Fallthrough
         case SDL_CONTROLLERBUTTONUP:
-          timer_cancelled = true;
           OnControllerButtonEvent(event.cbutton);
           break;
 
         default:
           break;
-      }
-    }
-
-    if (!timer_cancelled) {
-      auto now = std::chrono::high_resolution_clock::now();
-      auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
-      if (elapsed > kAutoTestAllTimeoutMilliseconds) {
-        RunAllTestsNonInteractive();
-        break;
       }
     }
 

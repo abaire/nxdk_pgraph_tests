@@ -1,6 +1,7 @@
 #ifndef NXDK_PGRAPH_TESTS_MENU_ITEM_H
 #define NXDK_PGRAPH_TESTS_MENU_ITEM_H
 
+#include <chrono>
 #include <cstdint>
 #include <functional>
 #include <memory>
@@ -83,10 +84,19 @@ struct MenuItemRoot : public MenuItem {
   explicit MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>>& suites, std::function<void()> on_run_all,
                         std::function<void()> on_exit, uint32_t width, uint32_t height);
 
+  void Draw() const override;
+  void Activate() override;
   bool Deactivate() override;
+  void CursorUp() override;
+  void CursorDown() override;
+  void CursorLeft() override;
+  void CursorRight() override;
 
   std::function<void()> on_run_all;
   std::function<void()> on_exit;
+
+  std::chrono::steady_clock::time_point start_time;
+  bool timer_cancelled{false};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_MENU_ITEM_H
