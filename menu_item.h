@@ -61,6 +61,7 @@ struct MenuItemTest : public MenuItem {
 
   void Draw() const override;
   void OnEnter() override;
+  void Activate() override {}
 
   std::shared_ptr<TestSuite> suite;
 };
