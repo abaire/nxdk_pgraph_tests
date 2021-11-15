@@ -113,7 +113,7 @@ void TestHost::DrawVertices() {
   assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
 
   Vertex *vptr =
-      texture_format_.XboxSwizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
+      texture_format_.xbox_swizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
 
   set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                      &vptr[0].pos);
@@ -157,8 +157,8 @@ void TestHost::SetupTextureStages() {
 
   // yuv requires color space conversion
   bool requires_colorspace_conversion =
-      texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
-      texture_format_.XboxFormat == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8;
+      texture_format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
+      texture_format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8;
 
   uint32_t control0 = NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE;
   control0 |= MASK(NV097_SET_CONTROL0_Z_FORMAT,
@@ -173,21 +173,21 @@ void TestHost::SetupTextureStages() {
       MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
       MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
       MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, 2) |
-      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, texture_format_.XboxFormat) |
+      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, texture_format_.xbox_format) |
       MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, 1) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, texture_format_.XboxSwizzled ? bsf(texture_width_) : 0) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, texture_format_.XboxSwizzled ? bsf(texture_height_) : 0) |
+      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, texture_format_.xbox_swizzled ? bsf(texture_width_) : 0) |
+      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, texture_format_.xbox_swizzled ? bsf(texture_height_) : 0) |
       MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, 0);
 
   // set stage 0 texture address & format
   p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(0), (DWORD)texture_memory_ & 0x03ffffff, format_mask);
 
-  if (!texture_format_.XboxSwizzled) {
+  if (!texture_format_.xbox_swizzled) {
     // set stage 0 texture pitch (pitch<<16)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0), (texture_format_.XboxBpp * texture_width_) << 16);
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0), (texture_format_.xbox_bpp * texture_width_) << 16);
 
-    // set stage 0 texture framebuffer_width_ & framebuffer_height_
-    // ((width<<16)|framebuffer_height_)
+    // set stage 0 texture width & height
+    // ((width<<16)|height)
     p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(0), (texture_width_ << 16) | texture_height_);
   }
 
@@ -218,12 +218,12 @@ int TestHost::SetTexture(SDL_Surface *gradient_surface) {
   auto pixels = static_cast<uint32_t *>(gradient_surface->pixels);
 
   // if conversion required, do so, otherwise use SDL to convert
-  if (texture_format_.RequireConversion) {
+  if (texture_format_.require_conversion) {
     uint8_t *dest = texture_memory_;
 
     // TODO: potential reference material -
     // https://github.com/scalablecory/colors/blob/master/color.c
-    switch (texture_format_.XboxFormat) {
+    switch (texture_format_.xbox_format) {
       case NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8:  // YUY2 aka
                                                                   // YUYV
       {
@@ -269,13 +269,13 @@ int TestHost::SetTexture(SDL_Surface *gradient_surface) {
     // TODO: swizzling
   } else {
     // standard SDL conversion to destination format
-    SDL_Surface *new_surf = SDL_ConvertSurfaceFormat(gradient_surface, texture_format_.SdlFormat, 0);
+    SDL_Surface *new_surf = SDL_ConvertSurfaceFormat(gradient_surface, texture_format_.sdl_format, 0);
     if (!new_surf) {
       return 4;
     }
 
     // copy pixels over to texture memory, swizzling if desired
-    if (texture_format_.XboxSwizzled) {
+    if (texture_format_.xbox_swizzled) {
       swizzle_rect((uint8_t *)new_surf->pixels, new_surf->w, new_surf->h, texture_memory_, new_surf->pitch,
                    new_surf->format->BytesPerPixel);
     } else {

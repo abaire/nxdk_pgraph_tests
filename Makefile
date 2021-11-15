@@ -8,14 +8,16 @@ SRCS = \
 	$(CURDIR)/main.cpp \
 	$(CURDIR)/math3d.c \
 	$(CURDIR)/pbkit_ext.cpp \
+	$(CURDIR)/menu_item.cpp \
 	$(CURDIR)/shaders/orthographic_vertex_shader.cpp \
 	$(CURDIR)/shaders/perspective_vertex_shader.cpp \
 	$(CURDIR)/shaders/precalculated_vertex_shader.cpp \
 	$(CURDIR)/shaders/projection_vertex_shader.cpp \
 	$(CURDIR)/shaders/shader_program.cpp \
+	$(CURDIR)/test_driver.cpp \
 	$(CURDIR)/test_host.cpp \
 	$(CURDIR)/tests/depth_format_tests.cpp \
-	$(CURDIR)/tests/test_base.cpp \
+	$(CURDIR)/tests/test_suite.cpp \
 	$(CURDIR)/tests/texture_format_tests.cpp \
 	$(CURDIR)/texture_format.cpp \
 	$(CURDIR)/vertex_buffer.cpp \

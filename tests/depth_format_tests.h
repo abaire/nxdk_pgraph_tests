@@ -5,12 +5,12 @@
 #include <memory>
 #include <string>
 
-#include "test_base.h"
+#include "test_suite.h"
 
 class TestHost;
 class VertexBuffer;
 
-class DepthFormatTests : TestBase {
+class DepthFormatTests : public TestSuite {
  public:
   struct DepthFormat {
     uint32_t float_to_fixed(float val) const;
@@ -23,11 +23,16 @@ class DepthFormatTests : TestBase {
  public:
   DepthFormatTests(TestHost &host, std::string output_dir);
 
-  void Run() override;
+  std::string Name() override { return "Depth buffer"; }
+  void Initialize() override;
 
  private:
   void CreateGeometry(const DepthFormat &format, bool z_format_float);
   void Test(const DepthFormat &format, bool compress_z, bool z_format_float, uint32_t depth_cutoff);
+
+  void AddTestEntry(const DepthFormat &format, bool compress_z, bool z_format_float, uint32_t depth_cutoff);
+  static std::string MakeTestName(const DepthFormat &format, bool compress_z, bool z_format_float,
+                                  uint32_t depth_cutoff);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_DEPTH_FORMAT_TESTS_H

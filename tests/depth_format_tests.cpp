@@ -18,36 +18,35 @@ constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
 
 constexpr uint32_t kNumDepthFormats = sizeof(kDepthFormats) / sizeof(kDepthFormats[0]);
 constexpr uint32_t kNumDepthTests = 32;
+constexpr bool kCompressionSettings[] = {false, true};
+constexpr bool kZFloatSettings[] = {true, false};
 
-DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir) : TestBase(host, std::move(output_dir)) {}
+DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
+  for (auto depth_format : kDepthFormats) {
+    for (auto z_float_enabled : kZFloatSettings) {
+      uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
 
-void DepthFormatTests::Run() {
+      for (auto compression_enabled : kCompressionSettings) {
+        uint32_t depth_cutoff = depth_format.max_depth;
+
+        for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= depth_cutoff_step) {
+          AddTestEntry(depth_format, compression_enabled, z_float_enabled, depth_cutoff);
+        }
+
+        // This should always render black if the depth test mode is LESS.
+        AddTestEntry(depth_format, compression_enabled, z_float_enabled, 0);
+      }
+    }
+  }
+}
+
+void DepthFormatTests::Initialize() {
   // NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8
   const TextureFormatInfo &texture_format = kTextureFormats[3];
   host_.SetTextureFormat(texture_format);
 
   auto shader = std::make_shared<PrecalculatedVertexShader>(false);
   host_.SetShaderProgram(shader);
-
-  constexpr bool kCompressionSettings[] = {false, true};
-  constexpr bool kZFloatSettings[] = {true, false};
-
-  for (auto depth_format : kDepthFormats) {
-    for (auto z_float_enabled : kZFloatSettings) {
-      CreateGeometry(depth_format, z_float_enabled);
-
-      uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
-      for (auto compression_enabled : kCompressionSettings) {
-        uint32_t depth_cutoff = depth_format.max_depth;
-        for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= depth_cutoff_step) {
-          Test(depth_format, compression_enabled, z_float_enabled, depth_cutoff);
-        }
-
-        // This should always render black if the depth test mode is LESS.
-        Test(depth_format, compression_enabled, z_float_enabled, 0);
-      }
-    }
-  }
 }
 
 void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, bool z_format_float, uint32_t depth_cutoff) {
@@ -79,11 +78,8 @@ void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, bool z_f
   pb_print("Max: %x\n", depth_cutoff);
   pb_draw_text_screen();
 
-  char buf[128] = {0};
-  snprintf(buf, 127, "DepthFmt_%s_C%s_FZ%s_M%x", format_name, compress_z ? "y" : "n", z_format_float ? "y" : "n",
-           depth_cutoff);
-
-  host_.FinishDrawAndSave(output_dir_.c_str(), buf);
+  std::string name = MakeTestName(format, compress_z, z_format_float, depth_cutoff);
+  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
 }
 
 void DepthFormatTests::CreateGeometry(const DepthFormat &format, bool z_format_float) {
@@ -180,6 +176,27 @@ void DepthFormatTests::CreateGeometry(const DepthFormat &format, bool z_format_f
   front_depth = back_depth - (back_depth / 3.0f);
 
   buffer->DefineQuad(idx++, left, top, right, bottom, front_depth, back_depth, back_depth, front_depth, ul, ll, lr, ur);
+}
+
+std::string DepthFormatTests::MakeTestName(const DepthFormat &format, bool compress_z, bool z_format_float,
+                                           uint32_t depth_cutoff) {
+  const char *format_name = format.format == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? "z16" : "z24";
+  char buf[128] = {0};
+  snprintf(buf, 127, "DepthFmt_%s_C%s_FZ%s_M%x", format_name, compress_z ? "y" : "n", z_format_float ? "y" : "n",
+           depth_cutoff);
+  return buf;
+}
+
+void DepthFormatTests::AddTestEntry(const DepthFormatTests::DepthFormat &format, bool compress_z, bool z_format_float,
+                                    uint32_t depth_cutoff) {
+  std::string name = MakeTestName(format, compress_z, z_format_float, depth_cutoff);
+
+  auto test = [this, format, compress_z, z_format_float, depth_cutoff]() {
+    this->CreateGeometry(format, z_format_float);
+    this->Test(format, compress_z, z_format_float, depth_cutoff);
+  };
+
+  tests_[name] = test;
 }
 
 float DepthFormatTests::DepthFormat::fixed_to_float(uint32_t val) const {

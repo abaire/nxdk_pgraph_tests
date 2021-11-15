@@ -13,23 +13,25 @@
 
 static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height);
 
-TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, uint32_t framebuffer_width,
-                                       uint32_t framebuffer_height)
-    : TestBase(host, std::move(output_dir)),
-      framebuffer_width_(framebuffer_width),
-      framebuffer_height_(framebuffer_height) {}
-
-void TextureFormatTests::Run() {
-  host_.SetShaderProgram(std::make_shared<PerspectiveVertexShader>(framebuffer_width_, framebuffer_height_));
-
-  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
-  buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
-  buffer->Linearize(host_.GetTextureWidth(), host_.GetTextureHeight());
-
+TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
+    : TestSuite(host, std::move(output_dir)) {
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
-    Test(format);
+    std::string name = MakeTestName(format);
+
+    auto test = [this, format]() {
+      std::shared_ptr<VertexBuffer> buffer = this->host_.AllocateVertexBuffer(6);
+      buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
+      buffer->Linearize(this->host_.GetTextureWidth(), this->host_.GetTextureHeight());
+      this->Test(format);
+    };
+    tests_[name] = test;
   }
+}
+
+void TextureFormatTests::Initialize() {
+  host_.SetShaderProgram(
+      std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight()));
 }
 
 void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
@@ -47,19 +49,24 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   host_.DrawVertices();
 
   /* PrepareDraw some text on the screen */
-  pb_print("N: %s\n", texture_format.Name);
-  pb_print("F: 0x%x\n", texture_format.XboxFormat);
-  pb_print("SZ: %d\n", texture_format.XboxSwizzled);
-  pb_print("C: %d\n", texture_format.RequireConversion);
+  pb_print("N: %s\n", texture_format.name);
+  pb_print("F: 0x%x\n", texture_format.xbox_format);
+  pb_print("SZ: %d\n", texture_format.xbox_swizzled);
+  pb_print("C: %d\n", texture_format.require_conversion);
   pb_print("W: %d\n", host_.GetTextureWidth());
   pb_print("H: %d\n", host_.GetTextureHeight());
-  pb_print("P: %d\n", texture_format.XboxBpp * host_.GetTextureWidth());
+  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetTextureWidth());
   pb_print("ERR: %d\n", update_texture_result);
   pb_draw_text_screen();
 
-  std::string test_name = "TexFmt_";
-  test_name += texture_format.Name;
+  std::string test_name = MakeTestName(texture_format);
   host_.FinishDrawAndSave(output_dir_.c_str(), test_name.c_str());
+}
+
+std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
+  std::string test_name = "TexFmt_";
+  test_name += texture_format.name;
+  return std::move(test_name);
 }
 
 static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height) {
