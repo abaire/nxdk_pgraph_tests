@@ -39,3 +39,11 @@ CXXFLAGS += -DDEVKIT
 endif
 
 include $(NXDK_DIR)/Makefile
+
+XBDM_GDB_BRIDGE := xbdm
+REMOTE_PATH := e:\\pgraph
+XBOX ?=
+.phony: deploy
+deploy: $(OUTPUT_DIR)/default.xbe
+	$(XBDM_GDB_BRIDGE) $(XBOX) -- mkdir $(REMOTE_PATH)
+	$(XBDM_GDB_BRIDGE) $(XBOX) -- putfile $< $(REMOTE_PATH) -f

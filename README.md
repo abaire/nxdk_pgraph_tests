@@ -19,3 +19,8 @@ Create a build target
 
 To capture DbgPrint, additionally append `-device lpc47m157 -serial tcp:127.0.0.1:9091` to `GDB Server args` and use
 something like [pykdclient](https://github.com/abaire/pykdclient).
+
+## Deploying with xbdm_gdb_bridge
+
+The `Makefile` contains a `deploy` target that will copy the finished binary to an XBOX running XBDM. This functionality
+requires the [xbdm_gdb_bridge](https://github.com/abaire/xbdm_gdb_bridge) utility.
