@@ -20,9 +20,9 @@
 #include "tests/texture_format_tests.h"
 
 #ifdef DEVKIT
-static constexpr const char *kOutputDirectory = "e:\\DEVKIT\\nxdk_texture_tests";
+static constexpr const char *kOutputDirectory = "e:\\DEVKIT\\nxdk_pgraph_tests";
 #else
-static constexpr const char *kOutputDirectory = "e:\\nxdk_texture_tests";
+static constexpr const char *kOutputDirectory = "e:\\nxdk_pgraph_tests";
 #endif
 
 static constexpr int kFramebufferWidth = 640;
@@ -76,9 +76,9 @@ int main() {
   TestDriver driver(test_suites, kFramebufferWidth, kFramebufferHeight);
   driver.Run();
 
-  debugPrint("Results written to %s", kOutputDirectory);
+  debugPrint("Results written to %s\n\nRebooting in 4 seconds...", kOutputDirectory);
   pb_show_debug_screen();
-  Sleep(15000);
+  Sleep(4000);
 
   pb_kill();
   return 0;

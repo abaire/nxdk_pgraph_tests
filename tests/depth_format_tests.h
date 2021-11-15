@@ -13,11 +13,11 @@ class VertexBuffer;
 class DepthFormatTests : public TestSuite {
  public:
   struct DepthFormat {
-    uint32_t float_to_fixed(float val) const;
     float fixed_to_float(uint32_t val) const;
 
     uint32_t format;
     uint32_t max_depth;
+    bool floating_point{false};
   };
 
  public:
@@ -27,12 +27,11 @@ class DepthFormatTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void CreateGeometry(const DepthFormat &format, bool z_format_float);
-  void Test(const DepthFormat &format, bool compress_z, bool z_format_float, uint32_t depth_cutoff);
+  void CreateGeometry(const DepthFormat &format);
+  void Test(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);
 
-  void AddTestEntry(const DepthFormat &format, bool compress_z, bool z_format_float, uint32_t depth_cutoff);
-  static std::string MakeTestName(const DepthFormat &format, bool compress_z, bool z_format_float,
-                                  uint32_t depth_cutoff);
+  void AddTestEntry(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);
+  static std::string MakeTestName(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_DEPTH_FORMAT_TESTS_H

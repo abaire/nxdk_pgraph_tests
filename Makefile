@@ -5,6 +5,7 @@ NXDK_SDL = y
 NXDK_CXX = y
 
 SRCS = \
+	$(CURDIR)/debug_output.cpp \
 	$(CURDIR)/main.cpp \
 	$(CURDIR)/math3d.c \
 	$(CURDIR)/pbkit_ext.cpp \
@@ -21,7 +22,8 @@ SRCS = \
 	$(CURDIR)/tests/texture_format_tests.cpp \
 	$(CURDIR)/texture_format.cpp \
 	$(CURDIR)/vertex_buffer.cpp \
-	$(CURDIR)/third_party/swizzle.c
+	$(CURDIR)/third_party/swizzle.c \
+	$(CURDIR)/third_party/printf/printf.c
 
 SHADER_OBJS = \
 	$(CURDIR)/shaders/precalculated_vertex_shader.inl \
@@ -30,8 +32,8 @@ SHADER_OBJS = \
 	$(CURDIR)/shaders/untextured_pixelshader.inl
 
 DEBUG := y
-CFLAGS += -I$(CURDIR)
-CXXFLAGS += -I$(CURDIR)
+CFLAGS += -I$(CURDIR) -I$(CURDIR)/third_party
+CXXFLAGS += -I$(CURDIR) -I$(CURDIR)/third_party
 
 DEVKIT ?= y
 ifeq ($(DEVKIT),y)
@@ -47,3 +49,10 @@ XBOX ?=
 deploy: $(OUTPUT_DIR)/default.xbe
 	$(XBDM_GDB_BRIDGE) $(XBOX) -- mkdir $(REMOTE_PATH)
 	$(XBDM_GDB_BRIDGE) $(XBOX) -- putfile $< $(REMOTE_PATH) -f
+
+.phony: execute
+execute: deploy
+	$(XBDM_GDB_BRIDGE) $(XBOX) -s -- /run $(REMOTE_PATH)
+
+
+

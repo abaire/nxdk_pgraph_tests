@@ -7,7 +7,6 @@
 
 #define MASK(mask, val) (((val) << (ffs(mask) - 1)) & (mask))
 
-void set_depth_buffer_format(uint32_t depth_buffer_format);
 void set_depth_stencil_buffer_region(uint32_t depth_buffer_format, uint32_t depth_value, uint8_t stencil_value,
                                      uint32_t left, uint32_t top, uint32_t width, uint32_t height);
 
@@ -25,5 +24,7 @@ uint32_t float_to_z24(float val);
 
 // Converts a 24-bit fixed point Z-buffer value to a float.
 float z24_to_float(uint32_t val);
+
+void pb_print_float(float value);
 
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H

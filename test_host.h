@@ -47,7 +47,8 @@ class TestHost {
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
 
  private:
-  void SetupTextureStages();
+  void SetupControl0() const;
+  void SetupTextureStages() const;
   static void SaveBackbuffer(const char *output_directory, const char *name);
 
  private:
@@ -60,10 +61,10 @@ class TestHost {
 
   uint32_t depth_buffer_format_{NV097_SET_SURFACE_FORMAT_ZETA_Z24S8};
   bool depth_buffer_mode_float_{false};
-  std::shared_ptr<ShaderProgram> shader_program_;
+  std::shared_ptr<ShaderProgram> shader_program_{};
 
-  std::shared_ptr<VertexBuffer> vertex_buffer_;
-  uint8_t *texture_memory_ = nullptr;
+  std::shared_ptr<VertexBuffer> vertex_buffer_{};
+  uint8_t *texture_memory_{nullptr};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_HOST_H
