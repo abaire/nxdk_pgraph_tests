@@ -6,6 +6,9 @@
 
 #include "tests/test_suite.h"
 
+static constexpr uint32_t kNumItemsPerPage = 12;
+static constexpr uint32_t kNumItemsPerHalfPage = kNumItemsPerPage >> 1;
+
 void MenuItem::PrepareDraw(uint32_t background_color) const {
   pb_wait_for_vbl();
   pb_target_back_buffer();
@@ -37,10 +40,33 @@ void MenuItem::Draw() const {
   const char *cursor_prefix = "> ";
   const char *normal_prefix = "  ";
 
-  for (auto i = 0; i < submenu.size(); ++i) {
+  uint32_t i = 0;
+  if (cursor_position > kNumItemsPerHalfPage) {
+    i = cursor_position - kNumItemsPerHalfPage;
+    if (i + kNumItemsPerPage > submenu.size()) {
+      if (submenu.size() < kNumItemsPerPage) {
+        i = 0;
+      } else {
+        i = submenu.size() - kNumItemsPerPage;
+      }
+    }
+  }
+
+  if (i) {
+    pb_print("...\n");
+  }
+
+  uint32_t i_end = i + std::min(kNumItemsPerPage, submenu.size());
+
+  for (; i < i_end; ++i) {
     const char *prefix = i == cursor_position ? cursor_prefix : normal_prefix;
     pb_print("%s%s\n", prefix, submenu[i]->name.c_str());
   }
+
+  if (i_end < submenu.size()) {
+    pb_print("...\n");
+  }
+
   Swap();
 }
 
@@ -104,12 +130,24 @@ void MenuItem::CursorLeft() {
     active_submenu->CursorLeft();
     return;
   }
+
+  if (cursor_position > kNumItemsPerHalfPage) {
+    cursor_position -= kNumItemsPerHalfPage;
+  } else {
+    cursor_position = 0;
+  }
 }
 
 void MenuItem::CursorRight() {
   if (active_submenu) {
     active_submenu->CursorRight();
     return;
+  }
+
+  if (cursor_position < submenu.size() - kNumItemsPerHalfPage) {
+    cursor_position += kNumItemsPerHalfPage;
+  } else {
+    cursor_position = submenu.size() - 1;
   }
 }
 
