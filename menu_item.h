@@ -30,6 +30,9 @@ struct MenuItem {
   virtual void CursorLeft();
   virtual void CursorRight();
 
+  void CursorUpAndActivate();
+  void CursorDownAndActivate();
+
  protected:
   void PrepareDraw(uint32_t background_color = 0xFF3E003E) const;
   static void Swap();
@@ -42,6 +45,7 @@ struct MenuItem {
   uint32_t cursor_position{0};
   std::vector<std::shared_ptr<MenuItem>> submenu{};
   std::shared_ptr<MenuItem> active_submenu{};
+  MenuItem* parent{nullptr};
 };
 
 struct MenuItemCallable : public MenuItem {
@@ -62,6 +66,10 @@ struct MenuItemTest : public MenuItem {
   void Draw() const override;
   void OnEnter() override;
   void Activate() override {}
+  void CursorUp() override;
+  void CursorDown() override;
+  void CursorLeft() override {}
+  void CursorRight() override {}
 
   std::shared_ptr<TestSuite> suite;
 };

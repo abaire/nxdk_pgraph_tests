@@ -151,6 +151,18 @@ void MenuItem::CursorRight() {
   }
 }
 
+void MenuItem::CursorUpAndActivate() {
+  active_submenu = nullptr;
+  CursorUp();
+  Activate();
+}
+
+void MenuItem::CursorDownAndActivate() {
+  active_submenu = nullptr;
+  CursorDown();
+  Activate();
+}
+
 MenuItemCallable::MenuItemCallable(std::function<void()> callback, std::string name, uint32_t width, uint32_t height)
     : MenuItem(std::move(name), width, height), on_activate(std::move(callback)) {}
 
@@ -166,11 +178,16 @@ void MenuItemTest::Draw() const {}
 void MenuItemTest::OnEnter() {
   // Blank the screen.
   PrepareDraw(0xFF000000);
+  pb_print("Running %s", name.c_str());
   Swap();
 
   suite->Initialize();
   suite->Run(name);
 }
+
+void MenuItemTest::CursorUp() { parent->CursorUpAndActivate(); }
+
+void MenuItemTest::CursorDown() { parent->CursorDownAndActivate(); }
 
 MenuItemSuite::MenuItemSuite(const std::shared_ptr<TestSuite> &suite, uint32_t width, uint32_t height)
     : MenuItem(std::move(suite->Name()), width, height), suite(suite) {
@@ -178,7 +195,9 @@ MenuItemSuite::MenuItemSuite(const std::shared_ptr<TestSuite> &suite, uint32_t w
   submenu.reserve(tests.size());
 
   for (auto &test : tests) {
-    submenu.push_back(std::make_shared<MenuItemTest>(suite, test, width, height));
+    auto child = std::make_shared<MenuItemTest>(suite, test, width, height);
+    child->parent = this;
+    submenu.push_back(child);
   }
 }
 
@@ -187,7 +206,9 @@ MenuItemRoot::MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>> &suites
     : MenuItem("<<root>>", width, height), on_run_all(std::move(on_run_all)), on_exit(std::move(on_exit)) {
   submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "Run all and exit", width, height));
   for (auto &suite : suites) {
-    submenu.push_back(std::make_shared<MenuItemSuite>(suite, width, height));
+    auto child = std::make_shared<MenuItemSuite>(suite, width, height);
+    child->parent = this;
+    submenu.push_back(child);
   }
 }
 
