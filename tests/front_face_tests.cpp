@@ -62,6 +62,24 @@ void FrontFaceTests::Test(uint32_t front_face) {
   host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z16);
   host_.SetDepthBufferFloatMode(false);
   host_.PrepareDraw();
+
+  // To verify that the HW is simply preserving a previously set value, force it to a known valid, but different value
+  // before setting the value under test.
+  // Note that the setup steps done by host_ will set the front face to CCW, so CW is preferred to differentiate the
+  // behavior from simply running tests in sequence.
+  if (front_face != NV097_SET_FRONT_FACE_V_CW) {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
+    pb_end(p);
+  } else {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+    pb_end(p);
+  }
+
+  while (pb_busy()) {
+  }
+
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_FRONT_FACE, front_face);
   pb_end(p);
