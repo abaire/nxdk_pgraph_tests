@@ -18,6 +18,7 @@ SRCS = \
 	$(CURDIR)/test_driver.cpp \
 	$(CURDIR)/test_host.cpp \
 	$(CURDIR)/tests/depth_format_tests.cpp \
+	$(CURDIR)/tests/front_face_tests.cpp \
 	$(CURDIR)/tests/test_suite.cpp \
 	$(CURDIR)/tests/texture_format_tests.cpp \
 	$(CURDIR)/texture_format.cpp \

@@ -12,7 +12,6 @@ class TextureFormatTests : public TestSuite {
  public:
   TextureFormatTests(TestHost &host, std::string output_dir);
 
-  //  void Run() override;
   std::string Name() override { return "Texture format"; }
   void Initialize() override;
 

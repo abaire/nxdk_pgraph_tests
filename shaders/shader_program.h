@@ -10,6 +10,7 @@ class ShaderProgram {
   virtual void Activate() = 0;
   virtual void PrepareDraw() = 0;
 
+  void SetTextureEnabled(bool enabled = true) { enable_texture_ = enabled; }
   bool RequiresTextureStage() { return enable_texture_; }
 
  protected:

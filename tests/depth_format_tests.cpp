@@ -1,12 +1,9 @@
 #include "depth_format_tests.h"
 
-#include <hal/xbox.h>
 #include <pbkit/pbkit.h>
-#include <windows.h>
 
 #include "../shaders/precalculated_vertex_shader.h"
 #include "../test_host.h"
-#include "../texture_format.h"
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"

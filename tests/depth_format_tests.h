@@ -8,7 +8,6 @@
 #include "test_suite.h"
 
 class TestHost;
-class VertexBuffer;
 
 class DepthFormatTests : public TestSuite {
  public:

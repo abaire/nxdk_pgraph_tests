@@ -17,6 +17,7 @@
 #include "test_driver.h"
 #include "test_host.h"
 #include "tests/depth_format_tests.h"
+#include "tests/front_face_tests.h"
 #include "tests/texture_format_tests.h"
 
 #ifdef DEVKIT
@@ -87,6 +88,10 @@ int main() {
 static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuite>> &test_suites) {
   {
     auto suite = std::make_shared<TextureFormatTests>(host, kOutputDirectory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<FrontFaceTests>(host, kOutputDirectory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
