@@ -55,6 +55,7 @@ void TestDriver::RunAllTestsNonInteractive() {
   for (auto &suite : test_suites_) {
     suite->Initialize();
     suite->RunAll();
+    suite->Deinitialize();
   }
   running_ = false;
 }

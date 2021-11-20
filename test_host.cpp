@@ -80,8 +80,6 @@ void TestHost::Clear(uint32_t argb, uint32_t depth_value, uint8_t stencil_value)
 }
 
 void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) {
-  assert(shader_program_ && "SetShaderProgram must be called before PrepareDraw");
-
   pb_wait_for_vbl();
   pb_reset();
 
@@ -129,7 +127,9 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 
   Clear(argb, depth_value, stencil_value);
 
-  shader_program_->PrepareDraw();
+  if (shader_program_) {
+    shader_program_->PrepareDraw();
+  }
 
   while (pb_busy()) {
     /* Wait for completion... */

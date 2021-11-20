@@ -14,6 +14,8 @@ class TestSuite {
   virtual std::string Name() = 0;
 
   virtual void Initialize() = 0;
+  virtual void Deinitialize() {}
+
   std::vector<std::string> TestNames() const;
   void Run(const std::string &test_name);
 

@@ -1,9 +1,13 @@
 #ifndef NXDK_PGRAPH_TESTS_PBKIT_EXT_H
 #define NXDK_PGRAPH_TESTS_PBKIT_EXT_H
 
+#include <pbkit/pbkit.h>
 #include <strings.h>
 
 #include <cstdint>
+
+// "Beta" class for blending operations (see xf86-video-nouveau).
+#define GR_CLASS_12 0x12
 
 #define MASK(mask, val) (((val) << (ffs(mask) - 1)) & (mask))
 
@@ -26,5 +30,11 @@ uint32_t float_to_z24(float val);
 float z24_to_float(uint32_t val);
 
 void pb_print_float(float value);
+
+// Points an existing DMA context object at a new address.
+void pb_set_dma_address(const struct s_CtxDma* context, const void* address, uint32_t limit);
+
+// Binds a subchannel to the given context.
+void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma* context);
 
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H

@@ -89,3 +89,35 @@ void pb_print_float(float value) {
   auto mantissa = static_cast<uint32_t>(value * shift);
   pb_print("%d.%06d", int_val, mantissa);
 }
+
+#define DMA_CLASS_3D 0x3D
+#define PB_SETOUTER 0xB2A
+
+void pb_set_dma_address(const struct s_CtxDma* context, const void* address, uint32_t limit) {
+  uint32_t dma_addr = reinterpret_cast<uint32_t>(address) & 0x03FFFFFF;
+  uint32_t dma_flags = DMA_CLASS_3D | 0x0000B000;
+  dma_addr |= 3;
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_WAIT_MAKESPACE, 0);
+
+  // set params addr,data
+  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_PARAMETER_A, NV_PRAMIN + (context->Inst << 4) + 0x08, dma_addr);
+
+  // calls subprogID PB_SETOUTER: does VIDEOREG(addr)=data
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT, PB_SETOUTER);
+  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_PARAMETER_A, NV_PRAMIN + (context->Inst << 4) + 0x0C, dma_addr);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT, PB_SETOUTER);
+  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_PARAMETER_A, NV_PRAMIN + (context->Inst << 4) + 0x00, dma_flags);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT, PB_SETOUTER);
+  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_PARAMETER_A, NV_PRAMIN + (context->Inst << 4) + 0x04, limit);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT, PB_SETOUTER);
+
+  pb_end(p);
+}
+
+void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma* context) {
+  auto p = pb_begin();
+  p = pb_push1_to(subchannel, p, NV20_TCL_PRIMITIVE_SET_MAIN_OBJECT, context->ChannelID);
+  pb_end(p);
+}
