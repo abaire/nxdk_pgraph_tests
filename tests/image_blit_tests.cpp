@@ -29,6 +29,7 @@ static std::string OperationName(uint32_t operation);
 static constexpr uint32_t kBlitOperations[] = {
     NV09F_SET_OPERATION_BLEND_AND,
     NV09F_SET_OPERATION_SRCCOPY,
+    6,  // BLEND_PREMULT?
 };
 
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
@@ -173,7 +174,8 @@ std::string ImageBlitTests::MakeTestName(uint32_t front_face) {
 static std::string OperationName(uint32_t operation) {
   if (operation == NV09F_SET_OPERATION_BLEND_AND) {
     return "BLEND_AND";
-  } else if (operation == NV09F_SET_OPERATION_SRCCOPY) {
+  }
+  if (operation == NV09F_SET_OPERATION_SRCCOPY) {
     return "SRCCOPY";
   }
 
