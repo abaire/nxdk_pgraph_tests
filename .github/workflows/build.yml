@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/**'
+      - 'README.md'
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '!.github/workflows/**'
+      - 'README.md'
+
+jobs:
+  BuildISO:
+    name: Build ISO
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone tree
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+        path: nxdk_pgraph_tests
+    - name: Clone nxdk
+      uses: actions/checkout@v2
+      with:
+        repository: abaire/nxdk
+        ref: pbkit_extensions
+        submodules: recursive
+        path: nxdk
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          llvm \
+          lld \
+          libsdl2-dev \
+          libsdl2-image-dev
+    - name: Compile
+      run: |
+        cd nxdk_pgraph_tests
+        make -j $(grep -c processor /proc/cpuinfo)
+    - name: Create release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: "Development Build"
+        files: |
+          nxdk_pgraph_tests/nxdk_pgraph_tests.iso
