@@ -24,9 +24,6 @@
 // Subchannel reserved for interaction with the class 12 channel.
 #define SUBCH_CLASS_12 6
 
-// Initial color for the compositing buffer.
-#define COMPOSITING_BUFFER_COLOR 0x00CC2222
-
 #define SOURCE_X 8
 #define SOURCE_Y 8
 #define SOURCE_WIDTH 128
@@ -38,12 +35,20 @@ static std::string OperationName(uint32_t operation);
 static std::string ColorFormatName(uint32_t format);
 
 static constexpr ImageBlitTests::BlitTest kTests[] = {
-    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0.5f, false},
-    //    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0.5f, false},  // Crashes on HW
-    //    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0.5f, true},  // Crashes on HW
-    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0, false},
-    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0, false},
-    //    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0, true},  // Equivalent to no composite.
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x80000000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x8FFFFFFF},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x007FFFFF},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00800000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00D00000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x03300000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x44400000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x444fffff},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x66800000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x7F800000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x7FFFFFFF},
+    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0},
+    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0},
 };
 
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
@@ -71,18 +76,11 @@ void ImageBlitTests::Initialize() {
   memcpy(source_image_, test_image->pixels, image_bytes);
   SDL_free(test_image);
 
-  uint32_t compositing_bytes = 4 * SOURCE_WIDTH * SOURCE_HEIGHT;
-  compositing_image_ = static_cast<uint8_t*>(MmAllocateContiguousMemory(compositing_bytes));
-  std::fill_n(reinterpret_cast<uint32_t*>(compositing_image_), compositing_bytes >> 2, COMPOSITING_BUFFER_COLOR);
-
   // TODO: Provide a mechanism to find the next unused channel.
   auto channel = 20;
 
   pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &image_src_dma_ctx_);
   pb_bind_channel(&image_src_dma_ctx_);
-
-  pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &image_composite_dma_ctx_);
-  pb_bind_channel(&image_composite_dma_ctx_);
 
   pb_create_gr_ctx(channel++, GR_CLASS_30, &null_ctx_);
   pb_bind_channel(&null_ctx_);
@@ -100,8 +98,6 @@ void ImageBlitTests::Initialize() {
 void ImageBlitTests::Deinitialize() {
   MmFreeContiguousMemory(source_image_);
   source_image_ = nullptr;
-  MmFreeContiguousMemory(compositing_image_);
-  compositing_image_ = nullptr;
 }
 
 void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
@@ -109,7 +105,7 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
                                uint32_t source_offset, uint32_t source_x, uint32_t source_y,
                                uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y,
                                uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
-                               uint32_t clip_height) {
+                               uint32_t clip_height) const {
   PrintMsg("ImageBlit: %d beta: 0x%X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
   auto p = pb_begin();
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_OPERATION, operation);
@@ -150,62 +146,38 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
 }
 
 void ImageBlitTests::Test(const BlitTest& test) {
-  host_.PrepareDraw(0x00660033);
+  host_.PrepareDraw(0x00440011);
 
   uint32_t image_bytes = image_pitch_ * image_height_;
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
-  if (test.composite_first) {
-    pb_set_dma_address(&image_composite_dma_ctx_, compositing_image_, image_bytes - 1);
-  }
 
   uint32_t clip_x = 0;
   uint32_t clip_y = 0;
   uint32_t clip_w = host_.GetFramebufferWidth();
   uint32_t clip_h = host_.GetFramebufferHeight();
 
-  if (test.composite_first) {
-    ImageBlit(test.blit_operation, test.GetBeta(), image_src_dma_ctx_.ChannelID, image_composite_dma_ctx_.ChannelID,
-              test.buffer_color_format, image_pitch_, SOURCE_WIDTH << 2, 0, SOURCE_X, SOURCE_Y, 0, 0, 0, SOURCE_WIDTH,
-              SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
-
-    while (pb_busy()) {
-    }
-    pb_wait_until_gr_not_busy();
-    host_.FinishDraw();
-
-    ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_composite_dma_ctx_.ChannelID,
-              11,  // DMA channel 11 - 0x1117
-              test.buffer_color_format, SOURCE_WIDTH << 2, host_.GetFramebufferWidth() << 2, 0, 0, 0, 0, DESTINATION_X,
-              DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
-  } else {
-    ImageBlit(test.blit_operation, test.GetBeta(), image_src_dma_ctx_.ChannelID,
-              11,  // DMA channel 11 - 0x1117
-              test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, SOURCE_X, SOURCE_Y, 0,
-              DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
-  }
+  ImageBlit(test.blit_operation, test.beta, image_src_dma_ctx_.ChannelID,
+            11,  // DMA channel 11 - 0x1117
+            test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, SOURCE_X, SOURCE_Y, 0,
+            DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
 
   std::string op_name = OperationName(test.blit_operation);
   pb_print("Op: %s\n", op_name.c_str());
   std::string color_format_name = ColorFormatName(test.buffer_color_format);
   pb_print("BufFmt: %s\n", color_format_name.c_str());
   if (test.blit_operation != NV09F_SET_OPERATION_SRCCOPY) {
-    pb_print("Beta: %08X\n", test.GetBeta());
-  }
-  if (test.composite_first) {
-    pb_print("Composite\n");
+    pb_print("Beta: %08X\n", test.beta);
   }
   pb_draw_text_screen();
 
   std::string name = MakeTestName(test);
-  //  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
-
-  host_.FinishDraw();
+  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
 }
 
 std::string ImageBlitTests::MakeTestName(const BlitTest& test) {
   char buf[256] = {0};
-  snprintf(buf, 255, "ImageBlt_%s_%s_B%08X_C%s", OperationName(test.blit_operation).c_str(),
-           ColorFormatName(test.buffer_color_format).c_str(), test.GetBeta(), test.composite_first ? "Y" : "N");
+  snprintf(buf, 255, "ImageBlt_%s_%s_B%08X", OperationName(test.blit_operation).c_str(),
+           ColorFormatName(test.buffer_color_format).c_str(), test.beta);
   return buf;
 }
 
@@ -228,30 +200,11 @@ static std::string ColorFormatName(uint32_t format) {
       return "XRGB";
     case NV04_SURFACE_2D_FORMAT_A8R8G8B8:
       return "ARGB";
+    default:
+      break;
   }
 
   char buf[16] = {0};
   snprintf(buf, 15, "%X", format);
   return buf;
-}
-
-uint32_t ImageBlitTests::BlitTest::GetBeta() const {
-  uint32_t int_val;
-
-  // Sets the beta factor. The parameter is a signed fixed-point number with a sign bit and 31 fractional bits.
-  // Note that negative values are clamped to 0, and only 8 fractional bits are actually implemented in hardware.
-
-  float beta_val = beta;
-  if (beta_val < 0.0f) {
-    int_val = 0;
-  } else {
-    if (beta_val > 1.0f) {
-      beta_val = 1.0f;
-    }
-
-    constexpr uint32_t kMaxValue = 0x7f800000;
-    int_val = static_cast<int>(beta_val * static_cast<float>(kMaxValue));
-    int_val &= kMaxValue;
-  }
-  return int_val;
 }
