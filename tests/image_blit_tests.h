@@ -27,11 +27,11 @@ class ImageBlitTests : public TestSuite {
 
  private:
   void Test(const BlitTest& test);
-  void Render2D(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
-                uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
-                uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x,
-                uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y,
-                uint32_t clip_width, uint32_t clip_height);
+  void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
+                 uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
+                 uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x,
+                 uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y,
+                 uint32_t clip_width, uint32_t clip_height);
 
   static std::string MakeTestName(const BlitTest& test);
 

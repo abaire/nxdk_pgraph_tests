@@ -39,11 +39,11 @@ static std::string ColorFormatName(uint32_t format);
 
 static constexpr ImageBlitTests::BlitTest kTests[] = {
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0.5f, false},
-    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0.5f, false},
-    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0.5f, true},
+    //    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0.5f, false},  // Crashes on HW
+    //    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0.5f, true},  // Crashes on HW
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0, false},
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0, false},
-    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0, true},
+    //    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0, true},  // Equivalent to no composite.
 };
 
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
@@ -75,15 +75,6 @@ void ImageBlitTests::Initialize() {
   compositing_image_ = static_cast<uint8_t*>(MmAllocateContiguousMemory(compositing_bytes));
   std::fill_n(reinterpret_cast<uint32_t*>(compositing_image_), compositing_bytes >> 2, COMPOSITING_BUFFER_COLOR);
 
-  // DONOTSUBMIT
-  auto foo = source_image_;
-  for (int y = 0; y < test_image->h; ++y) {
-    for (int x = 0; x < test_image->w; ++x) {
-      foo[3] = 0x33;
-      foo += 4;
-    }
-  }
-
   // TODO: Provide a mechanism to find the next unused channel.
   auto channel = 20;
 
@@ -113,11 +104,13 @@ void ImageBlitTests::Deinitialize() {
   compositing_image_ = nullptr;
 }
 
-void ImageBlitTests::Render2D(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
-                              uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch,
-                              uint32_t source_offset, uint32_t source_x, uint32_t source_y, uint32_t destination_offset,
-                              uint32_t destination_x, uint32_t destination_y, uint32_t width, uint32_t height,
-                              uint32_t clip_x, uint32_t clip_y, uint32_t clip_width, uint32_t clip_height) {
+void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
+                               uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch,
+                               uint32_t source_offset, uint32_t source_x, uint32_t source_y,
+                               uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y,
+                               uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
+                               uint32_t clip_height) {
+  PrintMsg("ImageBlit: %d beta: 0x%X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
   auto p = pb_begin();
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_OPERATION, operation);
   p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
@@ -171,22 +164,24 @@ void ImageBlitTests::Test(const BlitTest& test) {
   uint32_t clip_h = host_.GetFramebufferHeight();
 
   if (test.composite_first) {
-    Render2D(test.blit_operation, test.GetBeta(), image_src_dma_ctx_.ChannelID, image_composite_dma_ctx_.ChannelID,
-             test.buffer_color_format, image_pitch_, SOURCE_WIDTH << 2, 0, SOURCE_X, SOURCE_Y, 0, 0, 0, SOURCE_WIDTH,
-             SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
+    ImageBlit(test.blit_operation, test.GetBeta(), image_src_dma_ctx_.ChannelID, image_composite_dma_ctx_.ChannelID,
+              test.buffer_color_format, image_pitch_, SOURCE_WIDTH << 2, 0, SOURCE_X, SOURCE_Y, 0, 0, 0, SOURCE_WIDTH,
+              SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
 
     while (pb_busy()) {
     }
+    pb_wait_until_gr_not_busy();
+    host_.FinishDraw();
 
-    Render2D(NV09F_SET_OPERATION_SRCCOPY, 0, image_composite_dma_ctx_.ChannelID,
-             11,  // DMA channel 11 - 0x1117
-             test.buffer_color_format, SOURCE_WIDTH << 2, host_.GetFramebufferWidth() << 2, 0, 0, 0, 0, DESTINATION_X,
-             DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
+    ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_composite_dma_ctx_.ChannelID,
+              11,  // DMA channel 11 - 0x1117
+              test.buffer_color_format, SOURCE_WIDTH << 2, host_.GetFramebufferWidth() << 2, 0, 0, 0, 0, DESTINATION_X,
+              DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
   } else {
-    Render2D(test.blit_operation, test.GetBeta(), image_src_dma_ctx_.ChannelID,
-             11,  // DMA channel 11 - 0x1117
-             test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, SOURCE_X, SOURCE_Y, 0,
-             DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
+    ImageBlit(test.blit_operation, test.GetBeta(), image_src_dma_ctx_.ChannelID,
+              11,  // DMA channel 11 - 0x1117
+              test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, SOURCE_X, SOURCE_Y, 0,
+              DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
   }
 
   std::string op_name = OperationName(test.blit_operation);
@@ -194,7 +189,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
   std::string color_format_name = ColorFormatName(test.buffer_color_format);
   pb_print("BufFmt: %s\n", color_format_name.c_str());
   if (test.blit_operation != NV09F_SET_OPERATION_SRCCOPY) {
-    pb_print("Beta: %d\n", test.GetBeta());
+    pb_print("Beta: %08X\n", test.GetBeta());
   }
   if (test.composite_first) {
     pb_print("Composite\n");
