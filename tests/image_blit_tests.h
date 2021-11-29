@@ -9,7 +9,13 @@ class TestHost;
 
 class ImageBlitTests : public TestSuite {
  public:
-  ImageBlitTests(TestHost &host, std::string output_dir);
+  struct BlitTest {
+    uint32_t blit_operation;
+    uint32_t buffer_color_format;
+  };
+
+ public:
+  ImageBlitTests(TestHost& host, std::string output_dir);
 
   std::string Name() override { return "Image blit"; }
   void Initialize() override;
@@ -17,13 +23,13 @@ class ImageBlitTests : public TestSuite {
 
  private:
   void CreateGeometry();
-  void Test(uint32_t operation);
+  void Test(const BlitTest& test);
 
-  static std::string MakeTestName(uint32_t front_face);
+  static std::string MakeTestName(const BlitTest& test);
 
   uint32_t image_pitch_;
   uint32_t image_height_;
-  uint8_t *surface_memory_;
+  uint8_t* surface_memory_;
 
   struct s_CtxDma null_ctx_;
   struct s_CtxDma image_src_dma_ctx_;
