@@ -52,6 +52,11 @@ endif
 CLEANRULES = clean-resources
 include $(NXDK_DIR)/Makefile
 
+PBKIT_DEBUG ?= n
+ifeq ($(PBKIT_DEBUG),y)
+NXDK_CFLAGS += -DDBG
+endif
+
 XBDM_GDB_BRIDGE := xbdm
 REMOTE_PATH := e:\\pgraph
 XBOX ?=
