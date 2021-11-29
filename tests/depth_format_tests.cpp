@@ -41,9 +41,7 @@ DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir) : Tes
 }
 
 void DepthFormatTests::Initialize() {
-  // NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8
-  const TextureFormatInfo &texture_format = kTextureFormats[3];
-  host_.SetTextureFormat(texture_format);
+  SetDefaultTextureFormat();
 
   auto shader = std::make_shared<PrecalculatedVertexShader>(false);
   host_.SetShaderProgram(shader);

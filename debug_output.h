@@ -1,6 +1,8 @@
 #ifndef NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H
 #define NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H
 
+#include <string>
+
 #include "printf/printf.h"
 
 template <typename... VarArgs>

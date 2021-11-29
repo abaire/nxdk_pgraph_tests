@@ -22,6 +22,9 @@ class TestSuite {
   void RunAll();
 
  protected:
+  void SetDefaultTextureFormat() const;
+
+ protected:
   TestHost &host_;
   std::string output_dir_;
 

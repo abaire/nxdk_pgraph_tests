@@ -15,6 +15,7 @@
 #include <cassert>
 #include <utility>
 
+#include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "shaders/shader_program.h"
@@ -197,6 +198,11 @@ void TestHost::SetupControl0() const {
 }
 
 void TestHost::SetupTextureStages() const {
+  if (!texture_format_.xbox_bpp) {
+    PrintMsg("No texture format specified. This will cause an invalid pgraph state exception and a crash.");
+    assert(!"No texture format specified. This will cause an invalid pgraph state exception and a crash.");
+  }
+
   auto p = pb_begin();
   // FIXME: Use constants instead of the hardcoded values below
 
@@ -319,7 +325,7 @@ int TestHost::SetTexture(SDL_Surface *gradient_surface) {
   return 0;
 }
 
-void TestHost::FinishDraw() {
+void TestHost::FinishDraw() const {
   while (pb_busy()) {
     /* Wait for completion... */
   }

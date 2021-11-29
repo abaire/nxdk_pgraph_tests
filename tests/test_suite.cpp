@@ -2,6 +2,9 @@
 
 #include <cassert>
 
+#include "../test_host.h"
+#include "texture_format.h"
+
 TestSuite::TestSuite(TestHost& host, std::string output_dir) : host_(host), output_dir_(std::move(output_dir)) {}
 
 std::vector<std::string> TestSuite::TestNames() const {
@@ -28,4 +31,10 @@ void TestSuite::RunAll() {
   for (const auto& test_name : names) {
     Run(test_name);
   }
+}
+
+void TestSuite::SetDefaultTextureFormat() const {
+  // NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8
+  const TextureFormatInfo& texture_format = kTextureFormats[3];
+  host_.SetTextureFormat(texture_format);
 }

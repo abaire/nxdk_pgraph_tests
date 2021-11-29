@@ -27,8 +27,7 @@
 static std::string OperationName(uint32_t operation);
 
 static constexpr uint32_t kBlitOperations[] = {
-    NV09F_SET_OPERATION_BLEND_AND,
-    NV09F_SET_OPERATION_SRCCOPY,
+    NV09F_SET_OPERATION_BLEND_AND, NV09F_SET_OPERATION_SRCCOPY,
     6,  // BLEND_PREMULT?
 };
 
@@ -39,6 +38,22 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir) : TestSui
     auto test = [this, operation]() { this->Test(operation); };
     tests_[name] = test;
   }
+}
+
+void ImageBlitTests::Initialize() {
+  SetDefaultTextureFormat();
+
+  SDL_Surface* test_image = IMG_Load("D:\\image_blit\\TestImage.png");
+  assert(test_image);
+
+  image_pitch_ = test_image->pitch;
+  image_height_ = test_image->h;
+  uint32_t image_bytes = image_pitch_ * image_height_;
+
+  surface_memory_ = static_cast<uint8_t*>(MmAllocateContiguousMemory(image_bytes));
+  memcpy(surface_memory_, test_image->pixels, image_bytes);
+
+  SDL_free(test_image);
 
   // TODO: Provide a mechanism to find the next unused channel.
   pb_create_dma_ctx(20, DMA_CLASS_3D, 0, MAXRAM, &image_src_dma_ctx_);
@@ -58,26 +73,12 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir) : TestSui
   pb_bind_subchannel(SUBCH_CLASS_12, &beta_ctx_);
 }
 
-void ImageBlitTests::Initialize() {
-  SDL_Surface* test_image = IMG_Load("D:\\image_blit\\TestImage.png");
-  assert(test_image);
-
-  image_pitch_ = test_image->pitch;
-  image_height_ = test_image->h;
-  uint32_t image_bytes = image_pitch_ * image_height_;
-
-  surface_memory_ = static_cast<uint8_t*>(MmAllocateContiguousMemory(image_bytes));
-  memcpy(surface_memory_, test_image->pixels, image_bytes);
-
-  SDL_free(test_image);
-}
-
 void ImageBlitTests::Deinitialize() {
   MmFreeContiguousMemory(surface_memory_);
   surface_memory_ = nullptr;
 }
 
-static uint32_t* set_beta(uint32_t *p, float value) {
+static uint32_t* set_beta(uint32_t* p, float value) {
   // Sets the beta factor. The parameter is a signed fixed-point number with a sign bit and 31 fractional bits.
   // Note that negative values are clamped to 0, and only 8 fractional bits are actually implemented in hardware.
   uint32_t int_val;
@@ -130,8 +131,8 @@ void ImageBlitTests::Test(uint32_t operation) {
   p = pb_push1_to(SUBCH_CLASS_9F, p, 0x0124, 1);  // Sync write
   p = pb_push1_to(SUBCH_CLASS_9F, p, 0x0128, 2);  // Modulo
 
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_FORMAT,
-                  7);  // NV062_SET_COLOR_FORMAT_LE_X8R8G8B8_O8R8G8B8
+  //  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_FORMAT, NV04_SURFACE_2D_FORMAT_A8R8G8B8);
+  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_FORMAT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8);
 
   p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_PITCH, (dest_pitch << 16) | image_pitch_);
   p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_OFFSET_SRC, 0);

@@ -41,7 +41,7 @@ class TestHost {
 
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00);
   void DrawVertices();
-  void FinishDraw();
+  void FinishDraw() const;
   void FinishDrawAndSave(const char *output_directory, const char *name);
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
