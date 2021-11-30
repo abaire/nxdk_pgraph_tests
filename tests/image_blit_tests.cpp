@@ -24,6 +24,9 @@
 // Subchannel reserved for interaction with the class 12 channel.
 #define SUBCH_CLASS_12 6
 
+// Subchannel reserved for interaction with the class 72 channel.
+#define SUBCH_CLASS_72 7
+
 #define SOURCE_X 8
 #define SOURCE_Y 8
 #define SOURCE_WIDTH 128
@@ -47,8 +50,31 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x66800000},
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x7F800000},
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x7FFFFFFF},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000000},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFF000000},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FF0000},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x0000FF00},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x000000FF},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x33000000},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00330000},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00003300},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000033},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FFFFFF},
+    {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFFFFFFFF},
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0},
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000000},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFF000000},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FF0000},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x0000FF00},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x000000FF},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x33000000},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00330000},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00003300},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000033},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FFFFFF},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFFFFFFFF},
+    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0x00000033},
 };
 
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
@@ -93,6 +119,10 @@ void ImageBlitTests::Initialize() {
   pb_create_gr_ctx(channel++, GR_CLASS_12, &beta_ctx_);
   pb_bind_channel(&beta_ctx_);
   pb_bind_subchannel(SUBCH_CLASS_12, &beta_ctx_);
+
+  pb_create_gr_ctx(channel++, GR_CLASS_72, &beta4_ctx_);
+  pb_bind_channel(&beta4_ctx_);
+  pb_bind_subchannel(SUBCH_CLASS_72, &beta4_ctx_);
 }
 
 void ImageBlitTests::Deinitialize() {
@@ -106,19 +136,17 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
                                uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y,
                                uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
                                uint32_t clip_height) const {
-  PrintMsg("ImageBlit: %d beta: 0x%X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
+  PrintMsg("ImageBlit: %d beta: 0x%08X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
   auto p = pb_begin();
+  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
+  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
+  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
+  pb_end(p);
+
+  p = pb_begin();
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_OPERATION, operation);
   p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
   p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
-
-  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, (clip_y << 16) | clip_x);
-  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, (clip_height << 16) | clip_width);
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
-
-  p = pb_push1_to(SUBCH_CLASS_9F, p, 0x0120, 0);  // Sync read
-  p = pb_push1_to(SUBCH_CLASS_9F, p, 0x0124, 1);  // Sync write
-  p = pb_push1_to(SUBCH_CLASS_9F, p, 0x0128, 2);  // Modulo
 
   p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_FORMAT, surface_format);
 
@@ -130,13 +158,20 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
 
-  if (operation == NV09F_SET_OPERATION_SRCCOPY) {
+  if (operation != NV09F_SET_OPERATION_BLEND_AND) {
     p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA, null_ctx_.ChannelID);
   } else {
     p = pb_push1_to(SUBCH_CLASS_12, p, NV012_SET_BETA, beta);
     p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA, beta_ctx_.ChannelID);
   }
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
+
+  if (operation != NV09F_SET_OPERATION_SRCCOPY_PREMULT && operation != NV09F_SET_OPERATION_BLEND_AND_PREMULT) {
+    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
+  } else {
+    // beta is ARGB
+    p = pb_push1_to(SUBCH_CLASS_72, p, NV072_SET_BETA, beta);
+    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, beta4_ctx_.ChannelID);
+  }
 
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_POINT_IN, source_x | (source_y << 16));
   p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_POINT_OUT, destination_x | (destination_y << 16));
@@ -176,7 +211,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
 
 std::string ImageBlitTests::MakeTestName(const BlitTest& test) {
   char buf[256] = {0};
-  snprintf(buf, 255, "ImageBlt_%s_%s_B%08X", OperationName(test.blit_operation).c_str(),
+  snprintf(buf, 255, "ImgBlt_%s_%s_B%08X", OperationName(test.blit_operation).c_str(),
            ColorFormatName(test.buffer_color_format).c_str(), test.beta);
   return buf;
 }
@@ -187,6 +222,12 @@ static std::string OperationName(uint32_t operation) {
   }
   if (operation == NV09F_SET_OPERATION_SRCCOPY) {
     return "SRCCOPY";
+  }
+  if (operation == NV09F_SET_OPERATION_SRCCOPY_PREMULT) {
+    return "SRCCOPYPRE";
+  }
+  if (operation == NV09F_SET_OPERATION_BLEND_AND_PREMULT) {
+    return "BLENDANDPRE";
   }
 
   char buf[16] = {0};

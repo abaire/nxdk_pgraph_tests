@@ -9,6 +9,9 @@
 // "Beta" class for blending operations (see xf86-video-nouveau).
 #define GR_CLASS_12 0x12
 
+// "Beta4" class for blending operations (see xf86-video-nouveau).
+#define GR_CLASS_72 0x72
+
 #define MASK(mask, val) (((val) << (ffs(mask) - 1)) & (mask))
 
 void set_depth_stencil_buffer_region(uint32_t depth_buffer_format, uint32_t depth_value, uint8_t stencil_value,

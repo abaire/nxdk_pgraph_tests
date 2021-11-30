@@ -173,6 +173,7 @@ void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
   SDL_Surface *surface =
       SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, width, height, 32, pitch, SDL_PIXELFORMAT_ARGB8888);
   if (IMG_SavePNG(surface, target_file)) {
+    PrintMsg("Failed to save PNG file '%s'\n", target_file);
     assert(!"Failed to save PNG file.");
   }
 
