@@ -12,9 +12,6 @@
 static constexpr uint32_t kF16MaxFixedRepresentation = 0x0000FFFF;
 static constexpr uint32_t kF24MaxFixedRepresentation = 0x00FEFFFF;
 
-// Uncomment if pb_DepthStencilAddr is non-static in nxdk's pgraph.c and can be queried for debugging.
-//#define EXPORTED_PGRAPH_INTERNALS
-
 constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
     {NV097_SET_SURFACE_FORMAT_ZETA_Z16, 0x0000FFFF, false},
     {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, 0x00FFFFFF, false},
@@ -72,15 +69,8 @@ void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, uint32_t
   pb_draw_text_screen();
 
   std::string name = MakeTestName(format, compress_z, depth_cutoff);
-  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
-
-#ifdef EXPORTED_PGRAPH_INTERNALS
-  auto *depth_stencil = (DWORD *)pb_DepthStencilAddr;
-  DWORD first = *depth_stencil;
-  PrintMsg("%s: 0x%X :: %g => 0x%X\n", format.floating_point ? "F" : "D", depth_cutoff,
-           format.fixed_to_float(depth_cutoff);
-           , first);
-#endif
+  std::string z_name = name + "_ZB";
+  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str(), z_name.c_str());
 }
 
 void DepthFormatTests::CreateGeometry(const DepthFormat &format) {

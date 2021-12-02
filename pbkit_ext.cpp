@@ -121,3 +121,7 @@ void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma* context) {
   p = pb_push1_to(subchannel, p, NV20_TCL_PRIMITIVE_SET_MAIN_OBJECT, context->ChannelID);
   pb_end(p);
 }
+
+void* pb_agp_access(void* fb_memory_pointer) {
+  return reinterpret_cast<void*>(reinterpret_cast<uint32_t>(fb_memory_pointer) | AGP_MEMORY_REMAP);
+}

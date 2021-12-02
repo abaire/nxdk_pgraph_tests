@@ -25,6 +25,12 @@ DPAD:
 * Back - Go up one menu or leave a test. If pressed on the root menu, exit the application.
 * Black - Exit the application.
 
+## Build prerequisites
+
+This test suite requires some modifications to the pbkit used by the nxdk in order to operate.
+
+Use the `pbkit_extensions` branch in https://github.com/abaire/nxdk
+
 ## Running with CLion
 
 Create a build target

@@ -13,6 +13,13 @@ class ShaderProgram;
 struct Vertex;
 class VertexBuffer;
 
+// The first pgraph 0x3D subchannel that can be used by tests.
+// It appears that this must be exactly one more than the last subchannel configured by pbkit or it will trigger an
+// exception in xemu.
+constexpr uint32_t kNextSubchannel = NEXT_SUBCH;
+// The first pgraph context channel that can be used by tests.
+constexpr uint32_t kNextContextChannel = 25;
+
 class TestHost {
  public:
   TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t texture_width, uint32_t texture_height);
@@ -42,7 +49,7 @@ class TestHost {
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00);
   void DrawVertices();
   void FinishDraw() const;
-  void FinishDrawAndSave(const char *output_directory, const char *name);
+  void FinishDrawAndSave(const char *output_directory, const char *name, const char *z_buffer_name = nullptr);
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
 
@@ -50,6 +57,7 @@ class TestHost {
   void SetupControl0() const;
   void SetupTextureStages() const;
   static void SaveBackbuffer(const char *output_directory, const char *name);
+  void SaveZBuffer(const char *output_directory, const char *name) const;
 
  private:
   uint32_t framebuffer_width_;

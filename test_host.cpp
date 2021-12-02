@@ -165,13 +165,41 @@ void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
   snprintf(target_file, 255, "%s\\%s.png", output_directory, name);
   CreateDirectory(output_directory, nullptr);
 
-  auto buffer = pb_back_buffer();
+  auto buffer = pb_agp_access(pb_back_buffer());
   auto width = static_cast<int>(pb_back_buffer_width());
   auto height = static_cast<int>(pb_back_buffer_height());
   auto pitch = static_cast<int>(pb_back_buffer_pitch());
 
   SDL_Surface *surface =
       SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, width, height, 32, pitch, SDL_PIXELFORMAT_ARGB8888);
+  if (IMG_SavePNG(surface, target_file)) {
+    PrintMsg("Failed to save PNG file '%s'\n", target_file);
+    assert(!"Failed to save PNG file.");
+  }
+
+  SDL_FreeSurface(surface);
+}
+
+void TestHost::SaveZBuffer(const char *output_directory, const char *name) const {
+  char target_file[256] = {0};
+  snprintf(target_file, 255, "%s\\%s.png", output_directory, name);
+  CreateDirectory(output_directory, nullptr);
+
+  auto buffer = pb_agp_access(pb_depth_stencil_buffer());
+  auto size = pb_depth_stencil_size();
+
+  PrintMsg("Saving z-buffer to %s. Size: %lu. Pitch %lu.\n", target_file, size, pb_depth_stencil_pitch());
+
+  // The Z buffer set up by pbkit uses a 32bpp pitch regardless of the actual format being used by the HW.
+  int pitch = static_cast<int>(pb_depth_stencil_pitch());
+  int depth = depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? 16 : 32;
+  int format =
+      depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? SDL_PIXELFORMAT_RGB565 : SDL_PIXELFORMAT_ARGB8888;
+
+  SDL_Surface *surface =
+      SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, static_cast<int>(framebuffer_width_),
+                                         static_cast<int>(framebuffer_height_), depth, pitch, format);
+
   if (IMG_SavePNG(surface, target_file)) {
     PrintMsg("Failed to save PNG file '%s'\n", target_file);
     assert(!"Failed to save PNG file.");
@@ -337,12 +365,20 @@ void TestHost::FinishDraw() const {
   }
 }
 
-void TestHost::FinishDrawAndSave(const char *output_directory, const char *name) {
+void TestHost::FinishDrawAndSave(const char *output_directory, const char *name, const char *z_buffer_name) {
   while (pb_busy()) {
     /* Wait for completion... */
   }
 
+  // TODO: See why waiting for tiles to be non-busy results in the screen not updating anymore.
+  // In theory this should wait for all tiles to be rendered before capturing.
+  pb_wait_for_vbl();
+
   SaveBackbuffer(output_directory, name);
+
+  if (z_buffer_name) {
+    SaveZBuffer(output_directory, z_buffer_name);
+  }
 
   /* Swap buffers (if we can) */
   while (pb_finished()) {

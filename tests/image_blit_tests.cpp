@@ -19,13 +19,13 @@
 #define SUBCH_CLASS_62 SUBCH_4
 
 // Subchannel reserved for interaction with the class 19 channel.
-#define SUBCH_CLASS_19 5
+static constexpr uint32_t SUBCH_CLASS_19 = kNextSubchannel;
 
 // Subchannel reserved for interaction with the class 12 channel.
-#define SUBCH_CLASS_12 6
+static constexpr uint32_t SUBCH_CLASS_12 = SUBCH_CLASS_19 + 1;
 
 // Subchannel reserved for interaction with the class 72 channel.
-#define SUBCH_CLASS_72 7
+static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
 #define SOURCE_X 8
 #define SOURCE_Y 8
@@ -50,6 +50,16 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x66800000},
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x7F800000},
     {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x7FFFFFFF},
+
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x007FFFFF},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x00800000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x00D00000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x03300000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x44400000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x444fffff},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x66800000},
+    {NV09F_SET_OPERATION_BLEND_AND, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0x7F800000},
+
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000000},
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFF000000},
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FF0000},
@@ -61,8 +71,11 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000033},
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FFFFFF},
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFFFFFFFF},
+
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0},
+    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0},
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0},
+
     {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000000},
     {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFF000000},
     {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00FF0000},
@@ -103,7 +116,7 @@ void ImageBlitTests::Initialize() {
   SDL_free(test_image);
 
   // TODO: Provide a mechanism to find the next unused channel.
-  auto channel = 20;
+  auto channel = kNextContextChannel;
 
   pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &image_src_dma_ctx_);
   pb_bind_channel(&image_src_dma_ctx_);
@@ -206,7 +219,12 @@ void ImageBlitTests::Test(const BlitTest& test) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(test);
-  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
+  if (test.buffer_color_format == NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8) {
+    std::string z_name = name + "_ZB";
+    host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str(), z_name.c_str());
+  } else {
+    host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
+  }
 }
 
 std::string ImageBlitTests::MakeTestName(const BlitTest& test) {
@@ -241,6 +259,8 @@ static std::string ColorFormatName(uint32_t format) {
       return "XRGB";
     case NV04_SURFACE_2D_FORMAT_A8R8G8B8:
       return "ARGB";
+    case NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8:
+      return "ZRGB";
     default:
       break;
   }

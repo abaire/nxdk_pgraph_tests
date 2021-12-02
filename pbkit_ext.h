@@ -12,6 +12,10 @@
 // "Beta4" class for blending operations (see xf86-video-nouveau).
 #define GR_CLASS_72 0x72
 
+// Value that may be added to contiguous memory addresses to access as ADDR_AGPMEM, which is guaranteed to be linear
+// (and thus may be slower than tiled ADDR_FBMEM but can be manipulated directly).
+#define AGP_MEMORY_REMAP 0xF0000000
+
 #define MASK(mask, val) (((val) << (ffs(mask) - 1)) & (mask))
 
 void set_depth_stencil_buffer_region(uint32_t depth_buffer_format, uint32_t depth_value, uint8_t stencil_value,
@@ -39,5 +43,8 @@ void pb_set_dma_address(const struct s_CtxDma* context, const void* address, uin
 
 // Binds a subchannel to the given context.
 void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma* context);
+
+// Returns an AGP version of the given nv2a tiled memory address.
+void* pb_agp_access(void* fb_memory_pointer);
 
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H
