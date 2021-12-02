@@ -194,7 +194,7 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
 }
 
 void ImageBlitTests::Test(const BlitTest& test) {
-  host_.PrepareDraw(0x00440011);
+  host_.PrepareDraw(0xFF440011);
 
   uint32_t image_bytes = image_pitch_ * image_height_;
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
