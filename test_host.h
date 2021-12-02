@@ -26,9 +26,13 @@ class TestHost {
   ~TestHost();
 
   void SetTextureFormat(const TextureFormatInfo &fmt);
-  void SetDepthBufferFormat(uint32_t fmt);
-  void SetDepthBufferFloatMode(bool enabled);
   int SetTexture(SDL_Surface *gradient_surface);
+
+  void SetDepthBufferFormat(uint32_t fmt);
+  uint32_t GetDepthBufferFormat() const { return depth_buffer_format_; }
+
+  void SetDepthBufferFloatMode(bool enabled);
+  bool GetDepthBufferFloatMode() const { return depth_buffer_mode_float_; }
 
   uint32_t GetTextureWidth() const { return texture_width_; }
   uint32_t GetTextureHeight() const { return texture_height_; }

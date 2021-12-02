@@ -73,7 +73,7 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
     {NV09F_SET_OPERATION_BLEND_AND_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0xFFFFFFFF},
 
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0},
-    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0},
+    {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8, 0},  // Zero alpha.
     {NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0},
 
     {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, 0x00000000},
@@ -194,7 +194,7 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
 }
 
 void ImageBlitTests::Test(const BlitTest& test) {
-  host_.PrepareDraw(0xFF440011);
+  host_.PrepareDraw(0xF0440011);
 
   uint32_t image_bytes = image_pitch_ * image_height_;
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
@@ -219,12 +219,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(test);
-  if (test.buffer_color_format == NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8) {
-    std::string z_name = name + "_ZB";
-    host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str(), z_name.c_str());
-  } else {
-    host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
-  }
+  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
 }
 
 std::string ImageBlitTests::MakeTestName(const BlitTest& test) {
