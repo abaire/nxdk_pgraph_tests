@@ -32,6 +32,7 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
 void TextureFormatTests::Initialize() {
   host_.SetShaderProgram(
       std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight()));
+  host_.SetTextureStageEnabled(0, true);
 }
 
 void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {

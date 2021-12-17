@@ -25,6 +25,7 @@
 #define MAXRAM 0x03FFAFFF
 
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
+static void clear_attrib(uint32_t index);
 static void draw_arrays(uint32_t mode, int num_vertices);
 
 // bitscan forward
@@ -92,6 +93,7 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
 
   // Set the alpha blend source (s) and destination (d) factors
+  p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
   p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
   p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
   pb_end(p);
@@ -104,7 +106,7 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   uint32_t frame_buffer_format =
       (NV097_SET_SURFACE_FORMAT_TYPE_PITCH << 8) | (depth_buffer_format_ << 4) | color_format;
   uint32_t fbv_flag = 0;
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_BUFFER_FORMAT, frame_buffer_format | fbv_flag);
+  p = pb_push1(p, NV097_SET_SURFACE_FORMAT, frame_buffer_format | fbv_flag);
 
   uint32_t max_depth;
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
@@ -137,23 +139,56 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   }
 }
 
-void TestHost::DrawVertices() {
+void TestHost::DrawVertices(uint32_t elements) {
   assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
 
   Vertex *vptr =
       texture_format_.xbox_swizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
 
-  set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                     &vptr[0].pos);
+  if (elements & POSITION) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                       &vptr[0].pos);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_POSITION);
+  }
 
-  set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                     &vptr[0].texcoord);
+  clear_attrib(NV2A_VERTEX_ATTR_WEIGHT);
 
-  set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                     &vptr[0].normal);
+  if (elements & NORMAL) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                       &vptr[0].normal);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_NORMAL);
+  }
 
-  set_attrib_pointer(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-                     &vptr[0].diffuse);
+  if (elements & DIFFUSE) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+                       &vptr[0].diffuse);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_DIFFUSE);
+  }
+
+  clear_attrib(NV2A_VERTEX_ATTR_SPECULAR);
+  clear_attrib(NV2A_VERTEX_ATTR_FOG_COORD);
+  clear_attrib(NV2A_VERTEX_ATTR_POINT_SIZE);
+  clear_attrib(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
+  clear_attrib(NV2A_VERTEX_ATTR_BACK_SPECULAR);
+
+  if (elements & TEXCOORD0) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
+                       &vptr[0].texcoord);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE0);
+  }
+
+  clear_attrib(NV2A_VERTEX_ATTR_TEXTURE1);
+  clear_attrib(NV2A_VERTEX_ATTR_TEXTURE2);
+  clear_attrib(NV2A_VERTEX_ATTR_TEXTURE3);
+
+  // Matching observed behavior. This is probably unnecessary as these are never set by pbkit.
+  clear_attrib(13);
+  clear_attrib(14);
+  clear_attrib(15);
 
   int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
 
@@ -209,7 +244,6 @@ void TestHost::SaveZBuffer(const char *output_directory, const char *name) const
 }
 
 void TestHost::SetupControl0() const {
-  auto p = pb_begin();
   // yuv requires color space conversion
   bool requires_colorspace_conversion =
       texture_format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
@@ -222,6 +256,7 @@ void TestHost::SetupControl0() const {
   if (requires_colorspace_conversion) {
     control0 |= MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB);
   }
+  auto p = pb_begin();
   p = pb_push1(p, NV097_SET_CONTROL0, control0);
   pb_end(p);
 }
@@ -262,7 +297,12 @@ void TestHost::SetupTextureStages() const {
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), 0x00030303);
 
   // set stage 0 texture enable flags
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0), 0x4003ffc0);
+  if (texture_stage_enabled_[0]) {
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0),
+                 NV097_SET_TEXTURE_CONTROL0_ENABLE | NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP);
+  } else {
+    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0), 0);
+  }
 
   // set stage 0 texture filters (AA!)
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(0), 0x04074000);
@@ -388,7 +428,21 @@ void TestHost::FinishDrawAndSave(const char *output_directory, const char *name,
 
 void TestHost::SetShaderProgram(std::shared_ptr<ShaderProgram> program) {
   shader_program_ = std::move(program);
-  shader_program_->Activate();
+
+  if (shader_program_) {
+    shader_program_->Activate();
+  } else {
+    auto p = pb_begin();
+    p = pb_push1(
+        p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+        MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_FIXED) |
+            MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
+    pb_end(p);
+
+    // Use the untextured shader to set up the combiner state.
+    ShaderProgram::LoadUntexturedPixelShader();
+    ShaderProgram::DisablePixelShader();
+  }
 }
 
 std::shared_ptr<VertexBuffer> TestHost::AllocateVertexBuffer(uint32_t num_vertices) {
@@ -404,8 +458,15 @@ static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, u
                MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
                    MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE, size) |
                    MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE, stride));
-  p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_OFFSET + index * 4, (uint32_t)data & 0x03ffffff);
+  if (size && data) {
+    p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_OFFSET + index * 4, (uint32_t)data & 0x03ffffff);
+  }
   pb_end(p);
+}
+
+static void clear_attrib(uint32_t index) {
+  // Note: xemu has asserts on the count for several formats, so any format without that assert must be used.
+  set_attrib_pointer(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
 }
 
 /* Send draw commands for the triangles */

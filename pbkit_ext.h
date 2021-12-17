@@ -47,4 +47,8 @@ void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma* context);
 // Returns an AGP version of the given nv2a tiled memory address.
 void* pb_agp_access(void* fb_memory_pointer);
 
+// Pushes a 4 column x 3 row matrix (used to push the inverse matrix which intentionally omits the 4th row and is
+// not transposed).
+uint32_t* pb_push_4x3_matrix(uint32_t* p, DWORD command, const float* m);
+
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H

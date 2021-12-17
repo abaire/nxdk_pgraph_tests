@@ -4,12 +4,12 @@
 #include <SDL.h>
 
 typedef struct TextureFormatInfo {
-  SDL_PixelFormatEnum sdl_format;
-  uint32_t xbox_format;
-  uint16_t xbox_bpp;  // bytes per pixel
-  bool xbox_swizzled;
-  bool require_conversion;
-  const char *name;
+  SDL_PixelFormatEnum sdl_format{SDL_PIXELFORMAT_ARGB8888};
+  uint32_t xbox_format{0};
+  uint16_t xbox_bpp{4};  // bytes per pixel
+  bool xbox_swizzled{false};
+  bool require_conversion{false};
+  const char *name{nullptr};
 } TextureFormatInfo;
 
 extern const TextureFormatInfo kTextureFormats[];

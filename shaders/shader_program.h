@@ -13,6 +13,10 @@ class ShaderProgram {
   void SetTextureEnabled(bool enabled = true) { enable_texture_ = enabled; }
   bool RequiresTextureStage() { return enable_texture_; }
 
+  static void LoadTexturedPixelShader();
+  static void LoadUntexturedPixelShader();
+  static void DisablePixelShader();
+
  protected:
   void LoadShaderProgram(const uint32_t *shader, uint32_t shader_size);
 

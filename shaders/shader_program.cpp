@@ -6,9 +6,6 @@
 
 #include "pbkit_ext.h"
 
-static void LoadTexturedPixelShader();
-static void LoadUntexturedPixelShader();
-
 void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) {
   /* Load the shader we will render with */
   uint32_t *p;
@@ -50,7 +47,7 @@ void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_si
   }
 }
 
-static void LoadTexturedPixelShader() {
+void ShaderProgram::LoadTexturedPixelShader() {
   /* Setup fragment shader */
   uint32_t *p = pb_begin();
 
@@ -61,7 +58,7 @@ static void LoadTexturedPixelShader() {
   pb_end(p);
 }
 
-static void LoadUntexturedPixelShader() {
+void ShaderProgram::LoadUntexturedPixelShader() {
   /* Setup fragment shader */
   uint32_t *p = pb_begin();
 
@@ -69,5 +66,11 @@ static void LoadUntexturedPixelShader() {
 #include "shaders/untextured_pixelshader.inl"
   // clang format on
 
+  pb_end(p);
+}
+
+void ShaderProgram::DisablePixelShader() {
+  uint32_t *p = pb_begin();
+  p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, NV097_SET_SHADER_STAGE_PROGRAM_STAGE0_PROGRAM_NONE);
   pb_end(p);
 }

@@ -42,7 +42,7 @@ uint16_t float_to_z16(float val) {
     return 0;
   }
 
-  auto int_val = reinterpret_cast<uint32_t*>(&val);
+  auto int_val = reinterpret_cast<uint32_t *>(&val);
   return (*int_val >> 11) - 0x3F8000;
 }
 
@@ -52,7 +52,7 @@ float z16_to_float(uint32_t val) {
   }
 
   val = (val << 11) + 0x3C000000;
-  return *(float*)&val;
+  return *(float *)&val;
 }
 
 uint32_t float_to_z24(float val) {
@@ -60,7 +60,7 @@ uint32_t float_to_z24(float val) {
     return 0;
   }
 
-  auto int_val = reinterpret_cast<uint32_t*>(&val);
+  auto int_val = reinterpret_cast<uint32_t *>(&val);
   return ((*int_val >> 7) - 0x3000000) & 0x00FFFFFF;
 }
 
@@ -74,7 +74,7 @@ float z24_to_float(uint32_t val) {
   // XBOX 24 bit format is e8m16, convert it to a 32-bit float by shifting the exponent portion to 23:30.
   //  val = ((val & 0x00FF0000) << 7) + (val & 0x0000FFFF);
   val <<= 7;
-  return *(float*)&val;
+  return *(float *)&val;
 }
 
 void pb_print_float(float value) {
@@ -93,7 +93,7 @@ void pb_print_float(float value) {
 #define DMA_CLASS_3D 0x3D
 #define PB_SETOUTER 0xB2A
 
-void pb_set_dma_address(const struct s_CtxDma* context, const void* address, uint32_t limit) {
+void pb_set_dma_address(const struct s_CtxDma *context, const void *address, uint32_t limit) {
   uint32_t dma_addr = reinterpret_cast<uint32_t>(address) & 0x03FFFFFF;
   uint32_t dma_flags = DMA_CLASS_3D | 0x0000B000;
   dma_addr |= 3;
@@ -116,12 +116,33 @@ void pb_set_dma_address(const struct s_CtxDma* context, const void* address, uin
   pb_end(p);
 }
 
-void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma* context) {
+void pb_bind_subchannel(uint32_t subchannel, const struct s_CtxDma *context) {
   auto p = pb_begin();
   p = pb_push1_to(subchannel, p, NV20_TCL_PRIMITIVE_SET_MAIN_OBJECT, context->ChannelID);
   pb_end(p);
 }
 
-void* pb_agp_access(void* fb_memory_pointer) {
-  return reinterpret_cast<void*>(reinterpret_cast<uint32_t>(fb_memory_pointer) | AGP_MEMORY_REMAP);
+void *pb_agp_access(void *fb_memory_pointer) {
+  return reinterpret_cast<void *>(reinterpret_cast<uint32_t>(fb_memory_pointer) | AGP_MEMORY_REMAP);
+}
+
+uint32_t *pb_push_4x3_matrix(uint32_t *p, DWORD command, const float *m) {
+  pb_push_to(SUBCH_3D, p++, command, 12);
+
+  *((float *)p++) = m[_11];
+  *((float *)p++) = m[_12];
+  *((float *)p++) = m[_13];
+  *((float *)p++) = m[_14];
+
+  *((float *)p++) = m[_21];
+  *((float *)p++) = m[_22];
+  *((float *)p++) = m[_23];
+  *((float *)p++) = m[_24];
+
+  *((float *)p++) = m[_31];
+  *((float *)p++) = m[_32];
+  *((float *)p++) = m[_33];
+  *((float *)p++) = m[_34];
+
+  return p;
 }
