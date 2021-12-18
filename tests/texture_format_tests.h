@@ -16,6 +16,7 @@ class TextureFormatTests : public TestSuite {
   void Initialize() override;
 
  private:
+  void CreateGeometry();
   void Test(const TextureFormatInfo &texture_format);
   static std::string MakeTestName(const TextureFormatInfo &texture_format);
 };

@@ -6,7 +6,7 @@
 
 #include "pbkit_ext.h"
 
-void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) {
+void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const {
   /* Load the shader we will render with */
   uint32_t *p;
   int i;

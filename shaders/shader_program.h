@@ -18,7 +18,7 @@ class ShaderProgram {
   static void DisablePixelShader();
 
  protected:
-  void LoadShaderProgram(const uint32_t *shader, uint32_t shader_size);
+  void LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const;
 
   bool enable_texture_;
 };

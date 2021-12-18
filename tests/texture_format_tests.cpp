@@ -19,20 +19,25 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
     auto &format = kTextureFormats[i];
     std::string name = MakeTestName(format);
 
-    auto test = [this, format]() {
-      std::shared_ptr<VertexBuffer> buffer = this->host_.AllocateVertexBuffer(6);
-      buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
-      buffer->Linearize(this->host_.GetTextureWidth(), this->host_.GetTextureHeight());
-      this->Test(format);
-    };
-    tests_[name] = test;
+    tests_[name] = [this, format]() { this->Test(format); };
   }
 }
 
 void TextureFormatTests::Initialize() {
+  CreateGeometry();
+
+  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8);
+  host_.SetDepthBufferFloatMode(false);
+
   host_.SetShaderProgram(
       std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight()));
   host_.SetTextureStageEnabled(0, true);
+}
+
+void TextureFormatTests::CreateGeometry() {
+  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
+  buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
+  buffer->Linearize(static_cast<float>(host_.GetTextureWidth()), static_cast<float>(host_.GetTextureHeight()));
 }
 
 void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
@@ -44,6 +49,11 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   if (!update_texture_result) {
     update_texture_result = host_.SetTexture(gradient_surface);
     SDL_FreeSurface(gradient_surface);
+  } else {
+    pb_print("FAILED TO GENERATE SDL SURFACE - TEST IS INVALID: %d\n", update_texture_result);
+    pb_draw_text_screen();
+    host_.FinishDraw();
+    return;
   }
 
   host_.PrepareDraw();
