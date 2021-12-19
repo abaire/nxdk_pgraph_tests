@@ -6,9 +6,12 @@
 #include <cstdint>
 #include <memory>
 
+#include <printf/printf.h>
+
 #include "nxdk_ext.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"
+#include "math3d.h"
 
 class ShaderProgram;
 struct Vertex;
@@ -28,6 +31,7 @@ class TestHost {
     TEXCOORD0 = 1 << NV2A_VERTEX_ATTR_TEXTURE0,
     NORMAL = 1 << NV2A_VERTEX_ATTR_NORMAL,
     DIFFUSE = 1 << NV2A_VERTEX_ATTR_DIFFUSE,
+    SPECULAR = 1 << NV2A_VERTEX_ATTR_SPECULAR,
   };
 
  public:
@@ -72,6 +76,9 @@ class TestHost {
     texture_stage_enabled_[stage] = enabled;
   }
 
+  void SetFixedFunctionModelViewMatrix(const MATRIX model_matrix);
+  void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
+
  private:
   void SetupControl0() const;
   void SetupTextureStages() const;
@@ -94,6 +101,9 @@ class TestHost {
 
   std::shared_ptr<VertexBuffer> vertex_buffer_{};
   uint8_t *texture_memory_{nullptr};
+
+  MATRIX fixed_function_model_view_matrix_{};
+  MATRIX fixed_function_projection_matrix_{};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_HOST_H

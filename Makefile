@@ -22,7 +22,7 @@ SRCS = \
 	$(CURDIR)/tests/depth_format_tests.cpp \
 	$(CURDIR)/tests/front_face_tests.cpp \
 	$(CURDIR)/tests/image_blit_tests.cpp \
-	$(CURDIR)/tests/material_tests.cpp \
+	$(CURDIR)/tests/material_alpha_tests.cpp \
 	$(CURDIR)/tests/test_suite.cpp \
 	$(CURDIR)/tests/texture_format_tests.cpp \
 	$(CURDIR)/texture_format.cpp \

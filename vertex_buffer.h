@@ -9,6 +9,7 @@ typedef struct Vertex {
   float texcoord[2];
   float normal[3];
   float diffuse[4];
+  float specular[4];
 } Vertex;
 #pragma pack()
 
@@ -19,10 +20,24 @@ struct Color {
     b = blue;
   }
 
+  void SetRGBA(float red, float green, float blue, float alpha) {
+    r = red;
+    g = green;
+    b = blue;
+    a = alpha;
+  }
+
   void SetGrey(float val) {
     r = val;
     g = val;
     b = val;
+  }
+
+  void SetGreyA(float val, float alpha) {
+    r = val;
+    g = val;
+    b = val;
+    a = alpha;
   }
 
   float r{0.0f};
@@ -52,9 +67,18 @@ class VertexBuffer {
   void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
                   float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
                   const Color& ur_diffuse);
+  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                  float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                  const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular, const Color& lr_specular,
+                  const Color& ur_specular);
+
   void DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
                     float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
                     const Color& ur_diffuse);
+  void DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                    float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                    const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular,
+                    const Color& lr_specular, const Color& ur_specular);
 
  private:
   friend class TestHost;

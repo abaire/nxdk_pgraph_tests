@@ -6,6 +6,8 @@
 
 #include <cstdint>
 
+#include <printf/printf.h>
+
 // "Beta" class for blending operations (see xf86-video-nouveau).
 #define GR_CLASS_12 0x12
 
@@ -36,8 +38,6 @@ uint32_t float_to_z24(float val);
 // Converts a 24-bit fixed point Z-buffer value to a float.
 float z24_to_float(uint32_t val);
 
-void pb_print_float(float value);
-
 // Points an existing DMA context object at a new address.
 void pb_set_dma_address(const struct s_CtxDma* context, const void* address, uint32_t limit);
 
@@ -50,5 +50,10 @@ void* pb_agp_access(void* fb_memory_pointer);
 // Pushes a 4 column x 3 row matrix (used to push the inverse matrix which intentionally omits the 4th row and is
 // not transposed).
 uint32_t* pb_push_4x3_matrix(uint32_t* p, DWORD command, const float* m);
+
+// Versions of pb_print that use a full-featured printf implementation instead of the PCDLIB one that does not yet
+// support floats.
+void pb_print_with_floats(const char *format, ...);
+#define pb_print pb_print_with_floats
 
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H

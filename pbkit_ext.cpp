@@ -77,19 +77,6 @@ float z24_to_float(uint32_t val) {
   return *(float *)&val;
 }
 
-void pb_print_float(float value) {
-  auto shift = powf(10, static_cast<float>(6));
-
-  auto int_val = static_cast<uint32_t>(value);
-  if (value < 0) {
-    int_val *= -1;
-  }
-
-  value -= static_cast<float>(int_val);
-  auto mantissa = static_cast<uint32_t>(value * shift);
-  pb_print("%d.%06d", int_val, mantissa);
-}
-
 #define DMA_CLASS_3D 0x3D
 #define PB_SETOUTER 0xB2A
 
@@ -145,4 +132,18 @@ uint32_t *pb_push_4x3_matrix(uint32_t *p, DWORD command, const float *m) {
   *((float *)p++) = m[_34];
 
   return p;
+}
+
+void pb_print_with_floats(const char *format, ...) {
+  char buffer[512];
+
+  va_list argList;
+  va_start(argList, format);
+  vsnprintf_(buffer, 512, format, argList);
+  va_end(argList);
+
+  char *str = buffer;
+  while (*str != 0) {
+    pb_print_char(*str++);
+  }
 }

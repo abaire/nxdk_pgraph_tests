@@ -41,6 +41,9 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
   texture_memory_ = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(texture_width * texture_height * 4, 0, MAXRAM,
                                                                         0, PAGE_WRITECOMBINE | PAGE_READWRITE));
   assert(texture_memory_ && "Failed to allocate texture memory.");
+
+  matrix_unit(fixed_function_model_view_matrix_);
+  matrix_unit(fixed_function_projection_matrix_);
 }
 
 TestHost::~TestHost() {
@@ -168,7 +171,13 @@ void TestHost::DrawVertices(uint32_t elements) {
     clear_attrib(NV2A_VERTEX_ATTR_DIFFUSE);
   }
 
-  clear_attrib(NV2A_VERTEX_ATTR_SPECULAR);
+  if (elements & SPECULAR) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+                       &vptr[0].specular);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_SPECULAR);
+  }
+
   clear_attrib(NV2A_VERTEX_ATTR_FOG_COORD);
   clear_attrib(NV2A_VERTEX_ATTR_POINT_SIZE);
   clear_attrib(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
@@ -432,16 +441,17 @@ void TestHost::SetShaderProgram(std::shared_ptr<ShaderProgram> program) {
   if (shader_program_) {
     shader_program_->Activate();
   } else {
-    auto p = pb_begin();
-    p = pb_push1(
-        p, NV097_SET_TRANSFORM_EXECUTION_MODE,
-        MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_FIXED) |
-            MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
-    pb_end(p);
-
     // Use the untextured shader to set up the combiner state.
     ShaderProgram::LoadUntexturedPixelShader();
     ShaderProgram::DisablePixelShader();
+
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+                 MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_FIXED) |
+                     MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
+    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0x0);
+    p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x0);
+    pb_end(p);
   }
 }
 
@@ -449,6 +459,24 @@ std::shared_ptr<VertexBuffer> TestHost::AllocateVertexBuffer(uint32_t num_vertic
   vertex_buffer_.reset();
   vertex_buffer_ = std::make_shared<VertexBuffer>(num_vertices);
   return vertex_buffer_;
+}
+
+void TestHost::SetFixedFunctionModelViewMatrix(const MATRIX model_matrix) {
+  memcpy(fixed_function_model_view_matrix_, model_matrix, sizeof(fixed_function_model_view_matrix_));
+
+  auto p = pb_begin();
+  p = pb_push_transposed_matrix(p, NV20_TCL_PRIMITIVE_3D_MODELVIEW_MATRIX, fixed_function_model_view_matrix_);
+  MATRIX inverse;
+  matrix_inverse(inverse, fixed_function_model_view_matrix_);
+  p = pb_push_4x3_matrix(p, NV20_TCL_PRIMITIVE_3D_INVERSE_MODELVIEW_MATRIX, inverse);
+  pb_end(p);
+}
+
+void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) {
+  memcpy(fixed_function_projection_matrix_, projection_matrix, sizeof(fixed_function_projection_matrix_));
+  auto p = pb_begin();
+  p = pb_push_transposed_matrix(p, NV20_TCL_PRIMITIVE_3D_PROJECTION_MATRIX, fixed_function_projection_matrix_);
+  pb_end(p);
 }
 
 /* Set an attribute pointer */

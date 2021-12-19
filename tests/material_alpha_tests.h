@@ -5,9 +5,9 @@
 
 class TestHost;
 
-class MaterialTests : public TestSuite {
+class MaterialAlphaTests : public TestSuite {
  public:
-  MaterialTests(TestHost &host, std::string output_dir);
+  MaterialAlphaTests(TestHost &host, std::string output_dir);
 
   std::string Name() override { return "Material"; }
   void Initialize() override;
@@ -15,9 +15,9 @@ class MaterialTests : public TestSuite {
 
  private:
   void CreateGeometry();
-  void Test();
+  void Test(uint32_t diffuse_source, float material_alpha);
 
-  static std::string MakeTestName();
+  static std::string MakeTestName(uint32_t diffuse_source, float material_alpha);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_MATERIAL_TESTS_H

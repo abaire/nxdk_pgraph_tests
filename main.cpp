@@ -19,7 +19,7 @@
 #include "tests/depth_format_tests.h"
 #include "tests/front_face_tests.h"
 #include "tests/image_blit_tests.h"
-#include "tests/material_tests.h"
+#include "tests/material_alpha_tests.h"
 #include "tests/texture_format_tests.h"
 
 #ifdef DEVKIT
@@ -89,7 +89,7 @@ int main() {
 
 static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuite>> &test_suites) {
   {
-    auto suite = std::make_shared<MaterialTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<MaterialAlphaTests>(host, kOutputDirectory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
