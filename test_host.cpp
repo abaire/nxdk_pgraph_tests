@@ -207,7 +207,10 @@ void TestHost::DrawVertices(uint32_t elements) {
 void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
   char target_file[256] = {0};
   snprintf(target_file, 255, "%s\\%s.png", output_directory, name);
-  CreateDirectory(output_directory, nullptr);
+
+  if (!CreateDirectory(output_directory, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
+    assert(!"Failed to create output directory.");
+  }
 
   auto buffer = pb_agp_access(pb_back_buffer());
   auto width = static_cast<int>(pb_back_buffer_width());
@@ -446,9 +449,10 @@ void TestHost::SetShaderProgram(std::shared_ptr<ShaderProgram> program) {
     ShaderProgram::DisablePixelShader();
 
     auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_TRANSFORM_EXECUTION_MODE,
-                 MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_FIXED) |
-                     MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
+    p = pb_push1(
+        p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+        MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_FIXED) |
+            MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
     p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0x0);
     p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x0);
     pb_end(p);
