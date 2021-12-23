@@ -1,0 +1,118 @@
+#include "two_d_line_tests.h"
+
+#include <pbkit/pbkit.h>
+
+#include "../nxdk_ext.h"
+#include "../pbkit_ext.h"
+#include "../test_host.h"
+
+// 5C is the class for NV04_RENDER_SOLID_LIN (nv32.h) / NV04_SOLID_LINE (nv_objects.h)
+static constexpr uint32_t SUBCH_CLASS_5C = kNextSubchannel;
+// 42 is the class for NV04_CONTEXT_SURFACES_2D (nv32.h) & (nv_objects.h)
+static constexpr uint32_t SUBCH_CLASS_42 = SUBCH_CLASS_5C + 1;
+
+static std::string ColorFormatName(uint32_t format, bool ReturnShortName);
+
+// clang-format off
+static constexpr TwoDLineTests::TestCase kTests[] = {
+    // values outside of target buffer bounds will result in crash
+    {0xFFFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 100, 100, 100, 400},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 222, 222, 222, 222},
+    {0x000000, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 200, 400, 400},
+    {0xFF0000, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 200, 400, 400},
+    {0x00FF00, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 200, 400, 400},
+    {0x0007E0, NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5, 400, 200, 400, 400},
+    {0x0003E0, NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5, 400, 200, 400, 400},
+    {0x00FF00, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 444, 222, 444, 444},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 0, 0, 639, 479},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 639, 479, 0, 0},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 0, 400, 479},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 300, 401, 300},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 300, 400, 301},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 639, 479, 0, 0},
+};
+// clang-format on
+
+TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
+  for (auto test : kTests) {
+    std::string name = MakeTestName(test, false);
+
+    auto test_method = [this, test]() { this->Test(test); };
+    tests_[name] = test_method;
+  }
+}
+
+void TwoDLineTests::Initialize() {
+  SetDefaultTextureFormat();
+
+  auto channel = kNextContextChannel;
+
+  pb_create_gr_ctx(channel++, NV04_SOLID_LINE, &solid_lin_ctx_);
+  pb_bind_channel(&solid_lin_ctx_);
+  pb_bind_subchannel(SUBCH_CLASS_5C, &solid_lin_ctx_);
+
+  pb_create_gr_ctx(channel++, NV04_CONTEXT_SURFACES_2D, &surface_destination_ctx_);
+  pb_bind_channel(&surface_destination_ctx_);
+  pb_bind_subchannel(SUBCH_CLASS_42, &surface_destination_ctx_);
+
+  host_.SetShaderProgram(nullptr);
+}
+
+void TwoDLineTests::Test(const TestCase& test) {
+  host_.PrepareDraw(0xFF440011);  // alpha + RRGGBB
+
+  auto p = pb_begin();
+
+  p = pb_push1_to(SUBCH_CLASS_42, p, NV04_CONTEXT_SURFACES_2D_SET_DMA_IMAGE_DST, DMA_CHANNEL_PIXEL_RENDERER);
+
+  p = pb_push1_to(SUBCH_CLASS_42, p, NV042_SET_PITCH, (pb_back_buffer_pitch() << 16) | pb_back_buffer_pitch());
+
+  p = pb_push1_to(SUBCH_CLASS_42, p, NV042_SET_COLOR_FORMAT, NV042_SET_COLOR_FORMAT_LE_A8R8G8B8);
+
+  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_OPERATION, NV09F_SET_OPERATION_SRCCOPY);
+  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_COLOR_VALUE, test.object_color);
+  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_SURFACE, surface_destination_ctx_.ChannelID);
+
+  // TODO: test to learn if 0x3 really is NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5
+  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_COLOR_FORMAT, test.color_format);
+  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_START, (test.start_y << 16) | test.start_x);
+  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_END, (test.end_y << 16) | test.end_x);
+
+  pb_end(p);
+
+  pb_print("2D Line: (%lu, %lu) - (%lu, %lu)\n", test.start_x, test.start_y, test.end_x, test.end_y);
+  std::string color_format_name = ColorFormatName(test.color_format, false);
+  pb_print("Color: %s - %08X\n", color_format_name.c_str(), test.object_color);
+
+  pb_draw_text_screen();
+  std::string name = MakeTestName(test, true);
+
+  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
+}
+
+std::string TwoDLineTests::MakeTestName(const TestCase& test, bool ReturnShortName) {
+  char buf[256] = {0};
+  snprintf(buf, 255, "2DLine-%s-C%08X-%lu_%lu-%lu_%lu", ColorFormatName(test.color_format, ReturnShortName).c_str(),
+           test.object_color, test.start_x, test.start_y, test.end_x, test.end_y);
+  return buf;
+}
+
+static std::string ColorFormatName(uint32_t format, bool ReturnShortName) {
+  switch (format) {
+    case NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5:
+      if (ReturnShortName) return "16";
+      return "R5G6B5";
+    case NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5:
+      if (ReturnShortName) return "15";
+      return "R5G5B5";
+    case NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8:
+      if (ReturnShortName) return "32";
+      return "R8G8B8";
+    default:
+      break;
+  }
+
+  char buf[16] = {0};
+  snprintf(buf, 15, "%X", format);
+  return buf;
+}

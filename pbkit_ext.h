@@ -2,17 +2,21 @@
 #define NXDK_PGRAPH_TESTS_PBKIT_EXT_H
 
 #include <pbkit/pbkit.h>
+#include <printf/printf.h>
 #include <strings.h>
 
 #include <cstdint>
-
-#include <printf/printf.h>
 
 // "Beta" class for blending operations (see xf86-video-nouveau).
 #define GR_CLASS_12 0x12
 
 // "Beta4" class for blending operations (see xf86-video-nouveau).
 #define GR_CLASS_72 0x72
+
+// Enumerated DMA channel destinations
+#define DMA_CHANNEL_PIXEL_RENDERER 9
+#define DMA_CHANNEL_DEPTH_STENCIL_RENDERER 10
+#define DMA_CHANNEL_BITBLT_IMAGES 11
 
 // Value that may be added to contiguous memory addresses to access as ADDR_AGPMEM, which is guaranteed to be linear
 // (and thus may be slower than tiled ADDR_FBMEM but can be manipulated directly).
@@ -53,7 +57,7 @@ uint32_t* pb_push_4x3_matrix(uint32_t* p, DWORD command, const float* m);
 
 // Versions of pb_print that use a full-featured printf implementation instead of the PCDLIB one that does not yet
 // support floats.
-void pb_print_with_floats(const char *format, ...);
+void pb_print_with_floats(const char* format, ...);
 #define pb_print pb_print_with_floats
 
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H

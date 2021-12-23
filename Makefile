@@ -19,6 +19,7 @@ SRCS = \
 	$(CURDIR)/shaders/shader_program.cpp \
 	$(CURDIR)/test_driver.cpp \
 	$(CURDIR)/test_host.cpp \
+	$(CURDIR)/tests/two_d_line_tests.cpp \
 	$(CURDIR)/tests/depth_format_tests.cpp \
 	$(CURDIR)/tests/front_face_tests.cpp \
 	$(CURDIR)/tests/image_blit_tests.cpp \
