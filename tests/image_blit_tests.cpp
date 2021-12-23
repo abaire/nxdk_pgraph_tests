@@ -205,7 +205,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
   uint32_t clip_h = host_.GetFramebufferHeight();
 
   ImageBlit(test.blit_operation, test.beta, image_src_dma_ctx_.ChannelID,
-            11,  // DMA channel 11 - 0x1117
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
             test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, SOURCE_X, SOURCE_Y, 0,
             DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
 

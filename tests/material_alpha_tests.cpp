@@ -54,6 +54,10 @@ void MaterialAlphaTests::Initialize() {
 
 void MaterialAlphaTests::Deinitialize() {
   host_.SetTextureStageEnabled(0, true);
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 0);
+  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 0);
+  pb_end(p);
   TestSuite::Deinitialize();
 }
 

@@ -2,6 +2,8 @@ name: Build
 
 on:
   push:
+    branches:
+      - main
     paths-ignore:
       - '.github/**'
       - '!.github/workflows/**'
@@ -37,16 +39,32 @@ jobs:
           lld \
           libsdl2-dev \
           libsdl2-image-dev
-    - name: Compile
+    - name: Compile devkit
       run: |
         cd nxdk_pgraph_tests
         make -j $(grep -c processor /proc/cpuinfo)
-    - name: Create release
+    - name: Create devkit release
+      if: github.ref == 'refs/heads/main'
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
+        automatic_release_tag: "latest-devkit"
         prerelease: true
-        title: "Development Build"
+        title: "Tests suitable for devkit dashboard"
+        files: |
+          nxdk_pgraph_tests/nxdk_pgraph_tests.iso
+    - name: Compile retail
+      run: |
+        cd nxdk_pgraph_tests
+        make clean
+        make -j $(grep -c processor /proc/cpuinfo) DEVKIT=n DEBUG=n
+    - name: Create retail release
+      if: github.ref == 'refs/heads/main'
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest-retail"
+        prerelease: true
+        title: "Tests suitable for retail dashboard"
         files: |
           nxdk_pgraph_tests/nxdk_pgraph_tests.iso

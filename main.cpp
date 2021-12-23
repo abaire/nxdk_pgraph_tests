@@ -21,6 +21,7 @@
 #include "tests/image_blit_tests.h"
 #include "tests/material_alpha_tests.h"
 #include "tests/texture_format_tests.h"
+#include "tests/two_d_line_tests.h"
 
 #ifdef DEVKIT
 static constexpr const char *kOutputDirectory = "e:\\DEVKIT\\nxdk_pgraph_tests";
@@ -95,6 +96,10 @@ static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuit
   {
     auto suite = std::make_shared<ImageBlitTests>(host, kOutputDirectory);
     test_suites.push_back(std::dynamic_pointer_cast<ImageBlitTests>(suite));
+  }
+  {
+    auto suite = std::make_shared<TwoDLineTests>(host, kOutputDirectory);
+    test_suites.push_back(std::dynamic_pointer_cast<TwoDLineTests>(suite));
   }
   {
     auto suite = std::make_shared<TextureFormatTests>(host, kOutputDirectory);

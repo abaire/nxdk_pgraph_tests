@@ -31,6 +31,11 @@ This test suite requires some modifications to the pbkit used by the nxdk in ord
 
 Use the `pbkit_extensions` branch in https://github.com/abaire/nxdk
 
+*NOTE*: By default this project expects to be run on a devkit (`e:\DEVKIT` must
+exist). If you wish to run on a retail system, pass `DEVKIT=n` as a parameter when
+invoking `make`.
+
+
 ## Running with CLion
 
 Create a build target
