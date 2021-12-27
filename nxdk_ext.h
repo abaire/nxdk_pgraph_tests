@@ -118,4 +118,9 @@
 #define NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5 0x00000002
 #define NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8 0x00000003
 
+// This is sent whenever a vertex buffer is drawn after being locked.
+// Failing to send it in a tight modification loop will cause the hardware to re-use previously set data even if new
+// values are set (likely it skips fetching the updated memory from system RAM).
+#define NV097_BREAK_VERTEX_BUFFER_CACHE 0x1710
+
 #endif  // NXDK_ZBUFFER_TESTS_NXDK_MISSING_DEFINES_H

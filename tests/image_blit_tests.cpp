@@ -101,6 +101,7 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir)
 }
 
 void ImageBlitTests::Initialize() {
+  TestSuite::Initialize();
   SetDefaultTextureFormat();
 
   SDL_Surface* temp = IMG_Load("D:\\image_blit\\TestImage.png");

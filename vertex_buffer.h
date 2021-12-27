@@ -58,7 +58,28 @@ class VertexBuffer {
 
   uint32_t GetNumVertices() const { return num_vertices_; }
 
+  void SetCacheValid(bool valid = true) { cache_valid_ = valid; }
+  bool IsCacheValid() const { return cache_valid_; }
+
   void Linearize(float texture_width, float texture_height);
+
+  // Defines a triangle with the give 3-element vertices.
+  void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three);
+  void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three,
+                      const float* normal_one, const float* normal_two, const float* normal_three);
+  void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three,
+                      const Color& one_diffuse, const Color& two_diffuse, const Color& three_diffuse);
+  void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three,
+                      const float* normal_one, const float* normal_two, const float* normal_three,
+                      const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
+  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three);
+  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three,
+                        const float* normal_one, const float* normal_two, const float* normal_three);
+  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three,
+                        const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
+  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three,
+                        const float* normal_one, const float* normal_two, const float* normal_three,
+                        const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
 
   void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom);
   void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float z);
@@ -86,6 +107,8 @@ class VertexBuffer {
   uint32_t num_vertices_;
   Vertex* linear_vertex_buffer_ = nullptr;      // texcoords 0 to kFramebufferWidth/kFramebufferHeight
   Vertex* normalized_vertex_buffer_ = nullptr;  // texcoords normalized 0 to 1
+
+  bool cache_valid_{false};  // Indicates whether the HW should be forced to reload this buffer.
 };
 
 #endif  // NXDK_PGRAPH_TESTS__VERTEX_BUFFER_H_

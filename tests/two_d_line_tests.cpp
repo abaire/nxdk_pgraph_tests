@@ -44,6 +44,7 @@ TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir)
 }
 
 void TwoDLineTests::Initialize() {
+  TestSuite::Initialize();
   SetDefaultTextureFormat();
 
   auto channel = kNextContextChannel;

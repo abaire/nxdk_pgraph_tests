@@ -33,6 +33,7 @@ MaterialAlphaTests::MaterialAlphaTests(TestHost& host, std::string output_dir)
 }
 
 void MaterialAlphaTests::Initialize() {
+  TestSuite::Initialize();
   // NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8
   const TextureFormatInfo& texture_format = kTextureFormats[3];
   host_.SetTextureFormat(texture_format);

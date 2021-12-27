@@ -54,6 +54,7 @@ class TestHost {
   uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
 
   std::shared_ptr<VertexBuffer> AllocateVertexBuffer(uint32_t num_vertices);
+  void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
   std::shared_ptr<VertexBuffer> GetVertexBuffer() { return vertex_buffer_; }
 
   void Clear(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00) const;
@@ -76,6 +77,15 @@ class TestHost {
     assert(stage == 0 && "Only 1 texture stage is fully implemented.");
     texture_stage_enabled_[stage] = enabled;
   }
+
+  // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
+  void SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  // Set up the viewport and fixed function pipeline matrices to match the nxdk settings.
+  void SetDefaultViewportAndFixedFunctionMatrices();
+
+  void SetViewportOffset(float x, float y, float z, float w) const;
+  void SetViewportScale(float x, float y, float z, float w) const;
 
   void SetFixedFunctionModelViewMatrix(const MATRIX model_matrix);
   void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
