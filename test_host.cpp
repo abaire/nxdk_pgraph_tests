@@ -23,7 +23,7 @@
 #include "vertex_buffer.h"
 
 #define MAXRAM 0x03FFAFFF
-
+#define MAX_FILE_PATH_SIZE 255
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void clear_attrib(uint32_t index);
 static void draw_arrays(uint32_t mode, int num_vertices);
@@ -204,13 +204,33 @@ void TestHost::DrawVertices(uint32_t elements) {
   draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, num_vertices);
 }
 
-void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
-  char target_file[256] = {0};
-  snprintf(target_file, 255, "%s\\%s.png", output_directory, name);
-
-  if (!CreateDirectory(output_directory, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
+void TestHost::EnsureFolderExists(const std::string &folder_path) {
+  if (folder_path.length() > MAX_FILE_PATH_SIZE) {
+    assert(!"Folder Path is too long.");
+  }
+  if (!CreateDirectory(folder_path.c_str(), nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
     assert(!"Failed to create output directory.");
   }
+}
+
+// Returns the full output filepath including the filename
+// Creates output directory if it does not exist
+std::string TestHost::PrepareSaveFilePNG(std::string output_directory, const std::string &filename) {
+  EnsureFolderExists(output_directory);
+
+  output_directory += "\\";
+  output_directory += filename;
+  output_directory += ".png";
+
+  if (output_directory.length() > MAX_FILE_PATH_SIZE) {
+    assert(!"Full save file path is too long.");
+  }
+
+  return std::move(output_directory);
+}
+
+void TestHost::SaveBackBuffer(const std::string &output_directory, const std::string &name) {
+  auto target_file = PrepareSaveFilePNG(output_directory, name);
 
   auto buffer = pb_agp_access(pb_back_buffer());
   auto width = static_cast<int>(pb_back_buffer_width());
@@ -219,23 +239,21 @@ void TestHost::SaveBackbuffer(const char *output_directory, const char *name) {
 
   SDL_Surface *surface =
       SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, width, height, 32, pitch, SDL_PIXELFORMAT_ARGB8888);
-  if (IMG_SavePNG(surface, target_file)) {
-    PrintMsg("Failed to save PNG file '%s'\n", target_file);
+  if (IMG_SavePNG(surface, target_file.c_str())) {
+    PrintMsg("Failed to save PNG file '%s'\n", target_file.c_str());
     assert(!"Failed to save PNG file.");
   }
 
   SDL_FreeSurface(surface);
 }
 
-void TestHost::SaveZBuffer(const char *output_directory, const char *name) const {
-  char target_file[256] = {0};
-  snprintf(target_file, 255, "%s\\%s.png", output_directory, name);
-  CreateDirectory(output_directory, nullptr);
+void TestHost::SaveZBuffer(const std::string &output_directory, const std::string &name) const {
+  auto target_file = PrepareSaveFilePNG(output_directory, name);
 
   auto buffer = pb_agp_access(pb_depth_stencil_buffer());
   auto size = pb_depth_stencil_size();
 
-  PrintMsg("Saving z-buffer to %s. Size: %lu. Pitch %lu.\n", target_file, size, pb_depth_stencil_pitch());
+  PrintMsg("Saving z-buffer to %s. Size: %lu. Pitch %lu.\n", target_file.c_str(), size, pb_depth_stencil_pitch());
 
   // The Z buffer set up by pbkit uses a 32bpp pitch regardless of the actual format being used by the HW.
   int pitch = static_cast<int>(pb_depth_stencil_pitch());
@@ -247,8 +265,8 @@ void TestHost::SaveZBuffer(const char *output_directory, const char *name) const
       SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, static_cast<int>(framebuffer_width_),
                                          static_cast<int>(framebuffer_height_), depth, pitch, format);
 
-  if (IMG_SavePNG(surface, target_file)) {
-    PrintMsg("Failed to save PNG file '%s'\n", target_file);
+  if (IMG_SavePNG(surface, target_file.c_str())) {
+    PrintMsg("Failed to save PNG file '%s'\n", target_file.c_str());
     assert(!"Failed to save PNG file.");
   }
 
@@ -417,7 +435,8 @@ void TestHost::FinishDraw() const {
   }
 }
 
-void TestHost::FinishDrawAndSave(const char *output_directory, const char *name, const char *z_buffer_name) {
+void TestHost::FinishDrawAndSave(const std::string &output_directory, const std::string &name,
+                                 const std::string &z_buffer_name) {
   while (pb_busy()) {
     /* Wait for completion... */
   }
@@ -426,9 +445,9 @@ void TestHost::FinishDrawAndSave(const char *output_directory, const char *name,
   // In theory this should wait for all tiles to be rendered before capturing.
   pb_wait_for_vbl();
 
-  SaveBackbuffer(output_directory, name);
+  SaveBackBuffer(output_directory, name);
 
-  if (z_buffer_name) {
+  if (!z_buffer_name.empty()) {
     SaveZBuffer(output_directory, z_buffer_name);
   }
 

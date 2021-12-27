@@ -5,7 +5,12 @@
 #include "../test_host.h"
 #include "texture_format.h"
 
-TestSuite::TestSuite(TestHost& host, std::string output_dir) : host_(host), output_dir_(std::move(output_dir)) {}
+TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string test_name)
+    : host_(host), output_dir_(std::move(output_dir)), test_name_(std::move(test_name)) {
+  output_dir_ += "\\";
+  output_dir_ += test_name_;
+  std::replace(output_dir_.begin(), output_dir_.end(), ' ', '_');
+}
 
 std::vector<std::string> TestSuite::TestNames() const {
   std::vector<std::string> ret;

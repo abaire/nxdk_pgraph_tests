@@ -9,9 +9,9 @@ class TestHost;
 
 class TestSuite {
  public:
-  TestSuite(TestHost &host, std::string output_dir);
+  TestSuite(TestHost &host, std::string output_dir, std::string test_name);
 
-  virtual std::string Name() = 0;
+  const std::string &Name() const { return test_name_; };
 
   virtual void Initialize() = 0;
   virtual void Deinitialize() {}
@@ -27,7 +27,7 @@ class TestSuite {
  protected:
   TestHost &host_;
   std::string output_dir_;
-
+  std::string test_name_;
   std::map<std::string, std::function<void()>> tests_{};
 };
 

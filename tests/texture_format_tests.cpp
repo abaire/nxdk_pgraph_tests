@@ -14,7 +14,7 @@
 static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height);
 
 TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir)) {
+    : TestSuite(host, std::move(output_dir), "Texture format") {
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
     std::string name = MakeTestName(format);
@@ -71,7 +71,7 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   pb_draw_text_screen();
 
   std::string test_name = MakeTestName(texture_format);
-  host_.FinishDrawAndSave(output_dir_.c_str(), test_name.c_str());
+  host_.FinishDrawAndSave(output_dir_, test_name);
 }
 
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {

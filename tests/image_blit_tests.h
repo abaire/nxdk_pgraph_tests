@@ -18,7 +18,6 @@ class ImageBlitTests : public TestSuite {
  public:
   ImageBlitTests(TestHost& host, std::string output_dir);
 
-  std::string Name() override { return "Image blit"; }
   void Initialize() override;
   void Deinitialize() override;
 

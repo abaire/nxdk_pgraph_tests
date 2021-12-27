@@ -33,7 +33,8 @@ static constexpr TwoDLineTests::TestCase kTests[] = {
 };
 // clang-format on
 
-TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
+TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir)
+    : TestSuite(host, std::move(output_dir), "2D Lines") {
   for (auto test : kTests) {
     std::string name = MakeTestName(test, false);
 
@@ -73,7 +74,6 @@ void TwoDLineTests::Test(const TestCase& test) {
   p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_COLOR_VALUE, test.object_color);
   p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_SURFACE, surface_destination_ctx_.ChannelID);
 
-  // TODO: test to learn if 0x3 really is NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5
   p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_COLOR_FORMAT, test.color_format);
   p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_START, (test.start_y << 16) | test.start_x);
   p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_END, (test.end_y << 16) | test.end_x);
@@ -87,7 +87,7 @@ void TwoDLineTests::Test(const TestCase& test) {
   pb_draw_text_screen();
   std::string name = MakeTestName(test, true);
 
-  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
+  host_.FinishDrawAndSave(output_dir_, name);
 }
 
 std::string TwoDLineTests::MakeTestName(const TestCase& test, bool ReturnShortName) {
@@ -106,7 +106,7 @@ static std::string ColorFormatName(uint32_t format, bool ReturnShortName) {
       if (ReturnShortName) return "15";
       return "R5G5B5";
     case NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8:
-      if (ReturnShortName) return "32";
+      if (ReturnShortName) return "24";
       return "R8G8B8";
     default:
       break;

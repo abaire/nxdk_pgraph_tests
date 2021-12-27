@@ -9,7 +9,6 @@ class FrontFaceTests : public TestSuite {
  public:
   FrontFaceTests(TestHost &host, std::string output_dir);
 
-  std::string Name() override { return "Front face"; }
   void Initialize() override;
 
  private:

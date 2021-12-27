@@ -23,7 +23,8 @@ constexpr uint32_t kNumDepthFormats = sizeof(kDepthFormats) / sizeof(kDepthForma
 constexpr uint32_t kNumDepthTests = 64;
 constexpr bool kCompressionSettings[] = {false, true};
 
-DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
+DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir)
+    : TestSuite(host, std::move(output_dir), "Depth buffer") {
   for (auto depth_format : kDepthFormats) {
     uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
 
@@ -70,7 +71,7 @@ void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, uint32_t
 
   std::string name = MakeTestName(format, compress_z, depth_cutoff);
   std::string z_name = name + "_ZB";
-  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str(), z_name.c_str());
+  host_.FinishDrawAndSave(output_dir_, name, z_name);
 }
 
 void DepthFormatTests::CreateGeometry(const DepthFormat &format) {
