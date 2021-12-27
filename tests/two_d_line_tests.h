@@ -21,7 +21,6 @@ class TwoDLineTests : public TestSuite {
  public:
   TwoDLineTests(TestHost& host, std::string output_dir);
 
-  std::string Name() override { return "2D Lines"; }
   void Initialize() override;
 
  private:

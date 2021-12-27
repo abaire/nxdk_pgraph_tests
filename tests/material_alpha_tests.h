@@ -9,7 +9,6 @@ class MaterialAlphaTests : public TestSuite {
  public:
   MaterialAlphaTests(TestHost &host, std::string output_dir);
 
-  std::string Name() override { return "Material"; }
   void Initialize() override;
   void Deinitialize() override;
 

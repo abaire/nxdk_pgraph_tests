@@ -22,7 +22,6 @@ class DepthFormatTests : public TestSuite {
  public:
   DepthFormatTests(TestHost &host, std::string output_dir);
 
-  std::string Name() override { return "Depth buffer"; }
   void Initialize() override;
 
  private:

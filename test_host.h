@@ -2,16 +2,16 @@
 #define NXDK_PGRAPH_TESTS_TEST_HOST_H
 
 #include <pbkit/pbkit.h>
+#include <printf/printf.h>
 
 #include <cstdint>
 #include <memory>
 
-#include <printf/printf.h>
-
+#include "math3d.h"
 #include "nxdk_ext.h"
+#include "string"
 #include "texture_format.h"
 #include "vertex_buffer.h"
-#include "math3d.h"
 
 class ShaderProgram;
 struct Vertex;
@@ -66,7 +66,8 @@ class TestHost {
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00);
   void DrawVertices(uint32_t elements = 0xFFFFFFFF);
   void FinishDraw() const;
-  void FinishDrawAndSave(const char *output_directory, const char *name, const char *z_buffer_name = nullptr);
+  void FinishDrawAndSave(const std::string &output_directory, const std::string &name,
+                         const std::string &z_buffer_name = "");
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
 
@@ -82,8 +83,10 @@ class TestHost {
  private:
   void SetupControl0() const;
   void SetupTextureStages() const;
-  static void SaveBackbuffer(const char *output_directory, const char *name);
-  void SaveZBuffer(const char *output_directory, const char *name) const;
+  static void EnsureFolderExists(const std::string &folder_path);
+  static std::string PrepareSaveFilePNG(std::string output_directory, const std::string &filename);
+  static void SaveBackBuffer(const std::string &output_directory, const std::string &name);
+  void SaveZBuffer(const std::string &output_directory, const std::string &name) const;
 
  private:
   uint32_t framebuffer_width_;

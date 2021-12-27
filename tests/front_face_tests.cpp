@@ -22,7 +22,8 @@ static constexpr uint32_t kCullFaces[] = {
     NV097_SET_CULL_FACE_V_FRONT_AND_BACK,
 };
 
-FrontFaceTests::FrontFaceTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir)) {
+FrontFaceTests::FrontFaceTests(TestHost& host, std::string output_dir)
+    : TestSuite(host, std::move(output_dir), "Front face") {
   for (auto winding : kWindings) {
     for (auto cull_face : kCullFaces) {
       std::string name = MakeTestName(winding, cull_face);
@@ -104,7 +105,7 @@ void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(front_face, cull_face);
-  host_.FinishDrawAndSave(output_dir_.c_str(), name.c_str());
+  host_.FinishDrawAndSave(output_dir_, name);
 }
 
 std::string FrontFaceTests::MakeTestName(uint32_t front_face, uint32_t cull_face) {
