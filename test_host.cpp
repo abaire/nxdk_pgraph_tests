@@ -23,7 +23,7 @@
 #include "vertex_buffer.h"
 
 #define MAXRAM 0x03FFAFFF
-#define MAX_FILE_PATH_SIZE 255
+#define MAX_FILE_PATH_SIZE 248
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void clear_attrib(uint32_t index);
 static void draw_arrays(uint32_t mode, int num_vertices);
@@ -208,7 +208,23 @@ void TestHost::EnsureFolderExists(const std::string &folder_path) {
   if (folder_path.length() > MAX_FILE_PATH_SIZE) {
     assert(!"Folder Path is too long.");
   }
-  if (!CreateDirectory(folder_path.c_str(), nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
+
+  char buffer[MAX_FILE_PATH_SIZE + 1] = {0};
+  const char *path_start = folder_path.c_str();
+  const char *slash = strchr(path_start, '\\');
+  slash = strchr(slash + 1, '\\');
+
+  while (slash) {
+    strncpy(buffer, path_start, slash - path_start);
+    if (!CreateDirectory(buffer, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
+      assert(!"Failed to create output directory.");
+    }
+
+    slash = strchr(slash + 1, '\\');
+  }
+
+  // Handle case where there was no trailing slash.
+  if (!CreateDirectory(path_start, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
     assert(!"Failed to create output directory.");
   }
 }
