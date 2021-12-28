@@ -13,7 +13,7 @@ class TestSuite {
 
   const std::string &Name() const { return test_name_; };
 
-  virtual void Initialize() = 0;
+  virtual void Initialize();
   virtual void Deinitialize() {}
 
   std::vector<std::string> TestNames() const;

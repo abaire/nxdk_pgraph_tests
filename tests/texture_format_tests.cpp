@@ -24,6 +24,7 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
 }
 
 void TextureFormatTests::Initialize() {
+  TestSuite::Initialize();
   CreateGeometry();
 
   host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8);

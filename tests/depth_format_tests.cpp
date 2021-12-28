@@ -39,6 +39,7 @@ DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir)
 }
 
 void DepthFormatTests::Initialize() {
+  TestSuite::Initialize();
   SetDefaultTextureFormat();
 
   auto shader = std::make_shared<PrecalculatedVertexShader>(false);

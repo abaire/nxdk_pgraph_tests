@@ -21,7 +21,10 @@ VertexBuffer::~VertexBuffer() {
   }
 }
 
-Vertex *VertexBuffer::Lock() { return normalized_vertex_buffer_; }
+Vertex *VertexBuffer::Lock() {
+  cache_valid_ = false;
+  return normalized_vertex_buffer_;
+}
 
 void VertexBuffer::Unlock() {}
 
@@ -38,6 +41,78 @@ void VertexBuffer::Linearize(float texture_width, float texture_height) {
     linear_vertex_buffer_[i].texcoord[0] *= static_cast<float>(texture_width);
     linear_vertex_buffer_[i].texcoord[1] *= static_cast<float>(texture_height);
   }
+}
+
+void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineTriangle(start_index, one, two, three, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three,
+                                  const float *normal_one, const float *normal_two, const float *normal_three) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineTriangle(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three,
+                                  const Color &one_diffuse, const Color &two_diffuse, const Color &three_diffuse) {
+  float normal[3] = {0.0f};
+  DefineTriangle(start_index, one, two, three, normal, normal, normal, one_diffuse, two_diffuse, three_diffuse);
+}
+
+void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three,
+                                  const float *normal_one, const float *normal_two, const float *normal_three,
+                                  const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
+  assert(start_index <= (num_vertices_ - 3) && "Invalid start_index, need at least 3 vertices to define triangle.");
+
+  Vertex *vb = normalized_vertex_buffer_ + (start_index * 3);
+
+  auto set = [vb](int index, const float *pos, const float *normal, const Color &diffuse) {
+    vb[index].pos[0] = pos[0];
+    vb[index].pos[1] = pos[1];
+    vb[index].pos[2] = pos[2];
+
+    vb[index].normal[0] = normal[0];
+    vb[index].normal[1] = normal[1];
+    vb[index].normal[2] = normal[2];
+
+    vb[index].diffuse[0] = diffuse.r;
+    vb[index].diffuse[1] = diffuse.g;
+    vb[index].diffuse[2] = diffuse.b;
+    vb[index].diffuse[3] = diffuse.a;
+  };
+
+  set(0, one, normal_one, diffuse_one);
+  set(1, two, normal_two, diffuse_two);
+  set(2, three, normal_three, diffuse_three);
+}
+
+void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineTriangleCW(start_index, one, two, three, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three,
+                                    const float *normal_one, const float *normal_two, const float *normal_three) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineTriangleCW(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three,
+                                    const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
+  float normal[3] = {0.0f};
+  DefineTriangleCW(start_index, one, two, three, normal, normal, normal, diffuse_one, diffuse_two, diffuse_three);
+}
+
+void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three,
+                                    const float *normal_one, const float *normal_two, const float *normal_three,
+                                    const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
+  DefineTriangle(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse_one, diffuse_two,
+                 diffuse_three);
+  Vertex *vb = normalized_vertex_buffer_ + (start_index * 3);
+  Vertex temp = vb[2];
+  vb[2] = vb[1];
+  vb[1] = temp;
 }
 
 void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom) {
@@ -104,7 +179,11 @@ void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float
 
 void VertexBuffer::DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
                                 float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
-                                const Color &lr_diffuse, const Color &ur_diffuse) {}
+                                const Color &lr_diffuse, const Color &ur_diffuse) {
+  Color specular = {1.0, 1.0, 1.0, 1.0};
+  DefineQuadCW(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
+               ur_diffuse, specular, specular, specular, specular);
+}
 
 void VertexBuffer::DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
                                 float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,

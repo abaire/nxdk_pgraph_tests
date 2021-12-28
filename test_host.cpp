@@ -90,10 +90,11 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_CULL_FACE_ENABLE, true);
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
 
   // Enable alpha blending functionality
   p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
 
   // Set the alpha blend source (s) and destination (d) factors
   p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
@@ -144,6 +145,13 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 
 void TestHost::DrawVertices(uint32_t elements) {
   assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
+
+  if (!vertex_buffer_->IsCacheValid()) {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
+    pb_end(p);
+    vertex_buffer_->SetCacheValid();
+  }
 
   Vertex *vptr =
       texture_format_.xbox_swizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
@@ -498,6 +506,106 @@ std::shared_ptr<VertexBuffer> TestHost::AllocateVertexBuffer(uint32_t num_vertic
   vertex_buffer_.reset();
   vertex_buffer_ = std::make_shared<VertexBuffer>(num_vertices);
   return vertex_buffer_;
+}
+
+void TestHost::SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer) { vertex_buffer_ = std::move(buffer); }
+
+void TestHost::SetXDKDefaultViewportAndFixedFunctionMatrices() {
+  SetViewportOffset(0.531250f, 0.531250f, 0, 0);
+  SetViewportScale(0, -0, 0, 0);
+
+  MATRIX matrix;
+  matrix[_11] = 1.0f;
+  matrix[_21] = 0.0f;
+  matrix[_31] = 0.0f;
+  matrix[_41] = 0.0f;
+
+  matrix[_12] = 0.0f;
+  matrix[_22] = 1.0f;
+  matrix[_32] = 0.0f;
+  matrix[_42] = 0.0f;
+
+  matrix[_13] = 0.0f;
+  matrix[_23] = 0.0f;
+  matrix[_33] = 1.0f;
+  matrix[_43] = 7.0f;
+
+  matrix[_14] = 0.0f;
+  matrix[_24] = 0.0f;
+  matrix[_34] = 0.0f;
+  matrix[_44] = 1.0f;
+  SetFixedFunctionModelViewMatrix(matrix);
+
+  matrix[_11] = 579.411194f;
+  matrix[_21] = 0.0f;
+  matrix[_31] = 320.0f;
+  matrix[_41] = 2240.0f;
+
+  matrix[_12] = 0.0f;
+  matrix[_22] = -579.411194;
+  matrix[_32] = 240.0f;
+  matrix[_42] = 1680.0f;
+
+  matrix[_13] = 0.0f;
+  matrix[_23] = 0.0f;
+  matrix[_33] = 16861522.0f;
+  matrix[_43] = 101169136.0f;
+
+  matrix[_14] = 0.0f;
+  matrix[_24] = 0.0f;
+  matrix[_34] = 1.0f;
+  matrix[_44] = 7.0f;
+  SetFixedFunctionProjectionMatrix(matrix);
+}
+
+void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
+  SetViewportOffset(320, 240, 0, 0);
+  SetViewportScale(320.000000, -240.000000, 16777215.000000, 0);
+
+  MATRIX matrix;
+  matrix_unit(matrix);
+  SetFixedFunctionModelViewMatrix(matrix);
+
+  matrix[_11] = 640.0f;
+  matrix[_21] = 0.0f;
+  matrix[_31] = 0.0f;
+  matrix[_41] = 640.0f;
+
+  matrix[_12] = 0.0f;
+  matrix[_22] = -240.0;
+  matrix[_32] = 0.0f;
+  matrix[_42] = 240.0f;
+
+  matrix[_13] = 0.0f;
+  matrix[_23] = 0.0f;
+  matrix[_33] = 16777215.0f;
+  matrix[_43] = 0.0f;
+
+  matrix[_14] = 0.0f;
+  matrix[_24] = 0.0f;
+  matrix[_34] = 0.0f;
+  matrix[_44] = 1.0f;
+  SetFixedFunctionProjectionMatrix(matrix);
+}
+
+void TestHost::SetViewportOffset(float x, float y, float z, float w) const {
+  auto p = pb_begin();
+  pb_push_to(SUBCH_3D, p++, NV097_SET_VIEWPORT_OFFSET, 4);
+  *(p++) = *(uint32_t *)&x;
+  *(p++) = *(uint32_t *)&y;
+  *(p++) = *(uint32_t *)&z;
+  *(p++) = *(uint32_t *)&w;
+  pb_end(p);
+}
+
+void TestHost::SetViewportScale(float x, float y, float z, float w) const {
+  auto p = pb_begin();
+  pb_push_to(SUBCH_3D, p++, NV097_SET_VIEWPORT_SCALE, 4);
+  *(p++) = *(uint32_t *)&x;
+  *(p++) = *(uint32_t *)&y;
+  *(p++) = *(uint32_t *)&z;
+  *(p++) = *(uint32_t *)&w;
+  pb_end(p);
 }
 
 void TestHost::SetFixedFunctionModelViewMatrix(const MATRIX model_matrix) {
