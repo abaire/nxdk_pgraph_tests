@@ -159,8 +159,6 @@ void LightingNormalTests::Test(bool set_normal, const float* normal) {
     Vertex* buf = normal_bleed_buffer_->Lock();
     int foo = sizeof(buf[0].normal);
     foo++;
-    memcpy(buf[0].normal, normal, sizeof(buf[0].normal));
-    memcpy(buf[1].normal, normal, sizeof(buf[1].normal));
     memcpy(buf[2].normal, normal, sizeof(buf[2].normal));
     normal_bleed_buffer_->Unlock();
 
