@@ -139,6 +139,10 @@ void TestDriver::OnControllerButtonEvent(const SDL_ControllerButtonEvent &event)
       OnB();
       break;
 
+    case SDL_CONTROLLER_BUTTON_X:
+      OnX();
+      break;
+
     case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
       OnBlack();
       break;
@@ -160,6 +164,8 @@ void TestDriver::OnBlack() { running_ = false; }
 void TestDriver::OnA() { menu_->Activate(); }
 
 void TestDriver::OnB() { menu_->Deactivate(); }
+
+void TestDriver::OnX() { menu_->OnActivateCurrentSuite(); }
 
 void TestDriver::OnUp() { menu_->CursorUp(); }
 
