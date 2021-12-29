@@ -90,6 +90,7 @@ int main() {
 }
 
 static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuite>> &test_suites) {
+  // Must be the first suite run for valid results. The first test depends on having a cleared initial state.
   {
     auto suite = std::make_shared<LightingNormalTests>(host, kOutputDirectory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));

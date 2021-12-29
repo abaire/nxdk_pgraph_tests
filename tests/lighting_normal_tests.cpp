@@ -152,13 +152,10 @@ void LightingNormalTests::Test(bool set_normal, const float* normal) {
     p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 1);
     p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 1);
     p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
-    //    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, 0);
 
     pb_end(p);
 
     Vertex* buf = normal_bleed_buffer_->Lock();
-    int foo = sizeof(buf[0].normal);
-    foo++;
     memcpy(buf[2].normal, normal, sizeof(buf[2].normal));
     normal_bleed_buffer_->Unlock();
 
