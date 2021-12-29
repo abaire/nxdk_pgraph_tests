@@ -39,6 +39,7 @@ class TestDriver {
   void OnRight();
   void OnA();
   void OnB();
+  void OnX();
 
  private:
   bool running_{true};

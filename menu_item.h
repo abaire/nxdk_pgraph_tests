@@ -30,6 +30,7 @@ struct MenuItem {
   virtual void CursorDown();
   virtual void CursorLeft();
   virtual void CursorRight();
+  virtual void OnActivateCurrentSuite();
 
   void CursorUpAndActivate();
   void CursorDownAndActivate();
@@ -55,7 +56,7 @@ struct MenuItemCallable : public MenuItem {
   void Draw() const override;
 
   void Activate() override;
-
+  void OnActivateCurrentSuite() override {}
   std::function<void()> on_activate;
 };
 
@@ -71,12 +72,14 @@ struct MenuItemTest : public MenuItem {
   void CursorDown() override;
   void CursorLeft() override {}
   void CursorRight() override {}
-
+  void OnActivateCurrentSuite() override {}
   std::shared_ptr<TestSuite> suite;
 };
 
 struct MenuItemSuite : public MenuItem {
   explicit MenuItemSuite(const std::shared_ptr<TestSuite>& suite, uint32_t width, uint32_t height);
+
+  void OnActivateCurrentSuite() override;
   std::shared_ptr<TestSuite> suite;
 };
 
@@ -91,10 +94,10 @@ struct MenuItemRoot : public MenuItem {
   void CursorDown() override;
   void CursorLeft() override;
   void CursorRight() override;
+  void OnActivateCurrentSuite() override;
 
   std::function<void()> on_run_all;
   std::function<void()> on_exit;
-
   std::chrono::steady_clock::time_point start_time;
   bool timer_cancelled{false};
 };

@@ -21,6 +21,7 @@ DPAD:
 * Right - Move the menu cursor down by half a page.
 * A - Enter a submenu or test.
 * B - Go up one menu or leave a test. If pressed on the root menu, exit the application.
+* X - Run all tests for the current suite.
 * Start - Enter a submenu or test.
 * Back - Go up one menu or leave a test. If pressed on the root menu, exit the application.
 * Black - Exit the application.
