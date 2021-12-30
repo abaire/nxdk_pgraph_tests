@@ -135,11 +135,6 @@ void LightingNormalTests::Test(bool set_normal, const float* normal) {
 
   uint32_t* p;
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_CLIP_MIN, 0);
-  p = pb_push1(p, NV097_SET_CLIP_MAX, 0x4B7FFFFF);
-  pb_end(p);
-
   SetLightAndMaterial();
 
   if (set_normal) {

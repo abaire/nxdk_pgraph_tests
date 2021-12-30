@@ -6,7 +6,7 @@
 class OrthographicVertexShader : public ProjectionVertexShader {
  public:
   OrthographicVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float left, float right,
-                           float bottom, float top, float near, float far);
+                           float bottom, float top, float near, float far, float z_min = 0, float z_max = 0x7FFF);
 
  protected:
   void CalculateProjectionMatrix() override;

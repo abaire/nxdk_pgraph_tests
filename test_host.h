@@ -115,6 +115,12 @@ class TestHost {
   std::shared_ptr<VertexBuffer> vertex_buffer_{};
   uint8_t *texture_memory_{nullptr};
 
+  enum FixedFunctionMatrixSetting {
+    MATRIX_MODE_DEFAULT_NXDK,
+    MATRIX_MODE_DEFAULT_XDK,
+    MATRIX_MODE_USER,
+  };
+  FixedFunctionMatrixSetting fixed_function_matrix_mode_{MATRIX_MODE_DEFAULT_NXDK};
   MATRIX fixed_function_model_view_matrix_{};
   MATRIX fixed_function_projection_matrix_{};
 };

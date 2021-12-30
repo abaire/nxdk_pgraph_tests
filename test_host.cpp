@@ -121,7 +121,8 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
     }
   } else {
     if (depth_buffer_mode_float_) {
-      max_depth = 0x7F7FFF80;  // z24_max as 32-bit float.
+      // max_depth = 0x7F7FFF80;  // z24_max as 32-bit float.
+      max_depth = 0x7149F2CA;  // Observed value, 1e+30 (also used for directional lighting as "infinity").
     } else {
       *((float *)&max_depth) = static_cast<float>(0x00FFFFFF);
     }
@@ -370,7 +371,22 @@ void TestHost::SetupTextureStages() const {
 
 void TestHost::SetTextureFormat(const TextureFormatInfo &fmt) { texture_format_ = fmt; }
 
-void TestHost::SetDepthBufferFormat(uint32_t fmt) { depth_buffer_format_ = fmt; }
+void TestHost::SetDepthBufferFormat(uint32_t fmt) {
+  depth_buffer_format_ = fmt;
+
+  switch (fixed_function_matrix_mode_) {
+    case MATRIX_MODE_USER:
+      break;
+
+    case MATRIX_MODE_DEFAULT_XDK:
+      SetXDKDefaultViewportAndFixedFunctionMatrices();
+      break;
+
+    case MATRIX_MODE_DEFAULT_NXDK:
+      SetDefaultViewportAndFixedFunctionMatrices();
+      break;
+  }
+}
 
 void TestHost::SetDepthBufferFloatMode(bool enabled) { depth_buffer_mode_float_ = enabled; }
 
@@ -548,19 +564,31 @@ void TestHost::SetXDKDefaultViewportAndFixedFunctionMatrices() {
 
   matrix[_13] = 0.0f;
   matrix[_23] = 0.0f;
-  matrix[_33] = 16861522.0f;
-  matrix[_43] = 101169136.0f;
+
+  if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
+    matrix[_33] = 65864.320312f;
+    matrix[_43] = 395185.9375f;
+  } else {
+    matrix[_33] = 16861522.0f;
+    matrix[_43] = 101169136.0f;
+  }
 
   matrix[_14] = 0.0f;
   matrix[_24] = 0.0f;
   matrix[_34] = 1.0f;
   matrix[_44] = 7.0f;
   SetFixedFunctionProjectionMatrix(matrix);
+
+  fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_XDK;
 }
 
 void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
   SetViewportOffset(320, 240, 0, 0);
-  SetViewportScale(320.000000, -240.000000, 16777215.000000, 0);
+  if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
+    SetViewportScale(320.000000, -240.000000, 65535.000000, 0);
+  } else {
+    SetViewportScale(320.000000, -240.000000, 16777215.000000, 0);
+  }
 
   MATRIX matrix;
   matrix_unit(matrix);
@@ -578,7 +606,11 @@ void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
 
   matrix[_13] = 0.0f;
   matrix[_23] = 0.0f;
-  matrix[_33] = 16777215.0f;
+  if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
+    matrix[_33] = 65535.0f;
+  } else {
+    matrix[_33] = 16777215.0f;
+  }
   matrix[_43] = 0.0f;
 
   matrix[_14] = 0.0f;
@@ -586,6 +618,8 @@ void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
   matrix[_34] = 0.0f;
   matrix[_44] = 1.0f;
   SetFixedFunctionProjectionMatrix(matrix);
+
+  fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_NXDK;
 }
 
 void TestHost::SetViewportOffset(float x, float y, float z, float w) const {
@@ -617,6 +651,8 @@ void TestHost::SetFixedFunctionModelViewMatrix(const MATRIX model_matrix) {
   matrix_inverse(inverse, fixed_function_model_view_matrix_);
   p = pb_push_4x3_matrix(p, NV20_TCL_PRIMITIVE_3D_INVERSE_MODELVIEW_MATRIX, inverse);
   pb_end(p);
+
+  fixed_function_matrix_mode_ = MATRIX_MODE_USER;
 }
 
 void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) {
@@ -624,6 +660,8 @@ void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) 
   auto p = pb_begin();
   p = pb_push_transposed_matrix(p, NV20_TCL_PRIMITIVE_3D_PROJECTION_MATRIX, fixed_function_projection_matrix_);
   pb_end(p);
+
+  fixed_function_matrix_mode_ = MATRIX_MODE_USER;
 }
 
 /* Set an attribute pointer */

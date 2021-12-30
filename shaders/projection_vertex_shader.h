@@ -9,7 +9,8 @@
 
 class ProjectionVertexShader : public ShaderProgram {
  public:
-  ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, bool enable_texture = true);
+  ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min = 0, float z_max = 0x7FFF,
+                         bool enable_texture = true);
 
   void Activate() override;
   void PrepareDraw() override;
@@ -32,6 +33,8 @@ class ProjectionVertexShader : public ShaderProgram {
  protected:
   float framebuffer_width_{0.0};
   float framebuffer_height_{0.0};
+  float z_min_;
+  float z_max_;
 
   MATRIX model_matrix_{};
   MATRIX view_matrix_{};

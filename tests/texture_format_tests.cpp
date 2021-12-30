@@ -27,9 +27,6 @@ void TextureFormatTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8);
-  host_.SetDepthBufferFloatMode(false);
-
   host_.SetShaderProgram(
       std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight()));
   host_.SetTextureStageEnabled(0, true);
