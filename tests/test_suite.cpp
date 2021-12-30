@@ -111,7 +111,13 @@ void TestSuite::Initialize() {
   *(p++) = 0x0;
   *(p++) = 0x0;
   *(p++) = 0x0;
+  pb_end(p);
 
+  while (pb_busy()) {
+    /* Wait for completion... */
+  }
+
+  p = pb_begin();
   p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0x0);
 
   {
