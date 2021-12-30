@@ -7,9 +7,9 @@
 
 class PerspectiveVertexShader : public ProjectionVertexShader {
  public:
-  PerspectiveVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float left = -1.0f,
-                          float right = 1.0f, float bottom = 1.0f, float top = -1.0f, float near = 1.0f,
-                          float far = 10.0f);
+  PerspectiveVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min = 0,
+                          float z_max = 0x7FFF, float left = -1.0f, float right = 1.0f, float bottom = 1.0f,
+                          float top = -1.0f, float near = 1.0f, float far = 10.0f);
 
  protected:
   void CalculateProjectionMatrix() override;

@@ -2,9 +2,10 @@
 
 #include "math3d.h"
 
-PerspectiveVertexShader::PerspectiveVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float left,
-                                                 float right, float top, float bottom, float near, float far)
-    : ProjectionVertexShader(framebuffer_width, framebuffer_height),
+PerspectiveVertexShader::PerspectiveVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min,
+                                                 float z_max, float left, float right, float top, float bottom,
+                                                 float near, float far)
+    : ProjectionVertexShader(framebuffer_width, framebuffer_height, z_min, z_max),
       left_(left),
       right_(right),
       top_(top),

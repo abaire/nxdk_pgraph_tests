@@ -16,11 +16,13 @@ static constexpr uint32_t kVertexShaderSize = sizeof(kVertexShader);
 
 static void matrix_viewport(MATRIX out, float x, float y, float width, float height, float z_min, float z_max);
 
-ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height,
-                                               bool enable_texture)
+ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min,
+                                               float z_max, bool enable_texture)
     : ShaderProgram(enable_texture),
       framebuffer_width_(static_cast<float>(framebuffer_width)),
-      framebuffer_height_(static_cast<float>(framebuffer_height)) {}
+      framebuffer_height_(static_cast<float>(framebuffer_height)),
+      z_min_(z_min),
+      z_max_(z_max) {}
 
 void ProjectionVertexShader::Activate() {
   UpdateMatrices();
@@ -92,11 +94,9 @@ void ProjectionVertexShader::UpdateMatrices() {
   matrix_unit(view_matrix_);
   create_world_view(view_matrix_, camera_position_, camera_rotation_);
 
-  /* Create projection matrix */
   CalculateProjectionMatrix();
 
-  /* Create viewport matrix, combine with projection */
-  matrix_viewport(viewport_matrix_, 0, 0, framebuffer_width_, framebuffer_height_, 0, 65536.0f);
+  matrix_viewport(viewport_matrix_, 0, 0, framebuffer_width_, framebuffer_height_, z_min_, z_max_);
   matrix_multiply(projection_viewport_matrix_, projection_matrix_, viewport_matrix_);
 
   /* Create local->world matrix given our updated object */

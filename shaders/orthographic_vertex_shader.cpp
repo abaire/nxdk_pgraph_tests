@@ -1,10 +1,9 @@
 #include "orthographic_vertex_shader.h"
 
 OrthographicVertexShader::OrthographicVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float left,
-                                                   float right, float bottom, float top, float near, float far)
-    :
-
-      ProjectionVertexShader(framebuffer_width, framebuffer_height) {
+                                                   float right, float bottom, float top, float near, float far,
+                                                   float z_min, float z_max)
+    : ProjectionVertexShader(framebuffer_width, framebuffer_height, z_min, z_max) {
   width_ = right - left;
   height_ = bottom - top;
   far_minus_near_ = far - near;
