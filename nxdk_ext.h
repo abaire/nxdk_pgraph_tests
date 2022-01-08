@@ -123,4 +123,9 @@
 // values are set (likely it skips fetching the updated memory from system RAM).
 #define NV097_BREAK_VERTEX_BUFFER_CACHE 0x1710
 
+#define NV097_SET_NORMAL3F 0x1530
+#define NV097_SET_DIFFUSE_COLOR 0x156C
+#define NV097_SET_SPECULAR_COLOR 0x158C
+#define NV097_SET_TEX_COORD0 0x1590
+
 #endif  // NXDK_ZBUFFER_TESTS_NXDK_MISSING_DEFINES_H

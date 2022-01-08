@@ -17,9 +17,9 @@ class LightingNormalTests : public TestSuite {
 
  private:
   void CreateGeometry();
-  void Test(bool set_normal, const float* normal);
+  void Test(bool set_normal, const float* normal, bool use_inline_buffer);
 
-  static std::string MakeTestName(bool set_normal, const float* normal);
+  static std::string MakeTestName(bool set_normal, const float* normal, bool inline_buffer);
 
  private:
   std::shared_ptr<VertexBuffer> normal_bleed_buffer_;
