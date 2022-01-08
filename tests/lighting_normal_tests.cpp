@@ -25,9 +25,11 @@ static constexpr TestParams kTests[] = {
 
 LightingNormalTests::LightingNormalTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Lighting normals") {
-  for (auto params : kTests) {
-    std::string name = MakeTestName(params.set_normal, params.normal);
-    tests_[name] = [this, params]() { this->Test(params.set_normal, params.normal); };
+  for (auto use_inline : {false, true}) {
+    for (auto params : kTests) {
+      std::string name = MakeTestName(params.set_normal, params.normal, use_inline);
+      tests_[name] = [this, params, use_inline]() { this->Test(params.set_normal, params.normal, use_inline); };
+    }
   }
 }
 
@@ -129,7 +131,7 @@ static void SetLightAndMaterial() {
   pb_end(p);
 }
 
-void LightingNormalTests::Test(bool set_normal, const float* normal) {
+void LightingNormalTests::Test(bool set_normal, const float* normal, bool use_inline_buffer) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -172,25 +174,35 @@ void LightingNormalTests::Test(bool set_normal, const float* normal) {
   pb_end(p);
 
   host_.SetVertexBuffer(lit_buffer_);
-  host_.DrawVertices(host_.POSITION | host_.DIFFUSE);
+  if (!use_inline_buffer) {
+    host_.DrawVertices(host_.POSITION | host_.DIFFUSE);
+  } else {
+    host_.DrawVerticesAsInlineBuffer(host_.POSITION | host_.DIFFUSE);
+  }
 
   if (!set_normal) {
-    pb_print("No normal");
+    pb_print("No normal\n");
   } else {
     pb_print("Nx: %g\nNy: %g\nNz: %g\n", normal[0], normal[1], normal[2]);
   }
+  if (use_inline_buffer) {
+    pb_print("Inline buffer");
+  }
   pb_draw_text_screen();
 
-  std::string name = MakeTestName(set_normal, normal);
+  std::string name = MakeTestName(set_normal, normal, use_inline_buffer);
   host_.FinishDrawAndSave(output_dir_, name);
 }
 
-std::string LightingNormalTests::MakeTestName(bool set_normal, const float* normal) {
+std::string LightingNormalTests::MakeTestName(bool set_normal, const float* normal, bool inline_buffer) {
   if (!set_normal) {
+    if (inline_buffer) {
+      return "NoNormal-inlinebuf";
+    }
     return "NoNormal";
   }
 
   char buf[128] = {0};
-  snprintf(buf, 127, "Nz_%d", (int)(normal[2] * 100));
+  snprintf(buf, 127, "Nz_%d%s", (int)(normal[2] * 100), inline_buffer ? "-inlinebuf" : "");
   return buf;
 }

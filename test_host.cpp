@@ -144,9 +144,7 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   }
 }
 
-void TestHost::DrawVertices(uint32_t elements) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
-
+void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   if (!vertex_buffer_->IsCacheValid()) {
     auto p = pb_begin();
     p = pb_push1(p, NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
@@ -157,7 +155,7 @@ void TestHost::DrawVertices(uint32_t elements) {
   Vertex *vptr =
       texture_format_.xbox_swizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
 
-  if (elements & POSITION) {
+  if (enabled_fields & POSITION) {
     set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                        &vptr[0].pos);
   } else {
@@ -166,21 +164,21 @@ void TestHost::DrawVertices(uint32_t elements) {
 
   clear_attrib(NV2A_VERTEX_ATTR_WEIGHT);
 
-  if (elements & NORMAL) {
+  if (enabled_fields & NORMAL) {
     set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                        &vptr[0].normal);
   } else {
     clear_attrib(NV2A_VERTEX_ATTR_NORMAL);
   }
 
-  if (elements & DIFFUSE) {
+  if (enabled_fields & DIFFUSE) {
     set_attrib_pointer(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
                        &vptr[0].diffuse);
   } else {
     clear_attrib(NV2A_VERTEX_ATTR_DIFFUSE);
   }
 
-  if (elements & SPECULAR) {
+  if (enabled_fields & SPECULAR) {
     set_attrib_pointer(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
                        &vptr[0].specular);
   } else {
@@ -192,7 +190,7 @@ void TestHost::DrawVertices(uint32_t elements) {
   clear_attrib(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
   clear_attrib(NV2A_VERTEX_ATTR_BACK_SPECULAR);
 
-  if (elements & TEXCOORD0) {
+  if (enabled_fields & TEXCOORD0) {
     set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
                        &vptr[0].texcoord);
   } else {
@@ -207,10 +205,81 @@ void TestHost::DrawVertices(uint32_t elements) {
   clear_attrib(13);
   clear_attrib(14);
   clear_attrib(15);
+}
 
+void TestHost::DrawVertices(uint32_t elements) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
+  SetVertexBufferAttributes(elements);
+  int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
+  draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, num_vertices);
+}
+
+void TestHost::DrawVerticesAsInlineBuffer(uint32_t enabled_fields) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVerticesAsInlineBuffer.");
+  SetVertexBufferAttributes(enabled_fields);
   int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
 
-  draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, num_vertices);
+  // TODO: Expose mode for tests that want to use other primitive modes.
+  uint32_t mode = NV097_SET_BEGIN_END_OP_TRIANGLES;
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, mode);
+  pb_end(p);
+
+  auto vertex = vertex_buffer_->Lock();
+  for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
+    if (enabled_fields & POSITION) {
+      SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2]);
+    }
+    if (enabled_fields & NORMAL) {
+      SetNormal(vertex->normal[0], vertex->normal[1], vertex->normal[2]);
+    }
+    if (enabled_fields & DIFFUSE) {
+      SetDiffuse(vertex->GetDiffuseARGB());
+    }
+    if (enabled_fields & SPECULAR) {
+      SetSpecular(vertex->GetSpecularARGB());
+    }
+    if (enabled_fields & TEXCOORD0) {
+      SetTexCoord0(vertex->texcoord[0], vertex->texcoord[1]);
+    }
+  }
+  vertex_buffer_->Unlock();
+  vertex_buffer_->SetCacheValid();
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
+}
+
+void TestHost::SetVertex(float x, float y, float z) const {
+  auto p = pb_begin();
+  p = pb_push3(p, NV097_SET_VERTEX3F, *(uint32_t *)&x, *(uint32_t *)&y, *(uint32_t *)&z);
+  pb_end(p);
+}
+
+void TestHost::SetNormal(float x, float y, float z) const {
+  auto p = pb_begin();
+  p = pb_push3(p, NV097_SET_NORMAL3F, *(uint32_t *)&x, *(uint32_t *)&y, *(uint32_t *)&z);
+  pb_end(p);
+}
+
+void TestHost::SetDiffuse(uint32_t argb) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, argb);
+  pb_end(p);
+}
+
+void TestHost::SetSpecular(uint32_t argb) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SPECULAR_COLOR, argb);
+  pb_end(p);
+}
+
+void TestHost::SetTexCoord0(float u, float v) const {
+  auto p = pb_begin();
+  p = pb_push2(p, NV097_SET_TEX_COORD0, *(uint32_t *)&u, *(uint32_t *)&v);
+  pb_end(p);
 }
 
 void TestHost::EnsureFolderExists(const std::string &folder_path) {
@@ -682,7 +751,6 @@ static void clear_attrib(uint32_t index) {
   set_attrib_pointer(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
 }
 
-/* Send draw commands for the triangles */
 static void draw_arrays(uint32_t mode, int num_vertices) {
   constexpr int vertices_per_push = 120;
   int start = 0;

@@ -3,6 +3,10 @@
 
 #include <cstdint>
 
+#define TO_ARGB(float_vals)                                                                  \
+  (((uint32_t)(float_vals[0] * 255.0f) << 24) + ((uint32_t)(float_vals[1] * 255.0f) << 16) + \
+   ((uint32_t)(float_vals[2] * 255.0f) << 8) + ((uint32_t)(float_vals[3] * 255.0f)))
+
 #pragma pack(1)
 typedef struct Vertex {
   float pos[3];
@@ -10,6 +14,10 @@ typedef struct Vertex {
   float normal[3];
   float diffuse[4];
   float specular[4];
+
+  uint32_t GetDiffuseARGB() const { return TO_ARGB(diffuse); }
+
+  uint32_t GetSpecularARGB() const { return TO_ARGB(specular); }
 } Vertex;
 #pragma pack()
 

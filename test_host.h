@@ -66,6 +66,7 @@ class TestHost {
 
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00);
   void DrawVertices(uint32_t elements = 0xFFFFFFFF);
+  void DrawVerticesAsInlineBuffer(uint32_t enabled_fields = 0xFFFFFFFF);
   void FinishDraw() const;
   void FinishDrawAndSave(const std::string &output_directory, const std::string &name,
                          const std::string &z_buffer_name = "");
@@ -90,7 +91,14 @@ class TestHost {
   void SetFixedFunctionModelViewMatrix(const MATRIX model_matrix);
   void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
 
+  void SetVertex(float x, float y, float z) const;
+  void SetNormal(float x, float y, float z) const;
+  void SetDiffuse(uint32_t argb) const;
+  void SetSpecular(uint32_t argb) const;
+  void SetTexCoord0(float u, float v) const;
+
  private:
+  void SetVertexBufferAttributes(uint32_t enabled_fields);
   void SetupControl0() const;
   void SetupTextureStages() const;
   static void EnsureFolderExists(const std::string &folder_path);
