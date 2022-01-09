@@ -26,7 +26,6 @@
 #define MAX_FILE_PATH_SIZE 248
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void clear_attrib(uint32_t index);
-static void draw_arrays(uint32_t mode, int num_vertices);
 
 // bitscan forward
 static int bsf(int val){__asm bsf eax, val}
@@ -207,40 +206,54 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   clear_attrib(15);
 }
 
-void TestHost::DrawVertices(uint32_t elements) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVertices.");
-  SetVertexBufferAttributes(elements);
+void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawArrays.");
+  static constexpr int kVerticesPerPush = 120;
+
+  SetVertexBufferAttributes(enabled_vertex_fields);
   int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
-  draw_arrays(NV097_SET_BEGIN_END_OP_TRIANGLES, num_vertices);
+
+  int start = 0;
+  while (start < num_vertices) {
+    int count = std::min(num_vertices - start, kVerticesPerPush);
+
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+
+    p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+                 MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
+
+    p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+
+    pb_end(p);
+
+    start += count;
+  }
 }
 
-void TestHost::DrawVerticesAsInlineBuffer(uint32_t enabled_fields) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawVerticesAsInlineBuffer.");
-  SetVertexBufferAttributes(enabled_fields);
-  int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
-
-  // TODO: Expose mode for tests that want to use other primitive modes.
-  uint32_t mode = NV097_SET_BEGIN_END_OP_TRIANGLES;
+void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
+  SetVertexBufferAttributes(enabled_vertex_fields);
 
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, mode);
+  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
   pb_end(p);
 
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
-    if (enabled_fields & POSITION) {
+    if (enabled_vertex_fields & POSITION) {
       SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2]);
     }
-    if (enabled_fields & NORMAL) {
+    if (enabled_vertex_fields & NORMAL) {
       SetNormal(vertex->normal[0], vertex->normal[1], vertex->normal[2]);
     }
-    if (enabled_fields & DIFFUSE) {
+    if (enabled_vertex_fields & DIFFUSE) {
       SetDiffuse(vertex->GetDiffuseARGB());
     }
-    if (enabled_fields & SPECULAR) {
+    if (enabled_vertex_fields & SPECULAR) {
       SetSpecular(vertex->GetSpecularARGB());
     }
-    if (enabled_fields & TEXCOORD0) {
+    if (enabled_vertex_fields & TEXCOORD0) {
       SetTexCoord0(vertex->texcoord[0], vertex->texcoord[1]);
     }
   }
@@ -248,6 +261,122 @@ void TestHost::DrawVerticesAsInlineBuffer(uint32_t enabled_fields) {
   vertex_buffer_->SetCacheValid();
 
   p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
+}
+
+void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineArray.");
+  static constexpr int kElementsPerPush = 64;
+
+  SetVertexBufferAttributes(enabled_vertex_fields);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+
+  int num_pushed = 0;
+  auto vertex = vertex_buffer_->Lock();
+  for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
+    // Note: Ordering is important and must follow the NV2A_VERTEX_ATTR_POSITION, ... ordering.
+    if (enabled_vertex_fields & POSITION) {
+      auto vals = (uint32_t *)vertex->pos;
+      p = pb_push3(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2]);
+      num_pushed += 3;
+    }
+    if (enabled_vertex_fields & NORMAL) {
+      auto vals = (uint32_t *)vertex->normal;
+      p = pb_push3(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2]);
+      num_pushed += 3;
+    }
+    if (enabled_vertex_fields & DIFFUSE) {
+      // TODO: Enable sending as a DWORD by changing the type and size sent via SetVertexBufferAttributes.
+      auto vals = (uint32_t *)vertex->diffuse;
+      p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
+      num_pushed += 4;
+    }
+    if (enabled_vertex_fields & SPECULAR) {
+      // TODO: Enable sending as a DWORD by changing the type and size sent via SetVertexBufferAttributes.
+      auto vals = (uint32_t *)vertex->specular;
+      p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
+      num_pushed += 4;
+    }
+    if (enabled_vertex_fields & TEXCOORD0) {
+      auto vals = (uint32_t *)vertex->texcoord;
+      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
+      num_pushed += 2;
+    }
+
+    if (num_pushed > kElementsPerPush) {
+      pb_end(p);
+      p = pb_begin();
+      num_pushed = 0;
+    }
+  }
+  vertex_buffer_->Unlock();
+  vertex_buffer_->SetCacheValid();
+
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
+}
+
+void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
+                                    DrawPrimitive primitive) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
+  static constexpr int kIndicesPerPush = 64;
+
+  SetVertexBufferAttributes(enabled_vertex_fields);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+
+  assert(indices.size() < 0x7FFFFFFF);
+  int indices_remaining = static_cast<int>(indices.size());
+  int num_pushed = 0;
+  const uint32_t *next_index = indices.data();
+  while (indices_remaining >= 2) {
+    if (num_pushed++ > kIndicesPerPush) {
+      pb_end(p);
+      p = pb_begin();
+      num_pushed = 0;
+    }
+
+    uint32_t index_pair = *next_index++ & 0xFFFF;
+    index_pair += *next_index++ << 16;
+
+    p = pb_push1(p, NV097_ARRAY_ELEMENT16, index_pair);
+
+    indices_remaining -= 2;
+  }
+
+  if (indices_remaining) {
+    p = pb_push1(p, NV097_ARRAY_ELEMENT32, *next_index);
+  }
+
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
+}
+
+void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
+                                    DrawPrimitive primitive) {
+  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
+  static constexpr int kIndicesPerPush = 64;
+
+  SetVertexBufferAttributes(enabled_vertex_fields);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+
+  int num_pushed = 0;
+  for (auto index : indices) {
+    if (num_pushed++ > kIndicesPerPush) {
+      pb_end(p);
+      p = pb_begin();
+      num_pushed = 0;
+    }
+
+    p = pb_push1(p, NV097_ARRAY_ELEMENT32, index);
+  }
+
   p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
   pb_end(p);
 }
@@ -749,25 +878,4 @@ static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, u
 static void clear_attrib(uint32_t index) {
   // Note: xemu has asserts on the count for several formats, so any format without that assert must be used.
   set_attrib_pointer(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
-}
-
-static void draw_arrays(uint32_t mode, int num_vertices) {
-  constexpr int vertices_per_push = 120;
-  int start = 0;
-  while (start < num_vertices) {
-    int count = std::min(num_vertices - start, vertices_per_push);
-
-    uint32_t *p = pb_begin();
-    p = pb_push1(p, NV097_SET_BEGIN_END, mode);
-
-    // bit 30 means all params go to NV097_DRAW_ARRAYS
-    p = pb_push1(p, 0x40000000 | NV097_DRAW_ARRAYS,
-                 MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
-
-    p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-
-    pb_end(p);
-
-    start += count;
-  }
 }

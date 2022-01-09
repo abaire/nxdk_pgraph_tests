@@ -171,7 +171,7 @@ void MaterialAlphaTests::Test(uint32_t diffuse_source, float material_alpha) {
 
   pb_end(p);
 
-  host_.DrawVertices(host_.POSITION | host_.NORMAL | host_.DIFFUSE | host_.SPECULAR);
+  host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE | host_.SPECULAR);
 
   std::string source = DiffuseSourceName(diffuse_source);
   pb_print("Src: %s\n", source.c_str());

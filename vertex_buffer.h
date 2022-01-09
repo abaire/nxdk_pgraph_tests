@@ -2,6 +2,7 @@
 #define NXDK_PGRAPH_TESTS__VERTEX_BUFFER_H_
 
 #include <cstdint>
+#include <vector>
 
 #define TO_ARGB(float_vals)                                                                  \
   (((uint32_t)(float_vals[0] * 255.0f) << 24) + ((uint32_t)(float_vals[1] * 255.0f) << 16) + \
