@@ -19,7 +19,7 @@ DPAD:
 * Down - Move the menu cursor down. Inside of a test, go to the previous test in the active suite.
 * Left - Move the menu cursor up by half a page.
 * Right - Move the menu cursor down by half a page.
-* A - Enter a submenu or test.
+* A - Enter a submenu or test. Inside of a test, re-run the test.
 * B - Go up one menu or leave a test. If pressed on the root menu, exit the application.
 * X - Run all tests for the current suite.
 * Start - Enter a submenu or test.

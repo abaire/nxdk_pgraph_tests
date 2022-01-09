@@ -92,6 +92,15 @@ void MenuItem::Activate() {
   }
 }
 
+void MenuItem::ActivateCurrentSuite() {
+  if (active_submenu) {
+    active_submenu->ActivateCurrentSuite();
+    return;
+  }
+  auto activated_item = submenu[cursor_position];
+  activated_item->ActivateCurrentSuite();
+}
+
 bool MenuItem::Deactivate() {
   if (!active_submenu) {
     return false;
@@ -141,15 +150,6 @@ void MenuItem::CursorLeft() {
   } else {
     cursor_position = 0;
   }
-}
-
-void MenuItem::OnActivateCurrentSuite() {
-  if (active_submenu) {
-    active_submenu->OnActivateCurrentSuite();
-    return;
-  }
-  auto activated_item = submenu[cursor_position];
-  activated_item->OnActivateCurrentSuite();
 }
 
 void MenuItem::CursorRight() {
@@ -215,7 +215,7 @@ MenuItemSuite::MenuItemSuite(const std::shared_ptr<TestSuite> &suite, uint32_t w
   }
 }
 
-void MenuItemSuite::OnActivateCurrentSuite() {
+void MenuItemSuite::ActivateCurrentSuite() {
   suite->Initialize();
   suite->RunAll();
   suite->Deinitialize();
@@ -236,9 +236,9 @@ MenuItemRoot::MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>> &suites
   start_time = std::chrono::high_resolution_clock::now();
 }
 
-void MenuItemRoot::OnActivateCurrentSuite() {
+void MenuItemRoot::ActivateCurrentSuite() {
   timer_cancelled = true;
-  MenuItem::OnActivateCurrentSuite();
+  MenuItem::ActivateCurrentSuite();
 }
 
 void MenuItemRoot::Draw() const {
