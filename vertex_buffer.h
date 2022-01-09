@@ -5,8 +5,8 @@
 #include <vector>
 
 #define TO_ARGB(float_vals)                                                                  \
-  (((uint32_t)(float_vals[0] * 255.0f) << 24) + ((uint32_t)(float_vals[1] * 255.0f) << 16) + \
-   ((uint32_t)(float_vals[2] * 255.0f) << 8) + ((uint32_t)(float_vals[3] * 255.0f)))
+  (((uint32_t)(float_vals[3] * 255.0f) << 24) + ((uint32_t)(float_vals[0] * 255.0f) << 16) + \
+   ((uint32_t)(float_vals[1] * 255.0f) << 8) + ((uint32_t)(float_vals[2] * 255.0f)))
 
 #pragma pack(1)
 typedef struct Vertex {
@@ -47,6 +47,11 @@ struct Color {
     g = val;
     b = val;
     a = alpha;
+  }
+
+  uint32_t AsARGB() const {
+    float vals[4] = {r, g, b, a};
+    return TO_ARGB(vals);
   }
 
   float r{0.0f};

@@ -25,6 +25,7 @@ SRCS = \
 	$(CURDIR)/tests/image_blit_tests.cpp \
 	$(CURDIR)/tests/lighting_normal_tests.cpp \
 	$(CURDIR)/tests/material_alpha_tests.cpp \
+	$(CURDIR)/tests/set_vertex_data_tests.cpp \
 	$(CURDIR)/tests/test_suite.cpp \
 	$(CURDIR)/tests/texture_format_tests.cpp \
 	$(CURDIR)/texture_format.cpp \

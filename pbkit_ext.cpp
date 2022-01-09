@@ -147,3 +147,18 @@ void pb_print_with_floats(const char *format, ...) {
     pb_print_char(*str++);
   }
 }
+
+uint32_t *pb_push2f(uint32_t *p, DWORD command, float param1, float param2) {
+  pb_push_to(SUBCH_3D, p, command, 2);
+  *((float *)(p + 1)) = param1;
+  *((float *)(p + 2)) = param2;
+  return p + 3;
+}
+
+uint32_t *pb_push3f(uint32_t *p, DWORD command, float param1, float param2, float param3) {
+  pb_push_to(SUBCH_3D, p, command, 3);
+  *((float *)(p + 1)) = param1;
+  *((float *)(p + 2)) = param2;
+  *((float *)(p + 3)) = param3;
+  return p + 4;
+}

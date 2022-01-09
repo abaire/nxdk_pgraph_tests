@@ -21,6 +21,7 @@
 #include "tests/image_blit_tests.h"
 #include "tests/lighting_normal_tests.h"
 #include "tests/material_alpha_tests.h"
+#include "tests/set_vertex_data_tests.h"
 #include "tests/texture_format_tests.h"
 #include "tests/two_d_line_tests.h"
 
@@ -117,6 +118,10 @@ static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<DepthFormatTests>(host, kOutputDirectory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<SetVertexDataTests>(host, kOutputDirectory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
 }
