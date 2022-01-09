@@ -25,12 +25,14 @@ struct MenuItem {
   // Invoked when the user activates this MenuItem.
   virtual void Activate();
 
+  virtual void ActivateCurrentSuite();
+
   virtual bool Deactivate();
+
   virtual void CursorUp();
   virtual void CursorDown();
   virtual void CursorLeft();
   virtual void CursorRight();
-  virtual void OnActivateCurrentSuite();
 
   void CursorUpAndActivate();
   void CursorDownAndActivate();
@@ -56,7 +58,7 @@ struct MenuItemCallable : public MenuItem {
   void Draw() const override;
 
   void Activate() override;
-  void OnActivateCurrentSuite() override {}
+  void ActivateCurrentSuite() override {}
   std::function<void()> on_activate;
 };
 
@@ -67,19 +69,19 @@ struct MenuItemTest : public MenuItem {
 
   void Draw() const override;
   void OnEnter() override;
-  void Activate() override {}
+  void Activate() override { OnEnter(); }
+  void ActivateCurrentSuite() override {}
   void CursorUp() override;
   void CursorDown() override;
   void CursorLeft() override {}
   void CursorRight() override {}
-  void OnActivateCurrentSuite() override {}
   std::shared_ptr<TestSuite> suite;
 };
 
 struct MenuItemSuite : public MenuItem {
   explicit MenuItemSuite(const std::shared_ptr<TestSuite>& suite, uint32_t width, uint32_t height);
 
-  void OnActivateCurrentSuite() override;
+  void ActivateCurrentSuite() override;
   std::shared_ptr<TestSuite> suite;
 };
 
@@ -89,12 +91,12 @@ struct MenuItemRoot : public MenuItem {
 
   void Draw() const override;
   void Activate() override;
+  void ActivateCurrentSuite() override;
   bool Deactivate() override;
   void CursorUp() override;
   void CursorDown() override;
   void CursorLeft() override;
   void CursorRight() override;
-  void OnActivateCurrentSuite() override;
 
   std::function<void()> on_run_all;
   std::function<void()> on_exit;

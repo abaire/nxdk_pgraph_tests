@@ -165,7 +165,7 @@ void TestDriver::OnA() { menu_->Activate(); }
 
 void TestDriver::OnB() { menu_->Deactivate(); }
 
-void TestDriver::OnX() { menu_->OnActivateCurrentSuite(); }
+void TestDriver::OnX() { menu_->ActivateCurrentSuite(); }
 
 void TestDriver::OnUp() { menu_->CursorUp(); }
 
