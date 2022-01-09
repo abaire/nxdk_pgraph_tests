@@ -5,6 +5,8 @@ Various tests for nv2a rendering.
 
 Based on code from https://github.com/Ernegien/nxdk/tree/test/texture-formats/samples/texture-formats
 
+Golden test results from XBOX hardware are [available here](https://github.com/abaire/nxdk_pgraph_tests_golden_results)
+
 ## Usage
 
 Tests will be executed automatically if no gamepad input is given within an initial timeout.
