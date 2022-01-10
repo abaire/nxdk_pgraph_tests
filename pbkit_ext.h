@@ -70,6 +70,9 @@ void* pb_agp_access(void* fb_memory_pointer);
 // not transposed).
 uint32_t* pb_push_4x3_matrix(uint32_t* p, DWORD command, const float* m);
 
+uint32_t* pb_push2f(uint32_t* p, DWORD command, float param1, float param2);
+uint32_t* pb_push3f(uint32_t* p, DWORD command, float param1, float param2, float param3);
+
 // Versions of pb_print that use a full-featured printf implementation instead of the PCDLIB one that does not yet
 // support floats.
 void pb_print_with_floats(const char* format, ...);
