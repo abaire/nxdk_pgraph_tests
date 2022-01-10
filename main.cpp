@@ -10,7 +10,6 @@
 #include <pbkit/pbkit.h>
 #include <windows.h>
 
-#include <cstdint>
 #include <memory>
 #include <vector>
 
@@ -24,29 +23,20 @@
 #include "tests/texture_format_tests.h"
 #include "tests/two_d_line_tests.h"
 
-#ifdef DEVKIT
-static constexpr const char *kOutputDirectory = "e:\\DEVKIT\\nxdk_pgraph_tests";
-#else
-static constexpr const char *kOutputDirectory = "e:\\nxdk_pgraph_tests";
-#endif
-
+#define FALLBACK_XBE_DIRECTORY "f:\\";
 static constexpr int kFramebufferWidth = 640;
 static constexpr int kFramebufferHeight = 480;
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 256;
 
-static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuite>> &test_suites);
+static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
+                            const std::string& output_directory);
+static bool get_xbe_directory(std::string& xbe_root_directory);
+static bool get_test_output_path(std::string& test_output_directory);
 
 /* Main program function */
 int main() {
   XVideoSetMode(kFramebufferWidth, kFramebufferHeight, 32, REFRESH_DEFAULT);
-
-  if (!nxMountDrive('E', R"(\Device\Harddisk0\Partition1)")) {
-    debugPrint("Failed to mount E:");
-    pb_show_debug_screen();
-    Sleep(2000);
-    return 1;
-  }
 
   int status = pb_init();
   if (status) {
@@ -71,17 +61,25 @@ int main() {
     return 1;
   }
 
+  std::string test_output_directory;
+  if (!get_test_output_path(test_output_directory)) {
+    debugPrint("Failed to mount F:");
+    pb_show_debug_screen();
+    Sleep(2000);
+    return 1;
+  };
+
   pb_show_front_screen();
 
   TestHost host(kFramebufferWidth, kFramebufferHeight, kTextureWidth, kTextureHeight);
 
   std::vector<std::shared_ptr<TestSuite>> test_suites;
-  register_suites(host, test_suites);
+  register_suites(host, test_suites, test_output_directory);
 
   TestDriver driver(test_suites, kFramebufferWidth, kFramebufferHeight);
   driver.Run();
 
-  debugPrint("Results written to %s\n\nRebooting in 4 seconds...", kOutputDirectory);
+  debugPrint("Results written to %s\n\nRebooting in 4 seconds...\n", test_output_directory.c_str());
   pb_show_debug_screen();
   Sleep(4000);
 
@@ -89,34 +87,60 @@ int main() {
   return 0;
 }
 
-static void register_suites(TestHost &host, std::vector<std::shared_ptr<TestSuite>> &test_suites) {
+bool get_xbe_directory(std::string& xbe_root_directory) {
+  std::string xbe_directory = XeImageFileName->Buffer;
+  if (xbe_directory.find("\\Device\\CdRom") == 0) {
+    debugPrint("Running from readonly media, using default path for test output.\n");
+    xbe_root_directory = FALLBACK_XBE_DIRECTORY;
+
+    if (!nxMountDrive('F', R"(\Device\Harddisk0\Partition6)")) {
+      return false;
+    }
+    return true;
+  }
+  xbe_root_directory = xbe_directory;
+}
+
+static bool get_test_output_path(std::string& test_output_directory) {
+  if (!get_xbe_directory(test_output_directory)) {
+    return false;
+  }
+  if (test_output_directory.back() == '\\') {
+    test_output_directory.pop_back();
+  }
+  test_output_directory += "\\nxdk_pgraph_tests";
+  return true;
+}
+
+static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
+                            const std::string& output_directory) {
   // Must be the first suite run for valid results. The first test depends on having a cleared initial state.
   {
-    auto suite = std::make_shared<LightingNormalTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<LightingNormalTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
-    auto suite = std::make_shared<MaterialAlphaTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<MaterialAlphaTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
-    auto suite = std::make_shared<ImageBlitTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<ImageBlitTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<ImageBlitTests>(suite));
   }
   {
-    auto suite = std::make_shared<TwoDLineTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<TwoDLineTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TwoDLineTests>(suite));
   }
   {
-    auto suite = std::make_shared<TextureFormatTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<TextureFormatTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
-    auto suite = std::make_shared<FrontFaceTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<FrontFaceTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
-    auto suite = std::make_shared<DepthFormatTests>(host, kOutputDirectory);
+    auto suite = std::make_shared<DepthFormatTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
 }

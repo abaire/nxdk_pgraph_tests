@@ -320,7 +320,7 @@ std::string TestHost::PrepareSaveFilePNG(std::string output_directory, const std
     assert(!"Full save file path is too long.");
   }
 
-  return std::move(output_directory);
+  return output_directory;
 }
 
 void TestHost::SaveBackBuffer(const std::string &output_directory, const std::string &name) {

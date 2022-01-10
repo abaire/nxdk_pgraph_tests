@@ -39,32 +39,17 @@ jobs:
           lld \
           libsdl2-dev \
           libsdl2-image-dev
-    - name: Compile devkit
+    - name: Compile
       run: |
         cd nxdk_pgraph_tests
         make -j $(grep -c processor /proc/cpuinfo)
-    - name: Create devkit release
+    - name: Create release
       if: github.ref == 'refs/heads/main'
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest-devkit"
+        automatic_release_tag: "latest"
         prerelease: true
-        title: "Tests suitable for devkit dashboard"
-        files: |
-          nxdk_pgraph_tests/nxdk_pgraph_tests.iso
-    - name: Compile retail
-      run: |
-        cd nxdk_pgraph_tests
-        make clean
-        make -j $(grep -c processor /proc/cpuinfo) DEVKIT=n DEBUG=n
-    - name: Create retail release
-      if: github.ref == 'refs/heads/main'
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest-retail"
-        prerelease: true
-        title: "Tests suitable for retail dashboard"
+        title: "xiso containing pgraph tests"
         files: |
           nxdk_pgraph_tests/nxdk_pgraph_tests.iso
