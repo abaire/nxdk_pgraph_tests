@@ -24,13 +24,6 @@ jobs:
       with:
         submodules: recursive
         path: nxdk_pgraph_tests
-    - name: Clone nxdk
-      uses: actions/checkout@v2
-      with:
-        repository: abaire/nxdk
-        ref: pbkit_extensions
-        submodules: recursive
-        path: nxdk
     - name: Install dependencies
       run: |
         sudo apt-get update

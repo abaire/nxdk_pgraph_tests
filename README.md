@@ -32,11 +32,13 @@ DPAD:
 
 This test suite requires some modifications to the pbkit used by the nxdk in order to operate.
 
-Use the `pbkit_extensions` branch in https://github.com/abaire/nxdk
+To facilitate this, the nxdk is included as a submodule of this project, referencing the
+`pbkit_extensions` branch from https://github.com/abaire/nxdk.
 
-*NOTE*: By default this project expects to be run on a devkit (`e:\DEVKIT` must
-exist). If you wish to run on a retail system, pass `DEVKIT=n` as a parameter when
-invoking `make`.
+This project should be cloned with the `--recursive` flag to pull the submodules and their submodules,
+after the fact this can be achieved via `git submodule update --init --recursive`.
+
+For macOS, the patched nxdk currently assumes that the Homebrew llvm@11 package has been installed.
 
 
 ## Running with CLion
