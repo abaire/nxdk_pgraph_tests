@@ -28,10 +28,23 @@ class TestHost {
  public:
   enum VertexFormatElements {
     POSITION = 1 << NV2A_VERTEX_ATTR_POSITION,
-    TEXCOORD0 = 1 << NV2A_VERTEX_ATTR_TEXTURE0,
     NORMAL = 1 << NV2A_VERTEX_ATTR_NORMAL,
     DIFFUSE = 1 << NV2A_VERTEX_ATTR_DIFFUSE,
     SPECULAR = 1 << NV2A_VERTEX_ATTR_SPECULAR,
+    TEXCOORD0 = 1 << NV2A_VERTEX_ATTR_TEXTURE0,
+  };
+
+  enum DrawPrimitive {
+    PRIMITIVE_POINTS = NV097_SET_BEGIN_END_OP_POINTS,
+    PRIMITIVE_LINES = NV097_SET_BEGIN_END_OP_LINES,
+    PRIMITIVE_LINE_LOOP = NV097_SET_BEGIN_END_OP_LINE_LOOP,
+    PRIMITIVE_LINE_STRIP = NV097_SET_BEGIN_END_OP_LINE_STRIP,
+    PRIMITIVE_TRIANGLES = NV097_SET_BEGIN_END_OP_TRIANGLES,
+    PRIMITIVE_TRIANGLE_STRIP = NV097_SET_BEGIN_END_OP_TRIANGLE_STRIP,
+    PRIMITIVE_TRIANGLE_FAN = NV097_SET_BEGIN_END_OP_TRIANGLE_FAN,
+    PRIMITIVE_QUADS = NV097_SET_BEGIN_END_OP_QUADS,
+    PRIMITIVE_QUAD_STRIP = NV097_SET_BEGIN_END_OP_QUAD_STRIP,
+    PRIMITIVE_POLYGON = NV097_SET_BEGIN_END_OP_POLYGON,
   };
 
  public:
@@ -65,8 +78,21 @@ class TestHost {
   static void EraseText();
 
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00);
-  void DrawVertices(uint32_t elements = 0xFFFFFFFF);
-  void DrawVerticesAsInlineBuffer(uint32_t enabled_fields = 0xFFFFFFFF);
+
+  void DrawArrays(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+  void DrawInlineBuffer(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+
+  // Sends vertices as an interleaved array of vertex fields. E.g., [POS_0,DIFFUSE_0,POS_1,DIFFUSE_1,...]
+  void DrawInlineArray(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+
+  // Sends vertices via an index array. Index values must be < 0xFFFF and are sent two per command.
+  void DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = 0xFFFFFFFF,
+                            DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+
+  // Sends vertices via an index array. Index values are unsigned integers.
+  void DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = 0xFFFFFFFF,
+                            DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+
   void FinishDraw() const;
   void FinishDrawAndSave(const std::string &output_directory, const std::string &name,
                          const std::string &z_buffer_name = "");

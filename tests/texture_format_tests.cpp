@@ -55,7 +55,7 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   }
 
   host_.PrepareDraw();
-  host_.DrawVertices();
+  host_.DrawArrays();
 
   /* PrepareDraw some text on the screen */
   pb_print("N: %s\n", texture_format.name);

@@ -23,12 +23,19 @@ static constexpr TestParams kTests[] = {
     {true, {0.24253562503633297f, 0.0f, 0.9701425001453319f}},
 };
 
+static constexpr LightingNormalTests::DrawMode kDrawMode[] = {
+    LightingNormalTests::DRAW_ARRAYS,
+    LightingNormalTests::DRAW_INLINE_BUFFERS,
+    LightingNormalTests::DRAW_INLINE_ARRAYS,
+    LightingNormalTests::DRAW_INLINE_ELEMENTS,
+};
+
 LightingNormalTests::LightingNormalTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Lighting normals") {
-  for (auto use_inline : {false, true}) {
+  for (auto draw_mode : kDrawMode) {
     for (auto params : kTests) {
-      std::string name = MakeTestName(params.set_normal, params.normal, use_inline);
-      tests_[name] = [this, params, use_inline]() { this->Test(params.set_normal, params.normal, use_inline); };
+      std::string name = MakeTestName(params.set_normal, params.normal, draw_mode);
+      tests_[name] = [this, params, draw_mode]() { this->Test(params.set_normal, params.normal, draw_mode); };
     }
   }
 }
@@ -78,6 +85,11 @@ void LightingNormalTests::CreateGeometry() {
     float two_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
     float three_pos[3] = {right, top, z};
     lit_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, one, two, three);
+
+    lit_index_buffer_.clear();
+    lit_index_buffer_.push_back(2);  // Intentionally specify the vertices out of order.
+    lit_index_buffer_.push_back(0);
+    lit_index_buffer_.push_back(1);
   }
 }
 
@@ -131,7 +143,7 @@ static void SetLightAndMaterial() {
   pb_end(p);
 }
 
-void LightingNormalTests::Test(bool set_normal, const float* normal, bool use_inline_buffer) {
+void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode draw_mode) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -157,7 +169,7 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, bool use_in
     normal_bleed_buffer_->Unlock();
 
     host_.SetVertexBuffer(normal_bleed_buffer_);
-    host_.DrawVertices(host_.POSITION | host_.NORMAL | host_.DIFFUSE);
+    host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE);
   }
 
   // Render the test subject with no normals but lighting enabled.
@@ -170,14 +182,26 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, bool use_in
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x10, 0);           // Specular
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);  // Back diffuse
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x20, 0);           // Back specular
-
   pb_end(p);
 
+  uint32_t vertex_elements = host_.POSITION | host_.DIFFUSE;
   host_.SetVertexBuffer(lit_buffer_);
-  if (!use_inline_buffer) {
-    host_.DrawVertices(host_.POSITION | host_.DIFFUSE);
-  } else {
-    host_.DrawVerticesAsInlineBuffer(host_.POSITION | host_.DIFFUSE);
+  switch (draw_mode) {
+    case DRAW_ARRAYS:
+      host_.DrawArrays(vertex_elements);
+      break;
+
+    case DRAW_INLINE_BUFFERS:
+      host_.DrawInlineBuffer(vertex_elements);
+      break;
+
+    case DRAW_INLINE_ELEMENTS:
+      host_.DrawInlineElements16(lit_index_buffer_, vertex_elements);
+      break;
+
+    case DRAW_INLINE_ARRAYS:
+      host_.DrawInlineArray(vertex_elements);
+      break;
   }
 
   if (!set_normal) {
@@ -185,24 +209,42 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, bool use_in
   } else {
     pb_print("Nx: %g\nNy: %g\nNz: %g\n", normal[0], normal[1], normal[2]);
   }
-  if (use_inline_buffer) {
-    pb_print("Inline buffer");
+
+  switch (draw_mode) {
+    case DRAW_ARRAYS:
+      break;
+
+    case DRAW_INLINE_BUFFERS:
+      pb_print("Inline buffer\n");
+      break;
+
+    case DRAW_INLINE_ELEMENTS:
+      pb_print("Inline elements\n");
+      break;
+
+    case DRAW_INLINE_ARRAYS:
+      pb_print("Inline arrays\n");
+      break;
   }
   pb_draw_text_screen();
 
-  std::string name = MakeTestName(set_normal, normal, use_inline_buffer);
+  std::string name = MakeTestName(set_normal, normal, draw_mode);
   host_.FinishDrawAndSave(output_dir_, name);
 }
 
-std::string LightingNormalTests::MakeTestName(bool set_normal, const float* normal, bool inline_buffer) {
-  if (!set_normal) {
-    if (inline_buffer) {
-      return "NoNormal-inlinebuf";
-    }
-    return "NoNormal";
-  }
-
+std::string LightingNormalTests::MakeTestName(bool set_normal, const float* normal, DrawMode draw_mode) {
   char buf[128] = {0};
-  snprintf(buf, 127, "Nz_%d%s", (int)(normal[2] * 100), inline_buffer ? "-inlinebuf" : "");
+  static constexpr const char* kModeSuffix[] = {
+      "",
+      "-inlinebuf",
+      "-inlinearrays",
+      "-inlineelements",
+  };
+
+  if (!set_normal) {
+    snprintf(buf, 127, "NoNormal%s", kModeSuffix[draw_mode]);
+  } else {
+    snprintf(buf, 127, "Nz_%d%s", (int)(normal[2] * 100), kModeSuffix[draw_mode]);
+  }
   return buf;
 }

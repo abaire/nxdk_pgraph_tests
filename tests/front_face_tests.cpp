@@ -105,7 +105,7 @@ void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face) {
   p = pb_push1(p, NV097_SET_FRONT_FACE, front_face);
   p = pb_push1(p, NV097_SET_CULL_FACE, cull_face);
   pb_end(p);
-  host_.DrawVertices();
+  host_.DrawArrays();
 
   std::string winding_name = WindingName(front_face);
   pb_print("FF: %s\n", winding_name.c_str());

@@ -60,7 +60,7 @@ void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, uint32_t
   p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
   pb_end(p);
 
-  host_.DrawVertices();
+  host_.DrawArrays();
 
   const char *format_name = format.format == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? "z16" : "z24";
   pb_print("DF: %s\n", format_name);
