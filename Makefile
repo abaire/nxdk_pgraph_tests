@@ -5,43 +5,45 @@ NXDK_SDL = y
 NXDK_CXX = y
 
 RESOURCEDIR = $(CURDIR)/resources
+SRCDIR = $(CURDIR)/src
+THIRDPARTYDIR = $(CURDIR)/third_party
 
 SRCS = \
-	$(CURDIR)/debug_output.cpp \
-	$(CURDIR)/main.cpp \
-	$(CURDIR)/math3d.c \
-	$(CURDIR)/pbkit_ext.cpp \
-	$(CURDIR)/menu_item.cpp \
-	$(CURDIR)/shaders/orthographic_vertex_shader.cpp \
-	$(CURDIR)/shaders/perspective_vertex_shader.cpp \
-	$(CURDIR)/shaders/precalculated_vertex_shader.cpp \
-	$(CURDIR)/shaders/projection_vertex_shader.cpp \
-	$(CURDIR)/shaders/shader_program.cpp \
-	$(CURDIR)/test_driver.cpp \
-	$(CURDIR)/test_host.cpp \
-	$(CURDIR)/tests/two_d_line_tests.cpp \
-	$(CURDIR)/tests/depth_format_tests.cpp \
-	$(CURDIR)/tests/front_face_tests.cpp \
-	$(CURDIR)/tests/image_blit_tests.cpp \
-	$(CURDIR)/tests/lighting_normal_tests.cpp \
-	$(CURDIR)/tests/material_alpha_tests.cpp \
-	$(CURDIR)/tests/set_vertex_data_tests.cpp \
-	$(CURDIR)/tests/test_suite.cpp \
-	$(CURDIR)/tests/texture_format_tests.cpp \
-	$(CURDIR)/texture_format.cpp \
-	$(CURDIR)/vertex_buffer.cpp \
-	$(CURDIR)/third_party/swizzle.c \
-	$(CURDIR)/third_party/printf/printf.c
+	$(SRCDIR)/debug_output.cpp \
+	$(SRCDIR)/main.cpp \
+	$(SRCDIR)/math3d.c \
+	$(SRCDIR)/pbkit_ext.cpp \
+	$(SRCDIR)/menu_item.cpp \
+	$(SRCDIR)/shaders/orthographic_vertex_shader.cpp \
+	$(SRCDIR)/shaders/perspective_vertex_shader.cpp \
+	$(SRCDIR)/shaders/precalculated_vertex_shader.cpp \
+	$(SRCDIR)/shaders/projection_vertex_shader.cpp \
+	$(SRCDIR)/shaders/shader_program.cpp \
+	$(SRCDIR)/test_driver.cpp \
+	$(SRCDIR)/test_host.cpp \
+	$(SRCDIR)/tests/two_d_line_tests.cpp \
+	$(SRCDIR)/tests/depth_format_tests.cpp \
+	$(SRCDIR)/tests/front_face_tests.cpp \
+	$(SRCDIR)/tests/image_blit_tests.cpp \
+	$(SRCDIR)/tests/lighting_normal_tests.cpp \
+	$(SRCDIR)/tests/material_alpha_tests.cpp \
+	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
+	$(SRCDIR)/tests/test_suite.cpp \
+	$(SRCDIR)/tests/texture_format_tests.cpp \
+	$(SRCDIR)/texture_format.cpp \
+	$(SRCDIR)/vertex_buffer.cpp \
+	$(THIRDPARTYDIR)/swizzle.c \
+	$(THIRDPARTYDIR)/printf/printf.c
 
 SHADER_OBJS = \
-	$(CURDIR)/shaders/precalculated_vertex_shader.inl \
-	$(CURDIR)/shaders/projection_vertex_shader.inl \
-	$(CURDIR)/shaders/textured_pixelshader.inl \
-	$(CURDIR)/shaders/untextured_pixelshader.inl
+	$(SRCDIR)/shaders/precalculated_vertex_shader.inl \
+	$(SRCDIR)/shaders/projection_vertex_shader.inl \
+	$(SRCDIR)/shaders/textured_pixelshader.inl \
+	$(SRCDIR)/shaders/untextured_pixelshader.inl
 
 DEBUG := y
-CFLAGS += -I$(CURDIR) -I$(CURDIR)/third_party
-CXXFLAGS += -I$(CURDIR) -I$(CURDIR)/third_party
+CFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
+CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
 
 DEVKIT ?= y
 ifeq ($(DEVKIT),y)

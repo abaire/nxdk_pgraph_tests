@@ -19,7 +19,7 @@
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "shaders/shader_program.h"
-#include "third_party/swizzle.h"
+#include "swizzle.h"
 #include "vertex_buffer.h"
 
 #define MAXRAM 0x03FFAFFF
