@@ -46,6 +46,11 @@ void LightingNormalTests::Initialize() {
   host_.SetShaderProgram(nullptr);
   CreateGeometry();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
+  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+  pb_end(p);
 }
 
 void LightingNormalTests::Deinitialize() {
@@ -95,7 +100,6 @@ void LightingNormalTests::CreateGeometry() {
 
 static void SetLightAndMaterial() {
   auto p = pb_begin();
-
   p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xbf34dce5);
   p = pb_push1(p, 0x09e4, 0xc020743f);
   p = pb_push1(p, 0x09e8, 0x40333d06);
@@ -104,41 +108,16 @@ static void SetLightAndMaterial() {
   p = pb_push1(p, 0x09f4, 0x401c1bce);
 
   p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  pb_push_to(SUBCH_3D, p++, NV097_SET_SCENE_AMBIENT_COLOR, 3);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
+  p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
   p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1(p, NV097_SET_MATERIAL_ALPHA, 0x3f800000);  // 1.0
+  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
 
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_AMBIENT_COLOR, 3);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_DIFFUSE_COLOR, 3);
-  *(p++) = 0x0;
-  *(p++) = 0x3F800000;
-  *(p++) = 0x3F333333;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_SPECULAR_COLOR, 3);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, 0x1);
-
+  p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
+  p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 0.0f, 1.0f, 0.7f);
+  p = pb_push3(p, NV097_SET_LIGHT_SPECULAR_COLOR, 0, 0, 0);
   p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 3);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_INFINITE_DIRECTION, 3);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x3F800000;  // 1.0f
+  p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
+  p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
 
   pb_end(p);
 }
@@ -153,15 +132,7 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode dr
 
   if (set_normal) {
     p = pb_begin();
-
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x10, 0);           // Specular
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);  // Back diffuse
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x20, 0);           // Back specular
-
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 1);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 1);
     p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
-
     pb_end(p);
 
     Vertex* buf = normal_bleed_buffer_->Lock();
@@ -175,13 +146,11 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode dr
   // Render the test subject with no normals but lighting enabled.
   p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 0x1);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 0x1);
   p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
 
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x10, 0);           // Specular
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);  // Back diffuse
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x20, 0);           // Back specular
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
   pb_end(p);
 
   uint32_t vertex_elements = host_.POSITION | host_.DIFFUSE;

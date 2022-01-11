@@ -78,7 +78,7 @@ static void SetLightAndMaterial() {
   p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
   p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
   p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1(p, NV097_SET_MATERIAL_ALPHA, 0x3f800000);  // 1.0
+  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
 
   {
     p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
