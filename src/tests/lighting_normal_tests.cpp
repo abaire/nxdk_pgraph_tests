@@ -8,12 +8,12 @@
 #include "shaders/precalculated_vertex_shader.h"
 #include "vertex_buffer.h"
 
-struct TestParams {
+struct MaterialParams {
   bool set_normal;
   float normal[3];
 };
 
-static constexpr TestParams kTests[] = {
+static constexpr MaterialParams kTests[] = {
     {false, {0.0f, 0.0f, 0.0f}},
     {true, {0.0f, 0.0f, 1.0f}},
     {true, {0.0f, 0.0f, -1.0f}},

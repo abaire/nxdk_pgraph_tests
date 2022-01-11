@@ -1,6 +1,7 @@
 #include "test_suite.h"
 
 #include "debug_output.h"
+#include "pbkit_ext.h"
 #include "test_host.h"
 #include "texture_format.h"
 
@@ -48,6 +49,8 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
   p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
+
+  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
 
   p = pb_push1(p, NV097_SET_BLEND_ENABLE, 1);
   p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);

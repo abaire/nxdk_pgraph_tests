@@ -115,6 +115,9 @@ class VertexBuffer {
                     const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular,
                     const Color& lr_specular, const Color& ur_specular);
 
+  void SetDiffuse(uint32_t vertex_index, const Color& color);
+  void SetSpecular(uint32_t vertex_index, const Color& color);
+
  private:
   friend class TestHost;
 
