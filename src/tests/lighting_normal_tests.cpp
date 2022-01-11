@@ -40,6 +40,32 @@ LightingNormalTests::LightingNormalTests(TestHost& host, std::string output_dir)
   }
 }
 
+static void SetLightAndMaterial() {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xbf34dce5);
+  p = pb_push1(p, 0x09e4, 0xc020743f);
+  p = pb_push1(p, 0x09e8, 0x40333d06);
+  p = pb_push1(p, 0x09ec, 0xbf003612);
+  p = pb_push1(p, 0x09f0, 0xbff852a5);
+  p = pb_push1(p, 0x09f4, 0x401c1bce);
+
+  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+  p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
+  p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
+
+  p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
+  p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 0.0f, 1.0f, 0.7f);
+  p = pb_push3(p, NV097_SET_LIGHT_SPECULAR_COLOR, 0, 0, 0);
+  p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
+  p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
+  p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
+
+  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
+
+  pb_end(p);
+}
+
 void LightingNormalTests::Initialize() {
   TestSuite::Initialize();
 
@@ -50,7 +76,13 @@ void LightingNormalTests::Initialize() {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
   pb_end(p);
+
+  SetLightAndMaterial();
 }
 
 void LightingNormalTests::Deinitialize() {
@@ -98,37 +130,11 @@ void LightingNormalTests::CreateGeometry() {
   }
 }
 
-static void SetLightAndMaterial() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xbf34dce5);
-  p = pb_push1(p, 0x09e4, 0xc020743f);
-  p = pb_push1(p, 0x09e8, 0x40333d06);
-  p = pb_push1(p, 0x09ec, 0xbf003612);
-  p = pb_push1(p, 0x09f0, 0xbff852a5);
-  p = pb_push1(p, 0x09f4, 0x401c1bce);
-
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
-  p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
-
-  p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
-  p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 0.0f, 1.0f, 0.7f);
-  p = pb_push3(p, NV097_SET_LIGHT_SPECULAR_COLOR, 0, 0, 0);
-  p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
-  p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
-  p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
-
-  pb_end(p);
-}
-
 void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode draw_mode) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
   uint32_t* p;
-
-  SetLightAndMaterial();
 
   if (set_normal) {
     p = pb_begin();
@@ -140,17 +146,12 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode dr
     normal_bleed_buffer_->Unlock();
 
     host_.SetVertexBuffer(normal_bleed_buffer_);
-    host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE);
+    host_.DrawArrays(host_.POSITION | host_.NORMAL);
   }
 
   // Render the test subject with no normals but lighting enabled.
   p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
-
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
   pb_end(p);
 
   uint32_t vertex_elements = host_.POSITION | host_.DIFFUSE;
