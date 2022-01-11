@@ -3,10 +3,10 @@
 #include <SDL_image.h>
 #include <pbkit/pbkit.h>
 
-#include "../nxdk_ext.h"
-#include "../pbkit_ext.h"
-#include "../test_host.h"
 #include "debug_output.h"
+#include "nxdk_ext.h"
+#include "pbkit_ext.h"
+#include "test_host.h"
 #include "vertex_buffer.h"
 
 // From pbkit.c
@@ -105,7 +105,7 @@ void ImageBlitTests::Initialize() {
   SetDefaultTextureFormat();
 
   SDL_Surface* temp = IMG_Load("D:\\image_blit\\TestImage.png");
-  assert(temp);
+  ASSERT(temp);
   SDL_Surface* test_image = SDL_ConvertSurfaceFormat(temp, SDL_PIXELFORMAT_BGRA32, 0);
   SDL_free(temp);
 

@@ -99,11 +99,7 @@ class TestHost {
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
 
-  void SetTextureStageEnabled(uint32_t stage, bool enabled = true) {
-    assert(stage < 4 && "Only 4 texture stages are supported.");
-    assert(stage == 0 && "Only 1 texture stage is fully implemented.");
-    texture_stage_enabled_[stage] = enabled;
-  }
+  void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();

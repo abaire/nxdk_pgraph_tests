@@ -12,7 +12,6 @@
 #include <xboxkrnl/xboxkrnl.h>
 
 #include <algorithm>
-#include <cassert>
 #include <utility>
 
 #include "debug_output.h"
@@ -39,7 +38,7 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
   // allocate texture memory buffer large enough for all types
   texture_memory_ = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(texture_width * texture_height * 4, 0, MAXRAM,
                                                                         0, PAGE_WRITECOMBINE | PAGE_READWRITE));
-  assert(texture_memory_ && "Failed to allocate texture memory.");
+  ASSERT(texture_memory_ && "Failed to allocate texture memory.");
 
   matrix_unit(fixed_function_model_view_matrix_);
   matrix_unit(fixed_function_projection_matrix_);
@@ -207,7 +206,7 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 }
 
 void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawArrays.");
+  ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawArrays.");
   static constexpr int kVerticesPerPush = 120;
 
   SetVertexBufferAttributes(enabled_vertex_fields);
@@ -232,7 +231,7 @@ void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitiv
 }
 
 void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
+  ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
   SetVertexBufferAttributes(enabled_vertex_fields);
 
   auto p = pb_begin();
@@ -266,7 +265,7 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
 }
 
 void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineArray.");
+  ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineArray.");
   static constexpr int kElementsPerPush = 64;
 
   SetVertexBufferAttributes(enabled_vertex_fields);
@@ -321,7 +320,7 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
 
 void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
                                     DrawPrimitive primitive) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
+  ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
   static constexpr int kIndicesPerPush = 64;
 
   SetVertexBufferAttributes(enabled_vertex_fields);
@@ -329,7 +328,7 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
 
-  assert(indices.size() < 0x7FFFFFFF);
+  ASSERT(indices.size() < 0x7FFFFFFF);
   int indices_remaining = static_cast<int>(indices.size());
   int num_pushed = 0;
   const uint32_t *next_index = indices.data();
@@ -358,7 +357,7 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
 
 void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
                                     DrawPrimitive primitive) {
-  assert(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
+  ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
   static constexpr int kIndicesPerPush = 64;
 
   SetVertexBufferAttributes(enabled_vertex_fields);
@@ -413,7 +412,7 @@ void TestHost::SetTexCoord0(float u, float v) const {
 
 void TestHost::EnsureFolderExists(const std::string &folder_path) {
   if (folder_path.length() > MAX_FILE_PATH_SIZE) {
-    assert(!"Folder Path is too long.");
+    ASSERT(!"Folder Path is too long.");
   }
 
   char buffer[MAX_FILE_PATH_SIZE + 1] = {0};
@@ -424,7 +423,7 @@ void TestHost::EnsureFolderExists(const std::string &folder_path) {
   while (slash) {
     strncpy(buffer, path_start, slash - path_start);
     if (!CreateDirectory(buffer, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
-      assert(!"Failed to create output directory.");
+      ASSERT(!"Failed to create output directory.");
     }
 
     slash = strchr(slash + 1, '\\');
@@ -432,7 +431,7 @@ void TestHost::EnsureFolderExists(const std::string &folder_path) {
 
   // Handle case where there was no trailing slash.
   if (!CreateDirectory(path_start, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
-    assert(!"Failed to create output directory.");
+    ASSERT(!"Failed to create output directory.");
   }
 }
 
@@ -446,7 +445,7 @@ std::string TestHost::PrepareSaveFilePNG(std::string output_directory, const std
   output_directory += ".png";
 
   if (output_directory.length() > MAX_FILE_PATH_SIZE) {
-    assert(!"Full save file path is too long.");
+    ASSERT(!"Full save file path is too long.");
   }
 
   return output_directory;
@@ -464,7 +463,7 @@ void TestHost::SaveBackBuffer(const std::string &output_directory, const std::st
       SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, width, height, 32, pitch, SDL_PIXELFORMAT_ARGB8888);
   if (IMG_SavePNG(surface, target_file.c_str())) {
     PrintMsg("Failed to save PNG file '%s'\n", target_file.c_str());
-    assert(!"Failed to save PNG file.");
+    ASSERT(!"Failed to save PNG file.");
   }
 
   SDL_FreeSurface(surface);
@@ -490,7 +489,7 @@ void TestHost::SaveZBuffer(const std::string &output_directory, const std::strin
 
   if (IMG_SavePNG(surface, target_file.c_str())) {
     PrintMsg("Failed to save PNG file '%s'\n", target_file.c_str());
-    assert(!"Failed to save PNG file.");
+    ASSERT(!"Failed to save PNG file.");
   }
 
   SDL_FreeSurface(surface);
@@ -517,7 +516,7 @@ void TestHost::SetupControl0() const {
 void TestHost::SetupTextureStages() const {
   if (!texture_format_.xbox_bpp) {
     PrintMsg("No texture format specified. This will cause an invalid pgraph state exception and a crash.");
-    assert(!"No texture format specified. This will cause an invalid pgraph state exception and a crash.");
+    ASSERT(!"No texture format specified. This will cause an invalid pgraph state exception and a crash.");
   }
 
   auto p = pb_begin();
@@ -862,6 +861,12 @@ void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
 }
 
+void TestHost::SetTextureStageEnabled(uint32_t stage, bool enabled) {
+  ASSERT(stage == 0 && "Only 1 texture stage is fully implemented.");
+  ASSERT(stage < 4 && "Only 4 texture stages are supported.");
+  texture_stage_enabled_[stage] = enabled;
+}
+
 /* Set an attribute pointer */
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();
@@ -876,6 +881,6 @@ static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, u
 }
 
 static void clear_attrib(uint32_t index) {
-  // Note: xemu has asserts on the count for several formats, so any format without that assert must be used.
+  // Note: xemu has asserts on the count for several formats, so any format without that ASSERT must be used.
   set_attrib_pointer(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
 }
