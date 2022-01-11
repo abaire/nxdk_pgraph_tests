@@ -27,6 +27,7 @@ SRCS = \
 	$(SRCDIR)/tests/image_blit_tests.cpp \
 	$(SRCDIR)/tests/lighting_normal_tests.cpp \
 	$(SRCDIR)/tests/material_alpha_tests.cpp \
+	$(SRCDIR)/tests/material_color_source_tests.cpp \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
 	$(SRCDIR)/tests/test_suite.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \

@@ -67,6 +67,8 @@ void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const 
                                   const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
   ASSERT(start_index <= (num_vertices_ - 3) && "Invalid start_index, need at least 3 vertices to define triangle.");
 
+  cache_valid_ = false;
+
   Vertex *vb = normalized_vertex_buffer_ + (start_index * 3);
 
   auto set = [vb](int index, const float *pos, const float *normal, const Color &diffuse) {
@@ -145,6 +147,8 @@ void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float
                               const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
   ASSERT(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
 
+  cache_valid_ = false;
+
   Vertex *vb = normalized_vertex_buffer_ + (start_index * 6);
 
   auto set = [vb](int index, float x, float y, float z, float u, float v, const Color &diffuse, const Color &specular) {
@@ -201,4 +205,21 @@ void VertexBuffer::DefineQuadCW(uint32_t start_index, float left, float top, flo
   temp = vb[5];
   vb[5] = vb[4];
   vb[4] = temp;
+}
+void VertexBuffer::SetDiffuse(uint32_t vertex_index, const Color &color) {
+  cache_valid_ = false;
+  ASSERT(vertex_index < num_vertices_ && "Invalid vertex_index.");
+  normalized_vertex_buffer_[vertex_index].diffuse[0] = color.r;
+  normalized_vertex_buffer_[vertex_index].diffuse[1] = color.g;
+  normalized_vertex_buffer_[vertex_index].diffuse[2] = color.b;
+  normalized_vertex_buffer_[vertex_index].diffuse[3] = color.a;
+}
+
+void VertexBuffer::SetSpecular(uint32_t vertex_index, const Color &color) {
+  cache_valid_ = false;
+  ASSERT(vertex_index < num_vertices_ && "Invalid vertex_index.");
+  normalized_vertex_buffer_[vertex_index].specular[0] = color.r;
+  normalized_vertex_buffer_[vertex_index].specular[1] = color.g;
+  normalized_vertex_buffer_[vertex_index].specular[2] = color.b;
+  normalized_vertex_buffer_[vertex_index].specular[3] = color.a;
 }

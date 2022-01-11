@@ -21,7 +21,7 @@ static constexpr float kAlphaValues[] = {
 static std::string DiffuseSourceName(uint32_t diffuse_source);
 
 MaterialAlphaTests::MaterialAlphaTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Material Alpha") {
+    : TestSuite(host, std::move(output_dir), "Material alpha") {
   for (auto source : kDiffuseSource) {
     for (auto alpha : kAlphaValues) {
       std::string name = MakeTestName(source, alpha);
