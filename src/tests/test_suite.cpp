@@ -1,8 +1,7 @@
 #include "test_suite.h"
 
-#include <cassert>
-
-#include "../test_host.h"
+#include "debug_output.h"
+#include "test_host.h"
 #include "texture_format.h"
 
 TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string test_name)
@@ -25,7 +24,7 @@ std::vector<std::string> TestSuite::TestNames() const {
 void TestSuite::Run(const std::string& test_name) {
   auto it = tests_.find(test_name);
   if (it == tests_.end()) {
-    assert(!"Invalid test name");
+    ASSERT(!"Invalid test name");
   }
 
   it->second();

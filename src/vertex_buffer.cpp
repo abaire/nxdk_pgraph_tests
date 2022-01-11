@@ -4,6 +4,8 @@
 
 #include <memory>
 
+#include "debug_output.h"
+
 #define MAXRAM 0x03FFAFFF
 
 VertexBuffer::VertexBuffer(uint32_t num_vertices) : num_vertices_(num_vertices) {
@@ -63,7 +65,7 @@ void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const 
 void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three,
                                   const float *normal_one, const float *normal_two, const float *normal_three,
                                   const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
-  assert(start_index <= (num_vertices_ - 3) && "Invalid start_index, need at least 3 vertices to define triangle.");
+  ASSERT(start_index <= (num_vertices_ - 3) && "Invalid start_index, need at least 3 vertices to define triangle.");
 
   Vertex *vb = normalized_vertex_buffer_ + (start_index * 3);
 
@@ -141,7 +143,7 @@ void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float
                               float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
                               const Color &lr_diffuse, const Color &ur_diffuse, const Color &ul_specular,
                               const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
-  assert(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
+  ASSERT(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
 
   Vertex *vb = normalized_vertex_buffer_ + (start_index * 6);
 

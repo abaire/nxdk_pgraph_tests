@@ -2,9 +2,9 @@
 
 #include <pbkit/pbkit.h>
 
-#include <cassert>
 #include <cmath>
 
+#include "debug_output.h"
 #include "nxdk_ext.h"
 
 void set_depth_stencil_buffer_region(uint32_t depth_buffer_format, uint32_t depth_value, uint8_t stencil_value,
@@ -29,7 +29,7 @@ void set_depth_stencil_buffer_region(uint32_t depth_buffer_format, uint32_t dept
       break;
 
     default:
-      assert(!"Invalid depth_buffer_format");
+      ASSERT(!"Invalid depth_buffer_format");
   }
 
   p = pb_push1(p, NV097_CLEAR_SURFACE, NV097_CLEAR_SURFACE_Z | NV097_CLEAR_SURFACE_STENCIL);
