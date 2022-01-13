@@ -240,20 +240,22 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
 
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
-    if (enabled_vertex_fields & POSITION) {
-      SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2]);
-    }
     if (enabled_vertex_fields & NORMAL) {
       SetNormal(vertex->normal[0], vertex->normal[1], vertex->normal[2]);
     }
     if (enabled_vertex_fields & DIFFUSE) {
-      SetDiffuse(vertex->GetDiffuseARGB());
+      SetDiffuse(vertex->diffuse[0], vertex->diffuse[1], vertex->diffuse[2], vertex->diffuse[3]);
     }
     if (enabled_vertex_fields & SPECULAR) {
-      SetSpecular(vertex->GetSpecularARGB());
+      SetSpecular(vertex->specular[0], vertex->specular[1], vertex->specular[2], vertex->specular[3]);
     }
     if (enabled_vertex_fields & TEXCOORD0) {
       SetTexCoord0(vertex->texcoord[0], vertex->texcoord[1]);
+    }
+
+    // Setting the position locks in the previously set values and must be done last.
+    if (enabled_vertex_fields & POSITION) {
+      SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2]);
     }
   }
   vertex_buffer_->Unlock();
@@ -392,15 +394,15 @@ void TestHost::SetNormal(float x, float y, float z) const {
   pb_end(p);
 }
 
-void TestHost::SetDiffuse(uint32_t argb) const {
+void TestHost::SetDiffuse(float r, float g, float b, float a) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, argb);
+  p = pb_push4f(p, NV097_SET_DIFFUSE_COLOR4F, r, g, b, a);
   pb_end(p);
 }
 
-void TestHost::SetSpecular(uint32_t argb) const {
+void TestHost::SetSpecular(float r, float g, float b, float a) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_COLOR, argb);
+  p = pb_push4f(p, NV097_SET_SPECULAR_COLOR4F, r, g, b, a);
   pb_end(p);
 }
 

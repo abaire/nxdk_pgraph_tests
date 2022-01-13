@@ -115,8 +115,8 @@ class TestHost {
 
   void SetVertex(float x, float y, float z) const;
   void SetNormal(float x, float y, float z) const;
-  void SetDiffuse(uint32_t argb) const;
-  void SetSpecular(uint32_t argb) const;
+  void SetDiffuse(float r, float g, float b, float a) const;
+  void SetSpecular(float r, float g, float b, float a) const;
   void SetTexCoord0(float u, float v) const;
 
   static std::string GetPrimitiveName(DrawPrimitive primitive);
