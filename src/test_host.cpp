@@ -867,6 +867,40 @@ void TestHost::SetTextureStageEnabled(uint32_t stage, bool enabled) {
   texture_stage_enabled_[stage] = enabled;
 }
 
+std::string TestHost::GetPrimitiveName(TestHost::DrawPrimitive primitive) {
+  switch (primitive) {
+    case PRIMITIVE_POINTS:
+      return "Points";
+
+    case PRIMITIVE_LINES:
+      return "Lines";
+
+    case PRIMITIVE_LINE_LOOP:
+      return "LineLoop";
+
+    case PRIMITIVE_LINE_STRIP:
+      return "LineStrip";
+
+    case PRIMITIVE_TRIANGLES:
+      return "Triangles";
+
+    case PRIMITIVE_TRIANGLE_STRIP:
+      return "TriStrip";
+
+    case PRIMITIVE_TRIANGLE_FAN:
+      return "TriFan";
+
+    case PRIMITIVE_QUADS:
+      return "Quads";
+
+    case PRIMITIVE_QUAD_STRIP:
+      return "QuadStrip";
+
+    case PRIMITIVE_POLYGON:
+      return "Polygon";
+  }
+}
+
 /* Set an attribute pointer */
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();

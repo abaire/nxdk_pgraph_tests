@@ -21,7 +21,6 @@ SRCS = \
 	$(SRCDIR)/shaders/shader_program.cpp \
 	$(SRCDIR)/test_driver.cpp \
 	$(SRCDIR)/test_host.cpp \
-	$(SRCDIR)/tests/two_d_line_tests.cpp \
 	$(SRCDIR)/tests/depth_format_tests.cpp \
 	$(SRCDIR)/tests/front_face_tests.cpp \
 	$(SRCDIR)/tests/image_blit_tests.cpp \
@@ -32,6 +31,8 @@ SRCS = \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
 	$(SRCDIR)/tests/test_suite.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
+	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
+	$(SRCDIR)/tests/two_d_line_tests.cpp \
 	$(SRCDIR)/texture_format.cpp \
 	$(SRCDIR)/vertex_buffer.cpp \
 	$(THIRDPARTYDIR)/swizzle.c \

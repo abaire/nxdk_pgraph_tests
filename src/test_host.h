@@ -70,14 +70,14 @@ class TestHost {
   void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
   std::shared_ptr<VertexBuffer> GetVertexBuffer() { return vertex_buffer_; }
 
-  void Clear(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00) const;
+  void Clear(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00) const;
   void SetDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value, uint32_t left = 0, uint32_t top = 0,
                              uint32_t width = 0, uint32_t height = 0) const;
   void SetFillColorRegion(uint32_t argb, uint32_t left = 0, uint32_t top = 0, uint32_t width = 0,
                           uint32_t height = 0) const;
   static void EraseText();
 
-  void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFF000000, uint8_t stencil_value = 0x00);
+  void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00);
 
   void DrawArrays(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
   void DrawInlineBuffer(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
@@ -118,6 +118,8 @@ class TestHost {
   void SetDiffuse(uint32_t argb) const;
   void SetSpecular(uint32_t argb) const;
   void SetTexCoord0(float u, float v) const;
+
+  static std::string GetPrimitiveName(DrawPrimitive primitive);
 
  private:
   void SetVertexBufferAttributes(uint32_t enabled_fields);

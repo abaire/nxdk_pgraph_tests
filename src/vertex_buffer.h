@@ -4,9 +4,9 @@
 #include <cstdint>
 #include <vector>
 
-#define TO_ARGB(float_vals)                                                                  \
-  (((uint32_t)(float_vals[3] * 255.0f) << 24) + ((uint32_t)(float_vals[0] * 255.0f) << 16) + \
-   ((uint32_t)(float_vals[1] * 255.0f) << 8) + ((uint32_t)(float_vals[2] * 255.0f)))
+#define TO_ARGB(float_vals)                                                                      \
+  (((uint32_t)((float_vals)[3] * 255.0f) << 24) + ((uint32_t)((float_vals)[0] * 255.0f) << 16) + \
+   ((uint32_t)((float_vals)[1] * 255.0f) << 8) + ((uint32_t)((float_vals)[2] * 255.0f)))
 
 #pragma pack(1)
 typedef struct Vertex {
@@ -15,6 +15,55 @@ typedef struct Vertex {
   float normal[3];
   float diffuse[4];
   float specular[4];
+
+  inline void SetPosition(const float* value) { memcpy(pos, value, sizeof(pos)); }
+
+  inline void SetPosition(float x, float y, float z) {
+    pos[0] = x;
+    pos[1] = y;
+    pos[2] = z;
+  }
+
+  inline void SetNormal(const float* value) { memcpy(normal, value, sizeof(normal)); }
+
+  inline void SetNormal(float x, float y, float z) {
+    normal[0] = x;
+    normal[1] = y;
+    normal[2] = z;
+  }
+
+  inline void SetDiffuse(const float* value) { memcpy(diffuse, value, sizeof(diffuse)); }
+
+  inline void SetDiffuse(float r, float g, float b, float a = 1.0f) {
+    diffuse[0] = r;
+    diffuse[1] = g;
+    diffuse[2] = b;
+    diffuse[3] = a;
+  }
+
+  inline void SetSpecular(const float* value) { memcpy(specular, value, sizeof(specular)); }
+
+  inline void SetSpecular(float r, float g, float b, float a = 1.0f) {
+    specular[0] = r;
+    specular[1] = g;
+    specular[2] = b;
+    specular[3] = a;
+  }
+
+  inline void SetTexCoord(const float* value) { memcpy(texcoord, value, sizeof(texcoord)); }
+
+  inline void SetTexCoord(const float u, const float v) {
+    texcoord[0] = u;
+    texcoord[1] = v;
+  }
+
+  inline void SetDiffuseGrey(float val) { SetDiffuse(val, val, val); }
+
+  void SetDiffuseGrey(float val, float alpha) { SetDiffuse(val, val, val, alpha); }
+
+  inline void SetSpecularGrey(float val) { SetSpecular(val, val, val); }
+
+  void SetSpecularGrey(float val, float alpha) { SetSpecular(val, val, val, alpha); }
 
   uint32_t GetDiffuseARGB() const { return TO_ARGB(diffuse); }
 
