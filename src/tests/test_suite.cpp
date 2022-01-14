@@ -60,7 +60,7 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
 
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, 0x0);
+  p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, 0xe);
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, 0x1c80);
 
@@ -96,9 +96,9 @@ void TestSuite::Initialize() {
 
   pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_ICW, 8);
   *(p++) = 0x14200000;
-  *(p++) = 0;
-  *(p++) = 0;
-  *(p++) = 0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
   *(p++) = 0x0;
   *(p++) = 0x0;
   *(p++) = 0x0;
@@ -106,9 +106,9 @@ void TestSuite::Initialize() {
 
   pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_OCW, 8);
   *(p++) = 0xC00;
-  *(p++) = 0;
-  *(p++) = 0;
-  *(p++) = 0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
   *(p++) = 0x0;
   *(p++) = 0x0;
   *(p++) = 0x0;

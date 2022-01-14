@@ -22,6 +22,7 @@ SRCS = \
 	$(SRCDIR)/test_driver.cpp \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/depth_format_tests.cpp \
+	$(SRCDIR)/tests/fog_tests.cpp \
 	$(SRCDIR)/tests/front_face_tests.cpp \
 	$(SRCDIR)/tests/image_blit_tests.cpp \
 	$(SRCDIR)/tests/lighting_normal_tests.cpp \

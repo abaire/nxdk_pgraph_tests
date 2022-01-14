@@ -2,9 +2,7 @@
 
 #include <pbkit/pbkit.h>
 
-#include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -399,24 +397,4 @@ std::string ThreeDPrimitiveTests::MakeTestName(TestHost::DrawPrimitive primitive
   }
 
   return std::move(ret);
-}
-
-static void CreateGeometry(TestHost& host, TestHost::DrawPrimitive primitive) {
-  float left = -2.75f;
-  float right = 2.75f;
-  float top = 1.75f;
-  float bottom = -1.75f;
-  float z = 1.0f;
-  VECTOR normal{0.0f, 0.0f, 1.0f, 1.0f};
-
-  std::shared_ptr<VertexBuffer> buffer = host.AllocateVertexBuffer(6);
-
-  buffer->DefineQuad(0, left, top, right, bottom);
-
-  // Point normals for half the quad away from the camera.
-  Vertex* v = buffer->Lock();
-  v[0].normal[2] = -1.0f;
-  v[1].normal[2] = -1.0f;
-  v[2].normal[2] = -1.0f;
-  buffer->Unlock();
 }
