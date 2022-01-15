@@ -27,8 +27,9 @@ void TextureFormatTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  host_.SetShaderProgram(
-      std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight()));
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  shader->SetLightingEnabled(false);
+  host_.SetShaderProgram(shader);
   host_.SetTextureStageEnabled(0, true);
 }
 

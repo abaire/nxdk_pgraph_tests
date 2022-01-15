@@ -2,12 +2,13 @@ struct vIn {
   float3 norm : NORMAL;
   float2 tex : TEXCOORD;
   float3 pos : POSITION;
+  float4 diffuse: DIFFUSE;
 };
 
 struct vOut {
   float4 pos : POSITION;
   float4 col : COLOR;
-  float fog : FOG;
+  float4 fog : FOG;
   float2 tex0 : TEXCOORD0;
 };
 
@@ -19,18 +20,14 @@ vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, un
   float4 pos = mul(float4(I.pos.xyz, 1.0), model_matrix);
   float3 norm = normalize(mul(float4(I.norm.xyz, 0.0f), model_matrix).xyz);
 
-  // Calculate diffuse light direction and intensity
-  float3 light_direction = normalize(light_dir.xyz);
-  float light_diffuse = max(dot(norm.xyz, light_direction), 0);
-
   // Transform pos to screen space
   pos = mul(pos, view_matrix);
   pos = mul(pos, projection_matrix);
   pos.xyz = pos.xyz / pos.w;
 
   result.pos = pos;
-  result.col = light_diffuse;
-  result.fog = result.pos.w;
+  result.col = I.diffuse;
+  result.fog = vec4(result.pos.w);
   result.tex0 = I.tex;
 
   return result;
