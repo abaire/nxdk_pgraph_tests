@@ -103,8 +103,7 @@ bool get_xbe_directory(std::string& xbe_root_directory) {
     }
     return true;
   }
-
-  xbe_root_directory = "D:";
+  xbe_root_directory = xbe_directory.substr(0, xbe_directory.find_last_of("\\"));
   return true;
 }
 
