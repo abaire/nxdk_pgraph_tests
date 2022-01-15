@@ -22,7 +22,7 @@ void vector_apply(VECTOR output, const VECTOR input0, const MATRIX input1) {
       input0[_X] * input1[_41] + input0[_Y] * input1[_42] + input0[_Z] * input1[_43] + input0[_W] * input1[_44];
 }
 
-void vector_clamp(VECTOR output, VECTOR input0, float min, float max) {
+void vector_clamp(VECTOR output, const VECTOR input0, float min, float max) {
   VECTOR work;
 
   // Copy the vector.
@@ -60,9 +60,13 @@ void vector_clamp(VECTOR output, VECTOR input0, float min, float max) {
   vector_copy(output, work);
 }
 
-void vector_copy(VECTOR output, VECTOR input0) { memcpy(output, input0, sizeof(VECTOR)); }
+void vector_copy(VECTOR output, const VECTOR input0) { memcpy(output, input0, sizeof(VECTOR)); }
 
-float vector_innerproduct(VECTOR input0, VECTOR input1) {
+float vector_dot(const VECTOR input0, const VECTOR input1) {
+  return vector_innerproduct(input0, input1);
+}
+
+float vector_innerproduct(const VECTOR input0, const VECTOR input1) {
   VECTOR work0, work1;
 
   // Normalize the first vector.
@@ -81,44 +85,46 @@ float vector_innerproduct(VECTOR input0, VECTOR input1) {
   return (work0[_X] * work1[_X]) + (work0[_Y] * work1[_Y]) + (work0[_Z] * work1[_Z]);
 }
 
-void vector_multiply(VECTOR output, VECTOR input0, VECTOR input1) {
-  VECTOR work;
-
-  // Multiply the vectors together.
-  work[_X] = input0[_X] * input1[_X];
-  work[_Y] = input0[_Y] * input1[_Y];
-  work[_Z] = input0[_Z] * input1[_Z];
-  work[_W] = input0[_W] * input1[_W];
-
-  // Output the result.
-  vector_copy(output, work);
+void vector_multiply(VECTOR output, const VECTOR input0, const VECTOR input1) {
+  output[_X] = input0[_X] * input1[_X];
+  output[_Y] = input0[_Y] * input1[_Y];
+  output[_Z] = input0[_Z] * input1[_Z];
+  output[_W] = input0[_W] * input1[_W];
 }
 
-void vector_normalize(VECTOR output, VECTOR input0) {
+void vector_normalize(VECTOR vector) {
   float k;
 
-  k = 1.0f / sqrt(input0[_X] * input0[_X] + input0[_Y] * input0[_Y] + input0[_Z] * input0[_Z]);
-  output[_X] *= k;
-  output[_Y] *= k;
-  output[_Z] *= k;
+  k = 1.0f / sqrtf(vector[_X] * vector[_X] + vector[_Y] * vector[_Y] + vector[_Z] * vector[_Z]);
+  vector[_X] *= k;
+  vector[_Y] *= k;
+  vector[_Z] *= k;
 }
 
-void vector_outerproduct(VECTOR output, VECTOR input0, VECTOR input1) {
-  VECTOR work;
+void vector_normalize_into(VECTOR output, const VECTOR input0) {
+  float k;
 
-  work[_X] = input0[_Y] * input1[_Z] - input0[_Z] * input1[_Y];
-  work[_Y] = input0[_Z] * input1[_X] - input0[_X] * input1[_Z];
-  work[_Z] = input0[_X] * input1[_Y] - input0[_Y] * input1[_X];
+  k = 1.0f / sqrtf(input0[_X] * input0[_X] + input0[_Y] * input0[_Y] + input0[_Z] * input0[_Z]);
+  output[_X] = input0[_X] * k;
+  output[_Y] = input0[_Y] * k;
+  output[_Z] = input0[_Z] * k;
+}
 
-  // Output the result.
-  vector_copy(output, work);
+void vector_crossproduct(VECTOR output, const VECTOR input0, const VECTOR input1) {
+  vector_outerproduct(output, input0, input1);
+}
+
+void vector_outerproduct(VECTOR output, const VECTOR input0, const VECTOR input1) {
+  output[_X] = input0[_Y] * input1[_Z] - input0[_Z] * input1[_Y];
+  output[_Y] = input0[_Z] * input1[_X] - input0[_X] * input1[_Z];
+  output[_Z] = input0[_X] * input1[_Y] - input0[_Y] * input1[_X];
 }
 
 // matrices function
 
-void matrix_copy(MATRIX output, MATRIX input0) { memcpy(output, input0, sizeof(MATRIX)); }
+void matrix_copy(MATRIX output, const MATRIX input0) { memcpy(output, input0, sizeof(MATRIX)); }
 
-void matrix_inverse(MATRIX output, MATRIX input0) {
+void matrix_inverse(MATRIX output, const MATRIX input0) {
   MATRIX work;
 
   // Calculate the inverse of the matrix.
@@ -135,7 +141,7 @@ void matrix_inverse(MATRIX output, MATRIX input0) {
   matrix_copy(output, work);
 }
 
-void matrix_multiply(MATRIX output, MATRIX input0, MATRIX input1) {
+void matrix_multiply(MATRIX output, const MATRIX input0, const MATRIX input1) {
   MATRIX work;
 
   work[_11] =
@@ -175,7 +181,7 @@ void matrix_multiply(MATRIX output, MATRIX input0, MATRIX input1) {
   matrix_copy(output, work);
 }
 
-void matrix_rotate(MATRIX output, MATRIX input0, VECTOR input1) {
+void matrix_rotate(MATRIX output, const MATRIX input0, const VECTOR input1) {
   MATRIX work;
 
   // Apply the z-axis rotation.
@@ -203,7 +209,7 @@ void matrix_rotate(MATRIX output, MATRIX input0, VECTOR input1) {
   matrix_multiply(output, output, work);
 }
 
-void matrix_scale(MATRIX output, MATRIX input0, VECTOR input1) {
+void matrix_scale(MATRIX output, const MATRIX input0, const VECTOR input1) {
   MATRIX work;
 
   // Apply the scaling.
@@ -214,7 +220,7 @@ void matrix_scale(MATRIX output, MATRIX input0, VECTOR input1) {
   matrix_multiply(output, input0, work);
 }
 
-void matrix_translate(MATRIX output, MATRIX input0, VECTOR input1) {
+void matrix_translate(MATRIX output, const MATRIX input0, const VECTOR input1) {
   MATRIX work;
 
   // Apply the translation.
@@ -225,7 +231,7 @@ void matrix_translate(MATRIX output, MATRIX input0, VECTOR input1) {
   matrix_multiply(output, input0, work);
 }
 
-void matrix_transpose(MATRIX output, MATRIX input0) {
+void matrix_transpose(MATRIX output, const MATRIX input0) {
   MATRIX work;
 
   // Transpose the matrix.
@@ -274,7 +280,7 @@ void create_local_light(MATRIX local_light, VECTOR rotation) {
   matrix_rotate(local_light, local_light, rotation);
 }
 
-void create_world_view(MATRIX world_view, VECTOR translation, VECTOR rotation) {
+void create_world_view(MATRIX world_view, const VECTOR translation, const VECTOR rotation) {
   VECTOR work0, work1;
 
   // Reverse the translation.

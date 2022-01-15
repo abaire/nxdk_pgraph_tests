@@ -132,6 +132,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
+    auto suite = std::make_shared<FogCustomShaderTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
     auto suite = std::make_shared<FrontFaceTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }

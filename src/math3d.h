@@ -39,46 +39,50 @@ typedef float MATRIX[16];
 void vector_apply(VECTOR output, const VECTOR input0, const MATRIX input1);
 // Multiply a vector by a matrix, returning a vector.
 
-void vector_clamp(VECTOR output, VECTOR input0, float min, float max);
+void vector_clamp(VECTOR output, const VECTOR input0, float min, float max);
 // Clamp a vector's values by cutting them off at a minimum and maximum value.
 
-void vector_copy(VECTOR output, VECTOR input0);
+void vector_copy(VECTOR output, const VECTOR input0);
 // Copy a vector.
 
-float vector_innerproduct(VECTOR input0, VECTOR input1);
+float vector_dot(const VECTOR input0, const VECTOR input1);
+float vector_innerproduct(const VECTOR input0, const VECTOR input1);
 // Calculate the inner product of two vectors. Returns a scalar value.
 
-void vector_multiply(VECTOR output, VECTOR input0, VECTOR input1);
+void vector_multiply(VECTOR output, const VECTOR input0, const VECTOR input1);
 // Multiply two vectors together.
 
-void vector_normalize(VECTOR output, VECTOR input0);
-// Normalize a vector by determining its length and dividing its values by this
-// value.
+void vector_normalize(VECTOR vector);
+// Normalize a vector by determining its length and dividing its values by this value.
 
-void vector_outerproduct(VECTOR output, VECTOR input0, VECTOR input1);
+void vector_normalize_into(VECTOR output, const VECTOR input0);
+// Normalize a vector by determining its length and dividing its values by this value.
+
+void vector_crossproduct(VECTOR output, const VECTOR input0, const VECTOR input1);
+void vector_outerproduct(VECTOR output, const VECTOR input0, const VECTOR input1);
 // Calculate the outer product of two vectors.
 
 // matrices functions
 
-void matrix_copy(MATRIX output, MATRIX input0);
+void matrix_copy(MATRIX output, const MATRIX input0);
 // Copy a matrix.
 
-void matrix_inverse(MATRIX output, MATRIX input0);
+void matrix_inverse(MATRIX output, const MATRIX input0);
 // Calculate the inverse of a matrix.
 
-void matrix_multiply(MATRIX output, MATRIX input0, MATRIX input1);
+void matrix_multiply(MATRIX output, const MATRIX input0, const MATRIX input1);
 // Multiply two matrices together.
 
-void matrix_rotate(MATRIX output, MATRIX input0, VECTOR input1);
+void matrix_rotate(MATRIX output, const MATRIX input0, const VECTOR input1);
 // Create a rotation matrix and apply it to the specified input matrix.
 
-void matrix_scale(MATRIX output, MATRIX input0, VECTOR input1);
+void matrix_scale(MATRIX output, const MATRIX input0, const VECTOR input1);
 // Create a scaling matrix and apply it to the specified input matrix.
 
-void matrix_translate(MATRIX output, MATRIX input0, VECTOR input1);
+void matrix_translate(MATRIX output, const MATRIX input0, const VECTOR input1);
 // Create a translation matrix and apply it to the specified input matrix.
 
-void matrix_transpose(MATRIX output, MATRIX input0);
+void matrix_transpose(MATRIX output, const MATRIX input0);
 // Transpose a matrix.
 
 void matrix_unit(MATRIX output);
@@ -94,7 +98,7 @@ void create_local_light(MATRIX local_light, VECTOR rotation);
 // Create a local_light matrix given a rotation.
 // Commonly used to transform an object's normals for lighting calculations.
 
-void create_world_view(MATRIX world_view, VECTOR translation, VECTOR rotation);
+void create_world_view(MATRIX world_view, const VECTOR translation, const VECTOR rotation);
 // Create a world_view matrix given a translation and rotation.
 // Commonly used to describe a camera's position and rotation.
 

@@ -3,8 +3,12 @@
 #include <pbkit/pbkit.h>
 
 #include "pbkit_ext.h"
+#include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
+
+static constexpr float kFogStart = 1.0f;
+static constexpr float kFogEnd = 200.0f;
 
 // clang-format off
 static constexpr FogTests::FogMode kFogModes[] = {
@@ -25,7 +29,8 @@ static constexpr FogTests::FogGenMode kGenModes[] = {
 };
 // clang-format on
 
-FogTests::FogTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir), "Fog") {
+FogTests::FogTests(TestHost& host, std::string output_dir, std::string suite_name)
+    : TestSuite(host, std::move(output_dir), suite_name) {
   for (const auto fog_mode : kFogModes) {
     for (const auto gen_mode : kGenModes) {
       // Alpha doesn't seem to actually have any effect.
@@ -87,7 +92,6 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   host_.PrepareDraw(kBackgroundColor);
 
   auto p = pb_begin();
-
   p = pb_push1(p, NV097_SET_COMBINER_CONTROL, 1);
 
   pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_ICW, 8);
@@ -143,9 +147,6 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   // Linear parameters.
   // TODO: Parameterize.
   // Right now these are just the near and far planes.
-  const float fog_start = 1.0f;
-  const float fog_end = 200.0f;
-
   // Exponential parameters.
   const float fog_density = 0.025f;
 
@@ -157,8 +158,8 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
 
   switch (fog_mode) {
     case FOG_LINEAR:
-      multiplier_param = -1.0f / (fog_end - fog_start);
-      bias_param = 1.0f + -fog_end * multiplier_param;
+      multiplier_param = -1.0f / (kFogEnd - kFogStart);
+      bias_param = 1.0f + -kFogEnd * multiplier_param;
       break;
 
     case FOG_EXP:
@@ -238,4 +239,68 @@ std::string FogTests::MakeTestName(FogTests::FogMode fog_mode, FogTests::FogGenM
   }
 
   return std::move(ret);
+}
+
+FogCustomShaderTests::FogCustomShaderTests(TestHost& host, std::string output_dir)
+    : FogTests(host, std::move(output_dir), "Fog vsh") {}
+
+void FogCustomShaderTests::Initialize() {
+  FogTests::Initialize();
+
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  shader->SetNear(kFogStart);
+  shader->SetFar(kFogEnd);
+  VECTOR camera_position{0.0f, 0.0f, -7.0f, 1.0f};
+  VECTOR look_at{0.0f, 0.0f, 0.0f, 1.0f};
+
+  shader->LookAt(camera_position, look_at);
+
+  shader->SetLightingEnabled(false);
+  shader->SetTextureEnabled(false);
+  host_.SetShaderProgram(shader);
+}
+
+void FogCustomShaderTests::CreateGeometry() {
+  constexpr uint32_t kNumTriangles = 4;
+  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(3 * kNumTriangles);
+
+  uint32_t idx = 0;
+
+  {
+    VECTOR one{-1.5f, -1.1547f, 0.0f};
+    VECTOR two{-0.5f,  0.5777f, 0.0f};
+    VECTOR three{-2.5f,  0.5777f, 0.0f};
+    buffer->DefineTriangle(idx++, one, two, three);
+  }
+
+  {
+    VECTOR one{0.0f, -1.5f, 5.0f};
+    VECTOR two{2.0f,  0.75f, 20.0f};
+    VECTOR three{-1.0f,  0.75f, 10.0f};
+    buffer->DefineTriangle(idx++, one, two, three);
+  }
+
+  {
+    VECTOR one{5.0f, -2.0f, 30};
+    VECTOR two{12.0f,  2.0f, 70};
+    VECTOR three{3.0f,  2.0f, 40};
+    buffer->DefineTriangle(idx++, one, two, three);
+  }
+
+  {
+    VECTOR one{20.0f, -10.0f, 50};
+    VECTOR two{80.0f,  10.0f, 200};
+    VECTOR three{12.0f,  10.0f, 125};
+    buffer->DefineTriangle(idx++, one, two, three);
+  }
+
+
+  buffer->DefineQuad(idx++, -1.0, 1.0, -0.05, -1.0, 1.0f, 1.0f, 1.0f, 1.0f);
+
+
+  //  buffer->DefineQuad(idx++, -1.0, 1.0, -0.05, -1.0, -1.0f, -3.0f, -5.0f, -10.0f);
+  ////  buffer->DefineQuad(idx++, 0, 10.75, 30.0, -10.75, -10.0f, -30.0f, -50.0f, -100.0f);
+  //  buffer->DefineQuad(idx++, 0, 10.75, 30.0, -10.75, 10.0f, 30.0f, 50.0f, 100.0f);
+
+  //  buffer->DefineQuad(idx++, 0.05, 0.75, 0.75, -0.75, 0.0f, 0.0f, 100.0f, 100.0f);
 }

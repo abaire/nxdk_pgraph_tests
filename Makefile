@@ -42,6 +42,7 @@ SRCS = \
 SHADER_OBJS = \
 	$(SRCDIR)/shaders/precalculated_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \
+	$(SRCDIR)/shaders/projection_vertex_shader_no_lighting.inl \
 	$(SRCDIR)/shaders/textured_pixelshader.inl \
 	$(SRCDIR)/shaders/untextured_pixelshader.inl
 
