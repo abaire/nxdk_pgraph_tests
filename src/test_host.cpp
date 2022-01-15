@@ -86,24 +86,10 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   pb_wait_for_vbl();
   pb_reset();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_CULL_FACE_ENABLE, true);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-
-  // Enable alpha blending functionality
-  p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
-
-  // Set the alpha blend source (s) and destination (d) factors
-  p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA);
-  pb_end(p);
-
   SetupTextureStages();
 
   // Override the values set in pb_init. Unfortunately the default is not exposed and must be recreated here.
-  p = pb_begin();
+  auto p = pb_begin();
   uint32_t color_format = NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8;
   uint32_t frame_buffer_format =
       (NV097_SET_SURFACE_FORMAT_TYPE_PITCH << 8) | (depth_buffer_format_ << 4) | color_format;

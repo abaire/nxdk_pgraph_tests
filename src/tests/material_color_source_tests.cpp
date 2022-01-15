@@ -56,8 +56,8 @@ void MaterialColorSourceTests::CreateGeometry() {
 
   {
     float one_pos[3] = {left + (mid_width - left) * 0.5f, top, z};
-    float two_pos[3] = {left, mid_height, z};
-    float three_pos[3] = {mid_width, mid_height, z};
+    float two_pos[3] = {mid_width, mid_height, z};
+    float three_pos[3] = {left, mid_height, z};
 
     diffuse_buffer_ = host_.AllocateVertexBuffer(3);
     diffuse_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, normal, normal, normal);
@@ -69,8 +69,8 @@ void MaterialColorSourceTests::CreateGeometry() {
 
   {
     float one_pos[3] = {mid_width + (right - mid_width) * 0.5f, top, z};
-    float two_pos[3] = {mid_width, mid_height, z};
-    float three_pos[3] = {right, mid_height, z};
+    float two_pos[3] = {right, mid_height, z};
+    float three_pos[3] = {mid_width, mid_height, z};
     specular_buffer_ = host_.AllocateVertexBuffer(3);
     specular_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, normal, normal, normal);
     for (auto index : {0, 1, 2}) {
@@ -81,8 +81,8 @@ void MaterialColorSourceTests::CreateGeometry() {
 
   {
     float one_pos[3] = {left, mid_height, z};
-    float two_pos[3] = {left + (mid_width - left) * 0.5f, bottom, z};
-    float three_pos[3] = {mid_width, mid_height, z};
+    float two_pos[3] = {mid_width, mid_height, z};
+    float three_pos[3] = {left + (mid_width - left) * 0.5f, bottom, z};
     ambient_buffer_ = host_.AllocateVertexBuffer(3);
     ambient_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, normal, normal, normal);
     for (auto index : {0, 1, 2}) {
@@ -93,8 +93,8 @@ void MaterialColorSourceTests::CreateGeometry() {
 
   {
     float one_pos[3] = {mid_width, mid_height, z};
-    float two_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
-    float three_pos[3] = {right, mid_height, z};
+    float two_pos[3] = {right, mid_height, z};
+    float three_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
     emissive_buffer_ = host_.AllocateVertexBuffer(3);
     emissive_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, normal, normal, normal);
     for (auto index : {0, 1, 2}) {

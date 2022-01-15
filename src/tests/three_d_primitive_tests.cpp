@@ -130,8 +130,8 @@ void ThreeDPrimitiveTests::CreateTriangles() {
     color_three.SetGrey(0.75f);
 
     float one[] = {kLeft, kTop, kZFront};
-    float two[] = {kLeft, 0.0f, kZFront};
-    float three[] = {0.0f, kTop, kZFront};
+    float two[] = {0.0f, kTop, kZFront};
+    float three[] = {kLeft, 0.0f, kZFront};
     buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
   }
 
@@ -141,8 +141,8 @@ void ThreeDPrimitiveTests::CreateTriangles() {
     color_three.SetRGB(0.1f, 0.25f, 0.90f);
 
     float one[] = {kRight, kTop, kZFront};
-    float two[] = {0.25f, 0.0f, kZFront};
-    float three[] = {0.10f, kBottom, kZBack};
+    float two[] = {0.10f, kBottom, kZBack};
+    float three[] = {0.25f, 0.0f, kZFront};
     buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
   }
 
@@ -152,8 +152,8 @@ void ThreeDPrimitiveTests::CreateTriangles() {
     color_three.SetRGB(0.85f, 0.95f, 0.10f);
 
     float one[] = {-0.4f, kBottom, kZBack};
-    float two[] = {0.0f, 0.0f, kZBack};
-    float three[] = {-1.4f, -1.4, kZBack};
+    float two[] = {-1.4f, -1.4, kZBack};
+    float three[] = {0.0f, 0.0f, kZBack};
     buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
   }
 
@@ -179,18 +179,18 @@ void ThreeDPrimitiveTests::CreateTriangleStrip() {
   };
 
   add_vertex(kLeft, 0.0f, kZFront, 1.0f, 0.0f, 0.0f);
-  add_vertex(-2.25f, kBottom, kZFront, 0.0f, 0.0f, 1.0f);
-  add_vertex(-2.0f, kTop, kZFront, 0.0f, 1.0f, 0.0f);
+  add_vertex(-2.25f, kTop, kZFront, 0.0f, 1.0f, 0.0f);
+  add_vertex(-2.0f, kBottom, kZFront, 0.0f, 0.0f, 1.0f);
 
-  add_vertex(-1.3f, -1.6, 1.15f, 0.25f, 0.0f, 0.8f);
+  add_vertex(-1.3f, 1.6, 1.15f, 0.25f, 0.0f, 0.8f);
 
-  add_vertex(0.0f, 1.5f, 1.3f, 0.75f, 0.0f, 0.25f);
+  add_vertex(0.0f, -1.5f, 1.3f, 0.75f, 0.0f, 0.25f);
 
-  add_vertex(0.4f, -1.0f, 1.7f, 0.33f, 0.33f, 0.33f);
+  add_vertex(0.4f, 1.0f, 1.7f, 0.33f, 0.33f, 0.33f);
 
-  add_vertex(1.4f, 0.6f, kZBack, 0.7f, 0.7f, 0.7f);
+  add_vertex(1.4f, -0.6f, kZBack, 0.7f, 0.7f, 0.7f);
 
-  add_vertex(kRight, kBottom, kZBack, 0.5f, 0.5f, 0.6f);
+  add_vertex(kRight, kTop, kZBack, 0.5f, 0.5f, 0.6f);
 
   buffer->Unlock();
 }
@@ -211,18 +211,18 @@ void ThreeDPrimitiveTests::CreateTriangleFan() {
   };
 
   add_vertex(0.0f, -0.75f, kZFront, 1.0f, 1.0f, 1.0f);
-  add_vertex(kRight, kBottom, kZBack, 0.5f, 0.5f, 0.6f);
-  add_vertex(2.4f, 0.6f, kZBack, 0.7f, 0.7f, 0.7f);
-
-  add_vertex(0.4f, 1.0f, 1.7f, 0.33f, 0.33f, 0.33f);
-
-  add_vertex(0.0f, 1.5f, 1.3f, 0.75f, 0.0f, 0.25f);
+  add_vertex(-2.25f, kBottom, kZFront, 0.0f, 0.0f, 1.0f);
+  add_vertex(-2.0f, kTop, kZFront, 0.0f, 1.0f, 0.0f);
 
   add_vertex(-0.6f, 0.65f, 1.15f, 0.25f, 0.0f, 0.8f);
 
-  add_vertex(-2.0f, kTop, kZFront, 0.0f, 1.0f, 0.0f);
+  add_vertex(0.0f, 1.5f, 1.3f, 0.75f, 0.0f, 0.25f);
 
-  add_vertex(-2.25f, kBottom, kZFront, 0.0f, 0.0f, 1.0f);
+  add_vertex(0.4f, 1.0f, 1.7f, 0.33f, 0.33f, 0.33f);
+
+  add_vertex(2.4f, 0.6f, kZBack, 0.7f, 0.7f, 0.7f);
+
+  add_vertex(kRight, kBottom, kZBack, 0.5f, 0.5f, 0.6f);
 
   buffer->Unlock();
 }
@@ -243,19 +243,19 @@ void ThreeDPrimitiveTests::CreateQuads() {
   };
 
   add_vertex(kLeft, kTop, kZFront, 1.0f, 1.0f, 1.0f);
-  add_vertex(-2.4f, kBottom, 1.7f, 0.33f, 0.33f, 0.33f);
-  add_vertex(-1.35f, -0.6f, 1.7f, 0.7f, 0.7f, 0.7f);
   add_vertex(-0.6f, 1.6f, 1.7f, 0.5f, 0.5f, 0.6f);
+  add_vertex(-1.35f, -0.6f, 1.7f, 0.7f, 0.7f, 0.7f);
+  add_vertex(-2.4f, kBottom, 1.7f, 0.33f, 0.33f, 0.33f);
 
   add_vertex(0.06f, -0.09f, kZFront, 1.0f, 0.0f, 1.0f);
-  add_vertex(1.25f, -1.65f, kZFront, 0.0f, 1.0f, 1.0f);
-  add_vertex(2.62f, -1.03f, kZFront, 1.0f, 1.0f, 0.0f);
   add_vertex(1.9f, -0.25f, kZFront, 0.1f, 0.3f, 0.6f);
+  add_vertex(2.62f, -1.03f, kZFront, 1.0f, 1.0f, 0.0f);
+  add_vertex(1.25f, -1.65f, kZFront, 0.0f, 1.0f, 1.0f);
 
   add_vertex(-1.25f, 1.3f, kZBack, 0.25f, 0.25f, 0.25f);
-  add_vertex(-1.0f, -1.0f, kZBack, 0.45f, 0.45f, 0.45f);
-  add_vertex(2.62f, -0.03f, kZBack, 0.65f, 0.65f, 0.65f);
   add_vertex(0.3f, 1.25f, kZBack, 0.1f, 0.3f, 0.1f);
+  add_vertex(2.62f, -0.03f, kZBack, 0.65f, 0.65f, 0.65f);
+  add_vertex(-1.0f, -1.0f, kZBack, 0.45f, 0.45f, 0.45f);
 
   buffer->Unlock();
 }
@@ -275,13 +275,13 @@ void ThreeDPrimitiveTests::CreateQuadStrip() {
     ++vertex;
   };
 
-  add_vertex(kLeft, kTop, kZFront, 1.0f, 1.0f, 1.0f);
   add_vertex(kLeft, kBottom, kZFront, 0.33f, 0.33f, 0.33f);
-  add_vertex(0.0f, 1.0f, kZFront, 0.0f, 0.9f, 0.2f);
+  add_vertex(kLeft, kTop, kZFront, 1.0f, 1.0f, 1.0f);
   add_vertex(0.0f, -1.35f, kZFront, 0.7f, 0.1f, 0.0f);
+  add_vertex(0.0f, 1.0f, kZFront, 0.0f, 0.9f, 0.2f);
 
-  add_vertex(kRight, kTop, kZFront, 0.0f, 0.7f, 0.9f);
   add_vertex(kRight, kBottom, kZFront, 0.33f, 0.33f, 0.33f);
+  add_vertex(kRight, kTop, kZFront, 0.0f, 0.7f, 0.9f);
 
   buffer->Unlock();
 }
@@ -302,10 +302,10 @@ void ThreeDPrimitiveTests::CreatePolygon() {
   };
 
   add_vertex(kLeft, kBottom, kZFront, 0.33f, 0.33f, 0.33f);
-  add_vertex(kRight, -1.5f, kZFront, 0.7f, 0.7f, 0.7f);
-  add_vertex(2.0f, 0.3f, kZFront, 0.0f, 0.9f, 0.2f);
-  add_vertex(-0.3f, kTop, kZFront, 0.1f, 0.7f, 0.5f);
   add_vertex(-1.4f, 1.1f, kZFront, 0.7f, 0.1f, 0.0f);
+  add_vertex(-0.3f, kTop, kZFront, 0.1f, 0.7f, 0.5f);
+  add_vertex(2.0f, 0.3f, kZFront, 0.0f, 0.9f, 0.2f);
+  add_vertex(kRight, -1.5f, kZFront, 0.7f, 0.7f, 0.7f);
 
   buffer->Unlock();
 }

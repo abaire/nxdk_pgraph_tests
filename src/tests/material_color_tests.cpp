@@ -177,7 +177,7 @@ void MaterialColorTests::CreateGeometry() {
 
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
 
-  buffer->DefineQuad(0, left, top, right, bottom);
+  buffer->DefineBiTri(0, left, top, right, bottom);
 
   // Point normals for half the quad away from the camera.
   Vertex* v = buffer->Lock();

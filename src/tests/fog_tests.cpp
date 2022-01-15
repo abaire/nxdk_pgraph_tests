@@ -58,29 +58,29 @@ void FogTests::CreateGeometry() {
   int index = 0;
   {
     float one[] = {-1.5f, -1.5f, 0.0f};
-    float two[] = {-0.5f, 0.6f, 0.0f};
-    float three[] = {-2.5f, 0.6f, 0.0f};
+    float two[] = {-2.5f, 0.6f, 0.0f};
+    float three[] = {-0.5f, 0.6f, 0.0f};
     buffer->DefineTriangle(index++, one, two, three);
   }
 
   {
     float one[] = {0.0f, -1.5f, 5.0f};
-    float two[] = {2.0f, 0.75f, 20.0f};
-    float three[] = {-1.0f, 0.75f, 10.0f};
+    float two[] = {-1.0f, 0.75f, 10.0f};
+    float three[] = {2.0f, 0.75f, 20.0f};
     buffer->DefineTriangle(index++, one, two, three);
   }
 
   {
     float one[] = {5.0f, -2.0f, 30};
-    float two[] = {12.0f, 2.0f, 70};
-    float three[] = {3.0f, 2.0f, 40};
+    float two[] = {3.0f, 2.0f, 40};
+    float three[] = {12.0f, 2.0f, 70};
     buffer->DefineTriangle(index++, one, two, three);
   }
 
   {
     float one[] = {20.0f, -10.0f, 50};
-    float two[] = {80.0f, 10.0f, 200};
-    float three[] = {12.0f, 10.0f, 125};
+    float two[] = {12.0f, 10.0f, 125};
+    float three[] = {80.0f, 10.0f, 200};
     buffer->DefineTriangle(index++, one, two, three);
   }
 }
@@ -258,49 +258,4 @@ void FogCustomShaderTests::Initialize() {
   shader->SetLightingEnabled(false);
   shader->SetTextureEnabled(false);
   host_.SetShaderProgram(shader);
-}
-
-void FogCustomShaderTests::CreateGeometry() {
-  constexpr uint32_t kNumTriangles = 4;
-  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(3 * kNumTriangles);
-
-  uint32_t idx = 0;
-
-  {
-    VECTOR one{-1.5f, -1.1547f, 0.0f};
-    VECTOR two{-0.5f,  0.5777f, 0.0f};
-    VECTOR three{-2.5f,  0.5777f, 0.0f};
-    buffer->DefineTriangle(idx++, one, two, three);
-  }
-
-  {
-    VECTOR one{0.0f, -1.5f, 5.0f};
-    VECTOR two{2.0f,  0.75f, 20.0f};
-    VECTOR three{-1.0f,  0.75f, 10.0f};
-    buffer->DefineTriangle(idx++, one, two, three);
-  }
-
-  {
-    VECTOR one{5.0f, -2.0f, 30};
-    VECTOR two{12.0f,  2.0f, 70};
-    VECTOR three{3.0f,  2.0f, 40};
-    buffer->DefineTriangle(idx++, one, two, three);
-  }
-
-  {
-    VECTOR one{20.0f, -10.0f, 50};
-    VECTOR two{80.0f,  10.0f, 200};
-    VECTOR three{12.0f,  10.0f, 125};
-    buffer->DefineTriangle(idx++, one, two, three);
-  }
-
-
-  buffer->DefineQuad(idx++, -1.0, 1.0, -0.05, -1.0, 1.0f, 1.0f, 1.0f, 1.0f);
-
-
-  //  buffer->DefineQuad(idx++, -1.0, 1.0, -0.05, -1.0, -1.0f, -3.0f, -5.0f, -10.0f);
-  ////  buffer->DefineQuad(idx++, 0, 10.75, 30.0, -10.75, -10.0f, -30.0f, -50.0f, -100.0f);
-  //  buffer->DefineQuad(idx++, 0, 10.75, 30.0, -10.75, 10.0f, 30.0f, 50.0f, 100.0f);
-
-  //  buffer->DefineQuad(idx++, 0.05, 0.75, 0.75, -0.75, 0.0f, 0.0f, 100.0f, 100.0f);
 }
