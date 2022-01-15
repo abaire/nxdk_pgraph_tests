@@ -84,8 +84,9 @@ void MaterialAlphaTests::CreateGeometry() {
   Color lr_s{1.0f, 1.0f, 0.0f, 0.5f};
   Color ur_s{0.0f, 1.0f, 1.0f, 0.75f};
 
-  buffer->DefineQuad(0, left + 10, top + 4, mid_width + 10, bottom - 10, 10.0f, 10.0f, 10.0f, 10.0f, ul, ll, lr, ur,
-                     ul_s, ll_s, lr_s, ur_s);
+  float z = 10.0f;
+  buffer->DefineBiTri(0, left + 10, top + 4, mid_width + 10, bottom - 10, z, z, z, z, ul, ll, lr, ur, ul_s, ll_s, lr_s,
+                      ur_s);
   // Point normals for half the quad away from the camera.
   Vertex* v = buffer->Lock();
   v[0].normal[2] = -1.0f;
@@ -104,8 +105,9 @@ void MaterialAlphaTests::CreateGeometry() {
 
   lr.SetRGBA(1.0f, 0.0f, 0.0f, 0.75f);
   lr_s.SetRGBA(0.95f, 0.5f, 0.8f, 0.05);
-  buffer->DefineQuad(1, mid_width - 10, top + 4, right - 10, bottom - 10, 10.0f, 10.0f, 10.0f, 10.0f, ul, ll, lr, ur,
-                     ul_s, ll_s, lr_s, ur_s);
+  z = 9.75f;
+  buffer->DefineBiTri(1, mid_width - 10, top + 4, right - 10, bottom - 10, z, z, z, z, ul, ll, lr, ur, ul_s, ll_s, lr_s,
+                      ur_s);
 }
 
 void MaterialAlphaTests::Test(uint32_t diffuse_source, float material_alpha) {

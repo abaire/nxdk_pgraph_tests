@@ -101,26 +101,26 @@ void LightingNormalTests::CreateGeometry() {
   {
     normal_bleed_buffer_ = host_.AllocateVertexBuffer(3);
     Color one{0.0f, 1.0f, 0.0f, 0.5f};
-    Color two{1.0f, 0.0f, 0.0f, 0.25f};
-    Color three{0.4f, 0.4f, 1.0f, 1.0f};
+    Color two{0.4f, 0.4f, 1.0f, 1.0f};
+    Color three{1.0f, 0.0f, 0.0f, 0.25f};
 
     float z = 3.0f;
     float one_pos[3] = {left, top, z};
-    float two_pos[3] = {left + (mid_width - left) * 0.5f, bottom, z};
-    float three_pos[3] = {mid_width, top, z};
+    float two_pos[3] = {mid_width, top, z};
+    float three_pos[3] = {left + (mid_width - left) * 0.5f, bottom, z};
     normal_bleed_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, one, two, three);
   }
 
   {
     lit_buffer_ = host_.AllocateVertexBuffer(3);
     Color one{0.4f, 0.1f, 0.1f, 1.0f};
-    Color two{1.0f, 1.0f, 0.4f, 1.0f};
-    Color three{1.0f, 0.6f, 0.3f, 1.0f};
+    Color two{1.0f, 0.6f, 0.3f, 1.0f};
+    Color three{1.0f, 1.0f, 0.4f, 1.0f};
 
     float z = 1.0f;
     float one_pos[3] = {mid_width, top, z};
-    float two_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
-    float three_pos[3] = {right, top, z};
+    float two_pos[3] = {right, top, z};
+    float three_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
     lit_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos, one, two, three);
 
     lit_index_buffer_.clear();

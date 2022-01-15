@@ -132,7 +132,7 @@ void DepthFormatTests::CreateGeometry(const DepthFormat &format) {
 
       float lz = format.fixed_to_float(static_cast<uint32_t>(z_left));
       float rz = format.fixed_to_float(static_cast<uint32_t>(std::max(0.0f, z_right)));
-      buffer->DefineQuad(idx++, x, y, x + kSmallSize, y + kSmallSize, lz, lz, rz, rz, ul, ll, lr, ur);
+      buffer->DefineBiTri(idx++, x, y, x + kSmallSize, y + kSmallSize, lz, lz, rz, rz, ul, ll, lr, ur);
 
       z_left += z_inc;
       right_offset *= -1.0f;
@@ -154,8 +154,8 @@ void DepthFormatTests::CreateGeometry(const DepthFormat &format) {
     lr.SetRGB(0.75, right_z / max_depth_float, right_z / max_depth_float);
 
     PrintMsg("Bottom quad: %g -> %g\n", left_z, right_z);
-    buffer->DefineQuad(idx++, left + 4, bottom - 10, right - 20, bottom - 5, left_z, left_z, right_z, right_z, ul, ll,
-                       lr, ur);
+    buffer->DefineBiTri(idx++, left + 4, bottom - 10, right - 20, bottom - 5, left_z, left_z, right_z, right_z, ul, ll,
+                        lr, ur);
   }
 
   // Add a small quad on the right going from near min depth at the top to 1/2 max depth at the bottom.
@@ -169,8 +169,8 @@ void DepthFormatTests::CreateGeometry(const DepthFormat &format) {
     lr.SetRGB(0.5, bottom_z / max_depth_float, bottom_z / max_depth_float);
 
     PrintMsg("Right quad: %g -> %g\n", top_z, bottom_z);
-    buffer->DefineQuad(idx++, right - 10, top + 5, right - 2, bottom - 5, top_z, bottom_z, bottom_z, top_z, ul, ll, lr,
-                       ur);
+    buffer->DefineBiTri(idx++, right - 10, top + 5, right - 2, bottom - 5, top_z, bottom_z, bottom_z, top_z, ul, ll, lr,
+                        ur);
   }
 
   // Add a large quad going from 1/3 max depth at the top to max depth at the bottom.
@@ -184,7 +184,7 @@ void DepthFormatTests::CreateGeometry(const DepthFormat &format) {
     float bottom_z = format.fixed_to_float(back_z);
     float top_z = format.fixed_to_float(back_z * 2 / 3);
     PrintMsg("Big quad: %g -> %g\n", top_z, bottom_z);
-    buffer->DefineQuad(idx++, left, top, right, bottom, top_z, bottom_z, bottom_z, top_z, ul, ll, lr, ur);
+    buffer->DefineBiTri(idx++, left, top, right, bottom, top_z, bottom_z, bottom_z, top_z, ul, ll, lr, ur);
   }
 }
 

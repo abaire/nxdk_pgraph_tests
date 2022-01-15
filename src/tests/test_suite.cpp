@@ -172,12 +172,13 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
   p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, 0);
 
-  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
   p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
   p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
 
   p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
   p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
 

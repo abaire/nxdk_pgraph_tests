@@ -46,10 +46,6 @@ class FogCustomShaderTests : public FogTests {
  public:
   FogCustomShaderTests(TestHost& host, std::string output_dir);
   void Initialize() override;
-
- protected:
-  void CreateGeometry() override;
-
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_TESTS_H

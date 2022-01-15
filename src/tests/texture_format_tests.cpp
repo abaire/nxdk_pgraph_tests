@@ -35,7 +35,7 @@ void TextureFormatTests::Initialize() {
 
 void TextureFormatTests::CreateGeometry() {
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
-  buffer->DefineQuad(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
+  buffer->DefineBiTri(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
   buffer->Linearize(static_cast<float>(host_.GetTextureWidth()), static_cast<float>(host_.GetTextureHeight()));
 }
 

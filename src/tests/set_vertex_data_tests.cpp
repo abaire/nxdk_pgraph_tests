@@ -44,22 +44,22 @@ void SetVertexDataTests::CreateGeometry() {
 
   {
     float one_pos[3] = {left, top, z};
-    float two_pos[3] = {left + (mid_width - left) * 0.5f, bottom, z};
-    float three_pos[3] = {mid_width, top, z};
+    float two_pos[3] = {mid_width, top, z};
+    float three_pos[3] = {left + (mid_width - left) * 0.5f, bottom, z};
     diffuse_buffer_ = host_.AllocateVertexBuffer(3);
     diffuse_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos);
   }
   {
     float one_pos[3] = {mid_width + (right - mid_width) * 0.5f, top, z};
-    float two_pos[3] = {mid_width, mid_height, z};
-    float three_pos[3] = {right, mid_height, z};
+    float two_pos[3] = {right, mid_height, z};
+    float three_pos[3] = {mid_width, mid_height, z};
     lit_buffer_ = host_.AllocateVertexBuffer(3);
     lit_buffer_->DefineTriangle(0, one_pos, two_pos, three_pos);
   }
   {
     float one_pos[3] = {mid_width, mid_height, z};
-    float two_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
-    float three_pos[3] = {right, mid_height, z};
+    float two_pos[3] = {right, mid_height, z};
+    float three_pos[3] = {mid_width + (right - mid_width) * 0.5f, bottom, z};
     lit_buffer_negative_ = host_.AllocateVertexBuffer(3);
     lit_buffer_negative_->DefineTriangle(0, one_pos, two_pos, three_pos);
   }

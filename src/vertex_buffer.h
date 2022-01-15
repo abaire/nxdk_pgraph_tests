@@ -127,42 +127,47 @@ class VertexBuffer {
   void Linearize(float texture_width, float texture_height);
 
   // Defines a triangle with the give 3-element vertices.
+  void DefineTriangleCCW(uint32_t start_index, const float* one, const float* two, const float* three);
+  void DefineTriangleCCW(uint32_t start_index, const float* one, const float* two, const float* three,
+                         const float* normal_one, const float* normal_two, const float* normal_three);
+  void DefineTriangleCCW(uint32_t start_index, const float* one, const float* two, const float* three,
+                         const Color& one_diffuse, const Color& two_diffuse, const Color& three_diffuse);
+  void DefineTriangleCCW(uint32_t start_index, const float* one, const float* two, const float* three,
+                         const float* normal_one, const float* normal_two, const float* normal_three,
+                         const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
   void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three);
   void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three,
                       const float* normal_one, const float* normal_two, const float* normal_three);
   void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three,
-                      const Color& one_diffuse, const Color& two_diffuse, const Color& three_diffuse);
+                      const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
   void DefineTriangle(uint32_t start_index, const float* one, const float* two, const float* three,
                       const float* normal_one, const float* normal_two, const float* normal_three,
                       const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
-  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three);
-  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three,
-                        const float* normal_one, const float* normal_two, const float* normal_three);
-  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three,
-                        const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
-  void DefineTriangleCW(uint32_t start_index, const float* one, const float* two, const float* three,
-                        const float* normal_one, const float* normal_two, const float* normal_three,
-                        const Color& diffuse_one, const Color& diffuse_two, const Color& diffuse_three);
 
-  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom);
-  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float z);
-  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
-                  float lr_z, float ur_z);
-  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
-                  float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
-                  const Color& ur_diffuse);
-  void DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
-                  float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
-                  const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular, const Color& lr_specular,
-                  const Color& ur_specular);
+  // Defines a quad made of two coplanar triangles (i.e., 6 vertices suitable for rendering as triangle primitives)
+  void DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom);
+  void DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float z);
+  void DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                      float lr_z, float ur_z);
+  void DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                      float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                      const Color& ur_diffuse);
+  void DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                      float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                      const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular,
+                      const Color& lr_specular, const Color& ur_specular);
 
-  void DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
-                    float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
-                    const Color& ur_diffuse);
-  void DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
-                    float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
-                    const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular,
-                    const Color& lr_specular, const Color& ur_specular);
+  void DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom);
+  void DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float z);
+  void DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                   float lr_z, float ur_z);
+  void DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                   float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                   const Color& ur_diffuse);
+  void DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z,
+                   float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                   const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular,
+                   const Color& lr_specular, const Color& ur_specular);
 
   void SetDiffuse(uint32_t vertex_index, const Color& color);
   void SetSpecular(uint32_t vertex_index, const Color& color);

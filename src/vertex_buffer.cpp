@@ -45,6 +45,34 @@ void VertexBuffer::Linearize(float texture_width, float texture_height) {
   }
 }
 
+void VertexBuffer::DefineTriangleCCW(uint32_t start_index, const float *one, const float *two, const float *three) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineTriangleCCW(start_index, one, two, three, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineTriangleCCW(uint32_t start_index, const float *one, const float *two, const float *three,
+                                     const float *normal_one, const float *normal_two, const float *normal_three) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineTriangleCCW(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineTriangleCCW(uint32_t start_index, const float *one, const float *two, const float *three,
+                                     const Color &one_diffuse, const Color &two_diffuse, const Color &three_diffuse) {
+  float normal[3] = {0.0f};
+  DefineTriangleCCW(start_index, one, two, three, normal, normal, normal, one_diffuse, two_diffuse, three_diffuse);
+}
+
+void VertexBuffer::DefineTriangleCCW(uint32_t start_index, const float *one, const float *two, const float *three,
+                                     const float *normal_one, const float *normal_two, const float *normal_three,
+                                     const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
+  DefineTriangle(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse_one, diffuse_two,
+                 diffuse_three);
+  Vertex *vb = normalized_vertex_buffer_ + (start_index * 3);
+  Vertex temp = vb[2];
+  vb[2] = vb[1];
+  vb[1] = temp;
+}
+
 void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three) {
   Color diffuse = {1.0, 1.0, 1.0, 1.0};
   DefineTriangle(start_index, one, two, three, diffuse, diffuse, diffuse);
@@ -57,9 +85,9 @@ void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const 
 }
 
 void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three,
-                                  const Color &one_diffuse, const Color &two_diffuse, const Color &three_diffuse) {
+                                  const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
   float normal[3] = {0.0f};
-  DefineTriangle(start_index, one, two, three, normal, normal, normal, one_diffuse, two_diffuse, three_diffuse);
+  DefineTriangle(start_index, one, two, three, normal, normal, normal, diffuse_one, diffuse_two, diffuse_three);
 }
 
 void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const float *two, const float *three,
@@ -91,60 +119,32 @@ void VertexBuffer::DefineTriangle(uint32_t start_index, const float *one, const 
   set(2, three, normal_three, diffuse_three);
 }
 
-void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three) {
+void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom) {
+  DefineBiTriCCW(start_index, left, top, right, bottom, 0.0f, 0.0f, 0.0f, 0.0f);
+}
+
+void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float z) {
+  DefineBiTriCCW(start_index, left, top, right, bottom, z, z, z, z);
+}
+
+void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                                  float ll_z, float lr_z, float ur_z) {
   Color diffuse = {1.0, 1.0, 1.0, 1.0};
-  DefineTriangleCW(start_index, one, two, three, diffuse, diffuse, diffuse);
+  DefineBiTriCCW(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, diffuse, diffuse, diffuse, diffuse);
 }
 
-void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three,
-                                    const float *normal_one, const float *normal_two, const float *normal_three) {
-  Color diffuse = {1.0, 1.0, 1.0, 1.0};
-  DefineTriangleCW(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse, diffuse, diffuse);
-}
-
-void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three,
-                                    const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
-  float normal[3] = {0.0f};
-  DefineTriangleCW(start_index, one, two, three, normal, normal, normal, diffuse_one, diffuse_two, diffuse_three);
-}
-
-void VertexBuffer::DefineTriangleCW(uint32_t start_index, const float *one, const float *two, const float *three,
-                                    const float *normal_one, const float *normal_two, const float *normal_three,
-                                    const Color &diffuse_one, const Color &diffuse_two, const Color &diffuse_three) {
-  DefineTriangle(start_index, one, two, three, normal_one, normal_two, normal_three, diffuse_one, diffuse_two,
-                 diffuse_three);
-  Vertex *vb = normalized_vertex_buffer_ + (start_index * 3);
-  Vertex temp = vb[2];
-  vb[2] = vb[1];
-  vb[1] = temp;
-}
-
-void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom) {
-  DefineQuad(start_index, left, top, right, bottom, 0.0f, 0.0f, 0.0f, 0.0f);
-}
-
-void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float z) {
-  DefineQuad(start_index, left, top, right, bottom, z, z, z, z);
-}
-
-void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
-                              float ll_z, float lr_z, float ur_z) {
-  Color diffuse = {1.0, 1.0, 1.0, 1.0};
-  DefineQuad(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, diffuse, diffuse, diffuse, diffuse);
-}
-
-void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
-                              float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
-                              const Color &lr_diffuse, const Color &ur_diffuse) {
+void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                                  float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
+                                  const Color &lr_diffuse, const Color &ur_diffuse) {
   Color specular = {1.0, 1.0, 1.0, 1.0};
-  DefineQuad(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
-             ur_diffuse, specular, specular, specular, specular);
+  DefineBiTriCCW(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
+                 ur_diffuse, specular, specular, specular, specular);
 }
 
-void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
-                              float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
-                              const Color &lr_diffuse, const Color &ur_diffuse, const Color &ul_specular,
-                              const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
+void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                                  float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
+                                  const Color &lr_diffuse, const Color &ur_diffuse, const Color &ul_specular,
+                                  const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
   ASSERT(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
 
   cache_valid_ = false;
@@ -183,20 +183,34 @@ void VertexBuffer::DefineQuad(uint32_t start_index, float left, float top, float
   set(5, right, bottom, lr_z, 1.0f, 1.0f, lr_diffuse, lr_specular);
 }
 
-void VertexBuffer::DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
-                                float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
-                                const Color &lr_diffuse, const Color &ur_diffuse) {
-  Color specular = {1.0, 1.0, 1.0, 1.0};
-  DefineQuadCW(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
-               ur_diffuse, specular, specular, specular, specular);
+void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom) {
+  DefineBiTri(start_index, left, top, right, bottom, 0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-void VertexBuffer::DefineQuadCW(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
-                                float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
-                                const Color &lr_diffuse, const Color &ur_diffuse, const Color &ul_specular,
-                                const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
-  DefineQuad(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
-             ur_diffuse, ul_specular, ll_specular, lr_specular, ur_specular);
+void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float z) {
+  DefineBiTri(start_index, left, top, right, bottom, z, z, z, z);
+}
+
+void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                               float ll_z, float lr_z, float ur_z) {
+  Color diffuse = {1.0, 1.0, 1.0, 1.0};
+  DefineBiTri(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, diffuse, diffuse, diffuse, diffuse);
+}
+
+void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                               float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
+                               const Color &lr_diffuse, const Color &ur_diffuse) {
+  Color specular = {1.0, 1.0, 1.0, 1.0};
+  DefineBiTri(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
+              ur_diffuse, specular, specular, specular, specular);
+}
+
+void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, float right, float bottom, float ul_z,
+                               float ll_z, float lr_z, float ur_z, const Color &ul_diffuse, const Color &ll_diffuse,
+                               const Color &lr_diffuse, const Color &ur_diffuse, const Color &ul_specular,
+                               const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
+  DefineBiTriCCW(start_index, left, top, right, bottom, ul_z, ll_z, lr_z, ur_z, ul_diffuse, ll_diffuse, lr_diffuse,
+                 ur_diffuse, ul_specular, ll_specular, lr_specular, ur_specular);
   Vertex *vb = normalized_vertex_buffer_ + (start_index * 6);
   Vertex temp = vb[2];
   vb[2] = vb[1];
@@ -206,6 +220,7 @@ void VertexBuffer::DefineQuadCW(uint32_t start_index, float left, float top, flo
   vb[5] = vb[4];
   vb[4] = temp;
 }
+
 void VertexBuffer::SetDiffuse(uint32_t vertex_index, const Color &color) {
   cache_valid_ = false;
   ASSERT(vertex_index < num_vertices_ && "Invalid vertex_index.");
