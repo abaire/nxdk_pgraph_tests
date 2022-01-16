@@ -27,7 +27,7 @@ vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, un
 
   result.pos = pos;
   result.col = I.diffuse;
-  result.fog = vec4(result.pos.w);
+  result.fog = result.pos.w;
   result.tex0 = I.tex;
 
   return result;
