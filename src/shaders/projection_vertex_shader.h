@@ -11,9 +11,6 @@ class ProjectionVertexShader : public ShaderProgram {
   ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min = 0, float z_max = 0x7FFF,
                          bool enable_texture = true, bool enable_lighting = true);
 
-  void Activate() override;
-  void PrepareDraw() override;
-
   void SetLightingEnabled(bool enabled = true) { enable_lighting_ = enabled; }
 
   inline void SetZMin(float val) { z_min_ = val; }
@@ -39,6 +36,9 @@ class ProjectionVertexShader : public ShaderProgram {
   MATRIX &GetProjectionViewportMatrix() { return projection_viewport_matrix_; }
 
  protected:
+  void OnActivate() override;
+  void OnLoadShader() override;
+  void OnLoadConstants() override;
   virtual void CalculateProjectionMatrix() = 0;
 
  private:

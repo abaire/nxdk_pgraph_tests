@@ -98,6 +98,7 @@ class TestHost {
                          const std::string &z_buffer_name = "");
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
+  std::shared_ptr<ShaderProgram> GetShaderProgram() const { return shader_program_; }
 
   void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 

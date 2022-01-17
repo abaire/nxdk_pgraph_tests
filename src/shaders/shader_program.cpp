@@ -70,3 +70,17 @@ void ShaderProgram::DisablePixelShader() {
   p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, NV097_SET_SHADER_STAGE_PROGRAM_STAGE0_PROGRAM_NONE);
   pb_end(p);
 }
+
+void ShaderProgram::Activate() {
+  OnActivate();
+
+  if (shader_override_) {
+    LoadShaderProgram(shader_override_, shader_override_size_);
+  } else {
+    OnLoadShader();
+  }
+}
+
+void ShaderProgram::PrepareDraw() {
+  OnLoadConstants();
+}

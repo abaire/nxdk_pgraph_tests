@@ -2,6 +2,8 @@
 
 #include <pbkit/pbkit.h>
 
+#include <utility>
+
 #include "pbkit_ext.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
@@ -15,9 +17,9 @@ static constexpr FogTests::FogMode kFogModes[] = {
     FogTests::FOG_LINEAR,
     FogTests::FOG_EXP,
     FogTests::FOG_EXP2,
-//    FogTests::FOG_EXP_ABS,
-//    FogTests::FOG_EXP2_ABS,
-//    FogTests::FOG_LINEAR_ABS,
+    FogTests::FOG_EXP_ABS,
+    FogTests::FOG_EXP2_ABS,
+    FogTests::FOG_LINEAR_ABS,
 };
 
 static constexpr FogTests::FogGenMode kGenModes[] = {
@@ -30,7 +32,7 @@ static constexpr FogTests::FogGenMode kGenModes[] = {
 // clang-format on
 
 FogTests::FogTests(TestHost& host, std::string output_dir, std::string suite_name)
-    : TestSuite(host, std::move(output_dir), suite_name) {
+    : TestSuite(host, std::move(output_dir), std::move(suite_name)) {
   for (const auto fog_mode : kFogModes) {
     for (const auto gen_mode : kGenModes) {
       // Alpha doesn't seem to actually have any effect.
@@ -158,16 +160,19 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
 
   switch (fog_mode) {
     case FOG_LINEAR:
+    case FOG_LINEAR_ABS:
       multiplier_param = -1.0f / (kFogEnd - kFogStart);
       bias_param = 1.0f + -kFogEnd * multiplier_param;
       break;
 
     case FOG_EXP:
+    case FOG_EXP_ABS:
       bias_param = 1.5f;
       multiplier_param = -fog_density / (2.0f * LN_256);
       break;
 
     case FOG_EXP2:
+    case FOG_EXP2_ABS:
       bias_param = 1.5f;
       multiplier_param = -fog_density / (2.0f * SQRT_LN_256);
       break;
@@ -241,8 +246,8 @@ std::string FogTests::MakeTestName(FogTests::FogMode fog_mode, FogTests::FogGenM
   return std::move(ret);
 }
 
-FogCustomShaderTests::FogCustomShaderTests(TestHost& host, std::string output_dir)
-    : FogTests(host, std::move(output_dir), "Fog vsh") {}
+FogCustomShaderTests::FogCustomShaderTests(TestHost& host, std::string output_dir, std::string suite_name)
+    : FogTests(host, std::move(output_dir), std::move(suite_name)) {}
 
 void FogCustomShaderTests::Initialize() {
   FogTests::Initialize();
@@ -257,5 +262,22 @@ void FogCustomShaderTests::Initialize() {
 
   shader->SetLightingEnabled(false);
   shader->SetTextureEnabled(false);
+  host_.SetShaderProgram(shader);
+}
+
+FogInfiniteFogCoordinateTests::FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir)
+    : FogCustomShaderTests(host, std::move(output_dir), "Fog inf coord") {}
+
+// clang format off
+static constexpr uint32_t kInfiniteFogCShader[] = {
+#include "shaders/fog_infinite_fogc_test.inl"
+};
+// clang format on
+
+void FogInfiniteFogCoordinateTests::Initialize() {
+  FogCustomShaderTests::Initialize();
+
+  auto shader = host_.GetShaderProgram();
+  shader->SetShaderOverride(kInfiniteFogCShader, sizeof(kInfiniteFogCShader));
   host_.SetShaderProgram(shader);
 }

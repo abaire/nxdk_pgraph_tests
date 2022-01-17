@@ -9,10 +9,11 @@
 
 class PrecalculatedVertexShader : public ShaderProgram {
  public:
-  PrecalculatedVertexShader(bool enable_texture = true) : ShaderProgram((enable_texture)) {}
+  explicit PrecalculatedVertexShader(bool enable_texture = true) : ShaderProgram((enable_texture)) {}
 
-  void Activate() override;
-  void PrepareDraw() override;
+ protected:
+  void OnLoadShader() override;
+  void OnLoadConstants() override;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADERS_PRECALCULATED_VERTEX_SHADER_H_

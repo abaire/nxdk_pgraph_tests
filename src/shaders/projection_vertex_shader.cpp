@@ -33,69 +33,6 @@ ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint3
   create_world_view(view_matrix_, camera_position_, rot);
 }
 
-void ProjectionVertexShader::Activate() {
-  UpdateMatrices();
-
-  if (enable_lighting_) {
-    LoadShaderProgram(kVertexShaderLighting, sizeof(kVertexShaderLighting));
-  } else {
-    LoadShaderProgram(kVertexShaderNoLighting, sizeof(kVertexShaderLighting));
-  }
-}
-
-void ProjectionVertexShader::PrepareDraw() {
-  /* Send shader constants
-   *
-   * WARNING: Changing shader source code may impact constant locations!
-   * Check the intermediate file (*.inl) for the expected locations after
-   * changing the code.
-   */
-  auto p = pb_begin();
-
-  /* Set shader constants cursor at C0 */
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96);
-
-  /* Send the model matrix */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, model_matrix_, 16 * 4);
-  p += 16;
-
-  /* Send the view matrix */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, view_matrix_, 16 * 4);
-  p += 16;
-
-  /* Send the projection matrix */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, projection_viewport_matrix_, 16 * 4);
-  p += 16;
-
-  /* Send camera position */
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, camera_position_, 4 * 4);
-  p += 4;
-
-  if (enable_lighting_) {
-    /* Send light direction */
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-    memcpy(p, light_direction_, 4 * 4);
-    p += 4;
-  }
-
-  /* Send shader constants */
-  float constants_0[4] = {0, 0, 0, 0};
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, constants_0, 4 * 4);
-  p += 4;
-
-  /* Clear all attributes */
-  pb_push(p++, NV097_SET_VERTEX_DATA_ARRAY_FORMAT, 16);
-  for (auto i = 0; i < 16; i++) {
-    *(p++) = NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F;
-  }
-  pb_end(p);
-}
-
 void ProjectionVertexShader::LookAt(const float *camera_position, const float *look_at_point, const float *up) {
   VECTOR direction;
   direction[0] = look_at_point[0] - camera_position[0];
@@ -164,6 +101,61 @@ void ProjectionVertexShader::UpdateMatrices() {
 
   /* Create local->world matrix given our updated object */
   matrix_unit(model_matrix_);
+}
+
+void ProjectionVertexShader::OnActivate() {
+  UpdateMatrices();
+}
+
+void ProjectionVertexShader::OnLoadShader() {
+  if (enable_lighting_) {
+    LoadShaderProgram(kVertexShaderLighting, sizeof(kVertexShaderLighting));
+  } else {
+    LoadShaderProgram(kVertexShaderNoLighting, sizeof(kVertexShaderLighting));
+  }
+}
+
+void ProjectionVertexShader::OnLoadConstants() {
+  /* Send shader constants
+   *
+   * WARNING: Changing shader source code may impact constant locations!
+   * Check the intermediate file (*.inl) for the expected locations after
+   * changing the code.
+   */
+  auto p = pb_begin();
+
+  /* Set shader constants cursor at C0 */
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96);
+
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+  memcpy(p, model_matrix_, 16 * 4);
+  p += 16;
+
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+  memcpy(p, view_matrix_, 16 * 4);
+  p += 16;
+
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+  memcpy(p, projection_viewport_matrix_, 16 * 4);
+  p += 16;
+
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
+  memcpy(p, camera_position_, 4 * 4);
+  p += 4;
+
+  if (enable_lighting_) {
+    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
+    memcpy(p, light_direction_, 4 * 4);
+    p += 4;
+  }
+
+  // Send shader constants
+  float constants_0[4] = {0, 0, 0, 0};
+  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
+  memcpy(p, constants_0, 4 * 4);
+  p += 4;
+
+  pb_end(p);
 }
 
 /* Construct a viewport transformation matrix */

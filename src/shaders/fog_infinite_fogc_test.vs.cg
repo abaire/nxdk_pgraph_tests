@@ -1,0 +1,34 @@
+struct vIn {
+  float3 norm : NORMAL;
+  float2 tex : TEXCOORD;
+  float3 pos : POSITION;
+  float4 diffuse: DIFFUSE;
+};
+
+struct vOut {
+  float4 pos : POSITION;
+  float4 col : COLOR;
+  float4 fog : FOG;
+  float2 tex0 : TEXCOORD0;
+};
+
+vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix,
+          uniform float4 camera_pos, uniform float4 light_dir) {
+  vOut result;
+
+  // Transform position and normal
+  float4 pos = mul(float4(I.pos.xyz, 1.0), model_matrix);
+  float3 norm = normalize(mul(float4(I.norm.xyz, 0.0f), model_matrix).xyz);
+
+  // Transform pos to screen space
+  pos = mul(pos, view_matrix);
+  pos = mul(pos, projection_matrix);
+  pos.xyz = pos.xyz / pos.w;
+
+  result.pos = pos;
+  result.col = I.diffuse;
+  result.fog = 1.0 / 0.0;
+  result.tex0 = I.tex;
+
+  return result;
+}

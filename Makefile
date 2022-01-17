@@ -40,6 +40,7 @@ SRCS = \
 	$(THIRDPARTYDIR)/printf/printf.c
 
 SHADER_OBJS = \
+	$(SRCDIR)/shaders/fog_infinite_fogc_test.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader_no_lighting.inl \

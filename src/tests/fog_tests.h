@@ -44,7 +44,13 @@ class FogTests : public TestSuite {
 
 class FogCustomShaderTests : public FogTests {
  public:
-  FogCustomShaderTests(TestHost& host, std::string output_dir);
+  FogCustomShaderTests(TestHost& host, std::string output_dir, std::string suite_name = "Fog vsh");
+  void Initialize() override;
+};
+
+class FogInfiniteFogCoordinateTests : public FogCustomShaderTests {
+ public:
+  FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir);
   void Initialize() override;
 };
 
