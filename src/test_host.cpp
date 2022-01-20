@@ -140,8 +140,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
       texture_format_.xbox_swizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
 
   if (enabled_fields & POSITION) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                       &vptr[0].pos);
+    set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+                       vertex_buffer_->position_count_, sizeof(Vertex), &vptr[0].pos);
   } else {
     clear_attrib(NV2A_VERTEX_ATTR_POSITION);
   }
@@ -149,8 +149,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   clear_attrib(NV2A_VERTEX_ATTR_WEIGHT);
 
   if (enabled_fields & NORMAL) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                       &vptr[0].normal);
+    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+                       vertex_buffer_->normal_count_, sizeof(Vertex), &vptr[0].normal);
   } else {
     clear_attrib(NV2A_VERTEX_ATTR_NORMAL);
   }

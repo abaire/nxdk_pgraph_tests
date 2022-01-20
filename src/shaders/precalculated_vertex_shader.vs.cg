@@ -1,7 +1,6 @@
 struct vIn {
-  float3 norm : NORMAL;
   float2 tex : TEXCOORD;
-  float3 pos : POSITION;
+  float4 pos : POSITION;
   float4 diffuse : DIFFUSE;
 };
 
@@ -14,7 +13,7 @@ struct vOut {
 vOut main(vIn I) {
   vOut result;
 
-  result.pos = float4(I.pos.xyz, 1.0);
+  result.pos = I.pos;
   result.col = I.diffuse;
   result.tex0 = I.tex;
 

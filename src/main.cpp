@@ -27,6 +27,7 @@
 #include "tests/texture_format_tests.h"
 #include "tests/three_d_primitive_tests.h"
 #include "tests/two_d_line_tests.h"
+#include "tests/w_param_tests.h"
 
 #define FALLBACK_XBE_DIRECTORY "f:\\";
 static constexpr int kFramebufferWidth = 640;
@@ -149,7 +150,7 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<ImageBlitTests>(host, output_directory);
-    test_suites.push_back(std::dynamic_pointer_cast<ImageBlitTests>(suite));
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
     auto suite = std::make_shared<MaterialAlphaTests>(host, output_directory);
@@ -177,6 +178,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<TwoDLineTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<WParamTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
 }

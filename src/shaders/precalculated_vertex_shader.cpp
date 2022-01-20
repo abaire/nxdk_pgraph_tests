@@ -8,9 +8,7 @@ static constexpr uint32_t kShader[] = {
 };
 // clang format on
 
-void PrecalculatedVertexShader::OnLoadShader() {
-  LoadShaderProgram(kShader, sizeof(kShader));
-}
+void PrecalculatedVertexShader::OnLoadShader() { LoadShaderProgram(kShader, sizeof(kShader)); }
 
 void PrecalculatedVertexShader::OnLoadConstants() {
   auto p = pb_begin();

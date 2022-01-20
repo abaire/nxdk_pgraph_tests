@@ -10,26 +10,28 @@
 
 #pragma pack(1)
 typedef struct Vertex {
-  float pos[3];
+  float pos[4];
   float texcoord[2];
-  float normal[3];
+  float normal[4];
   float diffuse[4];
   float specular[4];
 
   inline void SetPosition(const float* value) { memcpy(pos, value, sizeof(pos)); }
 
-  inline void SetPosition(float x, float y, float z) {
+  inline void SetPosition(float x, float y, float z, float w = 1.0f) {
     pos[0] = x;
     pos[1] = y;
     pos[2] = z;
+    pos[3] = w;
   }
 
   inline void SetNormal(const float* value) { memcpy(normal, value, sizeof(normal)); }
 
-  inline void SetNormal(float x, float y, float z) {
+  inline void SetNormal(float x, float y, float z, float w = 1.0f) {
     normal[0] = x;
     normal[1] = y;
     normal[2] = z;
+    normal[3] = w;
   }
 
   inline void SetDiffuse(const float* value) { memcpy(diffuse, value, sizeof(diffuse)); }
@@ -172,12 +174,21 @@ class VertexBuffer {
   void SetDiffuse(uint32_t vertex_index, const Color& color);
   void SetSpecular(uint32_t vertex_index, const Color& color);
 
+  inline void SetPositionIncludesW(bool enabled = true) { position_count_ = enabled ? 4 : 3; }
+
+  inline void SetNormalIncludesW(bool enabled = true) { normal_count_ = enabled ? 4 : 3; }
+
  private:
   friend class TestHost;
 
   uint32_t num_vertices_;
   Vertex* linear_vertex_buffer_ = nullptr;      // texcoords 0 to kFramebufferWidth/kFramebufferHeight
   Vertex* normalized_vertex_buffer_ = nullptr;  // texcoords normalized 0 to 1
+
+  // Number of components in the vertex position (3 or 4).
+  uint32_t position_count_ = 3;
+  // Number of components in the vertex normal (3 or 4).
+  uint32_t normal_count_ = 3;
 
   bool cache_valid_{false};  // Indicates whether the HW should be forced to reload this buffer.
 };

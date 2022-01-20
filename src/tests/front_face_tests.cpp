@@ -61,6 +61,7 @@ void FrontFaceTests::CreateGeometry() {
 
   uint32_t num_quads = 2;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
+  buffer->SetPositionIncludesW();
 
   Color ul{1.0, 0.0, 0.0, 1.0};
   Color ll{0.0, 1.0, 0.0, 1.0};
@@ -68,8 +69,17 @@ void FrontFaceTests::CreateGeometry() {
   Color ur{0.5, 0.5, 0.5, 1.0};
 
   uint32_t idx = 0;
-  buffer->DefineBiTriCCW(0, left + 10, top + 4, mid_width - 10, bottom - 10, 10.0f, 10.0f, 10.0f, 10.0f, ul, ll, lr,
-                         ur);
+  float z = 10.0f;
+  buffer->DefineBiTriCCW(0, left + 10, top + 4, mid_width - 10, bottom - 10, z, z, z, z, ul, ll, lr, ur);
+
+  buffer->SetPositionIncludesW();
+  auto vtx = buffer->Lock();
+  vtx[0].pos[3] = INFINITY;
+  vtx[1].pos[3] = 0.980578f;
+  vtx[2].pos[3] = 0.0f;
+  vtx[3].pos[3] = INFINITY;
+  vtx[4].pos[3] = INFINITY;
+  vtx[5].pos[3] = INFINITY;
 
   Color tmp = ul;
   ul = lr;
@@ -79,7 +89,7 @@ void FrontFaceTests::CreateGeometry() {
   ur = ll;
   ll = tmp;
 
-  buffer->DefineBiTri(1, mid_width + 10, top + 4, right - 10, bottom - 10, 10.0f, 10.0f, 10.0f, 10.0f, ul, ll, lr, ur);
+  buffer->DefineBiTri(1, mid_width + 10, top + 4, right - 10, bottom - 10, z, z, z, z, ul, ll, lr, ur);
 }
 
 void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face) {
