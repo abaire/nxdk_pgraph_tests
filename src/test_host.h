@@ -93,9 +93,8 @@ class TestHost {
   void DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = 0xFFFFFFFF,
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
-  void FinishDraw() const;
-  void FinishDrawAndSave(const std::string &output_directory, const std::string &name,
-                         const std::string &z_buffer_name = "");
+  void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
+                  const std::string &z_buffer_name = "");
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
   std::shared_ptr<ShaderProgram> GetShaderProgram() const { return shader_program_; }
@@ -121,6 +120,9 @@ class TestHost {
   void SetTexCoord0(float u, float v) const;
 
   static std::string GetPrimitiveName(DrawPrimitive primitive);
+
+  bool GetSaveResults() const { return save_results_; }
+  void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
  private:
   void SetVertexBufferAttributes(uint32_t enabled_fields);
@@ -156,6 +158,8 @@ class TestHost {
   FixedFunctionMatrixSetting fixed_function_matrix_mode_{MATRIX_MODE_DEFAULT_NXDK};
   MATRIX fixed_function_model_view_matrix_{};
   MATRIX fixed_function_projection_matrix_{};
+
+  bool save_results_{true};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_HOST_H

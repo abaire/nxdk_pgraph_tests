@@ -82,7 +82,7 @@ int main() {
   std::vector<std::shared_ptr<TestSuite>> test_suites;
   register_suites(host, test_suites, test_output_directory);
 
-  TestDriver driver(test_suites, kFramebufferWidth, kFramebufferHeight);
+  TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight);
   driver.Run();
 
   debugPrint("Results written to %s\n\nRebooting in 4 seconds...\n", test_output_directory.c_str());

@@ -41,6 +41,7 @@ void TextureFormatTests::CreateGeometry() {
 
 void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   host_.SetTextureFormat(texture_format);
+  std::string test_name = MakeTestName(texture_format);
 
   SDL_Surface *gradient_surface;
   int update_texture_result =
@@ -51,7 +52,7 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   } else {
     pb_print("FAILED TO GENERATE SDL SURFACE - TEST IS INVALID: %d\n", update_texture_result);
     pb_draw_text_screen();
-    host_.FinishDraw();
+    host_.FinishDraw(false, "", "");
     return;
   }
 
@@ -69,8 +70,7 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   pb_print("ERR: %d\n", update_texture_result);
   pb_draw_text_screen();
 
-  std::string test_name = MakeTestName(texture_format);
-  host_.FinishDrawAndSave(output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {

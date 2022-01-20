@@ -649,31 +649,28 @@ int TestHost::SetTexture(SDL_Surface *gradient_surface) {
   return 0;
 }
 
-void TestHost::FinishDraw() const {
+void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
+                          const std::string &z_buffer_name) {
+  bool perform_save = allow_saving && save_results_;
+  if (!perform_save) {
+    pb_printat(0, 55, (char *)"ns");
+    pb_draw_text_screen();
+  }
+
   while (pb_busy()) {
     /* Wait for completion... */
   }
 
-  /* Swap buffers (if we can) */
-  while (pb_finished()) {
-    /* Not ready to swap yet */
-  }
-}
+  if (perform_save) {
+    // TODO: See why waiting for tiles to be non-busy results in the screen not updating anymore.
+    // In theory this should wait for all tiles to be rendered before capturing.
+    pb_wait_for_vbl();
 
-void TestHost::FinishDrawAndSave(const std::string &output_directory, const std::string &name,
-                                 const std::string &z_buffer_name) {
-  while (pb_busy()) {
-    /* Wait for completion... */
-  }
+    SaveBackBuffer(output_directory, name);
 
-  // TODO: See why waiting for tiles to be non-busy results in the screen not updating anymore.
-  // In theory this should wait for all tiles to be rendered before capturing.
-  pb_wait_for_vbl();
-
-  SaveBackBuffer(output_directory, name);
-
-  if (!z_buffer_name.empty()) {
-    SaveZBuffer(output_directory, z_buffer_name);
+    if (!z_buffer_name.empty()) {
+      SaveZBuffer(output_directory, z_buffer_name);
+    }
   }
 
   /* Swap buffers (if we can) */

@@ -181,7 +181,7 @@ void MaterialAlphaTests::Test(uint32_t diffuse_source, float material_alpha) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(diffuse_source, material_alpha);
-  host_.FinishDrawAndSave(output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string MaterialAlphaTests::MakeTestName(uint32_t diffuse_source, float material_alpha) {

@@ -373,7 +373,7 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDrawAndSave(output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string ThreeDPrimitiveTests::MakeTestName(TestHost::DrawPrimitive primitive,

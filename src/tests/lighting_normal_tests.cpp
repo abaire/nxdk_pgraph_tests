@@ -199,7 +199,7 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode dr
   pb_draw_text_screen();
 
   std::string name = MakeTestName(set_normal, normal, draw_mode);
-  host_.FinishDrawAndSave(output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string LightingNormalTests::MakeTestName(bool set_normal, const float* normal, DrawMode draw_mode) {
