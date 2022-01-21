@@ -38,7 +38,7 @@ void WParamTests::CreateGeometryWGaps() {
   const float bottom = top + (fb_height - top * 2.0f);
   const float right = left + (fb_width - left * 2.0f);
   float width = right - left;
-  float mid_height = top + (bottom - top) * 0.5f;
+  float mid_height = top + (bottom - top) * 0.5f - 4;
 
   triangle_strip_ = host_.AllocateVertexBuffer(40);
 
@@ -109,7 +109,7 @@ void WParamTests::CreateGeometryWGaps() {
   triangle_strip_->Unlock();
 
   triangles_ = triangle_strip_->ConvertFromTriangleStripToTriangles();
-  triangles_->Translate(0.0f, 2.0f + (bottom - top) * 0.5f, 0.0f, 0.0f);
+  triangles_->Translate(-6.0f, 6.0f + (bottom - top) * 0.5f, 0.0f, 0.0f);
 }
 
 void WParamTests::TestWGaps() {
@@ -119,8 +119,38 @@ void WParamTests::TestWGaps() {
   host_.SetVertexBuffer(triangle_strip_);
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
+  // back.
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, 0xFFFFFFFF);
+  pb_end(p);
+
+  host_.DrawArrays(TestHost::POSITION, TestHost::PRIMITIVE_TRIANGLE_STRIP);
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  pb_end(p);
+
   host_.SetVertexBuffer(triangles_);
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE);
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
+  // back.
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, 0xFFFFFFFF);
+  pb_end(p);
+
+  host_.DrawArrays(TestHost::POSITION);
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  pb_end(p);
 
   pb_printat(5, 0, (char*)"Strip");
   pb_printat(12, 0, (char*)"Tris");
