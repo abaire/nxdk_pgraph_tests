@@ -8,6 +8,13 @@
 
 #define MAXRAM 0x03FFAFFF
 
+void Vertex::Translate(float x, float y, float z, float w) {
+  pos[0] += x;
+  pos[1] += y;
+  pos[2] += z;
+  pos[3] += w;
+}
+
 VertexBuffer::VertexBuffer(uint32_t num_vertices) : num_vertices_(num_vertices) {
   uint32_t buffer_size = sizeof(Vertex) * num_vertices;
   normalized_vertex_buffer_ = static_cast<Vertex *>(
@@ -237,4 +244,44 @@ void VertexBuffer::SetSpecular(uint32_t vertex_index, const Color &color) {
   normalized_vertex_buffer_[vertex_index].specular[1] = color.g;
   normalized_vertex_buffer_[vertex_index].specular[2] = color.b;
   normalized_vertex_buffer_[vertex_index].specular[3] = color.a;
+}
+
+std::shared_ptr<VertexBuffer> VertexBuffer::ConvertFromTriangleStripToTriangles() const {
+  auto num_triangles = num_vertices_ - 2;
+  auto ret = std::make_shared<VertexBuffer>(num_triangles * 3);
+
+  auto src = normalized_vertex_buffer_;
+  auto dst = ret->normalized_vertex_buffer_;
+
+  memcpy(dst, src, sizeof(*dst) * 3);
+  dst += 3;
+  src += 2;
+
+  auto copy_triangle = [&src, &dst](bool is_odd) {
+    if (is_odd) {
+      memcpy(dst++, src, sizeof(*dst));
+      memcpy(dst++, src - 1, sizeof(*dst));
+      ++src;
+      memcpy(dst++, src, sizeof(*dst));
+    } else {
+      memcpy(dst++, src - 1, sizeof(*dst));
+      memcpy(dst++, src, sizeof(*dst));
+      ++src;
+      memcpy(dst++, src, sizeof(*dst));
+    }
+  };
+
+  for (auto i = 1; i < num_triangles; ++i) {
+    copy_triangle(i & 0x01);
+  }
+
+  return ret;
+}
+
+void VertexBuffer::Translate(float x, float y, float z, float w) {
+  auto vertex = Lock();
+  for (auto i = 0; i < num_vertices_; ++i, ++vertex) {
+    vertex->Translate(x, y, z, w);
+  }
+  Unlock();
 }

@@ -70,6 +70,8 @@ typedef struct Vertex {
   uint32_t GetDiffuseARGB() const { return TO_ARGB(diffuse); }
 
   uint32_t GetSpecularARGB() const { return TO_ARGB(specular); }
+
+  void Translate(float x, float y, float z, float w);
 } Vertex;
 #pragma pack()
 
@@ -117,6 +119,10 @@ class VertexBuffer {
  public:
   explicit VertexBuffer(uint32_t num_vertices);
   ~VertexBuffer();
+
+  // Returns a new VertexBuffer containing vertices suitable for rendering as triangles by treating the contents of this
+  // buffer as a triangle strip.
+  std::shared_ptr<VertexBuffer> ConvertFromTriangleStripToTriangles() const;
 
   Vertex* Lock();
   void Unlock();
@@ -177,6 +183,8 @@ class VertexBuffer {
   inline void SetPositionIncludesW(bool enabled = true) { position_count_ = enabled ? 4 : 3; }
 
   inline void SetNormalIncludesW(bool enabled = true) { normal_count_ = enabled ? 4 : 3; }
+
+  void Translate(float x, float y, float z, float w = 0.0f);
 
  private:
   friend class TestHost;
