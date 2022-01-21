@@ -38,7 +38,7 @@ void WParamTests::CreateGeometryWGaps() {
   const float bottom = top + (fb_height - top * 2.0f);
   const float right = left + (fb_width - left * 2.0f);
   float width = right - left;
-  float mid_height = top + (bottom - top) * 0.5;
+  float mid_height = top + (bottom - top) * 0.5f;
 
   triangle_strip_ = host_.AllocateVertexBuffer(40);
 
@@ -144,7 +144,7 @@ void WParamTests::CreateGeometryPositiveWTriangleStrip() {
   const float bottom = top + (fb_height - top * 2.0f);
   const float right = left + (fb_width - left * 2.0f);
   float width = right - left;
-  float mid_width = left + width * 0.5;
+  float mid_width = left + width * 0.5f;
 
   triangle_strip_ = host_.AllocateVertexBuffer(6);
 
@@ -174,10 +174,36 @@ void WParamTests::TestPositiveWTriangleStrip() {
 }
 
 void WParamTests::CreateGeometryNegativeWTriangleStrip() {
-  CreateGeometryPositiveWTriangleStrip();
+  auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
+  auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
 
-  Vertex* vertex = triangle_strip_->Lock();
-  vertex[2].pos[3] = -0.01f;
+  const float left = floorf(fb_width / 5.0f);
+  const float top = floorf(fb_height / 6.0f);
+  const float bottom = top + (fb_height - top * 2.0f);
+  const float right = left + (fb_width - left * 2.0f);
+  float width = right - left;
+  float mid_width = left + width * 0.5f;
+
+  triangle_strip_ = host_.AllocateVertexBuffer(6);
+
+  triangle_strip_->SetPositionIncludesW();
+  auto vertex = triangle_strip_->Lock();
+
+  auto add_vertex = [&vertex](float x, float y, float w, float r, float g, float b) {
+    vertex->SetPosition(x, y, 0.0, w);
+    vertex->SetDiffuse(r, g, b);
+    ++vertex;
+  };
+
+  const float w = 1.0f;
+  add_vertex(left, bottom, w, 0.75, 0.75, 0.75);
+  add_vertex(left, top, w, 1.0, 1.0, 1.0);
+  add_vertex(mid_width, bottom, w, 0.5, 0.5, 0.5);
+  add_vertex(mid_width, top, w, 0.0f, 1.0f, 0.0f);
+
+  add_vertex(mid_width, top, -0.1, 1.0, 0.0, 0.0);
+  add_vertex(right, bottom, w, 0.0, 0.5, 0.5);
+
   triangle_strip_->Unlock();
 }
 
@@ -185,6 +211,23 @@ void WParamTests::TestNegativeWTriangleStrip() {
   CreateGeometryNegativeWTriangleStrip();
   host_.SetVertexBuffer(triangle_strip_);
   host_.PrepareDraw();
+
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
+  // back.
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, 0xFFFFFFFF);
+  pb_end(p);
+
+  host_.DrawArrays(TestHost::POSITION, TestHost::PRIMITIVE_TRIANGLE_STRIP);
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  pb_end(p);
+
   host_.FinishDrawAndSave(output_dir_, kTestWNegativeTriangleStrip);
 }
