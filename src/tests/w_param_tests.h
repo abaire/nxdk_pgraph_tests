@@ -14,13 +14,18 @@ class WParamTests : public TestSuite {
   void Deinitialize() override;
 
  private:
-  void CreateGeometry();
-  void Test();
+  void CreateGeometryWGaps();
+  void TestWGaps();
+
+  void CreateGeometryPositiveWTriangleStrip();
+  void TestPositiveWTriangleStrip();
+
+  void CreateGeometryNegativeWTriangleStrip();
+  void TestNegativeWTriangleStrip();
 
  private:
   std::shared_ptr<VertexBuffer> triangle_strip_;
   std::shared_ptr<VertexBuffer> triangles_;
-
 };
 
 #endif  // NXDK_PGRAPH_TESTS_INF_TESTS_H
