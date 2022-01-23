@@ -80,6 +80,7 @@ void FrontFaceTests::CreateGeometry() {
   vtx[3].pos[3] = INFINITY;
   vtx[4].pos[3] = INFINITY;
   vtx[5].pos[3] = INFINITY;
+  buffer->Unlock();
 
   Color tmp = ul;
   ul = lr;

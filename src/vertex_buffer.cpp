@@ -47,8 +47,8 @@ void VertexBuffer::Linearize(float texture_width, float texture_height) {
   memcpy(linear_vertex_buffer_, normalized_vertex_buffer_, buffer_size);
 
   for (int i = 0; i < num_vertices_; i++) {
-    linear_vertex_buffer_[i].texcoord[0] *= static_cast<float>(texture_width);
-    linear_vertex_buffer_[i].texcoord[1] *= static_cast<float>(texture_height);
+    linear_vertex_buffer_[i].texcoord0[0] *= static_cast<float>(texture_width);
+    linear_vertex_buffer_[i].texcoord0[1] *= static_cast<float>(texture_height);
   }
 }
 
@@ -162,9 +162,10 @@ void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, f
     vb[index].pos[0] = x;
     vb[index].pos[1] = y;
     vb[index].pos[2] = z;
+    vb[index].pos[3] = 1.0f;
 
-    vb[index].texcoord[0] = u;
-    vb[index].texcoord[1] = v;
+    vb[index].texcoord0[0] = u;
+    vb[index].texcoord0[1] = v;
 
     vb[index].normal[0] = 0.0f;
     vb[index].normal[1] = 0.0f;

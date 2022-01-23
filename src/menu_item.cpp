@@ -222,7 +222,7 @@ void MenuItemTest::CursorUp() { parent->CursorUpAndActivate(); }
 void MenuItemTest::CursorDown() { parent->CursorDownAndActivate(); }
 
 MenuItemSuite::MenuItemSuite(const std::shared_ptr<TestSuite> &suite, uint32_t width, uint32_t height)
-    : MenuItem(std::move(suite->Name()), width, height), suite(suite) {
+    : MenuItem(suite->Name(), width, height), suite(suite) {
   auto tests = suite->TestNames();
   submenu.reserve(tests.size());
 
@@ -235,6 +235,7 @@ MenuItemSuite::MenuItemSuite(const std::shared_ptr<TestSuite> &suite, uint32_t w
 
 void MenuItemSuite::ActivateCurrentSuite() {
   suite->Initialize();
+  suite->SetSavingAllowed(true);
   suite->RunAll();
   suite->Deinitialize();
   MenuItem::Deactivate();

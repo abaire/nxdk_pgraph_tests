@@ -68,9 +68,9 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);  // Back diffuse
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x20, 0);           // Back specular
 
-  p = pb_push1(p, 0x318, 0);
-  p = pb_push1(p, 0x31C, 0);
-  p = pb_push1(p, 0x43C, 8);
+  p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
+  p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
+  p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
 
   p = pb_push1(p, NV097_SET_COMBINER_CONTROL, 1);
 

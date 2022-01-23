@@ -103,9 +103,7 @@ void ProjectionVertexShader::UpdateMatrices() {
   matrix_unit(model_matrix_);
 }
 
-void ProjectionVertexShader::OnActivate() {
-  UpdateMatrices();
-}
+void ProjectionVertexShader::OnActivate() { UpdateMatrices(); }
 
 void ProjectionVertexShader::OnLoadShader() {
   if (enable_lighting_) {
@@ -122,40 +120,26 @@ void ProjectionVertexShader::OnLoadConstants() {
    * Check the intermediate file (*.inl) for the expected locations after
    * changing the code.
    */
-  auto p = pb_begin();
 
-  /* Set shader constants cursor at C0 */
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96);
-
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, model_matrix_, 16 * 4);
-  p += 16;
-
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, view_matrix_, 16 * 4);
-  p += 16;
-
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
-  memcpy(p, projection_viewport_matrix_, 16 * 4);
-  p += 16;
-
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, camera_position_, 4 * 4);
-  p += 4;
+  int index = 0;
+  SetUniform4x4F(index, model_matrix_);
+  index += 4;
+  SetUniform4x4F(index, view_matrix_);
+  index += 4;
+  SetUniform4x4F(index, projection_viewport_matrix_);
+  index += 4;
+  SetUniform4F(index, camera_position_);
+  ++index;
 
   if (enable_lighting_) {
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-    memcpy(p, light_direction_, 4 * 4);
-    p += 4;
+    SetUniform4F(index, light_direction_);
+    ++index;
   }
 
   // Send shader constants
   float constants_0[4] = {0, 0, 0, 0};
-  pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 4);
-  memcpy(p, constants_0, 4 * 4);
-  p += 4;
-
-  pb_end(p);
+  SetUniform4F(index, constants_0);
+  ++index;
 }
 
 /* Construct a viewport transformation matrix */

@@ -146,11 +146,16 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
     clear_attrib(NV2A_VERTEX_ATTR_POSITION);
   }
 
-  clear_attrib(NV2A_VERTEX_ATTR_WEIGHT);
+  if (enabled_fields & WEIGHT) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+                       &vptr[0].weight);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_WEIGHT);
+  }
 
   if (enabled_fields & NORMAL) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
-                       vertex_buffer_->normal_count_, sizeof(Vertex), &vptr[0].normal);
+    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                       &vptr[0].normal);
   } else {
     clear_attrib(NV2A_VERTEX_ATTR_NORMAL);
   }
@@ -169,21 +174,61 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
     clear_attrib(NV2A_VERTEX_ATTR_SPECULAR);
   }
 
-  clear_attrib(NV2A_VERTEX_ATTR_FOG_COORD);
-  clear_attrib(NV2A_VERTEX_ATTR_POINT_SIZE);
+  if (enabled_fields & FOG_COORD) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
+                       &vptr[0].fog_coord);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_FOG_COORD);
+  }
+
+  if (enabled_fields & POINT_SIZE) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
+                       &vptr[0].point_size);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_POINT_SIZE);
+  }
+
+  //  if (enabled_fields & BACK_DIFFUSE) {
+  //    set_attrib_pointer(NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+  //                       &vptr[0].back_diffuse);
+  //  } else {
   clear_attrib(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
+  //  }
+
+  //  if (enabled_fields & BACK_SPECULAR) {
+  //    set_attrib_pointer(NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+  //                       &vptr[0].back_specular);
+  //  } else {
   clear_attrib(NV2A_VERTEX_ATTR_BACK_SPECULAR);
+  //  }
 
   if (enabled_fields & TEXCOORD0) {
     set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                       &vptr[0].texcoord);
+                       &vptr[0].texcoord0);
   } else {
     clear_attrib(NV2A_VERTEX_ATTR_TEXTURE0);
   }
 
-  clear_attrib(NV2A_VERTEX_ATTR_TEXTURE1);
-  clear_attrib(NV2A_VERTEX_ATTR_TEXTURE2);
-  clear_attrib(NV2A_VERTEX_ATTR_TEXTURE3);
+  if (enabled_fields & TEXCOORD1) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
+                       &vptr[0].texcoord1);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE1);
+  }
+
+  if (enabled_fields & TEXCOORD2) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
+                       &vptr[0].texcoord2);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE2);
+  }
+
+  if (enabled_fields & TEXCOORD3) {
+    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
+                       &vptr[0].texcoord3);
+  } else {
+    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE3);
+  }
 
   // Matching observed behavior. This is probably unnecessary as these are never set by pbkit.
   clear_attrib(13);
@@ -192,6 +237,10 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 }
 
 void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
+  if (shader_program_) {
+    shader_program_->PrepareDraw();
+  }
+
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawArrays.");
   static constexpr int kVerticesPerPush = 120;
 
@@ -217,6 +266,10 @@ void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitiv
 }
 
 void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
+  if (shader_program_) {
+    shader_program_->PrepareDraw();
+  }
+
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
   SetVertexBufferAttributes(enabled_vertex_fields);
 
@@ -226,6 +279,9 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
 
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
+    if (enabled_vertex_fields & WEIGHT) {
+      SetWeight(vertex->weight[0]);
+    }
     if (enabled_vertex_fields & NORMAL) {
       SetNormal(vertex->normal[0], vertex->normal[1], vertex->normal[2]);
     }
@@ -235,8 +291,23 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
     if (enabled_vertex_fields & SPECULAR) {
       SetSpecular(vertex->specular[0], vertex->specular[1], vertex->specular[2], vertex->specular[3]);
     }
+    if (enabled_vertex_fields & FOG_COORD) {
+      SetFogCoord(vertex->fog_coord);
+    }
+    if (enabled_vertex_fields & POINT_SIZE) {
+      SetPointSize(vertex->point_size);
+    }
     if (enabled_vertex_fields & TEXCOORD0) {
-      SetTexCoord0(vertex->texcoord[0], vertex->texcoord[1]);
+      SetTexCoord0(vertex->texcoord0[0], vertex->texcoord0[1]);
+    }
+    if (enabled_vertex_fields & TEXCOORD1) {
+      SetTexCoord0(vertex->texcoord1[0], vertex->texcoord1[1]);
+    }
+    if (enabled_vertex_fields & TEXCOORD2) {
+      SetTexCoord0(vertex->texcoord2[0], vertex->texcoord2[1]);
+    }
+    if (enabled_vertex_fields & TEXCOORD3) {
+      SetTexCoord0(vertex->texcoord3[0], vertex->texcoord3[1]);
     }
 
     // Setting the position locks in the previously set values and must be done last.
@@ -253,6 +324,10 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
 }
 
 void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
+  if (shader_program_) {
+    shader_program_->PrepareDraw();
+  }
+
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineArray.");
   static constexpr int kElementsPerPush = 64;
 
@@ -267,8 +342,16 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
     // Note: Ordering is important and must follow the NV2A_VERTEX_ATTR_POSITION, ... ordering.
     if (enabled_vertex_fields & POSITION) {
       auto vals = (uint32_t *)vertex->pos;
-      p = pb_push3(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2]);
-      num_pushed += 3;
+      if (vertex_buffer_->position_count_ == 3) {
+        p = pb_push3(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2]);
+        num_pushed += 3;
+      } else {
+        p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
+        num_pushed += 4;
+      }
+    }
+    if (enabled_vertex_fields & WEIGHT) {
+      ASSERT(!"WEIGHT not supported");
     }
     if (enabled_vertex_fields & NORMAL) {
       auto vals = (uint32_t *)vertex->normal;
@@ -287,8 +370,35 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
       p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
       num_pushed += 4;
     }
+    if (enabled_vertex_fields & FOG_COORD) {
+      ASSERT(!"FOG_COORD not supported");
+    }
+    if (enabled_vertex_fields & POINT_SIZE) {
+      ASSERT(!"POINT_SIZE not supported");
+    }
+    if (enabled_vertex_fields & BACK_DIFFUSE) {
+      ASSERT(!"BACK_DIFFUSE not supported");
+    }
+    if (enabled_vertex_fields & BACK_SPECULAR) {
+      ASSERT(!"BACK_SPECULAR not supported");
+    }
     if (enabled_vertex_fields & TEXCOORD0) {
-      auto vals = (uint32_t *)vertex->texcoord;
+      auto vals = (uint32_t *)vertex->texcoord0;
+      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
+      num_pushed += 2;
+    }
+    if (enabled_vertex_fields & TEXCOORD1) {
+      auto vals = (uint32_t *)vertex->texcoord1;
+      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
+      num_pushed += 2;
+    }
+    if (enabled_vertex_fields & TEXCOORD2) {
+      auto vals = (uint32_t *)vertex->texcoord2;
+      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
+      num_pushed += 2;
+    }
+    if (enabled_vertex_fields & TEXCOORD3) {
+      auto vals = (uint32_t *)vertex->texcoord3;
       p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
       num_pushed += 2;
     }
@@ -308,6 +418,10 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
 
 void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
                                     DrawPrimitive primitive) {
+  if (shader_program_) {
+    shader_program_->PrepareDraw();
+  }
+
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
   static constexpr int kIndicesPerPush = 64;
 
@@ -345,6 +459,10 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
 
 void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
                                     DrawPrimitive primitive) {
+  if (shader_program_) {
+    shader_program_->PrepareDraw();
+  }
+
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
   static constexpr int kIndicesPerPush = 64;
 
@@ -374,6 +492,24 @@ void TestHost::SetVertex(float x, float y, float z) const {
   pb_end(p);
 }
 
+void TestHost::SetVertex(float x, float y, float z, float w) const {
+  auto p = pb_begin();
+  p = pb_push4f(p, NV097_SET_VERTEX4F, x, y, z, w);
+  pb_end(p);
+}
+
+void TestHost::SetWeight(float w1, float w2, float w3, float w4) const {
+  auto p = pb_begin();
+  p = pb_push4f(p, NV097_SET_WEIGHT4F, w1, w2, w3, w4);
+  pb_end(p);
+}
+
+void TestHost::SetWeight(float w) const {
+  auto p = pb_begin();
+  p = pb_push1f(p, NV097_SET_WEIGHT1F, w);
+  pb_end(p);
+}
+
 void TestHost::SetNormal(float x, float y, float z) const {
   auto p = pb_begin();
   p = pb_push3(p, NV097_SET_NORMAL3F, *(uint32_t *)&x, *(uint32_t *)&y, *(uint32_t *)&z);
@@ -392,9 +528,39 @@ void TestHost::SetSpecular(float r, float g, float b, float a) const {
   pb_end(p);
 }
 
+void TestHost::SetFogCoord(float fc) const {
+  auto p = pb_begin();
+  p = pb_push1f(p, NV097_SET_FOG_COORD, fc);
+  pb_end(p);
+}
+
+void TestHost::SetPointSize(float ps) const {
+  auto p = pb_begin();
+  p = pb_push1f(p, NV097_SET_POINT_SIZE, ps);
+  pb_end(p);
+}
+
 void TestHost::SetTexCoord0(float u, float v) const {
   auto p = pb_begin();
   p = pb_push2(p, NV097_SET_TEX_COORD0, *(uint32_t *)&u, *(uint32_t *)&v);
+  pb_end(p);
+}
+
+void TestHost::SetTexCoord1(float u, float v) const {
+  auto p = pb_begin();
+  p = pb_push2(p, NV097_SET_TEX_COORD1, *(uint32_t *)&u, *(uint32_t *)&v);
+  pb_end(p);
+}
+
+void TestHost::SetTexCoord2(float u, float v) const {
+  auto p = pb_begin();
+  p = pb_push2(p, NV097_SET_TEX_COORD2, *(uint32_t *)&u, *(uint32_t *)&v);
+  pb_end(p);
+}
+
+void TestHost::SetTexCoord3(float u, float v) const {
+  auto p = pb_begin();
+  p = pb_push2(p, NV097_SET_TEX_COORD3, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
 }
 
