@@ -162,7 +162,7 @@ void WParamTests::TestWGaps() {
   pb_printat(15, 39, (char*)"inf,inf");
   pb_draw_text_screen();
 
-  host_.FinishDrawAndSave(output_dir_, kTestWGaps);
+  host_.FinishDraw(allow_saving_, output_dir_, kTestWGaps);
 }
 
 void WParamTests::CreateGeometryPositiveWTriangleStrip() {
@@ -200,7 +200,7 @@ void WParamTests::TestPositiveWTriangleStrip() {
   host_.SetVertexBuffer(triangle_strip_);
   host_.PrepareDraw();
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
-  host_.FinishDrawAndSave(output_dir_, kTestWPositiveTriangleStrip);
+  host_.FinishDraw(allow_saving_, output_dir_, kTestWPositiveTriangleStrip);
 }
 
 void WParamTests::CreateGeometryNegativeWTriangleStrip() {
@@ -259,5 +259,5 @@ void WParamTests::TestNegativeWTriangleStrip() {
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
   pb_end(p);
 
-  host_.FinishDrawAndSave(output_dir_, kTestWNegativeTriangleStrip);
+  host_.FinishDraw(allow_saving_, output_dir_, kTestWNegativeTriangleStrip);
 }

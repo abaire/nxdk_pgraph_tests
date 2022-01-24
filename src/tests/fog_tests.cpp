@@ -192,7 +192,7 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDrawAndSave(output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string FogTests::MakeTestName(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, uint32_t fog_alpha) {

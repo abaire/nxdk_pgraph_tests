@@ -8,6 +8,7 @@
 #include <memory>
 #include <vector>
 
+#include "test_host.h"
 #include "tests/test_suite.h"
 
 constexpr uint32_t kMaxGamepads = 4;
@@ -16,7 +17,7 @@ struct MenuItem;
 
 class TestDriver {
  public:
-  TestDriver(const std::vector<std::shared_ptr<TestSuite>> &test_suites, uint32_t framebuffer_width,
+  TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites, uint32_t framebuffer_width,
              uint32_t framebuffer_height);
   ~TestDriver();
 
@@ -40,15 +41,20 @@ class TestDriver {
   void OnA();
   void OnB();
   void OnX();
+  void OnY();
 
  private:
-  bool running_{true};
+  volatile bool running_{true};
+  // Whether tests should render once and stop (true) or continually render frames (false).
+  bool one_shot_tests_{true};
+
   const std::vector<std::shared_ptr<TestSuite>> &test_suites_;
   SDL_GameController *gamepads_[kMaxGamepads]{nullptr};
 
   uint32_t framebuffer_width_;
   uint32_t framebuffer_height_;
 
+  TestHost &test_host_;
   std::shared_ptr<MenuItem> menu_;
 };
 

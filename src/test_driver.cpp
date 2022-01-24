@@ -6,9 +6,12 @@
 
 #include "menu_item.h"
 
-TestDriver::TestDriver(const std::vector<std::shared_ptr<TestSuite>> &test_suites, uint32_t framebuffer_width,
-                       uint32_t framebuffer_height)
-    : test_suites_(test_suites), framebuffer_width_(framebuffer_width), framebuffer_height_(framebuffer_height) {
+TestDriver::TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites,
+                       uint32_t framebuffer_width, uint32_t framebuffer_height)
+    : test_host_(host),
+      test_suites_(test_suites),
+      framebuffer_width_(framebuffer_width),
+      framebuffer_height_(framebuffer_height) {
   auto on_run_all = [this]() { RunAllTestsNonInteractive(); };
   auto on_exit = [this]() { running_ = false; };
   menu_ = std::make_shared<MenuItemRoot>(test_suites, on_run_all, on_exit, framebuffer_width, framebuffer_height);
@@ -46,7 +49,14 @@ void TestDriver::Run() {
       }
     }
 
+    if (!test_host_.GetSaveResults()) {
+      menu_->SetBackgroundColor(0xFF3E1E1E);
+    } else {
+      menu_->SetBackgroundColor(0xFF1E1E1E);
+    }
+
     menu_->Draw();
+
     Sleep(10);
   }
 }
@@ -143,6 +153,10 @@ void TestDriver::OnControllerButtonEvent(const SDL_ControllerButtonEvent &event)
       OnX();
       break;
 
+    case SDL_CONTROLLER_BUTTON_Y:
+      OnY();
+      break;
+
     case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
       OnBlack();
       break;
@@ -166,6 +180,12 @@ void TestDriver::OnA() { menu_->Activate(); }
 void TestDriver::OnB() { menu_->Deactivate(); }
 
 void TestDriver::OnX() { menu_->ActivateCurrentSuite(); }
+
+void TestDriver::OnY() {
+  bool save_results = !test_host_.GetSaveResults();
+  test_host_.SetSaveResults(save_results);
+  MenuItemTest::SetOneShotMode(save_results);
+}
 
 void TestDriver::OnUp() { menu_->CursorUp(); }
 

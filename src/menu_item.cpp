@@ -11,6 +11,9 @@ static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
 static constexpr uint32_t kNumItemsPerPage = 12;
 static constexpr uint32_t kNumItemsPerHalfPage = kNumItemsPerPage >> 1;
 
+uint32_t MenuItem::menu_background_color_ = 0xFF3E003E;
+bool MenuItemTest::one_shot_mode_ = true;
+
 void MenuItem::PrepareDraw(uint32_t background_color) const {
   pb_wait_for_vbl();
   pb_target_back_buffer();
@@ -31,13 +34,13 @@ void MenuItem::Swap() {
   }
 }
 
-void MenuItem::Draw() const {
+void MenuItem::Draw() {
   if (active_submenu) {
     active_submenu->Draw();
     return;
   }
 
-  PrepareDraw();
+  PrepareDraw(menu_background_color_);
 
   const char *cursor_prefix = "> ";
   const char *normal_prefix = "  ";
@@ -176,17 +179,27 @@ void MenuItem::CursorDownAndActivate() {
   Activate();
 }
 
+void MenuItem::SetBackgroundColor(uint32_t background_color) { menu_background_color_ = background_color; }
+
 MenuItemCallable::MenuItemCallable(std::function<void()> callback, std::string name, uint32_t width, uint32_t height)
     : MenuItem(std::move(name), width, height), on_activate(std::move(callback)) {}
 
-void MenuItemCallable::Draw() const {}
+void MenuItemCallable::Draw() {}
 
 void MenuItemCallable::Activate() { on_activate(); }
 
 MenuItemTest::MenuItemTest(std::shared_ptr<TestSuite> suite, std::string name, uint32_t width, uint32_t height)
     : MenuItem(std::move(name), width, height), suite(std::move(suite)) {}
 
-void MenuItemTest::Draw() const {}
+void MenuItemTest::Draw() {
+  if (one_shot_mode_ && has_run_once_) {
+    return;
+  }
+
+  suite->Run(name);
+  suite->SetSavingAllowed(false);
+  has_run_once_ = true;
+}
 
 void MenuItemTest::OnEnter() {
   // Blank the screen.
@@ -195,8 +208,13 @@ void MenuItemTest::OnEnter() {
   Swap();
 
   suite->Initialize();
-  suite->Run(name);
+  suite->SetSavingAllowed(true);
+  has_run_once_ = false;
+}
+
+bool MenuItemTest::Deactivate() {
   suite->Deinitialize();
+  return MenuItem::Deactivate();
 }
 
 void MenuItemTest::CursorUp() { parent->CursorUpAndActivate(); }
@@ -241,7 +259,7 @@ void MenuItemRoot::ActivateCurrentSuite() {
   MenuItem::ActivateCurrentSuite();
 }
 
-void MenuItemRoot::Draw() const {
+void MenuItemRoot::Draw() {
 #ifndef DISABLE_AUTORUN
   if (!timer_cancelled) {
     auto now = std::chrono::high_resolution_clock::now();

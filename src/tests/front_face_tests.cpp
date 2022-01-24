@@ -127,7 +127,7 @@ void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(front_face, cull_face);
-  host_.FinishDrawAndSave(output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string FrontFaceTests::MakeTestName(uint32_t front_face, uint32_t cull_face) {

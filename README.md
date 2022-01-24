@@ -24,6 +24,7 @@ DPAD:
 * A - Enter a submenu or test. Inside of a test, re-run the test.
 * B - Go up one menu or leave a test. If pressed on the root menu, exit the application.
 * X - Run all tests for the current suite.
+* Y - Toggle saving of results and multi-frame rendering.
 * Start - Enter a submenu or test.
 * Back - Go up one menu or leave a test. If pressed on the root menu, exit the application.
 * Black - Exit the application.
