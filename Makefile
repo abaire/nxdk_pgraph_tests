@@ -21,6 +21,7 @@ SRCS = \
 	$(SRCDIR)/shaders/shader_program.cpp \
 	$(SRCDIR)/test_driver.cpp \
 	$(SRCDIR)/test_host.cpp \
+	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/depth_format_tests.cpp \
 	$(SRCDIR)/tests/fog_tests.cpp \
 	$(SRCDIR)/tests/front_face_tests.cpp \
@@ -41,6 +42,7 @@ SRCS = \
 	$(THIRDPARTYDIR)/printf/printf.c
 
 SHADER_OBJS = \
+	$(SRCDIR)/shaders/attribute_carryover_test.inl \
 	$(SRCDIR)/shaders/fog_infinite_fogc_test.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \

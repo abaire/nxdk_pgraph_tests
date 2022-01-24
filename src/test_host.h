@@ -26,13 +26,23 @@ constexpr uint32_t kNextContextChannel = 25;
 
 class TestHost {
  public:
-  enum VertexFormatElements {
+  enum VertexAttribute {
     POSITION = 1 << NV2A_VERTEX_ATTR_POSITION,
+    WEIGHT = 1 << NV2A_VERTEX_ATTR_WEIGHT,
     NORMAL = 1 << NV2A_VERTEX_ATTR_NORMAL,
     DIFFUSE = 1 << NV2A_VERTEX_ATTR_DIFFUSE,
     SPECULAR = 1 << NV2A_VERTEX_ATTR_SPECULAR,
+    FOG_COORD = 1 << NV2A_VERTEX_ATTR_FOG_COORD,
+    POINT_SIZE = 1 << NV2A_VERTEX_ATTR_POINT_SIZE,
+    BACK_DIFFUSE = 1 << NV2A_VERTEX_ATTR_BACK_DIFFUSE,
+    BACK_SPECULAR = 1 << NV2A_VERTEX_ATTR_BACK_SPECULAR,
     TEXCOORD0 = 1 << NV2A_VERTEX_ATTR_TEXTURE0,
+    TEXCOORD1 = 1 << NV2A_VERTEX_ATTR_TEXTURE1,
+    TEXCOORD2 = 1 << NV2A_VERTEX_ATTR_TEXTURE2,
+    TEXCOORD3 = 1 << NV2A_VERTEX_ATTR_TEXTURE3,
   };
+
+  static constexpr uint32_t kDefaultVertexFields = POSITION | DIFFUSE | TEXCOORD0;
 
   enum DrawPrimitive {
     PRIMITIVE_POINTS = NV097_SET_BEGIN_END_OP_POINTS,
@@ -79,18 +89,20 @@ class TestHost {
 
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00);
 
-  void DrawArrays(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
-  void DrawInlineBuffer(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+  void DrawArrays(uint32_t enabled_vertex_fields = kDefaultVertexFields, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+  void DrawInlineBuffer(uint32_t enabled_vertex_fields = kDefaultVertexFields,
+                        DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
   // Sends vertices as an interleaved array of vertex fields. E.g., [POS_0,DIFFUSE_0,POS_1,DIFFUSE_1,...]
-  void DrawInlineArray(uint32_t enabled_vertex_fields = 0xFFFFFFFF, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
+  void DrawInlineArray(uint32_t enabled_vertex_fields = kDefaultVertexFields,
+                       DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
   // Sends vertices via an index array. Index values must be < 0xFFFF and are sent two per command.
-  void DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = 0xFFFFFFFF,
+  void DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = kDefaultVertexFields,
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
   // Sends vertices via an index array. Index values are unsigned integers.
-  void DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = 0xFFFFFFFF,
+  void DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = kDefaultVertexFields,
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
   void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
@@ -114,10 +126,18 @@ class TestHost {
   void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
 
   void SetVertex(float x, float y, float z) const;
+  void SetVertex(float x, float y, float z, float w) const;
+  void SetWeight(float w) const;
+  void SetWeight(float w1, float w2, float w3, float w4) const;
   void SetNormal(float x, float y, float z) const;
   void SetDiffuse(float r, float g, float b, float a) const;
   void SetSpecular(float r, float g, float b, float a) const;
+  void SetFogCoord(float fc) const;
+  void SetPointSize(float ps) const;
   void SetTexCoord0(float u, float v) const;
+  void SetTexCoord1(float u, float v) const;
+  void SetTexCoord2(float u, float v) const;
+  void SetTexCoord3(float u, float v) const;
 
   static std::string GetPrimitiveName(DrawPrimitive primitive);
 

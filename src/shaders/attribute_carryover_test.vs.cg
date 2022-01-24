@@ -1,0 +1,65 @@
+struct vIn {
+  float4 pos : POSITION;
+  float weight : BLENDWEIGHT;
+  float3 norm : NORMAL;
+  float4 diffuse : DIFFUSE;
+  float4 specular : SPECULAR;
+//  float point_size : PSIZE;
+//  float4 back_diffuse : BACK_DIFFUSE;
+//  float4 back_specular : BACK_SPECULAR;
+  float2 tex0 : TEXCOORD0;
+  float2 tex1 : TEXCOORD1;
+  float2 tex2 : TEXCOORD2;
+  float2 tex3 : TEXCOORD3;
+};
+
+struct vOut {
+  float4 pos : POSITION;
+  float4 col : COLOR0;
+};
+
+#define ATTR_WEIGHT 0
+#define ATTR_NORMAL 1
+#define ATTR_DIFFUSE 2
+#define ATTR_SPECULAR 3
+#define ATTR_FOG_COORD 4
+#define ATTR_POINT_SIZE 5
+#define ATTR_BACK_DIFFUSE 6
+#define ATTR_BACK_SPECULAR 7
+#define ATTR_TEX0 8
+#define ATTR_TEX1 9
+#define ATTR_TEX2 10
+#define ATTR_TEX3 11
+
+vOut main(vIn I, uniform int test_attribute) {
+  vOut result;
+
+  result.pos = I.pos;
+
+  // Keep in sync with attribute_carryover_test.h
+  if (test_attribute == ATTR_WEIGHT) {
+    result.col = float4(I.weight, 1.0, 1.0, 1.0);
+  } else if (test_attribute == ATTR_NORMAL) {
+    result.col = float4(I.norm, 1.0);
+  } else if (test_attribute == ATTR_DIFFUSE) {
+    result.col = I.diffuse;
+  } else if (test_attribute == ATTR_SPECULAR) {
+    result.col = I.specular;
+  } else if (test_attribute == ATTR_TEX0) {
+    result.col.rg = I.tex0;
+    result.col.ba = float2(0.0, 1.0);
+  } else if (test_attribute == ATTR_TEX1) {
+    result.col.rg = I.tex1;
+    result.col.ba = float2(0.0, 1.0);
+  } else if (test_attribute == ATTR_TEX2) {
+    result.col.rg = I.tex2;
+    result.col.ba = float2(0.0, 1.0);
+  } else if (test_attribute == ATTR_TEX3) {
+    result.col.rg = I.tex3;
+    result.col.ba = float2(0.0, 1.0);
+  } else {
+    result.col = float4(1.0, 0.0, 0.0, 0.75);
+  }
+
+  return result;
+}

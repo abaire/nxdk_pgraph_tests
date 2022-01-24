@@ -11,10 +11,18 @@
 #pragma pack(1)
 typedef struct Vertex {
   float pos[4];
-  float texcoord[2];
-  float normal[4];
+  float weight[1];
+  float normal[3];
   float diffuse[4];
   float specular[4];
+  float fog_coord;
+  float point_size;
+  float back_diffuse[4];
+  float back_specular[4];
+  float texcoord0[2];
+  float texcoord1[2];
+  float texcoord2[2];
+  float texcoord3[2];
 
   inline void SetPosition(const float* value) { memcpy(pos, value, sizeof(pos)); }
 
@@ -25,13 +33,16 @@ typedef struct Vertex {
     pos[3] = w;
   }
 
+  inline void SetWeight(const float* value) { memcpy(weight, value, sizeof(weight)); }
+
+  inline void SetWeight(float w) { weight[0] = w; }
+
   inline void SetNormal(const float* value) { memcpy(normal, value, sizeof(normal)); }
 
-  inline void SetNormal(float x, float y, float z, float w = 1.0f) {
+  inline void SetNormal(float x, float y, float z) {
     normal[0] = x;
     normal[1] = y;
     normal[2] = z;
-    normal[3] = w;
   }
 
   inline void SetDiffuse(const float* value) { memcpy(diffuse, value, sizeof(diffuse)); }
@@ -52,11 +63,50 @@ typedef struct Vertex {
     specular[3] = a;
   }
 
-  inline void SetTexCoord(const float* value) { memcpy(texcoord, value, sizeof(texcoord)); }
+  inline void SetBackDiffuse(const float* value) { memcpy(back_diffuse, value, sizeof(back_diffuse)); }
 
-  inline void SetTexCoord(const float u, const float v) {
-    texcoord[0] = u;
-    texcoord[1] = v;
+  inline void SetBackDiffuse(float r, float g, float b, float a = 1.0f) {
+    back_diffuse[0] = r;
+    back_diffuse[1] = g;
+    back_diffuse[2] = b;
+    back_diffuse[3] = a;
+  }
+
+  inline void SetBackSpecular(const float* value) { memcpy(back_specular, value, sizeof(back_specular)); }
+
+  inline void SetBackSpecular(float r, float g, float b, float a = 1.0f) {
+    back_specular[0] = r;
+    back_specular[1] = g;
+    back_specular[2] = b;
+    back_specular[3] = a;
+  }
+
+  inline void SetTexCoord0(const float* value) { memcpy(texcoord0, value, sizeof(texcoord0)); }
+
+  inline void SetTexCoord0(const float u, const float v) {
+    texcoord0[0] = u;
+    texcoord0[1] = v;
+  }
+
+  inline void SetTexCoord1(const float* value) { memcpy(texcoord1, value, sizeof(texcoord1)); }
+
+  inline void SetTexCoord1(const float u, const float v) {
+    texcoord1[0] = u;
+    texcoord1[1] = v;
+  }
+
+  inline void SetTexCoord2(const float* value) { memcpy(texcoord2, value, sizeof(texcoord2)); }
+
+  inline void SetTexCoord2(const float u, const float v) {
+    texcoord2[0] = u;
+    texcoord2[1] = v;
+  }
+
+  inline void SetTexCoord3(const float* value) { memcpy(texcoord3, value, sizeof(texcoord3)); }
+
+  inline void SetTexCoord3(const float u, const float v) {
+    texcoord3[0] = u;
+    texcoord3[1] = v;
   }
 
   inline void SetDiffuseGrey(float val) { SetDiffuse(val, val, val); }
@@ -182,8 +232,6 @@ class VertexBuffer {
 
   inline void SetPositionIncludesW(bool enabled = true) { position_count_ = enabled ? 4 : 3; }
 
-  inline void SetNormalIncludesW(bool enabled = true) { normal_count_ = enabled ? 4 : 3; }
-
   void Translate(float x, float y, float z, float w = 0.0f);
 
  private:
@@ -195,8 +243,6 @@ class VertexBuffer {
 
   // Number of components in the vertex position (3 or 4).
   uint32_t position_count_ = 3;
-  // Number of components in the vertex normal (3 or 4).
-  uint32_t normal_count_ = 3;
 
   bool cache_valid_{false};  // Indicates whether the HW should be forced to reload this buffer.
 };

@@ -13,7 +13,6 @@ class PrecalculatedVertexShader : public ShaderProgram {
 
  protected:
   void OnLoadShader() override;
-  void OnLoadConstants() override;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADERS_PRECALCULATED_VERTEX_SHADER_H_

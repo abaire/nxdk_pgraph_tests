@@ -15,6 +15,7 @@
 
 #include "test_driver.h"
 #include "test_host.h"
+#include "tests/attribute_carryover_tests.h"
 #include "tests/depth_format_tests.h"
 #include "tests/fog_tests.h"
 #include "tests/front_face_tests.h"
@@ -128,6 +129,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
 
+  {
+    auto suite = std::make_shared<AttributeCarryoverTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
   {
     auto suite = std::make_shared<FogTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
