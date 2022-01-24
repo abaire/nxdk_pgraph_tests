@@ -301,13 +301,13 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
       SetTexCoord0(vertex->texcoord0[0], vertex->texcoord0[1]);
     }
     if (enabled_vertex_fields & TEXCOORD1) {
-      SetTexCoord0(vertex->texcoord1[0], vertex->texcoord1[1]);
+      SetTexCoord1(vertex->texcoord1[0], vertex->texcoord1[1]);
     }
     if (enabled_vertex_fields & TEXCOORD2) {
-      SetTexCoord0(vertex->texcoord2[0], vertex->texcoord2[1]);
+      SetTexCoord2(vertex->texcoord2[0], vertex->texcoord2[1]);
     }
     if (enabled_vertex_fields & TEXCOORD3) {
-      SetTexCoord0(vertex->texcoord3[0], vertex->texcoord3[1]);
+      SetTexCoord3(vertex->texcoord3[0], vertex->texcoord3[1]);
     }
 
     // Setting the position locks in the previously set values and must be done last.
