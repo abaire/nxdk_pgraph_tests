@@ -35,19 +35,23 @@ class AttributeCarryoverTests : public TestSuite {
     ATTR_TEX3 = 11,
   };
 
+  struct TestConfig {
+    DrawMode draw_mode;
+    float attribute_value[4];
+  };
+
  public:
-  AttributeCarryoverTests(TestHost& host, std::string output_dir);
+  AttributeCarryoverTests(TestHost &host, std::string output_dir);
 
   void Initialize() override;
   void Deinitialize() override;
 
  private:
   void CreateGeometry(TestHost::DrawPrimitive primitive);
-  void Test(TestHost::DrawPrimitive primitive, Attribute test_attribute, const float* attribute_value,
-            DrawMode draw_mode);
+  void Test(TestHost::DrawPrimitive primitive, Attribute test_attribute, const TestConfig &config);
 
   static std::string MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
-                                  const float* attribute_value, DrawMode draw_mode);
+                                  const TestConfig &config);
 
  private:
   // Buffer containing vertices that set the attribute(s) under test.

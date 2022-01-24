@@ -312,7 +312,11 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
 
     // Setting the position locks in the previously set values and must be done last.
     if (enabled_vertex_fields & POSITION) {
-      SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2]);
+      if (vertex_buffer_->position_count_ == 3) {
+        SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2]);
+      } else {
+        SetVertex(vertex->pos[0], vertex->pos[1], vertex->pos[2], vertex->pos[3]);
+      }
     }
   }
   vertex_buffer_->Unlock();

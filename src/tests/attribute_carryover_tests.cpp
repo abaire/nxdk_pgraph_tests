@@ -19,13 +19,6 @@ static constexpr TestHost::DrawPrimitive kPrimitives[] = {
     TestHost::PRIMITIVE_TRIANGLES,
 };
 
-static constexpr AttributeCarryoverTests::DrawMode kDrawModes[] = {
-    AttributeCarryoverTests::DRAW_ARRAYS,
-    AttributeCarryoverTests::DRAW_INLINE_BUFFERS,
-    AttributeCarryoverTests::DRAW_INLINE_ARRAYS,
-    AttributeCarryoverTests::DRAW_INLINE_ELEMENTS,
-};
-
 static constexpr AttributeCarryoverTests::Attribute kTestAttributes[]{
     //    AttributeCarryoverTests::ATTR_WEIGHT,
     AttributeCarryoverTests::ATTR_NORMAL,
@@ -46,17 +39,22 @@ static constexpr const float kTestValues[][4] = {
     {0.5f, 0.0f, 0.0f, 1.0f},
 };
 
+static constexpr const AttributeCarryoverTests::TestConfig kTestConfigs[] = {
+    {AttributeCarryoverTests::DRAW_ARRAYS, {0.0f, 0.0f, 1.0f, 1.0f}},
+    {AttributeCarryoverTests::DRAW_INLINE_BUFFERS, {0.75f, 0.0f, 0.0f, 1.0f}},
+    {AttributeCarryoverTests::DRAW_INLINE_ARRAYS, {0.5f, 0.0f, 0.0f, 1.0f}},
+    {AttributeCarryoverTests::DRAW_INLINE_ELEMENTS, {0.25f, 0.0f, 0.6f, 1.0f}},
+};
+
 static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryoverTests::Attribute attribute);
 
-AttributeCarryoverTests::AttributeCarryoverTests(TestHost& host, std::string output_dir)
+AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Attrib carryover") {
-  for (auto draw_mode : kDrawModes) {
-    for (auto primitive : kPrimitives) {
-      for (auto attr : kTestAttributes) {
-        for (auto value : kTestValues) {
-          std::string name = MakeTestName(primitive, attr, value, draw_mode);
-          tests_[name] = [this, primitive, attr, value, draw_mode]() { this->Test(primitive, attr, value, draw_mode); };
-        }
+  for (auto primitive : kPrimitives) {
+    for (auto attr : kTestAttributes) {
+      for (auto config : kTestConfigs) {
+        std::string name = MakeTestName(primitive, attr, config);
+        tests_[name] = [this, primitive, attr, config]() { this->Test(primitive, attr, config); };
       }
     }
   }
@@ -176,17 +174,17 @@ void AttributeCarryoverTests::CreateGeometry(TestHost::DrawPrimitive primitive) 
   }
 }
 
-void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, AttributeCarryoverTests::Attribute test_attribute,
-                                   const float* attribute_value, AttributeCarryoverTests::DrawMode draw_mode) {
+void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute test_attribute,
+                                   const TestConfig &config) {
   auto shader = host_.GetShaderProgram();
 
   static constexpr uint32_t kBackgroundColor = 0xFF444444;
   CreateGeometry(primitive);
   host_.PrepareDraw(kBackgroundColor);
 
-  auto draw = [this, draw_mode, primitive](uint32_t additional_fields) {
+  auto draw = [this, config, primitive](uint32_t additional_fields) {
     uint32_t attributes = host_.POSITION | additional_fields;
-    switch (draw_mode) {
+    switch (config.draw_mode) {
       case DRAW_ARRAYS:
         host_.DrawArrays(attributes, primitive);
         break;
@@ -225,16 +223,16 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, AttributeC
 
   switch (test_attribute) {
     case ATTR_WEIGHT:
-      vertex->SetWeight(attribute_value);
+      vertex->SetWeight(config.attribute_value);
       break;
     case ATTR_NORMAL:
-      vertex->SetNormal(attribute_value);
+      vertex->SetNormal(config.attribute_value);
       break;
     case ATTR_DIFFUSE:
-      vertex->SetDiffuse(attribute_value);
+      vertex->SetDiffuse(config.attribute_value);
       break;
     case ATTR_SPECULAR:
-      vertex->SetSpecular(attribute_value);
+      vertex->SetSpecular(config.attribute_value);
       break;
     case ATTR_FOG_COORD:
     case ATTR_POINT_SIZE:
@@ -243,16 +241,16 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, AttributeC
       ASSERT(!"Attribute not supported.");
       break;
     case ATTR_TEX0:
-      vertex->SetTexCoord0(attribute_value);
+      vertex->SetTexCoord0(config.attribute_value);
       break;
     case ATTR_TEX1:
-      vertex->SetTexCoord1(attribute_value);
+      vertex->SetTexCoord1(config.attribute_value);
       break;
     case ATTR_TEX2:
-      vertex->SetTexCoord2(attribute_value);
+      vertex->SetTexCoord2(config.attribute_value);
       break;
     case ATTR_TEX3:
-      vertex->SetTexCoord3(attribute_value);
+      vertex->SetTexCoord3(config.attribute_value);
       break;
   }
   bleed_buffer_->Unlock();
@@ -267,17 +265,15 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, AttributeC
   host_.SetVertexBuffer(test_buffer_);
   draw(0);
 
-  std::string name = MakeTestName(primitive, test_attribute, attribute_value, draw_mode);
+  std::string name = MakeTestName(primitive, test_attribute, config);
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primitive,
-                                                  AttributeCarryoverTests::Attribute test_attribute,
-                                                  const float* attribute_value,
-                                                  AttributeCarryoverTests::DrawMode draw_mode) {
+std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
+                                                  const TestConfig &config) {
   std::string ret;
 
   switch (primitive) {
@@ -333,11 +329,11 @@ std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primit
   }
 
   char buf[32] = {0};
-  snprintf(buf, 31, "%.1f_%.1f_%.1f_%.1f", attribute_value[0], attribute_value[1], attribute_value[2],
-           attribute_value[3]);
+  snprintf(buf, 31, "%.1f_%.1f_%.1f_%.1f", config.attribute_value[0], config.attribute_value[1],
+           config.attribute_value[2], config.attribute_value[3]);
   ret += buf;
 
-  switch (draw_mode) {
+  switch (config.draw_mode) {
     case DRAW_ARRAYS:
       ret += "-da";
       break;
