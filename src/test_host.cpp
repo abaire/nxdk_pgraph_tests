@@ -129,6 +129,7 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 }
 
 void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
+  ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling SetVertexBufferAttributes.");
   if (!vertex_buffer_->IsCacheValid()) {
     auto p = pb_begin();
     p = pb_push1(p, NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
@@ -492,7 +493,7 @@ void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32
 
 void TestHost::SetVertex(float x, float y, float z) const {
   auto p = pb_begin();
-  p = pb_push3(p, NV097_SET_VERTEX3F, *(uint32_t *)&x, *(uint32_t *)&y, *(uint32_t *)&z);
+  p = pb_push3f(p, NV097_SET_VERTEX3F, x, y, z);
   pb_end(p);
 }
 
@@ -546,25 +547,25 @@ void TestHost::SetPointSize(float ps) const {
 
 void TestHost::SetTexCoord0(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEX_COORD0, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD0, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
 }
 
 void TestHost::SetTexCoord1(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEX_COORD1, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD1, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
 }
 
 void TestHost::SetTexCoord2(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEX_COORD2, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD2, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
 }
 
 void TestHost::SetTexCoord3(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEX_COORD3, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD3, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
 }
 

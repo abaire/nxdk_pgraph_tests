@@ -144,8 +144,9 @@ class TestHost {
   bool GetSaveResults() const { return save_results_; }
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
- private:
   void SetVertexBufferAttributes(uint32_t enabled_fields);
+
+ private:
   void SetupControl0() const;
   void SetupTextureStages() const;
   static void EnsureFolderExists(const std::string &folder_path);
