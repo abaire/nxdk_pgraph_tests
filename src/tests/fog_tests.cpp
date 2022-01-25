@@ -291,31 +291,84 @@ void FogInfiniteFogCoordinateTests::Initialize() {
   host_.SetShaderProgram(shader);
 }
 
-// FogVshFogW
+// FogVec4CoordTests
 
 // clang format off
-static constexpr uint32_t kFogDefaultsShader[] = {
-#include "shaders/fog_defaults_test.inl"
+static constexpr uint32_t kFogVec4Unset[] = {
+#include "shaders/fog_vec4_unset.inl"
+};
+static constexpr uint32_t kFogVec4W[] = {
+#include "shaders/fog_vec4_w.inl"
+};
+static constexpr uint32_t kFogVec4WX[] = {
+#include "shaders/fog_vec4_wx.inl"
+};
+static constexpr uint32_t kFogVec4WY[] = {
+#include "shaders/fog_vec4_wy.inl"
+};
+static constexpr uint32_t kFogVec4WZYX[] = {
+#include "shaders/fog_vec4_wzyx.inl"
+};
+static constexpr uint32_t kFogVec4X[] = {
+#include "shaders/fog_vec4_x.inl"
+};
+static constexpr uint32_t kFogVec4XYZW[] = {
+#include "shaders/fog_vec4_xyzw.inl"
+};
+static constexpr uint32_t kFogVec4Y[] = {
+#include "shaders/fog_vec4_y.inl"
+};
+static constexpr uint32_t kFogVec4Z[] = {
+#include "shaders/fog_vec4_z.inl"
 };
 // clang format on
 
-static const float kFogWTests[] = {0.0f, 0.5f, 1.0f};
+#define DEF_SHADER(shader) (shader), sizeof(shader)
 
-FogVshFogW::FogVshFogW(TestHost& host, std::string output_dir)
-    : FogCustomShaderTests(host, std::move(output_dir), "FogSh set FogW") {
+// clang format off
+static const FogVec4CoordTests::TestConfig kFogWTests[] = {
+    {"None", DEF_SHADER(kFogVec4Unset), {0.0f, 0.0f, 0.0f, 0.0f}},
+
+    {"W", DEF_SHADER(kFogVec4W), {0.0f, 0.0f, 0.0f, 0.0f}},
+    {"W", DEF_SHADER(kFogVec4W), {0.0f, 0.0f, 0.0f, 1.0f}},
+
+    {"WX", DEF_SHADER(kFogVec4WX), {0.25f, 0.0f, 0.0f, 0.5f}},
+    {"WX", DEF_SHADER(kFogVec4WX), {0.65f, 0.0f, 0.0f, 0.0f}},
+
+    {"WY", DEF_SHADER(kFogVec4WY), {0.0f, 0.0f, 0.25f, 0.75f}},
+    {"WY", DEF_SHADER(kFogVec4WY), {0.0f, 0.0f, 0.75f, 0.25f}},
+
+    {"WZYX", DEF_SHADER(kFogVec4WZYX), {0.25f, 0.5f, 0.75f, 1.0f}},
+    {"WZYX", DEF_SHADER(kFogVec4WZYX), {1.0f, 0.75f, 0.5f, 0.25f}},
+
+    {"X", DEF_SHADER(kFogVec4X), {0.0f, 0.0f, 0.0f, 0.0f}},
+    {"X", DEF_SHADER(kFogVec4X), {0.9f, 0.0f, 0.0f, 0.0f}},
+
+    {"XYZW", DEF_SHADER(kFogVec4XYZW), {1.0f, 0.25f, 0.75f, 0.5f}},
+    {"XYZW", DEF_SHADER(kFogVec4XYZW), {0.0f, 0.33f, 0.66f, 0.9f}},
+
+    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 4.0f, 0.0f, 0.0f}},
+    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 6.0f, 0.0f, 0.0f}},
+
+    {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.2f, 0.0f}},
+    {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.8f, 0.0f}},
+};
+// clang format on
+
+#undef DEF_TEST
+
+FogVec4CoordTests::FogVec4CoordTests(TestHost& host, std::string output_dir)
+    : FogCustomShaderTests(host, std::move(output_dir), "Fog coord vec4") {
   tests_.clear();
 
-  for (auto w : {0.0f, 0.5f, 1.0f}) {
-    std::string name = MakeTestName(w);
-    tests_[name] = [this, w]() { Test(w); };
+  for (auto& config : kFogWTests) {
+    std::string name = MakeTestName(config);
+    tests_[name] = [this, &config]() { Test(config); };
   }
 }
 
-void FogVshFogW::Initialize() {
+void FogVec4CoordTests::Initialize() {
   FogCustomShaderTests::Initialize();
-  auto shader = host_.GetShaderProgram();
-  shader->SetShaderOverride(kFogDefaultsShader, sizeof(kFogDefaultsShader));
-  host_.SetShaderProgram(shader);
 
   // Set specular alpha on vertices.
   uint32_t num_vertices = vertex_buffer_->GetNumVertices();
@@ -324,7 +377,7 @@ void FogVshFogW::Initialize() {
   auto vertex = vertex_buffer_->Lock();
   float alpha = 0.0f;
   for (auto i = 0; i < num_vertices; ++i, ++vertex) {
-    vertex->SetDiffuse(0.0f, 0.5, 1.0f, 1.0f);
+    vertex->SetDiffuse(0.0f, 0.0, 1.0f, 1.0f);
     alpha += inc;
   }
   vertex_buffer_->Unlock();
@@ -335,9 +388,11 @@ void FogVshFogW::Initialize() {
   host_.ClearOutputAlphaCombiners();
 }
 
-void FogVshFogW::Test(float fog_w) {
+void FogVec4CoordTests::Test(const TestConfig& config) {
   auto shader = host_.GetShaderProgram();
-  shader->SetUniformF(12, fog_w);
+  shader->SetShaderOverride(config.shader, config.shader_size);
+  shader->SetUniformF(12, config.fog[0], config.fog[1], config.fog[2], config.fog[3]);
+  host_.SetShaderProgram(shader);
 
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
 
@@ -360,7 +415,7 @@ void FogVshFogW::Test(float fog_w) {
   p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
 
   // Note: Fog color is ABGR and not ARGB
-  p = pb_push1(p, NV097_SET_FOG_COLOR, 0xFF);
+  p = pb_push1(p, NV097_SET_FOG_COLOR, 0x00FF00);
 
   // Gen mode does not seem to matter when using a vertex shader.
   p = pb_push1(p, NV097_SET_FOG_GEN_MODE, FOG_GEN_SPEC_ALPHA);
@@ -373,15 +428,16 @@ void FogVshFogW::Test(float fog_w) {
 
   host_.DrawArrays(host_.POSITION | host_.DIFFUSE);
 
-  std::string name = MakeTestName(fog_w);
+  std::string name = MakeTestName(config);
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-std::string FogVshFogW::MakeTestName(float fog_w) {
-  char buf[32] = {0};
-  snprintf(buf, 31, "SetFogW-%f", fog_w);
+std::string FogVec4CoordTests::MakeTestName(const TestConfig& config) {
+  char buf[40] = {0};
+  snprintf(buf, 39, "%s-%.2f_%.2f_%.2f_%.2f", config.prefix, config.fog[0], config.fog[1], config.fog[2],
+           config.fog[3]);
   return buf;
 }

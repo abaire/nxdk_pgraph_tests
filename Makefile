@@ -44,8 +44,16 @@ SRCS = \
 
 SHADER_OBJS = \
 	$(SRCDIR)/shaders/attribute_carryover_test.inl \
-	$(SRCDIR)/shaders/fog_defaults_test.inl \
 	$(SRCDIR)/shaders/fog_infinite_fogc_test.inl \
+	$(SRCDIR)/shaders/fog_vec4_unset.inl \
+	$(SRCDIR)/shaders/fog_vec4_x.inl \
+	$(SRCDIR)/shaders/fog_vec4_y.inl \
+	$(SRCDIR)/shaders/fog_vec4_z.inl \
+	$(SRCDIR)/shaders/fog_vec4_w.inl \
+	$(SRCDIR)/shaders/fog_vec4_wx.inl \
+	$(SRCDIR)/shaders/fog_vec4_wy.inl \
+	$(SRCDIR)/shaders/fog_vec4_wzyx.inl \
+	$(SRCDIR)/shaders/fog_vec4_xyzw.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader_no_lighting.inl \

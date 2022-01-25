@@ -58,14 +58,22 @@ class FogInfiniteFogCoordinateTests : public FogCustomShaderTests {
   void Initialize() override;
 };
 
-class FogVshFogW : public FogCustomShaderTests {
+class FogVec4CoordTests : public FogCustomShaderTests {
  public:
-  FogVshFogW(TestHost& host, std::string output_dir);
+  struct TestConfig {
+    const char* prefix;
+    const uint32_t* shader;
+    const uint32_t shader_size;
+    float fog[4];
+  };
+
+ public:
+  FogVec4CoordTests(TestHost& host, std::string output_dir);
   void Initialize() override;
-  void Test(float fog_w);
+  void Test(const TestConfig& config);
 
  private:
-  static std::string MakeTestName(float fog_w);
+  static std::string MakeTestName(const TestConfig& config);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_TESTS_H

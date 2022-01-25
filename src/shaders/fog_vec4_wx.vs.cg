@@ -8,12 +8,11 @@ struct vOut {
   float4 col0 : COLOR0;
   // cg expects this to be a single value, but will generate the correct code to manipulate a vector anyway.
   // Certain games (e.g., NFS Underground) treat oFog as a vec4, and that behavior is tested here.
-//  float4 fog : FOG;
   float4 fog : FOG;
 };
 
 vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix,
-          uniform float4 camera_pos, uniform float4 light_dir, uniform float fogW) {
+          uniform float4 fog_values) {
   vOut result;
 
   // Transform position and normal
@@ -27,7 +26,8 @@ vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, un
   result.pos = pos;
   result.col0 = I.diffuse;
 
-  result.fog.w = fogW;
+  result.fog.w = fog_values.w;
+  result.fog.x = fog_values.x;
 
   return result;
 }

@@ -1,0 +1,32 @@
+struct vIn {
+  float3 pos : POSITION;
+  float4 diffuse : COLOR0;
+};
+
+struct vOut {
+  float4 pos : POSITION;
+  float4 col0 : COLOR0;
+  // cg expects this to be a single value, but will generate the correct code to manipulate a vector anyway.
+  // Certain games (e.g., NFS Underground) treat oFog as a vec4, and that behavior is tested here.
+  float4 fog : FOG;
+};
+
+vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix,
+          uniform float4 fog_values) {
+  vOut result;
+
+  // Transform position and normal
+  float4 pos = mul(float4(I.pos.xyz, 1.0), model_matrix);
+
+  // Transform pos to screen space
+  pos = mul(pos, view_matrix);
+  pos = mul(pos, projection_matrix);
+  pos.xyz = pos.xyz / pos.w;
+
+  result.pos = pos;
+  result.col0 = I.diffuse;
+
+  result.fog.x = fog_values.x;
+
+  return result;
+}
