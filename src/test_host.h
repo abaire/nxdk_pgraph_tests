@@ -57,6 +57,69 @@ class TestHost {
     PRIMITIVE_POLYGON = NV097_SET_BEGIN_END_OP_POLYGON,
   };
 
+  enum CombinerSource {
+    SRC_ZERO = 0,     // 0
+    SRC_C0,           // Constant[0]
+    SRC_C1,           // Constant[1]
+    SRC_FOG,          // Fog coordinate
+    SRC_DIFFUSE,      // Vertex diffuse
+    SRC_SPECULAR,     // Vertex specular
+    SRC_6,            // ?
+    SRC_7,            // ?
+    SRC_TEX0,         // Texcoord0
+    SRC_TEX1,         // Texcoord1
+    SRC_TEX2,         // Texcoord2
+    SRC_TEX3,         // Texcoord3
+    SRC_R0,           // R0 from the vertex shader
+    SRC_R1,           // R1 from the vertex shader
+    SRC_SPEC_R0_SUM,  // Specular + R1
+    SRC_EF_PROD,      // Combiner param E * F
+  };
+
+  enum CombinerDest {
+    DST_DISCARD = 0,  // Discard the calculation
+    DST_C0,           // Constant[0]
+    DST_C1,           // Constant[1]
+    DST_FOG,          // Fog coordinate
+    DST_DIFFUSE,      // Vertex diffuse
+    DST_SPECULAR,     // Vertex specular
+    DST_6,            // ?
+    DST_7,            // ?
+    DST_TEX0,         // Texcoord0
+    DST_TEX1,         // Texcoord1
+    DST_TEX2,         // Texcoord2
+    DST_TEX3,         // Texcoord3
+    DST_R0,           // R0 from the vertex shader
+    DST_R1,           // R1 from the vertex shader
+    DST_SPEC_R0_SUM,  // Specular + R1
+    DST_EF_PROD,      // Combiner param E * F
+  };
+
+  enum CombinerSumMuxMode {
+    SM_SUM = 0,  // ab + cd
+    SM_MUX = 1,  // r0.a is used to select cd or ab
+  };
+
+  enum CombinerAlphaOutOp {
+    OP_IDENTITY = 0,
+    OP_BIAS = 1,
+    OP_SHIFT_LEFT_1 = 2,
+    OP_SHIFT_LEFT_1_BIAS = 3,
+    OP_SHIFT_LEFT_2 = 4,
+    OP_SHIFT_RIGHT_1 = 6,
+  };
+
+  enum CombinerMapping {
+    MAP_UNSIGNED_IDENTITY,
+    MAP_UNSIGNED_INVERT,
+    MAP_EXPAND_NORMAL,
+    MAP_EXPAND_NEGATE,
+    MAP_HALFBIAS_NORMAL,
+    MAP_HALFBIAS_NEGATE,
+    MAP_SIGNED_IDENTITY,
+    MAP_SIGNED_NEGATE,
+  };
+
  public:
   TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t texture_width, uint32_t texture_height);
   ~TestHost();
@@ -163,9 +226,57 @@ class TestHost {
 
   void SetAlphaBlendEnabled(bool enable = true) const;
 
+  void SetInputColorCombiner(int combiner, CombinerSource a_source = SRC_ZERO, bool a_alpha = false,
+                             CombinerMapping a_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource b_source = SRC_ZERO,
+                             bool b_alpha = false, CombinerMapping b_mapping = MAP_UNSIGNED_IDENTITY,
+                             CombinerSource c_source = SRC_ZERO, bool c_alpha = false,
+                             CombinerMapping c_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource d_source = SRC_ZERO,
+                             bool d_alpha = false, CombinerMapping d_mapping = MAP_UNSIGNED_IDENTITY) const;
+  void ClearInputColorCombiner(int combiner) const;
+  void ClearInputColorCombiners() const;
+  void SetInputAlphaCombiner(int combiner, CombinerSource a_source = SRC_ZERO, bool a_alpha = false,
+                             CombinerMapping a_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource b_source = SRC_ZERO,
+                             bool b_alpha = false, CombinerMapping b_mapping = MAP_UNSIGNED_IDENTITY,
+                             CombinerSource c_source = SRC_ZERO, bool c_alpha = false,
+                             CombinerMapping c_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource d_source = SRC_ZERO,
+                             bool d_alpha = false, CombinerMapping d_mapping = MAP_UNSIGNED_IDENTITY) const;
+  void ClearInputAlphaColorCombiner(int combiner) const;
+  void ClearInputAlphaCombiners() const;
+
+  void SetOutputColorCombiner(int combiner, CombinerDest ab_dst = DST_DISCARD, CombinerDest cd_dst = DST_DISCARD,
+                              CombinerDest sum_dst = DST_DISCARD, bool ab_dot_product = false,
+                              bool cd_dot_product = false, CombinerSumMuxMode sum_or_mux = SM_SUM,
+                              CombinerAlphaOutOp op = OP_IDENTITY, bool alpha_from_ab_blue = false,
+                              bool alpha_from_cd_blue = false) const;
+  void ClearOutputColorCombiner(int combiner) const;
+  void ClearOutputColorCombiners() const;
+
+  void SetOutputAlphaCombiner(int combiner, CombinerDest ab_dst = DST_DISCARD, CombinerDest cd_dst = DST_DISCARD,
+                              CombinerDest sum_dst = DST_DISCARD, bool ab_dot_product = false,
+                              bool cd_dot_product = false, CombinerSumMuxMode sum_or_mux = SM_SUM,
+                              CombinerAlphaOutOp op = OP_IDENTITY) const;
+  void ClearOutputAlphaColorCombiner(int combiner) const;
+  void ClearOutputAlphaCombiners() const;
+
+  void SetFinalCombiner0(CombinerSource a_source = SRC_ZERO, bool a_alpha = false, bool a_invert = false,
+                         CombinerSource b_source = SRC_ZERO, bool b_alpha = false, bool b_invert = false,
+                         CombinerSource c_source = SRC_ZERO, bool c_alpha = false, bool c_invert = false,
+                         CombinerSource d_source = SRC_ZERO, bool d_alpha = false, bool d_invert = false) const;
+  void SetFinalCombiner1(CombinerSource e_source = SRC_ZERO, bool e_alpha = false, bool e_invert = false,
+                         CombinerSource f_source = SRC_ZERO, bool f_alpha = false, bool f_invert = false,
+                         CombinerSource g_source = SRC_ZERO, bool g_alpha = false, bool g_invert = false,
+                         bool specular_add_invert_r12 = false, bool specular_add_invert_r5 = false,
+                         bool specular_clamp = false) const;
+
   void SetVertexBufferAttributes(uint32_t enabled_fields);
 
  private:
+  uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
+                             bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
+                             CombinerMapping c_mapping, CombinerSource d_source, bool d_alpha,
+                             CombinerMapping d_mapping) const;
+  uint32_t MakeOutputCombiner(CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst, bool ab_dot_product,
+                              bool cd_dot_product, CombinerSumMuxMode sum_or_mux, CombinerAlphaOutOp op) const;
   void SetupControl0() const;
   void SetupTextureStages() const;
   static void EnsureFolderExists(const std::string &folder_path);

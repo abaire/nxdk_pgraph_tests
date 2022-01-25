@@ -38,7 +38,7 @@ FogTests::FogTests(TestHost& host, std::string output_dir, std::string suite_nam
       // Alpha doesn't seem to actually have any effect.
       for (auto alpha : {0xFF}) {
         const std::string test_name = MakeTestName(fog_mode, gen_mode, alpha);
-        auto test = [this, fog_mode, gen_mode, alpha]() { this->Test(fog_mode, gen_mode, alpha); };
+        auto test = [this, fog_mode, gen_mode, alpha]() { Test(fog_mode, gen_mode, alpha); };
         tests_[test_name] = test;
       }
     }
@@ -53,37 +53,42 @@ void FogTests::Initialize() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 }
 
+void FogTests::Deinitialize() {
+  vertex_buffer_.reset();
+  TestSuite::Deinitialize();
+}
+
 void FogTests::CreateGeometry() {
   constexpr int kNumTriangles = 4;
-  auto buffer = host_.AllocateVertexBuffer(kNumTriangles * 3);
+  vertex_buffer_ = host_.AllocateVertexBuffer(kNumTriangles * 3);
 
   int index = 0;
   {
     float one[] = {-1.5f, -1.5f, 0.0f};
     float two[] = {-2.5f, 0.6f, 0.0f};
     float three[] = {-0.5f, 0.6f, 0.0f};
-    buffer->DefineTriangle(index++, one, two, three);
+    vertex_buffer_->DefineTriangle(index++, one, two, three);
   }
 
   {
     float one[] = {0.0f, -1.5f, 5.0f};
     float two[] = {-1.0f, 0.75f, 10.0f};
     float three[] = {2.0f, 0.75f, 20.0f};
-    buffer->DefineTriangle(index++, one, two, three);
+    vertex_buffer_->DefineTriangle(index++, one, two, three);
   }
 
   {
     float one[] = {5.0f, -2.0f, 30};
     float two[] = {3.0f, 2.0f, 40};
     float three[] = {12.0f, 2.0f, 70};
-    buffer->DefineTriangle(index++, one, two, three);
+    vertex_buffer_->DefineTriangle(index++, one, two, three);
   }
 
   {
     float one[] = {20.0f, -10.0f, 50};
     float two[] = {12.0f, 10.0f, 125};
     float three[] = {80.0f, 10.0f, 200};
-    buffer->DefineTriangle(index++, one, two, three);
+    vertex_buffer_->DefineTriangle(index++, one, two, three);
   }
 }
 
@@ -265,8 +270,7 @@ void FogCustomShaderTests::Initialize() {
   host_.SetShaderProgram(shader);
 }
 
-FogInfiniteFogCoordinateTests::FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir)
-    : FogCustomShaderTests(host, std::move(output_dir), "Fog inf coord") {}
+// FogInfiniteFogCoordinateTests
 
 // clang format off
 static constexpr uint32_t kInfiniteFogCShader[] = {
@@ -274,10 +278,110 @@ static constexpr uint32_t kInfiniteFogCShader[] = {
 };
 // clang format on
 
+FogInfiniteFogCoordinateTests::FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir)
+    : FogCustomShaderTests(host, std::move(output_dir), "Fog inf coord") {}
+
 void FogInfiniteFogCoordinateTests::Initialize() {
   FogCustomShaderTests::Initialize();
 
   auto shader = host_.GetShaderProgram();
   shader->SetShaderOverride(kInfiniteFogCShader, sizeof(kInfiniteFogCShader));
+  // const c[12] = 0
+  shader->SetUniformF(12, 0.0f);
   host_.SetShaderProgram(shader);
+}
+
+// FogVshFogW
+
+// clang format off
+static constexpr uint32_t kFogDefaultsShader[] = {
+#include "shaders/fog_defaults_test.inl"
+};
+// clang format on
+
+static const float kFogWTests[] = {0.0f, 0.5f, 1.0f};
+
+FogVshFogW::FogVshFogW(TestHost& host, std::string output_dir)
+    : FogCustomShaderTests(host, std::move(output_dir), "FogSh set FogW") {
+  tests_.clear();
+
+  for (auto w : {0.0f, 0.5f, 1.0f}) {
+    std::string name = MakeTestName(w);
+    tests_[name] = [this, w]() { Test(w); };
+  }
+}
+
+void FogVshFogW::Initialize() {
+  FogCustomShaderTests::Initialize();
+  auto shader = host_.GetShaderProgram();
+  shader->SetShaderOverride(kFogDefaultsShader, sizeof(kFogDefaultsShader));
+  host_.SetShaderProgram(shader);
+
+  // Set specular alpha on vertices.
+  uint32_t num_vertices = vertex_buffer_->GetNumVertices();
+  float inc = 1.0f / (float)num_vertices;
+
+  auto vertex = vertex_buffer_->Lock();
+  float alpha = 0.0f;
+  for (auto i = 0; i < num_vertices; ++i, ++vertex) {
+    vertex->SetDiffuse(0.0f, 0.5, 1.0f, 1.0f);
+    alpha += inc;
+  }
+  vertex_buffer_->Unlock();
+
+  host_.ClearInputColorCombiners();
+  host_.ClearInputAlphaCombiners();
+  host_.ClearOutputColorCombiners();
+  host_.ClearOutputAlphaCombiners();
+}
+
+void FogVshFogW::Test(float fog_w) {
+  auto shader = host_.GetShaderProgram();
+  shader->SetUniformF(12, fog_w);
+
+  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_R0);
+
+  host_.SetFinalCombiner0(TestHost::SRC_FOG, true, false, TestHost::SRC_FOG, false, false, TestHost::SRC_R0);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_CONTROL, 1);
+
+  p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
+
+  // Note: Fog color is ABGR and not ARGB
+  p = pb_push1(p, NV097_SET_FOG_COLOR, 0xFF);
+
+  // Gen mode does not seem to matter when using a vertex shader.
+  p = pb_push1(p, NV097_SET_FOG_GEN_MODE, FOG_GEN_SPEC_ALPHA);
+  p = pb_push1(p, NV097_SET_FOG_MODE, FOG_LINEAR);
+
+  // The final fog calculation should be exactly the output of the shader.
+  p = pb_push3f(p, NV097_SET_FOG_PARAMS, 1.0f, 1.0f, 0.0f);
+
+  pb_end(p);
+
+  host_.DrawArrays(host_.POSITION | host_.DIFFUSE);
+
+  std::string name = MakeTestName(fog_w);
+  pb_print("%s\n", name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, name);
+}
+
+std::string FogVshFogW::MakeTestName(float fog_w) {
+  char buf[32] = {0};
+  snprintf(buf, 31, "SetFogW-%f", fog_w);
+  return buf;
 }

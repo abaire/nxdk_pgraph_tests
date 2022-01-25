@@ -34,12 +34,16 @@ class FogTests : public TestSuite {
  public:
   FogTests(TestHost& host, std::string output_dir, std::string suite_name = "Fog");
   void Initialize() override;
+  void Deinitialize() override;
 
  protected:
   virtual void CreateGeometry();
   void Test(FogMode fog_mode, FogGenMode gen_mode, uint32_t fog_alpha);
 
   static std::string MakeTestName(FogMode fog_mode, FogGenMode gen_mode, uint32_t fog_alpha);
+
+ protected:
+  std::shared_ptr<VertexBuffer> vertex_buffer_;
 };
 
 class FogCustomShaderTests : public FogTests {
@@ -52,6 +56,16 @@ class FogInfiniteFogCoordinateTests : public FogCustomShaderTests {
  public:
   FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir);
   void Initialize() override;
+};
+
+class FogVshFogW : public FogCustomShaderTests {
+ public:
+  FogVshFogW(TestHost& host, std::string output_dir);
+  void Initialize() override;
+  void Test(float fog_w);
+
+ private:
+  static std::string MakeTestName(float fog_w);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_TESTS_H

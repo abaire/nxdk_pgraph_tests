@@ -1184,6 +1184,202 @@ void TestHost::SetAlphaBlendEnabled(bool enable) const {
   pb_end(p);
 }
 
+void TestHost::SetInputColorCombiner(int combiner, CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
+                                     CombinerSource b_source, bool b_alpha, CombinerMapping b_mapping,
+                                     CombinerSource c_source, bool c_alpha, CombinerMapping c_mapping,
+                                     CombinerSource d_source, bool d_alpha, CombinerMapping d_mapping) const {
+  uint32_t value = MakeInputCombiner(a_source, a_alpha, a_mapping, b_source, b_alpha, b_mapping, c_source, c_alpha,
+                                     c_mapping, d_source, d_alpha, d_mapping);
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner, value);
+  pb_end(p);
+}
+
+void TestHost::ClearInputColorCombiner(int combiner) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner, 0);
+  pb_end(p);
+}
+
+void TestHost::ClearInputColorCombiners() const {
+  auto p = pb_begin();
+  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_ICW, 8);
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  pb_end(p);
+}
+
+void TestHost::SetInputAlphaCombiner(int combiner, CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
+                                     CombinerSource b_source, bool b_alpha, CombinerMapping b_mapping,
+                                     CombinerSource c_source, bool c_alpha, CombinerMapping c_mapping,
+                                     CombinerSource d_source, bool d_alpha, CombinerMapping d_mapping) const {
+  uint32_t value = MakeInputCombiner(a_source, a_alpha, a_mapping, b_source, b_alpha, b_mapping, c_source, c_alpha,
+                                     c_mapping, d_source, d_alpha, d_mapping);
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner, value);
+  pb_end(p);
+}
+
+void TestHost::ClearInputAlphaColorCombiner(int combiner) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner, 0);
+  pb_end(p);
+}
+
+void TestHost::ClearInputAlphaCombiners() const {
+  auto p = pb_begin();
+  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_ICW, 8);
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  pb_end(p);
+}
+
+uint32_t TestHost::MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
+                                     CombinerSource b_source, bool b_alpha, CombinerMapping b_mapping,
+                                     CombinerSource c_source, bool c_alpha, CombinerMapping c_mapping,
+                                     CombinerSource d_source, bool d_alpha, CombinerMapping d_mapping) const {
+  auto channel = [](CombinerSource src, bool alpha, CombinerMapping mapping) {
+    return src + (alpha << 4) + (mapping << 5);
+  };
+
+  uint32_t ret = (channel(a_source, a_alpha, a_mapping) << 24) + (channel(b_source, b_alpha, b_mapping) << 16) +
+                 (channel(c_source, c_alpha, c_mapping) << 8) + channel(d_source, d_alpha, d_mapping);
+  return ret;
+}
+
+void TestHost::SetOutputColorCombiner(int combiner, TestHost::CombinerDest ab_dst, TestHost::CombinerDest cd_dst,
+                                      TestHost::CombinerDest sum_dst, bool ab_dot_product, bool cd_dot_product,
+                                      TestHost::CombinerSumMuxMode sum_or_mux, TestHost::CombinerAlphaOutOp op,
+                                      bool alpha_from_ab_blue, bool alpha_from_cd_blue) const {
+  uint32_t value = MakeOutputCombiner(ab_dst, cd_dst, sum_dst, ab_dot_product, cd_dot_product, sum_or_mux, op);
+  if (alpha_from_ab_blue) {
+    value |= (1 << 19);
+  }
+  if (alpha_from_cd_blue) {
+    value |= (1 << 18);
+  }
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner, value);
+  pb_end(p);
+}
+
+void TestHost::ClearOutputColorCombiner(int combiner) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner, 0);
+  pb_end(p);
+}
+
+void TestHost::ClearOutputColorCombiners() const {
+  auto p = pb_begin();
+  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_OCW, 8);
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  pb_end(p);
+}
+
+void TestHost::SetOutputAlphaCombiner(int combiner, CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst,
+                                      bool ab_dot_product, bool cd_dot_product, CombinerSumMuxMode sum_or_mux,
+                                      CombinerAlphaOutOp op) const {
+  uint32_t value = MakeOutputCombiner(ab_dst, cd_dst, sum_dst, ab_dot_product, cd_dot_product, sum_or_mux, op);
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner, value);
+  pb_end(p);
+}
+
+void TestHost::ClearOutputAlphaColorCombiner(int combiner) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner, 0);
+  pb_end(p);
+}
+
+void TestHost::ClearOutputAlphaCombiners() const {
+  auto p = pb_begin();
+  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_OCW, 8);
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  *(p++) = 0x0;
+  pb_end(p);
+}
+
+uint32_t TestHost::MakeOutputCombiner(TestHost::CombinerDest ab_dst, TestHost::CombinerDest cd_dst,
+                                      TestHost::CombinerDest sum_dst, bool ab_dot_product, bool cd_dot_product,
+                                      TestHost::CombinerSumMuxMode sum_or_mux, TestHost::CombinerAlphaOutOp op) const {
+  uint32_t ret = cd_dst | (ab_dst << 4) | (sum_dst << 8);
+  if (cd_dot_product) {
+    ret |= 1 << 12;
+  }
+  if (ab_dot_product) {
+    ret |= 1 << 13;
+  }
+  if (sum_or_mux) {
+    ret |= 1 << 14;
+  }
+  ret |= op << 15;
+
+  return ret;
+}
+
+void TestHost::SetFinalCombiner0(TestHost::CombinerSource a_source, bool a_alpha, bool a_invert,
+                                 TestHost::CombinerSource b_source, bool b_alpha, bool b_invert,
+                                 TestHost::CombinerSource c_source, bool c_alpha, bool c_invert,
+                                 TestHost::CombinerSource d_source, bool d_alpha, bool d_invert) const {
+  auto channel = [](CombinerSource src, bool alpha, bool invert) { return src + (alpha << 4) + (invert << 5); };
+
+  uint32_t value = (channel(a_source, a_alpha, a_invert) << 24) + (channel(b_source, b_alpha, b_invert) << 16) +
+                   (channel(c_source, c_alpha, c_invert) << 8) + channel(d_source, d_alpha, d_invert);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, value);
+  pb_end(p);
+}
+
+void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha, bool e_invert,
+                                 TestHost::CombinerSource f_source, bool f_alpha, bool f_invert,
+                                 TestHost::CombinerSource g_source, bool g_alpha, bool g_invert,
+                                 bool specular_add_invert_r12, bool specular_add_invert_r5, bool specular_clamp) const {
+  auto channel = [](CombinerSource src, bool alpha, bool invert) { return src + (alpha << 4) + (invert << 5); };
+
+  uint32_t value = (channel(e_source, e_alpha, e_invert) << 24) + (channel(f_source, f_alpha, f_invert) << 16) +
+                   (channel(g_source, g_alpha, g_invert) << 8);
+  if (specular_add_invert_r12) {
+    value += 0x20;
+  }
+  if (specular_add_invert_r5) {
+    value += (1 << 6);
+  }
+  if (specular_clamp) {
+    value += (1 << 7);
+  }
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, value);
+  pb_end(p);
+}
+
 /* Set an attribute pointer */
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();

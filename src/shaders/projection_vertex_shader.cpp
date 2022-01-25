@@ -122,23 +122,23 @@ void ProjectionVertexShader::OnLoadConstants() {
    */
 
   int index = 0;
-  SetUniform4x4F(index, model_matrix_);
+  SetBaseUniform4x4F(index, model_matrix_);
   index += 4;
-  SetUniform4x4F(index, view_matrix_);
+  SetBaseUniform4x4F(index, view_matrix_);
   index += 4;
-  SetUniform4x4F(index, projection_viewport_matrix_);
+  SetBaseUniform4x4F(index, projection_viewport_matrix_);
   index += 4;
-  SetUniform4F(index, camera_position_);
+  SetBaseUniform4F(index, camera_position_);
   ++index;
 
   if (enable_lighting_) {
-    SetUniform4F(index, light_direction_);
+    SetBaseUniform4F(index, light_direction_);
     ++index;
   }
 
   // Send shader constants
   float constants_0[4] = {0, 0, 0, 0};
-  SetUniform4F(index, constants_0);
+  SetBaseUniform4F(index, constants_0);
   ++index;
 }
 

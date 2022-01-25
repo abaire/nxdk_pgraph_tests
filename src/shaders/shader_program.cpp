@@ -84,7 +84,7 @@ void ShaderProgram::Activate() {
 void ShaderProgram::PrepareDraw() {
   OnLoadConstants();
 
-  if (uniforms_.empty() || !uniform_upload_required_) {
+  if (base_transform_constants_.empty() || !uniform_upload_required_) {
     return;
   }
 
@@ -92,13 +92,15 @@ void ShaderProgram::PrepareDraw() {
 }
 
 void ShaderProgram::UploadConstants() {
+  MergeUniforms();
+
   auto p = pb_begin();
 
   /* Set shader constants cursor at C0 */
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96 + uniform_start_offset_);
 
-  uint32_t *uniforms = uniforms_.data();
-  uint32_t values_remaining = uniforms_.size();
+  uint32_t *uniforms = base_transform_constants_.data();
+  uint32_t values_remaining = base_transform_constants_.size();
   while (values_remaining > 16) {
     pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
     memcpy(p, uniforms, 16 * 4);
@@ -117,20 +119,42 @@ void ShaderProgram::UploadConstants() {
   uniform_upload_required_ = false;
 }
 
-void ShaderProgram::SetUniformBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
+void ShaderProgram::SetTransformConstantBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
   // Constants are always provided as int4 vectors.
   uint32_t index = slot * 4;
   uint32_t num_ints = num_slots * 4;
   uint32_t required_size = index + num_ints;
 
-  if (uniforms_.size() < required_size) {
-    uniforms_.resize(required_size);
+  if (base_transform_constants_.size() < required_size) {
+    base_transform_constants_.resize(required_size);
   }
 
-  uint32_t *data = uniforms_.data() + index;
+  uint32_t *data = base_transform_constants_.data() + index;
   memcpy(data, values, num_ints * sizeof(uint32_t));
 
   uniform_upload_required_ = true;
+}
+
+void ShaderProgram::SetBaseUniform4x4F(uint32_t slot, const float *value) {
+  SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
+}
+
+void ShaderProgram::SetBaseUniform4F(uint32_t slot, const float *value) {
+  SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 1);
+}
+
+void ShaderProgram::SetBaseUniform4I(uint32_t slot, const uint32_t *value) {
+  SetTransformConstantBlock(slot, value, 1);
+}
+
+void ShaderProgram::SetBaseUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
+  const uint32_t vector[] = {x, y, z, w};
+  SetBaseUniform4I(slot, vector);
+}
+
+void ShaderProgram::SetBaseUniformF(uint32_t slot, float x, float y, float z, float w) {
+  const float vector[] = {x, y, z, w};
+  SetBaseUniform4F(slot, vector);
 }
 
 void ShaderProgram::SetUniform4x4F(uint32_t slot, const float *value) {
@@ -141,27 +165,43 @@ void ShaderProgram::SetUniform4F(uint32_t slot, const float *value) {
   SetUniformBlock(slot, reinterpret_cast<const uint32_t *>(value), 1);
 }
 
-void ShaderProgram::SetUniform4F(uint32_t slot, const uint32_t *value) {
-  SetUniformF(slot, value[0], value[1], value[2], value[3]);
+void ShaderProgram::SetUniform4I(uint32_t slot, const uint32_t *value) { SetUniformBlock(slot, value, 1); }
+
+void ShaderProgram::SetUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
+  const uint32_t vector[] = {x, y, z, w};
+  SetUniform4I(slot, vector);
 }
-
-void ShaderProgram::SetUniformF(uint32_t slot, uint32_t value) { SetUniformF(slot, value, 0, 0, 0); }
-
-void ShaderProgram::SetUniformF(uint32_t slot, uint32_t x, uint32_t y) { SetUniformF(slot, x, y, 0, 0); }
-
-void ShaderProgram::SetUniformF(uint32_t slot, uint32_t x, uint32_t y, uint32_t z) { SetUniformF(slot, x, y, z, 0); }
-
-void ShaderProgram::SetUniformF(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
-  SetUniformF(slot, static_cast<float>(x), static_cast<float>(y), static_cast<float>(z), static_cast<float>(w));
-}
-
-void ShaderProgram::SetUniformF(uint32_t slot, float value) { SetUniformF(slot, *(uint32_t *)&value); }
-
-void ShaderProgram::SetUniformF(uint32_t slot, float x, float y) { SetUniformF(slot, x, y, 0, 0); }
-
-void ShaderProgram::SetUniformF(uint32_t slot, float x, float y, float z) { SetUniformF(slot, x, y, z, 0); }
 
 void ShaderProgram::SetUniformF(uint32_t slot, float x, float y, float z, float w) {
   const float vector[] = {x, y, z, w};
   SetUniform4F(slot, vector);
+}
+
+void ShaderProgram::SetUniformBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
+  for (auto i = 0; i < num_slots; ++i, ++slot) {
+    TransformConstant val = {*values++, *values++, *values++, *values++};
+    uniforms_[slot] = val;
+  }
+
+  uint32_t index = slot * 4;
+  uint32_t num_ints = num_slots * 4;
+  uint32_t required_size = index + num_ints;
+
+  if (base_transform_constants_.size() < required_size) {
+    base_transform_constants_.resize(required_size);
+  }
+
+  uniform_upload_required_ = true;
+}
+
+void ShaderProgram::MergeUniforms() {
+  for (auto item : uniforms_) {
+    uint32_t slot = item.first;
+
+    uint32_t index = slot * 4;
+    base_transform_constants_[index++] = item.second.x;
+    base_transform_constants_[index++] = item.second.y;
+    base_transform_constants_[index++] = item.second.z;
+    base_transform_constants_[index++] = item.second.w;
+  }
 }
