@@ -547,26 +547,50 @@ void TestHost::SetPointSize(float ps) const {
 
 void TestHost::SetTexCoord0(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD0, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD0_2F, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
+}
+
+void TestHost::SetTexCoord0(float s, float t, float p, float q) const {
+  auto pb = pb_begin();
+  pb = pb_push4f(pb, NV097_SET_TEXCOORD0_4F, s, t, p, q);
+  pb_end(pb);
 }
 
 void TestHost::SetTexCoord1(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD1, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD1_2F, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
+}
+
+void TestHost::SetTexCoord1(float s, float t, float p, float q) const {
+  auto pb = pb_begin();
+  pb = pb_push4f(pb, NV097_SET_TEXCOORD1_4F, s, t, p, q);
+  pb_end(pb);
 }
 
 void TestHost::SetTexCoord2(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD2, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD2_2F, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
+}
+
+void TestHost::SetTexCoord2(float s, float t, float p, float q) const {
+  auto pb = pb_begin();
+  pb = pb_push4f(pb, NV097_SET_TEXCOORD2_4F, s, t, p, q);
+  pb_end(pb);
 }
 
 void TestHost::SetTexCoord3(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD3, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2(p, NV097_SET_TEXCOORD3_2F, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
+}
+
+void TestHost::SetTexCoord3(float s, float t, float p, float q) const {
+  auto pb = pb_begin();
+  pb = pb_push4f(pb, NV097_SET_TEXCOORD3_4F, s, t, p, q);
+  pb_end(pb);
 }
 
 void TestHost::EnsureFolderExists(const std::string &folder_path) {

@@ -7,10 +7,10 @@ struct vIn {
 //  float point_size : PSIZE;
 //  float4 back_diffuse : BACK_DIFFUSE;
 //  float4 back_specular : BACK_SPECULAR;
-  float2 tex0 : TEXCOORD0;
-  float2 tex1 : TEXCOORD1;
-  float2 tex2 : TEXCOORD2;
-  float2 tex3 : TEXCOORD3;
+  float4 tex0 : TEXCOORD0;
+  float4 tex1 : TEXCOORD1;
+  float4 tex2 : TEXCOORD2;
+  float4 tex3 : TEXCOORD3;
 };
 
 struct vOut {
@@ -46,17 +46,17 @@ vOut main(vIn I, uniform int test_attribute) {
   } else if (test_attribute == ATTR_SPECULAR) {
     result.col = I.specular;
   } else if (test_attribute == ATTR_TEX0) {
-    result.col.rg = I.tex0;
-    result.col.ba = float2(0.0, 1.0);
+    result.col.rgb = I.tex0.rgb;
+    result.col.a = 1.0;
   } else if (test_attribute == ATTR_TEX1) {
-    result.col.rg = I.tex1;
-    result.col.ba = float2(0.0, 1.0);
+    result.col.rgb = I.tex1.rgb;
+    result.col.a = 1.0;
   } else if (test_attribute == ATTR_TEX2) {
-    result.col.rg = I.tex2;
-    result.col.ba = float2(0.0, 1.0);
+    result.col.rgb = I.tex2.rgb;
+    result.col.a = 1.0;
   } else if (test_attribute == ATTR_TEX3) {
-    result.col.rg = I.tex3;
-    result.col.ba = float2(0.0, 1.0);
+    result.col.rgb = I.tex3.rgb;
+    result.col.a = 1.0;
   } else {
     result.col = float4(1.0, 0.0, 0.0, 0.75);
   }

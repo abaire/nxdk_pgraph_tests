@@ -198,7 +198,24 @@ void AttributeExplicitSetterTests::Test() {
   DO_DRAW(set_tex0_2f, ATTR_TEX0);
 
   // set_tex0_2i
-  // set_tex0_4f
+
+  auto set_tex0_4f = [this](int index) {
+    switch (index) {
+      default:
+      case 0:
+        host_.SetTexCoord0(0.0f, 1.0f, 0.0f, 1.0f);
+        break;
+
+      case 1:
+        host_.SetTexCoord0(0.0f, 0.0f, 1.0f, 0.5f);
+        break;
+
+      case 2:
+        host_.SetTexCoord0(1.0f, 0.0f, 0.0f, 0.75f);
+        break;
+    }
+  };
+  DO_DRAW(set_tex0_4f, ATTR_TEX0);
 
   auto set_tex1_2f = [this](int index) {
     switch (index) {
@@ -219,7 +236,24 @@ void AttributeExplicitSetterTests::Test() {
   DO_DRAW(set_tex1_2f, ATTR_TEX1);
 
   // set_tex1_2i
-  // set_tex1_4f
+
+  auto set_tex1_4f = [this](int index) {
+    switch (index) {
+      default:
+      case 0:
+        host_.SetTexCoord1(0.0f, 0.0f, 1.0f, 0.5f);
+        break;
+
+      case 1:
+        host_.SetTexCoord1(1.0f, 0.0f, 0.0f, 0.75f);
+        break;
+
+      case 2:
+        host_.SetTexCoord1(0.0f, 1.0f, 0.0f, 1.0f);
+        break;
+    }
+  };
+  DO_DRAW(set_tex1_4f, ATTR_TEX1);
 
   auto set_tex2_2f = [this](int index) {
     switch (index) {
@@ -240,7 +274,24 @@ void AttributeExplicitSetterTests::Test() {
   DO_DRAW(set_tex2_2f, ATTR_TEX2);
 
   // set_tex2_2i
-  // set_tex2_4f
+
+  auto set_tex2_4f = [this](int index) {
+    switch (index) {
+      default:
+      case 0:
+        host_.SetTexCoord2(1.0f, 0.0f, 0.0f, 0.75f);
+        break;
+
+      case 1:
+        host_.SetTexCoord2(0.0f, 0.0f, 1.0f, 0.5f);
+        break;
+
+      case 2:
+        host_.SetTexCoord2(0.0f, 1.0f, 0.0f, 1.0f);
+        break;
+    }
+  };
+  DO_DRAW(set_tex2_4f, ATTR_TEX2);
 
   auto set_tex3_2f = [this](int index) {
     switch (index) {
@@ -261,7 +312,24 @@ void AttributeExplicitSetterTests::Test() {
   DO_DRAW(set_tex3_2f, ATTR_TEX3);
 
   // set_tex3_2i
-  // set_tex3_4f
+
+  auto set_tex3_4f = [this](int index) {
+    switch (index) {
+      default:
+      case 0:
+        host_.SetTexCoord3(0.0f, 1.0f, 0.0f, 1.0f);
+        break;
+
+      case 1:
+        host_.SetTexCoord3(1.0f, 0.0f, 0.0f, 0.75f);
+        break;
+
+      case 2:
+        host_.SetTexCoord3(0.0f, 0.0f, 1.0f, 0.5f);
+        break;
+    }
+  };
+  DO_DRAW(set_tex3_4f, ATTR_TEX3);
 
 #undef DO_DRAW
 

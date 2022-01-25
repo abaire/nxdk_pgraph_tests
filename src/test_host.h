@@ -135,9 +135,13 @@ class TestHost {
   void SetFogCoord(float fc) const;
   void SetPointSize(float ps) const;
   void SetTexCoord0(float u, float v) const;
+  void SetTexCoord0(float s, float t, float p, float q) const;
   void SetTexCoord1(float u, float v) const;
+  void SetTexCoord1(float s, float t, float p, float q) const;
   void SetTexCoord2(float u, float v) const;
+  void SetTexCoord2(float s, float t, float p, float q) const;
   void SetTexCoord3(float u, float v) const;
+  void SetTexCoord3(float s, float t, float p, float q) const;
 
   static std::string GetPrimitiveName(DrawPrimitive primitive);
 
