@@ -46,17 +46,13 @@ vOut main(vIn I, uniform int test_attribute) {
   } else if (test_attribute == ATTR_SPECULAR) {
     result.col = I.specular;
   } else if (test_attribute == ATTR_TEX0) {
-    result.col.rgb = I.tex0.rgb;
-    result.col.a = 1.0;
+    result.col = I.tex0;
   } else if (test_attribute == ATTR_TEX1) {
-    result.col.rgb = I.tex1.rgb;
-    result.col.a = 1.0;
+    result.col = I.tex1;
   } else if (test_attribute == ATTR_TEX2) {
-    result.col.rgb = I.tex2.rgb;
-    result.col.a = 1.0;
+    result.col = I.tex2;
   } else if (test_attribute == ATTR_TEX3) {
-    result.col.rgb = I.tex3.rgb;
-    result.col.a = 1.0;
+    result.col = I.tex3;
   } else {
     result.col = float4(1.0, 0.0, 0.0, 0.75);
   }

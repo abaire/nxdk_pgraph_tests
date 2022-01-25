@@ -1173,6 +1173,17 @@ std::string TestHost::GetPrimitiveName(TestHost::DrawPrimitive primitive) {
   }
 }
 
+void TestHost::SetAlphaBlendEnabled(bool enable) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BLEND_ENABLE, enable);
+  if (enable) {
+    p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
+    p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
+    p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA);
+  }
+  pb_end(p);
+}
+
 /* Set an attribute pointer */
 static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();

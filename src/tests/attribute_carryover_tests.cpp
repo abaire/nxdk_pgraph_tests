@@ -67,11 +67,11 @@ void AttributeCarryoverTests::Initialize() {
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Send shader constants (see attribute_carryover_test.inl)
-  // const c[1] = 1 0 2 3
+  // const c[2] = 1 0 2 3
   shader->SetUniformF(1, 1, 0, 2, 3);
-  // const c[2] = 8 9 10 11
+  // const c[3] = 8 9 10 11
   shader->SetUniformF(2, 8, 9, 10, 11);
-  // const c[3] = 1 0 0.75
+  // const c[4] = 1 0 0.75
   shader->SetUniformF(3, 1.0f, 0.0f, 0.75f);
 
   host_.SetShaderProgram(shader);
@@ -257,6 +257,7 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute 
 
   // The bleed buffer should always render its diffuse color, regardless of the attribute under test.
   shader->SetUniformF(0, ATTR_DIFFUSE);
+  shader->SetUniformF(1, 0.0f);
   host_.SetVertexBuffer(bleed_buffer_);
   draw(host_.DIFFUSE | TestAttributeToVertexAttribute(test_attribute));
 

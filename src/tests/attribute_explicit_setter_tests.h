@@ -28,13 +28,19 @@ class AttributeExplicitSetterTests : public TestSuite {
     ATTR_TEX3 = 11,
   };
 
+  struct TestConfig {
+    const char* test_name;
+    bool force_blend_alpha;
+  };
+
  public:
   AttributeExplicitSetterTests(TestHost& host, std::string output_dir);
 
   void Initialize() override;
 
  private:
-  void Test();
+  void CreateGeometry();
+  void Test(const TestConfig& config);
   void Draw(float x, float y, const std::function<void(int)>& attribute_setter, Attribute test_attribute);
 
  private:

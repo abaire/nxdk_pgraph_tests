@@ -161,6 +161,8 @@ class TestHost {
   bool GetSaveResults() const { return save_results_; }
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
+  void SetAlphaBlendEnabled(bool enable = true) const;
+
   void SetVertexBufferAttributes(uint32_t enabled_fields);
 
  private:

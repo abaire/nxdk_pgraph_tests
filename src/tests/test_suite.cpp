@@ -48,6 +48,7 @@ void TestSuite::Initialize() {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
+  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
   p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
   p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
   p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
@@ -56,13 +57,9 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
   p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
   p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA);
-  p = pb_push1(p, 0x17C4, 0);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_LIGHT_MODEL_TWO_SIDE_ENABLE, 0);
   p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, 0xe);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, 0x1c80);
 
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x10, 0);           // Specular
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);  // Back diffuse
@@ -152,7 +149,7 @@ void TestSuite::Initialize() {
     p = pb_push1(p, filter, 0x1012000);
   }
 
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, 0x0);
+  p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, 0xc);
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, 0x1c80);
 
@@ -166,11 +163,6 @@ void TestSuite::Initialize() {
     matrix_enable += 4;
     p = pb_push1(p, matrix_enable, 0x0);
   }
-
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 0);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 0);
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, 0);
 
   p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
   p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
