@@ -535,9 +535,33 @@ void TestHost::SetDiffuse(float r, float g, float b, float a) const {
   pb_end(p);
 }
 
+void TestHost::SetDiffuse(float r, float g, float b) const {
+  auto p = pb_begin();
+  p = pb_push3f(p, NV097_SET_DIFFUSE_COLOR3F, r, g, b);
+  pb_end(p);
+}
+
+void TestHost::SetDiffuse(uint32_t color) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, color);
+  pb_end(p);
+}
+
 void TestHost::SetSpecular(float r, float g, float b, float a) const {
   auto p = pb_begin();
   p = pb_push4f(p, NV097_SET_SPECULAR_COLOR4F, r, g, b, a);
+  pb_end(p);
+}
+
+void TestHost::SetSpecular(float r, float g, float b) const {
+  auto p = pb_begin();
+  p = pb_push3f(p, NV097_SET_SPECULAR_COLOR3F, r, g, b);
+  pb_end(p);
+}
+
+void TestHost::SetSpecular(uint32_t color) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SPECULAR_COLOR4I, color);
   pb_end(p);
 }
 
@@ -559,9 +583,24 @@ void TestHost::SetTexCoord0(float u, float v) const {
   pb_end(p);
 }
 
+void TestHost::SetTexCoord0i(int u, int v) const {
+  auto p = pb_begin();
+  uint32_t uv = (u & 0xFFFF) | (v << 16);
+  p = pb_push1(p, NV097_SET_TEXCOORD0_2S, uv);
+  pb_end(p);
+}
+
 void TestHost::SetTexCoord0(float s, float t, float p, float q) const {
   auto pb = pb_begin();
   pb = pb_push4f(pb, NV097_SET_TEXCOORD0_4F, s, t, p, q);
+  pb_end(pb);
+}
+
+void TestHost::SetTexCoord0i(int s, int t, int p, int q) const {
+  auto pb = pb_begin();
+  uint32_t st = (s & 0xFFFF) | (t << 16);
+  uint32_t pq = (p & 0xFFFF) | (q << 16);
+  pb = pb_push2(pb, NV097_SET_TEXCOORD0_4S, st, pq);
   pb_end(pb);
 }
 
@@ -571,15 +610,37 @@ void TestHost::SetTexCoord1(float u, float v) const {
   pb_end(p);
 }
 
+void TestHost::SetTexCoord1i(int u, int v) const {
+  auto p = pb_begin();
+  uint32_t uv = (u & 0xFFFF) | (v << 16);
+  p = pb_push1(p, NV097_SET_TEXCOORD1_2S, uv);
+  pb_end(p);
+}
+
 void TestHost::SetTexCoord1(float s, float t, float p, float q) const {
   auto pb = pb_begin();
   pb = pb_push4f(pb, NV097_SET_TEXCOORD1_4F, s, t, p, q);
   pb_end(pb);
 }
 
+void TestHost::SetTexCoord1i(int s, int t, int p, int q) const {
+  auto pb = pb_begin();
+  uint32_t st = (s & 0xFFFF) | (t << 16);
+  uint32_t pq = (p & 0xFFFF) | (q << 16);
+  pb = pb_push2(pb, NV097_SET_TEXCOORD1_4S, st, pq);
+  pb_end(pb);
+}
+
 void TestHost::SetTexCoord2(float u, float v) const {
   auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD2_2F, *(uint32_t *)&u, *(uint32_t *)&v);
+  p = pb_push2f(p, NV097_SET_TEXCOORD2_2F, u, v);
+  pb_end(p);
+}
+
+void TestHost::SetTexCoord2i(int u, int v) const {
+  auto p = pb_begin();
+  uint32_t uv = (u & 0xFFFF) | (v << 16);
+  p = pb_push1(p, NV097_SET_TEXCOORD2_2S, uv);
   pb_end(p);
 }
 
@@ -589,15 +650,38 @@ void TestHost::SetTexCoord2(float s, float t, float p, float q) const {
   pb_end(pb);
 }
 
+void TestHost::SetTexCoord2i(int s, int t, int p, int q) const {
+  auto pb = pb_begin();
+  uint32_t st = (s & 0xFFFF) | (t << 16);
+  uint32_t pq = (p & 0xFFFF) | (q << 16);
+  pb = pb_push2(pb, NV097_SET_TEXCOORD2_4S, st, pq);
+  pb_end(pb);
+}
+
 void TestHost::SetTexCoord3(float u, float v) const {
   auto p = pb_begin();
   p = pb_push2(p, NV097_SET_TEXCOORD3_2F, *(uint32_t *)&u, *(uint32_t *)&v);
   pb_end(p);
 }
 
+void TestHost::SetTexCoord3i(int u, int v) const {
+  auto p = pb_begin();
+  uint32_t uv = (u & 0xFFFF) | (v << 16);
+  p = pb_push1(p, NV097_SET_TEXCOORD3_2S, uv);
+  pb_end(p);
+}
+
 void TestHost::SetTexCoord3(float s, float t, float p, float q) const {
   auto pb = pb_begin();
   pb = pb_push4f(pb, NV097_SET_TEXCOORD3_4F, s, t, p, q);
+  pb_end(pb);
+}
+
+void TestHost::SetTexCoord3i(int s, int t, int p, int q) const {
+  auto pb = pb_begin();
+  uint32_t st = (s & 0xFFFF) | (t << 16);
+  uint32_t pq = (p & 0xFFFF) | (q << 16);
+  pb = pb_push2(pb, NV097_SET_TEXCOORD3_4S, st, pq);
   pb_end(pb);
 }
 

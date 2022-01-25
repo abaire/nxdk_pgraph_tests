@@ -124,7 +124,7 @@ void WParamTests::TestWGaps() {
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, 0xFFFFFFFF);
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
   pb_end(p);
 
   host_.DrawArrays(TestHost::POSITION, TestHost::PRIMITIVE_TRIANGLE_STRIP);
@@ -142,7 +142,7 @@ void WParamTests::TestWGaps() {
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, 0xFFFFFFFF);
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
   pb_end(p);
 
   host_.DrawArrays(TestHost::POSITION);
@@ -249,7 +249,7 @@ void WParamTests::TestNegativeWTriangleStrip() {
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR, 0xFFFFFFFF);
+  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
   pb_end(p);
 
   host_.DrawArrays(TestHost::POSITION, TestHost::PRIMITIVE_TRIANGLE_STRIP);

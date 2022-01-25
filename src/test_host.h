@@ -132,17 +132,29 @@ class TestHost {
   void SetNormal(float x, float y, float z) const;
   void SetNormal3S(int x, int y, int z) const;
   void SetDiffuse(float r, float g, float b, float a) const;
+  void SetDiffuse(float r, float g, float b) const;
+  void SetDiffuse(uint32_t rgba) const;
   void SetSpecular(float r, float g, float b, float a) const;
+  void SetSpecular(float r, float g, float b) const;
+  void SetSpecular(uint32_t rgba) const;
   void SetFogCoord(float fc) const;
   void SetPointSize(float ps) const;
   void SetTexCoord0(float u, float v) const;
+  void SetTexCoord0i(int u, int v) const;
   void SetTexCoord0(float s, float t, float p, float q) const;
+  void SetTexCoord0i(int s, int t, int p, int q) const;
   void SetTexCoord1(float u, float v) const;
+  void SetTexCoord1i(int u, int v) const;
   void SetTexCoord1(float s, float t, float p, float q) const;
+  void SetTexCoord1i(int s, int t, int p, int q) const;
   void SetTexCoord2(float u, float v) const;
+  void SetTexCoord2i(int u, int v) const;
   void SetTexCoord2(float s, float t, float p, float q) const;
+  void SetTexCoord2i(int s, int t, int p, int q) const;
   void SetTexCoord3(float u, float v) const;
+  void SetTexCoord3i(int u, int v) const;
   void SetTexCoord3(float s, float t, float p, float q) const;
+  void SetTexCoord3i(int s, int t, int p, int q) const;
 
   static std::string GetPrimitiveName(DrawPrimitive primitive);
 
