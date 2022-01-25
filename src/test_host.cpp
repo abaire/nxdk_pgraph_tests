@@ -521,6 +521,14 @@ void TestHost::SetNormal(float x, float y, float z) const {
   pb_end(p);
 }
 
+void TestHost::SetNormal3S(int x, int y, int z) const {
+  auto p = pb_begin();
+  uint32_t xy = (x & 0xFFFF) | y << 16;
+  uint32_t z0 = z & 0xFFFF;
+  p = pb_push2(p, NV097_SET_NORMAL3S, xy, z0);
+  pb_end(p);
+}
+
 void TestHost::SetDiffuse(float r, float g, float b, float a) const {
   auto p = pb_begin();
   p = pb_push4f(p, NV097_SET_DIFFUSE_COLOR4F, r, g, b, a);

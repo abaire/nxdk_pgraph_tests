@@ -133,7 +133,23 @@ void AttributeExplicitSetterTests::Test() {
   };
   DO_DRAW(set_normal_3f, ATTR_NORMAL);
 
-  // set_normal_3i
+  auto set_normal_3s = [this](int index) {
+    switch (index) {
+      default:
+      case 0:
+        host_.SetNormal3S(0x7FFF, 0, 0);
+        break;
+
+      case 1:
+        host_.SetNormal3S(0, 0x7FFF, 0);
+        break;
+
+      case 2:
+        host_.SetNormal3S(0, 0, 0x7FFF);
+        break;
+    }
+  };
+  DO_DRAW(set_normal_3s, ATTR_NORMAL);
 
   auto set_diffuse_4f = [this](int index) {
     switch (index) {

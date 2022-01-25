@@ -130,6 +130,7 @@ class TestHost {
   void SetWeight(float w) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
   void SetNormal(float x, float y, float z) const;
+  void SetNormal3S(int x, int y, int z) const;
   void SetDiffuse(float r, float g, float b, float a) const;
   void SetSpecular(float r, float g, float b, float a) const;
   void SetFogCoord(float fc) const;
