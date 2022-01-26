@@ -10,7 +10,7 @@
 
 // clang format off
 static constexpr uint32_t kShader[] = {
-#include "shaders/attribute_carryover_test.inl"
+#include "shaders/attribute_explicit_setter_tests.inl"
 };
 // clang format on
 
@@ -35,12 +35,12 @@ void AttributeExplicitSetterTests::Initialize() {
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Send shader constants (see attribute_carryover_test.inl)
-  // const c[2] = 1 0 2 3
-  shader->SetUniformF(1, 1, 0, 2, 3);
-  // const c[3] = 8 9 10 11
-  shader->SetUniformF(2, 8, 9, 10, 11);
-  // const c[4] = 1 0 0.75
-  shader->SetUniformF(3, 1.0f, 0.0f, 0.75f);
+  // const c[3] = 1 0 2 3
+  shader->SetUniformF(3, 1, 0, 2, 3);
+  // const c[4] = 8 9 10 11
+  shader->SetUniformF(4, 8, 9, 10, 11);
+  // const c[5] = 1 0 0.75
+  shader->SetUniformF(5, 1.0f, 0.0f, 0.75f);
 
   host_.SetShaderProgram(shader);
 
@@ -77,6 +77,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
     // Render a background to visualize alpha values.
     auto shader = host_.GetShaderProgram();
     shader->SetUniformF(0, ATTR_DIFFUSE);
+    shader->SetUniformF(1, 0.0f, 1.0f);
     shader->PrepareDraw();
     host_.DrawArrays();
   }
@@ -87,15 +88,17 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
   float x = left;
   float y = top;
 
-#define DO_DRAW(method, attrib)              \
-  do {                                       \
-    Draw(x, y, (method), (attrib));          \
-    x += test_triangle_width + 7;            \
-    if (x > (right - test_triangle_width)) { \
-      y += test_triangle_height + 32;        \
-      x = left;                              \
-    }                                        \
+#define DO_DRAW(method, attrib, mask, bias, multiplier)           \
+  do {                                                            \
+    Draw(x, y, (method), (attrib), (mask), (bias), (multiplier)); \
+    x += test_triangle_width + 7;                                 \
+    if (x > (right - test_triangle_width)) {                      \
+      y += test_triangle_height + 32;                             \
+      x = left;                                                   \
+    }                                                             \
   } while (0)
+
+#define F2S(val) ((int16_t)((val)*65535.0f - 32768.0f))
 
   // Normals
 
@@ -115,31 +118,31 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_normal_3f, ATTR_NORMAL);
+  DO_DRAW(set_normal_3f, ATTR_NORMAL, 0x7, 0.0f, 1.0f);
   pb_printat(1, 11, (char*)"n3f");
 
   auto set_normal_3s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetNormal3S(0x7FFF, 0, 0);
+        host_.SetNormal3S(32767, -32768, 0);
         break;
 
       case 1:
-        host_.SetNormal3S(0, 0x1FFF, 0);
+        host_.SetNormal3S(1024, 16536, -32768);
         break;
 
       case 2:
-        host_.SetNormal3S(0, 0, 0x5000);
+        host_.SetNormal3S(-32768, -4500, 24000);
         break;
     }
   };
-  DO_DRAW(set_normal_3s, ATTR_NORMAL);
+  DO_DRAW(set_normal_3s, ATTR_NORMAL, 0x7, 1.0f, 0.5f);
   pb_printat(1, 17, (char*)"n3s");
 
   // Diffuse
 
-  auto set_diffuse_4i = [this](int index) {
+  auto set_diffuse_4ub = [this](int index) {
     switch (index) {
       default:
       case 0:
@@ -155,7 +158,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_diffuse_4i, ATTR_DIFFUSE);
+  DO_DRAW(set_diffuse_4ub, ATTR_DIFFUSE, 0xF, 0.0f, 1.0f);
   pb_printat(1, 22, (char*)"d4i");
 
   auto set_diffuse_3f = [this](int index) {
@@ -174,7 +177,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_diffuse_3f, ATTR_DIFFUSE);
+  DO_DRAW(set_diffuse_3f, ATTR_DIFFUSE, 0xF, 0.0f, 1.0f);
   pb_printat(1, 27, (char*)"d3f");
 
   auto set_diffuse_4f = [this](int index) {
@@ -193,12 +196,12 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_diffuse_4f, ATTR_DIFFUSE);
+  DO_DRAW(set_diffuse_4f, ATTR_DIFFUSE, 0xF, 0.0f, 1.0f);
   pb_printat(1, 32, (char*)"d4f");
 
   // Specular
 
-  auto set_specular_4i = [this](int index) {
+  auto set_specular_4ub = [this](int index) {
     switch (index) {
       default:
       case 0:
@@ -214,8 +217,8 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_specular_4i, ATTR_SPECULAR);
-  pb_printat(1, 37, (char*)"s4i");
+  DO_DRAW(set_specular_4ub, ATTR_SPECULAR, 0xF, 0.0f, 1.0f);
+  pb_printat(1, 37, (char*)"s4s");
 
   // Specular
   auto set_specular_3f = [this](int index) {
@@ -234,7 +237,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_specular_3f, ATTR_SPECULAR);
+  DO_DRAW(set_specular_3f, ATTR_SPECULAR, 0x7, 0.0f, 1.0f);
   pb_printat(1, 43, (char*)"s3f");
 
   auto set_specular_4f = [this](int index) {
@@ -253,7 +256,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_specular_4f, ATTR_SPECULAR);
+  DO_DRAW(set_specular_4f, ATTR_SPECULAR, 0xF, 0.0f, 1.0f);
   pb_printat(4, 11, (char*)"s4f");
 
   // TextureCoord0
@@ -274,46 +277,46 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex0_4f, ATTR_TEX0);
+  DO_DRAW(set_tex0_4f, ATTR_TEX0, 0xF, 0.0f, 1.0f);
   pb_printat(4, 17, (char*)"t04f");
 
-  auto set_tex0_2i = [this](int index) {
+  auto set_tex0_2s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetTexCoord0i(0x4FFF, 0);
+        host_.SetTexCoord0S(F2S(0.25f), F2S(0.0f));
         break;
 
       case 1:
-        host_.SetTexCoord0i(0, 0xFFFF);
+        host_.SetTexCoord0S(F2S(0.0f), F2S(0.75f));
         break;
 
       case 2:
-        host_.SetTexCoord0i(1, 0x8000);
+        host_.SetTexCoord0S(F2S(1.0f), F2S(1.0f));
         break;
     }
   };
-  DO_DRAW(set_tex0_2i, ATTR_TEX0);
+  DO_DRAW(set_tex0_2s, ATTR_TEX0, 0x3, 32768.0f, 1.0f / 65535.0f);
   pb_printat(4, 22, (char*)"t02s");
 
-  auto set_tex0_4i = [this](int index) {
+  auto set_tex0_4s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetTexCoord0i(0x7FFF, 0, 1, 0x7FFF);
+        host_.SetTexCoord0S(F2S(1.0f), F2S(0.0f), F2S(1.0f), F2S(1.0f));
         break;
 
       case 1:
-        host_.SetTexCoord0i(0, 0x7FFF, 0, 0x5FFF);
+        host_.SetTexCoord0S(F2S(0.0f), F2S(1.0f), F2S(0.0f), F2S(0.5f));
         break;
 
       case 2:
-        host_.SetTexCoord0i(0x1000, 0x3000, 0x6000, 0x4FFF);
+        host_.SetTexCoord0S(F2S(0.5f), F2S(0.5f), F2S(0.5f), F2S(0.75f));
         break;
     }
   };
-  DO_DRAW(set_tex0_4i, ATTR_TEX0);
-  pb_printat(4, 27, (char*)"t04i");
+  DO_DRAW(set_tex0_4s, ATTR_TEX0, 0xF, 32768.0f, 1.0f / 65535.0f);
+  pb_printat(4, 27, (char*)"t04s");
 
   auto set_tex0_2f = [this](int index) {
     switch (index) {
@@ -331,7 +334,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex0_2f, ATTR_TEX0);
+  DO_DRAW(set_tex0_2f, ATTR_TEX0, 0x3, 0.0f, 1.0f);
   pb_printat(4, 32, (char*)"t02f");
 
   // TextureCoord1
@@ -352,29 +355,26 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex1_2f, ATTR_TEX1);
+  DO_DRAW(set_tex1_2f, ATTR_TEX1, 0x3, 0.0f, 1.0f);
   pb_printat(4, 37, (char*)"t12f");
 
-  auto set_tex1_2i = [this](int index) {
+  auto set_tex1_2s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        // NaN as a 16-bit float.
-        host_.SetTexCoord1i(0x7FFF, 0);
+        host_.SetTexCoord1S(F2S(1.0f), F2S(0.0f));
         break;
 
       case 1:
-        // 0.00781 as a 16-bit float
-        host_.SetTexCoord1i(0, 0x1FFF);
+        host_.SetTexCoord1S(F2S(0.0f), F2S(1.0f));
         break;
 
       case 2:
-        // 0.5 as a 16-bit float.
-        host_.SetTexCoord1i(0x3800, 0x3800);
+        host_.SetTexCoord1S(F2S(0.4f), F2S(0.7f));
         break;
     }
   };
-  DO_DRAW(set_tex1_2i, ATTR_TEX1);
+  DO_DRAW(set_tex1_2s, ATTR_TEX1, 0x3, 32768.0f, 1.0f / 65535.0f);
   pb_printat(4, 43, (char*)"t12s");
 
   auto set_tex1_4f = [this](int index) {
@@ -393,26 +393,26 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex1_4f, ATTR_TEX1);
+  DO_DRAW(set_tex1_4f, ATTR_TEX1, 0xF, 0.0f, 1.0f);
   pb_printat(7, 11, (char*)"t14f");
 
-  auto set_tex1_4i = [this](int index) {
+  auto set_tex1_4s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetTexCoord1i(0x7FFF, 0, 0, 0x7FFF);
+        host_.SetTexCoord1S(F2S(0.0f), F2S(0.0f), F2S(1.0f), F2S(0.75f));
         break;
 
       case 1:
-        host_.SetTexCoord1i(0, 0x7FFF, 0, 0x5FFF);
+        host_.SetTexCoord1S(F2S(1.0f), F2S(0.0f), F2S(0.0f), F2S(0.5f));
         break;
 
       case 2:
-        host_.SetTexCoord1i(0x1000, 0x3000, 0, 0x4FFF);
+        host_.SetTexCoord1S(F2S(0.0f), F2S(1.0f), F2S(0.0f), F2S(0.45f));
         break;
     }
   };
-  DO_DRAW(set_tex1_4i, ATTR_TEX1);
+  DO_DRAW(set_tex1_4s, ATTR_TEX1, 0xF, 32768.0f, 1.0f / 65535.0f);
   pb_printat(7, 17, (char*)"t14s");
 
   // TextureCoord2
@@ -433,30 +433,27 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex2_2f, ATTR_TEX2);
+  DO_DRAW(set_tex2_2f, ATTR_TEX2, 0x3, 0.0f, 1.0f);
   pb_printat(7, 22, (char*)"t22f");
 
   auto set_tex2_2i = [this](int index) {
     switch (index) {
       default:
       case 0:
-        // NaN as a 32-bit float >> 16.
-        host_.SetTexCoord2i(0x7FFF, 0);
+        host_.SetTexCoord2S(F2S(1.0f), F2S(0.0f));
         break;
 
       case 1:
         // 0.5 as a 32-bit float >> 16.
-        host_.SetTexCoord2i(0, 0x3F00);
+        host_.SetTexCoord2S(F2S(0.0f), F2S(1.0f));
         break;
 
       case 2:
-        // 2.524355e-29 as a 32-bit float >> 16
-        // 4.656613e-10 as a 32-bit float >> 16
-        host_.SetTexCoord2i(0x1000, 0x3000);
+        host_.SetTexCoord2S(F2S(0.6f), F2S(0.6f));
         break;
     }
   };
-  DO_DRAW(set_tex2_2i, ATTR_TEX2);
+  DO_DRAW(set_tex2_2i, ATTR_TEX2, 0x3, 32768.0f, 1.0f / 65535.0f);
   pb_printat(7, 27, (char*)"t22s");
 
   auto set_tex2_4f = [this](int index) {
@@ -475,26 +472,26 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex2_4f, ATTR_TEX2);
+  DO_DRAW(set_tex2_4f, ATTR_TEX2, 0xF, 0.0f, 1.0f);
   pb_printat(7, 32, (char*)"t24f");
 
-  auto set_tex2_4i = [this](int index) {
+  auto set_tex2_4s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetTexCoord2i(0x7FFF, 0, 0, 0x7FFF);
+        host_.SetTexCoord2S(F2S(1.0f), F2S(0.0f), F2S(0.0f), F2S(1.0f));
         break;
 
       case 1:
-        host_.SetTexCoord2i(0, 0x7FFF, 0, 0x5FFF);
+        host_.SetTexCoord2S(F2S(0.0f), F2S(1.0f), F2S(0.0f), F2S(1.0f));
         break;
 
       case 2:
-        host_.SetTexCoord2i(0x1000, 0x3000, 0, 0x4FFF);
+        host_.SetTexCoord2S(F2S(0.0f), F2S(0.0f), F2S(1.0f), F2S(1.0f));
         break;
     }
   };
-  DO_DRAW(set_tex2_4i, ATTR_TEX2);
+  DO_DRAW(set_tex2_4s, ATTR_TEX2, 0xF, 32768.0f, 1.0f / 65535.0f);
   pb_printat(7, 37, (char*)"t24s");
 
   // TextureCoord3
@@ -515,26 +512,26 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex3_2f, ATTR_TEX3);
+  DO_DRAW(set_tex3_2f, ATTR_TEX3, 0x3, 0.0f, 1.0f);
   pb_printat(7, 43, (char*)"t32f");
 
-  auto set_tex3_2i = [this](int index) {
+  auto set_tex3_2s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetTexCoord3i(0x7FFF, 0);
+        host_.SetTexCoord3S(F2S(1.0f), F2S(0.0f));
         break;
 
       case 1:
-        host_.SetTexCoord3i(0, 0x3FFF);
+        host_.SetTexCoord3S(F2S(0.0f), F2S(1.0f));
         break;
 
       case 2:
-        host_.SetTexCoord3i(1, 1);
+        host_.SetTexCoord3S(F2S(0.3f), F2S(0.3f));
         break;
     }
   };
-  DO_DRAW(set_tex3_2i, ATTR_TEX3);
+  DO_DRAW(set_tex3_2s, ATTR_TEX3, 0x3, 32768.0f, 1.0f / 65535.0f);
   pb_printat(10, 11, (char*)"t32s");
 
   auto set_tex3_4f = [this](int index) {
@@ -553,28 +550,29 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
         break;
     }
   };
-  DO_DRAW(set_tex3_4f, ATTR_TEX3);
+  DO_DRAW(set_tex3_4f, ATTR_TEX3, 0xF, 0.0f, 1.0f);
   pb_printat(10, 17, (char*)"t34f");
 
-  auto set_tex3_4i = [this](int index) {
+  auto set_tex3_4s = [this](int index) {
     switch (index) {
       default:
       case 0:
-        host_.SetTexCoord3i(0x7FFF, 0, 0, 0x7FFF);
+        host_.SetTexCoord3S(F2S(1.0f), F2S(0.0f), F2S(0.0f), F2S(1.0f));
         break;
 
       case 1:
-        host_.SetTexCoord3i(0, 0x7FFF, 0, 0x5FFF);
+        host_.SetTexCoord3S(F2S(0.0f), F2S(1.0f), F2S(0.0f), F2S(1.0f));
         break;
 
       case 2:
-        host_.SetTexCoord3i(0x1000, 0x3000, 0, 0x4FFF);
+        host_.SetTexCoord3S(F2S(0.0f), F2S(0.1f), F2S(1.0f), F2S(0.8f));
         break;
     }
   };
-  DO_DRAW(set_tex3_4i, ATTR_TEX3);
+  DO_DRAW(set_tex3_4s, ATTR_TEX3, 0xF, 32768.0f, 1.0f / 65535.0f);
   pb_printat(10, 22, (char*)"t34s");
 
+#undef F2S
 #undef DO_DRAW
 
   pb_printat(0, 0, (char*)config.test_name);
@@ -584,9 +582,16 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
 }
 
 void AttributeExplicitSetterTests::Draw(float x, float y, const std::function<void(int)>& attribute_setter,
-                                        Attribute test_attribute) {
+                                        Attribute test_attribute, int mask, float bias, float multiplier) {
   auto shader = host_.GetShaderProgram();
   shader->SetUniformF(0, test_attribute);
+  float float_mask[4];
+  float_mask[0] = (mask & 0x01) != 0;
+  float_mask[1] = (mask & 0x02) != 0;
+  float_mask[2] = (mask & 0x04) != 0;
+  float_mask[3] = (mask & 0x08) != 0;
+  shader->SetUniform4F(1, float_mask);
+  shader->SetUniformF(2, bias, multiplier);
   shader->PrepareDraw();
 
   const float z = 3.0f;

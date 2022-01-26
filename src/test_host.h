@@ -203,21 +203,21 @@ class TestHost {
   void SetFogCoord(float fc) const;
   void SetPointSize(float ps) const;
   void SetTexCoord0(float u, float v) const;
-  void SetTexCoord0i(int u, int v) const;
+  void SetTexCoord0S(int u, int v) const;
   void SetTexCoord0(float s, float t, float p, float q) const;
-  void SetTexCoord0i(int s, int t, int p, int q) const;
+  void SetTexCoord0S(int s, int t, int p, int q) const;
   void SetTexCoord1(float u, float v) const;
-  void SetTexCoord1i(int u, int v) const;
+  void SetTexCoord1S(int u, int v) const;
   void SetTexCoord1(float s, float t, float p, float q) const;
-  void SetTexCoord1i(int s, int t, int p, int q) const;
+  void SetTexCoord1S(int s, int t, int p, int q) const;
   void SetTexCoord2(float u, float v) const;
-  void SetTexCoord2i(int u, int v) const;
+  void SetTexCoord2S(int u, int v) const;
   void SetTexCoord2(float s, float t, float p, float q) const;
-  void SetTexCoord2i(int s, int t, int p, int q) const;
+  void SetTexCoord2S(int s, int t, int p, int q) const;
   void SetTexCoord3(float u, float v) const;
-  void SetTexCoord3i(int u, int v) const;
+  void SetTexCoord3S(int u, int v) const;
   void SetTexCoord3(float s, float t, float p, float q) const;
-  void SetTexCoord3i(int s, int t, int p, int q) const;
+  void SetTexCoord3S(int s, int t, int p, int q) const;
 
   static std::string GetPrimitiveName(DrawPrimitive primitive);
 

@@ -583,7 +583,7 @@ void TestHost::SetTexCoord0(float u, float v) const {
   pb_end(p);
 }
 
-void TestHost::SetTexCoord0i(int u, int v) const {
+void TestHost::SetTexCoord0S(int u, int v) const {
   auto p = pb_begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
   p = pb_push1(p, NV097_SET_TEXCOORD0_2S, uv);
@@ -596,7 +596,7 @@ void TestHost::SetTexCoord0(float s, float t, float p, float q) const {
   pb_end(pb);
 }
 
-void TestHost::SetTexCoord0i(int s, int t, int p, int q) const {
+void TestHost::SetTexCoord0S(int s, int t, int p, int q) const {
   auto pb = pb_begin();
   uint32_t st = (s & 0xFFFF) | (t << 16);
   uint32_t pq = (p & 0xFFFF) | (q << 16);
@@ -610,7 +610,7 @@ void TestHost::SetTexCoord1(float u, float v) const {
   pb_end(p);
 }
 
-void TestHost::SetTexCoord1i(int u, int v) const {
+void TestHost::SetTexCoord1S(int u, int v) const {
   auto p = pb_begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
   p = pb_push1(p, NV097_SET_TEXCOORD1_2S, uv);
@@ -623,7 +623,7 @@ void TestHost::SetTexCoord1(float s, float t, float p, float q) const {
   pb_end(pb);
 }
 
-void TestHost::SetTexCoord1i(int s, int t, int p, int q) const {
+void TestHost::SetTexCoord1S(int s, int t, int p, int q) const {
   auto pb = pb_begin();
   uint32_t st = (s & 0xFFFF) | (t << 16);
   uint32_t pq = (p & 0xFFFF) | (q << 16);
@@ -637,7 +637,7 @@ void TestHost::SetTexCoord2(float u, float v) const {
   pb_end(p);
 }
 
-void TestHost::SetTexCoord2i(int u, int v) const {
+void TestHost::SetTexCoord2S(int u, int v) const {
   auto p = pb_begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
   p = pb_push1(p, NV097_SET_TEXCOORD2_2S, uv);
@@ -650,7 +650,7 @@ void TestHost::SetTexCoord2(float s, float t, float p, float q) const {
   pb_end(pb);
 }
 
-void TestHost::SetTexCoord2i(int s, int t, int p, int q) const {
+void TestHost::SetTexCoord2S(int s, int t, int p, int q) const {
   auto pb = pb_begin();
   uint32_t st = (s & 0xFFFF) | (t << 16);
   uint32_t pq = (p & 0xFFFF) | (q << 16);
@@ -664,7 +664,7 @@ void TestHost::SetTexCoord3(float u, float v) const {
   pb_end(p);
 }
 
-void TestHost::SetTexCoord3i(int u, int v) const {
+void TestHost::SetTexCoord3S(int u, int v) const {
   auto p = pb_begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
   p = pb_push1(p, NV097_SET_TEXCOORD3_2S, uv);
@@ -677,7 +677,7 @@ void TestHost::SetTexCoord3(float s, float t, float p, float q) const {
   pb_end(pb);
 }
 
-void TestHost::SetTexCoord3i(int s, int t, int p, int q) const {
+void TestHost::SetTexCoord3S(int s, int t, int p, int q) const {
   auto pb = pb_begin();
   uint32_t st = (s & 0xFFFF) | (t << 16);
   uint32_t pq = (p & 0xFFFF) | (q << 16);

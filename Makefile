@@ -44,6 +44,7 @@ SRCS = \
 
 SHADER_OBJS = \
 	$(SRCDIR)/shaders/attribute_carryover_test.inl \
+	$(SRCDIR)/shaders/attribute_explicit_setter_tests.inl \
 	$(SRCDIR)/shaders/fog_infinite_fogc_test.inl \
 	$(SRCDIR)/shaders/fog_vec4_unset.inl \
 	$(SRCDIR)/shaders/fog_vec4_x.inl \

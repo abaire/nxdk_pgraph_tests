@@ -41,7 +41,8 @@ class AttributeExplicitSetterTests : public TestSuite {
  private:
   void CreateGeometry();
   void Test(const TestConfig& config);
-  void Draw(float x, float y, const std::function<void(int)>& attribute_setter, Attribute test_attribute);
+  void Draw(float x, float y, const std::function<void(int)>& attribute_setter, Attribute test_attribute,
+            int mask = 0xF, float bias = 0.0f, float multiplier = 1.0f);
 
  private:
   float test_triangle_width{0.0f};
