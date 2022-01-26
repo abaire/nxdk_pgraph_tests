@@ -359,15 +359,18 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
     switch (index) {
       default:
       case 0:
+        // NaN as a 16-bit float.
         host_.SetTexCoord1i(0x7FFF, 0);
         break;
 
       case 1:
-        host_.SetTexCoord1i(0, 0x7FFF);
+        // 0.00781 as a 16-bit float
+        host_.SetTexCoord1i(0, 0x1FFF);
         break;
 
       case 2:
-        host_.SetTexCoord1i(0x1000, 0x3000);
+        // 0.5 as a 16-bit float.
+        host_.SetTexCoord1i(0x3800, 0x3800);
         break;
     }
   };
@@ -437,14 +440,18 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
     switch (index) {
       default:
       case 0:
+        // NaN as a 32-bit float >> 16.
         host_.SetTexCoord2i(0x7FFF, 0);
         break;
 
       case 1:
-        host_.SetTexCoord2i(0, 0x7FFF);
+        // 0.5 as a 32-bit float >> 16.
+        host_.SetTexCoord2i(0, 0x3F00);
         break;
 
       case 2:
+        // 2.524355e-29 as a 32-bit float >> 16
+        // 4.656613e-10 as a 32-bit float >> 16
         host_.SetTexCoord2i(0x1000, 0x3000);
         break;
     }
