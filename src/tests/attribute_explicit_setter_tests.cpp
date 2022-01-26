@@ -88,6 +88,10 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
   float x = left;
   float y = top;
 
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
+  pb_end(p);
+
 #define DO_DRAW(method, attrib, mask, bias, multiplier)           \
   do {                                                            \
     Draw(x, y, (method), (attrib), (mask), (bias), (multiplier)); \

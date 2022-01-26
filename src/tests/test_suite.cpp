@@ -174,6 +174,7 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
 
+  p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
   pb_end(p);
 
   host_.SetDefaultViewportAndFixedFunctionMatrices();
