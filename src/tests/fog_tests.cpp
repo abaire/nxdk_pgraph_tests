@@ -327,16 +327,19 @@ static constexpr uint32_t kFogVec4Z[] = {
 
 // clang format off
 static const FogVec4CoordTests::TestConfig kFogWTests[] = {
-    {"None", DEF_SHADER(kFogVec4Unset), {0.0f, 0.0f, 0.0f, 0.0f}},
+    // None just carries over the last set value.
+    //    {"None", DEF_SHADER(kFogVec4Unset), {0.0f, 0.0f, 0.0f, 0.0f}},
 
-    {"W", DEF_SHADER(kFogVec4W), {0.0f, 0.0f, 0.0f, 0.0f}},
-    {"W", DEF_SHADER(kFogVec4W), {0.0f, 0.0f, 0.0f, 1.0f}},
+    {"W", DEF_SHADER(kFogVec4W), {0.0f, 0.25f, 0.0f, 0.0f}},
+    {"W", DEF_SHADER(kFogVec4W), {0.5f, 0.5f, 0.0f, 0.0f}},
+    {"W", DEF_SHADER(kFogVec4W), {1.0f, 0.0f, 0.0f, 0.5f}},
+    {"W", DEF_SHADER(kFogVec4W), {0.3f, 0.3f, 0.3f, 1.0f}},
 
     {"WX", DEF_SHADER(kFogVec4WX), {0.25f, 0.0f, 0.0f, 0.5f}},
     {"WX", DEF_SHADER(kFogVec4WX), {0.65f, 0.0f, 0.0f, 0.0f}},
 
-    {"WY", DEF_SHADER(kFogVec4WY), {0.0f, 0.0f, 0.25f, 0.75f}},
-    {"WY", DEF_SHADER(kFogVec4WY), {0.0f, 0.0f, 0.75f, 0.25f}},
+    {"WY", DEF_SHADER(kFogVec4WY), {1.0f, 0.0f, 1.00f, 0.75f}},
+    {"WY", DEF_SHADER(kFogVec4WY), {0.0f, 0.75f, 0.75f, 0.25f}},
 
     {"WZYX", DEF_SHADER(kFogVec4WZYX), {0.25f, 0.5f, 0.75f, 1.0f}},
     {"WZYX", DEF_SHADER(kFogVec4WZYX), {1.0f, 0.75f, 0.5f, 0.25f}},
@@ -347,9 +350,11 @@ static const FogVec4CoordTests::TestConfig kFogWTests[] = {
     {"XYZW", DEF_SHADER(kFogVec4XYZW), {1.0f, 0.25f, 0.75f, 0.5f}},
     {"XYZW", DEF_SHADER(kFogVec4XYZW), {0.0f, 0.33f, 0.66f, 0.9f}},
 
-    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 4.0f, 0.0f, 0.0f}},
-    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 6.0f, 0.0f, 0.0f}},
+    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 0.0f, 0.0f, 0.0f}},
+    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 0.1f, 0.0f, 0.0f}},
+    {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 0.6f, 0.0f, 0.0f}},
 
+    {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.0f, 0.0f}},
     {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.2f, 0.0f}},
     {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.8f, 0.0f}},
 };
@@ -392,6 +397,10 @@ void FogVec4CoordTests::Test(const TestConfig& config) {
   auto shader = host_.GetShaderProgram();
   shader->SetShaderOverride(config.shader, config.shader_size);
   shader->SetUniformF(12, config.fog[0], config.fog[1], config.fog[2], config.fog[3]);
+  // const c[13] = 1 0
+  shader->SetUniformF(13, 1.0f, 0.0f);
+  // Hack for bug in Cg/vpcompiler wrt. clamp on the y-value. See fog_vec4_y.vs.cg.
+  shader->SetUniformF(14, config.fog[1]);
   host_.SetShaderProgram(shader);
 
   static constexpr uint32_t kBackgroundColor = 0xFF303030;

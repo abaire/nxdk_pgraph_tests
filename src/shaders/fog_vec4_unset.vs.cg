@@ -6,6 +6,7 @@ struct vIn {
 struct vOut {
   float4 pos : POSITION;
   float4 col0 : COLOR0;
+  float4 fog : FOG;
 };
 
 vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix,

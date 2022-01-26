@@ -26,10 +26,13 @@ vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, un
   result.pos = pos;
   result.col0 = I.diffuse;
 
-  result.fog.x = fog_values.x;
-  result.fog.y = fog_values.y;
-  result.fog.z = fog_values.z;
-  result.fog.w = fog_values.w;
+  // Note: Compiler warnings about unused components are expected, this is intentionally part of the test.
+  // Force all the correct components of fog_values to be referenced via `clamp`. Failure to do this results in
+  // Cg generating code that copies the entire vector, causing values to be set erroneously.
+  result.fog.x = clamp(fog_values.x, 0.0f, 1.0f);
+  result.fog.y = clamp(fog_values.y, 0.0f, 1.0f);
+  result.fog.z = clamp(fog_values.z, 0.0f, 1.0f);
+  result.fog.w = clamp(fog_values.w, 0.0f, 1.0f);
 
   return result;
 }
