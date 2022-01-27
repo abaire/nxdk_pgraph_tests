@@ -71,46 +71,25 @@ void TestSuite::Initialize() {
 
   p = pb_push1(p, NV097_SET_COMBINER_CONTROL, 1);
 
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_ICW, 8);
-  *(p++) = 0x4200000;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_OCW, 8);
-  *(p++) = 0xC00;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_ICW, 8);
-  *(p++) = 0x14200000;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_OCW, 8);
-  *(p++) = 0xC00;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
   pb_end(p);
+
+  host_.ClearInputColorCombiners();
+  host_.ClearInputAlphaCombiners();
+  host_.ClearOutputColorCombiners();
+  host_.ClearOutputAlphaCombiners();
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+
+  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false,
+                          false, TestHost::SRC_R0);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
+                          false, false, false, true);
 
   while (pb_busy()) {
     /* Wait for completion... */
@@ -150,8 +129,6 @@ void TestSuite::Initialize() {
   }
 
   p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, 0xc);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, 0x1c80);
 
   {
     uint32_t matrix_enable = NV097_SET_TEXTURE_MATRIX_ENABLE;
