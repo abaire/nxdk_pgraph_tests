@@ -2,7 +2,10 @@
 
 #include <pbkit/pbkit.h>
 
+#include "debug_output.h"
 #include "nxdk_ext.h"
+
+static TextureFormatInfo kInvalidTextureFormatInfo{};
 
 constexpr TextureFormatInfo kTextureFormats[] = {
 
@@ -59,7 +62,18 @@ constexpr TextureFormatInfo kTextureFormats[] = {
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8B8, true, true, "SZ_R8B8" },
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R6G5B5, true, true, "R6G5B5" }
 
-    // TODO: define others here
+    {SDL_PIXELFORMAT_INDEX8, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8, 1, true, false, "SZ_Index8"},
 };
 
 constexpr int kNumFormats = sizeof(kTextureFormats) / sizeof(kTextureFormats[0]);
+
+const TextureFormatInfo &GetTextureFormatInfo(uint32_t nv_texture_format) {
+  for (const auto &info : kTextureFormats) {
+    if (info.xbox_format == nv_texture_format) {
+      return info;
+    }
+  }
+
+  ASSERT(!"Unknown texture format.");
+  return kInvalidTextureFormatInfo;
+}

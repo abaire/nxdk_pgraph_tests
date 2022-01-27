@@ -166,6 +166,23 @@ void VertexBuffer::DefineBiTriCCW(uint32_t start_index, float left, float top, f
 
     vb[index].texcoord0[0] = u;
     vb[index].texcoord0[1] = v;
+    vb[index].texcoord0[2] = 0.0f;
+    vb[index].texcoord0[3] = 0.0f;
+
+    vb[index].texcoord1[0] = u;
+    vb[index].texcoord1[1] = v;
+    vb[index].texcoord1[2] = 0.0f;
+    vb[index].texcoord1[3] = 0.0f;
+
+    vb[index].texcoord2[0] = u;
+    vb[index].texcoord2[1] = v;
+    vb[index].texcoord2[2] = 0.0f;
+    vb[index].texcoord2[3] = 0.0f;
+
+    vb[index].texcoord3[0] = u;
+    vb[index].texcoord3[1] = v;
+    vb[index].texcoord3[2] = 0.0f;
+    vb[index].texcoord3[3] = 0.0f;
 
     vb[index].normal[0] = 0.0f;
     vb[index].normal[1] = 0.0f;

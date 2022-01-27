@@ -19,10 +19,10 @@ typedef struct Vertex {
   float point_size;
   float back_diffuse[4];
   float back_specular[4];
-  float texcoord0[2];
-  float texcoord1[2];
-  float texcoord2[2];
-  float texcoord3[2];
+  float texcoord0[4];
+  float texcoord1[4];
+  float texcoord2[4];
+  float texcoord3[4];
 
   inline void SetPosition(const float* value) { memcpy(pos, value, sizeof(pos)); }
 
@@ -88,11 +88,25 @@ typedef struct Vertex {
     texcoord0[1] = v;
   }
 
+  inline void SetTexCoord0(const float u, const float v, const float s, const float q) {
+    texcoord0[0] = u;
+    texcoord0[1] = v;
+    texcoord0[1] = s;
+    texcoord0[1] = q;
+  }
+
   inline void SetTexCoord1(const float* value) { memcpy(texcoord1, value, sizeof(texcoord1)); }
 
   inline void SetTexCoord1(const float u, const float v) {
     texcoord1[0] = u;
     texcoord1[1] = v;
+  }
+
+  inline void SetTexCoord1(const float u, const float v, const float s, const float q) {
+    texcoord1[0] = u;
+    texcoord1[1] = v;
+    texcoord1[1] = s;
+    texcoord1[1] = q;
   }
 
   inline void SetTexCoord2(const float* value) { memcpy(texcoord2, value, sizeof(texcoord2)); }
@@ -102,11 +116,25 @@ typedef struct Vertex {
     texcoord2[1] = v;
   }
 
+  inline void SetTexCoord2(const float u, const float v, const float s, const float q) {
+    texcoord2[0] = u;
+    texcoord2[1] = v;
+    texcoord2[1] = s;
+    texcoord2[1] = q;
+  }
+
   inline void SetTexCoord3(const float* value) { memcpy(texcoord3, value, sizeof(texcoord3)); }
 
   inline void SetTexCoord3(const float u, const float v) {
     texcoord3[0] = u;
     texcoord3[1] = v;
+  }
+
+  inline void SetTexCoord3(const float u, const float v, const float s, const float q) {
+    texcoord3[0] = u;
+    texcoord3[1] = v;
+    texcoord3[1] = s;
+    texcoord3[1] = q;
   }
 
   inline void SetDiffuseGrey(float val) { SetDiffuse(val, val, val); }
@@ -231,6 +259,10 @@ class VertexBuffer {
   void SetSpecular(uint32_t vertex_index, const Color& color);
 
   inline void SetPositionIncludesW(bool enabled = true) { position_count_ = enabled ? 4 : 3; }
+  inline void SetTexCoord0Count(uint32_t val) { tex0_coord_count_ = val; }
+  inline void SetTexCoord1Count(uint32_t val) { tex1_coord_count_ = val; }
+  inline void SetTexCoord2Count(uint32_t val) { tex2_coord_count_ = val; }
+  inline void SetTexCoord3Count(uint32_t val) { tex3_coord_count_ = val; }
 
   void Translate(float x, float y, float z, float w = 0.0f);
 
@@ -243,6 +275,12 @@ class VertexBuffer {
 
   // Number of components in the vertex position (3 or 4).
   uint32_t position_count_ = 3;
+
+  // Number of components in the vertex texcoord fields.
+  uint32_t tex0_coord_count_ = 2;
+  uint32_t tex1_coord_count_ = 2;
+  uint32_t tex2_coord_count_ = 2;
+  uint32_t tex3_coord_count_ = 2;
 
   bool cache_valid_{false};  // Indicates whether the HW should be forced to reload this buffer.
 };

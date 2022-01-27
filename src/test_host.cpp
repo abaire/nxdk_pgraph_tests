@@ -18,30 +18,46 @@
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "shaders/shader_program.h"
-#include "swizzle.h"
 #include "vertex_buffer.h"
 
 #define MAXRAM 0x03FFAFFF
 #define MAX_FILE_PATH_SIZE 248
-static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
-static void clear_attrib(uint32_t index);
+static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
+static void ClearVertexAttribute(uint32_t index);
 
-// bitscan forward
-static int bsf(int val){__asm bsf eax, val}
-
-TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t texture_width,
-                   uint32_t texture_height)
+TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
+                   uint32_t max_texture_height, uint32_t max_texture_depth)
     : framebuffer_width_(framebuffer_width),
       framebuffer_height_(framebuffer_height),
-      texture_width_(texture_width),
-      texture_height_(texture_height) {
+      max_texture_width_(max_texture_width),
+      max_texture_height_(max_texture_height),
+      max_texture_depth_(max_texture_depth) {
   // allocate texture memory buffer large enough for all types
-  texture_memory_ = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(texture_width * texture_height * 4, 0, MAXRAM,
-                                                                        0, PAGE_WRITECOMBINE | PAGE_READWRITE));
+  uint32_t stride = max_texture_width_ * 4;
+  uint32_t texture_size = stride * max_texture_height * max_texture_depth;
+
+  static constexpr uint32_t kMaxPaletteSize = 256 * 4;
+  uint32_t palette_size = kMaxPaletteSize * 4;
+
+  uint32_t total_size = texture_size + palette_size;
+
+  texture_memory_ = static_cast<uint8_t *>(
+      MmAllocateContiguousMemoryEx(total_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
   ASSERT(texture_memory_ && "Failed to allocate texture memory.");
+
+  texture_palette_memory_ = texture_memory_ + texture_size;
 
   matrix_unit(fixed_function_model_view_matrix_);
   matrix_unit(fixed_function_projection_matrix_);
+
+  uint32_t texture_offset = 0;
+  uint32_t palette_offset = 0;
+  for (auto i = 0; i < 4; ++i, texture_offset += texture_size, palette_offset += kMaxPaletteSize) {
+    texture_stage_[i].SetStage(i);
+    texture_stage_[i].SetDimensions(max_texture_width, max_texture_height);
+    texture_stage_[i].SetTextureOffset(texture_offset);
+    texture_stage_[i].SetPaletteOffset(palette_offset);
+  }
 }
 
 TestHost::~TestHost() {
@@ -49,6 +65,8 @@ TestHost::~TestHost() {
   if (texture_memory_) {
     MmFreeContiguousMemory(texture_memory_);
   }
+  // texture_palette_memory_ is an offset into texture_memory_ and is intentionally not freed.
+  texture_palette_memory_ = nullptr;
 }
 
 void TestHost::SetDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value, uint32_t left, uint32_t top,
@@ -137,104 +155,106 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
     vertex_buffer_->SetCacheValid();
   }
 
-  Vertex *vptr =
-      texture_format_.xbox_swizzled ? vertex_buffer_->normalized_vertex_buffer_ : vertex_buffer_->linear_vertex_buffer_;
+  // FIXME: Figure out what to do in cases where there are multiple stages with different swizzle flags.
+  // Is this supported by hardware?
+  Vertex *vptr = texture_stage_[0].IsSwizzled() ? vertex_buffer_->normalized_vertex_buffer_
+                                                : vertex_buffer_->linear_vertex_buffer_;
 
   if (enabled_fields & POSITION) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+    SetVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
                        vertex_buffer_->position_count_, sizeof(Vertex), &vptr[0].pos);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_POSITION);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
   }
 
   if (enabled_fields & WEIGHT) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+    SetVertexAttribute(NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
                        &vptr[0].weight);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_WEIGHT);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_WEIGHT);
   }
 
   if (enabled_fields & NORMAL) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+    SetVertexAttribute(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
                        &vptr[0].normal);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_NORMAL);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_NORMAL);
   }
 
   if (enabled_fields & DIFFUSE) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+    SetVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
                        &vptr[0].diffuse);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_DIFFUSE);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
   }
 
   if (enabled_fields & SPECULAR) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+    SetVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
                        &vptr[0].specular);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_SPECULAR);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR);
   }
 
   if (enabled_fields & FOG_COORD) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
+    SetVertexAttribute(NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
                        &vptr[0].fog_coord);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_FOG_COORD);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_FOG_COORD);
   }
 
   if (enabled_fields & POINT_SIZE) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
+    SetVertexAttribute(NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
                        &vptr[0].point_size);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_POINT_SIZE);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_POINT_SIZE);
   }
 
   //  if (enabled_fields & BACK_DIFFUSE) {
-  //    set_attrib_pointer(NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+  //    SetVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
   //                       &vptr[0].back_diffuse);
   //  } else {
-  clear_attrib(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
   //  }
 
   //  if (enabled_fields & BACK_SPECULAR) {
-  //    set_attrib_pointer(NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+  //    SetVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
   //                       &vptr[0].back_specular);
   //  } else {
-  clear_attrib(NV2A_VERTEX_ATTR_BACK_SPECULAR);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR);
   //  }
 
   if (enabled_fields & TEXCOORD0) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                       &vptr[0].texcoord0);
+    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+                       vertex_buffer_->tex0_coord_count_, sizeof(Vertex), &vptr[0].texcoord0);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE0);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE0);
   }
 
   if (enabled_fields & TEXCOORD1) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                       &vptr[0].texcoord1);
+    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+                       vertex_buffer_->tex1_coord_count_, sizeof(Vertex), &vptr[0].texcoord1);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE1);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE1);
   }
 
   if (enabled_fields & TEXCOORD2) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                       &vptr[0].texcoord2);
+    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+                       vertex_buffer_->tex2_coord_count_, sizeof(Vertex), &vptr[0].texcoord2);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE2);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE2);
   }
 
   if (enabled_fields & TEXCOORD3) {
-    set_attrib_pointer(NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 2, sizeof(Vertex),
-                       &vptr[0].texcoord3);
+    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+                       vertex_buffer_->tex3_coord_count_, sizeof(Vertex), &vptr[0].texcoord3);
   } else {
-    clear_attrib(NV2A_VERTEX_ATTR_TEXTURE3);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE3);
   }
 
   // Matching observed behavior. This is probably unnecessary as these are never set by pbkit.
-  clear_attrib(13);
-  clear_attrib(14);
-  clear_attrib(15);
+  ClearVertexAttribute(13);
+  ClearVertexAttribute(14);
+  ClearVertexAttribute(15);
 }
 
 void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
@@ -771,10 +791,9 @@ void TestHost::SaveZBuffer(const std::string &output_directory, const std::strin
 }
 
 void TestHost::SetupControl0() const {
-  // yuv requires color space conversion
-  bool requires_colorspace_conversion =
-      texture_format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
-      texture_format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8;
+  // FIXME: Figure out what to do in cases where there are multiple stages with different conversion needs.
+  // Is this supported by hardware?
+  bool requires_colorspace_conversion = texture_stage_[0].RequiresColorspaceConversion();
 
   uint32_t control0 = NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE;
   control0 |= MASK(NV097_SET_CONTROL0_Z_FORMAT,
@@ -789,59 +808,15 @@ void TestHost::SetupControl0() const {
 }
 
 void TestHost::SetupTextureStages() const {
-  if (!texture_format_.xbox_bpp) {
-    PrintMsg("No texture format specified. This will cause an invalid pgraph state exception and a crash.");
-    ASSERT(!"No texture format specified. This will cause an invalid pgraph state exception and a crash.");
+  // TODO: Support texture memory that is not allocated from the base of the DMA target registered by pbkit.
+  uint32_t texture_dma_offset = reinterpret_cast<uint32_t>(texture_memory_);
+  uint32_t palette_dma_offset = reinterpret_cast<uint32_t>(texture_palette_memory_);
+  for (auto &stage : texture_stage_) {
+    stage.Commit(texture_dma_offset, palette_dma_offset);
   }
-
-  auto p = pb_begin();
-  // FIXME: Use constants instead of the hardcoded values below
-
-  uint32_t format_mask =
-      MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, 1) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
-      MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, 2) |
-      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, texture_format_.xbox_format) |
-      MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, 1) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, texture_format_.xbox_swizzled ? bsf(texture_width_) : 0) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, texture_format_.xbox_swizzled ? bsf(texture_height_) : 0) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, 0);
-
-  // set stage 0 texture address & format
-  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(0), (DWORD)texture_memory_ & 0x03ffffff, format_mask);
-
-  if (!texture_format_.xbox_swizzled) {
-    // set stage 0 texture pitch (pitch<<16)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(0), (texture_format_.xbox_bpp * texture_width_) << 16);
-
-    // set stage 0 texture width & height
-    // ((width<<16)|height)
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(0), (texture_width_ << 16) | texture_height_);
-  }
-
-  // set stage 0 texture modes
-  // (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp 4=border 5=clamp to edge)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), 0x00030303);
-
-  // set stage 0 texture enable flags
-  if (texture_stage_enabled_[0]) {
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0),
-                 NV097_SET_TEXTURE_CONTROL0_ENABLE | NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP);
-  } else {
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(0), 0);
-  }
-
-  // set stage 0 texture filters (AA!)
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(0), 0x04074000);
-
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(1), 0);
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(2), 0);
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(3), 0);
-
-  pb_end(p);
 }
 
-void TestHost::SetTextureFormat(const TextureFormatInfo &fmt) { texture_format_ = fmt; }
+void TestHost::SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage) { texture_stage_[stage].SetFormat(fmt); }
 
 void TestHost::SetDepthBufferFormat(uint32_t fmt) {
   depth_buffer_format_ = fmt;
@@ -862,78 +837,23 @@ void TestHost::SetDepthBufferFormat(uint32_t fmt) {
 
 void TestHost::SetDepthBufferFloatMode(bool enabled) { depth_buffer_mode_float_ = enabled; }
 
-int TestHost::SetTexture(SDL_Surface *gradient_surface) {
-  auto pixels = static_cast<uint32_t *>(gradient_surface->pixels);
+int TestHost::SetTexture(SDL_Surface *surface, uint32_t stage) {
+  return texture_stage_[stage].SetTexture(surface, texture_memory_);
+}
 
-  // if conversion required, do so, otherwise use SDL to convert
-  if (texture_format_.require_conversion) {
-    uint8_t *dest = texture_memory_;
+int TestHost::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t pitch,
+                            uint32_t bytes_per_pixel, bool swizzle, uint32_t stage) {
+  uint32_t max_stride = max_texture_width_ * 4;
+  uint32_t max_texture_size = max_stride * max_texture_height_ * max_texture_depth_;
 
-    // TODO: potential reference material -
-    // https://github.com/scalablecory/colors/blob/master/color.c
-    switch (texture_format_.xbox_format) {
-      case NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8:  // YUY2 aka
-                                                                  // YUYV
-      {
-        uint32_t *source = pixels;
-        for (int y = 0; y < gradient_surface->h; ++y)
-          for (int x = 0; x < gradient_surface->w; x += 2, source += 2) {
-            uint8_t R0, G0, B0, R1, G1, B1;
-            SDL_GetRGB(source[0], gradient_surface->format, &R0, &G0, &B0);
-            SDL_GetRGB(source[1], gradient_surface->format, &R1, &G1, &B1);
-            dest[0] = (0.257f * R0) + (0.504f * G0) + (0.098f * B0) + 16;    // Y0
-            dest[1] = -(0.148f * R1) - (0.291f * G1) + (0.439f * B1) + 128;  // U
-            dest[2] = (0.257f * R1) + (0.504f * G1) + (0.098f * B1) + 16;    // Y1
-            dest[3] = (0.439f * R1) - (0.368f * G1) - (0.071f * B1) + 128;   // V
-            dest += 4;
-          }
-      } break;
+  uint32_t surface_size = pitch * height;
+  ASSERT(surface_size < max_texture_size && "Texture too large.");
 
-      case NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8:  // UYVY
-      {
-        uint32_t *source = pixels;
-        for (int y = 0; y < gradient_surface->h; ++y)
-          for (int x = 0; x < gradient_surface->w; x += 2, source += 2) {
-            uint8_t R0, G0, B0, R1, G1, B1;
-            SDL_GetRGB(source[0], gradient_surface->format, &R0, &G0, &B0);
-            SDL_GetRGB(source[1], gradient_surface->format, &R1, &G1, &B1);
-            dest[0] = -(0.148f * R1) - (0.291f * G1) + (0.439f * B1) + 128;  // U
-            dest[1] = (0.257f * R0) + (0.504f * G0) + (0.098f * B0) + 16;    // Y0
-            dest[2] = (0.439f * R1) - (0.368f * G1) - (0.071f * B1) + 128;   // V
-            dest[3] = (0.257f * R1) + (0.504f * G1) + (0.098f * B1) + 16;    // Y1
-            dest += 4;
-          }
-      } break;
+  return texture_stage_[stage].SetRawTexture(source, width, height, pitch, bytes_per_pixel, swizzle, texture_memory_);
+}
 
-      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8:
-        // TODO: for now, just let default gradient happen
-        break;
-
-      default:
-        return 3;
-        break;
-    }
-
-    // TODO: swizzling
-  } else {
-    // standard SDL conversion to destination format
-    SDL_Surface *new_surf = SDL_ConvertSurfaceFormat(gradient_surface, texture_format_.sdl_format, 0);
-    if (!new_surf) {
-      return 4;
-    }
-
-    // copy pixels over to texture memory, swizzling if desired
-    if (texture_format_.xbox_swizzled) {
-      swizzle_rect((uint8_t *)new_surf->pixels, new_surf->w, new_surf->h, texture_memory_, new_surf->pitch,
-                   new_surf->format->BytesPerPixel);
-    } else {
-      memcpy(texture_memory_, new_surf->pixels, new_surf->pitch * new_surf->h);
-    }
-
-    SDL_FreeSurface(new_surf);
-  }
-
-  return 0;
+int TestHost::SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage) {
+  return texture_stage_[stage].SetPalette(palette, size, texture_palette_memory_);
 }
 
 void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
@@ -1136,7 +1056,7 @@ void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) 
 void TestHost::SetTextureStageEnabled(uint32_t stage, bool enabled) {
   ASSERT(stage == 0 && "Only 1 texture stage is fully implemented.");
   ASSERT(stage < 4 && "Only 4 texture stages are supported.");
-  texture_stage_enabled_[stage] = enabled;
+  texture_stage_[stage].SetEnabled(enabled);
 }
 
 std::string TestHost::GetPrimitiveName(TestHost::DrawPrimitive primitive) {
@@ -1380,8 +1300,7 @@ void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha
   pb_end(p);
 }
 
-/* Set an attribute pointer */
-static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
+static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();
   p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
                MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
@@ -1393,7 +1312,7 @@ static void set_attrib_pointer(uint32_t index, uint32_t format, uint32_t size, u
   pb_end(p);
 }
 
-static void clear_attrib(uint32_t index) {
+static void ClearVertexAttribute(uint32_t index) {
   // Note: xemu has asserts on the count for several formats, so any format without that ASSERT must be used.
-  set_attrib_pointer(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
+  SetVertexAttribute(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
 }
