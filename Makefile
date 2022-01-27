@@ -36,9 +36,11 @@ SRCS = \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \
-	$(SRCDIR)/texture_format.cpp \
-	$(SRCDIR)/vertex_buffer.cpp \
+	$(SRCDIR)/tests/volume_texture_tests.cpp \
 	$(SRCDIR)/tests/w_param_tests.cpp \
+	$(SRCDIR)/texture_format.cpp \
+	$(SRCDIR)/texture_stage.cpp \
+	$(SRCDIR)/vertex_buffer.cpp \
 	$(THIRDPARTYDIR)/swizzle.c \
 	$(THIRDPARTYDIR)/printf/printf.c
 

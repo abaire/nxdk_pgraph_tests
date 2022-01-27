@@ -11,6 +11,7 @@
 #include "nxdk_ext.h"
 #include "string"
 #include "texture_format.h"
+#include "texture_stage.h"
 #include "vertex_buffer.h"
 
 class ShaderProgram;
@@ -120,12 +121,26 @@ class TestHost {
     MAP_SIGNED_NEGATE,
   };
 
+  enum PaletteSize {
+    PALETTE_32 = 32,
+    PALETTE_64 = 64,
+    PALETTE_128 = 128,
+    PALETTE_256 = 256,
+  };
+
  public:
-  TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t texture_width, uint32_t texture_height);
+  TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
+           uint32_t max_texture_height, uint32_t max_texture_depth = 16);
   ~TestHost();
 
-  void SetTextureFormat(const TextureFormatInfo &fmt);
-  int SetTexture(SDL_Surface *gradient_surface);
+  TextureStage &GetTextureStage(uint32_t stage) { return texture_stage_[stage]; }
+  void SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage = 0);
+  int SetTexture(SDL_Surface *surface, uint32_t stage = 0);
+  int SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t pitch, uint32_t bytes_per_pixel,
+                    bool swizzle, uint32_t stage = 0);
+
+  int SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage = 0);
+  void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 
   void SetDepthBufferFormat(uint32_t fmt);
   uint32_t GetDepthBufferFormat() const { return depth_buffer_format_; }
@@ -133,8 +148,9 @@ class TestHost {
   void SetDepthBufferFloatMode(bool enabled);
   bool GetDepthBufferFloatMode() const { return depth_buffer_mode_float_; }
 
-  uint32_t GetTextureWidth() const { return texture_width_; }
-  uint32_t GetTextureHeight() const { return texture_height_; }
+  uint32_t GetMaxTextureWidth() const { return max_texture_width_; }
+  uint32_t GetMaxTextureHeight() const { return max_texture_height_; }
+  uint32_t GetMaxTextureDepth() const { return max_texture_depth_; }
 
   uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
   uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
@@ -173,8 +189,6 @@ class TestHost {
 
   void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
   std::shared_ptr<ShaderProgram> GetShaderProgram() const { return shader_program_; }
-
-  void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -288,11 +302,11 @@ class TestHost {
   uint32_t framebuffer_width_;
   uint32_t framebuffer_height_;
 
-  TextureFormatInfo texture_format_{};
-  uint32_t texture_width_;
-  uint32_t texture_height_;
+  uint32_t max_texture_width_;
+  uint32_t max_texture_height_;
+  uint32_t max_texture_depth_;
 
-  bool texture_stage_enabled_[4]{true, false, false, false};
+  TextureStage texture_stage_[4];
 
   uint32_t depth_buffer_format_{NV097_SET_SURFACE_FORMAT_ZETA_Z24S8};
   bool depth_buffer_mode_float_{false};
@@ -300,6 +314,7 @@ class TestHost {
 
   std::shared_ptr<VertexBuffer> vertex_buffer_{};
   uint8_t *texture_memory_{nullptr};
+  uint8_t *texture_palette_memory_{nullptr};
 
   enum FixedFunctionMatrixSetting {
     MATRIX_MODE_DEFAULT_NXDK,

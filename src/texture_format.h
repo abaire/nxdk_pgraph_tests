@@ -15,4 +15,6 @@ typedef struct TextureFormatInfo {
 extern const TextureFormatInfo kTextureFormats[];
 extern const int kNumFormats;
 
+const TextureFormatInfo &GetTextureFormatInfo(uint32_t nv_texture_format);
+
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_H
