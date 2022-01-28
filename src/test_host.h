@@ -128,6 +128,28 @@ class TestHost {
     PALETTE_256 = 256,
   };
 
+  enum ShaderStageProgram {
+    STAGE_NONE = 0,
+    STAGE_2D_PROJECTIVE,
+    STAGE_3D_PROJECTIVE,
+    STAGE_CUBE_MAP,
+    STAGE_PASS_THROUGH,
+    STAGE_CLIP_PLANE,
+    STAGE_BUMPENVMAP,
+    STAGE_BUMPENVMAP_LUMINANCE,
+    STAGE_BRDF,
+    STAGE_DOT_ST,
+    STAGE_DOT_ZW,
+    STAGE_DOT_REFLECT_DIFFUSE,
+    STAGE_DOT_REFLECT_SPECULAR,
+    STAGE_DOT_STR_3D,
+    STAGE_DOT_STR_CUBE,
+    STAGE_DEPENDENT_AR,
+    STAGE_DEPENDENT_GB,
+    STAGE_DOT_PRODUCT,
+    STAGE_DOT_REFLECT_SPECULAR_CONST,
+  };
+
  public:
   TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
            uint32_t max_texture_height, uint32_t max_texture_depth = 16);
@@ -135,9 +157,11 @@ class TestHost {
 
   TextureStage &GetTextureStage(uint32_t stage) { return texture_stage_[stage]; }
   void SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage = 0);
+  void SetDefaultTextureParams(uint32_t stage = 0);
   int SetTexture(SDL_Surface *surface, uint32_t stage = 0);
-  int SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t pitch, uint32_t bytes_per_pixel,
-                    bool swizzle, uint32_t stage = 0);
+  int SetVolumetricTexture(const SDL_Surface **surface, uint32_t depth, uint32_t stage = 0);
+  int SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t depth, uint32_t pitch,
+                    uint32_t bytes_per_pixel, bool swizzle, uint32_t stage = 0);
 
   int SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage = 0);
   void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
@@ -281,6 +305,12 @@ class TestHost {
                          CombinerSource g_source = SRC_ZERO, bool g_alpha = false, bool g_invert = false,
                          bool specular_add_invert_r12 = false, bool specular_add_invert_r5 = false,
                          bool specular_clamp = false) const;
+
+  void SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1 = STAGE_NONE,
+                             ShaderStageProgram stage_2 = STAGE_NONE, ShaderStageProgram stage_3 = STAGE_NONE) const;
+  // Sets the input for shader stage 2 and 3. The value is the 0 based index of the stage whose output should be linked.
+  // E.g., to have stage2 use stage1's input and stage3 use stage2's the params would be (1, 2).
+  void SetShaderStageInput(uint32_t stage_2_input = 0, uint32_t stage_3_input = 0) const;
 
   void SetVertexBufferAttributes(uint32_t enabled_fields);
 

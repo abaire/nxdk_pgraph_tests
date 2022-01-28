@@ -39,7 +39,8 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
   static constexpr uint32_t kMaxPaletteSize = 256 * 4;
   uint32_t palette_size = kMaxPaletteSize * 4;
 
-  uint32_t total_size = texture_size + palette_size;
+  static constexpr uint32_t kMaxTextures = 4;
+  uint32_t total_size = texture_size * kMaxTextures + palette_size;
 
   texture_memory_ = static_cast<uint8_t *>(
       MmAllocateContiguousMemoryEx(total_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
@@ -809,14 +810,18 @@ void TestHost::SetupControl0() const {
 
 void TestHost::SetupTextureStages() const {
   // TODO: Support texture memory that is not allocated from the base of the DMA target registered by pbkit.
-  uint32_t texture_dma_offset = reinterpret_cast<uint32_t>(texture_memory_);
-  uint32_t palette_dma_offset = reinterpret_cast<uint32_t>(texture_palette_memory_);
+  auto texture_dma_offset = reinterpret_cast<uint32_t>(texture_memory_);
+  auto palette_dma_offset = reinterpret_cast<uint32_t>(texture_palette_memory_);
   for (auto &stage : texture_stage_) {
     stage.Commit(texture_dma_offset, palette_dma_offset);
   }
 }
 
 void TestHost::SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage) { texture_stage_[stage].SetFormat(fmt); }
+
+void TestHost::SetDefaultTextureParams(uint32_t stage) {
+  texture_stage_[stage].SetDimensions(max_texture_width_, max_texture_height_);
+}
 
 void TestHost::SetDepthBufferFormat(uint32_t fmt) {
   depth_buffer_format_ = fmt;
@@ -841,15 +846,20 @@ int TestHost::SetTexture(SDL_Surface *surface, uint32_t stage) {
   return texture_stage_[stage].SetTexture(surface, texture_memory_);
 }
 
-int TestHost::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t pitch,
-                            uint32_t bytes_per_pixel, bool swizzle, uint32_t stage) {
-  uint32_t max_stride = max_texture_width_ * 4;
-  uint32_t max_texture_size = max_stride * max_texture_height_ * max_texture_depth_;
+int TestHost::SetVolumetricTexture(const SDL_Surface **surface, uint32_t depth, uint32_t stage) {
+  return texture_stage_[stage].SetVolumetricTexture(surface, depth, texture_memory_);
+}
 
-  uint32_t surface_size = pitch * height;
+int TestHost::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t depth, uint32_t pitch,
+                            uint32_t bytes_per_pixel, bool swizzle, uint32_t stage) {
+  const uint32_t max_stride = max_texture_width_ * 4;
+  const uint32_t max_texture_size = max_stride * max_texture_height_ * max_texture_depth_;
+
+  const uint32_t layer_size = pitch * height;
+  const uint32_t surface_size = layer_size * depth;
   ASSERT(surface_size < max_texture_size && "Texture too large.");
 
-  return texture_stage_[stage].SetRawTexture(source, width, height, pitch, bytes_per_pixel, swizzle, texture_memory_);
+  return texture_stage_[stage].SetRawTexture(source, width, height, depth, pitch, bytes_per_pixel, swizzle, texture_memory_);
 }
 
 int TestHost::SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage) {
@@ -1297,6 +1307,25 @@ void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, value);
+  pb_end(p);
+}
+
+void TestHost::SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1, ShaderStageProgram stage_2,
+                                     ShaderStageProgram stage_3) const {
+  auto p = pb_begin();
+  p = pb_push1(
+      p, NV097_SET_SHADER_STAGE_PROGRAM,
+      MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE0, stage_0) | MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE1, stage_1) |
+          MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE2, stage_2) | MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE3, stage_3));
+  pb_end(p);
+}
+
+void TestHost::SetShaderStageInput(uint32_t stage_2_input, uint32_t stage_3_input) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SHADER_OTHER_STAGE_INPUT,
+               MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE1, 0) |
+                   MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE2, stage_2_input) |
+                   MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE3, stage_3_input));
   pb_end(p);
 }
 

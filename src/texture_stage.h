@@ -39,8 +39,9 @@ class TextureStage {
   void Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offset) const;
 
   int SetTexture(const SDL_Surface *surface, uint8_t *memory_base) const;
-  int SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t pitch, uint32_t bytes_per_pixel,
-                    bool swizzle, uint8_t *memory_base) const;
+  int SetVolumetricTexture(const SDL_Surface **layers, uint32_t depth, uint8_t *memory_base) const;
+  int SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t depth, uint32_t pitch,
+                    uint32_t bytes_per_pixel, bool swizzle, uint8_t *memory_base) const;
 
   int SetPalette(const uint32_t *palette, uint32_t length, uint8_t *memory_base);
 

@@ -31,7 +31,7 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
     std::string name = MakeTestName(format);
 
     if (format.xbox_format != NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8) {
-      tests_[name] = [this, format]() { this->Test(format); };
+      tests_[name] = [this, format]() { Test(format); };
     }
   }
 
@@ -96,7 +96,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
                                               (int)host_.GetMaxTextureHeight(), size);
   ASSERT(!err && "Failed to generate palettized surface");
 
-  err = host_.SetRawTexture(gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(),
+  err = host_.SetRawTexture(gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), 1,
                             host_.GetMaxTextureWidth(), 1, texture_format.xbox_swizzled);
   delete[] gradient_surface;
   ASSERT(!err && "Failed to set texture");
@@ -126,6 +126,9 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
   std::string test_name = "TexFmt_";
   test_name += texture_format.name;
+  if (!texture_format.xbox_swizzled) {
+    test_name += "_L";
+  }
   return std::move(test_name);
 }
 
@@ -154,12 +157,13 @@ static int GenerateGradientSurface(SDL_Surface **gradient_surface, int width, in
   }
 
   auto pixels = static_cast<uint32_t *>((*gradient_surface)->pixels);
-  for (int y = 0; y < height; ++y)
+  for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; ++x, ++pixels) {
       int x_normal = static_cast<int>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
       int y_normal = static_cast<int>(static_cast<float>(y) * 255.0f / static_cast<float>(height));
       *pixels = SDL_MapRGBA((*gradient_surface)->format, y_normal, x_normal, 255 - y_normal, x_normal + y_normal);
     }
+  }
 
   SDL_UnlockSurface(*gradient_surface);
 

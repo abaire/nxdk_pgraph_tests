@@ -67,7 +67,7 @@ void ShaderProgram::LoadUntexturedPixelShader() {
 
 void ShaderProgram::DisablePixelShader() {
   uint32_t *p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, NV097_SET_SHADER_STAGE_PROGRAM_STAGE0_PROGRAM_NONE);
+  p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0);
   pb_end(p);
 }
 
