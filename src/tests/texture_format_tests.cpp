@@ -96,7 +96,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
                                               (int)host_.GetMaxTextureHeight(), size);
   ASSERT(!err && "Failed to generate palettized surface");
 
-  err = host_.SetRawTexture(gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(),
+  err = host_.SetRawTexture(gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), 1,
                             host_.GetMaxTextureWidth(), 1, texture_format.xbox_swizzled);
   delete[] gradient_surface;
   ASSERT(!err && "Failed to set texture");

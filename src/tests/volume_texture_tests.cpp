@@ -6,12 +6,14 @@
 #include <memory>
 #include <utility>
 
+#include "debug_output.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"
 
-static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height);
+static int GeneratePalettizedSurface(uint8_t **ret, uint32_t width, uint32_t height, uint32_t depth,
+                                     TestHost::PaletteSize palette_size);
 static uint32_t *GeneratePalette(TestHost::PaletteSize size);
 
 static const VolumeTextureTests::TestConfig kTestConfigs[] = {
@@ -34,6 +36,22 @@ void VolumeTextureTests::Initialize() {
   host_.SetShaderProgram(nullptr);
   CreateGeometry();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetTextureStageEnabled(0, true);
+
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_TEX0, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false,
+                              TestHost::MAP_UNSIGNED_INVERT);
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_TEX0, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false,
+                              TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetOutputColorCombiner(0, TestHost::DST_DIFFUSE);
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DIFFUSE);
+
+  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false,
+                          false, TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_DIFFUSE,
+                          true);
 }
 
 void VolumeTextureTests::CreateGeometry() {
@@ -44,64 +62,75 @@ void VolumeTextureTests::CreateGeometry() {
   const float mid_width = 0;
   const float mid_height = 0;
 
-  const uint32_t num_quads = 4;
+  //  const uint32_t num_quads = 4;
+  //  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
+  //  buffer->SetTexCoord0Count(2);
+  //
+  //  const float spacing = 0.05f;
+  //  int index = 0;
+  //
+  //  buffer->DefineBiTri(index++, left, top, mid_width - spacing, mid_height + spacing);
+  //
+  //  buffer->DefineBiTri(index++, mid_width + spacing, top, right, mid_height + spacing);
+  //
+  //  buffer->DefineBiTri(index++, left, mid_height - spacing, mid_width - spacing, bottom);
+  //
+  //  buffer->DefineBiTri(index++, mid_width + spacing, mid_height - spacing, right, bottom);
+  //
+  //  // Set texcoords.
+  //  auto vertex = buffer->Lock();
+  //
+  //  auto set_bitri_texcoords = [&vertex](float p) {
+  //    vertex++->SetTexCoord0(0.0f, 0.0f, p, 0.0);
+  //    vertex++->SetTexCoord0(1.0f, 0.0f, p, 0.0);
+  //    vertex++->SetTexCoord0(1.0f, 1.0f, p, 0.0);
+  //
+  //    vertex++->SetTexCoord0(0.0f, 0.0f, p, 0.0);
+  //    vertex++->SetTexCoord0(1.0f, 1.0f, p, 0.0);
+  //    vertex++->SetTexCoord0(0.0f, 1.0f, p, 0.0);
+  //  };
+  //
+  //  set_bitri_texcoords(0.0f);
+  //
+  //  set_bitri_texcoords(0.33f);
+  //
+  //  set_bitri_texcoords(0.66f);
+  //
+  //  set_bitri_texcoords(1.0f);
+  //
+  //  buffer->Unlock();
+
+  const uint32_t num_quads = 1;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
-  buffer->SetTexCoord0Count(3);
 
-  const float spacing = 0.05f;
   int index = 0;
-
-  buffer->DefineBiTri(index++, left, top, mid_width - spacing, mid_height + spacing);
-
-  buffer->DefineBiTri(index++, mid_width + spacing, top, right, mid_height + spacing);
-
-  buffer->DefineBiTri(index++, left, mid_height - spacing, mid_width - spacing, bottom);
-
-  buffer->DefineBiTri(index++, mid_width + spacing, mid_height - spacing, right, bottom);
-
-  // Set texcoords.
-  auto vertex = buffer->Lock();
-
-  auto set_bitri_texcoords = [&vertex](float p) {
-    vertex++->SetTexCoord0(0.0f, 0.0f, p, 0.0);
-    vertex++->SetTexCoord0(1.0f, 0.0f, p, 0.0);
-    vertex++->SetTexCoord0(1.0f, 1.0f, p, 0.0);
-
-    vertex++->SetTexCoord0(0.0f, 0.0f, p, 0.0);
-    vertex++->SetTexCoord0(1.0f, 1.0f, p, 0.0);
-    vertex++->SetTexCoord0(0.0f, 1.0f, p, 0.0);
-  };
-
-  set_bitri_texcoords(0.0f);
-
-  set_bitri_texcoords(0.33f);
-
-  set_bitri_texcoords(0.66f);
-
-  set_bitri_texcoords(1.0f);
-
-  buffer->Unlock();
-
+  buffer->DefineBiTri(index++, left, top, right, bottom);
   buffer->Linearize(static_cast<float>(host_.GetMaxTextureWidth()), static_cast<float>(host_.GetMaxTextureHeight()));
 }
 
 void VolumeTextureTests::Test(const TestConfig &config) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
-  //  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8));
 
-  //  SDL_Surface *gradient_surface;
-  //  int update_texture_result =
-  //      GenerateGradientSurface(&gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
-  //  if (!update_texture_result) {
-  //    update_texture_result = host_.SetTexture(gradient_surface);
-  //    SDL_FreeSurface(gradient_surface);
-  //  } else {
-  //    pb_print("FAILED TO GENERATE SDL SURFACE - TEST IS INVALID: %d\n", update_texture_result);
-  //    pb_draw_text_screen();
-  //    host_.FinishDraw(false, "", "");
-  //    return;
-  //  }
+  TestHost::PaletteSize palette_size = TestHost::PALETTE_256;
+  auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
+  host_.SetTextureFormat(texture_format);
+
+  uint8_t *surface = nullptr;
+  uint32_t depth = 1;
+  int err = GeneratePalettizedSurface(&surface, (int)host_.GetMaxTextureWidth(), (int)host_.GetMaxTextureHeight(),
+                                      depth, palette_size);
+  ASSERT(!err && "Failed to generate palettized surface");
+
+  err = host_.SetRawTexture(surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), depth,
+                            host_.GetMaxTextureWidth(), 1, texture_format.xbox_swizzled);
+  delete[] surface;
+  ASSERT(!err && "Failed to set texture");
+
+  auto palette = GeneratePalette(palette_size);
+  err = host_.SetPalette(palette, palette_size);
+  delete[] palette;
+  ASSERT(!err && "Failed to set palette");
 
   host_.DrawArrays();
 
@@ -119,31 +148,35 @@ void VolumeTextureTests::Test(const TestConfig &config) {
   host_.FinishDraw(allow_saving_, output_dir_, config.name);
 }
 
-static int generate_gradient_surface(SDL_Surface **gradient_surface, int width, int height) {
-  *gradient_surface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA8888);
-  if (!(*gradient_surface)) {
+static int GeneratePalettizedSurface(uint8_t **ret, uint32_t width, uint32_t height, uint32_t depth,
+                                     TestHost::PaletteSize palette_size) {
+  *ret = new uint8_t[width * height * depth];
+  if (!(*ret)) {
     return 1;
   }
 
-  if (SDL_LockSurface(*gradient_surface)) {
-    SDL_FreeSurface(*gradient_surface);
-    *gradient_surface = nullptr;
-    return 2;
+  auto pixel = *ret;
+
+  uint32_t layer_size = width * height;
+
+  uint32_t half_size = layer_size >> 1;
+
+  for (uint32_t i = 0; i < half_size; ++i, ++pixel) {
+    *pixel = i & (palette_size - 1);
   }
 
-  auto pixels = static_cast<uint32_t *>((*gradient_surface)->pixels);
-  for (int y = 0; y < height; ++y)
-    for (int x = 0; x < width; ++x, ++pixels) {
-      int x_normal = static_cast<int>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
-      int y_normal = static_cast<int>(static_cast<float>(y) * 255.0f / static_cast<float>(height));
-      *pixels = SDL_MapRGBA((*gradient_surface)->format, y_normal, x_normal, 255 - y_normal, x_normal + y_normal);
-    }
+  for (uint32_t i = half_size; i < layer_size; i += 4) {
+    uint8_t value = i & (palette_size - 1);
+    *pixel++ = value;
+    *pixel++ = value;
+    *pixel++ = value;
+    *pixel++ = value;
+  }
 
-  SDL_UnlockSurface(*gradient_surface);
+  // TODO: Layer 1+.
 
   return 0;
 }
-
 static uint32_t *GeneratePalette(TestHost::PaletteSize size) {
   auto ret = new uint32_t[size];
 

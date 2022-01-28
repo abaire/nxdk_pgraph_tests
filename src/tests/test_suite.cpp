@@ -39,9 +39,15 @@ void TestSuite::RunAll() {
 }
 
 void TestSuite::SetDefaultTextureFormat() const {
-  // NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8
-  const TextureFormatInfo& texture_format = kTextureFormats[3];
-  host_.SetTextureFormat(texture_format);
+  const TextureFormatInfo& texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8);
+  host_.SetTextureFormat(texture_format, 0);
+  host_.SetDefaultTextureParams(0);
+  host_.SetTextureFormat(texture_format, 1);
+  host_.SetDefaultTextureParams(1);
+  host_.SetTextureFormat(texture_format, 2);
+  host_.SetDefaultTextureParams(2);
+  host_.SetTextureFormat(texture_format, 3);
+  host_.SetDefaultTextureParams(3);
 }
 
 void TestSuite::Initialize() {
@@ -160,4 +166,6 @@ void TestSuite::Initialize() {
 
   SetDefaultTextureFormat();
   host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetShaderStageInput(0, 0);
 }
