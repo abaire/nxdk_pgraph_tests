@@ -66,15 +66,12 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_IMAGE_RECT
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(stage_), size_param);
 
-  // set stage 0 texture modes
   // (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp 4=border 5=clamp to edge)
   // NV097_SET_TEXTURE_ADDRESS
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(stage_), 0x00030303);
 
-  // set stage 0 texture filters (AA!)
   // NV097_SET_TEXTURE_FILTER
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), 0x1012000);
-  // Note: Using 0x04074000 breaks 3d textures (the resultant buffer is 0'd out).
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), texture_filter_);
 
   p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
@@ -90,7 +87,25 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_PALETTE
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_PALETTE_OFFSET(stage_), palette_config);
 
+  p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, border_color_);
+
+  p = pb_push4f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_MAT, bump_env_material[0], bump_env_material[1], bump_env_material[2],
+                bump_env_material[3]);
+  p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE, bump_env_scale);
+  p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET, bump_env_offset);
+
   pb_end(p);
+}
+
+void TextureStage::SetFilter(uint32_t lod_bias, TextureStage::ConvolutionKernel kernel, TextureStage::MinFilter min,
+                             TextureStage::MagFilter mag, bool signed_alpha, bool signed_red, bool signed_green,
+                             bool signed_blue) {
+  texture_filter_ =
+      MASK(NV097_SET_TEXTURE_FILTER_MIPMAP_LOD_BIAS, lod_bias) |
+      MASK(NV097_SET_TEXTURE_FILTER_CONVOLUTION_KERNEL, kernel) | MASK(NV097_SET_TEXTURE_FILTER_MIN, min) |
+      MASK(NV097_SET_TEXTURE_FILTER_MAG, mag) | MASK(NV097_SET_TEXTURE_FILTER_ASIGNED, signed_alpha) |
+      MASK(NV097_SET_TEXTURE_FILTER_RSIGNED, signed_red) | MASK(NV097_SET_TEXTURE_FILTER_GSIGNED, signed_green) |
+      MASK(NV097_SET_TEXTURE_FILTER_BSIGNED, signed_blue);
 }
 
 int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) const {

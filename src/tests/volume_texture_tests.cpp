@@ -62,10 +62,6 @@ void VolumeTextureTests::Initialize() {
   host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false,
                           false, TestHost::SRC_R0);
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true);
-
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, 0xFFFFFF);
-  pb_end(p);
 }
 
 void VolumeTextureTests::CreateGeometry() {
@@ -241,21 +237,13 @@ static int GeneratePalettizedSurface(uint8_t **ret, uint32_t width, uint32_t hei
 
   auto pixel = *ret;
 
-  for (auto d = 0; d < depth; ++d) {
-    uint32_t layer_size = width * height;
-
-    uint32_t half_size = layer_size >> 1;
-
-    for (uint32_t i = 0; i < half_size; ++i, ++pixel) {
-      *pixel = (d << 2) & (palette_size - 1);
-    }
-
-    for (uint32_t i = half_size; i < layer_size; i += 4) {
-      uint8_t value = (i + (d << 2)) & (palette_size - 1);
-      *pixel++ = value;
-      *pixel++ = value;
-      *pixel++ = value;
-      *pixel++ = value;
+  uint32_t block_size = palette_size / 4;
+  uint32_t offset = 0;
+  for (auto d = 0; d < depth; ++d, offset += block_size) {
+    for (auto y = 0; y < height; ++y) {
+      for (auto x = 0; x < width; ++x) {
+        *pixel++ = (y + offset) & (palette_size - 1);
+      }
     }
   }
 
