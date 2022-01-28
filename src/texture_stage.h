@@ -6,6 +6,7 @@
 
 #include "texture_format.h"
 
+// Sets up an nv2a texture stage.
 class TextureStage {
  public:
   enum ConvolutionKernel {

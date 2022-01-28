@@ -149,30 +149,30 @@ void VolumeTextureTests::Test(const TextureFormatInfo &texture_format) {
 }
 
 void VolumeTextureTests::TestPalettized() {
-  host_.PrepareDraw(kBackgroundColor);
-
   TestHost::PaletteSize palette_size = TestHost::PALETTE_256;
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
   host_.SetTextureFormat(texture_format);
 
-  uint8_t *surface = nullptr;
   const uint32_t width = kTextureWidth;
   const uint32_t height = kTextureHeight;
-  int err = GeneratePalettizedSurface(&surface, width, height, kTextureDepth, palette_size);
+  const uint32_t depth = kTextureDepth;
+  auto &stage = host_.GetTextureStage(0);
+  stage.SetDimensions(width, height, depth);
+
+  uint8_t *surface = nullptr;
+  int err = GeneratePalettizedSurface(&surface, width, height, depth, palette_size);
   ASSERT(!err && "Failed to generate palettized surface");
 
-  err = host_.SetRawTexture(surface, width, height, kTextureDepth, width, 1, texture_format.xbox_swizzled);
+  err = host_.SetRawTexture(surface, width, height, depth, width, 1, texture_format.xbox_swizzled);
   delete[] surface;
   ASSERT(!err && "Failed to set texture");
-
-  auto stage = host_.GetTextureStage(0);
-  stage.SetDimensions(width, height, kTextureDepth);
 
   auto palette = GeneratePalette(palette_size);
   err = host_.SetPalette(palette, palette_size);
   delete[] palette;
   ASSERT(!err && "Failed to set palette");
 
+  host_.PrepareDraw(kBackgroundColor);
   host_.DrawArrays();
 
   pb_print("N: %s\n", texture_format.name);
@@ -242,7 +242,7 @@ static int GeneratePalettizedSurface(uint8_t **ret, uint32_t width, uint32_t hei
   for (auto d = 0; d < depth; ++d, offset += block_size) {
     for (auto y = 0; y < height; ++y) {
       for (auto x = 0; x < width; ++x) {
-        *pixel++ = (y + offset) & (palette_size - 1);
+        *pixel++ = ((y % block_size) + offset) & (palette_size - 1);
       }
     }
   }

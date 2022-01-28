@@ -190,6 +190,10 @@ class TestHost {
                           uint32_t height = 0) const;
   static void EraseText();
 
+  // Note: A number of states are expected to be set before this method is called.
+  // E.g., texture stages, shader states
+  // This is not an exhaustive list and is not necessarily up to date. Prefer to call this just before initiating draw
+  // and be suspect of order dependence if you see results that seem to indicate that settings are being ignored.
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00);
 
   void DrawArrays(uint32_t enabled_vertex_fields = kDefaultVertexFields, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
