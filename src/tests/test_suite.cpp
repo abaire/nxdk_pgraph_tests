@@ -135,17 +135,7 @@ void TestSuite::Initialize() {
   }
 
   p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-
-  {
-    uint32_t matrix_enable = NV097_SET_TEXTURE_MATRIX_ENABLE;
-    p = pb_push1(p, matrix_enable, 0x0);
-    matrix_enable += 4;
-    p = pb_push1(p, matrix_enable, 0x0);
-    matrix_enable += 4;
-    p = pb_push1(p, matrix_enable, 0x0);
-    matrix_enable += 4;
-    p = pb_push1(p, matrix_enable, 0x0);
-  }
+  p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
   p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
   p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);

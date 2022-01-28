@@ -91,8 +91,8 @@ typedef struct Vertex {
   inline void SetTexCoord0(const float u, const float v, const float s, const float q) {
     texcoord0[0] = u;
     texcoord0[1] = v;
-    texcoord0[1] = s;
-    texcoord0[1] = q;
+    texcoord0[2] = s;
+    texcoord0[3] = q;
   }
 
   inline void SetTexCoord1(const float* value) { memcpy(texcoord1, value, sizeof(texcoord1)); }
@@ -105,8 +105,8 @@ typedef struct Vertex {
   inline void SetTexCoord1(const float u, const float v, const float s, const float q) {
     texcoord1[0] = u;
     texcoord1[1] = v;
-    texcoord1[1] = s;
-    texcoord1[1] = q;
+    texcoord1[2] = s;
+    texcoord1[3] = q;
   }
 
   inline void SetTexCoord2(const float* value) { memcpy(texcoord2, value, sizeof(texcoord2)); }
@@ -119,8 +119,8 @@ typedef struct Vertex {
   inline void SetTexCoord2(const float u, const float v, const float s, const float q) {
     texcoord2[0] = u;
     texcoord2[1] = v;
-    texcoord2[1] = s;
-    texcoord2[1] = q;
+    texcoord2[2] = s;
+    texcoord2[3] = q;
   }
 
   inline void SetTexCoord3(const float* value) { memcpy(texcoord3, value, sizeof(texcoord3)); }
@@ -133,8 +133,8 @@ typedef struct Vertex {
   inline void SetTexCoord3(const float u, const float v, const float s, const float q) {
     texcoord3[0] = u;
     texcoord3[1] = v;
-    texcoord3[1] = s;
-    texcoord3[1] = q;
+    texcoord3[2] = s;
+    texcoord3[3] = q;
   }
 
   inline void SetDiffuseGrey(float val) { SetDiffuse(val, val, val); }

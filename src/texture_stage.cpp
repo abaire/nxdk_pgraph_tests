@@ -28,18 +28,18 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
 
   auto p = pb_begin();
 
+  // NV097_SET_TEXTURE_CONTROL0
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
+               NV097_SET_TEXTURE_CONTROL0_ENABLE | NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP);
+
   uint32_t dimensionality = GetDimensionality();
 
-  uint32_t size_u = 0;
-  uint32_t size_v = 0;
+  uint32_t size_u = bsf((int)width_);
+  uint32_t size_v = bsf((int)height_);
   uint32_t size_p = 0;
-  //  if (format_.xbox_swizzled) {
-  size_u = bsf((int)width_);
-  size_v = bsf((int)height_);
   if (dimensionality > 2) {
     size_p = bsf((int)depth_);
   }
-  //  }
 
   const uint32_t DMA_A = 1;
   const uint32_t DMA_B = 2;
@@ -71,13 +71,12 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_ADDRESS
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(stage_), 0x00030303);
 
-  // NV097_SET_TEXTURE_CONTROL0
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
-               NV097_SET_TEXTURE_CONTROL0_ENABLE | NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP);
-
   // set stage 0 texture filters (AA!)
   // NV097_SET_TEXTURE_FILTER
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), 0x04074000);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), 0x1012000);
+  // Note: Using 0x04074000 breaks 3d textures (the resultant buffer is 0'd out).
+
+  p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
   uint32_t palette_config = 0;
   if (format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8) {
@@ -96,10 +95,11 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
 
 int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) const {
   auto pixels = static_cast<uint32_t *>(surface->pixels);
-  uint8_t *dest = memory_base + texture_memory_offset_;
 
   // if conversion required, do so, otherwise use SDL to convert
   if (format_.require_conversion) {
+    uint8_t *dest = memory_base + texture_memory_offset_;
+
     // TODO: potential reference material -
     // https://github.com/scalablecory/colors/blob/master/color.c
     switch (format_.xbox_format) {
@@ -156,21 +156,72 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
     return 4;
   }
 
-  SetRawTexture((const uint8_t *)new_surf->pixels, new_surf->w, new_surf->h, new_surf->pitch,
+  SetRawTexture((const uint8_t *)new_surf->pixels, new_surf->w, new_surf->h, 1, new_surf->pitch,
                 new_surf->format->BytesPerPixel, format_.xbox_swizzled, memory_base);
 
   SDL_FreeSurface(new_surf);
   return 0;
 }
 
-int TextureStage::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t pitch,
+int TextureStage::SetVolumetricTexture(const SDL_Surface **layers, uint32_t depth, uint8_t *memory_base) const {
+  ASSERT(format_.xbox_swizzled && "Volumetric textures using linear formats are not supported by XBOX.")
+
+  auto **new_surfaces = new SDL_Surface *[depth];
+
+  for (auto i = 0; i < depth; ++i) {
+    auto *surface = const_cast<SDL_Surface *>(layers[i]);
+    new_surfaces[i] = SDL_ConvertSurfaceFormat(surface, format_.sdl_format, 0);
+
+    if (!new_surfaces[i]) {
+      ASSERT(!"Failed to convert surface format.");
+      // This will leak memory, but the ASSERT will halt execution anyway.
+      return 4;
+    }
+  }
+
+  const int32_t width = new_surfaces[0]->w;
+  int32_t height = new_surfaces[0]->h;
+  int32_t pitch = new_surfaces[0]->pitch;
+  int32_t bytes_per_pixel = new_surfaces[0]->format->BytesPerPixel;
+
+  uint32_t converted_surface_size = pitch * height;
+  auto *flattened = new uint8_t[converted_surface_size * depth];
+  uint8_t *dest = flattened;
+  for (auto i = 0; i < depth; ++i) {
+    SDL_Surface *s = new_surfaces[i];
+    ASSERT(s->w == width && "Volumetric surface layers must have identical dimensions");
+    ASSERT(s->h == height && "Volumetric surface layers must have identical dimensions");
+    ASSERT(s->pitch == pitch && "Volumetric surface layers must have identical dimensions");
+    ASSERT(s->format->BytesPerPixel == bytes_per_pixel && "Volumetric surface layers must have identical dimensions");
+
+    memcpy(dest, s->pixels, converted_surface_size);
+    dest += converted_surface_size;
+  }
+
+  for (auto i = 0; i < depth; ++i) {
+    SDL_FreeSurface(new_surfaces[i]);
+  }
+  delete[] new_surfaces;
+
+  int ret = SetRawTexture(flattened, width, height, depth, pitch, bytes_per_pixel, format_.xbox_swizzled, memory_base);
+
+  delete[] flattened;
+
+  return ret;
+}
+
+int TextureStage::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t depth, uint32_t pitch,
                                 uint32_t bytes_per_pixel, bool swizzle, uint8_t *memory_base) const {
   uint8_t *dest = memory_base + texture_memory_offset_;
 
   if (swizzle) {
-    swizzle_rect(source, width, height, dest, pitch, bytes_per_pixel);
+    if (depth > 1) {
+      swizzle_box(source, width, height, depth, dest, pitch, pitch * height, bytes_per_pixel);
+    } else {
+      swizzle_rect(source, width, height, dest, pitch, bytes_per_pixel);
+    }
   } else {
-    memcpy(dest, source, pitch * height);
+    memcpy(dest, source, pitch * height * depth);
   }
 
   return 0;

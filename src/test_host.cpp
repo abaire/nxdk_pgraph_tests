@@ -39,7 +39,8 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
   static constexpr uint32_t kMaxPaletteSize = 256 * 4;
   uint32_t palette_size = kMaxPaletteSize * 4;
 
-  uint32_t total_size = texture_size + palette_size;
+  static constexpr uint32_t kMaxTextures = 4;
+  uint32_t total_size = texture_size * kMaxTextures + palette_size;
 
   texture_memory_ = static_cast<uint8_t *>(
       MmAllocateContiguousMemoryEx(total_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
@@ -845,16 +846,21 @@ int TestHost::SetTexture(SDL_Surface *surface, uint32_t stage) {
   return texture_stage_[stage].SetTexture(surface, texture_memory_);
 }
 
+int TestHost::SetVolumetricTexture(const SDL_Surface **surface, uint32_t depth, uint32_t stage) {
+  return texture_stage_[stage].SetVolumetricTexture(surface, depth, texture_memory_);
+}
+
 int TestHost::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t depth, uint32_t pitch,
                             uint32_t bytes_per_pixel, bool swizzle, uint32_t stage) {
-  uint32_t max_stride = max_texture_width_ * 4;
-  uint32_t max_texture_size = max_stride * max_texture_height_ * max_texture_depth_;
+  const uint32_t max_stride = max_texture_width_ * 4;
+  const uint32_t max_texture_size = max_stride * max_texture_height_ * max_texture_depth_;
 
-  uint32_t surface_size = pitch * height * depth;
+  const uint32_t layer_size = pitch * height;
+  const uint32_t surface_size = layer_size * depth;
   ASSERT(surface_size < max_texture_size && "Texture too large.");
 
-  // TODO: Handle 3d textures.
-  return texture_stage_[stage].SetRawTexture(source, width, height, pitch, bytes_per_pixel, swizzle, texture_memory_);
+  return texture_stage_[stage].SetRawTexture(source, width, height, depth, pitch, bytes_per_pixel, swizzle,
+                                             texture_memory_);
 }
 
 int TestHost::SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage) {

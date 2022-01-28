@@ -152,13 +152,14 @@ class TestHost {
 
  public:
   TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
-           uint32_t max_texture_height, uint32_t max_texture_depth = 16);
+           uint32_t max_texture_height, uint32_t max_texture_depth = 4);
   ~TestHost();
 
   TextureStage &GetTextureStage(uint32_t stage) { return texture_stage_[stage]; }
   void SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage = 0);
   void SetDefaultTextureParams(uint32_t stage = 0);
   int SetTexture(SDL_Surface *surface, uint32_t stage = 0);
+  int SetVolumetricTexture(const SDL_Surface **surface, uint32_t depth, uint32_t stage = 0);
   int SetRawTexture(const uint8_t *source, uint32_t width, uint32_t height, uint32_t depth, uint32_t pitch,
                     uint32_t bytes_per_pixel, bool swizzle, uint32_t stage = 0);
 

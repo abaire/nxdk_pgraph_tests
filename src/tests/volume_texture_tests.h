@@ -8,14 +8,8 @@
 
 class TestHost;
 
+// Tests 3d texture behavior.
 class VolumeTextureTests : public TestSuite {
- public:
-  struct TestConfig {
-    char name[30]{0};
-    TextureFormatInfo format;
-    bool is_palettized{false};
-  };
-
  public:
   VolumeTextureTests(TestHost &host, std::string output_dir);
 
@@ -23,7 +17,9 @@ class VolumeTextureTests : public TestSuite {
 
  private:
   void CreateGeometry();
-  void Test(const TestConfig &config);
+
+  void Test(const TextureFormatInfo &texture_format);
+  void TestPalettized();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_VOLUME_TEXTURE_TESTS_H
