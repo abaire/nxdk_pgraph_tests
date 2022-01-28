@@ -22,6 +22,8 @@ static const uint32_t kTextureWidth = 256;
 static const uint32_t kTextureHeight = 256;
 static const uint32_t kTextureDepth = 4;
 
+static const uint32_t kNumQuads = 7;
+
 VolumeTextureTests::VolumeTextureTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Volume texture") {
   for (auto i = 0; i < kNumFormats; ++i) {
@@ -65,27 +67,45 @@ void VolumeTextureTests::Initialize() {
 }
 
 void VolumeTextureTests::CreateGeometry() {
-  const float left = -2.75f;
-  const float right = 2.75f;
-  const float top = 1.75f;
-  const float bottom = -1.75f;
-  const float mid_width = 0;
-  const float mid_height = 0;
+  const float kLeft = -2.75f;
+  const float kRight = 2.75f;
+  const float kTop = 1.75f;
+  const float kBottom = -1.75f;
 
-  const uint32_t num_quads = 4;
-  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
+  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * kNumQuads);
   buffer->SetTexCoord0Count(3);
 
-  const float spacing = 0.05f;
+  const float spacing = 0.1f;
+  const float width = (kRight - kLeft) / 3.0f - spacing * 2.0f;
+  const float height = (kTop - kBottom) / 3.0f - spacing * 2.0f;
+
   int index = 0;
+  float left = kLeft;
+  float top = kTop;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
 
-  buffer->DefineBiTri(index++, left, top, mid_width - spacing, mid_height + spacing);
+  // Midway between layer 0 and 1.
+  left += width + spacing;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
 
-  buffer->DefineBiTri(index++, mid_width + spacing, top, right, mid_height + spacing);
+  left += width + spacing;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
 
-  buffer->DefineBiTri(index++, left, mid_height - spacing, mid_width - spacing, bottom);
+  // Midway between layer 1 and 2.
+  left = kLeft + width + spacing;
+  top -= height + spacing;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
 
-  buffer->DefineBiTri(index++, mid_width + spacing, mid_height - spacing, right, bottom);
+  left = kLeft;
+  top -= height + spacing;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
+
+  // Midway between layer 2 and 3.
+  left += width + spacing;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
+
+  left += width + spacing;
+  buffer->DefineBiTri(index++, left, top, left + width, top - height);
 
   // Set texcoords.
   auto vertex = buffer->Lock();
@@ -100,12 +120,12 @@ void VolumeTextureTests::CreateGeometry() {
     vertex++->SetTexCoord0(0.0f, 1.0f, p, 0.0);
   };
 
-  set_bitri_texcoords(0.0f);
-
-  set_bitri_texcoords(0.33f);
-
-  set_bitri_texcoords(0.66f);
-
+  float inc = 1.0f / kNumQuads;
+  float p = 0.0f;
+  for (auto i = 0; i < kNumQuads - 1; ++i) {
+    set_bitri_texcoords(p);
+    p += inc;
+  }
   set_bitri_texcoords(1.0f);
 
   buffer->Unlock();
