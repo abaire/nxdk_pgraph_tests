@@ -161,101 +161,50 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   Vertex *vptr = texture_stage_[0].IsSwizzled() ? vertex_buffer_->normalized_vertex_buffer_
                                                 : vertex_buffer_->linear_vertex_buffer_;
 
-  if (enabled_fields & POSITION) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
-                       vertex_buffer_->position_count_, sizeof(Vertex), &vptr[0].pos);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
-  }
+  auto set = [this, enabled_fields](
+                 VertexAttribute attribute,
+                 uint32_t attribute_index,
+                 uint32_t format,
+                 uint32_t size,
+                 const void* data) {
+    if (enabled_fields & attribute) {
+      uint32_t stride = sizeof(Vertex);
+      if (vertex_attribute_stride_override_[attribute_index] != kNoStrideOverride) {
+        stride = vertex_attribute_stride_override_[attribute_index];
+      }
+      SetVertexAttribute(attribute_index, format, size, stride, data);
+    } else {
+      ClearVertexAttribute(attribute_index);
+    }
+  };
 
-  if (enabled_fields & WEIGHT) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-                       &vptr[0].weight);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_WEIGHT);
-  }
+  set(POSITION, NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->position_count_, &vptr[0].pos);
+  set(WEIGHT, NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].weight);
+  set(NORMAL, NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, &vptr[0].normal);
+  set(DIFFUSE, NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].diffuse);
+  set(SPECULAR, NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].specular);
+  set(FOG_COORD, NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].fog_coord);
+  set(POINT_SIZE, NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].point_size);
 
-  if (enabled_fields & NORMAL) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
-                       &vptr[0].normal);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_NORMAL);
-  }
-
-  if (enabled_fields & DIFFUSE) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-                       &vptr[0].diffuse);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
-  }
-
-  if (enabled_fields & SPECULAR) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-                       &vptr[0].specular);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR);
-  }
-
-  if (enabled_fields & FOG_COORD) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
-                       &vptr[0].fog_coord);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_FOG_COORD);
-  }
-
-  if (enabled_fields & POINT_SIZE) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, sizeof(Vertex),
-                       &vptr[0].point_size);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_POINT_SIZE);
-  }
-
-  //  if (enabled_fields & BACK_DIFFUSE) {
-  //    SetVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-  //                       &vptr[0].back_diffuse);
-  //  } else {
+//  set(BACK_DIFFUSE, NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].back_diffuse);
   ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
-  //  }
 
-  //  if (enabled_fields & BACK_SPECULAR) {
-  //    SetVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-  //                       &vptr[0].back_specular);
-  //  } else {
+  //  set(BACK_SPECULAR, NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].back_specular);
   ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR);
-  //  }
 
-  if (enabled_fields & TEXCOORD0) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
-                       vertex_buffer_->tex0_coord_count_, sizeof(Vertex), &vptr[0].texcoord0);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE0);
-  }
+  set(TEXCOORD0, NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex0_coord_count_, &vptr[0].texcoord0);
+  set(TEXCOORD1, NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex1_coord_count_, &vptr[0].texcoord1);
+  set(TEXCOORD2, NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex2_coord_count_, &vptr[0].texcoord2);
+  set(TEXCOORD3, NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex3_coord_count_, &vptr[0].texcoord3);
 
-  if (enabled_fields & TEXCOORD1) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
-                       vertex_buffer_->tex1_coord_count_, sizeof(Vertex), &vptr[0].texcoord1);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE1);
-  }
+  //  set(V13, NV2A_VERTEX_ATTR_13, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v13);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_13);
 
-  if (enabled_fields & TEXCOORD2) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
-                       vertex_buffer_->tex2_coord_count_, sizeof(Vertex), &vptr[0].texcoord2);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE2);
-  }
+    //  set(V14, NV2A_VERTEX_ATTR_14, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v14);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_14);
 
-  if (enabled_fields & TEXCOORD3) {
-    SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
-                       vertex_buffer_->tex3_coord_count_, sizeof(Vertex), &vptr[0].texcoord3);
-  } else {
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE3);
-  }
-
-  // Matching observed behavior. This is probably unnecessary as these are never set by pbkit.
-  ClearVertexAttribute(13);
-  ClearVertexAttribute(14);
-  ClearVertexAttribute(15);
+    //  set(V15, NV2A_VERTEX_ATTR_15, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v15);
+    ClearVertexAttribute(NV2A_VERTEX_ATTR_15);
 }
 
 void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
@@ -1328,6 +1277,21 @@ void TestHost::SetShaderStageInput(uint32_t stage_2_input, uint32_t stage_3_inpu
                    MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE2, stage_2_input) |
                    MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE3, stage_3_input));
   pb_end(p);
+}
+
+void TestHost::OverrideVertexAttributeStride(TestHost::VertexAttribute attribute, uint32_t stride)  {
+  for (auto i = 0; i < 16; ++i) {
+    if (attribute & (1 << i)) {
+      vertex_attribute_stride_override_[i] = stride;
+      return;
+    }
+  }
+
+  ASSERT(!"Invalid attribute");
+}
+
+void TestHost::ClearVertexAttributeStrideOverride(TestHost::VertexAttribute attribute) {
+  OverrideVertexAttributeStride(attribute, kNoStrideOverride);
 }
 
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {

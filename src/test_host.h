@@ -25,6 +25,8 @@ constexpr uint32_t kNextSubchannel = NEXT_SUBCH;
 // The first pgraph context channel that can be used by tests.
 constexpr uint32_t kNextContextChannel = 25;
 
+constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
+
 class TestHost {
  public:
   enum VertexAttribute {
@@ -41,6 +43,9 @@ class TestHost {
     TEXCOORD1 = 1 << NV2A_VERTEX_ATTR_TEXTURE1,
     TEXCOORD2 = 1 << NV2A_VERTEX_ATTR_TEXTURE2,
     TEXCOORD3 = 1 << NV2A_VERTEX_ATTR_TEXTURE3,
+    V13 = 1 << NV2A_VERTEX_ATTR_13,
+    V14 = 1 << NV2A_VERTEX_ATTR_14,
+    V15 = 1 << NV2A_VERTEX_ATTR_15,
   };
 
   static constexpr uint32_t kDefaultVertexFields = POSITION | DIFFUSE | TEXCOORD0;
@@ -318,6 +323,17 @@ class TestHost {
 
   void SetVertexBufferAttributes(uint32_t enabled_fields);
 
+  // Overrides the default calculation of stride for a vertex attribute. "0" is special cased by the hardware to cause
+  // all reads for the attribute to be serviced by the first value in the buffer.
+  void OverrideVertexAttributeStride(VertexAttribute attribute, uint32_t stride);
+  // Clears any previously set override.
+  void ClearVertexAttributeStrideOverride(VertexAttribute attribute);
+  void ClearAllVertexAttributeStrideOverrides() {
+    for (auto i = 0; i < 16; ++i) {
+      ClearVertexAttributeStrideOverride(static_cast<VertexAttribute>(1 << i));
+    }
+  }
+
  private:
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
@@ -360,6 +376,25 @@ class TestHost {
   MATRIX fixed_function_projection_matrix_{};
 
   bool save_results_{true};
+
+  uint32_t vertex_attribute_stride_override_[16]{
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride,
+      kNoStrideOverride
+  };
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_HOST_H

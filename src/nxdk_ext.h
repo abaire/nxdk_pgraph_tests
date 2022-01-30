@@ -17,6 +17,10 @@
 #define NV2A_VERTEX_ATTR_TEXTURE1 10
 #define NV2A_VERTEX_ATTR_TEXTURE2 11
 #define NV2A_VERTEX_ATTR_TEXTURE3 12
+// These do not have a default semantic but are usable from custom vertex shaders.
+#define NV2A_VERTEX_ATTR_13 13
+#define NV2A_VERTEX_ATTR_14 14
+#define NV2A_VERTEX_ATTR_15 15
 
 #define NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8 0x17
 #define NV097_SET_TEXTURE_FORMAT_COLOR_SZ_B8G8R8A8 0x3B
