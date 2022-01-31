@@ -1163,7 +1163,7 @@ uint32_t TestHost::MakeInputCombiner(CombinerSource a_source, bool a_alpha, Comb
 
 void TestHost::SetOutputColorCombiner(int combiner, TestHost::CombinerDest ab_dst, TestHost::CombinerDest cd_dst,
                                       TestHost::CombinerDest sum_dst, bool ab_dot_product, bool cd_dot_product,
-                                      TestHost::CombinerSumMuxMode sum_or_mux, TestHost::CombinerAlphaOutOp op,
+                                      TestHost::CombinerSumMuxMode sum_or_mux, TestHost::CombinerOutOp op,
                                       bool alpha_from_ab_blue, bool alpha_from_cd_blue) const {
   uint32_t value = MakeOutputCombiner(ab_dst, cd_dst, sum_dst, ab_dot_product, cd_dot_product, sum_or_mux, op);
   if (alpha_from_ab_blue) {
@@ -1200,7 +1200,7 @@ void TestHost::ClearOutputColorCombiners() const {
 
 void TestHost::SetOutputAlphaCombiner(int combiner, CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst,
                                       bool ab_dot_product, bool cd_dot_product, CombinerSumMuxMode sum_or_mux,
-                                      CombinerAlphaOutOp op) const {
+                                      CombinerOutOp op) const {
   uint32_t value = MakeOutputCombiner(ab_dst, cd_dst, sum_dst, ab_dot_product, cd_dot_product, sum_or_mux, op);
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, value);
@@ -1229,7 +1229,7 @@ void TestHost::ClearOutputAlphaCombiners() const {
 
 uint32_t TestHost::MakeOutputCombiner(TestHost::CombinerDest ab_dst, TestHost::CombinerDest cd_dst,
                                       TestHost::CombinerDest sum_dst, bool ab_dot_product, bool cd_dot_product,
-                                      TestHost::CombinerSumMuxMode sum_or_mux, TestHost::CombinerAlphaOutOp op) const {
+                                      TestHost::CombinerSumMuxMode sum_or_mux, TestHost::CombinerOutOp op) const {
   uint32_t ret = cd_dst | (ab_dst << 4) | (sum_dst << 8);
   if (cd_dot_product) {
     ret |= 1 << 12;
@@ -1282,18 +1282,26 @@ void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha
   pb_end(p);
 }
 
+void TestHost::SetCombinerFactorC0(int combiner, uint32_t value) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_FACTOR0 + 4 * combiner, value);
+  pb_end(p);
+}
+
 void TestHost::SetCombinerFactorC0(int combiner, float red, float green, float blue, float alpha) const {
   float rgba[4]{red, green, blue, alpha};
+  SetCombinerFactorC0(combiner, TO_BGRA(rgba));
+}
+
+void TestHost::SetCombinerFactorC1(int combiner, uint32_t value) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_FACTOR0 + 4 * combiner, TO_BGRA(rgba));
+  p = pb_push1(p, NV097_SET_COMBINER_FACTOR1 + 4 * combiner, value);
   pb_end(p);
 }
 
 void TestHost::SetCombinerFactorC1(int combiner, float red, float green, float blue, float alpha) const {
   float rgba[4]{red, green, blue, alpha};
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_FACTOR1 + 4 * combiner, TO_BGRA(rgba));
-  pb_end(p);
+  SetCombinerFactorC1(combiner, TO_BGRA(rgba));
 }
 
 void TestHost::SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const {
