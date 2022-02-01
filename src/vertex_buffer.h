@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <vector>
 
-#define TO_ARGB(float_vals)                                                                      \
+#define TO_BGRA(float_vals)                                                                      \
   (((uint32_t)((float_vals)[3] * 255.0f) << 24) + ((uint32_t)((float_vals)[0] * 255.0f) << 16) + \
    ((uint32_t)((float_vals)[1] * 255.0f) << 8) + ((uint32_t)((float_vals)[2] * 255.0f)))
 
@@ -145,9 +145,9 @@ typedef struct Vertex {
 
   void SetSpecularGrey(float val, float alpha) { SetSpecular(val, val, val, alpha); }
 
-  uint32_t GetDiffuseARGB() const { return TO_ARGB(diffuse); }
+  uint32_t GetDiffuseARGB() const { return TO_BGRA(diffuse); }
 
-  uint32_t GetSpecularARGB() const { return TO_ARGB(specular); }
+  uint32_t GetSpecularARGB() const { return TO_BGRA(specular); }
 
   void Translate(float x, float y, float z, float w);
 } Vertex;
@@ -180,9 +180,9 @@ struct Color {
     a = alpha;
   }
 
-  uint32_t AsARGB() const {
+  uint32_t AsBGRA() const {
     float vals[4] = {r, g, b, a};
-    return TO_ARGB(vals);
+    return TO_BGRA(vals);
   }
 
   float r{0.0f};

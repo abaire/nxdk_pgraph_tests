@@ -130,7 +130,7 @@ void SetVertexDataTests::Test(SetFunction func, const Color& diffuse, bool satur
 
   switch (func) {
     case FUNC_4UB:
-      p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.AsARGB());
+      p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.AsBGRA());
       break;
 
     case FUNC_4F_M:

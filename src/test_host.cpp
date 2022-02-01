@@ -161,12 +161,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   Vertex *vptr = texture_stage_[0].IsSwizzled() ? vertex_buffer_->normalized_vertex_buffer_
                                                 : vertex_buffer_->linear_vertex_buffer_;
 
-  auto set = [this, enabled_fields](
-                 VertexAttribute attribute,
-                 uint32_t attribute_index,
-                 uint32_t format,
-                 uint32_t size,
-                 const void* data) {
+  auto set = [this, enabled_fields](VertexAttribute attribute, uint32_t attribute_index, uint32_t format, uint32_t size,
+                                    const void *data) {
     if (enabled_fields & attribute) {
       uint32_t stride = sizeof(Vertex);
       if (vertex_attribute_stride_override_[attribute_index] != kNoStrideOverride) {
@@ -178,7 +174,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
     }
   };
 
-  set(POSITION, NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->position_count_, &vptr[0].pos);
+  set(POSITION, NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->position_count_,
+      &vptr[0].pos);
   set(WEIGHT, NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].weight);
   set(NORMAL, NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, &vptr[0].normal);
   set(DIFFUSE, NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].diffuse);
@@ -186,25 +183,31 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   set(FOG_COORD, NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].fog_coord);
   set(POINT_SIZE, NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].point_size);
 
-//  set(BACK_DIFFUSE, NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].back_diffuse);
+  //  set(BACK_DIFFUSE, NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4,
+  //  &vptr[0].back_diffuse);
   ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
 
-  //  set(BACK_SPECULAR, NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].back_specular);
+  //  set(BACK_SPECULAR, NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4,
+  //  &vptr[0].back_specular);
   ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR);
 
-  set(TEXCOORD0, NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex0_coord_count_, &vptr[0].texcoord0);
-  set(TEXCOORD1, NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex1_coord_count_, &vptr[0].texcoord1);
-  set(TEXCOORD2, NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex2_coord_count_, &vptr[0].texcoord2);
-  set(TEXCOORD3, NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->tex3_coord_count_, &vptr[0].texcoord3);
+  set(TEXCOORD0, NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+      vertex_buffer_->tex0_coord_count_, &vptr[0].texcoord0);
+  set(TEXCOORD1, NV2A_VERTEX_ATTR_TEXTURE1, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+      vertex_buffer_->tex1_coord_count_, &vptr[0].texcoord1);
+  set(TEXCOORD2, NV2A_VERTEX_ATTR_TEXTURE2, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+      vertex_buffer_->tex2_coord_count_, &vptr[0].texcoord2);
+  set(TEXCOORD3, NV2A_VERTEX_ATTR_TEXTURE3, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
+      vertex_buffer_->tex3_coord_count_, &vptr[0].texcoord3);
 
   //  set(V13, NV2A_VERTEX_ATTR_13, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v13);
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_13);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_13);
 
-    //  set(V14, NV2A_VERTEX_ATTR_14, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v14);
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_14);
+  //  set(V14, NV2A_VERTEX_ATTR_14, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v14);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_14);
 
-    //  set(V15, NV2A_VERTEX_ATTR_15, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v15);
-    ClearVertexAttribute(NV2A_VERTEX_ATTR_15);
+  //  set(V15, NV2A_VERTEX_ATTR_15, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].v15);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_15);
 }
 
 void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
@@ -1064,6 +1067,23 @@ void TestHost::SetAlphaBlendEnabled(bool enable) const {
   pb_end(p);
 }
 
+void TestHost::SetCombinerControl(int num_combiners, bool same_factor0, bool same_factor1, bool mux_msb) const {
+  uint32_t setting = MASK(NV097_SET_COMBINER_CONTROL_ITERATION_COUNT, num_combiners);
+  if (!same_factor0) {
+    setting |= MASK(NV097_SET_COMBINER_CONTROL_FACTOR0, NV097_SET_COMBINER_CONTROL_FACTOR0_EACH_STAGE);
+  }
+  if (!same_factor1) {
+    setting |= MASK(NV097_SET_COMBINER_CONTROL_FACTOR1, NV097_SET_COMBINER_CONTROL_FACTOR1_EACH_STAGE);
+  }
+  if (mux_msb) {
+    setting |= MASK(NV097_SET_COMBINER_CONTROL_MUX_SELECT, NV097_SET_COMBINER_CONTROL_MUX_SELECT_MSB);
+  }
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_CONTROL, setting);
+  pb_end(p);
+}
+
 void TestHost::SetInputColorCombiner(int combiner, CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
                                      CombinerSource b_source, bool b_alpha, CombinerMapping b_mapping,
                                      CombinerSource c_source, bool c_alpha, CombinerMapping c_mapping,
@@ -1071,13 +1091,13 @@ void TestHost::SetInputColorCombiner(int combiner, CombinerSource a_source, bool
   uint32_t value = MakeInputCombiner(a_source, a_alpha, a_mapping, b_source, b_alpha, b_mapping, c_source, c_alpha,
                                      c_mapping, d_source, d_alpha, d_mapping);
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner, value);
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner * 4, value);
   pb_end(p);
 }
 
 void TestHost::ClearInputColorCombiner(int combiner) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner, 0);
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner * 4, 0);
   pb_end(p);
 }
 
@@ -1102,13 +1122,13 @@ void TestHost::SetInputAlphaCombiner(int combiner, CombinerSource a_source, bool
   uint32_t value = MakeInputCombiner(a_source, a_alpha, a_mapping, b_source, b_alpha, b_mapping, c_source, c_alpha,
                                      c_mapping, d_source, d_alpha, d_mapping);
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner, value);
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner * 4, value);
   pb_end(p);
 }
 
 void TestHost::ClearInputAlphaColorCombiner(int combiner) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner, 0);
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner * 4, 0);
   pb_end(p);
 }
 
@@ -1152,13 +1172,13 @@ void TestHost::SetOutputColorCombiner(int combiner, TestHost::CombinerDest ab_ds
   }
 
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner, value);
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner * 4, value);
   pb_end(p);
 }
 
 void TestHost::ClearOutputColorCombiner(int combiner) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner, 0);
+  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner * 4, 0);
   pb_end(p);
 }
 
@@ -1181,13 +1201,13 @@ void TestHost::SetOutputAlphaCombiner(int combiner, CombinerDest ab_dst, Combine
                                       CombinerAlphaOutOp op) const {
   uint32_t value = MakeOutputCombiner(ab_dst, cd_dst, sum_dst, ab_dot_product, cd_dot_product, sum_or_mux, op);
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner, value);
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, value);
   pb_end(p);
 }
 
 void TestHost::ClearOutputAlphaColorCombiner(int combiner) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner, 0);
+  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, 0);
   pb_end(p);
 }
 
@@ -1260,6 +1280,34 @@ void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha
   pb_end(p);
 }
 
+void TestHost::SetCombinerFactorC0(int combiner, float red, float green, float blue, float alpha) const {
+  float rgba[4]{red, green, blue, alpha};
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_FACTOR0 + 4 * combiner, TO_BGRA(rgba));
+  pb_end(p);
+}
+
+void TestHost::SetCombinerFactorC1(int combiner, float red, float green, float blue, float alpha) const {
+  float rgba[4]{red, green, blue, alpha};
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_FACTOR1 + 4 * combiner, TO_BGRA(rgba));
+  pb_end(p);
+}
+
+void TestHost::SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const {
+  float rgba[4]{red, green, blue, alpha};
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR, TO_BGRA(rgba));
+  pb_end(p);
+}
+
+void TestHost::SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const {
+  float rgba[4]{red, green, blue, alpha};
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR + 0x04, TO_BGRA(rgba));
+  pb_end(p);
+}
+
 void TestHost::SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1, ShaderStageProgram stage_2,
                                      ShaderStageProgram stage_3) const {
   auto p = pb_begin();
@@ -1279,7 +1327,7 @@ void TestHost::SetShaderStageInput(uint32_t stage_2_input, uint32_t stage_3_inpu
   pb_end(p);
 }
 
-void TestHost::OverrideVertexAttributeStride(TestHost::VertexAttribute attribute, uint32_t stride)  {
+void TestHost::OverrideVertexAttributeStride(TestHost::VertexAttribute attribute, uint32_t stride) {
   for (auto i = 0; i < 16; ++i) {
     if (attribute & (1 << i)) {
       vertex_attribute_stride_override_[i] = stride;

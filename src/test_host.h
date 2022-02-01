@@ -234,6 +234,8 @@ class TestHost {
 
   void SetFixedFunctionModelViewMatrix(const MATRIX model_matrix);
   void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
+  inline const float *GetFixedFunctionModelViewMatrix() const { return fixed_function_model_view_matrix_; }
+  inline const float *GetFixedFunctionProjectionMatrix() const { return fixed_function_projection_matrix_; }
 
   void SetVertex(float x, float y, float z) const;
   void SetVertex(float x, float y, float z, float w) const;
@@ -272,6 +274,13 @@ class TestHost {
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
   void SetAlphaBlendEnabled(bool enable = true) const;
+
+  // Sets up the number of enabled color combiners and behavior flags.
+  //
+  // same_factor0 == true will reuse the C0 constant across all enabled stages.
+  // same_factor1 == true will reuse the C1 constant across all enabled stages.
+  void SetCombinerControl(int num_combiners = 1, bool same_factor0 = false, bool same_factor1 = false,
+                          bool mux_msb = false) const;
 
   void SetInputColorCombiner(int combiner, CombinerSource a_source = SRC_ZERO, bool a_alpha = false,
                              CombinerMapping a_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource b_source = SRC_ZERO,
@@ -314,6 +323,12 @@ class TestHost {
                          CombinerSource g_source = SRC_ZERO, bool g_alpha = false, bool g_invert = false,
                          bool specular_add_invert_r12 = false, bool specular_add_invert_r5 = false,
                          bool specular_clamp = false) const;
+
+  void SetCombinerFactorC0(int combiner, float red, float green, float blue, float alpha) const;
+  void SetCombinerFactorC1(int combiner, float red, float green, float blue, float alpha) const;
+
+  void SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const;
+  void SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const;
 
   void SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1 = STAGE_NONE,
                              ShaderStageProgram stage_2 = STAGE_NONE, ShaderStageProgram stage_3 = STAGE_NONE) const;
@@ -378,23 +393,9 @@ class TestHost {
   bool save_results_{true};
 
   uint32_t vertex_attribute_stride_override_[16]{
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride,
-      kNoStrideOverride
-  };
+      kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride,
+      kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride,
+      kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_HOST_H
