@@ -161,9 +161,17 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         }
       } break;
 
-      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8:
-        // TODO: for now, just let default gradient happen
-        break;
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8: {
+        uint32_t *source = pixels;
+        for (int y = 0; y < surface->h; ++y) {
+          for (int x = 0; x < surface->w; ++x, ++source) {
+            uint8_t red, green, blue, alpha;
+            SDL_GetRGBA(*source, surface->format, &red, &green, &blue, &alpha);
+            *dest++ = red + (green << 8);
+            *dest++ = blue + (alpha << 8);
+          }
+        }
+      } break;
 
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_AY8:
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y8: {
