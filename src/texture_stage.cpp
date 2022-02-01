@@ -115,6 +115,14 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
   if (format_.require_conversion) {
     uint8_t *dest = memory_base + texture_memory_offset_;
 
+    // Buffer for formats that need to be swizzled after conversion.
+    uint32_t swizzle_w = surface->w;
+    uint32_t swizzle_h = surface->h;
+    uint32_t swizzle_depth = 1;
+    uint32_t swizzle_pitch = surface->pitch;
+    uint32_t swizzle_bpp = surface->format->BytesPerPixel;
+    uint8_t *converted = nullptr;
+
     // TODO: potential reference material -
     // https://github.com/scalablecory/colors/blob/master/color.c
     switch (format_.xbox_format) {
@@ -122,7 +130,7 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
                                                                   // YUYV
       {
         uint32_t *source = pixels;
-        for (int y = 0; y < surface->h; ++y)
+        for (int y = 0; y < surface->h; ++y) {
           for (int x = 0; x < surface->w; x += 2, source += 2) {
             uint8_t R0, G0, B0, R1, G1, B1;
             SDL_GetRGB(source[0], surface->format, &R0, &G0, &B0);
@@ -133,12 +141,13 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
             dest[3] = (0.439f * R1) - (0.368f * G1) - (0.071f * B1) + 128;   // V
             dest += 4;
           }
+        }
       } break;
 
       case NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8:  // UYVY
       {
         uint32_t *source = pixels;
-        for (int y = 0; y < surface->h; ++y)
+        for (int y = 0; y < surface->h; ++y) {
           for (int x = 0; x < surface->w; x += 2, source += 2) {
             uint8_t R0, G0, B0, R1, G1, B1;
             SDL_GetRGB(source[0], surface->format, &R0, &G0, &B0);
@@ -149,18 +158,52 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
             dest[3] = (0.257f * R1) + (0.504f * G1) + (0.098f * B1) + 16;    // Y1
             dest += 4;
           }
+        }
       } break;
 
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8:
         // TODO: for now, just let default gradient happen
         break;
 
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_AY8:
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y8: {
+        uint32_t *source = pixels;
+        for (int y = 0; y < surface->h; ++y) {
+          for (int x = 0; x < surface->w; ++x, ++source) {
+            uint8_t red, green, blue;
+            SDL_GetRGB(source[0], surface->format, &red, &green, &blue);
+            *dest++ = static_cast<uint8_t>(0.299f * red + 0.587f * green + 0.114f * blue);
+          }
+        }
+      } break;
+
+      case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_AY8:
+      case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_Y8: {
+        uint32_t *source = pixels;
+        swizzle_bpp = 1;
+        swizzle_pitch = swizzle_w * swizzle_bpp;
+        converted = new uint8_t[swizzle_pitch * swizzle_h * swizzle_depth];
+        dest = converted;
+
+        for (int y = 0; y < surface->h; ++y) {
+          for (int x = 0; x < surface->w; ++x, ++source) {
+            uint8_t red, green, blue;
+            SDL_GetRGB(source[0], surface->format, &red, &green, &blue);
+            *dest++ = static_cast<uint8_t>(0.299f * red + 0.587f * green + 0.114f * blue);
+          }
+        }
+      } break;
+
       default:
         return 3;
-        break;
     }
 
-    // TODO: swizzling
+    if (format_.xbox_swizzled) {
+      ASSERT(converted && "Swizzle source buffer not populated");
+      SetRawTexture((const uint8_t *)converted, swizzle_w, swizzle_h, swizzle_depth, swizzle_pitch, swizzle_bpp,
+                    format_.xbox_swizzled, memory_base);
+      delete[] converted;
+    }
 
     return 0;
   }
