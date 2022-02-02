@@ -104,6 +104,7 @@ void TestSuite::Initialize() {
   p = pb_begin();
   p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0x0);
 
+  // TODO: Set up with TextureStage instances in host_.
   {
     uint32_t address = NV097_SET_TEXTURE_ADDRESS;
     uint32_t control = NV097_SET_TEXTURE_CONTROL0;

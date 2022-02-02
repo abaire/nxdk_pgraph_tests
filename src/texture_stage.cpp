@@ -16,6 +16,7 @@ bool TextureStage::RequiresColorspaceConversion() const {
 void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offset) const {
   if (!enabled_) {
     auto p = pb_begin();
+    // NV097_SET_TEXTURE_CONTROL0
     p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_), false);
     pb_end(p);
     return;
@@ -27,7 +28,6 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   }
 
   auto p = pb_begin();
-
   // NV097_SET_TEXTURE_CONTROL0
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
                NV097_SET_TEXTURE_CONTROL0_ENABLE | NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP);
@@ -44,14 +44,15 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   const uint32_t DMA_A = 1;
   const uint32_t DMA_B = 2;
 
-  uint32_t format =
-      MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, DMA_A) | MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, 0) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE_COLOR) |
-      MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, dimensionality) |
-      MASK(NV097_SET_TEXTURE_FORMAT_COLOR, format_.xbox_format) |
-      MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, mipmap_levels_) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, size_u) | MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, size_v) |
-      MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, size_p);
+  uint32_t format = MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, DMA_A) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, cubemap_enable_) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_BORDER_SOURCE, border_source_color_) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_DIMENSIONALITY, dimensionality) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_COLOR, format_.xbox_format) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_MIPMAP_LEVELS, mipmap_levels_) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_U, size_u) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, size_v) |
+                    MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, size_p);
 
   uint32_t offset = reinterpret_cast<uint32_t>(memory_dma_offset) + texture_memory_offset_;
   uint32_t texture_addr = offset & 0x03ffffff;
@@ -66,9 +67,14 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_IMAGE_RECT
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(stage_), size_param);
 
-  // (0x0W0V0U wrapping: 1=wrap 2=mirror 3=clamp 4=border 5=clamp to edge)
-  // NV097_SET_TEXTURE_ADDRESS
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(stage_), 0x00030303);
+  uint32_t texture_address = MASK(NV097_SET_TEXTURE_ADDRESS_U, wrap_modes_[0]) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_U, cylinder_wrap_[0]) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_V, wrap_modes_[1]) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_V, cylinder_wrap_[1]) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_P, wrap_modes_[2]) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_P, cylinder_wrap_[2]) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_Q, cylinder_wrap_[3]);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(stage_), texture_address);
 
   // NV097_SET_TEXTURE_FILTER
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), texture_filter_);
