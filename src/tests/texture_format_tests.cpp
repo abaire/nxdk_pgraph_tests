@@ -49,6 +49,7 @@ void TextureFormatTests::Initialize() {
   shader->SetLightingEnabled(false);
   host_.SetShaderProgram(shader);
   host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 }
 
 void TextureFormatTests::CreateGeometry() {
