@@ -30,10 +30,32 @@ class TextureStage {
     MAG_CONVOLUTION_2D_LOD0 = 4,
   };
 
+  enum WrapMode { WRAP_WRAP = 1, WRAP_MIRROR, WRAP_CLAMP_TO_EDGE, WRAP_BORDER, WRAP_CLAMP_TO_EDGE_OGL };
+
  public:
+  void SetUWrap(WrapMode mode, bool cylinder_wrap = false) {
+    wrap_modes_[0] = mode;
+    cylinder_wrap_[0] = cylinder_wrap;
+  }
+  void SetVWrap(WrapMode mode, bool cylinder_wrap = false) {
+    wrap_modes_[1] = mode;
+    cylinder_wrap_[1] = cylinder_wrap;
+  }
+  void SetPWrap(WrapMode mode, bool cylinder_wrap = false) {
+    wrap_modes_[2] = mode;
+    cylinder_wrap_[2] = cylinder_wrap;
+  }
+  void SetQWrap(bool cylinder_wrap = false) { cylinder_wrap_[3] = cylinder_wrap; }
+
   void SetEnabled(bool enabled = true) { enabled_ = enabled; }
   void SetFormat(const TextureFormatInfo &format) { format_ = format; }
   void SetBorderColor(uint32_t color) { border_color_ = color; }
+
+  void SetCubemapEnable(bool val = true) { cubemap_enable_ = val; }
+
+  // Determines whether texels along the border retrieve their color from border_color_ or the texture.
+  void SetBorderFromColor(bool val = true) { border_source_color_ = val; }
+
   void SetBumpEnv(float x, float y, float z, float w, float scale, float offset = 0.0f) {
     bump_env_material[0] = x;
     bump_env_material[1] = y;
@@ -95,7 +117,13 @@ class TextureStage {
   uint32_t palette_memory_offset_{0};
 
   uint32_t texture_filter_{0x1012000};
+
   uint32_t border_color_{0};
+  bool cubemap_enable_{false};
+  bool border_source_color_{true};
+
+  WrapMode wrap_modes_[3]{WRAP_WRAP, WRAP_WRAP, WRAP_WRAP};
+  bool cylinder_wrap_[4] = {false};
 
   float bump_env_material[4] = {0.0f, 0.0f, 0.0f, 0.0f};
   float bump_env_scale{0.0f};

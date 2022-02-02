@@ -330,6 +330,9 @@ class TestHost {
   void SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const;
   void SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const;
 
+  // Sets the type of texture sampling for each texture.
+  //
+  // If you have a totally blank texture, double check that this is set to something other than STAGE_NONE.
   void SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1 = STAGE_NONE,
                              ShaderStageProgram stage_2 = STAGE_NONE, ShaderStageProgram stage_3 = STAGE_NONE) const;
   // Sets the input for shader stage 2 and 3. The value is the 0 based index of the stage whose output should be linked.
@@ -349,6 +352,12 @@ class TestHost {
     }
   }
 
+  void SetupControl0() const;
+
+  // Commit any changes to texture stages (called automatically in PrepareDraw but may be useful to call more frequently
+  // in scenes with multiple draws per clear)
+  void SetupTextureStages() const;
+
  private:
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
@@ -356,8 +365,6 @@ class TestHost {
                              CombinerMapping d_mapping) const;
   uint32_t MakeOutputCombiner(CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst, bool ab_dot_product,
                               bool cd_dot_product, CombinerSumMuxMode sum_or_mux, CombinerAlphaOutOp op) const;
-  void SetupControl0() const;
-  void SetupTextureStages() const;
   static void EnsureFolderExists(const std::string &folder_path);
   static std::string PrepareSaveFilePNG(std::string output_directory, const std::string &filename);
   static void SaveBackBuffer(const std::string &output_directory, const std::string &name);
