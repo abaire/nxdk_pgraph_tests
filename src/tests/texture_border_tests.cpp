@@ -146,8 +146,8 @@ void TextureBorderTests::Test2D() {
   stage.SetBorderColor(0xF00000CC);
   stage.SetDimensions(kTextureWidth, kTextureHeight);
 
-  stage.SetUWrap(TextureStage::WRAP_WRAP, false);
-  stage.SetVWrap(TextureStage::WRAP_WRAP, false);
+  stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
+  stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
   host_.SetupTextureStages();
   host_.SetVertexBuffer(vertex_buffers_[0]);
   host_.DrawArrays();
@@ -178,6 +178,7 @@ void TextureBorderTests::Test2D() {
   host_.SetVertexBuffer(vertex_buffers_[4]);
   host_.DrawArrays();
 
+  stage.SetBorderFromColor(true);
   stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE_OGL, false);
   stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE_OGL, false);
   host_.SetupTextureStages();

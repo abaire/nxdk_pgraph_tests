@@ -30,7 +30,7 @@ class TextureStage {
     MAG_CONVOLUTION_2D_LOD0 = 4,
   };
 
-  enum WrapMode { WRAP_WRAP = 1, WRAP_MIRROR, WRAP_CLAMP_TO_EDGE, WRAP_BORDER, WRAP_CLAMP_TO_EDGE_OGL };
+  enum WrapMode { WRAP_REPEAT = 1, WRAP_MIRROR, WRAP_CLAMP_TO_EDGE, WRAP_BORDER, WRAP_CLAMP_TO_EDGE_OGL };
 
  public:
   void SetUWrap(WrapMode mode, bool cylinder_wrap = false) {
@@ -122,7 +122,7 @@ class TextureStage {
   bool cubemap_enable_{false};
   bool border_source_color_{true};
 
-  WrapMode wrap_modes_[3]{WRAP_WRAP, WRAP_WRAP, WRAP_WRAP};
+  WrapMode wrap_modes_[3]{WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE, WRAP_CLAMP_TO_EDGE};
   bool cylinder_wrap_[4] = {false};
 
   float bump_env_material[4] = {0.0f, 0.0f, 0.0f, 0.0f};

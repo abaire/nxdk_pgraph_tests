@@ -67,6 +67,7 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_IMAGE_RECT
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(stage_), size_param);
 
+  // NV097_SET_TEXTURE_ADDRESS
   uint32_t texture_address = MASK(NV097_SET_TEXTURE_ADDRESS_U, wrap_modes_[0]) |
                              MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_U, cylinder_wrap_[0]) |
                              MASK(NV097_SET_TEXTURE_ADDRESS_V, wrap_modes_[1]) |
