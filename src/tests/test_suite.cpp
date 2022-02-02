@@ -104,6 +104,20 @@ void TestSuite::Initialize() {
   p = pb_begin();
   p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0x0);
 
+  for (auto i = 0; i < 4; ++i) {
+    auto& stage = host_.GetTextureStage(i);
+    stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+    stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+    stage.SetPWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+    stage.SetQWrap(false);
+
+    stage.SetEnabled(false);
+    stage.SetCubemapEnable(false);
+    stage.SetFilter();
+    stage.SetAlphaKillEnable(false);
+    stage.SetLODClamp(0, 4095);
+  }
+
   // TODO: Set up with TextureStage instances in host_.
   {
     uint32_t address = NV097_SET_TEXTURE_ADDRESS;

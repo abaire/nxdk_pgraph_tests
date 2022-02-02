@@ -143,8 +143,10 @@ void TextureBorderTests::Test2D() {
 
   auto &stage = host_.GetTextureStage(0);
   stage.SetEnabled();
-  stage.SetBorderColor(0xF00000CC);
-  stage.SetDimensions(kTextureWidth, kTextureHeight);
+  stage.SetBorderColor(0xF0FF00FF);
+  stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+  stage.SetImageDimensions(320, 240);
+  stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_TENT_LOD0);
 
   stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
   stage.SetVWrap(TextureStage::WRAP_REPEAT, false);

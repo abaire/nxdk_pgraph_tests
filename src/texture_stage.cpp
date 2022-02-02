@@ -30,15 +30,18 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   auto p = pb_begin();
   // NV097_SET_TEXTURE_CONTROL0
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
-               NV097_SET_TEXTURE_CONTROL0_ENABLE | NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP);
+               NV097_SET_TEXTURE_CONTROL0_ENABLE |
+                   MASK(NV097_SET_TEXTURE_CONTROL0_ALPHA_KILL_ENABLE, alpha_kill_enable_) |
+                   MASK(NV097_SET_TEXTURE_CONTROL0_MIN_LOD_CLAMP, lod_min_) |
+                   MASK(NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP, lod_max_));
 
   uint32_t dimensionality = GetDimensionality();
 
-  uint32_t size_u = bsf((int)width_);
-  uint32_t size_v = bsf((int)height_);
+  uint32_t size_u = bsf((int)size_u_);
+  uint32_t size_v = bsf((int)size_v_);
   uint32_t size_p = 0;
   if (dimensionality > 2) {
-    size_p = bsf((int)depth_);
+    size_p = bsf((int)size_p_);
   }
 
   const uint32_t DMA_A = 1;
@@ -60,10 +63,10 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr, format);
 
   uint32_t pitch_param = (format_.xbox_bpp * width_) << 16;
-  ;
-  uint32_t size_param = size_param = (width_ << 16) | (height_ & 0xFFFF);
   // NV097_SET_TEXTURE_CONTROL1
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch_param);
+
+  uint32_t size_param = (width_ << 16) | (height_ & 0xFFFF);
   // NV097_SET_TEXTURE_IMAGE_RECT
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(stage_), size_param);
 

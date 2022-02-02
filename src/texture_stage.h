@@ -53,6 +53,12 @@ class TextureStage {
 
   void SetCubemapEnable(bool val = true) { cubemap_enable_ = val; }
 
+  void SetAlphaKillEnable(bool val = true) { alpha_kill_enable_ = val; }
+  void SetLODClamp(uint32_t min = 0, uint32_t max = 4095) {
+    lod_min_ = min;
+    lod_max_ = max;
+  }
+
   // Determines whether texels along the border retrieve their color from border_color_ or the texture.
   void SetBorderFromColor(bool val = true) { border_source_color_ = val; }
 
@@ -64,7 +70,14 @@ class TextureStage {
     bump_env_scale = scale;
     bump_env_offset = offset;
   }
-  void SetDimensions(uint32_t width, uint32_t height, uint32_t depth = 1) {
+
+  void SetTextureDimensions(uint32_t u, uint32_t v, uint32_t p = 1) {
+    size_u_ = u;
+    size_v_ = v;
+    size_p_ = p;
+  }
+
+  void SetImageDimensions(uint32_t width, uint32_t height, uint32_t depth = 1) {
     width_ = width;
     height_ = height;
     depth_ = depth;
@@ -79,6 +92,11 @@ class TextureStage {
     }
     return 2;
   }
+
+  void SetFilter(uint32_t lod_bias = 0, ConvolutionKernel kernel = K_QUINCUNX, MinFilter min = MIN_BOX_LOD0,
+                 MagFilter mag = MAG_BOX_LOD0, bool signed_alpha = false, bool signed_red = false,
+                 bool signed_green = false, bool signed_blue = false);
+
   bool IsSwizzled() const { return format_.xbox_swizzled; }
   bool RequiresColorspaceConversion() const;
 
@@ -89,9 +107,6 @@ class TextureStage {
 
   void SetTextureOffset(uint32_t offset) { texture_memory_offset_ = offset; }
   void SetPaletteOffset(uint32_t offset) { palette_memory_offset_ = offset; }
-  void SetFilter(uint32_t lod_bias = 0, ConvolutionKernel kernel = K_QUINCUNX, MinFilter min = MIN_BOX_LOD0,
-                 MagFilter mag = MAG_BOX_LOD0, bool signed_alpha = false, bool signed_red = false,
-                 bool signed_green = false, bool signed_blue = false);
 
   void Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offset) const;
 
@@ -105,11 +120,19 @@ class TextureStage {
  private:
   uint32_t stage_{0};
   bool enabled_{false};
+  bool alpha_kill_enable_{false};
+  uint32_t lod_min_{0};
+  uint32_t lod_max_{4095};
+
   TextureFormatInfo format_;
   uint32_t width_{0};
   uint32_t height_{0};
   uint32_t depth_{0};
   uint32_t texture_memory_offset_{0};
+
+  uint32_t size_u_{0};
+  uint32_t size_v_{0};
+  uint32_t size_p_{0};
 
   uint32_t mipmap_levels_{1};
 

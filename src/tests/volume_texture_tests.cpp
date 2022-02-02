@@ -154,7 +154,8 @@ void VolumeTextureTests::Test(const TextureFormatInfo &texture_format) {
   delete[] layers;
 
   auto &stage = host_.GetTextureStage(0);
-  stage.SetDimensions(width, height, kTextureDepth);
+  stage.SetTextureDimensions(width, height, kTextureDepth);
+  stage.SetImageDimensions(width, height, kTextureDepth);
 
   host_.PrepareDraw(kBackgroundColor);
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE | TestHost::TEXCOORD0);
@@ -177,7 +178,8 @@ void VolumeTextureTests::TestPalettized() {
   const uint32_t height = kTextureHeight;
   const uint32_t depth = kTextureDepth;
   auto &stage = host_.GetTextureStage(0);
-  stage.SetDimensions(width, height, depth);
+  stage.SetTextureDimensions(width, height, depth);
+  stage.SetImageDimensions(width, height, depth);
 
   uint8_t *surface = nullptr;
   int err = GeneratePalettizedSurface(&surface, width, height, depth, palette_size);

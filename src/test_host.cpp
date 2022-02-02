@@ -55,7 +55,8 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
   uint32_t palette_offset = 0;
   for (auto i = 0; i < 4; ++i, texture_offset += texture_size, palette_offset += kMaxPaletteSize) {
     texture_stage_[i].SetStage(i);
-    texture_stage_[i].SetDimensions(max_texture_width, max_texture_height);
+    texture_stage_[i].SetTextureDimensions(max_texture_width, max_texture_height);
+    texture_stage_[i].SetImageDimensions(max_texture_width, max_texture_height);
     texture_stage_[i].SetTextureOffset(texture_offset);
     texture_stage_[i].SetPaletteOffset(palette_offset);
   }
@@ -772,7 +773,8 @@ void TestHost::SetupTextureStages() const {
 void TestHost::SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage) { texture_stage_[stage].SetFormat(fmt); }
 
 void TestHost::SetDefaultTextureParams(uint32_t stage) {
-  texture_stage_[stage].SetDimensions(max_texture_width_, max_texture_height_);
+  texture_stage_[stage].SetTextureDimensions(max_texture_width_, max_texture_height_);
+  texture_stage_[stage].SetImageDimensions(max_texture_width_, max_texture_height_);
 }
 
 void TestHost::SetDepthBufferFormat(uint32_t fmt) {
