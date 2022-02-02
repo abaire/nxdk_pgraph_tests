@@ -171,7 +171,7 @@ void TestSuite::Initialize() {
 
   SetDefaultTextureFormat();
   host_.SetTextureStageEnabled(0, false);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
   host_.SetShaderStageInput(0, 0);
 
   host_.ClearAllVertexAttributeStrideOverrides();
