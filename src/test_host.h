@@ -394,7 +394,9 @@ class TestHost {
   void SetCombinerFactorC1(int combiner, uint32_t value) const;
   void SetCombinerFactorC1(int combiner, float red, float green, float blue, float alpha) const;
 
+  void SetFinalCombinerFactorC0(uint32_t value) const;
   void SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const;
+  void SetFinalCombinerFactorC1(uint32_t value) const;
   void SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const;
 
   // Sets the type of texture sampling for each texture.

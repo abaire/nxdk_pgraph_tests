@@ -1304,18 +1304,26 @@ void TestHost::SetCombinerFactorC1(int combiner, float red, float green, float b
   SetCombinerFactorC1(combiner, TO_BGRA(rgba));
 }
 
+void TestHost::SetFinalCombinerFactorC0(uint32_t value) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR, value);
+  pb_end(p);
+}
+
 void TestHost::SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const {
   float rgba[4]{red, green, blue, alpha};
+  SetFinalCombinerFactorC0(TO_BGRA(rgba));
+}
+
+void TestHost::SetFinalCombinerFactorC1(uint32_t value) const {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR, TO_BGRA(rgba));
+  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR + 0x04, value);
   pb_end(p);
 }
 
 void TestHost::SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const {
   float rgba[4]{red, green, blue, alpha};
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR + 0x04, TO_BGRA(rgba));
-  pb_end(p);
+  SetFinalCombinerFactorC1(TO_BGRA(rgba));
 }
 
 void TestHost::SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1, ShaderStageProgram stage_2,
