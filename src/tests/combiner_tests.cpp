@@ -6,12 +6,13 @@
 #include "test_host.h"
 #include "vertex_buffer.h"
 
-static constexpr const char* kTestName = "Mux";
+static constexpr const char* kMuxTestName = "Mux";
+static constexpr const char* kIndependenceTestName = "Independence";
 
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Combiner") {
-  auto test = [this]() { Test(); };
-  tests_[kTestName] = test;
+  tests_[kMuxTestName] = [this]() { TestMux(); };
+  tests_[kIndependenceTestName] = [this]() { TestCombinerIndependence(); };
 }
 
 void CombinerTests::Initialize() {
@@ -65,7 +66,7 @@ void CombinerTests::CreateGeometry() {
   }
 }
 
-void CombinerTests::Test() {
+void CombinerTests::TestMux() {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -136,10 +137,73 @@ void CombinerTests::Test() {
   host_.SetVertexBuffer(vertex_buffers_[5]);
   host_.DrawArrays(vertex_elements);
 
-  pb_printat(0, 0, (char*)"%s\n", kTestName);
+  pb_printat(0, 0, (char*)"%s\n", kMuxTestName);
   pb_printat(1, 0, (char*)"Unset = Red");
   pb_printat(2, 0, (char*)"Set = Blue");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, kMuxTestName);
+}
+
+void CombinerTests::TestCombinerIndependence() {
+  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+  host_.PrepareDraw(kBackgroundColor);
+
+  uint32_t vertex_elements = host_.POSITION | host_.DIFFUSE | host_.SPECULAR;
+
+  host_.SetCombinerControl(2);
+
+  // Turn R0 green.
+  host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 0.0f, 1.0f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+
+  // Turn R0 red, and set R1 to the previous (green) value of R0.
+  host_.SetCombinerFactorC0(1, 1.0f, 0.0f, 0.0f, 1.0f);
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_R0, TestHost::DST_R1);
+
+  // Show a green quad.
+  host_.SetFinalCombiner0Just(TestHost::SRC_R1);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  pb_printat(2, 6, (char*)"Green from r0 stage 0");
+  host_.SetVertexBuffer(vertex_buffers_[0]);
+  host_.DrawArrays(vertex_elements);
+
+  host_.SetCombinerControl(3);
+
+  // Set R0 blue to 25%
+  host_.SetCombinerFactorC0(0, 0.0f, 0.0f, 0.25f, 0.0f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+
+  // Turn R0 75% white and R1 50% white
+  host_.SetCombinerFactorC0(1, 0.0f, 0.0f, 0.75f, 0.0f);
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_R0, TestHost::DST_R1, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY, true, true);
+
+  host_.SetInputColorCombiner(2, TestHost::AlphaInput(TestHost::SRC_R0), TestHost::OneInput(),
+                              TestHost::AlphaInput(TestHost::SRC_R1), TestHost::OneInput());
+  host_.SetOutputColorCombiner(2, TestHost::DST_R0, TestHost::DST_R1);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_R1);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  pb_printat(7, 20, (char*)"DGrey from r0 stage 1 alpha");
+  host_.SetVertexBuffer(vertex_buffers_[2]);
+  host_.DrawArrays(vertex_elements);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  pb_printat(12, 6, (char*)"LGrey from r0 stage 1");
+  host_.SetVertexBuffer(vertex_buffers_[4]);
+  host_.DrawArrays(vertex_elements);
+
+  pb_printat(0, 0, (char*)"%s\n", kIndependenceTestName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kIndependenceTestName);
 }
