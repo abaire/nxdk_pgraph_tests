@@ -109,8 +109,9 @@ debug_bridge_no_deploy:
 .phony: debug_bridge
 debug_bridge: deploy debug_bridge_no_deploy
 
+RESOURCE_FILES = $(shell find $(RESOURCEDIR)/ -type f)
 RESOURCES = \
-	$(patsubst $(RESOURCEDIR)/%,$(OUTPUT_DIR)/%,$(wildcard $(RESOURCEDIR)/image_blit/*))
+	$(patsubst $(RESOURCEDIR)/%,$(OUTPUT_DIR)/%,$(RESOURCE_FILES))
 
 TARGET += $(RESOURCES)
 $(GEN_XISO): $(RESOURCES)

@@ -1019,7 +1019,6 @@ void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) 
 }
 
 void TestHost::SetTextureStageEnabled(uint32_t stage, bool enabled) {
-  ASSERT(stage == 0 && "Only 1 texture stage is fully implemented.");
   ASSERT(stage < 4 && "Only 4 texture stages are supported.");
   texture_stage_[stage].SetEnabled(enabled);
 }
