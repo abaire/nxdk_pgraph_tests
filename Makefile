@@ -59,6 +59,7 @@ SRCS = \
 	$(SRCDIR)/tests/null_surface_tests.cpp \
 	$(SRCDIR)/tests/overlapping_draw_modes_tests.cpp \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
+	$(SRCDIR)/tests/stencil_tests.cpp \
 	$(SRCDIR)/tests/surface_clip_tests.cpp \
 	$(SRCDIR)/tests/surface_pitch_tests.cpp \
 	$(SRCDIR)/tests/test_suite.cpp \
