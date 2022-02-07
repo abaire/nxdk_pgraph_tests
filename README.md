@@ -41,6 +41,21 @@ after the fact this can be achieved via `git submodule update --init --recursive
 
 For macOS, the patched nxdk currently assumes that the Homebrew llvm@11 package has been installed.
 
+## Adding new tests
+
+### Using nv2a log events from xemu
+
+1. Enable tracing of nv2a log events as normal (see xemu documentation) and
+   exercise the event of interest within the game.
+1. Duplicate an existing test as a skeleton.
+1. Add the duplicated test to the `Makefile` and `main.cpp` (please preserve
+   alphabetical ordering if possible).
+1. Use [nv2a_to_pbkit](https://github.com/abaire/nv2a_to_pbkit) to get a rough
+   set of pbkit invocations duplicating the behavior from the log. Take the
+   interesting portions of the converted output and put them into the body of
+   the test. You may wish to utilize some of the helper methods from `TestHost`
+   and similar classes rather than using the raw output to improve readability.
+
 
 ## Running with CLion
 
