@@ -5,8 +5,7 @@
 #include <memory>
 
 #include "debug_output.h"
-
-#define MAXRAM 0x03FFAFFF
+#include "pbkit_ext.h"
 
 void Vertex::Translate(float x, float y, float z, float w) {
   pos[0] += x;

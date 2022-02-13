@@ -42,8 +42,8 @@ void DepthFormatTests::Initialize() {
   TestSuite::Initialize();
   SetDefaultTextureFormat();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>(false);
-  host_.SetShaderProgram(shader);
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
 }
 
 void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff) {

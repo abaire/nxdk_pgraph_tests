@@ -16,9 +16,10 @@ SRCS = \
 	$(SRCDIR)/menu_item.cpp \
 	$(SRCDIR)/shaders/orthographic_vertex_shader.cpp \
 	$(SRCDIR)/shaders/perspective_vertex_shader.cpp \
+	$(SRCDIR)/shaders/pixel_shader_program.cpp \
 	$(SRCDIR)/shaders/precalculated_vertex_shader.cpp \
 	$(SRCDIR)/shaders/projection_vertex_shader.cpp \
-	$(SRCDIR)/shaders/shader_program.cpp \
+	$(SRCDIR)/shaders/vertex_shader_program.cpp \
 	$(SRCDIR)/test_driver.cpp \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
@@ -36,6 +37,7 @@ SRCS = \
 	$(SRCDIR)/tests/test_suite.cpp \
 	$(SRCDIR)/tests/texture_border_tests.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
+	$(SRCDIR)/tests/texture_render_target_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \
 	$(SRCDIR)/tests/volume_texture_tests.cpp \

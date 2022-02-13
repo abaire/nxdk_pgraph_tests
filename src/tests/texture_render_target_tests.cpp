@@ -1,4 +1,4 @@
-#include "texture_format_tests.h"
+#include "texture_render_target_tests.h"
 
 #include <SDL.h>
 #include <pbkit/pbkit.h>
@@ -7,11 +7,22 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "pbkit_ext.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/pixel_shader_program.h"
+#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"
+
+#define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
+
+// From pbkit.c, DMA_COLOR is set to channel 9 by default
+// NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
+const uint32_t kDefaultDMAColorChannel = 9;
+
+static const uint32_t kTextureWidth = 256;
+static const uint32_t kTexturePitch = kTextureWidth * 4;
+static const uint32_t kTextureHeight = 256;
 
 static int GenerateGradientSurface(SDL_Surface **gradient_surface, int width, int height);
 static int GeneratePalettizedGradientSurface(uint8_t **gradient_surface, int width, int height,
@@ -25,8 +36,8 @@ static constexpr TestHost::PaletteSize kPaletteSizes[] = {
     TestHost::PALETTE_32,
 };
 
-TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture format") {
+TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string output_dir)
+    : TestSuite(host, std::move(output_dir), "Texture render target") {
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
     std::string name = MakeTestName(format);
@@ -42,26 +53,49 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
   }
 }
 
-void TextureFormatTests::Initialize() {
+void TextureRenderTargetTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  shader->SetLightingEnabled(false);
-  host_.SetVertexShaderProgram(shader);
+  auto channel = kNextContextChannel;
+  const uint32_t texture_target_dma_channel = channel++;
+  pb_create_dma_ctx(texture_target_dma_channel, DMA_CLASS_3D, 0, MAXRAM, &texture_target_ctx_);
+  pb_bind_channel(&texture_target_ctx_);
+
+  const uint32_t texture_size = kTexturePitch * kTextureHeight;
+  render_target_ =
+      (uint8_t *)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
+  ASSERT(render_target_ && "Failed to allocate target surface.");
+  pb_set_dma_address(&texture_target_ctx_, render_target_, texture_size - 1);
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-
-  PixelShaderProgram::LoadTexturedPixelShader();
 }
 
-void TextureFormatTests::CreateGeometry() {
-  std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
-  buffer->DefineBiTri(0, -0.75, 0.75, 0.75, -0.75, 0.1f);
-  buffer->Linearize(static_cast<float>(host_.GetMaxTextureWidth()), static_cast<float>(host_.GetMaxTextureHeight()));
+void TextureRenderTargetTests::Deinitialize() {
+  TestSuite::Deinitialize();
+  if (render_target_) {
+    MmFreeContiguousMemory(render_target_);
+  }
 }
 
-void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
+void TextureRenderTargetTests::CreateGeometry() {
+  render_target_vertex_buffer_ = host_.AllocateVertexBuffer(6);
+  render_target_vertex_buffer_->DefineBiTri(0, 0.0f, 0.0f, kTextureWidth, kTextureHeight, 0.1f);
+  render_target_vertex_buffer_->Linearize(kTextureWidth, kTextureHeight);
+
+  framebuffer_vertex_buffer_ = host_.AllocateVertexBuffer(6);
+  framebuffer_vertex_buffer_->DefineBiTri(0, -1.75, 1.75, 1.75, -1.75, 0.1f);
+  framebuffer_vertex_buffer_->Linearize(static_cast<float>(kTextureWidth), static_cast<float>(kTextureHeight));
+}
+
+void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+
   host_.SetTextureFormat(texture_format);
   std::string test_name = MakeTestName(texture_format);
 
@@ -74,6 +108,51 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   SDL_FreeSurface(gradient_surface);
   ASSERT(!update_texture_result && "Failed to set texture");
 
+  uint32_t *p;
+
+  host_.PrepareDraw(0xFE202020);
+
+  // Redirect the color output to the target texture.
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+  pb_end(p);
+
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetVertexBuffer(render_target_vertex_buffer_);
+  bool swizzle = true;
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
+  if (!swizzle) {
+    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
+    host_.Clear(0xFF000000, 0, 0);
+  }
+
+  host_.DrawArrays();
+
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  pb_end(p);
+
+  host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
+
+  host_.SetVertexBuffer(framebuffer_vertex_buffer_);
   host_.PrepareDraw(0xFE202020);
   host_.DrawArrays();
 
@@ -87,9 +166,14 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
+
+  host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  host_.SetViewportOffset(0.531250f, 0.531250f, 0, 0);
+  host_.SetViewportScale(0, -0, 0, 0);
 }
 
-void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
+void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
   host_.SetTextureFormat(texture_format);
   std::string test_name = MakePalettizedTestName(size);
@@ -110,6 +194,50 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
   ASSERT(!err && "Failed to set palette");
 
   host_.PrepareDraw(0xFE202020);
+
+  uint32_t *p;
+  // Redirect the color output to the target texture.
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+  pb_end(p);
+
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetVertexBuffer(render_target_vertex_buffer_);
+  bool swizzle = true;
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
+  if (!swizzle) {
+    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
+    host_.Clear(0xFF000000, 0, 0);
+  }
+
+  host_.DrawArrays();
+
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  pb_end(p);
+
+  host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
+
+  host_.SetVertexBuffer(framebuffer_vertex_buffer_);
+  host_.PrepareDraw(0xFE202020);
   host_.DrawArrays();
 
   pb_print("N: %s\n", texture_format.name);
@@ -125,7 +253,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
+std::string TextureRenderTargetTests::MakeTestName(const TextureFormatInfo &texture_format) {
   std::string test_name = "TexFmt_";
   test_name += texture_format.name;
   if (!texture_format.xbox_swizzled) {
@@ -134,7 +262,7 @@ std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_fo
   return std::move(test_name);
 }
 
-std::string TextureFormatTests::MakePalettizedTestName(TestHost::PaletteSize size) {
+std::string TextureRenderTargetTests::MakePalettizedTestName(TestHost::PaletteSize size) {
   std::string test_name = "TexFmt_";
   auto &fmt = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
   test_name += fmt.name;

@@ -34,7 +34,7 @@ MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string o
 void MaterialColorSourceTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   CreateGeometry();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 }

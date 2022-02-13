@@ -31,7 +31,7 @@ AttributeExplicitSetterTests::AttributeExplicitSetterTests(TestHost& host, std::
 void AttributeExplicitSetterTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>(false);
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Send shader constants (see attribute_carryover_test.inl)
@@ -42,7 +42,7 @@ void AttributeExplicitSetterTests::Initialize() {
   // const c[5] = 1 0 0.75
   shader->SetUniformF(5, 1.0f, 0.0f, 0.75f);
 
-  host_.SetShaderProgram(shader);
+  host_.SetVertexShaderProgram(shader);
 
   CreateGeometry();
 }

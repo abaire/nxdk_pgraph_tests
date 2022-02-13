@@ -9,9 +9,6 @@
 #include "test_host.h"
 #include "vertex_buffer.h"
 
-// From pbkit.c
-#define MAXRAM 0x03FFAFFF
-
 // See pb_init in pbkit.c, where the channel contexts are set up.
 // SUBCH_3 == GR_CLASS_9F, which contains the IMAGE_BLIT commands.
 #define SUBCH_CLASS_9F SUBCH_3

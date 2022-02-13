@@ -17,10 +17,11 @@
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
-#include "shaders/shader_program.h"
+#include "shaders/vertex_shader_program.h"
 #include "vertex_buffer.h"
 
-#define MAXRAM 0x03FFAFFF
+#define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
+
 #define MAX_FILE_PATH_SIZE 248
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void ClearVertexAttribute(uint32_t index);
@@ -102,20 +103,40 @@ void TestHost::Clear(uint32_t argb, uint32_t depth_value, uint8_t stencil_value)
   EraseText();
 }
 
+void TestHost::SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format, uint32_t width,
+                                uint32_t height, bool swizzle, uint32_t clip_x, uint32_t clip_y,
+                                AntiAliasingSetting aa) const {
+  uint32_t value = SET_MASK(NV097_SET_SURFACE_FORMAT_COLOR, color_format) |
+                   SET_MASK(NV097_SET_SURFACE_FORMAT_ZETA, depth_format) |
+                   SET_MASK(NV097_SET_SURFACE_FORMAT_ANTI_ALIASING, aa) |
+                   SET_MASK(NV097_SET_SURFACE_FORMAT_TYPE,
+                            swizzle ? NV097_SET_SURFACE_FORMAT_TYPE_SWIZZLE : NV097_SET_SURFACE_FORMAT_TYPE_PITCH);
+  if (swizzle) {
+    uint32_t log_width = 31 - __builtin_clz(width);
+    value |= SET_MASK(NV097_SET_SURFACE_FORMAT_WIDTH, log_width);
+    uint32_t log_height = 31 - __builtin_clz(height);
+    value |= SET_MASK(NV097_SET_SURFACE_FORMAT_HEIGHT, log_height);
+  }
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_FORMAT, value);
+  if (!swizzle) {
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, (width << 16) + clip_x);
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (height << 16) + clip_y);
+  }
+  pb_end(p);
+}
+
 void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) {
   pb_wait_for_vbl();
   pb_reset();
 
   SetupTextureStages();
 
+  SetSurfaceFormat(SCF_A8R8G8B8, (SurfaceZetaFormat)depth_buffer_format_, framebuffer_width_, framebuffer_height_);
+
   // Override the values set in pb_init. Unfortunately the default is not exposed and must be recreated here.
   auto p = pb_begin();
-  uint32_t color_format = NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8;
-  uint32_t frame_buffer_format =
-      (NV097_SET_SURFACE_FORMAT_TYPE_PITCH << 8) | (depth_buffer_format_ << 4) | color_format;
-  uint32_t fbv_flag = 0;
-  p = pb_push1(p, NV097_SET_SURFACE_FORMAT, frame_buffer_format | fbv_flag);
-
   uint32_t max_depth;
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
     if (depth_buffer_mode_float_) {
@@ -139,8 +160,8 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 
   Clear(argb, depth_value, stencil_value);
 
-  if (shader_program_) {
-    shader_program_->PrepareDraw();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->PrepareDraw();
   }
 
   while (pb_busy()) {
@@ -212,8 +233,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 }
 
 void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
-  if (shader_program_) {
-    shader_program_->PrepareDraw();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->PrepareDraw();
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawArrays.");
@@ -241,8 +262,8 @@ void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitiv
 }
 
 void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
-  if (shader_program_) {
-    shader_program_->PrepareDraw();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->PrepareDraw();
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
@@ -303,8 +324,8 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
 }
 
 void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
-  if (shader_program_) {
-    shader_program_->PrepareDraw();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->PrepareDraw();
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineArray.");
@@ -397,8 +418,8 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
 
 void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
                                     DrawPrimitive primitive) {
-  if (shader_program_) {
-    shader_program_->PrepareDraw();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->PrepareDraw();
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
@@ -438,8 +459,8 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
 
 void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
                                     DrawPrimitive primitive) {
-  if (shader_program_) {
-    shader_program_->PrepareDraw();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->PrepareDraw();
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
@@ -851,16 +872,12 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
   }
 }
 
-void TestHost::SetShaderProgram(std::shared_ptr<ShaderProgram> program) {
-  shader_program_ = std::move(program);
+void TestHost::SetVertexShaderProgram(std::shared_ptr<VertexShaderProgram> program) {
+  vertex_shader_program_ = std::move(program);
 
-  if (shader_program_) {
-    shader_program_->Activate();
+  if (vertex_shader_program_) {
+    vertex_shader_program_->Activate();
   } else {
-    // Use the untextured shader to set up the combiner state.
-    ShaderProgram::LoadUntexturedPixelShader();
-    ShaderProgram::DisablePixelShader();
-
     auto p = pb_begin();
     p = pb_push1(
         p, NV097_SET_TRANSFORM_EXECUTION_MODE,
@@ -881,62 +898,22 @@ std::shared_ptr<VertexBuffer> TestHost::AllocateVertexBuffer(uint32_t num_vertic
 void TestHost::SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer) { vertex_buffer_ = std::move(buffer); }
 
 void TestHost::SetXDKDefaultViewportAndFixedFunctionMatrices() {
+  SetWindowClip(framebuffer_width_, framebuffer_height_);
   SetViewportOffset(0.531250f, 0.531250f, 0, 0);
   SetViewportScale(0, -0, 0, 0);
 
   MATRIX matrix;
-  matrix[_11] = 1.0f;
-  matrix[_21] = 0.0f;
-  matrix[_31] = 0.0f;
-  matrix[_41] = 0.0f;
-
-  matrix[_12] = 0.0f;
-  matrix[_22] = 1.0f;
-  matrix[_32] = 0.0f;
-  matrix[_42] = 0.0f;
-
-  matrix[_13] = 0.0f;
-  matrix[_23] = 0.0f;
-  matrix[_33] = 1.0f;
-  matrix[_43] = 7.0f;
-
-  matrix[_14] = 0.0f;
-  matrix[_24] = 0.0f;
-  matrix[_34] = 0.0f;
-  matrix[_44] = 1.0f;
+  GetDefaultXDKModelViewMatrix(matrix);
   SetFixedFunctionModelViewMatrix(matrix);
 
-  matrix[_11] = 579.411194f;
-  matrix[_21] = 0.0f;
-  matrix[_31] = 320.0f;
-  matrix[_41] = 2240.0f;
-
-  matrix[_12] = 0.0f;
-  matrix[_22] = -579.411194;
-  matrix[_32] = 240.0f;
-  matrix[_42] = 1680.0f;
-
-  matrix[_13] = 0.0f;
-  matrix[_23] = 0.0f;
-
-  if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
-    matrix[_33] = 65864.320312f;
-    matrix[_43] = 395185.9375f;
-  } else {
-    matrix[_33] = 16861522.0f;
-    matrix[_43] = 101169136.0f;
-  }
-
-  matrix[_14] = 0.0f;
-  matrix[_24] = 0.0f;
-  matrix[_34] = 1.0f;
-  matrix[_44] = 7.0f;
+  GetDefaultXDKProjectionMatrix(matrix);
   SetFixedFunctionProjectionMatrix(matrix);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_XDK;
 }
 
 void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
+  SetWindowClip(framebuffer_width_, framebuffer_height_);
   SetViewportOffset(320, 240, 0, 0);
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
     SetViewportScale(320.000000, -240.000000, 65535.000000, 0);
@@ -976,23 +953,73 @@ void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_NXDK;
 }
 
+void TestHost::GetDefaultXDKModelViewMatrix(MATRIX matrix) const {
+  matrix[_11] = 1.0f;
+  matrix[_21] = 0.0f;
+  matrix[_31] = 0.0f;
+  matrix[_41] = 0.0f;
+
+  matrix[_12] = 0.0f;
+  matrix[_22] = 1.0f;
+  matrix[_32] = 0.0f;
+  matrix[_42] = 0.0f;
+
+  matrix[_13] = 0.0f;
+  matrix[_23] = 0.0f;
+  matrix[_33] = 1.0f;
+  matrix[_43] = 7.0f;
+
+  matrix[_14] = 0.0f;
+  matrix[_24] = 0.0f;
+  matrix[_34] = 0.0f;
+  matrix[_44] = 1.0f;
+}
+
+void TestHost::GetDefaultXDKProjectionMatrix(MATRIX matrix) const {
+  // TODO: These should be calcualted based on the fraembuffer size.
+  matrix[_11] = 579.411194f;
+  matrix[_21] = 0.0f;
+  matrix[_31] = 320.0f;
+  matrix[_41] = 2240.0f;
+
+  matrix[_12] = 0.0f;
+  matrix[_22] = -579.411194;
+  matrix[_32] = 240.0f;
+  matrix[_42] = 1680.0f;
+
+  matrix[_13] = 0.0f;
+  matrix[_23] = 0.0f;
+
+  if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
+    matrix[_33] = 65864.320312f;
+    matrix[_43] = 395185.9375f;
+  } else {
+    matrix[_33] = 16861522.0f;
+    matrix[_43] = 101169136.0f;
+  }
+
+  matrix[_14] = 0.0f;
+  matrix[_24] = 0.0f;
+  matrix[_34] = 1.0f;
+  matrix[_44] = 7.0f;
+}
+
+void TestHost::SetWindowClip(uint32_t width, uint32_t height, uint32_t x, uint32_t y) {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_WINDOW_CLIP_HORIZONTAL, x + (width << 16));
+  p = pb_push1(p, NV097_SET_WINDOW_CLIP_VERTICAL, y + (height << 16));
+  pb_end(p);
+}
+
 void TestHost::SetViewportOffset(float x, float y, float z, float w) const {
   auto p = pb_begin();
-  pb_push_to(SUBCH_3D, p++, NV097_SET_VIEWPORT_OFFSET, 4);
-  *(p++) = *(uint32_t *)&x;
-  *(p++) = *(uint32_t *)&y;
-  *(p++) = *(uint32_t *)&z;
-  *(p++) = *(uint32_t *)&w;
+  p = pb_push4f(p, NV097_SET_VIEWPORT_OFFSET, x, y, z, w);
   pb_end(p);
 }
 
 void TestHost::SetViewportScale(float x, float y, float z, float w) const {
   auto p = pb_begin();
-  pb_push_to(SUBCH_3D, p++, NV097_SET_VIEWPORT_SCALE, 4);
-  *(p++) = *(uint32_t *)&x;
-  *(p++) = *(uint32_t *)&y;
-  *(p++) = *(uint32_t *)&z;
-  *(p++) = *(uint32_t *)&w;
+  p = pb_push4f(p, NV097_SET_VIEWPORT_SCALE, x, y, z, w);
   pb_end(p);
 }
 
@@ -1000,10 +1027,10 @@ void TestHost::SetFixedFunctionModelViewMatrix(const MATRIX model_matrix) {
   memcpy(fixed_function_model_view_matrix_, model_matrix, sizeof(fixed_function_model_view_matrix_));
 
   auto p = pb_begin();
-  p = pb_push_transposed_matrix(p, NV20_TCL_PRIMITIVE_3D_MODELVIEW_MATRIX, fixed_function_model_view_matrix_);
+  p = pb_push_transposed_matrix(p, NV097_SET_MODEL_VIEW_MATRIX, fixed_function_model_view_matrix_);
   MATRIX inverse;
   matrix_inverse(inverse, fixed_function_model_view_matrix_);
-  p = pb_push_4x3_matrix(p, NV20_TCL_PRIMITIVE_3D_INVERSE_MODELVIEW_MATRIX, inverse);
+  p = pb_push_4x3_matrix(p, NV097_SET_INVERSE_MODEL_VIEW_MATRIX, inverse);
   pb_end(p);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
@@ -1012,7 +1039,7 @@ void TestHost::SetFixedFunctionModelViewMatrix(const MATRIX model_matrix) {
 void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) {
   memcpy(fixed_function_projection_matrix_, projection_matrix, sizeof(fixed_function_projection_matrix_));
   auto p = pb_begin();
-  p = pb_push_transposed_matrix(p, NV20_TCL_PRIMITIVE_3D_PROJECTION_MATRIX, fixed_function_projection_matrix_);
+  p = pb_push_transposed_matrix(p, NV097_SET_COMPOSITE_MATRIX, fixed_function_projection_matrix_);
   pb_end(p);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
@@ -1069,6 +1096,7 @@ void TestHost::SetAlphaBlendEnabled(bool enable) const {
 }
 
 void TestHost::SetCombinerControl(int num_combiners, bool same_factor0, bool same_factor1, bool mux_msb) const {
+  ASSERT(num_combiners > 0 && num_combiners < 8);
   uint32_t setting = MASK(NV097_SET_COMBINER_CONTROL_ITERATION_COUNT, num_combiners);
   if (!same_factor0) {
     setting |= MASK(NV097_SET_COMBINER_CONTROL_FACTOR0, NV097_SET_COMBINER_CONTROL_FACTOR0_EACH_STAGE);

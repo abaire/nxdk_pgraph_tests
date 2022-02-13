@@ -2,6 +2,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
 
@@ -173,6 +174,9 @@ void TestSuite::Initialize() {
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
   host_.SetShaderStageInput(0, 0);
+
+  PixelShaderProgram::LoadUntexturedPixelShader();
+  PixelShaderProgram::DisablePixelShader();
 
   host_.ClearAllVertexAttributeStrideOverrides();
 }

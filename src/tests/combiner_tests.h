@@ -2,11 +2,9 @@
 #define NXDK_PGRAPH_TESTS_COMBINER_TESTS_H
 
 #include <memory>
-#include <vector>
 
 #include "test_host.h"
 #include "test_suite.h"
-#include "vertex_buffer.h"
 
 class TestHost;
 class VertexBuffer;

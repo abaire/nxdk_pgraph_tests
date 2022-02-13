@@ -14,7 +14,7 @@
 #include "texture_stage.h"
 #include "vertex_buffer.h"
 
-class ShaderProgram;
+class VertexShaderProgram;
 struct Vertex;
 class VertexBuffer;
 
@@ -201,6 +201,30 @@ class TestHost {
     STAGE_DOT_REFLECT_SPECULAR_CONST,
   };
 
+  enum AntiAliasingSetting {
+    AA_CENTER_1 = NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_1,
+    AA_CENTER_CORNER_2 = NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_CORNER_2,
+    AA_SQUARE_OFFSET_4 = NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_SQUARE_OFFSET_4,
+  };
+
+  enum SurfaceColorFormat {
+    SCF_X1R5G5B5_Z1R5G5B5 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_Z1R5G5B5,
+    SCF_X1R5G5B5_O1R5G5B5 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_O1R5G5B5,
+    SCF_R5G6B5 = NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5,
+    SCF_X8R8G8B8_Z8R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_Z8R8G8B8,
+    SCF_X8R8G8B8_O8R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_O8R8G8B8,
+    SCF_X1A7R8G8B8_Z1A7R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_Z1A7R8G8B8,
+    SCF_X1A7R8G8B8_O1A7R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_O1A7R8G8B8,
+    SCF_A8R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8,
+    SCF_B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_B8,
+    SCF_G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_G8B8,
+  };
+
+  enum SurfaceZetaFormat {
+    SZF_Z16 = NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+    SZF_Z24S8 = NV097_SET_SURFACE_FORMAT_ZETA_Z24S8
+  };
+
  public:
   TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
            uint32_t max_texture_height, uint32_t max_texture_depth = 4);
@@ -266,8 +290,21 @@ class TestHost {
   void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
                   const std::string &z_buffer_name = "");
 
-  void SetShaderProgram(std::shared_ptr<ShaderProgram> program);
-  std::shared_ptr<ShaderProgram> GetShaderProgram() const { return shader_program_; }
+  // Set the surface format
+  // width and height are treated differently depending on whether swizzle is enabled or not.
+  // swizzle = true
+  //     width and height must be a power of two
+  // swizzle = false
+  //     width and height may be arbitrary positive values and will be used to set the clip dimensions
+  void SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format, uint32_t width,
+                        uint32_t height, bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0,
+                        AntiAliasingSetting aa = AA_CENTER_1) const;
+
+  void SetVertexShaderProgram(std::shared_ptr<VertexShaderProgram> program);
+  std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
+
+  void GetDefaultXDKModelViewMatrix(MATRIX matrix) const;
+  void GetDefaultXDKProjectionMatrix(MATRIX matrix) const;
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -275,6 +312,7 @@ class TestHost {
   // Set up the viewport and fixed function pipeline matrices to match the nxdk settings.
   void SetDefaultViewportAndFixedFunctionMatrices();
 
+  void SetWindowClip(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0);
   void SetViewportOffset(float x, float y, float z, float w) const;
   void SetViewportScale(float x, float y, float z, float w) const;
 
@@ -451,7 +489,7 @@ class TestHost {
 
   uint32_t depth_buffer_format_{NV097_SET_SURFACE_FORMAT_ZETA_Z24S8};
   bool depth_buffer_mode_float_{false};
-  std::shared_ptr<ShaderProgram> shader_program_{};
+  std::shared_ptr<VertexShaderProgram> vertex_shader_program_{};
 
   std::shared_ptr<VertexBuffer> vertex_buffer_{};
   uint8_t *texture_memory_{nullptr};

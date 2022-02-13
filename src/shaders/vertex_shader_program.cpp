@@ -1,4 +1,4 @@
-#include "shader_program.h"
+#include "vertex_shader_program.h"
 
 #include <pbkit/pbkit.h>
 
@@ -6,7 +6,7 @@
 
 #include "pbkit_ext.h"
 
-void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const {
+void VertexShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const {
   uint32_t *p;
   int i;
 
@@ -35,43 +35,9 @@ void ShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_si
     p += 4;
     pb_end(p);
   }
-
-  if (enable_texture_) {
-    LoadTexturedPixelShader();
-  } else {
-    LoadUntexturedPixelShader();
-  }
 }
 
-void ShaderProgram::LoadTexturedPixelShader() {
-  /* Setup fragment shader */
-  uint32_t *p = pb_begin();
-
-// clang format off
-#include "shaders/textured_pixelshader.inl"
-  // clang format on
-
-  pb_end(p);
-}
-
-void ShaderProgram::LoadUntexturedPixelShader() {
-  /* Setup fragment shader */
-  uint32_t *p = pb_begin();
-
-// clang format off
-#include "shaders/untextured_pixelshader.inl"
-  // clang format on
-
-  pb_end(p);
-}
-
-void ShaderProgram::DisablePixelShader() {
-  uint32_t *p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0);
-  pb_end(p);
-}
-
-void ShaderProgram::Activate() {
+void VertexShaderProgram::Activate() {
   OnActivate();
 
   if (shader_override_) {
@@ -81,7 +47,7 @@ void ShaderProgram::Activate() {
   }
 }
 
-void ShaderProgram::PrepareDraw() {
+void VertexShaderProgram::PrepareDraw() {
   OnLoadConstants();
 
   if (base_transform_constants_.empty() || !uniform_upload_required_) {
@@ -91,7 +57,7 @@ void ShaderProgram::PrepareDraw() {
   UploadConstants();
 }
 
-void ShaderProgram::UploadConstants() {
+void VertexShaderProgram::UploadConstants() {
   MergeUniforms();
 
   auto p = pb_begin();
@@ -119,7 +85,7 @@ void ShaderProgram::UploadConstants() {
   uniform_upload_required_ = false;
 }
 
-void ShaderProgram::SetTransformConstantBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
+void VertexShaderProgram::SetTransformConstantBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
   // Constants are always provided as int4 vectors.
   uint32_t index = slot * 4;
   uint32_t num_ints = num_slots * 4;
@@ -135,49 +101,49 @@ void ShaderProgram::SetTransformConstantBlock(uint32_t slot, const uint32_t *val
   uniform_upload_required_ = true;
 }
 
-void ShaderProgram::SetBaseUniform4x4F(uint32_t slot, const float *value) {
+void VertexShaderProgram::SetBaseUniform4x4F(uint32_t slot, const float *value) {
   SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
 }
 
-void ShaderProgram::SetBaseUniform4F(uint32_t slot, const float *value) {
+void VertexShaderProgram::SetBaseUniform4F(uint32_t slot, const float *value) {
   SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 1);
 }
 
-void ShaderProgram::SetBaseUniform4I(uint32_t slot, const uint32_t *value) {
+void VertexShaderProgram::SetBaseUniform4I(uint32_t slot, const uint32_t *value) {
   SetTransformConstantBlock(slot, value, 1);
 }
 
-void ShaderProgram::SetBaseUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
+void VertexShaderProgram::SetBaseUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
   const uint32_t vector[] = {x, y, z, w};
   SetBaseUniform4I(slot, vector);
 }
 
-void ShaderProgram::SetBaseUniformF(uint32_t slot, float x, float y, float z, float w) {
+void VertexShaderProgram::SetBaseUniformF(uint32_t slot, float x, float y, float z, float w) {
   const float vector[] = {x, y, z, w};
   SetBaseUniform4F(slot, vector);
 }
 
-void ShaderProgram::SetUniform4x4F(uint32_t slot, const float *value) {
+void VertexShaderProgram::SetUniform4x4F(uint32_t slot, const float *value) {
   SetUniformBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
 }
 
-void ShaderProgram::SetUniform4F(uint32_t slot, const float *value) {
+void VertexShaderProgram::SetUniform4F(uint32_t slot, const float *value) {
   SetUniformBlock(slot, reinterpret_cast<const uint32_t *>(value), 1);
 }
 
-void ShaderProgram::SetUniform4I(uint32_t slot, const uint32_t *value) { SetUniformBlock(slot, value, 1); }
+void VertexShaderProgram::SetUniform4I(uint32_t slot, const uint32_t *value) { SetUniformBlock(slot, value, 1); }
 
-void ShaderProgram::SetUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
+void VertexShaderProgram::SetUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
   const uint32_t vector[] = {x, y, z, w};
   SetUniform4I(slot, vector);
 }
 
-void ShaderProgram::SetUniformF(uint32_t slot, float x, float y, float z, float w) {
+void VertexShaderProgram::SetUniformF(uint32_t slot, float x, float y, float z, float w) {
   const float vector[] = {x, y, z, w};
   SetUniform4F(slot, vector);
 }
 
-void ShaderProgram::SetUniformBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
+void VertexShaderProgram::SetUniformBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
   for (auto i = 0; i < num_slots; ++i, ++slot) {
     TransformConstant val = {*values++, *values++, *values++, *values++};
     uniforms_[slot] = val;
@@ -194,7 +160,7 @@ void ShaderProgram::SetUniformBlock(uint32_t slot, const uint32_t *values, uint3
   uniform_upload_required_ = true;
 }
 
-void ShaderProgram::MergeUniforms() {
+void VertexShaderProgram::MergeUniforms() {
   for (auto item : uniforms_) {
     uint32_t slot = item.first;
 

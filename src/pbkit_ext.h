@@ -7,6 +7,9 @@
 
 #include <cstdint>
 
+// From pbkit.c
+#define MAXRAM 0x03FFAFFF
+
 // "Beta" class for blending operations (see xf86-video-nouveau).
 #define GR_CLASS_12 0x12
 

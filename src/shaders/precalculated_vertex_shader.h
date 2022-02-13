@@ -5,11 +5,11 @@
 
 #include "../math3d.h"
 #include "math3d.h"
-#include "shader_program.h"
+#include "vertex_shader_program.h"
 
-class PrecalculatedVertexShader : public ShaderProgram {
+class PrecalculatedVertexShader : public VertexShaderProgram {
  public:
-  explicit PrecalculatedVertexShader(bool enable_texture = true) : ShaderProgram((enable_texture)) {}
+  explicit PrecalculatedVertexShader() : VertexShaderProgram() {}
 
  protected:
   void OnLoadShader() override;

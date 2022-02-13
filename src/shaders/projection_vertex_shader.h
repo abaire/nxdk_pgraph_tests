@@ -4,12 +4,12 @@
 #include <cstdint>
 
 #include "math3d.h"
-#include "shader_program.h"
+#include "vertex_shader_program.h"
 
-class ProjectionVertexShader : public ShaderProgram {
+class ProjectionVertexShader : public VertexShaderProgram {
  public:
   ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min = 0, float z_max = 0x7FFF,
-                         bool enable_texture = true, bool enable_lighting = true);
+                         bool enable_lighting = true);
 
   void SetLightingEnabled(bool enabled = true) { enable_lighting_ = enabled; }
 

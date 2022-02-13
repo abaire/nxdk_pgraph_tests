@@ -32,7 +32,7 @@ ZeroStrideTests::ZeroStrideTests(TestHost& host, std::string output_dir)
 void ZeroStrideTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   CreateGeometry();

@@ -69,7 +69,7 @@ static void SetLightAndMaterial() {
 void LightingNormalTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   CreateGeometry();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 

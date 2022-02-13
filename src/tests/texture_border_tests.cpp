@@ -32,7 +32,7 @@ void TextureBorderTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   host_.SetTextureStageEnabled(0, true);

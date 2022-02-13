@@ -48,7 +48,7 @@ FogTests::FogTests(TestHost& host, std::string output_dir, std::string suite_nam
 void FogTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   CreateGeometry();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 }
@@ -266,8 +266,7 @@ void FogCustomShaderTests::Initialize() {
   shader->LookAt(camera_position, look_at);
 
   shader->SetLightingEnabled(false);
-  shader->SetTextureEnabled(false);
-  host_.SetShaderProgram(shader);
+  host_.SetVertexShaderProgram(shader);
 }
 
 // FogInfiniteFogCoordinateTests
@@ -288,7 +287,7 @@ void FogInfiniteFogCoordinateTests::Initialize() {
   shader->SetShaderOverride(kInfiniteFogCShader, sizeof(kInfiniteFogCShader));
   // const c[12] = 0
   shader->SetUniformF(12, 0.0f);
-  host_.SetShaderProgram(shader);
+  host_.SetVertexShaderProgram(shader);
 }
 
 // FogVec4CoordTests
@@ -401,7 +400,7 @@ void FogVec4CoordTests::Test(const TestConfig& config) {
   shader->SetUniformF(13, 1.0f, 0.0f);
   // Hack for bug in Cg/vpcompiler wrt. clamp on the y-value. See fog_vec4_y.vs.cg.
   shader->SetUniformF(14, config.fog[1]);
-  host_.SetShaderProgram(shader);
+  host_.SetVertexShaderProgram(shader);
 
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
 

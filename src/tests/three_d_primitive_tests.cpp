@@ -49,7 +49,7 @@ ThreeDPrimitiveTests::ThreeDPrimitiveTests(TestHost& host, std::string output_di
 void ThreeDPrimitiveTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 }
 

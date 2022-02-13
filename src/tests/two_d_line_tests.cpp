@@ -57,7 +57,7 @@ void TwoDLineTests::Initialize() {
   pb_bind_channel(&surface_destination_ctx_);
   pb_bind_subchannel(SUBCH_CLASS_42, &surface_destination_ctx_);
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
 }
 
 void TwoDLineTests::Test(const TestCase& test) {

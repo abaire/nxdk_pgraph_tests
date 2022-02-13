@@ -19,8 +19,8 @@ WParamTests::WParamTests(TestHost& host, std::string output_dir) : TestSuite(hos
 
 void WParamTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>(false);
-  host_.SetShaderProgram(shader);
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
 }
 
 void WParamTests::Deinitialize() {

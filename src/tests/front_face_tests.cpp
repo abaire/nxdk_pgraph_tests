@@ -43,8 +43,8 @@ void FrontFaceTests::Initialize() {
     pb_end(p);
   }
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>(false);
-  host_.SetShaderProgram(shader);
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
 
   CreateGeometry();
 }

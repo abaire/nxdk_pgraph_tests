@@ -1,13 +1,13 @@
-#ifndef NXDK_PGRAPH_TESTS_SHADER_PROGRAM_H
-#define NXDK_PGRAPH_TESTS_SHADER_PROGRAM_H
+#ifndef NXDK_PGRAPH_TESTS_VERTEX_SHADER_PROGRAM_H
+#define NXDK_PGRAPH_TESTS_VERTEX_SHADER_PROGRAM_H
 
 #include <cstdint>
 #include <map>
 #include <vector>
 
-class ShaderProgram {
+class VertexShaderProgram {
  public:
-  explicit ShaderProgram(bool enable_texture = true) : enable_texture_(enable_texture) {}
+  VertexShaderProgram() = default;
 
   void Activate();
   void PrepareDraw();
@@ -26,13 +26,6 @@ class ShaderProgram {
 
   void SetUniformF(uint32_t slot, float x, float y = 0.0f, float z = 0.0f, float w = 0.0f);
   void SetUniformI(uint32_t slot, uint32_t x, uint32_t y = 0, uint32_t z = 0, uint32_t w = 0);
-
-  void SetTextureEnabled(bool enabled = true) { enable_texture_ = enabled; }
-  bool RequiresTextureStage() const { return enable_texture_; }
-
-  static void LoadTexturedPixelShader();
-  static void LoadUntexturedPixelShader();
-  static void DisablePixelShader();
 
  protected:
   virtual void OnActivate() {}
@@ -56,7 +49,6 @@ class ShaderProgram {
   void MergeUniforms();
 
  protected:
-  bool enable_texture_;
   const uint32_t *shader_override_{nullptr};
   uint32_t shader_override_size_{0};
 
@@ -71,4 +63,4 @@ class ShaderProgram {
   bool uniform_upload_required_{true};
 };
 
-#endif  // NXDK_PGRAPH_TESTS_SHADER_PROGRAM_H
+#endif  // NXDK_PGRAPH_TESTS_VERTEX_SHADER_PROGRAM_H

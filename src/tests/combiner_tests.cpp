@@ -18,7 +18,7 @@ CombinerTests::CombinerTests(TestHost& host, std::string output_dir)
 void CombinerTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   CreateGeometry();

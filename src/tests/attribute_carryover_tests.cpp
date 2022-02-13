@@ -63,7 +63,7 @@ AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string out
 void AttributeCarryoverTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>(false);
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Send shader constants (see attribute_carryover_test.inl)
@@ -74,7 +74,7 @@ void AttributeCarryoverTests::Initialize() {
   // const c[4] = 1 0 0.75
   shader->SetUniformF(3, 1.0f, 0.0f, 0.75f);
 
-  host_.SetShaderProgram(shader);
+  host_.SetVertexShaderProgram(shader);
 }
 
 void AttributeCarryoverTests::Deinitialize() {

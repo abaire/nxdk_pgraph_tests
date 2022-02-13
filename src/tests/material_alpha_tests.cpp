@@ -38,7 +38,7 @@ void MaterialAlphaTests::Initialize() {
   const TextureFormatInfo& texture_format = kTextureFormats[3];
   host_.SetTextureFormat(texture_format);
 
-  host_.SetShaderProgram(nullptr);
+  host_.SetVertexShaderProgram(nullptr);
 
   host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z16);
   host_.SetDepthBufferFloatMode(false);
