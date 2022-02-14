@@ -300,6 +300,8 @@ class TestHost {
                         uint32_t height, bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0,
                         AntiAliasingSetting aa = AA_CENTER_1) const;
 
+  void SetDepthClip(float min, float max) const;
+
   void SetVertexShaderProgram(std::shared_ptr<VertexShaderProgram> program);
   std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
 

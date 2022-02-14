@@ -127,6 +127,13 @@ void TestHost::SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaForm
   pb_end(p);
 }
 
+void TestHost::SetDepthClip(float min, float max) const {
+  auto p = pb_begin();
+  p = pb_push1f(p, NV097_SET_CLIP_MIN, min);
+  p = pb_push1f(p, NV097_SET_CLIP_MAX, max);
+  pb_end(p);
+}
+
 void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) {
   pb_wait_for_vbl();
   pb_reset();
@@ -136,27 +143,25 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   SetSurfaceFormat(SCF_A8R8G8B8, (SurfaceZetaFormat)depth_buffer_format_, framebuffer_width_, framebuffer_height_);
 
   // Override the values set in pb_init. Unfortunately the default is not exposed and must be recreated here.
-  auto p = pb_begin();
-  uint32_t max_depth;
+
+  float max_depth;
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
     if (depth_buffer_mode_float_) {
-      max_depth = 0x43FFF800;  // z16_max as 32-bit float.
+      *(uint32_t *)&max_depth = 0x43FFF800;  // z16_max as 32-bit float.
     } else {
-      *((float *)&max_depth) = static_cast<float>(0xFFFF);
+      max_depth = static_cast<float>(0xFFFF);
     }
   } else {
     if (depth_buffer_mode_float_) {
       // max_depth = 0x7F7FFF80;  // z24_max as 32-bit float.
-      max_depth = 0x7149F2CA;  // Observed value, 1e+30 (also used for directional lighting as "infinity").
+      *(uint32_t *)&max_depth =
+          0x7149F2CA;  // Observed value, 1e+30 (also used for directional lighting as "infinity").
     } else {
-      *((float *)&max_depth) = static_cast<float>(0x00FFFFFF);
+      max_depth = static_cast<float>(0x00FFFFFF);
     }
   }
 
-  p = pb_push1(p, NV097_SET_CLIP_MIN, 0);
-  p = pb_push1(p, NV097_SET_CLIP_MAX, max_depth);
-
-  pb_end(p);
+  SetDepthClip(0.0f, max_depth);
 
   Clear(argb, depth_value, stencil_value);
 
