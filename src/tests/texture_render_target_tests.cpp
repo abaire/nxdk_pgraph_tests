@@ -84,13 +84,16 @@ void TextureRenderTargetTests::Deinitialize() {
 }
 
 void TextureRenderTargetTests::CreateGeometry() {
+  const auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
+  const auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
+
   render_target_vertex_buffer_ = host_.AllocateVertexBuffer(6);
   render_target_vertex_buffer_->DefineBiTri(0, 0.0f, 0.0f, kTextureWidth, kTextureHeight, 0.1f);
   render_target_vertex_buffer_->Linearize(kTextureWidth, kTextureHeight);
 
   framebuffer_vertex_buffer_ = host_.AllocateVertexBuffer(6);
   framebuffer_vertex_buffer_->DefineBiTri(0, -1.75, 1.75, 1.75, -1.75, 0.1f);
-  framebuffer_vertex_buffer_->Linearize(static_cast<float>(kTextureWidth), static_cast<float>(kTextureHeight));
+  framebuffer_vertex_buffer_->Linearize(fb_width, fb_height);
 }
 
 void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
@@ -98,6 +101,9 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 
   host_.SetTextureFormat(texture_format);
   std::string test_name = MakeTestName(texture_format);
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetTextureDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
 
   SDL_Surface *gradient_surface;
   int update_texture_result =
@@ -127,6 +133,8 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
+  host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
+
   host_.SetVertexBuffer(render_target_vertex_buffer_);
   bool swizzle = true;
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
@@ -137,9 +145,11 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 
   host_.DrawArrays();
 
+  texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
+  host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
   host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
 
   p = pb_begin();
