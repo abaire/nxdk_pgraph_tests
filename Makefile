@@ -40,6 +40,7 @@ SRCS = \
 	$(SRCDIR)/tests/texture_render_target_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \
+	$(SRCDIR)/tests/vertex_shader_rounding_tests.cpp \
 	$(SRCDIR)/tests/volume_texture_tests.cpp \
 	$(SRCDIR)/tests/w_param_tests.cpp \
 	$(SRCDIR)/tests/zero_stride_tests.cpp \
