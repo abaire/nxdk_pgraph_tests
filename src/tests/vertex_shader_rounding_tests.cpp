@@ -8,7 +8,6 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/pixel_shader_program.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -25,10 +24,19 @@ static const uint32_t kTextureHeight = 128;
 static constexpr const char kTestRenderTargetName[] = "RenderTarget";
 static constexpr const char kTestGeometryName[] = "Geometry";
 
+static constexpr float kGeometryTestBiases[] = {
+    // Boundaries at 1/16 = 0.0625f
+    0.0f, 0.001f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f,
+};
+
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
   tests_[kTestRenderTargetName] = [this]() { TestRenderTarget(); };
-  tests_[kTestGeometryName] = [this]() { TestGeometry(); };
+
+  for (auto bias : kGeometryTestBiases) {
+    std::string test_name = MakeGeometryTestName(bias);
+    tests_[test_name] = [this, bias]() { TestGeometry(bias); };
+  }
 }
 
 void VertexShaderRoundingTests::Initialize() {
@@ -185,7 +193,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   host_.FinishDraw(allow_saving_, output_dir_, kTestRenderTargetName);
 }
 
-void VertexShaderRoundingTests::TestGeometry() {
+void VertexShaderRoundingTests::TestGeometry(float bias) {
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 
@@ -216,12 +224,8 @@ void VertexShaderRoundingTests::TestGeometry() {
   host_.SetVertex(left, bottom, z, 1.0f);
   host_.End();
 
-  pb_print("%s\n", kTestGeometryName);
-  pb_draw_text_screen();
-
   // Draw a subpixel offset green square.
   color = 0xFF009900;
-  const float bias = 0.5;
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetDiffuse(color);
   host_.SetVertex(left + bias, top + bias, z, 1.0f);
@@ -230,8 +234,15 @@ void VertexShaderRoundingTests::TestGeometry() {
   host_.SetVertex(left + bias, bottom, z, 1.0f);
   host_.End();
 
-  pb_print("%s\n", kTestGeometryName);
+  std::string test_name = MakeGeometryTestName(bias);
+  pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestGeometryName);
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+}
+
+std::string VertexShaderRoundingTests::MakeGeometryTestName(float bias) {
+  char buf[32] = {0};
+  snprintf(buf, 31, "%s_%f", kTestGeometryName, bias);
+  return buf;
 }
