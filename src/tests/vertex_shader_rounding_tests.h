@@ -20,7 +20,8 @@ class VertexShaderRoundingTests : public TestSuite {
  private:
   void CreateGeometry();
 
-  void Test();
+  void TestRenderTarget();
+  void TestGeometry();
 
  private:
   struct s_CtxDma texture_target_ctx_ {};

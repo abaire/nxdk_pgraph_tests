@@ -323,8 +323,16 @@ class TestHost {
   inline const float *GetFixedFunctionModelViewMatrix() const { return fixed_function_model_view_matrix_; }
   inline const float *GetFixedFunctionProjectionMatrix() const { return fixed_function_projection_matrix_; }
 
+  // Start the process of rendering an inline-defined primitive (specified via SetXXXX methods below).
+  // Note that End() must be called to trigger rendering, and that SetVertex() triggers the creation of a vertex.
+  void Begin(DrawPrimitive primitive) const;
+  void End() const;
+
+  // Trigger creation of a vertex, applying the last set attributes.
   void SetVertex(float x, float y, float z) const;
+  // Trigger creation of a vertex, applying the last set attributes.
   void SetVertex(float x, float y, float z, float w) const;
+
   void SetWeight(float w) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
   void SetNormal(float x, float y, float z) const;

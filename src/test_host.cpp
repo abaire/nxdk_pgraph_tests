@@ -266,6 +266,18 @@ void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitiv
   }
 }
 
+void TestHost::Begin(DrawPrimitive primitive) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+  pb_end(p);
+}
+
+void TestHost::End() const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
+}
+
 void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
   if (vertex_shader_program_) {
     vertex_shader_program_->PrepareDraw();
@@ -274,9 +286,7 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
   SetVertexBufferAttributes(enabled_vertex_fields);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
-  pb_end(p);
+  Begin(primitive);
 
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
@@ -323,9 +333,7 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
   vertex_buffer_->Unlock();
   vertex_buffer_->SetCacheValid();
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  End();
 }
 
 void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {

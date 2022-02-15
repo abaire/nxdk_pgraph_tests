@@ -8,6 +8,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/pixel_shader_program.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -21,11 +22,13 @@ static const uint32_t kTextureWidth = 128;
 static const uint32_t kTexturePitch = kTextureWidth * 4;
 static const uint32_t kTextureHeight = 128;
 
-static constexpr const char kTestName[] = "Rounding";
+static constexpr const char kTestRenderTargetName[] = "RenderTarget";
+static constexpr const char kTestGeometryName[] = "Geometry";
 
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
-  tests_[kTestName] = [this]() { Test(); };
+  tests_[kTestRenderTargetName] = [this]() { TestRenderTarget(); };
+  tests_[kTestGeometryName] = [this]() { TestGeometry(); };
 }
 
 void VertexShaderRoundingTests::Initialize() {
@@ -75,7 +78,7 @@ void VertexShaderRoundingTests::CreateGeometry() {
   framebuffer_vertex_buffer_->Linearize(fb_width, fb_height);
 }
 
-void VertexShaderRoundingTests::Test() {
+void VertexShaderRoundingTests::TestRenderTarget() {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
   host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
@@ -176,5 +179,59 @@ void VertexShaderRoundingTests::Test() {
   host_.PrepareDraw(0xFE202020);
   host_.DrawArrays();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestName);
+  pb_print("%s\n", kTestRenderTargetName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kTestRenderTargetName);
+}
+
+void VertexShaderRoundingTests::TestGeometry() {
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.PrepareDraw(0xFE404040);
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  const float height = floorf(static_cast<float>(host_.GetFramebufferHeight()) / 4.0f) * 2.0f;
+
+  const float left = floorf((static_cast<float>(host_.GetFramebufferWidth()) - height) / 2.0f);
+  const float top = floorf(height / 2.0f);
+  const float right = left + height;
+  const float bottom = top + height;
+  const float z = 1;
+
+  // Draw a background.
+  uint32_t color = 0xFFFF00FF;
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(color);
+  host_.SetVertex(left, top, z, 1.0f);
+  host_.SetVertex(right, top, z, 1.0f);
+  host_.SetVertex(right, bottom, z, 1.0f);
+  host_.SetVertex(left, bottom, z, 1.0f);
+  host_.End();
+
+  pb_print("%s\n", kTestGeometryName);
+  pb_draw_text_screen();
+
+  // Draw a subpixel offset green square.
+  color = 0xFF009900;
+  const float bias = 0.5;
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(color);
+  host_.SetVertex(left + bias, top + bias, z, 1.0f);
+  host_.SetVertex(right, top + bias, z, 1.0f);
+  host_.SetVertex(right, bottom, z, 1.0f);
+  host_.SetVertex(left + bias, bottom, z, 1.0f);
+  host_.End();
+
+  pb_print("%s\n", kTestGeometryName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kTestGeometryName);
 }
