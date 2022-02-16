@@ -185,8 +185,10 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 
   // FIXME: Figure out what to do in cases where there are multiple stages with different swizzle flags.
   // Is this supported by hardware?
-  Vertex *vptr = texture_stage_[0].IsSwizzled() ? vertex_buffer_->normalized_vertex_buffer_
-                                                : vertex_buffer_->linear_vertex_buffer_;
+  Vertex *vptr = texture_stage_[0].IsSwizzled() ||
+                         texture_stage_[0].format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5
+                     ? vertex_buffer_->normalized_vertex_buffer_
+                     : vertex_buffer_->linear_vertex_buffer_;
 
   auto set = [this, enabled_fields](VertexAttribute attribute, uint32_t attribute_index, uint32_t format, uint32_t size,
                                     const void *data) {
