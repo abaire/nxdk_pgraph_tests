@@ -24,6 +24,7 @@ SRCS = \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
+	$(SRCDIR)/tests/clear_tests.cpp \
 	$(SRCDIR)/tests/combiner_tests.cpp \
 	$(SRCDIR)/tests/depth_format_tests.cpp \
 	$(SRCDIR)/tests/fog_tests.cpp \

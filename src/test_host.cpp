@@ -778,12 +778,12 @@ void TestHost::SaveZBuffer(const std::string &output_directory, const std::strin
   SDL_FreeSurface(surface);
 }
 
-void TestHost::SetupControl0() const {
+void TestHost::SetupControl0(bool enable_stencil_write) const {
   // FIXME: Figure out what to do in cases where there are multiple stages with different conversion needs.
   // Is this supported by hardware?
   bool requires_colorspace_conversion = texture_stage_[0].RequiresColorspaceConversion();
 
-  uint32_t control0 = NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE;
+  uint32_t control0 = enable_stencil_write ? NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE : 0;
   control0 |= MASK(NV097_SET_CONTROL0_Z_FORMAT,
                    depth_buffer_mode_float_ ? NV097_SET_CONTROL0_Z_FORMAT_FLOAT : NV097_SET_CONTROL0_Z_FORMAT_FIXED);
 

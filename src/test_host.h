@@ -469,7 +469,7 @@ class TestHost {
     }
   }
 
-  void SetupControl0() const;
+  void SetupControl0(bool enable_stencil_write = true) const;
 
   // Commit any changes to texture stages (called automatically in PrepareDraw but may be useful to call more frequently
   // in scenes with multiple draws per clear)
