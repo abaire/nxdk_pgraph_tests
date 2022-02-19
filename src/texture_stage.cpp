@@ -62,7 +62,7 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_OFFSET
   p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr, format);
 
-  uint32_t pitch_param = uint32_t(format_.xbox_bpp * width_) << 16;
+  uint32_t pitch_param = uint32_t(format_.xbox_bpp * width_ / 8) << 16;
   // NV097_SET_TEXTURE_CONTROL1
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch_param);
 
@@ -228,6 +228,7 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
           }
         }
       } break;
+
       case NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5: {
         uint32_t *source = pixels;
         for (int y = 0; y < surface->h; y += 4) {
