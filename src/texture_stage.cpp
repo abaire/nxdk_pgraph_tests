@@ -283,7 +283,7 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
 }
 
 int TextureStage::SetVolumetricTexture(const SDL_Surface **layers, uint32_t depth, uint8_t *memory_base) const {
-  ASSERT(format_.xbox_swizzled && "Volumetric textures using linear formats are not supported by XBOX.")
+  ASSERT((!format_.xbox_linear) && "Volumetric textures using linear formats are not supported by XBOX.")
 
   auto **new_surfaces = new SDL_Surface *[depth];
 

@@ -98,6 +98,7 @@ class TextureStage {
                  bool signed_green = false, bool signed_blue = false);
 
   bool IsSwizzled() const { return format_.xbox_swizzled; }
+  bool IsLinear() const { return format_.xbox_linear; }
   bool RequiresColorspaceConversion() const;
 
  private:

@@ -128,7 +128,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
   std::string test_name = "TexFmt_";
   test_name += texture_format.name;
-  if (!texture_format.xbox_swizzled) {
+  if (texture_format.xbox_linear) {
     test_name += "_L";
   }
   return std::move(test_name);
