@@ -257,7 +257,6 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute 
 
   // The bleed buffer should always render its diffuse color, regardless of the attribute under test.
   shader->SetUniformF(0, ATTR_DIFFUSE);
-  shader->SetUniformF(1, 0.0f);
   host_.SetVertexBuffer(bleed_buffer_);
   draw(host_.DIFFUSE | TestAttributeToVertexAttribute(test_attribute));
 
