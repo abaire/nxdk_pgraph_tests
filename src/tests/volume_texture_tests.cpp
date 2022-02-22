@@ -28,7 +28,7 @@ VolumeTextureTests::VolumeTextureTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Volume texture") {
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
-    if (!format.xbox_swizzled) {
+    if (format.xbox_linear) {
       // Linear volumetric formats are not supported by the hardware.
       continue;
     }

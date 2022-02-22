@@ -6,8 +6,9 @@
 typedef struct TextureFormatInfo {
   SDL_PixelFormatEnum sdl_format{SDL_PIXELFORMAT_ARGB8888};
   uint32_t xbox_format{0};
-  uint16_t xbox_bpp{4};  // bytes per pixel
+  uint32_t xbox_bpp{32};  // bits per pixel
   bool xbox_swizzled{false};
+  bool xbox_linear{true};
   bool require_conversion{false};
   const char *name{nullptr};
 } TextureFormatInfo;

@@ -62,7 +62,7 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_OFFSET
   p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr, format);
 
-  uint32_t pitch_param = (format_.xbox_bpp * width_) << 16;
+  uint32_t pitch_param = (format_.xbox_bpp * width_ / 8) << 16;
   // NV097_SET_TEXTURE_CONTROL1
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch_param);
 
@@ -229,6 +229,32 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         }
       } break;
 
+      case NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5: {
+        uint32_t *source = pixels;
+        for (int y = 0; y < surface->h; y += 4) {
+          for (int x = 0; x < surface->w; x += 4, source += 4) {
+            // TODO: use proper encoding of the colors by quering all the colors and calculating color distances
+            // Reference: https://www.khronos.org/opengl/wiki/S3_Texture_Compression
+            uint8_t red, green, blue, alpha;
+            SDL_GetRGBA(*source, surface->format, &red, &green, &blue, &alpha);
+
+            // color0
+            dest[0] = 0x0;
+            dest[1] = 0x0;
+            // color1
+            dest[2] = ((green & 0x1C) << 3) + (blue >> 3);
+            dest[3] = (red & 0xF8) + (green >> 5);
+            uint8_t code = alpha >= 125 ? 0x55 : 0xFF;
+            dest[4] = code;  // code 0
+            dest[5] = code;  // code 1
+            dest[6] = code;  // code 2
+            dest[7] = code;  // code 3
+            dest += 8;
+          }
+          source += 3 * surface->w;
+        }
+      } break;
+
       default:
         return 3;
     }
@@ -257,7 +283,7 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
 }
 
 int TextureStage::SetVolumetricTexture(const SDL_Surface **layers, uint32_t depth, uint8_t *memory_base) const {
-  ASSERT(format_.xbox_swizzled && "Volumetric textures using linear formats are not supported by XBOX.")
+  ASSERT((!format_.xbox_linear) && "Volumetric textures using linear formats are not supported by XBOX.")
 
   auto **new_surfaces = new SDL_Surface *[depth];
 

@@ -83,7 +83,7 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   pb_print("C: %d\n", texture_format.require_conversion);
   pb_print("W: %d\n", host_.GetMaxTextureWidth());
   pb_print("H: %d\n", host_.GetMaxTextureHeight());
-  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth());
+  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
@@ -119,7 +119,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
   pb_print("C: %d\n", texture_format.require_conversion);
   pb_print("W: %d\n", host_.GetMaxTextureWidth());
   pb_print("H: %d\n", host_.GetMaxTextureHeight());
-  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth());
+  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
@@ -128,7 +128,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
   std::string test_name = "TexFmt_";
   test_name += texture_format.name;
-  if (!texture_format.xbox_swizzled) {
+  if (texture_format.xbox_linear) {
     test_name += "_L";
   }
   return std::move(test_name);
