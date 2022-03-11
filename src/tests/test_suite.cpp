@@ -128,6 +128,11 @@ void TestSuite::Initialize() {
 
     stage.SetTextureMatrixEnable(false);
     stage.SetTextureMatrix(identity_matrix);
+
+    stage.SetTexgenS(TextureStage::TG_DISABLE);
+    stage.SetTexgenT(TextureStage::TG_DISABLE);
+    stage.SetTexgenR(TextureStage::TG_DISABLE);
+    stage.SetTexgenQ(TextureStage::TG_DISABLE);
   }
 
   // TODO: Set up with TextureStage instances in host_.
@@ -175,10 +180,6 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
 
   p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
-
-  p = pb_push1(p, NV097_SET_TEXGEN_S, NV097_SET_TEXGEN_S_DISABLE);
-  p = pb_push1(p, NV097_SET_TEXGEN_T, NV097_SET_TEXGEN_S_DISABLE);
-  p = pb_push1(p, NV097_SET_TEXGEN_R, NV097_SET_TEXGEN_S_DISABLE);
   pb_end(p);
 
   host_.SetDefaultViewportAndFixedFunctionMatrices();

@@ -32,6 +32,15 @@ class TextureStage {
 
   enum WrapMode { WRAP_REPEAT = 1, WRAP_MIRROR, WRAP_CLAMP_TO_EDGE, WRAP_BORDER, WRAP_CLAMP_TO_EDGE_OGL };
 
+  enum TexGen {
+    TG_DISABLE = NV097_SET_TEXGEN_S_DISABLE,
+    TG_EYE_LINEAR = NV097_SET_TEXGEN_S_EYE_LINEAR,
+    TG_OBJECT_LINEAR = NV097_SET_TEXGEN_S_OBJECT_LINEAR,
+    TG_SPHERE_MAP = NV097_SET_TEXGEN_S_SPHERE_MAP,
+    TG_NORMAL_MAP = NV097_SET_TEXGEN_S_NORMAL_MAP,
+    TG_REFLECTION_MAP = NV097_SET_TEXGEN_S_REFLECTION_MAP,
+  };
+
  public:
   TextureStage();
 
@@ -109,6 +118,15 @@ class TextureStage {
   const float *GetTextureMatrix() const { return texture_matrix_; }
   float *GetTextureMatrix() { return texture_matrix_; }
 
+  TexGen GetTexgenS() const { return texgen_s_; }
+  TexGen GetTexgenT() const { return texgen_t_; }
+  TexGen GetTexgenR() const { return texgen_r_; }
+  TexGen GetTexgenQ() const { return texgen_q_; }
+  void SetTexgenS(TexGen val) { texgen_s_ = val; }
+  void SetTexgenT(TexGen val) { texgen_t_ = val; }
+  void SetTexgenR(TexGen val) { texgen_r_ = val; }
+  void SetTexgenQ(TexGen val) { texgen_q_ = val; }
+
  private:
   friend class TestHost;
 
@@ -163,6 +181,11 @@ class TextureStage {
 
   bool texture_matrix_enable_{false};
   float texture_matrix_[16];
+
+  TexGen texgen_s_{TG_DISABLE};
+  TexGen texgen_t_{TG_DISABLE};
+  TexGen texgen_r_{TG_DISABLE};
+  TexGen texgen_q_{TG_DISABLE};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_STAGE_H

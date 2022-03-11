@@ -36,6 +36,7 @@ SRCS = \
 	$(SRCDIR)/tests/material_color_source_tests.cpp \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
 	$(SRCDIR)/tests/test_suite.cpp \
+	$(SRCDIR)/tests/texgen_tests.cpp \
 	$(SRCDIR)/tests/texture_border_tests.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
 	$(SRCDIR)/tests/texture_matrix_tests.cpp \

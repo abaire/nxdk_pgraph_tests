@@ -88,8 +88,6 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_FILTER
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), texture_filter_);
 
-  p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
-
   uint32_t palette_config = 0;
   if (format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8) {
     ASSERT(palette_length_ <= 3 && "Invalid attempt to use paletted format without setting palette.");
@@ -112,6 +110,12 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   if (texture_matrix_enable_) {
     p = pb_push_4x4_matrix(p, NV097_SET_TEXTURE_MATRIX + 64 * stage_, texture_matrix_);
   }
+
+  p = pb_push1(p, NV097_SET_TEXGEN_S, texgen_s_);
+  p = pb_push1(p, NV097_SET_TEXGEN_T, texgen_t_);
+  p = pb_push1(p, NV097_SET_TEXGEN_R, texgen_r_);
+  p = pb_push1(p, NV097_SET_TEXGEN_Q, texgen_q_);
+
   pb_end(p);
 }
 
