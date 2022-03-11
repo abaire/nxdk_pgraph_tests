@@ -134,6 +134,32 @@ uint32_t *pb_push_4x3_matrix(uint32_t *p, DWORD command, const float *m) {
   return p;
 }
 
+uint32_t *pb_push_4x4_matrix(uint32_t *p, DWORD command, const float *m) {
+  pb_push_to(SUBCH_3D, p++, command, 16);
+
+  *((float *)p++) = m[_11];
+  *((float *)p++) = m[_12];
+  *((float *)p++) = m[_13];
+  *((float *)p++) = m[_14];
+
+  *((float *)p++) = m[_21];
+  *((float *)p++) = m[_22];
+  *((float *)p++) = m[_23];
+  *((float *)p++) = m[_24];
+
+  *((float *)p++) = m[_31];
+  *((float *)p++) = m[_32];
+  *((float *)p++) = m[_33];
+  *((float *)p++) = m[_34];
+
+  *((float *)p++) = m[_41];
+  *((float *)p++) = m[_42];
+  *((float *)p++) = m[_43];
+  *((float *)p++) = m[_44];
+
+  return p;
+}
+
 void pb_print_with_floats(const char *format, ...) {
   char buffer[512];
 

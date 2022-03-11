@@ -73,6 +73,9 @@ void* pb_agp_access(void* fb_memory_pointer);
 // not transposed).
 uint32_t* pb_push_4x3_matrix(uint32_t* p, DWORD command, const float* m);
 
+// Pushes a 4x4 matrix (not transposed).
+uint32_t* pb_push_4x4_matrix(uint32_t* p, DWORD command, const float* m);
+
 uint32_t* pb_push1f(uint32_t* p, DWORD command, float param1);
 uint32_t* pb_push2f(uint32_t* p, DWORD command, float param1, float param2);
 uint32_t* pb_push3f(uint32_t* p, DWORD command, float param1, float param2, float param3);

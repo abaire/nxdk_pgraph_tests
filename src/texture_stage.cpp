@@ -1,12 +1,17 @@
 #include "texture_stage.h"
 
 #include "debug_output.h"
+#include "math3d.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "swizzle.h"
 
 // bitscan forward
-static int bsf(int val) { __asm bsf eax, val }
+static int bsf(int val){__asm bsf eax, val}
+
+TextureStage::TextureStage() {
+  matrix_unit(texture_matrix_);
+}
 
 bool TextureStage::RequiresColorspaceConversion() const {
   return format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8 ||
@@ -103,7 +108,10 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
                 bump_env_material[3]);
   p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE, bump_env_scale);
   p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET, bump_env_offset);
-
+  p = pb_push1(p, NV097_SET_TEXTURE_MATRIX_ENABLE + (4 * stage_), texture_matrix_enable_);
+  if (texture_matrix_enable_) {
+    p = pb_push_4x4_matrix(p, NV097_SET_TEXTURE_MATRIX + 64 * stage_, texture_matrix_);
+  }
   pb_end(p);
 }
 

@@ -33,6 +33,8 @@ class TextureStage {
   enum WrapMode { WRAP_REPEAT = 1, WRAP_MIRROR, WRAP_CLAMP_TO_EDGE, WRAP_BORDER, WRAP_CLAMP_TO_EDGE_OGL };
 
  public:
+  TextureStage();
+
   void SetUWrap(WrapMode mode, bool cylinder_wrap = false) {
     wrap_modes_[0] = mode;
     cylinder_wrap_[0] = cylinder_wrap;
@@ -101,6 +103,12 @@ class TextureStage {
   bool IsLinear() const { return format_.xbox_linear; }
   bool RequiresColorspaceConversion() const;
 
+  void SetTextureMatrixEnable(bool enabled) { texture_matrix_enable_ = enabled; }
+  bool GetTextureMatrixEnable() const { return texture_matrix_enable_; }
+  void SetTextureMatrix(const float *matrix) { memcpy(texture_matrix_, matrix, sizeof(texture_matrix_)); }
+  const float *GetTextureMatrix() const { return texture_matrix_; }
+  float *GetTextureMatrix() { return texture_matrix_; }
+
  private:
   friend class TestHost;
 
@@ -152,6 +160,9 @@ class TextureStage {
   float bump_env_material[4] = {0.0f, 0.0f, 0.0f, 0.0f};
   float bump_env_scale{0.0f};
   float bump_env_offset{0.0f};
+
+  bool texture_matrix_enable_{false};
+  float texture_matrix_[16];
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_STAGE_H

@@ -38,6 +38,7 @@ SRCS = \
 	$(SRCDIR)/tests/test_suite.cpp \
 	$(SRCDIR)/tests/texture_border_tests.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
+	$(SRCDIR)/tests/texture_matrix_tests.cpp \
 	$(SRCDIR)/tests/texture_render_target_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \

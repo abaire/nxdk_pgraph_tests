@@ -105,6 +105,8 @@ void TestSuite::Initialize() {
   p = pb_begin();
   p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0x0);
 
+  MATRIX identity_matrix;
+  matrix_unit(identity_matrix);
   for (auto i = 0; i < 4; ++i) {
     auto& stage = host_.GetTextureStage(i);
     stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
@@ -117,6 +119,9 @@ void TestSuite::Initialize() {
     stage.SetFilter();
     stage.SetAlphaKillEnable(false);
     stage.SetLODClamp(0, 4095);
+
+    stage.SetTextureMatrixEnable(false);
+    stage.SetTextureMatrix(identity_matrix);
   }
 
   // TODO: Set up with TextureStage instances in host_.
@@ -164,6 +169,10 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
 
   p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
+
+  p = pb_push1(p, NV097_SET_TEXGEN_S, NV097_SET_TEXGEN_S_DISABLE);
+  p = pb_push1(p, NV097_SET_TEXGEN_T, NV097_SET_TEXGEN_S_DISABLE);
+  p = pb_push1(p, NV097_SET_TEXGEN_R, NV097_SET_TEXGEN_S_DISABLE);
   pb_end(p);
 
   host_.SetDefaultViewportAndFixedFunctionMatrices();
