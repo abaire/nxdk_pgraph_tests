@@ -185,8 +185,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 
   // FIXME: Figure out what to do in cases where there are multiple stages with different swizzle flags.
   // Is this supported by hardware?
-  Vertex *vptr = texture_stage_[0].IsLinear() ? vertex_buffer_->linear_vertex_buffer_ 
-                                              : vertex_buffer_->normalized_vertex_buffer_;
+  Vertex *vptr =
+      texture_stage_[0].IsLinear() ? vertex_buffer_->linear_vertex_buffer_ : vertex_buffer_->normalized_vertex_buffer_;
 
   auto set = [this, enabled_fields](VertexAttribute attribute, uint32_t attribute_index, uint32_t format, uint32_t size,
                                     const void *data) {
@@ -1302,19 +1302,23 @@ void TestHost::SetFinalCombiner0(TestHost::CombinerSource a_source, bool a_alpha
 void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha, bool e_invert,
                                  TestHost::CombinerSource f_source, bool f_alpha, bool f_invert,
                                  TestHost::CombinerSource g_source, bool g_alpha, bool g_invert,
-                                 bool specular_add_invert_r12, bool specular_add_invert_r5, bool specular_clamp) const {
+                                 bool specular_add_invert_r0, bool specular_add_invert_v1, bool specular_clamp) const {
   auto channel = [](CombinerSource src, bool alpha, bool invert) { return src + (alpha << 4) + (invert << 5); };
+
+  // The V1+R0 sum is not available in CW1.
+  ASSERT(e_source != SRC_SPEC_R0_SUM && f_source != SRC_SPEC_R0_SUM && g_source != SRC_SPEC_R0_SUM);
 
   uint32_t value = (channel(e_source, e_alpha, e_invert) << 24) + (channel(f_source, f_alpha, f_invert) << 16) +
                    (channel(g_source, g_alpha, g_invert) << 8);
-  if (specular_add_invert_r12) {
-    value += 0x20;
+  if (specular_add_invert_r0) {
+    // NV097_SET_COMBINER_SPECULAR_FOG_CW1_SPECULAR_ADD_INVERT_R12 crashes on hardware.
+    value += (1 << 5);
   }
-  if (specular_add_invert_r5) {
-    value += (1 << 6);
+  if (specular_add_invert_v1) {
+    value += NV097_SET_COMBINER_SPECULAR_FOG_CW1_SPECULAR_ADD_INVERT_R5;
   }
   if (specular_clamp) {
-    value += (1 << 7);
+    value += NV097_SET_COMBINER_SPECULAR_FOG_CW1_SPECULAR_CLAMP;
   }
 
   auto p = pb_begin();

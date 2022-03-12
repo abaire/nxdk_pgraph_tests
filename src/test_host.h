@@ -78,7 +78,7 @@ class TestHost {
     SRC_TEX3,         // Texcoord3
     SRC_R0,           // R0 from the vertex shader
     SRC_R1,           // R1 from the vertex shader
-    SRC_SPEC_R0_SUM,  // Specular + R1
+    SRC_SPEC_R0_SUM,  // Specular + R0
     SRC_EF_PROD,      // Combiner param E * F
   };
 
@@ -434,7 +434,7 @@ class TestHost {
   void SetFinalCombiner1(CombinerSource e_source = SRC_ZERO, bool e_alpha = false, bool e_invert = false,
                          CombinerSource f_source = SRC_ZERO, bool f_alpha = false, bool f_invert = false,
                          CombinerSource g_source = SRC_ZERO, bool g_alpha = false, bool g_invert = false,
-                         bool specular_add_invert_r12 = false, bool specular_add_invert_r5 = false,
+                         bool specular_add_invert_r0 = false, bool specular_add_invert_v1 = false,
                          bool specular_clamp = false) const;
 
   void SetCombinerFactorC0(int combiner, uint32_t value) const;

@@ -20,6 +20,7 @@ class CombinerTests : public TestSuite {
   void CreateGeometry();
   void TestMux();
   void TestCombinerIndependence();
+  void TestFlags();
 
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];

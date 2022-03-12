@@ -8,11 +8,13 @@
 
 static constexpr const char* kMuxTestName = "Mux";
 static constexpr const char* kIndependenceTestName = "Independence";
+static constexpr const char* kFlagsTestName = "Flags";
 
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Combiner") {
   tests_[kMuxTestName] = [this]() { TestMux(); };
   tests_[kIndependenceTestName] = [this]() { TestCombinerIndependence(); };
+  tests_[kFlagsTestName] = [this]() { TestFlags(); };
 }
 
 void CombinerTests::Initialize() {
@@ -206,4 +208,88 @@ void CombinerTests::TestCombinerIndependence() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, kIndependenceTestName);
+}
+
+void CombinerTests::TestFlags() {
+  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+  host_.PrepareDraw(kBackgroundColor);
+
+  uint32_t vertex_elements = host_.POSITION | host_.DIFFUSE | host_.SPECULAR;
+
+  host_.SetCombinerControl(1);
+
+  // Set V1 and R0 to 1.0
+  host_.SetInputColorCombiner(0, TestHost::OneInput(), TestHost::OneInput(), TestHost::OneInput(),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_SPECULAR, TestHost::DST_R0);
+
+  // Set the final output to (D=0) + (A=0.5) * (B=V1+R0) + (1 - A=0.5) * (C=0)
+  // Set alpha (G) to 1.0
+  host_.SetFinalCombinerFactorC0(0.5f, 0.5f, 0.5f, 0.5f);
+  host_.SetFinalCombiner0(TestHost::SRC_C0, false, false, TestHost::SRC_SPEC_R0_SUM, false, false);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
+                          true);
+
+  // The expected output is full brightness white.
+  pb_printat(2, 10, (char*)"Uncapped");
+  host_.SetVertexBuffer(vertex_buffers_[0]);
+  host_.DrawArrays(vertex_elements);
+
+  // Do the same thing, but clamp the V1+R0 sum
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
+                          true, false, false, true);
+  pb_printat(2, 22, (char*)"Capped");
+  host_.SetVertexBuffer(vertex_buffers_[1]);
+  host_.DrawArrays(vertex_elements);
+
+  // Set v1 to 0, r0 to 0.75.
+  host_.SetCombinerFactorC0(0, 0.75f, 0.75f, 0.75f, 0.75f);
+  host_.SetInputColorCombiner(0, TestHost::ZeroInput(), TestHost::ZeroInput(), TestHost::ColorInput(TestHost::SRC_C0),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_SPECULAR, TestHost::DST_R0);
+
+  // Set A to 1.0 so the final output is just B(the V1 + R0 sum).
+  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, true, TestHost::SRC_SPEC_R0_SUM, false, false);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
+                          true);
+
+  pb_printat(2, 31, (char*)"Normal R0");
+  host_.SetVertexBuffer(vertex_buffers_[2]);
+  host_.DrawArrays(vertex_elements);
+
+  // Now invert R0.
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
+                          true, true, false, false);
+
+  pb_printat(2, 42, (char*)"1 - R0");
+  host_.SetVertexBuffer(vertex_buffers_[3]);
+  host_.DrawArrays(vertex_elements);
+
+  // Essentially the same test, but using v1 instead of r0
+  // Set r0 to 0, v1 to 0.75.
+  host_.SetInputColorCombiner(0, TestHost::ZeroInput(), TestHost::ZeroInput(), TestHost::ColorInput(TestHost::SRC_C0),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR);
+
+  // Set A to 1.0 so the final output is just B(the V1 + R0 sum).
+  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, true, TestHost::SRC_SPEC_R0_SUM, false, false);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
+                          true);
+
+  pb_printat(7, 14, (char*)"V1");
+  host_.SetVertexBuffer(vertex_buffers_[4]);
+  host_.DrawArrays(vertex_elements);
+
+  // Now invert V1.
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
+                          true, false, true, false);
+
+  pb_printat(7, 23, (char*)"1 - V1");
+  host_.SetVertexBuffer(vertex_buffers_[5]);
+  host_.DrawArrays(vertex_elements);
+
+  pb_printat(0, 0, (char*)"%s\n", kFlagsTestName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kFlagsTestName);
 }
