@@ -95,7 +95,11 @@ int main() {
   TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight);
   driver.Run();
 
+#ifdef ENABLE_SHUTDOWN
+  HalInitiateShutdown();
+#else
   debugPrint("Results written to %s\n\nRebooting in 4 seconds...\n", test_output_directory.c_str());
+#endif
   pb_show_debug_screen();
   Sleep(4000);
 
@@ -137,7 +141,6 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
     auto suite = std::make_shared<LightingNormalTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
-
   {
     auto suite = std::make_shared<AttributeCarryoverTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));

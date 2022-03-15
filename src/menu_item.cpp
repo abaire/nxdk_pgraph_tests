@@ -7,7 +7,11 @@
 
 #include "tests/test_suite.h"
 
+#ifdef AUTORUN_IMMEDIATELY
+static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 0;
+#else
 static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
+#endif
 static constexpr uint32_t kNumItemsPerPage = 12;
 static constexpr uint32_t kNumItemsPerHalfPage = kNumItemsPerPage >> 1;
 
