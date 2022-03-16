@@ -75,12 +75,9 @@ DEBUG := y
 CFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
 CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
 
-DEVKIT ?= y
-ifeq ($(DEVKIT),y)
-CXXFLAGS += -DDEVKIT
-endif
-
+# Disable automatic test execution if no input is detected.
 DISABLE_AUTORUN ?= n
+# Remove the delay for input before starting automated testing.
 AUTORUN_IMMEDIATELY ?= n
 ifeq ($(DISABLE_AUTORUN),y)
 CXXFLAGS += -DDISABLE_AUTORUN
@@ -90,13 +87,24 @@ CXXFLAGS += -DAUTORUN_IMMEDIATELY
 endif
 endif
 
+# Cause the program to shut down the xbox on completion instead of rebooting.
 ENABLE_SHUTDOWN ?= n
 ifeq ($(ENABLE_SHUTDOWN),y)
 CXXFLAGS += -DENABLE_SHUTDOWN
 endif
 
+# Optionally set the root path at which test results will be written when running
+# from read-only media.
+# E.g., "c:"
 ifdef FALLBACK_OUTPUT_ROOT_PATH
 CXXFLAGS += -DFALLBACK_OUTPUT_ROOT_PATH="\"$(FALLBACK_OUTPUT_ROOT_PATH)\""
+endif
+
+# Set the path to a configuration file containing the names of tests that should
+# be enabled, one per line.
+# E.g., "c:/pgraph_tests.cnf"
+ifdef RUNTIME_CONFIG_PATH
+CXXFLAGS += -DRUNTIME_CONFIG_PATH="\"$(RUNTIME_CONFIG_PATH)\""
 endif
 
 CLEANRULES = clean-resources

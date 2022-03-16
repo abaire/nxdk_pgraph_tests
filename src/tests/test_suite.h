@@ -16,6 +16,8 @@ class TestSuite {
   virtual void Initialize();
   virtual void Deinitialize() {}
 
+  void DisableTests(const std::vector<std::string> &tests_to_skip);
+
   std::vector<std::string> TestNames() const;
   void Run(const std::string &test_name);
 

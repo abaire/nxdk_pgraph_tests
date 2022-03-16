@@ -13,6 +13,22 @@ Tests will be executed automatically if no gamepad input is given within an init
 
 Individual tests may be executed via the menu.
 
+### Test configuration
+Tests can optionally be determined via a configuration file loaded from the XBOX. The file follows a simple line-based
+format.
+
+* A test suite and all of the tests within will be enabled if the suite name appears on a single line.
+* A single test within an enabled suite may be disabled by prefixing its name with a `-` after the line containing the
+  test suite containing it.
+
+The names used are the same as the names that appear in the `nxdk_praph_tests` menu.
+
+For example:
+```
+ThisTestSuiteIsEnabled
+-ExceptThisTest
+```
+
 ### Controls
 
 DPAD:

@@ -1,6 +1,5 @@
 #include "vertex_shader_rounding_tests.h"
 
-#include <SDL.h>
 #include <pbkit/pbkit.h>
 
 #include <memory>

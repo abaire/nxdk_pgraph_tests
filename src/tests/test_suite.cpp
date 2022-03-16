@@ -23,6 +23,12 @@ std::vector<std::string> TestSuite::TestNames() const {
   return std::move(ret);
 }
 
+void TestSuite::DisableTests(const std::vector<std::string>& tests_to_skip) {
+  for (auto& name : tests_to_skip) {
+    tests_.erase(name);
+  }
+}
+
 void TestSuite::Run(const std::string& test_name) {
   auto it = tests_.find(test_name);
   if (it == tests_.end()) {
