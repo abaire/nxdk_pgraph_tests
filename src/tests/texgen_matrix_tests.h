@@ -19,9 +19,7 @@ class TexgenMatrixTests : public TestSuite {
  private:
   void CreateGeometry();
 
-  void Test(TextureStage::TexGen gen_mode);
-
-  static std::string MakeTestName(TextureStage::TexGen mode);
+  void Test(const std::string &test_name, MATRIX matrix, TextureStage::TexGen gen_mode);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXGEN_MATRIX_TESTS_H

@@ -17,6 +17,8 @@ static int GenerateSurface(SDL_Surface **surface, int width, int height);
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 128;
 
+static std::string TestNameForTexGenMode(TextureStage::TexGen mode);
+
 static TextureStage::TexGen kTestModes[] = {
     TextureStage::TG_DISABLE,
     TextureStage::TG_EYE_LINEAR,
@@ -29,8 +31,114 @@ static TextureStage::TexGen kTestModes[] = {
 TexgenMatrixTests::TexgenMatrixTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texgen with texture matrix") {
   for (auto mode : kTestModes) {
-    std::string name = MakeTestName(mode);
-    tests_[name] = [this, mode]() { Test(mode); };
+    std::string name = TestNameForTexGenMode(mode);
+    {
+      std::string test_name = name + "_Identity";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_Double";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR scale = {2.0, 2.0, 2.0, 1.0};
+        matrix_scale(matrix, matrix, scale);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_Half";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR scale = {0.5, 0.5, 0.5, 1.0};
+        matrix_scale(matrix, matrix, scale);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_ShiftHPlus";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR translate = {0.5, 0.0, 0.0, 0.0};
+        matrix_translate(matrix, matrix, translate);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_ShiftHMinus";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR translate = {-0.5, 0.0, 0.0, 0.0};
+        matrix_translate(matrix, matrix, translate);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_ShiftVPlus";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR translate = {0.0, 0.5, 0.0, 0.0};
+        matrix_translate(matrix, matrix, translate);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_ShiftVMinus";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR translate = {0.0, -0.5, 0.0, 0.0};
+        matrix_translate(matrix, matrix, translate);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_RotateX";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR rot = {M_PI * 0.5, 0.0, 0.0, 0.0};
+        matrix_rotate(matrix, matrix, rot);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_RotateY";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR rot = {0.0, M_PI * 0.5, 0.0, 0.0};
+        matrix_rotate(matrix, matrix, rot);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_RotateZ";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix;
+        matrix_unit(matrix);
+        VECTOR rot = {0.0, 0.0, M_PI * 0.5, 0.0};
+        matrix_rotate(matrix, matrix, rot);
+        Test(test_name, matrix, mode);
+      };
+    }
+    {
+      std::string test_name = name + "_Arbitrary";
+      tests_[test_name] = [this, test_name, mode]() {
+        MATRIX matrix = {
+            0.7089392, 0.0, 0.515, 0.0, 0.0, 1.2603364, 0.49, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+        };
+        Test(test_name, matrix, mode);
+      };
+    }
   }
 }
 
@@ -46,25 +154,6 @@ void TexgenMatrixTests::Initialize() {
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetBorderColor(0xFF7F007F);
   texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-  texture_stage.SetTextureMatrixEnable(true);
-  auto matrix = texture_stage.GetTextureMatrix();
-  matrix_unit(matrix);
-  matrix[_11] = 0.708939;
-  matrix[_12] = 0.000000;
-  matrix[_13] = 0.515000;
-  matrix[_14] = 0.000000;
-  matrix[_21] = 0.000000;
-  matrix[_22] = 1.260336;
-  matrix[_23] = 0.490000;
-  matrix[_24] = 0.000000;
-  matrix[_31] = 0.000000;
-  matrix[_32] = 0.000000;
-  matrix[_33] = 0.000000;
-  matrix[_34] = 0.000000;
-  matrix[_41] = 0.000000;
-  matrix[_42] = 0.000000;
-  matrix[_43] = 1.000000;
-  matrix[_44] = 0.00000;
 
   SDL_Surface *gradient_surface;
   int update_texture_result = GenerateSurface(&gradient_surface, kTextureWidth, kTextureHeight);
@@ -81,34 +170,38 @@ void TexgenMatrixTests::Initialize() {
 void TexgenMatrixTests::CreateGeometry() {
   static constexpr float left = -2.75f;
   static constexpr float right = 2.75f;
-  static constexpr float top = 1.75f;
-  static constexpr float bottom = -1.75f;
+  static constexpr float top = 1.0f;
+  static constexpr float bottom = -2.5f;
 
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
 
   buffer->DefineBiTri(0, left, top, right, bottom);
 }
 
-void TexgenMatrixTests::Test(TextureStage::TexGen mode) {
-  std::string test_name = MakeTestName(mode);
-
+void TexgenMatrixTests::Test(const std::string &test_name, MATRIX matrix, TextureStage::TexGen gen_mode) {
   host_.PrepareDraw(0xFE202020);
 
   auto &texture_stage = host_.GetTextureStage(0);
-  texture_stage.SetTexgenS(mode);
-  texture_stage.SetTexgenT(mode);
-  texture_stage.SetTexgenR(mode);
+  texture_stage.SetTexgenS(gen_mode);
+  texture_stage.SetTexgenT(gen_mode);
+  texture_stage.SetTexgenR(gen_mode);
+  texture_stage.SetTextureMatrixEnable(true);
+  matrix_copy(texture_stage.GetTextureMatrix(), matrix);
 
   host_.SetupTextureStages();
   host_.DrawArrays();
 
-  pb_print("M: %s\n", test_name.c_str());
+  pb_print("%s\n", test_name.c_str());
+  const float *val = texture_stage.GetTextureMatrix();
+  for (auto i = 0; i < 4; ++i, val += 4) {
+    pb_print_with_floats("%.3f %.3f %.3f %.3f\n", val[0], val[1], val[2], val[3]);
+  }
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-std::string TexgenMatrixTests::MakeTestName(TextureStage::TexGen mode) {
+static std::string TestNameForTexGenMode(TextureStage::TexGen mode) {
   switch (mode) {
     case TextureStage::TG_DISABLE:
       return "Disabled";
