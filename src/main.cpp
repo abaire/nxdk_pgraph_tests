@@ -5,6 +5,7 @@
 
 #include <SDL_image.h>
 #include <hal/debug.h>
+#include <hal/fileio.h>
 #include <hal/video.h>
 #include <nxdk/mount.h>
 #include <pbkit/pbkit.h>
@@ -39,7 +40,9 @@
 #include "tests/w_param_tests.h"
 #include "tests/zero_stride_tests.h"
 
-#define FALLBACK_XBE_DIRECTORY "f:\\";
+#ifndef FALLBACK_OUTPUT_ROOT_PATH
+#define FALLBACK_OUTPUT_ROOT_PATH "f:\\";
+#endif
 static constexpr int kFramebufferWidth = 640;
 static constexpr int kFramebufferHeight = 480;
 static constexpr int kTextureWidth = 256;
@@ -47,7 +50,7 @@ static constexpr int kTextureHeight = 256;
 
 static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                             const std::string& output_directory);
-static bool get_xbe_directory(std::string& xbe_root_directory);
+static bool get_writable_output_directory(std::string& xbe_root_directory);
 static bool get_test_output_path(std::string& test_output_directory);
 
 /* Main program function */
@@ -79,7 +82,7 @@ int main() {
 
   std::string test_output_directory;
   if (!get_test_output_path(test_output_directory)) {
-    debugPrint("Failed to mount F:");
+    debugPrint("Failed to mount %s", test_output_directory.c_str());
     pb_show_debug_screen();
     Sleep(2000);
     return 1;
@@ -107,13 +110,24 @@ int main() {
   return 0;
 }
 
-bool get_xbe_directory(std::string& xbe_root_directory) {
+static bool get_writable_output_directory(std::string& xbe_root_directory) {
   std::string xbe_directory = XeImageFileName->Buffer;
   if (xbe_directory.find("\\Device\\CdRom") == 0) {
     debugPrint("Running from readonly media, using default path for test output.\n");
-    xbe_root_directory = FALLBACK_XBE_DIRECTORY;
+    xbe_root_directory = FALLBACK_OUTPUT_ROOT_PATH;
 
-    if (!nxMountDrive('F', R"(\Device\Harddisk0\Partition6)")) {
+    char device_path[256] = {0};
+    if (XConvertDOSFilenameToXBOX(xbe_root_directory.c_str(), device_path) != STATUS_SUCCESS) {
+      return false;
+    }
+
+    // Any valid input will start with \Device\Harddisk0\PartitionX
+    if (!strstr(device_path, R"(\Device\Harddisk0\Partition)")) {
+      return false;
+    }
+    device_path[28] = 0;
+
+    if (!nxIsDriveMounted(xbe_root_directory.front()) && !nxMountDrive(xbe_root_directory.front(), device_path)) {
       return false;
     }
     return true;
@@ -124,7 +138,7 @@ bool get_xbe_directory(std::string& xbe_root_directory) {
 }
 
 static bool get_test_output_path(std::string& test_output_directory) {
-  if (!get_xbe_directory(test_output_directory)) {
+  if (!get_writable_output_directory(test_output_directory)) {
     return false;
   }
   if (test_output_directory.back() == '\\') {
