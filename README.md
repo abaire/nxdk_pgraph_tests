@@ -20,13 +20,18 @@ format.
 * A test suite and all of the tests within will be enabled if the suite name appears on a single line.
 * A single test within an enabled suite may be disabled by prefixing its name with a `-` after the line containing the
   test suite containing it.
+* Any line starting with `#` will be ignored.
 
 The names used are the same as the names that appear in the `nxdk_praph_tests` menu.
+
+If the entire file is empty (or commented out), it will be ignored and all tests will be enabled.
 
 For example:
 ```
 ThisTestSuiteIsEnabled
 -ExceptThisTest
+
+# This is ignored.
 ```
 
 ### Controls

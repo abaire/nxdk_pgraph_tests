@@ -57,6 +57,8 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
                             const std::string& output_directory);
 static bool get_writable_output_directory(std::string& xbe_root_directory);
 static bool get_test_output_path(std::string& test_output_directory);
+static void dump_config_file(const std::string& config_file_path,
+                             const std::vector<std::shared_ptr<TestSuite>>& test_suites);
 static void process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 
 /* Main program function */
@@ -100,6 +102,10 @@ int main() {
 
   std::vector<std::shared_ptr<TestSuite>> test_suites;
   register_suites(host, test_suites, test_output_directory);
+
+#ifdef DUMP_CONFIG_FILE
+  dump_config_file(test_output_directory + "\\config.cnf", test_suites);
+#endif
 
 #ifdef RUNTIME_CONFIG_PATH
   process_config(RUNTIME_CONFIG_PATH, test_suites);
@@ -164,6 +170,23 @@ static bool get_test_output_path(std::string& test_output_directory) {
   return true;
 }
 
+static void dump_config_file(const std::string& config_file_path,
+                             const std::vector<std::shared_ptr<TestSuite>>& test_suites) {
+  if (!ensure_drive_mounted(config_file_path[0])) {
+    ASSERT(!"Failed to mount config path")
+  }
+
+  std::ofstream config_file(config_file_path);
+  ASSERT(config_file && "Failed to open config file for output");
+
+  for (auto& suite : test_suites) {
+    config_file << suite->Name() << std::endl;
+    for (auto& test_name : suite->TestNames()) {
+      config_file << "# " << test_name << std::endl;
+    }
+  }
+}
+
 static void process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   if (!ensure_drive_mounted(config_file_path[0])) {
     ASSERT(!"Failed to mount config path")
@@ -180,9 +203,15 @@ static void process_config(const char* config_file_path, std::vector<std::shared
   std::string last_test_suite;
   std::string line;
   while (std::getline(config_file, line)) {
+    if (line.empty()) {
+      continue;
+    }
     if (line.front() == '-') {
       line.erase(0, 1);
       test_config[last_test_suite].push_back(line);
+      continue;
+    }
+    if (line.front() == '#') {
       continue;
     }
 
@@ -203,6 +232,9 @@ static void process_config(const char* config_file_path, std::vector<std::shared
     filtered_tests.push_back(suite);
   }
 
+  if (filtered_tests.empty()) {
+    return;
+  }
   test_suites = filtered_tests;
 }
 

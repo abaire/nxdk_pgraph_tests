@@ -107,6 +107,12 @@ ifdef RUNTIME_CONFIG_PATH
 CXXFLAGS += -DRUNTIME_CONFIG_PATH="\"$(RUNTIME_CONFIG_PATH)\""
 endif
 
+# Cause a runtime config file enabling all tests to be generated in the standard results directory.
+DUMP_CONFIG_FILE ?= n
+ifeq ($(DUMP_CONFIG_FILE),y)
+CXXFLAGS += -DDUMP_CONFIG_FILE
+endif
+
 CLEANRULES = clean-resources
 include $(NXDK_DIR)/Makefile
 
