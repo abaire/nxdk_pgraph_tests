@@ -154,6 +154,9 @@ typedef struct Vertex {
 #pragma pack()
 
 struct Color {
+  Color() = default;
+  Color(float red, float green, float blue, float alpha = 1.0f) : r(red), g(green), b(blue), a(alpha) {}
+
   void SetRGB(float red, float green, float blue) {
     r = red;
     g = green;
