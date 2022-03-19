@@ -16,7 +16,9 @@ constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
     {NV097_SET_SURFACE_FORMAT_ZETA_Z16, 0x0000FFFF, false},
     {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, 0x00FFFFFF, false},
     {NV097_SET_SURFACE_FORMAT_ZETA_Z16, kF16MaxFixedRepresentation, true},
-    {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, kF24MaxFixedRepresentation, true},
+
+    // TODO: Enable when https://github.com/mborgerson/xemu/issues/322 is resolved.
+    //    {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, kF24MaxFixedRepresentation, true},
 };
 
 constexpr uint32_t kNumDepthFormats = sizeof(kDepthFormats) / sizeof(kDepthFormats[0]);
