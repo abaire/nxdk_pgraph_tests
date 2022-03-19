@@ -49,7 +49,7 @@
 #include "tests/zero_stride_tests.h"
 
 #ifndef FALLBACK_OUTPUT_ROOT_PATH
-#define FALLBACK_OUTPUT_ROOT_PATH "f:\\";
+#define FALLBACK_OUTPUT_ROOT_PATH "e:\\";
 #endif
 static constexpr int kFramebufferWidth = 640;
 static constexpr int kFramebufferHeight = 480;
