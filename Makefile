@@ -54,7 +54,8 @@ SRCS = \
 	$(SRCDIR)/texture_stage.cpp \
 	$(SRCDIR)/vertex_buffer.cpp \
 	$(THIRDPARTYDIR)/swizzle.c \
-	$(THIRDPARTYDIR)/printf/printf.c
+	$(THIRDPARTYDIR)/printf/printf.c \
+	$(THIRDPARTYDIR)/fpng/src/fpng.cpp
 
 SHADER_OBJS = \
 	$(SRCDIR)/shaders/attribute_carryover_test.inl \
@@ -75,9 +76,13 @@ SHADER_OBJS = \
 	$(SRCDIR)/shaders/textured_pixelshader.inl \
 	$(SRCDIR)/shaders/untextured_pixelshader.inl
 
-DEBUG := y
 CFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
-CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
+CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR) -DFPNG_NO_STDIO=1 -DFPNG_NO_SSE=1
+
+ifneq ($(DEBUG),y)
+CFLAGS += -O3 -fno-strict-aliasing
+CXXFLAGS += -O3 -fno-strict-aliasing
+endif
 
 # Disable automatic test execution if no input is detected.
 DISABLE_AUTORUN ?= n
