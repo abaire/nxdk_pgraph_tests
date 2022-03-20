@@ -5,7 +5,8 @@
 #include "pbkit_ext.h"
 #include "vertex_buffer.h"
 
-static const char kTestName[] = "ArrElm_DrwArr_ArrElm";
+static const char kArrElDrawArrArrElTest[] = "ArrElm_DrwArr_ArrElm";
+static const char kDrawArrDrawArrTest[] = "DrwArr_DrwArr";
 
 static constexpr float kLeft = -2.75f;
 static constexpr float kRight = 2.75f;
@@ -14,16 +15,16 @@ static constexpr float kBottom = -1.75f;
 
 OverlappingDrawModesTests::OverlappingDrawModesTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Overlapping draw modes") {
-  tests_[kTestName] = [this]() { Test(); };
+  tests_[kArrElDrawArrArrElTest] = [this]() { TestArrayElementDrawArrayArrayElement(); };
+  tests_[kDrawArrDrawArrTest] = [this]() { TestDrawArrayDrawArray(); };
 }
 
 void OverlappingDrawModesTests::Initialize() {
   TestSuite::Initialize();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-  CreateGeometry();
 }
 
-void OverlappingDrawModesTests::CreateGeometry() {
+void OverlappingDrawModesTests::CreateTriangleStrip() {
   constexpr int kNumTriangles = 6;
   auto buffer = host_.AllocateVertexBuffer(3 + (kNumTriangles - 1));
 
@@ -70,7 +71,9 @@ static uint32_t *SetArrayElements(uint32_t *p, const uint32_t *next_index, uint3
   return p;
 }
 
-void OverlappingDrawModesTests::Test() {
+void OverlappingDrawModesTests::TestArrayElementDrawArrayArrayElement() {
+  CreateTriangleStrip();
+
   host_.PrepareDraw(0xFE242424);
 
   host_.SetVertexBufferAttributes(host_.POSITION | host_.DIFFUSE);
@@ -98,5 +101,77 @@ void OverlappingDrawModesTests::Test() {
   p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
   pb_end(p);
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, kArrElDrawArrArrElTest);
+}
+
+void OverlappingDrawModesTests::CreateTriangles() {
+  constexpr int kNumTriangles = 3;
+  auto buffer = host_.AllocateVertexBuffer(kNumTriangles * 3);
+
+  const float z = 1.0f;
+
+  int index = 0;
+  Color color_one, color_two, color_three;
+  {
+    color_one.SetGrey(0.25f);
+    color_two.SetGrey(0.55f);
+    color_three.SetGrey(0.75f);
+
+    float one[] = {kLeft, kTop, z};
+    float two[] = {0.0f, kTop, z};
+    float three[] = {kLeft, 0.0f, z};
+    buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
+  }
+
+  {
+    color_one.SetRGB(0.8f, 0.25f, 0.10f);
+    color_two.SetRGB(0.1f, 0.85f, 0.10f);
+    color_three.SetRGB(0.1f, 0.25f, 0.90f);
+
+    float one[] = {kRight, kTop, z};
+    float two[] = {0.10f, kBottom, z};
+    float three[] = {0.25f, 0.0f, z};
+    buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
+  }
+
+  {
+    color_one.SetRGB(0.8f, 0.25f, 0.90f);
+    color_two.SetRGB(0.1f, 0.85f, 0.90f);
+    color_three.SetRGB(0.85f, 0.95f, 0.10f);
+
+    float one[] = {-0.4f, kBottom, z};
+    float two[] = {-1.4f, -1.4, z};
+    float three[] = {0.0f, 0.0f, z};
+    buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
+  }
+
+  index_buffer_.clear();
+  for (auto i = 0; i < buffer->GetNumVertices(); ++i) {
+    index_buffer_.push_back(i);
+  }
+}
+
+void OverlappingDrawModesTests::TestDrawArrayDrawArray() {
+  CreateTriangles();
+
+  host_.PrepareDraw(0xFE242424);
+
+  host_.SetVertexBufferAttributes(host_.POSITION | host_.DIFFUSE);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+
+  // Draw the first triangle
+  auto vertex_buffer = host_.GetVertexBuffer();
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 3) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+
+  // Draw the third triangle
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 3) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
+
+  host_.FinishDraw(allow_saving_, output_dir_, kDrawArrDrawArrTest);
 }

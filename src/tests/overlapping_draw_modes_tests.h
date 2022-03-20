@@ -17,8 +17,11 @@ class OverlappingDrawModesTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void CreateGeometry();
-  void Test();
+  void CreateTriangles();
+  void CreateTriangleStrip();
+
+  void TestArrayElementDrawArrayArrayElement();
+  void TestDrawArrayDrawArray();
 
  private:
   std::vector<uint32_t> index_buffer_;
