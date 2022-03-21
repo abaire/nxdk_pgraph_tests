@@ -10,6 +10,7 @@
 #include <strings.h>
 #include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
+#include <fpng/src/fpng.h>
 
 #include <algorithm>
 #include <utility>
@@ -742,14 +743,32 @@ void TestHost::SaveBackBuffer(const std::string &output_directory, const std::st
   auto height = static_cast<int>(pb_back_buffer_height());
   auto pitch = static_cast<int>(pb_back_buffer_pitch());
 
-  SDL_Surface *surface =
-      SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, width, height, 32, pitch, SDL_PIXELFORMAT_ARGB8888);
-  if (IMG_SavePNG(surface, target_file.c_str())) {
-    PrintMsg("Failed to save PNG file '%s'\n", target_file.c_str());
-    ASSERT(!"Failed to save PNG file.");
+  // FIXME: Support 16bpp surfaces
+  ASSERT((pitch == width * 4) && "Expected packed 32bpp surface");
+
+  // Swizzle color channels ARGB -> ABGR
+  unsigned int num_pixels = width * height;
+  uint32_t *pre_enc_buf = (uint32_t *)malloc(num_pixels * 4);
+  ASSERT(pre_enc_buf && "Failed to allocate pre-encode buffer");
+  for (unsigned int i = 0; i < num_pixels; i++) {
+    uint32_t c = static_cast<uint32_t *>(buffer)[i];
+    pre_enc_buf[i] = (c & 0xff00ff00) | ((c >> 16) & 0xff) | ((c & 0xff) << 16);
   }
 
-  SDL_FreeSurface(surface);
+  std::vector<uint8_t> out_buf;
+  if (!fpng::fpng_encode_image_to_memory((void *)pre_enc_buf, width, height, 4, out_buf)) {
+    ASSERT(!"Failed to encode PNG image");
+  }
+  free(pre_enc_buf);
+
+  FILE *pFile = fopen(target_file.c_str(), "wb");
+  ASSERT(pFile && "Failed to open output PNG image");
+  if (fwrite(out_buf.data(), 1, out_buf.size(), pFile) != out_buf.size()) {
+    ASSERT(!"Failed to write output PNG image");
+  }
+  if (fclose(pFile)) {
+    ASSERT(!"Failed to close output PNG image");
+  }
 }
 
 void TestHost::SaveZBuffer(const std::string &output_directory, const std::string &name) const {
