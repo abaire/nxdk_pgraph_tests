@@ -7,6 +7,7 @@
 
 static const char kArrElDrawArrArrElTest[] = "ArrElm_DrwArr_ArrElm";
 static const char kDrawArrDrawArrTest[] = "DrwArr_DrwArr";
+static const char kXemuSquashOptimizationTest[] = "SquashOpt";
 
 static constexpr float kLeft = -2.75f;
 static constexpr float kRight = 2.75f;
@@ -17,6 +18,7 @@ OverlappingDrawModesTests::OverlappingDrawModesTests(TestHost &host, std::string
     : TestSuite(host, std::move(output_dir), "Overlapping draw modes") {
   tests_[kArrElDrawArrArrElTest] = [this]() { TestArrayElementDrawArrayArrayElement(); };
   tests_[kDrawArrDrawArrTest] = [this]() { TestDrawArrayDrawArray(); };
+  tests_[kXemuSquashOptimizationTest] = [this]() { TestXemuSquashOptimization(); };
 }
 
 void OverlappingDrawModesTests::Initialize() {
@@ -90,7 +92,7 @@ void OverlappingDrawModesTests::TestArrayElementDrawArrayArrayElement() {
   // Then the next 3 via DRAW_ARRAYS
   auto vertex_buffer = host_.GetVertexBuffer();
   p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-               MASK(NV097_DRAW_ARRAYS_COUNT, 3) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 4));
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 4));
 
   // And finally the last one via another ARRAY_ELEMENT command.
   {
@@ -105,7 +107,7 @@ void OverlappingDrawModesTests::TestArrayElementDrawArrayArrayElement() {
 }
 
 void OverlappingDrawModesTests::CreateTriangles() {
-  constexpr int kNumTriangles = 3;
+  constexpr int kNumTriangles = 4;
   auto buffer = host_.AllocateVertexBuffer(kNumTriangles * 3);
 
   const float z = 1.0f;
@@ -145,6 +147,17 @@ void OverlappingDrawModesTests::CreateTriangles() {
     buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
   }
 
+  {
+    color_one.SetRGB(0.2f, 0.4f, 0.8f);
+    color_two.SetRGB(0.3f, 0.5f, 0.9f);
+    color_three.SetRGB(0.4f, 0.3f, 0.7f);
+
+    float one[] = {kLeft, kBottom, z};
+    float two[] = {kLeft, 0.0f, z};
+    float three[] = {0.0f, 0.0f, z};
+    buffer->DefineTriangle(index++, one, two, three, color_one, color_two, color_three);
+  }
+
   index_buffer_.clear();
   for (auto i = 0; i < buffer->GetNumVertices(); ++i) {
     index_buffer_.push_back(i);
@@ -164,14 +177,53 @@ void OverlappingDrawModesTests::TestDrawArrayDrawArray() {
   // Draw the first triangle
   auto vertex_buffer = host_.GetVertexBuffer();
   p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-               MASK(NV097_DRAW_ARRAYS_COUNT, 3) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
 
   // Draw the third triangle
   p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-               MASK(NV097_DRAW_ARRAYS_COUNT, 3) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
 
   p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
   pb_end(p);
 
   host_.FinishDraw(allow_saving_, output_dir_, kDrawArrDrawArrTest);
+}
+
+void OverlappingDrawModesTests::TestXemuSquashOptimization() {
+  CreateTriangles();
+
+  host_.PrepareDraw(0xFE242424);
+
+  host_.SetVertexBufferAttributes(host_.POSITION | host_.DIFFUSE);
+
+  auto p = pb_begin();
+  auto vertex_buffer = host_.GetVertexBuffer();
+
+  // Draw the first triangle as a Begin+DA+End triplet.
+  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+
+  // Draw the second triangle the same way.
+  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+
+  // Draw the third triangle via DRAW_ARRAYS and the fourth via ARRAY_ELEMENT.
+  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+
+  {
+    const uint32_t indices[] = {9, 10, 11};
+    p = SetArrayElements(p, indices, sizeof(indices) / sizeof(indices[0]));
+  }
+
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+
+  pb_end(p);
+
+  host_.FinishDraw(allow_saving_, output_dir_, kXemuSquashOptimizationTest);
 }
