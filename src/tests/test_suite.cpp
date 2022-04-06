@@ -82,8 +82,6 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
   p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
 
-  p = pb_push1(p, NV097_SET_COMBINER_CONTROL, 1);
-
   pb_end(p);
 
   host_.ClearInputColorCombiners();
@@ -91,6 +89,7 @@ void TestSuite::Initialize() {
   host_.ClearOutputColorCombiners();
   host_.ClearOutputAlphaCombiners();
 
+  host_.SetCombinerControl(1);
   host_.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
                               false, TestHost::MAP_UNSIGNED_INVERT);
   host_.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
@@ -104,12 +103,13 @@ void TestSuite::Initialize() {
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
                           false, false, false, true);
 
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE);
+
   while (pb_busy()) {
     /* Wait for completion... */
   }
 
   p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0x0);
 
   MATRIX identity_matrix;
   matrix_unit(identity_matrix);

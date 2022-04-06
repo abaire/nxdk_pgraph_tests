@@ -7,10 +7,10 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <fpng/src/fpng.h>
 #include <strings.h>
 #include <windows.h>
 #include <xboxkrnl/xboxkrnl.h>
-#include <fpng/src/fpng.h>
 
 #include <algorithm>
 #include <utility>
@@ -186,8 +186,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 
   // FIXME: Figure out what to do in cases where there are multiple stages with different swizzle flags.
   // Is this supported by hardware?
-  Vertex *vptr =
-      texture_stage_[0].IsLinear() ? vertex_buffer_->linear_vertex_buffer_ : vertex_buffer_->normalized_vertex_buffer_;
+  bool is_linear = texture_stage_[0].enabled_ && texture_stage_[0].IsLinear();
+  Vertex *vptr = is_linear ? vertex_buffer_->linear_vertex_buffer_ : vertex_buffer_->normalized_vertex_buffer_;
 
   auto set = [this, enabled_fields](VertexAttribute attribute, uint32_t attribute_index, uint32_t format, uint32_t size,
                                     const void *data) {

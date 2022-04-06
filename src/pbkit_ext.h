@@ -17,6 +17,7 @@
 #define GR_CLASS_72 0x72
 
 // Enumerated DMA channel destinations
+#define DMA_CHANNEL_3D_3 3
 #define DMA_CHANNEL_PIXEL_RENDERER 9
 #define DMA_CHANNEL_DEPTH_STENCIL_RENDERER 10
 #define DMA_CHANNEL_BITBLT_IMAGES 11

@@ -23,7 +23,7 @@ class VertexBuffer;
 // exception in xemu.
 constexpr uint32_t kNextSubchannel = NEXT_SUBCH;
 // The first pgraph context channel that can be used by tests.
-constexpr uint32_t kNextContextChannel = 25;
+constexpr int32_t kNextContextChannel = 25;
 
 constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
 
@@ -250,6 +250,8 @@ class TestHost {
   uint32_t GetMaxTextureWidth() const { return max_texture_width_; }
   uint32_t GetMaxTextureHeight() const { return max_texture_height_; }
   uint32_t GetMaxTextureDepth() const { return max_texture_depth_; }
+
+  uint8_t *GetTextureMemory() const { return texture_memory_; }
 
   uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
   uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
