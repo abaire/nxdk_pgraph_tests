@@ -15,6 +15,13 @@
 // SUBCH_4 == GR_CLASS_62, which contains the NV10 2D surface commands.
 #define SUBCH_CLASS_62 SUBCH_4
 
+// NV097_SET_CONTEXT_DMA_ZETA is set to channel 10 by default.
+const uint32_t kDefaultDMAZetaChannel = 10;
+
+// From pbkit.c, DMA_A is set to channel 11 by default
+// NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
+const uint32_t kDefaultDMAChannelA = 11;
+
 // Subchannel reserved for interaction with the class 19 channel.
 static constexpr uint32_t SUBCH_CLASS_19 = kNextSubchannel;
 
@@ -24,11 +31,19 @@ static constexpr uint32_t SUBCH_CLASS_12 = SUBCH_CLASS_19 + 1;
 // Subchannel reserved for interaction with the class 72 channel.
 static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
-static constexpr char kTestName[] = "BlitFBToTextureAndRender";
+static constexpr char kTextureTarget[] = "FBToTexture";
+static constexpr char kZetaTarget[] = "FBToZetaAsTex";
 
 TextureFramebufferBlitTests::TextureFramebufferBlitTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture Framebuffer Blit") {
-  tests_[kTestName] = [this]() { Test(); };
+  tests_[kTextureTarget] = [this]() {
+    auto offset = reinterpret_cast<uint32_t>(host_.GetTextureMemory());
+    Test(offset, kTextureTarget);
+  };
+  tests_[kZetaTarget] = [this]() {
+    auto offset = reinterpret_cast<uint32_t>(pb_depth_stencil_buffer());
+    Test(offset, kZetaTarget);
+  };
 }
 
 void TextureFramebufferBlitTests::Initialize() {
@@ -40,8 +55,7 @@ void TextureFramebufferBlitTests::Initialize() {
   // TODO: Provide a mechanism to find the next unused channel.
   auto channel = kNextContextChannel;
 
-  const uint32_t texture_target_dma_channel = channel++;
-  pb_create_dma_ctx(texture_target_dma_channel, DMA_CLASS_3D, 0, MAXRAM, &texture_target_ctx_);
+  pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &texture_target_ctx_);
   pb_bind_channel(&texture_target_ctx_);
 
   pb_create_gr_ctx(channel++, GR_CLASS_30, &null_ctx_);
@@ -59,6 +73,21 @@ void TextureFramebufferBlitTests::Initialize() {
   pb_create_gr_ctx(channel++, GR_CLASS_72, &beta4_ctx_);
   pb_bind_channel(&beta4_ctx_);
   pb_bind_subchannel(SUBCH_CLASS_72, &beta4_ctx_);
+
+  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8);
+
+  // The texture DMA channel is overridden to use a context that can address arbitrary RAM.
+  // (pbkit sets up a channel that can only address a subset of video RAM)
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, texture_target_ctx_.ChannelID);
+  pb_end(p);
+}
+
+void TextureFramebufferBlitTests::Deinitialize() {
+  TestSuite::Deinitialize();
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, kDefaultDMAChannelA);
+  pb_end(p);
 }
 
 void TextureFramebufferBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel,
@@ -174,13 +203,19 @@ void TextureFramebufferBlitTests::CreateGeometry() {
                                    static_cast<float>(host_.GetFramebufferHeight()));
 }
 
-void TextureFramebufferBlitTests::Test() {
+void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char* test_name) {
   host_.PrepareDraw(0xF0441111);
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
+  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
+
+  // Trigger https://github.com/mborgerson/xemu/issues/788 by forcing xemu to consider the zeta buffer as dirty.
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
   pb_end(p);
+
+  texture_destination &= 0x03FFFFFF;
 
   // Render test content to the framebuffer, then blit it into texture memory.
   {
@@ -201,22 +236,27 @@ void TextureFramebufferBlitTests::Test() {
     uint32_t fb_pitch = clip_w * 4;
 
     ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, DMA_CHANNEL_3D_3, texture_target_ctx_.ChannelID,
-              NV04_SURFACE_2D_FORMAT_A8R8G8B8, fb_pitch, fb_pitch, reinterpret_cast<uint32_t>(pb_back_buffer()), 0, 0,
-              reinterpret_cast<uint32_t>(host_.GetTextureMemory()), 0, 0, clip_w, clip_h, clip_x, clip_y, clip_w,
-              clip_h);
+              NV04_SURFACE_2D_FORMAT_A8R8G8B8, fb_pitch, fb_pitch,
+              reinterpret_cast<uint32_t>(pb_back_buffer()) & 0x03FFFFFF, 0, 0, texture_destination, 0, 0, clip_w,
+              clip_h, clip_x, clip_y, clip_w, clip_h);
   }
-
-  host_.Clear(0xF0111111);
 
   // Render a quad with the generated texture.
   auto& stage = host_.GetTextureStage(0);
   stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+  stage.SetTextureDimensions(1, 1, 1);
   stage.SetBorderColor(0xFF7F007F);
   stage.SetImageDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
   host_.SetupTextureStages();
+
+  // The texture stage utilities always operate off of the texture memory managed by the test_host. Because this test
+  // needs to reference arbitrary texture destinations, the offset must be applied manually after the rest of the params
+  // are committed.
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, texture_destination);
+  pb_end(p);
 
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
@@ -224,5 +264,9 @@ void TextureFramebufferBlitTests::Test() {
   host_.SetVertexBuffer(target_vertex_buffer_);
   host_.DrawArrays();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestName);
+  pb_print("%s\n", test_name);
+  pb_print("0x%X\n", texture_destination & 0x03FFFFFF);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }

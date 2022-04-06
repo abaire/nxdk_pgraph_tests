@@ -13,10 +13,11 @@ class TextureFramebufferBlitTests : public TestSuite {
   TextureFramebufferBlitTests(TestHost& host, std::string output_dir);
 
   void Initialize() override;
+  void Deinitialize() override;
 
  private:
   void CreateGeometry();
-  void Test();
+  void Test(uint32_t texture_destination, const char* test_name);
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
                  uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
                  uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x,
