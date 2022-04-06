@@ -184,8 +184,8 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
     vertex_buffer_->SetCacheValid();
   }
 
-  // FIXME: Figure out what to do in cases where there are multiple stages with different swizzle flags.
-  // Is this supported by hardware?
+  // FIXME: Linearize on a per-stage basis instead of basing entirely on stage 0.
+  // E.g., if texture unit 0 uses linear and 1 uses swizzle, TEX0 should be linearized, TEX1 should be normalized.
   bool is_linear = texture_stage_[0].enabled_ && texture_stage_[0].IsLinear();
   Vertex *vptr = is_linear ? vertex_buffer_->linear_vertex_buffer_ : vertex_buffer_->normalized_vertex_buffer_;
 
