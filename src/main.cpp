@@ -45,6 +45,7 @@
 #include "tests/texture_render_target_tests.h"
 #include "tests/three_d_primitive_tests.h"
 #include "tests/two_d_line_tests.h"
+#include "tests/vertex_shader_independence_tests.h"
 #include "tests/vertex_shader_rounding_tests.h"
 #include "tests/volume_texture_tests.h"
 #include "tests/w_param_tests.h"
@@ -352,6 +353,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<TwoDLineTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<VertexShaderIndependenceTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
