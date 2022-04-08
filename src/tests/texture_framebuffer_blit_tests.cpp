@@ -9,11 +9,17 @@
 #include "test_host.h"
 #include "vertex_buffer.h"
 
+#define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
+
 // See pb_init in pbkit.c, where the channel contexts are set up.
 // SUBCH_3 == GR_CLASS_9F, which contains the IMAGE_BLIT commands.
 #define SUBCH_CLASS_9F SUBCH_3
 // SUBCH_4 == GR_CLASS_62, which contains the NV10 2D surface commands.
 #define SUBCH_CLASS_62 SUBCH_4
+
+// From pbkit.c, DMA_COLOR is set to channel 9 by default
+// NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
+const uint32_t kDefaultDMAColorChannel = 9;
 
 // NV097_SET_CONTEXT_DMA_ZETA is set to channel 10 by default.
 const uint32_t kDefaultDMAZetaChannel = 10;
@@ -33,6 +39,7 @@ static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
 static constexpr char kTextureTarget[] = "FBToTexture";
 static constexpr char kZetaTarget[] = "FBToZetaAsTex";
+static constexpr char kRenderTextureTarget[] = "FBToOldRenderTarget";
 
 TextureFramebufferBlitTests::TextureFramebufferBlitTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture Framebuffer Blit") {
@@ -44,6 +51,7 @@ TextureFramebufferBlitTests::TextureFramebufferBlitTests(TestHost& host, std::st
     auto offset = reinterpret_cast<uint32_t>(pb_depth_stencil_buffer());
     Test(offset, kZetaTarget);
   };
+  tests_[kRenderTextureTarget] = [this]() { TestRenderTarget(kRenderTextureTarget); };
 }
 
 void TextureFramebufferBlitTests::Initialize() {
@@ -203,8 +211,46 @@ void TextureFramebufferBlitTests::CreateGeometry() {
                                    static_cast<float>(host_.GetFramebufferHeight()));
 }
 
+void TextureFramebufferBlitTests::TestRenderTarget(const char* test_name) {
+  const auto pitch = host_.GetFramebufferWidth() * 4;
+  const uint32_t texture_size = pitch * host_.GetFramebufferHeight();
+  auto target =
+      (uint8_t*)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
+  ASSERT(target && "Failed to allocate target surface.");
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(target) & 0x03FFFFFF);
+  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+  pb_end(p);
+
+  // Render something into the texture. The expectation is that this will not actually be displayed since the test will
+  // completely blit over it.
+  host_.PrepareDraw(0xF0AA00AA);
+
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+  pb_end(p);
+
+  Test(reinterpret_cast<uint32_t>(target), test_name);
+
+  MmFreeContiguousMemory(target);
+}
+
 void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char* test_name) {
   host_.PrepareDraw(0xF0441111);
+
+  texture_destination &= 0x03FFFFFF;
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
@@ -214,8 +260,6 @@ void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char*
   // Trigger https://github.com/mborgerson/xemu/issues/788 by forcing xemu to consider the zeta buffer as dirty.
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
   pb_end(p);
-
-  texture_destination &= 0x03FFFFFF;
 
   // Render test content to the framebuffer, then blit it into texture memory.
   {

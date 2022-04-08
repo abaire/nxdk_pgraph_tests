@@ -17,6 +17,7 @@ class TextureFramebufferBlitTests : public TestSuite {
 
  private:
   void CreateGeometry();
+  void TestRenderTarget(const char* test_name);
   void Test(uint32_t texture_destination, const char* test_name);
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
                  uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
