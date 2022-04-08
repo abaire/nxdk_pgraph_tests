@@ -10,7 +10,6 @@ class ClearTests : public TestSuite {
   ClearTests(TestHost &host, std::string output_dir);
 
   void Initialize() override;
-  void Deinitialize() override;
 
  private:
   void CreateGeometry();

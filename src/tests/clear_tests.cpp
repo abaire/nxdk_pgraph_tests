@@ -43,14 +43,6 @@ void ClearTests::Initialize() {
   pb_end(p);
 }
 
-void ClearTests::Deinitialize() {
-  TestSuite::Deinitialize();
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COLOR_MASK, 0xFFFFFFFF);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-  pb_end(p);
-}
-
 void ClearTests::CreateGeometry() {
   uint32_t num_quads = 4;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);

@@ -25,6 +25,7 @@ SRCS = \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
 	$(SRCDIR)/tests/clear_tests.cpp \
+	$(SRCDIR)/tests/color_mask_blend_tests.cpp \
 	$(SRCDIR)/tests/color_zeta_overlap_tests.cpp \
 	$(SRCDIR)/tests/combiner_tests.cpp \
 	$(SRCDIR)/tests/depth_format_tests.cpp \
