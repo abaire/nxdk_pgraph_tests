@@ -40,6 +40,7 @@
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_tests.h"
 #include "tests/texture_border_tests.h"
+#include "tests/texture_depth_source_tests.h"
 #include "tests/texture_format_tests.h"
 #include "tests/texture_framebuffer_blit_tests.h"
 #include "tests/texture_matrix_tests.h"
@@ -159,6 +160,8 @@ static bool get_writable_output_directory(std::string& xbe_root_directory) {
     debugPrint("Running from readonly media, using default path for test output.\n");
     xbe_root_directory = FALLBACK_OUTPUT_ROOT_PATH;
 
+    std::replace(xbe_root_directory.begin(), xbe_root_directory.end(), '/', '\\');
+
     return ensure_drive_mounted(xbe_root_directory.front());
   }
 
@@ -170,7 +173,8 @@ static bool get_test_output_path(std::string& test_output_directory) {
   if (!get_writable_output_directory(test_output_directory)) {
     return false;
   }
-  if (test_output_directory.back() == '\\') {
+  char last_char = test_output_directory.back();
+  if (last_char == '\\' || last_char == '/') {
     test_output_directory.pop_back();
   }
   test_output_directory += "\\nxdk_pgraph_tests";
@@ -326,6 +330,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<TextureBorderTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<TextureDepthSourceTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {

@@ -66,10 +66,6 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
   p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
 
-  p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
-  p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA);
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_LIGHT_MODEL_TWO_SIDE_ENABLE, 0);
   p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
@@ -83,6 +79,8 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
 
   pb_end(p);
+
+  host_.SetAlphaBlendEnabled();
 
   host_.ClearInputColorCombiners();
   host_.ClearInputAlphaCombiners();

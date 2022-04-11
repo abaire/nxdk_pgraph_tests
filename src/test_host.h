@@ -255,6 +255,8 @@ class TestHost {
 
   uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
   uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
+  float GetFramebufferWidthF() const { return static_cast<float>(framebuffer_width_); }
+  float GetFramebufferHeightF() const { return static_cast<float>(framebuffer_height_); }
 
   std::shared_ptr<VertexBuffer> AllocateVertexBuffer(uint32_t num_vertices);
   void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
@@ -369,7 +371,9 @@ class TestHost {
   bool GetSaveResults() const { return save_results_; }
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
-  void SetAlphaBlendEnabled(bool enable = true) const;
+  void SetAlphaBlendEnabled(bool enable = true, uint32_t func = NV097_SET_BLEND_EQUATION_V_FUNC_ADD,
+                            uint32_t sfactor = NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA,
+                            uint32_t dfactor = NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA) const;
 
   // Sets up the number of enabled color combiners and behavior flags.
   //

@@ -1116,13 +1116,13 @@ std::string TestHost::GetPrimitiveName(TestHost::DrawPrimitive primitive) {
   }
 }
 
-void TestHost::SetAlphaBlendEnabled(bool enable) const {
+void TestHost::SetAlphaBlendEnabled(bool enable, uint32_t func, uint32_t sfactor, uint32_t dfactor) const {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_BLEND_ENABLE, enable);
   if (enable) {
-    p = pb_push1(p, NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_EQUATION_V_FUNC_ADD);
-    p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA);
-    p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA);
+    p = pb_push1(p, NV097_SET_BLEND_EQUATION, func);
+    p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, sfactor);
+    p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, dfactor);
   }
   pb_end(p);
 }
