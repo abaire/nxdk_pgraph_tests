@@ -229,6 +229,22 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         }
       } break;
 
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y16:
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED: {
+        // Treat the source as a 32-bit depth value and remap to 16 bit.
+        uint32_t *source = pixels;
+        for (int y = 0; y < surface->h; ++y) {
+          for (int x = 0; x < surface->w; ++x, ++source) {
+            uint8_t red, green, blue;
+            SDL_GetRGB(source[0], surface->format, &red, &green, &blue);
+            uint32_t y_value = static_cast<uint8_t>(0.299f * red + 0.587f * green + 0.114f * blue);
+            y_value = static_cast<uint32_t>(static_cast<float>(y_value) / 255.0f * 65535.0f);
+            *dest++ = y_value & 0xFF;
+            *dest++ = (y_value >> 8) & 0xFF;
+          }
+        }
+      } break;
+
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8: {
         uint32_t *source = pixels;
         for (int y = 0; y < surface->h; ++y) {
