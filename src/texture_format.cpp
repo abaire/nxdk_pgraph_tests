@@ -31,6 +31,7 @@ constexpr TextureFormatInfo kTextureFormats[] = {
     {SDL_PIXELFORMAT_ARGB1555, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X1R5G5B5, 16, false, true, false, "X1R5G5B5"},
     {SDL_PIXELFORMAT_ARGB4444, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A4R4G4B4, 16, false, true, false, "A4R4G4B4"},
     {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8, 16, false, true, true, "G8B8"},
+    //    {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8B8, 16, false, true, true, "R8B8"},
 
     // yuv color space
     // Each 4 bytes represent the color for 2 neighboring pixels:

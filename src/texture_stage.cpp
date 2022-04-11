@@ -183,18 +183,6 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         }
       } break;
 
-      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8: {
-        uint32_t *source = pixels;
-        for (int y = 0; y < surface->h; ++y) {
-          for (int x = 0; x < surface->w; ++x, ++source) {
-            uint8_t red, green, blue, alpha;
-            SDL_GetRGBA(*source, surface->format, &red, &green, &blue, &alpha);
-            *dest++ = red + (green << 8);
-            *dest++ = blue + (alpha << 8);
-          }
-        }
-      } break;
-
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_AY8:
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y8: {
         uint32_t *source = pixels;
@@ -241,6 +229,30 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         }
       } break;
 
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8: {
+        uint32_t *source = pixels;
+        for (int y = 0; y < surface->h; ++y) {
+          for (int x = 0; x < surface->w; ++x, ++source) {
+            uint8_t red, green, blue, alpha;
+            SDL_GetRGBA(*source, surface->format, &red, &green, &blue, &alpha);
+            *dest++ = blue;
+            *dest++ = green;
+          }
+        }
+      } break;
+
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8B8: {
+        uint32_t *source = pixels;
+        for (int y = 0; y < surface->h; ++y) {
+          for (int x = 0; x < surface->w; ++x, ++source) {
+            uint8_t red, green, blue, alpha;
+            SDL_GetRGBA(*source, surface->format, &red, &green, &blue, &alpha);
+            *dest++ = blue;
+            *dest++ = red;
+          }
+        }
+      } break;
+
       case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_G8B8: {
         uint32_t *source = pixels;
         swizzle_bpp = 2;
@@ -248,10 +260,6 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         converted = new uint8_t[swizzle_pitch * swizzle_h * swizzle_depth];
         dest = converted;
 
-        // Byte 0 => Red, Blue
-        // Byte 1:
-        //   Alpha = 0xBF + (pow(abs(byte1 - 0x7F) / 16, 2))
-        //   Green = pow(byte1 / 16, 2)
         for (int y = 0; y < surface->h; ++y) {
           for (int x = 0; x < surface->w; ++x, ++source) {
             uint8_t red, green, blue, alpha;
@@ -269,10 +277,6 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         converted = new uint8_t[swizzle_pitch * swizzle_h * swizzle_depth];
         dest = converted;
 
-        // Byte 0 => Green, Blue
-        // Byte 1:
-        //   Alpha = 0xBF + (pow(abs(byte1 - 0x7F) / 16, 2))
-        //   Red = pow(byte1 / 16, 2)
         for (int y = 0; y < surface->h; ++y) {
           for (int x = 0; x < surface->w; ++x, ++source) {
             uint8_t red, green, blue, alpha;
