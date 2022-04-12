@@ -66,9 +66,7 @@ void TwoDLineTests::Test(const TestCase& test) {
   auto p = pb_begin();
 
   p = pb_push1_to(SUBCH_CLASS_42, p, NV04_CONTEXT_SURFACES_2D_SET_DMA_IMAGE_DST, DMA_CHANNEL_PIXEL_RENDERER);
-
   p = pb_push1_to(SUBCH_CLASS_42, p, NV042_SET_PITCH, (pb_back_buffer_pitch() << 16) | pb_back_buffer_pitch());
-
   p = pb_push1_to(SUBCH_CLASS_42, p, NV042_SET_COLOR_FORMAT, NV042_SET_COLOR_FORMAT_LE_A8R8G8B8);
 
   p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_OPERATION, NV09F_SET_OPERATION_SRCCOPY);

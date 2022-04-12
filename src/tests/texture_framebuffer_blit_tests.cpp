@@ -94,7 +94,18 @@ void TextureFramebufferBlitTests::Initialize() {
 void TextureFramebufferBlitTests::Deinitialize() {
   TestSuite::Deinitialize();
   auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
+  // Note: Leaving arbitrary offsets for these values will lead to a color buffer limit error in the two_d_line_tests.
+  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_OFFSET_SOURCE, 0);
+  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_OFFSET_DESTIN, 0);
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, kDefaultDMAChannelA);
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
   pb_end(p);
 }
 
