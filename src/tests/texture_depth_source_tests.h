@@ -1,5 +1,5 @@
-#ifndef NXDK_PGRAPH_TESTS_TEXTURE_DEPTH_SOURCE_TESTS_H
-#define NXDK_PGRAPH_TESTS_TEXTURE_DEPTH_SOURCE_TESTS_H
+#ifndef NXDK_PGRAPH_TESTS_TEXTURE_SHADOW_COMPARATOR_TESTS_H
+#define NXDK_PGRAPH_TESTS_TEXTURE_SHADOW_COMPARATOR_TESTS_H
 
 #include <memory>
 #include <string>
@@ -10,9 +10,9 @@
 struct TextureFormatInfo;
 class VertexBuffer;
 
-class TextureDepthSourceTests : public TestSuite {
+class TextureShadowComparatorTests : public TestSuite {
  public:
-  TextureDepthSourceTests(TestHost &host, std::string output_dir);
+  TextureShadowComparatorTests(TestHost &host, std::string output_dir);
 
   void Initialize() override;
 
@@ -24,4 +24,4 @@ class TextureDepthSourceTests : public TestSuite {
   struct s_CtxDma texture_target_ctx_ {};
 };
 
-#endif  // NXDK_PGRAPH_TESTS_TEXTURE_DEPTH_SOURCE_TESTS_H
+#endif  // NXDK_PGRAPH_TESTS_TEXTURE_SHADOW_COMPARATOR_TESTS_H

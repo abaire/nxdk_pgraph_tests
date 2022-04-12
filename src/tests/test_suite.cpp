@@ -175,9 +175,9 @@ void TestSuite::Initialize() {
                NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
                    NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
 
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
   p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
   p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
 

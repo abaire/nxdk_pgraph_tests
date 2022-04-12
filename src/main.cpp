@@ -333,10 +333,6 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
-    auto suite = std::make_shared<TextureDepthSourceTests>(host, output_directory);
-    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
-  }
-  {
     auto suite = std::make_shared<TexgenMatrixTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
@@ -358,6 +354,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<TextureRenderTargetTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<TextureShadowComparatorTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {

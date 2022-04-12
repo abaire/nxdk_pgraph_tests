@@ -42,11 +42,11 @@ SRCS = \
 	$(SRCDIR)/tests/texgen_matrix_tests.cpp \
 	$(SRCDIR)/tests/texgen_tests.cpp \
 	$(SRCDIR)/tests/texture_border_tests.cpp \
-	$(SRCDIR)/tests/texture_depth_source_tests.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
 	$(SRCDIR)/tests/texture_framebuffer_blit_tests.cpp \
 	$(SRCDIR)/tests/texture_matrix_tests.cpp \
 	$(SRCDIR)/tests/texture_render_target_tests.cpp \
+	$(SRCDIR)/tests/texture_shadow_comparator_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \
 	$(SRCDIR)/tests/vertex_shader_independence_tests.cpp \
