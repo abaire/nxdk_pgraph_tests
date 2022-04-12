@@ -24,9 +24,9 @@ const uint32_t kDefaultDMAColorChannel = 9;
 // NV097_SET_CONTEXT_DMA_ZETA is set to channel 10 by default.
 const uint32_t kDefaultDMAZetaChannel = 10;
 
-// From pbkit.c, DMA_A is set to channel 11 by default
+// From pbkit.c, DMA_A is set to channel 3 by default
 // NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
-const uint32_t kDefaultDMAChannelA = 11;
+const uint32_t kDefaultDMAChannelA = 3;
 
 // Subchannel reserved for interaction with the class 19 channel.
 static constexpr uint32_t SUBCH_CLASS_19 = kNextSubchannel;

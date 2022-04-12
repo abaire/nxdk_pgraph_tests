@@ -33,6 +33,11 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   }
 
   auto p = pb_begin();
+  uint32_t offset = reinterpret_cast<uint32_t>(memory_dma_offset) + texture_memory_offset_;
+  uint32_t texture_addr = offset & 0x03ffffff;
+  // NV097_SET_TEXTURE_OFFSET
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr);
+
   // NV097_SET_TEXTURE_CONTROL0
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
                NV097_SET_TEXTURE_CONTROL0_ENABLE |
@@ -62,10 +67,8 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
                     MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_V, size_v) |
                     MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, size_p);
 
-  uint32_t offset = reinterpret_cast<uint32_t>(memory_dma_offset) + texture_memory_offset_;
-  uint32_t texture_addr = offset & 0x03ffffff;
-  // NV097_SET_TEXTURE_OFFSET
-  p = pb_push2(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr, format);
+  // NV097_SET_TEXTURE_FORMAT
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FORMAT(stage_), format);
 
   uint32_t pitch_param = (format_.xbox_bpp * width_ / 8) << 16;
   // NV097_SET_TEXTURE_CONTROL1
