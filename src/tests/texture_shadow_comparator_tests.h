@@ -20,7 +20,7 @@ class TextureShadowComparatorTests : public TestSuite {
 
  private:
   void TestRawValues(uint32_t depth_format, uint32_t texture_format, uint32_t shadow_comp_function, uint32_t min_val, uint32_t max_val, uint32_t ref, const std::string &name);
-  void TestPerspective(uint32_t depth_format, uint32_t texture_format, uint32_t shadow_comp_function, float min_val, float max_val, float ref, const std::string &name);
+  void TestPerspective(uint32_t depth_format, bool float_depth, uint32_t texture_format, uint32_t shadow_comp_function, float min_val, float max_val, float ref, const std::string &name);
 
  private:
   struct s_CtxDma texture_target_ctx_ {};

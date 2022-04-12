@@ -29,6 +29,8 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
   switch (format.xbox_format) {
     case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8:
     case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED:
       return true;
 
     default:

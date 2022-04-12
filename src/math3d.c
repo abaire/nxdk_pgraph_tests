@@ -141,6 +141,21 @@ void vector_outerproduct(VECTOR output, const VECTOR input0, const VECTOR input1
   output[_W] = 1.0f;
 }
 
+void vector_euclidean(VECTOR output, const VECTOR input) {
+  if (input[_W] == 0.0f) {
+    output[_X] = INFINITY;
+    output[_Y] = INFINITY;
+    output[_Z] = INFINITY;
+    output[_W] = input[_W];
+    return;
+  }
+
+  output[_X] = input[_X] / input[_W];
+  output[_Y] = input[_Y] / input[_W];
+  output[_Z] = input[_Z] / input[_W];
+  output[_W] = 1.0f;
+}
+
 // matrices function
 
 void matrix_copy(MATRIX output, const MATRIX input0) { memcpy(output, input0, sizeof(MATRIX)); }
@@ -449,6 +464,84 @@ void create_d3d_standard_viewport_16(MATRIX ret, float width, float height) {
   create_d3d_viewport(ret, width, height, (float)0xFFFF, 0.0f, 1.0f);
 }
 
+void create_d3d_standard_viewport_16_float(MATRIX ret, float width, float height) {
+  unsigned int max_value_int = 0x43FFF800;
+  float max_value = *(float*)&max_value_int;
+  create_d3d_viewport(ret, width, height, (float)max_value, 0.0f, 1.0f);
+}
+
 void create_d3d_standard_viewport_24(MATRIX ret, float width, float height) {
   create_d3d_viewport(ret, width, height, (float)0x00FFFFFF, 0.0f, 1.0f);
+}
+
+void create_d3d_standard_viewport_24_float(MATRIX ret, float width, float height) {
+  unsigned int max_value_int = 0x7149F2CA;
+  float max_value = *(float*)&max_value_int;
+  create_d3d_viewport(ret, width, height, max_value, 0.0f, 1.0f);
+}
+
+float matrix_determinant(const MATRIX m) {
+  return m[_11] * m[_22] * m[_33] * m[_44] + m[_11] * m[_23] * m[_34] * m[_42] + m[_11] * m[_24] * m[_32] * m[_43] -
+         m[_11] * m[_24] * m[_33] * m[_42] - m[_11] * m[_23] * m[_32] * m[_44] - m[_11] * m[_22] * m[_34] * m[_43] -
+         m[_12] * m[_21] * m[_33] * m[_44] - m[_13] * m[_21] * m[_34] * m[_42] - m[_14] * m[_21] * m[_32] * m[_43] +
+         m[_14] * m[_21] * m[_33] * m[_42] + m[_13] * m[_21] * m[_32] * m[_44] + m[_12] * m[_21] * m[_34] * m[_43] +
+         m[_12] * m[_23] * m[_31] * m[_44] + m[_13] * m[_24] * m[_31] * m[_42] + m[_14] * m[_22] * m[_31] * m[_43] -
+         m[_14] * m[_23] * m[_31] * m[_42] - m[_13] * m[_22] * m[_31] * m[_44] - m[_12] * m[_24] * m[_31] * m[_43] -
+         m[_12] * m[_23] * m[_34] * m[_41] - m[_13] * m[_24] * m[_32] * m[_41] - m[_14] * m[_22] * m[_33] * m[_41] +
+         m[_14] * m[_23] * m[_32] * m[_41] + m[_13] * m[_22] * m[_34] * m[_41] + m[_12] * m[_24] * m[_33] * m[_41];
+}
+
+void matrix_adjoint(MATRIX output, const MATRIX m) {
+  output[_11] = -(m[_24] * m[_33] * m[_42]) + m[_23] * m[_34] * m[_42] + m[_24] * m[_32] * m[_43] -
+                m[_22] * m[_34] * m[_43] - m[_23] * m[_32] * m[_44] + m[_22] * m[_33] * m[_44];
+  output[_12] = m[_14] * m[_33] * m[_42] - m[_13] * m[_34] * m[_42] - m[_14] * m[_32] * m[_43] +
+                m[_12] * m[_34] * m[_43] + m[_13] * m[_32] * m[_44] - m[_12] * m[_33] * m[_44];
+  output[_13] = -(m[_14] * m[_23] * m[_42]) + m[_13] * m[_24] * m[_42] + m[_14] * m[_22] * m[_43] -
+                m[_12] * m[_24] * m[_43] - m[_13] * m[_22] * m[_44] + m[_12] * m[_23] * m[_44];
+  output[_14] = m[_14] * m[_23] * m[_32] - m[_13] * m[_24] * m[_32] - m[_14] * m[_22] * m[_33] +
+                m[_12] * m[_24] * m[_33] + m[_13] * m[_22] * m[_34] - m[_12] * m[_23] * m[_34];
+
+  output[_21] = m[_24] * m[_33] * m[_41] - m[_23] * m[_34] * m[_41] - m[_24] * m[_31] * m[_43] +
+                m[_21] * m[_34] * m[_43] + m[_23] * m[_31] * m[_44] - m[_21] * m[_33] * m[_44];
+  output[_22] = -(m[_14] * m[_33] * m[_41]) + m[_13] * m[_34] * m[_41] + m[_14] * m[_31] * m[_43] -
+                m[_11] * m[_34] * m[_43] - m[_13] * m[_31] * m[_44] + m[_11] * m[_33] * m[_44];
+  output[_23] = m[_14] * m[_23] * m[_41] - m[_13] * m[_24] * m[_41] - m[_14] * m[_21] * m[_43] +
+                m[_11] * m[_24] * m[_43] + m[_13] * m[_21] * m[_44] - m[_11] * m[_23] * m[_44];
+  output[_24] = -(m[_14] * m[_23] * m[_31]) + m[_13] * m[_24] * m[_31] + m[_14] * m[_21] * m[_33] -
+                m[_11] * m[_24] * m[_33] - m[_13] * m[_21] * m[_34] + m[_11] * m[_23] * m[_34];
+
+  output[_31] = -(m[_24] * m[_32] * m[_41]) + m[_22] * m[_34] * m[_41] + m[_24] * m[_31] * m[_42] -
+                m[_21] * m[_34] * m[_42] - m[_22] * m[_31] * m[_44] + m[_21] * m[_32] * m[_44];
+  output[_32] = m[_14] * m[_32] * m[_41] - m[_12] * m[_34] * m[_41] - m[_14] * m[_31] * m[_42] +
+                m[_11] * m[_34] * m[_42] + m[_12] * m[_31] * m[_44] - m[_11] * m[_32] * m[_44];
+  output[_33] = -(m[_14] * m[_22] * m[_41]) + m[_12] * m[_24] * m[_41] + m[_14] * m[_21] * m[_42] -
+                m[_11] * m[_24] * m[_42] - m[_12] * m[_21] * m[_44] + m[_11] * m[_22] * m[_44];
+  output[_34] = m[_14] * m[_22] * m[_31] - m[_12] * m[_24] * m[_31] - m[_14] * m[_21] * m[_32] +
+                m[_11] * m[_24] * m[_32] + m[_12] * m[_21] * m[_34] - m[_11] * m[_22] * m[_34];
+
+  output[_41] = m[_23] * m[_32] * m[_41] - m[_22] * m[_33] * m[_41] - m[_23] * m[_31] * m[_42] +
+                m[_21] * m[_33] * m[_42] + m[_22] * m[_31] * m[_43] - m[_21] * m[_32] * m[_43];
+  output[_42] = -(m[_13] * m[_32] * m[_41]) + m[_12] * m[_33] * m[_41] + m[_13] * m[_31] * m[_42] -
+                m[_11] * m[_33] * m[_42] - m[_12] * m[_31] * m[_43] + m[_11] * m[_32] * m[_43];
+  output[_43] = m[_13] * m[_22] * m[_41] - m[_12] * m[_23] * m[_41] - m[_13] * m[_21] * m[_42] +
+                m[_11] * m[_23] * m[_42] + m[_12] * m[_21] * m[_43] - m[_11] * m[_22] * m[_43];
+  output[_44] = -(m[_13] * m[_22] * m[_31]) + m[_12] * m[_23] * m[_31] + m[_13] * m[_21] * m[_32] -
+                m[_11] * m[_23] * m[_32] - m[_12] * m[_21] * m[_33] + m[_11] * m[_22] * m[_33];
+}
+
+void matrix_scalar_multiply(MATRIX output, const MATRIX input, float m) {
+  for (int i = 0; i < 16; ++i) {
+    output[i] = input[i] * m;
+  }
+}
+
+int matrix_general_inverse(MATRIX output, const MATRIX input) {
+  float det = matrix_determinant(input);
+  if (det == 0.0f) {
+    return 0;
+  }
+
+  matrix_adjoint(output, input);
+  matrix_scalar_multiply(output, output, 1.0f / det);
+  return 1;
 }

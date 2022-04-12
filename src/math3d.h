@@ -36,21 +36,22 @@ typedef float MATRIX[16];
 
 // vector functions
 
-void vector_apply(VECTOR output, const VECTOR input0, const MATRIX input1);
+
 // Multiply a vector by a matrix, returning a vector.
+void vector_apply(VECTOR output, const VECTOR input0, const MATRIX input1);
 
-void vector_clamp(VECTOR output, const VECTOR input0, float min, float max);
 // Clamp a vector's values by cutting them off at a minimum and maximum value.
+void vector_clamp(VECTOR output, const VECTOR input0, float min, float max);
 
-void vector_copy(VECTOR output, const VECTOR input0);
 // Copy a vector.
+void vector_copy(VECTOR output, const VECTOR input0);
 
-float vector_dot(const VECTOR input0, const VECTOR input1);
-float vector_innerproduct(const VECTOR input0, const VECTOR input1);
 // Calculate the inner product of two vectors. Returns a scalar value.
+float vector_innerproduct(const VECTOR input0, const VECTOR input1);
+float vector_dot(const VECTOR input0, const VECTOR input1);
 
-void vector_multiply(VECTOR output, const VECTOR input0, const VECTOR input1);
 // Multiply two vectors together.
+void vector_multiply(VECTOR output, const VECTOR input0, const VECTOR input1);
 
 // Subtract b from a.
 void vector_subtract(VECTOR output, const VECTOR a, const VECTOR b);
@@ -58,41 +59,57 @@ void vector_subtract(VECTOR output, const VECTOR a, const VECTOR b);
 // Add the given vectors.
 void vector_add(VECTOR output, const VECTOR a, const VECTOR b);
 
+// Normalize a vector by determining its length and dividing its values by this value.
 void vector_normalize(VECTOR vector);
-// Normalize a vector by determining its length and dividing its values by this value.
 
+// Normalize a vector by determining its length and dividing its values by this value.
 void vector_normalize_into(VECTOR output, const VECTOR input0);
-// Normalize a vector by determining its length and dividing its values by this value.
 
-void vector_crossproduct(VECTOR output, const VECTOR input0, const VECTOR input1);
-void vector_outerproduct(VECTOR output, const VECTOR input0, const VECTOR input1);
 // Calculate the outer product of two vectors.
+void vector_outerproduct(VECTOR output, const VECTOR input0, const VECTOR input1);
+void vector_crossproduct(VECTOR output, const VECTOR input0, const VECTOR input1);
+
+// Divide by w to convert to a 3-dimensional vector.
+void vector_euclidean(VECTOR output, const VECTOR input);
 
 // matrices functions
 
-void matrix_copy(MATRIX output, const MATRIX input0);
 // Copy a matrix.
+void matrix_copy(MATRIX output, const MATRIX input0);
 
+// Calculate the inverse of a homogenous transform matrix (the last column must
+// be {0, 0, 0, 1}).
 void matrix_inverse(MATRIX output, const MATRIX input0);
-// Calculate the inverse of a matrix.
 
-void matrix_multiply(MATRIX output, const MATRIX input0, const MATRIX input1);
+// Calculate the inverse of a generic matrix.
+// Return 0 if the matrix is not invertible.
+int matrix_general_inverse(MATRIX output, const MATRIX input);
+
 // Multiply two matrices together.
+void matrix_multiply(MATRIX output, const MATRIX input0, const MATRIX input1);
 
-void matrix_rotate(MATRIX output, const MATRIX input0, const VECTOR input1);
 // Create a rotation matrix and apply it to the specified input matrix.
+void matrix_rotate(MATRIX output, const MATRIX input0, const VECTOR input1);
 
-void matrix_scale(MATRIX output, const MATRIX input0, const VECTOR input1);
 // Create a scaling matrix and apply it to the specified input matrix.
+void matrix_scale(MATRIX output, const MATRIX input0, const VECTOR input1);
 
-void matrix_translate(MATRIX output, const MATRIX input0, const VECTOR input1);
 // Create a translation matrix and apply it to the specified input matrix.
+void matrix_translate(MATRIX output, const MATRIX input0, const VECTOR input1);
 
-void matrix_transpose(MATRIX output, const MATRIX input0);
 // Transpose a matrix.
+void matrix_transpose(MATRIX output, const MATRIX input0);
 
-void matrix_unit(MATRIX output);
 // Create a unit matrix.
+void matrix_unit(MATRIX output);
+
+// Calculate the determinant of the given matrix.
+float matrix_determinant(const MATRIX m);
+
+// Calculate the adjoint/adjugate of the given matrix.
+void matrix_adjoint(MATRIX output, const MATRIX m);
+
+void matrix_scalar_multiply(MATRIX output, const MATRIX input, float m);
 
 // creation functions
 
@@ -122,7 +139,9 @@ void create_d3d_look_at_lh(MATRIX ret, const VECTOR eye, const VECTOR at, const 
 void create_d3d_perspective_fov_lh(MATRIX ret, float fov_y, float aspect, float z_near, float z_far);
 void create_d3d_viewport(MATRIX ret, float width, float height, float max_depthbuffer_value, float z_min, float z_max);
 void create_d3d_standard_viewport_16(MATRIX ret, float width, float height);
+void create_d3d_standard_viewport_16_float(MATRIX ret, float width, float height);
 void create_d3d_standard_viewport_24(MATRIX ret, float width, float height);
+void create_d3d_standard_viewport_24_float(MATRIX ret, float width, float height);
 
 #ifdef __cplusplus
 };

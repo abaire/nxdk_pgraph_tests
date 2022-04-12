@@ -241,6 +241,7 @@ class TestHost {
   int SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage = 0);
   void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 
+  inline void SetSurfaceSwizzle(bool enable = true) { surface_swizzle_ = enable; }
   void SetDepthBufferFormat(uint32_t fmt);
   uint32_t GetDepthBufferFormat() const { return depth_buffer_format_; }
 
@@ -310,19 +311,15 @@ class TestHost {
   std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
 
   // Generates a D3D-style model view matrix.
-  void GetD3DModelViewMatrix(MATRIX matrix, VECTOR eye, VECTOR at, VECTOR up) const;
+  static void GetD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up);
 
   // Gets a D3D-style matrix suitable for a projection + viewport transform.
   void GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const;
 
-  // Generates a D3D-style composite matrix. This is a combination of the current modelview matrix with an appropriate
-  // projection and viewport transformation.
-  void GetD3DCompositeMatrix(MATRIX result, float fov, float z_near, float z_far) const;
-
   // Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin)
-  void GetDefaultXDKModelViewMatrix(MATRIX matrix) const;
-  // Gets a reasonable default composite matrix (fov = PI/4, near = 1, far = 200)
-  void GetDefaultXDKCompositeMatrix(MATRIX matrix) const;
+  static void GetDefaultXDKModelViewMatrix(MATRIX matrix);
+  // Gets a reasonable default projection matrix (fov = PI/4, near = 1, far = 200)
+  void GetDefaultXDKProjectionMatrix(MATRIX matrix) const;
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -330,9 +327,15 @@ class TestHost {
   // Set up the viewport and fixed function pipeline matrices to match the nxdk settings.
   void SetDefaultViewportAndFixedFunctionMatrices();
 
-  void SetWindowClip(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0);
-  void SetViewportOffset(float x, float y, float z, float w) const;
-  void SetViewportScale(float x, float y, float z, float w) const;
+  // Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
+  void ProjectPoint(VECTOR result, const VECTOR world_point) const;
+
+  void UnprojectPoint(VECTOR result, const VECTOR screen_point) const;
+  void UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const;
+
+  static void SetWindowClip(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0);
+  static void SetViewportOffset(float x, float y, float z, float w);
+  static void SetViewportScale(float x, float y, float z, float w);
 
   void SetFixedFunctionModelViewMatrix(const MATRIX model_matrix);
   void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
@@ -348,6 +351,8 @@ class TestHost {
   void SetVertex(float x, float y, float z) const;
   // Trigger creation of a vertex, applying the last set attributes.
   void SetVertex(float x, float y, float z, float w) const;
+  // Trigger creation of a vertex, applying the last set attributes.
+  inline void SetVertex(const VECTOR pt) const { SetVertex(pt[_X], pt[_Y], pt[_Z], pt[_W]); }
 
   void SetWeight(float w) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
@@ -493,6 +498,14 @@ class TestHost {
   // in scenes with multiple draws per clear)
   void SetupTextureStages() const;
 
+  static void SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
+                          uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
+                          SDL_PixelFormatEnum format);
+  // Saves the given region of memory as a flat binary file.
+  static void SaveRawTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
+                             uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel);
+  void SaveZBuffer(const std::string &output_directory, const std::string &name) const;
+
  private:
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
@@ -501,9 +514,9 @@ class TestHost {
   uint32_t MakeOutputCombiner(CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst, bool ab_dot_product,
                               bool cd_dot_product, CombinerSumMuxMode sum_or_mux, CombinerOutOp op) const;
   static void EnsureFolderExists(const std::string &folder_path);
-  static std::string PrepareSaveFilePNG(std::string output_directory, const std::string &filename);
+  static std::string PrepareSaveFile(std::string output_directory, const std::string &filename,
+                                     const std::string &ext = ".png");
   static void SaveBackBuffer(const std::string &output_directory, const std::string &name);
-  void SaveZBuffer(const std::string &output_directory, const std::string &name) const;
 
  private:
   uint32_t framebuffer_width_;
@@ -515,6 +528,7 @@ class TestHost {
 
   TextureStage texture_stage_[4];
 
+  bool surface_swizzle_{false};
   uint32_t depth_buffer_format_{NV097_SET_SURFACE_FORMAT_ZETA_Z24S8};
   bool depth_buffer_mode_float_{false};
   std::shared_ptr<VertexShaderProgram> vertex_shader_program_{};
@@ -531,6 +545,8 @@ class TestHost {
   FixedFunctionMatrixSetting fixed_function_matrix_mode_{MATRIX_MODE_DEFAULT_NXDK};
   MATRIX fixed_function_model_view_matrix_{};
   MATRIX fixed_function_projection_matrix_{};
+  MATRIX fixed_function_composite_matrix_{};
+  MATRIX fixed_function_inverse_composite_matrix_{};
 
   bool save_results_{true};
 

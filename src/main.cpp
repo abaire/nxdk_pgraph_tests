@@ -40,7 +40,7 @@
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_tests.h"
 #include "tests/texture_border_tests.h"
-#include "tests/texture_depth_source_tests.h"
+#include "tests/texture_shadow_comparator_tests.h"
 #include "tests/texture_format_tests.h"
 #include "tests/texture_framebuffer_blit_tests.h"
 #include "tests/texture_matrix_tests.h"

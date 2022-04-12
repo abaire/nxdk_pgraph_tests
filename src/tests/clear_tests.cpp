@@ -52,8 +52,8 @@ void ClearTests::CreateGeometry() {
   Color lr{0.0, 0.0, 1.0, 1.0};
   Color ur{0.5, 0.5, 0.5, 1.0};
 
-  auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
-  auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
+  auto fb_width = host_.GetFramebufferWidthF();
+  auto fb_height = host_.GetFramebufferHeightF();
 
   float width = floorf(fb_width / (1.0f + 2.0f * static_cast<float>(num_quads)));
   float height = floorf(fb_height / 4.0f);

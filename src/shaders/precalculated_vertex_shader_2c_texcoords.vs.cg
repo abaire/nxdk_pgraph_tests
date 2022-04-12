@@ -7,7 +7,7 @@ struct vIn {
 struct vOut {
   float4 pos : POSITION;
   float4 col : COLOR;
-  float2 tex0 : TEXCOORD0;  // Our diffuse map
+  float2 tex0 : TEXCOORD0;
 };
 
 vOut main(vIn I) {

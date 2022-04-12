@@ -248,6 +248,11 @@ int TextureStage::SetTexture(const SDL_Surface *surface, uint8_t *memory_base) c
         }
       } break;
 
+      case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT: {
+        // TODO: Implement conversion to float.
+        ASSERT(!"Y16 float format not supported.");
+      } break;
+
       case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8: {
         uint32_t *source = pixels;
         for (int y = 0; y < surface->h; ++y) {

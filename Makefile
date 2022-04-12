@@ -74,7 +74,8 @@ SHADER_OBJS = \
 	$(SRCDIR)/shaders/fog_vec4_wy.inl \
 	$(SRCDIR)/shaders/fog_vec4_wzyx.inl \
 	$(SRCDIR)/shaders/fog_vec4_xyzw.inl \
-	$(SRCDIR)/shaders/precalculated_vertex_shader.inl \
+	$(SRCDIR)/shaders/precalculated_vertex_shader_2c_texcoords.inl \
+	$(SRCDIR)/shaders/precalculated_vertex_shader_4c_texcoords.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader_no_lighting.inl \
 	$(SRCDIR)/shaders/textured_pixelshader.inl \

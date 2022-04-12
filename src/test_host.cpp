@@ -27,6 +27,7 @@
 #define MAX_FILE_PATH_SIZE 248
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void ClearVertexAttribute(uint32_t index);
+static void GetCompositeMatrix(MATRIX result, const MATRIX model_view, const MATRIX projection);
 
 TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
                    uint32_t max_texture_height, uint32_t max_texture_depth)
@@ -53,6 +54,8 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
 
   matrix_unit(fixed_function_model_view_matrix_);
   matrix_unit(fixed_function_projection_matrix_);
+  matrix_unit(fixed_function_composite_matrix_);
+  matrix_unit(fixed_function_inverse_composite_matrix_);
 
   uint32_t texture_offset = 0;
   uint32_t palette_offset = 0;
@@ -142,7 +145,8 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 
   SetupTextureStages();
 
-  SetSurfaceFormat(SCF_A8R8G8B8, (SurfaceZetaFormat)depth_buffer_format_, framebuffer_width_, framebuffer_height_);
+  SetSurfaceFormat(SCF_A8R8G8B8, (SurfaceZetaFormat)depth_buffer_format_, framebuffer_width_, framebuffer_height_,
+                   surface_swizzle_);
 
   // Override the values set in pb_init. Unfortunately the default is not exposed and must be recreated here.
 
@@ -722,12 +726,13 @@ void TestHost::EnsureFolderExists(const std::string &folder_path) {
 
 // Returns the full output filepath including the filename
 // Creates output directory if it does not exist
-std::string TestHost::PrepareSaveFilePNG(std::string output_directory, const std::string &filename) {
+std::string TestHost::PrepareSaveFile(std::string output_directory, const std::string &filename,
+                                      const std::string &extension) {
   EnsureFolderExists(output_directory);
 
   output_directory += "\\";
   output_directory += filename;
-  output_directory += ".png";
+  output_directory += extension;
 
   if (output_directory.length() > MAX_FILE_PATH_SIZE) {
     ASSERT(!"Full save file path is too long.");
@@ -737,7 +742,7 @@ std::string TestHost::PrepareSaveFilePNG(std::string output_directory, const std
 }
 
 void TestHost::SaveBackBuffer(const std::string &output_directory, const std::string &name) {
-  auto target_file = PrepareSaveFilePNG(output_directory, name);
+  auto target_file = PrepareSaveFile(output_directory, name);
 
   auto buffer = pb_agp_access(pb_back_buffer());
   auto width = static_cast<int>(pb_back_buffer_width());
@@ -773,22 +778,26 @@ void TestHost::SaveBackBuffer(const std::string &output_directory, const std::st
 }
 
 void TestHost::SaveZBuffer(const std::string &output_directory, const std::string &name) const {
-  auto target_file = PrepareSaveFilePNG(output_directory, name);
-
-  auto buffer = pb_agp_access(pb_depth_stencil_buffer());
-  auto size = pb_depth_stencil_size();
-
-  PrintMsg("Saving z-buffer to %s. Size: %lu. Pitch %lu.\n", target_file.c_str(), size, pb_depth_stencil_pitch());
-
-  // The Z buffer set up by pbkit uses a 32bpp pitch regardless of the actual format being used by the HW.
-  int pitch = static_cast<int>(pb_depth_stencil_pitch());
-  int depth = depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? 16 : 32;
-  int format =
+  uint32_t depth = depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? 16 : 32;
+  auto format =
       depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? SDL_PIXELFORMAT_RGB565 : SDL_PIXELFORMAT_ARGB8888;
+  SaveTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
+              pb_depth_stencil_pitch(), depth, format);
+}
+
+void TestHost::SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
+                           uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
+                           SDL_PixelFormatEnum format) {
+  auto target_file = PrepareSaveFile(output_directory, name);
+
+  auto buffer = pb_agp_access(const_cast<void *>(static_cast<const void *>(texture)));
+  auto size = pitch * height;
+
+  PrintMsg("Saving to %s. Size: %lu. Pitch %lu.\n", target_file.c_str(), size, pitch);
 
   SDL_Surface *surface =
-      SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, static_cast<int>(framebuffer_width_),
-                                         static_cast<int>(framebuffer_height_), depth, pitch, format);
+      SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, static_cast<int>(width), static_cast<int>(height),
+                                         static_cast<int>(bits_per_pixel), static_cast<int>(pitch), format);
 
   if (IMG_SavePNG(surface, target_file.c_str())) {
     PrintMsg("Failed to save PNG file '%s'\n", target_file.c_str());
@@ -796,6 +805,29 @@ void TestHost::SaveZBuffer(const std::string &output_directory, const std::strin
   }
 
   SDL_FreeSurface(surface);
+}
+
+void TestHost::SaveRawTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
+                              uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel) {
+  auto target_file = PrepareSaveFile(output_directory, name, ".raw");
+
+  auto buffer = static_cast<uint8_t *>(pb_agp_access(const_cast<void *>(static_cast<const void *>(texture))));
+  const uint32_t bytes_per_pixel = (bits_per_pixel >> 3);
+  const uint32_t populated_pitch = width * bytes_per_pixel;
+  const auto size = populated_pitch * height;
+
+  PrintMsg("Saving to %s. Size: %lu. Pitch %lu.\n", target_file.c_str(), size, pitch);
+
+  FILE *f = fopen(target_file.c_str(), "wb");
+  ASSERT(f && "Failed to open raw texture output file.");
+
+  for (uint32_t y = 0; y < height; ++y) {
+    auto written = fwrite(buffer, populated_pitch, 1, f);
+    ASSERT(written == 1 && "Failed to write row to raw texture output file.");
+    buffer += pitch;
+  }
+
+  fclose(f);
 }
 
 void TestHost::SetupControl0(bool enable_stencil_write) const {
@@ -832,6 +864,8 @@ void TestHost::SetDefaultTextureParams(uint32_t stage) {
 }
 
 void TestHost::SetDepthBufferFormat(uint32_t fmt) {
+  // Note: This method intentionally recalculates matrices even if the format has not changed as it is called by
+  // SetDepthBufferFloatMode when that mode changes.
   depth_buffer_format_ = fmt;
 
   switch (fixed_function_matrix_mode_) {
@@ -848,7 +882,14 @@ void TestHost::SetDepthBufferFormat(uint32_t fmt) {
   }
 }
 
-void TestHost::SetDepthBufferFloatMode(bool enabled) { depth_buffer_mode_float_ = enabled; }
+void TestHost::SetDepthBufferFloatMode(bool enabled) {
+  if (enabled == depth_buffer_mode_float_) {
+    return;
+  }
+  depth_buffer_mode_float_ = enabled;
+
+  SetDepthBufferFormat(depth_buffer_format_);
+}
 
 int TestHost::SetTexture(SDL_Surface *surface, uint32_t stage) {
   return texture_stage_[stage].SetTexture(surface, texture_memory_);
@@ -939,7 +980,7 @@ void TestHost::SetXDKDefaultViewportAndFixedFunctionMatrices() {
   GetDefaultXDKModelViewMatrix(matrix);
   SetFixedFunctionModelViewMatrix(matrix);
 
-  GetDefaultXDKCompositeMatrix(matrix);
+  GetDefaultXDKProjectionMatrix(matrix);
   SetFixedFunctionProjectionMatrix(matrix);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_XDK;
@@ -986,24 +1027,31 @@ void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_NXDK;
 }
 
-void TestHost::GetDefaultXDKModelViewMatrix(MATRIX matrix) const {
-
+void TestHost::GetDefaultXDKModelViewMatrix(MATRIX matrix) {
   VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
   VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
   VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
-  create_d3d_look_at_lh(matrix, eye, at, up);
+  GetD3DModelViewMatrix(matrix, eye, at, up);
 }
 
-void TestHost::GetD3DModelViewMatrix(MATRIX matrix, VECTOR eye, VECTOR at, VECTOR up) const {
+void TestHost::GetD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up) {
   create_d3d_look_at_lh(matrix, eye, at, up);
 }
 
 void TestHost::GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const {
   MATRIX viewport;
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
-    create_d3d_standard_viewport_16(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
+    if (depth_buffer_mode_float_) {
+      create_d3d_standard_viewport_16_float(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
+    } else {
+      create_d3d_standard_viewport_16(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
+    }
   } else {
-    create_d3d_standard_viewport_24(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
+    if (depth_buffer_mode_float_) {
+      create_d3d_standard_viewport_24_float(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
+    } else {
+      create_d3d_standard_viewport_24(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
+    }
   }
 
   MATRIX projection;
@@ -1012,15 +1060,44 @@ void TestHost::GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_
   matrix_multiply(result, projection, viewport);
 }
 
-void TestHost::GetD3DCompositeMatrix(MATRIX result, float fov, float z_near, float z_far) const {
-  MATRIX temp;
-  GetD3DProjectionViewportMatrix(temp, fov, z_near, z_far);
-
-  matrix_multiply(result, fixed_function_model_view_matrix_, temp);
+void TestHost::GetDefaultXDKProjectionMatrix(MATRIX matrix) const {
+  GetD3DProjectionViewportMatrix(matrix, M_PI * 0.25f, 1.0f, 200.0f);
 }
 
-void TestHost::GetDefaultXDKCompositeMatrix(MATRIX matrix) const {
-  GetD3DCompositeMatrix(matrix, M_PI * 0.25f, 1.0f, 200.0f);
+void TestHost::ProjectPoint(VECTOR result, const VECTOR world_point) const {
+  VECTOR screen_point;
+  vector_apply(screen_point, world_point, fixed_function_composite_matrix_);
+
+  result[_X] = screen_point[_X] / screen_point[_W];
+  result[_Y] = screen_point[_Y] / screen_point[_W];
+  result[_Z] = screen_point[_Z] / screen_point[_W];
+  result[_W] = 1.0f;
+}
+
+void TestHost::UnprojectPoint(VECTOR result, const VECTOR screen_point) const {
+  vector_apply(result, screen_point, fixed_function_inverse_composite_matrix_);
+}
+
+void TestHost::UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const {
+  VECTOR work;
+  vector_copy(work, screen_point);
+
+  // TODO: Get the near and far plane mappings from the viewport matrix.
+  work[_Z] = 0.0f;
+  VECTOR near_plane;
+  vector_apply(near_plane, work, fixed_function_inverse_composite_matrix_);
+  vector_euclidean(near_plane, near_plane);
+
+  work[_Z] = 64000.0f;
+  VECTOR far_plane;
+  vector_apply(far_plane, work, fixed_function_inverse_composite_matrix_);
+  vector_euclidean(far_plane, far_plane);
+
+  float t = (world_z - near_plane[_Z]) / (far_plane[_Z] - near_plane[_Z]);
+  result[_X] = near_plane[_X] + (far_plane[_X] - near_plane[_X]) * t;
+  result[_Y] = near_plane[_Y] + (far_plane[_Y] - near_plane[_Y]) * t;
+  result[_Z] = world_z;
+  result[_W] = 1.0f;
 }
 
 void TestHost::SetWindowClip(uint32_t width, uint32_t height, uint32_t x, uint32_t y) {
@@ -1030,13 +1107,13 @@ void TestHost::SetWindowClip(uint32_t width, uint32_t height, uint32_t x, uint32
   pb_end(p);
 }
 
-void TestHost::SetViewportOffset(float x, float y, float z, float w) const {
+void TestHost::SetViewportOffset(float x, float y, float z, float w) {
   auto p = pb_begin();
   p = pb_push4f(p, NV097_SET_VIEWPORT_OFFSET, x, y, z, w);
   pb_end(p);
 }
 
-void TestHost::SetViewportScale(float x, float y, float z, float w) const {
+void TestHost::SetViewportScale(float x, float y, float z, float w) {
   auto p = pb_begin();
   p = pb_push4f(p, NV097_SET_VIEWPORT_SCALE, x, y, z, w);
   pb_end(p);
@@ -1053,13 +1130,22 @@ void TestHost::SetFixedFunctionModelViewMatrix(const MATRIX model_matrix) {
   pb_end(p);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
+
+  // Update the composite matrix.
+  SetFixedFunctionProjectionMatrix(fixed_function_projection_matrix_);
 }
 
 void TestHost::SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix) {
   memcpy(fixed_function_projection_matrix_, projection_matrix, sizeof(fixed_function_projection_matrix_));
+
+  GetCompositeMatrix(fixed_function_composite_matrix_, fixed_function_model_view_matrix_,
+                     fixed_function_projection_matrix_);
   auto p = pb_begin();
-  p = pb_push_transposed_matrix(p, NV097_SET_COMPOSITE_MATRIX, fixed_function_projection_matrix_);
+  p = pb_push_transposed_matrix(p, NV097_SET_COMPOSITE_MATRIX, fixed_function_composite_matrix_);
   pb_end(p);
+
+  matrix_transpose(fixed_function_composite_matrix_, fixed_function_composite_matrix_);
+  matrix_general_inverse(fixed_function_inverse_composite_matrix_, fixed_function_composite_matrix_);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
 }
@@ -1425,4 +1511,8 @@ static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, u
 static void ClearVertexAttribute(uint32_t index) {
   // Note: xemu has asserts on the count for several formats, so any format without that ASSERT must be used.
   SetVertexAttribute(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
+}
+
+static void GetCompositeMatrix(MATRIX result, const MATRIX model_view, const MATRIX projection) {
+  matrix_multiply(result, model_view, projection);
 }
