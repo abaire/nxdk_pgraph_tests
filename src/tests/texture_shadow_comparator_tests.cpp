@@ -159,6 +159,7 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
     };
   };
 
+  // TODO: Test floating point zeta buffers.
   for (auto comp_func : kCompareFuncs) {
     add_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16, comp_func, 0,
              0xFFFF, 0x7FFF);

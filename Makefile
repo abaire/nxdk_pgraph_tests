@@ -50,6 +50,7 @@ SRCS = \
 	$(SRCDIR)/tests/texture_render_target_tests.cpp \
 	$(SRCDIR)/tests/texture_render_update_in_place_tests.cpp \
 	$(SRCDIR)/tests/texture_shadow_comparator_tests.cpp \
+	$(SRCDIR)/tests/texture_signed_component_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \
 	$(SRCDIR)/tests/vertex_shader_independence_tests.cpp \
@@ -59,6 +60,7 @@ SRCS = \
 	$(SRCDIR)/tests/window_clip_tests.cpp \
 	$(SRCDIR)/tests/zero_stride_tests.cpp \
 	$(SRCDIR)/texture_format.cpp \
+	$(SRCDIR)/texture_generator.cpp \
 	$(SRCDIR)/texture_stage.cpp \
 	$(SRCDIR)/vertex_buffer.cpp \
 	$(THIRDPARTYDIR)/swizzle.c \
