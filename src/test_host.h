@@ -253,10 +253,10 @@ class TestHost {
 
   uint8_t *GetTextureMemory() const { return texture_memory_; }
 
-  uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
-  uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
-  float GetFramebufferWidthF() const { return static_cast<float>(framebuffer_width_); }
-  float GetFramebufferHeightF() const { return static_cast<float>(framebuffer_height_); }
+  inline uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
+  inline uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
+  inline float GetFramebufferWidthF() const { return static_cast<float>(framebuffer_width_); }
+  inline float GetFramebufferHeightF() const { return static_cast<float>(framebuffer_height_); }
 
   std::shared_ptr<VertexBuffer> AllocateVertexBuffer(uint32_t num_vertices);
   void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
@@ -309,8 +309,20 @@ class TestHost {
   void SetVertexShaderProgram(std::shared_ptr<VertexShaderProgram> program);
   std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
 
+  // Generates a D3D-style model view matrix.
+  void GetD3DModelViewMatrix(MATRIX matrix, VECTOR eye, VECTOR at, VECTOR up) const;
+
+  // Gets a D3D-style matrix suitable for a projection + viewport transform.
+  void GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const;
+
+  // Generates a D3D-style composite matrix. This is a combination of the current modelview matrix with an appropriate
+  // projection and viewport transformation.
+  void GetD3DCompositeMatrix(MATRIX result, float fov, float z_near, float z_far) const;
+
+  // Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin)
   void GetDefaultXDKModelViewMatrix(MATRIX matrix) const;
-  void GetDefaultXDKProjectionMatrix(MATRIX matrix) const;
+  // Gets a reasonable default composite matrix (fov = PI/4, near = 1, far = 200)
+  void GetDefaultXDKCompositeMatrix(MATRIX matrix) const;
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();

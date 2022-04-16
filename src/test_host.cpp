@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "math3d.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "shaders/vertex_shader_program.h"
@@ -938,7 +939,7 @@ void TestHost::SetXDKDefaultViewportAndFixedFunctionMatrices() {
   GetDefaultXDKModelViewMatrix(matrix);
   SetFixedFunctionModelViewMatrix(matrix);
 
-  GetDefaultXDKProjectionMatrix(matrix);
+  GetDefaultXDKCompositeMatrix(matrix);
   SetFixedFunctionProjectionMatrix(matrix);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_XDK;
@@ -986,54 +987,40 @@ void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
 }
 
 void TestHost::GetDefaultXDKModelViewMatrix(MATRIX matrix) const {
-  matrix[_11] = 1.0f;
-  matrix[_21] = 0.0f;
-  matrix[_31] = 0.0f;
-  matrix[_41] = 0.0f;
 
-  matrix[_12] = 0.0f;
-  matrix[_22] = 1.0f;
-  matrix[_32] = 0.0f;
-  matrix[_42] = 0.0f;
-
-  matrix[_13] = 0.0f;
-  matrix[_23] = 0.0f;
-  matrix[_33] = 1.0f;
-  matrix[_43] = 7.0f;
-
-  matrix[_14] = 0.0f;
-  matrix[_24] = 0.0f;
-  matrix[_34] = 0.0f;
-  matrix[_44] = 1.0f;
+  VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
+  VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
+  VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
+  create_d3d_look_at_lh(matrix, eye, at, up);
 }
 
-void TestHost::GetDefaultXDKProjectionMatrix(MATRIX matrix) const {
-  // TODO: These should be calcualted based on the fraembuffer size.
-  matrix[_11] = 579.411194f;
-  matrix[_21] = 0.0f;
-  matrix[_31] = 320.0f;
-  matrix[_41] = 2240.0f;
+void TestHost::GetD3DModelViewMatrix(MATRIX matrix, VECTOR eye, VECTOR at, VECTOR up) const {
+  create_d3d_look_at_lh(matrix, eye, at, up);
+}
 
-  matrix[_12] = 0.0f;
-  matrix[_22] = -579.411194;
-  matrix[_32] = 240.0f;
-  matrix[_42] = 1680.0f;
-
-  matrix[_13] = 0.0f;
-  matrix[_23] = 0.0f;
-
+void TestHost::GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const {
+  MATRIX viewport;
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
-    matrix[_33] = 65864.320312f;
-    matrix[_43] = 395185.9375f;
+    create_d3d_standard_viewport_16(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
   } else {
-    matrix[_33] = 16861522.0f;
-    matrix[_43] = 101169136.0f;
+    create_d3d_standard_viewport_24(viewport, GetFramebufferWidthF(), GetFramebufferHeightF());
   }
 
-  matrix[_14] = 0.0f;
-  matrix[_24] = 0.0f;
-  matrix[_34] = 1.0f;
-  matrix[_44] = 7.0f;
+  MATRIX projection;
+  create_d3d_perspective_fov_lh(projection, fov, GetFramebufferWidthF() / GetFramebufferHeightF(), z_near, z_far);
+
+  matrix_multiply(result, projection, viewport);
+}
+
+void TestHost::GetD3DCompositeMatrix(MATRIX result, float fov, float z_near, float z_far) const {
+  MATRIX temp;
+  GetD3DProjectionViewportMatrix(temp, fov, z_near, z_far);
+
+  matrix_multiply(result, fixed_function_model_view_matrix_, temp);
+}
+
+void TestHost::GetDefaultXDKCompositeMatrix(MATRIX matrix) const {
+  GetD3DCompositeMatrix(matrix, M_PI * 0.25f, 1.0f, 200.0f);
 }
 
 void TestHost::SetWindowClip(uint32_t width, uint32_t height, uint32_t x, uint32_t y) {

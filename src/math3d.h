@@ -52,6 +52,12 @@ float vector_innerproduct(const VECTOR input0, const VECTOR input1);
 void vector_multiply(VECTOR output, const VECTOR input0, const VECTOR input1);
 // Multiply two vectors together.
 
+// Subtract b from a.
+void vector_subtract(VECTOR output, const VECTOR a, const VECTOR b);
+
+// Add the given vectors.
+void vector_add(VECTOR output, const VECTOR a, const VECTOR b);
+
 void vector_normalize(VECTOR vector);
 // Normalize a vector by determining its length and dividing its values by this value.
 
@@ -111,6 +117,12 @@ void create_local_screen(MATRIX local_screen, MATRIX local_world, MATRIX world_v
 // Create a local_screen matrix given a local_world, world_view and view_screen
 // matrix. Commonly used with vector_apply() to transform kBillboardQuad for
 // rendering.
+
+void create_d3d_look_at_lh(MATRIX ret, const VECTOR eye, const VECTOR at, const VECTOR up);
+void create_d3d_perspective_fov_lh(MATRIX ret, float fov_y, float aspect, float z_near, float z_far);
+void create_d3d_viewport(MATRIX ret, float width, float height, float max_depthbuffer_value, float z_min, float z_max);
+void create_d3d_standard_viewport_16(MATRIX ret, float width, float height);
+void create_d3d_standard_viewport_24(MATRIX ret, float width, float height);
 
 #ifdef __cplusplus
 };

@@ -2,6 +2,7 @@
 
 #include "math3d.h"
 
+#include <assert.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -92,6 +93,22 @@ void vector_multiply(VECTOR output, const VECTOR input0, const VECTOR input1) {
   output[_W] = input0[_W] * input1[_W];
 }
 
+void vector_subtract(VECTOR output, const VECTOR a, const VECTOR b) {
+  assert(a[_W] == 1.0f && b[_W] == 1.0f);
+  output[_X] = a[_X] - b[_X];
+  output[_Y] = a[_Y] - b[_Y];
+  output[_Z] = a[_Z] - b[_Z];
+  output[_W] = 1.0f;
+}
+
+void vector_add(VECTOR output, const VECTOR a, const VECTOR b) {
+  assert(a[_W] == 1.0f && b[_W] == 1.0f);
+  output[_X] = a[_X] * b[_X];
+  output[_Y] = a[_Y] * b[_Y];
+  output[_Z] = a[_Z] * b[_Z];
+  output[_W] = 1.0f;
+}
+
 void vector_normalize(VECTOR vector) {
   float k;
 
@@ -111,13 +128,17 @@ void vector_normalize_into(VECTOR output, const VECTOR input0) {
 }
 
 void vector_crossproduct(VECTOR output, const VECTOR input0, const VECTOR input1) {
+  assert(input0[_W] == 1.0f && input1[_W] == 1.0f);
   vector_outerproduct(output, input0, input1);
+  output[_W] = 1.0f;
 }
 
 void vector_outerproduct(VECTOR output, const VECTOR input0, const VECTOR input1) {
+  assert(input0[_W] == 1.0f && input1[_W] == 1.0f);
   output[_X] = input0[_Y] * input1[_Z] - input0[_Z] * input1[_Y];
   output[_Y] = input0[_Z] * input1[_X] - input0[_X] * input1[_Z];
   output[_Z] = input0[_X] * input1[_Y] - input0[_Y] * input1[_X];
+  output[_W] = 1.0f;
 }
 
 // matrices function
@@ -361,4 +382,73 @@ void create_local_screen(MATRIX local_screen, MATRIX local_world, MATRIX world_v
   matrix_multiply(local_screen, local_screen, local_world);
   matrix_multiply(local_screen, local_screen, world_view);
   matrix_multiply(local_screen, local_screen, view_screen);
+}
+
+void create_d3d_look_at_lh(MATRIX ret, const VECTOR eye, const VECTOR at, const VECTOR up) {
+  // https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxmatrixlookatlh
+  VECTOR z_axis;
+  vector_subtract(z_axis, at, eye);
+  vector_normalize(z_axis);
+
+  VECTOR x_axis;
+  vector_crossproduct(x_axis, up, z_axis);
+  vector_normalize(x_axis);
+
+  VECTOR y_axis;
+  vector_crossproduct(y_axis, z_axis, x_axis);
+  vector_normalize(y_axis);
+
+  ret[_11] = x_axis[_X];
+  ret[_12] = y_axis[_X];
+  ret[_13] = z_axis[_X];
+  ret[_14] = 0.0f;
+
+  ret[_21] = x_axis[_Y];
+  ret[_22] = y_axis[_Y];
+  ret[_23] = z_axis[_Y];
+  ret[_24] = 0.0f;
+
+  ret[_31] = x_axis[_Z];
+  ret[_32] = y_axis[_Z];
+  ret[_33] = z_axis[_Z];
+  ret[_34] = 0.0f;
+
+  ret[_41] = -1.0f * vector_dot(x_axis, eye);
+  ret[_42] = -1.0f * vector_dot(y_axis, eye);
+  ret[_43] = -1.0f * vector_dot(z_axis, eye);
+  ret[_44] = 1.0f;
+}
+
+void create_d3d_perspective_fov_lh(MATRIX ret, float fov_y, float aspect, float z_near, float z_far) {
+  float y_scale = 1.0f / tanf(fov_y * 0.5f);
+  float x_scale = y_scale / aspect;
+
+  float z_adjustment = z_far / (z_far - z_near);
+
+  matrix_unit(ret);
+  ret[_11] = x_scale;
+  ret[_22] = y_scale;
+  ret[_33] = z_adjustment;
+  ret[_34] = 1.0f;
+  ret[_43] = -1.0f * z_near * z_adjustment;
+  ret[_44] = 0.0f;
+}
+
+void create_d3d_viewport(MATRIX ret, float width, float height, float max_depthbuffer_value, float z_min, float z_max) {
+  matrix_unit(ret);
+
+  ret[_11] = width * 0.5f;
+  ret[_41] = ret[_11];
+  ret[_42] = height * 0.5f;
+  ret[_22] = -1.0f * ret[_42];
+  ret[_33] = max_depthbuffer_value * (z_max - z_min);
+  ret[_43] = max_depthbuffer_value * z_min;
+}
+
+void create_d3d_standard_viewport_16(MATRIX ret, float width, float height) {
+  create_d3d_viewport(ret, width, height, (float)0xFFFF, 0.0f, 1.0f);
+}
+
+void create_d3d_standard_viewport_24(MATRIX ret, float width, float height) {
+  create_d3d_viewport(ret, width, height, (float)0x00FFFFFF, 0.0f, 1.0f);
 }
