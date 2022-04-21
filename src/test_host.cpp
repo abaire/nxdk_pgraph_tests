@@ -1509,6 +1509,16 @@ void TestHost::ClearVertexAttributeStrideOverride(TestHost::VertexAttribute attr
   OverrideVertexAttributeStride(attribute, kNoStrideOverride);
 }
 
+float TestHost::NV2ARound(float input) {
+  // The hardware rounding boundary is 1/16th of a pixel past 0.5
+  float fraction = input - static_cast<float>(static_cast<uint32_t>(input));
+  if (fraction >= 0.5625f) {
+    return ceilf(input);
+  }
+
+  return floorf(input);
+}
+
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   uint32_t *p = pb_begin();
   p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,

@@ -509,6 +509,9 @@ class TestHost {
   // Returns the maximum possible value that can be stored in the depth surface for the given mode.
   static float MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mode);
 
+  // Rounds the given integer in the same way as nv2a hardware (only remainders >= 9/16th are rounded up).
+  static float NV2ARound(float input);
+
  private:
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
