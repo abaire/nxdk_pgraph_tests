@@ -9,9 +9,15 @@
 class ProjectionVertexShader : public VertexShaderProgram {
  public:
   ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min = 0, float z_max = 0x7FFF,
-                         bool enable_lighting = true);
+                         bool enable_lighting = true, bool use_4_component_texcoords = false);
 
   void SetLightingEnabled(bool enabled = true) { enable_lighting_ = enabled; }
+
+  inline void SetUse4ComponentTexcoords(bool enable = true) { use_4_component_texcoords_ = enable; }
+  inline void SetUseD3DStyleViewport(bool enable = true) {
+    use_d3d_style_viewport_ = enable;
+    UpdateMatrices();
+  }
 
   inline void SetZMin(float val) { z_min_ = val; }
   inline void SetZMax(float val) { z_max_ = val; }
@@ -43,6 +49,7 @@ class ProjectionVertexShader : public VertexShaderProgram {
 
  private:
   void UpdateMatrices();
+  void CalculateViewportMatrix();
 
  protected:
   float framebuffer_width_{0.0};
@@ -51,6 +58,9 @@ class ProjectionVertexShader : public VertexShaderProgram {
   float z_max_;
 
   bool enable_lighting_{true};
+  bool use_4_component_texcoords_{false};
+  // Generate a viewport matrix that matches XDK/D3D behavior.
+  bool use_d3d_style_viewport_{false};
 
   MATRIX model_matrix_{};
   MATRIX view_matrix_{};

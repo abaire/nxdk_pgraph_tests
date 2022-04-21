@@ -506,6 +506,9 @@ class TestHost {
                              uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel);
   void SaveZBuffer(const std::string &output_directory, const std::string &name) const;
 
+  // Returns the maximum possible value that can be stored in the depth surface for the given mode.
+  static float MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mode);
+
  private:
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,

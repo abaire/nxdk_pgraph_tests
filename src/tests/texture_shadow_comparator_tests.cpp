@@ -6,12 +6,13 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "swizzle.h"
 #include "test_host.h"
 
 // Uncomment to save the depth texture as an additional artifact.
-//#define DEBUG_DUMP_DEPTH_TEXTURE
+#define DEBUG_DUMP_DEPTH_TEXTURE
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -28,6 +29,9 @@ static constexpr float kZNear = kCameraZ + 1.0f;
 static constexpr float kZFar = kCameraZ + 200.0f;
 static constexpr float kZMid = kZNear + (kZFar - kZNear) * 0.5f;
 static constexpr float kZQuarter = kZNear + (kZFar - kZNear) * 0.25f;
+
+// Used to determine the tests around the end and mid/quarter points in projection tests.
+static constexpr float kEpsilon = 0.0125f;
 
 static constexpr uint32_t kCompareFuncs[] = {
     NV097_SET_SHADOW_COMPARE_FUNC_NEVER,  NV097_SET_SHADOW_COMPARE_FUNC_GREATER, NV097_SET_SHADOW_COMPARE_FUNC_EQUAL,
@@ -103,8 +107,21 @@ static std::string MakeRawValueTestName(const TextureFormatInfo &format, uint32_
   return std::move(ret);
 }
 
-static std::string MakePerspectiveTestName(const TextureFormatInfo &format, uint32_t depth_format, bool float_depth,
-                                           float min_val, float max_val, float ref, uint32_t comp_func) {
+static std::string MakeFixedFunctionTestName(const TextureFormatInfo &format, uint32_t depth_format, bool float_depth,
+                                             float min_val, float max_val, float ref, uint32_t comp_func) {
+  std::string ret = "F";
+  ret += ShortDepthName(format, depth_format, float_depth);
+
+  char buf[32] = {0};
+  sprintf(buf, "_%0.02f-%0.02f_%0.02f_", min_val, max_val, ref);
+  ret += buf;
+
+  ret += CompareFunctionName(comp_func);
+  return std::move(ret);
+}
+
+static std::string MakeProgrammableTestName(const TextureFormatInfo &format, uint32_t depth_format, bool float_depth,
+                                            float min_val, float max_val, float ref, uint32_t comp_func) {
   std::string ret = "P";
   ret += ShortDepthName(format, depth_format, float_depth);
 
@@ -127,13 +144,18 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
     };
   };
 
-  auto add_perspective_test = [this](uint32_t texture_format, uint32_t surface_format, bool float_depth,
-                                     uint32_t comp_func, float min_val, float max_val, float ref_val) {
+  auto add_perspective_tests = [this](uint32_t texture_format, uint32_t surface_format, bool float_depth,
+                                      uint32_t comp_func, float min_val, float max_val, float ref_val) {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
-    std::string name =
-        MakePerspectiveTestName(texture_format_info, surface_format, float_depth, min_val, max_val, ref_val, comp_func);
-    tests_[name] = [this, surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, name]() {
-      TestPerspective(surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, name);
+    std::string ff = MakeFixedFunctionTestName(texture_format_info, surface_format, float_depth, min_val, max_val,
+                                               ref_val, comp_func);
+    std::string prog = MakeProgrammableTestName(texture_format_info, surface_format, float_depth, min_val, max_val,
+                                                ref_val, comp_func);
+    tests_[ff] = [this, surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, ff]() {
+      TestFixedFunction(surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, ff);
+    };
+    tests_[prog] = [this, surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, prog]() {
+      TestProgrammable(surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, prog);
     };
   };
 
@@ -152,20 +174,20 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
     add_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, comp_func,
              256, 512, 384);
 
-    add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                         false, comp_func, kZNear, kZFar, kZQuarter);
-    add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                         false, comp_func, 10.0f, 20.0f, 15.0f);
+    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                          false, comp_func, kZNear, kZFar, kZQuarter);
+    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                          false, comp_func, 10.0f, 20.0f, 15.0f);
 
-    add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                         true, comp_func, kZNear, kZFar, kZQuarter);
-    add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                         true, comp_func, 10.0f, 20.0f, 15.0f);
+    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                          true, comp_func, kZNear, kZFar, kZQuarter);
+    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                          true, comp_func, 10.0f, 20.0f, 15.0f);
 
-    add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
-                         NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, kZNear, kZFar, kZQuarter);
-    add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
-                         NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, 10.0f, 20.0f, 15.0f);
+    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
+                          NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, kZNear, kZFar, kZQuarter);
+    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
+                          NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, 10.0f, 20.0f, 15.0f);
   }
 }
 
@@ -403,13 +425,41 @@ void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool float_depth, uint32_t texture_format,
-                                                   uint32_t shadow_comp_function, float min_val, float max_val,
-                                                   float ref_val, const std::string &name) {
+void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool float_depth, uint32_t texture_format,
+                                                     uint32_t shadow_comp_function, float min_val, float max_val,
+                                                     float ref_val, const std::string &name) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetDepthBufferFormat(depth_format);
   host_.SetDepthBufferFloatMode(float_depth);
 
+  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, name);
+}
+
+void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool float_depth, uint32_t texture_format,
+                                                    uint32_t shadow_comp_function, float min_val, float max_val,
+                                                    float ref_val, const std::string &name) {
+  float depth_buffer_max_value = host_.MaxDepthBufferValue(depth_format, float_depth);
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
+                                                          -1.0f, 1.0f, 200.0f);
+  {
+    shader->SetLightingEnabled(false);
+    shader->SetUse4ComponentTexcoords();
+    shader->SetUseD3DStyleViewport();
+    VECTOR camera_position = {0.0f, 0.0f, kCameraZ, 1.0f};
+    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    shader->LookAt(camera_position, camera_look_at);
+  }
+  host_.SetVertexShaderProgram(shader);
+  host_.SetDepthBufferFormat(depth_format);
+  host_.SetDepthBufferFloatMode(float_depth);
+
+  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, name);
+}
+
+void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t texture_format,
+                                                 uint32_t shadow_comp_function, float min_val, float max_val,
+                                                 float ref_val, const std::string &name) {
   auto p = pb_begin();
   // Depth test must be enabled or nothing will be written to the depth target.
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
@@ -499,9 +549,8 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
     const auto box_width = static_cast<float>(layout.box_width);
     const auto box_height = static_cast<float>(layout.box_height);
 
-    const float epsilon = 0.01f;
     const float kZValues[] = {
-        min_val, min_val + epsilon, ref_val - epsilon, ref_val, ref_val + epsilon, max_val - epsilon, max_val,
+        min_val, min_val + kEpsilon, ref_val - kEpsilon, ref_val, ref_val + kEpsilon, max_val - kEpsilon, max_val,
     };
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
@@ -567,7 +616,7 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
     VECTOR projected_point;
     VECTOR world_point = {0.0f, 0.0f, tex_depth, 1.0f};
     host_.ProjectPoint(projected_point, world_point);
-    tex_depth = projected_point[_Z];
+    tex_depth = floorf(projected_point[_Z]);
   }
 
   {
@@ -650,7 +699,7 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
 
   pb_print("%s\n", name.c_str());
   pb_print("Rng %.02f-%.02f\n", min_val, max_val);
-  pb_print("Ref, center: %.02f\n", ref_val);
+  pb_print("Ref: %.02f (%u)\n", ref_val, static_cast<uint32_t>(tex_depth));
 
   pb_draw_text_screen();
 

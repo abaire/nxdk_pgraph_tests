@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <memory>
 
+#include "debug_output.h"
 #include "math3d.h"
 
 // clang format off
@@ -15,18 +16,21 @@ static constexpr uint32_t kVertexShaderLighting[] = {
 static constexpr uint32_t kVertexShaderNoLighting[] = {
 #include "projection_vertex_shader_no_lighting.inl"
 };
+
+static constexpr uint32_t kVertexShaderNoLighting4ComponentTexcoord[] = {
+#include "projection_vertex_shader_no_lighting_4c_texcoords.inl"
+};
 // clang format on
 
-static void matrix_viewport(MATRIX out, float x, float y, float width, float height, float z_min, float z_max);
-
 ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min,
-                                               float z_max, bool enable_lighting)
+                                               float z_max, bool enable_lighting, bool use_4_component_texcoords)
     : VertexShaderProgram(),
       framebuffer_width_(static_cast<float>(framebuffer_width)),
       framebuffer_height_(static_cast<float>(framebuffer_height)),
       z_min_(z_min),
       z_max_(z_max),
-      enable_lighting_{enable_lighting} {
+      enable_lighting_{enable_lighting},
+      use_4_component_texcoords_{use_4_component_texcoords} {
   matrix_unit(view_matrix_);
 
   VECTOR rot = {0, 0, 0, 1};
@@ -95,8 +99,7 @@ void ProjectionVertexShader::SetDirectionalLightDirection(const VECTOR &directio
 
 void ProjectionVertexShader::UpdateMatrices() {
   CalculateProjectionMatrix();
-
-  matrix_viewport(viewport_matrix_, 0, 0, framebuffer_width_, framebuffer_height_, z_min_, z_max_);
+  CalculateViewportMatrix();
   matrix_multiply(projection_viewport_matrix_, projection_matrix_, viewport_matrix_);
 
   /* Create local->world matrix given our updated object */
@@ -109,7 +112,11 @@ void ProjectionVertexShader::OnLoadShader() {
   if (enable_lighting_) {
     LoadShaderProgram(kVertexShaderLighting, sizeof(kVertexShaderLighting));
   } else {
-    LoadShaderProgram(kVertexShaderNoLighting, sizeof(kVertexShaderLighting));
+    if (use_4_component_texcoords_) {
+      LoadShaderProgram(kVertexShaderNoLighting4ComponentTexcoord, sizeof(kVertexShaderNoLighting4ComponentTexcoord));
+    } else {
+      LoadShaderProgram(kVertexShaderNoLighting, sizeof(kVertexShaderLighting));
+    }
   }
 }
 
@@ -142,14 +149,21 @@ void ProjectionVertexShader::OnLoadConstants() {
   ++index;
 }
 
-/* Construct a viewport transformation matrix */
-static void matrix_viewport(MATRIX out, float x, float y, float width, float height, float z_min, float z_max) {
-  matrix_unit(out);
-  out[0] = width / 2.0f;
-  out[5] = height / -2.0f;
-  out[10] = (z_max - z_min) / 2.0f;
-  out[12] = x + width / 2.0f;
-  out[13] = y + height / 2.0f;
-  out[14] = (z_min + z_max) / 2.0f;
-  out[15] = 1.0f;
+void ProjectionVertexShader::CalculateViewportMatrix() {
+  if (use_d3d_style_viewport_) {
+    // TODO: Support alternative screen space Z range and take in the max depthbuffer value separately.
+    // This should mirror the `create_d3d_viewport` parameters. In practice none of the tests use a range other than
+    // 0..1 so this is not currently implemented and z_far is understood to contain the maximum depthbuffer value.
+    ASSERT(z_min_ == 0.0f && "Viewport z-range only implemented for 0..1");
+    create_d3d_viewport(viewport_matrix_, framebuffer_width_, framebuffer_height_, z_max_, 0.0f, 1.0f);
+  } else {
+    matrix_unit(viewport_matrix_);
+    viewport_matrix_[_11] = framebuffer_width_ * 0.5f;
+    viewport_matrix_[_41] = viewport_matrix_[_11];
+    viewport_matrix_[_42] = framebuffer_height_ * 0.5f;
+    viewport_matrix_[_22] = -1.0f * viewport_matrix_[_42];
+
+    viewport_matrix_[_33] = (z_max_ - z_min_) * 0.5f;
+    viewport_matrix_[_43] = (z_min_ + z_max_) * 0.5f;
+  }
 }
