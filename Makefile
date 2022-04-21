@@ -24,6 +24,7 @@ SRCS = \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
+	$(SRCDIR)/tests/attribute_float_tests.cpp \
 	$(SRCDIR)/tests/clear_tests.cpp \
 	$(SRCDIR)/tests/color_mask_blend_tests.cpp \
 	$(SRCDIR)/tests/color_zeta_overlap_tests.cpp \
@@ -75,6 +76,7 @@ SHADER_OBJS = \
 	$(SRCDIR)/shaders/fog_vec4_wy.inl \
 	$(SRCDIR)/shaders/fog_vec4_wzyx.inl \
 	$(SRCDIR)/shaders/fog_vec4_xyzw.inl \
+	$(SRCDIR)/shaders/mul_by_one_vertex_shader.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader_2c_texcoords.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader_4c_texcoords.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \

@@ -1,0 +1,25 @@
+// Multiply by a constant to force
+// generating a mul instruction
+float4 one = 1;
+
+struct vIn {
+  float4 tex : TEXCOORD;
+  float4 pos : POSITION;
+  float4 diffuse : DIFFUSE;
+};
+
+struct vOut {
+  float4 pos : POSITION;
+  float4 col : COLOR;
+  float4 tex0 : TEXCOORD0;
+};
+
+vOut main(vIn I) {
+  vOut result;
+
+  result.pos = I.pos;
+  result.col = I.diffuse * one;
+  result.tex0 = I.tex;
+
+  return result;
+}
