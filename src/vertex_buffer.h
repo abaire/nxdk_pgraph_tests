@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <vector>
 
+#include "math3d.h"
+
 #define TO_BGRA(float_vals)                                                                      \
   (((uint32_t)((float_vals)[3] * 255.0f) << 24) + ((uint32_t)((float_vals)[0] * 255.0f) << 16) + \
    ((uint32_t)((float_vals)[1] * 255.0f) << 8) + ((uint32_t)((float_vals)[2] * 255.0f)))
@@ -257,6 +259,26 @@ class VertexBuffer {
                    float lr_z, float ur_z, const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
                    const Color& ur_diffuse, const Color& ul_specular, const Color& ll_specular,
                    const Color& lr_specular, const Color& ur_specular);
+
+  inline void DefineBiTri(uint32_t start_index, const VECTOR ul, const VECTOR ll, const VECTOR lr, const VECTOR ur) {
+    Color diffuse(1.0, 1.0, 1.0, 1.0);
+    Color specular(1.0, 1.0, 1.0, 1.0);
+    DefineBiTri(start_index, ul, ll, lr, ur, diffuse, diffuse, diffuse, diffuse, specular, specular, specular,
+                specular);
+  }
+
+  inline void DefineBiTri(uint32_t start_index, const VECTOR ul, const VECTOR ll, const VECTOR lr, const VECTOR ur,
+                          const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse,
+                          const Color& ur_diffuse) {
+    Color specular(1.0, 1.0, 1.0, 1.0);
+    DefineBiTri(start_index, ul, ll, lr, ur, ul_diffuse, ll_diffuse, lr_diffuse, ur_diffuse, specular, specular,
+                specular, specular);
+  }
+
+  void DefineBiTri(uint32_t start_index, const VECTOR ul, const VECTOR ll, const VECTOR lr, const VECTOR ur,
+                   const Color& ul_diffuse, const Color& ll_diffuse, const Color& lr_diffuse, const Color& ur_diffuse,
+                   const Color& ul_specular, const Color& ll_specular, const Color& lr_specular,
+                   const Color& ur_specular);
 
   void SetDiffuse(uint32_t vertex_index, const Color& color);
   void SetSpecular(uint32_t vertex_index, const Color& color);

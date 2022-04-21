@@ -245,6 +245,66 @@ void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, floa
   vb[4] = temp;
 }
 
+void VertexBuffer::DefineBiTri(uint32_t start_index, const VECTOR ul, const VECTOR ll, const VECTOR lr, const VECTOR ur,
+                               const Color &ul_diffuse, const Color &ll_diffuse, const Color &lr_diffuse,
+                               const Color &ur_diffuse, const Color &ul_specular, const Color &ll_specular,
+                               const Color &lr_specular, const Color &ur_specular) {
+  ASSERT(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
+
+  cache_valid_ = false;
+
+  Vertex *vb = normalized_vertex_buffer_ + (start_index * 6);
+
+  auto set = [vb](int index, float x, float y, float z, float u, float v, const Color &diffuse, const Color &specular) {
+    vb[index].pos[0] = x;
+    vb[index].pos[1] = y;
+    vb[index].pos[2] = z;
+    vb[index].pos[3] = 1.0f;
+
+    vb[index].texcoord0[0] = u;
+    vb[index].texcoord0[1] = v;
+    vb[index].texcoord0[2] = 0.0f;
+    vb[index].texcoord0[3] = 0.0f;
+
+    vb[index].texcoord1[0] = u;
+    vb[index].texcoord1[1] = v;
+    vb[index].texcoord1[2] = 0.0f;
+    vb[index].texcoord1[3] = 0.0f;
+
+    vb[index].texcoord2[0] = u;
+    vb[index].texcoord2[1] = v;
+    vb[index].texcoord2[2] = 0.0f;
+    vb[index].texcoord2[3] = 0.0f;
+
+    vb[index].texcoord3[0] = u;
+    vb[index].texcoord3[1] = v;
+    vb[index].texcoord3[2] = 0.0f;
+    vb[index].texcoord3[3] = 0.0f;
+
+    vb[index].normal[0] = 0.0f;
+    vb[index].normal[1] = 0.0f;
+    vb[index].normal[2] = 1.0f;
+
+    vb[index].diffuse[0] = diffuse.r;
+    vb[index].diffuse[1] = diffuse.g;
+    vb[index].diffuse[2] = diffuse.b;
+    vb[index].diffuse[3] = diffuse.a;
+
+    vb[index].specular[0] = specular.r;
+    vb[index].specular[1] = specular.g;
+    vb[index].specular[2] = specular.b;
+    vb[index].specular[3] = specular.a;
+  };
+
+  set(0, ul[_X], ul[_Y], ul[_Z], 0.0f, 0.0f, ul_diffuse, ul_specular);
+  set(1, lr[_X], lr[_Y], lr[_Z], 1.0f, 1.0f, lr_diffuse, lr_specular);
+  set(2, ur[_X], ur[_Y], ur[_Z], 1.0f, 0.0f, ur_diffuse, ur_specular);
+
+  set(3, ul[_X], ul[_Y], ul[_Z], 0.0f, 0.0f, ul_diffuse, ul_specular);
+  set(4, ll[_X], ll[_Y], ll[_Z], 0.0f, 1.0f, ll_diffuse, ll_specular);
+  set(5, lr[_X], lr[_Y], lr[_Z], 1.0f, 1.0f, lr_diffuse, lr_specular);
+}
+
 void VertexBuffer::SetDiffuse(uint32_t vertex_index, const Color &color) {
   cache_valid_ = false;
   ASSERT(vertex_index < num_vertices_ && "Invalid vertex_index.");

@@ -22,6 +22,8 @@
 #include "shaders/vertex_shader_program.h"
 #include "vertex_buffer.h"
 
+#define SAVE_Z_AS_PNG
+
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
 #define MAX_FILE_PATH_SIZE 248
@@ -779,10 +781,15 @@ void TestHost::SaveBackBuffer(const std::string &output_directory, const std::st
 
 void TestHost::SaveZBuffer(const std::string &output_directory, const std::string &name) const {
   uint32_t depth = depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? 16 : 32;
+#ifdef SAVE_Z_AS_PNG
   auto format =
       depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? SDL_PIXELFORMAT_RGB565 : SDL_PIXELFORMAT_ARGB8888;
   SaveTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
               pb_depth_stencil_pitch(), depth, format);
+#else
+  SaveRawTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
+                 framebuffer_width_ * 4, depth);
+#endif
 }
 
 void TestHost::SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,

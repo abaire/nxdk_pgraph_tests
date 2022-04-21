@@ -21,7 +21,6 @@ constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
     //    {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, kF24MaxFixedRepresentation, true},
 };
 
-constexpr uint32_t kNumDepthFormats = sizeof(kDepthFormats) / sizeof(kDepthFormats[0]);
 constexpr uint32_t kNumDepthTests = 64;
 constexpr bool kCompressionSettings[] = {false, true};
 
