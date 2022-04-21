@@ -22,6 +22,13 @@ const uint32_t kDefaultDMAZetaChannel = 10;
 static constexpr int kHorizontal = 15;
 static constexpr int kVertical = 15;
 
+// Keep in sync with the value used to set up the default XDK composite matrix.
+static constexpr float kCameraZ = -7.0f;
+static constexpr float kZNear = kCameraZ + 1.0f;
+static constexpr float kZFar = kCameraZ + 200.0f;
+static constexpr float kZMid = kZNear + (kZFar - kZNear) * 0.5f;
+static constexpr float kZQuarter = kZNear + (kZFar - kZNear) * 0.25f;
+
 static constexpr uint32_t kCompareFuncs[] = {
     NV097_SET_SHADOW_COMPARE_FUNC_NEVER,  NV097_SET_SHADOW_COMPARE_FUNC_GREATER, NV097_SET_SHADOW_COMPARE_FUNC_EQUAL,
     NV097_SET_SHADOW_COMPARE_FUNC_GEQUAL, NV097_SET_SHADOW_COMPARE_FUNC_LESS,    NV097_SET_SHADOW_COMPARE_FUNC_NOTEQUAL,
@@ -146,17 +153,17 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
              256, 512, 384);
 
     add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                         false, comp_func, 0.0f, 200.0f, 100.0f);
+                         false, comp_func, kZNear, kZFar, kZQuarter);
     add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
                          false, comp_func, 10.0f, 20.0f, 15.0f);
 
     add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                         true, comp_func, 0.0f, 200.0f, 100.0f);
+                         true, comp_func, kZNear, kZFar, kZQuarter);
     add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
                          true, comp_func, 10.0f, 20.0f, 15.0f);
 
     add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
-                         NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, 0.0f, 200.0f, 100.0f);
+                         NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, kZNear, kZFar, kZQuarter);
     add_perspective_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
                          NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, 10.0f, 20.0f, 15.0f);
   }
@@ -398,7 +405,7 @@ void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t
 
 void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool float_depth, uint32_t texture_format,
                                                    uint32_t shadow_comp_function, float min_val, float max_val,
-                                                   float ref, const std::string &name) {
+                                                   float ref_val, const std::string &name) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetDepthBufferFormat(depth_format);
   host_.SetDepthBufferFloatMode(float_depth);
@@ -431,11 +438,11 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
 
   {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
-    // Render a background quad that starts below min depth at the top and increases to past max depth along the bottom.
+    // Render a background quad from min depth at the top to max depth along the bottom.
     host_.SetDiffuse(0xFF440044);
 
-    float z_top = min_val - 1.0f;
-    float z_bottom = max_val + 15.0f;
+    float z_top = min_val;
+    float z_bottom = max_val;
 
     VECTOR ul;
     VECTOR screen_point = {sLeft, sTop, 0.0f, 1.0f};
@@ -492,10 +499,9 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
     const auto box_width = static_cast<float>(layout.box_width);
     const auto box_height = static_cast<float>(layout.box_height);
 
-    const float mid_val = min_val + (max_val - min_val) * 0.5f;
     const float epsilon = 0.01f;
     const float kZValues[] = {
-        min_val, min_val + epsilon, mid_val - epsilon, mid_val, mid_val + epsilon, max_val - epsilon, max_val,
+        min_val, min_val + epsilon, ref_val - epsilon, ref_val, ref_val + epsilon, max_val - epsilon, max_val,
     };
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
@@ -553,7 +559,7 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
   p = pb_push1(p, NV097_SET_TEXTURE_CONTROL1, texture_pitch << 16);
   pb_end(p);
 
-  float tex_depth = ref;
+  float tex_depth = ref_val;
   {
     // The comparison value needs to go through the same projection as the depth values themselves. For example, when
     // testing the 0-200 range, typical depth values will be around 0xDD40 and higher, so a comparison to 100.0f would
@@ -644,7 +650,7 @@ void TextureShadowComparatorTests::TestPerspective(uint32_t depth_format, bool f
 
   pb_print("%s\n", name.c_str());
   pb_print("Rng %.02f-%.02f\n", min_val, max_val);
-  pb_print("Ref, center: %.02f\n", ref);
+  pb_print("Ref, center: %.02f\n", ref_val);
 
   pb_draw_text_screen();
 
