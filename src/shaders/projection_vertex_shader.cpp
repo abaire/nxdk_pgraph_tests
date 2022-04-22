@@ -84,6 +84,8 @@ void ProjectionVertexShader::LookTo(const float *camera_position, const float *c
   view_matrix_[_42] = -vector_innerproduct(y_axis, const_cast<float *>(camera_position));
   view_matrix_[_43] = -vector_innerproduct(z_axis, const_cast<float *>(camera_position));
   view_matrix_[_44] = 1.0f;
+
+  UpdateMatrices();
 }
 
 void ProjectionVertexShader::SetCamera(const VECTOR position, const VECTOR rotation) {
@@ -91,6 +93,7 @@ void ProjectionVertexShader::SetCamera(const VECTOR position, const VECTOR rotat
 
   matrix_unit(view_matrix_);
   create_world_view(view_matrix_, camera_position_, rotation);
+  UpdateMatrices();
 }
 
 void ProjectionVertexShader::SetDirectionalLightDirection(const VECTOR &direction) {
@@ -104,6 +107,10 @@ void ProjectionVertexShader::UpdateMatrices() {
 
   /* Create local->world matrix given our updated object */
   matrix_unit(model_matrix_);
+
+  matrix_multiply(composite_matrix_, view_matrix_, projection_viewport_matrix_);
+  matrix_transpose(composite_matrix_, composite_matrix_);
+  matrix_general_inverse(inverse_composite_matrix_, composite_matrix_);
 }
 
 void ProjectionVertexShader::OnActivate() { UpdateMatrices(); }
@@ -166,4 +173,40 @@ void ProjectionVertexShader::CalculateViewportMatrix() {
     viewport_matrix_[_33] = (z_max_ - z_min_) * 0.5f;
     viewport_matrix_[_43] = (z_min_ + z_max_) * 0.5f;
   }
+}
+
+void ProjectionVertexShader::ProjectPoint(VECTOR result, const VECTOR world_point) const {
+  VECTOR screen_point;
+  vector_apply(screen_point, world_point, composite_matrix_);
+
+  result[_X] = screen_point[_X] / screen_point[_W];
+  result[_Y] = screen_point[_Y] / screen_point[_W];
+  result[_Z] = screen_point[_Z] / screen_point[_W];
+  result[_W] = 1.0f;
+}
+
+void ProjectionVertexShader::UnprojectPoint(VECTOR result, const VECTOR screen_point) const {
+  vector_apply(result, screen_point, inverse_composite_matrix_);
+}
+
+void ProjectionVertexShader::UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const {
+  VECTOR work;
+  vector_copy(work, screen_point);
+
+  // TODO: Get the near and far plane mappings from the viewport matrix.
+  work[_Z] = 0.0f;
+  VECTOR near_plane;
+  vector_apply(near_plane, work, inverse_composite_matrix_);
+  vector_euclidean(near_plane, near_plane);
+
+  work[_Z] = 64000.0f;
+  VECTOR far_plane;
+  vector_apply(far_plane, work, inverse_composite_matrix_);
+  vector_euclidean(far_plane, far_plane);
+
+  float t = (world_z - near_plane[_Z]) / (far_plane[_Z] - near_plane[_Z]);
+  result[_X] = near_plane[_X] + (far_plane[_X] - near_plane[_X]) * t;
+  result[_Y] = near_plane[_Y] + (far_plane[_Y] - near_plane[_Y]) * t;
+  result[_Z] = world_z;
+  result[_W] = 1.0f;
 }

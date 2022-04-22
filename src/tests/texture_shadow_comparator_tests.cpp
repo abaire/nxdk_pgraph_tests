@@ -12,7 +12,7 @@
 #include "test_host.h"
 
 // Uncomment to save the depth texture as an additional artifact.
-#define DEBUG_DUMP_DEPTH_TEXTURE
+//#define DEBUG_DUMP_DEPTH_TEXTURE
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -27,17 +27,17 @@ static constexpr int kVertical = 15;
 static constexpr float kCameraZ = -7.0f;
 static constexpr float kZNear = kCameraZ + 1.0f;
 static constexpr float kZFar = kCameraZ + 200.0f;
-static constexpr float kZMid = kZNear + (kZFar - kZNear) * 0.5f;
-static constexpr float kZQuarter = kZNear + (kZFar - kZNear) * 0.25f;
 
 // Used to determine the tests around the end and mid/quarter points in projection tests.
 static constexpr float kEpsilon = 0.0125f;
 
+// clang format off
 static constexpr uint32_t kCompareFuncs[] = {
     NV097_SET_SHADOW_COMPARE_FUNC_NEVER,  NV097_SET_SHADOW_COMPARE_FUNC_GREATER, NV097_SET_SHADOW_COMPARE_FUNC_EQUAL,
     NV097_SET_SHADOW_COMPARE_FUNC_GEQUAL, NV097_SET_SHADOW_COMPARE_FUNC_LESS,    NV097_SET_SHADOW_COMPARE_FUNC_NOTEQUAL,
     NV097_SET_SHADOW_COMPARE_FUNC_LEQUAL, NV097_SET_SHADOW_COMPARE_FUNC_ALWAYS,
 };
+// clang format on
 
 struct BoxLayoutInfo {
   uint32_t box_width;
@@ -113,7 +113,7 @@ static std::string MakeFixedFunctionTestName(const TextureFormatInfo &format, ui
   ret += ShortDepthName(format, depth_format, float_depth);
 
   char buf[32] = {0};
-  sprintf(buf, "_%0.02f-%0.02f_%0.02f_", min_val, max_val, ref);
+  sprintf(buf, "_%0.02f-%0.02f_%0.04f_", min_val, max_val, ref);
   ret += buf;
 
   ret += CompareFunctionName(comp_func);
@@ -126,7 +126,7 @@ static std::string MakeProgrammableTestName(const TextureFormatInfo &format, uin
   ret += ShortDepthName(format, depth_format, float_depth);
 
   char buf[32] = {0};
-  sprintf(buf, "_%0.02f-%0.02f_%0.02f_", min_val, max_val, ref);
+  sprintf(buf, "_%0.02f-%0.02f_%0.04f_", min_val, max_val, ref);
   ret += buf;
 
   ret += CompareFunctionName(comp_func);
@@ -174,20 +174,43 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
     add_test(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, comp_func,
              256, 512, 384);
 
-    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                          false, comp_func, kZNear, kZFar, kZQuarter);
-    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                          false, comp_func, 10.0f, 20.0f, 15.0f);
+    {
+      const float kZRef = kZNear + (kZFar - kZNear) * 0.06f;
+      add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                            false, comp_func, kZNear, kZFar, kZRef);
+      add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                            false, comp_func, 10.0f, 20.0f, 15.0f);
+    }
 
-    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                          true, comp_func, kZNear, kZFar, kZQuarter);
-    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
-                          true, comp_func, 10.0f, 20.0f, 15.0f);
+    {
+      const float kZRef = kZNear + (kZFar - kZNear) * 0.0531f;
+      add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                            true, comp_func, kZNear, kZFar, kZRef);
+      add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT, NV097_SET_SURFACE_FORMAT_ZETA_Z16,
+                            true, comp_func, 10.0f, 20.0f, 14.04f);
+    }
 
     add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
-                          NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, kZNear, kZFar, kZQuarter);
-    add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
-                          NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, 10.0f, 20.0f, 15.0f);
+                          NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, kZNear, kZFar, 10.65f);
+
+    {
+      // TODO: Unify these in an add_perspective_tests call.
+      // There is some subtle difference between the fixed function pipeline and the programmable shader written to
+      // attempt to duplicate it. The depth values at 24 bit end up being ~1 off, making it impossible to choose a
+      // reference value that will be matched by both pipelines.
+      constexpr uint32_t texture_format = NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED;
+      constexpr uint32_t surface = NV097_SET_SURFACE_FORMAT_ZETA_Z24S8;
+      const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
+      std::string ff = MakeFixedFunctionTestName(texture_format_info, surface, false, 10.0f, 20.0f, 11.47f, comp_func);
+      tests_[ff] = [this, comp_func, ff]() {
+        TestFixedFunction(surface, false, texture_format, comp_func, 10.0f, 20.0f, 11.47f, ff);
+      };
+
+      std::string prog = MakeProgrammableTestName(texture_format_info, surface, false, 10.0f, 20.0f, 11.45f, comp_func);
+      tests_[prog] = [this, comp_func, prog]() {
+        TestProgrammable(surface, false, texture_format, comp_func, 10.0f, 20.0f, 11.45f, prog);
+      };
+    }
   }
 }
 
@@ -432,7 +455,10 @@ void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool
   host_.SetDepthBufferFormat(depth_format);
   host_.SetDepthBufferFloatMode(float_depth);
 
-  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, name);
+  auto project_point = [this](VECTOR out, const VECTOR in) { host_.ProjectPoint(out, in); };
+  auto unproject_point = [this](VECTOR out, const VECTOR in, float z) { host_.UnprojectPoint(out, in, z); };
+  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, project_point,
+                unproject_point, name);
 }
 
 void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool float_depth, uint32_t texture_format,
@@ -454,12 +480,18 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
   host_.SetDepthBufferFormat(depth_format);
   host_.SetDepthBufferFloatMode(float_depth);
 
-  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, name);
+  auto project_point = [shader](VECTOR out, const VECTOR in) { shader->ProjectPoint(out, in); };
+  auto unproject_point = [shader](VECTOR out, const VECTOR in, float z) { shader->UnprojectPoint(out, in, z); };
+
+  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, project_point,
+                unproject_point, name);
 }
 
 void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t texture_format,
                                                  uint32_t shadow_comp_function, float min_val, float max_val,
-                                                 float ref_val, const std::string &name) {
+                                                 float ref_val, std::function<void(VECTOR, const VECTOR)> project_point,
+                                                 std::function<void(VECTOR, const VECTOR, float)> unproject_point,
+                                                 const std::string &name) {
   auto p = pb_begin();
   // Depth test must be enabled or nothing will be written to the depth target.
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
@@ -496,19 +528,19 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
 
     VECTOR ul;
     VECTOR screen_point = {sLeft, sTop, 0.0f, 1.0f};
-    host_.UnprojectPoint(ul, screen_point, z_top);
+    unproject_point(ul, screen_point, z_top);
 
     VECTOR ur;
     screen_point[_X] = sRight;
-    host_.UnprojectPoint(ur, screen_point, z_top);
+    unproject_point(ur, screen_point, z_top);
 
     VECTOR lr;
     screen_point[_Y] = sBottom;
-    host_.UnprojectPoint(lr, screen_point, z_bottom);
+    unproject_point(lr, screen_point, z_bottom);
 
     VECTOR ll;
     screen_point[_X] = sLeft;
-    host_.UnprojectPoint(ll, screen_point, z_bottom);
+    unproject_point(ll, screen_point, z_bottom);
 
     host_.SetVertex(ul[_X], ul[_Y], z_top, 1.0f);
     host_.SetVertex(ur[_X], ur[_Y], z_top, 1.0f);
@@ -521,23 +553,23 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
 
   // Render quads at various depths along the center of the screen.
   {
-    auto box = [this](float left, float top, float right, float bottom, float z) {
+    auto box = [this, &unproject_point](float left, float top, float right, float bottom, float z) {
       host_.SetDiffuse(0xFFAA11AA);
       VECTOR ul;
       VECTOR screen_point = {left, top, 0.0f, 1.0f};
-      host_.UnprojectPoint(ul, screen_point, z);
+      unproject_point(ul, screen_point, z);
 
       VECTOR ur;
       screen_point[_X] = right;
-      host_.UnprojectPoint(ur, screen_point, z);
+      unproject_point(ur, screen_point, z);
 
       VECTOR lr;
       screen_point[_Y] = bottom;
-      host_.UnprojectPoint(lr, screen_point, z);
+      unproject_point(lr, screen_point, z);
 
       VECTOR ll;
       screen_point[_X] = left;
-      host_.UnprojectPoint(ll, screen_point, z);
+      unproject_point(ll, screen_point, z);
 
       host_.SetVertex(ul[_X], ul[_Y], z, 1.0f);
       host_.SetVertex(ur[_X], ur[_Y], z, 1.0f);
@@ -608,15 +640,15 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
   p = pb_push1(p, NV097_SET_TEXTURE_CONTROL1, texture_pitch << 16);
   pb_end(p);
 
-  float tex_depth = ref_val;
+  float projected_ref_val = ref_val;
   {
-    // The comparison value needs to go through the same projection as the depth values themselves. For example, when
-    // testing the 0-200 range, typical depth values will be around 0xDD40 and higher, so a comparison to 100.0f would
-    // make no sense.
+    // The comparison value needs to go through the same projection as the depth values themselves.
     VECTOR projected_point;
-    VECTOR world_point = {0.0f, 0.0f, tex_depth, 1.0f};
-    host_.ProjectPoint(projected_point, world_point);
-    tex_depth = floorf(projected_point[_Z]);
+    VECTOR world_point = {0.0f, 0.0f, projected_ref_val, 1.0f};
+    project_point(projected_point, world_point);
+
+    // There is a half texel offset difference between the shadow lookup and the actual location.
+    projected_ref_val = projected_point[_Z];
   }
 
   {
@@ -628,25 +660,25 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
     const float z = 1.5f;
     VECTOR ul;
     VECTOR screen_point = {sLeft, sTop, 0.0f, 1.0f};
-    host_.UnprojectPoint(ul, screen_point, z);
+    unproject_point(ul, screen_point, z);
 
     VECTOR lr;
     screen_point[_X] = sRight;
     screen_point[_Y] = sBottom;
-    host_.UnprojectPoint(lr, screen_point, z);
+    unproject_point(lr, screen_point, z);
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFF2277FF);
-    host_.SetTexCoord0(0.0f, 0.0f, tex_depth, 1.0f);
+    host_.SetTexCoord0(0.0f, 0.0f, projected_ref_val, 1.0f);
     host_.SetVertex(ul[_X], ul[_Y], z, 1.0f);
 
-    host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f, tex_depth, 1.0f);
+    host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f, projected_ref_val, 1.0f);
     host_.SetVertex(lr[_X], ul[_Y], z, 1.0f);
 
-    host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), tex_depth, 1.0f);
+    host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), projected_ref_val, 1.0f);
     host_.SetVertex(lr[_X], lr[_Y], z, 1.0f);
 
-    host_.SetTexCoord0(0.0, host_.GetFramebufferHeightF(), tex_depth, 1.0f);
+    host_.SetTexCoord0(0.0, host_.GetFramebufferHeightF(), projected_ref_val, 1.0f);
     host_.SetVertex(ul[_X], lr[_Y], z, 1.0f);
     host_.End();
   }
@@ -679,17 +711,17 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
       VECTOR pt;
 
       VECTOR screen_point = {left + left_offset, bottom, 0.0f, 1.0f};
-      host_.UnprojectPoint(pt, screen_point, 0.0f);
+      unproject_point(pt, screen_point, 0.0f);
       host_.SetVertex(pt);
 
       screen_point[_X] = left + mid_offset;
       screen_point[_Y] = top;
-      host_.UnprojectPoint(pt, screen_point, 0.0f);
+      unproject_point(pt, screen_point, 0.0f);
       host_.SetVertex(pt);
 
       screen_point[_X] = left + right_offset;
       screen_point[_Y] = bottom;
-      host_.UnprojectPoint(pt, screen_point, 0.0f);
+      unproject_point(pt, screen_point, 0.0f);
       host_.SetVertex(pt);
 
       left += static_cast<float>(layout.spacing + layout.box_width);
@@ -699,7 +731,7 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
 
   pb_print("%s\n", name.c_str());
   pb_print("Rng %.02f-%.02f\n", min_val, max_val);
-  pb_print("Ref: %.02f (%u)\n", ref_val, static_cast<uint32_t>(tex_depth));
+  pb_print("Ref: %.02f (0x%X)\n", ref_val, static_cast<uint32_t>(projected_ref_val));
 
   pb_draw_text_screen();
 

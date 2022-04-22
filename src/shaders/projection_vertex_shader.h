@@ -41,6 +41,12 @@ class ProjectionVertexShader : public VertexShaderProgram {
   MATRIX &GetViewportMatrix() { return viewport_matrix_; }
   MATRIX &GetProjectionViewportMatrix() { return projection_viewport_matrix_; }
 
+  // Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
+  void ProjectPoint(VECTOR result, const VECTOR world_point) const;
+
+  void UnprojectPoint(VECTOR result, const VECTOR screen_point) const;
+  void UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const;
+
  protected:
   void OnActivate() override;
   void OnLoadShader() override;
@@ -67,6 +73,9 @@ class ProjectionVertexShader : public VertexShaderProgram {
   MATRIX projection_matrix_{};
   MATRIX viewport_matrix_{};
   MATRIX projection_viewport_matrix_{};
+
+  MATRIX composite_matrix_{};
+  MATRIX inverse_composite_matrix_{};
 
   VECTOR camera_position_ = {0, 0, -2.25, 1};
   VECTOR light_direction_ = {0, 0, 1, 1};
