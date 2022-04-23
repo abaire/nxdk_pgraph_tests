@@ -15,9 +15,6 @@ class AttributeFloatTests : public TestSuite {
  public:
   AttributeFloatTests(TestHost &host, std::string output_dir);
 
-  void Initialize() override;
-  void Deinitialize() override;
-
  private:
   void Test(const std::string testName, const TestConfig &testConfig, const ShaderConfig &shaderConfig);
 };

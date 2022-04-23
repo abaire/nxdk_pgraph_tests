@@ -77,14 +77,6 @@ AttributeFloatTests::AttributeFloatTests(TestHost &host, std::string output_dir)
   }
 }
 
-void AttributeFloatTests::Initialize() {
-  TestSuite::Initialize();
-}
-
-void AttributeFloatTests::Deinitialize() {
-  TestSuite::Deinitialize();
-}
-
 void CreateGeometry(float x, float y, float width, float height, float from, float to, std::vector<float> &vb) {
   vb.clear();
 
