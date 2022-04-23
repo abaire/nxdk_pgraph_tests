@@ -5,7 +5,6 @@
 #include "test_suite.h"
 
 struct TestConfig;
-struct ShaderConfig;
 
 // Tests behavior of various float inputs to vertex shaders
 // including NaN, INF, etc.
@@ -16,7 +15,7 @@ class AttributeFloatTests : public TestSuite {
   AttributeFloatTests(TestHost &host, std::string output_dir);
 
  private:
-  void Test(const std::string testName, const TestConfig &testConfig, const ShaderConfig &shaderConfig);
+  void Test(const TestConfig &testConfig);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_ATTRIBUTE_NAN_TESTS_H

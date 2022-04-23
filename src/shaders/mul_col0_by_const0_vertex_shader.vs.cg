@@ -1,6 +1,4 @@
-// Multiply by a constant to force
-// generating a mul instruction
-float4 one = 1;
+float4 mul : C[0];
 
 struct vIn {
   float4 tex : TEXCOORD;
@@ -18,7 +16,7 @@ vOut main(vIn I) {
   vOut result;
 
   result.pos = I.pos;
-  result.col = I.diffuse * one;
+  result.col = I.diffuse * mul;
   result.tex0 = I.tex;
 
   return result;
