@@ -23,6 +23,7 @@
 #include "test_host.h"
 #include "tests/attribute_carryover_tests.h"
 #include "tests/attribute_explicit_setter_tests.h"
+#include "tests/attribute_float_tests.h"
 #include "tests/clear_tests.h"
 #include "tests/color_mask_blend_tests.h"
 #include "tests/color_zeta_overlap_tests.h"
@@ -263,6 +264,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<AttributeExplicitSetterTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<AttributeFloatTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
