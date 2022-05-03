@@ -48,6 +48,7 @@ SRCS = \
 	$(SRCDIR)/tests/texture_framebuffer_blit_tests.cpp \
 	$(SRCDIR)/tests/texture_matrix_tests.cpp \
 	$(SRCDIR)/tests/texture_render_target_tests.cpp \
+	$(SRCDIR)/tests/texture_render_update_in_place_tests.cpp \
 	$(SRCDIR)/tests/texture_shadow_comparator_tests.cpp \
 	$(SRCDIR)/tests/three_d_primitive_tests.cpp \
 	$(SRCDIR)/tests/two_d_line_tests.cpp \
