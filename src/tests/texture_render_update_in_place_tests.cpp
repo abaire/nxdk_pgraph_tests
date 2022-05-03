@@ -114,14 +114,14 @@ void TextureRenderUpdateInPlaceTests::Test() {
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
   host_.SetupTextureStages();
 
-  // Set the render target as the input texture and modulate the texture, converting it to yellow, still fully opaque.
+  // Set the render target as the input texture and remove the blue channel.
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, texture_target_ctx_.ChannelID);
     p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, render_target_address);
     pb_end(p);
 
-    host_.SetCombinerFactorC0(0, 1.0f, 1.0f, 0.25f, 1.0f);
+    host_.SetCombinerFactorC0(0, 1.0f, 1.0f, 0.0f, 1.0f);
     host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 1.0f);
     host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::ColorInput(TestHost::SRC_C0));
     host_.SetOutputColorCombiner(0, TestHost::DST_R0);
@@ -133,14 +133,14 @@ void TextureRenderUpdateInPlaceTests::Test() {
   }
 
   // Switch the target texture to the normal texture memory, leaving the same texture offset (input) address. Then
-  // modulate the texture further, zeroing the red and blue channels and reducing the alpha.
+  // modulate the texture further, zeroing the red channel and increasing the alpha.
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, normal_texture_address);
     pb_end(p);
 
-    host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 0.0f, 1.0f);
-    host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 0.25f);
+    host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 1.0f, 1.0f);
+    host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 1.0f);
     host_.DrawArrays();
   }
 
