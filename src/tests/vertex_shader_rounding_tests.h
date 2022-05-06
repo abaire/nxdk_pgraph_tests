@@ -30,7 +30,6 @@ class VertexShaderRoundingTests : public TestSuite {
   struct s_CtxDma texture_target_ctx_ {};
   uint8_t *render_target_{nullptr};
 
-  std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;
   std::shared_ptr<VertexBuffer> framebuffer_vertex_buffer_;
 };
 
