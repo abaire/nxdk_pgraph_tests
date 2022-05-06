@@ -46,7 +46,8 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
   uint32_t palette_size = kMaxPaletteSize * 4;
 
   static constexpr uint32_t kMaxTextures = 4;
-  uint32_t total_size = texture_size * kMaxTextures + palette_size;
+  texture_memory_size_ = texture_size * kMaxTextures;
+  uint32_t total_size = texture_memory_size_ + palette_size;
 
   texture_memory_ = static_cast<uint8_t *>(
       MmAllocateContiguousMemoryEx(total_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));

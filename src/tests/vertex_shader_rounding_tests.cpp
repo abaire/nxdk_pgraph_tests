@@ -8,10 +8,15 @@
 #include "debug_output.h"
 #include "pbkit_ext.h"
 #include "shaders/precalculated_vertex_shader.h"
+#include "swizzle.h"
 #include "test_host.h"
 #include "texture_format.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
+
+// From pbkit.c, DMA_A is set to channel 3 by default
+// NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
+const uint32_t kDefaultDMAChannelA = 3;
 
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
 const uint32_t kDefaultDMAColorChannel = 9;
@@ -21,6 +26,7 @@ static const uint32_t kTexturePitch = kTextureWidth * 4;
 static const uint32_t kTextureHeight = 128;
 
 static constexpr const char kTestRenderTargetName[] = "RenderTarget";
+static constexpr const char kTestCompositingRenderTargetName[] = "Compositing";
 static constexpr const char kTestGeometryName[] = "Geometry";
 
 static constexpr float kGeometryTestBiases[] = {
@@ -28,9 +34,13 @@ static constexpr float kGeometryTestBiases[] = {
     0.0f, 0.001f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f,
 };
 
+static std::string MakeCompositingRenderTargetTestName(bool power_of_two);
+
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
   tests_[kTestRenderTargetName] = [this]() { TestRenderTarget(); };
+
+  tests_[kTestCompositingRenderTargetName] = [this]() { TestCompositingRenderTarget(); };
 
   for (auto bias : kGeometryTestBiases) {
     std::string test_name = MakeGeometryTestName(bias);
@@ -51,10 +61,6 @@ void VertexShaderRoundingTests::Initialize() {
   render_target_ =
       (uint8_t *)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
   ASSERT(render_target_ && "Failed to allocate target surface.");
-  auto *pixel = reinterpret_cast<uint32_t *>(render_target_);
-  for (uint32_t i = 0; i < kTextureWidth * kTextureHeight; ++i) {
-    *pixel++ = 0x7FFF00FF;
-  }
   pb_set_dma_address(&texture_target_ctx_, render_target_, texture_size - 1);
 
   host_.SetCombinerControl(1, true, true);
@@ -73,21 +79,71 @@ void VertexShaderRoundingTests::Deinitialize() {
 }
 
 void VertexShaderRoundingTests::CreateGeometry() {
-  const auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
-  const auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
-
   render_target_vertex_buffer_ = host_.AllocateVertexBuffer(6);
   render_target_vertex_buffer_->DefineBiTri(0, -1.0f, 1.0f, 1.0f, -1.0f, 0.1f);
   render_target_vertex_buffer_->Linearize(kTextureWidth, kTextureHeight);
 
   framebuffer_vertex_buffer_ = host_.AllocateVertexBuffer(6);
   framebuffer_vertex_buffer_->DefineBiTri(0, -1.75, 1.75, 1.75, -1.75, 0.1f);
-  framebuffer_vertex_buffer_->Linearize(fb_width, fb_height);
+  framebuffer_vertex_buffer_->Linearize(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
+}
+
+void VertexShaderRoundingTests::TestGeometry(float bias) {
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.PrepareDraw(0xFE404040);
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  const float height = floorf(static_cast<float>(host_.GetFramebufferHeight()) / 4.0f) * 2.0f;
+
+  const float left = floorf((static_cast<float>(host_.GetFramebufferWidth()) - height) / 2.0f);
+  const float top = floorf(height / 2.0f);
+  const float right = left + height;
+  const float bottom = top + height;
+  const float z = 1;
+
+  // Draw a background.
+  uint32_t color = 0xFFFF00FF;
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(color);
+  host_.SetVertex(left, top, z, 1.0f);
+  host_.SetVertex(right, top, z, 1.0f);
+  host_.SetVertex(right, bottom, z, 1.0f);
+  host_.SetVertex(left, bottom, z, 1.0f);
+  host_.End();
+
+  // Draw a subpixel offset green square.
+  color = 0xFF009900;
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(color);
+  host_.SetVertex(left + bias, top + bias, z, 1.0f);
+  host_.SetVertex(right, top + bias, z, 1.0f);
+  host_.SetVertex(right, bottom, z, 1.0f);
+  host_.SetVertex(left + bias, bottom, z, 1.0f);
+  host_.End();
+
+  std::string test_name = MakeGeometryTestName(bias);
+  pb_print("%s\n", test_name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
 void VertexShaderRoundingTests::TestRenderTarget() {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-
+  {
+    auto *pixel = reinterpret_cast<uint32_t *>(render_target_);
+    for (uint32_t i = 0; i < kTextureWidth * kTextureHeight; ++i) {
+      *pixel++ = 0x7FFF00FF;
+    }
+  }
   host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
 
   auto &texture_stage = host_.GetTextureStage(0);
@@ -95,9 +151,11 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   const uint32_t kSourceTextureSize = host_.GetMaxTextureWidth() * host_.GetMaxTextureHeight();
   auto *source_texture = new uint32_t[kSourceTextureSize];
-  auto *pixel = source_texture;
-  for (uint32_t i = 0; i < kSourceTextureSize; ++i) {
-    *pixel++ = 0xFF00AAFF;
+  {
+    auto *pixel = source_texture;
+    for (uint32_t i = 0; i < kSourceTextureSize; ++i) {
+      *pixel++ = 0xFF00AAFF;
+    }
   }
   host_.SetRawTexture(reinterpret_cast<uint8_t *>(source_texture), host_.GetMaxTextureWidth(),
                       host_.GetMaxTextureHeight(), 1, host_.GetMaxTextureWidth() * 4, 4, false);
@@ -192,52 +250,127 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   host_.FinishDraw(allow_saving_, output_dir_, kTestRenderTargetName);
 }
 
-void VertexShaderRoundingTests::TestGeometry(float bias) {
-  host_.SetTextureStageEnabled(0, false);
-  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+static void GenerateRGBACheckerboard(uint8_t *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width,
+                                     uint32_t height, uint32_t pitch, uint32_t first_color = 0xFF00FFFF,
+                                     uint32_t second_color = 0xFF000000) {
+  auto odd = first_color;
+  auto even = second_color;
+  buffer += y_offset * pitch;
 
-  host_.PrepareDraw(0xFE404040);
+  for (uint32_t y = 0; y < height; ++y) {
+    auto pixel = reinterpret_cast<uint32_t *>(buffer);
+    pixel += x_offset;
+    buffer += pitch;
 
-  host_.SetCombinerControl(1, true, true);
-  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
-  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    if ((y & 0x07) == 0) {
+      auto temp = odd;
+      odd = even;
+      even = temp;
+    }
+
+    for (uint32_t x = 0; x < width; ++x) {
+      *pixel++ = (x & 0x10) ? odd : even;
+    }
+  }
+}
+
+void VertexShaderRoundingTests::TestCompositingRenderTarget() {
+  static constexpr uint32_t kNumCompositingIterations = 8;
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+
+  {
+    memset(host_.GetTextureMemory(), 0, host_.GetTextureMemorySize());
+    static constexpr uint32_t kCheckerboardWidth = 256;
+    static constexpr uint32_t kCheckerboardHeight = 256;
+    uint32_t x = (host_.GetFramebufferWidth() - kCheckerboardWidth) / 2;
+    uint32_t y = (host_.GetFramebufferHeight() - kCheckerboardHeight) / 2;
+    GenerateRGBACheckerboard(host_.GetTextureMemory(), x, y, kCheckerboardWidth, kCheckerboardHeight,
+                             kFramebufferPitch);
+  }
+
+  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
 
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  const float height = floorf(static_cast<float>(host_.GetFramebufferHeight()) / 4.0f) * 2.0f;
+  host_.PrepareDraw(0xFE202020);
 
-  const float left = floorf((static_cast<float>(host_.GetFramebufferWidth()) - height) / 2.0f);
-  const float top = floorf(height / 2.0f);
-  const float right = left + height;
-  const float bottom = top + height;
-  const float z = 1;
+  host_.SetVertexBuffer(render_target_vertex_buffer_);
 
-  // Draw a background.
-  uint32_t color = 0xFFFF00FF;
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetTextureDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  texture_stage.SetImageDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  host_.SetupTextureStages();
+
+  host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight(), false);
+
+  // Point the color buffer at the texture and mix it with itself multiple times.
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
+
+    // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
+
+    host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 0.5f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+    host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_TEX0), TestHost::AlphaInput(TestHost::SRC_C1));
+    host_.SetOutputAlphaCombiner(0, TestHost::DST_R0);
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_R0, true);
+
+    for (uint32_t i = 0; i < kNumCompositingIterations; ++i) {
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      host_.SetVertex(0, 0, 0, 1.0f);
+
+      host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f);
+      host_.SetVertex(host_.GetFramebufferWidthF(), 0, 0, 1.0f);
+
+      host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
+      host_.SetVertex(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), 0, 1.0f);
+
+      host_.SetTexCoord0(0.0f, host_.GetFramebufferHeightF());
+      host_.SetVertex(0, host_.GetFramebufferHeightF(), 0, 1.0f);
+      host_.End();
+    }
+  }
+
+  // Restore the color buffer and render one last time to the screen.
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  pb_end(p);
+
   host_.Begin(TestHost::PRIMITIVE_QUADS);
-  host_.SetDiffuse(color);
-  host_.SetVertex(left, top, z, 1.0f);
-  host_.SetVertex(right, top, z, 1.0f);
-  host_.SetVertex(right, bottom, z, 1.0f);
-  host_.SetVertex(left, bottom, z, 1.0f);
+  host_.SetTexCoord0(0.0f, 0.0f);
+  host_.SetVertex(0, 0, 0, 1.0f);
+
+  host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f);
+  host_.SetVertex(host_.GetFramebufferWidthF(), 0, 0, 1.0f);
+
+  host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
+  host_.SetVertex(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), 0, 1.0f);
+
+  host_.SetTexCoord0(0.0f, host_.GetFramebufferHeightF());
+  host_.SetVertex(0, host_.GetFramebufferHeightF(), 0, 1.0f);
   host_.End();
 
-  // Draw a subpixel offset green square.
-  color = 0xFF009900;
-  host_.Begin(TestHost::PRIMITIVE_QUADS);
-  host_.SetDiffuse(color);
-  host_.SetVertex(left + bias, top + bias, z, 1.0f);
-  host_.SetVertex(right, top + bias, z, 1.0f);
-  host_.SetVertex(right, bottom, z, 1.0f);
-  host_.SetVertex(left + bias, bottom, z, 1.0f);
-  host_.End();
-
-  std::string test_name = MakeGeometryTestName(bias);
-  pb_print("%s\n", test_name.c_str());
-  pb_draw_text_screen();
-
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, kTestCompositingRenderTargetName);
 }
 
 std::string VertexShaderRoundingTests::MakeGeometryTestName(float bias) {

@@ -253,6 +253,7 @@ class TestHost {
   uint32_t GetMaxTextureDepth() const { return max_texture_depth_; }
 
   uint8_t *GetTextureMemory() const { return texture_memory_; }
+  uint32_t GetTextureMemorySize() const { return texture_memory_size_; }
 
   inline uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
   inline uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
@@ -542,6 +543,7 @@ class TestHost {
   std::shared_ptr<VertexBuffer> vertex_buffer_{};
   uint8_t *texture_memory_{nullptr};
   uint8_t *texture_palette_memory_{nullptr};
+  uint32_t texture_memory_size_{0};
 
   enum FixedFunctionMatrixSetting {
     MATRIX_MODE_DEFAULT_NXDK,
