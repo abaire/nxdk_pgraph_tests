@@ -8,7 +8,6 @@
 #include "debug_output.h"
 #include "pbkit_ext.h"
 #include "shaders/precalculated_vertex_shader.h"
-#include "swizzle.h"
 #include "test_host.h"
 #include "texture_format.h"
 
@@ -35,6 +34,9 @@ static constexpr float kGeometryTestBiases[] = {
 };
 
 static std::string MakeCompositingRenderTargetTestName(bool power_of_two);
+static void GenerateRGBACheckerboard(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width,
+                                     uint32_t height, uint32_t pitch, uint32_t first_color = 0xFF00FFFF,
+                                     uint32_t second_color = 0xFF000000, uint32_t checker_size = 8);
 
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
@@ -62,13 +64,6 @@ void VertexShaderRoundingTests::Initialize() {
       (uint8_t *)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
   ASSERT(render_target_ && "Failed to allocate target surface.");
   pb_set_dma_address(&texture_target_ctx_, render_target_, texture_size - 1);
-
-  host_.SetCombinerControl(1, true, true);
-  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
-
-  host_.SetTextureStageEnabled(0, true);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 }
 
 void VertexShaderRoundingTests::Deinitialize() {
@@ -79,10 +74,6 @@ void VertexShaderRoundingTests::Deinitialize() {
 }
 
 void VertexShaderRoundingTests::CreateGeometry() {
-  render_target_vertex_buffer_ = host_.AllocateVertexBuffer(6);
-  render_target_vertex_buffer_->DefineBiTri(0, -1.0f, 1.0f, 1.0f, -1.0f, 0.1f);
-  render_target_vertex_buffer_->Linearize(kTextureWidth, kTextureHeight);
-
   framebuffer_vertex_buffer_ = host_.AllocateVertexBuffer(6);
   framebuffer_vertex_buffer_->DefineBiTri(0, -1.75, 1.75, 1.75, -1.75, 0.1f);
   framebuffer_vertex_buffer_->Linearize(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
@@ -148,18 +139,18 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetTextureDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
+  texture_stage.SetImageDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
 
-  const uint32_t kSourceTextureSize = host_.GetMaxTextureWidth() * host_.GetMaxTextureHeight();
-  auto *source_texture = new uint32_t[kSourceTextureSize];
-  {
-    auto *pixel = source_texture;
-    for (uint32_t i = 0; i < kSourceTextureSize; ++i) {
-      *pixel++ = 0xFF00AAFF;
-    }
-  }
-  host_.SetRawTexture(reinterpret_cast<uint8_t *>(source_texture), host_.GetMaxTextureWidth(),
-                      host_.GetMaxTextureHeight(), 1, host_.GetMaxTextureWidth() * 4, 4, false);
+  const uint32_t kMaxTextureStride = host_.GetMaxTextureWidth() * 4;
+  auto *source_texture = new uint8_t[kMaxTextureStride * host_.GetMaxTextureHeight()];
+  GenerateRGBACheckerboard(source_texture, 0, 0, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(),
+                           kMaxTextureStride, 0xFF0088DD, 0xFF88AAFF, 4);
+  host_.SetRawTexture(source_texture, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), 1, kMaxTextureStride, 4,
+                      false);
   delete[] source_texture;
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
   host_.PrepareDraw(0xFE202020);
 
@@ -176,8 +167,12 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
   pb_end(p);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
-  host_.SetVertexShaderProgram(shader);
+  bool swizzle = true;
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
+  if (!swizzle) {
+    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
+    host_.Clear(0xFF000000, 0, 0);
+  }
 
   host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
 
@@ -186,63 +181,89 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   host_.SetViewportScale(320.0f, -240.0f, 16777215.0f, 0.0f);
   host_.SetDepthClip(0.0f, 16777215.0f);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_LOAD, 0x0);
+  // Manually load the vertex shader and uniforms.
+  {
+    p = pb_begin();
+    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0x0);
+    p = pb_push1(
+        p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+        MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_PROGRAM) |
+            MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
+    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0);
 
-  //  MOV(oPos,xyzw, v0);
-  p = pb_push4(p, 0xB00 /*NV097_SET_TRANSFORM_PROGRAM[0]*/, 0x00000000, 0x0020001B, 0x0836106C, 0x2070F800);
+    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_LOAD, 0x0);
 
-  //  MUL(oPos,xyz, R12, c[58]);
-  //  RCC(R1,x, R12.w);
-  p = pb_push4(p, 0xB10 /*NV097_SET_TRANSFORM_PROGRAM[4]*/, 0x00000000, 0x0647401B, 0xC4361BFF, 0x1078E800);
+    //  MOV(oPos,xyzw, v0);
+    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020001B, 0x0836106C, 0x2070F800);
 
-  // MAD(oPos,xyz, R12, R1.x, c[59]);
-  p = pb_push4(p, 0xB20 /*NV097_SET_TRANSFORM_PROGRAM[8]*/, 0x00000000, 0x0087601B, 0xC400286C, 0x3070E801);
+    //  MUL(oPos,xyz, R12, c[58]);
+    //  RCC(R1,x, R12.w);
+    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0647401B, 0xC4361BFF, 0x1078E800);
 
-  // MOV(oT0,xy, v9);
-  p = pb_push4(p, 0xB30 /* NV097_SET_TRANSFORM_PROGRAM[12] */, 0x00000000, 0x0020121B, 0x0836106C, 0x2070C849);
+    // MOV(oT0,xy, v9);
+    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020121B, 0x0836106C, 0x2070C849);
 
-  p = pb_push1(p, 0x1E98 /*NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN*/, 0x0);
+    // MAD(oPos,xyz, R12, R1.x, c[59]);
+    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0087601B, 0xC400286C, 0x3070E801);
 
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0x0);
-  p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x62);
-
-  p = pb_push4f(p, 0xB80 /*NV097_SET_TRANSFORM_CONSTANT[0]*/, 1.0f, 0.0f, 0.0f, 0.0f);
-  p = pb_push4f(p, 0xB90 /*NV097_SET_TRANSFORM_CONSTANT[4]*/, 0.0f, 1.0f, 0.0f, 0.0f);
-  p = pb_push4f(p, 0xBA0 /*NV097_SET_TRANSFORM_CONSTANT[8]*/, 0.0f, 0.0f, 0.050505f, 0.242424f);
-  p = pb_push4f(p, 0xBB0 /*NV097_SET_TRANSFORM_CONSTANT[12]*/, 0.0f, 0.0f, 0.0f, 1.0f);
-  pb_end(p);
-
-  host_.SetVertexBuffer(render_target_vertex_buffer_);
-  bool swizzle = true;
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
-  if (!swizzle) {
-    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
-    host_.Clear(0xFF000000, 0, 0);
+    p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x62);
+    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 1.0f, 0.0f, 0.0f, 0.0f);
+    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 0.0f, 1.0f, 0.0f, 0.0f);
+    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 0.0f, 0.0f, 0.050505f, 0.242424f);
+    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 0.0f, 0.0f, 0.0f, 1.0f);
+    pb_end(p);
   }
 
-  host_.DrawArrays();
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
-  texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-  host_.SetVertexShaderProgram(nullptr);
-  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  // Render a full surface quad into the render target.
+  {
+    const float kLeft = -1.0f;
+    const float kRight = 1.0f;
+    const float kTop = 1.0f;
+    const float kBottom = -1.0f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(kLeft, kTop, 0.1f, 1.0f);
 
-  host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
-  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    host_.SetTexCoord0(kTextureWidth, 0.0f);
+    host_.SetVertex(kRight, kTop, 0.1f, 1.0f);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  pb_end(p);
+    host_.SetTexCoord0(kTextureWidth, kTextureHeight);
+    host_.SetVertex(kRight, kBottom, 0.1f, 1.0f);
 
-  host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
+    host_.SetTexCoord0(0.0f, kTextureHeight);
+    host_.SetVertex(kLeft, kBottom, 0.1f, 1.0f);
+    host_.End();
+  }
 
-  host_.SetVertexBuffer(framebuffer_vertex_buffer_);
-  host_.PrepareDraw(0xFE202020);
-  host_.DrawArrays();
+  // Render the render buffer from the previous draw call onto the screen.
+  {
+    texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+    texture_stage.SetImageDimensions(kTextureWidth, kTextureHeight);
+
+    host_.SetVertexShaderProgram(nullptr);
+    host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+    host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+
+    p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    pb_end(p);
+
+    host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
+
+    host_.SetVertexBuffer(framebuffer_vertex_buffer_);
+    host_.PrepareDraw(0xFE202020);
+    host_.DrawArrays();
+  }
 
   pb_print("%s\n", kTestRenderTargetName);
   pb_draw_text_screen();
@@ -250,32 +271,8 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   host_.FinishDraw(allow_saving_, output_dir_, kTestRenderTargetName);
 }
 
-static void GenerateRGBACheckerboard(uint8_t *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width,
-                                     uint32_t height, uint32_t pitch, uint32_t first_color = 0xFF00FFFF,
-                                     uint32_t second_color = 0xFF000000) {
-  auto odd = first_color;
-  auto even = second_color;
-  buffer += y_offset * pitch;
-
-  for (uint32_t y = 0; y < height; ++y) {
-    auto pixel = reinterpret_cast<uint32_t *>(buffer);
-    pixel += x_offset;
-    buffer += pitch;
-
-    if ((y & 0x07) == 0) {
-      auto temp = odd;
-      odd = even;
-      even = temp;
-    }
-
-    for (uint32_t x = 0; x < width; ++x) {
-      *pixel++ = (x & 0x10) ? odd : even;
-    }
-  }
-}
-
 void VertexShaderRoundingTests::TestCompositingRenderTarget() {
-  static constexpr uint32_t kNumCompositingIterations = 8;
+  static constexpr uint32_t kNumCompositingIterations = 1;
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
   {
@@ -295,8 +292,6 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget() {
 
   host_.PrepareDraw(0xFE202020);
 
-  host_.SetVertexBuffer(render_target_vertex_buffer_);
-
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
   auto &texture_stage = host_.GetTextureStage(0);
@@ -308,7 +303,7 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget() {
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight(), false);
 
-  // Point the color buffer at the texture and mix it with itself multiple times.
+  // Point the color buffer at the texture and mix the left hand side with itself multiple times.
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
@@ -327,19 +322,24 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget() {
     host_.SetFinalCombiner0Just(TestHost::SRC_R0);
     host_.SetFinalCombiner1Just(TestHost::SRC_R0, true);
 
+    const float kLeft = 0.0f;
+    const float kRight = floorf(host_.GetFramebufferWidthF() * 0.5f);
+    const float kTop = 0.0f;
+    const float kBottom = host_.GetFramebufferHeightF();
+
     for (uint32_t i = 0; i < kNumCompositingIterations; ++i) {
       host_.Begin(TestHost::PRIMITIVE_QUADS);
-      host_.SetTexCoord0(0.0f, 0.0f);
-      host_.SetVertex(0, 0, 0, 1.0f);
+      host_.SetTexCoord0(kLeft, kTop);
+      host_.SetVertex(kLeft, kTop, 0, 1.0f);
 
-      host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f);
-      host_.SetVertex(host_.GetFramebufferWidthF(), 0, 0, 1.0f);
+      host_.SetTexCoord0(kRight, kTop);
+      host_.SetVertex(kRight, kTop, 0, 1.0f);
 
-      host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
-      host_.SetVertex(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), 0, 1.0f);
+      host_.SetTexCoord0(kRight, kBottom);
+      host_.SetVertex(kRight, kBottom, 0, 1.0f);
 
-      host_.SetTexCoord0(0.0f, host_.GetFramebufferHeightF());
-      host_.SetVertex(0, host_.GetFramebufferHeightF(), 0, 1.0f);
+      host_.SetTexCoord0(kLeft, kBottom);
+      host_.SetVertex(kLeft, kBottom, 0, 1.0f);
       host_.End();
     }
   }
@@ -370,6 +370,9 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget() {
   host_.SetVertex(0, host_.GetFramebufferHeightF(), 0, 1.0f);
   host_.End();
 
+  pb_print("0x%X\n", reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
+  pb_draw_text_screen();
+
   host_.FinishDraw(allow_saving_, output_dir_, kTestCompositingRenderTargetName);
 }
 
@@ -377,4 +380,29 @@ std::string VertexShaderRoundingTests::MakeGeometryTestName(float bias) {
   char buf[32] = {0};
   snprintf(buf, 31, "%s_%f", kTestGeometryName, bias);
   return buf;
+}
+
+static void GenerateRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y_offset, uint32_t width,
+                                     uint32_t height, uint32_t pitch, uint32_t first_color, uint32_t second_color,
+                                     uint32_t checker_size) {
+  auto buffer = reinterpret_cast<uint8_t *>(target);
+  auto odd = first_color;
+  auto even = second_color;
+  buffer += y_offset * pitch;
+
+  for (uint32_t y = 0; y < height; ++y) {
+    auto pixel = reinterpret_cast<uint32_t *>(buffer);
+    pixel += x_offset;
+    buffer += pitch;
+
+    if (!(y % checker_size)) {
+      auto temp = odd;
+      odd = even;
+      even = temp;
+    }
+
+    for (uint32_t x = 0; x < width; ++x) {
+      *pixel++ = ((x / checker_size) & 0x01) ? odd : even;
+    }
+  }
 }
