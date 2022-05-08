@@ -135,22 +135,14 @@ void VertexShaderRoundingTests::TestRenderTarget() {
       *pixel++ = 0x7FFF00FF;
     }
   }
-  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
 
+  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetTextureDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
   texture_stage.SetImageDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
 
-  const uint32_t kMaxTextureStride = host_.GetMaxTextureWidth() * 4;
-  auto *source_texture = new uint8_t[kMaxTextureStride * host_.GetMaxTextureHeight()];
-  GenerateRGBACheckerboard(source_texture, 0, 0, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(),
-                           kMaxTextureStride, 0xFF0088DD, 0xFF88AAFF, 4);
-  host_.SetRawTexture(source_texture, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), 1, kMaxTextureStride, 4,
-                      false);
-  delete[] source_texture;
-
-  host_.SetTextureStageEnabled(0, true);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 
   host_.PrepareDraw(0xFE202020);
 
@@ -193,15 +185,15 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
     p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_LOAD, 0x0);
 
+    //  MOV(oD0,xyzw, v3);
+    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020061B, 0x0836106C, 0x2070F818);
+
     //  MOV(oPos,xyzw, v0);
     p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020001B, 0x0836106C, 0x2070F800);
 
     //  MUL(oPos,xyz, R12, c[58]);
     //  RCC(R1,x, R12.w);
     p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0647401B, 0xC4361BFF, 0x1078E800);
-
-    // MOV(oT0,xy, v9);
-    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020121B, 0x0836106C, 0x2070C849);
 
     // MAD(oPos,xyz, R12, R1.x, c[59]);
     p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0087601B, 0xC400286C, 0x3070E801);
@@ -215,7 +207,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   }
 
   host_.SetCombinerControl(1, true, true);
-  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
   // Render a full surface quad into the render target.
@@ -225,19 +217,20 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     const float kTop = 1.0f;
     const float kBottom = -1.0f;
     host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetDiffuse(0xFF887733);
     host_.SetVertex(kLeft, kTop, 0.1f, 1.0f);
 
-    host_.SetTexCoord0(kTextureWidth, 0.0f);
     host_.SetVertex(kRight, kTop, 0.1f, 1.0f);
 
-    host_.SetTexCoord0(kTextureWidth, kTextureHeight);
     host_.SetVertex(kRight, kBottom, 0.1f, 1.0f);
 
-    host_.SetTexCoord0(0.0f, kTextureHeight);
     host_.SetVertex(kLeft, kBottom, 0.1f, 1.0f);
     host_.End();
   }
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
 
   // Render the render buffer from the previous draw call onto the screen.
   {
