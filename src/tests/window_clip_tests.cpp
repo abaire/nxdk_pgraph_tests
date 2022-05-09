@@ -28,6 +28,7 @@ static constexpr char kClipOrderingTest[] = "ClipOrdering";
 static constexpr WindowClipTests::ClipRect kClipOne[] = {
     {0, 0, 0, 0},
     {0, 0, kImageWidth, kImageHeight},
+    {8, 16, kImageWidth + 32, kImageHeight + 32},
     {0, 0, kImageWidth - 1, kImageHeight - 1},
     {1, 1, kImageWidth - 2, kImageHeight - 2},
     {1, 1, kImageWidth - 3, kImageHeight - 3},
@@ -74,9 +75,9 @@ void WindowClipTests::Test(bool clip_exclusive, bool swap_order, const ClipRect 
 
   const auto kImageWidthF = static_cast<float>(kImageWidth);
   const auto kImageHeightF = static_cast<float>(kImageHeight);
-  const float kLeft = (host_.GetFramebufferWidthF() - kImageWidthF) * 0.5f;
+  const float kLeft = 0;
   const float kRight = kLeft + kImageWidthF;
-  const float kTop = (host_.GetFramebufferHeightF() - kImageHeightF) * 0.5f;
+  const float kTop = 0;
   const float kBottom = kTop + kImageHeightF;
 
   auto c1_left = c1.x + static_cast<uint32_t>(kLeft);
@@ -129,9 +130,9 @@ void WindowClipTests::Test(bool clip_exclusive, bool swap_order, const ClipRect 
   host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.ClearWindowClip(1);
 
-  pb_print("%s\n", name.c_str());
-  pb_print("%d,%d - %d,%d\n", c1_left, c1_top, c1_right, c1_bottom);
-  pb_print("%d,%d - %d,%d\n", c2_left, c2_top, c2_right, c2_bottom);
+  pb_printat(0, 25, (char *)"%s", name.c_str());
+  pb_printat(1, 25, (char *)"%d,%d - %d,%d", c1_left, c1_top, c1_right, c1_bottom);
+  pb_printat(2, 25, (char *)"%d,%d - %d,%d", c2_left, c2_top, c2_right, c2_bottom);
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, name);
