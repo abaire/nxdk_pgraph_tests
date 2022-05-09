@@ -42,6 +42,7 @@ static constexpr WindowClipTests::ClipRect kClipOne[] = {
     {0, 0, kImageWidth >> 1, kImageHeight >> 1},
     {0, 0, 1, 1},
     {kImageWidth - 1, kImageHeight - 1, 1, 1},
+    {kImageWidth, kImageHeight, 1, 1},
     {(kImageWidth - 64) >> 1, (kImageHeight - 64) >> 1, 64, 64},
 };
 
