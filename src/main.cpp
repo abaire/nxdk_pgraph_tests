@@ -54,6 +54,7 @@
 #include "tests/vertex_shader_rounding_tests.h"
 #include "tests/volume_texture_tests.h"
 #include "tests/w_param_tests.h"
+#include "tests/window_clip_tests.h"
 #include "tests/zero_stride_tests.h"
 
 #ifndef FALLBACK_OUTPUT_ROOT_PATH
@@ -397,6 +398,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<WParamTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<WindowClipTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {

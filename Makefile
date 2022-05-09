@@ -56,6 +56,7 @@ SRCS = \
 	$(SRCDIR)/tests/vertex_shader_rounding_tests.cpp \
 	$(SRCDIR)/tests/volume_texture_tests.cpp \
 	$(SRCDIR)/tests/w_param_tests.cpp \
+	$(SRCDIR)/tests/window_clip_tests.cpp \
 	$(SRCDIR)/tests/zero_stride_tests.cpp \
 	$(SRCDIR)/texture_format.cpp \
 	$(SRCDIR)/texture_stage.cpp \

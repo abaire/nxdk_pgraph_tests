@@ -1114,10 +1114,17 @@ void TestHost::UnprojectPoint(VECTOR result, const VECTOR screen_point, float wo
   result[_W] = 1.0f;
 }
 
-void TestHost::SetWindowClip(uint32_t width, uint32_t height, uint32_t x, uint32_t y) {
+void TestHost::SetWindowClipExclusive(bool exclusive) {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_WINDOW_CLIP_HORIZONTAL, x + (width << 16));
-  p = pb_push1(p, NV097_SET_WINDOW_CLIP_VERTICAL, y + (height << 16));
+  p = pb_push1(p, NV097_SET_WINDOW_CLIP_TYPE, exclusive);
+  pb_end(p);
+}
+
+void TestHost::SetWindowClip(uint32_t right, uint32_t bottom, uint32_t left, uint32_t top, uint32_t region) {
+  auto p = pb_begin();
+  const uint32_t offset = region * 4;
+  p = pb_push1(p, NV097_SET_WINDOW_CLIP_HORIZONTAL + offset, left + (right << 16));
+  p = pb_push1(p, NV097_SET_WINDOW_CLIP_VERTICAL + offset, top + (bottom << 16));
   pb_end(p);
 }
 

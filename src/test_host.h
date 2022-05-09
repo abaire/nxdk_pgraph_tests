@@ -334,7 +334,10 @@ class TestHost {
   void UnprojectPoint(VECTOR result, const VECTOR screen_point) const;
   void UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const;
 
-  static void SetWindowClip(uint32_t width, uint32_t height, uint32_t x = 0, uint32_t y = 0);
+  static void SetWindowClipExclusive(bool exclusive);
+  static void SetWindowClip(uint32_t right, uint32_t bottom, uint32_t left = 0, uint32_t top = 0, uint32_t region = 0);
+  static void ClearWindowClip(uint32_t region) { SetWindowClip(0, 0, 0, 0, region); }
+
   static void SetViewportOffset(float x, float y, float z, float w);
   static void SetViewportScale(float x, float y, float z, float w);
 
