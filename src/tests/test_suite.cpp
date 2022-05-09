@@ -81,10 +81,8 @@ void TestSuite::Initialize() {
   pb_end(p);
 
   host_.SetWindowClipExclusive(false);
+  // Note, setting the first clip region will cause the hardware to also set all subsequent regions.
   host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  for (auto i = 1; i < 8; ++i) {
-    host_.ClearWindowClip(1);
-  }
 
   host_.SetAlphaBlendEnabled();
 

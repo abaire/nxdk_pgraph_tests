@@ -23,7 +23,7 @@ class WindowClipTests : public TestSuite {
   WindowClipTests(TestHost &host, std::string output_dir);
 
  private:
-  void Test(bool clip_exclusive, const ClipRect &clip1, const ClipRect &clip2);
+  void Test(bool clip_exclusive, bool swap_order, const ClipRect &clip1, const ClipRect &clip2);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_WINDOW_CLIP_TESTS_H
