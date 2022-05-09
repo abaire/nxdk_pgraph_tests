@@ -336,7 +336,6 @@ class TestHost {
 
   static void SetWindowClipExclusive(bool exclusive);
   static void SetWindowClip(uint32_t right, uint32_t bottom, uint32_t left = 0, uint32_t top = 0, uint32_t region = 0);
-  static void ClearWindowClip(uint32_t region) { SetWindowClip(0, 0, 0, 0, region); }
 
   static void SetViewportOffset(float x, float y, float z, float w);
   static void SetViewportScale(float x, float y, float z, float w);

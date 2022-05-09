@@ -21,9 +21,18 @@ class WindowClipTests : public TestSuite {
 
  public:
   WindowClipTests(TestHost &host, std::string output_dir);
+  void Initialize() override;
 
  private:
   void Test(bool clip_exclusive, bool swap_order, const ClipRect &clip1, const ClipRect &clip2);
+  void TestRenderTarget(bool clip_exclusive, bool swap_order, const ClipRect &clip1, const ClipRect &clip2);
+
+  void Draw(bool clip_exclusive, bool swap_order, uint32_t c1_left, uint32_t c1_top, uint32_t c1_right,
+            uint32_t c1_bottom, uint32_t c2_left, uint32_t c2_top, uint32_t c2_right, uint32_t c2_bottom);
+
+ private:
+  struct s_CtxDma texture_target_ctx_ {};
+  std::shared_ptr<VertexBuffer> framebuffer_vertex_buffer_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_WINDOW_CLIP_TESTS_H
