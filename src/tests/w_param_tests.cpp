@@ -10,18 +10,24 @@
 static constexpr const char kTestWGaps[] = "w_gaps";
 static constexpr const char kTestWPositiveTriangleStrip[] = "w_pos_strip";
 static constexpr const char kTestWNegativeTriangleStrip[] = "w_neg_strip";
-static constexpr const char kTestFixedFunctionZeroW[] = "ff_w_zero";
+static constexpr const char kTestFixedFunctionZeroW[] = "ff_w_zero_";
 
 static void GenerateRGBACheckerboard(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width,
                                      uint32_t height, uint32_t pitch, uint32_t first_color = 0xFF00FFFF,
                                      uint32_t second_color = 0xFF000000, uint32_t checker_size = 8);
+
+static std::string MakeFFZeroWTestName(bool draw_quad) {
+  return std::string(kTestFixedFunctionZeroW) + (draw_quad ? "_quad" : "_bitri");
+}
 
 WParamTests::WParamTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "W param") {
   tests_[kTestWGaps] = [this]() { this->TestWGaps(); };
   tests_[kTestWPositiveTriangleStrip] = [this]() { this->TestPositiveWTriangleStrip(); };
   tests_[kTestWNegativeTriangleStrip] = [this]() { this->TestNegativeWTriangleStrip(); };
 
-  tests_[kTestFixedFunctionZeroW] = [this]() { this->TestFixedFunctionZeroW(); };
+  for (auto quad : {false, true}) {
+    tests_[MakeFFZeroWTestName(quad)] = [this, quad]() { this->TestFixedFunctionZeroW(quad); };
+  }
 }
 
 void WParamTests::Initialize() {
@@ -269,7 +275,7 @@ void WParamTests::TestNegativeWTriangleStrip() {
   host_.FinishDraw(allow_saving_, output_dir_, kTestWNegativeTriangleStrip);
 }
 
-void WParamTests::TestFixedFunctionZeroW() {
+void WParamTests::TestFixedFunctionZeroW(bool draw_quad) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
@@ -300,22 +306,45 @@ void WParamTests::TestFixedFunctionZeroW() {
     const float bottom = -1.75f;
     const auto depth = 0.0f;
 
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetTexCoord0(0.0f, 0.0f);
-    host_.SetVertex(left, top, depth, 0.0f);
+    if (draw_quad) {
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      host_.SetVertex(left, top, depth, 0.0f);
 
-    host_.SetTexCoord0(kTextureSize, 0.0f);
-    host_.SetVertex(right, top, depth, 1.0f);
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
 
-    host_.SetTexCoord0(kTextureSize, kTextureSize);
-    host_.SetVertex(right, bottom, depth, 1.0f);
+      host_.SetTexCoord0(kTextureSize, kTextureSize);
+      host_.SetVertex(right, bottom, depth, 1.0f);
 
-    host_.SetTexCoord0(0.0f, kTextureSize);
-    host_.SetVertex(left, bottom, depth, 1.0f);
-    host_.End();
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+      host_.End();
+    } else {
+      host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      host_.SetVertex(left, top, depth, 0.0f);
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+
+      host_.SetTexCoord0(kTextureSize, kTextureSize);
+      host_.SetVertex(right, bottom, depth, 1.0f);
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
+
+      host_.End();
+    }
   }
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestFixedFunctionZeroW);
+  host_.FinishDraw(allow_saving_, output_dir_, MakeFFZeroWTestName(draw_quad));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
