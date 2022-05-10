@@ -33,7 +33,7 @@ static constexpr float kGeometryTestBiases[] = {
     0.0f, 0.001f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f,
 };
 
-static std::string MakeCompositingRenderTargetTestName(bool power_of_two);
+static std::string MakeCompositingRenderTargetTestName(int z);
 static void GenerateRGBACheckerboard(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width,
                                      uint32_t height, uint32_t pitch, uint32_t first_color = 0xFF00FFFF,
                                      uint32_t second_color = 0xFF000000, uint32_t checker_size = 8);
@@ -42,7 +42,9 @@ VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
   tests_[kTestRenderTargetName] = [this]() { TestRenderTarget(); };
 
-  tests_[kTestCompositingRenderTargetName] = [this]() { TestCompositingRenderTarget(); };
+  for (auto z : {-4, -2, 2}) {
+    tests_[MakeCompositingRenderTargetTestName(z)] = [this, z]() { TestCompositingRenderTarget(z); };
+  }
 
   for (auto bias : kGeometryTestBiases) {
     std::string test_name = MakeGeometryTestName(bias);
@@ -264,8 +266,8 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   host_.FinishDraw(allow_saving_, output_dir_, kTestRenderTargetName);
 }
 
-void VertexShaderRoundingTests::TestCompositingRenderTarget() {
-  static constexpr uint32_t kNumCompositingIterations = 1;
+void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
+  static constexpr uint32_t kNumCompositingIterations = 4;
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
   {
@@ -341,6 +343,9 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget() {
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
@@ -349,24 +354,33 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget() {
   p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
   pb_end(p);
 
-  host_.Begin(TestHost::PRIMITIVE_QUADS);
-  host_.SetTexCoord0(0.0f, 0.0f);
-  host_.SetVertex(0, 0, 0, 1.0f);
+  {
+    const float left = -1.75;
+    const float top = 1.75;
+    const float right = 1.75;
+    const float bottom = -1.75;
+    const auto depth = static_cast<float>(z);
 
-  host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f);
-  host_.SetVertex(host_.GetFramebufferWidthF(), 0, 0, 1.0f);
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(left, top, depth, 1.0f);
 
-  host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
-  host_.SetVertex(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), 0, 1.0f);
+    host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f);
+    host_.SetVertex(right, top, depth, 1.0f);
 
-  host_.SetTexCoord0(0.0f, host_.GetFramebufferHeightF());
-  host_.SetVertex(0, host_.GetFramebufferHeightF(), 0, 1.0f);
-  host_.End();
+    host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF());
+    host_.SetVertex(right, bottom, depth, 1.0f);
+
+    host_.SetTexCoord0(0.0f, host_.GetFramebufferHeightF());
+    host_.SetVertex(left, bottom, depth, 1.0f);
+    host_.End();
+  }
 
   pb_print("0x%X\n", reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestCompositingRenderTargetName);
+  std::string name = MakeCompositingRenderTargetTestName(z);
+  host_.FinishDraw(allow_saving_, output_dir_, name.c_str());
 }
 
 std::string VertexShaderRoundingTests::MakeGeometryTestName(float bias) {
@@ -398,4 +412,10 @@ static void GenerateRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y
       *pixel++ = ((x / checker_size) & 0x01) ? odd : even;
     }
   }
+}
+
+static std::string MakeCompositingRenderTargetTestName(int z) {
+  char buf[32];
+  snprintf(buf, sizeof(buf), "%s_%d", kTestCompositingRenderTargetName, z);
+  return buf;
 }

@@ -22,7 +22,7 @@ class VertexShaderRoundingTests : public TestSuite {
 
   void TestRenderTarget();
   void TestGeometry(float bias);
-  void TestCompositingRenderTarget();
+  void TestCompositingRenderTarget(int z);
 
   static std::string MakeGeometryTestName(float bias);
 
