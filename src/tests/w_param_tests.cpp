@@ -10,11 +10,18 @@
 static constexpr const char kTestWGaps[] = "w_gaps";
 static constexpr const char kTestWPositiveTriangleStrip[] = "w_pos_strip";
 static constexpr const char kTestWNegativeTriangleStrip[] = "w_neg_strip";
+static constexpr const char kTestFixedFunctionZeroW[] = "ff_w_zero";
 
-WParamTests::WParamTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir), "W param") {
+static void GenerateRGBACheckerboard(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width,
+                                     uint32_t height, uint32_t pitch, uint32_t first_color = 0xFF00FFFF,
+                                     uint32_t second_color = 0xFF000000, uint32_t checker_size = 8);
+
+WParamTests::WParamTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "W param") {
   tests_[kTestWGaps] = [this]() { this->TestWGaps(); };
   tests_[kTestWPositiveTriangleStrip] = [this]() { this->TestPositiveWTriangleStrip(); };
   tests_[kTestWNegativeTriangleStrip] = [this]() { this->TestNegativeWTriangleStrip(); };
+
+  tests_[kTestFixedFunctionZeroW] = [this]() { this->TestFixedFunctionZeroW(); };
 }
 
 void WParamTests::Initialize() {
@@ -152,14 +159,14 @@ void WParamTests::TestWGaps() {
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
   pb_end(p);
 
-  pb_printat(5, 0, (char*)"Strip");
-  pb_printat(12, 0, (char*)"Tris");
-  pb_printat(1, 14, (char*)"0,0");
-  pb_printat(15, 18, (char*)"0.9,0");
-  pb_printat(1, 23, (char*)"10.9,0");
-  pb_printat(15, 28, (char*)"-0.9,0");
-  pb_printat(1, 33, (char*)"-10.9,10");
-  pb_printat(15, 39, (char*)"inf,inf");
+  pb_printat(5, 0, (char *)"Strip");
+  pb_printat(12, 0, (char *)"Tris");
+  pb_printat(1, 14, (char *)"0,0");
+  pb_printat(15, 18, (char *)"0.9,0");
+  pb_printat(1, 23, (char *)"10.9,0");
+  pb_printat(15, 28, (char *)"-0.9,0");
+  pb_printat(1, 33, (char *)"-10.9,10");
+  pb_printat(15, 39, (char *)"inf,inf");
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, kTestWGaps);
@@ -260,4 +267,82 @@ void WParamTests::TestNegativeWTriangleStrip() {
   pb_end(p);
 
   host_.FinishDraw(allow_saving_, output_dir_, kTestWNegativeTriangleStrip);
+}
+
+void WParamTests::TestFixedFunctionZeroW() {
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  host_.PrepareDraw(0xFE251135);
+
+  // Generate a distinct texture.
+  constexpr uint32_t kTextureSize = 256;
+  {
+    memset(host_.GetTextureMemory(), 0, host_.GetTextureMemorySize());
+    GenerateRGBACheckerboard(host_.GetTextureMemory(), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4);
+
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
+    texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+    host_.SetupTextureStages();
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+  }
+
+  {
+    const float left = -1.75f;
+    const float top = 1.75f;
+    const float right = 1.75f;
+    const float bottom = -1.75f;
+    const auto depth = 0.0f;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(left, top, depth, 0.0f);
+
+    host_.SetTexCoord0(kTextureSize, 0.0f);
+    host_.SetVertex(right, top, depth, 1.0f);
+
+    host_.SetTexCoord0(kTextureSize, kTextureSize);
+    host_.SetVertex(right, bottom, depth, 1.0f);
+
+    host_.SetTexCoord0(0.0f, kTextureSize);
+    host_.SetVertex(left, bottom, depth, 1.0f);
+    host_.End();
+  }
+
+  host_.FinishDraw(allow_saving_, output_dir_, kTestFixedFunctionZeroW);
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host_.SetVertexShaderProgram(std::make_shared<PrecalculatedVertexShader>());
+}
+
+static void GenerateRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y_offset, uint32_t width,
+                                     uint32_t height, uint32_t pitch, uint32_t first_color, uint32_t second_color,
+                                     uint32_t checker_size) {
+  auto buffer = reinterpret_cast<uint8_t *>(target);
+  auto odd = first_color;
+  auto even = second_color;
+  buffer += y_offset * pitch;
+
+  for (uint32_t y = 0; y < height; ++y) {
+    auto pixel = reinterpret_cast<uint32_t *>(buffer);
+    pixel += x_offset;
+    buffer += pitch;
+
+    if (!(y % checker_size)) {
+      auto temp = odd;
+      odd = even;
+      even = temp;
+    }
+
+    for (uint32_t x = 0; x < width; ++x) {
+      *pixel++ = ((x / checker_size) & 0x01) ? odd : even;
+    }
+  }
 }

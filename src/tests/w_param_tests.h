@@ -23,6 +23,8 @@ class WParamTests : public TestSuite {
   void CreateGeometryNegativeWTriangleStrip();
   void TestNegativeWTriangleStrip();
 
+  void TestFixedFunctionZeroW();
+
  private:
   std::shared_ptr<VertexBuffer> triangle_strip_;
   std::shared_ptr<VertexBuffer> triangles_;
