@@ -28,12 +28,18 @@ static constexpr uint32_t negNanQ = 0xFFC00000;
 // Signalling NaN on x86
 static constexpr uint32_t posNanS = 0x7F800001;
 static constexpr uint32_t negNanS = 0xFF800001;
-// Max
+// Max normal
 static constexpr uint32_t posMax = 0x7F7FFFFF;
 static constexpr uint32_t negMax = 0xFF7FFFFF;
+// Min normal
+static constexpr uint32_t posMinNorm= 0x00800000;
+static constexpr uint32_t negMinNorm = 0x80800000;
+// Max subnormal
+static constexpr uint32_t posMaxSubNorm = 0x007FFFFF;
+static constexpr uint32_t negMaxSubNorm = 0x807FFFFF;
 // Min subnormal
-static constexpr uint32_t posSubNorm= 0x00000001;
-static constexpr uint32_t negSubNorm = 0x80000001;
+static constexpr uint32_t posMinSubNorm= 0x00000001;
+static constexpr uint32_t negMinSubNorm = 0x80000001;
 
 float f(uint32_t v) {
     return *((float *)&v);
@@ -53,8 +59,10 @@ static const TestConfig testConfigs[] {
     {"-NaNq_NaNq", "-NaN to +NaN (quiet)", {f(negNanQ), f(posNanQ)}},
     {"-NaNs_NaNs", "-NaN to +NaN (signalling)", {f(negNanS), f(posNanS)}},
     {"-INF_INF", "-INF to +INF", {f(negInf), f(posInf)}},
-    {"-Max_Max", "-Max to +Max", {f(negMax), f(posMax)}},
-    {"-Min_Min", "-Min to +Min", {f(negSubNorm), f(posSubNorm)}},
+    {"-Max_Max", "-Max (normal) to +Max (normal)", {f(negMax), f(posMax)}},
+    {"-MinN_MinN", "-Min (normal) to +Min (normal)", {f(negMinNorm), f(posMinNorm)}},
+    {"-MaxSN_MaxSN", "-Max (subnormal) to +Max (subnormal)", {f(negMaxSubNorm), f(posMaxSubNorm)}},
+    {"-Min_Min", "-Min (subnormal) to +Min (subnormal)", {f(negMinSubNorm), f(posMinSubNorm)}},
 };
 
 AttributeFloatTests::AttributeFloatTests(TestHost &host, std::string output_dir)
