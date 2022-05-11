@@ -1,6 +1,8 @@
 #ifndef NXDK_PGRAPH_TESTS_TEST_SUITE_H
 #define NXDK_PGRAPH_TESTS_TEST_SUITE_H
 
+#include <chrono>
+#include <fstream>
 #include <map>
 #include <string>
 #include <vector>
@@ -27,6 +29,9 @@ class TestSuite {
 
  protected:
   void SetDefaultTextureFormat() const;
+
+  std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name);
+  void LogTestEnd(const std::string &test_name, std::chrono::steady_clock::time_point start_time);
 
  protected:
   TestHost &host_;

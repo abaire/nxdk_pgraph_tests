@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "debug_output.h"
+#include "logger.h"
 #include "test_driver.h"
 #include "test_host.h"
 #include "tests/attribute_carryover_tests.h"
@@ -65,6 +66,8 @@ static constexpr int kFramebufferWidth = 640;
 static constexpr int kFramebufferHeight = 480;
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 256;
+
+static constexpr const char* kLogFileName = "log.txt";
 
 static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                             const std::string& output_directory);
@@ -117,6 +120,15 @@ int main() {
   register_suites(host, test_suites, test_output_directory);
 
   TestHost::EnsureFolderExists(test_output_directory);
+
+#ifdef ENABLE_PROGRESS_LOG
+  {
+    std::string log_file = test_output_directory + "\\" + kLogFileName;
+    DeleteFile(log_file.c_str());
+
+    Logger::Initialize(log_file, true);
+  }
+#endif
 
 #ifdef DUMP_CONFIG_FILE
   dump_config_file(test_output_directory + "\\config.cnf", test_suites);

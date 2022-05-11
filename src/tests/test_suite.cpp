@@ -1,6 +1,9 @@
 #include "test_suite.h"
 
+#include <fstream>
+
 #include "debug_output.h"
+#include "logger.h"
 #include "pbkit_ext.h"
 #include "shaders/pixel_shader_program.h"
 #include "test_host.h"
@@ -35,7 +38,9 @@ void TestSuite::Run(const std::string& test_name) {
     ASSERT(!"Invalid test name");
   }
 
+  auto start_time = LogTestStart(test_name);
   it->second();
+  LogTestEnd(test_name, start_time);
 }
 
 void TestSuite::RunAll() {
@@ -202,4 +207,29 @@ void TestSuite::Initialize() {
   PixelShaderProgram::DisablePixelShader();
 
   host_.ClearAllVertexAttributeStrideOverrides();
+}
+
+std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name) {
+  PrintMsg("Starting %s::%s\n", suite_name_.c_str(), test_name.c_str());
+
+#ifdef ENABLE_PROGRESS_LOG
+  if (allow_saving_) {
+    Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
+  }
+#endif
+
+  return std::chrono::high_resolution_clock::now();
+}
+
+void TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clock::time_point start_time) {
+  auto now = std::chrono::high_resolution_clock::now();
+  auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
+
+  PrintMsg("  Completed %s %lums\n", test_name.c_str(), elapsed);
+
+#ifdef ENABLE_PROGRESS_LOG
+  if (allow_saving_) {
+    Logger::Log() << "  Completed " << test_name << " " << elapsed << "ms" << std::endl;
+  }
+#endif
 }

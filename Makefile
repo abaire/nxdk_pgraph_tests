@@ -10,6 +10,7 @@ THIRDPARTYDIR = $(CURDIR)/third_party
 
 SRCS = \
 	$(SRCDIR)/debug_output.cpp \
+	$(SRCDIR)/logger.cpp \
 	$(SRCDIR)/main.cpp \
 	$(SRCDIR)/math3d.c \
 	$(SRCDIR)/pbkit_ext.cpp \
@@ -133,6 +134,12 @@ endif
 DUMP_CONFIG_FILE ?= n
 ifeq ($(DUMP_CONFIG_FILE),y)
 CXXFLAGS += -DDUMP_CONFIG_FILE
+endif
+
+# Cause a log file to be created and updated with metrics at the start and end of each test.
+ENABLE_PROGRESS_LOG ?= n
+ifeq ($(ENABLE_PROGRESS_LOG),y)
+CXXFLAGS += -DENABLE_PROGRESS_LOG
 endif
 
 CLEANRULES = clean-resources
