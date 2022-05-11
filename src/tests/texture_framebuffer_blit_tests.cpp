@@ -82,7 +82,8 @@ void TextureFramebufferBlitTests::Initialize() {
   pb_bind_channel(&beta4_ctx_);
   pb_bind_subchannel(SUBCH_CLASS_72, &beta4_ctx_);
 
-  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8);
+  host_.SetSurfaceFormat(host_.GetColorBufferFormat(), TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
 
   // The texture DMA channel is overridden to use a context that can address arbitrary RAM.
   // (pbkit sets up a channel that can only address a subset of video RAM)
@@ -320,7 +321,6 @@ void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char*
   host_.DrawArrays();
 
   pb_print("%s\n", test_name);
-  pb_print("0x%X\n", texture_destination & 0x03FFFFFF);
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);

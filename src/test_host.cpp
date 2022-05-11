@@ -69,6 +69,8 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
     texture_stage_[i].SetTextureOffset(texture_offset);
     texture_stage_[i].SetPaletteOffset(palette_offset);
   }
+
+  SetSurfaceFormat(SCF_A8R8G8B8, SZF_Z24S8, framebuffer_width_, framebuffer_height_, surface_swizzle_);
 }
 
 TestHost::~TestHost() {
@@ -112,25 +114,42 @@ void TestHost::Clear(uint32_t argb, uint32_t depth_value, uint8_t stencil_value)
 }
 
 void TestHost::SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format, uint32_t width,
-                                uint32_t height, bool swizzle, uint32_t clip_x, uint32_t clip_y,
-                                AntiAliasingSetting aa) const {
-  uint32_t value = SET_MASK(NV097_SET_SURFACE_FORMAT_COLOR, color_format) |
-                   SET_MASK(NV097_SET_SURFACE_FORMAT_ZETA, depth_format) |
-                   SET_MASK(NV097_SET_SURFACE_FORMAT_ANTI_ALIASING, aa) |
-                   SET_MASK(NV097_SET_SURFACE_FORMAT_TYPE,
-                            swizzle ? NV097_SET_SURFACE_FORMAT_TYPE_SWIZZLE : NV097_SET_SURFACE_FORMAT_TYPE_PITCH);
-  if (swizzle) {
-    uint32_t log_width = 31 - __builtin_clz(width);
+                                uint32_t height, bool swizzle, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
+                                uint32_t clip_height, AntiAliasingSetting aa) {
+  surface_color_format_ = color_format;
+  depth_buffer_format_ = depth_format;
+  surface_swizzle_ = swizzle;
+  surface_width_ = width;
+  surface_height_ = height;
+  surface_clip_x_ = clip_x;
+  surface_clip_y_ = clip_y;
+  surface_clip_width_ = clip_width;
+  surface_clip_height_ = clip_height;
+  antialiasing_setting_ = aa;
+
+  HandleDepthBufferFormatChange();
+}
+
+void TestHost::CommitSurfaceFormat() const {
+  uint32_t value = SET_MASK(NV097_SET_SURFACE_FORMAT_COLOR, surface_color_format_) |
+                   SET_MASK(NV097_SET_SURFACE_FORMAT_ZETA, depth_buffer_format_) |
+                   SET_MASK(NV097_SET_SURFACE_FORMAT_ANTI_ALIASING, antialiasing_setting_) |
+                   SET_MASK(NV097_SET_SURFACE_FORMAT_TYPE, surface_swizzle_ ? NV097_SET_SURFACE_FORMAT_TYPE_SWIZZLE
+                                                                            : NV097_SET_SURFACE_FORMAT_TYPE_PITCH);
+  if (surface_swizzle_) {
+    uint32_t log_width = 31 - __builtin_clz(surface_width_);
     value |= SET_MASK(NV097_SET_SURFACE_FORMAT_WIDTH, log_width);
-    uint32_t log_height = 31 - __builtin_clz(height);
+    uint32_t log_height = 31 - __builtin_clz(surface_height_);
     value |= SET_MASK(NV097_SET_SURFACE_FORMAT_HEIGHT, log_height);
   }
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_SURFACE_FORMAT, value);
-  if (!swizzle) {
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, (width << 16) + clip_x);
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (height << 16) + clip_y);
+  if (!surface_swizzle_) {
+    uint32_t width = surface_clip_width_ ? surface_clip_width_ : surface_width_;
+    uint32_t height = surface_clip_height_ ? surface_clip_height_ : surface_height_;
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, (width << 16) + surface_clip_x_);
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (height << 16) + surface_clip_y_);
   }
   pb_end(p);
 }
@@ -168,9 +187,7 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   pb_reset();
 
   SetupTextureStages();
-
-  SetSurfaceFormat(SCF_A8R8G8B8, (SurfaceZetaFormat)depth_buffer_format_, framebuffer_width_, framebuffer_height_,
-                   surface_swizzle_);
+  CommitSurfaceFormat();
 
   // Override the values set in pb_init. Unfortunately the default is not exposed and must be recreated here.
 
@@ -877,11 +894,9 @@ void TestHost::SetDefaultTextureParams(uint32_t stage) {
   texture_stage_[stage].SetImageDimensions(max_texture_width_, max_texture_height_);
 }
 
-void TestHost::SetDepthBufferFormat(uint32_t fmt) {
+void TestHost::HandleDepthBufferFormatChange() {
   // Note: This method intentionally recalculates matrices even if the format has not changed as it is called by
   // SetDepthBufferFloatMode when that mode changes.
-  depth_buffer_format_ = fmt;
-
   switch (fixed_function_matrix_mode_) {
     case MATRIX_MODE_USER:
       break;
@@ -901,8 +916,7 @@ void TestHost::SetDepthBufferFloatMode(bool enabled) {
     return;
   }
   depth_buffer_mode_float_ = enabled;
-
-  SetDepthBufferFormat(depth_buffer_format_);
+  HandleDepthBufferFormatChange();
 }
 
 int TestHost::SetTexture(SDL_Surface *surface, uint32_t stage) {

@@ -453,7 +453,8 @@ void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool
                                                      uint32_t shadow_comp_function, float min_val, float max_val,
                                                      float ref_val, const std::string &name) {
   host_.SetVertexShaderProgram(nullptr);
-  host_.SetDepthBufferFormat(depth_format);
+  host_.SetSurfaceFormat(host_.GetColorBufferFormat(), static_cast<TestHost::SurfaceZetaFormat>(depth_format),
+                         host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetDepthBufferFloatMode(float_depth);
 
   auto project_point = [this](VECTOR out, const VECTOR in) { host_.ProjectPoint(out, in); };
@@ -478,7 +479,8 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetVertexShaderProgram(shader);
-  host_.SetDepthBufferFormat(depth_format);
+  host_.SetSurfaceFormat(host_.GetColorBufferFormat(), static_cast<TestHost::SurfaceZetaFormat>(depth_format),
+                         host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetDepthBufferFloatMode(float_depth);
 
   auto project_point = [shader](VECTOR out, const VECTOR in) { shader->ProjectPoint(out, in); };

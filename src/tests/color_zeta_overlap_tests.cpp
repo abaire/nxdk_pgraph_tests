@@ -35,7 +35,10 @@ ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost &host, std::string output_
 void ColorZetaOverlapTests::Initialize() {
   TestSuite::Initialize();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8);
+
+  // TODO: Switch to SCF_X8R8G8B8_O8R8G8B8 when supported in xemu since the tests will never properly set alpha.
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
 }
 
 void ColorZetaOverlapTests::TestColorIntoDepth() {
@@ -61,6 +64,11 @@ void ColorZetaOverlapTests::TestColorIntoDepth() {
   p = pb_begin();
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
   pb_end(p);
+
+  host_.SetFillColorRegion(0xFE242424);
+
+  pb_print("%s  ZB=0x00BFFF00", kColorIntoDepthTestName);
+  pb_draw_text_screen();
 
   std::string z_name = kColorIntoDepthTestName;
   z_name += "_ZB";
@@ -91,6 +99,9 @@ void ColorZetaOverlapTests::TestDepthIntoColor() {
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
   pb_end(p);
 
+  pb_print("%s\nC=0x00000000", kSwapTestName);
+  pb_draw_text_screen();
+
   std::string z_name = kDepthIntoColorTestName;
   z_name += "_ZB";
   host_.FinishDraw(allow_saving_, output_dir_, kDepthIntoColorTestName, z_name);
@@ -101,7 +112,7 @@ void ColorZetaOverlapTests::TestSwap() {
 
   auto buffer = host_.AllocateVertexBuffer(6);
   Color c(0.0, 0.75, 0.66, 0.0);
-  float z = 190.0f;
+  float z = 160.0f;
   float scale = 30.0f;
   buffer->DefineBiTri(0, kLeft * scale, kTop * scale, kRight * scale, kBottom * scale, z, z, z, z, c, c, c, c);
 
@@ -121,6 +132,9 @@ void ColorZetaOverlapTests::TestSwap() {
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
   pb_end(p);
+
+  pb_print("%s\nC=0x00000000\nZB=0x00A8BF00", kSwapTestName);
+  pb_draw_text_screen();
 
   std::string z_name = kSwapTestName;
   z_name += "_ZB";

@@ -34,16 +34,6 @@ MaterialAlphaTests::MaterialAlphaTests(TestHost& host, std::string output_dir)
 
 void MaterialAlphaTests::Initialize() {
   TestSuite::Initialize();
-  // NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8
-  const TextureFormatInfo& texture_format = kTextureFormats[3];
-  host_.SetTextureFormat(texture_format);
-
-  host_.SetVertexShaderProgram(nullptr);
-
-  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z16);
-  host_.SetDepthBufferFloatMode(false);
-
-  host_.SetTextureStageEnabled(0, false);
 
   CreateGeometry();
 
@@ -54,7 +44,6 @@ void MaterialAlphaTests::Initialize() {
 }
 
 void MaterialAlphaTests::Deinitialize() {
-  host_.SetTextureStageEnabled(0, true);
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 0);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 0);

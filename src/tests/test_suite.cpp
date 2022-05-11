@@ -63,6 +63,9 @@ void TestSuite::SetDefaultTextureFormat() const {
 }
 
 void TestSuite::Initialize() {
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
+
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
@@ -194,8 +197,6 @@ void TestSuite::Initialize() {
   pb_end(p);
 
   host_.SetDefaultViewportAndFixedFunctionMatrices();
-  host_.SetSurfaceSwizzle(false);
-  host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z16);
   host_.SetDepthBufferFloatMode(false);
 
   host_.SetVertexShaderProgram(nullptr);

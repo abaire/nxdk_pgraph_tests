@@ -241,12 +241,26 @@ class TestHost {
   int SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage = 0);
   void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 
-  inline void SetSurfaceSwizzle(bool enable = true) { surface_swizzle_ = enable; }
-  void SetDepthBufferFormat(uint32_t fmt);
-  uint32_t GetDepthBufferFormat() const { return depth_buffer_format_; }
+  // Set the surface format
+  // width and height are treated differently depending on whether swizzle is enabled or not.
+  // swizzle = true
+  //     width and height must be a power of two
+  // swizzle = false
+  //     width and height may be arbitrary positive values and will be used to set the clip dimensions
+  //
+  // Does not take effect until CommitSurfaceFormat is called.
+  void SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format, uint32_t width,
+                        uint32_t height, bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0,
+                        uint32_t clip_width = 0, uint32_t clip_height = 0, AntiAliasingSetting aa = AA_CENTER_1);
+
+  SurfaceColorFormat GetColorBufferFormat() const { return surface_color_format_; }
+
+  SurfaceZetaFormat GetDepthBufferFormat() const { return depth_buffer_format_; }
 
   void SetDepthBufferFloatMode(bool enabled);
   bool GetDepthBufferFloatMode() const { return depth_buffer_mode_float_; }
+
+  void CommitSurfaceFormat() const;
 
   uint32_t GetMaxTextureWidth() const { return max_texture_width_; }
   uint32_t GetMaxTextureHeight() const { return max_texture_height_; }
@@ -295,16 +309,6 @@ class TestHost {
 
   void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
                   const std::string &z_buffer_name = "");
-
-  // Set the surface format
-  // width and height are treated differently depending on whether swizzle is enabled or not.
-  // swizzle = true
-  //     width and height must be a power of two
-  // swizzle = false
-  //     width and height may be arbitrary positive values and will be used to set the clip dimensions
-  void SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format, uint32_t width,
-                        uint32_t height, bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0,
-                        AntiAliasingSetting aa = AA_CENTER_1) const;
 
   void SetDepthClip(float min, float max) const;
 
@@ -518,6 +522,8 @@ class TestHost {
   static void EnsureFolderExists(const std::string &folder_path);
 
  private:
+  // Update matrices when the depth buffer format changes.
+  void HandleDepthBufferFormatChange();
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
                              CombinerMapping c_mapping, CombinerSource d_source, bool d_alpha,
@@ -539,8 +545,17 @@ class TestHost {
   TextureStage texture_stage_[4];
 
   bool surface_swizzle_{false};
-  uint32_t depth_buffer_format_{NV097_SET_SURFACE_FORMAT_ZETA_Z24S8};
+  SurfaceColorFormat surface_color_format_{SCF_A8R8G8B8};
+  SurfaceZetaFormat depth_buffer_format_{SZF_Z24S8};
   bool depth_buffer_mode_float_{false};
+  uint32_t surface_clip_x_{0};
+  uint32_t surface_clip_y_{0};
+  uint32_t surface_clip_width_{640};
+  uint32_t surface_clip_height_{480};
+  uint32_t surface_width_{640};
+  uint32_t surface_height_{480};
+  AntiAliasingSetting antialiasing_setting_{AA_CENTER_1};
+
   std::shared_ptr<VertexShaderProgram> vertex_shader_program_{};
 
   std::shared_ptr<VertexBuffer> vertex_buffer_{};

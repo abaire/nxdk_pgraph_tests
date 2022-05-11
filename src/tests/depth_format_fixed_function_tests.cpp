@@ -237,7 +237,8 @@ void DepthFormatFixedFunctionTests::CreateGeometry() {
 }
 
 void DepthFormatFixedFunctionTests::Test(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff) {
-  host_.SetDepthBufferFormat(format.format);
+  host_.SetSurfaceFormat(host_.GetColorBufferFormat(), static_cast<TestHost::SurfaceZetaFormat>(format.format),
+                         host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetDepthBufferFloatMode(format.floating_point);
   host_.PrepareDraw(0xFF000000, depth_cutoff);
 
