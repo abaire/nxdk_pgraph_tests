@@ -128,7 +128,6 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
     vs->PrepareDraw();
 
     // Draw geometry
-    uint32_t attributes = host_.POSITION | host_.DIFFUSE;
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     for (int v = 0; v < vb.size(); v += 8) {
       host_.SetDiffuse(vb[v + 4], vb[v + 5], vb[v + 6], vb[v + 7]);
@@ -138,8 +137,7 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
   }
 
   // Draw descriptive text
-  std::string fileName = std::string(tConfig.fileName);
-  pb_print("%s\n%s\n0x%08x to 0x%08x\n", fileName.c_str(), tConfig.description,
+  pb_print("%s\n%s\n0x%08x to 0x%08x\n", tConfig.fileName, tConfig.description,
            *(uint32_t *)&tConfig.attribute_value[0], *(uint32_t *)&tConfig.attribute_value[1]);
   pb_print("Multiplier: n/a");
   for (auto &m : mulVals) {
@@ -147,5 +145,5 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, fileName);
+  host_.FinishDraw(allow_saving_, output_dir_, tConfig.fileName);
 }
