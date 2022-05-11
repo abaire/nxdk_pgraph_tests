@@ -23,6 +23,7 @@ SRCS = \
 	$(SRCDIR)/test_driver.cpp \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
+	$(SRCDIR)/tests/attribute_clamping_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
 	$(SRCDIR)/tests/attribute_float_tests.cpp \
 	$(SRCDIR)/tests/clear_tests.cpp \

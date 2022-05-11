@@ -22,6 +22,7 @@
 #include "test_driver.h"
 #include "test_host.h"
 #include "tests/attribute_carryover_tests.h"
+#include "tests/attribute_clamping_tests.h"
 #include "tests/attribute_explicit_setter_tests.h"
 #include "tests/attribute_float_tests.h"
 #include "tests/clear_tests.h"
@@ -262,6 +263,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<AttributeCarryoverTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<AttributeClampingTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
