@@ -198,6 +198,7 @@ void TestSuite::Initialize() {
   host_.SetDepthBufferFormat(NV097_SET_SURFACE_FORMAT_ZETA_Z16);
   host_.SetDepthBufferFloatMode(false);
 
+  host_.SetVertexShaderProgram(nullptr);
   SetDefaultTextureFormat();
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
