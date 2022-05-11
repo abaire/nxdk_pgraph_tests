@@ -515,6 +515,8 @@ class TestHost {
   // Rounds the given integer in the same way as nv2a hardware (only remainders >= 9/16th are rounded up).
   static float NV2ARound(float input);
 
+  static void EnsureFolderExists(const std::string &folder_path);
+
  private:
   uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
                              bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
@@ -522,7 +524,6 @@ class TestHost {
                              CombinerMapping d_mapping) const;
   uint32_t MakeOutputCombiner(CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst, bool ab_dot_product,
                               bool cd_dot_product, CombinerSumMuxMode sum_or_mux, CombinerOutOp op) const;
-  static void EnsureFolderExists(const std::string &folder_path);
   static std::string PrepareSaveFile(std::string output_directory, const std::string &filename,
                                      const std::string &ext = ".png");
   static void SaveBackBuffer(const std::string &output_directory, const std::string &name);

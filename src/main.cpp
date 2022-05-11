@@ -42,13 +42,13 @@
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_tests.h"
 #include "tests/texture_border_tests.h"
-#include "tests/texture_signed_component_tests.h"
 #include "tests/texture_format_tests.h"
 #include "tests/texture_framebuffer_blit_tests.h"
 #include "tests/texture_matrix_tests.h"
 #include "tests/texture_render_target_tests.h"
 #include "tests/texture_render_update_in_place_tests.h"
 #include "tests/texture_shadow_comparator_tests.h"
+#include "tests/texture_signed_component_tests.h"
 #include "tests/three_d_primitive_tests.h"
 #include "tests/two_d_line_tests.h"
 #include "tests/vertex_shader_independence_tests.h"
@@ -115,6 +115,8 @@ int main() {
 
   std::vector<std::shared_ptr<TestSuite>> test_suites;
   register_suites(host, test_suites, test_output_directory);
+
+  TestHost::EnsureFolderExists(test_output_directory);
 
 #ifdef DUMP_CONFIG_FILE
   dump_config_file(test_output_directory + "\\config.cnf", test_suites);
@@ -191,6 +193,9 @@ static void dump_config_file(const std::string& config_file_path,
   if (!ensure_drive_mounted(config_file_path[0])) {
     ASSERT(!"Failed to mount config path")
   }
+
+  const char* out_path = config_file_path.c_str();
+  PrintMsg("Writing config file to %s\n", out_path);
 
   std::ofstream config_file(config_file_path);
   ASSERT(config_file && "Failed to open config file for output");
