@@ -13,9 +13,7 @@ class Logger {
  private:
   Logger(const std::string &path, bool truncate_log = false);
 
-#ifdef ENABLE_PROGRESS_LOG
   std::ofstream log_file_;
-#endif
 
   static Logger *singleton_;
 };

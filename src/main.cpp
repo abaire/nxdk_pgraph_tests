@@ -217,6 +217,7 @@ static void dump_config_file(const std::string& config_file_path,
     for (auto& test_name : suite->TestNames()) {
       config_file << "# " << test_name << std::endl;
     }
+    config_file << std::endl << "#-------------------" << std::endl;
   }
 }
 
