@@ -345,5 +345,11 @@ void WParamTests::TestFixedFunctionZeroW(bool draw_quad) {
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
-  host_.SetVertexShaderProgram(std::make_shared<PrecalculatedVertexShader>());
+
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+  host_.SetDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 }
