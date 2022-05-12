@@ -146,37 +146,33 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   host_.PrepareDraw(0xFE202020);
 
-  uint32_t *p;
   // Redirect the color output to the target texture.
-  p = pb_begin();
-  p = pb_push1(
-      p, NV097_SET_SURFACE_PITCH,
-      SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kTexturePitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  {
+    auto p = pb_begin();
+    p = pb_push1(
+        p, NV097_SET_SURFACE_PITCH,
+        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kTexturePitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
 
-  bool swizzle = true;
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
-  host_.CommitSurfaceFormat();
-  if (!swizzle) {
-    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
-    host_.Clear(0xFF000000, 0, 0);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
+    host_.CommitSurfaceFormat();
+
+    host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
+
+    // This is what triggers the erroneous (rounding error) offset
+    host_.SetViewportOffset(320.531250f, 240.531250f, 0.0f, 0.0f);
+    host_.SetViewportScale(320.0f, -240.0f, 16777215.0f, 0.0f);
+    host_.SetDepthClip(0.0f, 16777215.0f);
   }
-
-  host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
-
-  // This is what triggers the erroneous (rounding error) offset
-  host_.SetViewportOffset(320.531250f, 240.531250f, 0.0f, 0.0f);
-  host_.SetViewportScale(320.0f, -240.0f, 16777215.0f, 0.0f);
-  host_.SetDepthClip(0.0f, 16777215.0f);
 
   // Manually load the vertex shader and uniforms.
   {
-    p = pb_begin();
+    auto p = pb_begin();
     p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0x0);
     p = pb_push1(
         p, NV097_SET_TRANSFORM_EXECUTION_MODE,
@@ -244,13 +240,15 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
     host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
 
-    p = pb_begin();
+    auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                  SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
                      SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
     p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
     p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
     pb_end(p);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                           host_.GetFramebufferHeight());
 
     host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
 
@@ -284,6 +282,8 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
   host_.PrepareDraw(0xFE202020);
 
   host_.SetTextureStageEnabled(0, true);
@@ -294,13 +294,13 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   host_.SetupTextureStages();
 
   host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight(), false);
-  host_.CommitSurfaceFormat();
 
   // Point the color buffer at the texture and mix the left hand side with itself multiple times.
   {
     auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
     p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
     p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
 
@@ -347,11 +347,11 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
   p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
   pb_end(p);
 
   {
@@ -376,11 +376,11 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
     host_.End();
   }
 
-  pb_print("0x%X\n", reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
+  std::string name = MakeCompositingRenderTargetTestName(z);
+  pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  std::string name = MakeCompositingRenderTargetTestName(z);
-  host_.FinishDraw(allow_saving_, output_dir_, name.c_str());
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string VertexShaderRoundingTests::MakeGeometryTestName(float bias) {

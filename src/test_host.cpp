@@ -82,8 +82,8 @@ TestHost::~TestHost() {
   texture_palette_memory_ = nullptr;
 }
 
-void TestHost::SetDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value, uint32_t left, uint32_t top,
-                                     uint32_t width, uint32_t height) const {
+void TestHost::ClearDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value, uint32_t left, uint32_t top,
+                                       uint32_t width, uint32_t height) const {
   if (!width || width > framebuffer_width_) {
     width = framebuffer_width_;
   }
@@ -94,7 +94,7 @@ void TestHost::SetDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value
   set_depth_stencil_buffer_region(depth_buffer_format_, depth_value, stencil_value, left, top, width, height);
 }
 
-void TestHost::SetFillColorRegion(uint32_t argb, uint32_t left, uint32_t top, uint32_t width, uint32_t height) const {
+void TestHost::ClearColorRegion(uint32_t argb, uint32_t left, uint32_t top, uint32_t width, uint32_t height) const {
   if (!width || width > framebuffer_width_) {
     width = framebuffer_width_;
   }
@@ -108,8 +108,8 @@ void TestHost::EraseText() { pb_erase_text_screen(); }
 
 void TestHost::Clear(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) const {
   SetupControl0();
-  SetFillColorRegion(argb);
-  SetDepthStencilRegion(depth_value, stencil_value);
+  ClearColorRegion(argb);
+  ClearDepthStencilRegion(depth_value, stencil_value);
   EraseText();
 }
 
@@ -152,6 +152,9 @@ void TestHost::CommitSurfaceFormat() const {
     p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (height << 16) + surface_clip_y_);
   }
   pb_end(p);
+
+  float max_depth = MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_);
+  SetDepthClip(0.0f, max_depth);
 }
 
 void TestHost::SetDepthClip(float min, float max) const {
@@ -190,10 +193,6 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
   CommitSurfaceFormat();
 
   // Override the values set in pb_init. Unfortunately the default is not exposed and must be recreated here.
-
-  float max_depth = MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_);
-
-  SetDepthClip(0.0f, max_depth);
 
   Clear(argb, depth_value, stencil_value);
 

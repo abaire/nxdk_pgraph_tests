@@ -9,6 +9,8 @@
 #include "test_host.h"
 #include "texture_format.h"
 
+#define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
+
 TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name)
     : host_(host), output_dir_(std::move(output_dir)), suite_name_(std::move(suite_name)) {
   output_dir_ += "\\";
@@ -63,10 +65,15 @@ void TestSuite::SetDefaultTextureFormat() const {
 }
 
 void TestSuite::Initialize() {
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
 
   auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);

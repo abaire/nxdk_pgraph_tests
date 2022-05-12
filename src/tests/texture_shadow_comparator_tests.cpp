@@ -618,7 +618,7 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
   pb_end(p);
 
   // Clear the visible part.
-  host_.SetFillColorRegion(0xFE443333);
+  host_.ClearColorRegion(0xFE443333);
 
   // Render a quad using the zeta buffer as a shadow map applied to the diffuse color.
   // The texture map is used as a color source and will either be 0xFFFFFFFF or 0x00000000 for any given texel.
