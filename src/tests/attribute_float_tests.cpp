@@ -53,6 +53,9 @@ static const TestConfig testConfigs[]{
     {"-8_1", "-8 to 1", {-8.f, 1.f}},
     {"0_8", "0 to 8", {0.f, 8.f}},
     {"-NaNq_NaNq", "-NaN to +NaN (quiet)", {f(negNanQ), f(posNanQ)}},
+    // TODO: It appears that the handling of the signaling NaN is nondeterministic.
+    // Sometimes it is converted to quiet NaN. As pgraph operates on integers and does a conversion from float back to
+    // int, it may be better to fall back into setting raw values without doing the float conversions.
     {"-NaNs_NaNs", "-NaN to +NaN (signalling)", {f(negNanS), f(posNanS)}},
     {"-INF_INF", "-INF to +INF", {f(negInf), f(posInf)}},
     {"-Max_Max", "-Max (normal) to +Max (normal)", {f(negMax), f(posMax)}},
