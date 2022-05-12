@@ -173,6 +173,7 @@ void TextureBorderTests::Test2D() {
   host_.SetVertexBuffer(vertex_buffers_[3]);
   host_.DrawArrays();
 
+  // TODO: This leads to non-deterministic output, part of the rendered texture seems to be uninitialized data.
   stage.SetBorderFromColor(false);
   stage.SetUWrap(TextureStage::WRAP_BORDER, false);
   stage.SetVWrap(TextureStage::WRAP_BORDER, false);
