@@ -106,6 +106,53 @@ void TextureRenderTargetTests::CreateGeometry() {
   framebuffer_vertex_buffer_->Linearize(fb_width, fb_height);
 }
 
+void TextureRenderTargetTests::ResetAndDrawFromRenderTarget() const {
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+  const auto render_target_address = reinterpret_cast<uint32_t>(render_target_) & 0x03FFFFFF;
+  const auto normal_texture_address = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
+
+  // Reset the color buffer to the framebuffer and set the texture source to the render target.
+  {
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                           host_.GetFramebufferHeight());
+    host_.CommitSurfaceFormat();
+
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+
+    host_.SetVertexShaderProgram(nullptr);
+    host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+    host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    pb_end(p);
+
+    host_.PrepareDraw(0xFE212021);
+
+    // PrepareDraw overwrites the texture offset.
+    p = pb_begin();
+    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, render_target_address);
+    pb_end(p);
+
+    host_.SetVertexBuffer(framebuffer_vertex_buffer_);
+    host_.DrawArrays();
+  }
+
+  // Restore the texture source.
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, normal_texture_address);
+    pb_end(p);
+  }
+}
+
 void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
@@ -124,57 +171,34 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
   SDL_FreeSurface(gradient_surface);
   ASSERT(!update_texture_result && "Failed to set texture");
 
-  uint32_t *p;
-
   host_.PrepareDraw(0xFE202020);
 
   // Redirect the color output to the target texture.
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  {
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
+    host_.CommitSurfaceFormat();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
-  host_.SetVertexShaderProgram(shader);
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
 
-  host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
+    // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
 
-  host_.SetVertexBuffer(render_target_vertex_buffer_);
-  bool swizzle = true;
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
-  if (!swizzle) {
-    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
-    host_.Clear(0xFF000000, 0, 0);
+    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    host_.SetVertexShaderProgram(shader);
+
+    host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
+    host_.SetVertexBuffer(render_target_vertex_buffer_);
+    host_.DrawArrays();
   }
 
-  host_.DrawArrays();
-
-  texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-  host_.SetVertexShaderProgram(nullptr);
-  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-
-  host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
-  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
-
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  pb_end(p);
-
-  host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
-
-  host_.SetVertexBuffer(framebuffer_vertex_buffer_);
-  host_.PrepareDraw(0xFE202020);
-  host_.DrawArrays();
+  ResetAndDrawFromRenderTarget();
 
   pb_print("N: %s\n", texture_format.name);
   pb_print("F: 0x%x\n", texture_format.xbox_format);
@@ -194,6 +218,9 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 
 void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+  const auto render_target_address = reinterpret_cast<uint32_t>(render_target_) & 0x03FFFFFF;
+  const auto normal_texture_address = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
+
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
   host_.SetTextureFormat(texture_format);
   std::string test_name = MakePalettizedTestName(size);
@@ -213,52 +240,32 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
   delete[] palette;
   ASSERT(!err && "Failed to set palette");
 
-  host_.PrepareDraw(0xFE202020);
+  host_.PrepareDraw(0xFE222020);
 
-  uint32_t *p;
   // Redirect the color output to the target texture.
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
-  host_.SetVertexShaderProgram(shader);
+    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    host_.SetVertexShaderProgram(shader);
 
-  host_.SetVertexBuffer(render_target_vertex_buffer_);
-  bool swizzle = true;
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
-  if (!swizzle) {
-    // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
-    host_.Clear(0xFF000000, 0, 0);
+    host_.SetVertexBuffer(render_target_vertex_buffer_);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
+    host_.CommitSurfaceFormat();
+
+    host_.DrawArrays();
   }
 
-  host_.DrawArrays();
-
-  host_.SetVertexShaderProgram(nullptr);
-  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-
-  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
-
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  pb_end(p);
-
-  host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
-
-  host_.SetVertexBuffer(framebuffer_vertex_buffer_);
-  host_.PrepareDraw(0xFE202020);
-  host_.DrawArrays();
+  ResetAndDrawFromRenderTarget();
 
   pb_print("N: %s\n", texture_format.name);
   pb_print("Ps: %d\n", size);

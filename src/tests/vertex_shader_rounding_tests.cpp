@@ -161,6 +161,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   bool swizzle = true;
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, swizzle);
+  host_.CommitSurfaceFormat();
   if (!swizzle) {
     // Linear targets should be cleared to avoid uninitialized memory in regions not explicitly drawn to.
     host_.Clear(0xFF000000, 0, 0);
@@ -295,6 +296,7 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight(), false);
+  host_.CommitSurfaceFormat();
 
   // Point the color buffer at the texture and mix the left hand side with itself multiple times.
   {

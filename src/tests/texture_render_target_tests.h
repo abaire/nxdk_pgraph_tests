@@ -23,6 +23,8 @@ class TextureRenderTargetTests : public TestSuite {
   void Test(const TextureFormatInfo &texture_format);
   void TestPalettized(TestHost::PaletteSize size);
 
+  void ResetAndDrawFromRenderTarget() const;
+
   static std::string MakeTestName(const TextureFormatInfo &texture_format);
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
 

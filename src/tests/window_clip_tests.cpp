@@ -194,6 +194,7 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
     p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
     pb_end(p);
     host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kImageWidth, kImageHeight, false);
+    host_.CommitSurfaceFormat();
   }
 
   Draw(clip_exclusive, swap_order, c1_left, c1_top, c1_right, c1_bottom, c2_left, c2_top, c2_right, c2_bottom);
@@ -209,6 +210,7 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
     pb_end(p);
     host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                            host_.GetFramebufferHeight(), false);
+    host_.CommitSurfaceFormat();
   }
 
   host_.Clear(0xFE332233);

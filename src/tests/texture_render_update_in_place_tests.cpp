@@ -90,6 +90,7 @@ void TextureRenderUpdateInPlaceTests::Test() {
   host_.SetVertexBuffer(render_target_vertex_buffer_);
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetMaxTextureWidth(),
                          host_.GetMaxTextureHeight(), true);
+  host_.CommitSurfaceFormat();
 
   // Set the render target as the color output and render a pure white rectangle.
   {
@@ -149,6 +150,7 @@ void TextureRenderUpdateInPlaceTests::Test() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight(), false);
+  host_.CommitSurfaceFormat();
 
   host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
