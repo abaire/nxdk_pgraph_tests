@@ -212,6 +212,15 @@ static void dump_config_file(const std::string& config_file_path,
   std::ofstream config_file(config_file_path);
   ASSERT(config_file && "Failed to open config file for output");
 
+  config_file << "# pgraph test suite configuration" << std::endl;
+  config_file << "# Lines starting with '#' are ignored." << std::endl;
+  config_file << "# To enable a test suite, add its name on a single line with no leading #. E.g.," << std::endl;
+  config_file << "# Lighting normals" << std::endl;
+  config_file << "# To disable a single test within a suite, add the name of the test prefixed with" << std::endl;
+  config_file << "#  a '-' after the uncommented suite. E.g.," << std::endl;
+  config_file << "# -NoNormal" << std::endl;
+  config_file << std::endl;
+
   for (auto& suite : test_suites) {
     config_file << suite->Name() << std::endl;
     for (auto& test_name : suite->TestNames()) {
