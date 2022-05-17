@@ -73,6 +73,8 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
                    SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, host_.GetFramebufferWidth() << 16);
+  p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, host_.GetFramebufferHeight() << 16);
 
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
