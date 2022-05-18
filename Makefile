@@ -13,8 +13,9 @@ SRCS = \
 	$(SRCDIR)/logger.cpp \
 	$(SRCDIR)/main.cpp \
 	$(SRCDIR)/math3d.c \
-	$(SRCDIR)/pbkit_ext.cpp \
 	$(SRCDIR)/menu_item.cpp \
+	$(SRCDIR)/pbkit_ext.cpp \
+	$(SRCDIR)/pgraph_diff_token.cpp \
 	$(SRCDIR)/shaders/orthographic_vertex_shader.cpp \
 	$(SRCDIR)/shaders/perspective_vertex_shader.cpp \
 	$(SRCDIR)/shaders/pixel_shader_program.cpp \
@@ -141,6 +142,13 @@ endif
 ENABLE_PROGRESS_LOG ?= n
 ifeq ($(ENABLE_PROGRESS_LOG),y)
 CXXFLAGS += -DENABLE_PROGRESS_LOG
+endif
+
+# Causes a diff of the nv2a PGRAPH registers to be done between the start and end of each test in order to detect state
+# leakage. Output is logged to XBDM and will be written into the progress log if it is enabled.
+ENABLE_PGRAPH_REGION_DIFF ?= n
+ifeq ($(ENABLE_PGRAPH_REGION_DIFF),y)
+CXXFLAGS += -DENABLE_PGRAPH_REGION_DIFF
 endif
 
 CLEANRULES = clean-resources

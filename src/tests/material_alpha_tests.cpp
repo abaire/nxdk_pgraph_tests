@@ -155,12 +155,15 @@ void MaterialAlphaTests::Test(uint32_t diffuse_source, float material_alpha) {
   p = pb_push1(p, NV097_SET_MATERIAL_EMISSION, 0x0);
   p = pb_push1(p, NV097_SET_MATERIAL_EMISSION + 4, 0x0);
   p = pb_push1(p, NV097_SET_MATERIAL_EMISSION + 8, 0x0);
+  pb_end(p);
 
   // Material's diffuse alpha float
+  PGRAPHDiffToken diff_token;
+  p = pb_begin();
   uint32_t alpha_int = *(uint32_t*)&material_alpha;
   p = pb_push1(p, NV097_SET_MATERIAL_ALPHA, alpha_int);
-
   pb_end(p);
+  diff_token.DumpDiff();
 
   host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE | host_.SPECULAR);
 
