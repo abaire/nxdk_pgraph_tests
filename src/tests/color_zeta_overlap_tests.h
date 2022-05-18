@@ -20,6 +20,13 @@ class ColorZetaOverlapTests : public TestSuite {
   void TestColorIntoDepth();
   void TestDepthIntoColor();
   void TestSwap();
+
+  // Tests the behavior identified in xemu #405
+  void TestXemuAdjacentSurfaceWithClipOffset(bool swizzle);
+  void TestXemuAdjacentSurfaceWithAA();
+
+  void SetSurfaceDMAs() const;
+  void RestoreSurfaceDMAs() const;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_COLOR_ZETA_OVERLAP_TESTS_H

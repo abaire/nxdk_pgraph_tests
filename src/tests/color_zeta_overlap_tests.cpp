@@ -22,6 +22,8 @@ const uint32_t kDefaultDMAZetaChannel = 10;
 static constexpr char kColorIntoDepthTestName[] = "ColorIntoZeta";
 static constexpr char kDepthIntoColorTestName[] = "ZetaIntoColor";
 static constexpr char kSwapTestName[] = "Swap";
+static constexpr char kXemuAdjacentWithClipOffsetTest[] = "AdjacentWithClipOffset";
+static constexpr char kXemuAdjacentWithAATest[] = "AdjacentWithAA";
 
 static constexpr float kLeft = -2.75f;
 static constexpr float kRight = 2.75f;
@@ -33,6 +35,14 @@ ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost &host, std::string output_
   tests_[kColorIntoDepthTestName] = [this]() { TestColorIntoDepth(); };
   tests_[kDepthIntoColorTestName] = [this]() { TestDepthIntoColor(); };
   tests_[kSwapTestName] = [this]() { TestSwap(); };
+
+  for (auto swizzle : {false, true}) {
+    std::string suffix = swizzle ? "_sz" : "_l";
+    tests_[kXemuAdjacentWithClipOffsetTest + suffix] = [this, swizzle]() {
+      TestXemuAdjacentSurfaceWithClipOffset(swizzle);
+    };
+  }
+  tests_[kXemuAdjacentWithAATest] = [this]() { TestXemuAdjacentSurfaceWithAA(); };
 }
 
 void ColorZetaOverlapTests::Initialize() {
@@ -164,4 +174,156 @@ void ColorZetaOverlapTests::TestSwap() {
   std::string z_name = kSwapTestName;
   z_name += "_ZB";
   host_.FinishDraw(allow_saving_, output_dir_, kSwapTestName, z_name);
+}
+
+void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset(bool swizzle) {
+  static constexpr uint32_t kColor = 0x00A8BF00;
+  static constexpr float kZ = 1.0f;
+
+  host_.PrepareDraw(0xFE1F1F1F, 0);
+
+  SetSurfaceDMAs();
+
+  // Point the color and zeta surfaces at texture memory with the zeta surface consecutive to the end of color.
+  static constexpr uint32_t kSurfaceWidth = 128;
+  static constexpr uint32_t kSurfaceHeight = 128;
+  static constexpr uint32_t kSurfacePitch = kSurfaceWidth * 4;
+
+  static constexpr uint32_t kClipX = 1;
+  static constexpr uint32_t kClipY = 1;
+  static constexpr uint32_t kClipW = kSurfaceWidth - 2;
+  static constexpr uint32_t kClipH = kSurfaceHeight - 2;
+  {
+    const uint32_t texture_memory = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
+    auto p = pb_begin();
+    p = pb_push1(
+        p, NV097_SET_SURFACE_PITCH,
+        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, texture_memory);
+    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, texture_memory + kSurfacePitch * kSurfaceHeight);
+    pb_end(p);
+
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false);
+    host_.CommitSurfaceFormat();
+
+    // This will force xemu to re-check the surface.
+    SetSurfaceDMAs();
+
+    host_.Clear();
+
+    p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, (kClipW << 16) + kClipX);
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (kClipH << 16) + kClipY);
+    pb_end(p);
+    // Set the surface clip to 1, 1. This will cause xemu to erroneously treat the color surface as kSurfaceWidth + 1,
+    // kSurfaceHeight + 1.
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, swizzle, kClipX,
+                           kClipY, kClipW, kClipH);
+    host_.CommitSurfaceFormat();
+  }
+
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(kColor);
+  host_.SetVertex(kLeft, kTop, kZ, 1.0f);
+  host_.SetVertex(kRight, kTop, kZ, 1.0f);
+  host_.SetVertex(kRight, kBottom, kZ, 1.0f);
+  host_.SetVertex(kLeft, kBottom, kZ, 1.0f);
+  host_.End();
+
+  RestoreSurfaceDMAs();
+
+  {
+    const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    pb_end(p);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                           host_.GetFramebufferHeight());
+    host_.CommitSurfaceFormat();
+  }
+
+  pb_print("%s\n%s\nSuccessful", kXemuAdjacentWithClipOffsetTest, swizzle ? "Swizzle" : "Linear");
+  pb_draw_text_screen();
+
+  std::string output = kXemuAdjacentWithClipOffsetTest;
+  output += swizzle ? "_sz" : "_l";
+  host_.FinishDraw(allow_saving_, output_dir_, output);
+}
+
+void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithAA() {
+  constexpr uint32_t kColor = 0x00A8BF00;
+  constexpr float kZ = 1.0f;
+
+  host_.PrepareDraw(0xFE1F1F1F, 0);
+
+  SetSurfaceDMAs();
+
+  // Point the color and zeta surfaces at texture memory with the zeta surface consecutive to the end of color.
+  static constexpr uint32_t kSurfaceWidth = 64;
+  static constexpr uint32_t kSurfaceHeight = 64;
+  static constexpr uint32_t kSurfacePitch = kSurfaceWidth * 4;
+  {
+    const uint32_t texture_memory = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
+    auto p = pb_begin();
+    p = pb_push1(
+        p, NV097_SET_SURFACE_PITCH,
+        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, texture_memory);
+    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, texture_memory + kSurfacePitch * kSurfaceHeight);
+    pb_end(p);
+    // Enable anti aliasing.
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false, 0, 0, 0,
+                           0, TestHost::AA_SQUARE_OFFSET_4);
+    host_.CommitSurfaceFormat();
+  }
+
+  // This will force xemu to re-check the surface.
+  SetSurfaceDMAs();
+
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(kColor);
+  host_.SetVertex(kLeft, kTop, kZ, 1.0f);
+  host_.SetVertex(kRight, kTop, kZ, 1.0f);
+  host_.SetVertex(kRight, kBottom, kZ, 1.0f);
+  host_.SetVertex(kLeft, kBottom, kZ, 1.0f);
+  host_.End();
+
+  RestoreSurfaceDMAs();
+
+  {
+    const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    pb_end(p);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                           host_.GetFramebufferHeight());
+    host_.CommitSurfaceFormat();
+  }
+
+  pb_print("%s\nSuccessful", kXemuAdjacentWithAATest);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kXemuAdjacentWithAATest);
+}
+
+void ColorZetaOverlapTests::SetSurfaceDMAs() const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
+  pb_end(p);
+}
+
+void ColorZetaOverlapTests::RestoreSurfaceDMAs() const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  pb_end(p);
 }
