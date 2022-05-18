@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+#include "pgraph_diff_token.h"
+
 class TestHost;
 
 class TestSuite {
@@ -16,7 +18,7 @@ class TestSuite {
   const std::string &Name() const { return suite_name_; };
 
   virtual void Initialize();
-  virtual void Deinitialize() {}
+  virtual void Deinitialize();
 
   void DisableTests(const std::vector<std::string> &tests_to_skip);
 
@@ -43,6 +45,8 @@ class TestSuite {
 
   // Map of `test_name` to `void test()`
   std::map<std::string, std::function<void()>> tests_{};
+
+  PGRAPHDiffToken pgraph_diff_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_SUITE_H

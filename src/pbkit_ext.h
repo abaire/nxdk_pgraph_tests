@@ -6,6 +6,7 @@
 #include <strings.h>
 
 #include <cstdint>
+#include <list>
 
 // From pbkit.c
 #define MAXRAM 0x03FFAFFF
@@ -85,5 +86,14 @@ uint32_t* pb_push3f(uint32_t* p, DWORD command, float param1, float param2, floa
 // support floats.
 void pb_print_with_floats(const char* format, ...);
 #define pb_print pb_print_with_floats
+
+#define PGRAPH_REGISTER_BASE 0xFD400000
+#define PGRAPH_REGISTER_ARRAY_SIZE 0x2000
+
+// Fetches (most of) the PGRAPH region from the nv2a hardware.
+// `registers` must be an array of at least size PGRAPH_REGISTER_ARRAY_SIZE bytes.
+void pb_fetch_pgraph_registers(uint8_t* registers);
+
+void pb_diff_registers(const uint8_t* a, const uint8_t* b, std::list<uint32_t>& modified_registers);
 
 #endif  // NXDK_PGRAPH_TESTS_PBKIT_EXT_H

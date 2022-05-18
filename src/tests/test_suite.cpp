@@ -12,7 +12,7 @@
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
 TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name)
-    : host_(host), output_dir_(std::move(output_dir)), suite_name_(std::move(suite_name)) {
+    : host_(host), output_dir_(std::move(output_dir)), suite_name_(std::move(suite_name)), pgraph_diff_(false) {
   output_dir_ += "\\";
   output_dir_ += suite_name_;
   std::replace(output_dir_.begin(), output_dir_.end(), ' ', '_');
@@ -218,6 +218,16 @@ void TestSuite::Initialize() {
   PixelShaderProgram::DisablePixelShader();
 
   host_.ClearAllVertexAttributeStrideOverrides();
+
+#ifdef ENABLE_PGRAPH_REGION_DIFF
+  pgraph_diff_.Capture();
+#endif
+}
+
+void TestSuite::Deinitialize() {
+#ifdef ENABLE_PGRAPH_REGION_DIFF
+  pgraph_diff_.DumpDiff();
+#endif
 }
 
 std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name) {

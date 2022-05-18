@@ -626,9 +626,11 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
   auto &stage = host_.GetTextureStage(0);
+  PGRAPHDiffToken diff_token;
   p = pb_begin();
   p = pb_push1(p, NV097_SET_SHADOW_COMPARE_FUNC, shadow_comp_function);
   pb_end(p);
+  diff_token.DumpDiff();
 
   host_.SetShaderStageProgram(TestHost::STAGE_3D_PROJECTIVE);
   stage.SetFormat(GetTextureFormatInfo(texture_format));
