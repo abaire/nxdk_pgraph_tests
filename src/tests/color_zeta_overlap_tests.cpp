@@ -12,12 +12,12 @@
 
 // From pbkit.c, DMA_A is set to channel 3 by default
 // NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
-const uint32_t kDefaultDMAChannelA = 3;
+static constexpr uint32_t kDefaultDMAChannelA = 3;
 // From pbkit.c, DMA_COLOR is set to channel 9 by default.
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
-const uint32_t kDefaultDMAColorChannel = 9;
+static constexpr uint32_t kDefaultDMAColorChannel = 9;
 // NV097_SET_CONTEXT_DMA_ZETA is set to channel 10 by default.
-const uint32_t kDefaultDMAZetaChannel = 10;
+static constexpr uint32_t kDefaultDMAZetaChannel = 10;
 
 static constexpr char kColorIntoDepthTestName[] = "ColorIntoZeta";
 static constexpr char kDepthIntoColorTestName[] = "ZetaIntoColor";
