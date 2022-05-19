@@ -38,6 +38,7 @@
 #include "tests/material_alpha_tests.h"
 #include "tests/material_color_source_tests.h"
 #include "tests/material_color_tests.h"
+#include "tests/null_surface_tests.h"
 #include "tests/overlapping_draw_modes_tests.h"
 #include "tests/set_vertex_data_tests.h"
 #include "tests/surface_clip_tests.h"
@@ -359,6 +360,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<MaterialColorSourceTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<NullSurfaceTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
