@@ -44,6 +44,7 @@ SRCS = \
 	$(SRCDIR)/tests/overlapping_draw_modes_tests.cpp \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
 	$(SRCDIR)/tests/surface_clip_tests.cpp \
+	$(SRCDIR)/tests/surface_pitch_tests.cpp \
 	$(SRCDIR)/tests/test_suite.cpp \
 	$(SRCDIR)/tests/texgen_matrix_tests.cpp \
 	$(SRCDIR)/tests/texgen_tests.cpp \

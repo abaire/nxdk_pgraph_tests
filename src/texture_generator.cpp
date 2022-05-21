@@ -1,5 +1,7 @@
 #include "texture_generator.h"
 
+#include "swizzle.h"
+
 void GenerateRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y_offset, uint32_t width, uint32_t height,
                               uint32_t pitch, uint32_t first_color, uint32_t second_color, uint32_t checker_size) {
   auto buffer = reinterpret_cast<uint8_t *>(target);
@@ -22,6 +24,19 @@ void GenerateRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y_offset
       *pixel++ = ((x / checker_size) & 0x01) ? odd : even;
     }
   }
+}
+
+void GenerateSwizzledRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y_offset, uint32_t width,
+                                      uint32_t height, uint32_t pitch, uint32_t first_color, uint32_t second_color,
+                                      uint32_t checker_size) {
+  const uint32_t size = height * pitch;
+  auto temp_buffer = new uint8_t[size];
+  memcpy(temp_buffer, target, size);
+
+  GenerateRGBACheckerboard(temp_buffer, x_offset, y_offset, width, height, pitch, first_color, second_color,
+                           checker_size);
+  swizzle_rect(temp_buffer, width, height, reinterpret_cast<uint8_t *>(target), pitch, 4);
+  delete[] temp_buffer;
 }
 
 int GenerateSurface(SDL_Surface **surface, int width, int height) {
