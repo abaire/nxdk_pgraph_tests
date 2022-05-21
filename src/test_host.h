@@ -27,6 +27,8 @@ constexpr int32_t kNextContextChannel = 25;
 
 constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
 
+#define VRAM_ADDR(x) ((x)&0x03FFFFFF)
+
 class TestHost {
  public:
   enum VertexAttribute {
