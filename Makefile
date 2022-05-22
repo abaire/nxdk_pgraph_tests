@@ -32,6 +32,7 @@ OPTIMIZED_SRCS = \
 	$(THIRDPARTYDIR)/fpng/src/fpng.cpp
 
 SRCS = \
+	$(SRCDIR)/dds_image.cpp \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
@@ -58,6 +59,7 @@ SRCS = \
 	$(SRCDIR)/tests/texgen_matrix_tests.cpp \
 	$(SRCDIR)/tests/texgen_tests.cpp \
 	$(SRCDIR)/tests/texture_border_tests.cpp \
+	$(SRCDIR)/tests/texture_format_dxt_tests.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \
 	$(SRCDIR)/tests/texture_framebuffer_blit_tests.cpp \
 	$(SRCDIR)/tests/texture_matrix_tests.cpp \
