@@ -98,52 +98,19 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_DIFFUSE), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+
+  host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_DIFFUSE), TestHost::OneInput());
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+
+  host_.SetFinalCombiner0(TestHost::SRC_FOG, true, false, TestHost::SRC_R0, false, false, TestHost::SRC_FOG, false,
+                          false);
+  host_.SetFinalCombiner1Just(TestHost::SRC_R0, true);
+
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_COMBINER_CONTROL, 1);
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_ICW, 8);
-  *(p++) = 0x4200000;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_OCW, 8);
-  *(p++) = 0xC00;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_ICW, 8);
-  *(p++) = 0x14200000;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_OCW, 8);
-  *(p++) = 0xC00;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-
   p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, 0x130C0300);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, 0x1c80);
 
   // Note: Fog color is ABGR and not ARGB
   p = pb_push1(p, NV097_SET_FOG_COLOR, 0x7F2030 + (fog_alpha << 24));
