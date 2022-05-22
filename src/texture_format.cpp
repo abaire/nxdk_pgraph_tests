@@ -61,10 +61,12 @@ constexpr TextureFormatInfo kTextureFormats[] = {
     {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_G8B8, 16, true, false, true, "G8B8"},
     {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8B8, 16, true, false, true, "R8B8"},
 
-    // misc formats
+    // Compressed formats
     {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5, 4, false, false, true, "DXT1"},
-    //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT23_A8R8G8B8, false, true, "DXT3" },
-    //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT45_A8R8G8B8, false, true, "DXT5" },
+    {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT23_A8R8G8B8, 4, false, false, true, "DXT3"},
+    {SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT45_A8R8G8B8, 4, false, false, true, "DXT5"},
+
+    // misc formats
     // TODO: implement in xemu
     //{ SDL_PIXELFORMAT_RGBA8888, NV097_SET_TEXTURE_FORMAT_COLOR_D16, false, true, "D16" },
     // TODO: implement in xemu
