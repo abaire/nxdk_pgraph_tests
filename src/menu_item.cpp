@@ -256,6 +256,9 @@ MenuItemRoot::MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>> &suites
     child->parent = this;
     submenu.push_back(child);
   }
+#ifdef DISABLE_AUTORUN
+  submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "! Run all and exit", width, height));
+#endif  // DISABLE_AUTORUN
   start_time = std::chrono::high_resolution_clock::now();
 }
 
