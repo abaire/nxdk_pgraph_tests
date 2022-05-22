@@ -8,12 +8,12 @@ RESOURCEDIR = $(CURDIR)/resources
 SRCDIR = $(CURDIR)/src
 THIRDPARTYDIR = $(CURDIR)/third_party
 
-SRCS = \
+OPTIMIZED_SRCS = \
 	$(SRCDIR)/debug_output.cpp \
-	$(SRCDIR)/logger.cpp \
 	$(SRCDIR)/main.cpp \
 	$(SRCDIR)/math3d.c \
 	$(SRCDIR)/menu_item.cpp \
+	$(SRCDIR)/logger.cpp \
 	$(SRCDIR)/pbkit_ext.cpp \
 	$(SRCDIR)/pgraph_diff_token.cpp \
 	$(SRCDIR)/shaders/orthographic_vertex_shader.cpp \
@@ -23,6 +23,15 @@ SRCS = \
 	$(SRCDIR)/shaders/projection_vertex_shader.cpp \
 	$(SRCDIR)/shaders/vertex_shader_program.cpp \
 	$(SRCDIR)/test_driver.cpp \
+	$(SRCDIR)/texture_format.cpp \
+	$(SRCDIR)/texture_generator.cpp \
+	$(SRCDIR)/texture_stage.cpp \
+	$(SRCDIR)/vertex_buffer.cpp \
+	$(THIRDPARTYDIR)/swizzle.c \
+	$(THIRDPARTYDIR)/printf/printf.c \
+	$(THIRDPARTYDIR)/fpng/src/fpng.cpp
+
+SRCS = \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
@@ -63,14 +72,7 @@ SRCS = \
 	$(SRCDIR)/tests/volume_texture_tests.cpp \
 	$(SRCDIR)/tests/w_param_tests.cpp \
 	$(SRCDIR)/tests/window_clip_tests.cpp \
-	$(SRCDIR)/tests/zero_stride_tests.cpp \
-	$(SRCDIR)/texture_format.cpp \
-	$(SRCDIR)/texture_generator.cpp \
-	$(SRCDIR)/texture_stage.cpp \
-	$(SRCDIR)/vertex_buffer.cpp \
-	$(THIRDPARTYDIR)/swizzle.c \
-	$(THIRDPARTYDIR)/printf/printf.c \
-	$(THIRDPARTYDIR)/fpng/src/fpng.cpp
+	$(SRCDIR)/tests/zero_stride_tests.cpp
 
 SHADER_OBJS = \
 	$(SRCDIR)/shaders/attribute_carryover_test.inl \
@@ -97,9 +99,10 @@ SHADER_OBJS = \
 CFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
 CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR) -DFPNG_NO_STDIO=1 -DFPNG_NO_SSE=1
 
+OPTIMIZE_COMPILE_FLAGS = -O3 -fno-strict-aliasing
 ifneq ($(DEBUG),y)
-CFLAGS += -O3 -fno-strict-aliasing
-CXXFLAGS += -O3 -fno-strict-aliasing
+CFLAGS += $(OPTIMIZE_COMPILE_FLAGS)
+CXXFLAGS += $(OPTIMIZE_COMPILE_FLAGS)
 endif
 
 # Disable automatic test execution if no input is detected.
@@ -153,7 +156,7 @@ ifeq ($(ENABLE_PGRAPH_REGION_DIFF),y)
 CXXFLAGS += -DENABLE_PGRAPH_REGION_DIFF
 endif
 
-CLEANRULES = clean-resources
+CLEANRULES = clean-resources clean-optimized
 include $(NXDK_DIR)/Makefile
 
 PBKIT_DEBUG ?= n
@@ -182,6 +185,38 @@ debug_bridge_no_deploy:
 .phony: debug_bridge
 debug_bridge: deploy debug_bridge_no_deploy
 
+DEPS += $(filter %.c.d, $(OPTIMIZED_SRCS:.c=.c.d))
+DEPS += $(filter %.cpp.d, $(OPTIMIZED_SRCS:.cpp=.cpp.d))
+$(OPTIMIZED_SRCS): $(SHADER_OBJS)
+OPTIMIZED_CC_SRCS := $(filter %.c,$(OPTIMIZED_SRCS))
+OPTIMIZED_CC_OBJS := $(addsuffix .obj, $(basename $(OPTIMIZED_CC_SRCS)))
+OPTIMIZED_CXX_SRCS := $(filter %.cpp,$(OPTIMIZED_SRCS))
+OPTIMIZED_CXX_OBJS := $(addsuffix .obj, $(basename $(OPTIMIZED_CXX_SRCS)))
+OPTIMIZED_AS_SRCS := $(filter %.s,$(OPTIMIZED_SRCS))
+OPTIMIZED_AS_OBJS := $(addsuffix .obj, $(basename $(OPTIMIZED_AS_SRCS)))
+OPTIMIZED_OBJS := $(OPTIMIZED_CC_OBJS) $(OPTIMIZED_CXX_OBJS) $(OPTIMIZED_AS_OBJS)
+OPTIMIZED_FILTER_COMPILE_FLAGS := -g -gdwarf-4
+
+$(OPTIMIZED_CC_OBJS): %.obj: %.c
+	@echo "[ CC - OPT ] $@"
+	$(VE) $(CC) $(filter-out $(OPTIMIZED_FILTER_COMPILE_FLAGS),$(NXDK_CFLAGS)) $(OPTIMIZE_COMPILE_FLAGS) $(CFLAGS) -MD -MP -MT '$@' -MF '$(patsubst %.obj,%.c.d,$@)' -c -o '$@' '$<'
+
+$(OPTIMIZED_CXX_OBJS): %.obj: %.cpp
+	@echo "[ CXX - OPT] $@"
+	$(VE) $(CXX) $(filter-out $(OPTIMIZED_FILTER_COMPILE_FLAGS),$(NXDK_CXXFLAGS)) $(OPTIMIZE_COMPILE_FLAGS) $(CXXFLAGS) -MD -MP -MT '$@' -MF '$(patsubst %.obj,%.cpp.d,$@)' -c -o '$@' '$<'
+
+$(OPTIMIZED_AS_OBJS): %.obj: %.s
+	@echo "[ AS - OPT ] $@"
+	$(VE) $(AS) $(filter-out $(OPTIMIZED_FILTER_COMPILE_FLAGS),$(NXDK_ASFLAGS)) $(OPTIMIZE_COMPILE_FLAGS) $(ASFLAGS) -c -o '$@' '$<'
+
+optimized.lib: $(OPTIMIZED_OBJS)
+
+.PHONY: clean-optimized
+clean-optimized:
+	$(VE)rm -f optimized.lib
+
+main.exe: optimized.lib
+
 RESOURCE_FILES = $(shell find $(RESOURCEDIR)/ -type f)
 RESOURCES = \
 	$(patsubst $(RESOURCEDIR)/%,$(OUTPUT_DIR)/%,$(RESOURCE_FILES))
@@ -195,4 +230,4 @@ $(OUTPUT_DIR)/%: $(RESOURCEDIR)/%
 
 .PHONY: clean-resources
 clean-resources:
-	$(VE)rm -rf $(OUTPUT_DIR)/resources
+	$(VE)rm -rf $(patsubst $(RESOURCEDIR)/%,$(OUTPUT_DIR)/%,$(RESOURCES))
