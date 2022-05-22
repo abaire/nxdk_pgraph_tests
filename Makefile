@@ -215,7 +215,7 @@ optimized.lib: $(OPTIMIZED_OBJS)
 
 .PHONY: clean-optimized
 clean-optimized:
-	$(VE)rm -f optimized.lib
+	$(VE)rm -f optimized.lib $(OPTIMIZED_OBJS)
 
 main.exe: optimized.lib
 
