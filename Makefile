@@ -9,6 +9,7 @@ SRCDIR = $(CURDIR)/src
 THIRDPARTYDIR = $(CURDIR)/third_party
 
 OPTIMIZED_SRCS = \
+	$(SRCDIR)/dds_image.cpp \
 	$(SRCDIR)/debug_output.cpp \
 	$(SRCDIR)/main.cpp \
 	$(SRCDIR)/math3d.c \
@@ -32,7 +33,6 @@ OPTIMIZED_SRCS = \
 	$(THIRDPARTYDIR)/fpng/src/fpng.cpp
 
 SRCS = \
-	$(SRCDIR)/dds_image.cpp \
 	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
