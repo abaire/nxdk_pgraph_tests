@@ -94,9 +94,22 @@ static std::string CompareFunctionName(uint32_t comp_func) {
   return "<<INVALID>>";
 }
 
-static std::string MakeRawValueTestName(const TextureFormatInfo &format, uint32_t depth_format, uint32_t comp_func,
-                                        uint32_t min_val, uint32_t max_val, uint32_t ref) {
-  std::string ret = "R";
+static std::string ShortModeName(TestHost::ShaderStageProgram mode) {
+  switch (mode) {
+    case TestHost::STAGE_3D_PROJECTIVE:
+      return "3";
+    case TestHost::STAGE_2D_PROJECTIVE:
+      return "2";
+    default:
+      ASSERT(!"Unimplemented texture projection mode.");
+      return "";
+  }
+}
+
+static std::string MakeRawValueTestName(const TextureFormatInfo &format, TestHost::ShaderStageProgram mode,
+                                        uint32_t depth_format, uint32_t comp_func, uint32_t min_val, uint32_t max_val,
+                                        uint32_t ref) {
+  std::string ret = ShortModeName(mode) + "R";
   ret += ShortDepthName(format, depth_format, false);
 
   char buf[32] = {0};
@@ -107,9 +120,10 @@ static std::string MakeRawValueTestName(const TextureFormatInfo &format, uint32_
   return std::move(ret);
 }
 
-static std::string MakeFixedFunctionTestName(const TextureFormatInfo &format, uint32_t depth_format, bool float_depth,
-                                             float min_val, float max_val, float ref, uint32_t comp_func) {
-  std::string ret = "F";
+static std::string MakeFixedFunctionTestName(const TextureFormatInfo &format, TestHost::ShaderStageProgram mode,
+                                             uint32_t depth_format, bool float_depth, float min_val, float max_val,
+                                             float ref, uint32_t comp_func) {
+  std::string ret = ShortModeName(mode) + "F";
   ret += ShortDepthName(format, depth_format, float_depth);
 
   char buf[32] = {0};
@@ -120,9 +134,10 @@ static std::string MakeFixedFunctionTestName(const TextureFormatInfo &format, ui
   return std::move(ret);
 }
 
-static std::string MakeProgrammableTestName(const TextureFormatInfo &format, uint32_t depth_format, bool float_depth,
-                                            float min_val, float max_val, float ref, uint32_t comp_func) {
-  std::string ret = "P";
+static std::string MakeProgrammableTestName(const TextureFormatInfo &format, TestHost::ShaderStageProgram mode,
+                                            uint32_t depth_format, bool float_depth, float min_val, float max_val,
+                                            float ref, uint32_t comp_func) {
+  std::string ret = ShortModeName(mode) + "P";
   ret += ShortDepthName(format, depth_format, float_depth);
 
   char buf[32] = {0};
@@ -138,25 +153,34 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
   auto add_test = [this](uint32_t texture_format, uint32_t surface_format, uint32_t comp_func, uint32_t min_val,
                          uint32_t max_val, uint32_t ref) {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
-    std::string name = MakeRawValueTestName(texture_format_info, surface_format, comp_func, min_val, max_val, ref);
-    tests_[name] = [this, surface_format, texture_format, comp_func, name, min_val, max_val, ref]() {
-      TestRawValues(surface_format, texture_format, comp_func, min_val, max_val, ref, name);
-    };
+    for (auto texture_mode : {TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_3D_PROJECTIVE}) {
+      std::string name =
+          MakeRawValueTestName(texture_format_info, texture_mode, surface_format, comp_func, min_val, max_val, ref);
+      tests_[name] = [this, surface_format, texture_format, texture_mode, comp_func, name, min_val, max_val, ref]() {
+        TestRawValues(surface_format, texture_format, texture_mode, comp_func, min_val, max_val, ref, name);
+      };
+    }
   };
 
   auto add_perspective_tests = [this](uint32_t texture_format, uint32_t surface_format, bool float_depth,
                                       uint32_t comp_func, float min_val, float max_val, float ref_val) {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
-    std::string ff = MakeFixedFunctionTestName(texture_format_info, surface_format, float_depth, min_val, max_val,
-                                               ref_val, comp_func);
-    std::string prog = MakeProgrammableTestName(texture_format_info, surface_format, float_depth, min_val, max_val,
-                                                ref_val, comp_func);
-    tests_[ff] = [this, surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, ff]() {
-      TestFixedFunction(surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, ff);
-    };
-    tests_[prog] = [this, surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, prog]() {
-      TestProgrammable(surface_format, float_depth, texture_format, comp_func, min_val, max_val, ref_val, prog);
-    };
+    for (auto texture_mode : {TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_3D_PROJECTIVE}) {
+      std::string ff = MakeFixedFunctionTestName(texture_format_info, texture_mode, surface_format, float_depth,
+                                                 min_val, max_val, ref_val, comp_func);
+      std::string prog = MakeProgrammableTestName(texture_format_info, texture_mode, surface_format, float_depth,
+                                                  min_val, max_val, ref_val, comp_func);
+      tests_[ff] = [this, surface_format, float_depth, texture_format, texture_mode, comp_func, min_val, max_val,
+                    ref_val, ff]() {
+        TestFixedFunction(surface_format, float_depth, texture_format, texture_mode, comp_func, min_val, max_val,
+                          ref_val, ff);
+      };
+      tests_[prog] = [this, surface_format, float_depth, texture_format, texture_mode, comp_func, min_val, max_val,
+                      ref_val, prog]() {
+        TestProgrammable(surface_format, float_depth, texture_format, texture_mode, comp_func, min_val, max_val,
+                         ref_val, prog);
+      };
+    }
   };
 
   // TODO: Test floating point zeta buffers.
@@ -194,7 +218,7 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
     add_perspective_tests(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED,
                           NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, false, comp_func, kZNear, kZFar, 10.65f);
 
-    {
+    for (auto texture_mode : {TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_3D_PROJECTIVE}) {
       // TODO: Unify these in an add_perspective_tests call.
       // There is some subtle difference between the fixed function pipeline and the programmable shader written to
       // attempt to duplicate it. The depth values at 24 bit end up being ~1 off, making it impossible to choose a
@@ -202,14 +226,16 @@ TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::
       constexpr uint32_t texture_format = NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED;
       constexpr uint32_t surface = NV097_SET_SURFACE_FORMAT_ZETA_Z24S8;
       const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
-      std::string ff = MakeFixedFunctionTestName(texture_format_info, surface, false, 10.0f, 20.0f, 11.47f, comp_func);
-      tests_[ff] = [this, comp_func, ff]() {
-        TestFixedFunction(surface, false, texture_format, comp_func, 10.0f, 20.0f, 11.47f, ff);
+      std::string ff =
+          MakeFixedFunctionTestName(texture_format_info, texture_mode, surface, false, 10.0f, 20.0f, 11.47f, comp_func);
+      tests_[ff] = [this, comp_func, ff, texture_mode]() {
+        TestFixedFunction(surface, false, texture_format, texture_mode, comp_func, 10.0f, 20.0f, 11.47f, ff);
       };
 
-      std::string prog = MakeProgrammableTestName(texture_format_info, surface, false, 10.0f, 20.0f, 11.45f, comp_func);
-      tests_[prog] = [this, comp_func, prog]() {
-        TestProgrammable(surface, false, texture_format, comp_func, 10.0f, 20.0f, 11.45f, prog);
+      std::string prog =
+          MakeProgrammableTestName(texture_format_info, texture_mode, surface, false, 10.0f, 20.0f, 11.45f, comp_func);
+      tests_[prog] = [this, comp_func, prog, texture_mode]() {
+        TestProgrammable(surface, false, texture_format, texture_mode, comp_func, 10.0f, 20.0f, 11.45f, prog);
       };
     }
   }
@@ -335,8 +361,9 @@ static void PrepareRawValueTestTexture(uint8_t *memory, uint32_t width, uint32_t
 }
 
 void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t texture_format,
-                                                 uint32_t shadow_comp_function, uint32_t min_val, uint32_t max_val,
-                                                 uint32_t ref, const std::string &name) {
+                                                 TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
+                                                 uint32_t min_val, uint32_t max_val, uint32_t ref,
+                                                 const std::string &name) {
   host_.SetVertexShaderProgram(raw_value_shader_);
 
   host_.PrepareDraw(0xFE112233);
@@ -375,7 +402,7 @@ void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t
   pb_end(p);
 
   stage.SetFormat(GetTextureFormatInfo(texture_format));
-  host_.SetShaderStageProgram(TestHost::STAGE_3D_PROJECTIVE);
+  host_.SetShaderStageProgram(mode);
   stage.SetFormat(GetTextureFormatInfo(texture_format));
   stage.SetTextureDimensions(1, 1, 1);
   stage.SetImageDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
@@ -450,8 +477,9 @@ void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t
 }
 
 void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool float_depth, uint32_t texture_format,
-                                                     uint32_t shadow_comp_function, float min_val, float max_val,
-                                                     float ref_val, const std::string &name) {
+                                                     TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
+                                                     float min_val, float max_val, float ref_val,
+                                                     const std::string &name) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetSurfaceFormat(host_.GetColorBufferFormat(), static_cast<TestHost::SurfaceZetaFormat>(depth_format),
                          host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
@@ -459,13 +487,14 @@ void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool
 
   auto project_point = [this](VECTOR out, const VECTOR in) { host_.ProjectPoint(out, in); };
   auto unproject_point = [this](VECTOR out, const VECTOR in, float z) { host_.UnprojectPoint(out, in, z); };
-  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, project_point,
+  TestProjected(depth_format, texture_format, mode, shadow_comp_function, min_val, max_val, ref_val, project_point,
                 unproject_point, name);
 }
 
 void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool float_depth, uint32_t texture_format,
-                                                    uint32_t shadow_comp_function, float min_val, float max_val,
-                                                    float ref_val, const std::string &name) {
+                                                    TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
+                                                    float min_val, float max_val, float ref_val,
+                                                    const std::string &name) {
   float depth_buffer_max_value = host_.MaxDepthBufferValue(depth_format, float_depth);
   auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                                                           0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
@@ -486,13 +515,14 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
   auto project_point = [shader](VECTOR out, const VECTOR in) { shader->ProjectPoint(out, in); };
   auto unproject_point = [shader](VECTOR out, const VECTOR in, float z) { shader->UnprojectPoint(out, in, z); };
 
-  TestProjected(depth_format, texture_format, shadow_comp_function, min_val, max_val, ref_val, project_point,
+  TestProjected(depth_format, texture_format, mode, shadow_comp_function, min_val, max_val, ref_val, project_point,
                 unproject_point, name);
 }
 
 void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t texture_format,
-                                                 uint32_t shadow_comp_function, float min_val, float max_val,
-                                                 float ref_val, std::function<void(VECTOR, const VECTOR)> project_point,
+                                                 TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
+                                                 float min_val, float max_val, float ref_val,
+                                                 std::function<void(VECTOR, const VECTOR)> project_point,
                                                  std::function<void(VECTOR, const VECTOR, float)> unproject_point,
                                                  const std::string &name) {
   auto p = pb_begin();
@@ -632,7 +662,7 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
   pb_end(p);
   diff_token.DumpDiff();
 
-  host_.SetShaderStageProgram(TestHost::STAGE_3D_PROJECTIVE);
+  host_.SetShaderStageProgram(mode);
   stage.SetFormat(GetTextureFormatInfo(texture_format));
   stage.SetTextureDimensions(1, 1, 1);
   stage.SetImageDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
