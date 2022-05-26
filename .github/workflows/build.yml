@@ -32,6 +32,7 @@ jobs:
           lld \
           libsdl2-dev \
           libsdl2-image-dev
+        pip3 install nv2a-vsh
     - name: Compile
       run: |
         cd nxdk_pgraph_tests
