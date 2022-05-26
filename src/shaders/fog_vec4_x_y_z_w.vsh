@@ -25,4 +25,8 @@ mov oPos.w, r0
 
 mov oD0, iDiffuse
 
-mov oFog.xyzw, #fog_value.xyzw
+; Elements are intentionally set in multiple instructions.
+mov oFog.x, #fog_value.x
+mov oFog.y, #fog_value.y
+mov oFog.z, #fog_value.z
+mov oFog.w, #fog_value.w

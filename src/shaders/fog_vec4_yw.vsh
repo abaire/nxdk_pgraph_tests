@@ -25,4 +25,4 @@ mov oPos.w, r0
 
 mov oD0, iDiffuse
 
-mov oFog.xyzw, #fog_value.xyzw
+mov oFog.yw, #fog_value.yw

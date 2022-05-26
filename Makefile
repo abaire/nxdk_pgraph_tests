@@ -95,15 +95,25 @@ SHADER_OBJS = \
 
 NV2A_VSH_OBJS = \
 	$(SRCDIR)/shaders/fog_infinite_fogc_test.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_unset.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_x.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_y.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_z.vshinc \
 	$(SRCDIR)/shaders/fog_vec4_w.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_wx.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_wy.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_wzyx.vshinc \
-	$(SRCDIR)/shaders/fog_vec4_xyzw.vshinc
+	$(SRCDIR)/shaders/fog_vec4_w_x.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_w_y.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_w_z_y_x.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_x.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xw.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xy.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xyz.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_x_y_z_w.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xyzw.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xz.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xzw.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_y.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_yw.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_yz.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_yzw.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_z.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_zw.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_unset.vshinc
 
 CFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
 CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR) -DFPNG_NO_STDIO=1 -DFPNG_NO_SSE=1

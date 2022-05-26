@@ -259,29 +259,63 @@ void FogInfiniteFogCoordinateTests::Initialize() {
 static constexpr uint32_t kFogVec4Unset[] = {
 #include "shaders/fog_vec4_unset.vshinc"
 };
-static constexpr uint32_t kFogVec4W[] = {
-#include "shaders/fog_vec4_w.vshinc"
-};
-static constexpr uint32_t kFogVec4WX[] = {
-#include "shaders/fog_vec4_wx.vshinc"
-};
-static constexpr uint32_t kFogVec4WY[] = {
-#include "shaders/fog_vec4_wy.vshinc"
-};
-static constexpr uint32_t kFogVec4WZYX[] = {
-#include "shaders/fog_vec4_wzyx.vshinc"
-};
+
+// Individual setters.
 static constexpr uint32_t kFogVec4X[] = {
 #include "shaders/fog_vec4_x.vshinc"
-};
-static constexpr uint32_t kFogVec4XYZW[] = {
-#include "shaders/fog_vec4_xyzw.vshinc"
 };
 static constexpr uint32_t kFogVec4Y[] = {
 #include "shaders/fog_vec4_y.vshinc"
 };
 static constexpr uint32_t kFogVec4Z[] = {
 #include "shaders/fog_vec4_z.vshinc"
+};
+static constexpr uint32_t kFogVec4W[] = {
+#include "shaders/fog_vec4_w.vshinc"
+};
+static constexpr uint32_t kFogVec4W_X[] = {
+#include "shaders/fog_vec4_w_x.vshinc"
+};
+static constexpr uint32_t kFogVec4W_Y[] = {
+#include "shaders/fog_vec4_w_y.vshinc"
+};
+static constexpr uint32_t kFogVec4W_Z_Y_X[] = {
+#include "shaders/fog_vec4_w_z_y_x.vshinc"
+};
+static constexpr uint32_t kFogVec4X_Y_Z_W[] = {
+#include "shaders/fog_vec4_x_y_z_w.vshinc"
+};
+
+// Bulk setters.
+static constexpr uint32_t kFogVec4XW[] = {
+#include "shaders/fog_vec4_xw.vshinc"
+};
+static constexpr uint32_t kFogVec4XY[] = {
+#include "shaders/fog_vec4_xy.vshinc"
+};
+static constexpr uint32_t kFogVec4XYZ[] = {
+#include "shaders/fog_vec4_xyz.vshinc"
+};
+static constexpr uint32_t kFogVec4XYZW[] = {
+#include "shaders/fog_vec4_xyzw.vshinc"
+};
+static constexpr uint32_t kFogVec4XZ[] = {
+#include "shaders/fog_vec4_xz.vshinc"
+};
+static constexpr uint32_t kFogVec4XZW[] = {
+#include "shaders/fog_vec4_xzw.vshinc"
+};
+static constexpr uint32_t kFogVec4YW[] = {
+#include "shaders/fog_vec4_yw.vshinc"
+};
+static constexpr uint32_t kFogVec4YZ[] = {
+#include "shaders/fog_vec4_yz.vshinc"
+};
+static constexpr uint32_t kFogVec4YZW[] = {
+#include "shaders/fog_vec4_yzw.vshinc"
+};
+static constexpr uint32_t kFogVec4ZW[] = {
+#include "shaders/fog_vec4_zw.vshinc"
 };
 // clang format on
 
@@ -294,20 +328,20 @@ static const FogVec4CoordTests::TestConfig kFogWTests[] = {
     {"W", DEF_SHADER(kFogVec4W), {1.0f, 0.0f, 0.0f, 0.5f}},
     {"W", DEF_SHADER(kFogVec4W), {0.3f, 0.3f, 0.3f, 1.0f}},
 
-    {"WX", DEF_SHADER(kFogVec4WX), {0.25f, 0.0f, 0.0f, 0.5f}},
-    {"WX", DEF_SHADER(kFogVec4WX), {0.65f, 0.0f, 0.0f, 0.0f}},
+    {"W_X", DEF_SHADER(kFogVec4W_X), {0.25f, 0.0f, 0.0f, 0.5f}},
+    {"W_X", DEF_SHADER(kFogVec4W_X), {0.65f, 0.0f, 0.0f, 0.0f}},
 
-    {"WY", DEF_SHADER(kFogVec4WY), {1.0f, 0.0f, 1.00f, 0.75f}},
-    {"WY", DEF_SHADER(kFogVec4WY), {0.0f, 0.75f, 0.75f, 0.25f}},
+    {"W_Y", DEF_SHADER(kFogVec4W_Y), {1.0f, 0.0f, 1.00f, 0.75f}},
+    {"W_Y", DEF_SHADER(kFogVec4W_Y), {0.0f, 0.75f, 0.75f, 0.25f}},
 
-    {"WZYX", DEF_SHADER(kFogVec4WZYX), {0.25f, 0.5f, 0.75f, 1.0f}},
-    {"WZYX", DEF_SHADER(kFogVec4WZYX), {1.0f, 0.75f, 0.5f, 0.25f}},
+    {"W_Z_Y_X", DEF_SHADER(kFogVec4W_Z_Y_X), {0.25f, 0.5f, 0.75f, 1.0f}},
+    {"W_Z_Y_X", DEF_SHADER(kFogVec4W_Z_Y_X), {1.0f, 0.75f, 0.5f, 0.25f}},
 
     {"X", DEF_SHADER(kFogVec4X), {0.0f, 0.0f, 0.0f, 0.0f}},
     {"X", DEF_SHADER(kFogVec4X), {0.9f, 0.0f, 0.0f, 0.0f}},
 
-    {"XYZW", DEF_SHADER(kFogVec4XYZW), {1.0f, 0.25f, 0.75f, 0.5f}},
-    {"XYZW", DEF_SHADER(kFogVec4XYZW), {0.0f, 0.33f, 0.66f, 0.9f}},
+    {"X_Y_Z_W", DEF_SHADER(kFogVec4X_Y_Z_W), {1.0f, 0.25f, 0.75f, 0.5f}},
+    {"X_Y_Z_W", DEF_SHADER(kFogVec4X_Y_Z_W), {0.0f, 0.33f, 0.66f, 0.9f}},
 
     {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 0.0f, 0.0f, 0.0f}},
     {"Y", DEF_SHADER(kFogVec4Y), {0.0f, 0.1f, 0.0f, 0.0f}},
@@ -316,6 +350,33 @@ static const FogVec4CoordTests::TestConfig kFogWTests[] = {
     {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.0f, 0.0f}},
     {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.2f, 0.0f}},
     {"Z", DEF_SHADER(kFogVec4Z), {0.0f, 0.0f, 0.8f, 0.0f}},
+
+    {"XW", DEF_SHADER(kFogVec4XW), {0.25f, 0.0f, 0.0f, 0.5f}},
+    {"XW", DEF_SHADER(kFogVec4XW), {0.65f, 0.0f, 0.0f, 0.0f}},
+    {"XY", DEF_SHADER(kFogVec4XY), {0.25f, 0.5f, 0.0f, 0.0f}},
+    {"XY", DEF_SHADER(kFogVec4XY), {0.65f, 0.75f, 0.0f, 0.0f}},
+    {"XYZ", DEF_SHADER(kFogVec4XYZ), {0.25f, 0.5f, 0.75f, 0.0f}},
+    {"XYZ", DEF_SHADER(kFogVec4XYZ), {0.65f, 0.75f, 0.33f, 0.0f}},
+    {"XYZW", DEF_SHADER(kFogVec4XYZW), {0.25f, 0.50f, 0.75f, 1.0f}},
+    {"XYZW", DEF_SHADER(kFogVec4XYZW), {0.65f, 0.75f, 0.33f, 0.0f}},
+
+    {"XZ", DEF_SHADER(kFogVec4XZ), {0.25f, 0.0f, 0.75f, 0.0f}},
+    {"XZ", DEF_SHADER(kFogVec4XZ), {0.65f, 0.0f, 0.33f, 0.0f}},
+
+    {"XZW", DEF_SHADER(kFogVec4XZW), {0.25f, 0.0f, 0.75f, 1.0f}},
+    {"XZW", DEF_SHADER(kFogVec4XZW), {0.65f, 0.0f, 0.33f, 0.0f}},
+
+    {"YW", DEF_SHADER(kFogVec4YW), {0.0f, 0.50f, 0.0f, 1.0f}},
+    {"YW", DEF_SHADER(kFogVec4YW), {0.0f, 0.75f, 0.0f, 0.0f}},
+
+    {"YZ", DEF_SHADER(kFogVec4YZ), {0.00f, 0.50f, 0.75f, 0.0f}},
+    {"YZ", DEF_SHADER(kFogVec4YZ), {0.00f, 0.75f, 0.33f, 0.0f}},
+
+    {"YZW", DEF_SHADER(kFogVec4YZW), {0.0f, 0.50f, 0.75f, 1.0f}},
+    {"YZW", DEF_SHADER(kFogVec4YZW), {0.0f, 0.75f, 0.33f, 0.0f}},
+
+    {"ZW", DEF_SHADER(kFogVec4ZW), {0.0f, 0.0f, 0.75f, 1.0f}},
+    {"ZW", DEF_SHADER(kFogVec4ZW), {0.0f, 0.0f, 0.33f, 0.0f}},
 };
 // clang format on
 
