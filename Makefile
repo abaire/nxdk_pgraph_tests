@@ -4,6 +4,11 @@ NXDK_DIR ?= $(CURDIR)/third_party/nxdk
 NXDK_SDL = y
 NXDK_CXX = y
 
+# pip3 install nv2a-vsh
+# https://pypi.org/project/nv2a-vsh/
+# https://github.com/abaire/nv2a_vsh_asm
+NV2AVSH = nv2avsh
+
 RESOURCEDIR = $(CURDIR)/resources
 SRCDIR = $(CURDIR)/src
 THIRDPARTYDIR = $(CURDIR)/third_party
@@ -80,16 +85,6 @@ SHADER_OBJS = \
 	$(SRCDIR)/shaders/attribute_carryover_test.inl \
 	$(SRCDIR)/shaders/attribute_explicit_setter_tests.inl \
 	$(SRCDIR)/shaders/mul_col0_by_const0_vertex_shader.inl \
-	$(SRCDIR)/shaders/fog_infinite_fogc_test.inl \
-	$(SRCDIR)/shaders/fog_vec4_unset.inl \
-	$(SRCDIR)/shaders/fog_vec4_x.inl \
-	$(SRCDIR)/shaders/fog_vec4_y.inl \
-	$(SRCDIR)/shaders/fog_vec4_z.inl \
-	$(SRCDIR)/shaders/fog_vec4_w.inl \
-	$(SRCDIR)/shaders/fog_vec4_wx.inl \
-	$(SRCDIR)/shaders/fog_vec4_wy.inl \
-	$(SRCDIR)/shaders/fog_vec4_wzyx.inl \
-	$(SRCDIR)/shaders/fog_vec4_xyzw.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader_2c_texcoords.inl \
 	$(SRCDIR)/shaders/precalculated_vertex_shader_4c_texcoords.inl \
 	$(SRCDIR)/shaders/projection_vertex_shader.inl \
@@ -97,6 +92,18 @@ SHADER_OBJS = \
 	$(SRCDIR)/shaders/projection_vertex_shader_no_lighting_4c_texcoords.inl \
 	$(SRCDIR)/shaders/textured_pixelshader.inl \
 	$(SRCDIR)/shaders/untextured_pixelshader.inl
+
+NV2A_VSH_OBJS = \
+	$(SRCDIR)/shaders/fog_infinite_fogc_test.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_unset.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_x.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_y.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_z.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_w.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_wx.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_wy.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_wzyx.vshinc \
+	$(SRCDIR)/shaders/fog_vec4_xyzw.vshinc
 
 CFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR)
 CXXFLAGS += -I$(SRCDIR) -I$(THIRDPARTYDIR) -DFPNG_NO_STDIO=1 -DFPNG_NO_SSE=1
@@ -158,7 +165,7 @@ ifeq ($(ENABLE_PGRAPH_REGION_DIFF),y)
 CXXFLAGS += -DENABLE_PGRAPH_REGION_DIFF
 endif
 
-CLEANRULES = clean-resources clean-optimized
+CLEANRULES = clean-resources clean-optimized clean-nv2a-vsh-objs
 include $(NXDK_DIR)/Makefile
 
 PBKIT_DEBUG ?= n
@@ -189,7 +196,7 @@ debug_bridge: deploy debug_bridge_no_deploy
 
 DEPS += $(filter %.c.d, $(OPTIMIZED_SRCS:.c=.c.d))
 DEPS += $(filter %.cpp.d, $(OPTIMIZED_SRCS:.cpp=.cpp.d))
-$(OPTIMIZED_SRCS): $(SHADER_OBJS)
+$(OPTIMIZED_SRCS): $(SHADER_OBJS) $(NV2A_VSH_OBJS)
 OPTIMIZED_CC_SRCS := $(filter %.c,$(OPTIMIZED_SRCS))
 OPTIMIZED_CC_OBJS := $(addsuffix .obj, $(basename $(OPTIMIZED_CC_SRCS)))
 OPTIMIZED_CXX_SRCS := $(filter %.cpp,$(OPTIMIZED_SRCS))
@@ -233,3 +240,13 @@ $(OUTPUT_DIR)/%: $(RESOURCEDIR)/%
 .PHONY: clean-resources
 clean-resources:
 	$(VE)rm -rf $(patsubst $(RESOURCEDIR)/%,$(OUTPUT_DIR)/%,$(RESOURCES))
+
+# nv2avsh assembler rules:
+$(SRCS): $(NV2A_VSH_OBJS)
+.PHONY: clean-nv2a-vsh-objs
+clean-nv2a-vsh-objs:
+	$(VE)rm -f $(NV2A_VSH_OBJS)
+
+$(NV2A_VSH_OBJS): %.vshinc: %.vsh
+	@echo "[ nv2avsh  ] $@"
+	$(VE) $(NV2AVSH) '$<' '$@'

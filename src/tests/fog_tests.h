@@ -70,9 +70,17 @@ class FogVec4CoordTests : public FogCustomShaderTests {
  public:
   FogVec4CoordTests(TestHost& host, std::string output_dir);
   void Initialize() override;
-  void Test(const TestConfig& config);
 
  private:
+  // Verifies the behavior of setting individual components of the oFog register, showing that the last set value is
+  // taken as the value regardless of the destination mask.
+  // E.g., `mov oFog.w, 0.5` will effectively set oFog.x to 0.5, obliterating any previous value.
+  void Test(const TestConfig& config);
+
+  // Tests behavior when the fog register is used without being set.
+  void TestUnset();
+
+  void SetShader(const TestConfig& config) const;
   static std::string MakeTestName(const TestConfig& config);
 };
 

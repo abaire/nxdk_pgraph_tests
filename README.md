@@ -52,6 +52,9 @@ DPAD:
 
 ## Build prerequisites
 
+This project uses [nv2a-vsh](https://pypi.org/project/nv2a-vsh/) to assemble some of the vertex shaders for tests.
+It can be installed via `pip3 install nv2a-vsh --upgrade`.
+
 This test suite requires some modifications to the pbkit used by the nxdk in order to operate.
 
 To facilitate this, the nxdk is included as a submodule of this project, referencing the
