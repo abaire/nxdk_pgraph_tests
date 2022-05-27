@@ -432,8 +432,11 @@ void FogVec4CoordTests::Test(const TestConfig& config) {
 void FogVec4CoordTests::TestUnset() {
   auto shader = host_.GetShaderProgram();
 
-  // Draw once with the fog coordinates explicitly set to put the hardware into a consistent state.
-  {
+  // Draw with the fog coordinates explicitly set to put the hardware into a consistent state.
+  // This is done repeatedly to fix an apparent issue with parallelism, drawing only once can lead to a situation where
+  // one or more of the vertices in the "unset" draw case below still have arbitrary values from previous operations
+  // and are non-hermetic, leading to test results that are dependent on previous draws.
+  for (int i = 0; i < 2; ++i) {
     // It is expected that only the X value will have an effect.
     SetShader({"XYZW", DEF_SHADER(kFogVec4XYZW), {0.25f, 0.95f, 0.5f, 0.75f}});
 
