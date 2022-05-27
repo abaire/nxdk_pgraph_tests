@@ -17,7 +17,7 @@ static constexpr const char kTestName[] = "MAC_ILU_Independence";
 // the components determined by C1.
 
 // clang format off
-static constexpr uint32_t kShader[] = {
+static const uint32_t kShader[] = {
     // mov oPos, v0
     0x00000000, 0x0020001b, 0x0836106c, 0x2070f800,
 

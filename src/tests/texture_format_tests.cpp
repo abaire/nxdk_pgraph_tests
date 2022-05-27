@@ -18,7 +18,7 @@ static int GeneratePalettizedGradientSurface(uint8_t **gradient_surface, int wid
                                              TestHost::PaletteSize size);
 static uint32_t *GeneratePalette(TestHost::PaletteSize size);
 
-static constexpr TestHost::PaletteSize kPaletteSizes[] = {
+static const TestHost::PaletteSize kPaletteSizes[] = {
     TestHost::PALETTE_256,
     TestHost::PALETTE_128,
     TestHost::PALETTE_64,

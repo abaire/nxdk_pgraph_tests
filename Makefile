@@ -51,6 +51,7 @@ SRCS = \
 	$(SRCDIR)/tests/fog_tests.cpp \
 	$(SRCDIR)/tests/front_face_tests.cpp \
 	$(SRCDIR)/tests/image_blit_tests.cpp \
+	$(SRCDIR)/tests/inline_array_size_mismatch.cpp \
 	$(SRCDIR)/tests/lighting_normal_tests.cpp \
 	$(SRCDIR)/tests/material_alpha_tests.cpp \
 	$(SRCDIR)/tests/material_color_tests.cpp \

@@ -14,12 +14,12 @@ static constexpr uint32_t kShader[] = {
 };
 // clang format on
 
-static constexpr TestHost::DrawPrimitive kPrimitives[] = {
+static const TestHost::DrawPrimitive kPrimitives[] = {
     TestHost::PRIMITIVE_LINES,
     TestHost::PRIMITIVE_TRIANGLES,
 };
 
-static constexpr AttributeCarryoverTests::Attribute kTestAttributes[]{
+static const AttributeCarryoverTests::Attribute kTestAttributes[]{
     //    AttributeCarryoverTests::ATTR_WEIGHT,
     AttributeCarryoverTests::ATTR_NORMAL,
     AttributeCarryoverTests::ATTR_DIFFUSE,
@@ -34,12 +34,12 @@ static constexpr AttributeCarryoverTests::Attribute kTestAttributes[]{
     AttributeCarryoverTests::ATTR_TEX3,
 };
 
-static constexpr const float kTestValues[][4] = {
+static const const float kTestValues[][4] = {
     {0.0f, 0.0f, 1.0f, 1.0f},
     {0.5f, 0.0f, 0.0f, 1.0f},
 };
 
-static constexpr const AttributeCarryoverTests::TestConfig kTestConfigs[] = {
+static const AttributeCarryoverTests::TestConfig kTestConfigs[] = {
     {AttributeCarryoverTests::DRAW_ARRAYS, {0.0f, 0.0f, 1.0f, 1.0f}},
     {AttributeCarryoverTests::DRAW_INLINE_BUFFERS, {0.75f, 0.0f, 0.0f, 1.0f}},
     {AttributeCarryoverTests::DRAW_INLINE_ARRAYS, {0.5f, 0.0f, 0.0f, 1.0f}},
