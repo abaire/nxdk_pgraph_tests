@@ -44,6 +44,7 @@ SRCS = \
 	$(SRCDIR)/tests/attribute_float_tests.cpp \
 	$(SRCDIR)/tests/clear_tests.cpp \
 	$(SRCDIR)/tests/color_mask_blend_tests.cpp \
+	$(SRCDIR)/tests/color_zeta_disable_tests.cpp \
 	$(SRCDIR)/tests/color_zeta_overlap_tests.cpp \
 	$(SRCDIR)/tests/combiner_tests.cpp \
 	$(SRCDIR)/tests/depth_format_fixed_function_tests.cpp \
