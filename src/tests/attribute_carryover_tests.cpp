@@ -34,7 +34,7 @@ static const AttributeCarryoverTests::Attribute kTestAttributes[]{
     AttributeCarryoverTests::ATTR_TEX3,
 };
 
-static const const float kTestValues[][4] = {
+static const float kTestValues[][4] = {
     {0.0f, 0.0f, 1.0f, 1.0f},
     {0.5f, 0.0f, 0.0f, 1.0f},
 };
