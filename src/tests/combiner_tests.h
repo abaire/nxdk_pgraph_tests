@@ -20,6 +20,7 @@ class CombinerTests : public TestSuite {
   void CreateGeometry();
   void TestMux();
   void TestCombinerIndependence();
+  void TestCombinerColorAlphaIndependence();
   void TestFlags();
 
  private:

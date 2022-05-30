@@ -8,12 +8,14 @@
 
 static constexpr const char* kMuxTestName = "Mux";
 static constexpr const char* kIndependenceTestName = "Independence";
+static constexpr const char* kColorAlphaIndependenceTestName = "ColorAlphaIndependence";
 static constexpr const char* kFlagsTestName = "Flags";
 
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Combiner") {
   tests_[kMuxTestName] = [this]() { TestMux(); };
   tests_[kIndependenceTestName] = [this]() { TestCombinerIndependence(); };
+  tests_[kColorAlphaIndependenceTestName] = [this]() { TestCombinerColorAlphaIndependence(); };
   tests_[kFlagsTestName] = [this]() { TestFlags(); };
 }
 
@@ -208,6 +210,66 @@ void CombinerTests::TestCombinerIndependence() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, kIndependenceTestName);
+}
+
+void CombinerTests::TestCombinerColorAlphaIndependence() {
+  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+  host_.PrepareDraw(kBackgroundColor);
+
+  auto draw_quad = [this]() {
+    static constexpr float kLeft = -2.75f;
+    static constexpr float kRight = 2.75f;
+    static constexpr float kTop = 1.75f;
+    static constexpr float kBottom = -1.75f;
+    static constexpr float z = 0.0f;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0.1f, 1.0f, 0.1f, 1.0f);
+    host_.SetVertex(kLeft, kTop, z, 1.0f);
+    host_.SetVertex(kRight, kTop, z, 1.0f);
+    host_.SetVertex(kRight, kBottom, z, 1.0f);
+    host_.SetVertex(kLeft, kBottom, z, 1.0f);
+    host_.End();
+  };
+
+  // Draw a green quad.
+  {
+    host_.SetCombinerControl(1);
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    draw_quad();
+  }
+
+  // Overlay a transparent blue quad.
+  {
+    host_.SetCombinerControl(2);
+    // Set R0 blue to 0%
+    host_.SetCombinerFactorC0(0, 0.0f, 0.0f, 0.0f, 0.0f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+
+    // Turn R0 100% blue and set R1 alpha to R0 (which is 0% when entering this stage).
+    host_.SetCombinerFactorC0(1, 0.0f, 0.0f, 1.0f, 0.0f);
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_R0);
+
+    host_.SetInputAlphaCombiner(1, TestHost::ColorInput(TestHost::SRC_R0), TestHost::OneInput());
+    host_.SetOutputAlphaCombiner(1, TestHost::DST_R1);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_R1, true);
+
+    draw_quad();
+  }
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  pb_print("%s\n", kColorAlphaIndependenceTestName);
+  pb_print("Expect a green quad\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kColorAlphaIndependenceTestName);
 }
 
 void CombinerTests::TestFlags() {
