@@ -38,17 +38,8 @@ void TextureBorderTests::Initialize() {
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
-  host_.SetInputColorCombiner(0, TestHost::SRC_TEX0, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false,
-                              TestHost::MAP_UNSIGNED_INVERT);
-  host_.SetInputAlphaCombiner(0, TestHost::SRC_TEX0, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false,
-                              TestHost::MAP_UNSIGNED_INVERT);
-
-  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
-  host_.SetOutputAlphaCombiner(0, TestHost::DST_R0);
-
-  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false,
-                          false, TestHost::SRC_R0);
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 }
 
 void TextureBorderTests::CreateGeometry() {
