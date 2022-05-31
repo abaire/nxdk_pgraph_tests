@@ -376,7 +376,7 @@ void VertexShaderSwizzleTests::Initialize() {
   TestSuite::Initialize();
 
   host_.SetCombinerControl(1);
-  host_.SetAlphaBlendEnabled();
+  host_.SetBlend();
 
   // Allocate enough space for the shader header and the final instruction.
   shader_code_size_ = sizeof(kShaderHeader) + 16;

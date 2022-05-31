@@ -71,7 +71,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
 
   static constexpr uint32_t kBackgroundColor = 0xFF333333;
   host_.PrepareDraw(kBackgroundColor);
-  host_.SetAlphaBlendEnabled();
+  host_.SetBlend();
 
   if (config.force_blend_alpha) {
     // Render a background to visualize alpha values.

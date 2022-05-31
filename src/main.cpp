@@ -25,6 +25,7 @@
 #include "tests/attribute_carryover_tests.h"
 #include "tests/attribute_explicit_setter_tests.h"
 #include "tests/attribute_float_tests.h"
+#include "tests/blend_tests.h"
 #include "tests/clear_tests.h"
 #include "tests/color_mask_blend_tests.h"
 #include "tests/color_zeta_disable_tests.h"
@@ -43,11 +44,11 @@
 #include "tests/null_surface_tests.h"
 #include "tests/overlapping_draw_modes_tests.h"
 #include "tests/set_vertex_data_tests.h"
+#include "tests/stencil_tests.h"
 #include "tests/surface_clip_tests.h"
 #include "tests/surface_pitch_tests.h"
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_tests.h"
-#include "tests/stencil_tests.h"
 #include "tests/texture_border_tests.h"
 #include "tests/texture_format_dxt_tests.h"
 #include "tests/texture_format_tests.h"
@@ -306,6 +307,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<AttributeFloatTests>(host, output_directory);
+    test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
+  }
+  {
+    auto suite = std::make_shared<BlendTests>(host, output_directory);
     test_suites.push_back(std::dynamic_pointer_cast<TestSuite>(suite));
   }
   {
