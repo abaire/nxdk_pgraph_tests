@@ -28,6 +28,7 @@ constexpr int32_t kNextContextChannel = 25;
 constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
 
 #define VRAM_ADDR(x) ((x)&0x03FFFFFF)
+#define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
 class TestHost {
  public:
@@ -397,9 +398,13 @@ class TestHost {
   bool GetSaveResults() const { return save_results_; }
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
-  void SetAlphaBlendEnabled(bool enable = true, uint32_t func = NV097_SET_BLEND_EQUATION_V_FUNC_ADD,
-                            uint32_t sfactor = NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA,
-                            uint32_t dfactor = NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA) const;
+  void SetColorMask(uint32_t mask = NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                                    NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
+                                    NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE) const;
+
+  void SetBlend(bool enable = true, uint32_t func = NV097_SET_BLEND_EQUATION_V_FUNC_ADD,
+                uint32_t sfactor = NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA,
+                uint32_t dfactor = NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA) const;
 
   // Sets up the number of enabled color combiners and behavior flags.
   //

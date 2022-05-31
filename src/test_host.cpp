@@ -24,8 +24,6 @@
 
 #define SAVE_Z_AS_PNG
 
-#define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
-
 #define MAX_FILE_PATH_SIZE 248
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void ClearVertexAttribute(uint32_t index);
@@ -1223,7 +1221,13 @@ std::string TestHost::GetPrimitiveName(TestHost::DrawPrimitive primitive) {
   }
 }
 
-void TestHost::SetAlphaBlendEnabled(bool enable, uint32_t func, uint32_t sfactor, uint32_t dfactor) const {
+void TestHost::SetColorMask(uint32_t mask) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COLOR_MASK, mask);
+  pb_end(p);
+}
+
+void TestHost::SetBlend(bool enable, uint32_t func, uint32_t sfactor, uint32_t dfactor) const {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_BLEND_ENABLE, enable);
   if (enable) {
