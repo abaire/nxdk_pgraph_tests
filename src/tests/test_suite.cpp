@@ -95,6 +95,8 @@ void TestSuite::Initialize() {
   p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
   p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
 
+  p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
+
   pb_end(p);
 
   host_.SetWindowClipExclusive(false);
