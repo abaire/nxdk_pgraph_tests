@@ -17,6 +17,9 @@ class TextureCubemapTests : public TestSuite {
 
  private:
   void TestCubemap();
+  void TestDotSTRCubemap();
+
+  void Draw(float x, float y, float z, float r_x, float r_y, float r_z) const;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_CUBEMAP_TESTS_H
