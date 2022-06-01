@@ -7,16 +7,19 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "swizzle.h"
 #include "test_host.h"
 #include "texture_format.h"
+#include "texture_generator.h"
 #include "vertex_buffer.h"
 
-static int Generate2DSurface(SDL_Surface **gradient_surface, int width, int height);
+static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle);
 static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
                                        TestHost::PaletteSize palette_size);
 static uint32_t *GeneratePalette(TestHost::PaletteSize size);
 
 static constexpr uint32_t kTextureWidth = 32;
+static constexpr uint32_t kTexturePitch = kTextureWidth * 4;
 static constexpr uint32_t kTextureHeight = 32;
 
 static constexpr const char *kTest2D = "2D";
@@ -35,11 +38,22 @@ void TextureBorderTests::Initialize() {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  host_.SetTextureStageEnabled(0, true);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  // Generate a borderless texture as tex0
+  {
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    SDL_Surface *surface;
+    auto update_texture_result = GenerateColoredCheckerboardSurface(&surface, kTextureWidth, kTextureHeight);
+    ASSERT(!update_texture_result && "Failed to generate SDL surface");
+    update_texture_result = host_.SetTexture(surface);
+    SDL_FreeSurface(surface);
+    ASSERT(!update_texture_result && "Failed to set texture");
+  }
 
-  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+  // Generate a 4 texel bordered texture as tex1
+  {
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8), 1);
+    GenerateBordered2DSurface(host_.GetTextureMemoryForStage(1), kTextureWidth, kTextureHeight, true);
+  }
 }
 
 void TextureBorderTests::CreateGeometry() {
@@ -81,18 +95,34 @@ void TextureBorderTests::CreateGeometry() {
 
     auto *vertex = buffer->Lock();
 
+    // The min/max s,t value will be 4 (the size of the border)
+    static constexpr float kBorderMin = -4.0f / kTextureWidth;
+    static constexpr float kBorderMax = 1.0 + (-kBorderMin);
+
     auto set_tex = [&vertex](float l, float t, float r, float b) {
+#define BORDER_EXPAND(val) ((val) < 0.0f ? kBorderMin : ((val) > 1.0f ? kBorderMax : (val)))
+      float border_l = BORDER_EXPAND(l);
+      float border_r = BORDER_EXPAND(r);
+      float border_t = BORDER_EXPAND(t);
+      float border_b = BORDER_EXPAND(b);
+#undef BORDER_EXPAND
       vertex->SetTexCoord0(l, t);
+      vertex->SetTexCoord1(border_l, border_t);
       ++vertex;
       vertex->SetTexCoord0(r, t);
+      vertex->SetTexCoord1(border_r, border_t);
       ++vertex;
       vertex->SetTexCoord0(r, b);
+      vertex->SetTexCoord1(border_r, border_b);
       ++vertex;
       vertex->SetTexCoord0(l, t);
+      vertex->SetTexCoord1(border_l, border_t);
       ++vertex;
       vertex->SetTexCoord0(r, b);
+      vertex->SetTexCoord1(border_r, border_b);
       ++vertex;
       vertex->SetTexCoord0(l, b);
+      vertex->SetTexCoord1(border_l, border_b);
       ++vertex;
     };
 
@@ -120,64 +150,81 @@ void TextureBorderTests::CreateGeometry() {
 }
 
 void TextureBorderTests::Test2D() {
-  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
-
-  SDL_Surface *surface;
-  int update_texture_result = Generate2DSurface(&surface, kTextureWidth, kTextureHeight);
-  ASSERT(!update_texture_result && "Failed to generate SDL surface");
-
-  update_texture_result = host_.SetTexture(surface);
-  SDL_FreeSurface(surface);
-  ASSERT(!update_texture_result && "Failed to set texture");
-
   host_.PrepareDraw(0xFE202020);
 
-  auto &stage = host_.GetTextureStage(0);
-  stage.SetEnabled();
-  stage.SetBorderColor(0xF0FF00FF);
-  stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-  stage.SetImageDimensions(320, 240);
-  stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_TENT_LOD0);
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
-  stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
-  stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
-  host_.SetupTextureStages();
-  host_.SetVertexBuffer(vertex_buffers_[0]);
-  host_.DrawArrays();
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 
-  stage.SetUWrap(TextureStage::WRAP_MIRROR, false);
-  stage.SetVWrap(TextureStage::WRAP_MIRROR, false);
-  host_.SetupTextureStages();
-  host_.SetVertexBuffer(vertex_buffers_[1]);
-  host_.DrawArrays();
+  {
+    auto &stage = host_.GetTextureStage(0);
+    stage.SetEnabled();
+    stage.SetBorderColor(0xF0FF00FF);
+    stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_TENT_LOD0);
 
-  stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
-  stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
-  host_.SetupTextureStages();
-  host_.SetVertexBuffer(vertex_buffers_[2]);
-  host_.DrawArrays();
+    stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
+    stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[0]);
+    host_.DrawArrays();
 
-  stage.SetBorderFromColor(true);
-  stage.SetUWrap(TextureStage::WRAP_BORDER, false);
-  stage.SetVWrap(TextureStage::WRAP_BORDER, false);
-  host_.SetupTextureStages();
-  host_.SetVertexBuffer(vertex_buffers_[3]);
-  host_.DrawArrays();
+    stage.SetUWrap(TextureStage::WRAP_MIRROR, false);
+    stage.SetVWrap(TextureStage::WRAP_MIRROR, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[1]);
+    host_.DrawArrays();
 
-  // TODO: This leads to non-deterministic output, part of the rendered texture seems to be uninitialized data.
-  stage.SetBorderFromColor(false);
-  stage.SetUWrap(TextureStage::WRAP_BORDER, false);
-  stage.SetVWrap(TextureStage::WRAP_BORDER, false);
-  host_.SetupTextureStages();
-  host_.SetVertexBuffer(vertex_buffers_[4]);
-  host_.DrawArrays();
+    stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+    stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[2]);
+    host_.DrawArrays();
 
-  stage.SetBorderFromColor(true);
-  stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE_OGL, false);
-  stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE_OGL, false);
-  host_.SetupTextureStages();
-  host_.SetVertexBuffer(vertex_buffers_[5]);
-  host_.DrawArrays();
+    stage.SetBorderFromColor(true);
+    stage.SetUWrap(TextureStage::WRAP_BORDER, false);
+    stage.SetVWrap(TextureStage::WRAP_BORDER, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[3]);
+    host_.DrawArrays();
+
+    stage.SetBorderFromColor(true);
+    stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE_OGL, false);
+    stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE_OGL, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[5]);
+    host_.DrawArrays();
+
+    stage.SetEnabled(false);
+  }
+
+  // Render the bordered texture.
+  {
+    host_.SetTextureStageEnabled(0, false);
+    host_.SetTextureStageEnabled(1, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+
+    auto &stage = host_.GetTextureStage(1);
+    stage.SetEnabled();
+    stage.SetBorderColor(0xF0FF00FF);
+    stage.SetBorderFromColor(false);
+    stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_TENT_LOD0);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
+
+    stage.SetUWrap(TextureStage::WRAP_BORDER, false);
+    stage.SetVWrap(TextureStage::WRAP_BORDER, false);
+    host_.SetupTextureStages();
+
+    host_.SetVertexBuffer(vertex_buffers_[4]);
+    host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE | TestHost::TEXCOORD1);
+    stage.SetEnabled(false);
+  }
 
   pb_printat(1, 14, (char *)"Wrap");
   pb_printat(1, 26, (char *)"Mirror");
@@ -218,46 +265,29 @@ void TextureBorderTests::Test2DPalettized() {
 #endif
 }
 
-static int Generate2DSurface(SDL_Surface **gradient_surface, int width, int height) {
-  *gradient_surface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA8888);
-  if (!(*gradient_surface)) {
-    return 1;
+static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle) {
+  uint32_t border_width = swizzle ? width * 2 : width + 8;
+  uint32_t border_height = swizzle ? height * 2 : height + 8;
+  uint32_t full_pitch = border_width * 4;
+
+  uint8_t *buffer = texture_memory;
+  if (swizzle) {
+    const uint32_t size = full_pitch * border_height;
+    buffer = new uint8_t[size];
   }
 
-  if (SDL_LockSurface(*gradient_surface)) {
-    SDL_FreeSurface(*gradient_surface);
-    *gradient_surface = nullptr;
-    return 2;
-  }
+  GenerateRGBACheckerboard(buffer, 0, 0, border_width, border_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
 
   static const uint32_t kColors[] = {
-      SDL_MapRGBA((*gradient_surface)->format, 0xFF, 0, 0, 0xFF),
-      SDL_MapRGBA((*gradient_surface)->format, 0xFF, 0, 0, 0x66),
-      SDL_MapRGBA((*gradient_surface)->format, 0, 0xFF, 0, 0xFF),
-      SDL_MapRGBA((*gradient_surface)->format, 0, 0xFF, 0, 0x66),
-      SDL_MapRGBA((*gradient_surface)->format, 0x44, 0x44, 0xFF, 0xFF),
-      SDL_MapRGBA((*gradient_surface)->format, 0x44, 0x44, 0xFF, 0x66),
-      SDL_MapRGBA((*gradient_surface)->format, 0xFF, 0xFF, 0xFF, 0xFF),
-      SDL_MapRGBA((*gradient_surface)->format, 0xFF, 0xFF, 0xFF, 0x66),
+      0xFF0000FF, 0x660000FF, 0xFF00FF00, 0x6600FF00, 0xFFFF4444, 0x66FF4444, 0xFFFFFFFF, 0x66FFFFFF,
   };
   static const uint32_t kNumColors = sizeof(kColors) / sizeof(kColors[0]);
+  GenerateColoredCheckerboard(buffer, 4, 4, width, height, full_pitch, kColors, kNumColors, 4);
 
-  auto pixels = static_cast<uint32_t *>((*gradient_surface)->pixels);
-  for (int y = 0; y < height; ++y) {
-    for (int x = 0; x < width; x += 4) {
-      int index = (x / 4) + (y / 4);
-
-      uint32_t pixel = kColors[index % kNumColors];
-      *pixels++ = pixel;
-      *pixels++ = pixel;
-      *pixels++ = pixel;
-      *pixels++ = pixel;
-    }
+  if (swizzle) {
+    swizzle_rect(buffer, border_width, border_height, texture_memory, full_pitch, 4);
+    delete[] buffer;
   }
-
-  SDL_UnlockSurface(*gradient_surface);
-
-  return 0;
 }
 
 static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,

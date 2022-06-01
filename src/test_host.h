@@ -272,6 +272,10 @@ class TestHost {
   uint8_t *GetTextureMemory() const { return texture_memory_; }
   uint32_t GetTextureMemorySize() const { return texture_memory_size_; }
 
+  uint8_t *GetTextureMemoryForStage(uint32_t stage) const {
+    return texture_memory_ + texture_stage_[stage].GetTextureOffset();
+  }
+
   inline uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
   inline uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
   inline float GetFramebufferWidthF() const { return static_cast<float>(framebuffer_width_); }

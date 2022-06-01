@@ -132,7 +132,9 @@ class TextureStage {
 
   void SetStage(uint32_t stage) { stage_ = stage; }
 
+  uint32_t GetTextureOffset() const { return texture_memory_offset_; }
   void SetTextureOffset(uint32_t offset) { texture_memory_offset_ = offset; }
+  uint32_t GetPaletteOffset() const { return palette_memory_offset_; }
   void SetPaletteOffset(uint32_t offset) { palette_memory_offset_ = offset; }
 
   void Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offset) const;
