@@ -18,6 +18,7 @@ class TextureBorderTests : public TestSuite {
   void CreateGeometry();
 
   void Test2D();
+  void Test2DBorderedSwizzled();
   void Test2DPalettized();
 
  private:

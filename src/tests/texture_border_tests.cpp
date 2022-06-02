@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/precalculated_vertex_shader.h"
 #include "swizzle.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -24,10 +25,12 @@ static constexpr uint32_t kTextureHeight = 32;
 
 static constexpr const char *kTest2D = "2D";
 static constexpr const char *kTest2DIndexed = "2D_Indexed";
+static constexpr const char *kTest2DBorderedSwizzled = "2D_BorderTex_SZ";
 
 TextureBorderTests::TextureBorderTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture border") {
   tests_[kTest2D] = [this]() { Test2D(); };
+  tests_[kTest2DBorderedSwizzled] = [this]() { Test2DBorderedSwizzled(); };
   //  tests_[kTest2DIndexed] = [this]() { Test2DPalettized(); };
 }
 
@@ -42,7 +45,7 @@ void TextureBorderTests::Initialize() {
   {
     host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
     SDL_Surface *surface;
-    auto update_texture_result = GenerateColoredCheckerboardSurface(&surface, kTextureWidth, kTextureHeight);
+    auto update_texture_result = GenerateColoredCheckerboardSurface(&surface, kTextureWidth, kTextureHeight, 2);
     ASSERT(!update_texture_result && "Failed to generate SDL surface");
     update_texture_result = host_.SetTexture(surface);
     SDL_FreeSurface(surface);
@@ -150,6 +153,8 @@ void TextureBorderTests::CreateGeometry() {
 }
 
 void TextureBorderTests::Test2D() {
+  host_.SetVertexShaderProgram(nullptr);
+
   host_.PrepareDraw(0xFE202020);
 
   host_.SetTextureStageEnabled(0, true);
@@ -164,7 +169,7 @@ void TextureBorderTests::Test2D() {
     stage.SetEnabled();
     stage.SetBorderColor(0xF0FF00FF);
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_TENT_LOD0);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
 
     stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
     stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
@@ -212,7 +217,7 @@ void TextureBorderTests::Test2D() {
     stage.SetBorderColor(0xF0FF00FF);
     stage.SetBorderFromColor(false);
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_TENT_LOD0);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
 
     host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
     host_.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
@@ -226,6 +231,7 @@ void TextureBorderTests::Test2D() {
     stage.SetEnabled(false);
   }
 
+  pb_print("%s\n", kTest2D);
   pb_printat(1, 14, (char *)"Wrap");
   pb_printat(1, 26, (char *)"Mirror");
   pb_printat(1, 39, (char *)"Clamp");
@@ -265,27 +271,161 @@ void TextureBorderTests::Test2DPalettized() {
 #endif
 }
 
+void TextureBorderTests::Test2DBorderedSwizzled() {
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.PrepareDraw(0xFE181818);
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+
+  auto &stage = host_.GetTextureStage(2);
+  stage.SetEnabled();
+  stage.SetBorderColor(0xFFFF00FF);
+  stage.SetBorderFromColor(false);
+  stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
+  stage.SetUWrap(TextureStage::WRAP_BORDER, false);
+  stage.SetVWrap(TextureStage::WRAP_BORDER, false);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX2);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX2, true);
+
+  // Render the bordered texture.
+  static constexpr uint32_t kSizes[][2] = {
+      {1, 1}, {2, 2}, {4, 4}, {8, 8}, {16, 16}, {32, 32}, {16, 1}, {8, 2}, {4, 8},
+  };
+
+  static constexpr float kWidth = 64.0f;
+  static constexpr float kHeight = 64.0f;
+  static constexpr float kSpacing = 32.0f;
+
+  const float kNumPerRow = floorf((host_.GetFramebufferWidthF() - kSpacing) / (kWidth + kSpacing));
+  const float kStartColumn = kSpacing;
+  const float kEndColumn = kStartColumn + (kWidth + kSpacing) * kNumPerRow;
+  const float kNumRows = ceilf(static_cast<float>(sizeof(kSizes) / sizeof(kSizes[0])) / kNumPerRow);
+  static constexpr float kZ = 1.0f;
+
+  pb_print("%s\n", kTest2DBorderedSwizzled);
+  static constexpr int kTextLeft = 3;
+  static constexpr int kTextInc = 9;
+  static constexpr int kTextRowInc = 4;
+  int text_row = 1;
+  int text_col = kTextLeft;
+  float left = kStartColumn;
+  float top = host_.GetFramebufferHeightF() * 0.5f - ((kHeight + kSpacing) * kNumRows - kSpacing);
+
+  // Draw once with st coords from (0,1)
+  {
+    for (auto size : kSizes) {
+      host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8), 2);
+      GenerateBordered2DSurface(host_.GetTextureMemoryForStage(2), size[0], size[1], true);
+      stage.SetTextureDimensions(size[0], size[1]);
+      host_.SetupTextureStages();
+
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord2(0.0f, 0.0f);
+      host_.SetVertex(left, top, kZ, 1.0f);
+
+      host_.SetTexCoord2(1.0f, 0.0f);
+      host_.SetVertex(left + kWidth, top, kZ, 1.0f);
+
+      host_.SetTexCoord2(1.0f, 1.0f);
+      host_.SetVertex(left + kWidth, top + kHeight, kZ, 1.0f);
+
+      host_.SetTexCoord2(0.0f, 1.0f);
+      host_.SetVertex(left, top + kHeight, kZ, 1.0f);
+      host_.End();
+
+      pb_printat(text_row, text_col, (char *)"%dx%d", size[0], size[1]);
+
+      left += kWidth + kSpacing;
+      text_col += kTextInc;
+      if (left >= kEndColumn) {
+        left = kStartColumn;
+        top += kHeight + kSpacing;
+        text_col = kTextLeft;
+        text_row += kTextRowInc;
+      }
+    }
+  }
+
+  top = host_.GetFramebufferHeightF() * 0.5f + kSpacing;
+  left = kStartColumn;
+  text_col = kTextLeft;
+  text_row = 9;
+
+  // Draw with st coords calculated to show the border
+  {
+    for (auto size : kSizes) {
+      host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8), 2);
+      GenerateBordered2DSurface(host_.GetTextureMemoryForStage(2), size[0], size[1], true);
+      stage.SetTextureDimensions(size[0], size[1]);
+      host_.SetupTextureStages();
+
+      const float kBorderMinS = -4.0f / static_cast<float>(size[0]);
+      const float kBorderMinT = -4.0f / static_cast<float>(size[1]);
+      const float kBorderMaxS = 1.0f + (-kBorderMinS);
+      const float kBorderMaxT = 1.0f + (-kBorderMinT);
+
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord2(kBorderMinS, kBorderMinT);
+      host_.SetVertex(left, top, kZ, 1.0f);
+
+      host_.SetTexCoord2(kBorderMaxS, kBorderMinT);
+      host_.SetVertex(left + kWidth, top, kZ, 1.0f);
+
+      host_.SetTexCoord2(kBorderMaxS, kBorderMaxT);
+      host_.SetVertex(left + kWidth, top + kHeight, kZ, 1.0f);
+
+      host_.SetTexCoord2(kBorderMinS, kBorderMaxT);
+      host_.SetVertex(left, top + kHeight, kZ, 1.0f);
+      host_.End();
+
+      pb_printat(text_row, text_col, (char *)"B%dx%d", size[0], size[1]);
+
+      left += kWidth + kSpacing;
+      text_col += kTextInc;
+      if (left >= kEndColumn) {
+        left = kStartColumn;
+        top += kHeight + kSpacing;
+        text_col = kTextLeft;
+        text_row += kTextRowInc;
+      }
+    }
+  }
+
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kTest2DBorderedSwizzled);
+}
+
 static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle) {
-  uint32_t border_width = swizzle ? width * 2 : width + 8;
-  uint32_t border_height = swizzle ? height * 2 : height + 8;
-  uint32_t full_pitch = border_width * 4;
+  uint32_t bordered_width = swizzle ? (width >= 8 ? width * 2 : 16) : width + 8;
+  uint32_t bordered_height = swizzle ? (height >= 8 ? height * 2 : 16) : height + 8;
+  uint32_t full_pitch = bordered_width * 4;
 
   uint8_t *buffer = texture_memory;
   if (swizzle) {
-    const uint32_t size = full_pitch * border_height;
+    const uint32_t size = full_pitch * bordered_height;
     buffer = new uint8_t[size];
   }
 
-  GenerateRGBACheckerboard(buffer, 0, 0, border_width, border_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
+  GenerateRGBACheckerboard(buffer, 0, 0, bordered_width, bordered_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
 
   static const uint32_t kColors[] = {
       0xFF0000FF, 0x660000FF, 0xFF00FF00, 0x6600FF00, 0xFFFF4444, 0x66FF4444, 0xFFFFFFFF, 0x66FFFFFF,
   };
   static const uint32_t kNumColors = sizeof(kColors) / sizeof(kColors[0]);
-  GenerateColoredCheckerboard(buffer, 4, 4, width, height, full_pitch, kColors, kNumColors, 4);
+  GenerateColoredCheckerboard(buffer, 4, 4, width, height, full_pitch, kColors, kNumColors, 2);
 
   if (swizzle) {
-    swizzle_rect(buffer, border_width, border_height, texture_memory, full_pitch, 4);
+    swizzle_rect(buffer, bordered_width, bordered_height, texture_memory, full_pitch, 4);
     delete[] buffer;
   }
 }

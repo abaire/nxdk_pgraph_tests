@@ -1,5 +1,8 @@
 struct vIn {
-  float4 tex : TEXCOORD;
+  float4 tex0 : TEXCOORD0;
+  float4 tex1 : TEXCOORD1;
+  float4 tex2 : TEXCOORD2;
+  float4 tex3 : TEXCOORD3;
   float4 pos : POSITION;
   float4 diffuse : DIFFUSE;
 };
@@ -8,6 +11,9 @@ struct vOut {
   float4 pos : POSITION;
   float4 col : COLOR;
   float4 tex0 : TEXCOORD0;
+  float4 tex1 : TEXCOORD1;
+  float4 tex2 : TEXCOORD2;
+  float4 tex3 : TEXCOORD3;
 };
 
 vOut main(vIn I) {
@@ -15,7 +21,10 @@ vOut main(vIn I) {
 
   result.pos = I.pos;
   result.col = I.diffuse;
-  result.tex0 = I.tex;
+  result.tex0 = I.tex0;
+  result.tex1 = I.tex1;
+  result.tex2 = I.tex2;
+  result.tex3 = I.tex3;
 
   return result;
 }
