@@ -451,3 +451,13 @@ int TextureStage::SetPalette(const uint32_t *palette, uint32_t length, uint8_t *
   memcpy(dest, palette, length * 4);
   return 0;
 }
+
+uint32_t TextureStage::GetDimensionality() const {
+  if (height_ == 1 && depth_ == 1) {
+    return 1;
+  }
+  if (depth_ > 1) {
+    return 3;
+  }
+  return 2;
+}

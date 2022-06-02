@@ -86,23 +86,17 @@ class TextureStage {
     size_u_ = u;
     size_v_ = v;
     size_p_ = p;
+    depth_ = size_p_;
   }
 
   void SetImageDimensions(uint32_t width, uint32_t height, uint32_t depth = 1) {
     width_ = width;
     height_ = height;
     depth_ = depth;
+    size_p_ = depth;
   }
 
-  uint32_t GetDimensionality() const {
-    if (height_ == 1 && depth_ == 1) {
-      return 1;
-    }
-    if (depth_ > 1) {
-      return 3;
-    }
-    return 2;
-  }
+  uint32_t GetDimensionality() const;
 
   void SetFilter(uint32_t lod_bias = 0, ConvolutionKernel kernel = K_QUINCUNX, MinFilter min = MIN_BOX_LOD0,
                  MagFilter mag = MAG_BOX_LOD0, bool signed_alpha = false, bool signed_red = false,

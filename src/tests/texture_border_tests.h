@@ -21,6 +21,8 @@ class TextureBorderTests : public TestSuite {
   void Test2DBorderedSwizzled();
   void Test2DPalettized();
 
+  void Test3DBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height);
+
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];
 };
