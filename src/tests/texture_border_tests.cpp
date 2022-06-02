@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "swizzle.h"
 #include "test_host.h"
@@ -17,8 +18,7 @@
 static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle);
 static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
                                        TestHost::PaletteSize palette_size);
-static void GenerateBordered3DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, uint32_t depth,
-                                      bool swizzle);
+
 static uint32_t *GeneratePalette(TestHost::PaletteSize size);
 
 static constexpr uint32_t kTextureWidth = 32;
@@ -29,6 +29,7 @@ static constexpr const char *kTest2D = "2D";
 static constexpr const char *kTest2DIndexed = "2D_Indexed";
 static constexpr const char *kTest2DBorderedSwizzled = "2D_BorderTex_SZ";
 static constexpr const char *kTest3DBorderedSwizzled = "3D_BorderTex_SZ";
+static constexpr const char *kTestCubeMapBorderedSwizzled = "Cube_BorderTex_SZ";
 
 static constexpr uint32_t kDepthSlices = 4;
 
@@ -38,6 +39,48 @@ static constexpr const uint32_t kBorderTextureSizes[][2] = {
 };
 static constexpr const uint32_t kNumBorderTextureSizes = sizeof(kBorderTextureSizes) / sizeof(kBorderTextureSizes[0]);
 // clang format on
+
+// Must be ordered to match kCubeSTPoints for each face.
+static constexpr uint32_t kRightSide[] = {3, 7, 6, 2};
+static constexpr uint32_t kLeftSide[] = {1, 5, 4, 0};
+static constexpr uint32_t kTopSide[] = {4, 5, 6, 7};
+static constexpr uint32_t kBottomSide[] = {1, 0, 3, 2};
+static constexpr uint32_t kBackSide[] = {2, 6, 5, 1};
+static constexpr uint32_t kFrontSide[] = {0, 4, 7, 3};
+
+// clang-format off
+static constexpr const uint32_t *kCubeFaces[] = {
+  kRightSide,
+  kLeftSide,
+  kTopSide,
+  kBottomSide,
+  kBackSide,
+  kFrontSide,
+};
+
+static constexpr float kCubeSize = 1.0f;
+
+static constexpr float kCubePoints[][3] = {
+  {-kCubeSize, -kCubeSize, -kCubeSize},
+  {-kCubeSize, -kCubeSize, kCubeSize},
+  {kCubeSize, -kCubeSize, kCubeSize},
+  {kCubeSize, -kCubeSize, -kCubeSize},
+  {-kCubeSize, kCubeSize, -kCubeSize},
+  {-kCubeSize, kCubeSize, kCubeSize},
+  {kCubeSize, kCubeSize, kCubeSize},
+  {kCubeSize, kCubeSize, -kCubeSize},
+};
+
+static constexpr const float kCubeSTPoints[][4][2] = {
+  {{0.000000f, 0.000000f}, {0.000000f, 0.333333f}, {0.333333f, 0.333333f}, {0.333333f, 0.000000f}},
+  {{0.333333f, 0.000000f}, {0.333333f, 0.333333f}, {0.666667f, 0.333333f}, {0.666667f, 0.000000f}},
+  {{0.333333f, 0.333333f}, {0.333333f, 0.666667f}, {0.666667f, 0.666667f}, {0.666667f, 0.333333f}},
+  {{0.000000f, 0.333333f}, {0.000000f, 0.666667f}, {0.333333f, 0.666667f}, {0.333333f, 0.333333f}},
+  {{0.000000f, 0.666667f}, {0.000000f, 1.000000f}, {0.333333f, 1.000000f}, {0.333333f, 0.666667f}},
+  {{0.666667f, 0.000000f}, {0.666667f, 0.333333f}, {1.000000f, 0.333333f}, {1.000000f, 0.000000f}},
+};
+
+// clang-format on
 
 TextureBorderTests::TextureBorderTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture border") {
@@ -49,6 +92,12 @@ TextureBorderTests::TextureBorderTests(TestHost &host, std::string output_dir)
     char name[32] = {0};
     snprintf(name, sizeof(name), "%s_%dx%d", kTest3DBorderedSwizzled, size[0], size[1]);
     tests_[name] = [this, name, size]() { Test3DBorderedSwizzled(name, size[0], size[1]); };
+
+    // Cube maps must be square or the hardware will raise an invalid data error.
+    if (size[0] == size[1]) {
+      snprintf(name, sizeof(name), "%s_%dx%d", kTestCubeMapBorderedSwizzled, size[0], size[1]);
+      tests_[name] = [this, name, size]() { TestCubemapBorderedSwizzled(name, size[0], size[1]); };
+    }
   }
 }
 
@@ -118,7 +167,7 @@ void TextureBorderTests::CreateGeometry() {
 
     // The min/max s,t value will be 4 (the size of the border)
     static constexpr float kBorderMin = -4.0f / kTextureWidth;
-    static constexpr float kBorderMax = 1.0 + (-kBorderMin);
+    static constexpr float kBorderMax = 1.0f + (-kBorderMin);
 
     auto set_tex = [&vertex](float l, float t, float r, float b) {
 #define BORDER_EXPAND(val) ((val) < 0.0f ? kBorderMin : ((val) > 1.0f ? kBorderMax : (val)))
@@ -552,6 +601,105 @@ void TextureBorderTests::Test3DBorderedSwizzled(const std::string &name, uint32_
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
+void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height) {
+  const float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
+                                                          -1.0f, 1.0f, 200.0f);
+  {
+    shader->SetLightingEnabled(false);
+    shader->SetUse4ComponentTexcoords();
+    shader->SetUseD3DStyleViewport();
+    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    shader->LookAt(camera_position, camera_look_at);
+  }
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8), 3);
+  GenerateBorderedCubemapSurface(host_.GetTextureMemoryForStage(3), width, height, true);
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
+                              TestHost::STAGE_CUBE_MAP);
+
+  auto &stage = host_.GetTextureStage(3);
+  stage.SetEnabled();
+  stage.SetCubemapEnable();
+  stage.SetBorderColor(0xFF7777FF);
+  stage.SetBorderFromColor(false);
+  stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
+  stage.SetUWrap(TextureStage::WRAP_BORDER, false);
+  stage.SetVWrap(TextureStage::WRAP_BORDER, false);
+  stage.SetPWrap(TextureStage::WRAP_BORDER, false);
+  stage.SetTextureDimensions(width, height);
+  host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
+
+  host_.PrepareDraw(0xFE121212);
+
+  auto draw = [this, &shader, width](float x, float y, float z, float r_x, float r_y, float r_z,
+                                     bool include_border = false) {
+    MATRIX matrix = {0.0f};
+    VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
+    VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
+    VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
+    host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
+
+    auto model_matrix = shader->GetModelMatrix();
+    matrix_unit(model_matrix);
+    VECTOR rotation = {r_x, r_y, r_z};
+    matrix_rotate(model_matrix, model_matrix, rotation);
+    VECTOR translation = {x, y, z};
+    matrix_translate(model_matrix, model_matrix, translation);
+
+    matrix_multiply(matrix, shader->GetModelMatrix(), matrix);
+    host_.SetFixedFunctionModelViewMatrix(matrix);
+
+    shader->PrepareDraw();
+
+    // The min/max s,t value will be 4 (the size of the border)
+    const float kBorderMin = -4.0f / static_cast<float>(width);
+    const float kBorderMax = 1.0f + (-kBorderMin);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    for (auto face : kCubeFaces) {
+      for (auto i = 0; i < 4; ++i) {
+        uint32_t index = face[i];
+        const float *vertex = kCubePoints[index];
+        float s = vertex[0];
+        float t = vertex[1];
+        if (include_border) {
+          s = s == 0.0f ? kBorderMin : kBorderMax;
+          t = t == 0.0f ? kBorderMin : kBorderMax;
+        }
+        host_.SetTexCoord3(s, t, vertex[2], 1.0f);
+        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
+      }
+    }
+
+    host_.End();
+  };
+
+  const float z = 2.0f;
+  draw(-1.5f, 1.5f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
+  draw(1.5f, 1.5f, z, M_PI * 1.25f, M_PI * 0.25f, 0.0f);
+
+  draw(-1.5f, -1.5f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f, true);
+  draw(1.5f, -1.5f, z, M_PI * 1.25f, M_PI * 0.25f, 0.0f, true);
+
+  pb_print("%s\n", name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, name);
+}
+
 static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle) {
   uint32_t bordered_width = swizzle ? (width >= 8 ? width * 2 : 16) : width + 8;
   uint32_t bordered_height = swizzle ? (height >= 8 ? height * 2 : 16) : height + 8;
@@ -577,13 +725,15 @@ static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, u
   }
 }
 
-static void GenerateBordered3DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, uint32_t depth,
-                                      bool swizzle) {
+void TextureBorderTests::GenerateBordered3DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height,
+                                                   uint32_t depth, bool swizzle) const {
   const uint32_t bordered_width = swizzle ? (width >= 8 ? width * 2 : 16) : width + 8;
   const uint32_t bordered_height = swizzle ? (height >= 8 ? height * 2 : 16) : height + 8;
   const uint32_t full_pitch = bordered_width * 4;
   const uint32_t full_layer_pitch = full_pitch * bordered_height;
   const uint32_t size = full_layer_pitch * depth;
+
+  ASSERT(full_layer_pitch * depth < host_.GetMaxSingleTextureSize());
 
   uint8_t *buffer = texture_memory;
   if (swizzle) {
@@ -607,6 +757,43 @@ static void GenerateBordered3DSurface(uint8_t *texture_memory, uint32_t width, u
 
   if (swizzle) {
     swizzle_box(buffer, width, height, depth, texture_memory, full_pitch, full_layer_pitch, 4);
+    delete[] buffer;
+  }
+}
+
+void TextureBorderTests::GenerateBorderedCubemapSurface(uint8_t *texture_memory, uint32_t width, uint32_t height,
+                                                        bool swizzle) const {
+  const uint32_t bordered_width = swizzle ? (width >= 8 ? width * 2 : 16) : width + 8;
+  const uint32_t bordered_height = swizzle ? (height >= 8 ? height * 2 : 16) : height + 8;
+  const uint32_t full_pitch = bordered_width * 4;
+  const uint32_t full_layer_pitch = full_pitch * bordered_height;
+
+  ASSERT(full_layer_pitch * 6 < host_.GetMaxSingleTextureSize());
+
+  uint8_t *buffer = nullptr;
+  if (swizzle) {
+    buffer = new uint8_t[full_layer_pitch];
+  }
+
+  static constexpr uint32_t kMasks[] = {
+      0xFFFF0000, 0xFF00FF00, 0xFF0000FF, 0xFFFF00FF, 0xFFFFFF00, 0xFF00FFFF,
+  };
+  static constexpr uint32_t kNumMasks = sizeof(kMasks);
+
+  auto target = texture_memory;
+  for (uint32_t i = 0; i < 6; ++i, target += full_layer_pitch) {
+    const uint32_t high = 0xFFFFFFFF & kMasks[i % kNumMasks];
+    const uint32_t low = 0xFF777777 & kMasks[i % kNumMasks];
+    auto dest = swizzle ? buffer : target;
+    GenerateRGBACheckerboard(dest, 0, 0, bordered_width, bordered_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
+    GenerateRGBACheckerboard(dest, 4, 4, width, height, full_pitch, high, low, 1);
+
+    if (swizzle) {
+      swizzle_rect(dest, bordered_width, bordered_height, target, full_pitch, 4);
+    }
+  }
+
+  if (buffer) {
     delete[] buffer;
   }
 }

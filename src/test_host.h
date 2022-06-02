@@ -268,6 +268,7 @@ class TestHost {
   uint32_t GetMaxTextureWidth() const { return max_texture_width_; }
   uint32_t GetMaxTextureHeight() const { return max_texture_height_; }
   uint32_t GetMaxTextureDepth() const { return max_texture_depth_; }
+  uint32_t GetMaxSingleTextureSize() const { return max_single_texture_size_; }
 
   uint8_t *GetTextureMemory() const { return texture_memory_; }
   uint32_t GetTextureMemorySize() const { return texture_memory_size_; }
@@ -556,6 +557,7 @@ class TestHost {
   uint32_t max_texture_width_;
   uint32_t max_texture_height_;
   uint32_t max_texture_depth_;
+  uint32_t max_single_texture_size_{0};
 
   TextureStage texture_stage_[4];
 

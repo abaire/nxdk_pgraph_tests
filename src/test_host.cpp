@@ -38,20 +38,20 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
       max_texture_depth_(max_texture_depth) {
   // allocate texture memory buffer large enough for all types
   uint32_t stride = max_texture_width_ * 4;
-  uint32_t texture_size = stride * max_texture_height * max_texture_depth;
+  max_single_texture_size_ = stride * max_texture_height * max_texture_depth;
 
   static constexpr uint32_t kMaxPaletteSize = 256 * 4;
   uint32_t palette_size = kMaxPaletteSize * 4;
 
   static constexpr uint32_t kMaxTextures = 4;
-  texture_memory_size_ = texture_size * kMaxTextures;
+  texture_memory_size_ = max_single_texture_size_ * kMaxTextures;
   uint32_t total_size = texture_memory_size_ + palette_size;
 
   texture_memory_ = static_cast<uint8_t *>(
       MmAllocateContiguousMemoryEx(total_size, 0, MAXRAM, 0, PAGE_WRITECOMBINE | PAGE_READWRITE));
   ASSERT(texture_memory_ && "Failed to allocate texture memory.");
 
-  texture_palette_memory_ = texture_memory_ + texture_size;
+  texture_palette_memory_ = texture_memory_ + max_single_texture_size_;
 
   matrix_unit(fixed_function_model_view_matrix_);
   matrix_unit(fixed_function_projection_matrix_);
@@ -60,7 +60,7 @@ TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint
 
   uint32_t texture_offset = 0;
   uint32_t palette_offset = 0;
-  for (auto i = 0; i < 4; ++i, texture_offset += texture_size, palette_offset += kMaxPaletteSize) {
+  for (auto i = 0; i < 4; ++i, texture_offset += max_single_texture_size_, palette_offset += kMaxPaletteSize) {
     texture_stage_[i].SetStage(i);
     texture_stage_[i].SetTextureDimensions(max_texture_width, max_texture_height);
     texture_stage_[i].SetImageDimensions(max_texture_width, max_texture_height);
