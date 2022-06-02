@@ -31,6 +31,7 @@ ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint3
       z_max_(z_max),
       enable_lighting_{enable_lighting},
       use_4_component_texcoords_{use_4_component_texcoords} {
+  matrix_unit(model_matrix_);
   matrix_unit(view_matrix_);
 
   VECTOR rot = {0, 0, 0, 1};
@@ -105,10 +106,10 @@ void ProjectionVertexShader::UpdateMatrices() {
   CalculateViewportMatrix();
   matrix_multiply(projection_viewport_matrix_, projection_matrix_, viewport_matrix_);
 
-  /* Create local->world matrix given our updated object */
-  matrix_unit(model_matrix_);
+  MATRIX model_view_matrix;
+  matrix_multiply(model_view_matrix, model_matrix_, view_matrix_);
 
-  matrix_multiply(composite_matrix_, view_matrix_, projection_viewport_matrix_);
+  matrix_multiply(composite_matrix_, model_view_matrix, projection_viewport_matrix_);
   matrix_transpose(composite_matrix_, composite_matrix_);
   matrix_general_inverse(inverse_composite_matrix_, composite_matrix_);
 }

@@ -1,6 +1,9 @@
 struct vIn {
   float3 norm : NORMAL;
-  float4 tex : TEXCOORD;
+  float4 tex0 : TEXCOORD0;
+  float4 tex1 : TEXCOORD1;
+  float4 tex2 : TEXCOORD2;
+  float4 tex3 : TEXCOORD3;
   float3 pos : POSITION;
   float4 diffuse: DIFFUSE;
 };
@@ -10,6 +13,9 @@ struct vOut {
   float4 col : COLOR;
   float4 fog : FOG;
   float4 tex0 : TEXCOORD0;
+  float4 tex1 : TEXCOORD1;
+  float4 tex2 : TEXCOORD2;
+  float4 tex3 : TEXCOORD3;
 };
 
 vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix,
@@ -28,7 +34,10 @@ vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, un
   result.pos = pos;
   result.col = I.diffuse;
   result.fog = result.pos.w;
-  result.tex0 = I.tex;
+  result.tex0 = I.tex0;
+  result.tex1 = I.tex1;
+  result.tex2 = I.tex2;
+  result.tex3 = I.tex3;
 
   return result;
 }

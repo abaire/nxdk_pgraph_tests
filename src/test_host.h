@@ -323,15 +323,17 @@ class TestHost {
   std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
 
   // Generates a D3D-style model view matrix.
-  static void GetD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up);
+  static void BuildD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up);
 
   // Gets a D3D-style matrix suitable for a projection + viewport transform.
-  void GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const;
+  void BuildD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const;
 
   // Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin)
-  static void GetDefaultXDKModelViewMatrix(MATRIX matrix);
+  static void BuildDefaultXDKModelViewMatrix(MATRIX matrix);
   // Gets a reasonable default projection matrix (fov = PI/4, near = 1, far = 200)
-  void GetDefaultXDKProjectionMatrix(MATRIX matrix) const;
+  void BuildDefaultXDKProjectionMatrix(MATRIX matrix) const;
+
+  const float *GetFixedFunctionInverseCompositeMatrix() const { return fixed_function_inverse_composite_matrix_; }
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -526,6 +528,8 @@ class TestHost {
 
   // Returns the maximum possible value that can be stored in the depth surface for the given mode.
   static float MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mode);
+
+  float GetMaxDepthBufferValue() const { return MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_); }
 
   // Rounds the given integer in the same way as nv2a hardware (only remainders >= 9/16th are rounded up).
   static float NV2ARound(float input);

@@ -9,11 +9,12 @@
 
 #include "debug_output.h"
 #include "math3d.h"
+#include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
 
-static constexpr float kSize = 0.75f;
+static constexpr float kSize = 1.0f;
 
 // Must be ordered to match kCubeSTPoints for each face.
 static constexpr uint32_t kRightSide[] = {3, 7, 6, 2};
@@ -44,11 +45,13 @@ static constexpr float kCubePoints[][3] = {
   {kSize, kSize, -kSize},
 };
 
-static constexpr float kCubeSTPoints[][2] = {
-  {0.0f, 0.0f},
-  {0.0f, 1.0f},
-  {1.0f, 1.0f},
-  {1.0f, 0.0f},
+static constexpr const float kCubeSTPoints[][4][2] = {
+  {{0.000000f, 0.000000f}, {0.000000f, 0.333333f}, {0.333333f, 0.333333f}, {0.333333f, 0.000000f}},
+  {{0.333333f, 0.000000f}, {0.333333f, 0.333333f}, {0.666667f, 0.333333f}, {0.666667f, 0.000000f}},
+  {{0.333333f, 0.333333f}, {0.333333f, 0.666667f}, {0.666667f, 0.666667f}, {0.666667f, 0.333333f}},
+  {{0.000000f, 0.333333f}, {0.000000f, 0.666667f}, {0.333333f, 0.666667f}, {0.333333f, 0.333333f}},
+  {{0.000000f, 0.666667f}, {0.000000f, 1.000000f}, {0.333333f, 1.000000f}, {0.333333f, 0.666667f}},
+  {{0.666667f, 0.000000f}, {0.666667f, 0.333333f}, {1.000000f, 0.333333f}, {1.000000f, 0.000000f}},
 };
 
 // clang-format on
@@ -89,15 +92,28 @@ TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir)
 void TextureCubemapTests::Initialize() {
   TestSuite::Initialize();
 
-  host_.SetVertexShaderProgram(nullptr);
+  float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
+                                                          -1.0f, 1.0f, 200.0f);
+  {
+    shader->SetLightingEnabled(false);
+    shader->SetUse4ComponentTexcoords();
+    shader->SetUseD3DStyleViewport();
+    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    shader->LookAt(camera_position, camera_look_at);
+  }
+  host_.SetVertexShaderProgram(shader);
+
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   // Load the normal map into stage0
   {
-    SDL_Surface *normal_map = IMG_Load("D:\\texture_cubemap\\WaveNormalMap.png");
+    SDL_Surface *normal_map = IMG_Load("D:\\texture_cubemap\\cube_normals_object_space.png");
     ASSERT(normal_map && "Failed to load normal map");
     auto &stage = host_.GetTextureStage(0);
-    stage.SetTextureDimensions(128, 128);
+    stage.SetTextureDimensions(normal_map->w, normal_map->h);
     host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8), 0);
     host_.SetTexture(normal_map);
     SDL_free(normal_map);
@@ -129,9 +145,44 @@ void TextureCubemapTests::TestCubemap() {
 
   host_.PrepareDraw(0xFE121212);
 
+  auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
+
+  auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
+    MATRIX matrix = {0.0f};
+    VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
+    VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
+    VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
+    host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
+
+    auto model_matrix = shader->GetModelMatrix();
+    matrix_unit(model_matrix);
+    VECTOR rotation = {r_x, r_y, r_z};
+    matrix_rotate(model_matrix, model_matrix, rotation);
+    VECTOR translation = {x, y, z};
+    matrix_translate(model_matrix, model_matrix, translation);
+
+    matrix_multiply(matrix, shader->GetModelMatrix(), matrix);
+    host_.SetFixedFunctionModelViewMatrix(matrix);
+
+    shader->PrepareDraw();
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    for (auto face : kCubeFaces) {
+      for (auto i = 0; i < 4; ++i) {
+        uint32_t index = face[i];
+        const float *vertex = kCubePoints[index];
+        host_.SetTexCoord3(vertex[0], vertex[1], vertex[2], 1.0f);
+        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
+      }
+    }
+
+    host_.End();
+  };
+
   const float z = 2.0f;
-  Draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
-  Draw(1.5f, 0.0f, z, M_PI * -0.25, M_PI * -0.25f, 0.0f);
+  draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
+  draw(1.5f, 0.0f, z, M_PI * 1.25f, M_PI * 0.25f, 0.0f);
 
   pb_print("%s\n", kCubemapTest);
   pb_draw_text_screen();
@@ -140,6 +191,33 @@ void TextureCubemapTests::TestCubemap() {
 }
 
 void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping) {
+  /*
+  // https://xboxdevwiki.net/NV2A/Pixel_Combiner seemingly erroneously indicates that PS_TEXTUREMODES_DOT_STR_CUBE
+  should
+  // perform a reflected lookup using texm3x3vspec. In practice, it seems that the w tex coordinate is ignored in this
+  // test, so it is more likely that a texm3x3tex is the analog.
+
+  // See https://web.archive.org/web/20210614122128/https://www.nvidia.com/docs/IO/8228/D3DTutorial2_FX_HLSL.pdf
+
+  // texm3x3tex:
+  // tex0 is used to look up the normal for a given pixel
+  // The tex1, 2, and 3 combine contain the matrix needed to unproject a fragment back to the world-space point (used
+  // to position the normal in worldspace)
+  // The final value is a lookup from the cube map in t3 using the world adjusted normal.
+
+  // texm3x3vspec:
+  // tex0 is used to look up the normal for a given pixel
+  // The tex1, 2, and 3 combine:
+  //   1) The matrix needed to unproject a fragment back to the world-space point (used to position the normal in
+  //      worldspace)
+  //   2) The q component of the three are combined to provide the eye vector for the vertex (in worldspace).
+  //
+  // The hardware then creates a reflection vector using the normal and eye vectors and uses that to index into the
+  // cubemap to find the final pixel value.
+   */
+
+  auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
+
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(3, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_PRODUCT,
@@ -152,9 +230,60 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
 
   host_.PrepareDraw(0xFE131313);
 
+  auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
+    MATRIX matrix = {0.0f};
+    VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
+    VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
+    VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
+    host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
+
+    auto model_matrix = shader->GetModelMatrix();
+    matrix_unit(model_matrix);
+    VECTOR rotation = {r_x, r_y, r_z};
+    matrix_rotate(model_matrix, model_matrix, rotation);
+    VECTOR translation = {x, y, z};
+    matrix_translate(model_matrix, model_matrix, translation);
+
+    matrix_multiply(matrix, model_matrix, matrix);
+    host_.SetFixedFunctionModelViewMatrix(matrix);
+
+    auto inv_projection = host_.GetFixedFunctionInverseCompositeMatrix();
+    shader->PrepareDraw();
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    uint32_t face_index = 0;
+    for (auto face : kCubeFaces) {
+      const auto normals = kCubeSTPoints[face_index++];
+      for (auto i = 0; i < 4; ++i) {
+        uint32_t index = face[i];
+        const float *vertex = kCubePoints[index];
+        const float *normal_st = normals[i];
+        // These would be necessary if the method actually used eye-relative reflection.
+        //        VECTOR padded_vertex = {vertex[0], vertex[1], vertex[2], 1.0f};
+        //        vector_apply(padded_vertex, padded_vertex, model_matrix);
+        //        padded_vertex[0] /= padded_vertex[3];
+        //        padded_vertex[1] /= padded_vertex[3];
+        //        padded_vertex[2] /= padded_vertex[3];
+        //        padded_vertex[3] = 1.0f;
+        //        VECTOR eye_vec = {0.0f};
+        //        vector_subtract(eye_vec, eye, padded_vertex);
+        //        vector_normalize(eye_vec);
+
+        host_.SetTexCoord0(normal_st[0], normal_st[1]);
+        host_.SetTexCoord1(inv_projection[_11], inv_projection[_12], inv_projection[_13], 1);
+        host_.SetTexCoord2(inv_projection[_21], inv_projection[_22], inv_projection[_23], 0);
+        host_.SetTexCoord3(inv_projection[_31], inv_projection[_32], inv_projection[_33], 0);
+        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
+      }
+    }
+
+    host_.End();
+  };
+
   const float z = 2.0f;
-  Draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
-  Draw(1.5f, 0.0f, z, M_PI * -0.25, M_PI * -0.25f, 0.0f);
+  draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
+  draw(1.5f, 0.0f, z, M_PI * 1.25f, M_PI * 0.25f, 0.0f);
 
   p = pb_begin();
   p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
@@ -164,41 +293,6 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, name);
-}
-
-void TextureCubemapTests::Draw(float x, float y, float z, float r_x, float r_y, float r_z) const {
-  MATRIX matrix = {0.0f};
-  VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
-  VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
-  VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
-  host_.GetD3DModelViewMatrix(matrix, eye, at, up);
-
-  MATRIX model_matrix = {0.0f};
-  matrix_unit(model_matrix);
-  VECTOR rotation = {r_x, r_y, r_z};
-  matrix_rotate(model_matrix, model_matrix, rotation);
-  VECTOR translation = {x, y, z};
-  matrix_translate(model_matrix, model_matrix, translation);
-
-  matrix_multiply(matrix, model_matrix, matrix);
-  host_.SetFixedFunctionModelViewMatrix(matrix);
-
-  host_.Begin(TestHost::PRIMITIVE_QUADS);
-
-  for (auto face : kCubeFaces) {
-    for (auto i = 0; i < 4; ++i) {
-      uint32_t index = face[i];
-      const float *vertex = kCubePoints[index];
-      const float *normal_st = kCubeSTPoints[i];
-      host_.SetTexCoord0(normal_st[0], normal_st[1]);
-      host_.SetTexCoord1(vertex[0], vertex[1], vertex[2], 1.0f);
-      host_.SetTexCoord2(vertex[0], vertex[1], vertex[2], 1.0f);
-      host_.SetTexCoord3(vertex[0], vertex[1], vertex[2], 1.0f);
-      host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
-    }
-  }
-
-  host_.End();
 }
 
 static void GenerateCubemap(uint8_t *buffer) {

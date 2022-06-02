@@ -1002,10 +1002,10 @@ void TestHost::SetXDKDefaultViewportAndFixedFunctionMatrices() {
   SetViewportScale(0, -0, 0, 0);
 
   MATRIX matrix;
-  GetDefaultXDKModelViewMatrix(matrix);
+  BuildDefaultXDKModelViewMatrix(matrix);
   SetFixedFunctionModelViewMatrix(matrix);
 
-  GetDefaultXDKProjectionMatrix(matrix);
+  BuildDefaultXDKProjectionMatrix(matrix);
   SetFixedFunctionProjectionMatrix(matrix);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_XDK;
@@ -1052,18 +1052,18 @@ void TestHost::SetDefaultViewportAndFixedFunctionMatrices() {
   fixed_function_matrix_mode_ = MATRIX_MODE_DEFAULT_NXDK;
 }
 
-void TestHost::GetDefaultXDKModelViewMatrix(MATRIX matrix) {
+void TestHost::BuildDefaultXDKModelViewMatrix(MATRIX matrix) {
   VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
   VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
   VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
-  GetD3DModelViewMatrix(matrix, eye, at, up);
+  BuildD3DModelViewMatrix(matrix, eye, at, up);
 }
 
-void TestHost::GetD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up) {
+void TestHost::BuildD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up) {
   create_d3d_look_at_lh(matrix, eye, at, up);
 }
 
-void TestHost::GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const {
+void TestHost::BuildD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const {
   MATRIX viewport;
   if (depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16) {
     if (depth_buffer_mode_float_) {
@@ -1085,8 +1085,8 @@ void TestHost::GetD3DProjectionViewportMatrix(MATRIX result, float fov, float z_
   matrix_multiply(result, projection, viewport);
 }
 
-void TestHost::GetDefaultXDKProjectionMatrix(MATRIX matrix) const {
-  GetD3DProjectionViewportMatrix(matrix, M_PI * 0.25f, 1.0f, 200.0f);
+void TestHost::BuildDefaultXDKProjectionMatrix(MATRIX matrix) const {
+  BuildD3DProjectionViewportMatrix(matrix, M_PI * 0.25f, 1.0f, 200.0f);
 }
 
 void TestHost::ProjectPoint(VECTOR result, const VECTOR world_point) const {
