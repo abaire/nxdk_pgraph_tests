@@ -18,8 +18,6 @@ class TextureCubemapTests : public TestSuite {
  private:
   void TestCubemap();
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
-
-  void Draw(float x, float y, float z, float r_x, float r_y, float r_z) const;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_CUBEMAP_TESTS_H
