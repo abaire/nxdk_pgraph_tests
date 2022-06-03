@@ -941,6 +941,8 @@ int TestHost::SetPalette(const uint32_t *palette, PaletteSize size, uint32_t sta
   return texture_stage_[stage].SetPalette(palette, size, texture_palette_memory_);
 }
 
+void TestHost::SetPaletteSize(PaletteSize size, uint32_t stage) { texture_stage_[stage].SetPaletteSize(size); }
+
 void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
                           const std::string &z_buffer_name) {
   bool perform_save = allow_saving && save_results_;

@@ -68,6 +68,7 @@ SRCS = \
 	$(SRCDIR)/tests/texgen_matrix_tests.cpp \
 	$(SRCDIR)/tests/texgen_tests.cpp \
 	$(SRCDIR)/tests/texture_border_tests.cpp \
+	$(SRCDIR)/tests/texture_cpu_update_tests.cpp \
 	$(SRCDIR)/tests/texture_cubemap_tests.cpp \
 	$(SRCDIR)/tests/texture_format_dxt_tests.cpp \
 	$(SRCDIR)/tests/texture_format_tests.cpp \

@@ -242,6 +242,7 @@ class TestHost {
                     uint32_t bytes_per_pixel, bool swizzle, uint32_t stage = 0);
 
   int SetPalette(const uint32_t *palette, PaletteSize size, uint32_t stage = 0);
+  void SetPaletteSize(PaletteSize size, uint32_t stage = 0);
   void SetTextureStageEnabled(uint32_t stage, bool enabled = true);
 
   // Set the surface format
@@ -275,6 +276,9 @@ class TestHost {
 
   uint8_t *GetTextureMemoryForStage(uint32_t stage) const {
     return texture_memory_ + texture_stage_[stage].GetTextureOffset();
+  }
+  uint32_t *GetPaletteMemoryForStage(uint32_t stage) const {
+    return reinterpret_cast<uint32_t *>(texture_palette_memory_ + texture_stage_[stage].GetPaletteOffset());
   }
 
   inline uint32_t GetFramebufferWidth() const { return framebuffer_width_; }

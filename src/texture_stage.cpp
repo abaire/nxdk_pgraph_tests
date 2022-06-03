@@ -429,6 +429,17 @@ int TextureStage::SetRawTexture(const uint8_t *source, uint32_t width, uint32_t 
 }
 
 int TextureStage::SetPalette(const uint32_t *palette, uint32_t length, uint8_t *memory_base) {
+  auto ret = SetPaletteSize(length);
+  if (ret) {
+    return ret;
+  }
+
+  uint8_t *dest = memory_base + palette_memory_offset_;
+  memcpy(dest, palette, length * 4);
+  return 0;
+}
+
+int TextureStage::SetPaletteSize(uint32_t length) {
   switch (length) {
     case 256:
       palette_length_ = 0;
@@ -446,9 +457,6 @@ int TextureStage::SetPalette(const uint32_t *palette, uint32_t length, uint8_t *
       ASSERT(!"Invalid palette length. Must be 32|64|128|256");
       return 1;
   }
-
-  uint8_t *dest = memory_base + palette_memory_offset_;
-  memcpy(dest, palette, length * 4);
   return 0;
 }
 

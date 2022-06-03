@@ -139,6 +139,7 @@ class TextureStage {
                     uint32_t bytes_per_pixel, bool swizzle, uint8_t *memory_base) const;
 
   int SetPalette(const uint32_t *palette, uint32_t length, uint8_t *memory_base);
+  int SetPaletteSize(uint32_t length);
 
  private:
   uint32_t stage_{0};
