@@ -62,13 +62,12 @@ void VertexShaderProgram::UploadConstants() {
 
   auto p = pb_begin();
 
-  /* Set shader constants cursor at C0 */
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_ID, 96 + uniform_start_offset_);
+  p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 96 + uniform_start_offset_);
 
   uint32_t *uniforms = base_transform_constants_.data();
   uint32_t values_remaining = base_transform_constants_.size();
   while (values_remaining > 16) {
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, 16);
+    pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, 16);
     memcpy(p, uniforms, 16 * 4);
     uniforms += 16;
     p += 16;
@@ -76,7 +75,7 @@ void VertexShaderProgram::UploadConstants() {
   }
 
   if (values_remaining) {
-    pb_push(p++, NV20_TCL_PRIMITIVE_3D_VP_UPLOAD_CONST_X, values_remaining);
+    pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, values_remaining);
     memcpy(p, uniforms, values_remaining * 4);
     p += values_remaining;
   }
