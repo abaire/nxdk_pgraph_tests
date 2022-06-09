@@ -294,183 +294,183 @@ static void process_config(const char* config_file_path, std::vector<std::shared
 
 static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                             const std::string& output_directory) {
-  // Must be the first suite run for valid results. The first test depends on having a cleared initial state.
-  {
-    auto suite = std::make_shared<LightingNormalTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<AttributeCarryoverTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<AttributeExplicitSetterTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<AttributeFloatTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<BlendTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<ClearTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<ColorMaskBlendTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<ColorZetaDisableTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<ColorZetaOverlapTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<CombinerTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<FogTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<FogCustomShaderTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<FogInfiniteFogCoordinateTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<FogVec4CoordTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<FrontFaceTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<DepthFormatTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<DepthFormatFixedFunctionTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<ImageBlitTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<InlineArraySizeMismatchTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<MaterialAlphaTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<MaterialColorTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<MaterialColorSourceTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<NullSurfaceTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<OverlappingDrawModesTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<SetVertexDataTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<SurfaceClipTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<SurfacePitchTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<StencilTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureBorderTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureCPUUpdateTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureCubemapTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TexgenMatrixTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TexgenTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureFormatDXTTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureFormatTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureFramebufferBlitTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureMatrixTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureRenderTargetTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureRenderUpdateInPlaceTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureShadowComparatorTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TextureSignedComponentTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<ThreeDPrimitiveTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<TwoDLineTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
-  {
-    auto suite = std::make_shared<VertexShaderIndependenceTests>(host, output_directory);
-    test_suites.push_back(suite);
-  }
+  //  // Must be the first suite run for valid results. The first test depends on having a cleared initial state.
+  //  {
+  //    auto suite = std::make_shared<LightingNormalTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<AttributeCarryoverTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<AttributeExplicitSetterTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<AttributeFloatTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<BlendTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<ClearTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<ColorMaskBlendTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<ColorZetaDisableTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<ColorZetaOverlapTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<CombinerTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<FogTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<FogCustomShaderTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<FogInfiniteFogCoordinateTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<FogVec4CoordTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<FrontFaceTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<DepthFormatTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<DepthFormatFixedFunctionTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<ImageBlitTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<InlineArraySizeMismatchTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<MaterialAlphaTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<MaterialColorTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<MaterialColorSourceTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<NullSurfaceTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<OverlappingDrawModesTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<SetVertexDataTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<SurfaceClipTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<SurfacePitchTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<StencilTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureBorderTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureCPUUpdateTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureCubemapTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TexgenMatrixTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TexgenTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureFormatDXTTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureFormatTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureFramebufferBlitTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureMatrixTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureRenderTargetTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureRenderUpdateInPlaceTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureShadowComparatorTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TextureSignedComponentTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<ThreeDPrimitiveTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<TwoDLineTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
+  //  {
+  //    auto suite = std::make_shared<VertexShaderIndependenceTests>(host, output_directory);
+  //    test_suites.push_back(suite);
+  //  }
   {
     auto suite = std::make_shared<VertexShaderRoundingTests>(host, output_directory);
     test_suites.push_back(suite);

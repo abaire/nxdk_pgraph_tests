@@ -28,7 +28,8 @@ static const uint32_t kTextureHeight = 128;
 static constexpr const char kTestRenderTargetName[] = "RenderTarget";
 static constexpr const char kTestCompositingRenderTargetName[] = "Compositing";
 static constexpr const char kTestGeometryName[] = "Geometry";
-static constexpr const char kTestGeometryNonFullscreenName[] = "GeometrySubscreen";
+static constexpr const char kTestGeometrySubscreenName[] = "GeometrySubscreen";
+static constexpr const char kTestGeometrySuperscreenName[] = "GeometrySuperscreen";
 
 static constexpr float kGeometryTestBiases[] = {
     // Boundaries at 1/16 = 0.0625f
@@ -37,7 +38,8 @@ static constexpr float kGeometryTestBiases[] = {
 
 static std::string MakeCompositingRenderTargetTestName(int z);
 static std::string MakeGeometryTestName(float bias);
-static std::string MakeGeometryNonFullscreenTestName(float bias);
+static std::string MakeGeometrySubscreenTestName(float bias);
+static std::string MakeGeometrySuperscreenTestName(float bias);
 
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
@@ -51,8 +53,11 @@ VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string
     std::string test_name = MakeGeometryTestName(bias);
     tests_[test_name] = [this, bias]() { TestGeometry(bias); };
 
-    test_name = MakeGeometryNonFullscreenTestName(bias);
-    tests_[test_name] = [this, bias]() { TestGeometryNonFullscreen(bias); };
+    test_name = MakeGeometrySubscreenTestName(bias);
+    tests_[test_name] = [this, bias]() { TestGeometrySubscreen(bias); };
+
+    test_name = MakeGeometrySuperscreenTestName(bias);
+    tests_[test_name] = [this, bias]() { TestGeometrySuperscreen(bias); };
   }
 }
 
@@ -133,7 +138,7 @@ void VertexShaderRoundingTests::TestGeometry(float bias) {
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-void VertexShaderRoundingTests::TestGeometryNonFullscreen(float bias) {
+void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
   host_.PrepareDraw(0xFE414041);
@@ -257,7 +262,140 @@ void VertexShaderRoundingTests::TestGeometryNonFullscreen(float bias) {
     }
   }
 
-  std::string test_name = MakeGeometryNonFullscreenTestName(bias);
+  std::string test_name = MakeGeometrySubscreenTestName(bias);
+  pb_print("%s\n", test_name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+}
+
+void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+  host_.PrepareDraw(0xFE414041);
+
+  static constexpr uint32_t kTextureSize = 1024;
+
+  auto draw_texture = [this, bias](uint32_t draw_width, uint32_t draw_height) {
+    host_.SetTextureStageEnabled(0, false);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+    host_.SetupTextureStages();
+
+    const uint32_t kTexturePitch = kTextureSize * 4;
+    const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize);
+    host_.CommitSurfaceFormat();
+    host_.SetWindowClip(kTextureSize - 1, kTextureSize - 1);
+
+    // Point the color buffer at the texture and mix the left hand side with itself multiple times.
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
+
+    // Initialize the texture to magenta.
+    auto pixel = reinterpret_cast<uint32_t *>(host_.GetTextureMemory());
+    for (uint32_t y = 0; y < draw_height; ++y) {
+      for (uint32_t x = 0; x < draw_width; ++x, ++pixel) {
+        *pixel = 0xFFFF00FF;
+      }
+    }
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+    // Draw a subpixel offset green square.
+    static constexpr uint32_t kColor = 0xFF009900;
+    static constexpr float kZ = 0.0f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(kColor);
+    host_.SetVertex(bias, bias, kZ, 1.0f);
+    host_.SetVertex(static_cast<float>(draw_width), bias, kZ, 1.0f);
+    host_.SetVertex(static_cast<float>(draw_width), static_cast<float>(draw_height), kZ, 1.0f);
+    host_.SetVertex(bias, static_cast<float>(draw_height), kZ, 1.0f);
+    host_.End();
+
+    host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                           host_.GetFramebufferHeight());
+    host_.CommitSurfaceFormat();
+
+    p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
+  };
+
+  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
+
+  auto draw_quad = [this, draw_texture](uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
+    draw_texture(width, height);
+
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+    host_.SetupTextureStages();
+
+    host_.SetDiffuse(0xFFFFFF00);
+
+    const auto kWidth = static_cast<float>(width);
+    const auto kHeight = static_cast<float>(height);
+    const auto kLeft = static_cast<float>(x);
+    const auto kTop = static_cast<float>(y);
+    const auto kRight = kLeft + kWidth;
+    const auto kBottom = kTop + kHeight;
+
+    static constexpr float kZ = 0.0f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(kLeft, kTop, kZ, 1.0f);
+    host_.SetTexCoord0(kWidth, 0.0f);
+    host_.SetVertex(kRight, kTop, kZ, 1.0f);
+    host_.SetTexCoord0(kWidth, kHeight);
+    host_.SetVertex(kRight, kBottom, kZ, 1.0f);
+    host_.SetTexCoord0(0.0f, kHeight);
+    host_.SetVertex(kLeft, kBottom, kZ, 1.0f);
+    host_.End();
+  };
+
+  const float kQuadRegion = 128.0f;
+  const float kSpacing = 16.0f;
+  const float kHorizontalStart = floorf((host_.GetFramebufferWidthF() - (kQuadRegion + kSpacing)) * 0.5f);
+  const float kHorizontalEnd = kHorizontalStart * 2;
+  float left = kHorizontalStart;
+  float top = floorf((host_.GetFramebufferHeightF() - (kQuadRegion + kSpacing)) * 0.5f);
+
+  static constexpr uint32_t kGeometries[][2] = {
+      {128, 128},
+      {128, 32},
+      {32, 128},
+      {16, 64},
+  };
+
+  for (auto geometry : kGeometries) {
+    draw_quad(static_cast<uint32_t>(left), static_cast<uint32_t>(top), geometry[0], geometry[1]);
+    left += kQuadRegion + kSpacing;
+    if (left >= kHorizontalEnd) {
+      left = kHorizontalStart;
+      top += kQuadRegion + kSpacing;
+    }
+  }
+
+  std::string test_name = MakeGeometrySuperscreenTestName(bias);
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
@@ -526,9 +664,15 @@ static std::string MakeGeometryTestName(float bias) {
   return buf;
 }
 
-static std::string MakeGeometryNonFullscreenTestName(float bias) {
+static std::string MakeGeometrySubscreenTestName(float bias) {
   char buf[32] = {0};
-  snprintf(buf, 31, "%s_%f", kTestGeometryNonFullscreenName, bias);
+  snprintf(buf, 31, "%s_%f", kTestGeometrySubscreenName, bias);
+  return buf;
+}
+
+static std::string MakeGeometrySuperscreenTestName(float bias) {
+  char buf[32] = {0};
+  snprintf(buf, 31, "%s_%f", kTestGeometrySuperscreenName, bias);
   return buf;
 }
 
