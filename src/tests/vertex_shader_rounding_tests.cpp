@@ -67,14 +67,11 @@ void VertexShaderRoundingTests::Initialize() {
 
   auto channel = kNextContextChannel;
   const uint32_t texture_target_dma_channel = channel++;
-  pb_create_dma_ctx(texture_target_dma_channel, DMA_CLASS_3D, 0, MAXRAM, &texture_target_ctx_);
-  pb_bind_channel(&texture_target_ctx_);
 
   const uint32_t texture_size = kTexturePitch * kTextureHeight;
   render_target_ =
       (uint8_t *)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
   ASSERT(render_target_ && "Failed to allocate target surface.");
-  pb_set_dma_address(&texture_target_ctx_, render_target_, texture_size - 1);
 }
 
 void VertexShaderRoundingTests::Deinitialize() {
@@ -411,11 +408,6 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     }
   }
 
-  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
-  auto &texture_stage = host_.GetTextureStage(0);
-  texture_stage.SetTextureDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
-  texture_stage.SetImageDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
-
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 
@@ -427,8 +419,8 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     p = pb_push1(
         p, NV097_SET_SURFACE_PITCH,
         SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kTexturePitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(render_target_));
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
     p = pb_push1(p, NV097_NO_OPERATION, 0);
     p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
@@ -445,7 +437,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     host_.SetDepthClip(0.0f, 16777215.0f);
   }
 
-  // Manually load the vertex shader and uniforms.
+  // Manually load the vertex shader.
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0x0);
@@ -469,12 +461,6 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
     // MAD(oPos,xyz, R12, R1.x, c[59]);
     p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0087601B, 0xC400286C, 0x3070E801);
-
-    p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x62);
-    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 1.0f, 0.0f, 0.0f, 0.0f);
-    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 0.0f, 1.0f, 0.0f, 0.0f);
-    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 0.0f, 0.0f, 0.050505f, 0.242424f);
-    p = pb_push4f(p, NV097_SET_TRANSFORM_CONSTANT, 0.0f, 0.0f, 0.0f, 1.0f);
     pb_end(p);
   }
 
@@ -506,14 +492,15 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   // Render the render buffer from the previous draw call onto the screen.
   {
-    texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-    texture_stage.SetImageDimensions(kTextureWidth, kTextureHeight);
-
     host_.SetVertexShaderProgram(nullptr);
     host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
-    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+    texture_stage.SetImageDimensions(kTextureWidth, kTextureHeight);
+    host_.SetupTextureStages();
 
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
@@ -528,6 +515,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     host_.SetRawTexture(render_target_, kTextureWidth, kTextureHeight, 1, kTexturePitch, 4, false);
 
     host_.SetVertexBuffer(framebuffer_vertex_buffer_);
+
     host_.PrepareDraw(0xFE202020);
     host_.DrawArrays();
   }

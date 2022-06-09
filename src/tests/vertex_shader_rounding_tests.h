@@ -27,7 +27,6 @@ class VertexShaderRoundingTests : public TestSuite {
   void TestCompositingRenderTarget(int z);
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> framebuffer_vertex_buffer_;
