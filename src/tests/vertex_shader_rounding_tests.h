@@ -22,9 +22,8 @@ class VertexShaderRoundingTests : public TestSuite {
 
   void TestRenderTarget();
   void TestGeometry(float bias);
+  void TestGeometryNonFullscreen(float bias);
   void TestCompositingRenderTarget(int z);
-
-  static std::string MakeGeometryTestName(float bias);
 
  private:
   struct s_CtxDma texture_target_ctx_ {};
