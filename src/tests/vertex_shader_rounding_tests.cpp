@@ -36,7 +36,7 @@ static constexpr const char kTestProjectedAdjacentGeometryName[] = "ProjAdjacent
 
 static constexpr float kGeometryTestBiases[] = {
     // Boundaries at 1/16 = 0.0625f
-    0.0f, 0.001f, 0.49999f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f, 1.0f,
+    0.0f, 0.001f, 0.4999f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f, 1.0f,
 };
 
 static std::string MakeCompositingRenderTargetTestName(int z);
