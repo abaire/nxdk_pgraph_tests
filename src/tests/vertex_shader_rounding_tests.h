@@ -25,6 +25,8 @@ class VertexShaderRoundingTests : public TestSuite {
   void TestGeometrySubscreen(float bias);
   void TestGeometrySuperscreen(float draw_width);
   void TestCompositingRenderTarget(int z);
+  void TestAdjacentGeometry(float bias);
+  void TestProjectedAdjacentGeometry(float bias);
 
  private:
   uint8_t *render_target_{nullptr};

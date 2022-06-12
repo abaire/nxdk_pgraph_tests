@@ -7,6 +7,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -30,16 +31,16 @@ static constexpr const char kTestCompositingRenderTargetName[] = "Compositing";
 static constexpr const char kTestGeometryName[] = "Geometry";
 static constexpr const char kTestGeometrySubscreenName[] = "GeometrySubscreen";
 static constexpr const char kTestGeometrySuperscreenName[] = "GeometrySuperscreen";
+static constexpr const char kTestAdjacentGeometryName[] = "AdjacentGeometry";
+static constexpr const char kTestProjectedAdjacentGeometryName[] = "ProjAdjacentGeometry";
 
 static constexpr float kGeometryTestBiases[] = {
     // Boundaries at 1/16 = 0.0625f
-    0.0f, 0.001f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f, 1.0f,
+    0.0f, 0.001f, 0.49999f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f, 1.0f,
 };
 
 static std::string MakeCompositingRenderTargetTestName(int z);
-static std::string MakeGeometryTestName(float bias);
-static std::string MakeGeometrySubscreenTestName(float bias);
-static std::string MakeGeometrySuperscreenTestName(float bias);
+static std::string MakeGeometryTestName(const char *prefix, float bias);
 
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
@@ -50,14 +51,20 @@ VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string
   }
 
   for (auto bias : kGeometryTestBiases) {
-    std::string test_name = MakeGeometryTestName(bias);
+    std::string test_name = MakeGeometryTestName(kTestGeometryName, bias);
     tests_[test_name] = [this, bias]() { TestGeometry(bias); };
 
-    test_name = MakeGeometrySubscreenTestName(bias);
+    test_name = MakeGeometryTestName(kTestGeometrySubscreenName, bias);
     tests_[test_name] = [this, bias]() { TestGeometrySubscreen(bias); };
 
-    test_name = MakeGeometrySuperscreenTestName(bias);
+    test_name = MakeGeometryTestName(kTestGeometrySuperscreenName, bias);
     tests_[test_name] = [this, bias]() { TestGeometrySuperscreen(bias); };
+
+    test_name = MakeGeometryTestName(kTestAdjacentGeometryName, bias);
+    tests_[test_name] = [this, bias]() { TestAdjacentGeometry(bias); };
+
+    test_name = MakeGeometryTestName(kTestProjectedAdjacentGeometryName, bias);
+    tests_[test_name] = [this, bias]() { TestProjectedAdjacentGeometry(bias); };
   }
 }
 
@@ -128,7 +135,7 @@ void VertexShaderRoundingTests::TestGeometry(float bias) {
   host_.SetVertex(left + bias, bottom, z, 1.0f);
   host_.End();
 
-  std::string test_name = MakeGeometryTestName(bias);
+  std::string test_name = MakeGeometryTestName(kTestGeometryName, bias);
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
@@ -180,9 +187,9 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(kColor);
     host_.SetVertex(bias, bias, kZ, 1.0f);
-    host_.SetVertex(static_cast<float>(texture_width), bias, kZ, 1.0f);
-    host_.SetVertex(static_cast<float>(texture_width), static_cast<float>(texture_height), kZ, 1.0f);
-    host_.SetVertex(bias, static_cast<float>(texture_height), kZ, 1.0f);
+    host_.SetVertex(static_cast<float>(texture_width) + bias, bias, kZ, 1.0f);
+    host_.SetVertex(static_cast<float>(texture_width) + bias, static_cast<float>(texture_height) + bias, kZ, 1.0f);
+    host_.SetVertex(bias, static_cast<float>(texture_height) + bias, kZ, 1.0f);
     host_.End();
 
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
@@ -259,7 +266,7 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
     }
   }
 
-  std::string test_name = MakeGeometrySubscreenTestName(bias);
+  std::string test_name = MakeGeometryTestName(kTestGeometrySubscreenName, bias);
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
@@ -313,9 +320,9 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(kColor);
     host_.SetVertex(bias, bias, kZ, 1.0f);
-    host_.SetVertex(static_cast<float>(draw_width), bias, kZ, 1.0f);
-    host_.SetVertex(static_cast<float>(draw_width), static_cast<float>(draw_height), kZ, 1.0f);
-    host_.SetVertex(bias, static_cast<float>(draw_height), kZ, 1.0f);
+    host_.SetVertex(static_cast<float>(draw_width) + bias, bias, kZ, 1.0f);
+    host_.SetVertex(static_cast<float>(draw_width) + bias, static_cast<float>(draw_height) + bias, kZ, 1.0f);
+    host_.SetVertex(bias, static_cast<float>(draw_height) + bias, kZ, 1.0f);
     host_.End();
 
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
@@ -392,7 +399,7 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
     }
   }
 
-  std::string test_name = MakeGeometrySuperscreenTestName(bias);
+  std::string test_name = MakeGeometryTestName(kTestGeometrySuperscreenName, bias);
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
@@ -400,6 +407,9 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
 }
 
 void VertexShaderRoundingTests::TestRenderTarget() {
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   {
     auto *pixel = reinterpret_cast<uint32_t *>(render_target_);
@@ -646,21 +656,154 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-static std::string MakeGeometryTestName(float bias) {
-  char buf[32] = {0};
-  snprintf(buf, 31, "%s_%f", kTestGeometryName, bias);
-  return buf;
+void VertexShaderRoundingTests::TestAdjacentGeometry(float bias) {
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.PrepareDraw(0xFE404040);
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  static constexpr float kQuadSize = 100.0f;
+
+  const float kMidX = floorf(host_.GetFramebufferWidthF() * 0.5f);
+  const float kMidY = floor(host_.GetFramebufferHeightF() * 0.5f);
+  const float kRowStart = kMidX - (kQuadSize * 2);
+  float left = kRowStart;
+  float top = kMidY - kQuadSize;
+  const float kZ = 1;
+  const float kBackgroundZ = kZ + 0.0001f;
+
+  // Draw a background.
+  uint32_t color = 0xFFE0E0E0;
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(color);
+  host_.SetVertex(left, top, kBackgroundZ, 1.0f);
+  host_.SetVertex(left + kQuadSize * 4.0f, top, kBackgroundZ, 1.0f);
+  host_.SetVertex(left + kQuadSize * 4.0f, top + kQuadSize * 2.0f, kBackgroundZ, 1.0f);
+  host_.SetVertex(left, top + kQuadSize * 2.0f, kBackgroundZ, 1.0f);
+  host_.End();
+
+  // Draw a subpixel offset green square.
+  color = 0xFF009900;
+  for (uint32_t y = 0; y < 2; ++y) {
+    float bottom = top + kQuadSize;
+    for (uint32_t x = 0; x < 4; ++x) {
+      float right = left + kQuadSize;
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetDiffuse(color);
+      host_.SetVertex(left + bias, top + bias, kZ, 1.0f);
+      host_.SetVertex(right + bias, top + bias, kZ, 1.0f);
+      host_.SetVertex(right + bias, bottom + bias, kZ, 1.0f);
+      host_.SetVertex(left + bias, bottom + bias, kZ, 1.0f);
+      host_.End();
+      left += kQuadSize;
+    }
+    left = kRowStart;
+    top = bottom;
+  }
+
+  std::string test_name = MakeGeometryTestName(kTestAdjacentGeometryName, bias);
+  pb_print("%s\n", test_name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-static std::string MakeGeometrySubscreenTestName(float bias) {
-  char buf[32] = {0};
-  snprintf(buf, 31, "%s_%f", kTestGeometrySubscreenName, bias);
-  return buf;
+void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
+  float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
+                                                          -1.0f, 1.0f, 200.0f);
+  {
+    shader->SetLightingEnabled(false);
+    shader->SetUse4ComponentTexcoords();
+    shader->SetUseD3DStyleViewport();
+    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    shader->LookAt(camera_position, camera_look_at);
+  }
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.PrepareDraw(0xFE404040);
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  static constexpr float kQuadSize = 100.0f;
+
+  const float kMidX = floorf(host_.GetFramebufferWidthF() * 0.5f);
+  const float kMidY = floor(host_.GetFramebufferHeightF() * 0.5f);
+  const float kRowStart = kMidX - (kQuadSize * 2);
+  float left = kRowStart;
+  float top = kMidY - kQuadSize;
+  const float kZBottom = 0.0f;
+  const float kZTop = 10.0f;
+  const float kBackgroundZBottom = kZBottom + 0.0001f;
+  const float kBackgroundZTop = kZTop + 0.0001f;
+
+  auto set_vertex = [this](float x, float y, float z) {
+    VECTOR world;
+    VECTOR screen_point = {x, y, z, 1.0f};
+    host_.UnprojectPoint(world, screen_point, z);
+    host_.SetVertex(world[0], world[1], z, 1.0f);
+  };
+
+  // Draw a background.
+  uint32_t color = 0xFFE0E0E0;
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(color);
+  set_vertex(left, top, kBackgroundZTop);
+  set_vertex(left + kQuadSize * 4.0f, top, kBackgroundZTop);
+  set_vertex(left + kQuadSize * 4.0f, top + kQuadSize * 2.0f, kBackgroundZBottom);
+  set_vertex(left, top + kQuadSize * 2.0f, kBackgroundZBottom);
+  host_.End();
+
+  float z_inc = kZTop - kZBottom * 0.5f;
+  float bottom_z = kZBottom;
+
+  // Draw a subpixel offset green square.
+  color = 0xFF009900;
+  for (uint32_t y = 0; y < 2; ++y) {
+    float bottom = top + kQuadSize;
+    float top_z = bottom_z + z_inc;
+
+    for (uint32_t x = 0; x < 4; ++x) {
+      float right = left + kQuadSize;
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetDiffuse(color);
+      set_vertex(left + bias, top + bias, top_z);
+      set_vertex(right + bias, top + bias, top_z);
+      set_vertex(right + bias, bottom + bias, bottom_z);
+      set_vertex(left + bias, bottom + bias, bottom_z);
+      host_.End();
+      left += kQuadSize;
+    }
+    left = kRowStart;
+    bottom_z = kZBottom;
+    top = bottom;
+  }
+
+  std::string test_name = MakeGeometryTestName(kTestProjectedAdjacentGeometryName, bias);
+  pb_print("%s\n", test_name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-static std::string MakeGeometrySuperscreenTestName(float bias) {
+static std::string MakeGeometryTestName(const char *prefix, float bias) {
   char buf[32] = {0};
-  snprintf(buf, 31, "%s_%f", kTestGeometrySuperscreenName, bias);
+  snprintf(buf, sizeof(buf), "%s_%.04f", prefix, bias);
   return buf;
 }
 
