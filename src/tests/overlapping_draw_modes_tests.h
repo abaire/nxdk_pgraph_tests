@@ -23,6 +23,7 @@ class OverlappingDrawModesTests : public TestSuite {
   void TestArrayElementDrawArrayArrayElement();
   void TestDrawArrayDrawArray();
   void TestXemuSquashOptimization();
+  void TestXemuSquashOptimizationSingleDrawArrays();
 
  private:
   std::vector<uint32_t> index_buffer_;

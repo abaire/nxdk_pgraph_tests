@@ -8,6 +8,7 @@
 static const char kArrElDrawArrArrElTest[] = "ArrElm_DrwArr_ArrElm";
 static const char kDrawArrDrawArrTest[] = "DrwArr_DrwArr";
 static const char kXemuSquashOptimizationTest[] = "SquashOpt";
+static const char kXemuSquashOptimizationSingleDrawArraysTest[] = "SquashOptSingleArray";
 
 static constexpr float kLeft = -2.75f;
 static constexpr float kRight = 2.75f;
@@ -19,6 +20,7 @@ OverlappingDrawModesTests::OverlappingDrawModesTests(TestHost &host, std::string
   tests_[kArrElDrawArrArrElTest] = [this]() { TestArrayElementDrawArrayArrayElement(); };
   tests_[kDrawArrDrawArrTest] = [this]() { TestDrawArrayDrawArray(); };
   tests_[kXemuSquashOptimizationTest] = [this]() { TestXemuSquashOptimization(); };
+  tests_[kXemuSquashOptimizationSingleDrawArraysTest] = [this]() { TestXemuSquashOptimizationSingleDrawArrays(); };
 }
 
 void OverlappingDrawModesTests::Initialize() {
@@ -226,4 +228,41 @@ void OverlappingDrawModesTests::TestXemuSquashOptimization() {
   pb_end(p);
 
   host_.FinishDraw(allow_saving_, output_dir_, kXemuSquashOptimizationTest);
+}
+
+void OverlappingDrawModesTests::TestXemuSquashOptimizationSingleDrawArrays() {
+  // Tests an edge case in xemu where a single DrawArrays followed by ARRAY_ELEMENTS combines the draws but fails
+  // to clear the DrawArrays count, leading to an assert.
+  CreateTriangles();
+
+  host_.PrepareDraw(0xFE242424);
+
+  host_.SetVertexBufferAttributes(host_.POSITION | host_.DIFFUSE);
+
+  auto p = pb_begin();
+  auto vertex_buffer = host_.GetVertexBuffer();
+
+  // Draw the third triangle via DRAW_ARRAYS and the fourth via ARRAY_ELEMENT.
+  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+
+  {
+    const uint32_t indices[] = {9, 10, 11};
+    p = SetArrayElements(p, indices, sizeof(indices) / sizeof(indices[0]));
+  }
+
+  // Then draw the first triangle as another DrawArrays
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+
+  // Draw the second triangle the same way.
+  p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+               MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
+
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+
+  pb_end(p);
+
+  host_.FinishDraw(allow_saving_, output_dir_, kXemuSquashOptimizationSingleDrawArraysTest);
 }
