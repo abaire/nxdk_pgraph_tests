@@ -97,6 +97,7 @@ void TestSuite::Initialize() {
 
   p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
 
+  p = pb_push1(p, NV097_SET_SHADE_MODEL, NV097_SET_SHADE_MODEL_SMOOTH);
   pb_end(p);
 
   host_.SetWindowClipExclusive(false);
