@@ -44,6 +44,7 @@
 #include "tests/null_surface_tests.h"
 #include "tests/overlapping_draw_modes_tests.h"
 #include "tests/set_vertex_data_tests.h"
+#include "tests/shade_model_tests.h"
 #include "tests/stencil_tests.h"
 #include "tests/surface_clip_tests.h"
 #include "tests/surface_pitch_tests.h"
@@ -393,6 +394,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<SetVertexDataTests>(host, output_directory);
+    test_suites.push_back(suite);
+  }
+  {
+    auto suite = std::make_shared<ShadeModelTests>(host, output_directory);
     test_suites.push_back(suite);
   }
   {

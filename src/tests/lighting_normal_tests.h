@@ -29,7 +29,6 @@ class LightingNormalTests : public TestSuite {
  private:
   void CreateGeometry();
   void Test(bool set_normal, const float* normal, DrawMode draw_mode);
-  void TestShadeModel(uint32_t model);
 
   static std::string MakeTestName(bool set_normal, const float* normal, DrawMode draw_mode);
 

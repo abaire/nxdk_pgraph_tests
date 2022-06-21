@@ -30,13 +30,6 @@ static constexpr LightingNormalTests::DrawMode kDrawMode[] = {
     LightingNormalTests::DRAW_INLINE_ELEMENTS,
 };
 
-static constexpr uint32_t kShadeModel[] = {
-    NV097_SET_SHADE_MODEL_FLAT,
-    NV097_SET_SHADE_MODEL_SMOOTH,
-};
-
-std::string MakeShadeModelTestName(uint32_t shade_model);
-
 LightingNormalTests::LightingNormalTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Lighting normals") {
   for (auto draw_mode : kDrawMode) {
@@ -44,11 +37,6 @@ LightingNormalTests::LightingNormalTests(TestHost& host, std::string output_dir)
       std::string name = MakeTestName(params.set_normal, params.normal, draw_mode);
       tests_[name] = [this, params, draw_mode]() { this->Test(params.set_normal, params.normal, draw_mode); };
     }
-  }
-
-  for (auto model : kShadeModel) {
-    std::string name = MakeShadeModelTestName(model);
-    tests_[name] = [this, model]() { this->TestShadeModel(model); };
   }
 }
 
@@ -219,42 +207,6 @@ void LightingNormalTests::Test(bool set_normal, const float* normal, DrawMode dr
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-void LightingNormalTests::TestShadeModel(uint32_t model) {
-  std::string name = MakeShadeModelTestName(model);
-  static constexpr uint32_t kBackgroundColor = 0xFF2C302E;
-  host_.PrepareDraw(kBackgroundColor);
-
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
-  pb_end(p);
-
-  {
-    static constexpr float kLeft = -2.75f;
-    static constexpr float kRight = 2.75f;
-    static constexpr float kTop = 1.75f;
-    static constexpr float kBottom = -1.75f;
-
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetNormal(0.5773502691896258f, -0.5773502691896258f, 0.5773502691896258f);
-    host_.SetVertex(kLeft, kTop, 0.1f, 1.0f);
-
-    host_.SetNormal(0.0f, 0.0f, 1.0f);
-    host_.SetVertex(kRight, kTop, 0.1f, 1.0f);
-
-    host_.SetNormal(0.4082482904638631f, 0.4082482904638631f, 0.8164965809277261f);
-    host_.SetVertex(kRight, kBottom, 0.1f, 1.0f);
-
-    host_.SetNormal(-0.66667f, 0.66667f, 0.3333333f);
-    host_.SetVertex(kLeft, kBottom, 0.1f, 1.0f);
-    host_.End();
-  }
-
-  pb_print("%s\n", name.c_str());
-  pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
-}
-
 std::string LightingNormalTests::MakeTestName(bool set_normal, const float* normal, DrawMode draw_mode) {
   char buf[128] = {0};
   static constexpr const char* kModeSuffix[] = {
@@ -269,11 +221,5 @@ std::string LightingNormalTests::MakeTestName(bool set_normal, const float* norm
   } else {
     snprintf(buf, 127, "Nz_%d%s", (int)(normal[2] * 100), kModeSuffix[draw_mode]);
   }
-  return buf;
-}
-
-std::string MakeShadeModelTestName(uint32_t shade_model) {
-  char buf[32] = {0};
-  snprintf(buf, sizeof(buf), "ShadeModel_%s", shade_model == NV097_SET_SHADE_MODEL_SMOOTH ? "Smooth" : "Flat");
   return buf;
 }
