@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include "test_host.h"
 #include "test_suite.h"
 
 class TestHost;
@@ -18,8 +19,8 @@ class ShadeModelTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void TestShadeModelFixed(uint32_t model, bool texture);
-  void TestShadeModel(uint32_t model, bool texture);
+  void TestShadeModelFixed(uint32_t model, TestHost::DrawPrimitive primitive, bool texture);
+  void TestShadeModel(uint32_t model, TestHost::DrawPrimitive primitive, bool texture);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADE_MODEL_TESTS_H
