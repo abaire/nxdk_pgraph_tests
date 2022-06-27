@@ -22,6 +22,7 @@
 #include "logger.h"
 #include "test_driver.h"
 #include "test_host.h"
+#include "tests/antialiasing_tests.h"
 #include "tests/attribute_carryover_tests.h"
 #include "tests/attribute_explicit_setter_tests.h"
 #include "tests/attribute_float_tests.h"
@@ -298,6 +299,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   // Must be the first suite run for valid results. The first test depends on having a cleared initial state.
   {
     auto suite = std::make_shared<LightingNormalTests>(host, output_directory);
+    test_suites.push_back(suite);
+  }
+  {
+    auto suite = std::make_shared<AntialiasingTests>(host, output_directory);
     test_suites.push_back(suite);
   }
   {
