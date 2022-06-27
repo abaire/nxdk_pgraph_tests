@@ -39,6 +39,7 @@ OPTIMIZED_SRCS = \
 
 SRCS = \
 	$(SRCDIR)/test_host.cpp \
+	$(SRCDIR)/tests/antialiasing_tests.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
 	$(SRCDIR)/tests/attribute_float_tests.cpp \
