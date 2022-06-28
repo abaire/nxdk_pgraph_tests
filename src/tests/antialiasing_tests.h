@@ -27,6 +27,7 @@ class AntialiasingTests : public TestSuite {
 
  private:
   void Test(const char *name, TestHost::AntiAliasingSetting aa);
+  void TestAAOnThenOffThenCPUWrite();
 
   void Draw() const;
 };
