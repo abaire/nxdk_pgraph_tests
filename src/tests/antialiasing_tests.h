@@ -28,8 +28,11 @@ class AntialiasingTests : public TestSuite {
  private:
   void Test(const char *name, TestHost::AntiAliasingSetting aa);
   void TestAAOnThenOffThenCPUWrite();
+  void TestModifyNonFramebufferSurface();
+  void TestFramebufferIsIndependentOfSurface();
 
   void Draw() const;
+  void NoOpDraw() const;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_ANTIALIASING_TESTS_H
