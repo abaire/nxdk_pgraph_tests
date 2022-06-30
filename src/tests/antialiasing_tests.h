@@ -32,6 +32,7 @@ class AntialiasingTests : public TestSuite {
   void TestFramebufferIsIndependentOfSurface();
   void TestCPUWriteIgnoresSurfaceConfig();
   void TestGPUAAWriteAfterCPUWrite();
+  void TestNonAACPURoundTrip();
 
   void Draw() const;
   void NoOpDraw() const;

@@ -28,6 +28,7 @@ static constexpr const char kModifyNonFramebufferSurface[] = "SurfaceStatesAreIn
 static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifiedBySurfaceState";
 static constexpr const char kCPUWriteIgnoresSurfaceConfig[] = "CPUWriteIgnoresSurfaceConfig";
 static constexpr const char kGPUAAWriteAfterCPUWrite[] = "GPUAAWriteAfterCPUWrite";
+static constexpr const char kNonAACPURoundTrip[] = "NonAACPURoundTrip";
 
 static constexpr uint32_t kTextureSize = 128;
 
@@ -41,6 +42,7 @@ AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir)
   tests_[kFramebufferIsIndependent] = [this]() { TestFramebufferIsIndependentOfSurface(); };
   tests_[kCPUWriteIgnoresSurfaceConfig] = [this]() { TestCPUWriteIgnoresSurfaceConfig(); };
   tests_[kGPUAAWriteAfterCPUWrite] = [this]() { TestGPUAAWriteAfterCPUWrite(); };
+  tests_[kNonAACPURoundTrip] = [this]() { TestNonAACPURoundTrip(); };
 };
 
 void AntialiasingTests::Initialize() {
@@ -392,6 +394,62 @@ void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, kGPUAAWriteAfterCPUWrite);
+}
+
+void AntialiasingTests::TestNonAACPURoundTrip() {
+  host_.PrepareDraw(0xFF050505);
+
+  // This test verifies that nop draws to a CPU blitted surface are truly nops.
+
+  // Configure a surface pointing at texture memory and do a no-op draw to force xemu to create a SurfaceBinding.
+  // In this case, anti-aliasing is left off to verify that xemu's behavior is correct when dealing with a pitch that
+  // does not match the content.
+  {
+    static constexpr uint32_t anti_aliasing_multiplier = 4;
+    const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
+    const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    pb_end(p);
+
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize);
+    NoOpDraw();
+  }
+
+  // Do a CPU copy to texture memory.
+  WaitForGPU();
+  GenerateRGBACheckerboard(host_.GetTextureMemoryForStage(0), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4,
+                           0xFF336666, 0xFF33FF33, kCheckerSize);
+
+  // Point the output surface back at the framebuffer.
+  {
+    const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    pb_end(p);
+  }
+
+  // Restore the surface format to allow the texture to be rendered.
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
+
+  // Draw a quad with the texture. Note that the texture configuration used in the draw routine assumes a
+  // non-antialiased pitch, so the GPU render should result in lines of pixels with gaps (as the AA pitch is > the
+  // texture pitch).
+  Draw();
+
+  pb_print("%s\n", kNonAACPURoundTrip);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kNonAACPURoundTrip);
 }
 
 void AntialiasingTests::Draw() const {
