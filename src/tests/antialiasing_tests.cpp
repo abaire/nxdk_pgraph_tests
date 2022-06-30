@@ -26,6 +26,7 @@ static constexpr const char kAA4[] = "CreateSurfaceWithSquareOffset4";
 static constexpr const char kOnOffCPUWrite[] = "AAOnThenOffCPUWrite";
 static constexpr const char kModifyNonFramebufferSurface[] = "SurfaceStatesAreIndependent";
 static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifiedBySurfaceState";
+static constexpr const char kCPUWriteIgnoresSurfaceConfig[] = "CPUWriteIgnoresSurfaceConfig";
 
 static constexpr uint32_t kTextureSize = 128;
 
@@ -37,7 +38,8 @@ AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir)
   tests_[kOnOffCPUWrite] = [this]() { TestAAOnThenOffThenCPUWrite(); };
   tests_[kModifyNonFramebufferSurface] = [this]() { TestModifyNonFramebufferSurface(); };
   tests_[kFramebufferIsIndependent] = [this]() { TestFramebufferIsIndependentOfSurface(); };
-}
+  tests_[kCPUWriteIgnoresSurfaceConfig] = [this]() { TestCPUWriteIgnoresSurfaceConfig(); };
+};
 
 void AntialiasingTests::Initialize() {
   TestSuite::Initialize();
@@ -145,7 +147,7 @@ void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
                      SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
     pb_end(p);
     GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
-                             kFramebufferPitch, kCheckerboardA, kCheckerboardB, kCheckerSize);
+                             kFramebufferPitch, kCheckerboardA, 0xFF5555FF, kCheckerSize);
   }
 
   // pbkit's text drawing routines use the 3D pipeline which causes xemu to recreate the surface and masks the bug.
@@ -191,7 +193,7 @@ void AntialiasingTests::TestModifyNonFramebufferSurface() {
   // 3. Do a CPU copy to the framebuffer
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
-                           kFramebufferPitch, kCheckerboardA, kCheckerboardB, kCheckerSize);
+                           kFramebufferPitch, 0xFF008080, kCheckerboardB, kCheckerSize);
 
   // pbkit's text drawing routines use the 3D pipeline which causes xemu to recreate the surface and masks the bug.
   //  pb_print("%s\n", kOnOffCPUWrite);
@@ -247,15 +249,68 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
   // 2. Do a CPU copy to the framebuffer
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
-                           kFramebufferPitch, kCheckerboardA, kCheckerboardB, kCheckerSize);
+                           kFramebufferPitch, 0xFF222222, 0xFF88AA00, kCheckerSize);
 
   // Expected behavior is that the framebuffer looks normal, regardless of the fact that it was a 3d draw target with
   // params that do not matc AvSetDisplayMode.
-  host_.FinishDraw(allow_saving_, output_dir_, kModifyNonFramebufferSurface);
+  host_.FinishDraw(allow_saving_, output_dir_, kFramebufferIsIndependent);
 
   // Restore the framebuffer surface format for future tests.
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
+}
+
+void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig() {
+  host_.PrepareDraw(0xFF050505);
+
+  // This test verifies that direct writes to VRAM bypass any surface configuration and must not be interpreted using
+  // the current xemu SurfaceBinding.
+
+  // Configure a surface pointing at texture memory and do a no-op draw to force xemu to create a SurfaceBinding.
+  {
+    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti aliasing
+    // mode increase. Technically this should be based off of the AA mode, but in practice it's fine to use the max
+    // value.
+    static constexpr uint32_t anti_aliasing_multiplier = 4;
+
+    const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
+    const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    pb_end(p);
+
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0, 0, 0, 0,
+                           TestHost::AA_CENTER_CORNER_2);
+    NoOpDraw();
+  }
+
+  // Do a CPU copy to texture memory, ignoring the AA setting.
+  GenerateRGBACheckerboard(host_.GetTextureMemoryForStage(0), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4,
+                           0xFFCC3333, kCheckerboardB, kCheckerSize);
+
+  // Point the output surface back at the framebuffer.
+  {
+    const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    pb_end(p);
+  }
+
+  // Draw a quad with the texture.
+  Draw();
+
+  pb_print("%s\n", kCPUWriteIgnoresSurfaceConfig);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kCPUWriteIgnoresSurfaceConfig);
 }
 
 void AntialiasingTests::Draw() const {
