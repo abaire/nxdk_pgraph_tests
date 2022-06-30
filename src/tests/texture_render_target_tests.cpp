@@ -115,9 +115,8 @@ void TextureRenderTargetTests::ResetAndDrawFromRenderTarget() const {
 
   // Reset the color buffer to the framebuffer and set the texture source to the render target.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                           host_.GetFramebufferHeight());
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                    host_.GetFramebufferHeight());
 
     auto &texture_stage = host_.GetTextureStage(0);
     texture_stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
@@ -177,8 +176,7 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 
   // Redirect the color output to the target texture.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
 
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
@@ -261,8 +259,7 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
     host_.SetVertexShaderProgram(shader);
 
     host_.SetVertexBuffer(render_target_vertex_buffer_);
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
 
     host_.DrawArrays();
   }

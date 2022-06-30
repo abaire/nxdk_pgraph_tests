@@ -59,9 +59,8 @@ void SurfaceClipTests::Test(const ClipRect &rect) {
 
   host_.PrepareDraw(0xFC111155);
 
-  host_.SetSurfaceFormat(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
   host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
 
   DrawTestImage(rect);
@@ -70,8 +69,8 @@ void SurfaceClipTests::Test(const ClipRect &rect) {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, name);
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight());
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
 }
 
 void SurfaceClipTests::TestXemuBug420() {
@@ -80,9 +79,8 @@ void SurfaceClipTests::TestXemuBug420() {
   host_.PrepareDraw(0xFC111155);
 
   const ClipRect rect = {0, 0, 512, 384};
-  host_.SetSurfaceFormat(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
 
   // This triggers an assertion failure:
   // `(pg->color_binding->width == pg->zeta_binding->width) && (pg->color_binding->height == pg->zeta_binding->height)'
@@ -92,8 +90,8 @@ void SurfaceClipTests::TestXemuBug420() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, kXemuBug420Test);
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight());
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
 }
 
 void SurfaceClipTests::TestRenderTarget(const ClipRect &rect) {

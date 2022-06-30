@@ -58,17 +58,15 @@ void BlendTests::Test(const std::string &name, const std::function<void()> &body
   RenderToTextureStart();
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, 256, 256, true);
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, 256, 256, true);
 
   // Initialize texture to fully opaque white.
   memset(host_.GetTextureMemory(), 0xFF, kTexturePitch * kTextureSize);
 
   body();
 
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight());
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
 
   RenderToTextureEnd();
 

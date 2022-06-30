@@ -57,8 +57,7 @@ void NullSurfaceTests::TestXemuBug893() {
   SetSurfaceDMAs();
 
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false);
 
     auto p = pb_begin();
     p = pb_push1(
@@ -88,9 +87,8 @@ void NullSurfaceTests::TestXemuBug893() {
 
   DrawTestQuad(false);
 
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight());
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
 
   RestoreSurfaceDMAs();
   {

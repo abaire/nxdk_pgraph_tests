@@ -155,8 +155,7 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
     const uint32_t kTexturePitch = texture_width * 4;
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, texture_width, texture_height);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, texture_width, texture_height);
     host_.SetWindowClip(texture_width - 1, texture_height - 1);
 
     // Point the color buffer at the texture and mix the left hand side with itself multiple times.
@@ -193,9 +192,8 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
     host_.End();
 
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
-                           host_.GetFramebufferHeight());
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                                    host_.GetFramebufferHeight());
 
     p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
@@ -288,8 +286,7 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
     const uint32_t kTexturePitch = kTextureSize * 4;
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize);
     host_.SetWindowClip(kTextureSize - 1, kTextureSize - 1);
 
     // Point the color buffer at the texture and mix the left hand side with itself multiple times.
@@ -326,9 +323,8 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
     host_.End();
 
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
-                           host_.GetFramebufferHeight());
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                                    host_.GetFramebufferHeight());
 
     p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
@@ -436,8 +432,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
     pb_end(p);
 
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
 
     host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
 

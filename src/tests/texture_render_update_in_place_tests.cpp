@@ -88,9 +88,8 @@ void TextureRenderUpdateInPlaceTests::Test() {
   const auto normal_texture_address = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
 
   host_.SetVertexBuffer(render_target_vertex_buffer_);
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetMaxTextureWidth(),
-                         host_.GetMaxTextureHeight(), true);
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetMaxTextureWidth(),
+                                  host_.GetMaxTextureHeight(), true);
 
   // Set the render target as the color output and render a pure white rectangle.
   {
@@ -148,9 +147,8 @@ void TextureRenderUpdateInPlaceTests::Test() {
   // Set the input texture to the normal texture address and the output to the backbuffer.
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight(), false);
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight(), false);
 
   host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);

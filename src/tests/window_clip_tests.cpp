@@ -193,8 +193,7 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
     p = pb_push1(p, NV097_NO_OPERATION, 0);
     p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
     pb_end(p);
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kImageWidth, kImageHeight, false);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kImageWidth, kImageHeight, false);
   }
 
   Draw(clip_exclusive, swap_order, c1_left, c1_top, c1_right, c1_bottom, c2_left, c2_top, c2_right, c2_bottom);
@@ -208,9 +207,8 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
     p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
     p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
     pb_end(p);
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                           host_.GetFramebufferHeight(), false);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                    host_.GetFramebufferHeight(), false);
   }
 
   host_.Clear(0xFE332233);

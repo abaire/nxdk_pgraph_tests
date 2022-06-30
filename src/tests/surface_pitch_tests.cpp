@@ -47,8 +47,7 @@ void SurfacePitchTests::TestSwizzle() {
 
   // Set up linear surface render targets with the full texture size, filling each with a solid colored quad.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, false);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, false);
 
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
@@ -107,8 +106,8 @@ void SurfacePitchTests::TestSwizzle() {
 
   // Swizzled surface smaller than the original with pitch matching the outer surface.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSmallTextureSize, kSmallTextureSize, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSmallTextureSize, kSmallTextureSize,
+                                    true);
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                  SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
@@ -120,8 +119,8 @@ void SurfacePitchTests::TestSwizzle() {
 
   // Swizzled surface smaller than the original with pitch matching the smaller surface.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSmallTextureSize, kSmallTextureSize, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSmallTextureSize, kSmallTextureSize,
+                                    true);
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                  SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSmallTexturePitch) |
@@ -133,8 +132,7 @@ void SurfacePitchTests::TestSwizzle() {
 
   // Swizzled surface matching the original with pitch matching the outer surface.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                  SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
@@ -146,8 +144,7 @@ void SurfacePitchTests::TestSwizzle() {
 
   // Swizzled surface matching the original with pitch matching the smaller surface.
   {
-    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
-    host_.CommitSurfaceFormat();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                  SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSmallTexturePitch) |
@@ -165,9 +162,8 @@ void SurfacePitchTests::TestSwizzle() {
 
 void SurfacePitchTests::DrawResults(const uint32_t *result_textures, const uint32_t demo_memory) const {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                         host_.GetFramebufferHeight());
-  host_.CommitSurfaceFormat();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
