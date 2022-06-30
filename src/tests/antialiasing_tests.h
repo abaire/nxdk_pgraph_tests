@@ -35,6 +35,7 @@ class AntialiasingTests : public TestSuite {
 
   void Draw() const;
   void NoOpDraw() const;
+  void WaitForGPU() const;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_ANTIALIASING_TESTS_H

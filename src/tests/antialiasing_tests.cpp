@@ -148,6 +148,7 @@ void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
                  SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
                      SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
     pb_end(p);
+    WaitForGPU();
     GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                              kFramebufferPitch, kCheckerboardA, 0xFF5555FF, kCheckerSize);
   }
@@ -194,6 +195,7 @@ void AntialiasingTests::TestModifyNonFramebufferSurface() {
 
   // 3. Do a CPU copy to the framebuffer
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+  WaitForGPU();
   GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                            kFramebufferPitch, 0xFF008080, kCheckerboardB, kCheckerSize);
 
@@ -250,6 +252,7 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
 
   // 2. Do a CPU copy to the framebuffer
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+  WaitForGPU();
   GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                            kFramebufferPitch, 0xFF222222, 0xFF88AA00, kCheckerSize);
 
@@ -291,6 +294,7 @@ void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig() {
   }
 
   // Do a CPU copy to texture memory, ignoring the AA setting.
+  WaitForGPU();
   GenerateRGBACheckerboard(host_.GetTextureMemoryForStage(0), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4,
                            0xFFCC3333, kCheckerboardB, kCheckerSize);
 
@@ -344,6 +348,7 @@ void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
   }
 
   // Do a CPU copy to texture memory, ignoring the AA setting.
+  WaitForGPU();
   GenerateRGBACheckerboard(host_.GetTextureMemoryForStage(0), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4,
                            0xFF333333, 0xFFEEAA33, kCheckerSize);
 
@@ -432,4 +437,11 @@ void AntialiasingTests::NoOpDraw() const {
   host_.SetVertex(0.0f, 0.0f, 0.1f, 1.0f);
   host_.SetVertex(0.0f, 0.0f, 0.1f, 1.0f);
   host_.End();
+}
+
+void AntialiasingTests::WaitForGPU() const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_NO_OPERATION, 0);
+  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+  pb_end(p);
 }
