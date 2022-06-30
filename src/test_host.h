@@ -257,6 +257,12 @@ class TestHost {
                         uint32_t height, bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0,
                         uint32_t clip_width = 0, uint32_t clip_height = 0, AntiAliasingSetting aa = AA_CENTER_1);
 
+  // Sets the surface format and commits it immediately.
+  void SetSurfaceFormatImmediate(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format, uint32_t width,
+                                 uint32_t height, bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0,
+                                 uint32_t clip_width = 0, uint32_t clip_height = 0,
+                                 AntiAliasingSetting aa = AA_CENTER_1);
+
   SurfaceColorFormat GetColorBufferFormat() const { return surface_color_format_; }
 
   SurfaceZetaFormat GetDepthBufferFormat() const { return depth_buffer_format_; }

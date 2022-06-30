@@ -128,6 +128,14 @@ void TestHost::SetSurfaceFormat(SurfaceColorFormat color_format, SurfaceZetaForm
   HandleDepthBufferFormatChange();
 }
 
+void TestHost::SetSurfaceFormatImmediate(SurfaceColorFormat color_format, SurfaceZetaFormat depth_format,
+                                         uint32_t width, uint32_t height, bool swizzle, uint32_t clip_x,
+                                         uint32_t clip_y, uint32_t clip_width, uint32_t clip_height,
+                                         AntiAliasingSetting aa) {
+  SetSurfaceFormat(color_format, depth_format, width, height, swizzle, clip_x, clip_y, clip_width, clip_height, aa);
+  CommitSurfaceFormat();
+}
+
 void TestHost::CommitSurfaceFormat() const {
   uint32_t value = SET_MASK(NV097_SET_SURFACE_FORMAT_COLOR, surface_color_format_) |
                    SET_MASK(NV097_SET_SURFACE_FORMAT_ZETA, depth_buffer_format_) |
