@@ -18,6 +18,10 @@ static constexpr const char kOpaqueDXT1[] = "D:\\dxt_images\\plasma_dxt1.dds";
 static constexpr const char kOpaqueDXT3[] = "D:\\dxt_images\\plasma_dxt3.dds";
 static constexpr const char kOpaqueDXT5[] = "D:\\dxt_images\\plasma_dxt5.dds";
 
+static constexpr const char kOpaqueDXT1NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt1.dds";
+static constexpr const char kOpaqueDXT3NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt3.dds";
+static constexpr const char kOpaqueDXT5NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt5.dds";
+
 struct TestCase {
   const char *filename;
   TextureFormatDXTTests::CompressedTextureFormat format;
@@ -32,12 +36,24 @@ static constexpr TestCase kTestCases[] = {
     {kOpaqueDXT5, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
 };
 
+static constexpr TestCase kNonSquareTestCases[] = {
+    {kOpaqueDXT1NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT1},
+    {kOpaqueDXT3NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT3},
+    {kOpaqueDXT5NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
+};
+
 static std::string GetFormatName(TextureFormatDXTTests::CompressedTextureFormat texture_format);
 
 TextureFormatDXTTests::TextureFormatDXTTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture DXT") {
   for (auto &test : kTestCases) {
     tests_[MakeTestName(test.filename, test.format)] = [this, &test]() { Test(test.filename, test.format); };
+    tests_[MakeTestName(test.filename, test.format, true)] = [this, &test]() {
+      TestMipmap(test.filename, test.format);
+    };
+  }
+
+  for (auto &test : kNonSquareTestCases) {
     tests_[MakeTestName(test.filename, test.format, true)] = [this, &test]() {
       TestMipmap(test.filename, test.format);
     };
