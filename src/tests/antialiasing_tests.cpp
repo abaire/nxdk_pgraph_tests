@@ -29,6 +29,9 @@ static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifie
 static constexpr const char kCPUWriteIgnoresSurfaceConfig[] = "CPUWriteIgnoresSurfaceConfig";
 static constexpr const char kGPUAAWriteAfterCPUWrite[] = "GPUAAWriteAfterCPUWrite";
 static constexpr const char kNonAACPURoundTrip[] = "NonAACPURoundTrip";
+#ifdef MULTIFRAME_CPU_BLIT
+static constexpr const char kMultiframeCPUBlit[] = "__MultiframeCPUBlit";
+#endif
 
 static constexpr uint32_t kTextureSize = 128;
 
@@ -43,6 +46,10 @@ AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir)
   tests_[kCPUWriteIgnoresSurfaceConfig] = [this]() { TestCPUWriteIgnoresSurfaceConfig(); };
   tests_[kGPUAAWriteAfterCPUWrite] = [this]() { TestGPUAAWriteAfterCPUWrite(); };
   tests_[kNonAACPURoundTrip] = [this]() { TestNonAACPURoundTrip(); };
+
+#ifdef MULTIFRAME_CPU_BLIT
+  tests_[kMultiframeCPUBlit] = [this]() { TestMultiframeCPUBlit(); };
+#endif
 };
 
 void AntialiasingTests::Initialize() {
@@ -56,11 +63,19 @@ void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa)
   // Point the color surface at texture memory, configure the surface with some anti-aliasing mode, clear, then point
   // the surface back to the framebuffer and render the texture memory.
 
+  // DONOTSUBMIT
+  // TEMP: Set well beyond the actual RGBA texture to magenta
+  {
+    auto pixel = (uint32_t *)host_.GetTextureMemory();
+    for (uint32_t i = 0; i < kTextureSize * kTextureSize * 4; ++i) {
+      *pixel++ = 0xFFFF00FF;
+    }
+  }
+
   // Create a texture with an obvious border around it.
   memset(host_.GetTextureMemory(), 0xCC, kTextureSize * kTextureSize * 4);
   GenerateRGBACheckerboard(host_.GetTextureMemory(), 2, 2, kTextureSize - 4, kTextureSize - 4, kTextureSize * 4,
                            kCheckerboardA, kCheckerboardB, kCheckerSize);
-
   {
     // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti aliasing
     // mode increase. Technically this should be based off of the AA mode, but in practice it's fine to use the max
@@ -451,6 +466,57 @@ void AntialiasingTests::TestNonAACPURoundTrip() {
 
   host_.FinishDraw(allow_saving_, output_dir_, kNonAACPURoundTrip);
 }
+
+#ifdef MULTIFRAME_CPU_BLIT
+void AntialiasingTests::TestMultiframeCPUBlit() {
+  static constexpr uint32_t kNumFrames = 120;
+  static constexpr uint32_t kColors[][2] = {
+      {0xFF000000, 0xFFCCCCCC}, {0xFFFF3333, 0xFF000000}, {0xFF000000, 0xFF3333FF},
+      {0xFF33FF33, 0xFF000000}, {0xFF000000, 0xFFCC44CC}, {0xFFCCCC44, 0xFF000000},
+  };
+
+  const auto width = host_.GetFramebufferWidth();
+  const auto height = host_.GetFramebufferHeight();
+  const auto kFramebufferPitch = width * 4;
+
+  for (auto i = 0; i < kNumFrames; ++i) {
+    host_.PrepareDraw(0xFF050505);
+
+    // Configure a surface pointing at the current framebuffer and do a no-op draw to force xemu to create a
+    // SurfaceBinding with a sparse pitch.
+    {
+      static constexpr uint32_t anti_aliasing_multiplier = 2;
+      const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
+      auto p = pb_begin();
+      p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                   SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                       SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+      pb_end(p);
+
+      host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0,
+                                      0, 0, 0, TestHost::AA_CENTER_CORNER_2);
+      NoOpDraw();
+    }
+
+    // Do a CPU copy to texture memory, ignoring the AA setting.
+    WaitForGPU();
+    auto color = kColors[i % (sizeof(kColors) / sizeof(kColors[0]))];
+    GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, width, height, kFramebufferPitch, color[0], color[1], 24);
+
+    host_.FinishDraw(false, output_dir_, kMultiframeCPUBlit);
+  }
+
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    pb_end(p);
+  }
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
+}
+#endif  // MULTIFRAME_CPU_BLIT
 
 void AntialiasingTests::Draw() const {
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
