@@ -121,6 +121,9 @@ class TextureStage {
   void SetTexgenR(TexGen val) { texgen_r_ = val; }
   void SetTexgenQ(TexGen val) { texgen_q_ = val; }
 
+  void SetMipMapLevels(uint32_t val) { mipmap_levels_ = val; }
+  uint32_t GetMipMapLevels() const { return mipmap_levels_; }
+
  private:
   friend class TestHost;
 

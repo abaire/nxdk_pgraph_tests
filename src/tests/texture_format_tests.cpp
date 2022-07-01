@@ -9,6 +9,7 @@
 #include "debug_output.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "shaders/pixel_shader_program.h"
+#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"
@@ -44,10 +45,14 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture format") {
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
-    std::string name = MakeTestName(format);
-
     if (!RequiresSpecialTest(format)) {
+      std::string name = MakeTestName(format);
       tests_[name] = [this, format]() { Test(format); };
+
+      if (format.xbox_swizzled) {
+        std::string mip_name = MakeTestName(format, true);
+        tests_[mip_name] = [this, format]() { TestMipMap(format); };
+      }
     }
   }
 
@@ -61,12 +66,8 @@ void TextureFormatTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  shader->SetLightingEnabled(false);
-  host_.SetVertexShaderProgram(shader);
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-
   PixelShaderProgram::LoadTexturedPixelShader();
 }
 
@@ -77,6 +78,10 @@ void TextureFormatTests::CreateGeometry() {
 }
 
 void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  shader->SetLightingEnabled(false);
+  host_.SetVertexShaderProgram(shader);
+
   host_.SetTextureFormat(texture_format);
   std::string test_name = MakeTestName(texture_format);
 
@@ -105,6 +110,10 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
 }
 
 void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  shader->SetLightingEnabled(false);
+  host_.SetVertexShaderProgram(shader);
+
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
   host_.SetTextureFormat(texture_format);
   std::string test_name = MakePalettizedTestName(size);
@@ -140,8 +149,74 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
-  std::string test_name = "TexFmt_";
+void TextureFormatTests::TestMipMap(const TextureFormatInfo &texture_format) {
+  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetTextureFormat(texture_format);
+  std::string test_name = MakeTestName(texture_format, true);
+
+  SDL_Surface *gradient_surface;
+  int update_texture_result =
+      GenerateGradientSurface(&gradient_surface, (int)host_.GetMaxTextureWidth(), (int)host_.GetMaxTextureHeight());
+  ASSERT(!update_texture_result && "Failed to generate SDL surface");
+
+  update_texture_result = host_.SetTexture(gradient_surface);
+  SDL_FreeSurface(gradient_surface);
+  ASSERT(!update_texture_result && "Failed to set texture");
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_NEARESTLOD);
+  host_.SetupTextureStages();
+
+  host_.PrepareDraw(0xFE202020);
+
+  auto draw = [this](float left, float top, float size) {
+    float right = left + size;
+    float bottom = top + size;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(left, top, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(1.0f, 0.0f);
+    host_.SetVertex(right, top, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(1.0f, 1.0f);
+    host_.SetVertex(right, bottom, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(0.0f, 1.0f);
+    host_.SetVertex(left, bottom, 0.1f, 1.0f);
+    host_.End();
+  };
+
+  draw(5.0f, 80.0f, 256.0f);
+  draw(270.0f, 80.0f, 128.0f);
+  draw(410.0f, 80.0f, 64.0f);
+  draw(480.0f, 80.0f, 32.0f);
+  draw(520.0f, 80.0f, 16.0f);
+  draw(270.0f, 220.0f, 8.0f);
+  draw(280.0f, 220.0f, 4.0f);
+  draw(290.0f, 220.0f, 2.0f);
+  draw(300.0f, 220.0f, 1.0f);
+
+  texture_stage.SetMipMapLevels(1);
+
+  pb_print("N: %s\n", test_name.c_str());
+  pb_print("F: 0x%x\n", texture_format.xbox_format);
+  pb_print("SZ: %d\n", texture_format.xbox_swizzled);
+  pb_print("C: %d\n", texture_format.require_conversion);
+  pb_print("W: %d\n", host_.GetMaxTextureWidth());
+  pb_print("H: %d\n", host_.GetMaxTextureHeight());
+  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+}
+
+std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format, bool mipmap) {
+  std::string test_name = mipmap ? "Mip_" : "TexFmt_";
+
   test_name += texture_format.name;
   if (texture_format.xbox_linear) {
     test_name += "_L";

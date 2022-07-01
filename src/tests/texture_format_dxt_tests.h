@@ -22,7 +22,9 @@ class TextureFormatDXTTests : public TestSuite {
 
  private:
   void Test(const char *filename, CompressedTextureFormat texture_format);
-  static std::string MakeTestName(const std::string &filename, CompressedTextureFormat texture_format);
+  void TestMipmap(const char *filename, CompressedTextureFormat texture_format);
+  static std::string MakeTestName(const std::string &filename, CompressedTextureFormat texture_format,
+                                  bool mipmap = false);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_DXT_TESTS_H

@@ -38,6 +38,9 @@ TextureFormatDXTTests::TextureFormatDXTTests(TestHost &host, std::string output_
     : TestSuite(host, std::move(output_dir), "Texture DXT") {
   for (auto &test : kTestCases) {
     tests_[MakeTestName(test.filename, test.format)] = [this, &test]() { Test(test.filename, test.format); };
+    tests_[MakeTestName(test.filename, test.format, true)] = [this, &test]() {
+      TestMipmap(test.filename, test.format);
+    };
   }
 }
 
@@ -113,6 +116,81 @@ void TextureFormatDXTTests::Test(const char *filename, CompressedTextureFormat t
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
+void TextureFormatDXTTests::TestMipmap(const char *filename,
+                                       TextureFormatDXTTests::CompressedTextureFormat texture_format) {
+  host_.PrepareDraw(0xFE101010);
+
+  DDSImage img;
+  bool loaded = img.LoadFile(filename);
+  ASSERT(loaded && "Failed to load test image from file.");
+
+  auto data = img.GetPrimaryImage();
+  uint32_t nv2a_format = 0;
+  switch (data->format) {
+    case DDSImage::SubImage::Format::DXT1:
+      nv2a_format = NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5;
+      break;
+
+    case DDSImage::SubImage::Format::DXT3:
+      nv2a_format = NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT23_A8R8G8B8;
+      break;
+
+    case DDSImage::SubImage::Format::DXT5:
+      nv2a_format = NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT45_A8R8G8B8;
+      break;
+
+    default:
+      ASSERT(!"Unimplemented subimage format.");
+  }
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));
+  texture_stage.SetTextureDimensions(data->width, data->height);
+  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_NEARESTLOD);
+
+  texture_stage.SetMipMapLevels(10);
+  host_.SetRawTexture(data->data.data(), data->compressed_width, data->compressed_height, data->depth, data->pitch,
+                      data->bytes_per_pixel, false);
+  host_.SetupTextureStages();
+
+  auto draw = [this](float left, float top, float size) {
+    float right = left + size;
+    float bottom = top + size;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(left, top, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(1.0f, 0.0f);
+    host_.SetVertex(right, top, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(1.0f, 1.0f);
+    host_.SetVertex(right, bottom, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(0.0f, 1.0f);
+    host_.SetVertex(left, bottom, 0.1f, 1.0f);
+    host_.End();
+  };
+
+  draw(5.0f, 80.0f, 256.0f);
+  draw(270.0f, 80.0f, 128.0f);
+  draw(410.0f, 80.0f, 64.0f);
+  draw(480.0f, 80.0f, 32.0f);
+  draw(520.0f, 80.0f, 16.0f);
+  draw(270.0f, 220.0f, 8.0f);
+  draw(280.0f, 220.0f, 4.0f);
+  draw(290.0f, 220.0f, 2.0f);
+  draw(300.0f, 220.0f, 1.0f);
+
+  texture_stage.SetMipMapLevels(1);
+
+  std::string test_name = MakeTestName(filename, texture_format, true);
+  pb_print("%s\n", test_name.c_str());
+  pb_print("FMT: %s\n", GetFormatName(texture_format).c_str());
+  pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+}
+
 static std::string GetFormatName(TextureFormatDXTTests::CompressedTextureFormat texture_format) {
   switch (texture_format) {
     case TextureFormatDXTTests::CompressedTextureFormat::DXT1:
@@ -126,8 +204,10 @@ static std::string GetFormatName(TextureFormatDXTTests::CompressedTextureFormat 
   }
 }
 
-std::string TextureFormatDXTTests::MakeTestName(const std::string &filename, CompressedTextureFormat texture_format) {
-  std::string test_name = GetFormatName(texture_format);
+std::string TextureFormatDXTTests::MakeTestName(const std::string &filename, CompressedTextureFormat texture_format,
+                                                bool mipmap) {
+  std::string test_name = mipmap ? "MIP" : "";
+  test_name += GetFormatName(texture_format);
 
   const auto begin = filename.rfind('\\');
   const auto end = filename.rfind('.');
