@@ -146,7 +146,7 @@ void TextureFormatDXTTests::TestMipmap(const char *filename,
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));
   texture_stage.SetTextureDimensions(data->width, data->height);
-  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_NEARESTLOD);
+  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD);
 
   texture_stage.SetMipMapLevels(10);
   host_.SetRawTexture(data->data.data(), data->compressed_width, data->compressed_height, data->depth, data->pitch,

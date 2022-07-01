@@ -166,7 +166,7 @@ void TextureFormatTests::TestMipMap(const TextureFormatInfo &texture_format) {
   ASSERT(!update_texture_result && "Failed to set texture");
 
   auto &texture_stage = host_.GetTextureStage(0);
-  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_NEARESTLOD);
+  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD);
   host_.SetupTextureStages();
 
   host_.PrepareDraw(0xFE202020);
