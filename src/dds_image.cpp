@@ -128,7 +128,6 @@ bool DDSImage::LoadFile(const char *filename, bool load_mipmaps) {
     ASSERT((pixelformat.dwFourCC != kDX10Magic) && "DX10 format not supported.");
 
     uint32_t block_size = 0;
-    uint32_t pitch = 0;
     SubImage::Format format = SubImage::Format::NONE;
     uint32_t bytes_per_pixel = 0;
     uint32_t compressed_width = compressed_size(header.dwWidth);
@@ -160,29 +159,64 @@ bool DDSImage::LoadFile(const char *filename, bool load_mipmaps) {
         return false;
     }
 
-    pitch = compressed_width * block_size;
-    uint32_t compressed_bytes = pitch * compressed_height * header.dwDepth;
+    auto read_image = [block_size, format, &f, bytes_per_pixel](
+                          uint32_t width, uint32_t height, uint32_t depth, uint32_t compressed_width,
+                          uint32_t compressed_height) -> std::shared_ptr<SubImage> {
+      uint32_t pitch = compressed_width * block_size;
+      uint32_t compressed_bytes = pitch * compressed_height * depth;
 
-    std::shared_ptr<SubImage> primary_image = std::make_shared<SubImage>();
-    primary_image->level = 0;
-    primary_image->format = format;
-    primary_image->width = header.dwWidth;
-    primary_image->height = header.dwHeight;
-    primary_image->compressed_width = compressed_width;
-    primary_image->compressed_height = compressed_height;
-    primary_image->depth = header.dwDepth;
-    primary_image->pitch = pitch;
-    primary_image->bytes_per_pixel = bytes_per_pixel;
-    primary_image->data.resize(compressed_bytes);
-    if (fread(primary_image->data.data(), compressed_bytes, 1, f) != 1) {
+      std::shared_ptr<SubImage> ret = std::make_shared<SubImage>();
+      ret->level = 0;
+      ret->format = format;
+      ret->width = width;
+      ret->height = height;
+      ret->compressed_width = compressed_width;
+      ret->compressed_height = compressed_height;
+      ret->depth = depth;
+      ret->pitch = pitch;
+      ret->bytes_per_pixel = bytes_per_pixel;
+
+      ret->data.resize(compressed_bytes);
+      if (fread(ret->data.data(), compressed_bytes, 1, f) != 1) {
+        return {};
+      }
+
+      return ret;
+    };
+
+    auto primary_image =
+        read_image(header.dwWidth, header.dwHeight, header.dwDepth, compressed_width, compressed_height);
+    if (!primary_image) {
       ASSERT(!"Failed to read image data.");
       fclose(f);
       return false;
     }
-
     sub_images_.push_back(primary_image);
 
-    ASSERT(!load_mipmaps && "Mipmap loading not implemented.");
+    if (load_mipmaps) {
+      uint32_t width = header.dwWidth;
+      uint32_t height = header.dwHeight;
+
+      for (auto i = 1; i < header.dwMipMapCount; ++i) {
+        width >>= 1;
+        if (width < 1) {
+          width = 1;
+        }
+        height >>= 1;
+        if (height < 1) {
+          height = 1;
+        }
+
+        auto subimage = read_image(width, height, header.dwDepth, compressed_size(width), compressed_size(height));
+        if (!subimage) {
+          ASSERT(!"Failed to read mipmap data.");
+          fclose(f);
+          return false;
+        }
+
+        sub_images_.push_back(subimage);
+      }
+    }
   } else {
     ASSERT((header.dwFlags & DDSD_PITCH) && (pixelformat.dwFlags & DDPF_RGB) && "Texture not flagged as uncompressed");
     // TODO: Implement if necessary.

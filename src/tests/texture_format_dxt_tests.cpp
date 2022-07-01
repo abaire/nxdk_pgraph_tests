@@ -137,12 +137,12 @@ void TextureFormatDXTTests::TestMipmap(const char *filename,
   host_.PrepareDraw(0xFE101010);
 
   DDSImage img;
-  bool loaded = img.LoadFile(filename);
+  bool loaded = img.LoadFile(filename, true);
   ASSERT(loaded && "Failed to load test image from file.");
 
-  auto data = img.GetPrimaryImage();
+  auto primary_image = img.GetPrimaryImage();
   uint32_t nv2a_format = 0;
-  switch (data->format) {
+  switch (primary_image->format) {
     case DDSImage::SubImage::Format::DXT1:
       nv2a_format = NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5;
       break;
@@ -161,12 +161,17 @@ void TextureFormatDXTTests::TestMipmap(const char *filename,
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));
-  texture_stage.SetTextureDimensions(data->width, data->height);
+  texture_stage.SetTextureDimensions(primary_image->width, primary_image->height);
   texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD);
 
-  texture_stage.SetMipMapLevels(10);
-  host_.SetRawTexture(data->data.data(), data->compressed_width, data->compressed_height, data->depth, data->pitch,
-                      data->bytes_per_pixel, false);
+  texture_stage.SetMipMapLevels(img.NumLevels());
+
+  uint8_t *texture_ram = host_.GetTextureMemoryForStage(0);
+  for (auto &subimage : img.GetSubImages()) {
+    uint32_t size = subimage->pitch * subimage->compressed_height * subimage->depth;
+    memcpy(texture_ram, subimage->data.data(), size);
+    texture_ram += size;
+  }
   host_.SetupTextureStages();
 
   auto draw = [this](float left, float top, float size) {

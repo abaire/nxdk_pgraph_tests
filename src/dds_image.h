@@ -29,6 +29,9 @@ class DDSImage {
 
   inline std::shared_ptr<SubImage> GetPrimaryImage() const { return GetSubImage(0); }
   std::shared_ptr<SubImage> GetSubImage(uint32_t mipmap_level = 0) const;
+  const std::vector<std::shared_ptr<SubImage>> &GetSubImages() const { return sub_images_; }
+
+  uint32_t NumLevels() const { return sub_images_.size(); }
 
  private:
   bool loaded_{false};

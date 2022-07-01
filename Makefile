@@ -29,6 +29,7 @@ OPTIMIZED_SRCS = \
 	$(SRCDIR)/shaders/projection_vertex_shader.cpp \
 	$(SRCDIR)/shaders/vertex_shader_program.cpp \
 	$(SRCDIR)/test_driver.cpp \
+	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/texture_format.cpp \
 	$(SRCDIR)/texture_generator.cpp \
 	$(SRCDIR)/texture_stage.cpp \
@@ -38,7 +39,6 @@ OPTIMIZED_SRCS = \
 	$(THIRDPARTYDIR)/fpng/src/fpng.cpp
 
 SRCS = \
-	$(SRCDIR)/test_host.cpp \
 	$(SRCDIR)/tests/antialiasing_tests.cpp \
 	$(SRCDIR)/tests/attribute_carryover_tests.cpp \
 	$(SRCDIR)/tests/attribute_explicit_setter_tests.cpp \
