@@ -61,6 +61,7 @@ SRCS = \
 	$(SRCDIR)/tests/material_color_source_tests.cpp \
 	$(SRCDIR)/tests/null_surface_tests.cpp \
 	$(SRCDIR)/tests/overlapping_draw_modes_tests.cpp \
+	$(SRCDIR)/tests/pvideo_tests.cpp \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
 	$(SRCDIR)/tests/shade_model_tests.cpp \
 	$(SRCDIR)/tests/stencil_tests.cpp \
