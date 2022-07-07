@@ -567,7 +567,7 @@ void TextureBorderTests::Test3DBorderedSwizzled(const std::string &name, uint32_
   stage.SetEnabled();
   stage.SetBorderColor(0xFF7777FF);
   stage.SetBorderFromColor(false);
-  stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
+  stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_LOD0, TextureStage::MAG_BOX_LOD0);
   stage.SetUWrap(TextureStage::WRAP_BORDER, false);
   stage.SetVWrap(TextureStage::WRAP_BORDER, false);
   stage.SetPWrap(TextureStage::WRAP_BORDER, false);
@@ -812,9 +812,10 @@ void TextureBorderTests::GenerateBordered3DSurface(uint8_t *texture_memory, uint
                                                    uint32_t depth, bool swizzle) const {
   const uint32_t bordered_width = swizzle ? (width >= 8 ? width * 2 : 16) : width + 8;
   const uint32_t bordered_height = swizzle ? (height >= 8 ? height * 2 : 16) : height + 8;
+  const uint32_t bordered_depth = swizzle ? (depth >= 8 ? depth * 2 : 16) : depth + 8;
   const uint32_t full_pitch = bordered_width * 4;
   const uint32_t full_layer_pitch = full_pitch * bordered_height;
-  const uint32_t size = full_layer_pitch * depth;
+  const uint32_t size = full_layer_pitch * bordered_depth;
 
   ASSERT(full_layer_pitch * depth < host_.GetMaxSingleTextureSize());
 
@@ -823,23 +824,35 @@ void TextureBorderTests::GenerateBordered3DSurface(uint8_t *texture_memory, uint
     buffer = new uint8_t[size];
   }
 
-  GenerateRGBACheckerboard(buffer, 0, 0, bordered_width, bordered_height * depth, full_pitch, 0xFFCCCCCC, 0xFF444444,
-                           2);
-
   static constexpr uint32_t kMasks[] = {
       0xFFFF0000, 0xFF00FF00, 0xFF0000FF, 0xFFFF00FF, 0xFFFFFF00, 0xFF00FFFF,
   };
   static constexpr uint32_t kNumMasks = sizeof(kMasks);
 
   auto target = buffer;
-  for (uint32_t i = 0, y = 4; i < depth; ++i, y += full_layer_pitch, target += full_layer_pitch) {
-    uint32_t high = 0xFFFFFFFF & kMasks[i % kNumMasks];
-    uint32_t low = 0xFF777777 & kMasks[i % kNumMasks];
+
+  // Leading border layers.
+  for (uint32_t i = 0; i < 4; ++i, target += full_layer_pitch) {
+    GenerateRGBACheckerboard(target, 0, 0, bordered_width, bordered_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
+  }
+
+  for (uint32_t i = 0; i < depth; ++i, target += full_layer_pitch) {
+    uint32_t mask = kMasks[i % kNumMasks];
+    uint32_t high = 0xFFFFFFFF & mask;
+    uint32_t low = 0xFF777777 & mask;
+
+    GenerateRGBACheckerboard(target, 0, 0, bordered_width, bordered_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
     GenerateRGBACheckerboard(target, 4, 4, width, height, full_pitch, high, low, 1);
   }
 
+  // Trailing border layers.
+  for (uint32_t i = 0; i < 4; ++i, target += full_layer_pitch) {
+    GenerateRGBACheckerboard(target, 0, 0, bordered_width, bordered_height, full_pitch, 0xFFCCCCCC, 0xFF444444, 2);
+  }
+
   if (swizzle) {
-    swizzle_box(buffer, width, height, depth, texture_memory, full_pitch, full_layer_pitch, 4);
+    swizzle_box(buffer, bordered_width, bordered_height, bordered_depth, texture_memory, full_pitch, full_layer_pitch,
+                4);
     delete[] buffer;
   }
 }
