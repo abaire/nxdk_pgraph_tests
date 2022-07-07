@@ -30,6 +30,7 @@ static constexpr const char *kTest2DIndexed = "2D_Indexed";
 static constexpr const char *kTest2DBorderedSwizzled = "2D_BorderTex_SZ";
 static constexpr const char *kTest3DBorderedSwizzled = "3D_BorderTex_SZ";
 static constexpr const char *kTestCubeMapBorderedSwizzled = "Cube_BorderTex_SZ";
+static constexpr const char *kXemu1034 = "xemu#1034";
 
 static constexpr uint32_t kDepthSlices = 4;
 
@@ -87,6 +88,7 @@ TextureBorderTests::TextureBorderTests(TestHost &host, std::string output_dir)
   tests_[kTest2D] = [this]() { Test2D(); };
   tests_[kTest2DBorderedSwizzled] = [this]() { Test2DBorderedSwizzled(); };
   //  tests_[kTest2DIndexed] = [this]() { Test2DPalettized(); };
+  tests_[kXemu1034] = [this]() { TestXemu1034(); };
 
   for (auto size : kBorderTextureSizes) {
     char name[32] = {0};
@@ -308,6 +310,75 @@ void TextureBorderTests::Test2D() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, kTest2D);
+}
+
+static void SetAddressMode(TextureStage::WrapMode mode) {
+  auto p = pb_begin();
+  uint32_t texture_address = MASK(NV097_SET_TEXTURE_ADDRESS_U, mode) | MASK(NV097_SET_TEXTURE_ADDRESS_V, mode) |
+                             MASK(NV097_SET_TEXTURE_ADDRESS_P, mode);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), texture_address);
+  pb_end(p);
+}
+
+void TextureBorderTests::TestXemu1034() {
+  // xemu #1034: Textures that are reused with different wrap modes will only use the original wrap mode.
+  // This requires some special handling as the normal path (committing changes via TestHost) causes xemu to consider
+  // the texture dirty which forces it to apply the new wrapping modes.
+  host_.SetVertexShaderProgram(nullptr);
+
+  host_.PrepareDraw(0xFE202020);
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+
+  {
+    auto &stage = host_.GetTextureStage(0);
+    stage.SetEnabled();
+    stage.SetBorderColor(0xF0FF00FF);
+    stage.SetBorderFromColor(true);
+    stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
+
+    stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
+    stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[0]);
+    host_.DrawArrays();
+
+    SetAddressMode(TextureStage::WRAP_MIRROR);
+    host_.SetVertexBuffer(vertex_buffers_[1]);
+    host_.DrawArrays();
+
+    SetAddressMode(TextureStage::WRAP_CLAMP_TO_EDGE);
+    host_.SetVertexBuffer(vertex_buffers_[2]);
+    host_.DrawArrays();
+
+    stage.SetUWrap(TextureStage::WRAP_BORDER, false);
+    stage.SetVWrap(TextureStage::WRAP_BORDER, false);
+    host_.SetupTextureStages();
+    host_.SetVertexBuffer(vertex_buffers_[3]);
+    host_.DrawArrays();
+
+    SetAddressMode(TextureStage::WRAP_CLAMP_TO_EDGE_OGL);
+    host_.SetVertexBuffer(vertex_buffers_[5]);
+    host_.DrawArrays();
+
+    stage.SetEnabled(false);
+  }
+
+  pb_print("%s\n", kXemu1034);
+  pb_printat(1, 14, (char *)"Wrap");
+  pb_printat(1, 26, (char *)"Mirror");
+  pb_printat(1, 39, (char *)"Clamp");
+  pb_printat(8, 12, (char *)"Border-C");
+  pb_printat(8, 39, (char *)"Clamp_OGl");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, kXemu1034);
 }
 
 void TextureBorderTests::Test2DPalettized() {
