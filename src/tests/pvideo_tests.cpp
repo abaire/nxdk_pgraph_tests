@@ -139,8 +139,9 @@ void PvideoTests::TestStopBehavior() {
     SetPvideoBuffer(true, false);
   }
 
-  // This is the key value, if stop is set to 1, the PVIDEO overlay is torn down completely. If it is not, it stays up
-  // in spite of being stopped.
+  // This is the key value, if stop's low bit is set, the PVIDEO overlay is torn down completely. If it is not, it
+  // stays up in spite of being stopped.
+  // SetPvideoStop(0xFFFFFFFE);
   SetPvideoStop(1);
   SetPvideoBuffer(false, false);
 

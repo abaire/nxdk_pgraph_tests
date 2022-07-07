@@ -72,9 +72,6 @@ void VertexShaderRoundingTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  auto channel = kNextContextChannel;
-  const uint32_t texture_target_dma_channel = channel++;
-
   const uint32_t texture_size = kTexturePitch * kTextureHeight;
   render_target_ =
       (uint8_t *)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);

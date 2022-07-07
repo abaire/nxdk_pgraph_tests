@@ -15,6 +15,8 @@ static constexpr uint32_t kDefaultDMAChannelA = 3;
 // From pbkit.c, DMA_COLOR is set to channel 9 by default.
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
 static constexpr uint32_t kDefaultDMAColorChannel = 9;
+// NV097_SET_CONTEXT_DMA_ZETA is set to channel 10 by default.
+static constexpr uint32_t kDefaultDMAZetaChannel = 10;
 
 constexpr uint32_t kCheckerSize = 8;
 static constexpr uint32_t kCheckerboardA = 0xFF808080;
@@ -23,6 +25,9 @@ static constexpr uint32_t kCheckerboardB = 0xFF3333C0;
 static constexpr const char kAANone[] = "CreateSurfaceWithCenter1";
 static constexpr const char kAA2[] = "CreateSurfaceWithCenterCorner2";
 static constexpr const char kAA4[] = "CreateSurfaceWithSquareOffset4";
+static constexpr const char kFBAANone[] = "FBSurfaceWithCenter1";
+static constexpr const char kFBAA2[] = "FBSurfaceWithCenterCorner2";
+static constexpr const char kFBAA4[] = "FBSurfaceWithSquareOffset4";
 static constexpr const char kOnOffCPUWrite[] = "AAOnThenOffCPUWrite";
 static constexpr const char kModifyNonFramebufferSurface[] = "SurfaceStatesAreIndependent";
 static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifiedBySurfaceState";
@@ -40,6 +45,12 @@ AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir)
   tests_[kAANone] = [this]() { Test(kAANone, TestHost::AA_CENTER_1); };
   tests_[kAA2] = [this]() { Test(kAA2, TestHost::AA_CENTER_CORNER_2); };
   tests_[kAA4] = [this]() { Test(kAA4, TestHost::AA_SQUARE_OFFSET_4); };
+
+  tests_[kFBAANone] = [this]() { TestAARenderToFramebufferSurface(kFBAANone, TestHost::AA_CENTER_1); };
+  tests_[kFBAA2] = [this]() { TestAARenderToFramebufferSurface(kFBAA2, TestHost::AA_CENTER_CORNER_2); };
+  // pbkit doesn't reserve enough framebuffer RAM for this test.
+  //  tests_[kFBAA4] = [this]() { TestAARenderToFramebufferSurface(kFBAA4, TestHost::AA_SQUARE_OFFSET_4); };
+
   tests_[kOnOffCPUWrite] = [this]() { TestAAOnThenOffThenCPUWrite(); };
   tests_[kModifyNonFramebufferSurface] = [this]() { TestModifyNonFramebufferSurface(); };
   tests_[kFramebufferIsIndependent] = [this]() { TestFramebufferIsIndependentOfSurface(); };
@@ -57,20 +68,18 @@ void AntialiasingTests::Initialize() {
 
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
+  p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
+  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
+  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
+  pb_end(p);
 }
 
 void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa) {
   // Point the color surface at texture memory, configure the surface with some anti-aliasing mode, clear, then point
   // the surface back to the framebuffer and render the texture memory.
-
-  // DONOTSUBMIT
-  // TEMP: Set well beyond the actual RGBA texture to magenta
-  {
-    auto pixel = (uint32_t *)host_.GetTextureMemory();
-    for (uint32_t i = 0; i < kTextureSize * kTextureSize * 4; ++i) {
-      *pixel++ = 0xFFFF00FF;
-    }
-  }
 
   // Create a texture with an obvious border around it.
   memset(host_.GetTextureMemory(), 0xCC, kTextureSize * kTextureSize * 4);
@@ -126,6 +135,80 @@ void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa)
   pb_print("%s\n", name);
   pb_draw_text_screen();
   host_.FinishDraw(allow_saving_, output_dir_, name);
+}
+
+void AntialiasingTests::TestAARenderToFramebufferSurface(const char *name, TestHost::AntiAliasingSetting aa) {
+  // Configure an antialiased surface coincident with the framebuffer and render to it, then display the contents.
+
+  uint32_t aa_multiplier;
+  switch (aa) {
+    case TestHost::AA_CENTER_1:
+      aa_multiplier = 1;
+      break;
+
+    case TestHost::AA_CENTER_CORNER_2:
+      aa_multiplier = 2;
+      break;
+
+    case TestHost::AA_SQUARE_OFFSET_4:
+      aa_multiplier = 4;
+      break;
+  }
+
+  {
+    const uint32_t pitch = host_.GetFramebufferWidth() * 4 * aa_multiplier;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
+    // Point zeta at an unbounded DMA channel so it won't fail limit checks, it won't be written to anyway.
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
+    pb_end(p);
+  }
+
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight(), false, 0, 0, 0, 0, aa);
+  host_.PrepareDraw(0xFF050505);
+
+  {
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetTextureStageEnabled(0, false);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+    static constexpr float inset = 64.0f;
+    const float left = inset;
+    const float right = host_.GetFramebufferWidthF() - inset;
+    const float top = inset;
+    const float bottom = host_.GetFramebufferHeightF() - inset;
+    const float mid_x = left + (right - left) * 0.5f;
+    const float mid_y = top + (bottom - top) * 0.5f;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0.25f, 0.95f, 0.75f);
+    host_.SetVertex(left, mid_y, 0.1f, 1.0f);
+    host_.SetVertex(mid_x, top, 0.1f, 1.0f);
+    host_.SetVertex(right, mid_y, 0.1f, 1.0f);
+    host_.SetVertex(mid_x, bottom, 0.1f, 1.0f);
+    host_.End();
+  }
+
+  pb_print("%s\n", name);
+  pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, name);
+
+  {
+    const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    pb_end(p);
+  }
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
 }
 
 void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
