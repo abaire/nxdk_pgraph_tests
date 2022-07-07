@@ -107,9 +107,6 @@ void TextureBorderTests::Initialize() {
   TestSuite::Initialize();
   CreateGeometry();
 
-  host_.SetVertexShaderProgram(nullptr);
-  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-
   // Generate a borderless texture as tex0
   {
     host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
@@ -223,11 +220,13 @@ void TextureBorderTests::CreateGeometry() {
 
 void TextureBorderTests::Test2D() {
   host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   host_.PrepareDraw(0xFE202020);
 
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
@@ -325,11 +324,13 @@ void TextureBorderTests::TestXemu1034() {
   // This requires some special handling as the normal path (committing changes via TestHost) causes xemu to consider
   // the texture dirty which forces it to apply the new wrapping modes.
   host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   host_.PrepareDraw(0xFE202020);
 
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
@@ -338,7 +339,6 @@ void TextureBorderTests::TestXemu1034() {
   {
     auto &stage = host_.GetTextureStage(0);
     stage.SetEnabled();
-    stage.SetBorderColor(0xF0FF00FF);
     stage.SetBorderFromColor(true);
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
     stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD, TextureStage::MAG_BOX_LOD0);
@@ -357,10 +357,21 @@ void TextureBorderTests::TestXemu1034() {
     host_.SetVertexBuffer(vertex_buffers_[2]);
     host_.DrawArrays();
 
-    stage.SetUWrap(TextureStage::WRAP_BORDER, false);
-    stage.SetVWrap(TextureStage::WRAP_BORDER, false);
-    host_.SetupTextureStages();
+    {
+      auto p = pb_begin();
+      p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, 0xF0559FFF);
+      pb_end(p);
+    }
+    SetAddressMode(TextureStage::WRAP_BORDER);
     host_.SetVertexBuffer(vertex_buffers_[3]);
+    host_.DrawArrays();
+
+    {
+      auto p = pb_begin();
+      p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, 0xF0FF5533);
+      pb_end(p);
+    }
+    host_.SetVertexBuffer(vertex_buffers_[4]);
     host_.DrawArrays();
 
     SetAddressMode(TextureStage::WRAP_CLAMP_TO_EDGE_OGL);
@@ -375,6 +386,7 @@ void TextureBorderTests::TestXemu1034() {
   pb_printat(1, 26, (char *)"Mirror");
   pb_printat(1, 39, (char *)"Clamp");
   pb_printat(8, 12, (char *)"Border-C");
+  pb_printat(8, 26, (char *)"Border-C2");
   pb_printat(8, 39, (char *)"Clamp_OGl");
   pb_draw_text_screen();
 
