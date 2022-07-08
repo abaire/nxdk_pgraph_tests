@@ -27,6 +27,7 @@ constexpr int32_t kNextContextChannel = 25;
 
 constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
 
+#define VRAM_MAX 0x07FFFFFF
 #define VRAM_ADDR(x) (reinterpret_cast<uint32_t>(x) & 0x03FFFFFF)
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 

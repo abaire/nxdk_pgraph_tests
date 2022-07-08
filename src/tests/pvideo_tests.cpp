@@ -6,9 +6,11 @@
 #include "texture_generator.h"
 
 static constexpr const char kStopBehavior[] = "Stop";
+static constexpr const char kInvalidSizeIn[] = "Invalid Size In";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "PVIDEO") {
   tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
+  tests_[kInvalidSizeIn] = [this]() { TestInvalidSizeIn(); };
 }
 
 void PvideoTests::Initialize() {
@@ -19,12 +21,6 @@ void PvideoTests::Initialize() {
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
   video_ = (uint8_t *)MmAllocateContiguousMemory(host_.GetFramebufferWidth() * 2 * host_.GetFramebufferHeight());
-
-  uint32_t pitch = host_.GetFramebufferWidth() * 4;
-  auto *temp = new uint8_t[pitch * host_.GetFramebufferHeight()];
-  GenerateRGBACheckerboard(temp, 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(), pitch);
-  SetVideoFrameCR8YB8CB8YA8(temp, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  delete[] temp;
 }
 
 void PvideoTests::Deinitialize() {
@@ -35,8 +31,27 @@ void PvideoTests::Deinitialize() {
   }
 }
 
+void PvideoTests::SetCheckerboardVideoFrameCR8YB8CB8YA8(uint32_t first_color, uint32_t second_color,
+                                                        uint32_t checker_size, uint32_t x_offset, uint32_t y_offset,
+                                                        uint32_t width, uint32_t height) {
+  if (!width) {
+    width = host_.GetFramebufferWidth();
+  }
+  if (!height) {
+    height = host_.GetFramebufferHeight();
+  }
+
+  const uint32_t pitch = width * 4;
+  auto *temp = new uint8_t[pitch * height];
+  GenerateRGBACheckerboard(temp, 0, 0, width, height, pitch, first_color, second_color, checker_size);
+  SetVideoFrameCR8YB8CB8YA8(temp, width, height);
+  delete[] temp;
+}
+
 void PvideoTests::SetVideoFrameCR8YB8CB8YA8(const void *pixels, uint32_t width, uint32_t height) {
   uint8_t *dest = video_;
+  memset(dest, 0, host_.GetFramebufferWidth() * 2 * host_.GetFramebufferHeight());
+
   auto source = reinterpret_cast<const uint32_t *>(pixels);
   for (int y = 0; y < height; ++y) {
     for (int x = 0; x < width; x += 2, source += 2) {
@@ -105,45 +120,104 @@ static void SetPvideoLuminanceChrominance() {
   VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x00001000;
 }
 
+static void PvideoInit() {
+  // Reset behavior based on observations of Dragon Ball Z Sagas FMV.
+  ClearPvideoInterrupts();
+  SetPvideoOffset(0);
+  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+  SetPvideoBase(0);
+  SetPvideoLuminanceChrominance();
+}
+
 void PvideoTests::TestStopBehavior() {
   host_.PrepareDraw(0xFF250535);
 
-  uint32_t pitch = host_.GetFramebufferWidth() * 2;
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF00FFFF, 0xFF000000, 8);
+  PvideoInit();
+  DbgPrint("Displaying video overlay...\n");
 
-  ClearPvideoInterrupts();
-
-  // Seen in Dragon Ball Z Saga, has no observable effect.
-  // VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
-
-  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
-
-  SetPvideoBase(VRAM_ADDR(video_));
-  uint32_t end = VRAM_ADDR(video_) + pitch * host_.GetFramebufferHeight();
-  SetPvideoLimit(end);
-  SetPvideoOffset(0);
-
-  // TODO: See if it's necessary to set these.
-  SetPvideoLuminanceChrominance();
-
-  for (uint32_t i = 0; i < 10; ++i) {
-    SetPvideoStop();
-    SetPvideoColorKey(0, 0, 0, 0);
-    //    SetPvideoOffset(0);
-    //    SetPvideoOffset(VRAM_ADDR(video_));
-    SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-    VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-    VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
-    SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, pitch, false);
-    SetPvideoInterruptEnabled(true, false);
-    SetPvideoBuffer(true, false);
+  for (uint32_t i = 0; i < 30; ++i) {
+    DrawFullscreenOverlay();
+    Sleep(33);
   }
+
+  DbgPrint("Stopping video overlay\n");
 
   // This is the key value, if stop's low bit is set, the PVIDEO overlay is torn down completely. If it is not, it
   // stays up in spite of being stopped.
   // SetPvideoStop(0xFFFFFFFE);
   SetPvideoStop(1);
-  SetPvideoBuffer(false, false);
+  ClearPvideoInterrupts();
+  VIDEOREG(NV_PVIDEO_OFFSET) = 0;
+  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+  VIDEOREG(NV_PVIDEO_BASE) = 0;
+  VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
+  VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
 
   host_.FinishDraw(false, output_dir_, kStopBehavior);
+}
+
+void PvideoTests::TestInvalidSizeIn() {
+  host_.PrepareDraw(0xFF250535);
+
+  uint32_t pitch = host_.GetFramebufferWidth() * 2;
+
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFFFF00, 0xFF333333, 16);
+
+  PvideoInit();
+
+  DbgPrint("Displaying video overlay...\n");
+  for (uint32_t i = 0; i < 30; ++i) {
+    DrawFullscreenOverlay();
+    Sleep(33);
+  }
+
+  DbgPrint("Setting size_in to 0xFFFFFFFF and sleeping for 1 second...\n");
+
+  // Seen in Dragon Ball Z Sagas before rendering starts, also seen when ejecting a disc while the PVIDEO overlay is up
+  // in xemu.
+  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+  Sleep(1000);
+
+  DbgPrint("Changing overlay color and rendering again\n...");
+  // This overlay never be displayed.
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF333333, 0xFFFF3333, 24);
+  for (uint32_t i = 0; i < 30; ++i) {
+    DrawFullscreenOverlay();
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  SetPvideoStop(1);
+  ClearPvideoInterrupts();
+  VIDEOREG(NV_PVIDEO_OFFSET) = 0;
+  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+  VIDEOREG(NV_PVIDEO_BASE) = 0;
+  VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
+  VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
+
+  host_.FinishDraw(false, output_dir_, kStopBehavior);
+}
+
+void PvideoTests::DrawFullscreenOverlay() {
+  SetPvideoStop();
+  SetPvideoColorKey(0, 0, 0, 0);
+  SetPvideoOffset(VRAM_ADDR(video_));
+  SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
+  VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+  SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+
+  // Dragon Ball Z Sagas just sets the limit to the maximum possible, it should be possible to set it to the actual
+  // calculated limit as well.
+  SetPvideoLimit(VRAM_MAX);
+  //  uint32_t end = VRAM_ADDR(video_) + 2 * host_.GetFramebufferWidth() * host_.GetFramebufferHeight();
+  //  SetPvideoLimit(end);
+
+  SetPvideoInterruptEnabled(true, false);
+  SetPvideoBuffer(true, false);
 }
