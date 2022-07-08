@@ -759,8 +759,8 @@ void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, ui
         float s = vertex[0];
         float t = vertex[1];
         if (include_border) {
-          s = s == 0.0f ? kBorderMin : kBorderMax;
-          t = t == 0.0f ? kBorderMin : kBorderMax;
+          s = s <= 0.0f ? kBorderMin : kBorderMax;
+          t = t <= 0.0f ? kBorderMin : kBorderMax;
         }
         host_.SetTexCoord3(s, t, vertex[2], 1.0f);
         host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
