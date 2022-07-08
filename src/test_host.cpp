@@ -895,6 +895,7 @@ void TestHost::SetupTextureStages() const {
 void TestHost::SetTextureFormat(const TextureFormatInfo &fmt, uint32_t stage) { texture_stage_[stage].SetFormat(fmt); }
 
 void TestHost::SetDefaultTextureParams(uint32_t stage) {
+  texture_stage_[stage].Reset();
   texture_stage_[stage].SetTextureDimensions(max_texture_width_, max_texture_height_);
   texture_stage_[stage].SetImageDimensions(max_texture_width_, max_texture_height_);
 }

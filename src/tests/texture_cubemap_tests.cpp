@@ -138,6 +138,9 @@ void TextureCubemapTests::Initialize() {
 }
 
 void TextureCubemapTests::TestCubemap() {
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
   host_.SetTextureStageEnabled(3, true);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
                               TestHost::STAGE_CUBE_MAP);
@@ -219,6 +222,8 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, true);
+  host_.SetTextureStageEnabled(2, true);
   host_.SetTextureStageEnabled(3, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_PRODUCT,
                               TestHost::STAGE_DOT_STR_CUBE);

@@ -44,6 +44,42 @@ class TextureStage {
  public:
   TextureStage();
 
+  void Reset() {
+    lod_min_ = 0;
+    lod_max_ = 4095;
+
+    mipmap_levels_ = 1;
+
+    texture_filter_ = 0x1012000;
+
+    border_color_ = 0;
+    cubemap_enable_ = false;
+    border_source_color_ = true;
+
+    wrap_modes_[0] = WRAP_CLAMP_TO_EDGE;
+    wrap_modes_[1] = WRAP_CLAMP_TO_EDGE;
+    wrap_modes_[2] = WRAP_CLAMP_TO_EDGE;
+    cylinder_wrap_[0] = false;
+    cylinder_wrap_[1] = false;
+    cylinder_wrap_[2] = false;
+    cylinder_wrap_[3] = false;
+
+    bump_env_material[0] = 0.0f;
+    bump_env_material[1] = 0.0f;
+    bump_env_material[2] = 0.0f;
+    bump_env_material[3] = 0.0f;
+
+    bump_env_scale = 0.0f;
+    bump_env_offset = 0.0f;
+
+    texture_matrix_enable_ = false;
+
+    texgen_s_ = TG_DISABLE;
+    texgen_t_ = TG_DISABLE;
+    texgen_r_ = TG_DISABLE;
+    texgen_q_ = TG_DISABLE;
+  }
+
   void SetUWrap(WrapMode mode, bool cylinder_wrap = false) {
     wrap_modes_[0] = mode;
     cylinder_wrap_[0] = cylinder_wrap;

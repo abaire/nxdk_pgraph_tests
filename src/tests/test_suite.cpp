@@ -214,6 +214,9 @@ void TestSuite::Initialize() {
   host_.SetVertexShaderProgram(nullptr);
   SetDefaultTextureFormat();
   host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
   host_.SetShaderStageInput(0, 0);
 
