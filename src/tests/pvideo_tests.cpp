@@ -1,5 +1,7 @@
 #include "pvideo_tests.h"
 
+// Note: pbkit eats any PVIDEO interrupts in `DPC`, so they cannot be used to feed the buffer.
+
 #include <windows.h>
 
 #include "shaders/precalculated_vertex_shader.h"
@@ -130,6 +132,19 @@ static void PvideoInit() {
   SetPvideoLuminanceChrominance();
 }
 
+static void PvideoTeardown() {
+  SetPvideoStop(1);
+  SetPvideoInterruptEnabled(false, false);
+  SetPvideoBuffer(false, false);
+  ClearPvideoInterrupts();
+  VIDEOREG(NV_PVIDEO_OFFSET) = 0;
+  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+  VIDEOREG(NV_PVIDEO_BASE) = 0;
+  VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
+  VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
+}
+
 void PvideoTests::TestStopBehavior() {
   host_.PrepareDraw(0xFF250535);
 
@@ -155,6 +170,9 @@ void PvideoTests::TestStopBehavior() {
   VIDEOREG(NV_PVIDEO_BASE) = 0;
   VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
   VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
 
   host_.FinishDraw(false, output_dir_, kStopBehavior);
 }
@@ -182,7 +200,6 @@ void PvideoTests::TestInvalidSizeIn() {
   Sleep(1000);
 
   DbgPrint("Changing overlay color and rendering again\n...");
-  // This overlay never be displayed.
   SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF333333, 0xFFFF3333, 24);
   for (uint32_t i = 0; i < 30; ++i) {
     DrawFullscreenOverlay();
@@ -190,14 +207,10 @@ void PvideoTests::TestInvalidSizeIn() {
   }
 
   DbgPrint("Stopping video overlay\n");
-  SetPvideoStop(1);
-  ClearPvideoInterrupts();
-  VIDEOREG(NV_PVIDEO_OFFSET) = 0;
-  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
-  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
-  VIDEOREG(NV_PVIDEO_BASE) = 0;
-  VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
-  VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
 
   host_.FinishDraw(false, output_dir_, kStopBehavior);
 }
