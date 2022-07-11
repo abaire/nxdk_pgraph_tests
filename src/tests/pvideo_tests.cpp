@@ -23,8 +23,10 @@ static constexpr const char kSizeInSmallerThanSizeOutUnity[] = "Size In smaller 
 static constexpr const char kSizeInSmallerThanSizeOutCorrect[] = "Size In smaller than out - dI/d0 Correct";
 static constexpr const char kPitchLessThanCompact[] = "Pitch less than compact";
 static constexpr const char kPitchLargerThanCompact[] = "Pitch larger than compact";
+static constexpr const char kPALIntoNTSC[] = "PAL into NTSC overlay";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "PVIDEO") {
+  tests_[kPALIntoNTSC] = [this]() { TestPALIntoNTSC(); };
   tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
   tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
 
@@ -509,6 +511,37 @@ void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
     SetDsDx(256, 128);
     SetDtDy(128, 64);
     SetPvideoOut(64, 64, 128, 64);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOutCorrect);
+}
+
+void PvideoTests::TestPALIntoNTSC() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Setting size_in PAL rendering to NTSC, dI/dO correct...\n");
+  SetTestPatternVideoFrameCR8YB8CB8YA8();
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    SetPvideoIn(0, 0, 720, 576);
+    SetDsDx(720, 640);
+    SetDtDy(576, 480);
+    SetPvideoOut(0, 0, 640, 480);
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
     SetPvideoLimit(VRAM_MAX);
     SetPvideoInterruptEnabled(true, false);

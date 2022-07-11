@@ -22,6 +22,7 @@ class PvideoTests : public TestSuite {
   void TestSizeMaxOutSmallUnityDeltas();
   void TestSizeMaxOutSmallCorrectDeltas();
 
+  void TestPALIntoNTSC();
   void TestSizeInLargerThanSizeOutUnityDeltas();
   void TestSizeInLargerThanSizeOutCorrectDeltas();
 
