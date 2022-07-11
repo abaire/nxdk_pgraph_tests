@@ -39,6 +39,18 @@ void GenerateSwizzledRGBACheckerboard(void *target, uint32_t x_offset, uint32_t 
   delete[] temp_buffer;
 }
 
+void GenerateRGBATestPattern(void *target, uint32_t width, uint32_t height) {
+  auto pixels = static_cast<uint32_t *>(target);
+  for (uint32_t y = 0; y < height; ++y) {
+    auto y_normal = static_cast<uint32_t>(static_cast<float>(y) * 255.0f / static_cast<float>(height));
+
+    for (uint32_t x = 0; x < width; ++x, ++pixels) {
+      auto x_normal = static_cast<uint32_t>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
+      *pixels = y_normal + (x_normal << 8) + ((255 - y_normal) << 16) + ((x_normal + y_normal) << 24);
+    }
+  }
+}
+
 int GenerateSurface(SDL_Surface **surface, int width, int height) {
   *surface = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA8888);
   if (!(*surface)) {
