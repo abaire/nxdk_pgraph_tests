@@ -4,6 +4,7 @@
 
 #include <windows.h>
 
+#include "debug_output.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "swizzle.h"
 #include "texture_generator.h"
@@ -195,6 +196,8 @@ static void PvideoTeardown() {
 }
 
 static inline uint32_t CalculateDelta(uint32_t in_size, uint32_t out_size) {
+  ASSERT(in_size > 1);
+  ASSERT(out_size > 1);
   return ((in_size - 1) << 20) / (out_size - 1);
 }
 
@@ -528,16 +531,16 @@ void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
   PvideoInit();
 
   DbgPrint("Setting size_in to 2x size_out, dI/dO unity...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFF00FF, 0xFF00FF00, 8);
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF7F3333, 8, 0, 0, 128, 64);
+  memset(video_, 0xFF, host_.GetFramebufferWidth() * 2 * host_.GetFramebufferHeight());
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF33337F, 8, 0, 0, 128, 64);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
     SetPvideoOffset(VRAM_ADDR(video_));
     SetPvideoIn(0, 0, 128, 64);
-    SetDsDx(host_.GetFramebufferWidth(), host_.GetFramebufferWidth());
-    SetDtDy(host_.GetFramebufferHeight(), host_.GetFramebufferHeight());
-    SetPvideoOut(128, 128, 256, 128);
+    SetDsDx(11, 11);
+    SetDtDy(11, 11);
+    SetPvideoOut(0, 0, 256, 128);
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
     SetPvideoLimit(VRAM_MAX);
     SetPvideoInterruptEnabled(true, false);
@@ -560,15 +563,15 @@ void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
   PvideoInit();
 
   DbgPrint("Setting size_in to 2x size_out, dI/dO correct...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFF00FF, 0xFF00FF00, 8);
+  memset(video_, 0x7F, host_.GetFramebufferWidth() * 2 * host_.GetFramebufferHeight());
   SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF7F3333, 8, 0, 0, 128, 64);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
     SetPvideoOffset(VRAM_ADDR(video_));
     SetPvideoIn(0, 0, 128, 64);
-    SetDsDx(256, 128);
-    SetDtDy(128, 64);
+    SetDsDx(128, 256);
+    SetDtDy(64, 128);
     SetPvideoOut(256, 128, 256, 128);
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
     SetPvideoLimit(VRAM_MAX);
