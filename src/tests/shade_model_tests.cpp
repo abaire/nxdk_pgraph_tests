@@ -67,10 +67,16 @@ ShadeModelTests::ShadeModelTests(TestHost& host, std::string output_dir)
       {
         std::string name = MakeTestName(kFixedUntextured, model, primitive);
         tests_[name] = [this, model, primitive]() { this->TestShadeModelFixed(model, primitive, false); };
+        name = "W_" + name;
+        tests_[name] = [this, model, primitive]() {
+          this->TestShadeModelFixed_W(model, primitive, false, 0.5f, 0.05f);
+        };
       }
       {
         std::string name = MakeTestName(kFixedTextured, model, primitive);
         tests_[name] = [this, model, primitive]() { this->TestShadeModelFixed(model, primitive, true); };
+        name = "W_" + name;
+        tests_[name] = [this, model, primitive]() { this->TestShadeModelFixed_W(model, primitive, true, 0.5f, 0.05f); };
       }
       {
         std::string name = MakeTestName(kUntextured, model, primitive);
@@ -117,111 +123,149 @@ static constexpr uint32_t kTestDiffuse[] = {
     0xFF33FFCC, 0xFF33CCFF, 0xFFCC33FF, 0xFF991111, 0xFF119911, 0xFF111199, 0xFF666666,
 };
 
-static void add_vertex(TestHost& host, float x, float y, uint32_t index, float u, float v) {
+static void add_vertex(TestHost& host, float x, float y, uint32_t index, float u, float v, float w = 1.0f) {
   host.SetNormal(kTestNormals[index][0], kTestNormals[index][1], kTestNormals[index][2]);
   host.SetDiffuse(kTestDiffuse[index]);
   host.SetTexCoord0(u, v);
-  host.SetVertex(x, y, 0.1f, 1.0f);
+  host.SetVertex(x, y, 0.1f, w);
 };
 
-static void DrawTriangles(TestHost& host) {
+static void DrawTriangles(TestHost& host, float w, float w_inc) {
   host.Begin(TestHost::PRIMITIVE_TRIANGLES);
   uint32_t index = 0;
-  add_vertex(host, kLeft, kTop, index++, 0.0f, 0.0f);
-  add_vertex(host, 0.0f, kTop, index++, 1.0f, 0.0f);
-  add_vertex(host, kLeft, 0.0f, index++, 0.0f, 1.0f);
+  add_vertex(host, kLeft, kTop, index++, 0.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, 0.0f, kTop, index++, 1.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, kLeft, 0.0f, index++, 0.0f, 1.0f, w);
+  w += w_inc;
 
-  add_vertex(host, kRight, kTop, index++, 1.0f, 0.0f);
-  add_vertex(host, 0.10f, kBottom, index++, 0.1f, 1.0f);
-  add_vertex(host, 0.25f, 0.0f, index++, 0.25f, 0.5f);
+  add_vertex(host, kRight, kTop, index++, 1.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, 0.10f, kBottom, index++, 0.1f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, 0.25f, 0.0f, index++, 0.25f, 0.5f, w);
+  w += w_inc;
 
-  add_vertex(host, -0.4f, kBottom, index++, 0.5f, 1.0f);
-  add_vertex(host, -1.4f, -1.4, index++, 0.2f, 0.5f);
-  add_vertex(host, 0.0f, 0.0f, index++, 1.0f, 0.0f);
+  add_vertex(host, -0.4f, kBottom, index++, 0.5f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, -1.4f, -1.4, index++, 0.2f, 0.5f, w);
+  w += w_inc;
+  add_vertex(host, 0.0f, 0.0f, index++, 1.0f, 0.0f, w);
   host.End();
 }
 
-static void DrawTriangleStrip(TestHost& host) {
+static void DrawTriangleStrip(TestHost& host, float w, float w_inc) {
   host.Begin(TestHost::PRIMITIVE_TRIANGLE_STRIP);
   uint32_t index = 0;
 
-  add_vertex(host, kLeft, 0.0f, index++, 0.0f, 0.0f);
-  add_vertex(host, -2.25f, kTop, index++, 0.0f, 1.0f);
-  add_vertex(host, -2.0f, kBottom, index++, 0.0f, 0.0f);
+  add_vertex(host, kLeft, 0.0f, index++, 0.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, -2.25f, kTop, index++, 0.0f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, -2.0f, kBottom, index++, 0.0f, 0.0f, w);
+  w += w_inc;
 
-  add_vertex(host, -1.3f, 1.6, index++, 1.15f, 0.25f);
+  add_vertex(host, -1.3f, 1.6, index++, 1.15f, 0.25f, w);
+  w += w_inc;
 
-  add_vertex(host, 0.0f, -1.5f, index++, 1.3f, 0.75f);
+  add_vertex(host, 0.0f, -1.5f, index++, 1.3f, 0.75f, w);
+  w += w_inc;
 
-  add_vertex(host, 0.4f, 1.0f, index++, 1.7f, 0.33f);
+  add_vertex(host, 0.4f, 1.0f, index++, 1.7f, 0.33f, w);
+  w += w_inc;
 
-  add_vertex(host, 1.4f, -0.6f, index++, 0.7f, 0.7f);
+  add_vertex(host, 1.4f, -0.6f, index++, 0.7f, 0.7f, w);
+  w += w_inc;
 
-  add_vertex(host, kRight, kTop, index++, 0.5f, 0.5f);
+  add_vertex(host, kRight, kTop, index++, 0.5f, 0.5f, w);
   host.End();
 }
 
-static void DrawTriangleFan(TestHost& host) {
+static void DrawTriangleFan(TestHost& host, float w, float w_inc) {
   host.Begin(TestHost::PRIMITIVE_TRIANGLE_FAN);
   uint32_t index = 0;
-  add_vertex(host, 0.0f, -0.75f, index++, 1.0f, 1.0f);
-  add_vertex(host, -2.25f, kBottom, index++, 0.0f, 0.0f);
-  add_vertex(host, -2.0f, kTop, index++, 0.0f, 1.0f);
+  add_vertex(host, 0.0f, -0.75f, index++, 1.0f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, -2.25f, kBottom, index++, 0.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, -2.0f, kTop, index++, 0.0f, 1.0f, w);
+  w += w_inc;
 
-  add_vertex(host, -0.6f, 0.65f, index++, 1.15f, 0.25f);
+  add_vertex(host, -0.6f, 0.65f, index++, 1.15f, 0.25f, w);
+  w += w_inc;
 
-  add_vertex(host, 0.0f, 1.5f, index++, 1.3f, 0.75f);
+  add_vertex(host, 0.0f, 1.5f, index++, 1.3f, 0.75f, w);
+  w += w_inc;
 
-  add_vertex(host, 0.4f, 1.0f, index++, 1.7f, 0.33f);
+  add_vertex(host, 0.4f, 1.0f, index++, 1.7f, 0.33f, w);
+  w += w_inc;
 
-  add_vertex(host, 2.4f, 0.6f, index++, 0.7f, 0.7f);
+  add_vertex(host, 2.4f, 0.6f, index++, 0.7f, 0.7f, w);
+  w += w_inc;
 
-  add_vertex(host, kRight, kBottom, index++, 0.5f, 0.5f);
+  add_vertex(host, kRight, kBottom, index++, 0.5f, 0.5f, w);
   host.End();
 }
 
-static void DrawQuads(TestHost& host) {
+static void DrawQuads(TestHost& host, float w, float w_inc) {
   host.Begin(TestHost::PRIMITIVE_QUADS);
   uint32_t index = 0;
 
-  add_vertex(host, kLeft, kTop, index++, 0.0f, 0.0f);
-  add_vertex(host, -0.4f, kTop, index++, 1.0f, 0.0f);
-  add_vertex(host, -0.4f, kBottom, index++, 1.0f, 1.0f);
-  add_vertex(host, kLeft, kBottom, index++, 0.0f, 1.0f);
+  add_vertex(host, kLeft, kTop, index++, 0.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, -0.4f, kTop, index++, 1.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, -0.4f, kBottom, index++, 1.0f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, kLeft, kBottom, index++, 0.0f, 1.0f, w);
+  w += w_inc;
 
-  add_vertex(host, 0.15f, kTop, index++, 0.0f, 0.0f);
-  add_vertex(host, kRight, kTop, index++, 1.0f, 0.0f);
-  add_vertex(host, kRight, kBottom, index++, 1.0f, 1.0f);
-  add_vertex(host, 0.0f, kBottom, index++, 0.0f, 1.0f);
+  add_vertex(host, 0.15f, kTop, index++, 0.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, kRight, kTop, index++, 1.0f, 0.0f, w);
+  w += w_inc;
+  add_vertex(host, kRight, kBottom, index++, 1.0f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, 0.0f, kBottom, index++, 0.0f, 1.0f, w);
 
   host.End();
 }
 
-static void DrawQuadStrip(TestHost& host) {
+static void DrawQuadStrip(TestHost& host, float w, float w_inc) {
   host.Begin(TestHost::PRIMITIVE_QUAD_STRIP);
   uint32_t index = 0;
-  add_vertex(host, kLeft, kBottom, index++, 0.33f, 0.33f);
-  add_vertex(host, kLeft, kTop, index++, 1.0f, 1.0f);
-  add_vertex(host, 0.0f, -1.35f, index++, 0.7f, 0.1f);
-  add_vertex(host, 0.0f, 1.0f, index++, 0.0f, 0.9f);
+  add_vertex(host, kLeft, kBottom, index++, 0.33f, 0.33f, w);
+  w += w_inc;
+  add_vertex(host, kLeft, kTop, index++, 1.0f, 1.0f, w);
+  w += w_inc;
+  add_vertex(host, 0.0f, -1.35f, index++, 0.7f, 0.1f, w);
+  w += w_inc;
+  add_vertex(host, 0.0f, 1.0f, index++, 0.0f, 0.9f, w);
+  w += w_inc;
 
-  add_vertex(host, kRight, kBottom, index++, 0.33f, 0.33f);
-  add_vertex(host, kRight, kTop, index++, 0.0f, 0.7f);
+  add_vertex(host, kRight, kBottom, index++, 0.33f, 0.33f, w);
+  w += w_inc;
+  add_vertex(host, kRight, kTop, index++, 0.0f, 0.7f, w);
   host.End();
 }
 
-static void DrawPolygon(TestHost& host) {
+static void DrawPolygon(TestHost& host, float w, float w_inc) {
   host.Begin(TestHost::PRIMITIVE_POLYGON);
   uint32_t index = 0;
-  add_vertex(host, kLeft, kBottom, index++, 0.33f, 0.33f);
-  add_vertex(host, -1.4f, 1.1f, index++, 0.7f, 0.1f);
-  add_vertex(host, -0.3f, kTop, index++, 0.1f, 0.7f);
-  add_vertex(host, 2.0f, 0.3f, index++, 0.0f, 0.9f);
-  add_vertex(host, kRight, -1.5f, index++, 0.7f, 0.7f);
+  add_vertex(host, kLeft, kBottom, index++, 0.33f, 0.33f, w);
+  w += w_inc;
+  add_vertex(host, -1.4f, 1.1f, index++, 0.7f, 0.1f, w);
+  w += w_inc;
+  add_vertex(host, -0.3f, kTop, index++, 0.1f, 0.7f, w);
+  w += w_inc;
+  add_vertex(host, 2.0f, 0.3f, index++, 0.0f, 0.9f, w);
+  w += w_inc;
+  add_vertex(host, kRight, -1.5f, index++, 0.7f, 0.7f, w);
   host.End();
 }
 
-static void Draw(TestHost& host, TestHost::DrawPrimitive primitive) {
+static void Draw(TestHost& host, TestHost::DrawPrimitive primitive, float w = 1.0f, float w_inc = 0.0f) {
   switch (primitive) {
     case TestHost::PRIMITIVE_LINES:
     case TestHost::PRIMITIVE_POINTS:
@@ -231,27 +275,27 @@ static void Draw(TestHost& host, TestHost::DrawPrimitive primitive) {
       break;
 
     case TestHost::PRIMITIVE_TRIANGLES:
-      DrawTriangles(host);
+      DrawTriangles(host, w, w_inc);
       break;
 
     case TestHost::PRIMITIVE_TRIANGLE_STRIP:
-      DrawTriangleStrip(host);
+      DrawTriangleStrip(host, w, w_inc);
       break;
 
     case TestHost::PRIMITIVE_TRIANGLE_FAN:
-      DrawTriangleFan(host);
+      DrawTriangleFan(host, w, w_inc);
       break;
 
     case TestHost::PRIMITIVE_QUADS:
-      DrawQuads(host);
+      DrawQuads(host, w, w_inc);
       break;
 
     case TestHost::PRIMITIVE_QUAD_STRIP:
-      DrawQuadStrip(host);
+      DrawQuadStrip(host, w, w_inc);
       break;
 
     case TestHost::PRIMITIVE_POLYGON:
-      DrawPolygon(host);
+      DrawPolygon(host, w, w_inc);
       break;
   }
 }
@@ -339,6 +383,47 @@ void ShadeModelTests::TestShadeModel(uint32_t model, TestHost::DrawPrimitive pri
   }
 
   Draw(host_, primitive);
+
+  if (texture) {
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+    host_.SetTextureStageEnabled(0, false);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  }
+
+  pb_print("%s\n", name.c_str());
+  pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, name);
+}
+
+void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, TestHost::DrawPrimitive primitive, bool texture, float w,
+                                            float w_inc) {
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  std::string name = "W_" + MakeTestName(texture ? kFixedTextured : kFixedUntextured, model, primitive);
+  static constexpr uint32_t kBackgroundColor = 0xFF2C302E;
+  host_.PrepareDraw(kBackgroundColor);
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
+  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+  p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
+  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
+  pb_end(p);
+
+  if (texture) {
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    auto& texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+    texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
+    host_.SetupTextureStages();
+  }
+
+  Draw(host_, primitive, w, w_inc);
 
   if (texture) {
     host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);

@@ -21,6 +21,8 @@ class ShadeModelTests : public TestSuite {
  private:
   void TestShadeModelFixed(uint32_t model, TestHost::DrawPrimitive primitive, bool texture);
   void TestShadeModel(uint32_t model, TestHost::DrawPrimitive primitive, bool texture);
+
+  void TestShadeModelFixed_W(uint32_t model, TestHost::DrawPrimitive primitive, bool texture, float w, float w_inc);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADE_MODEL_TESTS_H
