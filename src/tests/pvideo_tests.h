@@ -15,9 +15,19 @@ class PvideoTests : public TestSuite {
  private:
   void TestStopBehavior();
   void TestAlternateStopBehavior();
-  void TestSizeInMax();
-  void TestSizeMaxOutSmall();
-  void TestSizeInLargerThanSizeOut();
+
+  void TestSizeInMaxUnityDeltas();
+  void TestSizeInMaxLargeDelta();
+  void TestSizeInMaxSmallDelta();
+  void TestSizeMaxOutSmallUnityDeltas();
+  void TestSizeMaxOutSmallCorrectDeltas();
+
+  void TestSizeInLargerThanSizeOutUnityDeltas();
+  void TestSizeInLargerThanSizeOutCorrectDeltas();
+
+  void TestSizeInSmallerThanSizeOutUnityDeltas();
+  void TestSizeInSmallerThanSizeOutCorrectDeltas();
+
   void TestPitchLessThanCompact();
   void TestPitchLargerThanCompact();
 

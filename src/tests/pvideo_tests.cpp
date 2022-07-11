@@ -10,18 +10,36 @@
 
 static constexpr const char kStopBehavior[] = "Stop";
 static constexpr const char kAlternateStop[] = "Stop Alt";
-static constexpr const char kSizeInMax[] = "Size In Max";
-static constexpr const char kSizeInMaxOutSmall[] = "Size In Max Out Small";
-static constexpr const char kSizeInLargerThanSizeOut[] = "Size In larger than out";
+
+static constexpr const char kSizeInMaxUnity[] = "Size In Max - dI/dO = 1";
+static constexpr const char kSizeInMaxLarge[] = "Size In Max - dI/dO > 1";
+static constexpr const char kSizeInMaxSmall[] = "Size In Max - dI/dO < 1";
+static constexpr const char kSizeInMaxOutSmallUnity[] = "Size In Max Out Small - dI/dO = 1";
+static constexpr const char kSizeInMaxOutSmallCorrect[] = "Size In Max Out Small - dI/d0 Correct";
+static constexpr const char kSizeInLargerThanSizeOutUnity[] = "Size In larger than out - dI/dO = 1";
+static constexpr const char kSizeInLargerThanSizeOutCorrect[] = "Size In larger than out - dI/d0 Correct";
+static constexpr const char kSizeInSmallerThanSizeOutUnity[] = "Size In smaller than out - dI/dO = 1";
+static constexpr const char kSizeInSmallerThanSizeOutCorrect[] = "Size In smaller than out - dI/d0 Correct";
 static constexpr const char kPitchLessThanCompact[] = "Pitch less than compact";
 static constexpr const char kPitchLargerThanCompact[] = "Pitch larger than compact";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "PVIDEO") {
   tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
   tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
-  tests_[kSizeInMax] = [this]() { TestSizeInMax(); };
-  tests_[kSizeInMaxOutSmall] = [this]() { TestSizeMaxOutSmall(); };
-  tests_[kSizeInLargerThanSizeOut] = [this]() { TestSizeInLargerThanSizeOut(); };
+
+  tests_[kSizeInMaxUnity] = [this]() { TestSizeInMaxUnityDeltas(); };
+  tests_[kSizeInMaxLarge] = [this]() { TestSizeInMaxLargeDelta(); };
+  tests_[kSizeInMaxSmall] = [this]() { TestSizeInMaxSmallDelta(); };
+
+  tests_[kSizeInMaxOutSmallUnity] = [this]() { TestSizeMaxOutSmallUnityDeltas(); };
+  tests_[kSizeInMaxOutSmallCorrect] = [this]() { TestSizeMaxOutSmallCorrectDeltas(); };
+
+  tests_[kSizeInLargerThanSizeOutUnity] = [this]() { TestSizeInLargerThanSizeOutUnityDeltas(); };
+  tests_[kSizeInLargerThanSizeOutCorrect] = [this]() { TestSizeInLargerThanSizeOutCorrectDeltas(); };
+
+  tests_[kSizeInSmallerThanSizeOutUnity] = [this]() { TestSizeInSmallerThanSizeOutUnityDeltas(); };
+  tests_[kSizeInSmallerThanSizeOutCorrect] = [this]() { TestSizeInSmallerThanSizeOutCorrectDeltas(); };
+
   tests_[kPitchLessThanCompact] = [this]() { TestPitchLessThanCompact(); };
   tests_[kPitchLargerThanCompact] = [this]() { TestPitchLargerThanCompact(); };
 }
@@ -80,10 +98,13 @@ void PvideoTests::SetTestPatternVideoFrameCR8YB8CB8YA8(uint32_t width, uint32_t 
 }
 
 void PvideoTests::SetVideoFrameCR8YB8CB8YA8(const void *pixels, uint32_t width, uint32_t height) {
-  uint8_t *dest = video_;
+  uint8_t *row = video_;
+  uint32_t dest_pitch = host_.GetFramebufferWidth() * 2;
 
   auto source = reinterpret_cast<const uint32_t *>(pixels);
   for (int y = 0; y < height; ++y) {
+    uint8_t *dest = row;
+    row += dest_pitch;
     for (int x = 0; x < width; x += 2, source += 2) {
       float R0, G0, B0, R1, G1, B1;
 
@@ -102,8 +123,6 @@ void PvideoTests::SetVideoFrameCR8YB8CB8YA8(const void *pixels, uint32_t width, 
       dest += 4;
     }
   }
-
-  // swizzle_rect(video_, bordered_width, bordered_height, texture_memory, full_pitch, 4);
 }
 
 static void ClearPvideoInterrupts() { VIDEOREG(NV_PVIDEO_INTR) = 0x00000011; }
@@ -173,6 +192,18 @@ static void PvideoTeardown() {
   VIDEOREG(NV_PVIDEO_BASE) = 0;
   VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
   VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
+}
+
+static inline uint32_t CalculateDelta(uint32_t in_size, uint32_t out_size) {
+  return ((in_size - 1) << 20) / (out_size - 1);
+}
+
+static void SetDsDx(uint32_t in_width, uint32_t out_width) {
+  VIDEOREG(NV_PVIDEO_DS_DX) = CalculateDelta(in_width, out_width);
+}
+
+static void SetDtDy(uint32_t in_height, uint32_t out_height) {
+  VIDEOREG(NV_PVIDEO_DT_DY) = CalculateDelta(in_height, out_height);
 }
 
 void PvideoTests::TestStopBehavior() {
@@ -245,7 +276,7 @@ void PvideoTests::TestAlternateStopBehavior() {
   PvideoTeardown();
 }
 
-void PvideoTests::TestSizeInMax() {
+void PvideoTests::TestSizeInMaxUnityDeltas() {
   host_.PrepareDraw(0xFF250535);
 
   PvideoInit();
@@ -258,7 +289,7 @@ void PvideoTests::TestSizeInMax() {
     Sleep(33);
   }
 
-  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen...\n");
+  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen, dI/dO unity...\n");
   SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF33, 8);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
@@ -266,8 +297,8 @@ void PvideoTests::TestSizeInMax() {
     SetPvideoOffset(VRAM_ADDR(video_));
     VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
     VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
-    VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-    VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+    SetDsDx(host_.GetFramebufferWidth(), host_.GetFramebufferWidth());
+    SetDtDy(host_.GetFramebufferHeight(), host_.GetFramebufferHeight());
     SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
     SetPvideoLimit(VRAM_MAX);
@@ -282,15 +313,95 @@ void PvideoTests::TestSizeInMax() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMax);
+  host_.FinishDraw(false, output_dir_, kSizeInMaxUnity);
 }
 
-void PvideoTests::TestSizeMaxOutSmall() {
+void PvideoTests::TestSizeInMaxLargeDelta() {
   host_.PrepareDraw(0xFF250535);
 
   PvideoInit();
 
-  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to subscreen...\n");
+  DbgPrint("Displaying video overlay...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFFFF00, 0xFF333333, 16, 0, 0, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
+  for (uint32_t i = 0; i < 30; ++i) {
+    DrawFullscreenOverlay();
+    Sleep(33);
+  }
+
+  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen, dI/dO implies larger...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF88FF33, 8);
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+    VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+    SetDsDx(host_.GetFramebufferWidth() << 1, host_.GetFramebufferWidth());
+    SetDtDy(host_.GetFramebufferHeight() << 1, host_.GetFramebufferHeight());
+    SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInMaxLarge);
+}
+
+void PvideoTests::TestSizeInMaxSmallDelta() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Displaying video overlay...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFFFF00, 0xFF333333, 16, 0, 0, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
+  for (uint32_t i = 0; i < 30; ++i) {
+    DrawFullscreenOverlay();
+    Sleep(33);
+  }
+
+  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen, dI/dO implies smaller...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF88, 8);
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+    VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+    SetDsDx(host_.GetFramebufferWidth() >> 2, host_.GetFramebufferWidth());
+    SetDtDy(host_.GetFramebufferHeight() >> 2, host_.GetFramebufferHeight());
+    SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInMaxSmall);
+}
+
+void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to subscreen, dI/dO unity...\n");
   SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF111133, 0xFF3333FF, 8);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
@@ -298,8 +409,8 @@ void PvideoTests::TestSizeMaxOutSmall() {
     SetPvideoOffset(VRAM_ADDR(video_));
     VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
     VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
-    VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-    VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+    SetDsDx(host_.GetFramebufferWidth(), host_.GetFramebufferWidth());
+    SetDtDy(host_.GetFramebufferHeight(), host_.GetFramebufferHeight());
     SetPvideoOut(10, 10, 128, 64);
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
     SetPvideoLimit(VRAM_MAX);
@@ -314,23 +425,55 @@ void PvideoTests::TestSizeMaxOutSmall() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMaxOutSmall);
+  host_.FinishDraw(false, output_dir_, kSizeInMaxOutSmallUnity);
 }
 
-void PvideoTests::TestSizeInLargerThanSizeOut() {
+void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
   host_.PrepareDraw(0xFF250535);
 
   PvideoInit();
 
-  DbgPrint("Setting size_in to 2x size_out...\n");
+  DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to subscreen, dI/dO correct...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF111133, 0xFF3377FF, 8);
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
+    VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
+    SetDsDx(host_.GetFramebufferWidth(), 128);
+    SetDtDy(host_.GetFramebufferHeight(), 64);
+    SetPvideoOut(10, 10, 128, 64);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInMaxOutSmallCorrect);
+}
+
+void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Setting size_in to 2x size_out, dI/dO unity...\n");
   SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF33, 8);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
     SetPvideoOffset(VRAM_ADDR(video_));
     SetPvideoIn(0, 0, 256, 128);
-    VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-    VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+    SetDsDx(host_.GetFramebufferWidth(), host_.GetFramebufferWidth());
+    SetDtDy(host_.GetFramebufferHeight(), host_.GetFramebufferHeight());
     SetPvideoOut(64, 64, 128, 64);
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
     SetPvideoLimit(VRAM_MAX);
@@ -345,7 +488,102 @@ void PvideoTests::TestSizeInLargerThanSizeOut() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOut);
+  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOutUnity);
+}
+
+void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Setting size_in to 2x size_out, dI/dO correct...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF33, 8);
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    SetPvideoIn(0, 0, 256, 128);
+    SetDsDx(256, 128);
+    SetDtDy(128, 64);
+    SetPvideoOut(64, 64, 128, 64);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOutCorrect);
+}
+
+void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Setting size_in to 2x size_out, dI/dO unity...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFF00FF, 0xFF00FF00, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF7F3333, 8, 0, 0, 128, 64);
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    SetPvideoIn(0, 0, 128, 64);
+    SetDsDx(host_.GetFramebufferWidth(), host_.GetFramebufferWidth());
+    SetDtDy(host_.GetFramebufferHeight(), host_.GetFramebufferHeight());
+    SetPvideoOut(128, 128, 256, 128);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInSmallerThanSizeOutUnity);
+}
+
+void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  DbgPrint("Setting size_in to 2x size_out, dI/dO correct...\n");
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFF00FF, 0xFF00FF00, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF7F3333, 8, 0, 0, 128, 64);
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoColorKey(0, 0, 0, 0);
+    SetPvideoOffset(VRAM_ADDR(video_));
+    SetPvideoIn(0, 0, 128, 64);
+    SetDsDx(256, 128);
+    SetDtDy(128, 64);
+    SetPvideoOut(256, 128, 256, 128);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
+    SetPvideoLimit(VRAM_MAX);
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_print("DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, kSizeInSmallerThanSizeOutCorrect);
 }
 
 void PvideoTests::TestPitchLessThanCompact() {
