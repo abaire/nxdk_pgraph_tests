@@ -261,7 +261,6 @@ MenuItemRoot::MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>> &suites
 #ifdef DISABLE_AUTORUN
   submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "! Run all and exit", width, height));
 #endif  // DISABLE_AUTORUN
-  start_time = std::chrono::high_resolution_clock::now();
 }
 
 void MenuItemRoot::ActivateCurrentSuite() {
@@ -270,6 +269,11 @@ void MenuItemRoot::ActivateCurrentSuite() {
 }
 
 void MenuItemRoot::Draw() {
+  if (!timer_valid) {
+    start_time = std::chrono::high_resolution_clock::now();
+    timer_valid = true;
+  }
+
 #ifndef DISABLE_AUTORUN
   if (!timer_cancelled) {
     auto now = std::chrono::high_resolution_clock::now();
@@ -388,16 +392,19 @@ MenuItemOptions::MenuItemOptions(const std::vector<std::shared_ptr<TestSuite>> &
     };
     submenu.push_back(std::make_shared<MenuItemOption>("Previous crashes", values, on_apply));
   }
-
-  start_time = std::chrono::high_resolution_clock::now();
 }
 
 void MenuItemOptions::Draw() {
+  if (!timer_valid) {
+    start_time = std::chrono::high_resolution_clock::now();
+    timer_valid = true;
+  }
   if (!timer_cancelled) {
     auto now = std::chrono::high_resolution_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
     if (elapsed > kAutoTestAllTimeoutMilliseconds) {
-      on_exit();
+      cursor_position = 0;
+      Activate();
       return;
     }
 

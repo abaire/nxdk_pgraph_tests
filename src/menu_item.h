@@ -112,6 +112,7 @@ struct MenuItemRoot : public MenuItem {
   std::function<void()> on_run_all;
   std::function<void()> on_exit;
   std::chrono::steady_clock::time_point start_time;
+  bool timer_valid{false};
   bool timer_cancelled{false};
 };
 
@@ -130,6 +131,7 @@ struct MenuItemOptions : public MenuItem {
 
   std::function<void()> on_exit;
   std::chrono::steady_clock::time_point start_time;
+  bool timer_valid{false};
   bool timer_cancelled{false};
 };
 
