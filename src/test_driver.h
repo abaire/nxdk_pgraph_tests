@@ -5,7 +5,10 @@
 
 #include <cstdint>
 #include <list>
+#include <map>
 #include <memory>
+#include <set>
+#include <string>
 #include <vector>
 
 #include "test_host.h"
@@ -18,7 +21,7 @@ struct MenuItem;
 class TestDriver {
  public:
   TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites, uint32_t framebuffer_width,
-             uint32_t framebuffer_height);
+             uint32_t framebuffer_height, bool show_options_menu = false);
   ~TestDriver();
 
   void Run();
@@ -55,7 +58,9 @@ class TestDriver {
   uint32_t framebuffer_height_;
 
   TestHost &test_host_;
-  std::shared_ptr<MenuItem> menu_;
+  std::shared_ptr<MenuItem> active_menu_;
+  std::shared_ptr<MenuItem> root_menu_;
+  std::shared_ptr<MenuItem> options_menu_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_DRIVER_H

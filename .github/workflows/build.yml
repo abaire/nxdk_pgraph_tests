@@ -36,7 +36,11 @@ jobs:
     - name: Compile
       run: |
         cd nxdk_pgraph_tests
-        make -j $(grep -c processor /proc/cpuinfo) ENABLE_PROGRESS_LOG=y RUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf" DUMP_CONFIG_FILE=y
+        make -j $(grep -c processor /proc/cpuinfo) \
+          ENABLE_PROGRESS_LOG=y \
+          ENABLE_INTERACTIVE_CRASH_AVOIDANCE=y \
+          RUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf" \
+          DUMP_CONFIG_FILE=y
     - name: Create release
       if: github.ref == 'refs/heads/main'
       uses: "marvinpinto/action-automatic-releases@latest"

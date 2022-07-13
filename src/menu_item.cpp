@@ -3,8 +3,10 @@
 #include <pbkit/pbkit.h>
 
 #include <chrono>
+#include <memory>
 #include <utility>
 
+#include "debug_output.h"
 #include "tests/test_suite.h"
 
 #ifdef AUTORUN_IMMEDIATELY
@@ -320,4 +322,138 @@ void MenuItemRoot::CursorLeft() {
 void MenuItemRoot::CursorRight() {
   timer_cancelled = true;
   MenuItem::CursorRight();
+}
+
+struct MenuItemOption : public MenuItem {
+  MenuItemOption(const std::string &name, std::function<void(const MenuItemOption &)> on_apply);
+  MenuItemOption(const std::string &label, const std::vector<std::string> &values,
+                 std::function<void(const MenuItemOption &)> on_apply);
+
+  inline void UpdateName() { name = label + ": " + values[current_option]; }
+
+  void Activate() override;
+  void CursorLeft() override;
+  void CursorRight() override;
+
+  std::string label;
+  std::vector<std::string> values;
+  uint32_t current_option = 0;
+
+  std::function<void(const MenuItemOption &)> on_apply;
+};
+
+MenuItemOption::MenuItemOption(const std::string &name, std::function<void(const MenuItemOption &)> on_apply)
+    : MenuItem(name, 0, 0), on_apply(on_apply) {}
+
+MenuItemOption::MenuItemOption(const std::string &label, const std::vector<std::string> &values,
+                               std::function<void(const MenuItemOption &)> on_apply)
+    : MenuItem("", 0, 0), label(label), values(values), on_apply(on_apply) {
+  ASSERT(!values.empty())
+  UpdateName();
+}
+
+void MenuItemOption::Activate() {
+  current_option = (current_option + 1) % values.size();
+  UpdateName();
+}
+
+void MenuItemOption::CursorLeft() {
+  current_option = (current_option - 1) % values.size();
+  UpdateName();
+}
+
+void MenuItemOption::CursorRight() { Activate(); }
+
+MenuItemOptions::MenuItemOptions(const std::vector<std::shared_ptr<TestSuite>> &suites, std::function<void()> on_exit,
+                                 uint32_t width, uint32_t height)
+    : MenuItem("<<options>>", width, height), on_exit(std::move(on_exit)) {
+  submenu.push_back(
+      std::make_shared<MenuItemOption>("Accept", [this](const MenuItemOption &_ignored) { this->on_exit(); }));
+
+  {
+    constexpr uint32_t OPT_SKIP = 0;
+    constexpr uint32_t OPT_RUN = 1;
+    std::vector<std::string> values = {"Skip", "Run"};
+
+    auto on_apply = [suites](const MenuItemOption &opt) {
+      if (opt.current_option == OPT_SKIP) {
+        for (auto &suite : suites) {
+          suite->SetSuspectedCrashHandlingMode(TestSuite::SuspectedCrashHandling::SKIP_ALL);
+        }
+      } else if (opt.current_option == OPT_RUN) {
+        for (auto &suite : suites) {
+          suite->SetSuspectedCrashHandlingMode(TestSuite::SuspectedCrashHandling::RUN_ALL);
+        }
+      }
+    };
+    submenu.push_back(std::make_shared<MenuItemOption>("Previous crashes", values, on_apply));
+  }
+
+  start_time = std::chrono::high_resolution_clock::now();
+}
+
+void MenuItemOptions::Draw() {
+  if (!timer_cancelled) {
+    auto now = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
+    if (elapsed > kAutoTestAllTimeoutMilliseconds) {
+      on_exit();
+      return;
+    }
+
+    char run_all[128] = {0};
+    snprintf(run_all, 127, "Accept (automatic in %d ms)", kAutoTestAllTimeoutMilliseconds - elapsed);
+    submenu[0]->name = run_all;
+  } else {
+    submenu[0]->name = "Accept";
+  }
+
+  MenuItem::Draw();
+}
+
+void MenuItemOptions::Activate() {
+  timer_cancelled = true;
+  if (cursor_position == 0) {
+    for (auto i = 1; i < submenu.size(); ++i) {
+      const auto &item = *(reinterpret_cast<MenuItemOption *>(submenu[i].get()));
+      item.on_apply(item);
+    }
+    on_exit();
+    return;
+  }
+  MenuItem::Activate();
+}
+void MenuItemOptions::ActivateCurrentSuite() {
+  timer_cancelled = true;
+  MenuItem::ActivateCurrentSuite();
+}
+
+bool MenuItemOptions::Deactivate() {
+  timer_cancelled = true;
+  on_exit();
+  return false;
+}
+
+void MenuItemOptions::CursorUp() {
+  timer_cancelled = true;
+  MenuItem::CursorUp();
+}
+
+void MenuItemOptions::CursorDown() {
+  timer_cancelled = true;
+  MenuItem::CursorDown();
+}
+
+void MenuItemOptions::CursorLeft() {
+  timer_cancelled = true;
+  if (cursor_position > 0) {
+    submenu[cursor_position]->CursorLeft();
+  }
+}
+
+void MenuItemOptions::CursorRight() {
+  timer_cancelled = true;
+  if (cursor_position > 0) {
+    submenu[cursor_position]->CursorRight();
+  }
 }

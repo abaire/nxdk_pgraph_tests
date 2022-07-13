@@ -89,6 +89,8 @@ static bool get_writable_output_directory(std::string& xbe_root_directory);
 static bool get_test_output_path(std::string& test_output_directory);
 static void dump_config_file(const std::string& config_file_path,
                              const std::vector<std::shared_ptr<TestSuite>>& test_suites);
+static bool discover_historical_crashes(const std::string& log_file_path,
+                                        std::map<std::string, std::set<std::string>>& crashes);
 static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 
 /* Main program function */
@@ -135,12 +137,26 @@ int main() {
 
   TestHost::EnsureFolderExists(test_output_directory);
 
+  std::map<std::string, std::set<std::string>> historical_crashes;
 #ifdef ENABLE_PROGRESS_LOG
   {
     std::string log_file = test_output_directory + "\\" + kLogFileName;
+#ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
+    discover_historical_crashes(log_file, historical_crashes);
+#endif
     DeleteFile(log_file.c_str());
 
     Logger::Initialize(log_file, true);
+
+    if (!historical_crashes.empty()) {
+      Logger::Log() << "<HistoricalCrashes>" << std::endl;
+      for (auto& suite_tests : historical_crashes) {
+        for (auto& test : suite_tests.second) {
+          Logger::Log() << "Crash? " << suite_tests.first << "::" << test << std::endl;
+        }
+      }
+      Logger::Log() << "</HistoricalCrashes>" << std::endl;
+    }
   }
 #endif
 
@@ -157,7 +173,16 @@ int main() {
     process_config("d:\\pgraph_tests.cnf", test_suites);
   }
 
-  TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight);
+  if (!historical_crashes.empty()) {
+    for (auto& suite : test_suites) {
+      auto crash_info = historical_crashes.find(suite->Name());
+      if (crash_info != historical_crashes.end()) {
+        suite->SetSuspectedCrashes(crash_info->second);
+      }
+    }
+  }
+
+  TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight, !historical_crashes.empty());
   driver.Run();
 
 #ifdef ENABLE_SHUTDOWN
@@ -247,6 +272,84 @@ static void dump_config_file(const std::string& config_file_path,
     }
     config_file << std::endl << "#-------------------" << std::endl;
   }
+}
+
+static bool discover_historical_crashes(const std::string& log_file_path,
+                                        std::map<std::string, std::set<std::string>>& crashes) {
+  crashes.clear();
+  if (!ensure_drive_mounted(log_file_path[0])) {
+    return false;
+  }
+
+  std::string dos_style_path = log_file_path;
+  std::replace(dos_style_path.begin(), dos_style_path.end(), '/', '\\');
+
+  std::ifstream log_file(dos_style_path.c_str());
+  if (!log_file) {
+    return false;
+  }
+
+  std::string last_test_suite;
+  std::string last_test_name;
+  std::string line;
+
+  auto add_crash = [&crashes](const std::string& suite, const std::string& test) {
+    auto toskip = crashes.find(suite);
+    if (toskip == crashes.end()) {
+      crashes[suite] = {test};
+    } else {
+      toskip->second.emplace(test);
+    }
+  };
+
+  while (std::getline(log_file, line)) {
+    PrintMsg("'%s'\n", line.c_str());
+    if (!line.compare(0, 7, "Crash? ")) {
+      line = line.substr(7);
+      auto delimiter = line.find("::");
+      add_crash(line.substr(0, delimiter), line.substr(delimiter + 2));
+      continue;
+    }
+
+    if (!line.compare(0, 9, "Starting ")) {
+      if (!last_test_suite.empty()) {
+        PrintMsg("Potential crash: '%s' '%s'\n", last_test_suite.c_str(), last_test_name.c_str());
+        add_crash(last_test_suite, last_test_name);
+      }
+
+      line = line.substr(9);
+      auto delimiter = line.find("::");
+      last_test_suite = line.substr(0, delimiter);
+      last_test_name = line.substr(delimiter + 2);
+      continue;
+    }
+
+    if (!line.compare(0, 13, "  Completed '")) {
+      std::string test_name = line.substr(13);
+      auto delimiter = test_name.rfind("' in ");
+      test_name = test_name.substr(0, delimiter);
+      if (test_name == last_test_name) {
+        auto crash_suite = crashes.find(last_test_suite);
+        if (crash_suite != crashes.end()) {
+          crash_suite->second.erase(last_test_name);
+        }
+        last_test_suite.clear();
+        last_test_name.clear();
+        continue;
+      }
+      PrintMsg("Completed line mismatch: '%s' '%s' but completed: '%s'\n", last_test_suite.c_str(),
+               last_test_name.c_str(), test_name.c_str());
+    }
+
+    PrintMsg("Unprocessed log line '%s'\n", line.c_str());
+  }
+
+  if (!last_test_suite.empty()) {
+    PrintMsg("Potential crash: '%s' '%s'\n", last_test_suite.c_str(), last_test_name.c_str());
+    add_crash(last_test_suite, last_test_name);
+  }
+
+  return true;
 }
 
 static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites) {

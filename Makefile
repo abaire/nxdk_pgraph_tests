@@ -178,6 +178,16 @@ ifeq ($(ENABLE_PROGRESS_LOG),y)
 CXXFLAGS += -DENABLE_PROGRESS_LOG
 endif
 
+# Uses the result of the last progress log to ask the user whether tests that appeared to crash historically should be
+# skipped.
+ENABLE_INTERACTIVE_CRASH_AVOIDANCE ?= n
+ifeq ($(ENABLE_INTERACTIVE_CRASH_AVOIDANCE),y)
+ifneq ($(ENABLE_PROGRESS_LOG),y)
+$(error ENABLE_INTERACTIVE_CRASH_AVOIDANCE may not be enabled without ENABLE_PROGRESS_LOG)
+endif
+CXXFLAGS += -DENABLE_INTERACTIVE_CRASH_AVOIDANCE
+endif
+
 # Causes a diff of the nv2a PGRAPH registers to be done between the start and end of each test in order to detect state
 # leakage. Output is logged to XBDM and will be written into the progress log if it is enabled.
 ENABLE_PGRAPH_REGION_DIFF ?= n

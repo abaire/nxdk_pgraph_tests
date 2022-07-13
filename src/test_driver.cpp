@@ -7,14 +7,23 @@
 #include "menu_item.h"
 
 TestDriver::TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites,
-                       uint32_t framebuffer_width, uint32_t framebuffer_height)
+                       uint32_t framebuffer_width, uint32_t framebuffer_height, bool show_options_menu)
     : test_host_(host),
       test_suites_(test_suites),
       framebuffer_width_(framebuffer_width),
       framebuffer_height_(framebuffer_height) {
   auto on_run_all = [this]() { RunAllTestsNonInteractive(); };
   auto on_exit = [this]() { running_ = false; };
-  menu_ = std::make_shared<MenuItemRoot>(test_suites, on_run_all, on_exit, framebuffer_width, framebuffer_height);
+  root_menu_ = std::make_shared<MenuItemRoot>(test_suites, on_run_all, on_exit, framebuffer_width, framebuffer_height);
+
+  if (show_options_menu) {
+    auto on_options_exit = [this]() { active_menu_ = root_menu_; };
+    options_menu_ =
+        std::make_shared<MenuItemOptions>(test_suites, on_options_exit, framebuffer_width, framebuffer_height);
+    active_menu_ = options_menu_;
+  } else {
+    active_menu_ = root_menu_;
+  }
 }
 
 TestDriver::~TestDriver() {
@@ -50,12 +59,12 @@ void TestDriver::Run() {
     }
 
     if (!test_host_.GetSaveResults()) {
-      menu_->SetBackgroundColor(0xFF3E1E1E);
+      active_menu_->SetBackgroundColor(0xFF3E1E1E);
     } else {
-      menu_->SetBackgroundColor(0xFF1E1E1E);
+      active_menu_->SetBackgroundColor(0xFF1E1E1E);
     }
 
-    menu_->Draw();
+    active_menu_->Draw();
 
     Sleep(10);
   }
@@ -169,17 +178,17 @@ void TestDriver::ShowDebugMessageAndExit() {
   running_ = false;
 }
 
-void TestDriver::OnBack() { menu_->Deactivate(); }
+void TestDriver::OnBack() { active_menu_->Deactivate(); }
 
-void TestDriver::OnStart() { menu_->Activate(); }
+void TestDriver::OnStart() { active_menu_->Activate(); }
 
 void TestDriver::OnBlack() { running_ = false; }
 
-void TestDriver::OnA() { menu_->Activate(); }
+void TestDriver::OnA() { active_menu_->Activate(); }
 
-void TestDriver::OnB() { menu_->Deactivate(); }
+void TestDriver::OnB() { active_menu_->Deactivate(); }
 
-void TestDriver::OnX() { menu_->ActivateCurrentSuite(); }
+void TestDriver::OnX() { active_menu_->ActivateCurrentSuite(); }
 
 void TestDriver::OnY() {
   bool save_results = !test_host_.GetSaveResults();
@@ -187,10 +196,10 @@ void TestDriver::OnY() {
   MenuItemTest::SetOneShotMode(save_results);
 }
 
-void TestDriver::OnUp() { menu_->CursorUp(); }
+void TestDriver::OnUp() { active_menu_->CursorUp(); }
 
-void TestDriver::OnDown() { menu_->CursorDown(); }
+void TestDriver::OnDown() { active_menu_->CursorDown(); }
 
-void TestDriver::OnLeft() { menu_->CursorLeft(); }
+void TestDriver::OnLeft() { active_menu_->CursorLeft(); }
 
-void TestDriver::OnRight() { menu_->CursorRight(); }
+void TestDriver::OnRight() { active_menu_->CursorRight(); }

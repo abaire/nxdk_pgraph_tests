@@ -115,4 +115,22 @@ struct MenuItemRoot : public MenuItem {
   bool timer_cancelled{false};
 };
 
+struct MenuItemOptions : public MenuItem {
+  MenuItemOptions(const std::vector<std::shared_ptr<TestSuite>>& suites, std::function<void()> on_exit, uint32_t width,
+                  uint32_t height);
+
+  void Draw() override;
+  void Activate() override;
+  void ActivateCurrentSuite() override;
+  bool Deactivate() override;
+  void CursorUp() override;
+  void CursorDown() override;
+  void CursorLeft() override;
+  void CursorRight() override;
+
+  std::function<void()> on_exit;
+  std::chrono::steady_clock::time_point start_time;
+  bool timer_cancelled{false};
+};
+
 #endif  // NXDK_PGRAPH_TESTS_MENU_ITEM_H

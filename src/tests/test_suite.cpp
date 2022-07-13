@@ -48,6 +48,21 @@ void TestSuite::Run(const std::string& test_name) {
 void TestSuite::RunAll() {
   auto names = TestNames();
   for (const auto& test_name : names) {
+    if (suspected_crashes_.find(test_name) != suspected_crashes_.end()) {
+      switch (suspected_crash_handling_mode_) {
+        case SuspectedCrashHandling::RUN_ALL:
+          break;
+
+        case SuspectedCrashHandling::SKIP_ALL:
+          continue;
+
+        case SuspectedCrashHandling::ASK:
+          // TODO: IMPLEMENT ASK MODE FOR CRASH HANDLING
+          ASSERT(!"TODO: IMPLEMENT ME");
+          break;
+      }
+    }
+
     Run(test_name);
   }
 }
@@ -252,11 +267,11 @@ void TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clo
   auto now = std::chrono::high_resolution_clock::now();
   auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
 
-  PrintMsg("  Completed %s %lums\n", test_name.c_str(), elapsed);
+  PrintMsg("  Completed '%s' in %lums\n", test_name.c_str(), elapsed);
 
 #ifdef ENABLE_PROGRESS_LOG
   if (allow_saving_) {
-    Logger::Log() << "  Completed " << test_name << " " << elapsed << "ms" << std::endl;
+    Logger::Log() << "  Completed '" << test_name << "' in " << elapsed << "ms" << std::endl;
   }
 #endif
 }
