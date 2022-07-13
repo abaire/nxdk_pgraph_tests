@@ -4,13 +4,14 @@
 
 Logger* Logger::singleton_ = nullptr;
 
-Logger::Logger(const std::string& log_path, bool truncate_log) {
+Logger::Logger(const std::string& log_path, bool truncate_log) : log_path_(log_path) {
   const char* p = log_path.c_str();
   PrintMsg("Opening log file at %s\n", p);
-  auto open_mode = truncate_log ? std::ios_base::trunc : std::ios_base::app;
-  log_file_ = std::ofstream(log_path, open_mode);
 
-  ASSERT(log_file_ && "Failed to open log file for output");
+  if (truncate_log) {
+    auto log_file = std::ofstream(log_path, std::ios_base::trunc);
+    ASSERT(log_file && "Failed to open log file for output");
+  }
 }
 
 void Logger::Initialize(const std::string& log_path, bool truncate_log) {
@@ -19,7 +20,9 @@ void Logger::Initialize(const std::string& log_path, bool truncate_log) {
   singleton_ = new Logger(log_path, truncate_log);
 }
 
-std::ofstream& Logger::Log() {
+std::ofstream Logger::Log() {
   ASSERT(singleton_ && "Attempt to use Logger before Initialize");
-  return singleton_->log_file_;
+  auto log_file = std::ofstream(singleton_->log_path_, std::ios_base::app);
+  ASSERT(log_file && "Failed to open log file for output");
+  return std::move(log_file);
 }
