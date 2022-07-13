@@ -15,8 +15,8 @@ on:
       - 'README.md'
 
 jobs:
-  BuildISO:
-    name: Build ISO
+  BuildISOWithCrashAvoidance:
+    name: Build ISO with experimental crash avoidance
     runs-on: ubuntu-latest
     steps:
     - name: Clone tree
@@ -46,8 +46,43 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
+        automatic_release_tag: "latest-experimental_crash_tracking"
         prerelease: false
-        title: "xiso containing pgraph tests"
+        title: "xiso containing pgraph tests with experimental crash tracking"
         files: |
           nxdk_pgraph_tests/nxdk_pgraph_tests.iso
+  BuildISO:
+    name: Build ISO
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone tree
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          path: nxdk_pgraph_tests
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            llvm \
+            lld \
+            libsdl2-dev \
+            libsdl2-image-dev
+          pip3 install nv2a-vsh
+      - name: Compile
+        run: |
+          cd nxdk_pgraph_tests
+          make -j $(grep -c processor /proc/cpuinfo) \
+            ENABLE_PROGRESS_LOG=y \
+            RUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf" \
+            DUMP_CONFIG_FILE=y
+      - name: Create release
+        if: github.ref == 'refs/heads/main'
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "xiso containing pgraph tests"
+          files: |
+            nxdk_pgraph_tests/nxdk_pgraph_tests.iso
