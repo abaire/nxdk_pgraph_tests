@@ -34,6 +34,20 @@ ThisTestSuiteIsEnabled
 # This is ignored.
 ```
 
+In the default release build, the test suite will look for this file in
+`e:/nxdk_pgraph_tests/pgraph_tests.cnf` and `d:\pgraph_tests.cnf`, taking
+whichever is found first. If neither is found, all tests will be executed.
+
+The default release build will also write a template of this file called
+`config.cnf` (see the `DUMP_CONFIG_FILE` Makefile variable).
+
+### Progress logging
+
+If the `ENABLE_PROGRESS_LOG` Makefile variable is set to `y`, a progress log
+named `pgraph_progress_log.txt` will be saved in the output directory. This may
+be useful when trying to track down emulator crashes (e.g., due to unimplemented
+features).
+
 ### Controls
 
 DPAD:

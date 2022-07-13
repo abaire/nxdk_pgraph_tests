@@ -81,7 +81,7 @@ static constexpr int kFramebufferHeight = 480;
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 256;
 
-static constexpr const char* kLogFileName = "log.txt";
+static constexpr const char* kLogFileName = "pgraph_progress_log.txt";
 
 static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                             const std::string& output_directory);
@@ -89,7 +89,7 @@ static bool get_writable_output_directory(std::string& xbe_root_directory);
 static bool get_test_output_path(std::string& test_output_directory);
 static void dump_config_file(const std::string& config_file_path,
                              const std::vector<std::shared_ptr<TestSuite>>& test_suites);
-static void process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites);
+static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 
 /* Main program function */
 int main() {
@@ -148,9 +148,14 @@ int main() {
   dump_config_file(test_output_directory + "\\config.cnf", test_suites);
 #endif
 
+  bool config_parsed = false;
 #ifdef RUNTIME_CONFIG_PATH
-  process_config(RUNTIME_CONFIG_PATH, test_suites);
+  config_parsed = process_config(RUNTIME_CONFIG_PATH, test_suites);
 #endif
+  if (!config_parsed) {
+    // Optionally parse a bundled config.cnf
+    process_config("d:\\pgraph_tests.cnf", test_suites);
+  }
 
   TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight);
   driver.Run();
@@ -244,16 +249,20 @@ static void dump_config_file(const std::string& config_file_path,
   }
 }
 
-static void process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
+static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   if (!ensure_drive_mounted(config_file_path[0])) {
-    ASSERT(!"Failed to mount config path")
+    PrintMsg("Ignoring missing config at %s\n", config_file_path);
+    return false;
   }
 
   std::string dos_style_path = config_file_path;
   std::replace(dos_style_path.begin(), dos_style_path.end(), '/', '\\');
   std::map<std::string, std::vector<std::string>> test_config;
   std::ifstream config_file(dos_style_path.c_str());
-  ASSERT(config_file && "Failed to open config file");
+  if (!config_file) {
+    PrintMsg("Ignoring missing config at %s\n", config_file_path);
+    return false;
+  }
 
   // The config file is a list of test suite names (one per line), each optionally followed by lines containing a test
   // name prefixed with '-' (indicating that test should be disabled).
@@ -290,9 +299,11 @@ static void process_config(const char* config_file_path, std::vector<std::shared
   }
 
   if (filtered_tests.empty()) {
-    return;
+    return true;
   }
   test_suites = filtered_tests;
+
+  return true;
 }
 
 static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,

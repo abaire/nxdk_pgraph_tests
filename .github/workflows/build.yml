@@ -36,14 +36,14 @@ jobs:
     - name: Compile
       run: |
         cd nxdk_pgraph_tests
-        make -j $(grep -c processor /proc/cpuinfo)
+        make -j $(grep -c processor /proc/cpuinfo) ENABLE_PROGRESS_LOG=y RUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf" DUMP_CONFIG_FILE=y
     - name: Create release
       if: github.ref == 'refs/heads/main'
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
-        prerelease: true
+        prerelease: false
         title: "xiso containing pgraph tests"
         files: |
           nxdk_pgraph_tests/nxdk_pgraph_tests.iso
