@@ -3,8 +3,16 @@
 #include <pbkit/pbkit.h>
 
 #include "pbkit_ext.h"
+#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
+
+// From pbkit.c, DMA_A is set to channel 3 by default
+// NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
+static constexpr uint32_t kDefaultDMAChannelA = 3;
+// From pbkit.c, DMA_COLOR is set to channel 9 by default.
+// NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
+static constexpr uint32_t kDefaultDMAColorChannel = 9;
 
 // clang-format off
 static constexpr ThreeDPrimitiveTests::DrawMode kDrawModes[] = {
@@ -319,13 +327,33 @@ void ThreeDPrimitiveTests::CreatePolygon() {
 void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw_mode, bool line_smooth,
                                 bool poly_smooth) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
-  host_.PrepareDraw(kBackgroundColor);
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
-  p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
-  p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
-  pb_end(p);
+  if (line_smooth || poly_smooth) {
+    const uint32_t kAAFramebufferPitch = host_.GetFramebufferWidth() * 4 * 2;
+    const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    pb_end(p);
+    host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                           host_.GetFramebufferHeight(), false, 0, 0, 0, 0, TestHost::AA_CENTER_CORNER_2);
+  }
+  host_.PrepareDraw(kBackgroundColor);
+
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
+    p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, true);
+    p = pb_push1(p, 0x1D7C, 0xFFFF0001);  // From Tenchu: Return from Darkness
+    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
+    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
+    pb_end(p);
+  }
+  host_.SetBlend(true);
 
   switch (primitive) {
     case TestHost::PRIMITIVE_LINES:
@@ -379,10 +407,59 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
       break;
   }
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
-  p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
-  pb_end(p);
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
+    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
+    pb_end(p);
+  }
+
+  // Render the antialiased texture to the screen.
+  if (line_smooth || poly_smooth) {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    pb_end(p);
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                                    host_.GetFramebufferHeight());
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    auto& texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+    texture_stage.SetImageDimensions(host_.GetFramebufferWidth() * 2, host_.GetFramebufferHeight());
+    host_.SetupTextureStages();
+
+    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    host_.SetVertexShaderProgram(shader);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetVertex(0.0f, 0.0f, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(host_.GetFramebufferWidthF() * 2.0f, 0.0f);
+    host_.SetVertex(host_.GetFramebufferWidthF(), 0.0f, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(host_.GetFramebufferWidthF() * 2.0f, host_.GetFramebufferHeightF());
+    host_.SetVertex(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), 0.1f, 1.0f);
+
+    host_.SetTexCoord0(0.0f, host_.GetFramebufferHeightF());
+    host_.SetVertex(0.0f, host_.GetFramebufferHeightF(), 0.1f, 1.0f);
+    host_.End();
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+    host_.SetTextureStageEnabled(0, false);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+    host_.SetVertexShaderProgram(nullptr);
+    host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  }
 
   std::string name = MakeTestName(primitive, draw_mode, line_smooth, poly_smooth);
   pb_print("%s\n", name.c_str());
