@@ -348,7 +348,7 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
     p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, true);
-    p = pb_push1(p, 0x1D7C, 0xFFFF0001);  // From Tenchu: Return from Darkness
+    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0000);  // From MS Dashboard, this enables poly smoothing
     p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
     p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
     pb_end(p);
@@ -409,6 +409,9 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
 
   {
     auto p = pb_begin();
+    // From Tenchu: Return from Darkness, this disables poly smoothing regardless of whether the individual flags are
+    // enabled.
+    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
     p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
     p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
     pb_end(p);
