@@ -64,6 +64,7 @@ SRCS = \
 	$(SRCDIR)/tests/pvideo_tests.cpp \
 	$(SRCDIR)/tests/set_vertex_data_tests.cpp \
 	$(SRCDIR)/tests/shade_model_tests.cpp \
+	$(SRCDIR)/tests/smoothing_tests.cpp \
 	$(SRCDIR)/tests/stencil_tests.cpp \
 	$(SRCDIR)/tests/surface_clip_tests.cpp \
 	$(SRCDIR)/tests/surface_pitch_tests.cpp \
