@@ -36,9 +36,10 @@ class ThreeDPrimitiveTests : public TestSuite {
 
   void CreatePolygon();
 
-  void Test(TestHost::DrawPrimitive primitive, DrawMode draw_mode);
+  void Test(TestHost::DrawPrimitive primitive, DrawMode draw_mode, bool line_smooth, bool poly_smooth);
 
-  static std::string MakeTestName(TestHost::DrawPrimitive primitive, DrawMode draw_mode);
+  static std::string MakeTestName(TestHost::DrawPrimitive primitive, DrawMode draw_mode, bool line_smooth,
+                                  bool poly_smooth);
 
  private:
   std::vector<uint32_t> index_buffer_;

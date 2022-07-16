@@ -37,11 +37,17 @@ static constexpr float kZBack = 5.0f;
 
 ThreeDPrimitiveTests::ThreeDPrimitiveTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "3D primitive") {
-  for (const auto primitive : kPrimitives) {
-    for (const auto draw_mode : kDrawModes) {
-      const std::string test_name = MakeTestName(primitive, draw_mode);
-      auto test = [this, primitive, draw_mode]() { this->Test(primitive, draw_mode); };
-      tests_[test_name] = test;
+  for (auto line_smooth : {false, true}) {
+    for (auto poly_smooth : {false, true}) {
+      for (const auto primitive : kPrimitives) {
+        for (const auto draw_mode : kDrawModes) {
+          const std::string test_name = MakeTestName(primitive, draw_mode, line_smooth, poly_smooth);
+          auto test = [this, primitive, draw_mode, line_smooth, poly_smooth]() {
+            this->Test(primitive, draw_mode, line_smooth, poly_smooth);
+          };
+          tests_[test_name] = test;
+        }
+      }
     }
   }
 }
@@ -310,11 +316,15 @@ void ThreeDPrimitiveTests::CreatePolygon() {
   buffer->Unlock();
 }
 
-void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw_mode) {
+void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw_mode, bool line_smooth,
+                                bool poly_smooth) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
+
+  p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
+  p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
   pb_end(p);
 
   switch (primitive) {
@@ -369,7 +379,12 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
       break;
   }
 
-  std::string name = MakeTestName(primitive, draw_mode);
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
+  p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
+  pb_end(p);
+
+  std::string name = MakeTestName(primitive, draw_mode, line_smooth, poly_smooth);
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
@@ -377,7 +392,8 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
 }
 
 std::string ThreeDPrimitiveTests::MakeTestName(TestHost::DrawPrimitive primitive,
-                                               ThreeDPrimitiveTests::DrawMode draw_mode) {
+                                               ThreeDPrimitiveTests::DrawMode draw_mode, bool line_smooth,
+                                               bool poly_smooth) {
   std::string ret = TestHost::GetPrimitiveName(primitive);
   switch (draw_mode) {
     case DRAW_ARRAYS:
@@ -394,6 +410,13 @@ std::string ThreeDPrimitiveTests::MakeTestName(TestHost::DrawPrimitive primitive
     case DRAW_INLINE_ELEMENTS:
       ret += "-inlineelements";
       break;
+  }
+
+  if (line_smooth) {
+    ret += "-ls";
+  }
+  if (poly_smooth) {
+    ret += "-ps";
   }
 
   return std::move(ret);
