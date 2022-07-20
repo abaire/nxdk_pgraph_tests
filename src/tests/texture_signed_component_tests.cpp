@@ -31,7 +31,9 @@ TextureSignedComponentTests::TextureSignedComponentTests(TestHost &host, std::st
 
   {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8);
-    tests_[texture_format_info.name] = [this, texture_format_info]() { TestGradients(texture_format_info); };
+    std::string name = "txt_";
+    name += texture_format_info.name;
+    tests_[name] = [this, name, texture_format_info]() { TestGradients(name, texture_format_info); };
   }
 }
 
@@ -87,32 +89,35 @@ void TextureSignedComponentTests::Test(const TextureFormatInfo &texture_format, 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-void TextureSignedComponentTests::TestGradients(const TextureFormatInfo &texture_format) {
+void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format) {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetTextureFormat(texture_format);
 
   static constexpr uint32_t kTextureSize = 256;
-  auto setup_texture = [this](uint32_t mask) {
+  auto setup_texture = [this](uint32_t mask, uint32_t alpha) {
     SDL_Surface *test_surface =
         SDL_CreateRGBSurfaceWithFormat(0, kTextureSize, kTextureSize, 32, SDL_PIXELFORMAT_ABGR8888);
     ASSERT(test_surface);
     ASSERT(!SDL_LockSurface(test_surface));
 
-    auto texture_memory = reinterpret_cast<uint32_t *>(test_surface->pixels);
-    for (uint32_t y = 0; y < kTextureSize; ++y) {
-      uint32_t val = (y & 0xFF);
+    auto texture_memory = reinterpret_cast<uint8_t *>(test_surface->pixels);
+    uint32_t row[kTextureSize];
+    for (uint32_t x = 0; x < kTextureSize; ++x) {
+      uint32_t val = (x & 0xFF);
       uint32_t texture_value;
       if (mask == 0xFF000000) {
         texture_value = (val << 24) | 0xFFFFFF;
       } else {
-        texture_value = 0xFF000000 | (((val << 16) | (val << 8) | val) & mask);
+        texture_value = ((alpha & 0xFF) << 24) | (((val << 16) | (val << 8) | val) & mask);
       }
+      row[x] = texture_value;
+    }
 
-      for (uint32_t x = 0; x < kTextureSize; ++x) {
-        *texture_memory++ = texture_value;
-      }
+    for (uint32_t y = 0; y < kTextureSize; ++y) {
+      memcpy(texture_memory, row, sizeof(row));
+      texture_memory += sizeof(row);
     }
     SDL_UnlockSurface(test_surface);
 
@@ -123,8 +128,9 @@ void TextureSignedComponentTests::TestGradients(const TextureFormatInfo &texture
 
   auto &stage = host_.GetTextureStage(0);
 
-  host_.PrepareDraw(0xFFFF00FF);
-
+  host_.PrepareDraw(0xFF000000);
+  GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+                           host_.GetFramebufferWidth() * 4, 0xFFFFFFFF, 0xFF7F7F7F, 12);
   constexpr uint32_t kMasks[] = {
       0xFF0000FF,
       0xFF00FF00,
@@ -148,39 +154,50 @@ void TextureSignedComponentTests::TestGradients(const TextureFormatInfo &texture
     host_.End();
   };
 
-  float left = 0.0f;
-  float x_inc = host_.GetFramebufferWidthF() / 4.0f;
+  const float h_start = floorf(static_cast<float>(host_.GetFramebufferWidth() % kTextureSize) * 0.5f);
+  float left = h_start;
+  float x_inc = kTextureSize;
   float top = 0.0f;
   float y_inc = host_.GetFramebufferHeightF() / 2.0f;
+  const float row_inc = y_inc / 4.0f;
+
   for (auto mask : kMasks) {
-    setup_texture(mask);
-
-    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_LOD0, TextureStage::MAG_BOX_LOD0);
-    host_.SetupTextureStages();
-
     float right = left + x_inc;
-    float bottom = top + y_inc;
+    float bottom = top + row_inc;
+    float section_top = top;
+    float section_bottom = top + y_inc;
 
-    draw(left, top, right, bottom);
-    left = right;
-    right += x_inc;
+    for (auto alpha : {0xFF, 0x7F}) {
+      setup_texture(mask, alpha);
+      stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_LOD0, TextureStage::MAG_BOX_LOD0);
+      host_.SetupTextureStages();
+      draw(left, top, right, bottom);
 
-    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_LOD0, TextureStage::MAG_BOX_LOD0,
-                    mask == 0xFF000000, (mask & 0xFF) != 0, (mask & 0xFF00) != 0, (mask & 0xFF0000) != 0);
-    host_.SetupTextureStages();
-    draw(left, top, right, bottom);
-    left = right;
-
-    if (right >= host_.GetFramebufferWidthF()) {
       top = bottom;
-      left = 0.0f;
+      bottom += row_inc;
+
+      stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_LOD0, TextureStage::MAG_BOX_LOD0,
+                      mask == 0xFF000000, (mask & 0xFF) != 0, (mask & 0xFF00) != 0, (mask & 0xFF0000) != 0);
+      host_.SetupTextureStages();
+      draw(left, top, right, bottom);
+
+      top = bottom;
+      bottom += row_inc;
+    }
+
+    if (right >= host_.GetFramebufferWidthF() - h_start) {
+      top = section_bottom;
+      left = h_start;
+    } else {
+      left = right;
+      top = section_top;
     }
   }
 
-  pb_print("%s\n", texture_format.name);
+  pb_print("          %s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, texture_format.name);
+  host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
 std::string TextureSignedComponentTests::MakeTestName(const TextureFormatInfo &texture_format, uint32_t signed_flags) {
