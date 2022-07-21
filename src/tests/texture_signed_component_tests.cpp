@@ -17,6 +17,17 @@
 
 static int GenerateBlockTestSurface(SDL_Surface **surface, int width, int height);
 
+struct BlendOp {
+  const char *name;
+  uint32_t value;
+};
+
+static constexpr struct BlendOp kBlendOps[] = {
+    {"ADD", NV097_SET_BLEND_EQUATION_V_FUNC_ADD},
+    {"SADD", NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED},
+    {"SREVSUB", NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED},
+};
+
 TextureSignedComponentTests::TextureSignedComponentTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture signed component tests") {
   auto add_test = [this](uint32_t texture_format, uint32_t signed_flags) {
@@ -29,11 +40,13 @@ TextureSignedComponentTests::TextureSignedComponentTests(TestHost &host, std::st
     add_test(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8, i);
   }
 
-  {
+  for (const auto &test_op : kBlendOps) {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8);
     std::string name = "txt_";
     name += texture_format_info.name;
-    tests_[name] = [this, name, texture_format_info]() { TestGradients(name, texture_format_info); };
+    name += "_";
+    name += test_op.name;
+    tests_[name] = [this, name, texture_format_info, &test_op]() { TestGradients(name, texture_format_info, test_op.value); };
   }
 }
 
@@ -89,7 +102,7 @@ void TextureSignedComponentTests::Test(const TextureFormatInfo &texture_format, 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format) {
+void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format, uint32_t blend_op) {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
@@ -128,6 +141,7 @@ void TextureSignedComponentTests::TestGradients(const std::string &name, const T
 
   auto &stage = host_.GetTextureStage(0);
 
+  host_.SetBlend(true, blend_op);
   host_.PrepareDraw(0xFF000000);
   GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                            host_.GetFramebufferWidth() * 4, 0xFFFFFFFF, 0xFF7F7F7F, 12);
@@ -198,6 +212,8 @@ void TextureSignedComponentTests::TestGradients(const std::string &name, const T
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, name);
+
+  host_.SetBlend();
 }
 
 std::string TextureSignedComponentTests::MakeTestName(const TextureFormatInfo &texture_format, uint32_t signed_flags) {

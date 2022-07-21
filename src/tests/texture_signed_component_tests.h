@@ -18,7 +18,7 @@ class TextureSignedComponentTests : public TestSuite {
   void CreateGeometry();
 
   void Test(const TextureFormatInfo &texture_format, uint32_t signed_flags, const std::string &test_name);
-  void TestGradients(const std::string &name, const TextureFormatInfo &texture_format);
+  void TestGradients(const std::string &name, const TextureFormatInfo &texture_format, uint32_t blend_op);
 
   static std::string MakeTestName(const TextureFormatInfo &texture_format, uint32_t signed_flags);
 };
