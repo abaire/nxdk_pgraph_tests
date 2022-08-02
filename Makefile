@@ -87,6 +87,7 @@ SRCS = \
 	$(SRCDIR)/tests/vertex_shader_independence_tests.cpp \
 	$(SRCDIR)/tests/vertex_shader_rounding_tests.cpp \
 	$(SRCDIR)/tests/vertex_shader_swizzle_tests.cpp \
+	$(SRCDIR)/tests/viewport_tests.cpp \
 	$(SRCDIR)/tests/volume_texture_tests.cpp \
 	$(SRCDIR)/tests/w_param_tests.cpp \
 	$(SRCDIR)/tests/window_clip_tests.cpp \
