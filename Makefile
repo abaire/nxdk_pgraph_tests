@@ -197,6 +197,15 @@ ifeq ($(ENABLE_PGRAPH_REGION_DIFF),y)
 CXXFLAGS += -DENABLE_PGRAPH_REGION_DIFF
 endif
 
+# Enables the MultiframeCPUBlit test within the Antialiasing tests.
+# This test requires evaluation across multiple frames and thus cannot produce
+# a usable golden artifact for automated validation. This should only be enabled
+# for manual testing purposes.
+ENABLE_MULTIFRAME_CPU_BLIT_TEST ?= n
+ifeq ($(ENABLE_MULTIFRAME_CPU_BLIT_TEST),y)
+CXXFLAGS += -DMULTIFRAME_CPU_BLIT
+endif
+
 CLEANRULES = clean-resources clean-optimized clean-nv2a-vsh-objs
 include $(NXDK_DIR)/Makefile
 
