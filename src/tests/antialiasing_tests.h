@@ -35,7 +35,6 @@ class AntialiasingTests : public TestSuite {
   void TestGPUAAWriteAfterCPUWrite();
   void TestNonAACPURoundTrip();
 
-//#define MULTIFRAME_CPU_BLIT
 #ifdef MULTIFRAME_CPU_BLIT
   // This test is only useful when viewing live and should generally be disabled.
   void TestMultiframeCPUBlit();
