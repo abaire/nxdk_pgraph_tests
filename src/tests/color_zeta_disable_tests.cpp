@@ -16,7 +16,7 @@ static constexpr const char kTestName[] = "MaskOff";
 
 ColorZetaDisableTests::ColorZetaDisableTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Color Zeta Disable") {
-  tests_["kTestName"] = [this]() { Test(); };
+  tests_[kTestName] = [this]() { Test(); };
 }
 
 void ColorZetaDisableTests::Initialize() {
