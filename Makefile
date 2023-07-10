@@ -51,6 +51,7 @@ SRCS = \
 	$(SRCDIR)/tests/combiner_tests.cpp \
 	$(SRCDIR)/tests/depth_format_fixed_function_tests.cpp \
 	$(SRCDIR)/tests/depth_format_tests.cpp \
+	$(SRCDIR)/tests/dma_corruption_around_surface_tests.cpp \
 	$(SRCDIR)/tests/fog_tests.cpp \
 	$(SRCDIR)/tests/front_face_tests.cpp \
 	$(SRCDIR)/tests/image_blit_tests.cpp \
