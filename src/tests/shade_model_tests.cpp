@@ -15,6 +15,11 @@ static constexpr uint32_t kShadeModel[] = {
     NV097_SET_SHADE_MODEL_SMOOTH,
 };
 
+static constexpr uint32_t kProvokingVertex[] = {
+    NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST,
+    NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_LAST,
+};
+
 static constexpr const char kFixedUntextured[] = "Fixed";
 static constexpr const char kFixedTextured[] = "FixedTex";
 static constexpr const char kUntextured[] = "Prog";
@@ -32,7 +37,7 @@ static constexpr float kBottom = -1.75f;
 
 constexpr uint32_t kTextureSize = 64;
 
-std::string MakeTestName(const char* prefix, uint32_t shade_model, TestHost::DrawPrimitive);
+std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex, TestHost::DrawPrimitive);
 
 static void SetLightAndMaterial() {
   auto p = pb_begin();
@@ -63,28 +68,40 @@ static void SetLightAndMaterial() {
 ShadeModelTests::ShadeModelTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Shade model") {
   for (auto primitive : kPrimitives) {
-    for (auto model : kShadeModel) {
-      {
-        std::string name = MakeTestName(kFixedUntextured, model, primitive);
-        tests_[name] = [this, model, primitive]() { this->TestShadeModelFixed(model, primitive, false); };
-        name = "W_" + name;
-        tests_[name] = [this, model, primitive]() {
-          this->TestShadeModelFixed_W(model, primitive, false, 0.5f, 0.05f);
-        };
-      }
-      {
-        std::string name = MakeTestName(kFixedTextured, model, primitive);
-        tests_[name] = [this, model, primitive]() { this->TestShadeModelFixed(model, primitive, true); };
-        name = "W_" + name;
-        tests_[name] = [this, model, primitive]() { this->TestShadeModelFixed_W(model, primitive, true, 0.5f, 0.05f); };
-      }
-      {
-        std::string name = MakeTestName(kUntextured, model, primitive);
-        tests_[name] = [this, model, primitive]() { this->TestShadeModel(model, primitive, false); };
-      }
-      {
-        std::string name = MakeTestName(kTextured, model, primitive);
-        tests_[name] = [this, model, primitive]() { this->TestShadeModel(model, primitive, true); };
+    for (auto provoking_vertex : kProvokingVertex) {
+      for (auto model : kShadeModel) {
+        {
+          std::string name = MakeTestName(kFixedUntextured, model, provoking_vertex, primitive);
+          tests_[name] = [this, model, provoking_vertex, primitive]() {
+            this->TestShadeModelFixed(model, provoking_vertex, primitive, false);
+          };
+          name = "W_" + name;
+          tests_[name] = [this, model, provoking_vertex, primitive]() {
+            this->TestShadeModelFixed_W(model, provoking_vertex, primitive, false, 0.5f, 0.05f);
+          };
+        }
+        {
+          std::string name = MakeTestName(kFixedTextured, model, provoking_vertex, primitive);
+          tests_[name] = [this, model, provoking_vertex, primitive]() {
+            this->TestShadeModelFixed(model, provoking_vertex, primitive, true);
+          };
+          name = "W_" + name;
+          tests_[name] = [this, model, provoking_vertex, primitive]() {
+            this->TestShadeModelFixed_W(model, provoking_vertex, primitive, true, 0.5f, 0.05f);
+          };
+        }
+        {
+          std::string name = MakeTestName(kUntextured, model, provoking_vertex, primitive);
+          tests_[name] = [this, model, provoking_vertex, primitive]() {
+            this->TestShadeModel(model, provoking_vertex, primitive, false);
+          };
+        }
+        {
+          std::string name = MakeTestName(kTextured, model, provoking_vertex, primitive);
+          tests_[name] = [this, model, provoking_vertex, primitive]() {
+            this->TestShadeModel(model, provoking_vertex, primitive, true);
+          };
+        }
       }
     }
   }
@@ -300,11 +317,12 @@ static void Draw(TestHost& host, TestHost::DrawPrimitive primitive, float w = 1.
   }
 }
 
-void ShadeModelTests::TestShadeModelFixed(uint32_t model, TestHost::DrawPrimitive primitive, bool texture) {
+void ShadeModelTests::TestShadeModelFixed(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive,
+                                          bool texture) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  std::string name = MakeTestName(texture ? kFixedTextured : kFixedUntextured, model, primitive);
+  std::string name = MakeTestName(texture ? kFixedTextured : kFixedUntextured, model, provoking_vertex, primitive);
   static constexpr uint32_t kBackgroundColor = 0xFF2C302E;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -312,6 +330,7 @@ void ShadeModelTests::TestShadeModelFixed(uint32_t model, TestHost::DrawPrimitiv
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
   p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, provoking_vertex);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
   pb_end(p);
 
@@ -357,10 +376,11 @@ static void SetShader(TestHost& host_) {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 }
 
-void ShadeModelTests::TestShadeModel(uint32_t model, TestHost::DrawPrimitive primitive, bool texture) {
+void ShadeModelTests::TestShadeModel(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive,
+                                     bool texture) {
   SetShader(host_);
 
-  std::string name = MakeTestName(texture ? kTextured : kUntextured, model, primitive);
+  std::string name = MakeTestName(texture ? kTextured : kUntextured, model, provoking_vertex, primitive);
   static constexpr uint32_t kBackgroundColor = 0xFF2C302E;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -368,6 +388,7 @@ void ShadeModelTests::TestShadeModel(uint32_t model, TestHost::DrawPrimitive pri
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
   p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, provoking_vertex);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
   pb_end(p);
 
@@ -396,12 +417,13 @@ void ShadeModelTests::TestShadeModel(uint32_t model, TestHost::DrawPrimitive pri
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, TestHost::DrawPrimitive primitive, bool texture, float w,
-                                            float w_inc) {
+void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, uint32_t provoking_vertex,
+                                            TestHost::DrawPrimitive primitive, bool texture, float w, float w_inc) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  std::string name = "W_" + MakeTestName(texture ? kFixedTextured : kFixedUntextured, model, primitive);
+  std::string name =
+      "W_" + MakeTestName(texture ? kFixedTextured : kFixedUntextured, model, provoking_vertex, primitive);
   static constexpr uint32_t kBackgroundColor = 0xFF2C302E;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -409,6 +431,7 @@ void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, TestHost::DrawPrimit
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
   p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, provoking_vertex);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
   pb_end(p);
 
@@ -437,7 +460,15 @@ void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, TestHost::DrawPrimit
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-std::string MakeTestName(const char* prefix, uint32_t shade_model, TestHost::DrawPrimitive primitive) {
+void ShadeModelTests::Deinitialize() {
+  TestSuite::Deinitialize();
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST);
+  pb_end(p);
+}
+
+std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex,
+                         TestHost::DrawPrimitive primitive) {
   const char* primitive_name;
   switch (primitive) {
     case TestHost::PRIMITIVE_TRIANGLES:
@@ -469,7 +500,8 @@ std::string MakeTestName(const char* prefix, uint32_t shade_model, TestHost::Dra
   }
 
   char buf[32] = {0};
-  snprintf(buf, sizeof(buf), "%s_%s_%s", prefix, primitive_name,
-           shade_model == NV097_SET_SHADE_MODEL_SMOOTH ? "Smooth" : "Flat");
+  snprintf(buf, sizeof(buf), "%s_%s_%s_%s", prefix, primitive_name,
+           shade_model == NV097_SET_SHADE_MODEL_SMOOTH ? "Smooth" : "Flat",
+           provoking_vertex == NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST ? "First" : "Last");
   return buf;
 }
