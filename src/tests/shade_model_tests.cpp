@@ -367,8 +367,8 @@ static void SetShader(TestHost& host_) {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
-    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetVertexShaderProgram(shader);

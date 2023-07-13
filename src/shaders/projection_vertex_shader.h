@@ -3,8 +3,10 @@
 
 #include <cstdint>
 
-#include "math3d.h"
 #include "vertex_shader_program.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 class ProjectionVertexShader : public VertexShaderProgram {
  public:
@@ -25,27 +27,27 @@ class ProjectionVertexShader : public VertexShaderProgram {
   inline float GetZMin() const { return z_min_; }
   inline float GetZMax() const { return z_max_; }
 
-  inline void LookAt(const VECTOR camera_position, const VECTOR look_at_point) {
-    VECTOR y_axis{0, 1, 0, 1};
+  inline void LookAt(const vector_t &camera_position, const vector_t &look_at_point) {
+    vector_t y_axis{0, 1, 0, 1};
     LookAt(camera_position, look_at_point, y_axis);
   }
 
-  void LookAt(const VECTOR camera_position, const VECTOR look_at_point, const VECTOR up);
-  void LookTo(const VECTOR camera_position, const VECTOR camera_direction, const VECTOR up);
-  void SetCamera(const VECTOR position, const VECTOR rotation);
-  void SetDirectionalLightDirection(const VECTOR &direction);
+  void LookAt(const vector_t &camera_position, const vector_t &look_at_point, const vector_t &up);
+  void LookTo(const vector_t &camera_position, const vector_t &camera_direction, const vector_t &up);
+  void SetCamera(const vector_t &position, const vector_t &rotation);
+  void SetDirectionalLightDirection(const vector_t &direction);
 
-  MATRIX &GetModelMatrix() { return model_matrix_; }
-  MATRIX &GetViewMatrix() { return view_matrix_; }
-  MATRIX &GetProjectionMatrix() { return projection_matrix_; }
-  MATRIX &GetViewportMatrix() { return viewport_matrix_; }
-  MATRIX &GetProjectionViewportMatrix() { return projection_viewport_matrix_; }
+  matrix4_t &GetModelMatrix() { return model_matrix_; }
+  matrix4_t &GetViewMatrix() { return view_matrix_; }
+  matrix4_t &GetProjectionMatrix() { return projection_matrix_; }
+  matrix4_t &GetViewportMatrix() { return viewport_matrix_; }
+  matrix4_t &GetProjectionViewportMatrix() { return projection_viewport_matrix_; }
 
   // Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
-  void ProjectPoint(VECTOR result, const VECTOR world_point) const;
+  void ProjectPoint(vector_t &result, const vector_t &world_point) const;
 
-  void UnprojectPoint(VECTOR result, const VECTOR screen_point) const;
-  void UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const;
+  void UnprojectPoint(vector_t &result, const vector_t &screen_point) const;
+  void UnprojectPoint(vector_t &result, const vector_t &screen_point, float world_z) const;
 
  protected:
   void OnActivate() override;
@@ -68,17 +70,17 @@ class ProjectionVertexShader : public VertexShaderProgram {
   // Generate a viewport matrix that matches XDK/D3D behavior.
   bool use_d3d_style_viewport_{false};
 
-  MATRIX model_matrix_{};
-  MATRIX view_matrix_{};
-  MATRIX projection_matrix_{};
-  MATRIX viewport_matrix_{};
-  MATRIX projection_viewport_matrix_{};
+  matrix4_t model_matrix_{};
+  matrix4_t view_matrix_{};
+  matrix4_t projection_matrix_{};
+  matrix4_t viewport_matrix_{};
+  matrix4_t projection_viewport_matrix_{};
 
-  MATRIX composite_matrix_{};
-  MATRIX inverse_composite_matrix_{};
+  matrix4_t composite_matrix_{};
+  matrix4_t inverse_composite_matrix_{};
 
-  VECTOR camera_position_ = {0, 0, -2.25, 1};
-  VECTOR light_direction_ = {0, 0, 1, 1};
+  vector_t camera_position_ = {0, 0, -2.25, 1};
+  vector_t light_direction_ = {0, 0, 1, 1};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADERS_PROJECTION_VERTEX_SHADER_H_

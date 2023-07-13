@@ -18,7 +18,7 @@ class TextureMatrixTests : public TestSuite {
 
  private:
   void CreateGeometry();
-  void Test(const char *test_name, MATRIX matrix);
+  void Test(const char *test_name, const matrix4_t &matrix);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_MATRIX_TESTS_H

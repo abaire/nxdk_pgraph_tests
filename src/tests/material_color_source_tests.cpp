@@ -49,7 +49,7 @@ void MaterialColorSourceTests::CreateGeometry() {
 
   float z = 1.0f;
 
-  VECTOR normal{0.0f, 0.0f, 1.0f, 1.0f};
+  vector_t normal{0.0f, 0.0f, 1.0f, 1.0f};
 
   Color diffuse{0.0f, 1.0f, 0.0f, 1.0f};
   Color specular{0.0f, 0.0f, 1.0f, 1.0f};

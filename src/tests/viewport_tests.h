@@ -3,9 +3,11 @@
 #include <memory>
 #include <string>
 
-#include "math3d.h"
 #include "test_host.h"
 #include "test_suite.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 struct TextureFormatInfo;
 class VertexBuffer;
@@ -13,8 +15,8 @@ class VertexBuffer;
 class ViewportTests : public TestSuite {
  public:
   struct Viewport {
-    VECTOR offset;
-    VECTOR scale;
+    vector_t offset;
+    vector_t scale;
   };
 
  public:

@@ -5,6 +5,8 @@
 #include <map>
 #include <vector>
 
+#include "xbox_math_types.h"
+
 class VertexShaderProgram {
  public:
   VertexShaderProgram() = default;
@@ -21,7 +23,7 @@ class VertexShaderProgram {
     uniform_start_offset_ = uniform_start_offset;
   }
 
-  void SetUniform4x4F(uint32_t slot, const float *value);
+  void SetUniform4x4F(uint32_t slot, const XboxMath::matrix4_t &value);
   void SetUniform4F(uint32_t slot, const float *value);
   void SetUniform4I(uint32_t slot, const uint32_t *value);
 
@@ -37,7 +39,7 @@ class VertexShaderProgram {
 
   void SetTransformConstantBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots);
 
-  void SetBaseUniform4x4F(uint32_t slot, const float *value);
+  void SetBaseUniform4x4F(uint32_t slot, const XboxMath::matrix4_t &value);
   void SetBaseUniform4F(uint32_t slot, const float *value);
   void SetBaseUniform4I(uint32_t slot, const uint32_t *value);
 

@@ -715,8 +715,8 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
-    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -744,8 +744,8 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   const float kBackgroundZTop = kZTop + 0.0001f;
 
   auto set_vertex = [this](float x, float y, float z) {
-    VECTOR world;
-    VECTOR screen_point = {x, y, z, 1.0f};
+    vector_t world;
+    vector_t screen_point = {x, y, z, 1.0f};
     host_.UnprojectPoint(world, screen_point, z);
     host_.SetVertex(world[0], world[1], z, 1.0f);
   };
@@ -764,10 +764,10 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   float bottom_z = kZBottom;
 
   struct Quad {
-    VECTOR ul;
-    VECTOR ur;
-    VECTOR lr;
-    VECTOR ll;
+    vector_t ul;
+    vector_t ur;
+    vector_t lr;
+    vector_t ll;
   };
 
   Quad quads[8];

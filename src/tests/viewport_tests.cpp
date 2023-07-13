@@ -30,7 +30,7 @@ static constexpr ViewportTests::Viewport kTestCases[] = {
 
 static std::string MakeTestName(const ViewportTests::Viewport &vp) {
   char buffer[32];
-  snprintf(buffer, sizeof(buffer), "%.03f_%.03f-%.03f_%.03f", vp.offset[_X], vp.offset[_Y], vp.scale[_X], vp.scale[_Y]);
+  snprintf(buffer, sizeof(buffer), "%.03f_%.03f-%.03f_%.03f", vp.offset[0], vp.offset[1], vp.scale[0], vp.scale[1]);
   return buffer;
 }
 
@@ -53,13 +53,13 @@ void ViewportTests::Test(const Viewport &vp) {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
-    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-  host_.SetViewportOffset(vp.offset[_X], vp.offset[_Y], vp.offset[_Z], vp.offset[_W]);
-  host_.SetViewportScale(vp.scale[_X], vp.scale[_Y], vp.scale[_Z], vp.scale[_W]);
+  host_.SetViewportOffset(vp.offset[0], vp.offset[1], vp.offset[2], vp.offset[3]);
+  host_.SetViewportScale(vp.scale[0], vp.scale[1], vp.scale[2], vp.scale[3]);
 
   host_.SetVertexShaderProgram(shader);
 
@@ -85,8 +85,8 @@ void ViewportTests::Test(const Viewport &vp) {
   const float kBackgroundZTop = kZTop + 0.0001f;
 
   auto set_vertex = [this](float x, float y, float z) {
-    VECTOR world;
-    VECTOR screen_point = {x, y, z, 1.0f};
+    vector_t world;
+    vector_t screen_point = {x, y, z, 1.0f};
     host_.UnprojectPoint(world, screen_point, z);
     host_.SetVertex(world[0], world[1], z, 1.0f);
   };
@@ -105,10 +105,10 @@ void ViewportTests::Test(const Viewport &vp) {
   float bottom_z = kZBottom;
 
   struct Quad {
-    VECTOR ul;
-    VECTOR ur;
-    VECTOR lr;
-    VECTOR ll;
+    vector_t ul;
+    vector_t ur;
+    vector_t lr;
+    vector_t ll;
   };
 
   Quad quads[8];

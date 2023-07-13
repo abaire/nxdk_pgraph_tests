@@ -177,8 +177,6 @@ add_library(
         src/debug_output.cpp
         src/debug_output.h
         src/main.cpp
-        src/math3d.c
-        src/math3d.h
         src/menu_item.cpp
         src/menu_item.h
         src/logger.cpp
@@ -213,7 +211,6 @@ add_library(
         src/vertex_buffer.h
 )
 
-
 if (NOT NO_OPT)
     target_compile_options(
             optimized_sources
@@ -244,6 +241,7 @@ target_link_libraries(
         fpng
         printf
         swizzle
+        xbox_math3d
         NXDK::NXDK
         NXDK::NXDK_CXX
         NXDK::SDL2
@@ -327,6 +325,7 @@ target_link_libraries(
         optimized_sources
         printf
         swizzle
+        xbox_math3d
         NXDK::NXDK
         NXDK::NXDK_CXX
         NXDK::SDL2

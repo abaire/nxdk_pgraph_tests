@@ -223,8 +223,8 @@ void FogCustomShaderTests::Initialize() {
   auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   shader->SetNear(kFogStart);
   shader->SetFar(kFogEnd);
-  VECTOR camera_position{0.0f, 0.0f, -7.0f, 1.0f};
-  VECTOR look_at{0.0f, 0.0f, 0.0f, 1.0f};
+  vector_t camera_position{0.0f, 0.0f, -7.0f, 1.0f};
+  vector_t look_at{0.0f, 0.0f, 0.0f, 1.0f};
 
   shader->LookAt(camera_position, look_at);
 

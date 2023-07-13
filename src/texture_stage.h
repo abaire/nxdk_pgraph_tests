@@ -5,6 +5,9 @@
 #include <printf/printf.h>
 
 #include "texture_format.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 // Sets up an nv2a texture stage.
 class TextureStage {
@@ -144,9 +147,9 @@ class TextureStage {
 
   void SetTextureMatrixEnable(bool enabled) { texture_matrix_enable_ = enabled; }
   bool GetTextureMatrixEnable() const { return texture_matrix_enable_; }
-  void SetTextureMatrix(const float *matrix) { memcpy(texture_matrix_, matrix, sizeof(texture_matrix_)); }
-  const float *GetTextureMatrix() const { return texture_matrix_; }
-  float *GetTextureMatrix() { return texture_matrix_; }
+  void SetTextureMatrix(const matrix4_t &matrix) { memcpy(texture_matrix_, matrix, sizeof(texture_matrix_)); }
+  const matrix4_t &GetTextureMatrix() const { return texture_matrix_; }
+  matrix4_t &GetTextureMatrix() { return texture_matrix_; }
 
   TexGen GetTexgenS() const { return texgen_s_; }
   TexGen GetTexgenT() const { return texgen_t_; }
@@ -216,7 +219,7 @@ class TextureStage {
   float bump_env_offset{0.0f};
 
   bool texture_matrix_enable_{false};
-  float texture_matrix_[16];
+  matrix4_t texture_matrix_;
 
   TexGen texgen_s_{TG_DISABLE};
   TexGen texgen_t_{TG_DISABLE};
