@@ -2,6 +2,7 @@
 
 #include <fstream>
 
+#include "configure.h"
 #include "debug_output.h"
 #include "logger.h"
 #include "pbkit_ext.h"

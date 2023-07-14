@@ -5,6 +5,7 @@
 #include <memory>
 #include <utility>
 
+#include "configure.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
@@ -34,7 +35,7 @@ static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifie
 static constexpr const char kCPUWriteIgnoresSurfaceConfig[] = "CPUWriteIgnoresSurfaceConfig";
 static constexpr const char kGPUAAWriteAfterCPUWrite[] = "GPUAAWriteAfterCPUWrite";
 static constexpr const char kNonAACPURoundTrip[] = "NonAACPURoundTrip";
-#ifdef MULTIFRAME_CPU_BLIT
+#ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
 static constexpr const char kMultiframeCPUBlit[] = "__MultiframeCPUBlit";
 #endif
 
@@ -58,7 +59,7 @@ AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir)
   tests_[kGPUAAWriteAfterCPUWrite] = [this]() { TestGPUAAWriteAfterCPUWrite(); };
   tests_[kNonAACPURoundTrip] = [this]() { TestNonAACPURoundTrip(); };
 
-#ifdef MULTIFRAME_CPU_BLIT
+#ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
   tests_[kMultiframeCPUBlit] = [this]() { TestMultiframeCPUBlit(); };
 #endif
 };
@@ -550,7 +551,7 @@ void AntialiasingTests::TestNonAACPURoundTrip() {
   host_.FinishDraw(allow_saving_, output_dir_, kNonAACPURoundTrip);
 }
 
-#ifdef MULTIFRAME_CPU_BLIT
+#ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
 void AntialiasingTests::TestMultiframeCPUBlit() {
   static constexpr uint32_t kNumFrames = 120;
   static constexpr uint32_t kColors[][2] = {
@@ -599,7 +600,7 @@ void AntialiasingTests::TestMultiframeCPUBlit() {
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
 }
-#endif  // MULTIFRAME_CPU_BLIT
+#endif  // ENABLE_MULTIFRAME_CPU_BLIT_TEST
 
 void AntialiasingTests::Draw() const {
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);

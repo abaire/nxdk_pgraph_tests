@@ -15,42 +15,6 @@ on:
       - 'README.md'
 
 jobs:
-  BuildISOWithCrashAvoidance:
-    name: Build ISO with experimental crash avoidance
-    runs-on: ubuntu-latest
-    steps:
-    - name: Clone tree
-      uses: actions/checkout@v2
-      with:
-        submodules: recursive
-        path: nxdk_pgraph_tests
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          llvm \
-          lld \
-          libsdl2-dev \
-          libsdl2-image-dev
-        pip3 install nv2a-vsh
-    - name: Compile
-      run: |
-        cd nxdk_pgraph_tests
-        make -j $(grep -c processor /proc/cpuinfo) \
-          ENABLE_PROGRESS_LOG=y \
-          ENABLE_INTERACTIVE_CRASH_AVOIDANCE=y \
-          RUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf" \
-          DUMP_CONFIG_FILE=y
-    - name: Create release
-      if: github.ref == 'refs/heads/main'
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest-experimental_crash_tracking"
-        prerelease: false
-        title: "xiso containing pgraph tests with experimental crash tracking"
-        files: |
-          nxdk_pgraph_tests/nxdk_pgraph_tests.iso
   BuildISO:
     name: Build ISO
     runs-on: ubuntu-latest
@@ -64,18 +28,27 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            cmake \
             llvm \
             lld \
             libsdl2-dev \
-            libsdl2-image-dev
+            libsdl2-image-dev \
+            ninja-build
           pip3 install nv2a-vsh
+      - name: Prewarm nxdk
+        working-directory: nxdk_pgraph_tests
+        run: bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
       - name: Compile
         run: |
           cd nxdk_pgraph_tests
-          make -j $(grep -c processor /proc/cpuinfo) \
-            ENABLE_PROGRESS_LOG=y \
-            RUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf" \
-            DUMP_CONFIG_FILE=y
+          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
+          cmake -B build \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
+                -DENABLE_PROGRESS_LOG=ON \
+                -DDUMP_CONFIG_FILE=ON \
+                -DRUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf"
+          cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
       - name: Create release
         if: github.ref == 'refs/heads/main'
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -85,4 +58,4 @@ jobs:
           prerelease: false
           title: "xiso containing pgraph tests"
           files: |
-            nxdk_pgraph_tests/nxdk_pgraph_tests.iso
+            build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso

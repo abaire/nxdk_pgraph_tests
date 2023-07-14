@@ -3,6 +3,7 @@
 #include <set>
 #include <vector>
 
+#include "configure.h"
 #include "debug_output.h"
 
 #ifdef ENABLE_PROGRESS_LOG

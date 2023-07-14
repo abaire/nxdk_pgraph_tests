@@ -9,11 +9,11 @@
 
 // clang format off
 static const std::vector<uint32_t> passthrough{
-#include "shaders/precalculated_vertex_shader_4c_texcoords.inl"
+#include "precalculated_vertex_shader_4c_texcoords.inl"
 };
 
 static const std::vector<uint32_t> mulColour{
-#include "shaders/mul_col0_by_const0_vertex_shader.inl"
+#include "mul_col0_by_const0_vertex_shader.inl"
 };
 // clang format on
 

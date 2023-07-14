@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 
+#include "configure.h"
 #include "test_host.h"
 #include "test_suite.h"
 
@@ -35,7 +36,7 @@ class AntialiasingTests : public TestSuite {
   void TestGPUAAWriteAfterCPUWrite();
   void TestNonAACPURoundTrip();
 
-#ifdef MULTIFRAME_CPU_BLIT
+#ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
   // This test is only useful when viewing live and should generally be disabled.
   void TestMultiframeCPUBlit();
 #endif

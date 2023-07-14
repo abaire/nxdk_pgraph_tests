@@ -6,6 +6,7 @@
 #include <memory>
 #include <utility>
 
+#include "configure.h"
 #include "debug_output.h"
 #include "tests/test_suite.h"
 

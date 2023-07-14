@@ -10,7 +10,7 @@
 
 // clang format off
 static constexpr uint32_t kShader[] = {
-#include "shaders/attribute_carryover_test.inl"
+#include "attribute_carryover_test.inl"
 };
 // clang format on
 

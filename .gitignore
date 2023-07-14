@@ -13,3 +13,4 @@
 .vscode/
 .idea/
 bin/
+cmake-build*/
