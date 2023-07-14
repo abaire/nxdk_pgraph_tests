@@ -150,6 +150,19 @@ that the `.gdbinit` file was successfully loaded.
 
 To create a launch configuration that deploys the devhost to an XBDM-enabled XBOX (devkit) with debugging enabled:
 
+1. Upload the full set of resource files to the XBOX
+
+   This can be done with [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge) and a `CMake Application`
+   target.
+    1. Create a new `CMake Application` target
+    2. Set `Target` to `nxdk_pgraph_tests_xiso`
+    3. Set `Executable` to the full path to the [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge)
+       binary
+    4. Set `Program arguments`
+       to `192.168.80.87 -v3 -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f`
+    5. Run the target. You will need to do this any time the resources are changed. The XBE can be uploaded as part of
+       the debug step.
+
 1. Create a new `Embedded GDB Server` run config.
     1. Set the "Target" to `nxdk_pgraph_tests`
     1. Set the "Executable binary" to `nxdk_pgraph_tests`
@@ -158,6 +171,6 @@ To create a launch configuration that deploys the devhost to an XBDM-enabled XBO
     1. Set "GDB Server" to the full path to the [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge)
        binary
     1. Set "GDB Server args"
-       to `<YOUR_XBOX_IP> -s -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/default.xbe e:\$CMakeCurrentTargetName$ -f && gdb :1999 e:\$CMakeCurrentTargetName$`
+       to `<YOUR_XBOX_IP> -s -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file/default.xbe e:\$CMakeCurrentTargetName$ -f && gdb :1999 e:\$CMakeCurrentTargetName$`
     1. Under "Advanced GDB Server Options"
         1. Set "Reset command" to `Never`

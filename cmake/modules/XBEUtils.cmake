@@ -61,7 +61,7 @@ function(add_xbe)
             2
             "XBE"
             ""
-            "XBENAME"
+            "XBENAME;TITLE"
             "RESOURCE_FILES;RESOURCE_DIRS"
     )
 
