@@ -236,7 +236,7 @@ void FogCustomShaderTests::Initialize() {
 
 // clang format off
 static const uint32_t kInfiniteFogCShader[] = {
-#include "shaders/fog_infinite_fogc_test.vshinc"
+#include "fog_infinite_fogc_test.vshinc"
 };
 // clang format on
 
@@ -257,65 +257,65 @@ void FogInfiniteFogCoordinateTests::Initialize() {
 
 // clang format off
 static const uint32_t kFogVec4Unset[] = {
-#include "shaders/fog_vec4_unset.vshinc"
+#include "fog_vec4_unset.vshinc"
 };
 
 // Individual setters.
 static const uint32_t kFogVec4X[] = {
-#include "shaders/fog_vec4_x.vshinc"
+#include "fog_vec4_x.vshinc"
 };
 static const uint32_t kFogVec4Y[] = {
-#include "shaders/fog_vec4_y.vshinc"
+#include "fog_vec4_y.vshinc"
 };
 static const uint32_t kFogVec4Z[] = {
-#include "shaders/fog_vec4_z.vshinc"
+#include "fog_vec4_z.vshinc"
 };
 static const uint32_t kFogVec4W[] = {
-#include "shaders/fog_vec4_w.vshinc"
+#include "fog_vec4_w.vshinc"
 };
 static const uint32_t kFogVec4W_X[] = {
-#include "shaders/fog_vec4_w_x.vshinc"
+#include "fog_vec4_w_x.vshinc"
 };
 static const uint32_t kFogVec4W_Y[] = {
-#include "shaders/fog_vec4_w_y.vshinc"
+#include "fog_vec4_w_y.vshinc"
 };
 static const uint32_t kFogVec4W_Z_Y_X[] = {
-#include "shaders/fog_vec4_w_z_y_x.vshinc"
+#include "fog_vec4_w_z_y_x.vshinc"
 };
 static const uint32_t kFogVec4X_Y_Z_W[] = {
-#include "shaders/fog_vec4_x_y_z_w.vshinc"
+#include "fog_vec4_x_y_z_w.vshinc"
 };
 
 // Bulk setters.
 static const uint32_t kFogVec4XW[] = {
-#include "shaders/fog_vec4_xw.vshinc"
+#include "fog_vec4_xw.vshinc"
 };
 static const uint32_t kFogVec4XY[] = {
-#include "shaders/fog_vec4_xy.vshinc"
+#include "fog_vec4_xy.vshinc"
 };
 static const uint32_t kFogVec4XYZ[] = {
-#include "shaders/fog_vec4_xyz.vshinc"
+#include "fog_vec4_xyz.vshinc"
 };
 static const uint32_t kFogVec4XYZW[] = {
-#include "shaders/fog_vec4_xyzw.vshinc"
+#include "fog_vec4_xyzw.vshinc"
 };
 static const uint32_t kFogVec4XZ[] = {
-#include "shaders/fog_vec4_xz.vshinc"
+#include "fog_vec4_xz.vshinc"
 };
 static const uint32_t kFogVec4XZW[] = {
-#include "shaders/fog_vec4_xzw.vshinc"
+#include "fog_vec4_xzw.vshinc"
 };
 static const uint32_t kFogVec4YW[] = {
-#include "shaders/fog_vec4_yw.vshinc"
+#include "fog_vec4_yw.vshinc"
 };
 static const uint32_t kFogVec4YZ[] = {
-#include "shaders/fog_vec4_yz.vshinc"
+#include "fog_vec4_yz.vshinc"
 };
 static const uint32_t kFogVec4YZW[] = {
-#include "shaders/fog_vec4_yzw.vshinc"
+#include "fog_vec4_yzw.vshinc"
 };
 static const uint32_t kFogVec4ZW[] = {
-#include "shaders/fog_vec4_zw.vshinc"
+#include "fog_vec4_zw.vshinc"
 };
 // clang format on
 

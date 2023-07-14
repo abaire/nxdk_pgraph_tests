@@ -8,14 +8,14 @@ PerspectiveVertexShader::PerspectiveVertexShader(uint32_t framebuffer_width, uin
                                                  float z_max, float fov_y, float left, float right, float bottom,
                                                  float top, float near, float far)
     : ProjectionVertexShader(framebuffer_width, framebuffer_height, z_min, z_max),
+      fov_y_(fov_y),
+      aspect_ratio_(framebuffer_width_ / framebuffer_height_),
       left_(left),
       right_(right),
       top_(top),
       bottom_(bottom),
       near_(near),
-      far_(far),
-      fov_y_(fov_y),
-      aspect_ratio_(framebuffer_width_ / framebuffer_height_) {}
+      far_(far) {}
 
 void PerspectiveVertexShader::CalculateProjectionMatrix() {
   memset(projection_matrix_, 0, sizeof(projection_matrix_));

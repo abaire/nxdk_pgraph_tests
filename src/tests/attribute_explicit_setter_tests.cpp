@@ -10,7 +10,7 @@
 
 // clang format off
 static constexpr uint32_t kShader[] = {
-#include "shaders/attribute_explicit_setter_tests.inl"
+#include "attribute_explicit_setter_tests.inl"
 };
 // clang format on
 

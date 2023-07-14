@@ -14,6 +14,7 @@ Tests will be executed automatically if no gamepad input is given within an init
 Individual tests may be executed via the menu.
 
 ### Test configuration
+
 Tests can optionally be determined via a configuration file loaded from the XBOX. The file follows a simple line-based
 format.
 
@@ -27,6 +28,7 @@ The names used are the same as the names that appear in the `nxdk_praph_tests` m
 If the entire file is empty (or commented out), it will be ignored and all tests will be enabled.
 
 For example:
+
 ```
 ThisTestSuiteIsEnabled
 -ExceptThisTest
@@ -72,21 +74,45 @@ It can be installed via `pip3 install nv2a-vsh --upgrade`.
 This test suite requires some modifications to the pbkit used by the nxdk in order to operate.
 
 To facilitate this, the nxdk is included as a submodule of this project, referencing the
-`pbkit_extensions` branch from https://github.com/abaire/nxdk.
+`cmake_pgraph_tester` branch from https://github.com/abaire/nxdk.
 
 This project should be cloned with the `--recursive` flag to pull the submodules and their submodules,
 after the fact this can be achieved via `git submodule update --init --recursive`.
 
-For macOS, the patched nxdk currently assumes that the Homebrew llvm@11 package has been installed.
+As of July 2023, the nxdk's CMake implementation requires bootstrapping before it may be used. To facilitate this, run
+the `prewarm-nxdk.sh` script from this project's root directory. It will navigate into the `nxdk` subdir and build all
+of the sample projects, triggering the creation of the `nxdk` libraries needed for the toolchain and for this project.
+
+### Building with CLion
+
+The CMake target can be configured to use the toolchain from the nxdk:
+
+* CMake options
+
+  `-DCMAKE_TOOLCHAIN_FILE=<absolute_path_to_this_project>/third_party/nxdk/share/toolchain-nxdk.cmake`
+
+* Environment
+
+  `NXDK_DIR=<absolute_path_to_this_project>/third_party/nxdk`
+
+On macOS you may also have to modify `PATH` in the `Environment` section such that a homebrew version of LLVM
+is preferred over Xcode's (to supply `dlltool`).
+
+#### Example settings
+
+Assuming that this project has been checked out at `/development/pgraph_tester`:
+
+* CMake options: `-DCMAKE_TOOLCHAIN_FILE=/development/pgraph_tester/third_party/nxdk/share/toolchain-nxdk.cmake`
+* Environment: `NXDK_DIR=/development/pgraph_tester/third_party/nxdk`
 
 ## Adding new tests
 
-### Using nv2a log events from xemu
+### Using nv2a log events from [xemu](https://xemu.app/)
 
 1. Enable tracing of nv2a log events as normal (see xemu documentation) and
    exercise the event of interest within the game.
 1. Duplicate an existing test as a skeleton.
-1. Add the duplicated test to the `Makefile` and `main.cpp` (please preserve
+1. Add the duplicated test to `CMakeLists.txt` and `main.cpp` (please preserve
    alphabetical ordering if possible).
 1. Use [nv2a_to_pbkit](https://github.com/abaire/nv2a_to_pbkit) to get a rough
    set of pbkit invocations duplicating the behavior from the log. Take the
@@ -94,23 +120,44 @@ For macOS, the patched nxdk currently assumes that the Homebrew llvm@11 package 
    the test. You may wish to utilize some of the helper methods from `TestHost`
    and similar classes rather than using the raw output to improve readability.
 
-
 ## Running with CLion
+
+### On xemu
 
 Create a build target
 
 1. Create a new `Embedded GDB Server` target
-1. Set the Target to `all`
-1. Set the Executable to `main.exe`
-1. Set `Download executable` to `None`
+1. Set the Target to `nxdk_pgraph_tests_xiso`
+1. Set the Executable to `nxdk_pgraph_tests`
+1. Set `Download executable` to `Never`
 1. Set `'target remote' args` to `127.0.0.1:1234`
 1. Set `GDB Server` to the path to the xemu binary
-1. Set `GDB Server args` to `-s -S` (the `-S` is optional and will cause xemu to wait for the debugger to connnect)
+1. Set `GDB Server args` to `-s -S -dvd_path "$CMakeCurrentBuildDir$/xiso/nxdk_pgraph_tests.iso"` (the `-S` is
+   optional and will cause xemu to wait for the debugger to connnect)
+1. Under `Advanced GDB Server Options`
+    1. Set "Working directory" to `$ProjectFileDir$`
+    1. On macOS, set "Environment variables"
+       to `DYLD_FALLBACK_LIBRARY_PATH=/<the full path to your xemu.app bundle>/Contents/Libraries/<the architecture for your platform, e.g., arm64>`
+    3. Set "Reset command" to `Never`
 
 To capture DbgPrint, additionally append `-device lpc47m157 -serial tcp:127.0.0.1:9091` to `GDB Server args` and use
 something like [pykdclient](https://github.com/abaire/pykdclient).
 
-## Deploying with xbdm_gdb_bridge
+NOTE: If you see a failure due to "Remote target doesn't support qGetTIBAddr packet", check the GDB output to make sure
+that the `.gdbinit` file was successfully loaded.
 
-The `Makefile` contains a `deploy` target that will copy the finished binary to an XBOX running XBDM. This functionality
-requires the [xbdm_gdb_bridge](https://github.com/abaire/xbdm_gdb_bridge) utility.
+## Deploying with [xbdm_gdb_bridge](https://github.com/abaire/xbdm_gdb_bridge)
+
+To create a launch configuration that deploys the devhost to an XBDM-enabled XBOX (devkit) with debugging enabled:
+
+1. Create a new `Embedded GDB Server` run config.
+    1. Set the "Target" to `nxdk_pgraph_tests`
+    1. Set the "Executable binary" to `nxdk_pgraph_tests`
+    1. Set "Download executable" to `Never`
+    1. Set "'target remote' args" to `localhost:1999`
+    1. Set "GDB Server" to the full path to the [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge)
+       binary
+    1. Set "GDB Server args"
+       to `<YOUR_XBOX_IP> -s -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/default.xbe e:\$CMakeCurrentTargetName$ -f && gdb :1999 e:\$CMakeCurrentTargetName$`
+    1. Under "Advanced GDB Server Options"
+        1. Set "Reset command" to `Never`

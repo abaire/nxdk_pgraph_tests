@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 
+#include "configure.h"
 #include "debug_output.h"
 #include "logger.h"
 #include "test_driver.h"
@@ -100,6 +101,8 @@ static bool process_config(const char* config_file_path, std::vector<std::shared
 int main() {
   XVideoSetMode(kFramebufferWidth, kFramebufferHeight, 32, REFRESH_DEFAULT);
 
+  // Reserve 4 times the size of the default framebuffers to allow for antialiasing.
+  pb_set_fb_size_multiplier(4);
   int status = pb_init();
   if (status) {
     debugPrint("pb_init Error %d\n", status);
