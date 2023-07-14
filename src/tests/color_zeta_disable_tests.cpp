@@ -47,7 +47,8 @@ void ColorZetaDisableTests::Test() {
   // This seems to clear the check that triggers a color/zeta limit error.
   // Spongebob sets this register early on in the game launch.
   auto crash_register = reinterpret_cast<uint32_t *>(PGRAPH_REGISTER_BASE + 0x880);
-  *crash_register = 0x28c3ff;
+  auto crash_register_pre_test = *crash_register;
+  *crash_register = crash_register_pre_test & (~0x800);
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_COLOR_MASK, 0);
@@ -67,9 +68,6 @@ void ColorZetaDisableTests::Test() {
   host_.SetVertex(left, bottom, z, 1.0f);
   host_.End();
 
-  // This is the original value set during the initial boot before the game code starts.
-  *crash_register = 0x8cfff;
-
   p = pb_begin();
   p = pb_push1(p, NV097_SET_COLOR_MASK,
                NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
@@ -81,6 +79,8 @@ void ColorZetaDisableTests::Test() {
 
   std::string z_name = std::string(kTestName) + "_ZB";
   host_.FinishDraw(allow_saving_, output_dir_, z_name);
+
+  *crash_register = crash_register_pre_test;
 }
 
 void ColorZetaDisableTests::DrawCheckerboardBackground() const {
