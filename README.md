@@ -174,3 +174,5 @@ To create a launch configuration that deploys the devhost to an XBDM-enabled XBO
        to `<YOUR_XBOX_IP> -s -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file/default.xbe e:\$CMakeCurrentTargetName$ -f && gdb :1999 e:\$CMakeCurrentTargetName$`
     1. Under "Advanced GDB Server Options"
         1. Set "Reset command" to `Never`
+        2. If CLion times out connecting to the GDB server, increase the `Startup delay` setting to give the XBE file
+           upload more time to complete. A timeout of 10000 - 15000 milliseconds may be a good start.
