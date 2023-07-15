@@ -179,6 +179,17 @@ add_library(
         src/main.cpp
         src/menu_item.cpp
         src/menu_item.h
+        src/models/distorted_cylinder.cpp
+        src/models/distorted_cylinder.h
+        src/models/distorted_cylinder_mesh.h
+        src/models/icosphere.cpp
+        src/models/icosphere.h
+        src/models/icosphere_mesh.h
+        src/models/model_builder.cpp
+        src/models/model_builder.h
+        src/models/single_quad.cpp
+        src/models/single_quad.h
+        src/models/single_quad_mesh.h
         src/logger.cpp
         src/logger.h
         src/pbkit_ext.cpp
@@ -288,6 +299,8 @@ add_executable(
         src/tests/inline_array_size_mismatch.h
         src/tests/lighting_normal_tests.cpp
         src/tests/lighting_normal_tests.h
+        src/tests/lighting_specular_tests.cpp
+        src/tests/lighting_specular_tests.h
         src/tests/lighting_two_sided_tests.cpp
         src/tests/lighting_two_sided_tests.h
         src/tests/line_width_tests.cpp
