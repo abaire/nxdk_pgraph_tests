@@ -28,7 +28,8 @@ static constexpr const char kPALIntoNTSC[] = "PAL into NTSC overlay";
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "PVIDEO") {
   tests_[kPALIntoNTSC] = [this]() { TestPALIntoNTSC(); };
   tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
-  tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
+  // This seems to permanently kill video output on 1.0 devkit.
+  //  tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
 
   tests_[kSizeInMaxUnity] = [this]() { TestSizeInMaxUnityDeltas(); };
   tests_[kSizeInMaxLarge] = [this]() { TestSizeInMaxLargeDelta(); };
@@ -253,12 +254,12 @@ void PvideoTests::TestAlternateStopBehavior() {
 
   DbgPrint("Immediately stopping video overlay with unknown registers\n");
 
-//  const uint32_t NV_PVIDEO_UNKNOWN_88 = 0x00008088;
-//  const uint32_t NV_PVIDEO_UNKNOWN_8C = 0x0000808C;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
+  //  const uint32_t NV_PVIDEO_UNKNOWN_88 = 0x00008088;
+  //  const uint32_t NV_PVIDEO_UNKNOWN_8C = 0x0000808C;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
 
   SetPvideoLuminanceChrominance();
   VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
