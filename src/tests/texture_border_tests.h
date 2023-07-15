@@ -20,7 +20,7 @@ class TextureBorderTests : public TestSuite {
   void Test2D();
   void TestXemu1034();
   void Test2DBorderedSwizzled();
-  void Test2DPalettized();
+  //  void Test2DPalettized();
 
   void Test3DBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height);
   void TestCubemapBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height);

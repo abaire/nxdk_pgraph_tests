@@ -9,7 +9,12 @@
 #include <SDL_image.h>
 #include <fpng/src/fpng.h>
 #include <strings.h>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
+#pragma clang diagnostic pop
+
 #include <xboxkrnl/xboxkrnl.h>
 
 #include <algorithm>

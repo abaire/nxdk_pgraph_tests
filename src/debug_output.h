@@ -1,7 +1,10 @@
 #ifndef NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H
 #define NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
+#pragma clang diagnostic pop
 
 #include <string>
 
@@ -22,6 +25,6 @@ inline void PrintMsg(const char *fmt, VarArgs &&...args) {
   DbgPrint("%s", buf.c_str());
 }
 
-void PrintAssertAndWaitForever(const char *assert_code, const char *filename, uint32_t line);
+[[noreturn]] void PrintAssertAndWaitForever(const char *assert_code, const char *filename, uint32_t line);
 
 #endif  // NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H

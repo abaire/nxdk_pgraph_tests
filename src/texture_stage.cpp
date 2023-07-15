@@ -54,8 +54,8 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
     size_p = bsf((int)size_p_);
   }
 
-  const uint32_t DMA_A = 1;
-  const uint32_t DMA_B = 2;
+  constexpr uint32_t DMA_A = 1;
+  //  const uint32_t DMA_B = 2;
 
   uint32_t format = MASK(NV097_SET_TEXTURE_FORMAT_CONTEXT_DMA, DMA_A) |
                     MASK(NV097_SET_TEXTURE_FORMAT_CUBEMAP_ENABLE, cubemap_enable_) |

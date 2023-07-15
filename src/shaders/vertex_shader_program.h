@@ -8,6 +8,7 @@
 class VertexShaderProgram {
  public:
   VertexShaderProgram() = default;
+  virtual ~VertexShaderProgram() = default;
 
   void Activate();
   void PrepareDraw();

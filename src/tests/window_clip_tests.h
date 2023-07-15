@@ -31,7 +31,6 @@ class WindowClipTests : public TestSuite {
             uint32_t c1_bottom, uint32_t c2_left, uint32_t c2_top, uint32_t c2_right, uint32_t c2_bottom);
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
   std::shared_ptr<VertexBuffer> framebuffer_vertex_buffer_;
 };
 

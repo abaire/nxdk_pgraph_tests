@@ -203,8 +203,7 @@ void pb_fetch_pgraph_registers(uint8_t *registers) {
     /* Wait for any pending pgraph commands to be flushed */
   }
 
-  const auto kPGRAPHRegisterBase = reinterpret_cast<const uint32_t *>(PGRAPH_REGISTER_BASE);
-  const auto kPGRAPHRegisterEnd = PGRAPH_REGISTER_BASE + PGRAPH_REGISTER_ARRAY_SIZE;
+  constexpr uint32_t kPGRAPHRegisterEnd = PGRAPH_REGISTER_BASE + PGRAPH_REGISTER_ARRAY_SIZE;
 
   struct Range {
     uint32_t begin;

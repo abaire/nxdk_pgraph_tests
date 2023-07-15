@@ -19,7 +19,7 @@ static constexpr AttributeExplicitSetterTests::TestConfig kTestConfigs[] = {
     {"Setters-visible", true},
 };
 
-static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeExplicitSetterTests::Attribute attribute);
+// static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeExplicitSetterTests::Attribute attribute);
 
 AttributeExplicitSetterTests::AttributeExplicitSetterTests(TestHost& host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Attrib setter") {
@@ -57,7 +57,6 @@ void AttributeExplicitSetterTests::CreateGeometry() {
 
   Color black{0.0f, 0.0f, 0.0f, 1.0f};
 
-  uint32_t idx = 0;
   float z = 10.0f;
   buffer->DefineBiTri(0, 0, 0, fb_width, fb_height, z, z, z, z, black, black, black, black);
 }
@@ -617,31 +616,31 @@ void AttributeExplicitSetterTests::Draw(float x, float y, const std::function<vo
   pb_end(p);
 }
 
-static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeExplicitSetterTests::Attribute attribute) {
-  switch (attribute) {
-    case AttributeExplicitSetterTests::ATTR_WEIGHT:
-      return TestHost::WEIGHT;
-    case AttributeExplicitSetterTests::ATTR_NORMAL:
-      return TestHost::NORMAL;
-    case AttributeExplicitSetterTests::ATTR_DIFFUSE:
-      return TestHost::DIFFUSE;
-    case AttributeExplicitSetterTests::ATTR_SPECULAR:
-      return TestHost::SPECULAR;
-    case AttributeExplicitSetterTests::ATTR_FOG_COORD:
-      return TestHost::FOG_COORD;
-    case AttributeExplicitSetterTests::ATTR_POINT_SIZE:
-      return TestHost::POINT_SIZE;
-    case AttributeExplicitSetterTests::ATTR_BACK_DIFFUSE:
-      return TestHost::BACK_DIFFUSE;
-    case AttributeExplicitSetterTests::ATTR_BACK_SPECULAR:
-      return TestHost::BACK_SPECULAR;
-    case AttributeExplicitSetterTests::ATTR_TEX0:
-      return TestHost::TEXCOORD0;
-    case AttributeExplicitSetterTests::ATTR_TEX1:
-      return TestHost::TEXCOORD1;
-    case AttributeExplicitSetterTests::ATTR_TEX2:
-      return TestHost::TEXCOORD2;
-    case AttributeExplicitSetterTests::ATTR_TEX3:
-      return TestHost::TEXCOORD3;
-  }
-}
+// static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeExplicitSetterTests::Attribute attribute) {
+//   switch (attribute) {
+//     case AttributeExplicitSetterTests::ATTR_WEIGHT:
+//       return TestHost::WEIGHT;
+//     case AttributeExplicitSetterTests::ATTR_NORMAL:
+//       return TestHost::NORMAL;
+//     case AttributeExplicitSetterTests::ATTR_DIFFUSE:
+//       return TestHost::DIFFUSE;
+//     case AttributeExplicitSetterTests::ATTR_SPECULAR:
+//       return TestHost::SPECULAR;
+//     case AttributeExplicitSetterTests::ATTR_FOG_COORD:
+//       return TestHost::FOG_COORD;
+//     case AttributeExplicitSetterTests::ATTR_POINT_SIZE:
+//       return TestHost::POINT_SIZE;
+//     case AttributeExplicitSetterTests::ATTR_BACK_DIFFUSE:
+//       return TestHost::BACK_DIFFUSE;
+//     case AttributeExplicitSetterTests::ATTR_BACK_SPECULAR:
+//       return TestHost::BACK_SPECULAR;
+//     case AttributeExplicitSetterTests::ATTR_TEX0:
+//       return TestHost::TEXCOORD0;
+//     case AttributeExplicitSetterTests::ATTR_TEX1:
+//       return TestHost::TEXCOORD1;
+//     case AttributeExplicitSetterTests::ATTR_TEX2:
+//       return TestHost::TEXCOORD2;
+//     case AttributeExplicitSetterTests::ATTR_TEX3:
+//       return TestHost::TEXCOORD3;
+//   }
+// }

@@ -15,9 +15,9 @@ constexpr uint32_t kDDSMagic = FOURCC('D', 'D', 'S', ' ');
 constexpr uint32_t kDX10Magic = FOURCC('D', 'X', '1', '0');
 
 static const uint32_t kDXT1Magic = FOURCC('D', 'X', 'T', '1');
-static const uint32_t kDXT2Magic = FOURCC('D', 'X', 'T', '2');
+// static const uint32_t kDXT2Magic = FOURCC('D', 'X', 'T', '2');
 static const uint32_t kDXT3Magic = FOURCC('D', 'X', 'T', '3');
-static const uint32_t kDXT4Magic = FOURCC('D', 'X', 'T', '4');
+// static const uint32_t kDXT4Magic = FOURCC('D', 'X', 'T', '4');
 static const uint32_t kDXT5Magic = FOURCC('D', 'X', 'T', '5');
 
 enum DDH_FLAGS {

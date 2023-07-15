@@ -29,7 +29,6 @@ static constexpr char kTestName[] = "DMAOverlap";
 static constexpr uint32_t kTextureSize = 128;
 
 static constexpr uint32_t kCheckerSize = 8;
-static constexpr uint32_t kCheckerboardA = 0xFF808080;
 static constexpr uint32_t kCheckerboardB = 0xFF3333C0;
 
 DMACorruptionAroundSurfaceTests::DMACorruptionAroundSurfaceTests(TestHost &host, std::string output_dir)

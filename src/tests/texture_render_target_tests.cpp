@@ -193,7 +193,7 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
     auto shader = std::make_shared<PrecalculatedVertexShader>();
     host_.SetVertexShaderProgram(shader);
 
-    host_.SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
+    TestHost::SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
     host_.SetVertexBuffer(render_target_vertex_buffer_);
     host_.DrawArrays();
   }
@@ -211,15 +211,13 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 
-  host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  host_.SetViewportOffset(0.531250f, 0.531250f, 0, 0);
-  host_.SetViewportScale(0, -0, 0, 0);
+  TestHost::SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  TestHost::SetViewportOffset(0.531250f, 0.531250f, 0, 0);
+  TestHost::SetViewportScale(0, -0, 0, 0);
 }
 
 void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-  const auto render_target_address = reinterpret_cast<uint32_t>(render_target_) & 0x03FFFFFF;
-  const auto normal_texture_address = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
 
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
   host_.SetTextureFormat(texture_format);

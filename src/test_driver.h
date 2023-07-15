@@ -48,14 +48,9 @@ class TestDriver {
 
  private:
   volatile bool running_{true};
-  // Whether tests should render once and stop (true) or continually render frames (false).
-  bool one_shot_tests_{true};
 
   const std::vector<std::shared_ptr<TestSuite>> &test_suites_;
   SDL_GameController *gamepads_[kMaxGamepads]{nullptr};
-
-  uint32_t framebuffer_width_;
-  uint32_t framebuffer_height_;
 
   TestHost &test_host_;
   std::shared_ptr<MenuItem> active_menu_;

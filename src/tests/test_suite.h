@@ -22,8 +22,9 @@ class TestSuite {
 
  public:
   TestSuite(TestHost &host, std::string output_dir, std::string suite_name);
+  virtual ~TestSuite() = default;
 
-  const std::string &Name() const { return suite_name_; };
+  [[nodiscard]] const std::string &Name() const { return suite_name_; };
 
   virtual void Initialize();
   virtual void Deinitialize();
@@ -31,7 +32,7 @@ class TestSuite {
   void DisableTests(const std::vector<std::string> &tests_to_skip);
   void SetSuspectedCrashes(const std::set<std::string> &test_names) { suspected_crashes_ = test_names; }
 
-  std::vector<std::string> TestNames() const;
+  [[nodiscard]] std::vector<std::string> TestNames() const;
   void Run(const std::string &test_name);
 
   void RunAll();

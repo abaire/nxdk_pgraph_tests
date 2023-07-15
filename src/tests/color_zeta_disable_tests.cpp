@@ -21,7 +21,6 @@ ColorZetaDisableTests::ColorZetaDisableTests(TestHost &host, std::string output_
 
 void ColorZetaDisableTests::Initialize() {
   TestSuite::Initialize();
-  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
   host_.SetCombinerControl(1);
