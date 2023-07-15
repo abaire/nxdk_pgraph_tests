@@ -2,11 +2,15 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
 #include "shaders/precalculated_vertex_shader.h"
+#include "test_host.h"
 #include "vertex_buffer.h"
+#include "xbox_math_matrix.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 static constexpr uint32_t kDiffuseSource[] = {
     NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_MATERIAL,
@@ -37,8 +41,8 @@ void MaterialAlphaTests::Initialize() {
 
   CreateGeometry();
 
-  MATRIX matrix;
-  matrix_unit(matrix);
+  matrix4_t matrix;
+  MatrixSetIdentity(matrix);
   host_.SetFixedFunctionModelViewMatrix(matrix);
   host_.SetFixedFunctionProjectionMatrix(matrix);
 }

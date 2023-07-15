@@ -3,9 +3,10 @@
 
 #include <cstdint>
 
-#include "../math3d.h"
-#include "math3d.h"
 #include "vertex_shader_program.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 class PrecalculatedVertexShader : public VertexShaderProgram {
  public:

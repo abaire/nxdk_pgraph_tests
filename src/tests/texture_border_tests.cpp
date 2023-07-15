@@ -14,6 +14,9 @@
 #include "texture_format.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
+#include "xbox_math_matrix.h"
+
+using namespace XboxMath;
 
 static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle);
 // static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
@@ -688,8 +691,8 @@ void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, ui
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
-    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetVertexShaderProgram(shader);
@@ -723,21 +726,22 @@ void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, ui
 
   auto draw = [this, &shader, width](float x, float y, float z, float r_x, float r_y, float r_z,
                                      bool include_border = false) {
-    MATRIX matrix = {0.0f};
-    VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
-    VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
-    host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
+    matrix4_t matrix = {0.0f};
+    vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
+    TestHost::BuildD3DModelViewMatrix(matrix, eye, at, up);
 
-    auto model_matrix = shader->GetModelMatrix();
-    matrix_unit(model_matrix);
-    VECTOR rotation = {r_x, r_y, r_z};
-    matrix_rotate(model_matrix, model_matrix, rotation);
-    VECTOR translation = {x, y, z};
-    matrix_translate(model_matrix, model_matrix, translation);
+    auto &model_matrix = shader->GetModelMatrix();
+    MatrixSetIdentity(model_matrix);
+    vector_t rotation = {r_x, r_y, r_z};
+    MatrixRotate(model_matrix, rotation);
+    vector_t translation = {x, y, z};
+    MatrixTranslate(model_matrix, translation);
 
-    matrix_multiply(matrix, shader->GetModelMatrix(), matrix);
-    host_.SetFixedFunctionModelViewMatrix(matrix);
+    matrix4_t mv_matrix;
+    MatrixMultMatrix(matrix, shader->GetModelMatrix(), mv_matrix);
+    host_.SetFixedFunctionModelViewMatrix(mv_matrix);
 
     shader->PrepareDraw();
 

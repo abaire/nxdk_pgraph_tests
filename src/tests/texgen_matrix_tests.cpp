@@ -12,6 +12,10 @@
 #include "texture_format.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
+#include "xbox_math_matrix.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 128;
@@ -34,105 +38,105 @@ TexgenMatrixTests::TexgenMatrixTests(TestHost &host, std::string output_dir)
     {
       std::string test_name = name + "_Identity";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_Double";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR scale = {2.0, 2.0, 2.0, 1.0};
-        matrix_scale(matrix, matrix, scale);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t scale = {2.0, 2.0, 2.0, 1.0};
+        MatrixScale(matrix, scale);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_Half";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR scale = {0.5, 0.5, 0.5, 1.0};
-        matrix_scale(matrix, matrix, scale);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t scale = {0.5, 0.5, 0.5, 1.0};
+        MatrixScale(matrix, scale);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_ShiftHPlus";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR translate = {0.5, 0.0, 0.0, 0.0};
-        matrix_translate(matrix, matrix, translate);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t translate = {0.5, 0.0, 0.0, 0.0};
+        MatrixTranslate(matrix, translate);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_ShiftHMinus";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR translate = {-0.5, 0.0, 0.0, 0.0};
-        matrix_translate(matrix, matrix, translate);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t translate = {-0.5, 0.0, 0.0, 0.0};
+        MatrixTranslate(matrix, translate);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_ShiftVPlus";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR translate = {0.0, 0.5, 0.0, 0.0};
-        matrix_translate(matrix, matrix, translate);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t translate = {0.0, 0.5, 0.0, 0.0};
+        MatrixTranslate(matrix, translate);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_ShiftVMinus";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR translate = {0.0, -0.5, 0.0, 0.0};
-        matrix_translate(matrix, matrix, translate);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t translate = {0.0, -0.5, 0.0, 0.0};
+        MatrixTranslate(matrix, translate);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_RotateX";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR rot = {M_PI * 0.5, 0.0, 0.0, 0.0};
-        matrix_rotate(matrix, matrix, rot);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t rot = {M_PI * 0.5, 0.0, 0.0, 0.0};
+        MatrixRotate(matrix, rot);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_RotateY";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR rot = {0.0, M_PI * 0.5, 0.0, 0.0};
-        matrix_rotate(matrix, matrix, rot);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t rot = {0.0, M_PI * 0.5, 0.0, 0.0};
+        MatrixRotate(matrix, rot);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_RotateZ";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix;
-        matrix_unit(matrix);
-        VECTOR rot = {0.0, 0.0, M_PI * 0.5, 0.0};
-        matrix_rotate(matrix, matrix, rot);
+        matrix4_t matrix;
+        MatrixSetIdentity(matrix);
+        vector_t rot = {0.0, 0.0, M_PI * 0.5, 0.0};
+        MatrixRotate(matrix, rot);
         Test(test_name, matrix, mode);
       };
     }
     {
       std::string test_name = name + "_Arbitrary";
       tests_[test_name] = [this, test_name, mode]() {
-        MATRIX matrix = {
+        matrix4_t matrix = {
             0.7089392, 0.0, 0.515, 0.0, 0.0, 1.2603364, 0.49, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
         };
         Test(test_name, matrix, mode);
@@ -177,7 +181,7 @@ void TexgenMatrixTests::CreateGeometry() {
   buffer->DefineBiTri(0, left, top, right, bottom);
 }
 
-void TexgenMatrixTests::Test(const std::string &test_name, MATRIX matrix, TextureStage::TexGen gen_mode) {
+void TexgenMatrixTests::Test(const std::string &test_name, const matrix4_t &matrix, TextureStage::TexGen gen_mode) {
   host_.PrepareDraw(0xFE202020);
 
   auto &texture_stage = host_.GetTextureStage(0);
@@ -185,13 +189,13 @@ void TexgenMatrixTests::Test(const std::string &test_name, MATRIX matrix, Textur
   texture_stage.SetTexgenT(gen_mode);
   texture_stage.SetTexgenR(gen_mode);
   texture_stage.SetTextureMatrixEnable(true);
-  matrix_copy(texture_stage.GetTextureMatrix(), matrix);
+  MatrixCopyMatrix(texture_stage.GetTextureMatrix(), matrix);
 
   host_.SetupTextureStages();
   host_.DrawArrays();
 
   pb_print("%s\n", test_name.c_str());
-  const float *val = texture_stage.GetTextureMatrix();
+  const float *val = texture_stage.GetTextureMatrix()[0];
   for (auto i = 0; i < 4; ++i, val += 4) {
     pb_print_with_floats("%.3f %.3f %.3f %.3f\n", val[0], val[1], val[2], val[3]);
   }

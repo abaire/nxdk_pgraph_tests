@@ -8,11 +8,14 @@
 #include <utility>
 
 #include "debug_output.h"
-#include "math3d.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
+#include "xbox_math_matrix.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 static constexpr float kSize = 1.0f;
 
@@ -99,8 +102,8 @@ void TextureCubemapTests::Initialize() {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
-    VECTOR camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetVertexShaderProgram(shader);
@@ -150,21 +153,22 @@ void TextureCubemapTests::TestCubemap() {
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
-    MATRIX matrix = {0.0f};
-    VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
-    VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
-    host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
+    matrix4_t matrix = {0.0f};
+    vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
+    TestHost::BuildD3DModelViewMatrix(matrix, eye, at, up);
 
-    auto model_matrix = shader->GetModelMatrix();
-    matrix_unit(model_matrix);
-    VECTOR rotation = {r_x, r_y, r_z};
-    matrix_rotate(model_matrix, model_matrix, rotation);
-    VECTOR translation = {x, y, z};
-    matrix_translate(model_matrix, model_matrix, translation);
+    auto &model_matrix = shader->GetModelMatrix();
+    MatrixSetIdentity(model_matrix);
+    vector_t rotation = {r_x, r_y, r_z};
+    MatrixRotate(model_matrix, rotation);
+    vector_t translation = {x, y, z};
+    MatrixTranslate(model_matrix, translation);
 
-    matrix_multiply(matrix, shader->GetModelMatrix(), matrix);
-    host_.SetFixedFunctionModelViewMatrix(matrix);
+    matrix4_t mv_matrix;
+    MatrixMultMatrix(matrix, shader->GetModelMatrix(), mv_matrix);
+    host_.SetFixedFunctionModelViewMatrix(mv_matrix);
 
     shader->PrepareDraw();
 
@@ -235,21 +239,22 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   host_.PrepareDraw(0xFE131313);
 
   auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
-    MATRIX matrix = {0.0f};
-    VECTOR eye{0.0f, 0.0f, -7.0f, 1.0f};
-    VECTOR at{0.0f, 0.0f, 0.0f, 1.0f};
-    VECTOR up{0.0f, 1.0f, 0.0f, 1.0f};
+    matrix4_t matrix = {0.0f};
+    vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
     host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
 
-    auto model_matrix = shader->GetModelMatrix();
-    matrix_unit(model_matrix);
-    VECTOR rotation = {r_x, r_y, r_z};
-    matrix_rotate(model_matrix, model_matrix, rotation);
-    VECTOR translation = {x, y, z};
-    matrix_translate(model_matrix, model_matrix, translation);
+    auto &model_matrix = shader->GetModelMatrix();
+    MatrixSetIdentity(model_matrix);
+    vector_t rotation = {r_x, r_y, r_z};
+    MatrixRotate(model_matrix, rotation);
+    vector_t translation = {x, y, z};
+    MatrixTranslate(model_matrix, translation);
 
-    matrix_multiply(matrix, model_matrix, matrix);
-    host_.SetFixedFunctionModelViewMatrix(matrix);
+    matrix4_t mv_matrix;
+    MatrixMultMatrix(matrix, model_matrix, mv_matrix);
+    host_.SetFixedFunctionModelViewMatrix(mv_matrix);
 
     auto inv_projection = host_.GetFixedFunctionInverseCompositeMatrix();
     shader->PrepareDraw();
@@ -264,20 +269,20 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
         const float *vertex = kCubePoints[index];
         const float *normal_st = normals[i];
         // These would be necessary if the method actually used eye-relative reflection.
-        //        VECTOR padded_vertex = {vertex[0], vertex[1], vertex[2], 1.0f};
+        //        vector_t padded_vertex = {vertex[0], vertex[1], vertex[2], 1.0f};
         //        vector_apply(padded_vertex, padded_vertex, model_matrix);
         //        padded_vertex[0] /= padded_vertex[3];
         //        padded_vertex[1] /= padded_vertex[3];
         //        padded_vertex[2] /= padded_vertex[3];
         //        padded_vertex[3] = 1.0f;
-        //        VECTOR eye_vec = {0.0f};
+        //        vector_t eye_vec = {0.0f};
         //        vector_subtract(eye_vec, eye, padded_vertex);
         //        vector_normalize(eye_vec);
 
         host_.SetTexCoord0(normal_st[0], normal_st[1]);
-        host_.SetTexCoord1(inv_projection[_11], inv_projection[_12], inv_projection[_13], 1);
-        host_.SetTexCoord2(inv_projection[_21], inv_projection[_22], inv_projection[_23], 0);
-        host_.SetTexCoord3(inv_projection[_31], inv_projection[_32], inv_projection[_33], 0);
+        host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], 1);
+        host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], 0);
+        host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], 0);
         host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
       }
     }

@@ -485,8 +485,8 @@ void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool
                                   host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetDepthBufferFloatMode(float_depth);
 
-  auto project_point = [this](VECTOR out, const VECTOR in) { host_.ProjectPoint(out, in); };
-  auto unproject_point = [this](VECTOR out, const VECTOR in, float z) { host_.UnprojectPoint(out, in, z); };
+  auto project_point = [this](vector_t &out, const vector_t &in) { host_.ProjectPoint(out, in); };
+  auto unproject_point = [this](vector_t &out, const vector_t &in, float z) { host_.UnprojectPoint(out, in, z); };
   TestProjected(depth_format, texture_format, mode, shadow_comp_function, min_val, max_val, ref_val, project_point,
                 unproject_point, name);
 }
@@ -502,8 +502,8 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
-    VECTOR camera_position = {0.0f, 0.0f, kCameraZ, 1.0f};
-    VECTOR camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    vector_t camera_position = {0.0f, 0.0f, kCameraZ, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);
   }
   host_.SetVertexShaderProgram(shader);
@@ -511,19 +511,17 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
                                   host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetDepthBufferFloatMode(float_depth);
 
-  auto project_point = [shader](VECTOR out, const VECTOR in) { shader->ProjectPoint(out, in); };
-  auto unproject_point = [shader](VECTOR out, const VECTOR in, float z) { shader->UnprojectPoint(out, in, z); };
+  auto project_point = [shader](vector_t &out, const vector_t &in) { shader->ProjectPoint(out, in); };
+  auto unproject_point = [shader](vector_t &out, const vector_t &in, float z) { shader->UnprojectPoint(out, in, z); };
 
   TestProjected(depth_format, texture_format, mode, shadow_comp_function, min_val, max_val, ref_val, project_point,
                 unproject_point, name);
 }
 
-void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t texture_format,
-                                                 TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
-                                                 float min_val, float max_val, float ref_val,
-                                                 std::function<void(VECTOR, const VECTOR)> project_point,
-                                                 std::function<void(VECTOR, const VECTOR, float)> unproject_point,
-                                                 const std::string &name) {
+void TextureShadowComparatorTests::TestProjected(
+    uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
+    float min_val, float max_val, float ref_val, std::function<void(vector_t &, const vector_t &)> project_point,
+    std::function<void(vector_t &, const vector_t &, float)> unproject_point, const std::string &name) {
   auto p = pb_begin();
   // Depth test must be enabled or nothing will be written to the depth target.
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
@@ -558,26 +556,26 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
     float z_top = min_val;
     float z_bottom = max_val;
 
-    VECTOR ul;
-    VECTOR screen_point = {sLeft, sTop, 0.0f, 1.0f};
+    vector_t ul;
+    vector_t screen_point = {sLeft, sTop, 0.0f, 1.0f};
     unproject_point(ul, screen_point, z_top);
 
-    VECTOR ur;
-    screen_point[_X] = sRight;
+    vector_t ur;
+    screen_point[0] = sRight;
     unproject_point(ur, screen_point, z_top);
 
-    VECTOR lr;
-    screen_point[_Y] = sBottom;
+    vector_t lr;
+    screen_point[1] = sBottom;
     unproject_point(lr, screen_point, z_bottom);
 
-    VECTOR ll;
-    screen_point[_X] = sLeft;
+    vector_t ll;
+    screen_point[0] = sLeft;
     unproject_point(ll, screen_point, z_bottom);
 
-    host_.SetVertex(ul[_X], ul[_Y], z_top, 1.0f);
-    host_.SetVertex(ur[_X], ur[_Y], z_top, 1.0f);
-    host_.SetVertex(lr[_X], lr[_Y], z_bottom, 1.0f);
-    host_.SetVertex(ll[_X], ll[_Y], z_bottom, 1.0f);
+    host_.SetVertex(ul[0], ul[1], z_top, 1.0f);
+    host_.SetVertex(ur[0], ur[1], z_top, 1.0f);
+    host_.SetVertex(lr[0], lr[1], z_bottom, 1.0f);
+    host_.SetVertex(ll[0], ll[1], z_bottom, 1.0f);
     host_.End();
   }
 
@@ -587,26 +585,26 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
   {
     auto box = [this, &unproject_point](float left, float top, float right, float bottom, float z) {
       host_.SetDiffuse(0xFFAA11AA);
-      VECTOR ul;
-      VECTOR screen_point = {left, top, 0.0f, 1.0f};
+      vector_t ul;
+      vector_t screen_point = {left, top, 0.0f, 1.0f};
       unproject_point(ul, screen_point, z);
 
-      VECTOR ur;
-      screen_point[_X] = right;
+      vector_t ur;
+      screen_point[0] = right;
       unproject_point(ur, screen_point, z);
 
-      VECTOR lr;
-      screen_point[_Y] = bottom;
+      vector_t lr;
+      screen_point[1] = bottom;
       unproject_point(lr, screen_point, z);
 
-      VECTOR ll;
-      screen_point[_X] = left;
+      vector_t ll;
+      screen_point[0] = left;
       unproject_point(ll, screen_point, z);
 
-      host_.SetVertex(ul[_X], ul[_Y], z, 1.0f);
-      host_.SetVertex(ur[_X], ur[_Y], z, 1.0f);
-      host_.SetVertex(lr[_X], lr[_Y], z, 1.0f);
-      host_.SetVertex(ll[_X], ll[_Y], z, 1.0f);
+      host_.SetVertex(ul[0], ul[1], z, 1.0f);
+      host_.SetVertex(ur[0], ur[1], z, 1.0f);
+      host_.SetVertex(lr[0], lr[1], z, 1.0f);
+      host_.SetVertex(ll[0], ll[1], z, 1.0f);
     };
     auto left = static_cast<float>(layout.first_box_left);
     const auto top = static_cast<float>(layout.top);
@@ -677,12 +675,12 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
   float projected_ref_val = ref_val;
   {
     // The comparison value needs to go through the same projection as the depth values themselves.
-    VECTOR projected_point;
-    VECTOR world_point = {0.0f, 0.0f, projected_ref_val, 1.0f};
+    vector_t projected_point;
+    vector_t world_point = {0.0f, 0.0f, projected_ref_val, 1.0f};
     project_point(projected_point, world_point);
 
     // There is a half texel offset difference between the shadow lookup and the actual location.
-    projected_ref_val = projected_point[_Z];
+    projected_ref_val = projected_point[2];
   }
 
   {
@@ -692,28 +690,28 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
     sBottom = host_.GetFramebufferHeightF() - sTop;
 
     const float z = 1.5f;
-    VECTOR ul;
-    VECTOR screen_point = {sLeft, sTop, 0.0f, 1.0f};
+    vector_t ul;
+    vector_t screen_point = {sLeft, sTop, 0.0f, 1.0f};
     unproject_point(ul, screen_point, z);
 
-    VECTOR lr;
-    screen_point[_X] = sRight;
-    screen_point[_Y] = sBottom;
+    vector_t lr;
+    screen_point[0] = sRight;
+    screen_point[1] = sBottom;
     unproject_point(lr, screen_point, z);
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFF2277FF);
     host_.SetTexCoord0(0.0f, 0.0f, projected_ref_val, 1.0f);
-    host_.SetVertex(ul[_X], ul[_Y], z, 1.0f);
+    host_.SetVertex(ul[0], ul[1], z, 1.0f);
 
     host_.SetTexCoord0(host_.GetFramebufferWidthF(), 0.0f, projected_ref_val, 1.0f);
-    host_.SetVertex(lr[_X], ul[_Y], z, 1.0f);
+    host_.SetVertex(lr[0], ul[1], z, 1.0f);
 
     host_.SetTexCoord0(host_.GetFramebufferWidthF(), host_.GetFramebufferHeightF(), projected_ref_val, 1.0f);
-    host_.SetVertex(lr[_X], lr[_Y], z, 1.0f);
+    host_.SetVertex(lr[0], lr[1], z, 1.0f);
 
     host_.SetTexCoord0(0.0, host_.GetFramebufferHeightF(), projected_ref_val, 1.0f);
-    host_.SetVertex(ul[_X], lr[_Y], z, 1.0f);
+    host_.SetVertex(ul[0], lr[1], z, 1.0f);
     host_.End();
   }
 
@@ -742,19 +740,19 @@ void TextureShadowComparatorTests::TestProjected(uint32_t depth_format, uint32_t
       host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
       host_.SetDiffuse(color);
 
-      VECTOR pt;
+      vector_t pt;
 
-      VECTOR screen_point = {left + left_offset, bottom, 0.0f, 1.0f};
+      vector_t screen_point = {left + left_offset, bottom, 0.0f, 1.0f};
       unproject_point(pt, screen_point, 0.0f);
       host_.SetVertex(pt);
 
-      screen_point[_X] = left + mid_offset;
-      screen_point[_Y] = top;
+      screen_point[0] = left + mid_offset;
+      screen_point[1] = top;
       unproject_point(pt, screen_point, 0.0f);
       host_.SetVertex(pt);
 
-      screen_point[_X] = left + right_offset;
-      screen_point[_Y] = bottom;
+      screen_point[0] = left + right_offset;
+      screen_point[1] = bottom;
       unproject_point(pt, screen_point, 0.0f);
       host_.SetVertex(pt);
 

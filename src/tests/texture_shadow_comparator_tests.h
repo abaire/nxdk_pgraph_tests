@@ -33,8 +33,8 @@ class TextureShadowComparatorTests : public TestSuite {
 
   void TestProjected(uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode,
                      uint32_t shadow_comp_function, float min_val, float max_val, float ref_val,
-                     std::function<void(VECTOR, const VECTOR)> project_point,
-                     std::function<void(VECTOR, const VECTOR, float)> unproject_point, const std::string &name);
+                     std::function<void(vector_t &, const vector_t &)> project_point,
+                     std::function<void(vector_t &, const vector_t &, float)> unproject_point, const std::string &name);
 
  private:
   struct s_CtxDma texture_target_ctx_ {};

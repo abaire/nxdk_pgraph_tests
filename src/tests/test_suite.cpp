@@ -9,6 +9,10 @@
 #include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
+#include "xbox_math_matrix.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -149,8 +153,8 @@ void TestSuite::Initialize() {
 
   p = pb_begin();
 
-  MATRIX identity_matrix;
-  matrix_unit(identity_matrix);
+  matrix4_t identity_matrix;
+  MatrixSetIdentity(identity_matrix);
   for (auto i = 0; i < 4; ++i) {
     auto& stage = host_.GetTextureStage(i);
     stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);

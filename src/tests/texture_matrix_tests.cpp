@@ -12,6 +12,7 @@
 #include "texture_format.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
+#include "xbox_math_matrix.h"
 
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 128;
@@ -21,105 +22,105 @@ TextureMatrixTests::TextureMatrixTests(TestHost &host, std::string output_dir)
   {
     constexpr char kTestName[] = "Identity";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "Double";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR scale = {2.0, 2.0, 2.0, 1.0};
-      matrix_scale(matrix, matrix, scale);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t scale = {2.0, 2.0, 2.0, 1.0};
+      MatrixScale(matrix, scale);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "Half";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR scale = {0.5, 0.5, 0.5, 1.0};
-      matrix_scale(matrix, matrix, scale);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t scale = {0.5, 0.5, 0.5, 1.0};
+      MatrixScale(matrix, scale);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "ShiftHPlus";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR translate = {0.5, 0.0, 0.0, 0.0};
-      matrix_translate(matrix, matrix, translate);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t translate = {0.5, 0.0, 0.0, 0.0};
+      MatrixTranslate(matrix, translate);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "ShiftHMinus";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR translate = {-0.5, 0.0, 0.0, 0.0};
-      matrix_translate(matrix, matrix, translate);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t translate = {-0.5, 0.0, 0.0, 0.0};
+      MatrixTranslate(matrix, translate);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "ShiftVPlus";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR translate = {0.0, 0.5, 0.0, 0.0};
-      matrix_translate(matrix, matrix, translate);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t translate = {0.0, 0.5, 0.0, 0.0};
+      MatrixTranslate(matrix, translate);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "ShiftVMinus";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR translate = {0.0, -0.5, 0.0, 0.0};
-      matrix_translate(matrix, matrix, translate);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t translate = {0.0, -0.5, 0.0, 0.0};
+      MatrixTranslate(matrix, translate);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "RotateX";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR rot = {M_PI * 0.5, 0.0, 0.0, 0.0};
-      matrix_rotate(matrix, matrix, rot);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t rot = {M_PI * 0.5, 0.0, 0.0, 0.0};
+      MatrixRotate(matrix, rot);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "RotateY";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR rot = {0.0, M_PI * 0.5, 0.0, 0.0};
-      matrix_rotate(matrix, matrix, rot);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t rot = {0.0, M_PI * 0.5, 0.0, 0.0};
+      MatrixRotate(matrix, rot);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "RotateZ";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix;
-      matrix_unit(matrix);
-      VECTOR rot = {0.0, 0.0, M_PI * 0.5, 0.0};
-      matrix_rotate(matrix, matrix, rot);
+      matrix4_t matrix;
+      MatrixSetIdentity(matrix);
+      vector_t rot = {0.0, 0.0, M_PI * 0.5, 0.0};
+      MatrixRotate(matrix, rot);
       Test(kTestName, matrix);
     };
   }
   {
     constexpr char kTestName[] = "Arbitrary";
     tests_[kTestName] = [this, kTestName]() {
-      MATRIX matrix = {
+      matrix4_t matrix = {
           0.7089392, 0.0, 0.515, 0.0, 0.0, 1.2603364, 0.49, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
       };
       Test(kTestName, matrix);
@@ -166,7 +167,7 @@ void TextureMatrixTests::CreateGeometry() {
   buffer->DefineBiTri(0, left, top, right, bottom);
 }
 
-void TextureMatrixTests::Test(const char *test_name, MATRIX matrix) {
+void TextureMatrixTests::Test(const char *test_name, const matrix4_t &matrix) {
   host_.PrepareDraw(0xFE202020);
 
   auto &texture_stage = host_.GetTextureStage(0);
@@ -177,7 +178,7 @@ void TextureMatrixTests::Test(const char *test_name, MATRIX matrix) {
 
   pb_print("%s\n", test_name);
 
-  const float *val = matrix;
+  const float *val = matrix[0];
   for (auto i = 0; i < 4; ++i, val += 4) {
     pb_print_with_floats("%.3f %.3f %.3f %.3f\n", val[0], val[1], val[2], val[3]);
   }

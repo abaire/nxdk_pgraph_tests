@@ -245,10 +245,10 @@ void VertexBuffer::DefineBiTri(uint32_t start_index, float left, float top, floa
   vb[4] = temp;
 }
 
-void VertexBuffer::DefineBiTri(uint32_t start_index, const VECTOR ul, const VECTOR ll, const VECTOR lr, const VECTOR ur,
-                               const Color &ul_diffuse, const Color &ll_diffuse, const Color &lr_diffuse,
-                               const Color &ur_diffuse, const Color &ul_specular, const Color &ll_specular,
-                               const Color &lr_specular, const Color &ur_specular) {
+void VertexBuffer::DefineBiTri(uint32_t start_index, const vector_t ul, const vector_t ll, const vector_t lr,
+                               const vector_t ur, const Color &ul_diffuse, const Color &ll_diffuse,
+                               const Color &lr_diffuse, const Color &ur_diffuse, const Color &ul_specular,
+                               const Color &ll_specular, const Color &lr_specular, const Color &ur_specular) {
   ASSERT(start_index <= (num_vertices_ - 6) && "Invalid start_index, need at least 6 vertices to define quad.");
 
   cache_valid_ = false;
@@ -296,13 +296,13 @@ void VertexBuffer::DefineBiTri(uint32_t start_index, const VECTOR ul, const VECT
     vb[index].specular[3] = specular.a;
   };
 
-  set(0, ul[_X], ul[_Y], ul[_Z], 0.0f, 0.0f, ul_diffuse, ul_specular);
-  set(1, lr[_X], lr[_Y], lr[_Z], 1.0f, 1.0f, lr_diffuse, lr_specular);
-  set(2, ur[_X], ur[_Y], ur[_Z], 1.0f, 0.0f, ur_diffuse, ur_specular);
+  set(0, ul[0], ul[1], ul[2], 0.0f, 0.0f, ul_diffuse, ul_specular);
+  set(1, lr[0], lr[1], lr[2], 1.0f, 1.0f, lr_diffuse, lr_specular);
+  set(2, ur[0], ur[1], ur[2], 1.0f, 0.0f, ur_diffuse, ur_specular);
 
-  set(3, ul[_X], ul[_Y], ul[_Z], 0.0f, 0.0f, ul_diffuse, ul_specular);
-  set(4, ll[_X], ll[_Y], ll[_Z], 0.0f, 1.0f, ll_diffuse, ll_specular);
-  set(5, lr[_X], lr[_Y], lr[_Z], 1.0f, 1.0f, lr_diffuse, lr_specular);
+  set(3, ul[0], ul[1], ul[2], 0.0f, 0.0f, ul_diffuse, ul_specular);
+  set(4, ll[0], ll[1], ll[2], 0.0f, 1.0f, ll_diffuse, ll_specular);
+  set(5, lr[0], lr[1], lr[2], 1.0f, 1.0f, lr_diffuse, lr_specular);
 }
 
 void VertexBuffer::SetDiffuse(uint32_t vertex_index, const Color &color) {

@@ -7,12 +7,14 @@
 #include <cstdint>
 #include <memory>
 
-#include "math3d.h"
 #include "nxdk_ext.h"
 #include "string"
 #include "texture_format.h"
 #include "texture_stage.h"
 #include "vertex_buffer.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 class VertexShaderProgram;
 struct Vertex;
@@ -335,17 +337,17 @@ class TestHost {
   std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
 
   // Generates a D3D-style model view matrix.
-  static void BuildD3DModelViewMatrix(MATRIX matrix, const VECTOR eye, const VECTOR at, const VECTOR up);
+  static void BuildD3DModelViewMatrix(matrix4_t &matrix, const vector_t &eye, const vector_t &at, const vector_t &up);
 
   // Gets a D3D-style matrix suitable for a projection + viewport transform.
-  void BuildD3DProjectionViewportMatrix(MATRIX result, float fov, float z_near, float z_far) const;
+  void BuildD3DProjectionViewportMatrix(matrix4_t &result, float fov, float z_near, float z_far) const;
 
   // Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin)
-  static void BuildDefaultXDKModelViewMatrix(MATRIX matrix);
+  static void BuildDefaultXDKModelViewMatrix(matrix4_t &matrix);
   // Gets a reasonable default projection matrix (fov = PI/4, near = 1, far = 200)
-  void BuildDefaultXDKProjectionMatrix(MATRIX matrix) const;
+  void BuildDefaultXDKProjectionMatrix(matrix4_t &matrix) const;
 
-  const float *GetFixedFunctionInverseCompositeMatrix() const { return fixed_function_inverse_composite_matrix_; }
+  const matrix4_t &GetFixedFunctionInverseCompositeMatrix() const { return fixed_function_inverse_composite_matrix_; }
 
   // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -354,10 +356,10 @@ class TestHost {
   void SetDefaultViewportAndFixedFunctionMatrices();
 
   // Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
-  void ProjectPoint(VECTOR result, const VECTOR world_point) const;
+  void ProjectPoint(vector_t &result, const vector_t &world_point) const;
 
-  void UnprojectPoint(VECTOR result, const VECTOR screen_point) const;
-  void UnprojectPoint(VECTOR result, const VECTOR screen_point, float world_z) const;
+  void UnprojectPoint(vector_t &result, const vector_t &screen_point) const;
+  void UnprojectPoint(vector_t &result, const vector_t &screen_point, float world_z) const;
 
   static void SetWindowClipExclusive(bool exclusive);
   static void SetWindowClip(uint32_t right, uint32_t bottom, uint32_t left = 0, uint32_t top = 0, uint32_t region = 0);
@@ -365,10 +367,10 @@ class TestHost {
   static void SetViewportOffset(float x, float y, float z, float w);
   static void SetViewportScale(float x, float y, float z, float w);
 
-  void SetFixedFunctionModelViewMatrix(const MATRIX model_matrix);
-  void SetFixedFunctionProjectionMatrix(const MATRIX projection_matrix);
-  inline const float *GetFixedFunctionModelViewMatrix() const { return fixed_function_model_view_matrix_; }
-  inline const float *GetFixedFunctionProjectionMatrix() const { return fixed_function_projection_matrix_; }
+  void SetFixedFunctionModelViewMatrix(const matrix4_t model_matrix);
+  void SetFixedFunctionProjectionMatrix(const matrix4_t projection_matrix);
+  inline const matrix4_t &GetFixedFunctionModelViewMatrix() const { return fixed_function_model_view_matrix_; }
+  inline const matrix4_t &GetFixedFunctionProjectionMatrix() const { return fixed_function_projection_matrix_; }
 
   // Start the process of rendering an inline-defined primitive (specified via SetXXXX methods below).
   // Note that End() must be called to trigger rendering, and that SetVertex() triggers the creation of a vertex.
@@ -380,7 +382,7 @@ class TestHost {
   // Trigger creation of a vertex, applying the last set attributes.
   void SetVertex(float x, float y, float z, float w) const;
   // Trigger creation of a vertex, applying the last set attributes.
-  inline void SetVertex(const VECTOR pt) const { SetVertex(pt[_X], pt[_Y], pt[_Z], pt[_W]); }
+  inline void SetVertex(const vector_t pt) const { SetVertex(pt[0], pt[1], pt[2], pt[3]); }
 
   void SetWeight(float w) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
@@ -597,10 +599,10 @@ class TestHost {
     MATRIX_MODE_USER,
   };
   FixedFunctionMatrixSetting fixed_function_matrix_mode_{MATRIX_MODE_DEFAULT_NXDK};
-  MATRIX fixed_function_model_view_matrix_{};
-  MATRIX fixed_function_projection_matrix_{};
-  MATRIX fixed_function_composite_matrix_{};
-  MATRIX fixed_function_inverse_composite_matrix_{};
+  matrix4_t fixed_function_model_view_matrix_{};
+  matrix4_t fixed_function_projection_matrix_{};
+  matrix4_t fixed_function_composite_matrix_{};
+  matrix4_t fixed_function_inverse_composite_matrix_{};
 
   bool save_results_{true};
 

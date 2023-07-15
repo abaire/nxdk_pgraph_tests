@@ -6,6 +6,8 @@
 
 #include "pbkit_ext.h"
 
+using namespace XboxMath;
+
 void VertexShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const {
   uint32_t *p;
   int i;
@@ -100,7 +102,7 @@ void VertexShaderProgram::SetTransformConstantBlock(uint32_t slot, const uint32_
   uniform_upload_required_ = true;
 }
 
-void VertexShaderProgram::SetBaseUniform4x4F(uint32_t slot, const float *value) {
+void VertexShaderProgram::SetBaseUniform4x4F(uint32_t slot, const matrix4_t &value) {
   SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
 }
 
@@ -122,7 +124,7 @@ void VertexShaderProgram::SetBaseUniformF(uint32_t slot, float x, float y, float
   SetBaseUniform4F(slot, vector);
 }
 
-void VertexShaderProgram::SetUniform4x4F(uint32_t slot, const float *value) {
+void VertexShaderProgram::SetUniform4x4F(uint32_t slot, const XboxMath::matrix4_t &value) {
   SetUniformBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
 }
 

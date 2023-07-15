@@ -115,20 +115,20 @@ void DepthFormatFixedFunctionTests::CreateGeometry() {
         lr.SetGrey(right_color);
         ur.SetGrey(right_color);
 
-        VECTOR ul_world;
-        VECTOR screen_point = {x, y, 0.0f, 1.0f};
+        vector_t ul_world;
+        vector_t screen_point = {x, y, 0.0f, 1.0f};
         host_.UnprojectPoint(ul_world, screen_point, z_left);
 
-        VECTOR ur_world;
-        screen_point[_X] = x + kSmallSize;
+        vector_t ur_world;
+        screen_point[0] = x + kSmallSize;
         host_.UnprojectPoint(ur_world, screen_point, z_right);
 
-        VECTOR lr_world;
-        screen_point[_Y] = y + kSmallSize;
+        vector_t lr_world;
+        screen_point[1] = y + kSmallSize;
         host_.UnprojectPoint(lr_world, screen_point, z_right);
 
-        VECTOR ll_world;
-        screen_point[_X] = x;
+        vector_t ll_world;
+        screen_point[0] = x;
         host_.UnprojectPoint(ll_world, screen_point, z_left);
 
         buffer->DefineBiTri(idx++, ul_world, ur_world, lr_world, ll_world, ul, ll, lr, ur);
@@ -154,20 +154,20 @@ void DepthFormatFixedFunctionTests::CreateGeometry() {
 
     PrintMsg("Bottom quad: %g -> %g\n", z_left, z_right);
 
-    VECTOR ul_world;
-    VECTOR screen_point = {kLeft + 4, kBottom - 10, 0.0f, 1.0f};
+    vector_t ul_world;
+    vector_t screen_point = {kLeft + 4, kBottom - 10, 0.0f, 1.0f};
     host_.UnprojectPoint(ul_world, screen_point, z_left);
 
-    VECTOR ur_world;
-    screen_point[_X] = kRight - 20;
+    vector_t ur_world;
+    screen_point[0] = kRight - 20;
     host_.UnprojectPoint(ur_world, screen_point, z_right);
 
-    VECTOR lr_world;
-    screen_point[_Y] = kBottom - 5;
+    vector_t lr_world;
+    screen_point[1] = kBottom - 5;
     host_.UnprojectPoint(lr_world, screen_point, z_right);
 
-    VECTOR ll_world;
-    screen_point[_X] = kLeft + 4;
+    vector_t ll_world;
+    screen_point[0] = kLeft + 4;
     host_.UnprojectPoint(ll_world, screen_point, z_left);
 
     buffer->DefineBiTri(idx++, ul_world, ur_world, lr_world, ll_world, ul, ll, lr, ur);
@@ -185,20 +185,20 @@ void DepthFormatFixedFunctionTests::CreateGeometry() {
 
     PrintMsg("Right quad: %g -> %g\n", z_top, z_bottom);
 
-    VECTOR ul_world;
-    VECTOR screen_point = {kRight - 10, kTop + 5, 0.0f, 1.0f};
+    vector_t ul_world;
+    vector_t screen_point = {kRight - 10, kTop + 5, 0.0f, 1.0f};
     host_.UnprojectPoint(ul_world, screen_point, z_top);
 
-    VECTOR ur_world;
-    screen_point[_X] = kRight - 2;
+    vector_t ur_world;
+    screen_point[0] = kRight - 2;
     host_.UnprojectPoint(ur_world, screen_point, z_top);
 
-    VECTOR lr_world;
-    screen_point[_Y] = kBottom - 5;
+    vector_t lr_world;
+    screen_point[1] = kBottom - 5;
     host_.UnprojectPoint(lr_world, screen_point, z_bottom);
 
-    VECTOR ll_world;
-    screen_point[_X] = kRight - 10;
+    vector_t ll_world;
+    screen_point[0] = kRight - 10;
     host_.UnprojectPoint(ll_world, screen_point, z_bottom);
 
     buffer->DefineBiTri(idx++, ul_world, ur_world, lr_world, ll_world, ul, ll, lr, ur);
@@ -215,20 +215,20 @@ void DepthFormatFixedFunctionTests::CreateGeometry() {
     float top_z = bottom_z * 2.0f / 3.0f;
     PrintMsg("Big quad: %g -> %g\n", top_z, bottom_z);
 
-    VECTOR ul_world;
-    VECTOR screen_point = {kLeft, kTop, 0.0f, 1.0f};
+    vector_t ul_world;
+    vector_t screen_point = {kLeft, kTop, 0.0f, 1.0f};
     host_.UnprojectPoint(ul_world, screen_point, top_z);
 
-    VECTOR ur_world;
-    screen_point[_X] = kRight;
+    vector_t ur_world;
+    screen_point[0] = kRight;
     host_.UnprojectPoint(ur_world, screen_point, top_z);
 
-    VECTOR lr_world;
-    screen_point[_Y] = kBottom;
+    vector_t lr_world;
+    screen_point[1] = kBottom;
     host_.UnprojectPoint(lr_world, screen_point, bottom_z);
 
-    VECTOR ll_world;
-    screen_point[_X] = kLeft;
+    vector_t ll_world;
+    screen_point[0] = kLeft;
     host_.UnprojectPoint(ll_world, screen_point, bottom_z);
 
     buffer->DefineBiTri(idx++, ul_world, ur_world, lr_world, ll_world, ul, ll, lr, ur);

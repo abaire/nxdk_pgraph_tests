@@ -1,16 +1,19 @@
 #include "texture_stage.h"
 
 #include "debug_output.h"
-#include "math3d.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "swizzle.h"
+#include "xbox_math_matrix.h"
+#include "xbox_math_types.h"
+
+using namespace XboxMath;
 
 // bitscan forward
 static int bsf(int val){__asm bsf eax, val}
 
 TextureStage::TextureStage() {
-  matrix_unit(texture_matrix_);
+  MatrixSetIdentity(texture_matrix_);
 }
 
 bool TextureStage::RequiresColorspaceConversion() const {
@@ -111,7 +114,7 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET, bump_env_offset);
   p = pb_push1(p, NV097_SET_TEXTURE_MATRIX_ENABLE + (4 * stage_), texture_matrix_enable_);
   if (texture_matrix_enable_) {
-    p = pb_push_4x4_matrix(p, NV097_SET_TEXTURE_MATRIX + 64 * stage_, texture_matrix_);
+    p = pb_push_4x4_matrix(p, NV097_SET_TEXTURE_MATRIX + 64 * stage_, texture_matrix_[0]);
   }
 
   p = pb_push1(p, NV097_SET_TEXGEN_S, texgen_s_);
