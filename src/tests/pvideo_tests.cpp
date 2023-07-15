@@ -28,7 +28,8 @@ static constexpr const char kPALIntoNTSC[] = "PAL into NTSC overlay";
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "PVIDEO") {
   tests_[kPALIntoNTSC] = [this]() { TestPALIntoNTSC(); };
   tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
-  tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
+  // This seems to permanently kill video output on 1.0 devkit.
+  //  tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
 
   tests_[kSizeInMaxUnity] = [this]() { TestSizeInMaxUnityDeltas(); };
   tests_[kSizeInMaxLarge] = [this]() { TestSizeInMaxLargeDelta(); };
