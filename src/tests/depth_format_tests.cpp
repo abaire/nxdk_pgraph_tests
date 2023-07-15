@@ -10,15 +10,13 @@
 #include "vertex_buffer.h"
 
 static constexpr uint32_t kF16MaxFixedRepresentation = 0x0000FFFF;
-// static constexpr uint32_t kF24MaxFixedRepresentation = 0x00FEFFFF;
+static constexpr uint32_t kF24MaxFixedRepresentation = 0x00FEFFFF;
 
 constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
     {NV097_SET_SURFACE_FORMAT_ZETA_Z16, 0x0000FFFF, false},
     {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, 0x00FFFFFF, false},
     {NV097_SET_SURFACE_FORMAT_ZETA_Z16, kF16MaxFixedRepresentation, true},
-
-    // TODO: Enable when https://github.com/mborgerson/xemu/issues/322 is resolved.
-    //    {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, kF24MaxFixedRepresentation, true},
+    {NV097_SET_SURFACE_FORMAT_ZETA_Z24S8, kF24MaxFixedRepresentation, true},
 };
 
 constexpr uint32_t kNumDepthTests = 48;
