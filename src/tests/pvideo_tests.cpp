@@ -2,7 +2,10 @@
 
 // Note: pbkit eats any PVIDEO interrupts in `DPC`, so they cannot be used to feed the buffer.
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
+#pragma clang diagnostic pop
 
 #include "debug_output.h"
 #include "shaders/precalculated_vertex_shader.h"
@@ -253,12 +256,12 @@ void PvideoTests::TestAlternateStopBehavior() {
 
   DbgPrint("Immediately stopping video overlay with unknown registers\n");
 
-//  const uint32_t NV_PVIDEO_UNKNOWN_88 = 0x00008088;
-//  const uint32_t NV_PVIDEO_UNKNOWN_8C = 0x0000808C;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
-//  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
+  //  const uint32_t NV_PVIDEO_UNKNOWN_88 = 0x00008088;
+  //  const uint32_t NV_PVIDEO_UNKNOWN_8C = 0x0000808C;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_88) = 0x04000400;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
+  //  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
 
   SetPvideoLuminanceChrominance();
   VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;

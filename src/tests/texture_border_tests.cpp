@@ -16,17 +16,15 @@
 #include "vertex_buffer.h"
 
 static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle);
-static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
-                                       TestHost::PaletteSize palette_size);
-
-static uint32_t *GeneratePalette(TestHost::PaletteSize size);
+// static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
+//                                        TestHost::PaletteSize palette_size);
+// static uint32_t *GeneratePalette(TestHost::PaletteSize size);
 
 static constexpr uint32_t kTextureWidth = 32;
-static constexpr uint32_t kTexturePitch = kTextureWidth * 4;
 static constexpr uint32_t kTextureHeight = 32;
 
 static constexpr const char *kTest2D = "2D";
-static constexpr const char *kTest2DIndexed = "2D_Indexed";
+// static constexpr const char *kTest2DIndexed = "2D_Indexed";
 static constexpr const char *kTest2DBorderedSwizzled = "2D_BorderTex_SZ";
 static constexpr const char *kTest3DBorderedSwizzled = "3D_BorderTex_SZ";
 static constexpr const char *kTestCubeMapBorderedSwizzled = "Cube_BorderTex_SZ";
@@ -72,14 +70,14 @@ static constexpr float kCubePoints[][3] = {
   {kCubeSize, kCubeSize, -kCubeSize},
 };
 
-static constexpr const float kCubeSTPoints[][4][2] = {
-  {{0.000000f, 0.000000f}, {0.000000f, 0.333333f}, {0.333333f, 0.333333f}, {0.333333f, 0.000000f}},
-  {{0.333333f, 0.000000f}, {0.333333f, 0.333333f}, {0.666667f, 0.333333f}, {0.666667f, 0.000000f}},
-  {{0.333333f, 0.333333f}, {0.333333f, 0.666667f}, {0.666667f, 0.666667f}, {0.666667f, 0.333333f}},
-  {{0.000000f, 0.333333f}, {0.000000f, 0.666667f}, {0.333333f, 0.666667f}, {0.333333f, 0.333333f}},
-  {{0.000000f, 0.666667f}, {0.000000f, 1.000000f}, {0.333333f, 1.000000f}, {0.333333f, 0.666667f}},
-  {{0.666667f, 0.000000f}, {0.666667f, 0.333333f}, {1.000000f, 0.333333f}, {1.000000f, 0.000000f}},
-};
+//static constexpr const float kCubeSTPoints[][4][2] = {
+//  {{0.000000f, 0.000000f}, {0.000000f, 0.333333f}, {0.333333f, 0.333333f}, {0.333333f, 0.000000f}},
+//  {{0.333333f, 0.000000f}, {0.333333f, 0.333333f}, {0.666667f, 0.333333f}, {0.666667f, 0.000000f}},
+//  {{0.333333f, 0.333333f}, {0.333333f, 0.666667f}, {0.666667f, 0.666667f}, {0.666667f, 0.333333f}},
+//  {{0.000000f, 0.333333f}, {0.000000f, 0.666667f}, {0.333333f, 0.666667f}, {0.333333f, 0.333333f}},
+//  {{0.000000f, 0.666667f}, {0.000000f, 1.000000f}, {0.333333f, 1.000000f}, {0.333333f, 0.666667f}},
+//  {{0.666667f, 0.000000f}, {0.666667f, 0.333333f}, {1.000000f, 0.333333f}, {1.000000f, 0.000000f}},
+//};
 
 // clang-format on
 
@@ -393,33 +391,31 @@ void TextureBorderTests::TestXemu1034() {
   host_.FinishDraw(allow_saving_, output_dir_, kXemu1034);
 }
 
-void TextureBorderTests::Test2DPalettized() {
-#if 0
-  auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
-  host_.SetTextureFormat(texture_format);
-
-  uint8_t *gradient_surface = nullptr;
-  int err = GeneratePalettized2DSurface(&gradient_surface, kTextureWidth, kTextureHeight, TestHost::PALETTE_256);
-  ASSERT(!err && "Failed to generate palettized surface");
-
-  err = host_.SetRawTexture(gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), 1,
-                            host_.GetMaxTextureWidth(), 1, texture_format.xbox_swizzled);
-  delete[] gradient_surface;
-  ASSERT(!err && "Failed to set texture");
-
-  auto palette = GeneratePalette(TestHost::PALETTE_256);
-  err = host_.SetPalette(palette, TestHost::PALETTE_256);
-  delete[] palette;
-  ASSERT(!err && "Failed to set palette");
-
-  host_.PrepareDraw(0xFE202020);
-  host_.DrawArrays();
-
-//  pb_draw_text_screen();
-
-  host_.FinishDraw(allow_saving_, output_dir_, kTest2DIndexed);
-#endif
-}
+// void TextureBorderTests::Test2DPalettized() {
+//   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
+//   host_.SetTextureFormat(texture_format);
+//
+//   uint8_t *gradient_surface = nullptr;
+//   int err = GeneratePalettized2DSurface(&gradient_surface, kTextureWidth, kTextureHeight, TestHost::PALETTE_256);
+//   ASSERT(!err && "Failed to generate palettized surface");
+//
+//   err = host_.SetRawTexture(gradient_surface, host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight(), 1,
+//                             host_.GetMaxTextureWidth(), 1, texture_format.xbox_swizzled);
+//   delete[] gradient_surface;
+//   ASSERT(!err && "Failed to set texture");
+//
+//   auto palette = GeneratePalette(TestHost::PALETTE_256);
+//   err = host_.SetPalette(palette, TestHost::PALETTE_256);
+//   delete[] palette;
+//   ASSERT(!err && "Failed to set palette");
+//
+//   host_.PrepareDraw(0xFE202020);
+//   host_.DrawArrays();
+//
+////  pb_draw_text_screen();
+//
+//  host_.FinishDraw(allow_saving_, output_dir_, kTest2DIndexed);
+//}
 
 void TextureBorderTests::Test2DBorderedSwizzled() {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
@@ -687,8 +683,7 @@ void TextureBorderTests::Test3DBorderedSwizzled(const std::string &name, uint32_
 void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height) {
   const float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
   auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
-                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
-                                                          -1.0f, 1.0f, 200.0f);
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
@@ -894,49 +889,46 @@ void TextureBorderTests::GenerateBorderedCubemapSurface(uint8_t *texture_memory,
   }
 }
 
-static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
-                                       TestHost::PaletteSize palette_size) {
-#if 0
-  *gradient_surface = new uint8_t[width * height];
-  if (!(*gradient_surface)) {
-    return 1;
-  }
+// static int GeneratePalettized2DSurface(uint8_t **gradient_surface, int width, int height,
+//                                        TestHost::PaletteSize palette_size) {
+//   *gradient_surface = new uint8_t[width * height];
+//   if (!(*gradient_surface)) {
+//     return 1;
+//   }
+//
+//   auto pixel = *gradient_surface;
+//
+//   uint32_t total_size = width * height;
+//   uint32_t half_size = total_size >> 1;
+//
+//   for (uint32_t i = 0; i < half_size; ++i, ++pixel) {
+//     *pixel = i & (palette_size - 1);
+//   }
+//
+//   for (uint32_t i = half_size; i < total_size; i += 4) {
+//     uint8_t value = i & (palette_size - 1);
+//     *pixel++ = value;
+//     *pixel++ = value;
+//     *pixel++ = value;
+//     *pixel++ = value;
+//   }
+//   return 0;
+// }
 
-  auto pixel = *gradient_surface;
-
-  uint32_t total_size = width * height;
-  uint32_t half_size = total_size >> 1;
-
-  for (uint32_t i = 0; i < half_size; ++i, ++pixel) {
-    *pixel = i & (palette_size - 1);
-  }
-
-  for (uint32_t i = half_size; i < total_size; i += 4) {
-    uint8_t value = i & (palette_size - 1);
-    *pixel++ = value;
-    *pixel++ = value;
-    *pixel++ = value;
-    *pixel++ = value;
-  }
-
-#endif
-  return 0;
-}
-
-static uint32_t *GeneratePalette(TestHost::PaletteSize size) {
-  auto ret = new uint32_t[size];
-
-  uint32_t block_size = size / 4;
-  auto component_inc = (uint32_t)ceilf(255.0f / (float)block_size);
-  uint32_t i = 0;
-  uint32_t component = 0;
-  for (; i < block_size; ++i, component += component_inc) {
-    uint32_t color_value = 0xFF - component;
-    ret[i + block_size * 0] = 0xFF000000 + color_value;
-    ret[i + block_size * 1] = 0xFF000000 + (color_value << 8);
-    ret[i + block_size * 2] = 0xFF000000 + (color_value << 16);
-    ret[i + block_size * 3] = 0xFF000000 + color_value + (color_value << 8) + (color_value << 16);
-  }
-
-  return ret;
-}
+// static uint32_t *GeneratePalette(TestHost::PaletteSize size) {
+//   auto ret = new uint32_t[size];
+//
+//   uint32_t block_size = size / 4;
+//   auto component_inc = (uint32_t)ceilf(255.0f / (float)block_size);
+//   uint32_t i = 0;
+//   uint32_t component = 0;
+//   for (; i < block_size; ++i, component += component_inc) {
+//     uint32_t color_value = 0xFF - component;
+//     ret[i + block_size * 0] = 0xFF000000 + color_value;
+//     ret[i + block_size * 1] = 0xFF000000 + (color_value << 8);
+//     ret[i + block_size * 2] = 0xFF000000 + (color_value << 16);
+//     ret[i + block_size * 3] = 0xFF000000 + color_value + (color_value << 8) + (color_value << 16);
+//   }
+//
+//   return ret;
+// }

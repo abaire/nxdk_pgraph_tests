@@ -48,8 +48,7 @@ void ViewportTests::Test(const Viewport &vp) {
 
   float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
   auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
-                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
-                                                          -1.0f, 1.0f, 200.0f);
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();

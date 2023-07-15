@@ -1,17 +1,22 @@
 #include "test_driver.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wignored-attributes"
 #include <hal/debug.h>
+#pragma clang diagnostic pop
+
 #include <pbkit/pbkit.h>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
+#pragma clang diagnostic pop
 
 #include "menu_item.h"
 
 TestDriver::TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites,
                        uint32_t framebuffer_width, uint32_t framebuffer_height, bool show_options_menu)
-    : test_host_(host),
-      test_suites_(test_suites),
-      framebuffer_width_(framebuffer_width),
-      framebuffer_height_(framebuffer_height) {
+    : test_suites_(test_suites), test_host_(host) {
   auto on_run_all = [this]() { RunAllTestsNonInteractive(); };
   auto on_exit = [this]() { running_ = false; };
   root_menu_ = std::make_shared<MenuItemRoot>(test_suites, on_run_all, on_exit, framebuffer_width, framebuffer_height);

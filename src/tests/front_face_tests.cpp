@@ -68,7 +68,6 @@ void FrontFaceTests::CreateGeometry() {
   Color lr{0.0, 0.0, 1.0, 1.0};
   Color ur{0.5, 0.5, 0.5, 1.0};
 
-  uint32_t idx = 0;
   float z = 10.0f;
   buffer->DefineBiTriCCW(0, left + 10, top + 4, mid_width - 10, bottom - 10, z, z, z, z, ul, ll, lr, ur);
 

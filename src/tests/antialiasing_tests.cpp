@@ -28,7 +28,7 @@ static constexpr const char kAA2[] = "CreateSurfaceWithCenterCorner2";
 static constexpr const char kAA4[] = "CreateSurfaceWithSquareOffset4";
 static constexpr const char kFBAANone[] = "FBSurfaceWithCenter1";
 static constexpr const char kFBAA2[] = "FBSurfaceWithCenterCorner2";
-static constexpr const char kFBAA4[] = "FBSurfaceWithSquareOffset4";
+// static constexpr const char kFBAA4[] = "FBSurfaceWithSquareOffset4";
 static constexpr const char kOnOffCPUWrite[] = "AAOnThenOffCPUWrite";
 static constexpr const char kModifyNonFramebufferSurface[] = "SurfaceStatesAreIndependent";
 static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifiedBySurfaceState";
@@ -332,7 +332,6 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
     // value.
     static constexpr uint32_t anti_aliasing_multiplier = 4;
 
-    const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SURFACE_PITCH,

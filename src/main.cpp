@@ -4,12 +4,18 @@
  */
 
 #include <SDL_image.h>
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wignored-attributes"
 #include <hal/debug.h>
+#pragma clang diagnostic pop
 #include <hal/fileio.h>
 #include <hal/video.h>
 #include <nxdk/mount.h>
 #include <pbkit/pbkit.h>
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
+#pragma clang diagnostic pop
 
 #include <algorithm>
 #include <fstream>
@@ -85,16 +91,22 @@ static constexpr int kFramebufferHeight = 480;
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 256;
 
+#ifdef ENABLE_PROGRESS_LOG
 static constexpr const char* kLogFileName = "pgraph_progress_log.txt";
+#endif
 
 static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                             const std::string& output_directory);
 static bool get_writable_output_directory(std::string& xbe_root_directory);
 static bool get_test_output_path(std::string& test_output_directory);
+#ifdef DUMP_CONFIG_FILE
 static void dump_config_file(const std::string& config_file_path,
                              const std::vector<std::shared_ptr<TestSuite>>& test_suites);
+#endif
+#ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 static bool discover_historical_crashes(const std::string& log_file_path,
                                         std::map<std::string, std::set<std::string>>& crashes);
+#endif
 static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 
 /* Main program function */
@@ -250,6 +262,7 @@ static bool get_test_output_path(std::string& test_output_directory) {
   return true;
 }
 
+#ifdef DUMP_CONFIG_FILE
 static void dump_config_file(const std::string& config_file_path,
                              const std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   if (!ensure_drive_mounted(config_file_path[0])) {
@@ -279,7 +292,9 @@ static void dump_config_file(const std::string& config_file_path,
     config_file << std::endl << "#-------------------" << std::endl;
   }
 }
+#endif  // DUMP_CONFIG_FILE
 
+#ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 static bool discover_historical_crashes(const std::string& log_file_path,
                                         std::map<std::string, std::set<std::string>>& crashes) {
   crashes.clear();
@@ -357,6 +372,7 @@ static bool discover_historical_crashes(const std::string& log_file_path,
 
   return true;
 }
+#endif  // ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 
 static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   if (!ensure_drive_mounted(config_file_path[0])) {

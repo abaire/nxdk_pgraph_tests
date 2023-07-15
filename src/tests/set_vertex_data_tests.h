@@ -8,7 +8,7 @@
 
 #include "test_suite.h"
 
-class Color;
+struct Color;
 class TestHost;
 class VertexBuffer;
 

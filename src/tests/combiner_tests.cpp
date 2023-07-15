@@ -40,8 +40,6 @@ void CombinerTests::CreateGeometry() {
   static constexpr float kRight = 2.75f;
   static constexpr float kTop = 1.85f;
   static constexpr float kBottom = -1.75f;
-  static constexpr float kZFront = 1.0f;
-  static constexpr float kZBack = 5.0f;
   static const float kSpacing = 0.1f;
   static const float kWidth = kRight - kLeft;
   static const float kHeight = kTop - kBottom;

@@ -15,7 +15,7 @@
 static constexpr float kTextureSize = 256.0f;
 
 static constexpr char kRGBATest[] = "RGBA";
-static constexpr char kPalettizedTest[] = "PaletteCycle";
+// static constexpr char kPalettizedTest[] = "PaletteCycle";
 
 TextureCPUUpdateTests::TextureCPUUpdateTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Texture CPU Update") {

@@ -172,8 +172,6 @@ void MaterialColorTests::CreateGeometry() {
   float right = 2.75f;
   float top = 1.75f;
   float bottom = -1.75f;
-  float z = 1.0f;
-  VECTOR normal{0.0f, 0.0f, 1.0f, 1.0f};
 
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
 

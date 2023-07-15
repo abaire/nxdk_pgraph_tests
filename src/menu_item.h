@@ -13,11 +13,12 @@ class TestSuite;
 struct MenuItem {
  public:
   MenuItem(std::string name, uint32_t width, uint32_t height) : width(width), height(height), name(std::move(name)) {}
+  virtual ~MenuItem() = default;
 
   static void SetBackgroundColor(uint32_t background_color);
 
   // Whether or not this menu item becomes the active drawable when activated.
-  virtual bool IsEnterable() const { return !submenu.empty(); }
+  [[nodiscard]] virtual bool IsEnterable() const { return !submenu.empty(); }
 
   virtual void Draw();
 
@@ -73,7 +74,7 @@ struct MenuItemTest : public MenuItem {
 
   static void SetOneShotMode(bool val) { one_shot_mode_ = val; }
 
-  bool IsEnterable() const override { return true; }
+  [[nodiscard]] bool IsEnterable() const override { return true; }
 
   void Draw() override;
   void OnEnter() override;

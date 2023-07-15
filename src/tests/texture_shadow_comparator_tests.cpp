@@ -12,7 +12,7 @@
 #include "test_host.h"
 
 // Uncomment to save the depth texture as an additional artifact.
-//#define DEBUG_DUMP_DEPTH_TEXTURE
+// #define DEBUG_DUMP_DEPTH_TEXTURE
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -497,8 +497,7 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
                                                     const std::string &name) {
   float depth_buffer_max_value = host_.MaxDepthBufferValue(depth_format, float_depth);
   auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
-                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, -1.0f, 1.0f, 1.0f,
-                                                          -1.0f, 1.0f, 200.0f);
+                                                          0.0f, depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
     shader->SetLightingEnabled(false);
     shader->SetUse4ComponentTexcoords();
