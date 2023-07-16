@@ -248,6 +248,20 @@ void TestSuite::Initialize() {
 #ifdef ENABLE_PGRAPH_REGION_DIFF
   pgraph_diff_.Capture();
 #endif
+
+  TagNV2ATrace(2);
+  p = pb_begin();
+  p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
+  p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
+  pb_end(p);
+  TagNV2ATrace(4);
+}
+
+void TestSuite::TagNV2ATrace(uint32_t num_nops) {
+  ASSERT(num_nops < 32 && "Too many nops in TagNV2ATrace");
+  auto p = pb_begin();
+  for (auto i = 0; i < num_nops; ++i) p = pb_push1(p, NV097_NO_OPERATION, 0x00);
+  pb_end(p);
 }
 
 void TestSuite::Deinitialize() {

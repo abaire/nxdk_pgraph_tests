@@ -40,6 +40,9 @@ class TestSuite {
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
   void SetSuspectedCrashHandlingMode(SuspectedCrashHandling mode) { suspected_crash_handling_mode_ = mode; }
 
+  //! Inserts a pattern of NV097_NO_OPERATION's into the pushbuffer to allow identification when viewing nv2a traces.
+  static void TagNV2ATrace(uint32_t num_nops);
+
  protected:
   void SetDefaultTextureFormat() const;
 
