@@ -288,6 +288,8 @@ add_executable(
         src/tests/inline_array_size_mismatch.h
         src/tests/lighting_normal_tests.cpp
         src/tests/lighting_normal_tests.h
+        src/tests/lighting_two_sided_tests.cpp
+        src/tests/lighting_two_sided_tests.h
         src/tests/material_alpha_tests.cpp
         src/tests/material_alpha_tests.h
         src/tests/material_color_source_tests.cpp
