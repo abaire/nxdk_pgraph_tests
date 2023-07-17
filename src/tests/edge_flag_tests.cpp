@@ -2,12 +2,9 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
-#include "texture_generator.h"
 #include "vertex_buffer.h"
 
 static constexpr float kLeft = -2.75f;
