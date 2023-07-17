@@ -42,6 +42,7 @@
 #include "tests/depth_format_fixed_function_tests.h"
 #include "tests/depth_format_tests.h"
 #include "tests/dma_corruption_around_surface_tests.h"
+#include "tests/edge_flag_tests.h"
 #include "tests/fog_tests.h"
 #include "tests/front_face_tests.h"
 #include "tests/image_blit_tests.h"
@@ -488,6 +489,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<DMACorruptionAroundSurfaceTests>(host, output_directory);
+    test_suites.push_back(suite);
+  }
+  {
+    auto suite = std::make_shared<EdgeFlagTests>(host, output_directory);
     test_suites.push_back(suite);
   }
   {
