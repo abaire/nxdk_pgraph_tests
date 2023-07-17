@@ -251,62 +251,116 @@ target_link_libraries(
 add_executable(
         "${TARGET}"
         src/tests/antialiasing_tests.cpp
+        src/tests/antialiasing_tests.h
         src/tests/attribute_carryover_tests.cpp
+        src/tests/attribute_carryover_tests.h
         src/tests/attribute_explicit_setter_tests.cpp
+        src/tests/attribute_explicit_setter_tests.h
         src/tests/attribute_float_tests.cpp
+        src/tests/attribute_float_tests.h
         src/tests/blend_tests.cpp
+        src/tests/blend_tests.h
         src/tests/clear_tests.cpp
+        src/tests/clear_tests.h
         src/tests/color_mask_blend_tests.cpp
+        src/tests/color_mask_blend_tests.h
         src/tests/color_zeta_disable_tests.cpp
+        src/tests/color_zeta_disable_tests.h
         src/tests/color_zeta_overlap_tests.cpp
+        src/tests/color_zeta_overlap_tests.h
         src/tests/combiner_tests.cpp
+        src/tests/combiner_tests.h
         src/tests/depth_format_fixed_function_tests.cpp
+        src/tests/depth_format_fixed_function_tests.h
         src/tests/depth_format_tests.cpp
+        src/tests/depth_format_tests.h
         src/tests/dma_corruption_around_surface_tests.cpp
+        src/tests/dma_corruption_around_surface_tests.h
+        src/tests/edge_flag_tests.cpp
+        src/tests/edge_flag_tests.h
         src/tests/fog_tests.cpp
+        src/tests/fog_tests.h
         src/tests/front_face_tests.cpp
+        src/tests/front_face_tests.h
         src/tests/image_blit_tests.cpp
+        src/tests/image_blit_tests.h
         src/tests/inline_array_size_mismatch.cpp
+        src/tests/inline_array_size_mismatch.h
         src/tests/lighting_normal_tests.cpp
+        src/tests/lighting_normal_tests.h
         src/tests/material_alpha_tests.cpp
+        src/tests/material_alpha_tests.h
         src/tests/material_color_source_tests.cpp
+        src/tests/material_color_source_tests.h
         src/tests/material_color_tests.cpp
+        src/tests/material_color_tests.h
         src/tests/null_surface_tests.cpp
+        src/tests/null_surface_tests.h
         src/tests/overlapping_draw_modes_tests.cpp
+        src/tests/overlapping_draw_modes_tests.h
         src/tests/pvideo_tests.cpp
+        src/tests/pvideo_tests.h
         src/tests/set_vertex_data_tests.cpp
+        src/tests/set_vertex_data_tests.h
         src/tests/shade_model_tests.cpp
+        src/tests/shade_model_tests.h
         src/tests/smoothing_tests.cpp
+        src/tests/smoothing_tests.h
         src/tests/stencil_tests.cpp
+        src/tests/stencil_tests.h
         src/tests/surface_clip_tests.cpp
+        src/tests/surface_clip_tests.h
         src/tests/surface_pitch_tests.cpp
+        src/tests/surface_pitch_tests.h
         src/tests/test_suite.cpp
+        src/tests/test_suite.h
         src/tests/texgen_matrix_tests.cpp
+        src/tests/texgen_matrix_tests.h
         src/tests/texgen_tests.cpp
+        src/tests/texgen_tests.h
         src/tests/texture_border_tests.cpp
+        src/tests/texture_border_tests.h
         src/tests/texture_cpu_update_tests.cpp
+        src/tests/texture_cpu_update_tests.h
         src/tests/texture_cubemap_tests.cpp
+        src/tests/texture_cubemap_tests.h
         src/tests/texture_format_dxt_tests.cpp
+        src/tests/texture_format_dxt_tests.h
         src/tests/texture_format_tests.cpp
+        src/tests/texture_format_tests.h
         src/tests/texture_framebuffer_blit_tests.cpp
+        src/tests/texture_framebuffer_blit_tests.h
         src/tests/texture_matrix_tests.cpp
+        src/tests/texture_matrix_tests.h
         src/tests/texture_render_target_tests.cpp
+        src/tests/texture_render_target_tests.h
         src/tests/texture_render_update_in_place_tests.cpp
+        src/tests/texture_render_update_in_place_tests.h
         src/tests/texture_shadow_comparator_tests.cpp
+        src/tests/texture_shadow_comparator_tests.h
         src/tests/texture_signed_component_tests.cpp
+        src/tests/texture_signed_component_tests.h
         src/tests/three_d_primitive_tests.cpp
+        src/tests/three_d_primitive_tests.h
         src/tests/two_d_line_tests.cpp
+        src/tests/two_d_line_tests.h
         src/tests/vertex_shader_independence_tests.cpp
+        src/tests/vertex_shader_independence_tests.h
         src/tests/vertex_shader_rounding_tests.cpp
+        src/tests/vertex_shader_rounding_tests.h
         src/tests/vertex_shader_swizzle_tests.cpp
+        src/tests/vertex_shader_swizzle_tests.h
         src/tests/viewport_tests.cpp
+        src/tests/viewport_tests.h
         src/tests/volume_texture_tests.cpp
+        src/tests/volume_texture_tests.h
         src/tests/w_param_tests.cpp
+        src/tests/w_param_tests.h
         src/tests/window_clip_tests.cpp
+        src/tests/window_clip_tests.h
         src/tests/zero_stride_tests.cpp
+        src/tests/zero_stride_tests.h
         ${generated_vertex_shaders}
-        ${generated_fp20_pixel_shaders_SOURCES}
-        ${generated_vp20_vertex_shaders_SOURCES}
 )
 set(EXECUTABLE_BINARY "${CMAKE_CURRENT_BINARY_DIR}/${TARGET}.exe")
 target_include_directories(
