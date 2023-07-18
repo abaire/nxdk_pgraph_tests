@@ -26,8 +26,17 @@ class TestSuite {
 
   [[nodiscard]] const std::string &Name() const { return suite_name_; };
 
+  //! Called to initialize the test suite.
   virtual void Initialize();
+
+  //! Called to tear down the test suite.
   virtual void Deinitialize();
+
+  //! Called before running an individual test within this suite.
+  virtual void SetupTest();
+
+  //! Called after running an individual test within this suite.
+  virtual void TearDownTest();
 
   void DisableTests(const std::vector<std::string> &tests_to_skip);
   void SetSuspectedCrashes(const std::set<std::string> &test_names) { suspected_crashes_ = test_names; }

@@ -1,4 +1,4 @@
-#include "edge_flag_tests.h"
+#include "line_width_tests.h"
 
 #include <pbkit/pbkit.h>
 
@@ -7,17 +7,65 @@
 #include "shaders/precalculated_vertex_shader.h"
 #include "vertex_buffer.h"
 
-static std::string MakeTestName(bool edge_flag) { return edge_flag ? "Enabled" : "Disabled"; }
+static constexpr LineWidthTests::fixed_t kDefaultWidth = (1 << 3);
 
-EdgeFlagTests::EdgeFlagTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Edge flag") {
-  for (auto edge_flag : {false, true}) {
-    const std::string test_name = MakeTestName(edge_flag);
-    tests_[test_name] = [this, test_name, edge_flag]() { Test(test_name, edge_flag); };
+static std::string MakeTestName(bool is_filled, LineWidthTests::fixed_t width) {
+  char buf[32];
+  if (width == 0xFFFFFFFF) {
+    snprintf(buf, sizeof(buf), "%s_FFFFFFFF", is_filled ? "Fill" : "Line");
+  } else {
+    snprintf(buf, sizeof(buf), "%s_%04u.%u", is_filled ? "Fill" : "Line", width >> 3, width & 0x7);
+  }
+  return buf;
+}
+
+LineWidthTests::LineWidthTests(TestHost &host, std::string output_dir)
+    : TestSuite(host, std::move(output_dir), "Line width") {
+  // SET_LINE_WIDTH only affects lines, so the vast majority are unfilled.
+
+  for (fixed_t line_width = 0; line_width < (2 << 3); ++line_width) {
+    const std::string test_name = MakeTestName(false, line_width);
+    tests_[test_name] = [this, test_name, line_width]() { Test(test_name, false, line_width); };
+  }
+
+  // Test larger values, skipping over fractional ones.
+  for (fixed_t line_width = 3 << 3; line_width < (16 << 3); line_width += (1 << 3)) {
+    const std::string test_name = MakeTestName(false, line_width);
+    tests_[test_name] = [this, test_name, line_width]() { Test(test_name, false, line_width); };
+  }
+
+  // Even larger values, skipping by 8's
+  for (fixed_t line_width = 16 << 3; line_width < (57 << 3); line_width += (8 << 3)) {
+    const std::string test_name = MakeTestName(false, line_width);
+    tests_[test_name] = [this, test_name, line_width]() { Test(test_name, false, line_width); };
+  }
+
+  // Step up towards 64, the max value that seems to have any effect.
+  for (fixed_t line_width = 57 << 3; line_width < (65 << 3); line_width += (1 << 3)) {
+    const std::string test_name = MakeTestName(false, line_width);
+    tests_[test_name] = [this, test_name, line_width]() { Test(test_name, false, line_width); };
+  }
+
+  // Show behavior around the boundary point.
+  for (fixed_t line_width = 63 << 3; line_width < (65 << 3); ++line_width) {
+    const std::string test_name = MakeTestName(false, line_width);
+    tests_[test_name] = [this, test_name, line_width]() { Test(test_name, false, line_width); };
+  }
+
+  // Test -1
+  {
+    const std::string test_name = MakeTestName(false, 0xFFFFFFFF);
+    tests_[test_name] = [this, test_name]() { Test(test_name, false, 0xFFFFFFFF); };
+  }
+
+  // Add a few filled tests to prove that there's no effect on filled polys.
+  for (auto line_width : {0, 1 << 3, 32 << 3}) {
+    const std::string test_name = MakeTestName(true, line_width);
+    tests_[test_name] = [this, test_name, line_width]() { Test(test_name, true, line_width); };
   }
 }
 
-void EdgeFlagTests::Initialize() {
+void LineWidthTests::Initialize() {
   TestSuite::Initialize();
 
   auto shader = std::make_shared<PrecalculatedVertexShader>();
@@ -25,21 +73,25 @@ void EdgeFlagTests::Initialize() {
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  // Edge flag has no visible effect if fill is enabled.
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
-  // back.
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
   pb_end(p);
   host_.SetBlend(true);
 }
 
-void EdgeFlagTests::Deinitialize() {
+static void SetFill(bool enabled) {
   auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_EDGE_FLAG, true);
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  uint32_t fill_mode = enabled ? NV097_SET_FRONT_POLYGON_MODE_V_FILL : NV097_SET_FRONT_POLYGON_MODE_V_LINE;
+  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, fill_mode);
+  // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
+  // back.
+  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, fill_mode);
   pb_end(p);
+}
+
+void LineWidthTests::TearDownTest() {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_LINE_WIDTH, kDefaultWidth);
+  pb_end(p);
+  SetFill(true);
 }
 
 static constexpr uint32_t kPalette[] = {
@@ -174,12 +226,13 @@ static void Draw(TestHost &host, float x, float y) {
   }
 }
 
-void EdgeFlagTests::Test(const std::string &name, bool edge_flag) {
-  host_.PrepareDraw(0xFF303234);
+void LineWidthTests::Test(const std::string &name, bool fill, fixed_t width) {
+  host_.PrepareDraw(0xFF202224);
 
+  SetFill(fill);
   {
     auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag);
+    p = pb_push1(p, NV097_SET_LINE_WIDTH, width);
     pb_end(p);
   }
 
@@ -187,86 +240,16 @@ void EdgeFlagTests::Test(const std::string &name, bool edge_flag) {
   const float y = host_.GetFramebufferHeightF() * 0.10f;
   Draw(host_, x, y);
 
-  // Triangles, quads, and polygons can have the flag toggled during the draw action to hide specific lines.
-  {
-    // clang format off
-    constexpr float kVertices[][2] = {
-        {365.185925f, 35.000000f},
-        {349.778838f, 22.523717f},
-        {410.000000f, 19.000000f},
-
-        {344.f, 48.f},
-        {404.f, 37.f},
-        {332.f, 103.f},
-    };
-    // clang format on
-    host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
-    uint32_t i = 0;
-    for (auto pt : kVertices) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag || (i & 0x01));
-      pb_end(p);
-      host_.SetDiffuse(kPalette[i]);
-      host_.SetVertex(x + pt[0], y + pt[1], 1.0f);
-      i = (i + 1) % kNumPaletteEntries;
-    }
-    host_.End();
-  }
-
-  {
-    // clang format off
-    constexpr float kVertices[][2] = {
-        {320.f, 232.0f}, {340.f, 142.1f}, {361.f, 120.0f}, {405.f, 169.3f}, {419.f, 230.5f},
-    };
-    // clang format on
-    host_.Begin(TestHost::PRIMITIVE_POLYGON);
-    uint32_t i = 0;
-    for (auto pt : kVertices) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag || !(i & 0x01));
-      pb_end(p);
-      host_.SetDiffuse(kPalette[i]);
-      host_.SetVertex(x + pt[0], y + pt[1], 1.0f);
-      i = (i + 1) % kNumPaletteEntries;
-    }
-    host_.End();
-  }
-
-  {
-    // clang format off
-    constexpr float kVertices[][2] = {
-        {100.f, 350.f},
-        {160.f, 340.f},
-        {158.5f, 425.4f},
-        {112.75f, 407.5f},
-    };
-    // clang format on
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    uint32_t i = 0;
-    for (auto pt : kVertices) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag || !(i & 0x01));
-      pb_end(p);
-      host_.SetDiffuse(kPalette[i]);
-      host_.SetVertex(x + pt[0], y + pt[1], 1.0f);
-      i = (i + 1) % kNumPaletteEntries;
-    }
-    host_.End();
-  }
-
   pb_print("%s\n", name.c_str());
   pb_printat(0, 15, (char *)"Pts");
   pb_printat(0, 28, (char *)"LLoop");
   pb_printat(0, 40, (char *)"Tri");
-  pb_printat(0, 49, (char *)"Tri-IN");
 
   pb_printat(11, 15, (char *)"QStrip");
   pb_printat(11, 28, (char *)"TFan");
   pb_printat(11, 39, (char *)"Poly");
-  pb_printat(11, 48, (char *)"Poly-IN");
 
   pb_printat(13, 15, (char *)"Quad");
-  pb_printat(13, 24, (char *)"Quad-IN");
 
   pb_draw_text_screen();
 

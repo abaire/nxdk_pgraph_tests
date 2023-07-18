@@ -290,6 +290,8 @@ add_executable(
         src/tests/lighting_normal_tests.h
         src/tests/lighting_two_sided_tests.cpp
         src/tests/lighting_two_sided_tests.h
+        src/tests/line_width_tests.cpp
+        src/tests/line_width_tests.h
         src/tests/material_alpha_tests.cpp
         src/tests/material_alpha_tests.h
         src/tests/material_color_source_tests.cpp
