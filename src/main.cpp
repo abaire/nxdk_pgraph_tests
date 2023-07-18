@@ -60,6 +60,7 @@
 #include "tests/shade_model_tests.h"
 #include "tests/smoothing_tests.h"
 #include "tests/stencil_tests.h"
+#include "tests/stipple_tests.h"
 #include "tests/surface_clip_tests.h"
 #include "tests/surface_pitch_tests.h"
 #include "tests/texgen_matrix_tests.h"
@@ -579,6 +580,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<StencilTests>(host, output_directory);
+    test_suites.push_back(suite);
+  }
+  {
+    auto suite = std::make_shared<StippleTests>(host, output_directory);
     test_suites.push_back(suite);
   }
   {
