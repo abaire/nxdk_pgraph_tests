@@ -196,6 +196,42 @@ uint32_t *pb_push3f(uint32_t *p, DWORD command, float param1, float param2, floa
   return p + 4;
 }
 
+uint32_t *pb_push2fv(uint32_t *p, DWORD command, const float *vector2) {
+  pb_push_to(SUBCH_3D, p, command, 2);
+  *((float *)(p + 1)) = *vector2++;
+  *((float *)(p + 2)) = *vector2++;
+  return p + 3;
+}
+
+uint32_t *pb_push3fv(uint32_t *p, DWORD command, const float *vector3) {
+  pb_push_to(SUBCH_3D, p, command, 3);
+  *((float *)(p + 1)) = *vector3++;
+  *((float *)(p + 2)) = *vector3++;
+  *((float *)(p + 3)) = *vector3++;
+  return p + 4;
+}
+
+uint32_t *pb_push4fv(uint32_t *p, DWORD command, const float *vector4) {
+  pb_push_to(SUBCH_3D, p, command, 4);
+  *((float *)(p + 1)) = *vector4++;
+  *((float *)(p + 2)) = *vector4++;
+  *((float *)(p + 3)) = *vector4++;
+  *((float *)(p + 4)) = *vector4++;
+  return p + 5;
+}
+
+uint32_t *pb_push2v(uint32_t *p, DWORD command, const uint32_t *vector2) {
+  return pb_push2(p, command, vector2[0], vector2[1]);
+}
+
+uint32_t *pb_push3v(uint32_t *p, DWORD command, const uint32_t *vector3) {
+  return pb_push3(p, command, vector3[0], vector3[1], vector3[2]);
+}
+
+uint32_t *pb_push4v(uint32_t *p, DWORD command, const uint32_t *vector4) {
+  return pb_push4(p, command, vector4[0], vector4[1], vector4[2], vector4[3]);
+}
+
 void pb_fetch_pgraph_registers(uint8_t *registers) {
   // See https://github.com/XboxDev/nv2a-trace/blob/65bdd2369a5b216cfc47c9545f870c49d118276b/Trace.py#L32
 

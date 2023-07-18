@@ -82,6 +82,14 @@ uint32_t* pb_push1f(uint32_t* p, DWORD command, float param1);
 uint32_t* pb_push2f(uint32_t* p, DWORD command, float param1, float param2);
 uint32_t* pb_push3f(uint32_t* p, DWORD command, float param1, float param2, float param3);
 
+uint32_t* pb_push2fv(uint32_t* p, DWORD command, const float* vector2);
+uint32_t* pb_push3fv(uint32_t* p, DWORD command, const float* vector3);
+uint32_t* pb_push4fv(uint32_t* p, DWORD command, const float* vector4);
+
+uint32_t* pb_push2v(uint32_t* p, DWORD command, const uint32_t* vector2);
+uint32_t* pb_push3v(uint32_t* p, DWORD command, const uint32_t* vector3);
+uint32_t* pb_push4v(uint32_t* p, DWORD command, const uint32_t* vector4);
+
 // Versions of pb_print that use a full-featured printf implementation instead of the PCDLIB one that does not yet
 // support floats.
 void pb_print_with_floats(const char* format, ...);

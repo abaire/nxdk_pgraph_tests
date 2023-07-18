@@ -312,6 +312,8 @@ add_executable(
         src/tests/smoothing_tests.h
         src/tests/stencil_tests.cpp
         src/tests/stencil_tests.h
+        src/tests/stipple_tests.cpp
+        src/tests/stipple_tests.h
         src/tests/surface_clip_tests.cpp
         src/tests/surface_clip_tests.h
         src/tests/surface_pitch_tests.cpp
