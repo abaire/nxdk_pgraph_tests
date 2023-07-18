@@ -13,7 +13,7 @@
 
 using namespace XboxMath;
 
-// clang format off
+// clang-format off
 static constexpr uint32_t kVertexShaderLighting[] = {
 #include "projection_vertex_shader.inl"
 };
@@ -25,7 +25,7 @@ static constexpr uint32_t kVertexShaderNoLighting[] = {
 static constexpr uint32_t kVertexShaderNoLighting4ComponentTexcoord[] = {
 #include "projection_vertex_shader_no_lighting_4c_texcoords.inl"
 };
-// clang format on
+// clang-format on
 
 ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min,
                                                float z_max, bool enable_lighting, bool use_4_component_texcoords)

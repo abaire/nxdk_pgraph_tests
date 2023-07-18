@@ -35,12 +35,12 @@ static constexpr const char *kXemu1034 = "xemu#1034";
 
 static constexpr uint32_t kDepthSlices = 4;
 
-// clang format off
+// clang-format off
 static constexpr const uint32_t kBorderTextureSizes[][2] = {
     {1, 1}, {2, 2}, {4, 4}, {8, 8}, {16, 16}, {32, 32}, {16, 1}, {8, 2}, {4, 8},
 };
 static constexpr const uint32_t kNumBorderTextureSizes = sizeof(kBorderTextureSizes) / sizeof(kBorderTextureSizes[0]);
-// clang format on
+// clang-format on
 
 // Must be ordered to match kCubeSTPoints for each face.
 static constexpr uint32_t kRightSide[] = {3, 7, 6, 2};

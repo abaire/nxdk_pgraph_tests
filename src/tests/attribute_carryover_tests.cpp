@@ -8,11 +8,11 @@
 #include "shaders/precalculated_vertex_shader.h"
 #include "vertex_buffer.h"
 
-// clang format off
+// clang-format off
 static constexpr uint32_t kShader[] = {
 #include "attribute_carryover_test.inl"
 };
-// clang format on
+// clang-format on
 
 static const TestHost::DrawPrimitive kPrimitives[] = {
     TestHost::PRIMITIVE_LINES,

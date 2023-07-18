@@ -16,7 +16,7 @@ static constexpr const char kTestName[] = "MAC_ILU_Independence";
 // The expected behavior is that the diffuse blue component is entirely determined by the C0 uniform with the rest of
 // the components determined by C1.
 
-// clang format off
+// clang-format off
 static const uint32_t kShader[] = {
     // mov oPos, v0
     0x00000000, 0x0020001b, 0x0836106c, 0x2070f800,
@@ -47,7 +47,7 @@ static const uint32_t kShader[] = {
 
     // mov oD0, r1
     0x00000000, 0x0020001b, 0x1436106c, 0x2070f819};
-// clang format on
+// clang-format on
 
 VertexShaderIndependenceTests::VertexShaderIndependenceTests(TestHost &host, std::string output_dir)
     : TestSuite(host, std::move(output_dir), "Vertex shader independence tests") {

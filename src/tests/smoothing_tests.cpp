@@ -7,12 +7,12 @@
 #include "test_host.h"
 #include "vertex_buffer.h"
 
-// clang format off
+// clang-format off
 static constexpr uint32_t kSmoothControlValues[] = {
     0xFFFF0000,
     0xFFFF0001,
 };
-// clang format on
+// clang-format on
 
 static std::string MakeTestName(uint32_t smooth_control) {
   char buf[64] = {0};
@@ -40,20 +40,13 @@ void SmoothingTests::Initialize() {
 }
 
 static constexpr uint32_t kPalette[] = {
-    0xFFFF3333,
-    0xFF33FF33,
-    0xFF3333FF,
-    0xFFFFFF33,
-    0xFF33FFFF,
-    0xFFFF33FF,
-    0xFF808080,
-    0xFFFFFFFF,
+    0xFFFF3333, 0xFF33FF33, 0xFF3333FF, 0xFFFFFF33, 0xFF33FFFF, 0xFFFF33FF, 0xFF808080, 0xFFFFFFFF,
 };
 static constexpr uint32_t kNumPaletteEntries = sizeof(kPalette) / sizeof(kPalette[0]);
 
 static void Draw(TestHost& host, float x, float y) {
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {19.000000f, 15.000000f},
         {56.000000f, 29.000000f},
@@ -72,7 +65,7 @@ static void Draw(TestHost& host, float x, float y) {
         {105.962647f, 76.068491f},
         {80.000000f, 87.000000f},
     };
-    // clang format on
+    // clang-format on
     host.Begin(TestHost::PRIMITIVE_POINTS);
     uint32_t i = 0;
     for (auto pt : kVertices) {
@@ -84,7 +77,7 @@ static void Draw(TestHost& host, float x, float y) {
   }
 
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {196.000000f, 47.000000f},
         {194.000000f, 19.000000f},
@@ -103,7 +96,7 @@ static void Draw(TestHost& host, float x, float y) {
         {190.828953f, 35.510304f},
         {163.000000f, 105.956814f},
     };
-    // clang format on
+    // clang-format on
     host.Begin(TestHost::PRIMITIVE_LINE_LOOP);
     uint32_t i = 0;
     for (auto pt : kVertices) {
@@ -115,7 +108,7 @@ static void Draw(TestHost& host, float x, float y) {
   }
 
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {265.185925f, 35.000000f},
         {249.778838f, 22.523717f},
@@ -124,7 +117,7 @@ static void Draw(TestHost& host, float x, float y) {
         {304.000000f, 37.000000f},
         {232.000000f, 102.522615f},
     };
-    // clang format on
+    // clang-format on
     host.Begin(TestHost::PRIMITIVE_TRIANGLES);
     uint32_t i = 0;
     for (auto pt : kVertices) {
@@ -136,7 +129,7 @@ static void Draw(TestHost& host, float x, float y) {
   }
 
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {0.000000f, 239.000000f},
         {0.000000f, 120.000000f},
@@ -145,7 +138,7 @@ static void Draw(TestHost& host, float x, float y) {
         {105.000000f, 239.000000f},
         {105.000000f, 120.000000f},
     };
-    // clang format on
+    // clang-format on
     host.Begin(TestHost::PRIMITIVE_QUAD_STRIP);
     uint32_t i = 0;
     for (auto pt : kVertices) {
@@ -157,7 +150,7 @@ static void Draw(TestHost& host, float x, float y) {
   }
 
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {158.500000f, 205.000000f},
         {115.545455f, 239.000000f},
@@ -168,7 +161,7 @@ static void Draw(TestHost& host, float x, float y) {
         {204.318182f, 159.100000f},
         {209.750000f, 239.000000f},
     };
-    // clang format on
+    // clang-format on
     host.Begin(TestHost::PRIMITIVE_TRIANGLE_FAN);
     uint32_t i = 0;
     for (auto pt : kVertices) {
@@ -180,7 +173,7 @@ static void Draw(TestHost& host, float x, float y) {
   }
 
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {218.000000f, 232.000000f},
         {237.772727f, 142.100000f},
@@ -188,7 +181,7 @@ static void Draw(TestHost& host, float x, float y) {
         {302.681818f, 169.300000f},
         {317.000000f, 230.500000f},
     };
-    // clang format on
+    // clang-format on
     host.Begin(TestHost::PRIMITIVE_POLYGON);
     uint32_t i = 0;
     for (auto pt : kVertices) {

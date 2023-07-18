@@ -31,13 +31,13 @@ static constexpr float kZFar = kCameraZ + 200.0f;
 // Used to determine the tests around the end and mid/quarter points in projection tests.
 static constexpr float kEpsilon = 0.0125f;
 
-// clang format off
+// clang-format off
 static const uint32_t kCompareFuncs[] = {
     NV097_SET_SHADOW_COMPARE_FUNC_NEVER,  NV097_SET_SHADOW_COMPARE_FUNC_GREATER, NV097_SET_SHADOW_COMPARE_FUNC_EQUAL,
     NV097_SET_SHADOW_COMPARE_FUNC_GEQUAL, NV097_SET_SHADOW_COMPARE_FUNC_LESS,    NV097_SET_SHADOW_COMPARE_FUNC_NOTEQUAL,
     NV097_SET_SHADOW_COMPARE_FUNC_LEQUAL, NV097_SET_SHADOW_COMPARE_FUNC_ALWAYS,
 };
-// clang format on
+// clang-format on
 
 struct BoxLayoutInfo {
   uint32_t box_width;
