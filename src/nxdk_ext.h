@@ -127,6 +127,11 @@
 #define NV097_SET_MATERIAL_EMISSION 0x03a8
 #define NV097_SET_SPECULAR_PARAMS 0x9E0
 
+// glLineWidth. Values are 6.3 fixed point and anything >= 64.0 will be ignored.
+#define NV097_SET_LINE_WIDTH 0x380
+#define NV097_SET_LINE_WIDTH_MAX_VALUE (63 << 3)
+#define NV097_SET_LINE_WIDTH_MASK ((64 << 3) - 1)
+
 // From LithiumX
 #define NV097_SET_BACK_MATERIAL_ALPHA 0x17AC
 

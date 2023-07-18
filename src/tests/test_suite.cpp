@@ -45,9 +45,11 @@ void TestSuite::Run(const std::string& test_name) {
     ASSERT(!"Invalid test name");
   }
 
+  SetupTest();
   auto start_time = LogTestStart(test_name);
   it->second();
   LogTestEnd(test_name, start_time);
+  TearDownTest();
 }
 
 void TestSuite::RunAll() {
@@ -270,6 +272,10 @@ void TestSuite::Deinitialize() {
   pgraph_diff_.DumpDiff();
 #endif
 }
+
+void TestSuite::SetupTest() {}
+
+void TestSuite::TearDownTest() {}
 
 std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name) {
   PrintMsg("Starting %s::%s\n", suite_name_.c_str(), test_name.c_str());

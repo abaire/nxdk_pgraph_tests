@@ -49,6 +49,7 @@
 #include "tests/inline_array_size_mismatch.h"
 #include "tests/lighting_normal_tests.h"
 #include "tests/lighting_two_sided_tests.h"
+#include "tests/line_width_tests.h"
 #include "tests/material_alpha_tests.h"
 #include "tests/material_color_source_tests.h"
 #include "tests/material_color_tests.h"
@@ -526,6 +527,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<LightingTwoSidedTests>(host, output_directory);
+    test_suites.push_back(suite);
+  }
+  {
+    auto suite = std::make_shared<LineWidthTests>(host, output_directory);
     test_suites.push_back(suite);
   }
   {
