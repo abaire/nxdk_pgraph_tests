@@ -113,7 +113,7 @@ void LightingTwoSidedTests::Test() {
   static constexpr float z = -1.f;
   // Front face
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {-1.5f, 0.1f},
         {-1.25f, 1.5f},
@@ -121,7 +121,7 @@ void LightingTwoSidedTests::Test() {
         {-0.25f, 0.1f},
     };
 
-    // clang format on
+    // clang-format on
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetNormal(0.f, 0.f, 1.f);
     for (auto pt : kVertices) {
@@ -132,7 +132,7 @@ void LightingTwoSidedTests::Test() {
 
   // Back face
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {0.25f, 0.1f},
         {1.25f, 0.1f},
@@ -140,7 +140,7 @@ void LightingTwoSidedTests::Test() {
         {0.1f, 1.5f},
     };
 
-    // clang format on
+    // clang-format on
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetNormal(0.f, 0.f, -1.f);
     for (auto pt : kVertices) {
@@ -157,7 +157,7 @@ void LightingTwoSidedTests::Test() {
 
   // Front face
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {-1.5f, -1.5f},
         {-1.25f, -0.1f},
@@ -165,7 +165,7 @@ void LightingTwoSidedTests::Test() {
         {-0.25f, -1.5f},
     };
 
-    // clang format on
+    // clang-format on
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetNormal(0.f, 0.f, 1.f);
     for (auto pt : kVertices) {
@@ -176,7 +176,7 @@ void LightingTwoSidedTests::Test() {
 
   // Back face
   {
-    // clang format off
+    // clang-format off
     constexpr float kVertices[][2] = {
         {0.25f, -1.5f},
         {1.25f, -1.5f},
@@ -184,7 +184,7 @@ void LightingTwoSidedTests::Test() {
         {0.1f, -0.1f},
     };
 
-    // clang format on
+    // clang-format on
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetNormal(0.f, 0.f, -1.f);
     for (auto pt : kVertices) {

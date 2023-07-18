@@ -2,7 +2,7 @@
 
 #include <pbkit/pbkit.h>
 
-// clang format off
+// clang-format off
 static constexpr uint32_t k2ComponentTexcoords[] = {
 #include "precalculated_vertex_shader_2c_texcoords.inl"
 };
@@ -10,7 +10,7 @@ static constexpr uint32_t k2ComponentTexcoords[] = {
 static constexpr uint32_t k4ComponentTexcoords[] = {
 #include "precalculated_vertex_shader_4c_texcoords.inl"
 };
-// clang format on
+// clang-format on
 
 void PrecalculatedVertexShader::OnLoadShader() {
   const uint32_t *shader;

@@ -8,11 +8,11 @@
 #include "shaders/precalculated_vertex_shader.h"
 #include "vertex_buffer.h"
 
-// clang format off
+// clang-format off
 static constexpr uint32_t kShader[] = {
 #include "attribute_explicit_setter_tests.inl"
 };
-// clang format on
+// clang-format on
 
 static constexpr AttributeExplicitSetterTests::TestConfig kTestConfigs[] = {
     {"Setters-alpha", false},

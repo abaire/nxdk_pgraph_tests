@@ -5,9 +5,9 @@
 void PixelShaderProgram::LoadTexturedPixelShader() {
   uint32_t *p = pb_begin();
 
-// clang format off
+// clang-format off
 #include "textured_pixelshader.inl"
-  // clang format on
+  // clang-format on
 
   pb_end(p);
 }
@@ -15,9 +15,9 @@ void PixelShaderProgram::LoadTexturedPixelShader() {
 void PixelShaderProgram::LoadUntexturedPixelShader() {
   uint32_t *p = pb_begin();
 
-// clang format off
+// clang-format off
 #include "untextured_pixelshader.inl"
-  // clang format on
+  // clang-format on
 
   pb_end(p);
 }

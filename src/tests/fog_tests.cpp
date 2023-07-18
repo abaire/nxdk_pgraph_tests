@@ -234,11 +234,11 @@ void FogCustomShaderTests::Initialize() {
 
 // FogInfiniteFogCoordinateTests
 
-// clang format off
+// clang-format off
 static const uint32_t kInfiniteFogCShader[] = {
 #include "fog_infinite_fogc_test.vshinc"
 };
-// clang format on
+// clang-format on
 
 FogInfiniteFogCoordinateTests::FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir)
     : FogCustomShaderTests(host, std::move(output_dir), "Fog inf coord") {}
@@ -255,7 +255,7 @@ void FogInfiniteFogCoordinateTests::Initialize() {
 
 // FogVec4CoordTests
 
-// clang format off
+// clang-format off
 static const uint32_t kFogVec4Unset[] = {
 #include "fog_vec4_unset.vshinc"
 };
@@ -317,11 +317,11 @@ static const uint32_t kFogVec4YZW[] = {
 static const uint32_t kFogVec4ZW[] = {
 #include "fog_vec4_zw.vshinc"
 };
-// clang format on
+// clang-format on
 
 #define DEF_SHADER(shader) (shader), sizeof(shader)
 
-// clang format off
+// clang-format off
 static const FogVec4CoordTests::TestConfig kFogWTests[] = {
     {"W", DEF_SHADER(kFogVec4W), {0.0f, 0.25f, 0.0f, 0.0f}},
     {"W", DEF_SHADER(kFogVec4W), {0.5f, 0.5f, 0.0f, 0.0f}},
@@ -378,7 +378,7 @@ static const FogVec4CoordTests::TestConfig kFogWTests[] = {
     {"ZW", DEF_SHADER(kFogVec4ZW), {0.0f, 0.0f, 0.75f, 1.0f}},
     {"ZW", DEF_SHADER(kFogVec4ZW), {0.0f, 0.0f, 0.33f, 0.0f}},
 };
-// clang format on
+// clang-format on
 
 #undef DEF_TEST
 

@@ -13,7 +13,7 @@ static constexpr uint32_t kDefaultDMAColorChannel = 9;
 
 static constexpr float kTestRectThickness = 4.0f;
 
-// clang format off
+// clang-format off
 static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
     {0, 0, 0, 0},
     // Using a zero sized clip that is offset leads to a buffer limit error while clearing on HW but is ignored on xemu.
@@ -27,7 +27,7 @@ static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
     // The extents must stay within the surface size to avoid a buffer limit error on HW.
     {8, 16, 640 - 8, 480 - 16},
 };
-// clang format on
+// clang-format on
 
 static constexpr const char kXemuBug420Test[] = "XemuBug420";
 

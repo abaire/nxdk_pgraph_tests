@@ -1,9 +1,9 @@
 #include "test_host.h"
 
-// clang format off
+// clang-format off
 #define _USE_MATH_DEFINES
 #include <cmath>
-// clang format on
+// clang-format on
 
 #include <SDL.h>
 #include <SDL_image.h>
