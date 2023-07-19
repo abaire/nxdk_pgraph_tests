@@ -368,6 +368,10 @@ add_executable(
         src/tests/zero_stride_tests.h
         ${generated_vertex_shaders}
 )
+
+# Pull debug info out of the binary into a host-side linked binary.
+split_debug("${TARGET}")
+
 set(EXECUTABLE_BINARY "${CMAKE_CURRENT_BINARY_DIR}/${TARGET}.exe")
 target_include_directories(
         "${TARGET}"

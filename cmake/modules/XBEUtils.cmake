@@ -28,31 +28,30 @@ function(_make_abs_paths list_name)
     set(${list_name} ${ret} PARENT_SCOPE)
 endfunction()
 
-# split_debug(executable_file debug_file_variable)
+# split_debug(executable_target)
 #
-# Splits debugging information from the given `executable_file`, generating a companion file ending in ".debug.exe"
-# Sets `debug_file_variable` in the parent scope to the generated file.
+# Splits debugging information from the given `executable_target`, generating a companion file ending in ".debug.exe".
 function(split_debug)
     if (${ARGC} LESS 1)
-        message(FATAL_ERROR "Missing required 'executable_file' parameter.")
-    elseif (${ARGC} LESS 2)
-        message(FATAL_ERROR "Missing required 'debug_file_variable_name' parameter.")
+        message(FATAL_ERROR "Missing required 'executable_target' parameter.")
     endif ()
 
-    set(exe_file "${ARGV0}")
-    set(debug_file_variable "${ARGV1}")
-    get_filename_component(exe_dirname "${exe_file}" DIRECTORY)
-    get_filename_component(exe_basename "${exe_file}" NAME_WE)
+    set(executable_target "${ARGV0}")
+    set(exe_file "${CMAKE_BINARY_DIR}/${executable_target}.exe")
+    get_filename_component(exe_dirname "${CMAKE_BINARY_DIR}/${executable_target}" DIRECTORY)
+    get_filename_component(exe_basename "${executable_target}" NAME_WE)
     set(output "${exe_dirname}/${exe_basename}.debug.exe")
 
     add_custom_command(
-            OUTPUT "${output}"
+            TARGET "${executable_target}"
+            POST_BUILD
             COMMAND "${CMAKE_COMMAND}" -E copy "${exe_file}" "${output}"
             COMMAND "${CMAKE_OBJCOPY}" --strip-debug "${exe_file}"
-            COMMAND "${CMAKE_OBJCOPY}" --add-gnu-debuglink="${output}" "${exe_file}"
-            DEPENDS "${exe_file}"
+            COMMAND "${CMAKE_OBJCOPY}" "--add-gnu-debuglink=${output}" "${exe_file}"
+            COMMENT Splitting debug information to reduce binary size...
+            VERBATIM
+            BYPRODUCTS "${output}"
     )
-    set("${debug_file_variable}" "${output}" PARENT_SCOPE)
 endfunction()
 
 function(add_xbe)
@@ -73,11 +72,6 @@ function(add_xbe)
 
     set(target "${ARGV0}")
     set(exe_file "${ARGV1}")
-
-    # exe_file will be updated to contain the stripped binary and
-    # exe_file_DEBUG will be created to track the generated debug artifact.
-    split_debug("${exe_file}" exe_file_DEBUG)
-    message("DEBUG FILE: ${exe_file} -> ${exe_file_DEBUG}")
 
     if (NOT XBE_XBENAME)
         set(XBE_XBENAME default.xbe)
@@ -116,7 +110,7 @@ function(add_xbe)
             "-TITLE:${XBE_TITLE}"
             "-OUT:${XBE_OUTPUT_PATH}"
             "${exe_file}"
-            DEPENDS "${exe_file}" "${exe_file_DEBUG}"
+            DEPENDS "${exe_file}"
     )
 
     # Copy resources to the staging directory.
