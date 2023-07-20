@@ -35,6 +35,7 @@
 #include "tests/attribute_float_tests.h"
 #include "tests/blend_tests.h"
 #include "tests/clear_tests.h"
+#include "tests/color_key_tests.h"
 #include "tests/color_mask_blend_tests.h"
 #include "tests/color_zeta_disable_tests.h"
 #include "tests/color_zeta_overlap_tests.h"
@@ -464,6 +465,10 @@ static void register_suites(TestHost& host, std::vector<std::shared_ptr<TestSuit
   }
   {
     auto suite = std::make_shared<ClearTests>(host, output_directory);
+    test_suites.push_back(suite);
+  }
+  {
+    auto suite = std::make_shared<ColorKeyTests>(host, output_directory);
     test_suites.push_back(suite);
   }
   {

@@ -37,7 +37,8 @@ static constexpr float kBottom = -1.75f;
 
 constexpr uint32_t kTextureSize = 64;
 
-std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex, TestHost::DrawPrimitive);
+static std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex,
+                                TestHost::DrawPrimitive);
 
 static void SetLightAndMaterial() {
   auto p = pb_begin();
@@ -466,8 +467,8 @@ void ShadeModelTests::Deinitialize() {
   pb_end(p);
 }
 
-std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex,
-                         TestHost::DrawPrimitive primitive) {
+static std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex,
+                                TestHost::DrawPrimitive primitive) {
   const char* primitive_name;
   switch (primitive) {
     case TestHost::PRIMITIVE_TRIANGLES:

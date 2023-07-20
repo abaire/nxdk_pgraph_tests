@@ -262,6 +262,8 @@ add_executable(
         src/tests/blend_tests.h
         src/tests/clear_tests.cpp
         src/tests/clear_tests.h
+        src/tests/color_key_tests.cpp
+        src/tests/color_key_tests.h
         src/tests/color_mask_blend_tests.cpp
         src/tests/color_mask_blend_tests.h
         src/tests/color_zeta_disable_tests.cpp
