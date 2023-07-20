@@ -169,6 +169,7 @@ void TestSuite::Initialize() {
     stage.SetCubemapEnable(false);
     stage.SetFilter();
     stage.SetAlphaKillEnable(false);
+    stage.SetColorKeyMode(TextureStage::CKM_DISABLE);
     stage.SetLODClamp(0, 4095);
 
     stage.SetTextureMatrixEnable(false);

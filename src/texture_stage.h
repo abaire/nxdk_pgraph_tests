@@ -44,6 +44,15 @@ class TextureStage {
     TG_REFLECTION_MAP = NV097_SET_TEXGEN_S_REFLECTION_MAP,
   };
 
+  enum ColorKeyMode {
+    //! Do nothing on a key match.
+    CKM_DISABLE = 0,
+    //! Zero out just alpha on a key match.
+    CKM_KILL_ALPHA = 1,
+    //! Zero out ARGB on a key match.
+    CKM_KILL_COLOR = 2
+  };
+
  public:
   TextureStage();
 
@@ -58,6 +67,7 @@ class TextureStage {
     border_color_ = 0;
     cubemap_enable_ = false;
     border_source_color_ = true;
+    color_key_mode_ = CKM_DISABLE;
 
     wrap_modes_[0] = WRAP_CLAMP_TO_EDGE;
     wrap_modes_[1] = WRAP_CLAMP_TO_EDGE;
@@ -97,13 +107,20 @@ class TextureStage {
   }
   void SetQWrap(bool cylinder_wrap = false) { cylinder_wrap_[3] = cylinder_wrap; }
 
+  bool GetEnabled() const { return enabled_; }
   void SetEnabled(bool enabled = true) { enabled_ = enabled; }
+  const TextureFormatInfo &GetFormat() const { return format_; }
   void SetFormat(const TextureFormatInfo &format) { format_ = format; }
+  uint32_t GetBorderColor() const { return border_color_; }
   void SetBorderColor(uint32_t color) { border_color_ = color; }
 
+  bool GetCubemapEnable() const { return cubemap_enable_; }
   void SetCubemapEnable(bool val = true) { cubemap_enable_ = val; }
 
+  bool GetAlphaKillEnable() const { return alpha_kill_enable_; }
   void SetAlphaKillEnable(bool val = true) { alpha_kill_enable_ = val; }
+  uint32_t GetColorKeyMode() const { return color_key_mode_; }
+  void SetColorKeyMode(uint32_t mode) { color_key_mode_ = mode; }
   void SetLODClamp(uint32_t min = 0, uint32_t max = 4095) {
     lod_min_ = min;
     lod_max_ = max;
@@ -187,6 +204,7 @@ class TextureStage {
   uint32_t stage_{0};
   bool enabled_{false};
   bool alpha_kill_enable_{false};
+  uint32_t color_key_mode_{CKM_DISABLE};
   uint32_t lod_min_{0};
   uint32_t lod_max_{4095};
 

@@ -46,7 +46,8 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
                NV097_SET_TEXTURE_CONTROL0_ENABLE |
                    MASK(NV097_SET_TEXTURE_CONTROL0_ALPHA_KILL_ENABLE, alpha_kill_enable_) |
                    MASK(NV097_SET_TEXTURE_CONTROL0_MIN_LOD_CLAMP, lod_min_) |
-                   MASK(NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP, lod_max_));
+                   MASK(NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP, lod_max_) |
+                   MASK(NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE, color_key_mode_));
 
   uint32_t dimensionality = GetDimensionality();
 
