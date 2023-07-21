@@ -726,7 +726,7 @@ void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, ui
 
   auto draw = [this, &shader, width](float x, float y, float z, float r_x, float r_y, float r_z,
                                      bool include_border = false) {
-    matrix4_t matrix = {0.0f};
+    matrix4_t matrix;
     vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
     vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
     vector_t up{0.0f, 1.0f, 0.0f, 1.0f};

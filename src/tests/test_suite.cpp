@@ -92,6 +92,10 @@ void TestSuite::Initialize() {
                          host_.GetFramebufferHeight());
 
   auto p = pb_begin();
+  p = pb_push4f(p, NV097_SET_EYE_POSITION, 0.0f, 0.0f, 0.0f, 1.0f);
+  p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL,
+               NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE | NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
+                   NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
   p = pb_push1(p, NV097_SET_SURFACE_PITCH,
                SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
                    SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));

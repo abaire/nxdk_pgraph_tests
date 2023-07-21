@@ -46,7 +46,10 @@ class ProjectionVertexShader : public VertexShaderProgram {
   // Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
   void ProjectPoint(vector_t &result, const vector_t &world_point) const;
 
+  //! Unprojects the given screen point, producing world coordinates that will project there.
   void UnprojectPoint(vector_t &result, const vector_t &screen_point) const;
+
+  //! Unprojects the given screen point, producing world coordinates that will project there with the given Z value.
   void UnprojectPoint(vector_t &result, const vector_t &screen_point, float world_z) const;
 
  protected:

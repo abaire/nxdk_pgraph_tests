@@ -121,7 +121,10 @@ TextureMatrixTests::TextureMatrixTests(TestHost &host, std::string output_dir)
     constexpr char kTestName[] = "Arbitrary";
     tests_[kTestName] = [this, kTestName]() {
       matrix4_t matrix = {
-          0.7089392, 0.0, 0.515, 0.0, 0.0, 1.2603364, 0.49, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+          {0.7089392, 0.0, 0.515, 0.0},
+          {0.0, 1.2603364, 0.49, 0.0},
+          {0.0, 0.0, 0.0, 0.0},
+          {0.0, 0.0, 1.0, 0.0},
       };
       Test(kTestName, matrix);
     };

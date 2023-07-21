@@ -153,7 +153,7 @@ void TextureCubemapTests::TestCubemap() {
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
-    matrix4_t matrix = {0.0f};
+    matrix4_t matrix;
     vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
     vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
     vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
@@ -239,11 +239,11 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   host_.PrepareDraw(0xFE131313);
 
   auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
-    matrix4_t matrix = {0.0f};
+    matrix4_t matrix;
     vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
     vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
     vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
-    host_.BuildD3DModelViewMatrix(matrix, eye, at, up);
+    TestHost::BuildD3DModelViewMatrix(matrix, eye, at, up);
 
     auto &model_matrix = shader->GetModelMatrix();
     MatrixSetIdentity(model_matrix);

@@ -120,6 +120,47 @@ Assuming that this project has been checked out at `/development/pgraph_tester`:
    the test. You may wish to utilize some of the helper methods from `TestHost`
    and similar classes rather than using the raw output to improve readability.
 
+### Writing nv2a vertex shaders in assembly
+
+See [the README in the nv2a_vsh_asm repository](https://github.com/abaire/nv2a_vsh_asm) for an overview.
+
+`*.vsh` files are assembed via the `generate_nv2a_vshinc_files` function in CMakeLists.txt. Each vsh file produces a
+corresponding `.vshinc` file that contains a C-style list of 32-bit integers containing the vertex shader operations.
+This file is intended to be included from test source files to initialize a constant array which may then be used to
+populate a `VertexShaderProgram` via `SetShaderOverride`.
+
+For example:
+
+```c++
+// Note that the VertexShaderProgram does not copy this data, so it is important that it remain in scope throughout
+// the use of the VertexShaderProgram object.
+static const uint32_t kPassthroughVsh[] = {
+#include "passthrough.vshinc"
+};
+
+// ...
+
+  auto shader = std::make_shared<VertexShaderProgram>();
+  shader->SetShaderOverride(kPassthroughVsh, sizeof(kPassthroughVsh));
+  host_.SetVertexShaderProgram(shader);
+
+```
+
+Uniform values may then be set via the `VertexShaderProgram::SetUniform*` series of functions. By default, the 0th
+uniform will be available in the shader as `c96`.
+
+For example, a shader that takes a 4-element vertex might have the code:
+
+```asm
+#vertex vector 96
+```
+
+which would be populated via
+
+```c++
+  shader->shader->SetUniformF(0, -1.f, 1.5f, 0.f, 1.f);
+```
+
 ## Running with CLion
 
 ### On xemu

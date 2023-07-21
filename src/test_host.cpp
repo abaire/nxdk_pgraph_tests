@@ -875,7 +875,7 @@ void TestHost::SaveRawTexture(const std::string &output_directory, const std::st
   fclose(f);
 }
 
-void TestHost::SetupControl0(bool enable_stencil_write) const {
+void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered) const {
   // FIXME: Figure out what to do in cases where there are multiple stages with different conversion needs.
   // Is this supported by hardware?
   bool requires_colorspace_conversion = texture_stage_[0].RequiresColorspaceConversion();
@@ -883,6 +883,7 @@ void TestHost::SetupControl0(bool enable_stencil_write) const {
   uint32_t control0 = enable_stencil_write ? NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE : 0;
   control0 |= MASK(NV097_SET_CONTROL0_Z_FORMAT,
                    depth_buffer_mode_float_ ? NV097_SET_CONTROL0_Z_FORMAT_FLOAT : NV097_SET_CONTROL0_Z_FORMAT_FIXED);
+  control0 |= MASK(NV097_SET_CONTROL0_Z_PERSPECTIVE_ENABLE, w_buffered ? 1 : 0);
 
   if (requires_colorspace_conversion) {
     control0 |= MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB);
@@ -1105,6 +1106,11 @@ void TestHost::BuildD3DProjectionViewportMatrix(matrix4_t &result, float fov, fl
   MatrixMultMatrix(projection, viewport, result);
 }
 
+void TestHost::BuildD3DOrthographicProjectionMatrix(XboxMath::matrix4_t &result, float left, float right, float top,
+                                                    float bottom, float z_near, float z_far) {
+  CreateD3DOrthographicLH(result, left, right, top, bottom, z_near, z_far);
+}
+
 void TestHost::BuildDefaultXDKProjectionMatrix(matrix4_t &matrix) const {
   BuildD3DProjectionViewportMatrix(matrix, M_PI * 0.25f, 1.0f, 200.0f);
 }
@@ -1192,6 +1198,7 @@ void TestHost::SetFixedFunctionProjectionMatrix(const matrix4_t projection_matri
 
   GetCompositeMatrix(fixed_function_composite_matrix_, fixed_function_model_view_matrix_,
                      fixed_function_projection_matrix_);
+
   auto p = pb_begin();
   p = pb_push_transposed_matrix(p, NV097_SET_COMPOSITE_MATRIX, fixed_function_composite_matrix_[0]);
   pb_end(p);
@@ -1200,6 +1207,11 @@ void TestHost::SetFixedFunctionProjectionMatrix(const matrix4_t projection_matri
   MatrixInvert(fixed_function_composite_matrix_, fixed_function_inverse_composite_matrix_);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
+
+  // https://developer.download.nvidia.com/assets/gamedev/docs/W_buffering2.pdf
+  auto &proj = fixed_function_projection_matrix_;
+  w_near_ = proj[3][3] - (proj[3][2] / proj[2][2] * proj[2][3]);
+  w_far_ = (proj[3][3] - proj[3][2]) / (proj[2][2] - proj[2][3]) * proj[2][3] + proj[3][3];
 }
 
 void TestHost::SetTextureStageEnabled(uint32_t stage, bool enabled) {

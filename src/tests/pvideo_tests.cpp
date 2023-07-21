@@ -13,7 +13,7 @@
 #include "texture_generator.h"
 
 static constexpr const char kStopBehavior[] = "Stop";
-static constexpr const char kAlternateStop[] = "Stop Alt";
+// static constexpr const char kAlternateStop[] = "Stop Alt";
 
 static constexpr const char kSizeInMaxUnity[] = "Size In Max - dI/dO = 1";
 static constexpr const char kSizeInMaxLarge[] = "Size In Max - dI/dO > 1";
