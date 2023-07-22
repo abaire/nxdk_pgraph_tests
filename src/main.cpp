@@ -115,8 +115,11 @@ static bool discover_historical_crashes(const std::string& log_file_path,
 #endif
 static bool process_config(const char* config_file_path, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 
+extern "C" __cdecl int automount_d_drive(void);
+
 /* Main program function */
 int main() {
+  automount_d_drive();
   XVideoSetMode(kFramebufferWidth, kFramebufferHeight, 32, REFRESH_DEFAULT);
 
   // Reserve 4 times the size of the default framebuffers to allow for antialiasing.

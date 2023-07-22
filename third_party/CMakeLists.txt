@@ -73,4 +73,26 @@ if (NOT NO_OPT)
             -Wno-everything
     )
     target_link_options(xbox_math3d PRIVATE "/debug:none")
+else ()
+    if (CMAKE_BUILD_TYPE MATCHES Debug)
+        target_compile_options(
+                xbox_math3d
+                PRIVATE
+                -g
+                -gdwarf-4
+                -O0
+                -Wall
+                -fstandalone-debug
+        )
+        target_link_options(xbox_math3d PRIVATE "/debug:full")
+    else ()
+        target_compile_options(
+                xbox_math3d
+                PRIVATE
+                -O3
+                -fno-strict-aliasing
+                -Wall
+        )
+        target_link_options(xbox_math3d PRIVATE "/debug:none")
+    endif ()
 endif ()

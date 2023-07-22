@@ -253,7 +253,7 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
     MatrixTranslate(model_matrix, translation);
 
     matrix4_t mv_matrix;
-    MatrixMultMatrix(matrix, model_matrix, mv_matrix);
+    MatrixMultMatrix(model_matrix, matrix, mv_matrix);
     host_.SetFixedFunctionModelViewMatrix(mv_matrix);
 
     auto inv_projection = host_.GetFixedFunctionInverseCompositeMatrix();
