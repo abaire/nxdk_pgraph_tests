@@ -460,13 +460,6 @@ void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, uint32_t provoking_v
   host_.FinishDraw(allow_saving_, output_dir_, name);
 }
 
-void ShadeModelTests::Deinitialize() {
-  TestSuite::Deinitialize();
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST);
-  pb_end(p);
-}
-
 static std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex,
                                 TestHost::DrawPrimitive primitive) {
   const char* primitive_name;

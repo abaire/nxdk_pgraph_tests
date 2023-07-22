@@ -17,7 +17,6 @@ class ShadeModelTests : public TestSuite {
   ShadeModelTests(TestHost& host, std::string output_dir);
 
   void Initialize() override;
-  void Deinitialize() override;
 
  private:
   void TestShadeModelFixed(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive, bool texture);

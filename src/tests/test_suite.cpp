@@ -91,41 +91,46 @@ void TestSuite::Initialize() {
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
 
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_EYE_POSITION, 0.0f, 0.0f, 0.0f, 1.0f);
-  p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL,
-               NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE | NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
-                   NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, host_.GetFramebufferWidth() << 16);
-  p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, host_.GetFramebufferHeight() << 16);
+  {
+    auto p = pb_begin();
+    p = pb_push4f(p, NV097_SET_EYE_POSITION, 0.0f, 0.0f, 0.0f, 1.0f);
+    p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL,
+                 NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE | NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
+                     NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
+    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
+                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, host_.GetFramebufferWidth() << 16);
+    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, host_.GetFramebufferHeight() << 16);
 
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
-  p = pb_push1f(p, NV097_SET_BACK_MATERIAL_ALPHA, 0.f);
+    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
+    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
+    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
+    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
+    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
+    p = pb_push1f(p, NV097_SET_BACK_MATERIAL_ALPHA, 0.f);
 
-  p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+    p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
+    p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+    p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
 
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
+    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
+    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
+    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
 
-  p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
-  p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
-  p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
+    p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
+    p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
+    p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
 
-  p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
+    p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
 
-  p = pb_push1(p, NV097_SET_SHADE_MODEL, NV097_SET_SHADE_MODEL_SMOOTH);
-  pb_end(p);
+    p = pb_push1(p, NV097_SET_SHADE_MODEL, NV097_SET_SHADE_MODEL_SMOOTH);
+    p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_LAST);
+    pb_end(p);
+  }
 
   host_.SetWindowClipExclusive(false);
   // Note, setting the first clip region will cause the hardware to also set all subsequent regions.
@@ -158,8 +163,6 @@ void TestSuite::Initialize() {
     /* Wait for completion... */
   }
 
-  p = pb_begin();
-
   matrix4_t identity_matrix;
   MatrixSetIdentity(identity_matrix);
   for (auto i = 0; i < 4; ++i) {
@@ -187,6 +190,7 @@ void TestSuite::Initialize() {
 
   // TODO: Set up with TextureStage instances in host_.
   {
+    auto p = pb_begin();
     uint32_t address = NV097_SET_TEXTURE_ADDRESS;
     uint32_t control = NV097_SET_TEXTURE_CONTROL0;
     uint32_t filter = NV097_SET_TEXTURE_FILTER;
@@ -214,27 +218,43 @@ void TestSuite::Initialize() {
     p = pb_push1(p, address, 0x10101);
     p = pb_push1(p, control, 0x3ffc0);
     p = pb_push1(p, filter, 0x1012000);
+    pb_end(p);
   }
 
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-  p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
+    p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
-  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
-  p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
-  p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
+    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
+    p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
+    p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
 
-  p = pb_push1(p, NV097_SET_COLOR_MASK,
-               NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                   NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
+    p = pb_push1(p, NV097_SET_COLOR_MASK,
+                 NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                     NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
 
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-  p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
+    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
+    p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
+    p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+    p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
+    p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
 
-  p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
-  pb_end(p);
+    p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
+
+    // Prevent bleedover between tests by setting default values.
+    p = pb_push4f(p, NV097_SET_WEIGHT4F, 0.f, 0.f, 0.f, 0.f);
+    p = pb_push3f(p, NV097_SET_NORMAL3F, 0.f, 0.f, 0.f);
+    p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0x00000000);
+    p = pb_push1(p, NV097_SET_SPECULAR_COLOR4I, 0x00000000);
+    p = pb_push1f(p, NV097_SET_SPECULAR_COLOR4I, 0.f);
+    p = pb_push1(p, NV097_SET_POINT_SIZE, 0x8);
+    p = pb_push4f(p, NV097_SET_TEXCOORD0_4F, 0.f, 0.f, 0.f, 0.f);
+    p = pb_push4f(p, NV097_SET_TEXCOORD1_4F, 0.f, 0.f, 0.f, 0.f);
+    p = pb_push4f(p, NV097_SET_TEXCOORD2_4F, 0.f, 0.f, 0.f, 0.f);
+    p = pb_push4f(p, NV097_SET_TEXCOORD3_4F, 0.f, 0.f, 0.f, 0.f);
+    pb_end(p);
+  }
 
   host_.SetDefaultViewportAndFixedFunctionMatrices();
   host_.SetDepthBufferFloatMode(false);
@@ -258,10 +278,12 @@ void TestSuite::Initialize() {
 #endif
 
   TagNV2ATrace(2);
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-  pb_end(p);
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
+    p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
+    pb_end(p);
+  }
   TagNV2ATrace(4);
 }
 
