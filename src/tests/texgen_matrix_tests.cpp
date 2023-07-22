@@ -137,7 +137,10 @@ TexgenMatrixTests::TexgenMatrixTests(TestHost &host, std::string output_dir)
       std::string test_name = name + "_Arbitrary";
       tests_[test_name] = [this, test_name, mode]() {
         matrix4_t matrix = {
-            0.7089392, 0.0, 0.515, 0.0, 0.0, 1.2603364, 0.49, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+            {0.7089392, 0.0, 0.515, 0.0},
+            {0.0, 1.2603364, 0.49, 0.0},
+            {0.0, 0.0, 0.0, 0.0},
+            {0.0, 0.0, 1.0, 0.0},
         };
         Test(test_name, matrix, mode);
       };

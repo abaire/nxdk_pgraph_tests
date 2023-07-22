@@ -120,7 +120,7 @@ void ColorKeyTests::TearDownTest() {
   pb_end(p);
 }
 
-static void add_vertex(TestHost& host, float x, float y, float u, float v) {
+static void AddVertex(TestHost& host, float x, float y, float u, float v) {
   host.SetDiffuse(0.4f, 0.1f, 0.8f);
   host.SetTexCoord0(u, v);
   host.SetTexCoord1(u, v);
@@ -138,10 +138,10 @@ static void DrawQuads(TestHost& host, float x = 0.f, float y = 0.f) {
 
   auto size = 0.75f;
 
-  add_vertex(host, -size + x, size + y, 0.f * kTextureSize, 0.f * kTextureSize);
-  add_vertex(host, size + x, size + y, 1.f * kTextureSize, 0.f * kTextureSize);
-  add_vertex(host, size + x, -size + y, 1.f * kTextureSize, 1.f * kTextureSize);
-  add_vertex(host, -size + x, -size + y, 0.f * kTextureSize, 1.f * kTextureSize);
+  AddVertex(host, -size + x, size + y, 0.f * kTextureSize, 0.f * kTextureSize);
+  AddVertex(host, size + x, size + y, 1.f * kTextureSize, 0.f * kTextureSize);
+  AddVertex(host, size + x, -size + y, 1.f * kTextureSize, 1.f * kTextureSize);
+  AddVertex(host, -size + x, -size + y, 0.f * kTextureSize, 1.f * kTextureSize);
 
   host.End();
 }

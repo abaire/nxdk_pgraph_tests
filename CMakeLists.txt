@@ -146,6 +146,7 @@ generate_nv2a_vshinc_files(
         src/shaders/fog_vec4_z.vsh
         src/shaders/fog_vec4_zw.vsh
         src/shaders/fog_vec4_unset.vsh
+        src/shaders/passthrough.vsh
 )
 
 generate_pixelshader_inl_files(
@@ -366,6 +367,8 @@ add_executable(
         src/tests/w_param_tests.h
         src/tests/window_clip_tests.cpp
         src/tests/window_clip_tests.h
+        src/tests/z_min_max_control_tests.cpp
+        src/tests/z_min_max_control_tests.h
         src/tests/zero_stride_tests.cpp
         src/tests/zero_stride_tests.h
         ${generated_vertex_shaders}

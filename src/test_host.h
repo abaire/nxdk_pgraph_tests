@@ -342,6 +342,10 @@ class TestHost {
   // Gets a D3D-style matrix suitable for a projection + viewport transform.
   void BuildD3DProjectionViewportMatrix(matrix4_t &result, float fov, float z_near, float z_far) const;
 
+  //! Builds an orthographic projection matrix.
+  static void BuildD3DOrthographicProjectionMatrix(matrix4_t &result, float left, float right, float top, float bottom,
+                                                   float z_near, float z_far);
+
   // Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin)
   static void BuildDefaultXDKModelViewMatrix(matrix4_t &matrix);
   // Gets a reasonable default projection matrix (fov = PI/4, near = 1, far = 200)
@@ -371,6 +375,9 @@ class TestHost {
   void SetFixedFunctionProjectionMatrix(const matrix4_t projection_matrix);
   inline const matrix4_t &GetFixedFunctionModelViewMatrix() const { return fixed_function_model_view_matrix_; }
   inline const matrix4_t &GetFixedFunctionProjectionMatrix() const { return fixed_function_projection_matrix_; }
+
+  float GetWNear() const { return w_near_; }
+  float GetWFar() const { return w_far_; }
 
   // Start the process of rendering an inline-defined primitive (specified via SetXXXX methods below).
   // Note that End() must be called to trigger rendering, and that SetVertex() triggers the creation of a vertex.
@@ -526,7 +533,8 @@ class TestHost {
     }
   }
 
-  void SetupControl0(bool enable_stencil_write = true) const;
+  //! Set up the control0 register, controlling stencil writing and depth buffer mode.
+  void SetupControl0(bool enable_stencil_write = true, bool w_buffered = false) const;
 
   // Commit any changes to texture stages (called automatically in PrepareDraw but may be useful to call more frequently
   // in scenes with multiple draws per clear)
@@ -603,6 +611,9 @@ class TestHost {
   matrix4_t fixed_function_projection_matrix_{};
   matrix4_t fixed_function_composite_matrix_{};
   matrix4_t fixed_function_inverse_composite_matrix_{};
+
+  float w_near_{0.f};
+  float w_far_{0.f};
 
   bool save_results_{true};
 
