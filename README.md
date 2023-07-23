@@ -200,7 +200,7 @@ To create a launch configuration that deploys the devhost to an XBDM-enabled XBO
     3. Set `Executable` to the full path to the [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge)
        binary
     4. Set `Program arguments`
-       to `192.168.80.87 -v3 -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f`
+       to `<YOUR_XBOX_IP> -v3 -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f`
     5. Run the target. You will need to do this any time the resources are changed. The XBE can be uploaded as part of
        the debug step.
 
@@ -212,8 +212,12 @@ To create a launch configuration that deploys the devhost to an XBDM-enabled XBO
     1. Set "GDB Server" to the full path to the [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge)
        binary
     1. Set "GDB Server args"
-       to `<YOUR_XBOX_IP> -s -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file/default.xbe e:\$CMakeCurrentTargetName$ -f && gdb :1999 e:\$CMakeCurrentTargetName$`
+       to `<YOUR_XBOX_IP> -s -- gdb :1999 e:\$CMakeCurrentTargetName$`
     1. Under "Advanced GDB Server Options"
         1. Set "Reset command" to `Never`
-        2. If CLion times out connecting to the GDB server, increase the `Startup delay` setting to give the XBE file
-           upload more time to complete. A timeout of 10000 - 15000 milliseconds may be a good start.
+    1. Add a "Before launch" > "Run External tool" to copy the default.xbe to the XBOX:
+        1. Set "Program" to the full path to the [xbdm_gdb_bridge binary](https://github.com/abaire/xbdm_gdb_bridge)
+           binary
+        2. Set "Arguments"
+           to `<YOUR_XBOX_IP> -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file/default.xbe e:\$CMakeCurrentTargetName$ -f`
+        3. Uncheck "Synchronize files after execution"
