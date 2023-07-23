@@ -24,5 +24,5 @@ std::ofstream Logger::Log() {
   ASSERT(singleton_ && "Attempt to use Logger before Initialize");
   auto log_file = std::ofstream(singleton_->log_path_, std::ios_base::app);
   ASSERT(log_file && "Failed to open log file for output");
-  return std::move(log_file);
+  return log_file;
 }
