@@ -22,11 +22,15 @@ function(generate_nv2a_vshinc_files)
 
     set(target "${ARGV0}")
 
-    set("${target}")
-    foreach (src ${NV2A_VSH_SOURCES})
-        set(output "${CMAKE_CURRENT_BINARY_DIR}/${src}inc")
+    set(generated_sources)
+    set(generated_source_dirs)
 
+    foreach (src ${NV2A_VSH_SOURCES})
         get_filename_component(abs_src "${src}" REALPATH)
+        get_filename_component(src_dirname "${src}" DIRECTORY)
+        get_filename_component(src_basename "${src}" NAME_WE)
+        file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${src_dirname}")
+        set(output "${CMAKE_CURRENT_BINARY_DIR}/${src_dirname}/${src_basename}.vshinc")
 
         add_custom_command(
                 OUTPUT "${output}"
@@ -34,6 +38,30 @@ function(generate_nv2a_vshinc_files)
                 DEPENDS "${abs_src}"
         )
 
-        set("${target}" "${${target}};${output}" CACHE INTERNAL "")
+        list(APPEND generated_sources "${output}")
+        list(APPEND generated_source_dirs "${CMAKE_CURRENT_BINARY_DIR}/${src_dirname}")
     endforeach ()
+
+    add_custom_target(
+            "${target}_gen"
+            DEPENDS
+            ${generated_sources}
+    )
+
+    list(REMOVE_DUPLICATES generated_source_dirs)
+    add_library(
+            "${target}"
+            INTERFACE
+            EXCLUDE_FROM_ALL
+            ${generated_sources}
+    )
+    target_include_directories(
+            "${target}"
+            INTERFACE
+            ${generated_source_dirs}
+    )
+    add_dependencies(
+            "${target}"
+            "${target}_gen"
+    )
 endfunction()

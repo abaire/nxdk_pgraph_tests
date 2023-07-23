@@ -124,7 +124,7 @@ endmacro()
 
 # Vertex shaders.
 generate_nv2a_vshinc_files(
-        generated_vertex_shaders
+        generated_nv2a_vertex_shaders
         SOURCES
         src/shaders/fog_infinite_fogc_test.vsh
         src/shaders/fog_vec4_w.vsh
@@ -240,6 +240,7 @@ target_link_libraries(
         PUBLIC
         generated_fp20_pixel_shaders
         generated_vp20_vertex_shaders
+        generated_nv2a_vertex_shaders
         PRIVATE
         fpng
         printf
@@ -373,7 +374,6 @@ add_executable(
         src/tests/z_min_max_control_tests.h
         src/tests/zero_stride_tests.cpp
         src/tests/zero_stride_tests.h
-        ${generated_vertex_shaders}
 )
 
 # Pull debug info out of the binary into a host-side linked binary.
