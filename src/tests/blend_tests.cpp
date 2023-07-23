@@ -5,13 +5,16 @@
 #include <memory>
 #include <utility>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 
 // From pbkit.c, DMA_A is set to channel 3 by default
 // NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
 static constexpr uint32_t kDefaultDMAChannelA = 3;
+// From pbkit.c, DMA_B is set to channel 11 by default
+// NV097_SET_CONTEXT_DMA_B == NV20_TCL_PRIMITIVE_3D_SET_OBJECT2
+// static constexpr uint32_t kDefaultDMAChannelB = 11;
 // From pbkit.c, DMA_COLOR is set to channel 9 by default.
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
 static constexpr uint32_t kDefaultDMAColorChannel = 9;
@@ -40,7 +43,7 @@ void BlendTests::Initialize() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
   host_.SetCombinerControl(1);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   auto p = pb_begin();
@@ -55,27 +58,31 @@ void BlendTests::Test(const std::string &name, const std::function<void()> &body
 
   DrawCheckerboardBackground();
 
-  RenderToTextureStart();
-  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
-  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
-  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, 256, 256, true);
+  {
+    RenderToTextureStart(1);
 
-  // Initialize texture to fully opaque white.
-  memset(host_.GetTextureMemory(), 0xFF, kTexturePitch * kTextureSize);
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, 256, 256, true);
 
-  body();
+    // Initialize texture to fully opaque white.
+    auto texture_memory = host_.GetTextureMemoryForStage(1);
+    memset(texture_memory, 0xFF, kTexturePitch * kTextureSize);
 
-  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
-                                  host_.GetFramebufferHeight());
+    body();
 
-  RenderToTextureEnd();
+    host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                    host_.GetFramebufferHeight());
+
+    RenderToTextureEnd();
+  }
 
   {
-    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
-    host_.SetTextureStageEnabled(0, true);
-    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-    auto &texture_stage = host_.GetTextureStage(0);
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
+    host_.SetTextureStageEnabled(1, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+    auto &texture_stage = host_.GetTextureStage(1);
     texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
     texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
     host_.SetupTextureStages();
@@ -86,13 +93,13 @@ void BlendTests::Test(const std::string &name, const std::function<void()> &body
     const float kBottom = kTop + kTextureSize;
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetTexCoord1(0.0f, 0.0f);
     host_.SetVertex(kLeft, kTop, 0.1f, 1.0f);
-    host_.SetTexCoord0(1.0f, 0.0f);
+    host_.SetTexCoord1(1.0f, 0.0f);
     host_.SetVertex(kRight, kTop, 0.1f, 1.0f);
-    host_.SetTexCoord0(1.0f, 1.0f);
+    host_.SetTexCoord1(1.0f, 1.0f);
     host_.SetVertex(kRight, kBottom, 0.1f, 1.0f);
-    host_.SetTexCoord0(0.0f, 1.0f);
+    host_.SetTexCoord1(0.0f, 1.0f);
     host_.SetVertex(kLeft, kBottom, 0.1f, 1.0f);
     host_.End();
 
@@ -151,8 +158,9 @@ void BlendTests::DrawCheckerboardBackground() const {
   texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
   host_.SetupTextureStages();
 
-  GenerateSwizzledRGBACheckerboard(host_.GetTextureMemory(), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4,
-                                   kCheckerboardA, kCheckerboardB, kCheckerSize);
+  auto texture_memory = host_.GetTextureMemoryForStage(0);
+  GenerateSwizzledRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kCheckerboardA,
+                                   kCheckerboardB, kCheckerSize);
 
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetTexCoord0(0.0f, 0.0f);
@@ -169,8 +177,8 @@ void BlendTests::DrawCheckerboardBackground() const {
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 }
 
-void BlendTests::RenderToTextureStart() const {
-  const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemory());
+void BlendTests::RenderToTextureStart(uint32_t stage) const {
+  const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(stage));
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);

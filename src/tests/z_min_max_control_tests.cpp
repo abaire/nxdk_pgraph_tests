@@ -4,8 +4,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/perspective_vertex_shader.h"
-#include "texture_generator.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 #include "xbox_math_d3d.h"
 #include "xbox_math_matrix.h"
@@ -82,12 +81,6 @@ static void AddVertex(TestHost& host, const vector_t& position, float r, float g
   host.SetDiffuse(r, g, b);
   host.SetVertex(position);
 };
-
-// clang-format off
-static const uint32_t kPassthroughVsh[] = {
-#include "passthrough.vshinc"
-};
-// clang-format on
 
 void ZMinMaxControlTests::DrawBlock(float x_offset, float y_offset, ZMinMaxDrawMode zw_mode, bool projected) const {
   const float z_min = 0.f;
@@ -212,8 +205,7 @@ void ZMinMaxControlTests::DrawBlock(float x_offset, float y_offset, ZMinMaxDrawM
 }
 
 void ZMinMaxControlTests::Test(const std::string& name, uint32_t mode, bool w_buffered) {
-  auto shader = std::make_shared<VertexShaderProgram>();
-  shader->SetShaderOverride(kPassthroughVsh, sizeof(kPassthroughVsh));
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(kBackgroundColor);

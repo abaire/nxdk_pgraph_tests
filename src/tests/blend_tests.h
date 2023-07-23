@@ -34,7 +34,7 @@ class BlendTests : public TestSuite {
   void Draw(float left, float top, float right, float bottom, uint32_t color, uint32_t func, uint32_t sfactor,
             uint32_t dfactor) const;
 
-  void RenderToTextureStart() const;
+  void RenderToTextureStart(uint32_t stage) const;
   void RenderToTextureEnd() const;
 };
 

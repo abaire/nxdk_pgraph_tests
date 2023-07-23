@@ -192,6 +192,8 @@ add_library(
         src/shaders/perspective_vertex_shader.h
         src/shaders/pixel_shader_program.cpp
         src/shaders/pixel_shader_program.h
+        src/shaders/passthrough_vertex_shader.cpp
+        src/shaders/passthrough_vertex_shader.h
         src/shaders/precalculated_vertex_shader.cpp
         src/shaders/precalculated_vertex_shader.h
         src/shaders/projection_vertex_shader.cpp
