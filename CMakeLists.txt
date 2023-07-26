@@ -177,11 +177,16 @@ add_library(
         src/dds_image.h
         src/debug_output.cpp
         src/debug_output.h
+        src/logger.cpp
+        src/logger.h
         src/main.cpp
         src/menu_item.cpp
         src/menu_item.h
-        src/logger.cpp
-        src/logger.h
+        src/models/flat_grid.cpp
+        src/models/flat_grid.h
+        src/models/flat_grid_mesh.h
+        src/models/model_builder.cpp
+        src/models/model_builder.h
         src/pbkit_ext.cpp
         src/pbkit_ext.h
         src/pgraph_diff_token.cpp
@@ -294,6 +299,8 @@ add_executable(
         src/tests/inline_array_size_mismatch.h
         src/tests/lighting_normal_tests.cpp
         src/tests/lighting_normal_tests.h
+        src/tests/lighting_spotlight_tests.cpp
+        src/tests/lighting_spotlight_tests.h
         src/tests/lighting_two_sided_tests.cpp
         src/tests/lighting_two_sided_tests.h
         src/tests/line_width_tests.cpp
