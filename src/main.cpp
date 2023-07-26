@@ -56,6 +56,7 @@
 #include "tests/inline_array_size_mismatch.h"
 #include "tests/lighting_control_tests.h"
 #include "tests/lighting_normal_tests.h"
+#include "tests/lighting_spotlight_tests.h"
 #include "tests/lighting_two_sided_tests.h"
 #include "tests/line_width_tests.h"
 #include "tests/material_alpha_tests.h"
@@ -395,6 +396,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(ImageBlitTests)
   REG_TEST(InlineArraySizeMismatchTests)
   REG_TEST(LightingControlTests)
+  REG_TEST(LightingSpotlightTests)
   REG_TEST(LightingTwoSidedTests)
   REG_TEST(LineWidthTests)
   REG_TEST(MaterialAlphaTests)

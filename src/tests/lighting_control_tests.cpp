@@ -1,5 +1,6 @@
 #include "lighting_control_tests.h"
 
+#include <models/flat_mesh_grid_model.h>
 #include <pbkit/pbkit.h>
 
 #include "debug_output.h"
@@ -17,9 +18,6 @@
 
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
-
-static constexpr float PI_OVER_180 = (float)M_PI / 180.0f;
-#define DEG2RAD(c) ((float)(c) * PI_OVER_180)
 
 static std::string MakeTestName(uint32_t light_control, bool is_fixed_function) {
   char buf[32] = {0};
@@ -55,24 +53,39 @@ void LightingControlTests::Deinitialize() {
 }
 
 void LightingControlTests::CreateGeometry() {
-  // SET_COLOR_MATERIAL below causes all of these values to be ignored entirely.
-  vector_t diffuse{0.f, 0.f, 0.f, 0.f};
+  // SET_COLOR_MATERIAL below causes per-vertex diffuse color to be ignored entirely.
+  vector_t diffuse{0.f, 0.f, 0.0f, 0.75f};
 
   // However:
   // 1) the alpha from the specular value is added to the material alpha.
   // 2) the color is added to the computed vertex color if SEPARATE_SPECULAR is OFF
   vector_t specular{0.f, 0.4, 0.f, 0.25f};
 
-  auto construct_model = [this](const ModelBuilder& model, std::shared_ptr<VertexBuffer>& vertex_buffer) {
+  auto construct_model = [this](ModelBuilder& model, std::shared_ptr<VertexBuffer>& vertex_buffer) {
     vertex_buffer = host_.AllocateVertexBuffer(model.GetVertexCount());
     model.PopulateVertexBuffer(vertex_buffer);
   };
 
-  construct_model(LightControlTestMeshConeModel(diffuse, specular), vertex_buffer_cone_);
-  construct_model(LightControlTestMeshCylinderModel(diffuse, specular), vertex_buffer_cylinder_);
-  construct_model(LightControlTestMeshSphereModel(diffuse, specular), vertex_buffer_sphere_);
-  construct_model(LightControlTestMeshSuzanneModel(diffuse, specular), vertex_buffer_suzanne_);
-  construct_model(LightControlTestMeshTorusModel(diffuse, specular), vertex_buffer_torus_);
+  {
+    auto model = LightControlTestMeshConeModel(diffuse, specular);
+    construct_model(model, vertex_buffer_cone_);
+  }
+  {
+    auto model = LightControlTestMeshCylinderModel(diffuse, specular);
+    construct_model(model, vertex_buffer_cylinder_);
+  }
+  {
+    auto model = LightControlTestMeshSphereModel(diffuse, specular);
+    construct_model(model, vertex_buffer_sphere_);
+  }
+  {
+    auto model = LightControlTestMeshSuzanneModel(diffuse, specular);
+    construct_model(model, vertex_buffer_suzanne_);
+  }
+  {
+    auto model = LightControlTestMeshTorusModel(diffuse, specular);
+    construct_model(model, vertex_buffer_torus_);
+  }
 }
 
 void LightingControlTests::Initialize() {
@@ -123,7 +136,7 @@ static void SetupLights(TestHost& host) {
     constexpr uint32_t kLightNum = 0;
 
     // From the left, pointing right and into the screen.
-    vector_t light_dir{1.f, 0.f, -1.f, 1.f};
+    vector_t light_dir{1.f, 0.f, 1.f, 1.f};
     VectorNormalize(light_dir);
 
     // Calculate the Blinn half vector.
@@ -158,7 +171,7 @@ static void SetupLights(TestHost& host) {
   // Point light on the right between the geometry and camera.
   {
     constexpr uint32_t kLightNum = 1;
-    vector_t position{1.5f, 1.f, 2.5f, 1.f};
+    vector_t position{1.5f, 1.f, -2.5f, 1.f};
     const matrix4_t& view_matrix = host.GetFixedFunctionModelViewMatrix();
     VectorMultMatrix(position, view_matrix);
     position[3] = 1.f;
@@ -173,47 +186,6 @@ static void SetupLights(TestHost& host) {
 
     light_mode_bitvector |= LIGHT_MODE(kLightNum, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_LOCAL);
   }
-
-  // // Spotlight below all geometry and closer to the camera, pointing towards the top of the screen.
-  // {
-  //   constexpr uint32_t kLightNum = 2;
-  //   const matrix4_t& view_matrix = host.GetFixedFunctionModelViewMatrix();
-  //   vector_t position{0.f, -4.75f, 0.25f, 1.f};
-  //   VectorMultMatrix(position, view_matrix);
-  //   position[3] = 1.f;
-  //
-  //   // Spotlight colors are multiplied and have a higher effect than directional lights.
-  //   p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), 0.f, 0.f, 0.005f);
-  //   p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), 0.25f, 0.f, 0.f);
-  //   p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), 0.f, 0.f, 0.25f);
-  //   p = pb_push1f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 5.0f);
-  //   p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_POSITION), position);
-  //   p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_ATTENUATION), 0.02f, 0.f, 0.f);
-  //
-  //   // TODO: Write a test to understand these values.
-  //   p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPOT_FALLOFF), 0.f, -0.494592f, 1.494592f);
-  //
-  //   vector_t direction{0.f, 1.f, 0.f, 1.f};
-  //   VectorNormalize(direction);
-  //
-  //   // See spotlight handling code here:
-  //   // https://github.com/xemu-project/xemu/blob/15bf68594f186c3df876fa7856b0d7a13e80f0e1/hw/xbox/nv2a/shaders.c#L653
-  //   // which references
-  //   // https://docs.microsoft.com/en-us/windows/win32/direct3d9/attenuation-and-spotlight-factor#spotlight-factor
-  //   float theta = DEG2RAD(1.f);  // umbra (fully illuminated) angle
-  //   float phi = DEG2RAD(35.f);   // penumbra (attenuated via falloff) angle
-  //
-  //   float cos_half_theta = cosf(0.5f * theta);
-  //   float cos_half_phi = cosf(0.5f * phi);
-  //
-  //   float inv_scale = -1.f / (cos_half_theta - cos_half_phi);
-  //   ScalarMultVector(direction, inv_scale);
-  //   direction[3] = cos_half_phi * inv_scale;
-  //
-  //   p = pb_push4fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPOT_DIRECTION), direction);
-  //
-  //   light_mode_bitvector |= LIGHT_MODE(kLightNum, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_SPOT);
-  // }
 
   p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
   pb_end(p);

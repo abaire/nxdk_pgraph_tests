@@ -2,7 +2,10 @@
 #ifndef _LIGHT_CONTROL_TEST_MESH_CONE_MODEL_H_
 #define _LIGHT_CONTROL_TEST_MESH_CONE_MODEL_H_
 
+#include <cstdint>
+
 #include "model_builder.h"
+#include "xbox_math_types.h"
 
 class LightControlTestMeshConeModel : public SolidColorModelBuilder {
  public:
@@ -13,8 +16,26 @@ class LightControlTestMeshConeModel : public SolidColorModelBuilder {
   [[nodiscard]] uint32_t GetVertexCount() const override;
 
  protected:
-  [[nodiscard]] const float *GetVertexPositions() const override;
-  [[nodiscard]] const float *GetVertexNormals() const override;
+  [[nodiscard]] const float *GetVertexPositions() override;
+  [[nodiscard]] const float *GetVertexNormals() override;
+  void ReleaseData() override {
+    if (vertices_) {
+      delete[] vertices_;
+      vertices_ = nullptr;
+    }
+    if (normals_) {
+      delete[] normals_;
+      normals_ = nullptr;
+    }
+    if (texcoords_) {
+      delete[] texcoords_;
+      texcoords_ = nullptr;
+    }
+  }
+
+  float *vertices_{nullptr};
+  float *normals_{nullptr};
+  float *texcoords_{nullptr};
 };
 
 #endif  // _LIGHT_CONTROL_TEST_MESH_CONE_MODEL_H_

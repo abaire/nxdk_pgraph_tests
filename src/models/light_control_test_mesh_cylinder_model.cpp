@@ -2,8 +2,64 @@
 
 #include "light_control_test_mesh_cylinder_model.h"
 
-#include "light_control_test_mesh_cylinder_mesh.h"
+#include <stdio.h>
 
-uint32_t LightControlTestMeshCylinderModel::GetVertexCount() const { return kNumVertices; }
-const float* LightControlTestMeshCylinderModel::GetVertexPositions() const { return kPosition; }
-const float* LightControlTestMeshCylinderModel::GetVertexNormals() const { return kNormal; }
+#include "debug_output.h"
+
+#define READ(target, size)                                                            \
+  if (fread((target), (size), 1, fp) != 1) {                                          \
+    ASSERT(!"Failed to read from d:\\models\\light_control_test_mesh_cylinder.mesh"); \
+  }
+
+#define READ_ARRAY(target, size, elements)                                            \
+  if (fread((target), (size), (elements), fp) != (elements)) {                        \
+    ASSERT(!"Failed to read from d:\\models\\light_control_test_mesh_cylinder.mesh"); \
+  }
+
+#define SKIP(size)                                                                  \
+  if (fseek(fp, (size), SEEK_CUR)) {                                                \
+    ASSERT(!"Failed to seek in d:\\models\\light_control_test_mesh_cylinder.mesh"); \
+  }
+
+uint32_t LightControlTestMeshCylinderModel::GetVertexCount() const {
+  FILE *fp = fopen("d:\\models\\light_control_test_mesh_cylinder.mesh", "rb");
+  ASSERT(fp && "Failed to open d:\\models\\light_control_test_mesh_cylinder.mesh");
+  uint32_t num_vertices;
+  READ(&num_vertices, sizeof(num_vertices))
+  fclose(fp);
+  return num_vertices;
+}
+
+const float *LightControlTestMeshCylinderModel::GetVertexPositions() {
+  ASSERT(!vertices_ && "vertices_ already populated")
+  FILE *fp = fopen("d:\\models\\light_control_test_mesh_cylinder.mesh", "rb");
+  ASSERT(fp && "Failed to open d:\\models\\light_control_test_mesh_cylinder.mesh");
+  SKIP(sizeof(uint32_t))
+
+  uint32_t num_positions;
+  READ(&num_positions, sizeof(num_positions))
+
+  vertices_ = new float[num_positions];
+  READ_ARRAY(vertices_, sizeof(*vertices_), num_positions)
+  fclose(fp);
+  return vertices_;
+}
+
+const float *LightControlTestMeshCylinderModel::GetVertexNormals() {
+  ASSERT(!normals_ && "normals_ already populated")
+  FILE *fp = fopen("d:\\models\\light_control_test_mesh_cylinder.mesh", "rb");
+  ASSERT(fp && "Failed to open d:\\models\\light_control_test_mesh_cylinder.mesh");
+  SKIP(sizeof(uint32_t))
+
+  uint32_t num_positions;
+  READ(&num_positions, sizeof(num_positions))
+  SKIP(sizeof(float) * num_positions)
+
+  uint32_t num_normals;
+  READ(&num_normals, sizeof(num_normals))
+  normals_ = new float[num_normals];
+  READ_ARRAY(normals_, sizeof(*normals_), num_normals)
+  fclose(fp);
+
+  return normals_;
+}

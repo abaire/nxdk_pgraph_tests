@@ -16,13 +16,16 @@ class ModelBuilder {
   [[nodiscard]] virtual uint32_t GetVertexCount() const = 0;
 
   //! Populates the given VertexBuffer with model data.
-  virtual void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices) const;
+  virtual void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices);
 
-  virtual void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices, const float *transformation) const;
+  virtual void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices, const float *transformation);
 
  protected:
-  [[nodiscard]] virtual const float *GetVertexPositions() const = 0;
-  [[nodiscard]] virtual const float *GetVertexNormals() const = 0;
+  [[nodiscard]] virtual const float *GetVertexPositions() = 0;
+  [[nodiscard]] virtual const float *GetVertexNormals() = 0;
+
+  // Called after vertex arrays have been consumed.
+  virtual void ReleaseData() {};
 };
 
 //! Builder for untextured models.
@@ -32,11 +35,11 @@ class SolidColorModelBuilder : public ModelBuilder {
   SolidColorModelBuilder(const vector_t &diffuse, const vector_t &specular);
 
   //! Populates the given VertexBuffer with model data.
-  void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices) const override;
+  void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices) override;
 
   //! Populates the given VertexBuffer with transformed model data.
   virtual void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices,
-                                    const float *transformation) const override;
+                                    const float *transformation) override;
 
  private:
   void ApplyColors(const std::shared_ptr<VertexBuffer> &vertices) const;
