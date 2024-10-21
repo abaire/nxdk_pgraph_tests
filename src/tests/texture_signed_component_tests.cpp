@@ -158,6 +158,7 @@ void TextureSignedComponentTests::TestGradients(const std::string &name, const T
   auto draw = [this](float left, float top, float right, float bottom) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetTexCoord0(0.0f, 0.0f);
+    host_.SetDiffuse(1.0f, 1.0f, 1.0f, 1.0f);
     host_.SetVertex(left, top, 1.0f);
 
     host_.SetTexCoord0(1.0f, 0.0f);
