@@ -215,6 +215,10 @@ add_executable(
         tests/blend_surface_tests.h
         tests/blend_tests.cpp
         tests/blend_tests.h
+        tests/bump_map_tests.cpp
+        tests/bump_map_tests.h
+        tests/bump_env_lum_tests.cpp
+        tests/bump_env_lum_tests.h
         tests/clear_tests.cpp
         tests/clear_tests.h
         tests/color_key_tests.cpp
