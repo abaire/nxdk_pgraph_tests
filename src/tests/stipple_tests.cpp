@@ -37,6 +37,13 @@ static std::map<std::string, const std::vector<DWORD>> kStipplePatterns = {
          0x0F0F0F0F, 0x0F0F0F0F, 0x0F0F0F0F, 0x0F0F0F0F, 0xF0F0F0F0, 0xF0F0F0F0, 0xF0F0F0F0, 0xF0F0F0F0,
          0x0F0F0F0F, 0x0F0F0F0F, 0x0F0F0F0F, 0x0F0F0F0F, 0xF0F0F0F0, 0xF0F0F0F0, 0xF0F0F0F0, 0xF0F0F0F0,
      }},
+    {"Asymmetric",
+     {
+         0xC0C0FFFF, 0xC0C0FFFF, 0xC0C0FFFF, 0xC0C0FFFF, 0xC0C0FFFF, 0xC0C0FFFF, 0xC0C0FFFF, 0xC0C0FFFF,
+         0x3030FFFF, 0x3030FFFF, 0x3030FFFF, 0x3030FFFF, 0x3030FFFF, 0x3030FFFF, 0x3030FFFF, 0x3030FFFF,
+         0x00008CEF, 0x00008CEF, 0x00008CEF, 0x00008CEF, 0x00008CEF, 0x00008CEF, 0x00008CEF, 0x00008CEF,
+         0x0F000F0F, 0x0F000F0F, 0x0F000F0F, 0x0F000F0F, 0x0F000F0F, 0x0F000F0F, 0x0F000F0F, 0x0F000F0F,
+     }},
 };
 
 StippleTests::StippleTests(TestHost &host, std::string output_dir, const Config &config)
@@ -204,6 +211,16 @@ static void Draw(TestHost &host, float x, float y) {
     }
     host.End();
   }
+
+  {
+    host.Begin(TestHost::PRIMITIVE_QUADS);
+    host.SetDiffuse(0xFFFFFFFF);
+    host.SetVertex(288.0f, 384.0f, 1.0f);
+    host.SetVertex(352.0f, 384.0f, 1.0f);
+    host.SetVertex(352.0f, 448.0f, 1.0f);
+    host.SetVertex(288.0f, 448.0f, 1.0f);
+    host.End();
+  }
 }
 
 void StippleTests::Test(const std::string &name, bool stipple_enable, const std::vector<DWORD> &stipple_pattern) {
@@ -232,6 +249,7 @@ void StippleTests::Test(const std::string &name, bool stipple_enable, const std:
   pb_printat(11, 39, (char *)"Poly");
 
   pb_printat(13, 15, (char *)"Quad");
+  pb_printat(13, 27, (char *)"Square");
 
   pb_draw_text_screen();
 
