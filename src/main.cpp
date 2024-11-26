@@ -103,6 +103,7 @@
 #include "tests/texture_anisotropy_tests.h"
 #include "tests/texture_border_color_tests.h"
 #include "tests/texture_border_tests.h"
+#include "tests/texture_brdf_tests.h"
 #include "tests/texture_cpu_update_tests.h"
 #include "tests/texture_cubemap_tests.h"
 #include "tests/texture_format_dxt_tests.h"
@@ -500,6 +501,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(Texture2DAsCubemapTests)
   REG_TEST(Texture3DAs2DTests)
   REG_TEST(TextureAnisotropyTests)
+  REG_TEST(TextureBRDFTests)
   REG_TEST(TextureBorderColorTests)
   REG_TEST(TextureBorderTests)
   REG_TEST(TextureCPUUpdateTests)
