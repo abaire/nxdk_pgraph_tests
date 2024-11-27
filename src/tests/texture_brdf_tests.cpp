@@ -249,7 +249,7 @@ static void GenerateSphericalCoordMap(uint8_t *buffer) {
         }
 
         unsigned int itheta = (theta / M_PI) * 65535.0f + 0.5f;
-        unsigned int iphi = phi / (2.0f * M_PI) * 65536.0f + 0.5f;
+        unsigned int iphi = phi / (2.0f * M_PI) * 65535.0f + 0.5f;
 
         *dest++ = iphi & 0xFF;
         *dest++ = iphi >> 8;
