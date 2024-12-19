@@ -12,6 +12,7 @@
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
+#include "xbox_math_matrix.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -33,6 +34,7 @@ static constexpr const char kTestGeometrySubscreenName[] = "GeometrySubscreen";
 static constexpr const char kTestGeometrySuperscreenName[] = "GeometrySuperscreen";
 static constexpr const char kTestAdjacentGeometryName[] = "AdjacentGeometry";
 static constexpr const char kTestProjectedAdjacentGeometryName[] = "ProjAdjacentGeometry";
+static constexpr const char kTestTopLeftRasterName[] = "TopLeftRaster";
 
 static constexpr float kGeometryTestBiases[] = {
     // Boundaries at 1/16 = 0.0625f
@@ -41,6 +43,7 @@ static constexpr float kGeometryTestBiases[] = {
 
 static std::string MakeCompositingRenderTargetTestName(int z);
 static std::string MakeGeometryTestName(const char *prefix, float bias);
+static std::string MakeTopLeftRasterTestName(bool fixed);
 
 VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests", config) {
@@ -65,6 +68,10 @@ VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string
 
     test_name = MakeGeometryTestName(kTestProjectedAdjacentGeometryName, bias);
     tests_[test_name] = [this, bias]() { TestProjectedAdjacentGeometry(bias); };
+  }
+
+  for (auto fixed : {false, true}) {
+    tests_[MakeTopLeftRasterTestName(fixed)] = [this, fixed]() { TestTopLeftRasterization(fixed); };
   }
 }
 
@@ -864,6 +871,180 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
+void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
+  if (fixed) {
+    host_.SetVertexShaderProgram(nullptr);
+    host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+    host_.SetViewportOffset(0, 0, 0, 0);
+    host_.SetViewportScale(0, 0, 0, 0);
+    matrix4_t matrix;
+    MatrixSetIdentity(matrix);
+    host_.SetFixedFunctionModelViewMatrix(matrix);
+    host_.SetFixedFunctionProjectionMatrix(matrix);
+  } else {
+    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    host_.SetVertexShaderProgram(shader);
+  }
+
+  host_.PrepareDraw(0xFF202224);
+
+  for (int i = 0; i < 20; i++) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(4.4376f + 4.0f*i, 44.0f, 1.0f);
+    host_.SetVertex(5.9f + 4.0f*i, 44.0f, 1.0f);
+    host_.SetVertex(5.9f + 4.0f*i, 300.5001f, 1.0f);
+    host_.SetVertex(4.5f + 4.0f*i + i*0.0625f + 0.001f, 300.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(288.0f, 0.0f, 1.0f);
+    host_.SetVertex(352.0f, 0.0f, 1.0f);
+    host_.SetVertex(352.0f, 448.5001f, 1.0f);
+    host_.SetVertex(288.0f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(209.9f, 0.0f, 1.0f);
+    host_.SetVertex(210.1f, 0.0f, 1.0f);
+    host_.SetVertex(210.1f, 448.5001f, 1.0f);
+    host_.SetVertex(209.9f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(410.4f, 0.0f, 1.0f);
+    host_.SetVertex(410.6f, 0.0f, 1.0f);
+    host_.SetVertex(410.6f, 448.5001f, 1.0f);
+    host_.SetVertex(410.4f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(550.53125f, 0.0f, 1.0f);
+    host_.SetVertex(551.9f, 0.0f, 1.0f);
+    host_.SetVertex(551.9f, 448.5001f, 1.0f);
+    host_.SetVertex(550.53125f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(460.5624f, 0.0f, 1.0f);
+    host_.SetVertex(461.9f, 0.0f, 1.0f);
+    host_.SetVertex(461.9f, 448.5001f, 1.0f);
+    host_.SetVertex(460.5624f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(470.5626f, 0.0f, 1.0f);
+    host_.SetVertex(471.9f, 0.0f, 1.0f);
+    host_.SetVertex(471.9f, 448.5001f, 1.0f);
+    host_.SetVertex(470.5626f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(480.5624f, 0.0f, 1.0f);
+    host_.SetVertex(481.9f, 0.0f, 1.0f);
+    host_.SetVertex(481.9f, 448.5001f, 1.0f);
+    host_.SetVertex(480.5626f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(490.5001f, 0.0f, 1.0f);
+    host_.SetVertex(491.9f, 0.0f, 1.0f);
+    host_.SetVertex(491.9f, 448.5001f, 1.0f);
+    host_.SetVertex(490.5626f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(500.5001f, 0.0f, 1.0f);
+    host_.SetVertex(501.9f, 0.0f, 1.0f);
+    host_.SetVertex(501.9f, 448.5001f, 1.0f);
+    host_.SetVertex(500.5624f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(510.4999f, 0.0f, 1.0f);
+    host_.SetVertex(511.9f, 0.0f, 1.0f);
+    host_.SetVertex(511.9f, 448.5001f, 1.0f);
+    host_.SetVertex(510.5626f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(520.4999f, 0.0f, 1.0f);
+    host_.SetVertex(521.9f, 0.0f, 1.0f);
+    host_.SetVertex(521.9f, 448.5001f, 1.0f);
+    host_.SetVertex(520.5624f, 448.5001f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(10.0f, 450.5f, 1.0f);
+    host_.SetVertex(630.0f, 450.5f, 1.0f);
+    host_.SetVertex(630.0f, 451.6f, 1.0f);
+    host_.SetVertex(10.0f, 451.6f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(10.0f, 455.5626f, 1.0f);
+    host_.SetVertex(630.0f, 455.5626f, 1.0f);
+    host_.SetVertex(630.0f, 456.6f, 1.0f);
+    host_.SetVertex(10.0f, 456.6f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFF00FF00);
+    host_.SetVertex(320.5625f, 140.5f, 1.0f);
+    host_.SetVertex(420.5625f, 140.5f, 1.0f);
+    host_.SetVertex(420.5f, 240.5f, 1.0f);
+    host_.SetVertex(320.5f, 240.5f, 1.0f);
+    host_.End();
+  }
+
+  std::string test_name = MakeTopLeftRasterTestName(fixed);
+  pb_print("%s\n", test_name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+}
+
 static std::string MakeGeometryTestName(const char *prefix, float bias) {
   char buf[32] = {0};
   snprintf(buf, sizeof(buf), "%s_%.04f", prefix, bias);
@@ -874,4 +1055,12 @@ static std::string MakeCompositingRenderTargetTestName(int z) {
   char buf[32];
   snprintf(buf, sizeof(buf), "%s_%d", kTestCompositingRenderTargetName, z);
   return buf;
+}
+
+static std::string MakeTopLeftRasterTestName(bool fixed) {
+  std::string test_name = kTestTopLeftRasterName;
+  if (fixed) {
+    test_name += "_Fixed";
+  }
+  return test_name;
 }
