@@ -51,7 +51,6 @@ jobs:
                 -DDUMP_CONFIG_FILE=ON \
                 -DRUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf"
           cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
-          find . -name "*.iso"
       - name: Create release
         if: github.ref == 'refs/heads/main'
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -61,4 +60,5 @@ jobs:
           prerelease: false
           title: "xiso containing pgraph tests"
           files: |
-            build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
+            nxdk_pgraph_tests/build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
+
