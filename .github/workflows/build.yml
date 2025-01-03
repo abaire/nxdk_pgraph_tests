@@ -13,6 +13,8 @@ on:
       - '.github/**'
       - '!.github/workflows/**'
       - 'README.md'
+  workflow_dispatch:
+    
 
 jobs:
   BuildISO:
