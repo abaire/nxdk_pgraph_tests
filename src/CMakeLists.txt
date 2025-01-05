@@ -235,6 +235,8 @@ add_executable(
         tests/context_switch_tests.h
         tests/degenerate_begin_end_tests.cpp
         tests/degenerate_begin_end_tests.h
+        tests/depth_clamp_tests.cpp
+        tests/depth_clamp_tests.h
         tests/depth_format_fixed_function_tests.cpp
         tests/depth_format_fixed_function_tests.h
         tests/depth_format_tests.cpp

@@ -882,7 +882,7 @@ void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
     host_.SetFixedFunctionModelViewMatrix(matrix);
     host_.SetFixedFunctionProjectionMatrix(matrix);
   } else {
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
     host_.SetVertexShaderProgram(shader);
   }
 
@@ -891,10 +891,10 @@ void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
   for (int i = 0; i < 20; i++) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(4.4376f + 4.0f*i, 44.0f, 1.0f);
-    host_.SetVertex(5.9f + 4.0f*i, 44.0f, 1.0f);
-    host_.SetVertex(5.9f + 4.0f*i, 300.5001f, 1.0f);
-    host_.SetVertex(4.5f + 4.0f*i + i*0.0625f + 0.001f, 300.5001f, 1.0f);
+    host_.SetVertex(4.4376f + 4.0f * i, 44.0f, 1.0f);
+    host_.SetVertex(5.9f + 4.0f * i, 44.0f, 1.0f);
+    host_.SetVertex(5.9f + 4.0f * i, 300.5001f, 1.0f);
+    host_.SetVertex(4.5f + 4.0f * i + i * 0.0625f + 0.001f, 300.5001f, 1.0f);
     host_.End();
   }
 
@@ -1042,7 +1042,7 @@ void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 static std::string MakeGeometryTestName(const char *prefix, float bias) {
