@@ -30,8 +30,8 @@ static constexpr float kRight = 2.75f;
 static constexpr float kTop = 1.75f;
 static constexpr float kBottom = -1.75f;
 
-ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Color zeta overlap") {
+ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Color zeta overlap", config) {
   tests_[kColorIntoDepthTestName] = [this]() { TestColorIntoDepth(); };
   tests_[kDepthIntoColorTestName] = [this]() { TestDepthIntoColor(); };
   tests_[kSwapTestName] = [this]() { TestSwap(); };

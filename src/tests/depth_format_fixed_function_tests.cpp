@@ -27,8 +27,9 @@ constexpr DepthFormatFixedFunctionTests::DepthFormat kDepthFormats[] = {
 constexpr uint32_t kNumDepthTests = 4;
 constexpr bool kCompressionSettings[] = {false, true};
 
-DepthFormatFixedFunctionTests::DepthFormatFixedFunctionTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Depth buffer fixed function") {
+DepthFormatFixedFunctionTests::DepthFormatFixedFunctionTests(TestHost &host, std::string output_dir,
+                                                             const Config &config)
+    : TestSuite(host, std::move(output_dir), "Depth buffer fixed function", config) {
   for (auto depth_format : kDepthFormats) {
     uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
 

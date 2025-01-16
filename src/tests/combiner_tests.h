@@ -12,7 +12,7 @@ class VertexBuffer;
 // Tests behavior when vertex attributes have a 0 stride.
 class CombinerTests : public TestSuite {
  public:
-  CombinerTests(TestHost& host, std::string output_dir);
+  CombinerTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
   void Deinitialize() override;
 

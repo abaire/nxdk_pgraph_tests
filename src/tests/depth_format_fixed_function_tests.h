@@ -18,7 +18,7 @@ class DepthFormatFixedFunctionTests : public TestSuite {
   };
 
  public:
-  DepthFormatFixedFunctionTests(TestHost &host, std::string output_dir);
+  DepthFormatFixedFunctionTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

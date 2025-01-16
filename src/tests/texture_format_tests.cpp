@@ -41,8 +41,8 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
   }
 }
 
-TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture format") {
+TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture format", config) {
   for (auto i = 0; i < kNumFormats; ++i) {
     auto &format = kTextureFormats[i];
     if (!RequiresSpecialTest(format)) {

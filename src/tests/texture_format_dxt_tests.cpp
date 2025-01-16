@@ -44,8 +44,8 @@ static constexpr TestCase kNonSquareTestCases[] = {
 
 static std::string GetFormatName(TextureFormatDXTTests::CompressedTextureFormat texture_format);
 
-TextureFormatDXTTests::TextureFormatDXTTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture DXT") {
+TextureFormatDXTTests::TextureFormatDXTTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture DXT", config) {
   for (auto &test : kTestCases) {
     tests_[MakeTestName(test.filename, test.format)] = [this, &test]() { Test(test.filename, test.format); };
     tests_[MakeTestName(test.filename, test.format, true)] = [this, &test]() {

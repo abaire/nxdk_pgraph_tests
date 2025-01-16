@@ -32,7 +32,7 @@ class FogTests : public TestSuite {
   };
 
  public:
-  FogTests(TestHost& host, std::string output_dir, std::string suite_name = "Fog");
+  FogTests(TestHost& host, std::string output_dir, const Config& config, std::string suite_name = "Fog");
   void Initialize() override;
   void Deinitialize() override;
 
@@ -48,13 +48,14 @@ class FogTests : public TestSuite {
 
 class FogCustomShaderTests : public FogTests {
  public:
-  FogCustomShaderTests(TestHost& host, std::string output_dir, std::string suite_name = "Fog vsh");
+  FogCustomShaderTests(TestHost& host, std::string output_dir, const Config& config,
+                       std::string suite_name = "Fog vsh");
   void Initialize() override;
 };
 
 class FogInfiniteFogCoordinateTests : public FogCustomShaderTests {
  public:
-  FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir);
+  FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 };
 
@@ -68,7 +69,7 @@ class FogVec4CoordTests : public FogCustomShaderTests {
   };
 
  public:
-  FogVec4CoordTests(TestHost& host, std::string output_dir);
+  FogVec4CoordTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 
  private:

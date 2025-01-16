@@ -9,7 +9,7 @@
 
 class SurfacePitchTests : public TestSuite {
  public:
-  SurfacePitchTests(TestHost &host, std::string output_dir);
+  SurfacePitchTests(TestHost &host, std::string output_dir, const Config &config);
   void Initialize() override;
 
  private:

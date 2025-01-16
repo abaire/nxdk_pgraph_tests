@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class TextureRenderTargetTests : public TestSuite {
  public:
-  TextureRenderTargetTests(TestHost &host, std::string output_dir);
+  TextureRenderTargetTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
   void Deinitialize() override;
@@ -29,7 +29,7 @@ class TextureRenderTargetTests : public TestSuite {
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;

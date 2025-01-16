@@ -25,7 +25,8 @@ static TextureStage::TexGen kTestModes[] = {
     TextureStage::TG_REFLECTION_MAP,
 };
 
-TexgenTests::TexgenTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "Texgen") {
+TexgenTests::TexgenTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texgen", config) {
   for (auto mode : kTestModes) {
     std::string name = MakeTestName(mode);
     tests_[name] = [this, mode]() { Test(mode); };

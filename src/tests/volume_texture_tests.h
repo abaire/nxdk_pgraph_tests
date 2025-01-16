@@ -11,7 +11,7 @@ class TestHost;
 // Tests 3d texture behavior.
 class VolumeTextureTests : public TestSuite {
  public:
-  VolumeTextureTests(TestHost &host, std::string output_dir);
+  VolumeTextureTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

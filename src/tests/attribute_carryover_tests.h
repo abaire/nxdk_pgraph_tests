@@ -41,7 +41,7 @@ class AttributeCarryoverTests : public TestSuite {
   };
 
  public:
-  AttributeCarryoverTests(TestHost &host, std::string output_dir);
+  AttributeCarryoverTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
   void Deinitialize() override;

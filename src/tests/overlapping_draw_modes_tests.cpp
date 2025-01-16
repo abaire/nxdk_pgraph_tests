@@ -15,8 +15,8 @@ static constexpr float kRight = 2.75f;
 static constexpr float kTop = 1.75f;
 static constexpr float kBottom = -1.75f;
 
-OverlappingDrawModesTests::OverlappingDrawModesTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Overlapping draw modes") {
+OverlappingDrawModesTests::OverlappingDrawModesTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Overlapping draw modes", config) {
   tests_[kArrElDrawArrArrElTest] = [this]() { TestArrayElementDrawArrayArrayElement(); };
   tests_[kDrawArrDrawArrTest] = [this]() { TestDrawArrayDrawArray(); };
   tests_[kXemuSquashOptimizationTest] = [this]() { TestXemuSquashOptimization(); };

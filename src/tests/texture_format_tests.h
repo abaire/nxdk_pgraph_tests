@@ -10,7 +10,7 @@ struct TextureFormatInfo;
 
 class TextureFormatTests : public TestSuite {
  public:
-  TextureFormatTests(TestHost &host, std::string output_dir);
+  TextureFormatTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

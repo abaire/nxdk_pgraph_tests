@@ -19,7 +19,7 @@ class MaterialColorSourceTests : public TestSuite {
   };
 
  public:
-  MaterialColorSourceTests(TestHost& host, std::string output_dir);
+  MaterialColorSourceTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

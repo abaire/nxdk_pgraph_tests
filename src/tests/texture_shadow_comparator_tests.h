@@ -15,7 +15,7 @@ class VertexBuffer;
 
 class TextureShadowComparatorTests : public TestSuite {
  public:
-  TextureShadowComparatorTests(TestHost &host, std::string output_dir);
+  TextureShadowComparatorTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
   void Deinitialize() override;
@@ -37,7 +37,7 @@ class TextureShadowComparatorTests : public TestSuite {
                      std::function<void(vector_t &, const vector_t &, float)> unproject_point, const std::string &name);
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
   std::shared_ptr<PrecalculatedVertexShader> raw_value_shader_;
 };
 

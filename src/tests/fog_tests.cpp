@@ -31,8 +31,8 @@ static const FogTests::FogGenMode kGenModes[] = {
 };
 // clang-format on
 
-FogTests::FogTests(TestHost& host, std::string output_dir, std::string suite_name)
-    : TestSuite(host, std::move(output_dir), std::move(suite_name)) {
+FogTests::FogTests(TestHost& host, std::string output_dir, const Config& config, std::string suite_name)
+    : TestSuite(host, std::move(output_dir), std::move(suite_name), config) {
   for (const auto fog_mode : kFogModes) {
     for (const auto gen_mode : kGenModes) {
       // Alpha doesn't seem to actually have any effect.
@@ -214,8 +214,9 @@ std::string FogTests::MakeTestName(FogTests::FogMode fog_mode, FogTests::FogGenM
   return std::move(ret);
 }
 
-FogCustomShaderTests::FogCustomShaderTests(TestHost& host, std::string output_dir, std::string suite_name)
-    : FogTests(host, std::move(output_dir), std::move(suite_name)) {}
+FogCustomShaderTests::FogCustomShaderTests(TestHost& host, std::string output_dir, const Config& config,
+                                           std::string suite_name)
+    : FogTests(host, std::move(output_dir), config, std::move(suite_name)) {}
 
 void FogCustomShaderTests::Initialize() {
   FogTests::Initialize();
@@ -240,8 +241,9 @@ static const uint32_t kInfiniteFogCShader[] = {
 };
 // clang-format on
 
-FogInfiniteFogCoordinateTests::FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir)
-    : FogCustomShaderTests(host, std::move(output_dir), "Fog inf coord") {}
+FogInfiniteFogCoordinateTests::FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir,
+                                                             const Config& config)
+    : FogCustomShaderTests(host, std::move(output_dir), config, "Fog inf coord") {}
 
 void FogInfiniteFogCoordinateTests::Initialize() {
   FogCustomShaderTests::Initialize();
@@ -384,8 +386,8 @@ static const FogVec4CoordTests::TestConfig kFogWTests[] = {
 
 static constexpr const char kUnsetTest[] = "CoordNotSet";
 
-FogVec4CoordTests::FogVec4CoordTests(TestHost& host, std::string output_dir)
-    : FogCustomShaderTests(host, std::move(output_dir), "Fog coord vec4") {
+FogVec4CoordTests::FogVec4CoordTests(TestHost& host, std::string output_dir, const Config& config)
+    : FogCustomShaderTests(host, std::move(output_dir), config, "Fog coord vec4") {
   tests_.clear();
 
   for (auto& config : kFogWTests) {

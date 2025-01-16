@@ -41,8 +41,8 @@ static constexpr uint32_t kBackgroundColor = 0xFF00CC00;
 
 static std::string MakeTestName(const char* prefix, uint32_t mode, bool alpha_from_texture);
 
-ColorKeyTests::ColorKeyTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Color key") {
+ColorKeyTests::ColorKeyTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Color key", config) {
   for (auto alpha : {false, true}) {
     for (auto mode : kColorKeyModes) {
       {

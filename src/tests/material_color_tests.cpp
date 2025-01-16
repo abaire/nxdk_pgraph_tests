@@ -150,8 +150,8 @@ static constexpr TestCase kTests[] = {
 };
 // clang-format on
 
-MaterialColorTests::MaterialColorTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Material color") {
+MaterialColorTests::MaterialColorTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Material color", config) {
   for (const auto& test_case : kTests) {
     auto config = test_case.BuildConfig();
     auto test = [this, config]() { this->Test(config); };

@@ -14,7 +14,7 @@ class VertexBuffer;
 // The observed behavior on hardware is that the last set normal is reused for the unspecified vertices.
 class ShadeModelTests : public TestSuite {
  public:
-  ShadeModelTests(TestHost& host, std::string output_dir);
+  ShadeModelTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

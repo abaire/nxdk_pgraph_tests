@@ -11,8 +11,8 @@ static constexpr const char* kIndependenceTestName = "Independence";
 static constexpr const char* kColorAlphaIndependenceTestName = "ColorAlphaIndependence";
 static constexpr const char* kFlagsTestName = "Flags";
 
-CombinerTests::CombinerTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Combiner") {
+CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Combiner", config) {
   tests_[kMuxTestName] = [this]() { TestMux(); };
   tests_[kIndependenceTestName] = [this]() { TestCombinerIndependence(); };
   tests_[kColorAlphaIndependenceTestName] = [this]() { TestCombinerColorAlphaIndependence(); };

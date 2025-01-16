@@ -12,7 +12,7 @@ class VertexBuffer;
 // Tests behavior when vertex attributes are not provided but are used by shaders.
 class OverlappingDrawModesTests : public TestSuite {
  public:
-  OverlappingDrawModesTests(TestHost &host, std::string output_dir);
+  OverlappingDrawModesTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

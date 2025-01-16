@@ -1,18 +1,20 @@
 cmake_minimum_required(VERSION 3.18)
 project(nxdk_pgraph_tests)
 
-set(CMAKE_MODULE_PATH
+set(
+        CMAKE_MODULE_PATH
         ${CMAKE_MODULE_PATH}
         "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/"
-        )
+)
 
 set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "ON")
 
 set(CMAKE_CXX_STANDARD 17)
-include(CMakePushCheckState)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(_CMAKE_PROCESSING_LANGUAGE "CXX")
+
 include(CheckSymbolExists)
-include(ExternalProject)
 include(FindPkgConfig)
 
 include(NV2A_VSH REQUIRED)
@@ -25,8 +27,6 @@ find_package(NXDK_SDL2_Image REQUIRED)
 find_package(Threads REQUIRED)
 
 add_subdirectory(third_party)
-
-set(TARGET nxdk_pgraph_tests)
 
 option(
         NO_OPT
@@ -48,7 +48,7 @@ option(
 
 option(
         DUMP_CONFIG_FILE
-        "Write a test configuration file template that may be edited to filter the tests that are executed."
+        "Write a default config file and exit instead of running tests."
         OFF
 )
 
@@ -84,41 +84,55 @@ option(
 
 set(
         RUNTIME_CONFIG_PATH
-        ""
+        "e:/nxdk_pgraph_tests/nxdk_pgraph_tests_config.json"
         CACHE STRING
-        "XBOX-path to the location of a configuration file to filter the tests that are executed."
+        "Absolute XBOX-path to the location of a JSON configuration file to set options and filter the tests that are executed."
 )
 
 set(
-        FALLBACK_OUTPUT_ROOT_PATH
-        "e:/"
+        DEFAULT_OUTPUT_DIRECTORY_PATH
+        "e:/nxdk_pgraph_tests"
         CACHE STRING
-        "Path at which test artifacts will be written when executed from read-only media."
+        "Absolute XBOX-path to a directory into which test output will be written."
 )
 
 configure_file(src/configure.h.in src/configure.h)
 
-macro(set_compile_options target)
+macro(set_opt_compile_and_link_options TARGET_NAME)
+    target_compile_options(
+            "${TARGET_NAME}"
+            PRIVATE
+            -O3
+            -fno-strict-aliasing
+            -Wall
+            $<$<COMPILE_LANGUAGE:CXX>:-Wno-builtin-macro-redefined>   # Suppress warning from NXDK undef of __STDC_NO_THREADS__
+    )
+    target_link_options(
+            "${TARGET_NAME}"
+            PRIVATE
+            "/debug:none"
+    )
+endmacro()
+
+macro(set_compile_and_link_options TARGET_NAME)
     if (CMAKE_BUILD_TYPE MATCHES Debug)
         target_compile_options(
-                "${target}"
+                "${TARGET_NAME}"
                 PRIVATE
                 -g
                 -gdwarf-4
                 -O0
                 -Wall
                 -fstandalone-debug
+                $<$<COMPILE_LANGUAGE:CXX>:-Wno-builtin-macro-redefined>   # Suppress warning from NXDK undef of __STDC_NO_THREADS__
         )
-        target_link_options("${target}" PRIVATE "/debug:full")
-    else ()
-        target_compile_options(
-                "${target}"
+        target_link_options(
+                "${TARGET_NAME}"
                 PRIVATE
-                -O3
-                -fno-strict-aliasing
-                -Wall
+                "/debug:full"
         )
-        target_link_options("${target}" PRIVATE "/debug:none")
+    else ()
+        set_opt_compile_and_link_options("${TARGET_NAME}")
     endif ()
 endmacro()
 
@@ -172,7 +186,7 @@ generate_vertexshader_inl_files(
 # Sources that should be optimized regardless of standard debug settings.
 add_library(
         optimized_sources
-        EXCLUDE_FROM_ALL
+        STATIC
         src/dds_image.cpp
         src/dds_image.h
         src/debug_output.cpp
@@ -186,6 +200,8 @@ add_library(
         src/pbkit_ext.h
         src/pgraph_diff_token.cpp
         src/pgraph_diff_token.h
+        src/runtime_config.cpp
+        src/runtime_config.h
         src/shaders/orthographic_vertex_shader.cpp
         src/shaders/orthographic_vertex_shader.h
         src/shaders/perspective_vertex_shader.cpp
@@ -215,16 +231,9 @@ add_library(
 )
 
 if (NOT NO_OPT)
-    target_compile_options(
-            optimized_sources
-            PRIVATE
-            -O3
-            -fno-strict-aliasing
-            -Wall
-    )
-    target_link_options(optimized_sources PRIVATE "/debug:none")
+    set_opt_compile_and_link_options(optimized_sources)
 else ()
-    set_compile_options(optimized_sources)
+    set_compile_and_link_options(optimized_sources)
 endif ()
 
 target_include_directories(
@@ -245,6 +254,7 @@ target_link_libraries(
         fpng
         printf
         swizzle
+        tiny-json
         xbox_math3d
         NXDK::NXDK
         NXDK::NXDK_CXX
@@ -253,7 +263,7 @@ target_link_libraries(
 )
 
 add_executable(
-        "${TARGET}"
+        nxdk_pgraph_tests
         src/tests/antialiasing_tests.cpp
         src/tests/antialiasing_tests.h
         src/tests/attribute_carryover_tests.cpp
@@ -377,21 +387,20 @@ add_executable(
 )
 
 # Pull debug info out of the binary into a host-side linked binary.
-split_debug("${TARGET}")
+split_debug(nxdk_pgraph_tests)
 
-set(EXECUTABLE_BINARY "${CMAKE_CURRENT_BINARY_DIR}/${TARGET}.exe")
+set(EXECUTABLE_BINARY "${CMAKE_CURRENT_BINARY_DIR}/nxdk_pgraph_tests.exe")
+set_compile_and_link_options(nxdk_pgraph_tests)
 target_include_directories(
-        "${TARGET}"
+        nxdk_pgraph_tests
         PRIVATE
         src
         third_party
         "${CMAKE_CURRENT_BINARY_DIR}/src"
 )
 
-set_compile_options("${TARGET}")
-
 target_link_libraries(
-        "${TARGET}"
+        nxdk_pgraph_tests
         fpng
         optimized_sources
         printf
@@ -406,6 +415,8 @@ target_link_libraries(
 add_xbe(xbe_file "${EXECUTABLE_BINARY}" TITLE "PGRAPH Tests" RESOURCE_DIRS resources)
 add_xiso(nxdk_pgraph_tests_xiso xbe_file)
 
+
+# Deployment via xbdm_gdb_bridge - https://github.com/abaire/xbdm_gdb_bridge
 #set(XBDM_GDB_BRIDGE $ENV{XBDM_GDB_BRIDGE})
 #set(XBOX $ENV{XBOX})
 #if (DEFINED ENV{REMOTE_PATH})

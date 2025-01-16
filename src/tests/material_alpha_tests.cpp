@@ -24,8 +24,8 @@ static constexpr float kAlphaValues[] = {
 
 static std::string DiffuseSourceName(uint32_t diffuse_source);
 
-MaterialAlphaTests::MaterialAlphaTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Material alpha") {
+MaterialAlphaTests::MaterialAlphaTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Material alpha", config) {
   for (auto source : kDiffuseSource) {
     for (auto alpha : kAlphaValues) {
       std::string name = MakeTestName(source, alpha);
@@ -162,7 +162,7 @@ void MaterialAlphaTests::Test(uint32_t diffuse_source, float material_alpha) {
   pb_end(p);
 
   // Material's diffuse alpha float
-  PGRAPHDiffToken diff_token;
+  PGRAPHDiffToken diff_token(true, false);
   p = pb_begin();
   uint32_t alpha_int = *(uint32_t*)&material_alpha;
   p = pb_push1(p, NV097_SET_MATERIAL_ALPHA, alpha_int);

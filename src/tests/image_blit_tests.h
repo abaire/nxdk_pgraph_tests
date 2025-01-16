@@ -16,7 +16,7 @@ class ImageBlitTests : public TestSuite {
   };
 
  public:
-  ImageBlitTests(TestHost& host, std::string output_dir);
+  ImageBlitTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;
@@ -35,11 +35,11 @@ class ImageBlitTests : public TestSuite {
   uint32_t image_height_{0};
   uint8_t* source_image_{nullptr};
 
-  struct s_CtxDma null_ctx_ {};
-  struct s_CtxDma image_src_dma_ctx_ {};
-  struct s_CtxDma clip_rect_ctx_ {};
-  struct s_CtxDma beta_ctx_ {};
-  struct s_CtxDma beta4_ctx_ {};
+  struct s_CtxDma null_ctx_{};
+  struct s_CtxDma image_src_dma_ctx_{};
+  struct s_CtxDma clip_rect_ctx_{};
+  struct s_CtxDma beta_ctx_{};
+  struct s_CtxDma beta4_ctx_{};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_IMAGE_BLIT_TESTS_H

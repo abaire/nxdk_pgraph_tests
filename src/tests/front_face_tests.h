@@ -7,7 +7,7 @@ class TestHost;
 
 class FrontFaceTests : public TestSuite {
  public:
-  FrontFaceTests(TestHost &host, std::string output_dir);
+  FrontFaceTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class VertexShaderRoundingTests : public TestSuite {
  public:
-  VertexShaderRoundingTests(TestHost &host, std::string output_dir);
+  VertexShaderRoundingTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
   void Deinitialize() override;

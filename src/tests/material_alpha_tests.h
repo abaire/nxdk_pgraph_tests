@@ -7,7 +7,7 @@ class TestHost;
 
 class MaterialAlphaTests : public TestSuite {
  public:
-  MaterialAlphaTests(TestHost &host, std::string output_dir);
+  MaterialAlphaTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;

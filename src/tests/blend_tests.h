@@ -21,7 +21,7 @@ class BlendTests : public TestSuite {
   };
 
  public:
-  BlendTests(TestHost &host, std::string output_dir);
+  BlendTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

@@ -2,11 +2,11 @@
 
 #include <pbkit/pbkit.h>
 
-#include "shaders/precalculated_vertex_shader.h"
-#include "test_host.h"
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "shaders/precalculated_vertex_shader.h"
+#include "test_host.h"
 #include "vertex_buffer.h"
 
 constexpr StencilTests::StencilParams kStencilParams[] = {
@@ -21,13 +21,12 @@ constexpr StencilTests::StencilParams kStencilParams[] = {
     {NV097_SET_STENCIL_OP_V_REPLACE, "REPLACE", true, true, 0x00, 1},
     // Stencil disable, depth disable
     {NV097_SET_STENCIL_OP_V_ZERO, "ZERO", false, false, 0xFF, 0},
-    {NV097_SET_STENCIL_OP_V_REPLACE, "REPLACE", false, false, 0x00, 1}
-};
+    {NV097_SET_STENCIL_OP_V_REPLACE, "REPLACE", false, false, 0x00, 1}};
 
-StencilTests::StencilTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Stencil") {
+StencilTests::StencilTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Stencil", config) {
   for (auto param : kStencilParams) {
-      AddTestEntry(param);
+    AddTestEntry(param);
   }
 }
 
@@ -52,7 +51,7 @@ void StencilTests::Test(const StencilParams &params) {
   auto crash_register = reinterpret_cast<uint32_t *>(PGRAPH_REGISTER_BASE + 0x880);
   auto crash_register_pre_test = *crash_register;
   *crash_register = crash_register_pre_test & (~0x800);
-  
+
   // Enable color, disable depth/stencil, set depth/stencil test params
   {
     auto p = pb_begin();
@@ -144,25 +143,22 @@ void StencilTests::CreateGeometry(const float sideLength, const float r, const f
     ur.SetRGB(r, g, b);
     lr.SetRGB(r, g, b);
 
-    buffer->DefineBiTri(idx++, centerX - halfLength, centerY - halfLength, centerX + halfLength, centerY + halfLength, z, z, z, z, ul, ll, lr, ur);
+    buffer->DefineBiTri(idx++, centerX - halfLength, centerY - halfLength, centerX + halfLength, centerY + halfLength,
+                        z, z, z, z, ul, ll, lr, ur);
   }
 }
 
 std::string StencilTests::MakeTestName(const StencilParams &params) {
   char buf[128] = {0};
-  snprintf(buf, 127, "Stencil_%s%s%s", 
-    params.stencil_op_zpass_str,
-    params.stencil_test_enabled ? "_ST" : "",
-    params.depth_test_enabled ? "_DT" : "");
+  snprintf(buf, 127, "Stencil_%s%s%s", params.stencil_op_zpass_str, params.stencil_test_enabled ? "_ST" : "",
+           params.depth_test_enabled ? "_DT" : "");
   return buf;
 }
 
 void StencilTests::AddTestEntry(const StencilTests::StencilParams &format) {
   std::string name = MakeTestName(format);
 
-  auto test = [this, format]() {
-    this->Test(format);
-  };
+  auto test = [this, format]() { this->Test(format); };
 
   tests_[name] = test;
 }

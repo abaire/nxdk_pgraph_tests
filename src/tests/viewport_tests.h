@@ -20,7 +20,7 @@ class ViewportTests : public TestSuite {
   };
 
  public:
-  ViewportTests(TestHost &host, std::string output_dir);
+  ViewportTests(TestHost &host, std::string output_dir, const Config &config);
 
  private:
   void Test(const Viewport &vp);

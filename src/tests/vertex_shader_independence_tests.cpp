@@ -49,8 +49,9 @@ static const uint32_t kShader[] = {
     0x00000000, 0x0020001b, 0x1436106c, 0x2070f819};
 // clang-format on
 
-VertexShaderIndependenceTests::VertexShaderIndependenceTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Vertex shader independence tests") {
+VertexShaderIndependenceTests::VertexShaderIndependenceTests(TestHost& host, std::string output_dir,
+                                                             const Config& config)
+    : TestSuite(host, std::move(output_dir), "Vertex shader independence tests", config) {
   tests_[kTestName] = [this]() { Test(); };
 }
 

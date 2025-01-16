@@ -21,7 +21,7 @@ class ZeroStrideTests : public TestSuite {
   };
 
  public:
-  ZeroStrideTests(TestHost& host, std::string output_dir);
+  ZeroStrideTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 
  private:

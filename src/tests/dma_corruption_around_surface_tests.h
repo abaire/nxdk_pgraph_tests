@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class DMACorruptionAroundSurfaceTests : public TestSuite {
  public:
-  DMACorruptionAroundSurfaceTests(TestHost &host, std::string output_dir);
+  DMACorruptionAroundSurfaceTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 
  private:

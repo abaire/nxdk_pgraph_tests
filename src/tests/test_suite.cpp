@@ -16,8 +16,13 @@ using namespace XboxMath;
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
-TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name)
-    : host_(host), output_dir_(std::move(output_dir)), suite_name_(std::move(suite_name)), pgraph_diff_(false) {
+TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name, const Config& config)
+    : host_(host),
+      output_dir_(std::move(output_dir)),
+      suite_name_(std::move(suite_name)),
+      pgraph_diff_(false, config.enable_progress_log),
+      enable_progress_log_{config.enable_progress_log},
+      enable_pgraph_region_diff_{config.enable_pgraph_region_diff} {
   output_dir_ += "\\";
   output_dir_ += suite_name_;
   std::replace(output_dir_.begin(), output_dir_.end(), ' ', '_');
@@ -33,7 +38,7 @@ std::vector<std::string> TestSuite::TestNames() const {
   return std::move(ret);
 }
 
-void TestSuite::DisableTests(const std::vector<std::string>& tests_to_skip) {
+void TestSuite::DisableTests(const std::set<std::string>& tests_to_skip) {
   for (auto& name : tests_to_skip) {
     tests_.erase(name);
   }
@@ -273,9 +278,9 @@ void TestSuite::Initialize() {
 
   host_.ClearAllVertexAttributeStrideOverrides();
 
-#ifdef ENABLE_PGRAPH_REGION_DIFF
-  pgraph_diff_.Capture();
-#endif
+  if (enable_pgraph_region_diff_) {
+    pgraph_diff_.Capture();
+  }
 
   TagNV2ATrace(2);
   {
@@ -295,9 +300,9 @@ void TestSuite::TagNV2ATrace(uint32_t num_nops) {
 }
 
 void TestSuite::Deinitialize() {
-#ifdef ENABLE_PGRAPH_REGION_DIFF
-  pgraph_diff_.DumpDiff();
-#endif
+  if (enable_pgraph_region_diff_) {
+    pgraph_diff_.DumpDiff();
+  }
 }
 
 void TestSuite::SetupTest() {}
@@ -307,11 +312,9 @@ void TestSuite::TearDownTest() {}
 std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name) {
   PrintMsg("Starting %s::%s\n", suite_name_.c_str(), test_name.c_str());
 
-#ifdef ENABLE_PROGRESS_LOG
-  if (allow_saving_) {
+  if (enable_progress_log_ && allow_saving_) {
     Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
   }
-#endif
 
   return std::chrono::high_resolution_clock::now();
 }
@@ -322,9 +325,7 @@ void TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clo
 
   PrintMsg("  Completed '%s' in %lums\n", test_name.c_str(), elapsed);
 
-#ifdef ENABLE_PROGRESS_LOG
-  if (allow_saving_) {
+  if (enable_progress_log_ && allow_saving_) {
     Logger::Log() << "  Completed '" << test_name << "' in " << elapsed << "ms" << std::endl;
   }
-#endif
 }

@@ -13,7 +13,7 @@ class VertexBuffer;
 // Tests 0x0AE0 color key functions.
 class ColorKeyTests : public TestSuite {
  public:
-  ColorKeyTests(TestHost& host, std::string output_dir);
+  ColorKeyTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void TearDownTest() override;

@@ -34,8 +34,8 @@ static std::string MakeTestName(const ViewportTests::Viewport &vp) {
   return buffer;
 }
 
-ViewportTests::ViewportTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Viewport") {
+ViewportTests::ViewportTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Viewport", config) {
   for (auto &vp : kTestCases) {
     tests_[MakeTestName(vp)] = [this, &vp]() { Test(vp); };
   }

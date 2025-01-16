@@ -19,8 +19,8 @@ static constexpr uint32_t kSmallTexturePitch = kSmallTextureSize * 4;
 
 static constexpr const char kSwizzlePitchTest[] = "Swizzle";
 
-SurfacePitchTests::SurfacePitchTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Surface pitch") {
+SurfacePitchTests::SurfacePitchTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Surface pitch", config) {
   tests_[kSwizzlePitchTest] = [this]() { TestSwizzle(); };
 }
 

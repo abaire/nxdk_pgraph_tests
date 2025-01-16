@@ -28,8 +28,8 @@ static constexpr struct BlendOp kBlendOps[] = {
     {"SREVSUB", NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED},
 };
 
-TextureSignedComponentTests::TextureSignedComponentTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture signed component tests") {
+TextureSignedComponentTests::TextureSignedComponentTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture signed component tests", config) {
   auto add_test = [this](uint32_t texture_format, uint32_t signed_flags) {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
     std::string name = MakeTestName(texture_format_info, signed_flags);
@@ -46,7 +46,9 @@ TextureSignedComponentTests::TextureSignedComponentTests(TestHost &host, std::st
     name += texture_format_info.name;
     name += "_";
     name += test_op.name;
-    tests_[name] = [this, name, texture_format_info, &test_op]() { TestGradients(name, texture_format_info, test_op.value); };
+    tests_[name] = [this, name, texture_format_info, &test_op]() {
+      TestGradients(name, texture_format_info, test_op.value);
+    };
   }
 }
 
@@ -102,7 +104,8 @@ void TextureSignedComponentTests::Test(const TextureFormatInfo &texture_format, 
   host_.FinishDraw(allow_saving_, output_dir_, test_name);
 }
 
-void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format, uint32_t blend_op) {
+void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format,
+                                                uint32_t blend_op) {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 

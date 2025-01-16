@@ -16,8 +16,8 @@ static constexpr const char kNullColorTest[] = "NullColor";
 static constexpr const char kNullZetaTest[] = "NullZeta";
 static constexpr const char kXemuBug893Test[] = "XemuBug893";
 
-NullSurfaceTests::NullSurfaceTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Null surface") {
+NullSurfaceTests::NullSurfaceTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Null surface", config) {
   //  tests_[kNullColorTest] = [this]() { TestNullColor(); };
   //  tests_[kNullZetaTest] = [this]() { TestNullZeta(); };
   tests_[kXemuBug893Test] = [this]() { TestXemuBug893(); };

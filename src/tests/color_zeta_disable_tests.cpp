@@ -14,8 +14,8 @@ static constexpr uint32_t kCheckerboardB = 0xFF000000;
 
 static constexpr const char kTestName[] = "MaskOff";
 
-ColorZetaDisableTests::ColorZetaDisableTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Color Zeta Disable") {
+ColorZetaDisableTests::ColorZetaDisableTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Color Zeta Disable", config) {
   tests_[kTestName] = [this]() { Test(); };
 }
 

@@ -20,7 +20,7 @@ class ColorZetaDisableTests : public TestSuite {
   };
 
  public:
-  ColorZetaDisableTests(TestHost &host, std::string output_dir);
+  ColorZetaDisableTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

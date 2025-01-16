@@ -24,7 +24,7 @@ class ZMinMaxControlTests : public TestSuite {
   } ZMinMaxDrawMode;
 
  public:
-  ZMinMaxControlTests(TestHost& host, std::string output_dir);
+  ZMinMaxControlTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void TearDownTest() override;

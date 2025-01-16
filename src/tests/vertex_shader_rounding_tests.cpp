@@ -42,8 +42,8 @@ static constexpr float kGeometryTestBiases[] = {
 static std::string MakeCompositingRenderTargetTestName(int z);
 static std::string MakeGeometryTestName(const char *prefix, float bias);
 
-VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests") {
+VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Vertex shader rounding tests", config) {
   tests_[kTestRenderTargetName] = [this]() { TestRenderTarget(); };
 
   for (auto z : {-4, -2, 2}) {

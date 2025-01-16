@@ -10,8 +10,8 @@
 
 static constexpr char kTestName[] = "TwoSidedLighting";
 
-LightingTwoSidedTests::LightingTwoSidedTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Lighting Two Sided") {
+LightingTwoSidedTests::LightingTwoSidedTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Lighting Two Sided", config) {
   tests_[kTestName] = [this]() { this->Test(); };
 }
 

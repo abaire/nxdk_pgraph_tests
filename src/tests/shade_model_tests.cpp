@@ -66,8 +66,8 @@ static void SetLightAndMaterial() {
   pb_end(p);
 }
 
-ShadeModelTests::ShadeModelTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Shade model") {
+ShadeModelTests::ShadeModelTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Shade model", config) {
   for (auto primitive : kPrimitives) {
     for (auto provoking_vertex : kProvokingVertex) {
       for (auto model : kShadeModel) {

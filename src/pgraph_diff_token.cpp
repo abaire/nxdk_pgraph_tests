@@ -5,10 +5,7 @@
 
 #include "configure.h"
 #include "debug_output.h"
-
-#ifdef ENABLE_PROGRESS_LOG
 #include "logger.h"
-#endif
 
 // This list was compiled by comparing the raw diff across a NV097_SET_SHADOW_COMPARE_FUNC to a diff across a
 // NV097_SET_MATERIAL_ALPHA. Addresses that were modified in both are assumed to be utility registers without any
@@ -27,7 +24,8 @@ static std::set<uint32_t> kDiffBlacklist{
     0xFD4017EC, 0xFD4017F0, 0xFD4017F4, 0xFD4017F8, 0xFD4017FC,
 };
 
-PGRAPHDiffToken::PGRAPHDiffToken(bool initialize) : registers{0} {
+PGRAPHDiffToken::PGRAPHDiffToken(bool initialize, bool enable_progress_log)
+    : registers{0}, enable_progress_log{enable_progress_log} {
   if (initialize) {
     Capture();
   }
@@ -53,9 +51,9 @@ void PGRAPHDiffToken::DumpDiff() const {
     const auto offset = (addr - PGRAPH_REGISTER_BASE) / 4;
     PrintMsg("0x%08X: 0x%08X => 0x%08X\n", addr, old_vals[offset], new_vals[offset]);
 
-#ifdef ENABLE_PROGRESS_LOG
-    Logger::Log() << std::setw(8) << std::hex << "0x" << addr << ": 0x" << old_vals[offset] << " => 0x"
-                  << new_vals[offset] << std::endl;
-#endif
+    if (enable_progress_log) {
+      Logger::Log() << std::setw(8) << std::hex << "0x" << addr << ": 0x" << old_vals[offset] << " => 0x"
+                    << new_vals[offset] << std::endl;
+    }
   }
 }

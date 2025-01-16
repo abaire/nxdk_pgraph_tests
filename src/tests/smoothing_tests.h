@@ -21,9 +21,9 @@ class SmoothingTests : public TestSuite {
   };
 
  public:
-  SmoothingTests(TestHost& host, std::string output_dir);
+  SmoothingTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 
  private:
-  void Test(const std::string &name, uint32_t smooth_control);
+  void Test(const std::string& name, uint32_t smooth_control);
 };

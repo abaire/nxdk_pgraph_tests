@@ -38,8 +38,8 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
   return buffer;
 }
 
-SurfaceClipTests::SurfaceClipTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Surface clip") {
+SurfaceClipTests::SurfaceClipTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Surface clip", config) {
   for (auto &rect : kTestRects) {
     tests_[MakeTestName(false, rect)] = [this, &rect]() { Test(rect); };
     tests_[MakeTestName(true, rect)] = [this, &rect]() { TestRenderTarget(rect); };

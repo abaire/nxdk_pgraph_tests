@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class TextureRenderUpdateInPlaceTests : public TestSuite {
  public:
-  TextureRenderUpdateInPlaceTests(TestHost &host, std::string output_dir);
+  TextureRenderUpdateInPlaceTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
   void Deinitialize() override;
@@ -23,7 +23,7 @@ class TextureRenderUpdateInPlaceTests : public TestSuite {
   void Test();
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;

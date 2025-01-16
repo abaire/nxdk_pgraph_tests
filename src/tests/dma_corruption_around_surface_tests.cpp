@@ -31,8 +31,9 @@ static constexpr uint32_t kTextureSize = 128;
 static constexpr uint32_t kCheckerSize = 8;
 static constexpr uint32_t kCheckerboardB = 0xFF3333C0;
 
-DMACorruptionAroundSurfaceTests::DMACorruptionAroundSurfaceTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "DMA corruption around surfaces") {
+DMACorruptionAroundSurfaceTests::DMACorruptionAroundSurfaceTests(TestHost &host, std::string output_dir,
+                                                                 const Config &config)
+    : TestSuite(host, std::move(output_dir), "DMA corruption around surfaces", config) {
   tests_[kTestName] = [this]() { Test(); };
 }
 

@@ -28,7 +28,8 @@ static constexpr const char kPitchLessThanCompact[] = "Pitch less than compact";
 static constexpr const char kPitchLargerThanCompact[] = "Pitch larger than compact";
 static constexpr const char kPALIntoNTSC[] = "PAL into NTSC overlay";
 
-PvideoTests::PvideoTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "PVIDEO") {
+PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "PVIDEO", config) {
   tests_[kPALIntoNTSC] = [this]() { TestPALIntoNTSC(); };
   tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
   // This seems to permanently kill video output on 1.0 devkit.

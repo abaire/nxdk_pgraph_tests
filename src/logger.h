@@ -11,7 +11,7 @@ class Logger {
   static std::ofstream Log();
 
  private:
-  Logger(const std::string &path, bool truncate_log = false);
+  explicit Logger(const std::string &path, bool truncate_log = false);
 
   std::string log_path_;
 
