@@ -13,7 +13,7 @@ class VertexBuffer;
 // Tests two-sided lighting.
 class LightingTwoSidedTests : public TestSuite {
  public:
-  LightingTwoSidedTests(TestHost& host, std::string output_dir);
+  LightingTwoSidedTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;

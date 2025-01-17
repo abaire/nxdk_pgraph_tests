@@ -21,7 +21,7 @@ class LightingNormalTests : public TestSuite {
   };
 
  public:
-  LightingNormalTests(TestHost& host, std::string output_dir);
+  LightingNormalTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;

@@ -9,7 +9,7 @@
 
 class NullSurfaceTests : public TestSuite {
  public:
-  NullSurfaceTests(TestHost &host, std::string output_dir);
+  NullSurfaceTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 
  private:

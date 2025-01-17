@@ -19,7 +19,7 @@ class TwoDLineTests : public TestSuite {
   };
 
  public:
-  TwoDLineTests(TestHost& host, std::string output_dir);
+  TwoDLineTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 
@@ -28,8 +28,8 @@ class TwoDLineTests : public TestSuite {
 
   static std::string MakeTestName(const TestCase& test, bool ReturnShortName);
 
-  struct s_CtxDma solid_lin_ctx_ {};
-  struct s_CtxDma surface_destination_ctx_ {};
+  struct s_CtxDma solid_lin_ctx_{};
+  struct s_CtxDma surface_destination_ctx_{};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_2D_LINE_TESTS_H

@@ -39,8 +39,8 @@ static std::map<std::string, const std::vector<uint32_t>> kStipplePatterns = {
      }},
 };
 
-StippleTests::StippleTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Stipple tests") {
+StippleTests::StippleTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Stipple tests", config) {
   // Stipple patterns only take effect when enabled so there's just one test with stipple disabled.
   {
     const char *kPatternName = "Checkered";

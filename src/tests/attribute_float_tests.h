@@ -12,7 +12,7 @@ struct TestConfig;
 // when encountering NaN values
 class AttributeFloatTests : public TestSuite {
  public:
-  AttributeFloatTests(TestHost &host, std::string output_dir);
+  AttributeFloatTests(TestHost &host, std::string output_dir, const Config &config);
 
  private:
   void Test(const TestConfig &testConfig);

@@ -8,7 +8,7 @@ class VertexBuffer;
 
 class WParamTests : public TestSuite {
  public:
-  WParamTests(TestHost &host, std::string output_dir);
+  WParamTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;

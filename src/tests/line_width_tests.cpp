@@ -19,8 +19,8 @@ static std::string MakeTestName(bool is_filled, LineWidthTests::fixed_t width) {
   return buf;
 }
 
-LineWidthTests::LineWidthTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Line width") {
+LineWidthTests::LineWidthTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Line width", config) {
   // SET_LINE_WIDTH only affects lines, so the vast majority are unfilled.
 
   for (fixed_t line_width = 0; line_width < (2 << 3); ++line_width) {

@@ -17,7 +17,7 @@ class TextureFormatDXTTests : public TestSuite {
   };
 
  public:
-  TextureFormatDXTTests(TestHost &host, std::string output_dir);
+  TextureFormatDXTTests(TestHost &host, std::string output_dir, const Config &config);
   void Initialize() override;
 
  private:

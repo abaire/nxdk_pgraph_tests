@@ -5,8 +5,9 @@
 
 struct PGRAPHDiffToken {
   uint8_t registers[PGRAPH_REGISTER_ARRAY_SIZE];
+  bool enable_progress_log;
 
-  explicit PGRAPHDiffToken(bool initialize = true);
+  explicit PGRAPHDiffToken(bool initialize = true, bool enable_progress_log = false);
   void Capture();
   void DumpDiff() const;
 };

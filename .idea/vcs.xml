@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/fpng" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/libcxx" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/libjpeg/libjpeg-turbo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/libpng/libpng" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/net/lwip" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/pdclib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/sdl/SDL2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/sdl/SDL2_image" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/sdl/SDL_ttf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/usb/libusbohci" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/zlib/zlib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/nxdk/tools/extract-xiso" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/printf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/tiny-json" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/xbox_math3d" vcs="Git" />
+  </component>
+</project>

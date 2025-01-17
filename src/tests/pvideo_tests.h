@@ -8,7 +8,7 @@
 
 class PvideoTests : public TestSuite {
  public:
-  PvideoTests(TestHost &host, std::string output_dir);
+  PvideoTests(TestHost &host, std::string output_dir, const Config &config);
   void Initialize() override;
   void Deinitialize() override;
 

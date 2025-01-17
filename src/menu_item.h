@@ -99,7 +99,8 @@ struct MenuItemSuite : public MenuItem {
 
 struct MenuItemRoot : public MenuItem {
   explicit MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>>& suites, std::function<void()> on_run_all,
-                        std::function<void()> on_exit, uint32_t width, uint32_t height);
+                        std::function<void()> on_exit, uint32_t width, uint32_t height, bool disable_autorun,
+                        bool autorun_immediately);
 
   void Draw() override;
   void Activate() override;
@@ -115,6 +116,10 @@ struct MenuItemRoot : public MenuItem {
   std::chrono::steady_clock::time_point start_time;
   bool timer_valid{false};
   bool timer_cancelled{false};
+
+ private:
+  bool disable_autorun_;
+  bool autorun_immediately_;
 };
 
 struct MenuItemOptions : public MenuItem {

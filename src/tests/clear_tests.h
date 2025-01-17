@@ -7,7 +7,7 @@ class TestHost;
 
 class ClearTests : public TestSuite {
  public:
-  ClearTests(TestHost &host, std::string output_dir);
+  ClearTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

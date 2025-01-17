@@ -10,11 +10,7 @@
 #include "debug_output.h"
 #include "tests/test_suite.h"
 
-#ifdef AUTORUN_IMMEDIATELY
-static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 0;
-#else
 static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
-#endif
 static constexpr uint32_t kNumItemsPerPage = 12;
 static constexpr uint32_t kNumItemsPerHalfPage = kNumItemsPerPage >> 1;
 
@@ -249,19 +245,26 @@ void MenuItemSuite::ActivateCurrentSuite() {
 }
 
 MenuItemRoot::MenuItemRoot(const std::vector<std::shared_ptr<TestSuite>> &suites, std::function<void()> on_run_all,
-                           std::function<void()> on_exit, uint32_t width, uint32_t height)
-    : MenuItem("<<root>>", width, height), on_run_all(std::move(on_run_all)), on_exit(std::move(on_exit)) {
-#ifndef DISABLE_AUTORUN
-  submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "Run all and exit", width, height));
-#endif  // DISABLE_AUTORUN
+                           std::function<void()> on_exit, uint32_t width, uint32_t height, bool disable_autorun,
+                           bool autorun_immediately)
+    : MenuItem("<<root>>", width, height),
+      on_run_all(std::move(on_run_all)),
+      on_exit(std::move(on_exit)),
+      disable_autorun_(disable_autorun),
+      autorun_immediately_(autorun_immediately) {
+  if (!disable_autorun) {
+    submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "Run all and exit", width, height));
+  }
+
   for (auto &suite : suites) {
     auto child = std::make_shared<MenuItemSuite>(suite, width, height);
     child->parent = this;
     submenu.push_back(child);
   }
-#ifdef DISABLE_AUTORUN
-  submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "! Run all and exit", width, height));
-#endif  // DISABLE_AUTORUN
+
+  if (disable_autorun) {
+    submenu.push_back(std::make_shared<MenuItemCallable>(on_run_all, "! Run all and exit", width, height));
+  }
 }
 
 void MenuItemRoot::ActivateCurrentSuite() {
@@ -275,22 +278,24 @@ void MenuItemRoot::Draw() {
     timer_valid = true;
   }
 
-#ifndef DISABLE_AUTORUN
-  if (!timer_cancelled) {
-    auto now = std::chrono::high_resolution_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
-    if (elapsed > kAutoTestAllTimeoutMilliseconds) {
-      on_run_all();
-      return;
-    }
+  if (!disable_autorun_) {
+    if (!timer_cancelled) {
+      auto now = std::chrono::high_resolution_clock::now();
+      auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
 
-    char run_all[128] = {0};
-    snprintf(run_all, 127, "Run all and exit (automatic in %d ms)", kAutoTestAllTimeoutMilliseconds - elapsed);
-    submenu[0]->name = run_all;
-  } else {
-    submenu[0]->name = "Run all and exit";
+      if (autorun_immediately_ || elapsed > kAutoTestAllTimeoutMilliseconds) {
+        on_run_all();
+        return;
+      }
+
+      char run_all[128] = {0};
+      snprintf(run_all, 127, "Run all and exit (automatic in %d ms)", kAutoTestAllTimeoutMilliseconds - elapsed);
+      submenu[0]->name = run_all;
+    } else {
+      submenu[0]->name = "Run all and exit";
+    }
   }
-#endif  // DISABLE_AUTORUN
+
   MenuItem::Draw();
 }
 

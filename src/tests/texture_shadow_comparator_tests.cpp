@@ -148,8 +148,8 @@ static std::string MakeProgrammableTestName(const TextureFormatInfo &format, Tes
   return std::move(ret);
 }
 
-TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture shadow comparator") {
+TextureShadowComparatorTests::TextureShadowComparatorTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture shadow comparator", config) {
   auto add_test = [this](uint32_t texture_format, uint32_t surface_format, uint32_t comp_func, uint32_t min_val,
                          uint32_t max_val, uint32_t ref) {
     const TextureFormatInfo &texture_format_info = GetTextureFormatInfo(texture_format);
@@ -653,7 +653,7 @@ void TextureShadowComparatorTests::TestProjected(
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
   auto &stage = host_.GetTextureStage(0);
-  PGRAPHDiffToken diff_token;
+  PGRAPHDiffToken diff_token(true, false);
   p = pb_begin();
   p = pb_push1(p, NV097_SET_SHADOW_COMPARE_FUNC, shadow_comp_function);
   pb_end(p);

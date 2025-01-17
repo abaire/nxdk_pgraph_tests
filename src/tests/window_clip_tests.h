@@ -20,7 +20,7 @@ class WindowClipTests : public TestSuite {
   };
 
  public:
-  WindowClipTests(TestHost &host, std::string output_dir);
+  WindowClipTests(TestHost &host, std::string output_dir, const Config &config);
   void Initialize() override;
 
  private:

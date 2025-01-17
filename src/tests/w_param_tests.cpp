@@ -17,7 +17,8 @@ static std::string MakeFFZeroWTestName(bool draw_quad) {
   return std::string(kTestFixedFunctionZeroW) + (draw_quad ? "_quad" : "_bitri");
 }
 
-WParamTests::WParamTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "W param") {
+WParamTests::WParamTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "W param", config) {
   tests_[kTestWGaps] = [this]() { this->TestWGaps(); };
   tests_[kTestWPositiveTriangleStrip] = [this]() { this->TestPositiveWTriangleStrip(); };
   tests_[kTestWNegativeTriangleStrip] = [this]() { this->TestNegativeWTriangleStrip(); };

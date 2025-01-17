@@ -22,7 +22,7 @@ class AntialiasingTests : public TestSuite {
   };
 
  public:
-  AntialiasingTests(TestHost &host, std::string output_dir);
+  AntialiasingTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

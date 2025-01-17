@@ -17,8 +17,8 @@
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 128;
 
-TextureMatrixTests::TextureMatrixTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture Matrix") {
+TextureMatrixTests::TextureMatrixTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture Matrix", config) {
   {
     constexpr char kTestName[] = "Identity";
     tests_[kTestName] = [this, kTestName]() {

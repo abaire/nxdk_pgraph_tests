@@ -20,7 +20,7 @@ class VertexShaderSwizzleTests : public TestSuite {
   };
 
  public:
-  VertexShaderSwizzleTests(TestHost &host, std::string output_dir);
+  VertexShaderSwizzleTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
   void Deinitialize() override;

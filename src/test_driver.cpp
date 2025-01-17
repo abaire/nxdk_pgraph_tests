@@ -15,11 +15,13 @@
 #include "menu_item.h"
 
 TestDriver::TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites,
-                       uint32_t framebuffer_width, uint32_t framebuffer_height, bool show_options_menu)
+                       uint32_t framebuffer_width, uint32_t framebuffer_height, bool show_options_menu,
+                       bool disable_autorun, bool autorun_immediately)
     : test_suites_(test_suites), test_host_(host) {
   auto on_run_all = [this]() { RunAllTestsNonInteractive(); };
   auto on_exit = [this]() { running_ = false; };
-  root_menu_ = std::make_shared<MenuItemRoot>(test_suites, on_run_all, on_exit, framebuffer_width, framebuffer_height);
+  root_menu_ = std::make_shared<MenuItemRoot>(test_suites, on_run_all, on_exit, framebuffer_width, framebuffer_height,
+                                              disable_autorun, autorun_immediately);
 
   if (show_options_menu) {
     auto on_options_exit = [this]() { active_menu_ = root_menu_; };

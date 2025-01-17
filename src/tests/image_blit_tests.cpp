@@ -87,8 +87,8 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
     //    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0x00000033},
 };
 
-ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Image blit") {
+ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Image blit", config) {
   for (auto test : kTests) {
     std::string name = MakeTestName(test);
 

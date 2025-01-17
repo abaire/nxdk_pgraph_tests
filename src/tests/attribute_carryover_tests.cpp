@@ -43,8 +43,8 @@ static const AttributeCarryoverTests::TestConfig kTestConfigs[] = {
 
 static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryoverTests::Attribute attribute);
 
-AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Attrib carryover") {
+AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Attrib carryover", config) {
   for (auto primitive : kPrimitives) {
     for (auto attr : kTestAttributes) {
       for (auto config : kTestConfigs) {

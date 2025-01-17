@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class TextureMatrixTests : public TestSuite {
  public:
-  TextureMatrixTests(TestHost &host, std::string output_dir);
+  TextureMatrixTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

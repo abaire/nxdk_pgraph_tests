@@ -24,7 +24,7 @@ class SetVertexDataTests : public TestSuite {
   };
 
  public:
-  SetVertexDataTests(TestHost& host, std::string output_dir);
+  SetVertexDataTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

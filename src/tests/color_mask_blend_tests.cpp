@@ -28,8 +28,8 @@ static std::string MakeTestName(const TestCase &test_case) {
   return buf;
 }
 
-ColorMaskBlendTests::ColorMaskBlendTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Color mask blend") {
+ColorMaskBlendTests::ColorMaskBlendTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Color mask blend", config) {
   for (auto &test_case : kTestCases) {
     std::string name = MakeTestName(test_case);
     tests_[name] = [this, name, test_case]() {

@@ -28,7 +28,8 @@ static constexpr const char kSignedRevSubtractName[] = "SignedRevSubtract";
 static constexpr uint32_t kTextureSize = 256;
 static constexpr uint32_t kTexturePitch = kTextureSize * 4;
 
-BlendTests::BlendTests(TestHost &host, std::string output_dir) : TestSuite(host, std::move(output_dir), "Blend tests") {
+BlendTests::BlendTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Blend tests", config) {
   tests_[kSignedAddName] = [this]() {
     Test(kSignedAddName, [this]() { Body(NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED); });
   };

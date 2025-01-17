@@ -20,7 +20,7 @@ class DepthFormatTests : public TestSuite {
   };
 
  public:
-  DepthFormatTests(TestHost &host, std::string output_dir);
+  DepthFormatTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

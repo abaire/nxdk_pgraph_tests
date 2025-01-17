@@ -13,8 +13,8 @@ static constexpr const char kTestName[] = "ExtraElements";
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride);
 static void ClearVertexAttribute(uint32_t index);
 
-InlineArraySizeMismatchTests::InlineArraySizeMismatchTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Inline array size mismatch") {
+InlineArraySizeMismatchTests::InlineArraySizeMismatchTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Inline array size mismatch", config) {
   tests_[kTestName] = [this]() { Test(); };
 }
 

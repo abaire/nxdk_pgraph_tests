@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class InlineArraySizeMismatchTests : public TestSuite {
  public:
-  InlineArraySizeMismatchTests(TestHost &host, std::string output_dir);
+  InlineArraySizeMismatchTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

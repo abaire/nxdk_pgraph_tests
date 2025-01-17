@@ -12,6 +12,9 @@
 
 class TestHost;
 
+/**
+ * Base class for all test suites.
+ */
 class TestSuite {
  public:
   enum class SuspectedCrashHandling {
@@ -20,8 +23,18 @@ class TestSuite {
     ASK,
   };
 
+  //! Runtime configuration for TestSuites.
+  struct Config {
+    // Enable logging of test progress to file.
+    bool enable_progress_log;
+
+    // Enables a diff of the nv2a PGRAPH registers before and after each test case.
+    bool enable_pgraph_region_diff;
+  };
+
  public:
-  TestSuite(TestHost &host, std::string output_dir, std::string suite_name);
+  TestSuite() = delete;
+  TestSuite(TestHost &host, std::string output_dir, std::string suite_name, const Config &config);
   virtual ~TestSuite() = default;
 
   [[nodiscard]] const std::string &Name() const { return suite_name_; };
@@ -38,7 +51,7 @@ class TestSuite {
   //! Called after running an individual test within this suite.
   virtual void TearDownTest();
 
-  void DisableTests(const std::vector<std::string> &tests_to_skip);
+  void DisableTests(const std::set<std::string> &tests_to_skip);
   void SetSuspectedCrashes(const std::set<std::string> &test_names) { suspected_crashes_ = test_names; }
 
   [[nodiscard]] std::vector<std::string> TestNames() const;
@@ -74,6 +87,9 @@ class TestSuite {
   SuspectedCrashHandling suspected_crash_handling_mode_{SuspectedCrashHandling::RUN_ALL};
 
   PGRAPHDiffToken pgraph_diff_;
+
+  bool enable_progress_log_;
+  bool enable_pgraph_region_diff_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_SUITE_H

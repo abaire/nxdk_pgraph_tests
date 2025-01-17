@@ -17,7 +17,7 @@ class SurfaceClipTests : public TestSuite {
   };
 
  public:
-  SurfaceClipTests(TestHost &host, std::string output_dir);
+  SurfaceClipTests(TestHost &host, std::string output_dir, const Config &config);
   void Initialize() override;
 
  private:

@@ -43,8 +43,8 @@ static constexpr float kBottom = -1.75f;
 static constexpr float kZFront = 1.0f;
 static constexpr float kZBack = 5.0f;
 
-ThreeDPrimitiveTests::ThreeDPrimitiveTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "3D primitive") {
+ThreeDPrimitiveTests::ThreeDPrimitiveTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "3D primitive", config) {
   for (auto line_smooth : {false, true}) {
     for (auto poly_smooth : {false, true}) {
       for (const auto primitive : kPrimitives) {

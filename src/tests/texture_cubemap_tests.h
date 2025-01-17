@@ -11,7 +11,7 @@ class TestHost;
 // Tests cubemap texture behavior.
 class TextureCubemapTests : public TestSuite {
  public:
-  TextureCubemapTests(TestHost &host, std::string output_dir);
+  TextureCubemapTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

@@ -84,8 +84,8 @@ static constexpr float kCubePoints[][3] = {
 
 // clang-format on
 
-TextureBorderTests::TextureBorderTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture border") {
+TextureBorderTests::TextureBorderTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture border", config) {
   tests_[kTest2D] = [this]() { Test2D(); };
   tests_[kTest2DBorderedSwizzled] = [this]() { Test2DBorderedSwizzled(); };
   //  tests_[kTest2DIndexed] = [this]() { Test2DPalettized(); };

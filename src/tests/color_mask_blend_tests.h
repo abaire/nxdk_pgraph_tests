@@ -7,7 +7,7 @@ class TestHost;
 
 class ColorMaskBlendTests : public TestSuite {
  public:
-  ColorMaskBlendTests(TestHost &host, std::string output_dir);
+  ColorMaskBlendTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

@@ -22,8 +22,8 @@ constexpr DepthFormatTests::DepthFormat kDepthFormats[] = {
 constexpr uint32_t kNumDepthTests = 48;
 constexpr bool kCompressionSettings[] = {false, true};
 
-DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Depth buffer") {
+DepthFormatTests::DepthFormatTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Depth buffer", config) {
   for (auto depth_format : kDepthFormats) {
     uint32_t depth_cutoff_step = depth_format.max_depth / kNumDepthTests;
 

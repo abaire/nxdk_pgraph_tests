@@ -21,7 +21,8 @@ static constexpr uint32_t kColorMasks[] = {
         NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE,
 };
 
-ClearTests::ClearTests(TestHost& host, std::string output_dir) : TestSuite(host, std::move(output_dir), "Clear") {
+ClearTests::ClearTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Clear", config) {
   for (auto color_write : kColorMasks) {
     for (auto depth_write : {true, false}) {
       std::string name = MakeTestName(color_write, depth_write);

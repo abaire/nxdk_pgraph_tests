@@ -21,7 +21,7 @@ class ThreeDPrimitiveTests : public TestSuite {
   };
 
  public:
-  ThreeDPrimitiveTests(TestHost& host, std::string output_dir);
+  ThreeDPrimitiveTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 
  private:

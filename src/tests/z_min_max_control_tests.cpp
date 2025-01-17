@@ -24,8 +24,8 @@ static constexpr float kWFar = 100.f;
 
 static std::string MakeTestName(const char* prefix, uint32_t mode, bool w_buffered);
 
-ZMinMaxControlTests::ZMinMaxControlTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "ZMinMaxControl") {
+ZMinMaxControlTests::ZMinMaxControlTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "ZMinMaxControl", config) {
   for (auto w_buffered : {false, true}) {
     for (auto cull :
          {NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_FALSE, NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE}) {

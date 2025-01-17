@@ -41,8 +41,8 @@ static constexpr const char kMultiframeCPUBlit[] = "__MultiframeCPUBlit";
 
 static constexpr uint32_t kTextureSize = 128;
 
-AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Antialiasing tests") {
+AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Antialiasing tests", config) {
   tests_[kAANone] = [this]() { Test(kAANone, TestHost::AA_CENTER_1); };
   tests_[kAA2] = [this]() { Test(kAA2, TestHost::AA_CENTER_CORNER_2); };
   tests_[kAA4] = [this]() { Test(kAA4, TestHost::AA_SQUARE_OFFSET_4); };

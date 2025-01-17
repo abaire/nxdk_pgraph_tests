@@ -13,7 +13,7 @@ class VertexBuffer;
 // Tests behavior of 0x16BC - glEdgeFlag
 class EdgeFlagTests : public TestSuite {
  public:
-  EdgeFlagTests(TestHost& host, std::string output_dir);
+  EdgeFlagTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;

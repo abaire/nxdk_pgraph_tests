@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class TexgenTests : public TestSuite {
  public:
-  TexgenTests(TestHost &host, std::string output_dir);
+  TexgenTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

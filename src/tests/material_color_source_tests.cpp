@@ -21,8 +21,8 @@ struct LightColors {
   Color ambient;
 };
 
-MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Material color source") {
+MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string output_dir, const Config& config)
+    : TestSuite(host, std::move(output_dir), "Material color source", config) {
   for (auto source : {SOURCE_MATERIAL, SOURCE_DIFFUSE, SOURCE_SPECULAR}) {
     std::string name = MakeTestName(source);
     auto test = [this, source]() { this->Test(source); };

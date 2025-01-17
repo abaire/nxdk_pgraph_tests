@@ -10,7 +10,7 @@ class TestHost;
 
 class TextureFramebufferBlitTests : public TestSuite {
  public:
-  TextureFramebufferBlitTests(TestHost& host, std::string output_dir);
+  TextureFramebufferBlitTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void Deinitialize() override;
@@ -31,11 +31,11 @@ class TextureFramebufferBlitTests : public TestSuite {
   // The bi-triangle used to render the texture to the final framebuffer.
   std::shared_ptr<VertexBuffer> target_vertex_buffer_;
 
-  struct s_CtxDma texture_target_ctx_ {};
-  struct s_CtxDma null_ctx_ {};
-  struct s_CtxDma clip_rect_ctx_ {};
-  struct s_CtxDma beta_ctx_ {};
-  struct s_CtxDma beta4_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
+  struct s_CtxDma null_ctx_{};
+  struct s_CtxDma clip_rect_ctx_{};
+  struct s_CtxDma beta_ctx_{};
+  struct s_CtxDma beta4_ctx_{};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_FRAMEBUFFER_BLIT_TESTS_H

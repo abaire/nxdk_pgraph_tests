@@ -21,7 +21,7 @@ class StencilTests : public TestSuite {
   };
 
  public:
-  StencilTests(TestHost &host, std::string output_dir);
+  StencilTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
 

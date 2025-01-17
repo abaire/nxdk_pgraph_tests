@@ -96,3 +96,20 @@ else ()
         target_link_options(xbox_math3d PRIVATE "/debug:none")
     endif ()
 endif ()
+
+# tiny-json
+add_library(
+        tiny-json
+        EXCLUDE_FROM_ALL
+        tiny-json/tiny-json.c
+        tiny-json/tiny-json.h
+)
+if (NOT NO_OPT)
+    target_compile_options(
+            tiny-json
+            PRIVATE
+            -O3
+            -Wno-everything
+    )
+    target_link_options(tiny-json PRIVATE "/debug:none")
+endif ()

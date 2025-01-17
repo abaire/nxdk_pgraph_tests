@@ -83,8 +83,8 @@ static const DotSTRTest kDotSTRTests[] = {
     {"DotSTRCube_HiLoHemi", 0x777},
 };
 
-TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir)
-    : TestSuite(host, std::move(output_dir), "Texture cubemap") {
+TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Texture cubemap", config) {
   tests_[kCubemapTest] = [this]() { TestCubemap(); };
 
   for (auto &test : kDotSTRTests) {

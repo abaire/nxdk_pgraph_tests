@@ -12,7 +12,7 @@ class VertexBuffer;
 
 class ColorZetaOverlapTests : public TestSuite {
  public:
-  ColorZetaOverlapTests(TestHost &host, std::string output_dir);
+  ColorZetaOverlapTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
 

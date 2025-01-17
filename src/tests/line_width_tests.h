@@ -13,7 +13,7 @@ class VertexBuffer;
 // Tests behavior of 0x380 - glLineWidth
 class LineWidthTests : public TestSuite {
  public:
-  LineWidthTests(TestHost& host, std::string output_dir);
+  LineWidthTests(TestHost& host, std::string output_dir, const Config& config);
 
   void Initialize() override;
   void TearDownTest() override;
