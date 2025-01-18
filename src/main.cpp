@@ -46,6 +46,7 @@
 #include "tests/bump_env_lum_tests.h"
 #include "tests/bump_map_tests.h"
 #include "tests/clear_tests.h"
+#include "tests/clipping_precision_tests.h"
 #include "tests/color_key_tests.h"
 #include "tests/color_mask_blend_tests.h"
 #include "tests/color_zeta_disable_tests.h"
@@ -445,6 +446,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(BumpMapTests)
   REG_TEST(BumpEnvLumTests)
   REG_TEST(ClearTests)
+  REG_TEST(ClippingPrecisionTests)
   REG_TEST(ColorKeyTests)
   REG_TEST(ColorMaskBlendTests)
   REG_TEST(ColorZetaDisableTests)

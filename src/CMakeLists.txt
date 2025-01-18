@@ -221,6 +221,8 @@ add_executable(
         tests/bump_env_lum_tests.h
         tests/clear_tests.cpp
         tests/clear_tests.h
+        tests/clipping_precision_tests.cpp
+        tests/clipping_precision_tests.h
         tests/color_key_tests.cpp
         tests/color_key_tests.h
         tests/color_mask_blend_tests.cpp
