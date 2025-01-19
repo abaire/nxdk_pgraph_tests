@@ -26,6 +26,7 @@ jobs:
         with:
           submodules: recursive
           path: nxdk_pgraph_tests
+
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -37,9 +38,11 @@ jobs:
             libsdl2-image-dev \
             ninja-build
           pip3 install nv2a-vsh
+
       - name: Prewarm nxdk
         working-directory: nxdk_pgraph_tests
         run: bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
+
       - name: Compile
         run: |
           cd nxdk_pgraph_tests
@@ -51,6 +54,7 @@ jobs:
                 -DDUMP_CONFIG_FILE=ON \
                 -DRUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf"
           cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
+
       - name: Create release
         if: github.ref == 'refs/heads/main'
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -65,12 +69,15 @@ jobs:
   BuildMacOS:
     name: Build macOS
     runs-on: macOS-latest
+    if: github.event_name == 'pull_request'
+
     steps:
       - name: Clone tree
         uses: actions/checkout@v3
         with:
           submodules: recursive
           path: nxdk_pgraph_tests
+
       - name: Install dependencies
         run: |
           export HOMEBREW_NO_AUTO_UPDATE=1
@@ -82,11 +89,13 @@ jobs:
             lld
           export PIP_BREAK_SYSTEM_PACKAGES=1
           pip3 install -r nxdk_pgraph_tests/requirements.txt
+
       - name: Prewarm nxdk
         working-directory: nxdk_pgraph_tests
         run: |
           export PATH="$(brew --prefix llvm@19)/bin:$PATH"
           bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
+
       - name: Compile
         run: |
           cd nxdk_pgraph_tests
