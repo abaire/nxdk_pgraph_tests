@@ -13,8 +13,8 @@ class ClippingPrecisionTests : public TestSuite {
   void Deinitialize() override;
 
  private:
-  void TestClippingPrecisionFrame(float ofs, bool done);
-  void TestClippingPrecision();
+  void TestClippingPrecisionFrame(float ofs, bool perspective_corrected, bool done);
+  void TestClippingPrecision(bool perspective_corrected);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_CLIPPING_PRECISION_TESTS_H
