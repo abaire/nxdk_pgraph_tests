@@ -99,6 +99,10 @@ static constexpr int kTextureHeight = 256;
 
 static constexpr const char* kLogFileName = "pgraph_progress_log.txt";
 
+const UCHAR kSMCSlaveAddress = 0x20;
+const UCHAR kSMCRegisterPower = 0x02;
+const UCHAR kSMCPowerShutdown = 0x80;
+
 static bool EnsureDriveMounted(char drive_letter);
 static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors);
 #ifdef DUMP_CONFIG_FILE
@@ -107,6 +111,7 @@ static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSu
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 static void RegisterSuites(TestHost& host, RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                            const std::string& output_directory);
+static void Shutdown();
 #ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 static bool DiscoverHistoricalCrashes(const std::string& log_file_path,
                                       std::map<std::string, std::set<std::string>>& crashes);
@@ -117,6 +122,7 @@ extern "C" __cdecl int automount_d_drive(void);
 /* Main program function */
 int main() {
   automount_d_drive();
+  debugPrint("Set video mode");
   XVideoSetMode(kFramebufferWidth, kFramebufferHeight, 32, REFRESH_DEFAULT);
 
   // Reserve 4 times the size of the default framebuffers to allow for antialiasing.
@@ -151,7 +157,7 @@ int main() {
     if (!LoadConfig(config, errors)) {
       debugPrint("Failed to load config, using default values.\n");
       for (auto& err : errors) {
-        debugPrint("%s", err.c_str());
+        debugPrint("%s\n", err.c_str());
       }
       pb_show_debug_screen();
     }
@@ -182,7 +188,7 @@ int main() {
       debugClearScreen();
       debugPrint("Failed to apply runtime config:\n");
       for (auto& err : errors) {
-        debugPrint("%s", err.c_str());
+        debugPrint("%s\n", err.c_str());
       }
       Sleep(kDelayOnFailureMilliseconds);
       return 1;
@@ -219,12 +225,12 @@ static bool EnsureDriveMounted(char drive_letter) {
 static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors) {
 #ifdef RUNTIME_CONFIG_PATH
   if (!EnsureDriveMounted(RUNTIME_CONFIG_PATH[0])) {
-    PrintMsg("Ignoring missing config at %s\n", RUNTIME_CONFIG_PATH);
+    debugPrint("Ignoring missing config at %s\n", RUNTIME_CONFIG_PATH);
   } else {
     if (config.LoadConfig(RUNTIME_CONFIG_PATH, errors)) {
       return true;
     } else {
-      PrintMsg("Failed to load config at %s\n", RUNTIME_CONFIG_PATH);
+      debugPrint("Failed to load config at %s\n", RUNTIME_CONFIG_PATH);
     }
   }
 #endif
@@ -249,7 +255,7 @@ static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSu
   Sleep(4000);
 
   if (config.enable_shutdown_on_completion()) {
-    HalInitiateShutdown();
+    Shutdown();
   }
 }
 #endif
@@ -290,11 +296,16 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
                     config.disable_autorun(), config.enable_autorun_immediately());
   driver.Run();
 
+  if (config.enable_progress_log() && Logger::Log().is_open()) {
+    Logger::Log().close();
+  }
+
   if (config.enable_shutdown_on_completion()) {
-    debugPrint("Results written to %s\n\nShutting down...\n", config.output_directory_path().c_str());
+    debugPrint("Results written to %s\n\nShutting down in 4 seconds...\n", config.output_directory_path().c_str());
     pb_show_debug_screen();
-    Sleep(500);
-    HalInitiateShutdown();
+    Sleep(4000);
+
+    Shutdown();
   } else {
     debugPrint("Results written to %s\n\nRebooting in 4 seconds...\n", config.output_directory_path().c_str());
     pb_show_debug_screen();
@@ -381,6 +392,18 @@ static bool DiscoverHistoricalCrashes(const std::string& log_file_path,
   return true;
 }
 #endif  // ENABLE_INTERACTIVE_CRASH_AVOIDANCE
+
+static void Shutdown() {
+  // TODO: HalInitiateShutdown doesn't seem to cause Xemu to actually close.
+  // This never sends the SMC command indicating that a shutdown should occur (at least, it never makes it to
+  // `smc_write_data` to be processed).
+  // HalInitiateShutdown();
+
+  HalWriteSMBusValue(kSMCSlaveAddress, kSMCRegisterPower, FALSE, kSMCPowerShutdown);
+  while (true) {
+    Sleep(30000);
+  }
+}
 
 static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
                            std::vector<std::shared_ptr<TestSuite>>& test_suites, const std::string& output_directory) {
