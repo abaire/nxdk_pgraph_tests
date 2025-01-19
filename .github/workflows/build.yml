@@ -61,6 +61,92 @@ jobs:
           name: nxdk_pgraph_tests_xiso.iso
           path: nxdk_pgraph_tests/build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
 
+  RunWithXemuLatest:
+    needs: [ BuildISO ]
+            nxdk_pgraph_tests_xiso.iso
+
+    name: Run against Xemu
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Xemu
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+                owner: "xemu-project",
+                repo: "xemu"
+            });
+
+            const asset = release.data.assets.find(
+                asset => asset.name.endsWith("x86_64.AppImage") && !asset.name.includes("dbg")
+            );
+            if (!asset) {
+              core.setFailed("Failed to retrieve Xemu AppImage.");
+              return;
+            }
+
+            const response = await github.rest.repos.getReleaseAsset({
+                owner: "xemu-project",
+                repo: "xemu",
+                asset_id: asset.id,
+                headers: { "Accept": "application/octet-stream" }
+            });
+
+            const fs = require('fs');
+            fs.writeFileSync("xemu.AppImage", Buffer.from(response.data));
+
+      - name: Download xemu-hdd-image
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const release = await github.rest.repos.getLatestRelease({
+                owner: "xemu-project",
+                repo: "xemu-hdd-image"
+            });
+
+            const asset = release.data.assets.find(
+                asset => asset.name.endsWith(".zip") && !asset.name.includes("dbg")
+            );
+            if (!asset) {
+              core.setFailed("Failed to retrieve xemu-hdd-image.");
+              return;
+            }
+
+            const response = await github.rest.repos.getReleaseAsset({
+                owner: "xemu-project",
+                repo: "xemu-hdd-image",
+                asset_id: asset.id,
+                headers: { "Accept": "application/octet-stream" }
+            });
+
+            const fs = require('fs');
+            fs.writeFileSync("xemu-hdd-image.zip", Buffer.from(response.data));
+
+      - name: Extract HDD image
+        run: |
+          unzip xemu-hdd-image.zip
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: nxdk_pgraph_tests_xiso.iso
+          path: .
+
+      - name: Clone tree
+        uses: actions/checkout@v3
+        with:
+          path: nxdk_pgraph_tests
+
+      - name: Run Xemu
+        uses: ./nxdk_pgraph_tests/.github/run-xemu-action
+        id: run-xemu
+        with:
+          xemu-image: xemu.AppImage
+          iso-image: nxdk_pgraph_tests_xiso.iso
+          hdd-image: xbox_hdd.qcow2
+
   CreateRelease:
     needs: [ BuildISO ]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -80,99 +166,3 @@ jobs:
           title: "xiso containing pgraph tests"
           files: |
             nxdk_pgraph_tests_xiso.iso
-
-  BuildMacOS:
-    name: Build macOS
-    runs-on: macOS-latest
-    if: github.event_name == 'pull_request'
-
-    steps:
-      - name: Clone tree
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          path: nxdk_pgraph_tests
-
-      - name: Install dependencies
-        run: |
-          export HOMEBREW_NO_AUTO_UPDATE=1
-          export HOMEBREW_NO_INSTALL_CLEANUP=1
-          brew install \
-            cmake \
-            coreutils \
-            llvm@19 \
-            lld
-          export PIP_BREAK_SYSTEM_PACKAGES=1
-          pip3 install -r nxdk_pgraph_tests/requirements.txt
-
-      - name: Prewarm nxdk
-        working-directory: nxdk_pgraph_tests
-        run: |
-          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
-          bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
-
-      - name: Compile in dump mode
-        run: |
-          cd nxdk_pgraph_tests
-          # The default clang install will result in linker failures on macOS.
-          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
-          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
-          cmake -B build \
-                -DCMAKE_BUILD_TYPE=Release \
-                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
-                -DDUMP_CONFIG_FILE=ON
-          cmake --build build -- -j
-
-      - name: Compile in run mode
-        run: |
-          cd nxdk_pgraph_tests
-          # The default clang install will result in linker failures on macOS.
-          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
-          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
-          cmake -B build \
-                -DCMAKE_BUILD_TYPE=Release \
-                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
-                -DDUMP_CONFIG_FILE=OFF
-          cmake --build build -- -j
-
-
-  TestMacOS:
-    name: Test macOS
-    runs-on: macOS-latest
-    if: github.event_name == 'pull_request'
-
-    steps:
-      - name: Clone tree
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Install dependencies
-        run: |
-          export HOMEBREW_NO_AUTO_UPDATE=1
-          export HOMEBREW_NO_INSTALL_CLEANUP=1
-          brew install \
-            cmake \
-            coreutils \
-            llvm@19 \
-            lld
-
-      - name: Compile and test in dump mode
-        run: |
-          # The default clang install will result in linker failures on macOS.
-          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
-          cmake -B build-dump-mode \
-                -DCMAKE_BUILD_TYPE=Release \
-                -DDUMP_CONFIG_FILE=ON
-          cmake --build build-dump-mode -- -j
-          cmake --build build-dump-mode --target test
-
-      - name: Compile and test in run mode
-        run: |
-          # The default clang install will result in linker failures on macOS.
-          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
-          cmake -B build \
-                -DCMAKE_BUILD_TYPE=Release \
-                -DDUMP_CONFIG_FILE=OFF
-          cmake --build build -- -j
-          cmake --build build --target test -- -j
