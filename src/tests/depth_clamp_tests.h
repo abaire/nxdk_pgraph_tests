@@ -17,7 +17,7 @@ class DepthClampTests : public TestSuite {
   void Deinitialize() override;
 
  private:
-  void Test(bool w_buffered, bool clamp, bool zbias, bool full_range);
+  void Test(bool w_buffered, bool clamp, bool zbias, bool full_range, bool vsh);
   void TestEqualDepth(bool w_buffered, float ofs);
 };
 
