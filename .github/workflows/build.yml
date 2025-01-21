@@ -49,10 +49,7 @@ jobs:
           export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
           cmake -B build \
                 -DCMAKE_BUILD_TYPE=Release \
-                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
-                -DENABLE_PROGRESS_LOG=ON \
-                -DDUMP_CONFIG_FILE=ON \
-                -DRUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf"
+                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake"
           cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
 
       - name: Create release
