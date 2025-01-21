@@ -52,8 +52,22 @@ jobs:
                 -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake"
           cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nxdk_pgraph_tests_xiso.iso
+          path: nxdk_pgraph_tests/build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
+
+  CreateRelease:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: nxdk_pgraph_tests_xiso.iso
+          path: .
+
       - name: Create release
-        if: github.ref == 'refs/heads/main'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -61,7 +75,7 @@ jobs:
           prerelease: false
           title: "xiso containing pgraph tests"
           files: |
-            nxdk_pgraph_tests/build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
+            nxdk_pgraph_tests_xiso.iso
 
   BuildMacOS:
     name: Build macOS
