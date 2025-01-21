@@ -15,6 +15,9 @@ on:
       - 'README.md'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 jobs:
   BuildISO:
@@ -59,6 +62,7 @@ jobs:
           path: nxdk_pgraph_tests/build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
 
   CreateRelease:
+    needs: [ BuildISO ]  
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
