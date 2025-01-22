@@ -253,10 +253,7 @@ static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSu
 
   pb_show_debug_screen();
   Sleep(4000);
-
-  if (config.enable_shutdown_on_completion()) {
-    Shutdown();
-  }
+  Shutdown();
 }
 #endif
 

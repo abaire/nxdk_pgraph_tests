@@ -41,31 +41,103 @@ Behavior can optionally be determined via a JSON configuration file loaded from 
     "enable_autorun_immediately": false,
     "enable_shutdown_on_completion": false,
     "enable_pgraph_region_diff": false,
-    "output_directory_path": "e:/nxdk_pgraph_tests"
+    "output_directory_path": "e:/nxdk_pgraph_tests",
+    "skip_tests_by_default": false
   },
+  "test_suites": {}
+}
+```
+
+In the default release build, the program will look for this file in the `output_directory_path` (
+`e:/nxdk_pgraph_tests/nxdk_pgraph_tests_config.json`) and `d:\nxdk_pgraph_tests_config.json`, taking whichever is found
+first.
+
+When building from source, the `sample-config.json` file in the `resources` directory can be copied to
+`resources/nxdk_pgraph_tests_config.json` and modified in order to change the default behavior of the final xiso.
+
+#### Filtering test suites/cases
+
+The `"test_suites"` section may be used to filter the set of tests.
+
+For example, suppose the program contains four test suites: `Default suite`, `Unlisted suite`, `Skipped suite`, and
+`Suite with skipped test`. Each test suite contains two tests, `TestOne` and `TestTwo`. Without any filtering, the menu
+tree would be something like:
+
+```
+Run all and exit
+Default suite
+  TestOne
+  TestTwo
+Unlisted suite
+  TestOne
+  TestTwo
+Skipped suite
+  TestOne
+  TestTwo
+Suite with skipped test
+  TestOne
+  TestTwo
+```
+
+___Note___: The names used within `"test_suites"` and its children are the same as the names that appear in the
+`nxdk_praph_tests` menu.
+
+By default, any descendant of the `"test_suites"` object that contains a `"skipped": true` will be omitted.
+
+For example, the following config will disable all tests except
+
+```json
+{
+  "settings": {},
   "test_suites": {
-    "suite_name": {
-      "test_case_name": {
+    "Skipped suite": {
+      "skipped": true,
+      "TestOne": {}
+    },
+    "Suite with skipped test": {
+      "TestTwo": {
         "skipped": true
       }
     },
-    "skipped_suite_name": {
-      "skipped": true,
-      "test_case_does_no_matter_since_the_suite_is_skipped": {
-      }
+    "Default suite": {
+      "TestOne": {}
     }
   }
 }
 ```
 
-The names used are the same as the names that appear in the `nxdk_praph_tests` menu.
+Resulting in
 
-In the default release build, the test suite will look for this file in
-`e:/nxdk_pgraph_tests/nxdk_pgraph_tests_config.json` and `d:\nxdk_pgraph_tests_config.json`, taking whichever is found
-first.
+```
+Run all and exit
+Default suite
+  TestOne
+  TestTwo
+Unlisted suite
+  TestOne
+  TestTwo
+Suite with skipped test
+  TestOne
+```
 
-When building from source, the `sample-config.json` file in the `resources` directory can be copied to
-`resources/nxdk_pgraph_tests_config.json` and modified in order to change the default behavior of the final xiso.
+This behavior may be modified via the `"skip_tests_by_default"` setting, allowing only entries with an explicit
+`"skipped": false` to be retained. For example, the following config will disable all tests except the `TestOne` case
+under `Default suite`.
+
+```json
+{
+  "settings": {
+    "skip_tests_by_default": true
+  },
+  "test_suites": {
+    "Default suite": {
+      "TestOne": {
+        "skipped": true
+      }
+    }
+  }
+}
+```
 
 ### Progress logging
 

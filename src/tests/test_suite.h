@@ -55,6 +55,8 @@ class TestSuite {
   void SetSuspectedCrashes(const std::set<std::string> &test_names) { suspected_crashes_ = test_names; }
 
   [[nodiscard]] std::vector<std::string> TestNames() const;
+  [[nodiscard]] bool HasEnabledTests() const { return !tests_.empty(); };
+
   void Run(const std::string &test_name);
 
   void RunAll();

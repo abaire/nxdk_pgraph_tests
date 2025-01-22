@@ -59,10 +59,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nxdk_pgraph_tests_xiso.iso
-          path: nxdk_pgraph_tests/build/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
+          path: nxdk_pgraph_tests/build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
 
   CreateRelease:
-    needs: [ BuildISO ]  
+    needs: [ BuildISO ]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
@@ -111,7 +111,7 @@ jobs:
           export PATH="$(brew --prefix llvm@19)/bin:$PATH"
           bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
 
-      - name: Compile
+      - name: Compile in dump mode
         run: |
           cd nxdk_pgraph_tests
           # The default clang install will result in linker failures on macOS.
@@ -120,7 +120,17 @@ jobs:
           cmake -B build \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
-                -DENABLE_PROGRESS_LOG=ON \
-                -DDUMP_CONFIG_FILE=ON \
-                -DRUNTIME_CONFIG_PATH="e:/nxdk_pgraph_tests/pgraph_tests.cnf"
+                -DDUMP_CONFIG_FILE=ON
+          cmake --build build -- -j
+
+      - name: Compile in run mode
+        run: |
+          cd nxdk_pgraph_tests
+          # The default clang install will result in linker failures on macOS.
+          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
+          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
+          cmake -B build \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
+                -DDUMP_CONFIG_FILE=OFF
           cmake --build build -- -j

@@ -3,6 +3,8 @@
 
 #include <SDL.h>
 
+#include <cstdint>
+
 typedef struct TextureFormatInfo {
   SDL_PixelFormatEnum sdl_format{SDL_PIXELFORMAT_ARGB8888};
   uint32_t xbox_format{0};
