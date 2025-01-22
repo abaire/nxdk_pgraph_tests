@@ -77,7 +77,7 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
-          title: "xiso containing pgraph tests"
+          title: "xiso containing pgraph tests @ ${{ github.sha }}"
           files: |
             nxdk_pgraph_tests_xiso.iso
 
