@@ -66,18 +66,35 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - name: Clone tree
+        uses: actions/checkout@v3
+        with:
+          path: nxdk_pgraph_tests
+
+      - name: Calculate version
+        id: calculate-version
+        run: |
+          echo "version=$(date +'%Y-%m-%d_%H-%M-%S-%N')" >> $GITHUB_OUTPUT
+
+      - name: Create tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ steps.calculate-version.outputs.version }}
+
       - uses: actions/download-artifact@v4
         with:
           name: nxdk_pgraph_tests_xiso.iso
           path: .
 
       - name: Create release
-        uses: "marvinpinto/action-automatic-releases@latest"
+        uses: softprops/action-gh-release@v2.2.1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          name: "NV2A PGRAPH tests ${{ steps.tag_version.outputs.new_version }}"
           prerelease: false
-          title: "xiso containing pgraph tests"
+          draft: false
           files: |
             nxdk_pgraph_tests_xiso.iso
 
