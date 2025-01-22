@@ -134,3 +134,45 @@ jobs:
                 -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
                 -DDUMP_CONFIG_FILE=OFF
           cmake --build build -- -j
+
+
+  TestMacOS:
+    name: Test macOS
+    runs-on: macOS-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Clone tree
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          export HOMEBREW_NO_AUTO_UPDATE=1
+          export HOMEBREW_NO_INSTALL_CLEANUP=1
+          brew install \
+            cmake \
+            coreutils \
+            llvm@19 \
+            lld
+
+      - name: Compile and test in dump mode
+        run: |
+          # The default clang install will result in linker failures on macOS.
+          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
+          cmake -B build-dump-mode \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DDUMP_CONFIG_FILE=ON
+          cmake --build build-dump-mode -- -j
+          cmake --build build-dump-mode --target test
+
+      - name: Compile and test in run mode
+        run: |
+          # The default clang install will result in linker failures on macOS.
+          export PATH="$(brew --prefix llvm@19)/bin:$PATH"
+          cmake -B build \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DDUMP_CONFIG_FILE=OFF
+          cmake --build build -- -j
+          cmake --build build --target test -- -j
