@@ -5,6 +5,7 @@
 #include "configure.h"
 #include "debug_output.h"
 #include "logger.h"
+#include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "shaders/pixel_shader_program.h"
 #include "test_host.h"

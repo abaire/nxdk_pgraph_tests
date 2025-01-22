@@ -6,9 +6,10 @@
 
 #define MAX_CONFIG_FILE_SIZE (1024 * 128)
 
-static bool parse_test_suites(json_t const* test_suites, std::vector<std::string>& errors,
-                              std::set<std::string>& skipped_test_suites,
-                              std::map<std::string, std::set<std::string>>& skipped_test_cases);
+static bool parse_test_suites(
+    json_t const* test_suites, std::vector<std::string>& errors,
+    std::map<std::string, RuntimeConfig::SkipConfiguration>& skipped_test_suites,
+    std::map<std::string, std::map<std::string, RuntimeConfig::SkipConfiguration>>& skipped_test_cases);
 
 //! C++ wrapper around Tiny-JSON jsonPool_t
 class JSONParser : jsonPool_t {
@@ -40,7 +41,6 @@ class JSONParser : jsonPool_t {
 bool RuntimeConfig::LoadConfig(const char* config_file_path, std::vector<std::string>& errors) {
   std::string dos_style_path = config_file_path;
   std::replace(dos_style_path.begin(), dos_style_path.end(), '/', '\\');
-  std::map<std::string, std::vector<std::string>> test_config;
 
   std::string json_string;
 
@@ -65,7 +65,13 @@ bool RuntimeConfig::LoadConfig(const char* config_file_path, std::vector<std::st
     config_file.read(&json_string[0], file_size);
   }
 
-  JSONParser parser{json_string.c_str()};
+  return LoadConfigBuffer(json_string, errors);
+}
+
+bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vector<std::string>& errors) {
+  std::map<std::string, std::vector<std::string>> test_config;
+
+  const JSONParser parser{config_content.c_str()};
 
   auto root = parser.root();
   if (!root) {
@@ -123,6 +129,11 @@ bool RuntimeConfig::LoadConfig(const char* config_file_path, std::vector<std::st
     return false;
   }
 
+  if (!get_bool(settings, "skip_tests_by_default", skip_tests_by_default_)) {
+    errors.emplace_back("settings[skip_tests_by_default] must be a boolean");
+    return false;
+  }
+
   auto output_directory_path = json_getProperty(settings, "output_directory_path");
   if (output_directory_path) {
     if (json_getType(output_directory_path) != JSON_TEXT) {
@@ -143,62 +154,32 @@ bool RuntimeConfig::LoadConfig(const char* config_file_path, std::vector<std::st
     return false;
   }
 
-  return parse_test_suites(test_suites, errors, skipped_test_suites_, skipped_test_cases_);
+  return parse_test_suites(test_suites, errors, configured_test_suites_, configured_test_cases_);
+}
+
+static RuntimeConfig::SkipConfiguration MakeSkipConfiguration(bool is_skipped) {
+  if (is_skipped) {
+    return RuntimeConfig::SkipConfiguration::SKIPPED;
+  }
+  return RuntimeConfig::SkipConfiguration::UNSKIPPED;
 }
 
 static bool parse_test_case(json_t const* test_case, const std::string& suite_name, const std::string& test_name,
-                            std::vector<std::string>& errors,
-                            std::map<std::string, std::set<std::string>>& skipped_test_cases,
+                            std::vector<std::string>& errors, RuntimeConfig::SkipConfiguration& config_value,
                             const std::string& test_case_error_message_prefix) {
-  auto skipped = json_getProperty(test_case, "skipped");
-  if (!skipped) {
-    return true;
-  }
+  for (auto element = json_getChild(test_case); element; element = json_getSibling(element)) {
+    std::string name = json_getName(element);
+    auto type = json_getType(element);
 
-  if (json_getType(skipped) != JSON_BOOLEAN) {
-    errors.emplace_back(test_case_error_message_prefix + "[skipped] must be a boolean");
-    return false;
-  }
-
-  if (!json_getBoolean(skipped)) {
-    return true;
-  }
-
-  auto existing = skipped_test_cases.find(test_name);
-  if (existing == skipped_test_cases.end()) {
-    skipped_test_cases[suite_name] = {test_name};
-  } else {
-    skipped_test_cases[suite_name].insert(test_name);
-  }
-
-  return true;
-}
-
-static bool parse_test_cases(json_t const* test_suite, const std::string& suite_name, std::vector<std::string>& errors,
-                             std::set<std::string>& skipped_test_suites,
-                             std::map<std::string, std::set<std::string>>& skipped_test_cases,
-                             const std::string& suite_error_message_prefix) {
-  for (auto test_or_skipped = json_getChild(test_suite); test_or_skipped;
-       test_or_skipped = json_getSibling(test_or_skipped)) {
-    std::string test_name = json_getName(test_or_skipped);
-    auto type = json_getType(test_or_skipped);
+    if (name != "skipped") {
+      errors.emplace_back(test_case_error_message_prefix + "[" + name + "] unsupported. Ignoring");
+      continue;
+    }
 
     if (type == JSON_BOOLEAN) {
-      if (test_name != "skipped") {
-        errors.emplace_back(suite_error_message_prefix + "[" + test_name + "] must be an object");
-        return false;
-      }
-
-      if (json_getBoolean(test_or_skipped)) {
-        skipped_test_suites.insert(suite_name);
-      }
-    } else if (type == JSON_OBJ) {
-      if (!parse_test_case(test_or_skipped, suite_name, test_name, errors, skipped_test_cases,
-                           suite_error_message_prefix + "[" + test_name + "]")) {
-        return false;
-      }
+      config_value = MakeSkipConfiguration(json_getBoolean(element));
     } else {
-      errors.emplace_back(suite_error_message_prefix + "[" + test_name + "] must be an object");
+      errors.emplace_back(test_case_error_message_prefix + "[skipped] must be a boolean");
       return false;
     }
   }
@@ -206,16 +187,62 @@ static bool parse_test_cases(json_t const* test_suite, const std::string& suite_
   return true;
 }
 
-static bool parse_test_suites(json_t const* test_suites, std::vector<std::string>& errors,
-                              std::set<std::string>& skipped_test_suites,
-                              std::map<std::string, std::set<std::string>>& skipped_test_cases) {
+static bool parse_test_cases(
+    json_t const* test_suite, const std::string& suite_name, std::vector<std::string>& errors,
+    std::map<std::string, RuntimeConfig::SkipConfiguration>& configured_suites,
+    std::map<std::string, std::map<std::string, RuntimeConfig::SkipConfiguration>>& configured_cases,
+    const std::string& suite_error_message_prefix) {
+  std::map<std::string, RuntimeConfig::SkipConfiguration> case_settings;
+
+  for (auto test_or_skipped = json_getChild(test_suite); test_or_skipped;
+       test_or_skipped = json_getSibling(test_or_skipped)) {
+    std::string test_name = json_getName(test_or_skipped);
+    auto type = json_getType(test_or_skipped);
+
+    if (test_name == "skipped") {
+      if (type == JSON_BOOLEAN) {
+        configured_suites[suite_name] = MakeSkipConfiguration(json_getBoolean(test_or_skipped));
+        continue;
+      }
+
+      errors.emplace_back(suite_error_message_prefix + "[skipped] must be a boolean.");
+      return false;
+    }
+
+    if (type == JSON_OBJ) {
+      auto config_value = RuntimeConfig::SkipConfiguration::DEFAULT;
+      if (!parse_test_case(test_or_skipped, suite_name, test_name, errors, config_value,
+                           suite_error_message_prefix + "[" + test_name + "]")) {
+        return false;
+      }
+      if (config_value != RuntimeConfig::SkipConfiguration::DEFAULT) {
+        case_settings[test_name] = config_value;
+      }
+    } else {
+      errors.emplace_back(suite_error_message_prefix + "[" + test_name + "] must be an object. Ignoring");
+      continue;
+    }
+  }
+
+  if (!case_settings.empty()) {
+    configured_cases[suite_name] = case_settings;
+  }
+
+  return true;
+}
+
+static bool parse_test_suites(
+    json_t const* test_suites, std::vector<std::string>& errors,
+    std::map<std::string, RuntimeConfig::SkipConfiguration>& skipped_test_suites,
+    std::map<std::string, std::map<std::string, RuntimeConfig::SkipConfiguration>>& skipped_test_cases) {
   std::string test_suites_error_message_prefix("test_suites[");
   for (auto suite = json_getChild(test_suites); suite; suite = json_getSibling(suite)) {
     std::string suite_name = json_getName(suite);
     auto suite_error_message_prefix = test_suites_error_message_prefix + suite_name + "]";
 
     if (json_getType(suite) != JSON_OBJ) {
-      errors.emplace_back(suite_error_message_prefix + " must be an object");
+      errors.emplace_back(suite_error_message_prefix + " must be an object. Ignoring");
+      continue;
     }
 
     if (!parse_test_cases(suite, suite_name, errors, skipped_test_suites, skipped_test_cases,
@@ -229,31 +256,54 @@ static bool parse_test_suites(json_t const* test_suites, std::vector<std::string
 
 bool RuntimeConfig::ApplyConfig(std::vector<std::shared_ptr<TestSuite>>& test_suites,
                                 std::vector<std::string>& errors) {
-  if (skipped_test_suites_.empty() && skipped_test_cases_.empty()) {
-    return true;
-  }
+  std::vector<std::shared_ptr<TestSuite>> filtered_test_suites;
 
-  if (!skipped_test_suites_.empty()) {
-    std::vector<std::shared_ptr<TestSuite>> filtered_tests;
-    for (auto& suite : test_suites) {
-      if (skipped_test_suites_.find(suite->Name()) == skipped_test_suites_.end()) {
-        filtered_tests.emplace_back(suite);
+  for (auto& suite : test_suites) {
+    auto default_skip_test_case = skip_tests_by_default_;
+
+    auto entry = configured_test_suites_.find(suite->Name());
+    if (entry != configured_test_suites_.end()) {
+      auto config = entry->second;
+      switch (config) {
+        case SKIPPED:
+          default_skip_test_case = true;
+          break;
+        case UNSKIPPED:
+          default_skip_test_case = false;
+          break;
+        default:
+          break;
       }
     }
 
-    test_suites = filtered_tests;
-  }
+    auto test_case_config = configured_test_cases_.find(suite->Name());
+    std::set<std::string> skipped_test_cases;
 
-  if (!skipped_test_cases_.empty()) {
-    for (auto& suite : test_suites) {
-      auto skipped_test_cases = skipped_test_cases_.find(suite->Name());
-      if (skipped_test_cases == skipped_test_cases_.end()) {
-        continue;
+    for (auto& test_case : suite->TestNames()) {
+      bool skip_test_case = default_skip_test_case;
+
+      if (test_case_config != configured_test_cases_.end()) {
+        auto explicit_config = test_case_config->second.find(test_case);
+        if (explicit_config != test_case_config->second.end()) {
+          skip_test_case = explicit_config->second == SKIPPED;
+        }
       }
 
-      suite->DisableTests(skipped_test_cases->second);
+      if (skip_test_case) {
+        skipped_test_cases.insert(test_case);
+      }
+    }
+
+    if (!skipped_test_cases.empty()) {
+      suite->DisableTests(skipped_test_cases);
+    }
+
+    if (suite->HasEnabledTests()) {
+      filtered_test_suites.push_back(suite);
     }
   }
+
+  test_suites = filtered_test_suites;
 
   return true;
 }
@@ -273,6 +323,12 @@ bool RuntimeConfig::DumpConfig(const std::string& config_file_path,
     return false;
   }
 
+  return DumpConfigToStream(config_file, test_suites, errors);
+}
+
+bool RuntimeConfig::DumpConfigToStream(std::ostream& config_file,
+                                       const std::vector<std::shared_ptr<TestSuite>>& test_suites,
+                                       std::vector<std::string>& errors) {
   config_file << "{" << std::endl;
 
   // General settings.
@@ -312,6 +368,7 @@ void RuntimeConfig::write_settings(std::ostream& output) const {
   BOOL_OPT(enable_autorun_immediately) << "," << std::endl;
   BOOL_OPT(enable_shutdown_on_completion) << "," << std::endl;
   BOOL_OPT(enable_pgraph_region_diff) << "," << std::endl;
+  BOOL_OPT(skip_tests_by_default) << "," << std::endl;
 
 #undef BOOL_OPT
 
@@ -321,10 +378,12 @@ void RuntimeConfig::write_settings(std::ostream& output) const {
 }
 
 void RuntimeConfig::write_test_suite(std::ostream& output, const std::shared_ptr<TestSuite>& suite) const {
-  output << "    \"" << suite->Name() << "\": {" << std::endl;
+  auto& suite_name = suite->Name();
+  output << "    \"" << suite_name << "\": {" << std::endl;
   bool add_test_comma = false;
-  if (skipped_test_suites_.find(suite->Name()) != skipped_test_suites_.end()) {
-    output << "      \"skipped\": true";
+  auto suite_config = configured_test_suites_.find(suite_name);
+  if (suite_config != configured_test_suites_.end()) {
+    output << "      \"skipped\": " << (suite_config->second == SKIPPED ? "true" : "false");
     add_test_comma = true;
   }
 
@@ -333,7 +392,7 @@ void RuntimeConfig::write_test_suite(std::ostream& output, const std::shared_ptr
       output << "," << std::endl;
     }
 
-    write_test_case(output, test_name);
+    write_test_case(output, suite_name, test_name);
 
     add_test_comma = true;
   }
@@ -342,11 +401,17 @@ void RuntimeConfig::write_test_suite(std::ostream& output, const std::shared_ptr
   output << "    }";
 }
 
-void RuntimeConfig::write_test_case(std::ostream& output, const std::string& test_name) const {
+void RuntimeConfig::write_test_case(std::ostream& output, const std::string& suite_name,
+                                    const std::string& test_name) const {
   output << "      \"" << test_name << "\": {" << std::endl;
-  if (skipped_test_cases_.find(test_name) != skipped_test_cases_.end()) {
-    output << "        \"skipped\": true" << std::endl;
+  auto suite_cases_config = configured_test_cases_.find(suite_name);
+  if (suite_cases_config != configured_test_cases_.end()) {
+    auto case_config = suite_cases_config->second.find(test_name);
+    if (case_config != suite_cases_config->second.end()) {
+      output << "        \"skipped\": " << (case_config->second == SKIPPED ? "true" : "false") << std::endl;
+    }
   }
+
   output << "      }";
 }
 

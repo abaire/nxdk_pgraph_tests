@@ -37,8 +37,8 @@ function(split_debug)
     endif ()
 
     set(executable_target "${ARGV0}")
-    set(exe_file "${CMAKE_BINARY_DIR}/${executable_target}.exe")
-    get_filename_component(exe_dirname "${CMAKE_BINARY_DIR}/${executable_target}" DIRECTORY)
+    set(exe_file "${CMAKE_CURRENT_BINARY_DIR}/${executable_target}.exe")
+    get_filename_component(exe_dirname "${CMAKE_CURRENT_BINARY_DIR}/${executable_target}" DIRECTORY)
     get_filename_component(exe_basename "${executable_target}" NAME_WE)
     set(output "${exe_dirname}/${exe_basename}.debug.exe")
 
