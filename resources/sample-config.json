@@ -5,6 +5,7 @@
     "enable_autorun_immediately": false,
     "enable_shutdown_on_completion": false,
     "enable_pgraph_region_diff": false,
+    "skip_tests_by_default": false,
     "output_directory_path": "e:/nxdk_pgraph_tests"
   },
   "test_suites": {
@@ -3857,5 +3858,6 @@
       },
       "InlineElements": {
       }
-    }  },
+    }
+  }
 }
