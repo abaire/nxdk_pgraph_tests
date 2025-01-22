@@ -105,5 +105,6 @@ option(
 if (IS_TARGET_BUILD)
     add_subdirectory(src)
 else ()
+    enable_testing()
     add_subdirectory(tests/host)
 endif ()

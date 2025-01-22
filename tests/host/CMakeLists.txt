@@ -10,7 +10,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
 include(GoogleTest)
 
 configure_file("${CMAKE_SOURCE_DIR}/src/configure.h.in" configure.h)
