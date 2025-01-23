@@ -293,7 +293,9 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
                     config.disable_autorun(), config.enable_autorun_immediately());
   driver.Run();
 
+  PrintMsg("Test loop completed normally\n");
   if (config.enable_progress_log() && Logger::Log().is_open()) {
+    Logger::Log() << "Testing completed normally, closing log." << std::endl;
     Logger::Log().close();
   }
 
