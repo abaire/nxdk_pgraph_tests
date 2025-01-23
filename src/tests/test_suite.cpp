@@ -23,7 +23,8 @@ TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_n
       suite_name_(std::move(suite_name)),
       pgraph_diff_(false, config.enable_progress_log),
       enable_progress_log_{config.enable_progress_log},
-      enable_pgraph_region_diff_{config.enable_pgraph_region_diff} {
+      enable_pgraph_region_diff_{config.enable_pgraph_region_diff},
+      delay_milliseconds_between_tests_{config.delay_milliseconds_between_tests} {
   output_dir_ += "\\";
   output_dir_ += suite_name_;
   std::replace(output_dir_.begin(), output_dir_.end(), ' ', '_');
@@ -315,6 +316,10 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
 
   if (enable_progress_log_ && allow_saving_) {
     Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
+  }
+
+  if (delay_milliseconds_between_tests_) {
+    Sleep(delay_milliseconds_between_tests_);
   }
 
   return std::chrono::high_resolution_clock::now();

@@ -150,7 +150,7 @@ endif ()
 target_include_directories(
         optimized_sources
         PRIVATE
-        .
+        "${CMAKE_CURRENT_SOURCE_DIR}"
         "${CMAKE_SOURCE_DIR}/third_party"
         "${CMAKE_CURRENT_BINARY_DIR}"
 )
@@ -305,7 +305,7 @@ set_compile_and_link_options(nxdk_pgraph_tests)
 target_include_directories(
         nxdk_pgraph_tests
         PRIVATE
-        .
+        "${CMAKE_CURRENT_SOURCE_DIR}"
         "${CMAKE_SOURCE_DIR}/third_party"
         "${CMAKE_CURRENT_BINARY_DIR}"
 )

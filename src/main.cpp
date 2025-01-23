@@ -404,7 +404,8 @@ static void Shutdown() {
 
 static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
                            std::vector<std::shared_ptr<TestSuite>>& test_suites, const std::string& output_directory) {
-  auto config = TestSuite::Config{runtime_config.enable_progress_log(), runtime_config.enable_pgraph_region_diff()};
+  auto config = TestSuite::Config{runtime_config.enable_progress_log(), runtime_config.enable_pgraph_region_diff(),
+                                  runtime_config.delay_milliseconds_between_tests()};
 
 #define REG_TEST(CLASS_NAME)                                                   \
   {                                                                            \
