@@ -35,6 +35,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_DefaultSettings) {
     "enable_shutdown_on_completion": false,
     "enable_pgraph_region_diff": false,
     "skip_tests_by_default": false,
+    "delay_milliseconds_between_tests": 0,
     "output_directory_path": "e:/nxdk_pgraph_tests"
   },
   "test_suites": {
@@ -70,6 +71,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
       "enable_shutdown_on_completion": true,
       "enable_pgraph_region_diff": true,
       "skip_tests_by_default": true,
+      "delay_milliseconds_between_tests": 10,
       "output_directory_path": "c:/foobar"
     }
   })");
@@ -92,6 +94,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
     "enable_shutdown_on_completion": true,
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
+    "delay_milliseconds_between_tests": 10,
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -127,6 +130,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultEnabled) {
       "enable_shutdown_on_completion": true,
       "enable_pgraph_region_diff": true,
       "skip_tests_by_default": true,
+      "delay_milliseconds_between_tests": 10,
       "output_directory_path": "c:/foobar"
     },
     "test_suites": {
@@ -155,6 +159,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultEnabled) {
     "enable_shutdown_on_completion": true,
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
+    "delay_milliseconds_between_tests": 10,
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -192,6 +197,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultDisabled) {
       "enable_shutdown_on_completion": true,
       "enable_pgraph_region_diff": true,
       "skip_tests_by_default": false,
+      "delay_milliseconds_between_tests": 10,
       "output_directory_path": "c:/foobar"
     },
     "test_suites": {
@@ -223,6 +229,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultDisabled) {
     "enable_shutdown_on_completion": true,
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": false,
+    "delay_milliseconds_between_tests": 10,
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -358,6 +365,33 @@ TEST(RuntimeConfig, LoadConfigBuffer_InvalidSkipTestsByDefault) {
   EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"skip_tests_by_default\": 1}}", errors));
   EXPECT_EQ(errors.size(), 1);
   EXPECT_STREQ(errors.at(0).c_str(), "settings[skip_tests_by_default] must be a boolean");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests_NonInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_between_tests\": false}}", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_between_tests] must be a positive integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests_Negative) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_between_tests\": -1}}", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_between_tests] must be a positive integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_between_tests\": 100}}", errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.delay_milliseconds_between_tests(), 100);
 }
 
 TEST(RuntimeConfig, LoadConfigBuffer_InvalidOutputDirectoryPath) {

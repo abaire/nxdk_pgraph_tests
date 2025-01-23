@@ -25,11 +25,14 @@ class TestSuite {
 
   //! Runtime configuration for TestSuites.
   struct Config {
-    // Enable logging of test progress to file.
+    //! Enable logging of test progress to file.
     bool enable_progress_log;
 
-    // Enables a diff of the nv2a PGRAPH registers before and after each test case.
+    // !Enables a diff of the nv2a PGRAPH registers before and after each test case.
     bool enable_pgraph_region_diff;
+
+    //! Artificial delay before starting each test.
+    int delay_milliseconds_between_tests;
   };
 
  public:
@@ -92,6 +95,7 @@ class TestSuite {
 
   bool enable_progress_log_;
   bool enable_pgraph_region_diff_;
+  int delay_milliseconds_between_tests_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_SUITE_H

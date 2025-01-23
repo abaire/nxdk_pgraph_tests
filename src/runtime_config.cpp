@@ -134,6 +134,22 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
     return false;
   }
 
+  auto delay_milliseconds_between_tests = json_getProperty(settings, "delay_milliseconds_between_tests");
+  if (delay_milliseconds_between_tests) {
+    if (json_getType(delay_milliseconds_between_tests) != JSON_INTEGER) {
+      errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
+      return false;
+    }
+
+    auto value = json_getInteger(delay_milliseconds_between_tests);
+    if (value < 0) {
+      errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
+      return false;
+    }
+
+    delay_milliseconds_between_tests_ = value;
+  }
+
   auto output_directory_path = json_getProperty(settings, "output_directory_path");
   if (output_directory_path) {
     if (json_getType(output_directory_path) != JSON_TEXT) {
@@ -372,7 +388,9 @@ void RuntimeConfig::write_settings(std::ostream& output) const {
 
 #undef BOOL_OPT
 
-  output << "    \"output_directory_path\": \"" << EscapePath(output_directory_path()) << "\"" << std::endl;
+  output << R"(    "delay_milliseconds_between_tests": )" << delay_milliseconds_between_tests_ << "," << std::endl;
+
+  output << R"(    "output_directory_path": ")" << EscapePath(output_directory_path_) << "\"" << std::endl;
 
   output << "  }";
 }
