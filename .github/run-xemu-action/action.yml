@@ -1,0 +1,19 @@
+name: 'Run Xemu'
+description: 'Runs xemu.app'
+inputs:
+  xemu-image:
+    description: 'Path to the xemu AppImage'
+    required: true
+  iso-image:
+    description: 'Path to the xiso that xemu should execute'
+    required: true
+  hdd-image:
+    description: 'Path to the HDD image that xemu should use'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.xemu-image }}
+    - ${{ inputs.iso-image }}
+    - ${{ inputs.hdd-image }}
