@@ -32,7 +32,7 @@ class TestSuite {
     bool enable_pgraph_region_diff;
 
     //! Artificial delay before starting each test.
-    int delay_milliseconds_between_tests;
+    uint32_t delay_milliseconds_between_tests;
   };
 
  public:
@@ -95,7 +95,7 @@ class TestSuite {
 
   bool enable_progress_log_;
   bool enable_pgraph_region_diff_;
-  int delay_milliseconds_between_tests_;
+  uint32_t delay_milliseconds_between_tests_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_SUITE_H

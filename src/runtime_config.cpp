@@ -1,5 +1,10 @@
 #include "runtime_config.h"
 
+#ifdef NXDK
+#include <lwip/inet.h>
+#else
+#include <arpa/inet.h>
+#endif
 #include <tiny-json/tiny-json.h>
 
 #include "debug_output.h"
@@ -89,7 +94,6 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
     return false;
   }
 
-  // generic lambda, operator() is a template with one parameter
   auto get_bool = [](auto object, const char* key, bool& out) {
     auto property = json_getProperty(object, key);
     if (!property) {
@@ -134,30 +138,83 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
     return false;
   }
 
-  auto delay_milliseconds_between_tests = json_getProperty(settings, "delay_milliseconds_between_tests");
-  if (delay_milliseconds_between_tests) {
-    if (json_getType(delay_milliseconds_between_tests) != JSON_INTEGER) {
-      errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
+  auto get_uint32 = [](auto object, const char* key, uint32_t& out) {
+    auto property = json_getProperty(object, key);
+    if (!property) {
+      return true;
+    }
+
+    if (json_getType(property) != JSON_INTEGER) {
       return false;
     }
 
-    auto value = json_getInteger(delay_milliseconds_between_tests);
+    auto value = json_getInteger(property);
     if (value < 0) {
-      errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
       return false;
     }
 
-    delay_milliseconds_between_tests_ = value;
+    out = static_cast<uint32_t>(value & 0xFFFFFFFF);
+    return true;
+  };
+
+  if (!get_uint32(settings, "delay_milliseconds_between_tests", delay_milliseconds_between_tests_)) {
+    errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
+    return false;
   }
 
-  auto output_directory_path = json_getProperty(settings, "output_directory_path");
-  if (output_directory_path) {
-    if (json_getType(output_directory_path) != JSON_TEXT) {
-      errors.emplace_back("settings[output_directory_path] must be a string");
+  auto get_string = [](auto object, const char* key, std::string& out) {
+    auto property = json_getProperty(object, key);
+    if (!property) {
+      return true;
+    }
+
+    if (json_getType(property) != JSON_TEXT) {
       return false;
     }
 
-    output_directory_path_ = SanitizePath(json_getValue(output_directory_path));
+    out = json_getValue(property);
+    return true;
+  };
+
+  if (!get_string(settings, "output_directory_path", output_directory_path_)) {
+    errors.emplace_back("settings[output_directory_path] must be a string");
+    return false;
+  }
+  output_directory_path_ = SanitizePath(output_directory_path_);
+
+  std::string ftp_ip;
+  if (!get_string(settings, "ftp_ip", ftp_ip)) {
+    errors.emplace_back("settings[ftp_ip] must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+    return false;
+  }
+  if (!ftp_ip.empty()) {
+    ftp_server_ip_ = inet_addr(ftp_ip.c_str());
+    if (ftp_server_ip_ == 0xFFFFFFFF) {
+      errors.emplace_back("settings[ftp_ip] must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+      return false;
+    }
+  }
+
+  uint32_t port = 0;
+  if (!get_uint32(settings, "ftp_port", port) || port > 0xFFFF) {
+    errors.emplace_back("settings[ftp_port] must be a positive 16-bit integer");
+    return false;
+  }
+  ftp_server_port_ = port & 0xFFFF;
+
+  if (!get_string(settings, "ftp_user", ftp_user_)) {
+    errors.emplace_back("settings[ftp_user] must be a string");
+    return false;
+  }
+
+  if (!get_string(settings, "ftp_password", ftp_password_)) {
+    errors.emplace_back("settings[ftp_password] must be a string");
+    return false;
+  }
+
+  if (!get_uint32(settings, "ftp_timeout_milliseconds", ftp_timeout_milliseconds_)) {
+    errors.emplace_back("settings[ftp_timeout_milliseconds] must be a positive integer");
+    return false;
   }
 
   auto test_suites = json_getProperty(root, "test_suites");
@@ -389,6 +446,19 @@ void RuntimeConfig::write_settings(std::ostream& output) const {
 #undef BOOL_OPT
 
   output << R"(    "delay_milliseconds_between_tests": )" << delay_milliseconds_between_tests_ << "," << std::endl;
+
+  output << R"(    "ftp_ip": ")";
+  if (ftp_server_ip_) {
+    auto network_ordered = htonl(ftp_server_ip_);
+    output << ((network_ordered >> 24) & 0xFF) << "." << ((network_ordered >> 16) & 0xFF) << "."
+           << ((network_ordered >> 8) & 0xFF) << "." << (network_ordered & 0xFF);
+  }
+  output << "\"," << std::endl;
+
+  output << R"(    "ftp_port": )" << ftp_server_port_ << "," << std::endl;
+  output << R"(    "ftp_user": ")" << ftp_user_ << "\"," << std::endl;
+  output << R"(    "ftp_password": ")" << ftp_password_ << "\"," << std::endl;
+  output << R"(    "ftp_timeout_milliseconds": )" << ftp_timeout_milliseconds_ << "," << std::endl;
 
   output << R"(    "output_directory_path": ")" << EscapePath(output_directory_path_) << "\"" << std::endl;
 

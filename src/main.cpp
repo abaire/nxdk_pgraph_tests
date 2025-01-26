@@ -16,6 +16,7 @@
 #pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
 #pragma clang diagnostic pop
+#include <nxdk/net.h>
 
 #include <algorithm>
 #include <fstream>
@@ -140,6 +141,7 @@ int main() {
     debugPrint("%s", SDL_GetError());
     pb_show_debug_screen();
     Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
     return 1;
   }
 
@@ -147,6 +149,7 @@ int main() {
     debugPrint("Failed to initialize SDL_image PNG mode.");
     pb_show_debug_screen();
     Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
     return 1;
   }
 
@@ -169,6 +172,7 @@ int main() {
                config.output_directory_path().c_str());
     pb_show_debug_screen();
     Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
     return 1;
   };
 
@@ -191,9 +195,24 @@ int main() {
         debugPrint("%s\n", err.c_str());
       }
       Sleep(kDelayOnFailureMilliseconds);
+      pb_kill();
       return 1;
     }
   }
+
+  if (config.ftp_server_ip()) {
+    debugPrint("Initializing network...\n");
+    pb_show_debug_screen();
+    int net_init_result = nxNetInit(nullptr);
+    if (net_init_result) {
+      debugPrint("nxNetInit failed: %d\n", net_init_result);
+      pb_show_debug_screen();
+      Sleep(kDelayOnFailureMilliseconds);
+      pb_kill();
+      return 1;
+    }
+  }
+
   pb_show_front_screen();
   RunTests(config, host, test_suites);
 #endif  // DUMP_CONFIG_FILE

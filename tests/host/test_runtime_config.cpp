@@ -36,6 +36,11 @@ TEST(RuntimeConfig, DumpConfigBuffer_DefaultSettings) {
     "enable_pgraph_region_diff": false,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 0,
+    "ftp_ip": "",
+    "ftp_port": 0,
+    "ftp_user": "",
+    "ftp_password": "",
+    "ftp_timeout_milliseconds": 0,
     "output_directory_path": "e:/nxdk_pgraph_tests"
   },
   "test_suites": {
@@ -72,6 +77,11 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
       "enable_pgraph_region_diff": true,
       "skip_tests_by_default": true,
       "delay_milliseconds_between_tests": 10,
+      "ftp_ip": "1.2.3.4",
+      "ftp_port": 2123,
+      "ftp_user": "username",
+      "ftp_password": "PaSSwOrD",
+      "ftp_timeout_milliseconds": 1024,
       "output_directory_path": "c:/foobar"
     }
   })");
@@ -95,6 +105,11 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "ftp_ip": "1.2.3.4",
+    "ftp_port": 2123,
+    "ftp_user": "username",
+    "ftp_password": "PaSSwOrD",
+    "ftp_timeout_milliseconds": 1024,
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -160,6 +175,11 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultEnabled) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "ftp_ip": "",
+    "ftp_port": 0,
+    "ftp_user": "",
+    "ftp_password": "",
+    "ftp_timeout_milliseconds": 0,
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -230,6 +250,11 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultDisabled) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 10,
+    "ftp_ip": "",
+    "ftp_port": 0,
+    "ftp_user": "",
+    "ftp_password": "",
+    "ftp_timeout_milliseconds": 0,
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -500,6 +525,80 @@ TEST(RuntimeConfig, LoadConfigBuffer_InvalidSkippedsMemberInTestCase) {
                                        errors));
   EXPECT_EQ(errors.size(), 1);
   EXPECT_STREQ(errors.at(0).c_str(), "test_suites[Suite][Case][skipped] must be a boolean");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPAddress_NonString) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"ftp_ip": 123} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(),
+               "settings[ftp_ip] must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPAddress_BadFormat) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"ftp_ip": "abc"} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(),
+               "settings[ftp_ip] must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPUser_NonString) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"ftp_user": 123} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[ftp_user] must be a string");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPPassword_NonString) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"ftp_password": 123} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[ftp_password] must be a string");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPTimeoutMilliseconds_NonSInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"ftp_timeout_milliseconds": "hi"} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[ftp_timeout_milliseconds] must be a positive integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPTimeoutMilliseconds_NegativeSInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"ftp_timeout_milliseconds": -1} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[ftp_timeout_milliseconds] must be a positive integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_ValidFTPConfig) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer(R"({"settings": {
+        "ftp_ip": "127.0.0.1",
+        "ftp_user": "user",
+        "ftp_password": "password",
+        "ftp_timeout_milliseconds": 123
+      } })",
+                                      errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.ftp_server_ip(), 0x100007F);
+  EXPECT_STREQ(config.ftp_user().c_str(), "user");
+  EXPECT_STREQ(config.ftp_password().c_str(), "password");
+  EXPECT_EQ(config.ftp_timeout_milliseconds(), 123);
 }
 
 TEST(RuntimeConfig, ApplyConfig_NoJSON_EmptyTestSuite) {

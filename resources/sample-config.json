@@ -7,7 +7,12 @@
     "enable_pgraph_region_diff": false,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 0,
-    "output_directory_path": "e:/nxdk_pgraph_tests"
+    "output_directory_path": "e:/nxdk_pgraph_tests",
+    "ftp_ip": "",
+    "ftp_port": 0,
+    "ftp_user": "",
+    "ftp_password": "",
+    "ftp_timeout_milliseconds": 0
   },
   "test_suites": {
     "Lighting normals": {

@@ -57,7 +57,13 @@ class RuntimeConfig {
   [[nodiscard]] bool enable_shutdown_on_completion() const { return enable_shutdown_on_completion_; }
   [[nodiscard]] bool enable_pgraph_region_diff() const { return enable_pgraph_region_diff_; }
   [[nodiscard]] bool skip_tests_by_default() const { return skip_tests_by_default_; }
-  [[nodiscard]] int delay_milliseconds_between_tests() const { return delay_milliseconds_between_tests_; }
+  [[nodiscard]] uint32_t delay_milliseconds_between_tests() const { return delay_milliseconds_between_tests_; }
+
+  [[nodiscard]] uint32_t ftp_server_ip() const { return ftp_server_ip_; }
+  [[nodiscard]] uint16_t ftp_server_port() const { return ftp_server_port_; }
+  [[nodiscard]] const std::string& ftp_user() const { return ftp_user_; }
+  [[nodiscard]] const std::string& ftp_password() const { return ftp_password_; }
+  [[nodiscard]] uint32_t ftp_timeout_milliseconds() const { return ftp_timeout_milliseconds_; }
 
   [[nodiscard]] const std::string& output_directory_path() const { return output_directory_path_; }
 
@@ -76,12 +82,18 @@ class RuntimeConfig {
   bool enable_progress_log_ = DEFAULT_ENABLE_PROGRESS_LOG;
   //! Add a delay before running each test. This may be useful in conjunction with the progress log if specific tests
   //! crash an emulator; giving more time for the log to be flushed to the filesystem.
-  int delay_milliseconds_between_tests_ = 0;
+  uint32_t delay_milliseconds_between_tests_ = 0;
   bool disable_autorun_ = DEFAULT_DISABLE_AUTORUN;
   bool enable_autorun_immediately_ = DEFAULT_AUTORUN_IMMEDIATELY;
   bool enable_shutdown_on_completion_ = DEFAULT_ENABLE_SHUTDOWN;
   bool enable_pgraph_region_diff_ = DEFAULT_ENABLE_PGRAPH_REGION_DIFF;
   bool skip_tests_by_default_ = DEFAULT_SKIP_TESTS_BY_DEFAULT;
+
+  uint32_t ftp_server_ip_ = 0;
+  uint16_t ftp_server_port_ = 0;
+  std::string ftp_user_;
+  std::string ftp_password_;
+  uint32_t ftp_timeout_milliseconds_ = 0;
 
   std::string output_directory_path_ = RuntimeConfig::SanitizePath(DEFAULT_OUTPUT_DIRECTORY_PATH);
 
