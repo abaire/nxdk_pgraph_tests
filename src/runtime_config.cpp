@@ -1,12 +1,20 @@
 #include "runtime_config.h"
 
-#include <tiny-json/tiny-json.h>
+#include <fstream>
+#ifdef NXDK
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
+#include <lwip/inet.h>
+#pragma clang diagnostic pop
+#else
+#include <arpa/inet.h>
+#endif
 
-#include "debug_output.h"
+#include <tiny-json/tiny-json.h>
 
 #define MAX_CONFIG_FILE_SIZE (1024 * 128)
 
-static bool parse_test_suites(
+static bool ParseTestSuites(
     json_t const* test_suites, std::vector<std::string>& errors,
     std::map<std::string, RuntimeConfig::SkipConfiguration>& skipped_test_suites,
     std::map<std::string, std::map<std::string, RuntimeConfig::SkipConfiguration>>& skipped_test_cases);
@@ -28,7 +36,7 @@ class JSONParser : jsonPool_t {
 
  private:
   static json_t* Alloc(jsonPool_t* pool) {
-    const auto list_pool = (JSONParser*)pool;
+    const auto list_pool = static_cast<JSONParser*>(pool);
     list_pool->object_list_.emplace_back();
     return &list_pool->object_list_.back();
   }
@@ -68,6 +76,53 @@ bool RuntimeConfig::LoadConfig(const char* config_file_path, std::vector<std::st
   return LoadConfigBuffer(json_string, errors);
 }
 
+static bool LoadBool(json_t const* object, const char* key, bool& out) {
+  auto property = json_getProperty(object, key);
+  if (!property) {
+    return true;
+  }
+
+  if (json_getType(property) != JSON_BOOLEAN) {
+    return false;
+  }
+
+  out = json_getBoolean(property);
+  return true;
+};
+
+static bool LoadString(json_t const* object, const char* key, std::string& out) {
+  auto property = json_getProperty(object, key);
+  if (!property) {
+    return true;
+  }
+
+  if (json_getType(property) != JSON_TEXT) {
+    return false;
+  }
+
+  out = json_getValue(property);
+  return true;
+};
+
+static bool LoadUint32(json_t const* object, const char* key, uint32_t& out) {
+  auto property = json_getProperty(object, key);
+  if (!property) {
+    return true;
+  }
+
+  if (json_getType(property) != JSON_INTEGER) {
+    return false;
+  }
+
+  auto value = json_getInteger(property);
+  if (value < 0) {
+    return false;
+  }
+
+  out = static_cast<uint32_t>(value & 0xFFFFFFFF);
+  return true;
+};
+
 bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vector<std::string>& errors) {
   std::map<std::string, std::vector<std::string>> test_config;
 
@@ -89,75 +144,49 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
     return false;
   }
 
-  // generic lambda, operator() is a template with one parameter
-  auto get_bool = [](auto object, const char* key, bool& out) {
-    auto property = json_getProperty(object, key);
-    if (!property) {
-      return true;
-    }
-
-    if (json_getType(property) != JSON_BOOLEAN) {
-      return false;
-    }
-
-    out = json_getBoolean(property);
-    return true;
-  };
-
-  if (!get_bool(settings, "enable_progress_log", enable_progress_log_)) {
+  if (!LoadBool(settings, "enable_progress_log", enable_progress_log_)) {
     errors.emplace_back("settings[enable_progress_log] must be a boolean");
     return false;
   }
 
-  if (!get_bool(settings, "disable_autorun", disable_autorun_)) {
+  if (!LoadBool(settings, "disable_autorun", disable_autorun_)) {
     errors.emplace_back("settings[disable_autorun] must be a boolean");
     return false;
   }
 
-  if (!get_bool(settings, "enable_autorun_immediately", enable_autorun_immediately_)) {
+  if (!LoadBool(settings, "enable_autorun_immediately", enable_autorun_immediately_)) {
     errors.emplace_back("settings[enable_autorun_immediately] must be a boolean");
     return false;
   }
 
-  if (!get_bool(settings, "enable_shutdown_on_completion", enable_shutdown_on_completion_)) {
+  if (!LoadBool(settings, "enable_shutdown_on_completion", enable_shutdown_on_completion_)) {
     errors.emplace_back("settings[enable_shutdown_on_completion] must be a boolean");
     return false;
   }
 
-  if (!get_bool(settings, "enable_pgraph_region_diff", enable_pgraph_region_diff_)) {
+  if (!LoadBool(settings, "enable_pgraph_region_diff", enable_pgraph_region_diff_)) {
     errors.emplace_back("settings[enable_pgraph_region_diff] must be a boolean");
     return false;
   }
 
-  if (!get_bool(settings, "skip_tests_by_default", skip_tests_by_default_)) {
+  if (!LoadBool(settings, "skip_tests_by_default", skip_tests_by_default_)) {
     errors.emplace_back("settings[skip_tests_by_default] must be a boolean");
     return false;
   }
 
-  auto delay_milliseconds_between_tests = json_getProperty(settings, "delay_milliseconds_between_tests");
-  if (delay_milliseconds_between_tests) {
-    if (json_getType(delay_milliseconds_between_tests) != JSON_INTEGER) {
-      errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
-      return false;
-    }
-
-    auto value = json_getInteger(delay_milliseconds_between_tests);
-    if (value < 0) {
-      errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
-      return false;
-    }
-
-    delay_milliseconds_between_tests_ = value;
+  if (!LoadUint32(settings, "delay_milliseconds_between_tests", delay_milliseconds_between_tests_)) {
+    errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
+    return false;
   }
 
-  auto output_directory_path = json_getProperty(settings, "output_directory_path");
-  if (output_directory_path) {
-    if (json_getType(output_directory_path) != JSON_TEXT) {
-      errors.emplace_back("settings[output_directory_path] must be a string");
-      return false;
-    }
+  if (!LoadString(settings, "output_directory_path", output_directory_path_)) {
+    errors.emplace_back("settings[output_directory_path] must be a string");
+    return false;
+  }
+  output_directory_path_ = SanitizePath(output_directory_path_);
 
-    output_directory_path_ = SanitizePath(json_getValue(output_directory_path));
+  if (!ProcessNetworkSettings(settings, errors)) {
+    return false;
   }
 
   auto test_suites = json_getProperty(root, "test_suites");
@@ -170,7 +199,105 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
     return false;
   }
 
-  return parse_test_suites(test_suites, errors, configured_test_suites_, configured_test_cases_);
+  return ParseTestSuites(test_suites, errors, configured_test_suites_, configured_test_cases_);
+}
+
+bool RuntimeConfig::ProcessNetworkSettings(const void* parent, std::vector<std::string>& errors) {
+  auto settings = static_cast<json_t const*>(parent);
+  auto network = json_getProperty(settings, "network");
+  if (!network) {
+    return true;
+  }
+
+  bool network_enable = false;
+  if (!LoadBool(network, "enable", network_enable)) {
+    errors.emplace_back("settings[network][config_automatic] must be a boolean");
+    return false;
+  }
+
+  bool config_automatic = false;
+  if (!LoadBool(network, "config_automatic", config_automatic)) {
+    errors.emplace_back("settings[network][config_automatic] must be a boolean");
+    return false;
+  }
+
+  bool config_dhcp = false;
+  if (!LoadBool(network, "config_dhcp", config_dhcp)) {
+    errors.emplace_back("settings[network][config_dhcp] must be a boolean");
+    return false;
+  }
+
+  if (!network_enable) {
+    network_config_mode_ = NetworkConfigMode::OFF;
+  } else if (config_automatic) {
+    network_config_mode_ = NetworkConfigMode::AUTOMATIC;
+  } else if (config_dhcp) {
+    network_config_mode_ = NetworkConfigMode::DHCP;
+  } else {
+    network_config_mode_ = NetworkConfigMode::STATIC;
+  }
+
+  auto load_ip = [&errors](auto object, const char* key, uint32_t& output, const std::string& error_prefix) {
+    std::string value;
+    if (!LoadString(object, key, value)) {
+      errors.emplace_back(error_prefix + " must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+      return false;
+    }
+    if (!value.empty()) {
+      output = ntohl(inet_addr(value.c_str()));
+      if (output == 0xFFFFFFFF) {
+        errors.emplace_back(error_prefix + " must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+        return false;
+      }
+    }
+    return true;
+  };
+
+  if (!load_ip(network, "static_ip", static_ip_, "settings[network][static_ip]")) {
+    return false;
+  }
+  if (!load_ip(network, "static_netmask", static_netmask_, "settings[network][static_netmask]")) {
+    return false;
+  }
+  if (!load_ip(network, "static_gateway", static_gateway_, "settings[network][static_gateway]")) {
+    return false;
+  }
+  if (!load_ip(network, "static_dns_1", static_dns_1_, "settings[network][static_dns_1]")) {
+    return false;
+  }
+  if (!load_ip(network, "static_dns_2", static_dns_2_, "settings[network][static_dns_2]")) {
+    return false;
+  }
+
+  if (auto ftp = json_getProperty(network, "ftp")) {
+    if (!load_ip(ftp, "ftp_ip", ftp_server_ip_, "settings[network][ftp][ftp_ip]")) {
+      return false;
+    }
+
+    uint32_t port = 0;
+    if (!LoadUint32(ftp, "ftp_port", port) || port > 0xFFFF) {
+      errors.emplace_back("settings[network][ftp][ftp_port] must be a positive 16-bit integer");
+      return false;
+    }
+    ftp_server_port_ = port & 0xFFFF;
+
+    if (!LoadString(ftp, "ftp_user", ftp_user_)) {
+      errors.emplace_back("settings[network][ftp][ftp_user] must be a string");
+      return false;
+    }
+
+    if (!LoadString(ftp, "ftp_password", ftp_password_)) {
+      errors.emplace_back("settings[network][ftp][ftp_password] must be a string");
+      return false;
+    }
+
+    if (!LoadUint32(ftp, "ftp_timeout_milliseconds", ftp_timeout_milliseconds_)) {
+      errors.emplace_back("settings[network][ftp][ftp_timeout_milliseconds] must be a positive integer");
+      return false;
+    }
+  }
+
+  return true;
 }
 
 static RuntimeConfig::SkipConfiguration MakeSkipConfiguration(bool is_skipped) {
@@ -180,9 +307,9 @@ static RuntimeConfig::SkipConfiguration MakeSkipConfiguration(bool is_skipped) {
   return RuntimeConfig::SkipConfiguration::UNSKIPPED;
 }
 
-static bool parse_test_case(json_t const* test_case, const std::string& suite_name, const std::string& test_name,
-                            std::vector<std::string>& errors, RuntimeConfig::SkipConfiguration& config_value,
-                            const std::string& test_case_error_message_prefix) {
+static bool ParseTestCase(json_t const* test_case, const std::string& suite_name, const std::string& test_name,
+                          std::vector<std::string>& errors, RuntimeConfig::SkipConfiguration& config_value,
+                          const std::string& test_case_error_message_prefix) {
   for (auto element = json_getChild(test_case); element; element = json_getSibling(element)) {
     std::string name = json_getName(element);
     auto type = json_getType(element);
@@ -203,7 +330,7 @@ static bool parse_test_case(json_t const* test_case, const std::string& suite_na
   return true;
 }
 
-static bool parse_test_cases(
+static bool ParseTestCases(
     json_t const* test_suite, const std::string& suite_name, std::vector<std::string>& errors,
     std::map<std::string, RuntimeConfig::SkipConfiguration>& configured_suites,
     std::map<std::string, std::map<std::string, RuntimeConfig::SkipConfiguration>>& configured_cases,
@@ -227,8 +354,8 @@ static bool parse_test_cases(
 
     if (type == JSON_OBJ) {
       auto config_value = RuntimeConfig::SkipConfiguration::DEFAULT;
-      if (!parse_test_case(test_or_skipped, suite_name, test_name, errors, config_value,
-                           suite_error_message_prefix + "[" + test_name + "]")) {
+      if (!ParseTestCase(test_or_skipped, suite_name, test_name, errors, config_value,
+                         suite_error_message_prefix + "[" + test_name + "]")) {
         return false;
       }
       if (config_value != RuntimeConfig::SkipConfiguration::DEFAULT) {
@@ -247,7 +374,7 @@ static bool parse_test_cases(
   return true;
 }
 
-static bool parse_test_suites(
+static bool ParseTestSuites(
     json_t const* test_suites, std::vector<std::string>& errors,
     std::map<std::string, RuntimeConfig::SkipConfiguration>& skipped_test_suites,
     std::map<std::string, std::map<std::string, RuntimeConfig::SkipConfiguration>>& skipped_test_cases) {
@@ -261,8 +388,8 @@ static bool parse_test_suites(
       continue;
     }
 
-    if (!parse_test_cases(suite, suite_name, errors, skipped_test_suites, skipped_test_cases,
-                          suite_error_message_prefix)) {
+    if (!ParseTestCases(suite, suite_name, errors, skipped_test_suites, skipped_test_cases,
+                        suite_error_message_prefix)) {
       return false;
     }
   }
@@ -279,12 +406,11 @@ bool RuntimeConfig::ApplyConfig(std::vector<std::shared_ptr<TestSuite>>& test_su
 
     auto entry = configured_test_suites_.find(suite->Name());
     if (entry != configured_test_suites_.end()) {
-      auto config = entry->second;
-      switch (config) {
-        case SKIPPED:
+      switch (entry->second) {
+        case SkipConfiguration::SKIPPED:
           default_skip_test_case = true;
           break;
-        case UNSKIPPED:
+        case SkipConfiguration::UNSKIPPED:
           default_skip_test_case = false;
           break;
         default:
@@ -301,7 +427,7 @@ bool RuntimeConfig::ApplyConfig(std::vector<std::shared_ptr<TestSuite>>& test_su
       if (test_case_config != configured_test_cases_.end()) {
         auto explicit_config = test_case_config->second.find(test_case);
         if (explicit_config != test_case_config->second.end()) {
-          skip_test_case = explicit_config->second == SKIPPED;
+          skip_test_case = explicit_config->second == SkipConfiguration::SKIPPED;
         }
       }
 
@@ -330,9 +456,6 @@ static std::string bool_str(bool value) { return value ? "true" : "false"; }
 bool RuntimeConfig::DumpConfig(const std::string& config_file_path,
                                const std::vector<std::shared_ptr<TestSuite>>& test_suites,
                                std::vector<std::string>& errors) {
-  const char* out_path = config_file_path.c_str();
-  PrintMsg("Writing config file to %s\n", out_path);
-
   std::ofstream config_file(config_file_path);
   if (!config_file) {
     errors.emplace_back("Failed to open config file for output");
@@ -349,7 +472,7 @@ bool RuntimeConfig::DumpConfigToStream(std::ostream& config_file,
 
   // General settings.
 
-  write_settings(config_file);
+  WriteSettings(config_file);
   config_file << "," << std::endl;
 
   // Test suite enable/disable status.
@@ -362,7 +485,7 @@ bool RuntimeConfig::DumpConfigToStream(std::ostream& config_file,
       config_file << "," << std::endl;
     }
 
-    write_test_suite(config_file, suite);
+    WriteTestSuite(config_file, suite);
     add_test_suite_comma = true;
   }
 
@@ -374,7 +497,7 @@ bool RuntimeConfig::DumpConfigToStream(std::ostream& config_file,
   return true;
 }
 
-void RuntimeConfig::write_settings(std::ostream& output) const {
+void RuntimeConfig::WriteSettings(std::ostream& output) const {
   output << "  \"settings\": {" << std::endl;
 
 #define BOOL_OPT(VALUE) output << "    \"" #VALUE "\": " << bool_str(VALUE())
@@ -385,23 +508,65 @@ void RuntimeConfig::write_settings(std::ostream& output) const {
   BOOL_OPT(enable_shutdown_on_completion) << "," << std::endl;
   BOOL_OPT(enable_pgraph_region_diff) << "," << std::endl;
   BOOL_OPT(skip_tests_by_default) << "," << std::endl;
-
 #undef BOOL_OPT
 
   output << R"(    "delay_milliseconds_between_tests": )" << delay_milliseconds_between_tests_ << "," << std::endl;
+
+  output << R"(    "network": {)" << std::endl;
+  output << R"(      "enable": )" << bool_str(network_config_mode_ != NetworkConfigMode::OFF) << "," << std::endl;
+  output << R"(      "config_automatic": )" << bool_str(network_config_mode_ == NetworkConfigMode::AUTOMATIC) << ","
+         << std::endl;
+  output << R"(      "config_dhcp": )" << bool_str(network_config_mode_ == NetworkConfigMode::DHCP) << "," << std::endl;
+
+#define IP_VALUE(MEMBER)                                                                   \
+  if ((MEMBER)) {                                                                          \
+    auto network_ordered = htonl((MEMBER));                                                \
+    output << (network_ordered & 0xFF) << "." << ((network_ordered >> 8) & 0xFF) << "."    \
+           << ((network_ordered >> 16) & 0xFF) << "." << ((network_ordered >> 24) & 0xFF); \
+  }
+
+  output << R"(      "static_ip": ")";
+  IP_VALUE(static_ip_)
+  output << R"(",)" << std::endl;
+  output << R"(      "static_netmask": ")";
+  IP_VALUE(static_netmask_)
+  output << R"(",)" << std::endl;
+  output << R"(      "static_gateway": ")";
+  IP_VALUE(static_gateway_)
+  output << R"(",)" << std::endl;
+  output << R"(      "static_dns_1": ")";
+  IP_VALUE(static_dns_1_)
+  output << R"(",)" << std::endl;
+  output << R"(      "static_dns_2": ")";
+  IP_VALUE(static_dns_2_)
+  output << R"(",)" << std::endl;
+
+  output << R"(      "ftp": {)" << std::endl;
+  output << R"(        "ftp_ip": ")";
+  IP_VALUE(ftp_server_ip_)
+  output << R"(",)" << std::endl;
+
+#undef IP_VALUE
+
+  output << R"(        "ftp_port": )" << ftp_server_port_ << "," << std::endl;
+  output << R"(        "ftp_user": ")" << ftp_user_ << "\"," << std::endl;
+  output << R"(        "ftp_password": ")" << ftp_password_ << "\"," << std::endl;
+  output << R"(        "ftp_timeout_milliseconds": )" << ftp_timeout_milliseconds_ << std::endl;
+  output << R"(      })" << std::endl;
+  output << R"(    },)" << std::endl;
 
   output << R"(    "output_directory_path": ")" << EscapePath(output_directory_path_) << "\"" << std::endl;
 
   output << "  }";
 }
 
-void RuntimeConfig::write_test_suite(std::ostream& output, const std::shared_ptr<TestSuite>& suite) const {
+void RuntimeConfig::WriteTestSuite(std::ostream& output, const std::shared_ptr<TestSuite>& suite) const {
   auto& suite_name = suite->Name();
   output << "    \"" << suite_name << "\": {" << std::endl;
   bool add_test_comma = false;
   auto suite_config = configured_test_suites_.find(suite_name);
   if (suite_config != configured_test_suites_.end()) {
-    output << "      \"skipped\": " << (suite_config->second == SKIPPED ? "true" : "false");
+    output << "      \"skipped\": " << (suite_config->second == SkipConfiguration::SKIPPED ? "true" : "false");
     add_test_comma = true;
   }
 
@@ -410,7 +575,7 @@ void RuntimeConfig::write_test_suite(std::ostream& output, const std::shared_ptr
       output << "," << std::endl;
     }
 
-    write_test_case(output, suite_name, test_name);
+    WriteTestCase(output, suite_name, test_name);
 
     add_test_comma = true;
   }
@@ -419,14 +584,15 @@ void RuntimeConfig::write_test_suite(std::ostream& output, const std::shared_ptr
   output << "    }";
 }
 
-void RuntimeConfig::write_test_case(std::ostream& output, const std::string& suite_name,
-                                    const std::string& test_name) const {
+void RuntimeConfig::WriteTestCase(std::ostream& output, const std::string& suite_name,
+                                  const std::string& test_name) const {
   output << "      \"" << test_name << "\": {" << std::endl;
   auto suite_cases_config = configured_test_cases_.find(suite_name);
   if (suite_cases_config != configured_test_cases_.end()) {
     auto case_config = suite_cases_config->second.find(test_name);
     if (case_config != suite_cases_config->second.end()) {
-      output << "        \"skipped\": " << (case_config->second == SKIPPED ? "true" : "false") << std::endl;
+      output << "        \"skipped\": " << (case_config->second == SkipConfiguration::SKIPPED ? "true" : "false")
+             << std::endl;
     }
   }
 

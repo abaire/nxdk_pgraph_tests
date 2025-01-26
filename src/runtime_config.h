@@ -1,6 +1,7 @@
 #ifndef NXDK_PGRAPH_TESTS_RUNTIME_CONFIG_H
 #define NXDK_PGRAPH_TESTS_RUNTIME_CONFIG_H
 
+#include <memory>
 #include <vector>
 
 #include "configure.h"
@@ -8,10 +9,17 @@
 
 class RuntimeConfig {
  public:
-  enum SkipConfiguration {
+  enum class SkipConfiguration {
     DEFAULT,
     SKIPPED,
     UNSKIPPED,
+  };
+
+  enum class NetworkConfigMode {
+    OFF,
+    AUTOMATIC,
+    DHCP,
+    STATIC,
   };
 
  public:
@@ -57,7 +65,20 @@ class RuntimeConfig {
   [[nodiscard]] bool enable_shutdown_on_completion() const { return enable_shutdown_on_completion_; }
   [[nodiscard]] bool enable_pgraph_region_diff() const { return enable_pgraph_region_diff_; }
   [[nodiscard]] bool skip_tests_by_default() const { return skip_tests_by_default_; }
-  [[nodiscard]] int delay_milliseconds_between_tests() const { return delay_milliseconds_between_tests_; }
+  [[nodiscard]] uint32_t delay_milliseconds_between_tests() const { return delay_milliseconds_between_tests_; }
+
+  [[nodiscard]] uint32_t ftp_server_ip() const { return ftp_server_ip_; }
+  [[nodiscard]] uint16_t ftp_server_port() const { return ftp_server_port_; }
+  [[nodiscard]] const std::string& ftp_user() const { return ftp_user_; }
+  [[nodiscard]] const std::string& ftp_password() const { return ftp_password_; }
+  [[nodiscard]] uint32_t ftp_timeout_milliseconds() const { return ftp_timeout_milliseconds_; }
+
+  [[nodiscard]] NetworkConfigMode network_config_mode() const { return network_config_mode_; }
+  [[nodiscard]] uint32_t static_ip() const { return static_ip_; }
+  [[nodiscard]] uint32_t static_gateway() const { return static_gateway_; }
+  [[nodiscard]] uint32_t static_netmask() const { return static_netmask_; }
+  [[nodiscard]] uint32_t static_dns_1() const { return static_dns_1_; }
+  [[nodiscard]] uint32_t static_dns_2() const { return static_dns_2_; }
 
   [[nodiscard]] const std::string& output_directory_path() const { return output_directory_path_; }
 
@@ -67,23 +88,38 @@ class RuntimeConfig {
 #ifdef DUMP_CONFIG_FILE
   static std::string EscapePath(const std::string& path);
 
-  void write_settings(std::ostream& output) const;
-  void write_test_suite(std::ostream& output, const std::shared_ptr<TestSuite>& suite) const;
-  void write_test_case(std::ostream& output, const std::string& suite_name, const std::string& test_name) const;
+  void WriteSettings(std::ostream& output) const;
+  void WriteTestSuite(std::ostream& output, const std::shared_ptr<TestSuite>& suite) const;
+  void WriteTestCase(std::ostream& output, const std::string& suite_name, const std::string& test_name) const;
 #endif  // DUMP_CONFIG_FILE
+
+  bool ProcessNetworkSettings(const void* parent, std::vector<std::string>& errors);
 
  private:
   bool enable_progress_log_ = DEFAULT_ENABLE_PROGRESS_LOG;
   //! Add a delay before running each test. This may be useful in conjunction with the progress log if specific tests
   //! crash an emulator; giving more time for the log to be flushed to the filesystem.
-  int delay_milliseconds_between_tests_ = 0;
+  uint32_t delay_milliseconds_between_tests_{0};
   bool disable_autorun_ = DEFAULT_DISABLE_AUTORUN;
   bool enable_autorun_immediately_ = DEFAULT_AUTORUN_IMMEDIATELY;
   bool enable_shutdown_on_completion_ = DEFAULT_ENABLE_SHUTDOWN;
   bool enable_pgraph_region_diff_ = DEFAULT_ENABLE_PGRAPH_REGION_DIFF;
   bool skip_tests_by_default_ = DEFAULT_SKIP_TESTS_BY_DEFAULT;
 
-  std::string output_directory_path_ = RuntimeConfig::SanitizePath(DEFAULT_OUTPUT_DIRECTORY_PATH);
+  uint32_t ftp_server_ip_{0};
+  uint16_t ftp_server_port_{0};
+  std::string ftp_user_;
+  std::string ftp_password_;
+  uint32_t ftp_timeout_milliseconds_{0};
+
+  NetworkConfigMode network_config_mode_ = NetworkConfigMode::OFF;
+  uint32_t static_ip_{0};
+  uint32_t static_gateway_{0};
+  uint32_t static_netmask_{0};
+  uint32_t static_dns_1_{0};
+  uint32_t static_dns_2_{0};
+
+  std::string output_directory_path_ = SanitizePath(DEFAULT_OUTPUT_DIRECTORY_PATH);
 
   //! Map of test suite name to skip config.
   std::map<std::string, SkipConfiguration> configured_test_suites_;

@@ -26,6 +26,13 @@ if(NOT TARGET NXDK::NXDK)
             PROPERTIES
             IMPORTED_LOCATION "${NXDK_DIR}/lib/libnxdk_net.lib"
     )
+    target_include_directories(
+            nxdk_net
+            INTERFACE
+            "${NXDK_DIR}/lib/net/lwip/src/include"
+            "${NXDK_DIR}/lib/net/nforceif/include"
+            "${NXDK_DIR}/lib/net/nvnetdrv"
+    )
 
     add_library(nxdk_usb STATIC IMPORTED)
     set_target_properties(

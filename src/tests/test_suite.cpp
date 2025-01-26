@@ -1,6 +1,8 @@
 #include "test_suite.h"
 
+#include <chrono>
 #include <fstream>
+#include <sstream>
 
 #include "configure.h"
 #include "debug_output.h"
@@ -15,6 +17,8 @@
 
 using namespace XboxMath;
 
+static constexpr char kFTPLogProgressFilename[] = "nxdk_pgraph_tests_progress.log";
+
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
 TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name, const Config& config)
@@ -24,7 +28,8 @@ TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_n
       pgraph_diff_(false, config.enable_progress_log),
       enable_progress_log_{config.enable_progress_log},
       enable_pgraph_region_diff_{config.enable_pgraph_region_diff},
-      delay_milliseconds_between_tests_{config.delay_milliseconds_between_tests} {
+      delay_milliseconds_between_tests_{config.delay_milliseconds_between_tests},
+      ftp_logger_{config.ftp_logger} {
   output_dir_ += "\\";
   output_dir_ += suite_name_;
   std::replace(output_dir_.begin(), output_dir_.end(), ' ', '_');
@@ -55,8 +60,22 @@ void TestSuite::Run(const std::string& test_name) {
   SetupTest();
   auto start_time = LogTestStart(test_name);
   it->second();
-  LogTestEnd(test_name, start_time);
+  auto duration = LogTestEnd(test_name, start_time);
   TearDownTest();
+
+  if (ftp_logger_ && allow_saving_) {
+    if (!ftp_logger_->Connect()) {
+      PrintMsg("FTP connect failed, aborting\n");
+    } else {
+      PrintMsg("Saving progress to FTP server...\n");
+
+      std::stringstream message;
+      message << "Completed \"" << suite_name_ << "::" << test_name << "\" in " << duration << " ms\n";
+      if (!ftp_logger_->WriteFile(kFTPLogProgressFilename, message.str())) {
+        PrintMsg("Failed to store progress log to FTP server!\n");
+      }
+    }
+  }
 }
 
 void TestSuite::RunAll() {
@@ -314,8 +333,23 @@ void TestSuite::TearDownTest() {}
 std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name) {
   PrintMsg("Starting %s::%s\n", suite_name_.c_str(), test_name.c_str());
 
-  if (enable_progress_log_ && allow_saving_) {
-    Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
+  if (allow_saving_) {
+    if (enable_progress_log_) {
+      Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
+    }
+
+    if (ftp_logger_) {
+      if (!ftp_logger_->Connect()) {
+        PrintMsg("FTP connect failed, aborting\n");
+      } else {
+        PrintMsg("Saving start message to FTP server...\n");
+        std::stringstream message;
+        message << "Starting \"" << suite_name_ << "::" << test_name << "\"\n";
+        if (!ftp_logger_->WriteFile(kFTPLogProgressFilename, message.str())) {
+          PrintMsg("Failed to store progress log to FTP server!\n");
+        }
+      }
+    }
   }
 
   if (delay_milliseconds_between_tests_) {
@@ -325,7 +359,7 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
   return std::chrono::high_resolution_clock::now();
 }
 
-void TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clock::time_point start_time) {
+long long TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clock::time_point start_time) const {
   auto now = std::chrono::high_resolution_clock::now();
   auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
 
@@ -334,4 +368,6 @@ void TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clo
   if (enable_progress_log_ && allow_saving_) {
     Logger::Log() << "  Completed '" << test_name << "' in " << elapsed << "ms" << std::endl;
   }
+
+  return elapsed;
 }

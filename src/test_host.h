@@ -1,6 +1,7 @@
 #ifndef NXDK_PGRAPH_TESTS_TEST_HOST_H
 #define NXDK_PGRAPH_TESTS_TEST_HOST_H
 
+#include <ftp_logger.h>
 #include <pbkit/pbkit.h>
 #include <printf/printf.h>
 
@@ -232,8 +233,8 @@ class TestHost {
   };
 
  public:
-  TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
-           uint32_t max_texture_height, uint32_t max_texture_depth = 4);
+  TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
+           uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth = 4);
   ~TestHost();
 
   TextureStage &GetTextureStage(uint32_t stage) { return texture_stage_[stage]; }
@@ -540,18 +541,21 @@ class TestHost {
   // in scenes with multiple draws per clear)
   void SetupTextureStages() const;
 
-  static void SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
-                          uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
-                          SDL_PixelFormatEnum format);
+  static std::string SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
+                                 uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
+                                 SDL_PixelFormatEnum format);
   // Saves the given region of memory as a flat binary file.
-  static void SaveRawTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
-                             uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel);
-  void SaveZBuffer(const std::string &output_directory, const std::string &name) const;
+  static std::string SaveRawTexture(const std::string &output_directory, const std::string &name,
+                                    const uint8_t *texture, uint32_t width, uint32_t height, uint32_t pitch,
+                                    uint32_t bits_per_pixel);
+  [[nodiscard]] std::string SaveZBuffer(const std::string &output_directory, const std::string &name) const;
 
   // Returns the maximum possible value that can be stored in the depth surface for the given mode.
   static float MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mode);
 
-  float GetMaxDepthBufferValue() const { return MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_); }
+  [[nodiscard]] float GetMaxDepthBufferValue() const {
+    return MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_);
+  }
 
   // Rounds the given integer in the same way as nv2a hardware (only remainders >= 9/16th are rounded up).
   static float NV2ARound(float input);
@@ -561,15 +565,16 @@ class TestHost {
  private:
   // Update matrices when the depth buffer format changes.
   void HandleDepthBufferFormatChange();
-  uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping, CombinerSource b_source,
-                             bool b_alpha, CombinerMapping b_mapping, CombinerSource c_source, bool c_alpha,
-                             CombinerMapping c_mapping, CombinerSource d_source, bool d_alpha,
-                             CombinerMapping d_mapping) const;
-  uint32_t MakeOutputCombiner(CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst, bool ab_dot_product,
-                              bool cd_dot_product, CombinerSumMuxMode sum_or_mux, CombinerOutOp op) const;
+  [[nodiscard]] uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
+                                           CombinerSource b_source, bool b_alpha, CombinerMapping b_mapping,
+                                           CombinerSource c_source, bool c_alpha, CombinerMapping c_mapping,
+                                           CombinerSource d_source, bool d_alpha, CombinerMapping d_mapping) const;
+  [[nodiscard]] uint32_t MakeOutputCombiner(CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst,
+                                            bool ab_dot_product, bool cd_dot_product, CombinerSumMuxMode sum_or_mux,
+                                            CombinerOutOp op) const;
   static std::string PrepareSaveFile(std::string output_directory, const std::string &filename,
                                      const std::string &ext = ".png");
-  static void SaveBackBuffer(const std::string &output_directory, const std::string &name);
+  static std::string SaveBackBuffer(const std::string &output_directory, const std::string &name);
 
  private:
   uint32_t framebuffer_width_;
@@ -616,6 +621,8 @@ class TestHost {
   float w_far_{0.f};
 
   bool save_results_{true};
+
+  std::shared_ptr<FTPLogger> ftp_logger_;
 
   uint32_t vertex_attribute_stride_override_[16]{
       kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride,
