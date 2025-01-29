@@ -38,13 +38,14 @@ static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, u
 static void ClearVertexAttribute(uint32_t index);
 static void GetCompositeMatrix(matrix4_t &result, const matrix4_t &model_view, const matrix4_t &projection);
 
-TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
-                   uint32_t max_texture_height, uint32_t max_texture_depth)
+TestHost::TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
+                   uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth)
     : framebuffer_width_(framebuffer_width),
       framebuffer_height_(framebuffer_height),
       max_texture_width_(max_texture_width),
       max_texture_height_(max_texture_height),
-      max_texture_depth_(max_texture_depth) {
+      max_texture_depth_(max_texture_depth),
+      ftp_logger_{std::move(ftp_logger)} {
   // allocate texture memory buffer large enough for all types
   uint32_t stride = max_texture_width_ * 4;
   max_single_texture_size_ = stride * max_texture_height * max_texture_depth;
@@ -781,7 +782,7 @@ std::string TestHost::PrepareSaveFile(std::string output_directory, const std::s
   return output_directory;
 }
 
-void TestHost::SaveBackBuffer(const std::string &output_directory, const std::string &name) {
+std::string TestHost::SaveBackBuffer(const std::string &output_directory, const std::string &name) {
   auto target_file = PrepareSaveFile(output_directory, name);
 
   auto buffer = pb_agp_access(pb_back_buffer());
@@ -815,24 +816,26 @@ void TestHost::SaveBackBuffer(const std::string &output_directory, const std::st
   if (fclose(pFile)) {
     ASSERT(!"Failed to close output PNG image");
   }
+
+  return target_file;
 }
 
-void TestHost::SaveZBuffer(const std::string &output_directory, const std::string &name) const {
+std::string TestHost::SaveZBuffer(const std::string &output_directory, const std::string &name) const {
   uint32_t depth = depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? 16 : 32;
 #ifdef SAVE_Z_AS_PNG
   auto format =
       depth_buffer_format_ == NV097_SET_SURFACE_FORMAT_ZETA_Z16 ? SDL_PIXELFORMAT_RGB565 : SDL_PIXELFORMAT_ARGB8888;
-  SaveTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
-              pb_depth_stencil_pitch(), depth, format);
+  return SaveTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
+                     pb_depth_stencil_pitch(), depth, format);
 #else
-  SaveRawTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
-                 framebuffer_width_ * 4, depth);
+  return SaveRawTexture(output_directory, name, pb_depth_stencil_buffer(), framebuffer_width_, framebuffer_height_,
+                        framebuffer_width_ * 4, depth);
 #endif
 }
 
-void TestHost::SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
-                           uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
-                           SDL_PixelFormatEnum format) {
+std::string TestHost::SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
+                                  uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
+                                  SDL_PixelFormatEnum format) {
   auto target_file = PrepareSaveFile(output_directory, name);
 
   auto buffer = pb_agp_access(const_cast<void *>(static_cast<const void *>(texture)));
@@ -850,10 +853,13 @@ void TestHost::SaveTexture(const std::string &output_directory, const std::strin
   }
 
   SDL_FreeSurface(surface);
+
+  return target_file;
 }
 
-void TestHost::SaveRawTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
-                              uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel) {
+std::string TestHost::SaveRawTexture(const std::string &output_directory, const std::string &name,
+                                     const uint8_t *texture, uint32_t width, uint32_t height, uint32_t pitch,
+                                     uint32_t bits_per_pixel) {
   auto target_file = PrepareSaveFile(output_directory, name, ".raw");
 
   auto buffer = static_cast<uint8_t *>(pb_agp_access(const_cast<void *>(static_cast<const void *>(texture))));
@@ -873,6 +879,8 @@ void TestHost::SaveRawTexture(const std::string &output_directory, const std::st
   }
 
   fclose(f);
+
+  return target_file;
 }
 
 void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered) const {
@@ -979,10 +987,22 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
     // In theory this should wait for all tiles to be rendered before capturing.
     pb_wait_for_vbl();
 
-    SaveBackBuffer(output_directory, name);
+    auto output_path = SaveBackBuffer(output_directory, name);
+
+    if (ftp_logger_) {
+      if (!ftp_logger_->Connect() || !ftp_logger_->PutFile(output_path)) {
+        PrintMsg("Failed to store backbuffer artifact %s to FTP server!\n", output_path.c_str());
+      }
+    }
 
     if (!z_buffer_name.empty()) {
-      SaveZBuffer(output_directory, z_buffer_name);
+      auto z_buffer_output_path = SaveZBuffer(output_directory, z_buffer_name);
+
+      if (ftp_logger_) {
+        if (!ftp_logger_->Connect() || !ftp_logger_->PutFile(output_path)) {
+          PrintMsg("Failed to store z-buffer artifact %s to FTP server!\n", z_buffer_output_path.c_str());
+        }
+      }
     }
   }
 

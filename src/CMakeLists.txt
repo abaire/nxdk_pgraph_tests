@@ -9,6 +9,14 @@ find_package(Threads REQUIRED)
 
 configure_file(configure.h.in configure.h)
 
+include(FetchContent)
+FetchContent_Declare(
+        nxdkftplib
+        GIT_REPOSITORY https://github.com/abaire/nxdk_ftp_client_lib.git
+        GIT_TAG 8647b15976d8f93f4e5b97755a0018a55426216d
+)
+FetchContent_MakeAvailable(nxdkftplib)
+
 macro(set_opt_compile_and_link_options TARGET_NAME)
     target_compile_options(
             "${TARGET_NAME}"
@@ -102,6 +110,8 @@ add_library(
         dds_image.h
         debug_output.cpp
         debug_output.h
+        ftp_logger.cpp
+        ftp_logger.h
         main.cpp
         menu_item.cpp
         menu_item.h
@@ -161,6 +171,7 @@ target_link_libraries(
         generated_fp20_pixel_shaders
         generated_vp20_vertex_shaders
         generated_nv2a_vertex_shaders
+        nxdk_ftp_client_lib::client
         PRIVATE
         fpng
         printf
@@ -312,6 +323,7 @@ target_include_directories(
 
 target_link_libraries(
         nxdk_pgraph_tests
+        PRIVATE
         fpng
         optimized_sources
         printf
@@ -321,6 +333,7 @@ target_link_libraries(
         NXDK::NXDK_CXX
         NXDK::SDL2
         NXDK::SDL2_Image
+        nxdk_ftp_client_lib::client
 )
 
 add_xbe(xbe_file "${EXECUTABLE_BINARY}" TITLE "PGRAPH Tests" RESOURCE_DIRS "${CMAKE_SOURCE_DIR}/resources")

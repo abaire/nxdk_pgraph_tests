@@ -1,8 +1,10 @@
 #ifndef NXDK_PGRAPH_TESTS_TEST_SUITE_H
 #define NXDK_PGRAPH_TESTS_TEST_SUITE_H
 
+#include <ftp_logger.h>
+
 #include <chrono>
-#include <fstream>
+#include <functional>
 #include <map>
 #include <set>
 #include <string>
@@ -32,7 +34,10 @@ class TestSuite {
     bool enable_pgraph_region_diff;
 
     //! Artificial delay before starting each test.
-    int delay_milliseconds_between_tests;
+    uint32_t delay_milliseconds_between_tests;
+
+    // Optional FTPLogger used to transfer test artifacts to a remote host.
+    std::shared_ptr<FTPLogger> ftp_logger;
   };
 
  public:
@@ -73,8 +78,9 @@ class TestSuite {
  protected:
   void SetDefaultTextureFormat() const;
 
+ private:
   std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name);
-  void LogTestEnd(const std::string &test_name, std::chrono::steady_clock::time_point start_time);
+  long long LogTestEnd(const std::string &test_name, std::chrono::steady_clock::time_point start_time) const;
 
  protected:
   TestHost &host_;
@@ -95,7 +101,9 @@ class TestSuite {
 
   bool enable_progress_log_;
   bool enable_pgraph_region_diff_;
-  int delay_milliseconds_between_tests_;
+  uint32_t delay_milliseconds_between_tests_;
+
+  std::shared_ptr<FTPLogger> ftp_logger_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_SUITE_H

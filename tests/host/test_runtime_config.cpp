@@ -18,7 +18,8 @@ TEST(RuntimeConfig, DumpConfigBuffer_DefaultSettings) {
   RuntimeConfig config;
   std::vector<std::string> errors;
   std::stringstream output;
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -36,6 +37,23 @@ TEST(RuntimeConfig, DumpConfigBuffer_DefaultSettings) {
     "enable_pgraph_region_diff": false,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 0,
+    "network": {
+      "enable": false,
+      "config_automatic": false,
+      "config_dhcp": false,
+      "static_ip": "",
+      "static_netmask": "",
+      "static_gateway": "",
+      "static_dns_1": "",
+      "static_dns_2": "",
+      "ftp": {
+        "ftp_ip": "",
+        "ftp_port": 0,
+        "ftp_user": "",
+        "ftp_password": "",
+        "ftp_timeout_milliseconds": 0
+      }
+    },
     "output_directory_path": "e:/nxdk_pgraph_tests"
   },
   "test_suites": {
@@ -72,12 +90,30 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
       "enable_pgraph_region_diff": true,
       "skip_tests_by_default": true,
       "delay_milliseconds_between_tests": 10,
+      "network": {
+        "enable": true,
+        "config_automatic": true,
+        "config_dhcp": false,
+        "static_ip": "1.2.3.4",
+        "static_netmask": "5.6.7.8",
+        "static_gateway": "11.12.13.14",
+        "static_dns_1": "15.16.17.18",
+        "static_dns_2": "20.21.22.23",
+        "ftp": {
+          "ftp_ip": "90.80.70.60",
+          "ftp_port": 0,
+          "ftp_user": "username",
+          "ftp_password": "PaSSwOrD",
+          "ftp_timeout_milliseconds": 1024
+        }
+      },
       "output_directory_path": "c:/foobar"
     }
   })");
 
   std::stringstream output;
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -95,6 +131,23 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "network": {
+      "enable": true,
+      "config_automatic": true,
+      "config_dhcp": false,
+      "static_ip": "1.2.3.4",
+      "static_netmask": "5.6.7.8",
+      "static_gateway": "11.12.13.14",
+      "static_dns_1": "15.16.17.18",
+      "static_dns_2": "20.21.22.23",
+      "ftp": {
+        "ftp_ip": "90.80.70.60",
+        "ftp_port": 0,
+        "ftp_user": "username",
+        "ftp_password": "PaSSwOrD",
+        "ftp_timeout_milliseconds": 1024
+      }
+    },
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -107,6 +160,176 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
       }
     },
     "Suite_2": {
+      "Test_1": {
+      },
+      "Test_2": {
+      },
+      "Test_3": {
+      }
+    }
+  }
+}
+)");
+}
+
+TEST(RuntimeConfig, DumpConfigBuffer_NetworkMode_Static) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+  PopulateConfig(config, R"({
+    "settings": {
+      "enable_progress_log": true,
+      "disable_autorun": true,
+      "enable_autorun_immediately": true,
+      "enable_shutdown_on_completion": true,
+      "enable_pgraph_region_diff": true,
+      "skip_tests_by_default": true,
+      "delay_milliseconds_between_tests": 10,
+      "network": {
+        "enable": true,
+        "config_automatic": false,
+        "config_dhcp": false,
+        "static_ip": "1.2.3.4",
+        "static_netmask": "5.6.7.8",
+        "static_gateway": "11.12.13.14",
+        "static_dns_1": "15.16.17.18",
+        "static_dns_2": "20.21.22.23",
+        "ftp": {
+          "ftp_ip": "90.80.70.60",
+          "ftp_port": 0,
+          "ftp_user": "username",
+          "ftp_password": "PaSSwOrD",
+          "ftp_timeout_milliseconds": 1024
+        }
+      },
+      "output_directory_path": "c:/foobar"
+    }
+  })");
+
+  std::stringstream output;
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
+  auto test_suite_config = TestSuite::Config{false, false};
+  std::vector suites = {
+      std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
+  };
+
+  EXPECT_TRUE(config.DumpConfigToStream(output, suites, errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_STREQ(output.str().c_str(), R"({
+  "settings": {
+    "enable_progress_log": true,
+    "disable_autorun": true,
+    "enable_autorun_immediately": true,
+    "enable_shutdown_on_completion": true,
+    "enable_pgraph_region_diff": true,
+    "skip_tests_by_default": true,
+    "delay_milliseconds_between_tests": 10,
+    "network": {
+      "enable": true,
+      "config_automatic": false,
+      "config_dhcp": false,
+      "static_ip": "1.2.3.4",
+      "static_netmask": "5.6.7.8",
+      "static_gateway": "11.12.13.14",
+      "static_dns_1": "15.16.17.18",
+      "static_dns_2": "20.21.22.23",
+      "ftp": {
+        "ftp_ip": "90.80.70.60",
+        "ftp_port": 0,
+        "ftp_user": "username",
+        "ftp_password": "PaSSwOrD",
+        "ftp_timeout_milliseconds": 1024
+      }
+    },
+    "output_directory_path": "c:/foobar"
+  },
+  "test_suites": {
+    "Suite_1": {
+      "Test_1": {
+      },
+      "Test_2": {
+      },
+      "Test_3": {
+      }
+    }
+  }
+}
+)");
+}
+
+TEST(RuntimeConfig, DumpConfigBuffer_NetworkMode_DHCP) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+  PopulateConfig(config, R"({
+    "settings": {
+      "enable_progress_log": true,
+      "disable_autorun": true,
+      "enable_autorun_immediately": true,
+      "enable_shutdown_on_completion": true,
+      "enable_pgraph_region_diff": true,
+      "skip_tests_by_default": true,
+      "delay_milliseconds_between_tests": 10,
+      "network": {
+        "enable": true,
+        "config_automatic": false,
+        "config_dhcp": true,
+        "static_ip": "1.2.3.4",
+        "static_netmask": "5.6.7.8",
+        "static_gateway": "11.12.13.14",
+        "static_dns_1": "15.16.17.18",
+        "static_dns_2": "20.21.22.23",
+        "ftp": {
+          "ftp_ip": "90.80.70.60",
+          "ftp_port": 0,
+          "ftp_user": "username",
+          "ftp_password": "PaSSwOrD",
+          "ftp_timeout_milliseconds": 1024
+        }
+      },
+      "output_directory_path": "c:/foobar"
+    }
+  })");
+
+  std::stringstream output;
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
+  auto test_suite_config = TestSuite::Config{false, false};
+  std::vector suites = {
+      std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
+  };
+
+  EXPECT_TRUE(config.DumpConfigToStream(output, suites, errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_STREQ(output.str().c_str(), R"({
+  "settings": {
+    "enable_progress_log": true,
+    "disable_autorun": true,
+    "enable_autorun_immediately": true,
+    "enable_shutdown_on_completion": true,
+    "enable_pgraph_region_diff": true,
+    "skip_tests_by_default": true,
+    "delay_milliseconds_between_tests": 10,
+    "network": {
+      "enable": true,
+      "config_automatic": false,
+      "config_dhcp": true,
+      "static_ip": "1.2.3.4",
+      "static_netmask": "5.6.7.8",
+      "static_gateway": "11.12.13.14",
+      "static_dns_1": "15.16.17.18",
+      "static_dns_2": "20.21.22.23",
+      "ftp": {
+        "ftp_ip": "90.80.70.60",
+        "ftp_port": 0,
+        "ftp_user": "username",
+        "ftp_password": "PaSSwOrD",
+        "ftp_timeout_milliseconds": 1024
+      }
+    },
+    "output_directory_path": "c:/foobar"
+  },
+  "test_suites": {
+    "Suite_1": {
       "Test_1": {
       },
       "Test_2": {
@@ -142,7 +365,8 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultEnabled) {
   })");
 
   std::stringstream output;
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -160,6 +384,23 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultEnabled) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "network": {
+      "enable": false,
+      "config_automatic": false,
+      "config_dhcp": false,
+      "static_ip": "",
+      "static_netmask": "",
+      "static_gateway": "",
+      "static_dns_1": "",
+      "static_dns_2": "",
+      "ftp": {
+        "ftp_ip": "",
+        "ftp_port": 0,
+        "ftp_user": "",
+        "ftp_password": "",
+        "ftp_timeout_milliseconds": 0
+      }
+    },
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -212,7 +453,8 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultDisabled) {
   })");
 
   std::stringstream output;
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -230,6 +472,23 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultDisabled) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 10,
+    "network": {
+      "enable": false,
+      "config_automatic": false,
+      "config_dhcp": false,
+      "static_ip": "",
+      "static_netmask": "",
+      "static_gateway": "",
+      "static_dns_1": "",
+      "static_dns_2": "",
+      "ftp": {
+        "ftp_ip": "",
+        "ftp_port": 0,
+        "ftp_user": "",
+        "ftp_password": "",
+        "ftp_timeout_milliseconds": 0
+      }
+    },
     "output_directory_path": "c:/foobar"
   },
   "test_suites": {
@@ -502,6 +761,86 @@ TEST(RuntimeConfig, LoadConfigBuffer_InvalidSkippedsMemberInTestCase) {
   EXPECT_STREQ(errors.at(0).c_str(), "test_suites[Suite][Case][skipped] must be a boolean");
 }
 
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPAddress_NonString) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"network": {"ftp": {"ftp_ip": 123}}} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(),
+               "settings[network][ftp][ftp_ip] must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPAddress_BadFormat) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"network": {"ftp": {"ftp_ip": "abc"}}} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(),
+               "settings[network][ftp][ftp_ip] must be a string containing an IPv4 address (e.g., \"1.2.3.4\")");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPUser_NonString) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"network": {"ftp": {"ftp_user": 123}}} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[network][ftp][ftp_user] must be a string");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPPassword_NonString) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"network": {"ftp": {"ftp_password": 123}}} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[network][ftp][ftp_password] must be a string");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPTimeoutMilliseconds_NonSInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(
+      config.LoadConfigBuffer(R"({"settings": {"network": {"ftp": {"ftp_timeout_milliseconds": "hi"}}} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[network][ftp][ftp_timeout_milliseconds] must be a positive integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidFTPTimeoutMilliseconds_NegativeSInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(
+      config.LoadConfigBuffer(R"({"settings": {"network": {"ftp": {"ftp_timeout_milliseconds": -1}}} })", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[network][ftp][ftp_timeout_milliseconds] must be a positive integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_ValidFTPConfig) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer(R"({"settings": {
+        "network": {
+          "ftp": {
+            "ftp_ip": "127.0.0.1",
+            "ftp_user": "user",
+            "ftp_password": "password",
+            "ftp_timeout_milliseconds": 123
+          }
+        }
+      } })",
+                                      errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.ftp_server_ip(), 0x7F000001);
+  EXPECT_STREQ(config.ftp_user().c_str(), "user");
+  EXPECT_STREQ(config.ftp_password().c_str(), "password");
+  EXPECT_EQ(config.ftp_timeout_milliseconds(), 123);
+}
+
 TEST(RuntimeConfig, ApplyConfig_NoJSON_EmptyTestSuite) {
   RuntimeConfig config;
   std::vector<std::shared_ptr<TestSuite> > suites;
@@ -513,7 +852,8 @@ TEST(RuntimeConfig, ApplyConfig_NoJSON_EmptyTestSuite) {
 
 TEST(RuntimeConfig, ApplyConfig_NoJSON) {
   RuntimeConfig config;
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "SuiteOne", test_suite_config),
@@ -529,7 +869,8 @@ TEST(RuntimeConfig, ApplyConfig_NoJSON) {
 TEST(RuntimeConfig, ApplyConfig_NoTestsFiltered_DefaultNotSkipped) {
   RuntimeConfig config;
   PopulateConfig(config, "{\"settings\": {}}");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -546,7 +887,8 @@ TEST(RuntimeConfig, ApplyConfig_NoTestsFiltered_DefaultNotSkipped) {
 TEST(RuntimeConfig, ApplyConfig_NonMatchingTestsFiltered_DefaultNotSkipped) {
   RuntimeConfig config;
   PopulateConfig(config, R"({"settings": {}, "test_suites": { "MadeUp": { "skipped": true } }})");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -563,7 +905,8 @@ TEST(RuntimeConfig, ApplyConfig_NonMatchingTestsFiltered_DefaultNotSkipped) {
 TEST(RuntimeConfig, ApplyConfig_TestSuiteExplicitSkip_DefaultNotSkipped) {
   RuntimeConfig config;
   PopulateConfig(config, R"({"settings": {}, "test_suites": { "Suite_1": { "skipped": true } }})");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -579,7 +922,8 @@ TEST(RuntimeConfig, ApplyConfig_TestSuiteExplicitSkip_DefaultNotSkipped) {
 TEST(RuntimeConfig, ApplyConfig_TestCaseExplicitSkip_DefaultNotSkipped) {
   RuntimeConfig config;
   PopulateConfig(config, R"({"settings": {}, "test_suites": { "Suite_1": { "Test_2": { "skipped": true } } }})");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -604,7 +948,8 @@ TEST(RuntimeConfig, ApplyConfig_TestCaseExplicitEnableWithinDisabledSuite_Defaul
       }
     }
   })");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -621,7 +966,8 @@ TEST(RuntimeConfig, ApplyConfig_TestCaseExplicitEnableWithinDisabledSuite_Defaul
 TEST(RuntimeConfig, ApplyConfig_NoTestsFiltered_DefaultSkipped) {
   RuntimeConfig config;
   PopulateConfig(config, R"({"settings": {"skip_tests_by_default": true}})");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -638,7 +984,8 @@ TEST(RuntimeConfig, ApplyConfig_NonMatchingTestsFiltered_DefaultSkipped) {
   RuntimeConfig config;
   PopulateConfig(config, R"({"settings": {"skip_tests_by_default": true}, "test_suites": { "MadeUp": { "skipped":
   true } }})");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -659,7 +1006,8 @@ TEST(RuntimeConfig, ApplyConfig_TestSuiteExplicitEnable_DefaultSkipped) {
       "Suite_2": { "skipped": false }
     }
   })");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector<std::shared_ptr<TestSuite> > suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -682,7 +1030,8 @@ TEST(RuntimeConfig, ApplyConfig_TestCaseExplicitEnable_DefaultSkipped) {
       }
     }
   })");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -706,7 +1055,8 @@ TEST(RuntimeConfig, ApplyConfig_TestCaseExplicitDisableWithinEnabledSuite_Defaul
       }
     }
   })");
-  TestHost host(1024, 768, 32, 32);
+  std::shared_ptr<FTPLogger> no_logger;
+  TestHost host(no_logger, 1024, 768, 32, 32);
   auto test_suite_config = TestSuite::Config{false, false};
   std::vector suites = {
       std::make_shared<TestSuite>(host, "/dev/null", "Suite_1", test_suite_config),
@@ -740,8 +1090,8 @@ static void PopulateConfig(RuntimeConfig& config, const std::string& json) {
 
 #pragma mark Stub definitions
 
-TestHost::TestHost(uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width,
-                   uint32_t max_texture_height, uint32_t max_texture_depth) {}
+TestHost::TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
+                   uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth) {}
 TestHost::~TestHost() {}
 
 TextureStage::TextureStage() {}

@@ -7,3858 +7,2012 @@
     "enable_pgraph_region_diff": false,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 0,
-    "output_directory_path": "e:/nxdk_pgraph_tests"
+    "output_directory_path": "e:/nxdk_pgraph_tests",
+    "network": {
+      "enable": false,
+      "config_automatic": true,
+      "config_dhcp": false,
+      "static_ip": "10.0.2.99",
+      "static_netmask": "255.255.0.0",
+      "static_gateway": "10.0.2.2",
+      "static_dns_1": "10.0.2.3",
+      "static_dns_2": "8.8.8.8",
+      "ftp": {
+        "ftp_ip": "",
+        "ftp_port": 0,
+        "ftp_user": "",
+        "ftp_password": "",
+        "ftp_timeout_milliseconds": 0
+      }
+    }
   },
   "test_suites": {
     "Lighting normals": {
-      "NoNormal": {
-      },
-      "NoNormal-inlinearrays": {
-      },
-      "NoNormal-inlinebuf": {
-      },
-      "NoNormal-inlineelements": {
-      },
-      "Nz_-100": {
-      },
-      "Nz_-100-inlinearrays": {
-      },
-      "Nz_-100-inlinebuf": {
-      },
-      "Nz_-100-inlineelements": {
-      },
-      "Nz_0": {
-      },
-      "Nz_0-inlinearrays": {
-      },
-      "Nz_0-inlinebuf": {
-      },
-      "Nz_0-inlineelements": {
-      },
-      "Nz_100": {
-      },
-      "Nz_100-inlinearrays": {
-      },
-      "Nz_100-inlinebuf": {
-      },
-      "Nz_100-inlineelements": {
-      },
-      "Nz_31": {
-      },
-      "Nz_31-inlinearrays": {
-      },
-      "Nz_31-inlinebuf": {
-      },
-      "Nz_31-inlineelements": {
-      },
-      "Nz_70": {
-      },
-      "Nz_70-inlinearrays": {
-      },
-      "Nz_70-inlinebuf": {
-      },
-      "Nz_70-inlineelements": {
-      },
-      "Nz_97": {
-      },
-      "Nz_97-inlinearrays": {
-      },
-      "Nz_97-inlinebuf": {
-      },
-      "Nz_97-inlineelements": {
-      }
+      "NoNormal": {},
+      "NoNormal-inlinearrays": {},
+      "NoNormal-inlinebuf": {},
+      "NoNormal-inlineelements": {},
+      "Nz_-100": {},
+      "Nz_-100-inlinearrays": {},
+      "Nz_-100-inlinebuf": {},
+      "Nz_-100-inlineelements": {},
+      "Nz_0": {},
+      "Nz_0-inlinearrays": {},
+      "Nz_0-inlinebuf": {},
+      "Nz_0-inlineelements": {},
+      "Nz_100": {},
+      "Nz_100-inlinearrays": {},
+      "Nz_100-inlinebuf": {},
+      "Nz_100-inlineelements": {},
+      "Nz_31": {},
+      "Nz_31-inlinearrays": {},
+      "Nz_31-inlinebuf": {},
+      "Nz_31-inlineelements": {},
+      "Nz_70": {},
+      "Nz_70-inlinearrays": {},
+      "Nz_70-inlinebuf": {},
+      "Nz_70-inlineelements": {},
+      "Nz_97": {},
+      "Nz_97-inlinearrays": {},
+      "Nz_97-inlinebuf": {},
+      "Nz_97-inlineelements": {}
     },
     "Antialiasing tests": {
-      "AAOnThenOffCPUWrite": {
-      },
-      "CPUWriteIgnoresSurfaceConfig": {
-      },
-      "CreateSurfaceWithCenter1": {
-      },
-      "CreateSurfaceWithCenterCorner2": {
-      },
-      "CreateSurfaceWithSquareOffset4": {
-      },
-      "FBSurfaceWithCenter1": {
-      },
-      "FBSurfaceWithCenterCorner2": {
-      },
-      "FramebufferNotModifiedBySurfaceState": {
-      },
-      "GPUAAWriteAfterCPUWrite": {
-      },
-      "NonAACPURoundTrip": {
-      },
-      "SurfaceStatesAreIndependent": {
-      }
+      "AAOnThenOffCPUWrite": {},
+      "CPUWriteIgnoresSurfaceConfig": {},
+      "CreateSurfaceWithCenter1": {},
+      "CreateSurfaceWithCenterCorner2": {},
+      "CreateSurfaceWithSquareOffset4": {},
+      "FBSurfaceWithCenter1": {},
+      "FBSurfaceWithCenterCorner2": {},
+      "FramebufferNotModifiedBySurfaceState": {},
+      "GPUAAWriteAfterCPUWrite": {},
+      "NonAACPURoundTrip": {},
+      "SurfaceStatesAreIndependent": {}
     },
     "Attrib carryover": {
-      "L-d0.0_0.0_1.0_1.0-da": {
-      },
-      "L-d0.2_0.0_0.6_1.0-ie": {
-      },
-      "L-d0.5_0.0_0.0_1.0-ia": {
-      },
-      "L-d0.8_0.0_0.0_1.0-ib": {
-      },
-      "L-n0.0_0.0_1.0_1.0-da": {
-      },
-      "L-n0.2_0.0_0.6_1.0-ie": {
-      },
-      "L-n0.5_0.0_0.0_1.0-ia": {
-      },
-      "L-n0.8_0.0_0.0_1.0-ib": {
-      },
-      "L-s0.0_0.0_1.0_1.0-da": {
-      },
-      "L-s0.2_0.0_0.6_1.0-ie": {
-      },
-      "L-s0.5_0.0_0.0_1.0-ia": {
-      },
-      "L-s0.8_0.0_0.0_1.0-ib": {
-      },
-      "L-t00.0_0.0_1.0_1.0-da": {
-      },
-      "L-t00.2_0.0_0.6_1.0-ie": {
-      },
-      "L-t00.5_0.0_0.0_1.0-ia": {
-      },
-      "L-t00.8_0.0_0.0_1.0-ib": {
-      },
-      "L-t10.0_0.0_1.0_1.0-da": {
-      },
-      "L-t10.2_0.0_0.6_1.0-ie": {
-      },
-      "L-t10.5_0.0_0.0_1.0-ia": {
-      },
-      "L-t10.8_0.0_0.0_1.0-ib": {
-      },
-      "L-t20.0_0.0_1.0_1.0-da": {
-      },
-      "L-t20.2_0.0_0.6_1.0-ie": {
-      },
-      "L-t20.5_0.0_0.0_1.0-ia": {
-      },
-      "L-t20.8_0.0_0.0_1.0-ib": {
-      },
-      "L-t30.0_0.0_1.0_1.0-da": {
-      },
-      "L-t30.2_0.0_0.6_1.0-ie": {
-      },
-      "L-t30.5_0.0_0.0_1.0-ia": {
-      },
-      "L-t30.8_0.0_0.0_1.0-ib": {
-      },
-      "T-d0.0_0.0_1.0_1.0-da": {
-      },
-      "T-d0.2_0.0_0.6_1.0-ie": {
-      },
-      "T-d0.5_0.0_0.0_1.0-ia": {
-      },
-      "T-d0.8_0.0_0.0_1.0-ib": {
-      },
-      "T-n0.0_0.0_1.0_1.0-da": {
-      },
-      "T-n0.2_0.0_0.6_1.0-ie": {
-      },
-      "T-n0.5_0.0_0.0_1.0-ia": {
-      },
-      "T-n0.8_0.0_0.0_1.0-ib": {
-      },
-      "T-s0.0_0.0_1.0_1.0-da": {
-      },
-      "T-s0.2_0.0_0.6_1.0-ie": {
-      },
-      "T-s0.5_0.0_0.0_1.0-ia": {
-      },
-      "T-s0.8_0.0_0.0_1.0-ib": {
-      },
-      "T-t00.0_0.0_1.0_1.0-da": {
-      },
-      "T-t00.2_0.0_0.6_1.0-ie": {
-      },
-      "T-t00.5_0.0_0.0_1.0-ia": {
-      },
-      "T-t00.8_0.0_0.0_1.0-ib": {
-      },
-      "T-t10.0_0.0_1.0_1.0-da": {
-      },
-      "T-t10.2_0.0_0.6_1.0-ie": {
-      },
-      "T-t10.5_0.0_0.0_1.0-ia": {
-      },
-      "T-t10.8_0.0_0.0_1.0-ib": {
-      },
-      "T-t20.0_0.0_1.0_1.0-da": {
-      },
-      "T-t20.2_0.0_0.6_1.0-ie": {
-      },
-      "T-t20.5_0.0_0.0_1.0-ia": {
-      },
-      "T-t20.8_0.0_0.0_1.0-ib": {
-      },
-      "T-t30.0_0.0_1.0_1.0-da": {
-      },
-      "T-t30.2_0.0_0.6_1.0-ie": {
-      },
-      "T-t30.5_0.0_0.0_1.0-ia": {
-      },
-      "T-t30.8_0.0_0.0_1.0-ib": {
-      }
+      "L-d0.0_0.0_1.0_1.0-da": {},
+      "L-d0.2_0.0_0.6_1.0-ie": {},
+      "L-d0.5_0.0_0.0_1.0-ia": {},
+      "L-d0.8_0.0_0.0_1.0-ib": {},
+      "L-n0.0_0.0_1.0_1.0-da": {},
+      "L-n0.2_0.0_0.6_1.0-ie": {},
+      "L-n0.5_0.0_0.0_1.0-ia": {},
+      "L-n0.8_0.0_0.0_1.0-ib": {},
+      "L-s0.0_0.0_1.0_1.0-da": {},
+      "L-s0.2_0.0_0.6_1.0-ie": {},
+      "L-s0.5_0.0_0.0_1.0-ia": {},
+      "L-s0.8_0.0_0.0_1.0-ib": {},
+      "L-t00.0_0.0_1.0_1.0-da": {},
+      "L-t00.2_0.0_0.6_1.0-ie": {},
+      "L-t00.5_0.0_0.0_1.0-ia": {},
+      "L-t00.8_0.0_0.0_1.0-ib": {},
+      "L-t10.0_0.0_1.0_1.0-da": {},
+      "L-t10.2_0.0_0.6_1.0-ie": {},
+      "L-t10.5_0.0_0.0_1.0-ia": {},
+      "L-t10.8_0.0_0.0_1.0-ib": {},
+      "L-t20.0_0.0_1.0_1.0-da": {},
+      "L-t20.2_0.0_0.6_1.0-ie": {},
+      "L-t20.5_0.0_0.0_1.0-ia": {},
+      "L-t20.8_0.0_0.0_1.0-ib": {},
+      "L-t30.0_0.0_1.0_1.0-da": {},
+      "L-t30.2_0.0_0.6_1.0-ie": {},
+      "L-t30.5_0.0_0.0_1.0-ia": {},
+      "L-t30.8_0.0_0.0_1.0-ib": {},
+      "T-d0.0_0.0_1.0_1.0-da": {},
+      "T-d0.2_0.0_0.6_1.0-ie": {},
+      "T-d0.5_0.0_0.0_1.0-ia": {},
+      "T-d0.8_0.0_0.0_1.0-ib": {},
+      "T-n0.0_0.0_1.0_1.0-da": {},
+      "T-n0.2_0.0_0.6_1.0-ie": {},
+      "T-n0.5_0.0_0.0_1.0-ia": {},
+      "T-n0.8_0.0_0.0_1.0-ib": {},
+      "T-s0.0_0.0_1.0_1.0-da": {},
+      "T-s0.2_0.0_0.6_1.0-ie": {},
+      "T-s0.5_0.0_0.0_1.0-ia": {},
+      "T-s0.8_0.0_0.0_1.0-ib": {},
+      "T-t00.0_0.0_1.0_1.0-da": {},
+      "T-t00.2_0.0_0.6_1.0-ie": {},
+      "T-t00.5_0.0_0.0_1.0-ia": {},
+      "T-t00.8_0.0_0.0_1.0-ib": {},
+      "T-t10.0_0.0_1.0_1.0-da": {},
+      "T-t10.2_0.0_0.6_1.0-ie": {},
+      "T-t10.5_0.0_0.0_1.0-ia": {},
+      "T-t10.8_0.0_0.0_1.0-ib": {},
+      "T-t20.0_0.0_1.0_1.0-da": {},
+      "T-t20.2_0.0_0.6_1.0-ie": {},
+      "T-t20.5_0.0_0.0_1.0-ia": {},
+      "T-t20.8_0.0_0.0_1.0-ib": {},
+      "T-t30.0_0.0_1.0_1.0-da": {},
+      "T-t30.2_0.0_0.6_1.0-ie": {},
+      "T-t30.5_0.0_0.0_1.0-ia": {},
+      "T-t30.8_0.0_0.0_1.0-ib": {}
     },
     "Attrib setter": {
-      "Setters-alpha": {
-      },
-      "Setters-visible": {
-      }
+      "Setters-alpha": {},
+      "Setters-visible": {}
     },
     "Attrib float": {
-      "-1 to 1": {
-      },
-      "-8 to 1": {
-      },
-      "-INF to +INF": {
-      },
-      "-Max (normal) to +Max (normal)": {
-      },
-      "-Max (subnormal) to +Max (subnormal)": {
-      },
-      "-Min (normal) to +Min (normal)": {
-      },
-      "-Min (subnormal) to +Min (subnormal)": {
-      },
-      "-NaN to +NaN (quiet)": {
-      },
-      "-NaN to +NaN (signalling)": {
-      },
-      "0 to 1": {
-      },
-      "0 to 8": {
-      }
+      "-1 to 1": {},
+      "-8 to 1": {},
+      "-INF to +INF": {},
+      "-Max (normal) to +Max (normal)": {},
+      "-Max (subnormal) to +Max (subnormal)": {},
+      "-Min (normal) to +Min (normal)": {},
+      "-Min (subnormal) to +Min (subnormal)": {},
+      "-NaN to +NaN (quiet)": {},
+      "-NaN to +NaN (signalling)": {},
+      "0 to 1": {},
+      "0 to 8": {}
     },
     "Blend tests": {
-      "SignedAdd": {
-      },
-      "SignedRevSubtract": {
-      }
+      "SignedAdd": {},
+      "SignedRevSubtract": {}
     },
     "Clear": {
-      "C00000000_Depth_n": {
-      },
-      "C00000000_Depth_y": {
-      },
-      "C00000001_Depth_n": {
-      },
-      "C00000001_Depth_y": {
-      },
-      "C00000100_Depth_n": {
-      },
-      "C00000100_Depth_y": {
-      },
-      "C00010000_Depth_n": {
-      },
-      "C00010000_Depth_y": {
-      },
-      "C01000000_Depth_n": {
-      },
-      "C01000000_Depth_y": {
-      },
-      "C01010101_Depth_n": {
-      },
-      "C01010101_Depth_y": {
-      }
+      "C00000000_Depth_n": {},
+      "C00000000_Depth_y": {},
+      "C00000001_Depth_n": {},
+      "C00000001_Depth_y": {},
+      "C00000100_Depth_n": {},
+      "C00000100_Depth_y": {},
+      "C00010000_Depth_n": {},
+      "C00010000_Depth_y": {},
+      "C01000000_Depth_n": {},
+      "C01000000_Depth_y": {},
+      "C01010101_Depth_n": {},
+      "C01010101_Depth_y": {}
     },
     "Color key": {
-      "FixedTex_Alpha": {
-      },
-      "FixedTex_AlphaColor": {
-      },
-      "FixedTex_Color": {
-      },
-      "FixedTex_Disabled": {
-      },
-      "IgnAlphaCh_FixedTex_Alpha": {
-      },
-      "IgnAlphaCh_FixedTex_AlphaColor": {
-      },
-      "IgnAlphaCh_FixedTex_Color": {
-      },
-      "IgnAlphaCh_FixedTex_Disabled": {
-      },
-      "IgnAlphaCh_ProgTex_Alpha": {
-      },
-      "IgnAlphaCh_ProgTex_AlphaColor": {
-      },
-      "IgnAlphaCh_ProgTex_Color": {
-      },
-      "IgnAlphaCh_ProgTex_Disabled": {
-      },
-      "ProgTex_Alpha": {
-      },
-      "ProgTex_AlphaColor": {
-      },
-      "ProgTex_Color": {
-      },
-      "ProgTex_Disabled": {
-      },
-      "UnsampledTex": {
-      }
+      "FixedTex_Alpha": {},
+      "FixedTex_AlphaColor": {},
+      "FixedTex_Color": {},
+      "FixedTex_Disabled": {},
+      "IgnAlphaCh_FixedTex_Alpha": {},
+      "IgnAlphaCh_FixedTex_AlphaColor": {},
+      "IgnAlphaCh_FixedTex_Color": {},
+      "IgnAlphaCh_FixedTex_Disabled": {},
+      "IgnAlphaCh_ProgTex_Alpha": {},
+      "IgnAlphaCh_ProgTex_AlphaColor": {},
+      "IgnAlphaCh_ProgTex_Color": {},
+      "IgnAlphaCh_ProgTex_Disabled": {},
+      "ProgTex_Alpha": {},
+      "ProgTex_AlphaColor": {},
+      "ProgTex_Color": {},
+      "ProgTex_Disabled": {},
+      "UnsampledTex": {}
     },
     "Color mask blend": {
-      "C00010101_O32774_S772_D0": {
-      }
+      "C00010101_O32774_S772_D0": {}
     },
     "Color Zeta Disable": {
-      "MaskOff": {
-      }
+      "MaskOff": {}
     },
     "Color zeta overlap": {
-      "AdjacentWithAA": {
-      },
-      "AdjacentWithClipOffset_l": {
-      },
-      "AdjacentWithClipOffset_sz": {
-      },
-      "ColorIntoZeta": {
-      },
-      "Swap": {
-      },
-      "ZetaIntoColor": {
-      }
+      "AdjacentWithAA": {},
+      "AdjacentWithClipOffset_l": {},
+      "AdjacentWithClipOffset_sz": {},
+      "ColorIntoZeta": {},
+      "Swap": {},
+      "ZetaIntoColor": {}
     },
     "Combiner": {
-      "ColorAlphaIndependence": {
-      },
-      "Flags": {
-      },
-      "Independence": {
-      },
-      "Mux": {
-      }
+      "ColorAlphaIndependence": {},
+      "Flags": {},
+      "Independence": {},
+      "Mux": {}
     },
     "Depth buffer": {
-      "DepthFmt_z16_Cn_FZn_M00000f": {
-      },
-      "DepthFmt_z16_Cn_FZn_M000564": {
-      },
-      "DepthFmt_z16_Cn_FZn_M000ab9": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00100e": {
-      },
-      "DepthFmt_z16_Cn_FZn_M001563": {
-      },
-      "DepthFmt_z16_Cn_FZn_M001ab8": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00200d": {
-      },
-      "DepthFmt_z16_Cn_FZn_M002562": {
-      },
-      "DepthFmt_z16_Cn_FZn_M002ab7": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00300c": {
-      },
-      "DepthFmt_z16_Cn_FZn_M003561": {
-      },
-      "DepthFmt_z16_Cn_FZn_M003ab6": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00400b": {
-      },
-      "DepthFmt_z16_Cn_FZn_M004560": {
-      },
-      "DepthFmt_z16_Cn_FZn_M004ab5": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00500a": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00555f": {
-      },
-      "DepthFmt_z16_Cn_FZn_M005ab4": {
-      },
-      "DepthFmt_z16_Cn_FZn_M006009": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00655e": {
-      },
-      "DepthFmt_z16_Cn_FZn_M006ab3": {
-      },
-      "DepthFmt_z16_Cn_FZn_M007008": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00755d": {
-      },
-      "DepthFmt_z16_Cn_FZn_M007ab2": {
-      },
-      "DepthFmt_z16_Cn_FZn_M008007": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00855c": {
-      },
-      "DepthFmt_z16_Cn_FZn_M008ab1": {
-      },
-      "DepthFmt_z16_Cn_FZn_M009006": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00955b": {
-      },
-      "DepthFmt_z16_Cn_FZn_M009ab0": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00a005": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00a55a": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00aaaf": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00b004": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00b559": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00baae": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00c003": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00c558": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00caad": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00d002": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00d557": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00daac": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00e001": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00e556": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00eaab": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00f000": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00f555": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00faaa": {
-      },
-      "DepthFmt_z16_Cn_FZn_M00ffff": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00000f": {
-      },
-      "DepthFmt_z16_Cn_FZy_M000564": {
-      },
-      "DepthFmt_z16_Cn_FZy_M000ab9": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00100e": {
-      },
-      "DepthFmt_z16_Cn_FZy_M001563": {
-      },
-      "DepthFmt_z16_Cn_FZy_M001ab8": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00200d": {
-      },
-      "DepthFmt_z16_Cn_FZy_M002562": {
-      },
-      "DepthFmt_z16_Cn_FZy_M002ab7": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00300c": {
-      },
-      "DepthFmt_z16_Cn_FZy_M003561": {
-      },
-      "DepthFmt_z16_Cn_FZy_M003ab6": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00400b": {
-      },
-      "DepthFmt_z16_Cn_FZy_M004560": {
-      },
-      "DepthFmt_z16_Cn_FZy_M004ab5": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00500a": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00555f": {
-      },
-      "DepthFmt_z16_Cn_FZy_M005ab4": {
-      },
-      "DepthFmt_z16_Cn_FZy_M006009": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00655e": {
-      },
-      "DepthFmt_z16_Cn_FZy_M006ab3": {
-      },
-      "DepthFmt_z16_Cn_FZy_M007008": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00755d": {
-      },
-      "DepthFmt_z16_Cn_FZy_M007ab2": {
-      },
-      "DepthFmt_z16_Cn_FZy_M008007": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00855c": {
-      },
-      "DepthFmt_z16_Cn_FZy_M008ab1": {
-      },
-      "DepthFmt_z16_Cn_FZy_M009006": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00955b": {
-      },
-      "DepthFmt_z16_Cn_FZy_M009ab0": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00a005": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00a55a": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00aaaf": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00b004": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00b559": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00baae": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00c003": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00c558": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00caad": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00d002": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00d557": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00daac": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00e001": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00e556": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00eaab": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00f000": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00f555": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00faaa": {
-      },
-      "DepthFmt_z16_Cn_FZy_M00ffff": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00000f": {
-      },
-      "DepthFmt_z16_Cy_FZn_M000564": {
-      },
-      "DepthFmt_z16_Cy_FZn_M000ab9": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00100e": {
-      },
-      "DepthFmt_z16_Cy_FZn_M001563": {
-      },
-      "DepthFmt_z16_Cy_FZn_M001ab8": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00200d": {
-      },
-      "DepthFmt_z16_Cy_FZn_M002562": {
-      },
-      "DepthFmt_z16_Cy_FZn_M002ab7": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00300c": {
-      },
-      "DepthFmt_z16_Cy_FZn_M003561": {
-      },
-      "DepthFmt_z16_Cy_FZn_M003ab6": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00400b": {
-      },
-      "DepthFmt_z16_Cy_FZn_M004560": {
-      },
-      "DepthFmt_z16_Cy_FZn_M004ab5": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00500a": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00555f": {
-      },
-      "DepthFmt_z16_Cy_FZn_M005ab4": {
-      },
-      "DepthFmt_z16_Cy_FZn_M006009": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00655e": {
-      },
-      "DepthFmt_z16_Cy_FZn_M006ab3": {
-      },
-      "DepthFmt_z16_Cy_FZn_M007008": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00755d": {
-      },
-      "DepthFmt_z16_Cy_FZn_M007ab2": {
-      },
-      "DepthFmt_z16_Cy_FZn_M008007": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00855c": {
-      },
-      "DepthFmt_z16_Cy_FZn_M008ab1": {
-      },
-      "DepthFmt_z16_Cy_FZn_M009006": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00955b": {
-      },
-      "DepthFmt_z16_Cy_FZn_M009ab0": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00a005": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00a55a": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00aaaf": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00b004": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00b559": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00baae": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00c003": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00c558": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00caad": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00d002": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00d557": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00daac": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00e001": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00e556": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00eaab": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00f000": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00f555": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00faaa": {
-      },
-      "DepthFmt_z16_Cy_FZn_M00ffff": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00000f": {
-      },
-      "DepthFmt_z16_Cy_FZy_M000564": {
-      },
-      "DepthFmt_z16_Cy_FZy_M000ab9": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00100e": {
-      },
-      "DepthFmt_z16_Cy_FZy_M001563": {
-      },
-      "DepthFmt_z16_Cy_FZy_M001ab8": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00200d": {
-      },
-      "DepthFmt_z16_Cy_FZy_M002562": {
-      },
-      "DepthFmt_z16_Cy_FZy_M002ab7": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00300c": {
-      },
-      "DepthFmt_z16_Cy_FZy_M003561": {
-      },
-      "DepthFmt_z16_Cy_FZy_M003ab6": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00400b": {
-      },
-      "DepthFmt_z16_Cy_FZy_M004560": {
-      },
-      "DepthFmt_z16_Cy_FZy_M004ab5": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00500a": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00555f": {
-      },
-      "DepthFmt_z16_Cy_FZy_M005ab4": {
-      },
-      "DepthFmt_z16_Cy_FZy_M006009": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00655e": {
-      },
-      "DepthFmt_z16_Cy_FZy_M006ab3": {
-      },
-      "DepthFmt_z16_Cy_FZy_M007008": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00755d": {
-      },
-      "DepthFmt_z16_Cy_FZy_M007ab2": {
-      },
-      "DepthFmt_z16_Cy_FZy_M008007": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00855c": {
-      },
-      "DepthFmt_z16_Cy_FZy_M008ab1": {
-      },
-      "DepthFmt_z16_Cy_FZy_M009006": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00955b": {
-      },
-      "DepthFmt_z16_Cy_FZy_M009ab0": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00a005": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00a55a": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00aaaf": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00b004": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00b559": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00baae": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00c003": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00c558": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00caad": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00d002": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00d557": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00daac": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00e001": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00e556": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00eaab": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00f000": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00f555": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00faaa": {
-      },
-      "DepthFmt_z16_Cy_FZy_M00ffff": {
-      },
-      "DepthFmt_z24_Cn_FZn_M00000f": {
-      },
-      "DepthFmt_z24_Cn_FZn_M055564": {
-      },
-      "DepthFmt_z24_Cn_FZn_M0aaab9": {
-      },
-      "DepthFmt_z24_Cn_FZn_M10000e": {
-      },
-      "DepthFmt_z24_Cn_FZn_M155563": {
-      },
-      "DepthFmt_z24_Cn_FZn_M1aaab8": {
-      },
-      "DepthFmt_z24_Cn_FZn_M20000d": {
-      },
-      "DepthFmt_z24_Cn_FZn_M255562": {
-      },
-      "DepthFmt_z24_Cn_FZn_M2aaab7": {
-      },
-      "DepthFmt_z24_Cn_FZn_M30000c": {
-      },
-      "DepthFmt_z24_Cn_FZn_M355561": {
-      },
-      "DepthFmt_z24_Cn_FZn_M3aaab6": {
-      },
-      "DepthFmt_z24_Cn_FZn_M40000b": {
-      },
-      "DepthFmt_z24_Cn_FZn_M455560": {
-      },
-      "DepthFmt_z24_Cn_FZn_M4aaab5": {
-      },
-      "DepthFmt_z24_Cn_FZn_M50000a": {
-      },
-      "DepthFmt_z24_Cn_FZn_M55555f": {
-      },
-      "DepthFmt_z24_Cn_FZn_M5aaab4": {
-      },
-      "DepthFmt_z24_Cn_FZn_M600009": {
-      },
-      "DepthFmt_z24_Cn_FZn_M65555e": {
-      },
-      "DepthFmt_z24_Cn_FZn_M6aaab3": {
-      },
-      "DepthFmt_z24_Cn_FZn_M700008": {
-      },
-      "DepthFmt_z24_Cn_FZn_M75555d": {
-      },
-      "DepthFmt_z24_Cn_FZn_M7aaab2": {
-      },
-      "DepthFmt_z24_Cn_FZn_M800007": {
-      },
-      "DepthFmt_z24_Cn_FZn_M85555c": {
-      },
-      "DepthFmt_z24_Cn_FZn_M8aaab1": {
-      },
-      "DepthFmt_z24_Cn_FZn_M900006": {
-      },
-      "DepthFmt_z24_Cn_FZn_M95555b": {
-      },
-      "DepthFmt_z24_Cn_FZn_M9aaab0": {
-      },
-      "DepthFmt_z24_Cn_FZn_Ma00005": {
-      },
-      "DepthFmt_z24_Cn_FZn_Ma5555a": {
-      },
-      "DepthFmt_z24_Cn_FZn_Maaaaaf": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mb00004": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mb55559": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mbaaaae": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mc00003": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mc55558": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mcaaaad": {
-      },
-      "DepthFmt_z24_Cn_FZn_Md00002": {
-      },
-      "DepthFmt_z24_Cn_FZn_Md55557": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mdaaaac": {
-      },
-      "DepthFmt_z24_Cn_FZn_Me00001": {
-      },
-      "DepthFmt_z24_Cn_FZn_Me55556": {
-      },
-      "DepthFmt_z24_Cn_FZn_Meaaaab": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mf00000": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mf55555": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mfaaaaa": {
-      },
-      "DepthFmt_z24_Cn_FZn_Mffffff": {
-      },
-      "DepthFmt_z24_Cn_FZy_M00002f": {
-      },
-      "DepthFmt_z24_Cn_FZy_M05502e": {
-      },
-      "DepthFmt_z24_Cn_FZy_M0aa02d": {
-      },
-      "DepthFmt_z24_Cn_FZy_M0ff02c": {
-      },
-      "DepthFmt_z24_Cn_FZy_M15402b": {
-      },
-      "DepthFmt_z24_Cn_FZy_M1a902a": {
-      },
-      "DepthFmt_z24_Cn_FZy_M1fe029": {
-      },
-      "DepthFmt_z24_Cn_FZy_M253028": {
-      },
-      "DepthFmt_z24_Cn_FZy_M2a8027": {
-      },
-      "DepthFmt_z24_Cn_FZy_M2fd026": {
-      },
-      "DepthFmt_z24_Cn_FZy_M352025": {
-      },
-      "DepthFmt_z24_Cn_FZy_M3a7024": {
-      },
-      "DepthFmt_z24_Cn_FZy_M3fc023": {
-      },
-      "DepthFmt_z24_Cn_FZy_M451022": {
-      },
-      "DepthFmt_z24_Cn_FZy_M4a6021": {
-      },
-      "DepthFmt_z24_Cn_FZy_M4fb020": {
-      },
-      "DepthFmt_z24_Cn_FZy_M55001f": {
-      },
-      "DepthFmt_z24_Cn_FZy_M5a501e": {
-      },
-      "DepthFmt_z24_Cn_FZy_M5fa01d": {
-      },
-      "DepthFmt_z24_Cn_FZy_M64f01c": {
-      },
-      "DepthFmt_z24_Cn_FZy_M6a401b": {
-      },
-      "DepthFmt_z24_Cn_FZy_M6f901a": {
-      },
-      "DepthFmt_z24_Cn_FZy_M74e019": {
-      },
-      "DepthFmt_z24_Cn_FZy_M7a3018": {
-      },
-      "DepthFmt_z24_Cn_FZy_M7f8017": {
-      },
-      "DepthFmt_z24_Cn_FZy_M84d016": {
-      },
-      "DepthFmt_z24_Cn_FZy_M8a2015": {
-      },
-      "DepthFmt_z24_Cn_FZy_M8f7014": {
-      },
-      "DepthFmt_z24_Cn_FZy_M94c013": {
-      },
-      "DepthFmt_z24_Cn_FZy_M9a1012": {
-      },
-      "DepthFmt_z24_Cn_FZy_M9f6011": {
-      },
-      "DepthFmt_z24_Cn_FZy_Ma4b010": {
-      },
-      "DepthFmt_z24_Cn_FZy_Maa000f": {
-      },
-      "DepthFmt_z24_Cn_FZy_Maf500e": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mb4a00d": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mb9f00c": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mbf400b": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mc4900a": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mc9e009": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mcf3008": {
-      },
-      "DepthFmt_z24_Cn_FZy_Md48007": {
-      },
-      "DepthFmt_z24_Cn_FZy_Md9d006": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mdf2005": {
-      },
-      "DepthFmt_z24_Cn_FZy_Me47004": {
-      },
-      "DepthFmt_z24_Cn_FZy_Me9c003": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mef1002": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mf46001": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mf9b000": {
-      },
-      "DepthFmt_z24_Cn_FZy_Mfeffff": {
-      },
-      "DepthFmt_z24_Cy_FZn_M00000f": {
-      },
-      "DepthFmt_z24_Cy_FZn_M055564": {
-      },
-      "DepthFmt_z24_Cy_FZn_M0aaab9": {
-      },
-      "DepthFmt_z24_Cy_FZn_M10000e": {
-      },
-      "DepthFmt_z24_Cy_FZn_M155563": {
-      },
-      "DepthFmt_z24_Cy_FZn_M1aaab8": {
-      },
-      "DepthFmt_z24_Cy_FZn_M20000d": {
-      },
-      "DepthFmt_z24_Cy_FZn_M255562": {
-      },
-      "DepthFmt_z24_Cy_FZn_M2aaab7": {
-      },
-      "DepthFmt_z24_Cy_FZn_M30000c": {
-      },
-      "DepthFmt_z24_Cy_FZn_M355561": {
-      },
-      "DepthFmt_z24_Cy_FZn_M3aaab6": {
-      },
-      "DepthFmt_z24_Cy_FZn_M40000b": {
-      },
-      "DepthFmt_z24_Cy_FZn_M455560": {
-      },
-      "DepthFmt_z24_Cy_FZn_M4aaab5": {
-      },
-      "DepthFmt_z24_Cy_FZn_M50000a": {
-      },
-      "DepthFmt_z24_Cy_FZn_M55555f": {
-      },
-      "DepthFmt_z24_Cy_FZn_M5aaab4": {
-      },
-      "DepthFmt_z24_Cy_FZn_M600009": {
-      },
-      "DepthFmt_z24_Cy_FZn_M65555e": {
-      },
-      "DepthFmt_z24_Cy_FZn_M6aaab3": {
-      },
-      "DepthFmt_z24_Cy_FZn_M700008": {
-      },
-      "DepthFmt_z24_Cy_FZn_M75555d": {
-      },
-      "DepthFmt_z24_Cy_FZn_M7aaab2": {
-      },
-      "DepthFmt_z24_Cy_FZn_M800007": {
-      },
-      "DepthFmt_z24_Cy_FZn_M85555c": {
-      },
-      "DepthFmt_z24_Cy_FZn_M8aaab1": {
-      },
-      "DepthFmt_z24_Cy_FZn_M900006": {
-      },
-      "DepthFmt_z24_Cy_FZn_M95555b": {
-      },
-      "DepthFmt_z24_Cy_FZn_M9aaab0": {
-      },
-      "DepthFmt_z24_Cy_FZn_Ma00005": {
-      },
-      "DepthFmt_z24_Cy_FZn_Ma5555a": {
-      },
-      "DepthFmt_z24_Cy_FZn_Maaaaaf": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mb00004": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mb55559": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mbaaaae": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mc00003": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mc55558": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mcaaaad": {
-      },
-      "DepthFmt_z24_Cy_FZn_Md00002": {
-      },
-      "DepthFmt_z24_Cy_FZn_Md55557": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mdaaaac": {
-      },
-      "DepthFmt_z24_Cy_FZn_Me00001": {
-      },
-      "DepthFmt_z24_Cy_FZn_Me55556": {
-      },
-      "DepthFmt_z24_Cy_FZn_Meaaaab": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mf00000": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mf55555": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mfaaaaa": {
-      },
-      "DepthFmt_z24_Cy_FZn_Mffffff": {
-      },
-      "DepthFmt_z24_Cy_FZy_M00002f": {
-      },
-      "DepthFmt_z24_Cy_FZy_M05502e": {
-      },
-      "DepthFmt_z24_Cy_FZy_M0aa02d": {
-      },
-      "DepthFmt_z24_Cy_FZy_M0ff02c": {
-      },
-      "DepthFmt_z24_Cy_FZy_M15402b": {
-      },
-      "DepthFmt_z24_Cy_FZy_M1a902a": {
-      },
-      "DepthFmt_z24_Cy_FZy_M1fe029": {
-      },
-      "DepthFmt_z24_Cy_FZy_M253028": {
-      },
-      "DepthFmt_z24_Cy_FZy_M2a8027": {
-      },
-      "DepthFmt_z24_Cy_FZy_M2fd026": {
-      },
-      "DepthFmt_z24_Cy_FZy_M352025": {
-      },
-      "DepthFmt_z24_Cy_FZy_M3a7024": {
-      },
-      "DepthFmt_z24_Cy_FZy_M3fc023": {
-      },
-      "DepthFmt_z24_Cy_FZy_M451022": {
-      },
-      "DepthFmt_z24_Cy_FZy_M4a6021": {
-      },
-      "DepthFmt_z24_Cy_FZy_M4fb020": {
-      },
-      "DepthFmt_z24_Cy_FZy_M55001f": {
-      },
-      "DepthFmt_z24_Cy_FZy_M5a501e": {
-      },
-      "DepthFmt_z24_Cy_FZy_M5fa01d": {
-      },
-      "DepthFmt_z24_Cy_FZy_M64f01c": {
-      },
-      "DepthFmt_z24_Cy_FZy_M6a401b": {
-      },
-      "DepthFmt_z24_Cy_FZy_M6f901a": {
-      },
-      "DepthFmt_z24_Cy_FZy_M74e019": {
-      },
-      "DepthFmt_z24_Cy_FZy_M7a3018": {
-      },
-      "DepthFmt_z24_Cy_FZy_M7f8017": {
-      },
-      "DepthFmt_z24_Cy_FZy_M84d016": {
-      },
-      "DepthFmt_z24_Cy_FZy_M8a2015": {
-      },
-      "DepthFmt_z24_Cy_FZy_M8f7014": {
-      },
-      "DepthFmt_z24_Cy_FZy_M94c013": {
-      },
-      "DepthFmt_z24_Cy_FZy_M9a1012": {
-      },
-      "DepthFmt_z24_Cy_FZy_M9f6011": {
-      },
-      "DepthFmt_z24_Cy_FZy_Ma4b010": {
-      },
-      "DepthFmt_z24_Cy_FZy_Maa000f": {
-      },
-      "DepthFmt_z24_Cy_FZy_Maf500e": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mb4a00d": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mb9f00c": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mbf400b": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mc4900a": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mc9e009": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mcf3008": {
-      },
-      "DepthFmt_z24_Cy_FZy_Md48007": {
-      },
-      "DepthFmt_z24_Cy_FZy_Md9d006": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mdf2005": {
-      },
-      "DepthFmt_z24_Cy_FZy_Me47004": {
-      },
-      "DepthFmt_z24_Cy_FZy_Me9c003": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mef1002": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mf46001": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mf9b000": {
-      },
-      "DepthFmt_z24_Cy_FZy_Mfeffff": {
-      }
+      "DepthFmt_z16_Cn_FZn_M00000f": {},
+      "DepthFmt_z16_Cn_FZn_M000564": {},
+      "DepthFmt_z16_Cn_FZn_M000ab9": {},
+      "DepthFmt_z16_Cn_FZn_M00100e": {},
+      "DepthFmt_z16_Cn_FZn_M001563": {},
+      "DepthFmt_z16_Cn_FZn_M001ab8": {},
+      "DepthFmt_z16_Cn_FZn_M00200d": {},
+      "DepthFmt_z16_Cn_FZn_M002562": {},
+      "DepthFmt_z16_Cn_FZn_M002ab7": {},
+      "DepthFmt_z16_Cn_FZn_M00300c": {},
+      "DepthFmt_z16_Cn_FZn_M003561": {},
+      "DepthFmt_z16_Cn_FZn_M003ab6": {},
+      "DepthFmt_z16_Cn_FZn_M00400b": {},
+      "DepthFmt_z16_Cn_FZn_M004560": {},
+      "DepthFmt_z16_Cn_FZn_M004ab5": {},
+      "DepthFmt_z16_Cn_FZn_M00500a": {},
+      "DepthFmt_z16_Cn_FZn_M00555f": {},
+      "DepthFmt_z16_Cn_FZn_M005ab4": {},
+      "DepthFmt_z16_Cn_FZn_M006009": {},
+      "DepthFmt_z16_Cn_FZn_M00655e": {},
+      "DepthFmt_z16_Cn_FZn_M006ab3": {},
+      "DepthFmt_z16_Cn_FZn_M007008": {},
+      "DepthFmt_z16_Cn_FZn_M00755d": {},
+      "DepthFmt_z16_Cn_FZn_M007ab2": {},
+      "DepthFmt_z16_Cn_FZn_M008007": {},
+      "DepthFmt_z16_Cn_FZn_M00855c": {},
+      "DepthFmt_z16_Cn_FZn_M008ab1": {},
+      "DepthFmt_z16_Cn_FZn_M009006": {},
+      "DepthFmt_z16_Cn_FZn_M00955b": {},
+      "DepthFmt_z16_Cn_FZn_M009ab0": {},
+      "DepthFmt_z16_Cn_FZn_M00a005": {},
+      "DepthFmt_z16_Cn_FZn_M00a55a": {},
+      "DepthFmt_z16_Cn_FZn_M00aaaf": {},
+      "DepthFmt_z16_Cn_FZn_M00b004": {},
+      "DepthFmt_z16_Cn_FZn_M00b559": {},
+      "DepthFmt_z16_Cn_FZn_M00baae": {},
+      "DepthFmt_z16_Cn_FZn_M00c003": {},
+      "DepthFmt_z16_Cn_FZn_M00c558": {},
+      "DepthFmt_z16_Cn_FZn_M00caad": {},
+      "DepthFmt_z16_Cn_FZn_M00d002": {},
+      "DepthFmt_z16_Cn_FZn_M00d557": {},
+      "DepthFmt_z16_Cn_FZn_M00daac": {},
+      "DepthFmt_z16_Cn_FZn_M00e001": {},
+      "DepthFmt_z16_Cn_FZn_M00e556": {},
+      "DepthFmt_z16_Cn_FZn_M00eaab": {},
+      "DepthFmt_z16_Cn_FZn_M00f000": {},
+      "DepthFmt_z16_Cn_FZn_M00f555": {},
+      "DepthFmt_z16_Cn_FZn_M00faaa": {},
+      "DepthFmt_z16_Cn_FZn_M00ffff": {},
+      "DepthFmt_z16_Cn_FZy_M00000f": {},
+      "DepthFmt_z16_Cn_FZy_M000564": {},
+      "DepthFmt_z16_Cn_FZy_M000ab9": {},
+      "DepthFmt_z16_Cn_FZy_M00100e": {},
+      "DepthFmt_z16_Cn_FZy_M001563": {},
+      "DepthFmt_z16_Cn_FZy_M001ab8": {},
+      "DepthFmt_z16_Cn_FZy_M00200d": {},
+      "DepthFmt_z16_Cn_FZy_M002562": {},
+      "DepthFmt_z16_Cn_FZy_M002ab7": {},
+      "DepthFmt_z16_Cn_FZy_M00300c": {},
+      "DepthFmt_z16_Cn_FZy_M003561": {},
+      "DepthFmt_z16_Cn_FZy_M003ab6": {},
+      "DepthFmt_z16_Cn_FZy_M00400b": {},
+      "DepthFmt_z16_Cn_FZy_M004560": {},
+      "DepthFmt_z16_Cn_FZy_M004ab5": {},
+      "DepthFmt_z16_Cn_FZy_M00500a": {},
+      "DepthFmt_z16_Cn_FZy_M00555f": {},
+      "DepthFmt_z16_Cn_FZy_M005ab4": {},
+      "DepthFmt_z16_Cn_FZy_M006009": {},
+      "DepthFmt_z16_Cn_FZy_M00655e": {},
+      "DepthFmt_z16_Cn_FZy_M006ab3": {},
+      "DepthFmt_z16_Cn_FZy_M007008": {},
+      "DepthFmt_z16_Cn_FZy_M00755d": {},
+      "DepthFmt_z16_Cn_FZy_M007ab2": {},
+      "DepthFmt_z16_Cn_FZy_M008007": {},
+      "DepthFmt_z16_Cn_FZy_M00855c": {},
+      "DepthFmt_z16_Cn_FZy_M008ab1": {},
+      "DepthFmt_z16_Cn_FZy_M009006": {},
+      "DepthFmt_z16_Cn_FZy_M00955b": {},
+      "DepthFmt_z16_Cn_FZy_M009ab0": {},
+      "DepthFmt_z16_Cn_FZy_M00a005": {},
+      "DepthFmt_z16_Cn_FZy_M00a55a": {},
+      "DepthFmt_z16_Cn_FZy_M00aaaf": {},
+      "DepthFmt_z16_Cn_FZy_M00b004": {},
+      "DepthFmt_z16_Cn_FZy_M00b559": {},
+      "DepthFmt_z16_Cn_FZy_M00baae": {},
+      "DepthFmt_z16_Cn_FZy_M00c003": {},
+      "DepthFmt_z16_Cn_FZy_M00c558": {},
+      "DepthFmt_z16_Cn_FZy_M00caad": {},
+      "DepthFmt_z16_Cn_FZy_M00d002": {},
+      "DepthFmt_z16_Cn_FZy_M00d557": {},
+      "DepthFmt_z16_Cn_FZy_M00daac": {},
+      "DepthFmt_z16_Cn_FZy_M00e001": {},
+      "DepthFmt_z16_Cn_FZy_M00e556": {},
+      "DepthFmt_z16_Cn_FZy_M00eaab": {},
+      "DepthFmt_z16_Cn_FZy_M00f000": {},
+      "DepthFmt_z16_Cn_FZy_M00f555": {},
+      "DepthFmt_z16_Cn_FZy_M00faaa": {},
+      "DepthFmt_z16_Cn_FZy_M00ffff": {},
+      "DepthFmt_z16_Cy_FZn_M00000f": {},
+      "DepthFmt_z16_Cy_FZn_M000564": {},
+      "DepthFmt_z16_Cy_FZn_M000ab9": {},
+      "DepthFmt_z16_Cy_FZn_M00100e": {},
+      "DepthFmt_z16_Cy_FZn_M001563": {},
+      "DepthFmt_z16_Cy_FZn_M001ab8": {},
+      "DepthFmt_z16_Cy_FZn_M00200d": {},
+      "DepthFmt_z16_Cy_FZn_M002562": {},
+      "DepthFmt_z16_Cy_FZn_M002ab7": {},
+      "DepthFmt_z16_Cy_FZn_M00300c": {},
+      "DepthFmt_z16_Cy_FZn_M003561": {},
+      "DepthFmt_z16_Cy_FZn_M003ab6": {},
+      "DepthFmt_z16_Cy_FZn_M00400b": {},
+      "DepthFmt_z16_Cy_FZn_M004560": {},
+      "DepthFmt_z16_Cy_FZn_M004ab5": {},
+      "DepthFmt_z16_Cy_FZn_M00500a": {},
+      "DepthFmt_z16_Cy_FZn_M00555f": {},
+      "DepthFmt_z16_Cy_FZn_M005ab4": {},
+      "DepthFmt_z16_Cy_FZn_M006009": {},
+      "DepthFmt_z16_Cy_FZn_M00655e": {},
+      "DepthFmt_z16_Cy_FZn_M006ab3": {},
+      "DepthFmt_z16_Cy_FZn_M007008": {},
+      "DepthFmt_z16_Cy_FZn_M00755d": {},
+      "DepthFmt_z16_Cy_FZn_M007ab2": {},
+      "DepthFmt_z16_Cy_FZn_M008007": {},
+      "DepthFmt_z16_Cy_FZn_M00855c": {},
+      "DepthFmt_z16_Cy_FZn_M008ab1": {},
+      "DepthFmt_z16_Cy_FZn_M009006": {},
+      "DepthFmt_z16_Cy_FZn_M00955b": {},
+      "DepthFmt_z16_Cy_FZn_M009ab0": {},
+      "DepthFmt_z16_Cy_FZn_M00a005": {},
+      "DepthFmt_z16_Cy_FZn_M00a55a": {},
+      "DepthFmt_z16_Cy_FZn_M00aaaf": {},
+      "DepthFmt_z16_Cy_FZn_M00b004": {},
+      "DepthFmt_z16_Cy_FZn_M00b559": {},
+      "DepthFmt_z16_Cy_FZn_M00baae": {},
+      "DepthFmt_z16_Cy_FZn_M00c003": {},
+      "DepthFmt_z16_Cy_FZn_M00c558": {},
+      "DepthFmt_z16_Cy_FZn_M00caad": {},
+      "DepthFmt_z16_Cy_FZn_M00d002": {},
+      "DepthFmt_z16_Cy_FZn_M00d557": {},
+      "DepthFmt_z16_Cy_FZn_M00daac": {},
+      "DepthFmt_z16_Cy_FZn_M00e001": {},
+      "DepthFmt_z16_Cy_FZn_M00e556": {},
+      "DepthFmt_z16_Cy_FZn_M00eaab": {},
+      "DepthFmt_z16_Cy_FZn_M00f000": {},
+      "DepthFmt_z16_Cy_FZn_M00f555": {},
+      "DepthFmt_z16_Cy_FZn_M00faaa": {},
+      "DepthFmt_z16_Cy_FZn_M00ffff": {},
+      "DepthFmt_z16_Cy_FZy_M00000f": {},
+      "DepthFmt_z16_Cy_FZy_M000564": {},
+      "DepthFmt_z16_Cy_FZy_M000ab9": {},
+      "DepthFmt_z16_Cy_FZy_M00100e": {},
+      "DepthFmt_z16_Cy_FZy_M001563": {},
+      "DepthFmt_z16_Cy_FZy_M001ab8": {},
+      "DepthFmt_z16_Cy_FZy_M00200d": {},
+      "DepthFmt_z16_Cy_FZy_M002562": {},
+      "DepthFmt_z16_Cy_FZy_M002ab7": {},
+      "DepthFmt_z16_Cy_FZy_M00300c": {},
+      "DepthFmt_z16_Cy_FZy_M003561": {},
+      "DepthFmt_z16_Cy_FZy_M003ab6": {},
+      "DepthFmt_z16_Cy_FZy_M00400b": {},
+      "DepthFmt_z16_Cy_FZy_M004560": {},
+      "DepthFmt_z16_Cy_FZy_M004ab5": {},
+      "DepthFmt_z16_Cy_FZy_M00500a": {},
+      "DepthFmt_z16_Cy_FZy_M00555f": {},
+      "DepthFmt_z16_Cy_FZy_M005ab4": {},
+      "DepthFmt_z16_Cy_FZy_M006009": {},
+      "DepthFmt_z16_Cy_FZy_M00655e": {},
+      "DepthFmt_z16_Cy_FZy_M006ab3": {},
+      "DepthFmt_z16_Cy_FZy_M007008": {},
+      "DepthFmt_z16_Cy_FZy_M00755d": {},
+      "DepthFmt_z16_Cy_FZy_M007ab2": {},
+      "DepthFmt_z16_Cy_FZy_M008007": {},
+      "DepthFmt_z16_Cy_FZy_M00855c": {},
+      "DepthFmt_z16_Cy_FZy_M008ab1": {},
+      "DepthFmt_z16_Cy_FZy_M009006": {},
+      "DepthFmt_z16_Cy_FZy_M00955b": {},
+      "DepthFmt_z16_Cy_FZy_M009ab0": {},
+      "DepthFmt_z16_Cy_FZy_M00a005": {},
+      "DepthFmt_z16_Cy_FZy_M00a55a": {},
+      "DepthFmt_z16_Cy_FZy_M00aaaf": {},
+      "DepthFmt_z16_Cy_FZy_M00b004": {},
+      "DepthFmt_z16_Cy_FZy_M00b559": {},
+      "DepthFmt_z16_Cy_FZy_M00baae": {},
+      "DepthFmt_z16_Cy_FZy_M00c003": {},
+      "DepthFmt_z16_Cy_FZy_M00c558": {},
+      "DepthFmt_z16_Cy_FZy_M00caad": {},
+      "DepthFmt_z16_Cy_FZy_M00d002": {},
+      "DepthFmt_z16_Cy_FZy_M00d557": {},
+      "DepthFmt_z16_Cy_FZy_M00daac": {},
+      "DepthFmt_z16_Cy_FZy_M00e001": {},
+      "DepthFmt_z16_Cy_FZy_M00e556": {},
+      "DepthFmt_z16_Cy_FZy_M00eaab": {},
+      "DepthFmt_z16_Cy_FZy_M00f000": {},
+      "DepthFmt_z16_Cy_FZy_M00f555": {},
+      "DepthFmt_z16_Cy_FZy_M00faaa": {},
+      "DepthFmt_z16_Cy_FZy_M00ffff": {},
+      "DepthFmt_z24_Cn_FZn_M00000f": {},
+      "DepthFmt_z24_Cn_FZn_M055564": {},
+      "DepthFmt_z24_Cn_FZn_M0aaab9": {},
+      "DepthFmt_z24_Cn_FZn_M10000e": {},
+      "DepthFmt_z24_Cn_FZn_M155563": {},
+      "DepthFmt_z24_Cn_FZn_M1aaab8": {},
+      "DepthFmt_z24_Cn_FZn_M20000d": {},
+      "DepthFmt_z24_Cn_FZn_M255562": {},
+      "DepthFmt_z24_Cn_FZn_M2aaab7": {},
+      "DepthFmt_z24_Cn_FZn_M30000c": {},
+      "DepthFmt_z24_Cn_FZn_M355561": {},
+      "DepthFmt_z24_Cn_FZn_M3aaab6": {},
+      "DepthFmt_z24_Cn_FZn_M40000b": {},
+      "DepthFmt_z24_Cn_FZn_M455560": {},
+      "DepthFmt_z24_Cn_FZn_M4aaab5": {},
+      "DepthFmt_z24_Cn_FZn_M50000a": {},
+      "DepthFmt_z24_Cn_FZn_M55555f": {},
+      "DepthFmt_z24_Cn_FZn_M5aaab4": {},
+      "DepthFmt_z24_Cn_FZn_M600009": {},
+      "DepthFmt_z24_Cn_FZn_M65555e": {},
+      "DepthFmt_z24_Cn_FZn_M6aaab3": {},
+      "DepthFmt_z24_Cn_FZn_M700008": {},
+      "DepthFmt_z24_Cn_FZn_M75555d": {},
+      "DepthFmt_z24_Cn_FZn_M7aaab2": {},
+      "DepthFmt_z24_Cn_FZn_M800007": {},
+      "DepthFmt_z24_Cn_FZn_M85555c": {},
+      "DepthFmt_z24_Cn_FZn_M8aaab1": {},
+      "DepthFmt_z24_Cn_FZn_M900006": {},
+      "DepthFmt_z24_Cn_FZn_M95555b": {},
+      "DepthFmt_z24_Cn_FZn_M9aaab0": {},
+      "DepthFmt_z24_Cn_FZn_Ma00005": {},
+      "DepthFmt_z24_Cn_FZn_Ma5555a": {},
+      "DepthFmt_z24_Cn_FZn_Maaaaaf": {},
+      "DepthFmt_z24_Cn_FZn_Mb00004": {},
+      "DepthFmt_z24_Cn_FZn_Mb55559": {},
+      "DepthFmt_z24_Cn_FZn_Mbaaaae": {},
+      "DepthFmt_z24_Cn_FZn_Mc00003": {},
+      "DepthFmt_z24_Cn_FZn_Mc55558": {},
+      "DepthFmt_z24_Cn_FZn_Mcaaaad": {},
+      "DepthFmt_z24_Cn_FZn_Md00002": {},
+      "DepthFmt_z24_Cn_FZn_Md55557": {},
+      "DepthFmt_z24_Cn_FZn_Mdaaaac": {},
+      "DepthFmt_z24_Cn_FZn_Me00001": {},
+      "DepthFmt_z24_Cn_FZn_Me55556": {},
+      "DepthFmt_z24_Cn_FZn_Meaaaab": {},
+      "DepthFmt_z24_Cn_FZn_Mf00000": {},
+      "DepthFmt_z24_Cn_FZn_Mf55555": {},
+      "DepthFmt_z24_Cn_FZn_Mfaaaaa": {},
+      "DepthFmt_z24_Cn_FZn_Mffffff": {},
+      "DepthFmt_z24_Cn_FZy_M00002f": {},
+      "DepthFmt_z24_Cn_FZy_M05502e": {},
+      "DepthFmt_z24_Cn_FZy_M0aa02d": {},
+      "DepthFmt_z24_Cn_FZy_M0ff02c": {},
+      "DepthFmt_z24_Cn_FZy_M15402b": {},
+      "DepthFmt_z24_Cn_FZy_M1a902a": {},
+      "DepthFmt_z24_Cn_FZy_M1fe029": {},
+      "DepthFmt_z24_Cn_FZy_M253028": {},
+      "DepthFmt_z24_Cn_FZy_M2a8027": {},
+      "DepthFmt_z24_Cn_FZy_M2fd026": {},
+      "DepthFmt_z24_Cn_FZy_M352025": {},
+      "DepthFmt_z24_Cn_FZy_M3a7024": {},
+      "DepthFmt_z24_Cn_FZy_M3fc023": {},
+      "DepthFmt_z24_Cn_FZy_M451022": {},
+      "DepthFmt_z24_Cn_FZy_M4a6021": {},
+      "DepthFmt_z24_Cn_FZy_M4fb020": {},
+      "DepthFmt_z24_Cn_FZy_M55001f": {},
+      "DepthFmt_z24_Cn_FZy_M5a501e": {},
+      "DepthFmt_z24_Cn_FZy_M5fa01d": {},
+      "DepthFmt_z24_Cn_FZy_M64f01c": {},
+      "DepthFmt_z24_Cn_FZy_M6a401b": {},
+      "DepthFmt_z24_Cn_FZy_M6f901a": {},
+      "DepthFmt_z24_Cn_FZy_M74e019": {},
+      "DepthFmt_z24_Cn_FZy_M7a3018": {},
+      "DepthFmt_z24_Cn_FZy_M7f8017": {},
+      "DepthFmt_z24_Cn_FZy_M84d016": {},
+      "DepthFmt_z24_Cn_FZy_M8a2015": {},
+      "DepthFmt_z24_Cn_FZy_M8f7014": {},
+      "DepthFmt_z24_Cn_FZy_M94c013": {},
+      "DepthFmt_z24_Cn_FZy_M9a1012": {},
+      "DepthFmt_z24_Cn_FZy_M9f6011": {},
+      "DepthFmt_z24_Cn_FZy_Ma4b010": {},
+      "DepthFmt_z24_Cn_FZy_Maa000f": {},
+      "DepthFmt_z24_Cn_FZy_Maf500e": {},
+      "DepthFmt_z24_Cn_FZy_Mb4a00d": {},
+      "DepthFmt_z24_Cn_FZy_Mb9f00c": {},
+      "DepthFmt_z24_Cn_FZy_Mbf400b": {},
+      "DepthFmt_z24_Cn_FZy_Mc4900a": {},
+      "DepthFmt_z24_Cn_FZy_Mc9e009": {},
+      "DepthFmt_z24_Cn_FZy_Mcf3008": {},
+      "DepthFmt_z24_Cn_FZy_Md48007": {},
+      "DepthFmt_z24_Cn_FZy_Md9d006": {},
+      "DepthFmt_z24_Cn_FZy_Mdf2005": {},
+      "DepthFmt_z24_Cn_FZy_Me47004": {},
+      "DepthFmt_z24_Cn_FZy_Me9c003": {},
+      "DepthFmt_z24_Cn_FZy_Mef1002": {},
+      "DepthFmt_z24_Cn_FZy_Mf46001": {},
+      "DepthFmt_z24_Cn_FZy_Mf9b000": {},
+      "DepthFmt_z24_Cn_FZy_Mfeffff": {},
+      "DepthFmt_z24_Cy_FZn_M00000f": {},
+      "DepthFmt_z24_Cy_FZn_M055564": {},
+      "DepthFmt_z24_Cy_FZn_M0aaab9": {},
+      "DepthFmt_z24_Cy_FZn_M10000e": {},
+      "DepthFmt_z24_Cy_FZn_M155563": {},
+      "DepthFmt_z24_Cy_FZn_M1aaab8": {},
+      "DepthFmt_z24_Cy_FZn_M20000d": {},
+      "DepthFmt_z24_Cy_FZn_M255562": {},
+      "DepthFmt_z24_Cy_FZn_M2aaab7": {},
+      "DepthFmt_z24_Cy_FZn_M30000c": {},
+      "DepthFmt_z24_Cy_FZn_M355561": {},
+      "DepthFmt_z24_Cy_FZn_M3aaab6": {},
+      "DepthFmt_z24_Cy_FZn_M40000b": {},
+      "DepthFmt_z24_Cy_FZn_M455560": {},
+      "DepthFmt_z24_Cy_FZn_M4aaab5": {},
+      "DepthFmt_z24_Cy_FZn_M50000a": {},
+      "DepthFmt_z24_Cy_FZn_M55555f": {},
+      "DepthFmt_z24_Cy_FZn_M5aaab4": {},
+      "DepthFmt_z24_Cy_FZn_M600009": {},
+      "DepthFmt_z24_Cy_FZn_M65555e": {},
+      "DepthFmt_z24_Cy_FZn_M6aaab3": {},
+      "DepthFmt_z24_Cy_FZn_M700008": {},
+      "DepthFmt_z24_Cy_FZn_M75555d": {},
+      "DepthFmt_z24_Cy_FZn_M7aaab2": {},
+      "DepthFmt_z24_Cy_FZn_M800007": {},
+      "DepthFmt_z24_Cy_FZn_M85555c": {},
+      "DepthFmt_z24_Cy_FZn_M8aaab1": {},
+      "DepthFmt_z24_Cy_FZn_M900006": {},
+      "DepthFmt_z24_Cy_FZn_M95555b": {},
+      "DepthFmt_z24_Cy_FZn_M9aaab0": {},
+      "DepthFmt_z24_Cy_FZn_Ma00005": {},
+      "DepthFmt_z24_Cy_FZn_Ma5555a": {},
+      "DepthFmt_z24_Cy_FZn_Maaaaaf": {},
+      "DepthFmt_z24_Cy_FZn_Mb00004": {},
+      "DepthFmt_z24_Cy_FZn_Mb55559": {},
+      "DepthFmt_z24_Cy_FZn_Mbaaaae": {},
+      "DepthFmt_z24_Cy_FZn_Mc00003": {},
+      "DepthFmt_z24_Cy_FZn_Mc55558": {},
+      "DepthFmt_z24_Cy_FZn_Mcaaaad": {},
+      "DepthFmt_z24_Cy_FZn_Md00002": {},
+      "DepthFmt_z24_Cy_FZn_Md55557": {},
+      "DepthFmt_z24_Cy_FZn_Mdaaaac": {},
+      "DepthFmt_z24_Cy_FZn_Me00001": {},
+      "DepthFmt_z24_Cy_FZn_Me55556": {},
+      "DepthFmt_z24_Cy_FZn_Meaaaab": {},
+      "DepthFmt_z24_Cy_FZn_Mf00000": {},
+      "DepthFmt_z24_Cy_FZn_Mf55555": {},
+      "DepthFmt_z24_Cy_FZn_Mfaaaaa": {},
+      "DepthFmt_z24_Cy_FZn_Mffffff": {},
+      "DepthFmt_z24_Cy_FZy_M00002f": {},
+      "DepthFmt_z24_Cy_FZy_M05502e": {},
+      "DepthFmt_z24_Cy_FZy_M0aa02d": {},
+      "DepthFmt_z24_Cy_FZy_M0ff02c": {},
+      "DepthFmt_z24_Cy_FZy_M15402b": {},
+      "DepthFmt_z24_Cy_FZy_M1a902a": {},
+      "DepthFmt_z24_Cy_FZy_M1fe029": {},
+      "DepthFmt_z24_Cy_FZy_M253028": {},
+      "DepthFmt_z24_Cy_FZy_M2a8027": {},
+      "DepthFmt_z24_Cy_FZy_M2fd026": {},
+      "DepthFmt_z24_Cy_FZy_M352025": {},
+      "DepthFmt_z24_Cy_FZy_M3a7024": {},
+      "DepthFmt_z24_Cy_FZy_M3fc023": {},
+      "DepthFmt_z24_Cy_FZy_M451022": {},
+      "DepthFmt_z24_Cy_FZy_M4a6021": {},
+      "DepthFmt_z24_Cy_FZy_M4fb020": {},
+      "DepthFmt_z24_Cy_FZy_M55001f": {},
+      "DepthFmt_z24_Cy_FZy_M5a501e": {},
+      "DepthFmt_z24_Cy_FZy_M5fa01d": {},
+      "DepthFmt_z24_Cy_FZy_M64f01c": {},
+      "DepthFmt_z24_Cy_FZy_M6a401b": {},
+      "DepthFmt_z24_Cy_FZy_M6f901a": {},
+      "DepthFmt_z24_Cy_FZy_M74e019": {},
+      "DepthFmt_z24_Cy_FZy_M7a3018": {},
+      "DepthFmt_z24_Cy_FZy_M7f8017": {},
+      "DepthFmt_z24_Cy_FZy_M84d016": {},
+      "DepthFmt_z24_Cy_FZy_M8a2015": {},
+      "DepthFmt_z24_Cy_FZy_M8f7014": {},
+      "DepthFmt_z24_Cy_FZy_M94c013": {},
+      "DepthFmt_z24_Cy_FZy_M9a1012": {},
+      "DepthFmt_z24_Cy_FZy_M9f6011": {},
+      "DepthFmt_z24_Cy_FZy_Ma4b010": {},
+      "DepthFmt_z24_Cy_FZy_Maa000f": {},
+      "DepthFmt_z24_Cy_FZy_Maf500e": {},
+      "DepthFmt_z24_Cy_FZy_Mb4a00d": {},
+      "DepthFmt_z24_Cy_FZy_Mb9f00c": {},
+      "DepthFmt_z24_Cy_FZy_Mbf400b": {},
+      "DepthFmt_z24_Cy_FZy_Mc4900a": {},
+      "DepthFmt_z24_Cy_FZy_Mc9e009": {},
+      "DepthFmt_z24_Cy_FZy_Mcf3008": {},
+      "DepthFmt_z24_Cy_FZy_Md48007": {},
+      "DepthFmt_z24_Cy_FZy_Md9d006": {},
+      "DepthFmt_z24_Cy_FZy_Mdf2005": {},
+      "DepthFmt_z24_Cy_FZy_Me47004": {},
+      "DepthFmt_z24_Cy_FZy_Me9c003": {},
+      "DepthFmt_z24_Cy_FZy_Mef1002": {},
+      "DepthFmt_z24_Cy_FZy_Mf46001": {},
+      "DepthFmt_z24_Cy_FZy_Mf9b000": {},
+      "DepthFmt_z24_Cy_FZy_Mfeffff": {}
     },
     "Depth buffer fixed function": {
-      "z16_Cn_FZn_M000003": {
-      },
-      "z16_Cn_FZn_M004002": {
-      },
-      "z16_Cn_FZn_M008001": {
-      },
-      "z16_Cn_FZn_M00c000": {
-      },
-      "z16_Cn_FZn_M00ffff": {
-      },
-      "z16_Cn_FZy_M000003": {
-      },
-      "z16_Cn_FZy_M004002": {
-      },
-      "z16_Cn_FZy_M008001": {
-      },
-      "z16_Cn_FZy_M00c000": {
-      },
-      "z16_Cn_FZy_M00ffff": {
-      },
-      "z16_Cy_FZn_M000003": {
-      },
-      "z16_Cy_FZn_M004002": {
-      },
-      "z16_Cy_FZn_M008001": {
-      },
-      "z16_Cy_FZn_M00c000": {
-      },
-      "z16_Cy_FZn_M00ffff": {
-      },
-      "z16_Cy_FZy_M000003": {
-      },
-      "z16_Cy_FZy_M004002": {
-      },
-      "z16_Cy_FZy_M008001": {
-      },
-      "z16_Cy_FZy_M00c000": {
-      },
-      "z16_Cy_FZy_M00ffff": {
-      },
-      "z24_Cn_FZn_M000003": {
-      },
-      "z24_Cn_FZn_M400002": {
-      },
-      "z24_Cn_FZn_M800001": {
-      },
-      "z24_Cn_FZn_Mc00000": {
-      },
-      "z24_Cn_FZn_Mffffff": {
-      },
-      "z24_Cn_FZy_M000003": {
-      },
-      "z24_Cn_FZy_M3fc002": {
-      },
-      "z24_Cn_FZy_M7f8001": {
-      },
-      "z24_Cn_FZy_Mbf4000": {
-      },
-      "z24_Cn_FZy_Mfeffff": {
-      },
-      "z24_Cy_FZn_M000003": {
-      },
-      "z24_Cy_FZn_M400002": {
-      },
-      "z24_Cy_FZn_M800001": {
-      },
-      "z24_Cy_FZn_Mc00000": {
-      },
-      "z24_Cy_FZn_Mffffff": {
-      },
-      "z24_Cy_FZy_M000003": {
-      },
-      "z24_Cy_FZy_M3fc002": {
-      },
-      "z24_Cy_FZy_M7f8001": {
-      },
-      "z24_Cy_FZy_Mbf4000": {
-      },
-      "z24_Cy_FZy_Mfeffff": {
-      }
+      "z16_Cn_FZn_M000003": {},
+      "z16_Cn_FZn_M004002": {},
+      "z16_Cn_FZn_M008001": {},
+      "z16_Cn_FZn_M00c000": {},
+      "z16_Cn_FZn_M00ffff": {},
+      "z16_Cn_FZy_M000003": {},
+      "z16_Cn_FZy_M004002": {},
+      "z16_Cn_FZy_M008001": {},
+      "z16_Cn_FZy_M00c000": {},
+      "z16_Cn_FZy_M00ffff": {},
+      "z16_Cy_FZn_M000003": {},
+      "z16_Cy_FZn_M004002": {},
+      "z16_Cy_FZn_M008001": {},
+      "z16_Cy_FZn_M00c000": {},
+      "z16_Cy_FZn_M00ffff": {},
+      "z16_Cy_FZy_M000003": {},
+      "z16_Cy_FZy_M004002": {},
+      "z16_Cy_FZy_M008001": {},
+      "z16_Cy_FZy_M00c000": {},
+      "z16_Cy_FZy_M00ffff": {},
+      "z24_Cn_FZn_M000003": {},
+      "z24_Cn_FZn_M400002": {},
+      "z24_Cn_FZn_M800001": {},
+      "z24_Cn_FZn_Mc00000": {},
+      "z24_Cn_FZn_Mffffff": {},
+      "z24_Cn_FZy_M000003": {},
+      "z24_Cn_FZy_M3fc002": {},
+      "z24_Cn_FZy_M7f8001": {},
+      "z24_Cn_FZy_Mbf4000": {},
+      "z24_Cn_FZy_Mfeffff": {},
+      "z24_Cy_FZn_M000003": {},
+      "z24_Cy_FZn_M400002": {},
+      "z24_Cy_FZn_M800001": {},
+      "z24_Cy_FZn_Mc00000": {},
+      "z24_Cy_FZn_Mffffff": {},
+      "z24_Cy_FZy_M000003": {},
+      "z24_Cy_FZy_M3fc002": {},
+      "z24_Cy_FZy_M7f8001": {},
+      "z24_Cy_FZy_Mbf4000": {},
+      "z24_Cy_FZy_Mfeffff": {}
     },
     "DMA corruption around surfaces": {
-      "DMAOverlap": {
-      }
+      "DMAOverlap": {}
     },
     "Edge flag": {
-      "Disabled": {
-      },
-      "Enabled": {
-      }
+      "Disabled": {},
+      "Enabled": {}
     },
     "Fog": {
-      "AFF-exp-planar": {
-      },
-      "AFF-exp2-planar": {
-      },
-      "AFF-exp2_abs-planar": {
-      },
-      "AFF-exp_abs-planar": {
-      },
-      "AFF-linear-planar": {
-      },
-      "AFF-linear_abs-planar": {
-      }
+      "AFF-exp-planar": {},
+      "AFF-exp2-planar": {},
+      "AFF-exp2_abs-planar": {},
+      "AFF-exp_abs-planar": {},
+      "AFF-linear-planar": {},
+      "AFF-linear_abs-planar": {}
     },
     "Fog vsh": {
-      "AFF-exp-planar": {
-      },
-      "AFF-exp2-planar": {
-      },
-      "AFF-exp2_abs-planar": {
-      },
-      "AFF-exp_abs-planar": {
-      },
-      "AFF-linear-planar": {
-      },
-      "AFF-linear_abs-planar": {
-      }
+      "AFF-exp-planar": {},
+      "AFF-exp2-planar": {},
+      "AFF-exp2_abs-planar": {},
+      "AFF-exp_abs-planar": {},
+      "AFF-linear-planar": {},
+      "AFF-linear_abs-planar": {}
     },
     "Fog inf coord": {
-      "AFF-exp-planar": {
-      },
-      "AFF-exp2-planar": {
-      },
-      "AFF-exp2_abs-planar": {
-      },
-      "AFF-exp_abs-planar": {
-      },
-      "AFF-linear-planar": {
-      },
-      "AFF-linear_abs-planar": {
-      }
+      "AFF-exp-planar": {},
+      "AFF-exp2-planar": {},
+      "AFF-exp2_abs-planar": {},
+      "AFF-exp_abs-planar": {},
+      "AFF-linear-planar": {},
+      "AFF-linear_abs-planar": {}
     },
     "Fog coord vec4": {
-      "CoordNotSet": {
-      },
-      "W-0.00_0.25_0.00_0.00": {
-      },
-      "W-0.30_0.30_0.30_1.00": {
-      },
-      "W-0.50_0.50_0.00_0.00": {
-      },
-      "W-1.00_0.00_0.00_0.50": {
-      },
-      "W_X-0.25_0.00_0.00_0.50": {
-      },
-      "W_X-0.65_0.00_0.00_0.00": {
-      },
-      "W_Y-0.00_0.75_0.75_0.25": {
-      },
-      "W_Y-1.00_0.00_1.00_0.75": {
-      },
-      "W_Z_Y_X-0.25_0.50_0.75_1.00": {
-      },
-      "W_Z_Y_X-1.00_0.75_0.50_0.25": {
-      },
-      "X-0.00_0.00_0.00_0.00": {
-      },
-      "X-0.90_0.00_0.00_0.00": {
-      },
-      "XW-0.25_0.00_0.00_0.50": {
-      },
-      "XW-0.65_0.00_0.00_0.00": {
-      },
-      "XY-0.25_0.50_0.00_0.00": {
-      },
-      "XY-0.65_0.75_0.00_0.00": {
-      },
-      "XYZ-0.25_0.50_0.75_0.00": {
-      },
-      "XYZ-0.65_0.75_0.33_0.00": {
-      },
-      "XYZW-0.25_0.50_0.75_1.00": {
-      },
-      "XYZW-0.65_0.75_0.33_0.00": {
-      },
-      "XZ-0.25_0.00_0.75_0.00": {
-      },
-      "XZ-0.65_0.00_0.33_0.00": {
-      },
-      "XZW-0.25_0.00_0.75_1.00": {
-      },
-      "XZW-0.65_0.00_0.33_0.00": {
-      },
-      "X_Y_Z_W-0.00_0.33_0.66_0.90": {
-      },
-      "X_Y_Z_W-1.00_0.25_0.75_0.50": {
-      },
-      "Y-0.00_0.00_0.00_0.00": {
-      },
-      "Y-0.00_0.10_0.00_0.00": {
-      },
-      "Y-0.00_0.60_0.00_0.00": {
-      },
-      "YW-0.00_0.50_0.00_1.00": {
-      },
-      "YW-0.00_0.75_0.00_0.00": {
-      },
-      "YZ-0.00_0.50_0.75_0.00": {
-      },
-      "YZ-0.00_0.75_0.33_0.00": {
-      },
-      "YZW-0.00_0.50_0.75_1.00": {
-      },
-      "YZW-0.00_0.75_0.33_0.00": {
-      },
-      "Z-0.00_0.00_0.00_0.00": {
-      },
-      "Z-0.00_0.00_0.20_0.00": {
-      },
-      "Z-0.00_0.00_0.80_0.00": {
-      },
-      "ZW-0.00_0.00_0.33_0.00": {
-      },
-      "ZW-0.00_0.00_0.75_1.00": {
-      }
+      "CoordNotSet": {},
+      "W-0.00_0.25_0.00_0.00": {},
+      "W-0.30_0.30_0.30_1.00": {},
+      "W-0.50_0.50_0.00_0.00": {},
+      "W-1.00_0.00_0.00_0.50": {},
+      "W_X-0.25_0.00_0.00_0.50": {},
+      "W_X-0.65_0.00_0.00_0.00": {},
+      "W_Y-0.00_0.75_0.75_0.25": {},
+      "W_Y-1.00_0.00_1.00_0.75": {},
+      "W_Z_Y_X-0.25_0.50_0.75_1.00": {},
+      "W_Z_Y_X-1.00_0.75_0.50_0.25": {},
+      "X-0.00_0.00_0.00_0.00": {},
+      "X-0.90_0.00_0.00_0.00": {},
+      "XW-0.25_0.00_0.00_0.50": {},
+      "XW-0.65_0.00_0.00_0.00": {},
+      "XY-0.25_0.50_0.00_0.00": {},
+      "XY-0.65_0.75_0.00_0.00": {},
+      "XYZ-0.25_0.50_0.75_0.00": {},
+      "XYZ-0.65_0.75_0.33_0.00": {},
+      "XYZW-0.25_0.50_0.75_1.00": {},
+      "XYZW-0.65_0.75_0.33_0.00": {},
+      "XZ-0.25_0.00_0.75_0.00": {},
+      "XZ-0.65_0.00_0.33_0.00": {},
+      "XZW-0.25_0.00_0.75_1.00": {},
+      "XZW-0.65_0.00_0.33_0.00": {},
+      "X_Y_Z_W-0.00_0.33_0.66_0.90": {},
+      "X_Y_Z_W-1.00_0.25_0.75_0.50": {},
+      "Y-0.00_0.00_0.00_0.00": {},
+      "Y-0.00_0.10_0.00_0.00": {},
+      "Y-0.00_0.60_0.00_0.00": {},
+      "YW-0.00_0.50_0.00_1.00": {},
+      "YW-0.00_0.75_0.00_0.00": {},
+      "YZ-0.00_0.50_0.75_0.00": {},
+      "YZ-0.00_0.75_0.33_0.00": {},
+      "YZW-0.00_0.50_0.75_1.00": {},
+      "YZW-0.00_0.75_0.33_0.00": {},
+      "Z-0.00_0.00_0.00_0.00": {},
+      "Z-0.00_0.00_0.20_0.00": {},
+      "Z-0.00_0.00_0.80_0.00": {},
+      "ZW-0.00_0.00_0.33_0.00": {},
+      "ZW-0.00_0.00_0.75_1.00": {}
     },
     "Front face": {
-      "FrontFace_0_CF_B": {
-      },
-      "FrontFace_0_CF_F": {
-      },
-      "FrontFace_0_CF_FaB": {
-      },
-      "FrontFace_63_CF_B": {
-      },
-      "FrontFace_63_CF_F": {
-      },
-      "FrontFace_63_CF_FaB": {
-      },
-      "FrontFace_CCW_CF_B": {
-      },
-      "FrontFace_CCW_CF_F": {
-      },
-      "FrontFace_CCW_CF_FaB": {
-      },
-      "FrontFace_CW_CF_B": {
-      },
-      "FrontFace_CW_CF_F": {
-      },
-      "FrontFace_CW_CF_FaB": {
-      }
+      "FrontFace_0_CF_B": {},
+      "FrontFace_0_CF_F": {},
+      "FrontFace_0_CF_FaB": {},
+      "FrontFace_63_CF_B": {},
+      "FrontFace_63_CF_F": {},
+      "FrontFace_63_CF_FaB": {},
+      "FrontFace_CCW_CF_B": {},
+      "FrontFace_CCW_CF_F": {},
+      "FrontFace_CCW_CF_FaB": {},
+      "FrontFace_CW_CF_B": {},
+      "FrontFace_CW_CF_F": {},
+      "FrontFace_CW_CF_FaB": {}
     },
     "Image blit": {
-      "ImgBlt_BLENDAND_XRGB_B00000000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B007FFFFF": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B00800000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B00D00000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B03300000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B44400000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B444FFFFF": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B66800000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B7F800000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B7FFFFFFF": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B80000000": {
-      },
-      "ImgBlt_BLENDAND_XRGB_B8FFFFFFF": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B007FFFFF": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B00800000": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B00D00000": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B03300000": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B44400000": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B444FFFFF": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B66800000": {
-      },
-      "ImgBlt_BLENDAND_ZRGB_B7F800000": {
-      },
-      "ImgBlt_SRCCOPY_ARGB_B00000000": {
-      },
-      "ImgBlt_SRCCOPY_XRGB_B00000000": {
-      },
-      "ImgBlt_SRCCOPY_ZRGB_B00000000": {
-      }
+      "ImgBlt_BLENDAND_XRGB_B00000000": {},
+      "ImgBlt_BLENDAND_XRGB_B007FFFFF": {},
+      "ImgBlt_BLENDAND_XRGB_B00800000": {},
+      "ImgBlt_BLENDAND_XRGB_B00D00000": {},
+      "ImgBlt_BLENDAND_XRGB_B03300000": {},
+      "ImgBlt_BLENDAND_XRGB_B44400000": {},
+      "ImgBlt_BLENDAND_XRGB_B444FFFFF": {},
+      "ImgBlt_BLENDAND_XRGB_B66800000": {},
+      "ImgBlt_BLENDAND_XRGB_B7F800000": {},
+      "ImgBlt_BLENDAND_XRGB_B7FFFFFFF": {},
+      "ImgBlt_BLENDAND_XRGB_B80000000": {},
+      "ImgBlt_BLENDAND_XRGB_B8FFFFFFF": {},
+      "ImgBlt_BLENDAND_ZRGB_B007FFFFF": {},
+      "ImgBlt_BLENDAND_ZRGB_B00800000": {},
+      "ImgBlt_BLENDAND_ZRGB_B00D00000": {},
+      "ImgBlt_BLENDAND_ZRGB_B03300000": {},
+      "ImgBlt_BLENDAND_ZRGB_B44400000": {},
+      "ImgBlt_BLENDAND_ZRGB_B444FFFFF": {},
+      "ImgBlt_BLENDAND_ZRGB_B66800000": {},
+      "ImgBlt_BLENDAND_ZRGB_B7F800000": {},
+      "ImgBlt_SRCCOPY_ARGB_B00000000": {},
+      "ImgBlt_SRCCOPY_XRGB_B00000000": {},
+      "ImgBlt_SRCCOPY_ZRGB_B00000000": {}
     },
     "Inline array size mismatch": {
-      "ExtraElements": {
-      }
+      "ExtraElements": {}
     },
     "Lighting Two Sided": {
-      "TwoSidedLighting": {
-      }
+      "TwoSidedLighting": {}
     },
     "Line width": {
-      "Fill_0000.0": {
-      },
-      "Fill_0001.0": {
-      },
-      "Fill_0032.0": {
-      },
-      "Line_0000.0": {
-      },
-      "Line_0000.1": {
-      },
-      "Line_0000.2": {
-      },
-      "Line_0000.3": {
-      },
-      "Line_0000.4": {
-      },
-      "Line_0000.5": {
-      },
-      "Line_0000.6": {
-      },
-      "Line_0000.7": {
-      },
-      "Line_0001.0": {
-      },
-      "Line_0001.1": {
-      },
-      "Line_0001.2": {
-      },
-      "Line_0001.3": {
-      },
-      "Line_0001.4": {
-      },
-      "Line_0001.5": {
-      },
-      "Line_0001.6": {
-      },
-      "Line_0001.7": {
-      },
-      "Line_0003.0": {
-      },
-      "Line_0004.0": {
-      },
-      "Line_0005.0": {
-      },
-      "Line_0006.0": {
-      },
-      "Line_0007.0": {
-      },
-      "Line_0008.0": {
-      },
-      "Line_0009.0": {
-      },
-      "Line_0010.0": {
-      },
-      "Line_0011.0": {
-      },
-      "Line_0012.0": {
-      },
-      "Line_0013.0": {
-      },
-      "Line_0014.0": {
-      },
-      "Line_0015.0": {
-      },
-      "Line_0016.0": {
-      },
-      "Line_0024.0": {
-      },
-      "Line_0032.0": {
-      },
-      "Line_0040.0": {
-      },
-      "Line_0048.0": {
-      },
-      "Line_0056.0": {
-      },
-      "Line_0057.0": {
-      },
-      "Line_0058.0": {
-      },
-      "Line_0059.0": {
-      },
-      "Line_0060.0": {
-      },
-      "Line_0061.0": {
-      },
-      "Line_0062.0": {
-      },
-      "Line_0063.0": {
-      },
-      "Line_0063.1": {
-      },
-      "Line_0063.2": {
-      },
-      "Line_0063.3": {
-      },
-      "Line_0063.4": {
-      },
-      "Line_0063.5": {
-      },
-      "Line_0063.6": {
-      },
-      "Line_0063.7": {
-      },
-      "Line_0064.0": {
-      },
-      "Line_0064.1": {
-      },
-      "Line_0064.2": {
-      },
-      "Line_0064.3": {
-      },
-      "Line_0064.4": {
-      },
-      "Line_0064.5": {
-      },
-      "Line_0064.6": {
-      },
-      "Line_0064.7": {
-      },
-      "Line_FFFFFFFF": {
-      }
+      "Fill_0000.0": {},
+      "Fill_0001.0": {},
+      "Fill_0032.0": {},
+      "Line_0000.0": {},
+      "Line_0000.1": {},
+      "Line_0000.2": {},
+      "Line_0000.3": {},
+      "Line_0000.4": {},
+      "Line_0000.5": {},
+      "Line_0000.6": {},
+      "Line_0000.7": {},
+      "Line_0001.0": {},
+      "Line_0001.1": {},
+      "Line_0001.2": {},
+      "Line_0001.3": {},
+      "Line_0001.4": {},
+      "Line_0001.5": {},
+      "Line_0001.6": {},
+      "Line_0001.7": {},
+      "Line_0003.0": {},
+      "Line_0004.0": {},
+      "Line_0005.0": {},
+      "Line_0006.0": {},
+      "Line_0007.0": {},
+      "Line_0008.0": {},
+      "Line_0009.0": {},
+      "Line_0010.0": {},
+      "Line_0011.0": {},
+      "Line_0012.0": {},
+      "Line_0013.0": {},
+      "Line_0014.0": {},
+      "Line_0015.0": {},
+      "Line_0016.0": {},
+      "Line_0024.0": {},
+      "Line_0032.0": {},
+      "Line_0040.0": {},
+      "Line_0048.0": {},
+      "Line_0056.0": {},
+      "Line_0057.0": {},
+      "Line_0058.0": {},
+      "Line_0059.0": {},
+      "Line_0060.0": {},
+      "Line_0061.0": {},
+      "Line_0062.0": {},
+      "Line_0063.0": {},
+      "Line_0063.1": {},
+      "Line_0063.2": {},
+      "Line_0063.3": {},
+      "Line_0063.4": {},
+      "Line_0063.5": {},
+      "Line_0063.6": {},
+      "Line_0063.7": {},
+      "Line_0064.0": {},
+      "Line_0064.1": {},
+      "Line_0064.2": {},
+      "Line_0064.3": {},
+      "Line_0064.4": {},
+      "Line_0064.5": {},
+      "Line_0064.6": {},
+      "Line_0064.7": {},
+      "Line_FFFFFFFF": {}
     },
     "Material alpha": {
-      "MatA_SMat_A0": {
-      },
-      "MatA_SMat_A3D4CCCCD": {
-      },
-      "MatA_SMat_A3E800000": {
-      },
-      "MatA_SMat_A3F000000": {
-      },
-      "MatA_SMat_A3F400000": {
-      },
-      "MatA_SMat_A3F800000": {
-      },
-      "MatA_SMat_A40000000": {
-      },
-      "MatA_SMat_ABF800000": {
-      },
-      "MatA_SVDiffuse_A0": {
-      },
-      "MatA_SVDiffuse_A3D4CCCCD": {
-      },
-      "MatA_SVDiffuse_A3E800000": {
-      },
-      "MatA_SVDiffuse_A3F000000": {
-      },
-      "MatA_SVDiffuse_A3F400000": {
-      },
-      "MatA_SVDiffuse_A3F800000": {
-      },
-      "MatA_SVDiffuse_A40000000": {
-      },
-      "MatA_SVDiffuse_ABF800000": {
-      },
-      "MatA_SVSpec_A0": {
-      },
-      "MatA_SVSpec_A3D4CCCCD": {
-      },
-      "MatA_SVSpec_A3E800000": {
-      },
-      "MatA_SVSpec_A3F000000": {
-      },
-      "MatA_SVSpec_A3F400000": {
-      },
-      "MatA_SVSpec_A3F800000": {
-      },
-      "MatA_SVSpec_A40000000": {
-      },
-      "MatA_SVSpec_ABF800000": {
-      }
+      "MatA_SMat_A0": {},
+      "MatA_SMat_A3D4CCCCD": {},
+      "MatA_SMat_A3E800000": {},
+      "MatA_SMat_A3F000000": {},
+      "MatA_SMat_A3F400000": {},
+      "MatA_SMat_A3F800000": {},
+      "MatA_SMat_A40000000": {},
+      "MatA_SMat_ABF800000": {},
+      "MatA_SVDiffuse_A0": {},
+      "MatA_SVDiffuse_A3D4CCCCD": {},
+      "MatA_SVDiffuse_A3E800000": {},
+      "MatA_SVDiffuse_A3F000000": {},
+      "MatA_SVDiffuse_A3F400000": {},
+      "MatA_SVDiffuse_A3F800000": {},
+      "MatA_SVDiffuse_A40000000": {},
+      "MatA_SVDiffuse_ABF800000": {},
+      "MatA_SVSpec_A0": {},
+      "MatA_SVSpec_A3D4CCCCD": {},
+      "MatA_SVSpec_A3E800000": {},
+      "MatA_SVSpec_A3F000000": {},
+      "MatA_SVSpec_A3F400000": {},
+      "MatA_SVSpec_A3F800000": {},
+      "MatA_SVSpec_A40000000": {},
+      "MatA_SVSpec_ABF800000": {}
     },
     "Material color": {
-      "001_RG0_11": {
-      },
-      "011_rBg_11": {
-      },
-      "011_rG0_B1": {
-      },
-      "301_rG0_11": {
-      },
-      "310_rG0_11": {
-      },
-      "311_rG0_11": {
-      }
+      "001_RG0_11": {},
+      "011_rBg_11": {},
+      "011_rG0_B1": {},
+      "301_rG0_11": {},
+      "310_rG0_11": {},
+      "311_rG0_11": {}
     },
     "Material color source": {
-      "FromMaterial": {
-      },
-      "FromVertexDiffuse": {
-      },
-      "FromVertexSpecular": {
-      }
+      "FromMaterial": {},
+      "FromVertexDiffuse": {},
+      "FromVertexSpecular": {}
     },
     "Null surface": {
-      "XemuBug893": {
-      }
+      "XemuBug893": {}
     },
     "Overlapping draw modes": {
-      "ArrElm_DrwArr_ArrElm": {
-      },
-      "DrwArr_DrwArr": {
-      },
-      "SquashOpt": {
-      },
-      "SquashOptSingleArray": {
-      }
+      "ArrElm_DrwArr_ArrElm": {},
+      "DrwArr_DrwArr": {},
+      "SquashOpt": {},
+      "SquashOptSingleArray": {}
     },
     "PVIDEO": {
-      "PAL into NTSC overlay": {
-      },
-      "Pitch larger than compact": {
-      },
-      "Pitch less than compact": {
-      },
-      "Size In Max - dI/dO < 1": {
-      },
-      "Size In Max - dI/dO = 1": {
-      },
-      "Size In Max - dI/dO > 1": {
-      },
-      "Size In Max Out Small - dI/d0 Correct": {
-      },
-      "Size In Max Out Small - dI/dO = 1": {
-      },
-      "Size In larger than out - dI/d0 Correct": {
-      },
-      "Size In larger than out - dI/dO = 1": {
-      },
-      "Size In smaller than out - dI/d0 Correct": {
-      },
-      "Size In smaller than out - dI/dO = 1": {
-      },
-      "Stop": {
-      }
+      "PAL into NTSC overlay": {},
+      "Pitch larger than compact": {},
+      "Pitch less than compact": {},
+      "Size In Max - dI/dO < 1": {},
+      "Size In Max - dI/dO = 1": {},
+      "Size In Max - dI/dO > 1": {},
+      "Size In Max Out Small - dI/d0 Correct": {},
+      "Size In Max Out Small - dI/dO = 1": {},
+      "Size In larger than out - dI/d0 Correct": {},
+      "Size In larger than out - dI/dO = 1": {},
+      "Size In smaller than out - dI/d0 Correct": {},
+      "Size In smaller than out - dI/dO = 1": {},
+      "Stop": {}
     },
     "SetVertexData": {
-      "SET_VERTEX_DATA2F_M": {
-      },
-      "SET_VERTEX_DATA2S-0001": {
-      },
-      "SET_VERTEX_DATA2S-7FFF": {
-      },
-      "SET_VERTEX_DATA4F_M": {
-      },
-      "SET_VERTEX_DATA4S_M-0001": {
-      },
-      "SET_VERTEX_DATA4S_M-7FFF": {
-      },
-      "SET_VERTEX_DATA4UB": {
-      }
+      "SET_VERTEX_DATA2F_M": {},
+      "SET_VERTEX_DATA2S-0001": {},
+      "SET_VERTEX_DATA2S-7FFF": {},
+      "SET_VERTEX_DATA4F_M": {},
+      "SET_VERTEX_DATA4S_M-0001": {},
+      "SET_VERTEX_DATA4S_M-7FFF": {},
+      "SET_VERTEX_DATA4UB": {}
     },
     "Shade model": {
-      "FixedTex_Poly_Flat_First": {
-      },
-      "FixedTex_Poly_Flat_Last": {
-      },
-      "FixedTex_Poly_Smooth_First": {
-      },
-      "FixedTex_Poly_Smooth_Last": {
-      },
-      "FixedTex_QuadStrip_Flat_First": {
-      },
-      "FixedTex_QuadStrip_Flat_Last": {
-      },
-      "FixedTex_QuadStrip_Smooth_First": {
-      },
-      "FixedTex_QuadStrip_Smooth_Last": {
-      },
-      "FixedTex_Quad_Flat_First": {
-      },
-      "FixedTex_Quad_Flat_Last": {
-      },
-      "FixedTex_Quad_Smooth_First": {
-      },
-      "FixedTex_Quad_Smooth_Last": {
-      },
-      "FixedTex_TriFan_Flat_First": {
-      },
-      "FixedTex_TriFan_Flat_Last": {
-      },
-      "FixedTex_TriFan_Smooth_First": {
-      },
-      "FixedTex_TriFan_Smooth_Last": {
-      },
-      "FixedTex_TriStrip_Flat_First": {
-      },
-      "FixedTex_TriStrip_Flat_Last": {
-      },
-      "FixedTex_TriStrip_Smooth_First": {
-      },
-      "FixedTex_TriStrip_Smooth_Last": {
-      },
-      "FixedTex_Tri_Flat_First": {
-      },
-      "FixedTex_Tri_Flat_Last": {
-      },
-      "FixedTex_Tri_Smooth_First": {
-      },
-      "FixedTex_Tri_Smooth_Last": {
-      },
-      "Fixed_Poly_Flat_First": {
-      },
-      "Fixed_Poly_Flat_Last": {
-      },
-      "Fixed_Poly_Smooth_First": {
-      },
-      "Fixed_Poly_Smooth_Last": {
-      },
-      "Fixed_QuadStrip_Flat_First": {
-      },
-      "Fixed_QuadStrip_Flat_Last": {
-      },
-      "Fixed_QuadStrip_Smooth_First": {
-      },
-      "Fixed_QuadStrip_Smooth_Last": {
-      },
-      "Fixed_Quad_Flat_First": {
-      },
-      "Fixed_Quad_Flat_Last": {
-      },
-      "Fixed_Quad_Smooth_First": {
-      },
-      "Fixed_Quad_Smooth_Last": {
-      },
-      "Fixed_TriFan_Flat_First": {
-      },
-      "Fixed_TriFan_Flat_Last": {
-      },
-      "Fixed_TriFan_Smooth_First": {
-      },
-      "Fixed_TriFan_Smooth_Last": {
-      },
-      "Fixed_TriStrip_Flat_First": {
-      },
-      "Fixed_TriStrip_Flat_Last": {
-      },
-      "Fixed_TriStrip_Smooth_First": {
-      },
-      "Fixed_TriStrip_Smooth_Last": {
-      },
-      "Fixed_Tri_Flat_First": {
-      },
-      "Fixed_Tri_Flat_Last": {
-      },
-      "Fixed_Tri_Smooth_First": {
-      },
-      "Fixed_Tri_Smooth_Last": {
-      },
-      "ProgTex_Poly_Flat_First": {
-      },
-      "ProgTex_Poly_Flat_Last": {
-      },
-      "ProgTex_Poly_Smooth_First": {
-      },
-      "ProgTex_Poly_Smooth_Last": {
-      },
-      "ProgTex_QuadStrip_Flat_First": {
-      },
-      "ProgTex_QuadStrip_Flat_Last": {
-      },
-      "ProgTex_QuadStrip_Smooth_First": {
-      },
-      "ProgTex_QuadStrip_Smooth_Last": {
-      },
-      "ProgTex_Quad_Flat_First": {
-      },
-      "ProgTex_Quad_Flat_Last": {
-      },
-      "ProgTex_Quad_Smooth_First": {
-      },
-      "ProgTex_Quad_Smooth_Last": {
-      },
-      "ProgTex_TriFan_Flat_First": {
-      },
-      "ProgTex_TriFan_Flat_Last": {
-      },
-      "ProgTex_TriFan_Smooth_First": {
-      },
-      "ProgTex_TriFan_Smooth_Last": {
-      },
-      "ProgTex_TriStrip_Flat_First": {
-      },
-      "ProgTex_TriStrip_Flat_Last": {
-      },
-      "ProgTex_TriStrip_Smooth_First": {
-      },
-      "ProgTex_TriStrip_Smooth_Last": {
-      },
-      "ProgTex_Tri_Flat_First": {
-      },
-      "ProgTex_Tri_Flat_Last": {
-      },
-      "ProgTex_Tri_Smooth_First": {
-      },
-      "ProgTex_Tri_Smooth_Last": {
-      },
-      "Prog_Poly_Flat_First": {
-      },
-      "Prog_Poly_Flat_Last": {
-      },
-      "Prog_Poly_Smooth_First": {
-      },
-      "Prog_Poly_Smooth_Last": {
-      },
-      "Prog_QuadStrip_Flat_First": {
-      },
-      "Prog_QuadStrip_Flat_Last": {
-      },
-      "Prog_QuadStrip_Smooth_First": {
-      },
-      "Prog_QuadStrip_Smooth_Last": {
-      },
-      "Prog_Quad_Flat_First": {
-      },
-      "Prog_Quad_Flat_Last": {
-      },
-      "Prog_Quad_Smooth_First": {
-      },
-      "Prog_Quad_Smooth_Last": {
-      },
-      "Prog_TriFan_Flat_First": {
-      },
-      "Prog_TriFan_Flat_Last": {
-      },
-      "Prog_TriFan_Smooth_First": {
-      },
-      "Prog_TriFan_Smooth_Last": {
-      },
-      "Prog_TriStrip_Flat_First": {
-      },
-      "Prog_TriStrip_Flat_Last": {
-      },
-      "Prog_TriStrip_Smooth_First": {
-      },
-      "Prog_TriStrip_Smooth_Last": {
-      },
-      "Prog_Tri_Flat_First": {
-      },
-      "Prog_Tri_Flat_Last": {
-      },
-      "Prog_Tri_Smooth_First": {
-      },
-      "Prog_Tri_Smooth_Last": {
-      },
-      "W_FixedTex_Poly_Flat_First": {
-      },
-      "W_FixedTex_Poly_Flat_Last": {
-      },
-      "W_FixedTex_Poly_Smooth_First": {
-      },
-      "W_FixedTex_Poly_Smooth_Last": {
-      },
-      "W_FixedTex_QuadStrip_Flat_First": {
-      },
-      "W_FixedTex_QuadStrip_Flat_Last": {
-      },
-      "W_FixedTex_QuadStrip_Smooth_First": {
-      },
-      "W_FixedTex_QuadStrip_Smooth_Last": {
-      },
-      "W_FixedTex_Quad_Flat_First": {
-      },
-      "W_FixedTex_Quad_Flat_Last": {
-      },
-      "W_FixedTex_Quad_Smooth_First": {
-      },
-      "W_FixedTex_Quad_Smooth_Last": {
-      },
-      "W_FixedTex_TriFan_Flat_First": {
-      },
-      "W_FixedTex_TriFan_Flat_Last": {
-      },
-      "W_FixedTex_TriFan_Smooth_First": {
-      },
-      "W_FixedTex_TriFan_Smooth_Last": {
-      },
-      "W_FixedTex_TriStrip_Flat_First": {
-      },
-      "W_FixedTex_TriStrip_Flat_Last": {
-      },
-      "W_FixedTex_TriStrip_Smooth_First": {
-      },
-      "W_FixedTex_TriStrip_Smooth_Last": {
-      },
-      "W_FixedTex_Tri_Flat_First": {
-      },
-      "W_FixedTex_Tri_Flat_Last": {
-      },
-      "W_FixedTex_Tri_Smooth_First": {
-      },
-      "W_FixedTex_Tri_Smooth_Last": {
-      },
-      "W_Fixed_Poly_Flat_First": {
-      },
-      "W_Fixed_Poly_Flat_Last": {
-      },
-      "W_Fixed_Poly_Smooth_First": {
-      },
-      "W_Fixed_Poly_Smooth_Last": {
-      },
-      "W_Fixed_QuadStrip_Flat_First": {
-      },
-      "W_Fixed_QuadStrip_Flat_Last": {
-      },
-      "W_Fixed_QuadStrip_Smooth_First": {
-      },
-      "W_Fixed_QuadStrip_Smooth_Last": {
-      },
-      "W_Fixed_Quad_Flat_First": {
-      },
-      "W_Fixed_Quad_Flat_Last": {
-      },
-      "W_Fixed_Quad_Smooth_First": {
-      },
-      "W_Fixed_Quad_Smooth_Last": {
-      },
-      "W_Fixed_TriFan_Flat_First": {
-      },
-      "W_Fixed_TriFan_Flat_Last": {
-      },
-      "W_Fixed_TriFan_Smooth_First": {
-      },
-      "W_Fixed_TriFan_Smooth_Last": {
-      },
-      "W_Fixed_TriStrip_Flat_First": {
-      },
-      "W_Fixed_TriStrip_Flat_Last": {
-      },
-      "W_Fixed_TriStrip_Smooth_First": {
-      },
-      "W_Fixed_TriStrip_Smooth_Last": {
-      },
-      "W_Fixed_Tri_Flat_First": {
-      },
-      "W_Fixed_Tri_Flat_Last": {
-      },
-      "W_Fixed_Tri_Smooth_First": {
-      },
-      "W_Fixed_Tri_Smooth_Last": {
-      }
+      "FixedTex_Poly_Flat_First": {},
+      "FixedTex_Poly_Flat_Last": {},
+      "FixedTex_Poly_Smooth_First": {},
+      "FixedTex_Poly_Smooth_Last": {},
+      "FixedTex_QuadStrip_Flat_First": {},
+      "FixedTex_QuadStrip_Flat_Last": {},
+      "FixedTex_QuadStrip_Smooth_First": {},
+      "FixedTex_QuadStrip_Smooth_Last": {},
+      "FixedTex_Quad_Flat_First": {},
+      "FixedTex_Quad_Flat_Last": {},
+      "FixedTex_Quad_Smooth_First": {},
+      "FixedTex_Quad_Smooth_Last": {},
+      "FixedTex_TriFan_Flat_First": {},
+      "FixedTex_TriFan_Flat_Last": {},
+      "FixedTex_TriFan_Smooth_First": {},
+      "FixedTex_TriFan_Smooth_Last": {},
+      "FixedTex_TriStrip_Flat_First": {},
+      "FixedTex_TriStrip_Flat_Last": {},
+      "FixedTex_TriStrip_Smooth_First": {},
+      "FixedTex_TriStrip_Smooth_Last": {},
+      "FixedTex_Tri_Flat_First": {},
+      "FixedTex_Tri_Flat_Last": {},
+      "FixedTex_Tri_Smooth_First": {},
+      "FixedTex_Tri_Smooth_Last": {},
+      "Fixed_Poly_Flat_First": {},
+      "Fixed_Poly_Flat_Last": {},
+      "Fixed_Poly_Smooth_First": {},
+      "Fixed_Poly_Smooth_Last": {},
+      "Fixed_QuadStrip_Flat_First": {},
+      "Fixed_QuadStrip_Flat_Last": {},
+      "Fixed_QuadStrip_Smooth_First": {},
+      "Fixed_QuadStrip_Smooth_Last": {},
+      "Fixed_Quad_Flat_First": {},
+      "Fixed_Quad_Flat_Last": {},
+      "Fixed_Quad_Smooth_First": {},
+      "Fixed_Quad_Smooth_Last": {},
+      "Fixed_TriFan_Flat_First": {},
+      "Fixed_TriFan_Flat_Last": {},
+      "Fixed_TriFan_Smooth_First": {},
+      "Fixed_TriFan_Smooth_Last": {},
+      "Fixed_TriStrip_Flat_First": {},
+      "Fixed_TriStrip_Flat_Last": {},
+      "Fixed_TriStrip_Smooth_First": {},
+      "Fixed_TriStrip_Smooth_Last": {},
+      "Fixed_Tri_Flat_First": {},
+      "Fixed_Tri_Flat_Last": {},
+      "Fixed_Tri_Smooth_First": {},
+      "Fixed_Tri_Smooth_Last": {},
+      "ProgTex_Poly_Flat_First": {},
+      "ProgTex_Poly_Flat_Last": {},
+      "ProgTex_Poly_Smooth_First": {},
+      "ProgTex_Poly_Smooth_Last": {},
+      "ProgTex_QuadStrip_Flat_First": {},
+      "ProgTex_QuadStrip_Flat_Last": {},
+      "ProgTex_QuadStrip_Smooth_First": {},
+      "ProgTex_QuadStrip_Smooth_Last": {},
+      "ProgTex_Quad_Flat_First": {},
+      "ProgTex_Quad_Flat_Last": {},
+      "ProgTex_Quad_Smooth_First": {},
+      "ProgTex_Quad_Smooth_Last": {},
+      "ProgTex_TriFan_Flat_First": {},
+      "ProgTex_TriFan_Flat_Last": {},
+      "ProgTex_TriFan_Smooth_First": {},
+      "ProgTex_TriFan_Smooth_Last": {},
+      "ProgTex_TriStrip_Flat_First": {},
+      "ProgTex_TriStrip_Flat_Last": {},
+      "ProgTex_TriStrip_Smooth_First": {},
+      "ProgTex_TriStrip_Smooth_Last": {},
+      "ProgTex_Tri_Flat_First": {},
+      "ProgTex_Tri_Flat_Last": {},
+      "ProgTex_Tri_Smooth_First": {},
+      "ProgTex_Tri_Smooth_Last": {},
+      "Prog_Poly_Flat_First": {},
+      "Prog_Poly_Flat_Last": {},
+      "Prog_Poly_Smooth_First": {},
+      "Prog_Poly_Smooth_Last": {},
+      "Prog_QuadStrip_Flat_First": {},
+      "Prog_QuadStrip_Flat_Last": {},
+      "Prog_QuadStrip_Smooth_First": {},
+      "Prog_QuadStrip_Smooth_Last": {},
+      "Prog_Quad_Flat_First": {},
+      "Prog_Quad_Flat_Last": {},
+      "Prog_Quad_Smooth_First": {},
+      "Prog_Quad_Smooth_Last": {},
+      "Prog_TriFan_Flat_First": {},
+      "Prog_TriFan_Flat_Last": {},
+      "Prog_TriFan_Smooth_First": {},
+      "Prog_TriFan_Smooth_Last": {},
+      "Prog_TriStrip_Flat_First": {},
+      "Prog_TriStrip_Flat_Last": {},
+      "Prog_TriStrip_Smooth_First": {},
+      "Prog_TriStrip_Smooth_Last": {},
+      "Prog_Tri_Flat_First": {},
+      "Prog_Tri_Flat_Last": {},
+      "Prog_Tri_Smooth_First": {},
+      "Prog_Tri_Smooth_Last": {},
+      "W_FixedTex_Poly_Flat_First": {},
+      "W_FixedTex_Poly_Flat_Last": {},
+      "W_FixedTex_Poly_Smooth_First": {},
+      "W_FixedTex_Poly_Smooth_Last": {},
+      "W_FixedTex_QuadStrip_Flat_First": {},
+      "W_FixedTex_QuadStrip_Flat_Last": {},
+      "W_FixedTex_QuadStrip_Smooth_First": {},
+      "W_FixedTex_QuadStrip_Smooth_Last": {},
+      "W_FixedTex_Quad_Flat_First": {},
+      "W_FixedTex_Quad_Flat_Last": {},
+      "W_FixedTex_Quad_Smooth_First": {},
+      "W_FixedTex_Quad_Smooth_Last": {},
+      "W_FixedTex_TriFan_Flat_First": {},
+      "W_FixedTex_TriFan_Flat_Last": {},
+      "W_FixedTex_TriFan_Smooth_First": {},
+      "W_FixedTex_TriFan_Smooth_Last": {},
+      "W_FixedTex_TriStrip_Flat_First": {},
+      "W_FixedTex_TriStrip_Flat_Last": {},
+      "W_FixedTex_TriStrip_Smooth_First": {},
+      "W_FixedTex_TriStrip_Smooth_Last": {},
+      "W_FixedTex_Tri_Flat_First": {},
+      "W_FixedTex_Tri_Flat_Last": {},
+      "W_FixedTex_Tri_Smooth_First": {},
+      "W_FixedTex_Tri_Smooth_Last": {},
+      "W_Fixed_Poly_Flat_First": {},
+      "W_Fixed_Poly_Flat_Last": {},
+      "W_Fixed_Poly_Smooth_First": {},
+      "W_Fixed_Poly_Smooth_Last": {},
+      "W_Fixed_QuadStrip_Flat_First": {},
+      "W_Fixed_QuadStrip_Flat_Last": {},
+      "W_Fixed_QuadStrip_Smooth_First": {},
+      "W_Fixed_QuadStrip_Smooth_Last": {},
+      "W_Fixed_Quad_Flat_First": {},
+      "W_Fixed_Quad_Flat_Last": {},
+      "W_Fixed_Quad_Smooth_First": {},
+      "W_Fixed_Quad_Smooth_Last": {},
+      "W_Fixed_TriFan_Flat_First": {},
+      "W_Fixed_TriFan_Flat_Last": {},
+      "W_Fixed_TriFan_Smooth_First": {},
+      "W_Fixed_TriFan_Smooth_Last": {},
+      "W_Fixed_TriStrip_Flat_First": {},
+      "W_Fixed_TriStrip_Flat_Last": {},
+      "W_Fixed_TriStrip_Smooth_First": {},
+      "W_Fixed_TriStrip_Smooth_Last": {},
+      "W_Fixed_Tri_Flat_First": {},
+      "W_Fixed_Tri_Flat_Last": {},
+      "W_Fixed_Tri_Smooth_First": {},
+      "W_Fixed_Tri_Smooth_Last": {}
     },
     "Smoothing control": {
-      "0xFFFF0000": {
-      },
-      "0xFFFF0001": {
-      }
+      "0xFFFF0000": {},
+      "0xFFFF0001": {}
     },
     "Surface clip": {
-      "XemuBug420": {
-      },
-      "rt_x0y0_w0h0": {
-      },
-      "rt_x0y0_w512h384": {
-      },
-      "rt_x0y0_w640h480": {
-      },
-      "rt_x16y8_w512h384": {
-      },
-      "rt_x8y16_w632h464": {
-      },
-      "x0y0_w0h0": {
-      },
-      "x0y0_w512h384": {
-      },
-      "x0y0_w640h480": {
-      },
-      "x16y8_w512h384": {
-      },
-      "x8y16_w632h464": {
-      }
+      "XemuBug420": {},
+      "rt_x0y0_w0h0": {},
+      "rt_x0y0_w512h384": {},
+      "rt_x0y0_w640h480": {},
+      "rt_x16y8_w512h384": {},
+      "rt_x8y16_w632h464": {},
+      "x0y0_w0h0": {},
+      "x0y0_w512h384": {},
+      "x0y0_w640h480": {},
+      "x16y8_w512h384": {},
+      "x8y16_w632h464": {}
     },
     "Surface pitch": {
-      "Swizzle": {
-      }
+      "Swizzle": {}
     },
     "Stencil": {
-      "Stencil_REPLACE": {
-      },
-      "Stencil_REPLACE_DT": {
-      },
-      "Stencil_REPLACE_ST": {
-      },
-      "Stencil_REPLACE_ST_DT": {
-      },
-      "Stencil_ZERO": {
-      },
-      "Stencil_ZERO_DT": {
-      },
-      "Stencil_ZERO_ST": {
-      },
-      "Stencil_ZERO_ST_DT": {
-      }
+      "Stencil_REPLACE": {},
+      "Stencil_REPLACE_DT": {},
+      "Stencil_REPLACE_ST": {},
+      "Stencil_REPLACE_ST_DT": {},
+      "Stencil_ZERO": {},
+      "Stencil_ZERO_DT": {},
+      "Stencil_ZERO_ST": {},
+      "Stencil_ZERO_ST_DT": {}
     },
     "Stipple tests": {
-      "Alternating_On": {
-      },
-      "Border_On": {
-      },
-      "Checkered_Off": {
-      },
-      "Checkered_On": {
-      },
-      "Zero_On": {
-      }
+      "Alternating_On": {},
+      "Border_On": {},
+      "Checkered_Off": {},
+      "Checkered_On": {},
+      "Zero_On": {}
     },
     "Texture border": {
-      "2D": {
-      },
-      "2D_BorderTex_SZ": {
-      },
-      "3D_BorderTex_SZ_16x1": {
-      },
-      "3D_BorderTex_SZ_16x16": {
-      },
-      "3D_BorderTex_SZ_1x1": {
-      },
-      "3D_BorderTex_SZ_2x2": {
-      },
-      "3D_BorderTex_SZ_32x32": {
-      },
-      "3D_BorderTex_SZ_4x4": {
-      },
-      "3D_BorderTex_SZ_4x8": {
-      },
-      "3D_BorderTex_SZ_8x2": {
-      },
-      "3D_BorderTex_SZ_8x8": {
-      },
-      "Cube_BorderTex_SZ_16x16": {
-      },
-      "Cube_BorderTex_SZ_1x1": {
-      },
-      "Cube_BorderTex_SZ_2x2": {
-      },
-      "Cube_BorderTex_SZ_32x32": {
-      },
-      "Cube_BorderTex_SZ_4x4": {
-      },
-      "Cube_BorderTex_SZ_8x8": {
-      },
-      "xemu#1034": {
-      }
+      "2D": {},
+      "2D_BorderTex_SZ": {},
+      "3D_BorderTex_SZ_16x1": {},
+      "3D_BorderTex_SZ_16x16": {},
+      "3D_BorderTex_SZ_1x1": {},
+      "3D_BorderTex_SZ_2x2": {},
+      "3D_BorderTex_SZ_32x32": {},
+      "3D_BorderTex_SZ_4x4": {},
+      "3D_BorderTex_SZ_4x8": {},
+      "3D_BorderTex_SZ_8x2": {},
+      "3D_BorderTex_SZ_8x8": {},
+      "Cube_BorderTex_SZ_16x16": {},
+      "Cube_BorderTex_SZ_1x1": {},
+      "Cube_BorderTex_SZ_2x2": {},
+      "Cube_BorderTex_SZ_32x32": {},
+      "Cube_BorderTex_SZ_4x4": {},
+      "Cube_BorderTex_SZ_8x8": {},
+      "xemu#1034": {}
     },
     "Texture CPU Update": {
-      "RGBA": {
-      }
+      "RGBA": {}
     },
     "Texture cubemap": {
-      "Cubemap": {
-      },
-      "DotSTRCube_-1to1": {
-      },
-      "DotSTRCube_-1to1D3D": {
-      },
-      "DotSTRCube_-1to1GL": {
-      },
-      "DotSTRCube_0to1": {
-      },
-      "DotSTRCube_HiLoHemi": {
-      },
-      "DotSTRCube_HiLo_1": {
-      }
+      "Cubemap": {},
+      "DotSTRCube_-1to1": {},
+      "DotSTRCube_-1to1D3D": {},
+      "DotSTRCube_-1to1GL": {},
+      "DotSTRCube_0to1": {},
+      "DotSTRCube_HiLoHemi": {},
+      "DotSTRCube_HiLo_1": {}
     },
     "Texgen with texture matrix": {
-      "Disabled_Arbitrary": {
-      },
-      "Disabled_Double": {
-      },
-      "Disabled_Half": {
-      },
-      "Disabled_Identity": {
-      },
-      "Disabled_RotateX": {
-      },
-      "Disabled_RotateY": {
-      },
-      "Disabled_RotateZ": {
-      },
-      "Disabled_ShiftHMinus": {
-      },
-      "Disabled_ShiftHPlus": {
-      },
-      "Disabled_ShiftVMinus": {
-      },
-      "Disabled_ShiftVPlus": {
-      },
-      "EyeLinear_Arbitrary": {
-      },
-      "EyeLinear_Double": {
-      },
-      "EyeLinear_Half": {
-      },
-      "EyeLinear_Identity": {
-      },
-      "EyeLinear_RotateX": {
-      },
-      "EyeLinear_RotateY": {
-      },
-      "EyeLinear_RotateZ": {
-      },
-      "EyeLinear_ShiftHMinus": {
-      },
-      "EyeLinear_ShiftHPlus": {
-      },
-      "EyeLinear_ShiftVMinus": {
-      },
-      "EyeLinear_ShiftVPlus": {
-      },
-      "NormalMap_Arbitrary": {
-      },
-      "NormalMap_Double": {
-      },
-      "NormalMap_Half": {
-      },
-      "NormalMap_Identity": {
-      },
-      "NormalMap_RotateX": {
-      },
-      "NormalMap_RotateY": {
-      },
-      "NormalMap_RotateZ": {
-      },
-      "NormalMap_ShiftHMinus": {
-      },
-      "NormalMap_ShiftHPlus": {
-      },
-      "NormalMap_ShiftVMinus": {
-      },
-      "NormalMap_ShiftVPlus": {
-      },
-      "ReflectionMap_Arbitrary": {
-      },
-      "ReflectionMap_Double": {
-      },
-      "ReflectionMap_Half": {
-      },
-      "ReflectionMap_Identity": {
-      },
-      "ReflectionMap_RotateX": {
-      },
-      "ReflectionMap_RotateY": {
-      },
-      "ReflectionMap_RotateZ": {
-      },
-      "ReflectionMap_ShiftHMinus": {
-      },
-      "ReflectionMap_ShiftHPlus": {
-      },
-      "ReflectionMap_ShiftVMinus": {
-      },
-      "ReflectionMap_ShiftVPlus": {
-      }
+      "Disabled_Arbitrary": {},
+      "Disabled_Double": {},
+      "Disabled_Half": {},
+      "Disabled_Identity": {},
+      "Disabled_RotateX": {},
+      "Disabled_RotateY": {},
+      "Disabled_RotateZ": {},
+      "Disabled_ShiftHMinus": {},
+      "Disabled_ShiftHPlus": {},
+      "Disabled_ShiftVMinus": {},
+      "Disabled_ShiftVPlus": {},
+      "EyeLinear_Arbitrary": {},
+      "EyeLinear_Double": {},
+      "EyeLinear_Half": {},
+      "EyeLinear_Identity": {},
+      "EyeLinear_RotateX": {},
+      "EyeLinear_RotateY": {},
+      "EyeLinear_RotateZ": {},
+      "EyeLinear_ShiftHMinus": {},
+      "EyeLinear_ShiftHPlus": {},
+      "EyeLinear_ShiftVMinus": {},
+      "EyeLinear_ShiftVPlus": {},
+      "NormalMap_Arbitrary": {},
+      "NormalMap_Double": {},
+      "NormalMap_Half": {},
+      "NormalMap_Identity": {},
+      "NormalMap_RotateX": {},
+      "NormalMap_RotateY": {},
+      "NormalMap_RotateZ": {},
+      "NormalMap_ShiftHMinus": {},
+      "NormalMap_ShiftHPlus": {},
+      "NormalMap_ShiftVMinus": {},
+      "NormalMap_ShiftVPlus": {},
+      "ReflectionMap_Arbitrary": {},
+      "ReflectionMap_Double": {},
+      "ReflectionMap_Half": {},
+      "ReflectionMap_Identity": {},
+      "ReflectionMap_RotateX": {},
+      "ReflectionMap_RotateY": {},
+      "ReflectionMap_RotateZ": {},
+      "ReflectionMap_ShiftHMinus": {},
+      "ReflectionMap_ShiftHPlus": {},
+      "ReflectionMap_ShiftVMinus": {},
+      "ReflectionMap_ShiftVPlus": {}
     },
     "Texgen": {
-      "Disabled": {
-      },
-      "EyeLinear": {
-      },
-      "NormalMap": {
-      },
-      "ObjectLinear": {
-      },
-      "ReflectionMap": {
-      }
+      "Disabled": {},
+      "EyeLinear": {},
+      "NormalMap": {},
+      "ObjectLinear": {},
+      "ReflectionMap": {}
     },
     "Texture DXT": {
-      "DXT1_plasma_alpha_dxt1": {
-      },
-      "DXT1_plasma_dxt1": {
-      },
-      "DXT3_plasma_alpha_dxt3": {
-      },
-      "DXT3_plasma_dxt3": {
-      },
-      "DXT5_plasma_alpha_dxt5": {
-      },
-      "DXT5_plasma_dxt5": {
-      },
-      "MIPDXT1_64x256_bands_dxt1": {
-      },
-      "MIPDXT1_plasma_alpha_dxt1": {
-      },
-      "MIPDXT1_plasma_dxt1": {
-      },
-      "MIPDXT3_64x256_bands_dxt3": {
-      },
-      "MIPDXT3_plasma_alpha_dxt3": {
-      },
-      "MIPDXT3_plasma_dxt3": {
-      },
-      "MIPDXT5_64x256_bands_dxt5": {
-      },
-      "MIPDXT5_plasma_alpha_dxt5": {
-      },
-      "MIPDXT5_plasma_dxt5": {
-      }
+      "DXT1_plasma_alpha_dxt1": {},
+      "DXT1_plasma_dxt1": {},
+      "DXT3_plasma_alpha_dxt3": {},
+      "DXT3_plasma_dxt3": {},
+      "DXT5_plasma_alpha_dxt5": {},
+      "DXT5_plasma_dxt5": {},
+      "MIPDXT1_64x256_bands_dxt1": {},
+      "MIPDXT1_plasma_alpha_dxt1": {},
+      "MIPDXT1_plasma_dxt1": {},
+      "MIPDXT3_64x256_bands_dxt3": {},
+      "MIPDXT3_plasma_alpha_dxt3": {},
+      "MIPDXT3_plasma_dxt3": {},
+      "MIPDXT5_64x256_bands_dxt5": {},
+      "MIPDXT5_plasma_alpha_dxt5": {},
+      "MIPDXT5_plasma_dxt5": {}
     },
     "Texture format": {
-      "TexFmt_A1R5G5B5": {
-      },
-      "TexFmt_A1R5G5B5_L": {
-      },
-      "TexFmt_A4R4G4B4": {
-      },
-      "TexFmt_A4R4G4B4_L": {
-      },
-      "TexFmt_A8B8G8R8": {
-      },
-      "TexFmt_A8B8G8R8_L": {
-      },
-      "TexFmt_A8R8G8B8": {
-      },
-      "TexFmt_A8R8G8B8_L": {
-      },
-      "TexFmt_A8Y8": {
-      },
-      "TexFmt_AY8": {
-      },
-      "TexFmt_AY8_L": {
-      },
-      "TexFmt_B8G8R8A8": {
-      },
-      "TexFmt_B8G8R8A8_L": {
-      },
-      "TexFmt_DXT1": {
-      },
-      "TexFmt_G8B8": {
-      },
-      "TexFmt_G8B8_L": {
-      },
-      "TexFmt_R5G6B5": {
-      },
-      "TexFmt_R5G6B5_L": {
-      },
-      "TexFmt_R8B8": {
-      },
-      "TexFmt_R8G8B8A8": {
-      },
-      "TexFmt_R8G8B8A8_L": {
-      },
-      "TexFmt_SZ_Index8_p128": {
-      },
-      "TexFmt_SZ_Index8_p256": {
-      },
-      "TexFmt_SZ_Index8_p32": {
-      },
-      "TexFmt_SZ_Index8_p64": {
-      },
-      "TexFmt_UYVY_L": {
-      },
-      "TexFmt_X1R5G5B5": {
-      },
-      "TexFmt_X1R5G5B5_L": {
-      },
-      "TexFmt_X8R8G8B8": {
-      },
-      "TexFmt_X8R8G8B8_L": {
-      },
-      "TexFmt_Y16_L": {
-      },
-      "TexFmt_Y8": {
-      },
-      "TexFmt_Y8_L": {
-      },
-      "TexFmt_YUY2_L": {
-      }
+      "TexFmt_A1R5G5B5": {},
+      "TexFmt_A1R5G5B5_L": {},
+      "TexFmt_A4R4G4B4": {},
+      "TexFmt_A4R4G4B4_L": {},
+      "TexFmt_A8B8G8R8": {},
+      "TexFmt_A8B8G8R8_L": {},
+      "TexFmt_A8R8G8B8": {},
+      "TexFmt_A8R8G8B8_L": {},
+      "TexFmt_A8Y8": {},
+      "TexFmt_AY8": {},
+      "TexFmt_AY8_L": {},
+      "TexFmt_B8G8R8A8": {},
+      "TexFmt_B8G8R8A8_L": {},
+      "TexFmt_DXT1": {},
+      "TexFmt_G8B8": {},
+      "TexFmt_G8B8_L": {},
+      "TexFmt_R5G6B5": {},
+      "TexFmt_R5G6B5_L": {},
+      "TexFmt_R8B8": {},
+      "TexFmt_R8G8B8A8": {},
+      "TexFmt_R8G8B8A8_L": {},
+      "TexFmt_SZ_Index8_p128": {},
+      "TexFmt_SZ_Index8_p256": {},
+      "TexFmt_SZ_Index8_p32": {},
+      "TexFmt_SZ_Index8_p64": {},
+      "TexFmt_UYVY_L": {},
+      "TexFmt_X1R5G5B5": {},
+      "TexFmt_X1R5G5B5_L": {},
+      "TexFmt_X8R8G8B8": {},
+      "TexFmt_X8R8G8B8_L": {},
+      "TexFmt_Y16_L": {},
+      "TexFmt_Y8": {},
+      "TexFmt_Y8_L": {},
+      "TexFmt_YUY2_L": {}
     },
     "Texture Framebuffer Blit": {
-      "FBToOldRenderTarget": {
-      },
-      "FBToTexture": {
-      },
-      "FBToZetaAsTex": {
-      }
+      "FBToOldRenderTarget": {},
+      "FBToTexture": {},
+      "FBToZetaAsTex": {}
     },
     "Texture Matrix": {
-      "Arbitrary": {
-      },
-      "Double": {
-      },
-      "Half": {
-      },
-      "Identity": {
-      },
-      "RotateX": {
-      },
-      "RotateY": {
-      },
-      "RotateZ": {
-      },
-      "ShiftHMinus": {
-      },
-      "ShiftHPlus": {
-      },
-      "ShiftVMinus": {
-      },
-      "ShiftVPlus": {
-      }
+      "Arbitrary": {},
+      "Double": {},
+      "Half": {},
+      "Identity": {},
+      "RotateX": {},
+      "RotateY": {},
+      "RotateZ": {},
+      "ShiftHMinus": {},
+      "ShiftHPlus": {},
+      "ShiftVMinus": {},
+      "ShiftVPlus": {}
     },
     "Texture render target": {
-      "TexFmt_A1R5G5B5": {
-      },
-      "TexFmt_A1R5G5B5_L": {
-      },
-      "TexFmt_A4R4G4B4": {
-      },
-      "TexFmt_A4R4G4B4_L": {
-      },
-      "TexFmt_A8B8G8R8": {
-      },
-      "TexFmt_A8B8G8R8_L": {
-      },
-      "TexFmt_A8R8G8B8": {
-      },
-      "TexFmt_A8R8G8B8_L": {
-      },
-      "TexFmt_A8Y8": {
-      },
-      "TexFmt_AY8": {
-      },
-      "TexFmt_AY8_L": {
-      },
-      "TexFmt_B8G8R8A8": {
-      },
-      "TexFmt_B8G8R8A8_L": {
-      },
-      "TexFmt_DXT1": {
-      },
-      "TexFmt_G8B8": {
-      },
-      "TexFmt_G8B8_L": {
-      },
-      "TexFmt_R5G6B5": {
-      },
-      "TexFmt_R5G6B5_L": {
-      },
-      "TexFmt_R8B8": {
-      },
-      "TexFmt_R8G8B8A8": {
-      },
-      "TexFmt_R8G8B8A8_L": {
-      },
-      "TexFmt_SZ_Index8_p128": {
-      },
-      "TexFmt_SZ_Index8_p256": {
-      },
-      "TexFmt_SZ_Index8_p32": {
-      },
-      "TexFmt_SZ_Index8_p64": {
-      },
-      "TexFmt_UYVY_L": {
-      },
-      "TexFmt_X1R5G5B5": {
-      },
-      "TexFmt_X1R5G5B5_L": {
-      },
-      "TexFmt_X8R8G8B8": {
-      },
-      "TexFmt_X8R8G8B8_L": {
-      },
-      "TexFmt_Y16_L": {
-      },
-      "TexFmt_Y8": {
-      },
-      "TexFmt_Y8_L": {
-      },
-      "TexFmt_YUY2_L": {
-      }
+      "TexFmt_A1R5G5B5": {},
+      "TexFmt_A1R5G5B5_L": {},
+      "TexFmt_A4R4G4B4": {},
+      "TexFmt_A4R4G4B4_L": {},
+      "TexFmt_A8B8G8R8": {},
+      "TexFmt_A8B8G8R8_L": {},
+      "TexFmt_A8R8G8B8": {},
+      "TexFmt_A8R8G8B8_L": {},
+      "TexFmt_A8Y8": {},
+      "TexFmt_AY8": {},
+      "TexFmt_AY8_L": {},
+      "TexFmt_B8G8R8A8": {},
+      "TexFmt_B8G8R8A8_L": {},
+      "TexFmt_DXT1": {},
+      "TexFmt_G8B8": {},
+      "TexFmt_G8B8_L": {},
+      "TexFmt_R5G6B5": {},
+      "TexFmt_R5G6B5_L": {},
+      "TexFmt_R8B8": {},
+      "TexFmt_R8G8B8A8": {},
+      "TexFmt_R8G8B8A8_L": {},
+      "TexFmt_SZ_Index8_p128": {},
+      "TexFmt_SZ_Index8_p256": {},
+      "TexFmt_SZ_Index8_p32": {},
+      "TexFmt_SZ_Index8_p64": {},
+      "TexFmt_UYVY_L": {},
+      "TexFmt_X1R5G5B5": {},
+      "TexFmt_X1R5G5B5_L": {},
+      "TexFmt_X8R8G8B8": {},
+      "TexFmt_X8R8G8B8_L": {},
+      "TexFmt_Y16_L": {},
+      "TexFmt_Y8": {},
+      "TexFmt_Y8_L": {},
+      "TexFmt_YUY2_L": {}
     },
     "Texture render update in place": {
-      "RenderToInputTexture": {
-      }
+      "RenderToInputTexture": {}
     },
     "Texture shadow comparator": {
-      "2F16_-6.00-193.00_5.9400_A": {
-      },
-      "2F16_-6.00-193.00_5.9400_EQ": {
-      },
-      "2F16_-6.00-193.00_5.9400_GE": {
-      },
-      "2F16_-6.00-193.00_5.9400_GT": {
-      },
-      "2F16_-6.00-193.00_5.9400_LE": {
-      },
-      "2F16_-6.00-193.00_5.9400_LT": {
-      },
-      "2F16_-6.00-193.00_5.9400_N": {
-      },
-      "2F16_-6.00-193.00_5.9400_NE": {
-      },
-      "2F16_10.00-20.00_15.0000_A": {
-      },
-      "2F16_10.00-20.00_15.0000_EQ": {
-      },
-      "2F16_10.00-20.00_15.0000_GE": {
-      },
-      "2F16_10.00-20.00_15.0000_GT": {
-      },
-      "2F16_10.00-20.00_15.0000_LE": {
-      },
-      "2F16_10.00-20.00_15.0000_LT": {
-      },
-      "2F16_10.00-20.00_15.0000_N": {
-      },
-      "2F16_10.00-20.00_15.0000_NE": {
-      },
-      "2F16f_-6.00-193.00_4.5669_A": {
-      },
-      "2F16f_-6.00-193.00_4.5669_EQ": {
-      },
-      "2F16f_-6.00-193.00_4.5669_GE": {
-      },
-      "2F16f_-6.00-193.00_4.5669_GT": {
-      },
-      "2F16f_-6.00-193.00_4.5669_LE": {
-      },
-      "2F16f_-6.00-193.00_4.5669_LT": {
-      },
-      "2F16f_-6.00-193.00_4.5669_N": {
-      },
-      "2F16f_-6.00-193.00_4.5669_NE": {
-      },
-      "2F16f_10.00-20.00_14.0400_A": {
-      },
-      "2F16f_10.00-20.00_14.0400_EQ": {
-      },
-      "2F16f_10.00-20.00_14.0400_GE": {
-      },
-      "2F16f_10.00-20.00_14.0400_GT": {
-      },
-      "2F16f_10.00-20.00_14.0400_LE": {
-      },
-      "2F16f_10.00-20.00_14.0400_LT": {
-      },
-      "2F16f_10.00-20.00_14.0400_N": {
-      },
-      "2F16f_10.00-20.00_14.0400_NE": {
-      },
-      "2F24_-6.00-193.00_10.6500_A": {
-      },
-      "2F24_-6.00-193.00_10.6500_EQ": {
-      },
-      "2F24_-6.00-193.00_10.6500_GE": {
-      },
-      "2F24_-6.00-193.00_10.6500_GT": {
-      },
-      "2F24_-6.00-193.00_10.6500_LE": {
-      },
-      "2F24_-6.00-193.00_10.6500_LT": {
-      },
-      "2F24_-6.00-193.00_10.6500_N": {
-      },
-      "2F24_-6.00-193.00_10.6500_NE": {
-      },
-      "2F24_10.00-20.00_11.4700_A": {
-      },
-      "2F24_10.00-20.00_11.4700_EQ": {
-      },
-      "2F24_10.00-20.00_11.4700_GE": {
-      },
-      "2F24_10.00-20.00_11.4700_GT": {
-      },
-      "2F24_10.00-20.00_11.4700_LE": {
-      },
-      "2F24_10.00-20.00_11.4700_LT": {
-      },
-      "2F24_10.00-20.00_11.4700_N": {
-      },
-      "2F24_10.00-20.00_11.4700_NE": {
-      },
-      "2P16_-6.00-193.00_5.9400_A": {
-      },
-      "2P16_-6.00-193.00_5.9400_EQ": {
-      },
-      "2P16_-6.00-193.00_5.9400_GE": {
-      },
-      "2P16_-6.00-193.00_5.9400_GT": {
-      },
-      "2P16_-6.00-193.00_5.9400_LE": {
-      },
-      "2P16_-6.00-193.00_5.9400_LT": {
-      },
-      "2P16_-6.00-193.00_5.9400_N": {
-      },
-      "2P16_-6.00-193.00_5.9400_NE": {
-      },
-      "2P16_10.00-20.00_15.0000_A": {
-      },
-      "2P16_10.00-20.00_15.0000_EQ": {
-      },
-      "2P16_10.00-20.00_15.0000_GE": {
-      },
-      "2P16_10.00-20.00_15.0000_GT": {
-      },
-      "2P16_10.00-20.00_15.0000_LE": {
-      },
-      "2P16_10.00-20.00_15.0000_LT": {
-      },
-      "2P16_10.00-20.00_15.0000_N": {
-      },
-      "2P16_10.00-20.00_15.0000_NE": {
-      },
-      "2P16f_-6.00-193.00_4.5669_A": {
-      },
-      "2P16f_-6.00-193.00_4.5669_EQ": {
-      },
-      "2P16f_-6.00-193.00_4.5669_GE": {
-      },
-      "2P16f_-6.00-193.00_4.5669_GT": {
-      },
-      "2P16f_-6.00-193.00_4.5669_LE": {
-      },
-      "2P16f_-6.00-193.00_4.5669_LT": {
-      },
-      "2P16f_-6.00-193.00_4.5669_N": {
-      },
-      "2P16f_-6.00-193.00_4.5669_NE": {
-      },
-      "2P16f_10.00-20.00_14.0400_A": {
-      },
-      "2P16f_10.00-20.00_14.0400_EQ": {
-      },
-      "2P16f_10.00-20.00_14.0400_GE": {
-      },
-      "2P16f_10.00-20.00_14.0400_GT": {
-      },
-      "2P16f_10.00-20.00_14.0400_LE": {
-      },
-      "2P16f_10.00-20.00_14.0400_LT": {
-      },
-      "2P16f_10.00-20.00_14.0400_N": {
-      },
-      "2P16f_10.00-20.00_14.0400_NE": {
-      },
-      "2P24_-6.00-193.00_10.6500_A": {
-      },
-      "2P24_-6.00-193.00_10.6500_EQ": {
-      },
-      "2P24_-6.00-193.00_10.6500_GE": {
-      },
-      "2P24_-6.00-193.00_10.6500_GT": {
-      },
-      "2P24_-6.00-193.00_10.6500_LE": {
-      },
-      "2P24_-6.00-193.00_10.6500_LT": {
-      },
-      "2P24_-6.00-193.00_10.6500_N": {
-      },
-      "2P24_-6.00-193.00_10.6500_NE": {
-      },
-      "2P24_10.00-20.00_11.4500_A": {
-      },
-      "2P24_10.00-20.00_11.4500_EQ": {
-      },
-      "2P24_10.00-20.00_11.4500_GE": {
-      },
-      "2P24_10.00-20.00_11.4500_GT": {
-      },
-      "2P24_10.00-20.00_11.4500_LE": {
-      },
-      "2P24_10.00-20.00_11.4500_LT": {
-      },
-      "2P24_10.00-20.00_11.4500_N": {
-      },
-      "2P24_10.00-20.00_11.4500_NE": {
-      },
-      "2R16_0-100_80_A": {
-      },
-      "2R16_0-100_80_EQ": {
-      },
-      "2R16_0-100_80_GE": {
-      },
-      "2R16_0-100_80_GT": {
-      },
-      "2R16_0-100_80_LE": {
-      },
-      "2R16_0-100_80_LT": {
-      },
-      "2R16_0-100_80_N": {
-      },
-      "2R16_0-100_80_NE": {
-      },
-      "2R16_0-FFFF_7FFF_A": {
-      },
-      "2R16_0-FFFF_7FFF_EQ": {
-      },
-      "2R16_0-FFFF_7FFF_GE": {
-      },
-      "2R16_0-FFFF_7FFF_GT": {
-      },
-      "2R16_0-FFFF_7FFF_LE": {
-      },
-      "2R16_0-FFFF_7FFF_LT": {
-      },
-      "2R16_0-FFFF_7FFF_N": {
-      },
-      "2R16_0-FFFF_7FFF_NE": {
-      },
-      "2R16_100-200_180_A": {
-      },
-      "2R16_100-200_180_EQ": {
-      },
-      "2R16_100-200_180_GE": {
-      },
-      "2R16_100-200_180_GT": {
-      },
-      "2R16_100-200_180_LE": {
-      },
-      "2R16_100-200_180_LT": {
-      },
-      "2R16_100-200_180_N": {
-      },
-      "2R16_100-200_180_NE": {
-      },
-      "2R24_0-100_80_A": {
-      },
-      "2R24_0-100_80_EQ": {
-      },
-      "2R24_0-100_80_GE": {
-      },
-      "2R24_0-100_80_GT": {
-      },
-      "2R24_0-100_80_LE": {
-      },
-      "2R24_0-100_80_LT": {
-      },
-      "2R24_0-100_80_N": {
-      },
-      "2R24_0-100_80_NE": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_A": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_EQ": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_GE": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_GT": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_LE": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_LT": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_N": {
-      },
-      "2R24_0-FFFFFF_7FFFFF_NE": {
-      },
-      "2R24_100-200_180_A": {
-      },
-      "2R24_100-200_180_EQ": {
-      },
-      "2R24_100-200_180_GE": {
-      },
-      "2R24_100-200_180_GT": {
-      },
-      "2R24_100-200_180_LE": {
-      },
-      "2R24_100-200_180_LT": {
-      },
-      "2R24_100-200_180_N": {
-      },
-      "2R24_100-200_180_NE": {
-      },
-      "3F16_-6.00-193.00_5.9400_A": {
-      },
-      "3F16_-6.00-193.00_5.9400_EQ": {
-      },
-      "3F16_-6.00-193.00_5.9400_GE": {
-      },
-      "3F16_-6.00-193.00_5.9400_GT": {
-      },
-      "3F16_-6.00-193.00_5.9400_LE": {
-      },
-      "3F16_-6.00-193.00_5.9400_LT": {
-      },
-      "3F16_-6.00-193.00_5.9400_N": {
-      },
-      "3F16_-6.00-193.00_5.9400_NE": {
-      },
-      "3F16_10.00-20.00_15.0000_A": {
-      },
-      "3F16_10.00-20.00_15.0000_EQ": {
-      },
-      "3F16_10.00-20.00_15.0000_GE": {
-      },
-      "3F16_10.00-20.00_15.0000_GT": {
-      },
-      "3F16_10.00-20.00_15.0000_LE": {
-      },
-      "3F16_10.00-20.00_15.0000_LT": {
-      },
-      "3F16_10.00-20.00_15.0000_N": {
-      },
-      "3F16_10.00-20.00_15.0000_NE": {
-      },
-      "3F16f_-6.00-193.00_4.5669_A": {
-      },
-      "3F16f_-6.00-193.00_4.5669_EQ": {
-      },
-      "3F16f_-6.00-193.00_4.5669_GE": {
-      },
-      "3F16f_-6.00-193.00_4.5669_GT": {
-      },
-      "3F16f_-6.00-193.00_4.5669_LE": {
-      },
-      "3F16f_-6.00-193.00_4.5669_LT": {
-      },
-      "3F16f_-6.00-193.00_4.5669_N": {
-      },
-      "3F16f_-6.00-193.00_4.5669_NE": {
-      },
-      "3F16f_10.00-20.00_14.0400_A": {
-      },
-      "3F16f_10.00-20.00_14.0400_EQ": {
-      },
-      "3F16f_10.00-20.00_14.0400_GE": {
-      },
-      "3F16f_10.00-20.00_14.0400_GT": {
-      },
-      "3F16f_10.00-20.00_14.0400_LE": {
-      },
-      "3F16f_10.00-20.00_14.0400_LT": {
-      },
-      "3F16f_10.00-20.00_14.0400_N": {
-      },
-      "3F16f_10.00-20.00_14.0400_NE": {
-      },
-      "3F24_-6.00-193.00_10.6500_A": {
-      },
-      "3F24_-6.00-193.00_10.6500_EQ": {
-      },
-      "3F24_-6.00-193.00_10.6500_GE": {
-      },
-      "3F24_-6.00-193.00_10.6500_GT": {
-      },
-      "3F24_-6.00-193.00_10.6500_LE": {
-      },
-      "3F24_-6.00-193.00_10.6500_LT": {
-      },
-      "3F24_-6.00-193.00_10.6500_N": {
-      },
-      "3F24_-6.00-193.00_10.6500_NE": {
-      },
-      "3F24_10.00-20.00_11.4700_A": {
-      },
-      "3F24_10.00-20.00_11.4700_EQ": {
-      },
-      "3F24_10.00-20.00_11.4700_GE": {
-      },
-      "3F24_10.00-20.00_11.4700_GT": {
-      },
-      "3F24_10.00-20.00_11.4700_LE": {
-      },
-      "3F24_10.00-20.00_11.4700_LT": {
-      },
-      "3F24_10.00-20.00_11.4700_N": {
-      },
-      "3F24_10.00-20.00_11.4700_NE": {
-      },
-      "3P16_-6.00-193.00_5.9400_A": {
-      },
-      "3P16_-6.00-193.00_5.9400_EQ": {
-      },
-      "3P16_-6.00-193.00_5.9400_GE": {
-      },
-      "3P16_-6.00-193.00_5.9400_GT": {
-      },
-      "3P16_-6.00-193.00_5.9400_LE": {
-      },
-      "3P16_-6.00-193.00_5.9400_LT": {
-      },
-      "3P16_-6.00-193.00_5.9400_N": {
-      },
-      "3P16_-6.00-193.00_5.9400_NE": {
-      },
-      "3P16_10.00-20.00_15.0000_A": {
-      },
-      "3P16_10.00-20.00_15.0000_EQ": {
-      },
-      "3P16_10.00-20.00_15.0000_GE": {
-      },
-      "3P16_10.00-20.00_15.0000_GT": {
-      },
-      "3P16_10.00-20.00_15.0000_LE": {
-      },
-      "3P16_10.00-20.00_15.0000_LT": {
-      },
-      "3P16_10.00-20.00_15.0000_N": {
-      },
-      "3P16_10.00-20.00_15.0000_NE": {
-      },
-      "3P16f_-6.00-193.00_4.5669_A": {
-      },
-      "3P16f_-6.00-193.00_4.5669_EQ": {
-      },
-      "3P16f_-6.00-193.00_4.5669_GE": {
-      },
-      "3P16f_-6.00-193.00_4.5669_GT": {
-      },
-      "3P16f_-6.00-193.00_4.5669_LE": {
-      },
-      "3P16f_-6.00-193.00_4.5669_LT": {
-      },
-      "3P16f_-6.00-193.00_4.5669_N": {
-      },
-      "3P16f_-6.00-193.00_4.5669_NE": {
-      },
-      "3P16f_10.00-20.00_14.0400_A": {
-      },
-      "3P16f_10.00-20.00_14.0400_EQ": {
-      },
-      "3P16f_10.00-20.00_14.0400_GE": {
-      },
-      "3P16f_10.00-20.00_14.0400_GT": {
-      },
-      "3P16f_10.00-20.00_14.0400_LE": {
-      },
-      "3P16f_10.00-20.00_14.0400_LT": {
-      },
-      "3P16f_10.00-20.00_14.0400_N": {
-      },
-      "3P16f_10.00-20.00_14.0400_NE": {
-      },
-      "3P24_-6.00-193.00_10.6500_A": {
-      },
-      "3P24_-6.00-193.00_10.6500_EQ": {
-      },
-      "3P24_-6.00-193.00_10.6500_GE": {
-      },
-      "3P24_-6.00-193.00_10.6500_GT": {
-      },
-      "3P24_-6.00-193.00_10.6500_LE": {
-      },
-      "3P24_-6.00-193.00_10.6500_LT": {
-      },
-      "3P24_-6.00-193.00_10.6500_N": {
-      },
-      "3P24_-6.00-193.00_10.6500_NE": {
-      },
-      "3P24_10.00-20.00_11.4500_A": {
-      },
-      "3P24_10.00-20.00_11.4500_EQ": {
-      },
-      "3P24_10.00-20.00_11.4500_GE": {
-      },
-      "3P24_10.00-20.00_11.4500_GT": {
-      },
-      "3P24_10.00-20.00_11.4500_LE": {
-      },
-      "3P24_10.00-20.00_11.4500_LT": {
-      },
-      "3P24_10.00-20.00_11.4500_N": {
-      },
-      "3P24_10.00-20.00_11.4500_NE": {
-      },
-      "3R16_0-100_80_A": {
-      },
-      "3R16_0-100_80_EQ": {
-      },
-      "3R16_0-100_80_GE": {
-      },
-      "3R16_0-100_80_GT": {
-      },
-      "3R16_0-100_80_LE": {
-      },
-      "3R16_0-100_80_LT": {
-      },
-      "3R16_0-100_80_N": {
-      },
-      "3R16_0-100_80_NE": {
-      },
-      "3R16_0-FFFF_7FFF_A": {
-      },
-      "3R16_0-FFFF_7FFF_EQ": {
-      },
-      "3R16_0-FFFF_7FFF_GE": {
-      },
-      "3R16_0-FFFF_7FFF_GT": {
-      },
-      "3R16_0-FFFF_7FFF_LE": {
-      },
-      "3R16_0-FFFF_7FFF_LT": {
-      },
-      "3R16_0-FFFF_7FFF_N": {
-      },
-      "3R16_0-FFFF_7FFF_NE": {
-      },
-      "3R16_100-200_180_A": {
-      },
-      "3R16_100-200_180_EQ": {
-      },
-      "3R16_100-200_180_GE": {
-      },
-      "3R16_100-200_180_GT": {
-      },
-      "3R16_100-200_180_LE": {
-      },
-      "3R16_100-200_180_LT": {
-      },
-      "3R16_100-200_180_N": {
-      },
-      "3R16_100-200_180_NE": {
-      },
-      "3R24_0-100_80_A": {
-      },
-      "3R24_0-100_80_EQ": {
-      },
-      "3R24_0-100_80_GE": {
-      },
-      "3R24_0-100_80_GT": {
-      },
-      "3R24_0-100_80_LE": {
-      },
-      "3R24_0-100_80_LT": {
-      },
-      "3R24_0-100_80_N": {
-      },
-      "3R24_0-100_80_NE": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_A": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_EQ": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_GE": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_GT": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_LE": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_LT": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_N": {
-      },
-      "3R24_0-FFFFFF_7FFFFF_NE": {
-      },
-      "3R24_100-200_180_A": {
-      },
-      "3R24_100-200_180_EQ": {
-      },
-      "3R24_100-200_180_GE": {
-      },
-      "3R24_100-200_180_GT": {
-      },
-      "3R24_100-200_180_LE": {
-      },
-      "3R24_100-200_180_LT": {
-      },
-      "3R24_100-200_180_N": {
-      },
-      "3R24_100-200_180_NE": {
-      }
+      "2F16_-6.00-193.00_5.9400_A": {},
+      "2F16_-6.00-193.00_5.9400_EQ": {},
+      "2F16_-6.00-193.00_5.9400_GE": {},
+      "2F16_-6.00-193.00_5.9400_GT": {},
+      "2F16_-6.00-193.00_5.9400_LE": {},
+      "2F16_-6.00-193.00_5.9400_LT": {},
+      "2F16_-6.00-193.00_5.9400_N": {},
+      "2F16_-6.00-193.00_5.9400_NE": {},
+      "2F16_10.00-20.00_15.0000_A": {},
+      "2F16_10.00-20.00_15.0000_EQ": {},
+      "2F16_10.00-20.00_15.0000_GE": {},
+      "2F16_10.00-20.00_15.0000_GT": {},
+      "2F16_10.00-20.00_15.0000_LE": {},
+      "2F16_10.00-20.00_15.0000_LT": {},
+      "2F16_10.00-20.00_15.0000_N": {},
+      "2F16_10.00-20.00_15.0000_NE": {},
+      "2F16f_-6.00-193.00_4.5669_A": {},
+      "2F16f_-6.00-193.00_4.5669_EQ": {},
+      "2F16f_-6.00-193.00_4.5669_GE": {},
+      "2F16f_-6.00-193.00_4.5669_GT": {},
+      "2F16f_-6.00-193.00_4.5669_LE": {},
+      "2F16f_-6.00-193.00_4.5669_LT": {},
+      "2F16f_-6.00-193.00_4.5669_N": {},
+      "2F16f_-6.00-193.00_4.5669_NE": {},
+      "2F16f_10.00-20.00_14.0400_A": {},
+      "2F16f_10.00-20.00_14.0400_EQ": {},
+      "2F16f_10.00-20.00_14.0400_GE": {},
+      "2F16f_10.00-20.00_14.0400_GT": {},
+      "2F16f_10.00-20.00_14.0400_LE": {},
+      "2F16f_10.00-20.00_14.0400_LT": {},
+      "2F16f_10.00-20.00_14.0400_N": {},
+      "2F16f_10.00-20.00_14.0400_NE": {},
+      "2F24_-6.00-193.00_10.6500_A": {},
+      "2F24_-6.00-193.00_10.6500_EQ": {},
+      "2F24_-6.00-193.00_10.6500_GE": {},
+      "2F24_-6.00-193.00_10.6500_GT": {},
+      "2F24_-6.00-193.00_10.6500_LE": {},
+      "2F24_-6.00-193.00_10.6500_LT": {},
+      "2F24_-6.00-193.00_10.6500_N": {},
+      "2F24_-6.00-193.00_10.6500_NE": {},
+      "2F24_10.00-20.00_11.4700_A": {},
+      "2F24_10.00-20.00_11.4700_EQ": {},
+      "2F24_10.00-20.00_11.4700_GE": {},
+      "2F24_10.00-20.00_11.4700_GT": {},
+      "2F24_10.00-20.00_11.4700_LE": {},
+      "2F24_10.00-20.00_11.4700_LT": {},
+      "2F24_10.00-20.00_11.4700_N": {},
+      "2F24_10.00-20.00_11.4700_NE": {},
+      "2P16_-6.00-193.00_5.9400_A": {},
+      "2P16_-6.00-193.00_5.9400_EQ": {},
+      "2P16_-6.00-193.00_5.9400_GE": {},
+      "2P16_-6.00-193.00_5.9400_GT": {},
+      "2P16_-6.00-193.00_5.9400_LE": {},
+      "2P16_-6.00-193.00_5.9400_LT": {},
+      "2P16_-6.00-193.00_5.9400_N": {},
+      "2P16_-6.00-193.00_5.9400_NE": {},
+      "2P16_10.00-20.00_15.0000_A": {},
+      "2P16_10.00-20.00_15.0000_EQ": {},
+      "2P16_10.00-20.00_15.0000_GE": {},
+      "2P16_10.00-20.00_15.0000_GT": {},
+      "2P16_10.00-20.00_15.0000_LE": {},
+      "2P16_10.00-20.00_15.0000_LT": {},
+      "2P16_10.00-20.00_15.0000_N": {},
+      "2P16_10.00-20.00_15.0000_NE": {},
+      "2P16f_-6.00-193.00_4.5669_A": {},
+      "2P16f_-6.00-193.00_4.5669_EQ": {},
+      "2P16f_-6.00-193.00_4.5669_GE": {},
+      "2P16f_-6.00-193.00_4.5669_GT": {},
+      "2P16f_-6.00-193.00_4.5669_LE": {},
+      "2P16f_-6.00-193.00_4.5669_LT": {},
+      "2P16f_-6.00-193.00_4.5669_N": {},
+      "2P16f_-6.00-193.00_4.5669_NE": {},
+      "2P16f_10.00-20.00_14.0400_A": {},
+      "2P16f_10.00-20.00_14.0400_EQ": {},
+      "2P16f_10.00-20.00_14.0400_GE": {},
+      "2P16f_10.00-20.00_14.0400_GT": {},
+      "2P16f_10.00-20.00_14.0400_LE": {},
+      "2P16f_10.00-20.00_14.0400_LT": {},
+      "2P16f_10.00-20.00_14.0400_N": {},
+      "2P16f_10.00-20.00_14.0400_NE": {},
+      "2P24_-6.00-193.00_10.6500_A": {},
+      "2P24_-6.00-193.00_10.6500_EQ": {},
+      "2P24_-6.00-193.00_10.6500_GE": {},
+      "2P24_-6.00-193.00_10.6500_GT": {},
+      "2P24_-6.00-193.00_10.6500_LE": {},
+      "2P24_-6.00-193.00_10.6500_LT": {},
+      "2P24_-6.00-193.00_10.6500_N": {},
+      "2P24_-6.00-193.00_10.6500_NE": {},
+      "2P24_10.00-20.00_11.4500_A": {},
+      "2P24_10.00-20.00_11.4500_EQ": {},
+      "2P24_10.00-20.00_11.4500_GE": {},
+      "2P24_10.00-20.00_11.4500_GT": {},
+      "2P24_10.00-20.00_11.4500_LE": {},
+      "2P24_10.00-20.00_11.4500_LT": {},
+      "2P24_10.00-20.00_11.4500_N": {},
+      "2P24_10.00-20.00_11.4500_NE": {},
+      "2R16_0-100_80_A": {},
+      "2R16_0-100_80_EQ": {},
+      "2R16_0-100_80_GE": {},
+      "2R16_0-100_80_GT": {},
+      "2R16_0-100_80_LE": {},
+      "2R16_0-100_80_LT": {},
+      "2R16_0-100_80_N": {},
+      "2R16_0-100_80_NE": {},
+      "2R16_0-FFFF_7FFF_A": {},
+      "2R16_0-FFFF_7FFF_EQ": {},
+      "2R16_0-FFFF_7FFF_GE": {},
+      "2R16_0-FFFF_7FFF_GT": {},
+      "2R16_0-FFFF_7FFF_LE": {},
+      "2R16_0-FFFF_7FFF_LT": {},
+      "2R16_0-FFFF_7FFF_N": {},
+      "2R16_0-FFFF_7FFF_NE": {},
+      "2R16_100-200_180_A": {},
+      "2R16_100-200_180_EQ": {},
+      "2R16_100-200_180_GE": {},
+      "2R16_100-200_180_GT": {},
+      "2R16_100-200_180_LE": {},
+      "2R16_100-200_180_LT": {},
+      "2R16_100-200_180_N": {},
+      "2R16_100-200_180_NE": {},
+      "2R24_0-100_80_A": {},
+      "2R24_0-100_80_EQ": {},
+      "2R24_0-100_80_GE": {},
+      "2R24_0-100_80_GT": {},
+      "2R24_0-100_80_LE": {},
+      "2R24_0-100_80_LT": {},
+      "2R24_0-100_80_N": {},
+      "2R24_0-100_80_NE": {},
+      "2R24_0-FFFFFF_7FFFFF_A": {},
+      "2R24_0-FFFFFF_7FFFFF_EQ": {},
+      "2R24_0-FFFFFF_7FFFFF_GE": {},
+      "2R24_0-FFFFFF_7FFFFF_GT": {},
+      "2R24_0-FFFFFF_7FFFFF_LE": {},
+      "2R24_0-FFFFFF_7FFFFF_LT": {},
+      "2R24_0-FFFFFF_7FFFFF_N": {},
+      "2R24_0-FFFFFF_7FFFFF_NE": {},
+      "2R24_100-200_180_A": {},
+      "2R24_100-200_180_EQ": {},
+      "2R24_100-200_180_GE": {},
+      "2R24_100-200_180_GT": {},
+      "2R24_100-200_180_LE": {},
+      "2R24_100-200_180_LT": {},
+      "2R24_100-200_180_N": {},
+      "2R24_100-200_180_NE": {},
+      "3F16_-6.00-193.00_5.9400_A": {},
+      "3F16_-6.00-193.00_5.9400_EQ": {},
+      "3F16_-6.00-193.00_5.9400_GE": {},
+      "3F16_-6.00-193.00_5.9400_GT": {},
+      "3F16_-6.00-193.00_5.9400_LE": {},
+      "3F16_-6.00-193.00_5.9400_LT": {},
+      "3F16_-6.00-193.00_5.9400_N": {},
+      "3F16_-6.00-193.00_5.9400_NE": {},
+      "3F16_10.00-20.00_15.0000_A": {},
+      "3F16_10.00-20.00_15.0000_EQ": {},
+      "3F16_10.00-20.00_15.0000_GE": {},
+      "3F16_10.00-20.00_15.0000_GT": {},
+      "3F16_10.00-20.00_15.0000_LE": {},
+      "3F16_10.00-20.00_15.0000_LT": {},
+      "3F16_10.00-20.00_15.0000_N": {},
+      "3F16_10.00-20.00_15.0000_NE": {},
+      "3F16f_-6.00-193.00_4.5669_A": {},
+      "3F16f_-6.00-193.00_4.5669_EQ": {},
+      "3F16f_-6.00-193.00_4.5669_GE": {},
+      "3F16f_-6.00-193.00_4.5669_GT": {},
+      "3F16f_-6.00-193.00_4.5669_LE": {},
+      "3F16f_-6.00-193.00_4.5669_LT": {},
+      "3F16f_-6.00-193.00_4.5669_N": {},
+      "3F16f_-6.00-193.00_4.5669_NE": {},
+      "3F16f_10.00-20.00_14.0400_A": {},
+      "3F16f_10.00-20.00_14.0400_EQ": {},
+      "3F16f_10.00-20.00_14.0400_GE": {},
+      "3F16f_10.00-20.00_14.0400_GT": {},
+      "3F16f_10.00-20.00_14.0400_LE": {},
+      "3F16f_10.00-20.00_14.0400_LT": {},
+      "3F16f_10.00-20.00_14.0400_N": {},
+      "3F16f_10.00-20.00_14.0400_NE": {},
+      "3F24_-6.00-193.00_10.6500_A": {},
+      "3F24_-6.00-193.00_10.6500_EQ": {},
+      "3F24_-6.00-193.00_10.6500_GE": {},
+      "3F24_-6.00-193.00_10.6500_GT": {},
+      "3F24_-6.00-193.00_10.6500_LE": {},
+      "3F24_-6.00-193.00_10.6500_LT": {},
+      "3F24_-6.00-193.00_10.6500_N": {},
+      "3F24_-6.00-193.00_10.6500_NE": {},
+      "3F24_10.00-20.00_11.4700_A": {},
+      "3F24_10.00-20.00_11.4700_EQ": {},
+      "3F24_10.00-20.00_11.4700_GE": {},
+      "3F24_10.00-20.00_11.4700_GT": {},
+      "3F24_10.00-20.00_11.4700_LE": {},
+      "3F24_10.00-20.00_11.4700_LT": {},
+      "3F24_10.00-20.00_11.4700_N": {},
+      "3F24_10.00-20.00_11.4700_NE": {},
+      "3P16_-6.00-193.00_5.9400_A": {},
+      "3P16_-6.00-193.00_5.9400_EQ": {},
+      "3P16_-6.00-193.00_5.9400_GE": {},
+      "3P16_-6.00-193.00_5.9400_GT": {},
+      "3P16_-6.00-193.00_5.9400_LE": {},
+      "3P16_-6.00-193.00_5.9400_LT": {},
+      "3P16_-6.00-193.00_5.9400_N": {},
+      "3P16_-6.00-193.00_5.9400_NE": {},
+      "3P16_10.00-20.00_15.0000_A": {},
+      "3P16_10.00-20.00_15.0000_EQ": {},
+      "3P16_10.00-20.00_15.0000_GE": {},
+      "3P16_10.00-20.00_15.0000_GT": {},
+      "3P16_10.00-20.00_15.0000_LE": {},
+      "3P16_10.00-20.00_15.0000_LT": {},
+      "3P16_10.00-20.00_15.0000_N": {},
+      "3P16_10.00-20.00_15.0000_NE": {},
+      "3P16f_-6.00-193.00_4.5669_A": {},
+      "3P16f_-6.00-193.00_4.5669_EQ": {},
+      "3P16f_-6.00-193.00_4.5669_GE": {},
+      "3P16f_-6.00-193.00_4.5669_GT": {},
+      "3P16f_-6.00-193.00_4.5669_LE": {},
+      "3P16f_-6.00-193.00_4.5669_LT": {},
+      "3P16f_-6.00-193.00_4.5669_N": {},
+      "3P16f_-6.00-193.00_4.5669_NE": {},
+      "3P16f_10.00-20.00_14.0400_A": {},
+      "3P16f_10.00-20.00_14.0400_EQ": {},
+      "3P16f_10.00-20.00_14.0400_GE": {},
+      "3P16f_10.00-20.00_14.0400_GT": {},
+      "3P16f_10.00-20.00_14.0400_LE": {},
+      "3P16f_10.00-20.00_14.0400_LT": {},
+      "3P16f_10.00-20.00_14.0400_N": {},
+      "3P16f_10.00-20.00_14.0400_NE": {},
+      "3P24_-6.00-193.00_10.6500_A": {},
+      "3P24_-6.00-193.00_10.6500_EQ": {},
+      "3P24_-6.00-193.00_10.6500_GE": {},
+      "3P24_-6.00-193.00_10.6500_GT": {},
+      "3P24_-6.00-193.00_10.6500_LE": {},
+      "3P24_-6.00-193.00_10.6500_LT": {},
+      "3P24_-6.00-193.00_10.6500_N": {},
+      "3P24_-6.00-193.00_10.6500_NE": {},
+      "3P24_10.00-20.00_11.4500_A": {},
+      "3P24_10.00-20.00_11.4500_EQ": {},
+      "3P24_10.00-20.00_11.4500_GE": {},
+      "3P24_10.00-20.00_11.4500_GT": {},
+      "3P24_10.00-20.00_11.4500_LE": {},
+      "3P24_10.00-20.00_11.4500_LT": {},
+      "3P24_10.00-20.00_11.4500_N": {},
+      "3P24_10.00-20.00_11.4500_NE": {},
+      "3R16_0-100_80_A": {},
+      "3R16_0-100_80_EQ": {},
+      "3R16_0-100_80_GE": {},
+      "3R16_0-100_80_GT": {},
+      "3R16_0-100_80_LE": {},
+      "3R16_0-100_80_LT": {},
+      "3R16_0-100_80_N": {},
+      "3R16_0-100_80_NE": {},
+      "3R16_0-FFFF_7FFF_A": {},
+      "3R16_0-FFFF_7FFF_EQ": {},
+      "3R16_0-FFFF_7FFF_GE": {},
+      "3R16_0-FFFF_7FFF_GT": {},
+      "3R16_0-FFFF_7FFF_LE": {},
+      "3R16_0-FFFF_7FFF_LT": {},
+      "3R16_0-FFFF_7FFF_N": {},
+      "3R16_0-FFFF_7FFF_NE": {},
+      "3R16_100-200_180_A": {},
+      "3R16_100-200_180_EQ": {},
+      "3R16_100-200_180_GE": {},
+      "3R16_100-200_180_GT": {},
+      "3R16_100-200_180_LE": {},
+      "3R16_100-200_180_LT": {},
+      "3R16_100-200_180_N": {},
+      "3R16_100-200_180_NE": {},
+      "3R24_0-100_80_A": {},
+      "3R24_0-100_80_EQ": {},
+      "3R24_0-100_80_GE": {},
+      "3R24_0-100_80_GT": {},
+      "3R24_0-100_80_LE": {},
+      "3R24_0-100_80_LT": {},
+      "3R24_0-100_80_N": {},
+      "3R24_0-100_80_NE": {},
+      "3R24_0-FFFFFF_7FFFFF_A": {},
+      "3R24_0-FFFFFF_7FFFFF_EQ": {},
+      "3R24_0-FFFFFF_7FFFFF_GE": {},
+      "3R24_0-FFFFFF_7FFFFF_GT": {},
+      "3R24_0-FFFFFF_7FFFFF_LE": {},
+      "3R24_0-FFFFFF_7FFFFF_LT": {},
+      "3R24_0-FFFFFF_7FFFFF_N": {},
+      "3R24_0-FFFFFF_7FFFFF_NE": {},
+      "3R24_100-200_180_A": {},
+      "3R24_100-200_180_EQ": {},
+      "3R24_100-200_180_GE": {},
+      "3R24_100-200_180_GT": {},
+      "3R24_100-200_180_LE": {},
+      "3R24_100-200_180_LT": {},
+      "3R24_100-200_180_N": {},
+      "3R24_100-200_180_NE": {}
     },
     "Texture signed component tests": {
-      "A8R8G8B8_0x0000": {
-      },
-      "A8R8G8B8_0x0001": {
-      },
-      "A8R8G8B8_0x0002": {
-      },
-      "A8R8G8B8_0x0003": {
-      },
-      "A8R8G8B8_0x0004": {
-      },
-      "A8R8G8B8_0x0005": {
-      },
-      "A8R8G8B8_0x0006": {
-      },
-      "A8R8G8B8_0x0007": {
-      },
-      "A8R8G8B8_0x0008": {
-      },
-      "A8R8G8B8_0x0009": {
-      },
-      "A8R8G8B8_0x000A": {
-      },
-      "A8R8G8B8_0x000B": {
-      },
-      "A8R8G8B8_0x000C": {
-      },
-      "A8R8G8B8_0x000D": {
-      },
-      "A8R8G8B8_0x000E": {
-      },
-      "A8R8G8B8_0x000F": {
-      },
-      "txt_A8R8G8B8_ADD": {
-      },
-      "txt_A8R8G8B8_SADD": {
-      },
-      "txt_A8R8G8B8_SREVSUB": {
-      }
+      "A8R8G8B8_0x0000": {},
+      "A8R8G8B8_0x0001": {},
+      "A8R8G8B8_0x0002": {},
+      "A8R8G8B8_0x0003": {},
+      "A8R8G8B8_0x0004": {},
+      "A8R8G8B8_0x0005": {},
+      "A8R8G8B8_0x0006": {},
+      "A8R8G8B8_0x0007": {},
+      "A8R8G8B8_0x0008": {},
+      "A8R8G8B8_0x0009": {},
+      "A8R8G8B8_0x000A": {},
+      "A8R8G8B8_0x000B": {},
+      "A8R8G8B8_0x000C": {},
+      "A8R8G8B8_0x000D": {},
+      "A8R8G8B8_0x000E": {},
+      "A8R8G8B8_0x000F": {},
+      "txt_A8R8G8B8_ADD": {},
+      "txt_A8R8G8B8_SADD": {},
+      "txt_A8R8G8B8_SREVSUB": {}
     },
     "3D primitive": {
-      "LineLoop": {
-      },
-      "LineLoop-inlinearrays": {
-      },
-      "LineLoop-inlinearrays-ls": {
-      },
-      "LineLoop-inlinearrays-ls-ps": {
-      },
-      "LineLoop-inlinearrays-ps": {
-      },
-      "LineLoop-inlinebuf": {
-      },
-      "LineLoop-inlinebuf-ls": {
-      },
-      "LineLoop-inlinebuf-ls-ps": {
-      },
-      "LineLoop-inlinebuf-ps": {
-      },
-      "LineLoop-inlineelements": {
-      },
-      "LineLoop-inlineelements-ls": {
-      },
-      "LineLoop-inlineelements-ls-ps": {
-      },
-      "LineLoop-inlineelements-ps": {
-      },
-      "LineLoop-ls": {
-      },
-      "LineLoop-ls-ps": {
-      },
-      "LineLoop-ps": {
-      },
-      "LineStrip": {
-      },
-      "LineStrip-inlinearrays": {
-      },
-      "LineStrip-inlinearrays-ls": {
-      },
-      "LineStrip-inlinearrays-ls-ps": {
-      },
-      "LineStrip-inlinearrays-ps": {
-      },
-      "LineStrip-inlinebuf": {
-      },
-      "LineStrip-inlinebuf-ls": {
-      },
-      "LineStrip-inlinebuf-ls-ps": {
-      },
-      "LineStrip-inlinebuf-ps": {
-      },
-      "LineStrip-inlineelements": {
-      },
-      "LineStrip-inlineelements-ls": {
-      },
-      "LineStrip-inlineelements-ls-ps": {
-      },
-      "LineStrip-inlineelements-ps": {
-      },
-      "LineStrip-ls": {
-      },
-      "LineStrip-ls-ps": {
-      },
-      "LineStrip-ps": {
-      },
-      "Lines": {
-      },
-      "Lines-inlinearrays": {
-      },
-      "Lines-inlinearrays-ls": {
-      },
-      "Lines-inlinearrays-ls-ps": {
-      },
-      "Lines-inlinearrays-ps": {
-      },
-      "Lines-inlinebuf": {
-      },
-      "Lines-inlinebuf-ls": {
-      },
-      "Lines-inlinebuf-ls-ps": {
-      },
-      "Lines-inlinebuf-ps": {
-      },
-      "Lines-inlineelements": {
-      },
-      "Lines-inlineelements-ls": {
-      },
-      "Lines-inlineelements-ls-ps": {
-      },
-      "Lines-inlineelements-ps": {
-      },
-      "Lines-ls": {
-      },
-      "Lines-ls-ps": {
-      },
-      "Lines-ps": {
-      },
-      "Points": {
-      },
-      "Points-inlinearrays": {
-      },
-      "Points-inlinearrays-ls": {
-      },
-      "Points-inlinearrays-ls-ps": {
-      },
-      "Points-inlinearrays-ps": {
-      },
-      "Points-inlinebuf": {
-      },
-      "Points-inlinebuf-ls": {
-      },
-      "Points-inlinebuf-ls-ps": {
-      },
-      "Points-inlinebuf-ps": {
-      },
-      "Points-inlineelements": {
-      },
-      "Points-inlineelements-ls": {
-      },
-      "Points-inlineelements-ls-ps": {
-      },
-      "Points-inlineelements-ps": {
-      },
-      "Points-ls": {
-      },
-      "Points-ls-ps": {
-      },
-      "Points-ps": {
-      },
-      "Polygon": {
-      },
-      "Polygon-inlinearrays": {
-      },
-      "Polygon-inlinearrays-ls": {
-      },
-      "Polygon-inlinearrays-ls-ps": {
-      },
-      "Polygon-inlinearrays-ps": {
-      },
-      "Polygon-inlinebuf": {
-      },
-      "Polygon-inlinebuf-ls": {
-      },
-      "Polygon-inlinebuf-ls-ps": {
-      },
-      "Polygon-inlinebuf-ps": {
-      },
-      "Polygon-inlineelements": {
-      },
-      "Polygon-inlineelements-ls": {
-      },
-      "Polygon-inlineelements-ls-ps": {
-      },
-      "Polygon-inlineelements-ps": {
-      },
-      "Polygon-ls": {
-      },
-      "Polygon-ls-ps": {
-      },
-      "Polygon-ps": {
-      },
-      "QuadStrip": {
-      },
-      "QuadStrip-inlinearrays": {
-      },
-      "QuadStrip-inlinearrays-ls": {
-      },
-      "QuadStrip-inlinearrays-ls-ps": {
-      },
-      "QuadStrip-inlinearrays-ps": {
-      },
-      "QuadStrip-inlinebuf": {
-      },
-      "QuadStrip-inlinebuf-ls": {
-      },
-      "QuadStrip-inlinebuf-ls-ps": {
-      },
-      "QuadStrip-inlinebuf-ps": {
-      },
-      "QuadStrip-inlineelements": {
-      },
-      "QuadStrip-inlineelements-ls": {
-      },
-      "QuadStrip-inlineelements-ls-ps": {
-      },
-      "QuadStrip-inlineelements-ps": {
-      },
-      "QuadStrip-ls": {
-      },
-      "QuadStrip-ls-ps": {
-      },
-      "QuadStrip-ps": {
-      },
-      "Quads": {
-      },
-      "Quads-inlinearrays": {
-      },
-      "Quads-inlinearrays-ls": {
-      },
-      "Quads-inlinearrays-ls-ps": {
-      },
-      "Quads-inlinearrays-ps": {
-      },
-      "Quads-inlinebuf": {
-      },
-      "Quads-inlinebuf-ls": {
-      },
-      "Quads-inlinebuf-ls-ps": {
-      },
-      "Quads-inlinebuf-ps": {
-      },
-      "Quads-inlineelements": {
-      },
-      "Quads-inlineelements-ls": {
-      },
-      "Quads-inlineelements-ls-ps": {
-      },
-      "Quads-inlineelements-ps": {
-      },
-      "Quads-ls": {
-      },
-      "Quads-ls-ps": {
-      },
-      "Quads-ps": {
-      },
-      "TriFan": {
-      },
-      "TriFan-inlinearrays": {
-      },
-      "TriFan-inlinearrays-ls": {
-      },
-      "TriFan-inlinearrays-ls-ps": {
-      },
-      "TriFan-inlinearrays-ps": {
-      },
-      "TriFan-inlinebuf": {
-      },
-      "TriFan-inlinebuf-ls": {
-      },
-      "TriFan-inlinebuf-ls-ps": {
-      },
-      "TriFan-inlinebuf-ps": {
-      },
-      "TriFan-inlineelements": {
-      },
-      "TriFan-inlineelements-ls": {
-      },
-      "TriFan-inlineelements-ls-ps": {
-      },
-      "TriFan-inlineelements-ps": {
-      },
-      "TriFan-ls": {
-      },
-      "TriFan-ls-ps": {
-      },
-      "TriFan-ps": {
-      },
-      "TriStrip": {
-      },
-      "TriStrip-inlinearrays": {
-      },
-      "TriStrip-inlinearrays-ls": {
-      },
-      "TriStrip-inlinearrays-ls-ps": {
-      },
-      "TriStrip-inlinearrays-ps": {
-      },
-      "TriStrip-inlinebuf": {
-      },
-      "TriStrip-inlinebuf-ls": {
-      },
-      "TriStrip-inlinebuf-ls-ps": {
-      },
-      "TriStrip-inlinebuf-ps": {
-      },
-      "TriStrip-inlineelements": {
-      },
-      "TriStrip-inlineelements-ls": {
-      },
-      "TriStrip-inlineelements-ls-ps": {
-      },
-      "TriStrip-inlineelements-ps": {
-      },
-      "TriStrip-ls": {
-      },
-      "TriStrip-ls-ps": {
-      },
-      "TriStrip-ps": {
-      },
-      "Triangles": {
-      },
-      "Triangles-inlinearrays": {
-      },
-      "Triangles-inlinearrays-ls": {
-      },
-      "Triangles-inlinearrays-ls-ps": {
-      },
-      "Triangles-inlinearrays-ps": {
-      },
-      "Triangles-inlinebuf": {
-      },
-      "Triangles-inlinebuf-ls": {
-      },
-      "Triangles-inlinebuf-ls-ps": {
-      },
-      "Triangles-inlinebuf-ps": {
-      },
-      "Triangles-inlineelements": {
-      },
-      "Triangles-inlineelements-ls": {
-      },
-      "Triangles-inlineelements-ls-ps": {
-      },
-      "Triangles-inlineelements-ps": {
-      },
-      "Triangles-ls": {
-      },
-      "Triangles-ls-ps": {
-      },
-      "Triangles-ps": {
-      }
+      "LineLoop": {},
+      "LineLoop-inlinearrays": {},
+      "LineLoop-inlinearrays-ls": {},
+      "LineLoop-inlinearrays-ls-ps": {},
+      "LineLoop-inlinearrays-ps": {},
+      "LineLoop-inlinebuf": {},
+      "LineLoop-inlinebuf-ls": {},
+      "LineLoop-inlinebuf-ls-ps": {},
+      "LineLoop-inlinebuf-ps": {},
+      "LineLoop-inlineelements": {},
+      "LineLoop-inlineelements-ls": {},
+      "LineLoop-inlineelements-ls-ps": {},
+      "LineLoop-inlineelements-ps": {},
+      "LineLoop-ls": {},
+      "LineLoop-ls-ps": {},
+      "LineLoop-ps": {},
+      "LineStrip": {},
+      "LineStrip-inlinearrays": {},
+      "LineStrip-inlinearrays-ls": {},
+      "LineStrip-inlinearrays-ls-ps": {},
+      "LineStrip-inlinearrays-ps": {},
+      "LineStrip-inlinebuf": {},
+      "LineStrip-inlinebuf-ls": {},
+      "LineStrip-inlinebuf-ls-ps": {},
+      "LineStrip-inlinebuf-ps": {},
+      "LineStrip-inlineelements": {},
+      "LineStrip-inlineelements-ls": {},
+      "LineStrip-inlineelements-ls-ps": {},
+      "LineStrip-inlineelements-ps": {},
+      "LineStrip-ls": {},
+      "LineStrip-ls-ps": {},
+      "LineStrip-ps": {},
+      "Lines": {},
+      "Lines-inlinearrays": {},
+      "Lines-inlinearrays-ls": {},
+      "Lines-inlinearrays-ls-ps": {},
+      "Lines-inlinearrays-ps": {},
+      "Lines-inlinebuf": {},
+      "Lines-inlinebuf-ls": {},
+      "Lines-inlinebuf-ls-ps": {},
+      "Lines-inlinebuf-ps": {},
+      "Lines-inlineelements": {},
+      "Lines-inlineelements-ls": {},
+      "Lines-inlineelements-ls-ps": {},
+      "Lines-inlineelements-ps": {},
+      "Lines-ls": {},
+      "Lines-ls-ps": {},
+      "Lines-ps": {},
+      "Points": {},
+      "Points-inlinearrays": {},
+      "Points-inlinearrays-ls": {},
+      "Points-inlinearrays-ls-ps": {},
+      "Points-inlinearrays-ps": {},
+      "Points-inlinebuf": {},
+      "Points-inlinebuf-ls": {},
+      "Points-inlinebuf-ls-ps": {},
+      "Points-inlinebuf-ps": {},
+      "Points-inlineelements": {},
+      "Points-inlineelements-ls": {},
+      "Points-inlineelements-ls-ps": {},
+      "Points-inlineelements-ps": {},
+      "Points-ls": {},
+      "Points-ls-ps": {},
+      "Points-ps": {},
+      "Polygon": {},
+      "Polygon-inlinearrays": {},
+      "Polygon-inlinearrays-ls": {},
+      "Polygon-inlinearrays-ls-ps": {},
+      "Polygon-inlinearrays-ps": {},
+      "Polygon-inlinebuf": {},
+      "Polygon-inlinebuf-ls": {},
+      "Polygon-inlinebuf-ls-ps": {},
+      "Polygon-inlinebuf-ps": {},
+      "Polygon-inlineelements": {},
+      "Polygon-inlineelements-ls": {},
+      "Polygon-inlineelements-ls-ps": {},
+      "Polygon-inlineelements-ps": {},
+      "Polygon-ls": {},
+      "Polygon-ls-ps": {},
+      "Polygon-ps": {},
+      "QuadStrip": {},
+      "QuadStrip-inlinearrays": {},
+      "QuadStrip-inlinearrays-ls": {},
+      "QuadStrip-inlinearrays-ls-ps": {},
+      "QuadStrip-inlinearrays-ps": {},
+      "QuadStrip-inlinebuf": {},
+      "QuadStrip-inlinebuf-ls": {},
+      "QuadStrip-inlinebuf-ls-ps": {},
+      "QuadStrip-inlinebuf-ps": {},
+      "QuadStrip-inlineelements": {},
+      "QuadStrip-inlineelements-ls": {},
+      "QuadStrip-inlineelements-ls-ps": {},
+      "QuadStrip-inlineelements-ps": {},
+      "QuadStrip-ls": {},
+      "QuadStrip-ls-ps": {},
+      "QuadStrip-ps": {},
+      "Quads": {},
+      "Quads-inlinearrays": {},
+      "Quads-inlinearrays-ls": {},
+      "Quads-inlinearrays-ls-ps": {},
+      "Quads-inlinearrays-ps": {},
+      "Quads-inlinebuf": {},
+      "Quads-inlinebuf-ls": {},
+      "Quads-inlinebuf-ls-ps": {},
+      "Quads-inlinebuf-ps": {},
+      "Quads-inlineelements": {},
+      "Quads-inlineelements-ls": {},
+      "Quads-inlineelements-ls-ps": {},
+      "Quads-inlineelements-ps": {},
+      "Quads-ls": {},
+      "Quads-ls-ps": {},
+      "Quads-ps": {},
+      "TriFan": {},
+      "TriFan-inlinearrays": {},
+      "TriFan-inlinearrays-ls": {},
+      "TriFan-inlinearrays-ls-ps": {},
+      "TriFan-inlinearrays-ps": {},
+      "TriFan-inlinebuf": {},
+      "TriFan-inlinebuf-ls": {},
+      "TriFan-inlinebuf-ls-ps": {},
+      "TriFan-inlinebuf-ps": {},
+      "TriFan-inlineelements": {},
+      "TriFan-inlineelements-ls": {},
+      "TriFan-inlineelements-ls-ps": {},
+      "TriFan-inlineelements-ps": {},
+      "TriFan-ls": {},
+      "TriFan-ls-ps": {},
+      "TriFan-ps": {},
+      "TriStrip": {},
+      "TriStrip-inlinearrays": {},
+      "TriStrip-inlinearrays-ls": {},
+      "TriStrip-inlinearrays-ls-ps": {},
+      "TriStrip-inlinearrays-ps": {},
+      "TriStrip-inlinebuf": {},
+      "TriStrip-inlinebuf-ls": {},
+      "TriStrip-inlinebuf-ls-ps": {},
+      "TriStrip-inlinebuf-ps": {},
+      "TriStrip-inlineelements": {},
+      "TriStrip-inlineelements-ls": {},
+      "TriStrip-inlineelements-ls-ps": {},
+      "TriStrip-inlineelements-ps": {},
+      "TriStrip-ls": {},
+      "TriStrip-ls-ps": {},
+      "TriStrip-ps": {},
+      "Triangles": {},
+      "Triangles-inlinearrays": {},
+      "Triangles-inlinearrays-ls": {},
+      "Triangles-inlinearrays-ls-ps": {},
+      "Triangles-inlinearrays-ps": {},
+      "Triangles-inlinebuf": {},
+      "Triangles-inlinebuf-ls": {},
+      "Triangles-inlinebuf-ls-ps": {},
+      "Triangles-inlinebuf-ps": {},
+      "Triangles-inlineelements": {},
+      "Triangles-inlineelements-ls": {},
+      "Triangles-inlineelements-ls-ps": {},
+      "Triangles-inlineelements-ps": {},
+      "Triangles-ls": {},
+      "Triangles-ls-ps": {},
+      "Triangles-ps": {}
     },
     "2D Lines": {
-      "2DLine-R5G5B5-C000003E0-400_200-400_400": {
-      },
-      "2DLine-R5G6B5-C000007E0-400_200-400_400": {
-      },
-      "2DLine-R8G8B8-C00000000-400_200-400_400": {
-      },
-      "2DLine-R8G8B8-C0000FF00-400_200-400_400": {
-      },
-      "2DLine-R8G8B8-C0000FF00-444_222-444_444": {
-      },
-      "2DLine-R8G8B8-C00FF0000-400_200-400_400": {
-      },
-      "2DLine-R8G8B8-C00FFFFFF-0_0-639_479": {
-      },
-      "2DLine-R8G8B8-C00FFFFFF-222_222-222_222": {
-      },
-      "2DLine-R8G8B8-C00FFFFFF-400_0-400_479": {
-      },
-      "2DLine-R8G8B8-C00FFFFFF-400_300-400_301": {
-      },
-      "2DLine-R8G8B8-C00FFFFFF-400_300-401_300": {
-      },
-      "2DLine-R8G8B8-C00FFFFFF-639_479-0_0": {
-      },
-      "2DLine-R8G8B8-CFFFFFFFF-100_100-100_400": {
-      }
+      "2DLine-R5G5B5-C000003E0-400_200-400_400": {},
+      "2DLine-R5G6B5-C000007E0-400_200-400_400": {},
+      "2DLine-R8G8B8-C00000000-400_200-400_400": {},
+      "2DLine-R8G8B8-C0000FF00-400_200-400_400": {},
+      "2DLine-R8G8B8-C0000FF00-444_222-444_444": {},
+      "2DLine-R8G8B8-C00FF0000-400_200-400_400": {},
+      "2DLine-R8G8B8-C00FFFFFF-0_0-639_479": {},
+      "2DLine-R8G8B8-C00FFFFFF-222_222-222_222": {},
+      "2DLine-R8G8B8-C00FFFFFF-400_0-400_479": {},
+      "2DLine-R8G8B8-C00FFFFFF-400_300-400_301": {},
+      "2DLine-R8G8B8-C00FFFFFF-400_300-401_300": {},
+      "2DLine-R8G8B8-C00FFFFFF-639_479-0_0": {},
+      "2DLine-R8G8B8-CFFFFFFFF-100_100-100_400": {}
     },
     "Vertex shader independence tests": {
-      "MAC_ILU_Independence": {
-      }
+      "MAC_ILU_Independence": {}
     },
     "Vertex shader rounding tests": {
-      "AdjacentGeometry_0.0000": {
-      },
-      "AdjacentGeometry_0.0010": {
-      },
-      "AdjacentGeometry_0.4999": {
-      },
-      "AdjacentGeometry_0.5000": {
-      },
-      "AdjacentGeometry_0.5624": {
-      },
-      "AdjacentGeometry_0.5625": {
-      },
-      "AdjacentGeometry_0.5626": {
-      },
-      "AdjacentGeometry_0.9990": {
-      },
-      "AdjacentGeometry_1.0000": {
-      },
-      "Compositing_-2": {
-      },
-      "Compositing_-4": {
-      },
-      "Compositing_2": {
-      },
-      "GeometrySubscreen_0.0000": {
-      },
-      "GeometrySubscreen_0.0010": {
-      },
-      "GeometrySubscreen_0.4999": {
-      },
-      "GeometrySubscreen_0.5000": {
-      },
-      "GeometrySubscreen_0.5624": {
-      },
-      "GeometrySubscreen_0.5625": {
-      },
-      "GeometrySubscreen_0.5626": {
-      },
-      "GeometrySubscreen_0.9990": {
-      },
-      "GeometrySubscreen_1.0000": {
-      },
-      "GeometrySuperscreen_0.0000": {
-      },
-      "GeometrySuperscreen_0.0010": {
-      },
-      "GeometrySuperscreen_0.4999": {
-      },
-      "GeometrySuperscreen_0.5000": {
-      },
-      "GeometrySuperscreen_0.5624": {
-      },
-      "GeometrySuperscreen_0.5625": {
-      },
-      "GeometrySuperscreen_0.5626": {
-      },
-      "GeometrySuperscreen_0.9990": {
-      },
-      "GeometrySuperscreen_1.0000": {
-      },
-      "Geometry_0.0000": {
-      },
-      "Geometry_0.0010": {
-      },
-      "Geometry_0.4999": {
-      },
-      "Geometry_0.5000": {
-      },
-      "Geometry_0.5624": {
-      },
-      "Geometry_0.5625": {
-      },
-      "Geometry_0.5626": {
-      },
-      "Geometry_0.9990": {
-      },
-      "Geometry_1.0000": {
-      },
-      "ProjAdjacentGeometry_0.0000": {
-      },
-      "ProjAdjacentGeometry_0.0010": {
-      },
-      "ProjAdjacentGeometry_0.4999": {
-      },
-      "ProjAdjacentGeometry_0.5000": {
-      },
-      "ProjAdjacentGeometry_0.5624": {
-      },
-      "ProjAdjacentGeometry_0.5625": {
-      },
-      "ProjAdjacentGeometry_0.5626": {
-      },
-      "ProjAdjacentGeometry_0.9990": {
-      },
-      "ProjAdjacentGeometry_1.0000": {
-      },
-      "RenderTarget": {
-      }
+      "AdjacentGeometry_0.0000": {},
+      "AdjacentGeometry_0.0010": {},
+      "AdjacentGeometry_0.4999": {},
+      "AdjacentGeometry_0.5000": {},
+      "AdjacentGeometry_0.5624": {},
+      "AdjacentGeometry_0.5625": {},
+      "AdjacentGeometry_0.5626": {},
+      "AdjacentGeometry_0.9990": {},
+      "AdjacentGeometry_1.0000": {},
+      "Compositing_-2": {},
+      "Compositing_-4": {},
+      "Compositing_2": {},
+      "GeometrySubscreen_0.0000": {},
+      "GeometrySubscreen_0.0010": {},
+      "GeometrySubscreen_0.4999": {},
+      "GeometrySubscreen_0.5000": {},
+      "GeometrySubscreen_0.5624": {},
+      "GeometrySubscreen_0.5625": {},
+      "GeometrySubscreen_0.5626": {},
+      "GeometrySubscreen_0.9990": {},
+      "GeometrySubscreen_1.0000": {},
+      "GeometrySuperscreen_0.0000": {},
+      "GeometrySuperscreen_0.0010": {},
+      "GeometrySuperscreen_0.4999": {},
+      "GeometrySuperscreen_0.5000": {},
+      "GeometrySuperscreen_0.5624": {},
+      "GeometrySuperscreen_0.5625": {},
+      "GeometrySuperscreen_0.5626": {},
+      "GeometrySuperscreen_0.9990": {},
+      "GeometrySuperscreen_1.0000": {},
+      "Geometry_0.0000": {},
+      "Geometry_0.0010": {},
+      "Geometry_0.4999": {},
+      "Geometry_0.5000": {},
+      "Geometry_0.5624": {},
+      "Geometry_0.5625": {},
+      "Geometry_0.5626": {},
+      "Geometry_0.9990": {},
+      "Geometry_1.0000": {},
+      "ProjAdjacentGeometry_0.0000": {},
+      "ProjAdjacentGeometry_0.0010": {},
+      "ProjAdjacentGeometry_0.4999": {},
+      "ProjAdjacentGeometry_0.5000": {},
+      "ProjAdjacentGeometry_0.5624": {},
+      "ProjAdjacentGeometry_0.5625": {},
+      "ProjAdjacentGeometry_0.5626": {},
+      "ProjAdjacentGeometry_0.9990": {},
+      "ProjAdjacentGeometry_1.0000": {},
+      "RenderTarget": {}
     },
     "Vertex shader swizzle tests": {
-      "Control": {
-      },
-      "ControlNA": {
-      },
-      "kTestMov00": {
-      },
-      "kTestMov01": {
-      },
-      "kTestMov02": {
-      },
-      "kTestMov03": {
-      },
-      "kTestMov04": {
-      },
-      "kTestMov05": {
-      },
-      "kTestMov06": {
-      },
-      "kTestMov07": {
-      },
-      "kTestMov08": {
-      },
-      "kTestMov09": {
-      },
-      "kTestMov10": {
-      },
-      "kTestMov11": {
-      },
-      "kTestMov12": {
-      },
-      "kTestMov13": {
-      },
-      "kTestMov14": {
-      },
-      "kTestMov15": {
-      },
-      "kTestMov16": {
-      },
-      "kTestNAMov00": {
-      },
-      "kTestNAMov01": {
-      },
-      "kTestNAMov02": {
-      },
-      "kTestNAMov03": {
-      },
-      "kTestNAMov04": {
-      },
-      "kTestNAMov05": {
-      },
-      "kTestNAMov06": {
-      },
-      "kTestNAMov07": {
-      },
-      "kTestNAMov08": {
-      },
-      "kTestNAMov09": {
-      }
+      "Control": {},
+      "ControlNA": {},
+      "kTestMov00": {},
+      "kTestMov01": {},
+      "kTestMov02": {},
+      "kTestMov03": {},
+      "kTestMov04": {},
+      "kTestMov05": {},
+      "kTestMov06": {},
+      "kTestMov07": {},
+      "kTestMov08": {},
+      "kTestMov09": {},
+      "kTestMov10": {},
+      "kTestMov11": {},
+      "kTestMov12": {},
+      "kTestMov13": {},
+      "kTestMov14": {},
+      "kTestMov15": {},
+      "kTestMov16": {},
+      "kTestNAMov00": {},
+      "kTestNAMov01": {},
+      "kTestNAMov02": {},
+      "kTestNAMov03": {},
+      "kTestNAMov04": {},
+      "kTestNAMov05": {},
+      "kTestNAMov06": {},
+      "kTestNAMov07": {},
+      "kTestNAMov08": {},
+      "kTestNAMov09": {}
     },
     "Viewport": {
-      "-0.438_-0.438-0.000_0.000": {
-      },
-      "-0.531_-0.531-0.000_0.000": {
-      },
-      "-0.531_-0.531-2.000_0.000": {
-      },
-      "-1.000_-1.000-0.000_0.000": {
-      },
-      "-1.000_-1.000-2.000_0.000": {
-      },
-      "0.000_0.000-0.000_0.000": {
-      },
-      "0.000_0.000-2.000_0.000": {
-      },
-      "0.531_0.531-0.000_0.000": {
-      },
-      "0.531_0.531-2.000_0.000": {
-      },
-      "0.562_0.562-0.000_0.000": {
-      },
-      "1.000_1.000-0.000_0.000": {
-      },
-      "1.000_1.000-2.000_0.000": {
-      }
+      "-0.438_-0.438-0.000_0.000": {},
+      "-0.531_-0.531-0.000_0.000": {},
+      "-0.531_-0.531-2.000_0.000": {},
+      "-1.000_-1.000-0.000_0.000": {},
+      "-1.000_-1.000-2.000_0.000": {},
+      "0.000_0.000-0.000_0.000": {},
+      "0.000_0.000-2.000_0.000": {},
+      "0.531_0.531-0.000_0.000": {},
+      "0.531_0.531-2.000_0.000": {},
+      "0.562_0.562-0.000_0.000": {},
+      "1.000_1.000-0.000_0.000": {},
+      "1.000_1.000-2.000_0.000": {}
     },
     "Volume texture": {
-      "A1R5G5B5": {
-      },
-      "A4R4G4B4": {
-      },
-      "A8B8G8R8": {
-      },
-      "A8R8G8B8": {
-      },
-      "A8Y8": {
-      },
-      "AY8": {
-      },
-      "B8G8R8A8": {
-      },
-      "DXT1": {
-      },
-      "G8B8": {
-      },
-      "R5G6B5": {
-      },
-      "R8B8": {
-      },
-      "R8G8B8A8": {
-      },
-      "SZ_Index8": {
-      },
-      "X1R5G5B5": {
-      },
-      "X8R8G8B8": {
-      },
-      "Y8": {
-      }
+      "A1R5G5B5": {},
+      "A4R4G4B4": {},
+      "A8B8G8R8": {},
+      "A8R8G8B8": {},
+      "A8Y8": {},
+      "AY8": {},
+      "B8G8R8A8": {},
+      "DXT1": {},
+      "G8B8": {},
+      "R5G6B5": {},
+      "R8B8": {},
+      "R8G8B8A8": {},
+      "SZ_Index8": {},
+      "X1R5G5B5": {},
+      "X8R8G8B8": {},
+      "Y8": {}
     },
     "W param": {
-      "ff_w_zero__bitri": {
-      },
-      "ff_w_zero__quad": {
-      },
-      "w_gaps": {
-      },
-      "w_neg_strip": {
-      },
-      "w_pos_strip": {
-      }
+      "ff_w_zero__bitri": {},
+      "ff_w_zero__quad": {},
+      "w_gaps": {},
+      "w_neg_strip": {},
+      "w_pos_strip": {}
     },
     "Window clip": {
-      "E_x0y0_w0h0-x0y0_w0h0": {
-      },
-      "E_x0y0_w0h0-x16y16_w8h8": {
-      },
-      "E_x0y0_w128h128-x0y0_w0h0": {
-      },
-      "E_x0y0_w128h128-x16y16_w8h8": {
-      },
-      "E_x0y0_w1h1-x0y0_w0h0": {
-      },
-      "E_x0y0_w1h1-x16y16_w8h8": {
-      },
-      "E_x0y0_w255h255-x0y0_w0h0": {
-      },
-      "E_x0y0_w255h255-x16y16_w8h8": {
-      },
-      "E_x0y0_w256h256-x0y0_w0h0": {
-      },
-      "E_x0y0_w256h256-x16y16_w8h8": {
-      },
-      "E_x1y1_w253h253-x0y0_w0h0": {
-      },
-      "E_x1y1_w253h253-x16y16_w8h8": {
-      },
-      "E_x1y1_w254h254-x0y0_w0h0": {
-      },
-      "E_x1y1_w254h254-x16y16_w8h8": {
-      },
-      "E_x255y255_w1h1-x0y0_w0h0": {
-      },
-      "E_x255y255_w1h1-x16y16_w8h8": {
-      },
-      "E_x256y256_w1h1-x0y0_w0h0": {
-      },
-      "E_x256y256_w1h1-x16y16_w8h8": {
-      },
-      "E_x8y16_w3840h3840-x0y0_w0h0": {
-      },
-      "E_x8y16_w3840h3840-x16y16_w8h8": {
-      },
-      "E_x96y96_w64h64-x0y0_w0h0": {
-      },
-      "E_x96y96_w64h64-x16y16_w8h8": {
-      },
-      "I_x0y0_w0h0-x0y0_w0h0": {
-      },
-      "I_x0y0_w0h0-x16y16_w8h8": {
-      },
-      "I_x0y0_w128h128-x0y0_w0h0": {
-      },
-      "I_x0y0_w128h128-x16y16_w8h8": {
-      },
-      "I_x0y0_w1h1-x0y0_w0h0": {
-      },
-      "I_x0y0_w1h1-x16y16_w8h8": {
-      },
-      "I_x0y0_w255h255-x0y0_w0h0": {
-      },
-      "I_x0y0_w255h255-x16y16_w8h8": {
-      },
-      "I_x0y0_w256h256-x0y0_w0h0": {
-      },
-      "I_x0y0_w256h256-x16y16_w8h8": {
-      },
-      "I_x1y1_w253h253-x0y0_w0h0": {
-      },
-      "I_x1y1_w253h253-x16y16_w8h8": {
-      },
-      "I_x1y1_w254h254-x0y0_w0h0": {
-      },
-      "I_x1y1_w254h254-x16y16_w8h8": {
-      },
-      "I_x255y255_w1h1-x0y0_w0h0": {
-      },
-      "I_x255y255_w1h1-x16y16_w8h8": {
-      },
-      "I_x256y256_w1h1-x0y0_w0h0": {
-      },
-      "I_x256y256_w1h1-x16y16_w8h8": {
-      },
-      "I_x8y16_w3840h3840-x0y0_w0h0": {
-      },
-      "I_x8y16_w3840h3840-x16y16_w8h8": {
-      },
-      "I_x96y96_w64h64-x0y0_w0h0": {
-      },
-      "I_x96y96_w64h64-x16y16_w8h8": {
-      },
-      "rE_x0y0_w0h0-x0y0_w0h0": {
-      },
-      "rE_x0y0_w0h0-x16y16_w8h8": {
-      },
-      "rE_x0y0_w128h128-x0y0_w0h0": {
-      },
-      "rE_x0y0_w128h128-x16y16_w8h8": {
-      },
-      "rE_x0y0_w1h1-x0y0_w0h0": {
-      },
-      "rE_x0y0_w1h1-x16y16_w8h8": {
-      },
-      "rE_x0y0_w255h255-x0y0_w0h0": {
-      },
-      "rE_x0y0_w255h255-x16y16_w8h8": {
-      },
-      "rE_x0y0_w256h256-x0y0_w0h0": {
-      },
-      "rE_x0y0_w256h256-x16y16_w8h8": {
-      },
-      "rE_x1y1_w253h253-x0y0_w0h0": {
-      },
-      "rE_x1y1_w253h253-x16y16_w8h8": {
-      },
-      "rE_x1y1_w254h254-x0y0_w0h0": {
-      },
-      "rE_x1y1_w254h254-x16y16_w8h8": {
-      },
-      "rE_x255y255_w1h1-x0y0_w0h0": {
-      },
-      "rE_x255y255_w1h1-x16y16_w8h8": {
-      },
-      "rE_x256y256_w1h1-x0y0_w0h0": {
-      },
-      "rE_x256y256_w1h1-x16y16_w8h8": {
-      },
-      "rE_x8y16_w3840h3840-x0y0_w0h0": {
-      },
-      "rE_x8y16_w3840h3840-x16y16_w8h8": {
-      },
-      "rE_x96y96_w64h64-x0y0_w0h0": {
-      },
-      "rE_x96y96_w64h64-x16y16_w8h8": {
-      },
-      "rI_x0y0_w0h0-x0y0_w0h0": {
-      },
-      "rI_x0y0_w0h0-x16y16_w8h8": {
-      },
-      "rI_x0y0_w128h128-x0y0_w0h0": {
-      },
-      "rI_x0y0_w128h128-x16y16_w8h8": {
-      },
-      "rI_x0y0_w1h1-x0y0_w0h0": {
-      },
-      "rI_x0y0_w1h1-x16y16_w8h8": {
-      },
-      "rI_x0y0_w255h255-x0y0_w0h0": {
-      },
-      "rI_x0y0_w255h255-x16y16_w8h8": {
-      },
-      "rI_x0y0_w256h256-x0y0_w0h0": {
-      },
-      "rI_x0y0_w256h256-x16y16_w8h8": {
-      },
-      "rI_x1y1_w253h253-x0y0_w0h0": {
-      },
-      "rI_x1y1_w253h253-x16y16_w8h8": {
-      },
-      "rI_x1y1_w254h254-x0y0_w0h0": {
-      },
-      "rI_x1y1_w254h254-x16y16_w8h8": {
-      },
-      "rI_x255y255_w1h1-x0y0_w0h0": {
-      },
-      "rI_x255y255_w1h1-x16y16_w8h8": {
-      },
-      "rI_x256y256_w1h1-x0y0_w0h0": {
-      },
-      "rI_x256y256_w1h1-x16y16_w8h8": {
-      },
-      "rI_x8y16_w3840h3840-x0y0_w0h0": {
-      },
-      "rI_x8y16_w3840h3840-x16y16_w8h8": {
-      },
-      "rI_x96y96_w64h64-x0y0_w0h0": {
-      },
-      "rI_x96y96_w64h64-x16y16_w8h8": {
-      },
-      "rsE_x60y60_w64h64-x0y0_w64h64": {
-      },
-      "rsI_x60y60_w64h64-x0y0_w64h64": {
-      },
-      "sE_x60y60_w64h64-x0y0_w64h64": {
-      },
-      "sI_x60y60_w64h64-x0y0_w64h64": {
-      }
+      "E_x0y0_w0h0-x0y0_w0h0": {},
+      "E_x0y0_w0h0-x16y16_w8h8": {},
+      "E_x0y0_w128h128-x0y0_w0h0": {},
+      "E_x0y0_w128h128-x16y16_w8h8": {},
+      "E_x0y0_w1h1-x0y0_w0h0": {},
+      "E_x0y0_w1h1-x16y16_w8h8": {},
+      "E_x0y0_w255h255-x0y0_w0h0": {},
+      "E_x0y0_w255h255-x16y16_w8h8": {},
+      "E_x0y0_w256h256-x0y0_w0h0": {},
+      "E_x0y0_w256h256-x16y16_w8h8": {},
+      "E_x1y1_w253h253-x0y0_w0h0": {},
+      "E_x1y1_w253h253-x16y16_w8h8": {},
+      "E_x1y1_w254h254-x0y0_w0h0": {},
+      "E_x1y1_w254h254-x16y16_w8h8": {},
+      "E_x255y255_w1h1-x0y0_w0h0": {},
+      "E_x255y255_w1h1-x16y16_w8h8": {},
+      "E_x256y256_w1h1-x0y0_w0h0": {},
+      "E_x256y256_w1h1-x16y16_w8h8": {},
+      "E_x8y16_w3840h3840-x0y0_w0h0": {},
+      "E_x8y16_w3840h3840-x16y16_w8h8": {},
+      "E_x96y96_w64h64-x0y0_w0h0": {},
+      "E_x96y96_w64h64-x16y16_w8h8": {},
+      "I_x0y0_w0h0-x0y0_w0h0": {},
+      "I_x0y0_w0h0-x16y16_w8h8": {},
+      "I_x0y0_w128h128-x0y0_w0h0": {},
+      "I_x0y0_w128h128-x16y16_w8h8": {},
+      "I_x0y0_w1h1-x0y0_w0h0": {},
+      "I_x0y0_w1h1-x16y16_w8h8": {},
+      "I_x0y0_w255h255-x0y0_w0h0": {},
+      "I_x0y0_w255h255-x16y16_w8h8": {},
+      "I_x0y0_w256h256-x0y0_w0h0": {},
+      "I_x0y0_w256h256-x16y16_w8h8": {},
+      "I_x1y1_w253h253-x0y0_w0h0": {},
+      "I_x1y1_w253h253-x16y16_w8h8": {},
+      "I_x1y1_w254h254-x0y0_w0h0": {},
+      "I_x1y1_w254h254-x16y16_w8h8": {},
+      "I_x255y255_w1h1-x0y0_w0h0": {},
+      "I_x255y255_w1h1-x16y16_w8h8": {},
+      "I_x256y256_w1h1-x0y0_w0h0": {},
+      "I_x256y256_w1h1-x16y16_w8h8": {},
+      "I_x8y16_w3840h3840-x0y0_w0h0": {},
+      "I_x8y16_w3840h3840-x16y16_w8h8": {},
+      "I_x96y96_w64h64-x0y0_w0h0": {},
+      "I_x96y96_w64h64-x16y16_w8h8": {},
+      "rE_x0y0_w0h0-x0y0_w0h0": {},
+      "rE_x0y0_w0h0-x16y16_w8h8": {},
+      "rE_x0y0_w128h128-x0y0_w0h0": {},
+      "rE_x0y0_w128h128-x16y16_w8h8": {},
+      "rE_x0y0_w1h1-x0y0_w0h0": {},
+      "rE_x0y0_w1h1-x16y16_w8h8": {},
+      "rE_x0y0_w255h255-x0y0_w0h0": {},
+      "rE_x0y0_w255h255-x16y16_w8h8": {},
+      "rE_x0y0_w256h256-x0y0_w0h0": {},
+      "rE_x0y0_w256h256-x16y16_w8h8": {},
+      "rE_x1y1_w253h253-x0y0_w0h0": {},
+      "rE_x1y1_w253h253-x16y16_w8h8": {},
+      "rE_x1y1_w254h254-x0y0_w0h0": {},
+      "rE_x1y1_w254h254-x16y16_w8h8": {},
+      "rE_x255y255_w1h1-x0y0_w0h0": {},
+      "rE_x255y255_w1h1-x16y16_w8h8": {},
+      "rE_x256y256_w1h1-x0y0_w0h0": {},
+      "rE_x256y256_w1h1-x16y16_w8h8": {},
+      "rE_x8y16_w3840h3840-x0y0_w0h0": {},
+      "rE_x8y16_w3840h3840-x16y16_w8h8": {},
+      "rE_x96y96_w64h64-x0y0_w0h0": {},
+      "rE_x96y96_w64h64-x16y16_w8h8": {},
+      "rI_x0y0_w0h0-x0y0_w0h0": {},
+      "rI_x0y0_w0h0-x16y16_w8h8": {},
+      "rI_x0y0_w128h128-x0y0_w0h0": {},
+      "rI_x0y0_w128h128-x16y16_w8h8": {},
+      "rI_x0y0_w1h1-x0y0_w0h0": {},
+      "rI_x0y0_w1h1-x16y16_w8h8": {},
+      "rI_x0y0_w255h255-x0y0_w0h0": {},
+      "rI_x0y0_w255h255-x16y16_w8h8": {},
+      "rI_x0y0_w256h256-x0y0_w0h0": {},
+      "rI_x0y0_w256h256-x16y16_w8h8": {},
+      "rI_x1y1_w253h253-x0y0_w0h0": {},
+      "rI_x1y1_w253h253-x16y16_w8h8": {},
+      "rI_x1y1_w254h254-x0y0_w0h0": {},
+      "rI_x1y1_w254h254-x16y16_w8h8": {},
+      "rI_x255y255_w1h1-x0y0_w0h0": {},
+      "rI_x255y255_w1h1-x16y16_w8h8": {},
+      "rI_x256y256_w1h1-x0y0_w0h0": {},
+      "rI_x256y256_w1h1-x16y16_w8h8": {},
+      "rI_x8y16_w3840h3840-x0y0_w0h0": {},
+      "rI_x8y16_w3840h3840-x16y16_w8h8": {},
+      "rI_x96y96_w64h64-x0y0_w0h0": {},
+      "rI_x96y96_w64h64-x16y16_w8h8": {},
+      "rsE_x60y60_w64h64-x0y0_w64h64": {},
+      "rsI_x60y60_w64h64-x0y0_w64h64": {},
+      "sE_x60y60_w64h64-x0y0_w64h64": {},
+      "sI_x60y60_w64h64-x0y0_w64h64": {}
     },
     "ZMinMaxControl": {
-      "CtrlFixed_NEARFAR_ZCLAMP": {
-      },
-      "CtrlFixed_NEARFAR_ZCLAMP_IgnW": {
-      },
-      "CtrlFixed_NEARFAR_ZCULL": {
-      },
-      "CtrlFixed_NEARFAR_ZCULL_IgnW": {
-      },
-      "CtrlFixed_WBuf_NEARFAR_ZCLAMP": {
-      },
-      "CtrlFixed_WBuf_NEARFAR_ZCLAMP_IgnW": {
-      },
-      "CtrlFixed_WBuf_NEARFAR_ZCULL": {
-      },
-      "CtrlFixed_WBuf_NEARFAR_ZCULL_IgnW": {
-      },
-      "CtrlFixed_WBuf_ZCLAMP": {
-      },
-      "CtrlFixed_WBuf_ZCLAMP_IgnW": {
-      },
-      "CtrlFixed_WBuf_ZCULL": {
-      },
-      "CtrlFixed_WBuf_ZCULL_IgnW": {
-      },
-      "CtrlFixed_ZCLAMP": {
-      },
-      "CtrlFixed_ZCLAMP_IgnW": {
-      },
-      "CtrlFixed_ZCULL": {
-      },
-      "CtrlFixed_ZCULL_IgnW": {
-      },
-      "Ctrl_NEARFAR_ZCLAMP": {
-      },
-      "Ctrl_NEARFAR_ZCLAMP_IgnW": {
-      },
-      "Ctrl_NEARFAR_ZCULL": {
-      },
-      "Ctrl_NEARFAR_ZCULL_IgnW": {
-      },
-      "Ctrl_WBuf_NEARFAR_ZCLAMP": {
-      },
-      "Ctrl_WBuf_NEARFAR_ZCLAMP_IgnW": {
-      },
-      "Ctrl_WBuf_NEARFAR_ZCULL": {
-      },
-      "Ctrl_WBuf_NEARFAR_ZCULL_IgnW": {
-      },
-      "Ctrl_WBuf_ZCLAMP": {
-      },
-      "Ctrl_WBuf_ZCLAMP_IgnW": {
-      },
-      "Ctrl_WBuf_ZCULL": {
-      },
-      "Ctrl_WBuf_ZCULL_IgnW": {
-      },
-      "Ctrl_ZCLAMP": {
-      },
-      "Ctrl_ZCLAMP_IgnW": {
-      },
-      "Ctrl_ZCULL": {
-      },
-      "Ctrl_ZCULL_IgnW": {
-      }
+      "CtrlFixed_NEARFAR_ZCLAMP": {},
+      "CtrlFixed_NEARFAR_ZCLAMP_IgnW": {},
+      "CtrlFixed_NEARFAR_ZCULL": {},
+      "CtrlFixed_NEARFAR_ZCULL_IgnW": {},
+      "CtrlFixed_WBuf_NEARFAR_ZCLAMP": {},
+      "CtrlFixed_WBuf_NEARFAR_ZCLAMP_IgnW": {},
+      "CtrlFixed_WBuf_NEARFAR_ZCULL": {},
+      "CtrlFixed_WBuf_NEARFAR_ZCULL_IgnW": {},
+      "CtrlFixed_WBuf_ZCLAMP": {},
+      "CtrlFixed_WBuf_ZCLAMP_IgnW": {},
+      "CtrlFixed_WBuf_ZCULL": {},
+      "CtrlFixed_WBuf_ZCULL_IgnW": {},
+      "CtrlFixed_ZCLAMP": {},
+      "CtrlFixed_ZCLAMP_IgnW": {},
+      "CtrlFixed_ZCULL": {},
+      "CtrlFixed_ZCULL_IgnW": {},
+      "Ctrl_NEARFAR_ZCLAMP": {},
+      "Ctrl_NEARFAR_ZCLAMP_IgnW": {},
+      "Ctrl_NEARFAR_ZCULL": {},
+      "Ctrl_NEARFAR_ZCULL_IgnW": {},
+      "Ctrl_WBuf_NEARFAR_ZCLAMP": {},
+      "Ctrl_WBuf_NEARFAR_ZCLAMP_IgnW": {},
+      "Ctrl_WBuf_NEARFAR_ZCULL": {},
+      "Ctrl_WBuf_NEARFAR_ZCULL_IgnW": {},
+      "Ctrl_WBuf_ZCLAMP": {},
+      "Ctrl_WBuf_ZCLAMP_IgnW": {},
+      "Ctrl_WBuf_ZCULL": {},
+      "Ctrl_WBuf_ZCULL_IgnW": {},
+      "Ctrl_ZCLAMP": {},
+      "Ctrl_ZCLAMP_IgnW": {},
+      "Ctrl_ZCULL": {},
+      "Ctrl_ZCULL_IgnW": {}
     },
     "Zero stride": {
-      "DrawArrays": {
-      },
-      "InlineElements": {
-      }
+      "DrawArrays": {},
+      "InlineElements": {}
     }
   }
 }

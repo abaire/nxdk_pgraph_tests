@@ -16,12 +16,16 @@
 #pragma clang diagnostic ignored "-Wmacro-redefined"
 #include <windows.h>
 #pragma clang diagnostic pop
+#include <lwip/inet.h>
+#include <lwip/netif.h>
+#include <nxdk/net.h>
 
 #include <algorithm>
 #include <fstream>
 #include <map>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "configure.h"
@@ -107,10 +111,11 @@ static bool EnsureDriveMounted(char drive_letter);
 static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors);
 #ifdef DUMP_CONFIG_FILE
 static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites);
-#endif
+#else
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites);
+#endif
 static void RegisterSuites(TestHost& host, RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites,
-                           const std::string& output_directory);
+                           const std::string& output_directory, std::shared_ptr<FTPLogger> ftp_logger);
 static void Shutdown();
 #ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 static bool DiscoverHistoricalCrashes(const std::string& log_file_path,
@@ -140,6 +145,7 @@ int main() {
     debugPrint("%s", SDL_GetError());
     pb_show_debug_screen();
     Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
     return 1;
   }
 
@@ -147,6 +153,7 @@ int main() {
     debugPrint("Failed to initialize SDL_image PNG mode.");
     pb_show_debug_screen();
     Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
     return 1;
   }
 
@@ -169,14 +176,55 @@ int main() {
                config.output_directory_path().c_str());
     pb_show_debug_screen();
     Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
     return 1;
   };
 
   TestHost::EnsureFolderExists(config.output_directory_path());
-  TestHost host(kFramebufferWidth, kFramebufferHeight, kTextureWidth, kTextureHeight);
 
   std::vector<std::shared_ptr<TestSuite>> test_suites;
-  RegisterSuites(host, config, test_suites, config.output_directory_path());
+  std::shared_ptr<FTPLogger> ftp_logger;
+#ifndef DUMP_CONFIG_FILE
+  auto network_config_mode = config.network_config_mode();
+  if (network_config_mode != RuntimeConfig::NetworkConfigMode::OFF) {
+    debugPrint("Initializing network...\n");
+    pb_show_debug_screen();
+
+    nx_net_mode_t network_mode = NX_NET_AUTO;
+    if (network_config_mode == RuntimeConfig::NetworkConfigMode::DHCP) {
+      network_mode = NX_NET_DHCP;
+    } else if (network_config_mode == RuntimeConfig::NetworkConfigMode::STATIC) {
+      network_mode = NX_NET_STATIC;
+    }
+
+    nx_net_parameters_t network_config{network_mode,
+                                       network_mode,
+                                       config.static_ip(),
+                                       config.static_gateway(),
+                                       config.static_netmask(),
+                                       config.static_dns_1(),
+                                       config.static_dns_2()};
+    int net_init_result = nxNetInit(&network_config);
+    if (net_init_result) {
+      debugPrint("nxNetInit failed: %d\n", net_init_result);
+      pb_show_debug_screen();
+      Sleep(kDelayOnFailureMilliseconds);
+      pb_kill();
+      return 1;
+    }
+
+    debugPrint("Network initialized: %s\n", ip4addr_ntoa(netif_ip4_addr(netif_default)));
+    pb_show_debug_screen();
+
+    if (config.ftp_server_ip()) {
+      ftp_logger = std::make_shared<FTPLogger>(config.ftp_server_ip(), config.ftp_server_port(), config.ftp_user(),
+                                               config.ftp_password(), config.ftp_timeout_milliseconds());
+    }
+  }
+#endif  // #ifndef DUMP_CONFIG_FILE
+
+  TestHost host(ftp_logger, kFramebufferWidth, kFramebufferHeight, kTextureWidth, kTextureHeight);
+  RegisterSuites(host, config, test_suites, config.output_directory_path(), ftp_logger);
 
 #ifdef DUMP_CONFIG_FILE
   debugPrint("Dumping config file and exiting due to DUMP_CONFIG_FILE option.\n");
@@ -191,9 +239,11 @@ int main() {
         debugPrint("%s\n", err.c_str());
       }
       Sleep(kDelayOnFailureMilliseconds);
+      pb_kill();
       return 1;
     }
   }
+
   pb_show_front_screen();
   RunTests(config, host, test_suites);
 #endif  // DUMP_CONFIG_FILE
@@ -255,7 +305,7 @@ static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSu
   Sleep(4000);
   Shutdown();
 }
-#endif
+#else
 
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   std::map<std::string, std::set<std::string>> historical_crashes;
@@ -311,6 +361,7 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
     Sleep(4000);
   }
 }
+#endif  // DUMP_CONFIG_FILE
 
 #ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 static bool DiscoverHistoricalCrashes(const std::string& log_file_path,
@@ -405,9 +456,10 @@ static void Shutdown() {
 }
 
 static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
-                           std::vector<std::shared_ptr<TestSuite>>& test_suites, const std::string& output_directory) {
+                           std::vector<std::shared_ptr<TestSuite>>& test_suites, const std::string& output_directory,
+                           std::shared_ptr<FTPLogger> ftp_logger) {
   auto config = TestSuite::Config{runtime_config.enable_progress_log(), runtime_config.enable_pgraph_region_diff(),
-                                  runtime_config.delay_milliseconds_between_tests()};
+                                  runtime_config.delay_milliseconds_between_tests(), std::move(ftp_logger)};
 
 #define REG_TEST(CLASS_NAME)                                                   \
   {                                                                            \

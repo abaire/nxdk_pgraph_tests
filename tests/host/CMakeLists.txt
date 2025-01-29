@@ -1,5 +1,10 @@
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/host-toolchain.cmake)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(_CMAKE_PROCESSING_LANGUAGE "CXX")
+
 include(FetchContent)
 FetchContent_Declare(
         googletest
