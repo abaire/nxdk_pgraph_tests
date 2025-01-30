@@ -39,7 +39,10 @@ class FTPLogger {
 
   bool IsConnected() const;
 
+  //! Truncate the remote file with the given name and set its content.
   bool WriteFile(const std::string& filename, const std::string& content);
+  //! Append the given content to the remote file with the given name.
+  bool AppendFile(const std::string& filename, const std::string& content);
 
   bool PutFile(const std::string& local_filename, const std::string& remote_filename = "");
 
