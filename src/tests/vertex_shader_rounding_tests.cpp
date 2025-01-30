@@ -136,7 +136,7 @@ void VertexShaderRoundingTests::TestGeometry(float bias) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
@@ -265,7 +265,7 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
@@ -396,7 +396,7 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 void VertexShaderRoundingTests::TestRenderTarget() {
@@ -525,7 +525,7 @@ void VertexShaderRoundingTests::TestRenderTarget() {
   pb_print("%s\n", kTestRenderTargetName);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestRenderTargetName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestRenderTargetName);
 }
 
 void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
@@ -645,7 +645,7 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void VertexShaderRoundingTests::TestAdjacentGeometry(float bias) {
@@ -704,7 +704,7 @@ void VertexShaderRoundingTests::TestAdjacentGeometry(float bias) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
@@ -852,7 +852,7 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 static std::string MakeGeometryTestName(const char *prefix, float bias) {

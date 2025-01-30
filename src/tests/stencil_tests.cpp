@@ -111,7 +111,7 @@ void StencilTests::Test(const StencilParams &params) {
 
   std::string name = MakeTestName(params);
   std::string z_name = name + "_ZB";
-  host_.FinishDraw(allow_saving_, output_dir_, name, z_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, z_name);
 
   // Restore pgraph register 0x880
   *crash_register = crash_register_pre_test;

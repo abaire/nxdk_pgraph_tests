@@ -160,7 +160,7 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 std::string FogTests::MakeTestName(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, uint32_t fog_alpha) {
@@ -428,7 +428,7 @@ void FogVec4CoordTests::Test(const TestConfig& config) {
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void FogVec4CoordTests::TestUnset() {
@@ -460,7 +460,7 @@ void FogVec4CoordTests::TestUnset() {
   pb_print("%s\n", kUnsetTest);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kUnsetTest);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kUnsetTest);
 }
 
 void FogVec4CoordTests::SetShader(const FogVec4CoordTests::TestConfig& config) const {

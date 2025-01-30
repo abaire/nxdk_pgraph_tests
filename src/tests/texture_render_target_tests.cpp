@@ -209,7 +209,7 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
   pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 
   TestHost::SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   TestHost::SetViewportOffset(0.531250f, 0.531250f, 0, 0);
@@ -274,7 +274,7 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
   pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 std::string TextureRenderTargetTests::MakeTestName(const TextureFormatInfo &texture_format) {

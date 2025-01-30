@@ -473,7 +473,7 @@ void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t
   pb_print("Ref, edges, center: 0x%X\n", ref);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void TextureShadowComparatorTests::TestFixedFunction(uint32_t depth_format, bool float_depth, uint32_t texture_format,
@@ -767,5 +767,5 @@ void TextureShadowComparatorTests::TestProjected(
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }

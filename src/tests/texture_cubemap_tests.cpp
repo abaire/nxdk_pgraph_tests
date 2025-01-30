@@ -193,7 +193,7 @@ void TextureCubemapTests::TestCubemap() {
   pb_print("%s\n", kCubemapTest);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kCubemapTest);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kCubemapTest);
 }
 
 void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping) {
@@ -301,7 +301,7 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 static void GenerateCubemap(uint8_t *buffer) {

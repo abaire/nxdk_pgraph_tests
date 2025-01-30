@@ -329,8 +329,8 @@ class TestHost {
   void DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = kDefaultVertexFields,
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
-  void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
-                  const std::string &z_buffer_name = "");
+  void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &suite_name,
+                  const std::string &name, const std::string &z_buffer_name = "");
 
   void SetDepthClip(float min, float max) const;
 

@@ -99,7 +99,7 @@ void ClearTests::Test(uint32_t color_mask, bool depth_write_enable) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(color_mask, depth_write_enable);
-  host_.FinishDraw(allow_saving_, output_dir_, name, name + "_ZB");
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, name + "_ZB");
 }
 
 std::string ClearTests::MakeTestName(uint32_t color_mask, bool depth_write_enable) {

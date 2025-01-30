@@ -252,7 +252,7 @@ void ColorKeyTests::TestFixedFunction(const std::string& name, uint32_t mode, bo
   pb_printat(9, 0, (char*)"      aRGB|xRGB, Axxx|axxx          ARGB2|argb2  ARGB3|argb3");
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 static void SetShader(TestHost& host_) {
@@ -284,7 +284,7 @@ void ColorKeyTests::Test(const std::string& name, uint32_t mode, bool alpha_from
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void ColorKeyTests::TestUnsampled(const std::string& name) {
@@ -325,7 +325,7 @@ void ColorKeyTests::TestUnsampled(const std::string& name) {
   pb_printat(12, 35, (char*)"CK0: 0x%08X", kColorKeys[0]);
   pb_printat(13, 35, (char*)"CK1: 0x%08X", tex1_color_key);
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void ColorKeyTests::SetupTextureStage(uint32_t stage, uint32_t mode) const {

@@ -245,7 +245,7 @@ void PvideoTests::TestStopBehavior() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kStopBehavior);
+  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehavior);
 }
 
 void PvideoTests::TestAlternateStopBehavior() {
@@ -287,7 +287,7 @@ void PvideoTests::TestAlternateStopBehavior() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kStopBehavior);
+  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehavior);
 
   Sleep(2000);
 
@@ -331,7 +331,7 @@ void PvideoTests::TestSizeInMaxUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMaxUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxUnity);
 }
 
 void PvideoTests::TestSizeInMaxLargeDelta() {
@@ -371,7 +371,7 @@ void PvideoTests::TestSizeInMaxLargeDelta() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMaxLarge);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxLarge);
 }
 
 void PvideoTests::TestSizeInMaxSmallDelta() {
@@ -411,7 +411,7 @@ void PvideoTests::TestSizeInMaxSmallDelta() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMaxSmall);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxSmall);
 }
 
 void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
@@ -443,7 +443,7 @@ void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMaxOutSmallUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallUnity);
 }
 
 void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
@@ -475,7 +475,7 @@ void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInMaxOutSmallCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallCorrect);
 }
 
 void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
@@ -506,7 +506,7 @@ void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOutUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutUnity);
 }
 
 void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
@@ -537,7 +537,7 @@ void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOutCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrect);
 }
 
 void PvideoTests::TestPALIntoNTSC() {
@@ -568,7 +568,7 @@ void PvideoTests::TestPALIntoNTSC() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInLargerThanSizeOutCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrect);
 }
 
 void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
@@ -600,7 +600,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInSmallerThanSizeOutUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutUnity);
 }
 
 void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
@@ -632,7 +632,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kSizeInSmallerThanSizeOutCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutCorrect);
 }
 
 void PvideoTests::TestPitchLessThanCompact() {
@@ -665,7 +665,7 @@ void PvideoTests::TestPitchLessThanCompact() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kPitchLessThanCompact);
+  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLessThanCompact);
 }
 
 void PvideoTests::TestPitchLargerThanCompact() {
@@ -696,7 +696,7 @@ void PvideoTests::TestPitchLargerThanCompact() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, kPitchLargerThanCompact);
+  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLargerThanCompact);
 }
 
 void PvideoTests::DrawFullscreenOverlay() {

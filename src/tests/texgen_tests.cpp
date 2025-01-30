@@ -85,7 +85,7 @@ void TexgenTests::Test(TextureStage::TexGen mode) {
   pb_print("M: %s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 std::string TexgenTests::MakeTestName(TextureStage::TexGen mode) {

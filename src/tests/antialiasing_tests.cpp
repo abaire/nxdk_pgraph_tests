@@ -135,7 +135,7 @@ void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa)
 
   pb_print("%s\n", name);
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void AntialiasingTests::TestAARenderToFramebufferSurface(const char *name, TestHost::AntiAliasingSetting aa) {
@@ -196,7 +196,7 @@ void AntialiasingTests::TestAARenderToFramebufferSurface(const char *name, TestH
 
   pb_print("%s\n", name);
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
@@ -257,7 +257,7 @@ void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
   // pbkit's text drawing routines use the 3D pipeline which causes xemu to recreate the surface and masks the bug.
   //  pb_print("%s\n", kOnOffCPUWrite);
   //  pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, kOnOffCPUWrite);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kOnOffCPUWrite);
 }
 
 void AntialiasingTests::TestModifyNonFramebufferSurface() {
@@ -306,7 +306,7 @@ void AntialiasingTests::TestModifyNonFramebufferSurface() {
 
   // Expected behavior is that the framebuffer looks normal, regardless of the fact that the unused texture surface is
   // set up as AA.
-  host_.FinishDraw(allow_saving_, output_dir_, kModifyNonFramebufferSurface);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kModifyNonFramebufferSurface);
 
   {
     auto p = pb_begin();
@@ -358,7 +358,7 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
 
   // Expected behavior is that the framebuffer looks normal, regardless of the fact that it was a 3d draw target with
   // params that do not matc AvSetDisplayMode.
-  host_.FinishDraw(allow_saving_, output_dir_, kFramebufferIsIndependent);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFramebufferIsIndependent);
 
   // Restore the framebuffer surface format for future tests.
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
@@ -420,7 +420,7 @@ void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig() {
   pb_print("%s\n", kCPUWriteIgnoresSurfaceConfig);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kCPUWriteIgnoresSurfaceConfig);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kCPUWriteIgnoresSurfaceConfig);
 }
 
 void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
@@ -491,7 +491,7 @@ void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
   pb_print("%s\n", kGPUAAWriteAfterCPUWrite);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kGPUAAWriteAfterCPUWrite);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kGPUAAWriteAfterCPUWrite);
 }
 
 void AntialiasingTests::TestNonAACPURoundTrip() {
@@ -547,7 +547,7 @@ void AntialiasingTests::TestNonAACPURoundTrip() {
   pb_print("%s\n", kNonAACPURoundTrip);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kNonAACPURoundTrip);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kNonAACPURoundTrip);
 }
 
 #ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
@@ -586,7 +586,7 @@ void AntialiasingTests::TestMultiframeCPUBlit() {
     auto color = kColors[i % (sizeof(kColors) / sizeof(kColors[0]))];
     GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, width, height, kFramebufferPitch, color[0], color[1], 24);
 
-    host_.FinishDraw(false, output_dir_, kMultiframeCPUBlit);
+    host_.FinishDraw(false, output_dir_, suite_name_, kMultiframeCPUBlit);
   }
 
   {
