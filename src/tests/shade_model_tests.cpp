@@ -357,7 +357,7 @@ void ShadeModelTests::TestShadeModelFixed(uint32_t model, uint32_t provoking_ver
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 static void SetShader(TestHost& host_) {
@@ -414,7 +414,7 @@ void ShadeModelTests::TestShadeModel(uint32_t model, uint32_t provoking_vertex, 
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, uint32_t provoking_vertex,
@@ -457,7 +457,7 @@ void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, uint32_t provoking_v
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 static std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32_t provoking_vertex,

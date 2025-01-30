@@ -91,7 +91,7 @@ void DMACorruptionAroundSurfaceTests::Test() {
   pb_print("%s\n", kTestName);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName);
 }
 
 void DMACorruptionAroundSurfaceTests::Draw() const {

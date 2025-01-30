@@ -970,8 +970,8 @@ int TestHost::SetPalette(const uint32_t *palette, PaletteSize size, uint32_t sta
 
 void TestHost::SetPaletteSize(PaletteSize size, uint32_t stage) { texture_stage_[stage].SetPaletteSize(size); }
 
-void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &name,
-                          const std::string &z_buffer_name) {
+void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &suite_name,
+                          const std::string &name, const std::string &z_buffer_name) {
   bool perform_save = allow_saving && save_results_;
   if (!perform_save) {
     pb_printat(0, 55, (char *)"ns");
@@ -990,8 +990,8 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
     auto output_path = SaveBackBuffer(output_directory, name);
 
     if (ftp_logger_) {
-      if (!ftp_logger_->Connect() ||
-          !ftp_logger_->PutFile(output_path, output_path.substr(output_directory.length() + 1))) {
+      auto remote_filename = suite_name + "::" + output_path.substr(output_directory.length() + 1);
+      if (!ftp_logger_->Connect() || !ftp_logger_->PutFile(output_path, remote_filename)) {
         PrintMsg("Failed to store backbuffer artifact %s to FTP server!\n", output_path.c_str());
       }
     }
@@ -1000,8 +1000,8 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
       auto z_buffer_output_path = SaveZBuffer(output_directory, z_buffer_name);
 
       if (ftp_logger_) {
-        if (!ftp_logger_->Connect() ||
-            !ftp_logger_->PutFile(z_buffer_output_path, z_buffer_output_path.substr(output_directory.length() + 1))) {
+        auto remote_filename = suite_name + "::" + z_buffer_output_path.substr(output_directory.length() + 1);
+        if (!ftp_logger_->Connect() || !ftp_logger_->PutFile(z_buffer_output_path, remote_filename)) {
           PrintMsg("Failed to store z-buffer artifact %s to FTP server!\n", z_buffer_output_path.c_str());
         }
       }

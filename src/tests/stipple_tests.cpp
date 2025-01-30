@@ -235,5 +235,5 @@ void StippleTests::Test(const std::string &name, bool stipple_enable, const std:
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }

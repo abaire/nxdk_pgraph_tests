@@ -218,7 +218,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(test);
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 std::string ImageBlitTests::MakeTestName(const BlitTest& test) {

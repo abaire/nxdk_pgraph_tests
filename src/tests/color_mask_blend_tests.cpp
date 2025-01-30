@@ -134,5 +134,5 @@ void ColorMaskBlendTests::Test(uint32_t color_mask, uint32_t blend_op, uint32_t 
   pb_print("Dst: %d\n", dfactor);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }

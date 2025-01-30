@@ -309,7 +309,7 @@ void TextureBorderTests::Test2D() {
   pb_printat(8, 39, (char *)"Clamp_OGl");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTest2D);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTest2D);
 }
 
 static void SetAddressMode(TextureStage::WrapMode mode) {
@@ -391,7 +391,7 @@ void TextureBorderTests::TestXemu1034() {
   pb_printat(8, 39, (char *)"Clamp_OGl");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kXemu1034);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemu1034);
 }
 
 // void TextureBorderTests::Test2DPalettized() {
@@ -417,7 +417,7 @@ void TextureBorderTests::TestXemu1034() {
 //
 ////  pb_draw_text_screen();
 //
-//  host_.FinishDraw(allow_saving_, output_dir_, kTest2DIndexed);
+//  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTest2DIndexed);
 //}
 
 void TextureBorderTests::Test2DBorderedSwizzled() {
@@ -546,7 +546,7 @@ void TextureBorderTests::Test2DBorderedSwizzled() {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kTest2DBorderedSwizzled);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTest2DBorderedSwizzled);
 }
 
 void TextureBorderTests::Test3DBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height) {
@@ -680,7 +680,7 @@ void TextureBorderTests::Test3DBorderedSwizzled(const std::string &name, uint32_
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height) {
@@ -779,7 +779,7 @@ void TextureBorderTests::TestCubemapBorderedSwizzled(const std::string &name, ui
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 static void GenerateBordered2DSurface(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle) {

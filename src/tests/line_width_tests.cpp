@@ -253,5 +253,5 @@ void LineWidthTests::Test(const std::string &name, bool fill, fixed_t width) {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }

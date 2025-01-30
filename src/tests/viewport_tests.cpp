@@ -192,5 +192,5 @@ void ViewportTests::Test(const Viewport &vp) {
   pb_printat(0, 25, (char *)"%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }

@@ -286,7 +286,7 @@ void MaterialColorSourceTests::Test(SourceMode source_mode) {
   pb_printat(9, 36, (char*)"Emissive");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 std::string MaterialColorSourceTests::MakeTestName(SourceMode source_mode) {
