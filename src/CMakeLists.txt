@@ -13,7 +13,7 @@ include(FetchContent)
 FetchContent_Declare(
         nxdkftplib
         GIT_REPOSITORY https://github.com/abaire/nxdk_ftp_client_lib.git
-        GIT_TAG 8647b15976d8f93f4e5b97755a0018a55426216d
+        GIT_TAG a6c469260b5b1dc17bad7ea68f4ed9f7d3940853
 )
 FetchContent_MakeAvailable(nxdkftplib)
 

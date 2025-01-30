@@ -71,7 +71,7 @@ void TestSuite::Run(const std::string& test_name) {
 
       std::stringstream message;
       message << "Completed \"" << suite_name_ << "::" << test_name << "\" in " << duration << " ms\n";
-      if (!ftp_logger_->WriteFile(kFTPLogProgressFilename, message.str())) {
+      if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
         PrintMsg("Failed to store progress log to FTP server!\n");
       }
     }
@@ -345,7 +345,7 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
         PrintMsg("Saving start message to FTP server...\n");
         std::stringstream message;
         message << "Starting \"" << suite_name_ << "::" << test_name << "\"\n";
-        if (!ftp_logger_->WriteFile(kFTPLogProgressFilename, message.str())) {
+        if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
           PrintMsg("Failed to store progress log to FTP server!\n");
         }
       }
