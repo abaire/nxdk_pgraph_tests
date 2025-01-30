@@ -204,7 +204,7 @@ void TexgenMatrixTests::Test(const std::string &test_name, const matrix4_t &matr
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, test_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
 static std::string TestNameForTexGenMode(TextureStage::TexGen mode) {

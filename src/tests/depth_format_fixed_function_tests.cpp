@@ -264,7 +264,7 @@ void DepthFormatFixedFunctionTests::Test(const DepthFormat &format, bool compres
 
   std::string name = MakeTestName(format, compress_z, depth_cutoff);
   std::string z_name = name + "_ZB";
-  host_.FinishDraw(allow_saving_, output_dir_, name, z_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, z_name);
 }
 
 std::string DepthFormatFixedFunctionTests::MakeTestName(const DepthFormat &format, bool compress_z,

@@ -112,7 +112,7 @@ void BlendTests::Test(const std::string &name, const std::function<void()> &body
   pb_print("G: 0x7F R: 0xFF B: 0x80 W: 0x00\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void BlendTests::Body(uint32_t blend_function) {

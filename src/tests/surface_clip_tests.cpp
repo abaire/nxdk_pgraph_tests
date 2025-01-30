@@ -68,7 +68,7 @@ void SurfaceClipTests::Test(const ClipRect &rect) {
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
 }
@@ -89,7 +89,7 @@ void SurfaceClipTests::TestXemuBug420() {
   pb_print("%s", kXemuBug420Test);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kXemuBug420Test);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemuBug420Test);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
 }
@@ -184,7 +184,7 @@ void SurfaceClipTests::TestRenderTarget(const ClipRect &rect) {
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 void SurfaceClipTests::DrawTestImage(const SurfaceClipTests::ClipRect &rect) {

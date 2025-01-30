@@ -219,7 +219,7 @@ void SetVertexDataTests::Test(SetFunction func, const Color& diffuse, bool satur
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
 std::string SetVertexDataTests::MakeTestName(SetFunction func, bool saturate_sign) {

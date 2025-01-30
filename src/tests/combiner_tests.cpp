@@ -144,7 +144,7 @@ void CombinerTests::TestMux() {
   pb_printat(2, 0, (char*)"Set = Blue");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kMuxTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kMuxTestName);
 }
 
 void CombinerTests::TestCombinerIndependence() {
@@ -207,7 +207,7 @@ void CombinerTests::TestCombinerIndependence() {
   pb_printat(0, 0, (char*)"%s\n", kIndependenceTestName);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kIndependenceTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kIndependenceTestName);
 }
 
 void CombinerTests::TestCombinerColorAlphaIndependence() {
@@ -267,7 +267,7 @@ void CombinerTests::TestCombinerColorAlphaIndependence() {
   pb_print("Expect a green quad\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kColorAlphaIndependenceTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kColorAlphaIndependenceTestName);
 }
 
 void CombinerTests::TestFlags() {
@@ -351,5 +351,5 @@ void CombinerTests::TestFlags() {
   pb_printat(0, 0, (char*)"%s\n", kFlagsTestName);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, kFlagsTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFlagsTestName);
 }
