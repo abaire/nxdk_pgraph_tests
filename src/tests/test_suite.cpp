@@ -63,14 +63,31 @@ void TestSuite::Run(const std::string& test_name) {
   auto duration = LogTestEnd(test_name, start_time);
   TearDownTest();
 
-  if (ftp_logger_ && allow_saving_) {
+  if (ftp_logger_) {
     if (!ftp_logger_->Connect()) {
       PrintMsg("FTP connect failed, aborting\n");
     } else {
       PrintMsg("Saving progress to FTP server...\n");
 
       std::stringstream message;
-      message << "Completed \"" << suite_name_ << "::" << test_name << "\" in " << duration << " ms\n";
+      if (allow_saving_) {
+        for (auto& put_operation : ftp_logger_->send_file_queue()) {
+          if (!ftp_logger_->PutFile(put_operation.first, put_operation.second)) {
+            message << "- MISSING: \"" << put_operation.second << "\"\n";
+          } else {
+            message << "- OUTPUT: \"" << put_operation.second << "\"\n";
+          }
+
+          if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
+            PrintMsg("Failed to store progress log to FTP server with artifact info!\n");
+          }
+          message.clear();
+        }
+      }
+      ftp_logger_->ClearSendQueue();
+
+      message.clear();
+      message << "END: \"" << suite_name_ << "::" << test_name << "\" IN " << duration << " MS\n";
       if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
         PrintMsg("Failed to store progress log to FTP server!\n");
       }
@@ -337,17 +354,17 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
     if (enable_progress_log_) {
       Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
     }
+  }
 
-    if (ftp_logger_) {
-      if (!ftp_logger_->Connect()) {
-        PrintMsg("FTP connect failed, aborting\n");
-      } else {
-        PrintMsg("Saving start message to FTP server...\n");
-        std::stringstream message;
-        message << "Starting \"" << suite_name_ << "::" << test_name << "\"\n";
-        if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
-          PrintMsg("Failed to store progress log to FTP server!\n");
-        }
+  if (ftp_logger_) {
+    if (!ftp_logger_->Connect()) {
+      PrintMsg("FTP connect failed, aborting\n");
+    } else {
+      PrintMsg("Saving start message to FTP server...\n");
+      std::stringstream message;
+      message << "START: \"" << suite_name_ << "::" << test_name << "\"\n";
+      if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
+        PrintMsg("Failed to store progress log to FTP server!\n");
       }
     }
   }
@@ -359,9 +376,11 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
   return std::chrono::high_resolution_clock::now();
 }
 
-long long TestSuite::LogTestEnd(const std::string& test_name, std::chrono::steady_clock::time_point start_time) const {
+long TestSuite::LogTestEnd(const std::string& test_name,
+                           const std::chrono::steady_clock::time_point& start_time) const {
   auto now = std::chrono::high_resolution_clock::now();
-  auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time);
+  auto elapsed = static_cast<long>((duration.count() & 0xFFFFFFFF));
 
   PrintMsg("  Completed '%s' in %lums\n", test_name.c_str(), elapsed);
 

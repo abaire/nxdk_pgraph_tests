@@ -80,7 +80,7 @@ class TestSuite {
 
  private:
   std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name);
-  long long LogTestEnd(const std::string &test_name, std::chrono::steady_clock::time_point start_time) const;
+  long LogTestEnd(const std::string &test_name, const std::chrono::steady_clock::time_point &start_time) const;
 
  protected:
   TestHost &host_;
