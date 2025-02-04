@@ -991,9 +991,7 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
 
     if (ftp_logger_) {
       auto remote_filename = suite_name + "::" + output_path.substr(output_directory.length() + 1);
-      if (!ftp_logger_->Connect() || !ftp_logger_->PutFile(output_path, remote_filename)) {
-        PrintMsg("Failed to store backbuffer artifact %s to FTP server!\n", output_path.c_str());
-      }
+      ftp_logger_->QueuePutFile(output_path, remote_filename);
     }
 
     if (save_zbuffer) {
@@ -1002,9 +1000,7 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
 
       if (ftp_logger_) {
         auto remote_filename = suite_name + "::" + z_buffer_output_path.substr(output_directory.length() + 1);
-        if (!ftp_logger_->Connect() || !ftp_logger_->PutFile(z_buffer_output_path, remote_filename)) {
-          PrintMsg("Failed to store z-buffer artifact %s to FTP server!\n", z_buffer_output_path.c_str());
-        }
+        ftp_logger_->QueuePutFile(z_buffer_output_path, remote_filename);
       }
     }
   }
