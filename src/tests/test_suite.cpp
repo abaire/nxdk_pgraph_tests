@@ -70,8 +70,8 @@ void TestSuite::Run(const std::string& test_name) {
       PrintMsg("Saving progress to FTP server...\n");
 
       if (allow_saving_) {
-        std::stringstream message;
         for (auto& put_operation : ftp_logger_->send_file_queue()) {
+          std::stringstream message;
           if (!ftp_logger_->PutFile(put_operation.first, put_operation.second)) {
             message << "- MISSING: \"" << put_operation.second << "\"\n";
           } else {
