@@ -330,7 +330,7 @@ class TestHost {
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
   void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &suite_name,
-                  const std::string &name, const std::string &z_buffer_name = "");
+                  const std::string &name, bool save_zbuffer = false);
 
   void SetDepthClip(float min, float max) const;
 

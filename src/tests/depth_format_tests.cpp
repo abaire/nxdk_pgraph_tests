@@ -71,8 +71,7 @@ void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, uint32_t
   pb_draw_text_screen();
 
   std::string name = MakeTestName(format, compress_z, depth_cutoff);
-  std::string z_name = name + "_ZB";
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, z_name);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, true);
 }
 
 void DepthFormatTests::CreateGeometry(const DepthFormat &format) {

@@ -971,7 +971,7 @@ int TestHost::SetPalette(const uint32_t *palette, PaletteSize size, uint32_t sta
 void TestHost::SetPaletteSize(PaletteSize size, uint32_t stage) { texture_stage_[stage].SetPaletteSize(size); }
 
 void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &suite_name,
-                          const std::string &name, const std::string &z_buffer_name) {
+                          const std::string &name, bool save_zbuffer) {
   bool perform_save = allow_saving && save_results_;
   if (!perform_save) {
     pb_printat(0, 55, (char *)"ns");
@@ -996,7 +996,8 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
       }
     }
 
-    if (!z_buffer_name.empty()) {
+    if (save_zbuffer) {
+      std::string z_buffer_name = name.substr(name.size() - 3) + "_ZB.png";
       auto z_buffer_output_path = SaveZBuffer(output_directory, z_buffer_name);
 
       if (ftp_logger_) {
