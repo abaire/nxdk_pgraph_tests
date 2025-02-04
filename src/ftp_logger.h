@@ -46,6 +46,15 @@ class FTPLogger {
 
   bool PutFile(const std::string& local_filename, const std::string& remote_filename = "");
 
+  void QueuePutFile(const std::string& local_filename, const std::string& remote_filename = "") {
+    send_file_queue_.emplace_back(local_filename, remote_filename);
+  }
+
+  //! (Local path, Remote path) pairs that have been queued for sending.
+  const std::vector<std::pair<std::string, std::string>> send_file_queue() const { return send_file_queue_; }
+
+  void ClearSendQueue() { send_file_queue_.clear(); }
+
   const std::vector<std::string>& error_log() const { return error_log_; }
 
  private:
@@ -63,6 +72,7 @@ class FTPLogger {
   FTPClient* ftp_client_{nullptr};
 
   std::vector<std::string> error_log_;
+  std::vector<std::pair<std::string, std::string>> send_file_queue_;
 };
 
 #endif  // FTPLOGGER_H

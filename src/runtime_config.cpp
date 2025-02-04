@@ -4,6 +4,7 @@
 #ifdef NXDK
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmacro-redefined"
+#pragma clang diagnostic ignored "-Wignored-attributes"
 #include <lwip/inet.h>
 #pragma clang diagnostic pop
 #else
