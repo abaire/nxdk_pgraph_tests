@@ -995,7 +995,7 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
     }
 
     if (save_zbuffer) {
-      std::string z_buffer_name = name.substr(name.size() - 3) + "_ZB.png";
+      std::string z_buffer_name = name + "_ZB";
       auto z_buffer_output_path = SaveZBuffer(output_directory, z_buffer_name);
 
       if (ftp_logger_) {
