@@ -124,7 +124,7 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR+github-actions@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR via action"
           git commit -m "Update Doxygen documentation" || echo "No changes to commit"
-          git push --set-upstream origin pages_doxygen
+          git push --set-upstream origin pages_doxygen -f
 
   BuildMacOS:
     name: Build macOS
