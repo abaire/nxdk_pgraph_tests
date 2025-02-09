@@ -108,3 +108,13 @@ else ()
     enable_testing()
     add_subdirectory(tests/host)
 endif ()
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    add_custom_target(
+            doc
+            COMMAND ${DOXYGEN_EXECUTABLE} Doxyfile
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Generating Doxygen documentation"
+    )
+endif (DOXYGEN_FOUND)

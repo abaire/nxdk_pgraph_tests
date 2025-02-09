@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
           path: nxdk_pgraph_tests
@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: nxdk_pgraph_tests
 
@@ -98,6 +98,34 @@ jobs:
           files: |
             nxdk_pgraph_tests_xiso.iso
 
+  DeployDocs:
+    runs-on: ubuntu-latest
+    needs: [BuildISO]
+    steps:
+      - name: Clone tree
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Doxygen and Graphviz
+        run: sudo apt-get install doxygen graphviz
+      - name: Generate docs
+        run: cmake -S . -B build && cmake --build build --verbose -- doc
+      - name: Create 'pages_doxygen' branch
+        run: |
+          git fetch origin --no-recurse-submodules
+          git checkout main
+          git pull
+          git checkout pages_doxygen || git checkout -b pages_doxygen
+          git rebase main
+      - name: Add and commit documentation changes
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          git add docs/*
+          git config --local user.email "$GITHUB_ACTOR+github-actions@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR via action"
+          git commit -m "Update Doxygen documentation" || echo "No changes to commit"
+          git push --set-upstream origin pages_doxygen
+
   BuildMacOS:
     name: Build macOS
     runs-on: macOS-latest
@@ -105,7 +133,7 @@ jobs:
 
     steps:
       - name: Clone tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
           path: nxdk_pgraph_tests
@@ -160,7 +188,7 @@ jobs:
 
     steps:
       - name: Clone tree
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
