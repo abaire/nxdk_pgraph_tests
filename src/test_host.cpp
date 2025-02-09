@@ -34,6 +34,7 @@ using namespace XboxMath;
 #define SAVE_Z_AS_PNG
 
 #define MAX_FILE_PATH_SIZE 248
+#define MAX_FILENAME_SIZE 42
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data);
 static void ClearVertexAttribute(uint32_t index);
 static void GetCompositeMatrix(matrix4_t &result, const matrix4_t &model_view, const matrix4_t &projection);
@@ -769,6 +770,11 @@ void TestHost::EnsureFolderExists(const std::string &folder_path) {
 // Creates output directory if it does not exist
 std::string TestHost::PrepareSaveFile(std::string output_directory, const std::string &filename,
                                       const std::string &extension) {
+  if (filename.length() > MAX_FILENAME_SIZE) {
+    PrintMsg("Filename '%s' > %d characters\n", filename.c_str(), MAX_FILENAME_SIZE);
+    ASSERT(!"File name is too long");
+  }
+
   EnsureFolderExists(output_directory);
 
   output_directory += "\\";
@@ -776,6 +782,7 @@ std::string TestHost::PrepareSaveFile(std::string output_directory, const std::s
   output_directory += extension;
 
   if (output_directory.length() > MAX_FILE_PATH_SIZE) {
+    PrintMsg("File save path '%s' > %d characters\n", output_directory.c_str(), MAX_FILE_PATH_SIZE);
     ASSERT(!"Full save file path is too long.");
   }
 
