@@ -41,12 +41,6 @@ option(
 )
 
 option(
-        ENABLE_INTERACTIVE_CRASH_AVOIDANCE
-        "Attempt to detect crashes and prevent crashing tests from running after the next restart."
-        OFF
-)
-
-option(
         DUMP_CONFIG_FILE
         "Write a default config file and exit instead of running tests."
         OFF

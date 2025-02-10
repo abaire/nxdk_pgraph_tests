@@ -19,12 +19,6 @@ class TestHost;
  */
 class TestSuite {
  public:
-  enum class SuspectedCrashHandling {
-    SKIP_ALL,
-    RUN_ALL,
-    ASK,
-  };
-
   //! Runtime configuration for TestSuites.
   struct Config {
     //! Enable logging of test progress to file.
@@ -60,7 +54,6 @@ class TestSuite {
   virtual void TearDownTest();
 
   void DisableTests(const std::set<std::string> &tests_to_skip);
-  void SetSuspectedCrashes(const std::set<std::string> &test_names) { suspected_crashes_ = test_names; }
 
   [[nodiscard]] std::vector<std::string> TestNames() const;
   [[nodiscard]] bool HasEnabledTests() const { return !tests_.empty(); };
@@ -70,7 +63,6 @@ class TestSuite {
   void RunAll();
 
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
-  void SetSuspectedCrashHandlingMode(SuspectedCrashHandling mode) { suspected_crash_handling_mode_ = mode; }
 
   //! Inserts a pattern of NV097_NO_OPERATION's into the pushbuffer to allow identification when viewing nv2a traces.
   static void TagNV2ATrace(uint32_t num_nops);
@@ -92,10 +84,6 @@ class TestSuite {
 
   // Map of `test_name` to `void test()`
   std::map<std::string, std::function<void()>> tests_{};
-
-  // Tests that have crashed historically.
-  std::set<std::string> suspected_crashes_{};
-  SuspectedCrashHandling suspected_crash_handling_mode_{SuspectedCrashHandling::RUN_ALL};
 
   PGRAPHDiffToken pgraph_diff_;
 
