@@ -121,6 +121,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           git add docs/*
+          git add xml/*
           git config --local user.email "$GITHUB_ACTOR+github-actions@users.noreply.github.com"
           git config --local user.name "$GITHUB_ACTOR via action"
           git commit -m "Update Doxygen documentation" || echo "No changes to commit"
