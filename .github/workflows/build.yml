@@ -110,6 +110,8 @@ jobs:
         run: sudo apt-get install doxygen graphviz
       - name: Generate docs
         run: cmake -S . -B build && cmake --build build --verbose -- doc
+      - name: Generate nxdk_pgrapg_tests_registry
+        run: python3 .github/scripts/summarize_test_suites.py xml
       - name: Create 'pages_doxygen' branch
         run: |
           git fetch origin --no-recurse-submodules
