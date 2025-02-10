@@ -98,21 +98,6 @@ void TestSuite::Run(const std::string& test_name) {
 void TestSuite::RunAll() {
   auto names = TestNames();
   for (const auto& test_name : names) {
-    if (suspected_crashes_.find(test_name) != suspected_crashes_.end()) {
-      switch (suspected_crash_handling_mode_) {
-        case SuspectedCrashHandling::RUN_ALL:
-          break;
-
-        case SuspectedCrashHandling::SKIP_ALL:
-          continue;
-
-        case SuspectedCrashHandling::ASK:
-          // TODO: IMPLEMENT ASK MODE FOR CRASH HANDLING
-          ASSERT(!"TODO: IMPLEMENT ME");
-          break;
-      }
-    }
-
     Run(test_name);
   }
 }

@@ -117,10 +117,6 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
 static void RegisterSuites(TestHost& host, RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites,
                            const std::string& output_directory, std::shared_ptr<FTPLogger> ftp_logger);
 static void Shutdown();
-#ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
-static bool DiscoverHistoricalCrashes(const std::string& log_file_path,
-                                      std::map<std::string, std::set<std::string>>& crashes);
-#endif
 
 extern "C" __cdecl int automount_d_drive(void);
 
@@ -312,9 +308,7 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
 
   if (config.enable_progress_log()) {
     std::string log_file = config.output_directory_path() + "\\" + kLogFileName;
-#ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
-    DiscoverHistoricalCrashes(log_file, historical_crashes);
-#endif
+
     DeleteFile(log_file.c_str());
 
     Logger::Initialize(log_file, true);
@@ -327,15 +321,6 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
         }
       }
       Logger::Log() << "</HistoricalCrashes>" << std::endl;
-    }
-  }
-
-  if (!historical_crashes.empty()) {
-    for (auto& suite : test_suites) {
-      auto crash_info = historical_crashes.find(suite->Name());
-      if (crash_info != historical_crashes.end()) {
-        suite->SetSuspectedCrashes(crash_info->second);
-      }
     }
   }
 
@@ -362,86 +347,6 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
   }
 }
 #endif  // DUMP_CONFIG_FILE
-
-#ifdef ENABLE_INTERACTIVE_CRASH_AVOIDANCE
-static bool DiscoverHistoricalCrashes(const std::string& log_file_path,
-                                      std::map<std::string, std::set<std::string>>& crashes) {
-  crashes.clear();
-  if (!EnsureDriveMounted(log_file_path[0])) {
-    return false;
-  }
-
-  std::string dos_style_path = log_file_path;
-  std::replace(dos_style_path.begin(), dos_style_path.end(), '/', '\\');
-
-  std::ifstream log_file(dos_style_path.c_str());
-  if (!log_file) {
-    return false;
-  }
-
-  std::string last_test_suite;
-  std::string last_test_name;
-  std::string line;
-
-  auto add_crash = [&crashes](const std::string& suite, const std::string& test) {
-    auto toskip = crashes.find(suite);
-    if (toskip == crashes.end()) {
-      crashes[suite] = {test};
-    } else {
-      toskip->second.emplace(test);
-    }
-  };
-
-  while (std::getline(log_file, line)) {
-    PrintMsg("'%s'\n", line.c_str());
-    if (!line.compare(0, 7, "Crash? ")) {
-      line = line.substr(7);
-      auto delimiter = line.find("::");
-      add_crash(line.substr(0, delimiter), line.substr(delimiter + 2));
-      continue;
-    }
-
-    if (!line.compare(0, 9, "Starting ")) {
-      if (!last_test_suite.empty()) {
-        PrintMsg("Potential crash: '%s' '%s'\n", last_test_suite.c_str(), last_test_name.c_str());
-        add_crash(last_test_suite, last_test_name);
-      }
-
-      line = line.substr(9);
-      auto delimiter = line.find("::");
-      last_test_suite = line.substr(0, delimiter);
-      last_test_name = line.substr(delimiter + 2);
-      continue;
-    }
-
-    if (!line.compare(0, 13, "  Completed '")) {
-      std::string test_name = line.substr(13);
-      auto delimiter = test_name.rfind("' in ");
-      test_name = test_name.substr(0, delimiter);
-      if (test_name == last_test_name) {
-        auto crash_suite = crashes.find(last_test_suite);
-        if (crash_suite != crashes.end()) {
-          crash_suite->second.erase(last_test_name);
-        }
-        last_test_suite.clear();
-        last_test_name.clear();
-        continue;
-      }
-      PrintMsg("Completed line mismatch: '%s' '%s' but completed: '%s'\n", last_test_suite.c_str(),
-               last_test_name.c_str(), test_name.c_str());
-    }
-
-    PrintMsg("Unprocessed log line '%s'\n", line.c_str());
-  }
-
-  if (!last_test_suite.empty()) {
-    PrintMsg("Potential crash: '%s' '%s'\n", last_test_suite.c_str(), last_test_name.c_str());
-    add_crash(last_test_suite, last_test_name);
-  }
-
-  return true;
-}
-#endif  // ENABLE_INTERACTIVE_CRASH_AVOIDANCE
 
 static void Shutdown() {
   // TODO: HalInitiateShutdown doesn't seem to cause Xemu to actually close.

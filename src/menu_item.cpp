@@ -379,25 +379,6 @@ MenuItemOptions::MenuItemOptions(const std::vector<std::shared_ptr<TestSuite>> &
     : MenuItem("<<options>>", width, height), on_exit(std::move(on_exit)) {
   submenu.push_back(
       std::make_shared<MenuItemOption>("Accept", [this](const MenuItemOption &_ignored) { this->on_exit(); }));
-
-  {
-    constexpr uint32_t OPT_SKIP = 0;
-    constexpr uint32_t OPT_RUN = 1;
-    std::vector<std::string> values = {"Skip", "Run"};
-
-    auto on_apply = [suites](const MenuItemOption &opt) {
-      if (opt.current_option == OPT_SKIP) {
-        for (auto &suite : suites) {
-          suite->SetSuspectedCrashHandlingMode(TestSuite::SuspectedCrashHandling::SKIP_ALL);
-        }
-      } else if (opt.current_option == OPT_RUN) {
-        for (auto &suite : suites) {
-          suite->SetSuspectedCrashHandlingMode(TestSuite::SuspectedCrashHandling::RUN_ALL);
-        }
-      }
-    };
-    submenu.push_back(std::make_shared<MenuItemOption>("Previous crashes", values, on_apply));
-  }
 }
 
 void MenuItemOptions::Draw() {
