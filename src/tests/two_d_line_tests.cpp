@@ -34,7 +34,7 @@ static constexpr TwoDLineTests::TestCase kTests[] = {
 // clang-format on
 
 TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir, const Config& config)
-    : TestSuite(host, std::move(output_dir), "2D Lines", config) {
+    : TestSuite(host, std::move(output_dir), kSuiteName, config) {
   for (auto test : kTests) {
     std::string name = MakeTestName(test, false);
 
