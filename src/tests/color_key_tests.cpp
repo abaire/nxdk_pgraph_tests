@@ -16,7 +16,7 @@ static constexpr uint32_t kColorKeyModes[] = {
     TextureStage::CKM_DISABLE,
     TextureStage::CKM_KILL_ALPHA,
     TextureStage::CKM_KILL_COLOR,
-    TextureStage::CKM_KILL_ALPHA | TextureStage::CKM_KILL_COLOR,
+    TextureStage::CKM_KILL_TEXEL,
 };
 
 constexpr uint32_t kTextureSize = 64;
@@ -25,10 +25,10 @@ static constexpr uint32_t kCheckerboardA = 0xFDCCCCCC;
 static constexpr uint32_t kCheckerboardB = 0xFE999999;
 
 static constexpr uint32_t kColorKeys[] = {
-    0xF00000FF,
-    0xF1FF00FF,
-    0xF2800080,
-    0xF3FF0000,
+    0xF00000FF,  // Blue
+    0xF1FF00FF,  // Magenta
+    0xF2800080,  // Deep purple
+    0xF3FF0000,  // Red
 };
 static constexpr uint32_t kAlphaKeys[] = {
     0xF4707071,
@@ -41,6 +41,104 @@ static constexpr uint32_t kBackgroundColor = 0xFF00CC00;
 
 static std::string MakeTestName(const char* prefix, uint32_t mode, bool alpha_from_texture);
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc FixedTex_Alpha
+ *    With the fixed function pipeline, zero out just the alpha channel for all places where the colorkey matches the
+ *    value of a texel. RGB channels are unaffected. This should omit all texels that match the color key.
+ *
+ * @tc FixedTex_AlphaColor
+ *    With the fixed function pipeline, kill the texel completely for wherever the color key matches the value of a
+ *    texel. This completely masks the texel rather than simply zero-ing out values. See IgnAlphaCh_FixedTex_AlphaColor.
+ *    This should omit all texels that match the color key.
+ *
+ * @tc FixedTex_Color
+ *    With the fixed function pipeline, zero out the color and alpha channels for all places where the color key matches
+ *    the value of a texel. Note that the Alpha channel is also set to zero. This should omit all texels that match the
+ *    color key.
+ *
+ * @tc FixedTex_Disabled
+ *    With the fixed function pipeline, make no changes to any texel whose value matches the color key. This should
+ *    render all texels as fully opaque with their original colors.
+ *
+ * @tc IgnAlphaCh_FixedTex_Alpha
+ *    With the fixed function pipeline, set the color key mode to clear just the alpha channel for matching texels.
+ *    When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be
+ *    rendered opaque despite matching the color key. This should render all texels fully opaque with their original
+ *    colors, since the texel alpha is ignored during texturing.
+ *
+ * @tc IgnAlphaCh_FixedTex_AlphaColor
+ *    With the fixed function pipeline, kill the texel completely for wherever the color key matches the value of a
+ *    texel. This completely masks the texel rather than simply zero-ing out values. When rendering, set the final
+ *    combiner to use an alpha value of 0xFF for all texels. This omits killed texels even though the combiner sets them
+ *    to fully opaque during texturing.
+ *
+ * @tc IgnAlphaCh_FixedTex_Color
+ *    With the fixed function pipeline, zero out the color and alpha channels for all places where the color key matches
+ *    the value of a texel. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing
+ *    pixels to be rendered opaque despite matching the color key. This should render matching texels as fully black,
+ *    since their RGB values were zeroed out and the zeroed alpha channel is ignored.
+ *
+ * @tc IgnAlphaCh_FixedTex_Disabled
+ *    With the fixed function pipeline, make no changes to any texel whose value matches the color key. When rendering,
+ *    set the final combiner to use an alpha value of 0xFF for all texels. This should render all texels as fully opaque
+ *    with their original colors.
+ *
+ * @tc IgnAlphaCh_ProgTex_Alpha
+ *    With a programmable shader, set the color key mode to clear just the alpha channel for matching texels. When
+ *    rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered
+ *    opaque despite matching the color key. This should render all texels fully opaque with their original colors,
+ *    since the texel alpha is ignored during texturing.
+ *
+ * @tc IgnAlphaCh_ProgTex_AlphaColor
+ *    With a programmable shader, kill the texel completely for wherever the color key matches the value of a
+ *    texel. This completely masks the texel rather than simply zero-ing out values. When rendering, set the final
+ *    combiner to use an alpha value of 0xFF for all texels. This omits killed texels even though the combiner sets them
+ *    to fully opaque during texturing.
+ *
+ * @tc IgnAlphaCh_ProgTex_Color
+ *    With a programmable shader, zero out the color and alpha channels for all places where the color key matches the
+ *    value of a texel. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing
+ *    pixels to be rendered opaque despite matching the color key. This should render matching texels as fully black,
+ *    since their RGB values were zeroed out and the zeroed alpha channel is ignored.
+ *
+ * @tc IgnAlphaCh_ProgTex_Disabled
+ *    With a programmable shader, make no changes to any texel whose value matches the color key. When rendering, set
+ *    the final combiner to use an alpha value of 0xFF for all texels. This should render all texels as fully opaque
+ *    with their original colors.
+ *
+ * @tc ProgTex_Alpha
+ *    With a programmable shader, zero out just the alpha channel for all places where the colorkey matches the value of
+ *    a texel. RGB channels are unaffected. This should omit all texels that match the color key.
+ *
+ * @tc ProgTex_AlphaColor
+ *    With a programmable shader, kill the texel completely for wherever the color key matches the value of a texel.
+ *    This completely masks the texel rather than simply zero-ing out values. See IgnAlphaCh_FixedTex_AlphaColor.
+ *    This should omit all texels that match the color key.
+ *
+ * @tc ProgTex_Color
+ *    With a programmable shader, zero out the color and alpha channels for all places where the color key matches the
+ *    value of a texel. Note that the Alpha channel is also set to zero. This should omit all texels that match the
+ *    color key.
+ *
+ * @tc ProgTex_Disabled
+ *    With a programmable shader, make no changes to any texel whose value matches the color key. This should render all
+ *    texels as fully opaque with their original colors.
+ *
+ * @tc UnsampledTex
+ *    Demonstrates that the color keys are independent of whether the associated texture stage is used in the final
+ *    composition or not.
+ *    With a programable shader, draw two quads with the color key mode set to kill matching texels. In both cases, the
+ *    final color combiner only samples from texture 0.
+ *    The left quad renders with the blue color key as key 0.
+ *    The right quad enables the second texture stage, keeps key 0, and adds the magenta color key with an alpha value
+ *    forced to 0xFF as key 1.
+ *    The left image should have the blue color in the NW checkerboard killed.
+ *    The right image should have the blue color in the NW checkerboard killed, but also the secondary blue color in the
+ *    SW checkerboard killed. This is because the unsampled magenta texture's SW secondary color matches the
+ *    magenta + 0xFF alpha enabled as a color key in the second operation.
+ */
 ColorKeyTests::ColorKeyTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Color key", config) {
   for (auto alpha : {false, true}) {
@@ -146,6 +244,15 @@ static void DrawQuads(TestHost& host, float x = 0.f, float y = 0.f) {
   host.End();
 }
 
+/**
+ * Draws a set of four pairs of quads, one for each texture stage (NW = stage 0, NE = stage 1, SW = stage 2, SE = stage
+ * 3). For each pair, set the color key for the stage to the kColorKeys entry for that stage for the left quad, and set
+ * it to the kAlphaKeys entry for the right quad.
+ *
+ * If `alpha_from_texture` is false, ignores the alpha provided by the texture unit after the color key operation and
+ * forces it to 0xFF. This means that all pixels will be rendered, even if the color key matches and the color key mode
+ * indicates that the alpha of the texel should be set to 0.
+ */
 static void DrawScreen(TestHost& host, bool alpha_from_texture) {
   // Color key killing will take effect even if the final combiner does not pull from the texture channel with a
   // matching key. In this test case, each quad has valid UV coords for every texture stage, so if they are enabled,
@@ -176,8 +283,6 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
   host.SetFinalCombiner0Just(TestHost::SRC_TEX1);
   if (alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
-  } else {
-    host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   }
   {
     auto p = pb_begin();
@@ -196,8 +301,6 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
   host.SetFinalCombiner0Just(TestHost::SRC_TEX2);
   if (alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_TEX2, true);
-  } else {
-    host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   }
   {
     auto p = pb_begin();
@@ -217,8 +320,6 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
   host.SetFinalCombiner0Just(TestHost::SRC_TEX3);
   if (alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
-  } else {
-    host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   }
   {
     auto p = pb_begin();
@@ -292,7 +393,7 @@ void ColorKeyTests::TestUnsampled(const std::string& name) {
 
   host_.PrepareDraw(kBackgroundColor);
 
-  SetupAllTextureStages(TextureStage::CKM_KILL_COLOR | TextureStage::CKM_KILL_ALPHA);
+  SetupAllTextureStages(TextureStage::CKM_KILL_TEXEL);
 
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
