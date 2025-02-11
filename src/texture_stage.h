@@ -50,7 +50,9 @@ class TextureStage {
     //! Zero out just alpha on a key match.
     CKM_KILL_ALPHA = 1,
     //! Zero out ARGB on a key match.
-    CKM_KILL_COLOR = 2
+    CKM_KILL_COLOR = 2,
+    //! Fully mask the texel, even if the alpha value is ignored during rendering.
+    CKM_KILL_TEXEL = 3,
   };
 
  public:
