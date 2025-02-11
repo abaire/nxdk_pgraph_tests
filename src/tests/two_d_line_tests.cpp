@@ -33,6 +33,26 @@ static constexpr TwoDLineTests::TestCase kTests[] = {
 };
 // clang-format on
 
+/**
+ * Constructs the 2D Line test suite.
+ *
+ * @tc 2DLine-15-C000003E0-400_200-400_400 XRGB 555 color depth - green vertical line from 400, 200 - 400, 400.
+ * @tc 2DLine-16-C000007E0-400_200-400_400 XRGB 565 color depth - green vertical line from 400, 200 - 400, 400.
+ * @tc 2DLine-24-C00000000-400_200-400_400 XRGB 888 - black vertical line from 400, 200 - 400, 400
+ * @tc 2DLine-24-C0000FF00-400_200-400_400 XRGB 888 - green vertical line from 400, 200 - 400, 400
+ * @tc 2DLine-24-C0000FF00-444_222-444_444 XRGB 888 - green vertical line from 444, 222 - 444, 444
+ * @tc 2DLine-24-C00FF0000-400_200-400_400 XRGB 888 - red vertical line from 400, 200 - 400, 400
+ * @tc 2DLine-24-C00FFFFFF-0_0-639_479 XRGB 888 - white diagonal line from 0, 0, - 639, 479 (one pixel short of bottom
+ *    right corner)
+ * @tc 2DLine-24-C00FFFFFF-222_222-222_222 XRGB 888 - should display nothing, the line has no length
+ * @tc 2DLine-24-C00FFFFFF-400_0-400_479 XRGB 888 - white vertical line from 400, 0 - 400, 479 (one pixel short of
+ *    bottom)
+ * @tc 2DLine-24-C00FFFFFF-400_300-400_301 XRGB 888 - white dot at 400, 300
+ * @tc 2DLine-24-C00FFFFFF-400_300-401_300 XRGB 888 - white dot at 400, 300
+ * @tc 2DLine-24-C00FFFFFF-639_479-0_0 XRGB 888 - white diagonal line from 639, 479 - 0, 0 (one pixel short of the upper
+ *    left corner)
+ * @tc 2DLine-24-CFFFFFFFF-100_100-100_400 XRGB 888 - white vertical line from 100, 100 - 100, 400 - alpha is ignored
+ */
 TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), kSuiteName, config) {
   for (auto test : kTests) {

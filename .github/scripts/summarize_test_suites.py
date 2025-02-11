@@ -26,6 +26,7 @@ class TestSuiteDescriptor(NamedTuple):
     description: list[str]
     source_file: str
     source_file_line: int
+    test_descriptions: dict[str, str]
 
     def to_obj(self) -> dict[str, Any]:
         return {
@@ -34,6 +35,7 @@ class TestSuiteDescriptor(NamedTuple):
             "description": self.description,
             "source_file": self.source_file,
             "source_file_line": self.source_file_line,
+            "test_descriptions": self.test_descriptions,
         }
 
 
@@ -42,6 +44,54 @@ class TestSuiteDescriptorReader:
 
     def __init__(self, descriptor_base_path: str):
         self.descriptor_base_path = descriptor_base_path
+
+    @staticmethod
+    def _process_class_descriptor(class_name: str, class_descriptor: ET.Element) -> tuple[str, dict[str, Any]]:
+        suite_name = class_name
+        test_descriptions: dict[str, Any] = {}
+        for section in class_descriptor.iter("sectiondef"):
+            # Look for a private static variable named kSuiteName which overrides the suite name used when saving artifacts.
+            section_kind = section.get("kind")
+            if section_kind == "private-static-attrib":
+                for member in section.iter("memberdef"):
+                    element = member.find("name")
+                    if element is None or element.text != "kSuiteName":
+                        continue
+                    element = member.find("initializer")
+                    if element is None:
+                        logger.warning("Found kSuiteName definition without an initializer")
+                        continue
+
+                    match = SUITE_NAME_INITIALIZER_RE.match(element.text)
+                    if not match:
+                        logger.warning("Found kSuiteName definition with unparseable initializer '%s'", element.text)
+                        continue
+                    suite_name = match.group(1)
+                continue
+
+            # Look for a comment on the initializer that contains "remark" sections from @tc commands.
+            if section_kind == "public-func":
+                for member in section.iter("memberdef"):
+                    element = member.find("qualifiedname")
+                    if element is None or element.text != f"{class_name}::{class_name}":
+                        continue
+                    element = member.find("detaileddescription")
+                    if element is None:
+                        continue
+
+                    for subsection in element.iter("simplesect"):
+                        if subsection.get("kind") != "remark":
+                            continue
+                        element = subsection.find("para")
+                        if element is None:
+                            logger.warning("Ignoring remark within detaileddescription that lacks para tag")
+                            continue
+
+                        test_name, description = element.text.split(" ", 1)
+                        test_descriptions[test_name] = description
+
+        return suite_name, test_descriptions
+
 
     def _process_possible_test_descriptor(self, index_node: ET.Element) -> TestSuiteDescriptor | None:
         detailed_descriptor_path = index_node.get("refid")
@@ -91,26 +141,7 @@ class TestSuiteDescriptorReader:
         else:
             detailed_description = [item.strip() for item in element.itertext() if item.strip()]
 
-        suite_name = class_name
-        # Look for a private static variable named kSuiteName which overrides the suite name used when saving artifacts.
-        for section in class_descriptor.iter("sectiondef"):
-            if section.get("kind") != "private-static-attrib":
-                continue
-
-            for member in section.iter("memberdef"):
-                element = member.find("name")
-                if element is None or element.text != "kSuiteName":
-                    continue
-                element = member.find("initializer")
-                if element is None:
-                    logger.warning("Found kSuiteName definition without an initializer")
-                    continue
-
-                match = SUITE_NAME_INITIALIZER_RE.match(element.text)
-                if not match:
-                    logger.warning("Found kSuiteName definition with unparseable initializer '%s'", element.text)
-                    continue
-                suite_name = match.group(1)
+        suite_name, test_descriptions = self._process_class_descriptor(class_name, class_descriptor)
 
         return TestSuiteDescriptor(
             suite_name=suite_name,
@@ -118,6 +149,7 @@ class TestSuiteDescriptorReader:
             description=detailed_description,
             source_file=class_definition_file,
             source_file_line=class_definition_line,
+            test_descriptions=test_descriptions,
         )
 
     def _process_index(self, root_node: ET.Element) -> list[TestSuiteDescriptor]:
