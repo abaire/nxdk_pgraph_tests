@@ -20,6 +20,24 @@ concurrency:
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 jobs:
+  CheckClangFormat:
+    name: Check clang-format
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            llvm-19
+      - name: Clone tree
+        uses: actions/checkout@v4
+      - name: Run clang-format
+        run: |
+          find src \
+              -iname "*.h" -o -iname "*.cpp" \
+              -exec clang-format -n -Werror {} \+;
+
   BuildISO:
     name: Build ISO
     runs-on: ubuntu-latest

@@ -33,7 +33,7 @@ class VertexShaderProgram {
  protected:
   virtual void OnActivate() {}
   virtual void OnLoadShader() {}
-  virtual void OnLoadConstants(){};
+  virtual void OnLoadConstants() {};
 
   void LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const;
 

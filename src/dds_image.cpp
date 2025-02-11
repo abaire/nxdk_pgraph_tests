@@ -9,7 +9,7 @@
 
 #include "debug_output.h"
 
-#define FOURCC(a, b, c, d) (((a)&0xFF) | (((b)&0xFF) << 8) | (((c)&0xFF) << 16) | (((d)&0xFF) << 24))
+#define FOURCC(a, b, c, d) (((a) & 0xFF) | (((b) & 0xFF) << 8) | (((c) & 0xFF) << 16) | (((d) & 0xFF) << 24))
 
 constexpr uint32_t kDDSMagic = FOURCC('D', 'D', 'S', ' ');
 constexpr uint32_t kDX10Magic = FOURCC('D', 'X', '1', '0');
