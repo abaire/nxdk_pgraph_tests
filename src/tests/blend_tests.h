@@ -28,7 +28,7 @@ class BlendTests : public TestSuite {
  private:
   void Test(const std::string &name, const std::function<void()> &body);
 
-  void Body(uint32_t blend_function);
+  void Body(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
 
   void DrawCheckerboardBackground() const;
   void Draw(float left, float top, float right, float bottom, uint32_t color, uint32_t func, uint32_t sfactor,
