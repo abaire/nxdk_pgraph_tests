@@ -22,20 +22,63 @@ static constexpr uint32_t kDefaultDMAColorChannel = 9;
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
 
-static constexpr const char kSignedAddName[] = "SignedAdd";
-static constexpr const char kSignedRevSubtractName[] = "SignedRevSubtract";
+struct BlendFunc {
+  const char *name;
+  uint32_t value;
+};
+
+static constexpr struct BlendFunc kBlendEqns[] = {
+    {"ADD", NV097_SET_BLEND_EQUATION_V_FUNC_ADD},
+    {"SUB", NV097_SET_BLEND_EQUATION_V_FUNC_SUBTRACT},
+    {"REVSUB", NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT},
+    {"MIN", NV097_SET_BLEND_EQUATION_V_MIN},
+    {"MAX", NV097_SET_BLEND_EQUATION_V_MAX},
+    {"SADD", NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED},
+    {"SREVSUB", NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED},
+};
+
+// SFACTORs and DFACTORS are all identical
+static constexpr struct BlendFunc kBlendFactors[] = {
+    {"0", NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO},
+    {"1", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE},
+    {"srcRGB", NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_COLOR},
+    {"1-srcRGB", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_COLOR},
+    {"srcA", NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA},
+    {"1-srcA", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA},
+    {"dstA", NV097_SET_BLEND_FUNC_SFACTOR_V_DST_ALPHA},
+    {"1-dstA", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_ALPHA},
+    {"dstRGB", NV097_SET_BLEND_FUNC_SFACTOR_V_DST_COLOR},
+    {"1-dstRGB", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_COLOR},
+    {"srcAsat", NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA_SATURATE},
+    {"cRGB", NV097_SET_BLEND_FUNC_SFACTOR_V_CONSTANT_COLOR},
+    {"1-cRGB", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_COLOR},
+    {"cA", NV097_SET_BLEND_FUNC_SFACTOR_V_CONSTANT_ALPHA},
+    {"1-cA", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_ALPHA},
+};
 
 static constexpr uint32_t kTextureSize = 256;
 static constexpr uint32_t kTexturePitch = kTextureSize * 4;
 
 BlendTests::BlendTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Blend tests", config) {
-  tests_[kSignedAddName] = [this]() {
-    Test(kSignedAddName, [this]() { Body(NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED); });
-  };
-  tests_[kSignedRevSubtractName] = [this]() {
-    Test(kSignedRevSubtractName, [this]() { Body(NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED); });
-  };
+  for (const auto &test_eqn : kBlendEqns) {
+    for (const auto &test_sfactor : kBlendFactors) {
+      for (const auto &test_dfactor : kBlendFactors) {
+        uint32_t sfactor = test_sfactor.value;
+        uint32_t dfactor = test_dfactor.value;
+        std::string name = test_sfactor.name;
+        name += "_";
+        name += test_eqn.name;
+        name += "_";
+        name += test_dfactor.name;
+        if (sfactor != NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO || dfactor != NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO) {
+          tests_[name] = [this, name, &test_eqn, sfactor, dfactor]() {
+            Test(name, [this, &test_eqn, sfactor, dfactor]() { Body(test_eqn.value, sfactor, dfactor); });
+          };
+        }
+      }
+    }
+  }
 }
 
 void BlendTests::Initialize() {
@@ -109,41 +152,37 @@ void BlendTests::Test(const std::string &name, const std::function<void()> &body
   }
 
   pb_print("%s\n", name.c_str());
-  pb_print("G: 0x7F R: 0xFF B: 0x80 W: 0x00\n");
+  pb_print("Alpha: G: 0x7F R: 0xFF B: 0x80 W: 0x00\n");
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
-void BlendTests::Body(uint32_t blend_function) {
+void BlendTests::Body(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {
   static constexpr float inc = 24.0f;
   float left = 0.0f;
   float right = kTextureSize;
   float top = 0.0f;
   float bottom = kTextureSize;
-  Draw(left, top, right, bottom, 0x7F00CC00, blend_function, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
-       NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  Draw(left, top, right, bottom, 0x7F00CC00, blend_function, src_factor, dst_factor);
 
   left += inc;
   right -= inc;
   top += inc;
   bottom -= inc;
-  Draw(left, top, right, bottom, 0xFFCC0000, blend_function, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
-       NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  Draw(left, top, right, bottom, 0xFFCC0000, blend_function, src_factor, dst_factor);
 
   left += inc;
   right -= inc;
   top += inc;
   bottom -= inc;
-  Draw(left, top, right, bottom, 0x800000FF, blend_function, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
-       NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  Draw(left, top, right, bottom, 0x800000FF, blend_function, src_factor, dst_factor);
 
   left += inc;
   right -= inc;
   top += inc;
   bottom -= inc;
-  Draw(left, top, right, bottom, 0x00FFFFFF, blend_function, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
-       NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  Draw(left, top, right, bottom, 0x00FFFFFF, blend_function, src_factor, dst_factor);
 }
 
 void BlendTests::DrawCheckerboardBackground() const {
