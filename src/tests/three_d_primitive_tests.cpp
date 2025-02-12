@@ -43,8 +43,612 @@ static constexpr float kBottom = -1.75f;
 static constexpr float kZFront = 1.0f;
 static constexpr float kZBack = 5.0f;
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc LineLoop-inlinearrays-ls-ps
+ *   Draws vertices as a line loop using NV097_INLINE_ARRAY with line smoothing
+ *   and polygon smoothing enabled.
+ *
+ * @tc LineLoop-inlinearrays-ls
+ *   Draws vertices as a line loop using NV097_INLINE_ARRAY with line smoothing
+ *   enabled.
+ *
+ * @tc LineLoop-inlinearrays-ps
+ *   Draws vertices as a line loop using NV097_INLINE_ARRAY with polygon
+ *   smoothing enabled.
+ *
+ * @tc LineLoop-inlinearrays
+ *   Draws vertices as a line loop using NV097_INLINE_ARRAY
+ *
+ * @tc LineLoop-inlinebuf-ls-ps
+ *   Draws vertices as a line loop using NV097_SET_VERTEX3F with line smoothing
+ *   and polygon smoothing enabled.
+ *
+ * @tc LineLoop-inlinebuf-ls
+ *   Draws vertices as a line loop using NV097_SET_VERTEX3F with line smoothing
+ *   enabled.
+ *
+ * @tc LineLoop-inlinebuf-ps
+ *   Draws vertices as a line loop using NV097_SET_VERTEX3F with polygon
+ *   smoothing enabled.
+ *
+ * @tc LineLoop-inlinebuf
+ *   Draws vertices as a line loop using NV097_SET_VERTEX3F
+ *
+ * @tc LineLoop-inlineelements-ls-ps
+ *   Draws vertices as a line loop using NV097_ARRAY_ELEMENT16 with line
+ *   smoothing and polygon smoothing enabled.
+ *
+ * @tc LineLoop-inlineelements-ls
+ *   Draws vertices as a line loop using NV097_ARRAY_ELEMENT16 with line
+ *   smoothing enabled.
+ *
+ * @tc LineLoop-inlineelements-ps
+ *   Draws vertices as a line loop using NV097_ARRAY_ELEMENT16 with polygon
+ *   smoothing enabled.
+ *
+ * @tc LineLoop-inlineelements
+ *   Draws vertices as a line loop using NV097_ARRAY_ELEMENT16
+ *
+ * @tc LineLoop-ls-ps
+ *   Draws vertices as a line loop using NV097_DRAW_ARRAYS with line smoothing
+ *   and polygon smoothing enabled.
+ *
+ * @tc LineLoop-ls
+ *   Draws vertices as a line loop using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc LineLoop-ps
+ *   Draws vertices as a line loop using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc LineLoop
+ *   Draws vertices as a line loop using NV097_DRAW_ARRAYS
+ *
+ * @tc LineStrip-inlinearrays-ls-ps
+ *   Draws vertices as a line strip using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc LineStrip-inlinearrays-ls
+ *   Draws vertices as a line strip using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc LineStrip-inlinearrays-ps
+ *   Draws vertices as a line strip using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc LineStrip-inlinearrays
+ *   Draws vertices as a line strip using NV097_INLINE_ARRAY
+ *
+ * @tc LineStrip-inlinebuf-ls-ps
+ *   Draws vertices as a line strip using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc LineStrip-inlinebuf-ls
+ *   Draws vertices as a line strip using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc LineStrip-inlinebuf-ps
+ *   Draws vertices as a line strip using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc LineStrip-inlinebuf
+ *   Draws vertices as a line strip using NV097_SET_VERTEX3F
+ *
+ * @tc LineStrip-inlineelements-ls-ps
+ *   Draws vertices as a line strip using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc LineStrip-inlineelements-ls
+ *   Draws vertices as a line strip using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc LineStrip-inlineelements-ps
+ *   Draws vertices as a line strip using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc LineStrip-inlineelements
+ *   Draws vertices as a line strip using NV097_ARRAY_ELEMENT16
+ *
+ * @tc LineStrip-ls-ps
+ *   Draws vertices as a line strip using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc LineStrip-ls
+ *   Draws vertices as a line strip using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc LineStrip-ps
+ *   Draws vertices as a line strip using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc LineStrip
+ *   Draws vertices as a line strip using NV097_DRAW_ARRAYS
+ *
+ * @tc Lines-inlinearrays-ls-ps
+ *   Draws vertices as lines using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Lines-inlinearrays-ls
+ *   Draws vertices as lines using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc Lines-inlinearrays-ps
+ *   Draws vertices as lines using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc Lines-inlinearrays
+ *   Draws vertices as lines using NV097_INLINE_ARRAY
+ *
+ * @tc Lines-inlinebuf-ls-ps
+ *   Draws vertices as lines using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Lines-inlinebuf-ls
+ *   Draws vertices as lines using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc Lines-inlinebuf-ps
+ *   Draws vertices as lines using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc Lines-inlinebuf
+ *   Draws vertices as lines using NV097_SET_VERTEX3F
+ *
+ * @tc Lines-inlineelements-ls-ps
+ *   Draws vertices as lines using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Lines-inlineelements-ls
+ *   Draws vertices as lines using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc Lines-inlineelements-ps
+ *   Draws vertices as lines using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc Lines-inlineelements
+ *   Draws vertices as lines using NV097_ARRAY_ELEMENT16
+ *
+ * @tc Lines-ls-ps
+ *   Draws vertices as lines using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Lines-ls
+ *   Draws vertices as lines using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc Lines-ps
+ *   Draws vertices as lines using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc Lines
+ *   Draws vertices as lines using NV097_DRAW_ARRAYS
+ *
+ * @tc Points-inlinearrays-ls-ps
+ *   Draws vertices as points using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Points-inlinearrays-ls
+ *   Draws vertices as points using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc Points-inlinearrays-ps
+ *   Draws vertices as points using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc Points-inlinearrays
+ *   Draws vertices as points using NV097_INLINE_ARRAY
+ *
+ * @tc Points-inlinebuf-ls-ps
+ *   Draws vertices as points using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Points-inlinebuf-ls
+ *   Draws vertices as points using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc Points-inlinebuf-ps
+ *   Draws vertices as points using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc Points-inlinebuf
+ *   Draws vertices as points using NV097_SET_VERTEX3F
+ *
+ * @tc Points-inlineelements-ls-ps
+ *   Draws vertices as points using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Points-inlineelements-ls
+ *   Draws vertices as points using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc Points-inlineelements-ps
+ *   Draws vertices as points using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc Points-inlineelements
+ *   Draws vertices as points using NV097_ARRAY_ELEMENT16
+ *
+ * @tc Points-ls-ps
+ *   Draws vertices as points using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Points-ls
+ *   Draws vertices as points using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc Points-ps
+ *   Draws vertices as points using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc Points
+ *   Draws vertices as points using NV097_DRAW_ARRAYS
+ *
+ * @tc Polygon-inlinearrays-ls-ps
+ *   Draws vertices as a polygon using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Polygon-inlinearrays-ls
+ *   Draws vertices as a polygon using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc Polygon-inlinearrays-ps
+ *   Draws vertices as a polygon using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc Polygon-inlinearrays
+ *   Draws vertices as a polygon using NV097_INLINE_ARRAY
+ *
+ * @tc Polygon-inlinebuf-ls-ps
+ *   Draws vertices as a polygon using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Polygon-inlinebuf-ls
+ *   Draws vertices as a polygon using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc Polygon-inlinebuf-ps
+ *   Draws vertices as a polygon using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc Polygon-inlinebuf
+ *   Draws vertices as a polygon using NV097_SET_VERTEX3F
+ *
+ * @tc Polygon-inlineelements-ls-ps
+ *   Draws vertices as a polygon using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Polygon-inlineelements-ls
+ *   Draws vertices as a polygon using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc Polygon-inlineelements-ps
+ *   Draws vertices as a polygon using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc Polygon-inlineelements
+ *   Draws vertices as a polygon using NV097_ARRAY_ELEMENT16
+ *
+ * @tc Polygon-ls-ps
+ *   Draws vertices as a polygon using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Polygon-ls
+ *   Draws vertices as a polygon using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc Polygon-ps
+ *   Draws vertices as a polygon using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc Polygon
+ *   Draws vertices as a polygon using NV097_DRAW_ARRAYS
+ *
+ * @tc QuadStrip-inlinearrays-ls-ps
+ *   Draws vertices as a strip of quads using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc QuadStrip-inlinearrays-ls
+ *   Draws vertices as a strip of quads using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc QuadStrip-inlinearrays-ps
+ *   Draws vertices as a strip of quads using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc QuadStrip-inlinearrays
+ *   Draws vertices as a strip of quads using NV097_INLINE_ARRAY
+ *
+ * @tc QuadStrip-inlinebuf-ls-ps
+ *   Draws vertices as a strip of quads using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc QuadStrip-inlinebuf-ls
+ *   Draws vertices as a strip of quads using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc QuadStrip-inlinebuf-ps
+ *   Draws vertices as a strip of quads using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc QuadStrip-inlinebuf
+ *   Draws vertices as a strip of quads using NV097_SET_VERTEX3F
+ *
+ * @tc QuadStrip-inlineelements-ls-ps
+ *   Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc QuadStrip-inlineelements-ls
+ *   Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc QuadStrip-inlineelements-ps
+ *   Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc QuadStrip-inlineelements
+ *   Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16
+ *
+ * @tc QuadStrip-ls-ps
+ *   Draws vertices as a strip of quads using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc QuadStrip-ls
+ *   Draws vertices as a strip of quads using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc QuadStrip-ps
+ *   Draws vertices as a strip of quads using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc QuadStrip
+ *   Draws vertices as a strip of quads using NV097_DRAW_ARRAYS
+ *
+ * @tc Quads-inlinearrays-ls-ps
+ *   Draws vertices as quads using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Quads-inlinearrays-ls
+ *   Draws vertices as quads using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc Quads-inlinearrays-ps
+ *   Draws vertices as quads using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc Quads-inlinearrays
+ *   Draws vertices as quads using NV097_INLINE_ARRAY
+ *
+ * @tc Quads-inlinebuf-ls-ps
+ *   Draws vertices as quads using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Quads-inlinebuf-ls
+ *   Draws vertices as quads using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc Quads-inlinebuf-ps
+ *   Draws vertices as quads using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc Quads-inlinebuf
+ *   Draws vertices as quads using NV097_SET_VERTEX3F
+ *
+ * @tc Quads-inlineelements-ls-ps
+ *   Draws vertices as quads using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Quads-inlineelements-ls
+ *   Draws vertices as quads using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc Quads-inlineelements-ps
+ *   Draws vertices as quads using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc Quads-inlineelements
+ *   Draws vertices as quads using NV097_ARRAY_ELEMENT16
+ *
+ * @tc Quads-ls-ps
+ *   Draws vertices as quads using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Quads-ls
+ *   Draws vertices as quads using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc Quads-ps
+ *   Draws vertices as quads using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc Quads
+ *   Draws vertices as quads using NV097_DRAW_ARRAYS
+ *
+ * @tc TriFan-inlinearrays-ls-ps
+ *   Draws vertices as a triangle fan using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriFan-inlinearrays-ls
+ *   Draws vertices as a triangle fan using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc TriFan-inlinearrays-ps
+ *   Draws vertices as a triangle fan using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriFan-inlinearrays
+ *   Draws vertices as a triangle fan using NV097_INLINE_ARRAY
+ *
+ * @tc TriFan-inlinebuf-ls-ps
+ *   Draws vertices as a triangle fan using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriFan-inlinebuf-ls
+ *   Draws vertices as a triangle fan using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc TriFan-inlinebuf-ps
+ *   Draws vertices as a triangle fan using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriFan-inlinebuf
+ *   Draws vertices as a triangle fan using NV097_SET_VERTEX3F
+ *
+ * @tc TriFan-inlineelements-ls-ps
+ *   Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriFan-inlineelements-ls
+ *   Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc TriFan-inlineelements-ps
+ *   Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriFan-inlineelements
+ *   Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16
+ *
+ * @tc TriFan-ls-ps
+ *   Draws vertices as a triangle fan using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriFan-ls
+ *   Draws vertices as a triangle fan using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc TriFan-ps
+ *   Draws vertices as a triangle fan using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriFan
+ *   Draws vertices as a triangle fan using NV097_DRAW_ARRAYS
+ *
+ * @tc TriStrip-inlinearrays-ls-ps
+ *   Draws vertices as a strip of triangles using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriStrip-inlinearrays-ls
+ *   Draws vertices as a strip of triangles using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc TriStrip-inlinearrays-ps
+ *   Draws vertices as a strip of triangles using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriStrip-inlinearrays
+ *   Draws vertices as a strip of triangles using NV097_INLINE_ARRAY
+ *
+ * @tc TriStrip-inlinebuf-ls-ps
+ *   Draws vertices as a strip of triangles using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriStrip-inlinebuf-ls
+ *   Draws vertices as a strip of triangles using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc TriStrip-inlinebuf-ps
+ *   Draws vertices as a strip of triangles using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriStrip-inlinebuf
+ *   Draws vertices as a strip of triangles using NV097_SET_VERTEX3F
+ *
+ * @tc TriStrip-inlineelements-ls-ps
+ *   Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriStrip-inlineelements-ls
+ *   Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc TriStrip-inlineelements-ps
+ *   Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriStrip-inlineelements
+ *   Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16
+ *
+ * @tc TriStrip-ls-ps
+ *   Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc TriStrip-ls
+ *   Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc TriStrip-ps
+ *   Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc TriStrip
+ *   Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS
+ *
+ * @tc Triangles-inlinearrays-ls-ps
+ *   Draws vertices as triangles using NV097_INLINE_ARRAY
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Triangles-inlinearrays-ls
+ *   Draws vertices as triangles using NV097_INLINE_ARRAY
+ *   with line smoothing enabled.
+ *
+ * @tc Triangles-inlinearrays-ps
+ *   Draws vertices as triangles using NV097_INLINE_ARRAY
+ *   with polygon smoothing enabled.
+ *
+ * @tc Triangles-inlinearrays
+ *   Draws vertices as triangles using NV097_INLINE_ARRAY
+ *
+ * @tc Triangles-inlinebuf-ls-ps
+ *   Draws vertices as triangles using NV097_SET_VERTEX3F
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Triangles-inlinebuf-ls
+ *   Draws vertices as triangles using NV097_SET_VERTEX3F
+ *   with line smoothing enabled.
+ *
+ * @tc Triangles-inlinebuf-ps
+ *   Draws vertices as triangles using NV097_SET_VERTEX3F
+ *   with polygon smoothing enabled.
+ *
+ * @tc Triangles-inlinebuf
+ *   Draws vertices as triangles using NV097_SET_VERTEX3F
+ *
+ * @tc Triangles-inlineelements-ls-ps
+ *   Draws vertices as triangles using NV097_ARRAY_ELEMENT16
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Triangles-inlineelements-ls
+ *   Draws vertices as triangles using NV097_ARRAY_ELEMENT16
+ *   with line smoothing enabled.
+ *
+ * @tc Triangles-inlineelements-ps
+ *   Draws vertices as triangles using NV097_ARRAY_ELEMENT16
+ *   with polygon smoothing enabled.
+ *
+ * @tc Triangles-inlineelements
+ *   Draws vertices as triangles using NV097_ARRAY_ELEMENT16
+ *
+ * @tc Triangles-ls-ps
+ *   Draws vertices as triangles using NV097_DRAW_ARRAYS
+ *   with line and polygon smoothing enabled.
+ *
+ * @tc Triangles-ls
+ *   Draws vertices as triangles using NV097_DRAW_ARRAYS
+ *   with line smoothing enabled.
+ *
+ * @tc Triangles-ps
+ *   Draws vertices as triangles using NV097_DRAW_ARRAYS
+ *   with polygon smoothing enabled.
+ *
+ * @tc Triangles
+ *   Draws vertices as triangles using NV097_DRAW_ARRAYS
+ *
+ */
 ThreeDPrimitiveTests::ThreeDPrimitiveTests(TestHost& host, std::string output_dir, const Config& config)
-    : TestSuite(host, std::move(output_dir), "3D primitive", config) {
+    : TestSuite(host, std::move(output_dir), kSuiteName, config) {
   for (auto line_smooth : {false, true}) {
     for (auto poly_smooth : {false, true}) {
       for (const auto primitive : kPrimitives) {

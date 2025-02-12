@@ -10,7 +10,9 @@
 
 class VertexBuffer;
 
-// Tests behavior when lighting is enabled and color components are requested from various sources.
+/**
+ * Tests behavior when rendering various 3D primitives.
+ */
 class ThreeDPrimitiveTests : public TestSuite {
  public:
   enum DrawMode {
@@ -43,6 +45,8 @@ class ThreeDPrimitiveTests : public TestSuite {
 
  private:
   std::vector<uint32_t> index_buffer_;
+
+  static constexpr const char* kSuiteName = "3D primitive";
 };
 
 #endif  // NXDK_PGRAPH_TESTS_THREE_D_PRIMITIVE_TESTS_H
