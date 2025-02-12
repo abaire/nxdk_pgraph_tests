@@ -433,6 +433,10 @@ class TestHost {
   void SetBlend(bool enable = true, uint32_t func = NV097_SET_BLEND_EQUATION_V_FUNC_ADD,
                 uint32_t sfactor = NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA,
                 uint32_t dfactor = NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA) const;
+  //! Sets the blend color (and alpha) used by the V_CONSTANT_COLOR and V_CONSTANT_ALPHA blend factors.
+  void SetBlendColorConstant(uint32_t color) const;
+
+  void SetAlphaReference(uint32_t color) const;
 
   // Sets up the number of enabled color combiners and behavior flags.
   //
