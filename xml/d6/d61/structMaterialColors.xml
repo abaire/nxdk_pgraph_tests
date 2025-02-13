@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d61/structMaterialColors" kind="struct" language="C++" prot="public">
+    <compoundname>MaterialColors</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d6/d61/structMaterialColors_1ad087c778dd9152be77349aa144b8c4b0" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color MaterialColors::diffuse</definition>
+        <argsstring></argsstring>
+        <name>diffuse</name>
+        <qualifiedname>MaterialColors::diffuse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="11" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d61/structMaterialColors_1afbe7bd1e3bb4f82400e33125c09618b1" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color MaterialColors::specular</definition>
+        <argsstring></argsstring>
+        <name>specular</name>
+        <qualifiedname>MaterialColors::specular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="12" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d61/structMaterialColors_1a43b590fd325394d4b7ae43cd7093ead8" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color MaterialColors::ambient</definition>
+        <argsstring></argsstring>
+        <name>ambient</name>
+        <qualifiedname>MaterialColors::ambient</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="13" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d61/structMaterialColors_1a27898a826bf88938a7a41e4af75c7f9c" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color MaterialColors::emissive</definition>
+        <argsstring></argsstring>
+        <name>emissive</name>
+        <qualifiedname>MaterialColors::emissive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="14" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d61/structMaterialColors_1aff049351a7959dc12a6b34af25b2d554" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float MaterialColors::specular_power</definition>
+        <argsstring></argsstring>
+        <name>specular_power</name>
+        <qualifiedname>MaterialColors::specular_power</qualifiedname>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="15" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="15" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Color</label>
+        <link refid="d0/da2/structColor"/>
+      </node>
+      <node id="1">
+        <label>MaterialColors</label>
+        <link refid="d6/d61/structMaterialColors"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ambient</edgelabel>
+          <edgelabel>diffuse</edgelabel>
+          <edgelabel>emissive</edgelabel>
+          <edgelabel>specular</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/material_color_source_tests.cpp" line="10" column="1" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="10" bodyend="16"/>
+    <listofallmembers>
+      <member refid="d6/d61/structMaterialColors_1a43b590fd325394d4b7ae43cd7093ead8" prot="public" virt="non-virtual"><scope>MaterialColors</scope><name>ambient</name></member>
+      <member refid="d6/d61/structMaterialColors_1ad087c778dd9152be77349aa144b8c4b0" prot="public" virt="non-virtual"><scope>MaterialColors</scope><name>diffuse</name></member>
+      <member refid="d6/d61/structMaterialColors_1a27898a826bf88938a7a41e4af75c7f9c" prot="public" virt="non-virtual"><scope>MaterialColors</scope><name>emissive</name></member>
+      <member refid="d6/d61/structMaterialColors_1afbe7bd1e3bb4f82400e33125c09618b1" prot="public" virt="non-virtual"><scope>MaterialColors</scope><name>specular</name></member>
+      <member refid="d6/d61/structMaterialColors_1aff049351a7959dc12a6b34af25b2d554" prot="public" virt="non-virtual"><scope>MaterialColors</scope><name>specular_power</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

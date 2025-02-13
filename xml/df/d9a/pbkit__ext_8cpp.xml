@@ -1,0 +1,931 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d9a/pbkit__ext_8cpp" kind="file" language="C++">
+    <compoundname>pbkit_ext.cpp</compoundname>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">vector</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="dd/d7f/nxdk__ext_8h" local="yes">nxdk_ext.h</includes>
+    <incdepgraph>
+      <node id="10">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/pbkit_ext.cpp</label>
+        <link refid="df/d9a/pbkit__ext_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>cmath</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>list</label>
+      </node>
+      <node id="3">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="4">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="12">
+        <label>string</label>
+      </node>
+      <node id="5">
+        <label>strings.h</label>
+      </node>
+      <node id="9">
+        <label>vector</label>
+      </node>
+      <node id="11">
+        <label>windows.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="df/d9a/pbkit__ext_8cpp_1a37d006dd5886dc589b198237815bbafc" prot="public" static="no">
+        <name>DMA_CLASS_3D</name>
+        <initializer>0x3D</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="81" column="9" bodyfile="src/pbkit_ext.cpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="df/d9a/pbkit__ext_8cpp_1a762cf84f3389d0b6eaa093419341d041" prot="public" static="no">
+        <name>PB_SETOUTER</name>
+        <initializer>0xB2A</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="82" column="9" bodyfile="src/pbkit_ext.cpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1ae4de1021d1a032451f9d4e5de120d954" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_depth_stencil_buffer_region</definition>
+        <argsstring>(uint32_t depth_buffer_format, uint32_t depth_value, uint8_t stencil_value, uint32_t left, uint32_t top, uint32_t width, uint32_t height)</argsstring>
+        <name>set_depth_stencil_buffer_region</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth_buffer_format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth_value</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>stencil_value</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="11" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="11" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1ac7964c08ca1fb2ad3bc77eb7c553758a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t float_to_z16</definition>
+        <argsstring>(float val)</argsstring>
+        <name>float_to_z16</name>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="41" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="41" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a40d7ec6c354ee344ac773d43f1e72791" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float z16_to_float</definition>
+        <argsstring>(uint32_t val)</argsstring>
+        <name>z16_to_float</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="50" column="7" bodyfile="src/pbkit_ext.cpp" bodystart="50" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a3f27ac5c8eff69f9b4c4ab5548c71dbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t float_to_z24</definition>
+        <argsstring>(float val)</argsstring>
+        <name>float_to_z24</name>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="59" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="59" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a7ec7c8ce89f24575fcd31da8577319d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float z24_to_float</definition>
+        <argsstring>(uint32_t val)</argsstring>
+        <name>z24_to_float</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="68" column="7" bodyfile="src/pbkit_ext.cpp" bodystart="68" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a6f44dea917b7ba20791230ac7e5d61f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pb_set_dma_address</definition>
+        <argsstring>(const struct s_CtxDma *context, const void *address, uint32_t limit)</argsstring>
+        <name>pb_set_dma_address</name>
+        <param>
+          <type>const struct s_CtxDma *</type>
+          <declname>context</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>address</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>limit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="84" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="84" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a28240409253929b38015e92402a623fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pb_bind_subchannel</definition>
+        <argsstring>(uint32_t subchannel, const struct s_CtxDma *context)</argsstring>
+        <name>pb_bind_subchannel</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>subchannel</declname>
+        </param>
+        <param>
+          <type>const struct s_CtxDma *</type>
+          <declname>context</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="107" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="107" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1ae7cc0f12ca84f69ed5f3fb2af8028fb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * pb_agp_access</definition>
+        <argsstring>(void *fb_memory_pointer)</argsstring>
+        <name>pb_agp_access</name>
+        <param>
+          <type>void *</type>
+          <declname>fb_memory_pointer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="113" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="113" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1ab039d05dedda0ff7807afd4dbffde3de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push_4x3_matrix</definition>
+        <argsstring>(uint32_t *p, DWORD command, const float *m)</argsstring>
+        <name>pb_push_4x3_matrix</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="117" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="117" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a5509df7acf58cd36fd98023fe3b782ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push_4x4_matrix</definition>
+        <argsstring>(uint32_t *p, DWORD command, const float *m)</argsstring>
+        <name>pb_push_4x4_matrix</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="138" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="138" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a77e84b79ce20c95d551e7dd4fbe3c374" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pb_print_with_floats</definition>
+        <argsstring>(const char *format,...)</argsstring>
+        <name>pb_print_with_floats</name>
+        <param>
+          <type>const char *</type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type>...</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="164" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="164" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1aec458354bbe4bdfddbe402d882691cd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push1f</definition>
+        <argsstring>(uint32_t *p, DWORD command, float param1)</argsstring>
+        <name>pb_push1f</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="178" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="178" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a739b952041a4825ec6ccfc9ff39ace64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push2f</definition>
+        <argsstring>(uint32_t *p, DWORD command, float param1, float param2)</argsstring>
+        <name>pb_push2f</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="184" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="184" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1abd4dee72b38de41c94281b0f22de1e86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push3f</definition>
+        <argsstring>(uint32_t *p, DWORD command, float param1, float param2, float param3)</argsstring>
+        <name>pb_push3f</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="191" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="191" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1aad20d0a1f729b5ba3765dc701df766fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push2fv</definition>
+        <argsstring>(uint32_t *p, DWORD command, const float *vector2)</argsstring>
+        <name>pb_push2fv</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="199" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="199" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1aaae4e0085ad853c1f43e68ebba235f9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push3fv</definition>
+        <argsstring>(uint32_t *p, DWORD command, const float *vector3)</argsstring>
+        <name>pb_push3fv</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="206" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="206" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a5e02c7bb1a459e6f4d7f127ed76e3346" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push4fv</definition>
+        <argsstring>(uint32_t *p, DWORD command, const float *vector4)</argsstring>
+        <name>pb_push4fv</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vector4</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="214" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="214" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1ae1592902814f0838a6f08dec4068a835" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push2v</definition>
+        <argsstring>(uint32_t *p, DWORD command, const uint32_t *vector2)</argsstring>
+        <name>pb_push2v</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="223" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="223" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a0ac3cc2a54cce0708af7ae67dbb27eb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push3v</definition>
+        <argsstring>(uint32_t *p, DWORD command, const uint32_t *vector3)</argsstring>
+        <name>pb_push3v</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="227" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="227" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a79bd711d980217eaa0a751d6bff2a45f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t *</type>
+        <definition>uint32_t * pb_push4v</definition>
+        <argsstring>(uint32_t *p, DWORD command, const uint32_t *vector4)</argsstring>
+        <name>pb_push4v</name>
+        <param>
+          <type>uint32_t *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>DWORD</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>vector4</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="231" column="10" bodyfile="src/pbkit_ext.cpp" bodystart="231" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1a6fcd5016a7cb952d4ccc577b492b6d4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pb_fetch_pgraph_registers</definition>
+        <argsstring>(uint8_t *registers)</argsstring>
+        <name>pb_fetch_pgraph_registers</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>registers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="235" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="235" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d9a/pbkit__ext_8cpp_1ac34db42dbda245f10231b941397fbf6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pb_diff_registers</definition>
+        <argsstring>(const uint8_t *a, const uint8_t *b, std::list&lt; uint32_t &gt; &amp;modified_registers)</argsstring>
+        <name>pb_diff_registers</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>std::list&lt; uint32_t &gt; &amp;</type>
+          <declname>modified_registers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pbkit_ext.cpp" line="281" column="6" bodyfile="src/pbkit_ext.cpp" bodystart="281" bodyend="292"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>set_depth_stencil_buffer_region(uint32_t<sp/>depth_buffer_format,<sp/>uint32_t<sp/>depth_value,<sp/>uint8_t<sp/>stencil_value,</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>left,<sp/>uint32_t<sp/>top,<sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>See:<sp/>pbkit.c:<sp/>pb_erase_depth_stencil_buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>uint32_t<sp/>right<sp/>=<sp/>left<sp/>+<sp/>width;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>uint32_t<sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>height;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>sets<sp/>rectangle<sp/>coordinates</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_CLEAR_RECT_HORIZONTAL,<sp/>((right<sp/>-<sp/>1)<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>(left<sp/>&amp;<sp/>0xFFFF));</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_CLEAR_RECT_VERTICAL,<sp/>((bottom<sp/>-<sp/>1)<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>(top<sp/>&amp;<sp/>0xFFFF));</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(depth_buffer_format)<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_SURFACE_FORMAT_ZETA_Z16:</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_ZSTENCIL_CLEAR_VALUE,<sp/>depth_value<sp/>&amp;<sp/>0xFFFF);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_SURFACE_FORMAT_ZETA_Z24S8:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_ZSTENCIL_CLEAR_VALUE,<sp/>((depth_value<sp/>&amp;<sp/>0x00FFFFFF)<sp/>&lt;&lt;<sp/>8)<sp/>|<sp/>stencil_value);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Invalid<sp/>depth_buffer_format&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_CLEAR_SURFACE,<sp/>NV097_CLEAR_SURFACE_Z<sp/>|<sp/>NV097_CLEAR_SURFACE_STENCIL);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">uint16_t<sp/>float_to_z16(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(val<sp/>==<sp/>0.0f)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>int_val<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(&amp;val);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(*int_val<sp/>&gt;&gt;<sp/>11)<sp/>-<sp/>0x3F8000;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z16_to_float(uint32_t<sp/>val)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!val)<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.0f;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>val<sp/>=<sp/>(val<sp/>&lt;&lt;<sp/>11)<sp/>+<sp/>0x3C000000;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)&amp;val;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal">uint32_t<sp/>float_to_z24(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(val<sp/>==<sp/>0.0f)<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>int_val<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(&amp;val);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>((*int_val<sp/>&gt;&gt;<sp/>7)<sp/>-<sp/>0x3000000)<sp/>&amp;<sp/>0x00FFFFFF;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z24_to_float(uint32_t<sp/>val)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>val<sp/>&amp;=<sp/>0x00FFFFFF;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!val)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.0f;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>XBOX<sp/>24<sp/>bit<sp/>format<sp/>is<sp/>e8m16,<sp/>convert<sp/>it<sp/>to<sp/>a<sp/>32-bit<sp/>float<sp/>by<sp/>shifting<sp/>the<sp/>exponent<sp/>portion<sp/>to<sp/>23:30.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>val<sp/>=<sp/>((val<sp/>&amp;<sp/>0x00FF0000)<sp/>&lt;&lt;<sp/>7)<sp/>+<sp/>(val<sp/>&amp;<sp/>0x0000FFFF);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>val<sp/>&lt;&lt;=<sp/>7;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)&amp;val;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DMA_CLASS_3D<sp/>0x3D</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PB_SETOUTER<sp/>0xB2A</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pb_set_dma_address(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>s_CtxDma<sp/>*context,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*address,<sp/>uint32_t<sp/>limit)<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dma_addr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(address)<sp/>&amp;<sp/>0x03FFFFFF;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dma_flags<sp/>=<sp/>DMA_CLASS_3D<sp/>|<sp/>0x0000B000;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>dma_addr<sp/>|=<sp/>3;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV20_TCL_PRIMITIVE_3D_WAIT_MAKESPACE,<sp/>0);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>set<sp/>params<sp/>addr,data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push2(p,<sp/>NV20_TCL_PRIMITIVE_3D_PARAMETER_A,<sp/>NV_PRAMIN<sp/>+<sp/>(context-&gt;Inst<sp/>&lt;&lt;<sp/>4)<sp/>+<sp/>0x08,<sp/>dma_addr);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>calls<sp/>subprogID<sp/>PB_SETOUTER:<sp/>does<sp/>VIDEOREG(addr)=data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT,<sp/>PB_SETOUTER);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push2(p,<sp/>NV20_TCL_PRIMITIVE_3D_PARAMETER_A,<sp/>NV_PRAMIN<sp/>+<sp/>(context-&gt;Inst<sp/>&lt;&lt;<sp/>4)<sp/>+<sp/>0x0C,<sp/>dma_addr);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT,<sp/>PB_SETOUTER);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push2(p,<sp/>NV20_TCL_PRIMITIVE_3D_PARAMETER_A,<sp/>NV_PRAMIN<sp/>+<sp/>(context-&gt;Inst<sp/>&lt;&lt;<sp/>4)<sp/>+<sp/>0x00,<sp/>dma_flags);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT,<sp/>PB_SETOUTER);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push2(p,<sp/>NV20_TCL_PRIMITIVE_3D_PARAMETER_A,<sp/>NV_PRAMIN<sp/>+<sp/>(context-&gt;Inst<sp/>&lt;&lt;<sp/>4)<sp/>+<sp/>0x04,<sp/>limit);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV20_TCL_PRIMITIVE_3D_FIRE_INTERRUPT,<sp/>PB_SETOUTER);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pb_bind_subchannel(uint32_t<sp/>subchannel,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>s_CtxDma<sp/>*context)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(subchannel,<sp/>p,<sp/>NV20_TCL_PRIMITIVE_SET_MAIN_OBJECT,<sp/>context-&gt;ChannelID);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*pb_agp_access(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*fb_memory_pointer)<sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(fb_memory_pointer)<sp/>|<sp/>AGP_MEMORY_REMAP);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal">uint32_t<sp/>*pb_push_4x3_matrix(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*m)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p++,<sp/>command,<sp/>12);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_11];</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_12];</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_13];</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_14];</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_21];</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_22];</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_23];</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_24];</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_31];</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_32];</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_33];</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_34];</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal">uint32_t<sp/>*pb_push_4x4_matrix(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*m)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p++,<sp/>command,<sp/>16);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_11];</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_12];</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_13];</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_14];</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_21];</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_22];</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_23];</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_24];</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_31];</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_32];</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_33];</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_34];</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_41];</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_42];</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_43];</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)p++)<sp/>=<sp/>m[_44];</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pb_print_with_floats(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*format,<sp/>...)<sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buffer[512];</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>va_list<sp/>argList;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>va_start(argList,<sp/>format);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>vsnprintf_(buffer,<sp/>512,<sp/>format,<sp/>argList);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>va_end(argList);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*str<sp/>=<sp/>buffer;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(*str<sp/>!=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_print_char(*str++);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal">uint32_t<sp/>*pb_push1f(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1)<sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p,<sp/>command,<sp/>1);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>1))<sp/>=<sp/>param1;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p<sp/>+<sp/>2;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal">uint32_t<sp/>*pb_push2f(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param2)<sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p,<sp/>command,<sp/>2);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>1))<sp/>=<sp/>param1;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>2))<sp/>=<sp/>param2;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p<sp/>+<sp/>3;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal">uint32_t<sp/>*pb_push3f(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param3)<sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p,<sp/>command,<sp/>3);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>1))<sp/>=<sp/>param1;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>2))<sp/>=<sp/>param2;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>3))<sp/>=<sp/>param3;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p<sp/>+<sp/>4;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal">uint32_t<sp/>*pb_push2fv(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vector2)<sp/>{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p,<sp/>command,<sp/>2);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>1))<sp/>=<sp/>*vector2++;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>2))<sp/>=<sp/>*vector2++;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p<sp/>+<sp/>3;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal">uint32_t<sp/>*pb_push3fv(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vector3)<sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p,<sp/>command,<sp/>3);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>1))<sp/>=<sp/>*vector3++;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>2))<sp/>=<sp/>*vector3++;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>3))<sp/>=<sp/>*vector3++;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p<sp/>+<sp/>4;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal">uint32_t<sp/>*pb_push4fv(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vector4)<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/>pb_push_to(SUBCH_3D,<sp/>p,<sp/>command,<sp/>4);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>1))<sp/>=<sp/>*vector4++;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>2))<sp/>=<sp/>*vector4++;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>3))<sp/>=<sp/>*vector4++;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)(p<sp/>+<sp/>4))<sp/>=<sp/>*vector4++;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>p<sp/>+<sp/>5;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal">uint32_t<sp/>*pb_push2v(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*vector2)<sp/>{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pb_push2(p,<sp/>command,<sp/>vector2[0],<sp/>vector2[1]);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal">uint32_t<sp/>*pb_push3v(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*vector3)<sp/>{</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pb_push3(p,<sp/>command,<sp/>vector3[0],<sp/>vector3[1],<sp/>vector3[2]);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal">uint32_t<sp/>*pb_push4v(uint32_t<sp/>*p,<sp/>DWORD<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*vector4)<sp/>{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pb_push4(p,<sp/>command,<sp/>vector4[0],<sp/>vector4[1],<sp/>vector4[2],<sp/>vector4[3]);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pb_fetch_pgraph_registers(uint8_t<sp/>*registers)<sp/>{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>See<sp/>https://github.com/XboxDev/nv2a-trace/blob/65bdd2369a5b216cfc47c9545f870c49d118276b/Trace.py#L32</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pb_busy())<sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Wait<sp/>for<sp/>any<sp/>pending<sp/>pgraph<sp/>commands<sp/>to<sp/>be<sp/>flushed<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPGRAPHRegisterEnd<sp/>=<sp/>PGRAPH_REGISTER_BASE<sp/>+<sp/>PGRAPH_REGISTER_ARRAY_SIZE;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">Range<sp/>{</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>begin;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>end;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>Range<sp/>kReadRanges[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{PGRAPH_REGISTER_BASE,<sp/>0xFD400200},<sp/></highlight><highlight class="comment">//<sp/>From<sp/>nv2a-trace:<sp/>&quot;0xFD400200<sp/>hangs<sp/>Xbox,<sp/>I<sp/>just<sp/>skipped<sp/>to<sp/>0x400.&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Spotchecked<sp/>300,<sp/>360,<sp/>3B0,<sp/>3F0<sp/>also<sp/>hang</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{0xFD400400,<sp/>0xFD400754},<sp/></highlight><highlight class="comment">//<sp/>From<sp/>xemu,<sp/>0xFD400754<sp/>is<sp/>the<sp/>RDI<sp/>interface.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{0xFD400758,<sp/>kPGRAPHRegisterEnd},</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>a<sp/>dword<sp/>at<sp/>a<sp/>time<sp/>as<sp/>the<sp/>target<sp/>is<sp/>MMIO.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>uint32_t<sp/>*last_empty<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;range<sp/>:<sp/>kReadRanges)<sp/>{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>src<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(range.begin);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>end<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(range.end);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>range.begin<sp/>-<sp/>PGRAPH_REGISTER_BASE;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dst<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(registers<sp/>+<sp/>offset);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(last_empty<sp/>&amp;&amp;<sp/>last_empty<sp/>&lt;<sp/>dst)<sp/>{</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>*last_empty++<sp/>=<sp/>0xBAD0BAD0;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(src<sp/>&lt;<sp/>end)<sp/>{</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((intptr_t)src<sp/>&gt;=<sp/>0xFD400200<sp/>&amp;&amp;<sp/>(intptr_t)src<sp/>&lt;<sp/>0xFD400400)<sp/>{</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PrintMsg(</highlight><highlight class="stringliteral">&quot;Checking<sp/>0x%p\n&quot;</highlight><highlight class="normal">,<sp/>src);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Sleep(10);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>*dst++<sp/>=<sp/>*src++;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/>last_empty<sp/>=<sp/>dst;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pb_diff_registers(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*a,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>*b,<sp/>std::list&lt;uint32_t&gt;<sp/>&amp;modified_registers)<sp/>{</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/>modified_registers.clear();</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_val<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(a);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>new_val<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(b);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>PGRAPH_REGISTER_ARRAY_SIZE<sp/>/<sp/>4;<sp/>++i,<sp/>++old_val,<sp/>++new_val)<sp/>{</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(*old_val<sp/>!=<sp/>*new_val)<sp/>{</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>modified_registers.push_back(PGRAPH_REGISTER_BASE<sp/>+<sp/>i<sp/>*<sp/>4);</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="292"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/pbkit_ext.cpp"/>
+  </compounddef>
+</doxygen>

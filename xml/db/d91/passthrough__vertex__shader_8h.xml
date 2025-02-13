@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d91/passthrough__vertex__shader_8h" kind="file" language="C++">
+    <compoundname>passthrough_vertex_shader.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes refid="da/d63/vertex__shader__program_8h" local="yes">vertex_shader_program.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <includedby refid="d9/d26/passthrough__vertex__shader_8cpp" local="yes">src/shaders/passthrough_vertex_shader.cpp</includedby>
+    <includedby refid="dd/d80/blend__tests_8cpp" local="yes">src/tests/blend_tests.cpp</includedby>
+    <includedby refid="d2/dc9/z__min__max__control__tests_8cpp" local="yes">src/tests/z_min_max_control_tests.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/shaders/passthrough_vertex_shader.h</label>
+        <link refid="db/d91/passthrough__vertex__shader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>map</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="6">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="db/dfa/classPassthroughVertexShader" prot="public">PassthroughVertexShader</innerclass>
+    <innernamespace refid="d1/d24/namespaceXboxMath">XboxMath</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SHADERS_PASSTHROUGH_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SHADERS_PASSTHROUGH_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_shader_program.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="db/dfa/classPassthroughVertexShader" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="db/dfa/classPassthroughVertexShader" kindref="compound">PassthroughVertexShader</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="dc/dfc/classVertexShaderProgram" kindref="compound">VertexShaderProgram</ref><sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><ref refid="db/dfa/classPassthroughVertexShader" kindref="compound">PassthroughVertexShader</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnLoadShader()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SHADERS_PASSTHROUGH_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/passthrough_vertex_shader.h"/>
+  </compounddef>
+</doxygen>

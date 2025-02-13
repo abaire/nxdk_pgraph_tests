@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/d56/structTestHost_1_1ZeroInput" kind="struct" language="C++" prot="public">
+    <compoundname>TestHost::ZeroInput</compoundname>
+    <basecompoundref refid="d3/db1/structTestHost_1_1CombinerInput" prot="public" virt="non-virtual">TestHost::CombinerInput</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d5/d56/structTestHost_1_1ZeroInput_1a6e898f82aeb046abfac63a24aa0ebbbf" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TestHost::ZeroInput::ZeroInput</definition>
+        <argsstring>()</argsstring>
+        <name>ZeroInput</name>
+        <qualifiedname>TestHost::ZeroInput::ZeroInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="159" column="14" bodyfile="src/test_host.h" bodystart="159" bodyend="163"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestHost::CombinerInput</label>
+        <link refid="d3/db1/structTestHost_1_1CombinerInput"/>
+      </node>
+      <node id="1">
+        <label>TestHost::ZeroInput</label>
+        <link refid="d5/d56/structTestHost_1_1ZeroInput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>TestHost::CombinerInput</label>
+        <link refid="d3/db1/structTestHost_1_1CombinerInput"/>
+      </node>
+      <node id="1">
+        <label>TestHost::ZeroInput</label>
+        <link refid="d5/d56/structTestHost_1_1ZeroInput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/test_host.h" line="158" column="3" bodyfile="src/test_host.h" bodystart="158" bodyend="164"/>
+    <listofallmembers>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a49def257fe8d44a737a9b8277517f6c6" prot="public" virt="non-virtual"><scope>TestHost::ZeroInput</scope><name>alpha</name></member>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a0762521b0b5c40968605180edc921c07" prot="public" virt="non-virtual"><scope>TestHost::ZeroInput</scope><name>mapping</name></member>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a2ac27274709f7198478607072b07f424" prot="public" virt="non-virtual"><scope>TestHost::ZeroInput</scope><name>source</name></member>
+      <member refid="d5/d56/structTestHost_1_1ZeroInput_1a6e898f82aeb046abfac63a24aa0ebbbf" prot="public" virt="non-virtual"><scope>TestHost::ZeroInput</scope><name>ZeroInput</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

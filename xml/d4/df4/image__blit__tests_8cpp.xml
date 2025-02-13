@@ -1,0 +1,679 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/df4/image__blit__tests_8cpp" kind="file" language="C++">
+    <compoundname>image_blit_tests.cpp</compoundname>
+    <includes refid="d5/d38/image__blit__tests_8h" local="yes">image_blit_tests.h</includes>
+    <includes local="no">SDL_image.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="dd/d7f/nxdk__ext_8h" local="yes">nxdk_ext.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes refid="d3/dbd/vertex__buffer_8h" local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="21">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h_source"/>
+      </node>
+      <node id="16">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/image_blit_tests.cpp</label>
+        <link refid="d4/df4/image__blit__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>image_blit_tests.h</label>
+        <link refid="d5/d38/image__blit__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>texture_stage.h</label>
+        <link refid="d7/d78/texture__stage_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>SDL.h</label>
+      </node>
+      <node id="20">
+        <label>SDL_image.h</label>
+      </node>
+      <node id="6">
+        <label>atomic</label>
+      </node>
+      <node id="12">
+        <label>chrono</label>
+      </node>
+      <node id="7">
+        <label>cstdint</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="19">
+        <label>list</label>
+      </node>
+      <node id="13">
+        <label>map</label>
+      </node>
+      <node id="25">
+        <label>memory</label>
+      </node>
+      <node id="3">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="17">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="14">
+        <label>set</label>
+      </node>
+      <node id="9">
+        <label>string</label>
+      </node>
+      <node id="18">
+        <label>strings.h</label>
+      </node>
+      <node id="10">
+        <label>thread</label>
+      </node>
+      <node id="11">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>windows.h</label>
+      </node>
+      <node id="29">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a71f766c629bd3683e45fee43153c0f44" prot="public" static="no">
+        <name>SUBCH_CLASS_9F</name>
+        <initializer>SUBCH_3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="14" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a16b272dce0a9b1b72b59bd955c659df7" prot="public" static="no">
+        <name>SUBCH_CLASS_62</name>
+        <initializer>SUBCH_4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="16" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a9cf9a67568a08de98d0d2580289d7f38" prot="public" static="no">
+        <name>SOURCE_X</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="27" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a1ed278b7b7a36eb0dcf1195f6aeb7c9e" prot="public" static="no">
+        <name>SOURCE_Y</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="28" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a8f50d5321e2a988116a5133c75f88961" prot="public" static="no">
+        <name>SOURCE_WIDTH</name>
+        <initializer>128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="29" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a6be941aa31122a45729d6f1089a73d36" prot="public" static="no">
+        <name>SOURCE_HEIGHT</name>
+        <initializer>128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="30" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1a0c3f05738c8116240ce7871a2416f9e5" prot="public" static="no">
+        <name>DESTINATION_X</name>
+        <initializer>256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="31" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/df4/image__blit__tests_8cpp_1aaf4634b5cb6f697372e43112b9fdd813" prot="public" static="no">
+        <name>DESTINATION_Y</name>
+        <initializer>176</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="32" column="9" bodyfile="src/tests/image_blit_tests.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/df4/image__blit__tests_8cpp_1a68b1179ad534f91fc0d0e6414cfda2f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_19</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_19</name>
+        <initializer>= kNextSubchannel</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="19" column="27" bodyfile="src/tests/image_blit_tests.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/df4/image__blit__tests_8cpp_1aba4d8b3f2965313b48d88df105dc505c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_12</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_12</name>
+        <initializer>= SUBCH_CLASS_19 + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="22" column="27" bodyfile="src/tests/image_blit_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/df4/image__blit__tests_8cpp_1a4e1038c7d0a5b6606e1be65cfd843fd8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_72</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_72</name>
+        <initializer>= SUBCH_CLASS_12 + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="25" column="27" bodyfile="src/tests/image_blit_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/df4/image__blit__tests_8cpp_1ae84c04cb394fbe66f1df7b007ce743fc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="da/d17/structImageBlitTests_1_1BlitTest" kindref="compound">ImageBlitTests::BlitTest</ref></type>
+        <definition>constexpr ImageBlitTests::BlitTest kTests[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTests</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="37" column="43" bodyfile="src/tests/image_blit_tests.cpp" bodystart="37" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d4/df4/image__blit__tests_8cpp_1ae38611016cf6a31b0b36f242d59e1962" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string OperationName</definition>
+        <argsstring>(uint32_t operation)</argsstring>
+        <name>OperationName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>operation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="231" column="20" bodyfile="src/tests/image_blit_tests.cpp" bodystart="231" bodyend="248" declfile="src/tests/image_blit_tests.cpp" declline="34" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/df4/image__blit__tests_8cpp_1a4fee9807c1a6b6ef6d30e3aa402d6ac1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string ColorFormatName</definition>
+        <argsstring>(uint32_t format)</argsstring>
+        <name>ColorFormatName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="250" column="20" bodyfile="src/tests/image_blit_tests.cpp" bodystart="250" bodyend="265" declfile="src/tests/image_blit_tests.cpp" declline="35" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;image_blit_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL_image.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>pb_init<sp/>in<sp/>pbkit.c,<sp/>where<sp/>the<sp/>channel<sp/>contexts<sp/>are<sp/>set<sp/>up.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SUBCH_3<sp/>==<sp/>GR_CLASS_9F,<sp/>which<sp/>contains<sp/>the<sp/>IMAGE_BLIT<sp/>commands.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SUBCH_CLASS_9F<sp/>SUBCH_3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SUBCH_4<sp/>==<sp/>GR_CLASS_62,<sp/>which<sp/>contains<sp/>the<sp/>NV10<sp/>2D<sp/>surface<sp/>commands.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SUBCH_CLASS_62<sp/>SUBCH_4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Subchannel<sp/>reserved<sp/>for<sp/>interaction<sp/>with<sp/>the<sp/>class<sp/>19<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_19<sp/>=<sp/>kNextSubchannel;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Subchannel<sp/>reserved<sp/>for<sp/>interaction<sp/>with<sp/>the<sp/>class<sp/>12<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_12<sp/>=<sp/>SUBCH_CLASS_19<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Subchannel<sp/>reserved<sp/>for<sp/>interaction<sp/>with<sp/>the<sp/>class<sp/>72<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_72<sp/>=<sp/>SUBCH_CLASS_12<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SOURCE_X<sp/>8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SOURCE_Y<sp/>8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SOURCE_WIDTH<sp/>128</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SOURCE_HEIGHT<sp/>128</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DESTINATION_X<sp/>256</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DESTINATION_Y<sp/>176</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>OperationName(uint32_t<sp/>operation);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>ColorFormatName(uint32_t<sp/>format);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="da/d17/structImageBlitTests_1_1BlitTest" kindref="compound">ImageBlitTests::BlitTest</ref><sp/>kTests[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x80000000},</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x8FFFFFFF},</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x007FFFFF},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00800000},</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x03300000},</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00D00000},</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x44400000},</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x444fffff},</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x66800000},</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x7F800000},</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x7FFFFFFF},</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x007FFFFF},</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x00800000},</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x00D00000},</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x03300000},</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x44400000},</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x444fffff},</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x66800000},</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0x7F800000},</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00000000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0xFF000000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00FF0000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x0000FF00},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x000000FF},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x33000000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00330000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00003300},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00000033},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00FFFFFF},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_BLEND_AND_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0xFFFFFFFF},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0},</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8,<sp/>0},<sp/><sp/></highlight><highlight class="comment">//<sp/>Zero<sp/>alpha.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY,<sp/>NV04_SURFACE_2D_FORMAT_A8R8G8B8,<sp/>0},</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00000000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0xFF000000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00FF0000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x0000FF00},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x000000FF},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x33000000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00330000},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00003300},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00000033},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0x00FFFFFF},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8,<sp/>0xFFFFFFFF},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{NV09F_SET_OPERATION_SRCCOPY_PREMULT,<sp/>NV04_SURFACE_2D_FORMAT_A8R8G8B8,<sp/>0x00000033},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal">ImageBlitTests::ImageBlitTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Image<sp/>blit&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test<sp/>:<sp/>kTests)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(test);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test_method<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>test]()<sp/>{<sp/>this-&gt;Test(test);<sp/>};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>test_method;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d0/d2c/classImageBlitTests_1a59a420a5b7d07b27a0dcaa693e89ec7f" kindref="member">ImageBlitTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>SetDefaultTextureFormat();</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>SDL_Surface*<sp/>temp<sp/>=<sp/>IMG_Load(</highlight><highlight class="stringliteral">&quot;D:\\image_blit\\TestImage.png&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>ASSERT(temp);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>SDL_Surface*<sp/>test_image<sp/>=<sp/>SDL_ConvertSurfaceFormat(temp,<sp/>SDL_PIXELFORMAT_BGRA32,<sp/>0);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>SDL_free(temp);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>image_pitch_<sp/>=<sp/>test_image-&gt;pitch;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>image_height_<sp/>=<sp/>test_image-&gt;h;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>uint32_t<sp/>image_bytes<sp/>=<sp/>image_pitch_<sp/>*<sp/>image_height_;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>source_image_<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(MmAllocateContiguousMemory(image_bytes));</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>memcpy(source_image_,<sp/>test_image-&gt;pixels,<sp/>image_bytes);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>SDL_free(test_image);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Provide<sp/>a<sp/>mechanism<sp/>to<sp/>find<sp/>the<sp/>next<sp/>unused<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>channel<sp/>=<sp/>kNextContextChannel;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>pb_create_dma_ctx(channel++,<sp/>DMA_CLASS_3D,<sp/>0,<sp/>MAXRAM,<sp/>&amp;image_src_dma_ctx_);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;image_src_dma_ctx_);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_30,<sp/>&amp;null_ctx_);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;null_ctx_);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_19,<sp/>&amp;clip_rect_ctx_);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;clip_rect_ctx_);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Provide<sp/>a<sp/>mechanism<sp/>to<sp/>find<sp/>the<sp/>next<sp/>unused<sp/>subchannel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_19,<sp/>&amp;clip_rect_ctx_);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_12,<sp/>&amp;beta_ctx_);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;beta_ctx_);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_12,<sp/>&amp;beta_ctx_);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_72,<sp/>&amp;beta4_ctx_);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;beta4_ctx_);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_72,<sp/>&amp;beta4_ctx_);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d0/d2c/classImageBlitTests_1a6fa4a2f165de8707d76195433b31e20e" kindref="member">ImageBlitTests::Deinitialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>MmFreeContiguousMemory(source_image_);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>source_image_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ImageBlitTests::ImageBlit(uint32_t<sp/>operation,<sp/>uint32_t<sp/>beta,<sp/>uint32_t<sp/>source_channel,<sp/>uint32_t<sp/>destination_channel,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>surface_format,<sp/>uint32_t<sp/>source_pitch,<sp/>uint32_t<sp/>destination_pitch,</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>source_offset,<sp/>uint32_t<sp/>source_x,<sp/>uint32_t<sp/>source_y,</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>destination_offset,<sp/>uint32_t<sp/>destination_x,<sp/>uint32_t<sp/>destination_y,</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height,<sp/>uint32_t<sp/>clip_x,<sp/>uint32_t<sp/>clip_y,<sp/>uint32_t<sp/>clip_width,</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>clip_height)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>PrintMsg(</highlight><highlight class="stringliteral">&quot;ImageBlit:<sp/>%d<sp/>beta:<sp/>0x%08X<sp/>src:<sp/>%d<sp/>dest:<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>operation,<sp/>beta,<sp/>source_channel,<sp/>destination_channel);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_19,<sp/>p,<sp/>NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT,<sp/>clip_x<sp/>|<sp/>(clip_y<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_19,<sp/>p,<sp/>NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE,<sp/>clip_width<sp/>|<sp/>(clip_height<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_CLIP_RECTANGLE,<sp/>clip_rect_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_OPERATION,<sp/>operation);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_62,<sp/>p,<sp/>NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0,<sp/>source_channel);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_62,<sp/>p,<sp/>NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1,<sp/>destination_channel);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_62,<sp/>p,<sp/>NV10_CONTEXT_SURFACES_2D_FORMAT,<sp/>surface_format);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_62,<sp/>p,<sp/>NV10_CONTEXT_SURFACES_2D_PITCH,<sp/>source_pitch<sp/>|<sp/>(destination_pitch<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_62,<sp/>p,<sp/>NV10_CONTEXT_SURFACES_2D_OFFSET_SRC,<sp/>source_offset);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_62,<sp/>p,<sp/>NV10_CONTEXT_SURFACES_2D_OFFSET_DST,<sp/>destination_offset);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_COLOR_KEY,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_PATTERN,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_ROP5,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>!=<sp/>NV09F_SET_OPERATION_BLEND_AND)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_SET_BETA,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_12,<sp/>p,<sp/>NV012_SET_BETA,<sp/>beta);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_SET_BETA,<sp/>beta_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>!=<sp/>NV09F_SET_OPERATION_SRCCOPY_PREMULT<sp/>&amp;&amp;<sp/>operation<sp/>!=<sp/>NV09F_SET_OPERATION_BLEND_AND_PREMULT)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_SET_BETA4,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>beta<sp/>is<sp/>ARGB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_72,<sp/>p,<sp/>NV072_SET_BETA,<sp/>beta);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_SET_BETA4,<sp/>beta4_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_POINT_IN,<sp/>source_x<sp/>|<sp/>(source_y<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_POINT_OUT,<sp/>destination_x<sp/>|<sp/>(destination_y<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1_to(SUBCH_CLASS_9F,<sp/>p,<sp/>NV_IMAGE_BLIT_SIZE,<sp/>width<sp/>|<sp/>(height<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ImageBlitTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BlitTest&amp;<sp/>test)<sp/>{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xF0440011);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>uint32_t<sp/>image_bytes<sp/>=<sp/>image_pitch_<sp/>*<sp/>image_height_;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/>pb_set_dma_address(&amp;image_src_dma_ctx_,<sp/>source_image_,<sp/>image_bytes<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>uint32_t<sp/>clip_x<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>uint32_t<sp/>clip_y<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/>uint32_t<sp/>clip_w<sp/>=<sp/>host_.GetFramebufferWidth();</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/>uint32_t<sp/>clip_h<sp/>=<sp/>host_.GetFramebufferHeight();</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>ImageBlit(test.blit_operation,<sp/>test.beta,<sp/>image_src_dma_ctx_.ChannelID,</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DMA_CHANNEL_BITBLT_IMAGES,<sp/><sp/></highlight><highlight class="comment">//<sp/>DMA<sp/>channel<sp/>11<sp/>-<sp/>0x1117</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test.buffer_color_format,<sp/>image_pitch_,<sp/>4<sp/>*<sp/>host_.GetFramebufferWidth(),<sp/>0,<sp/>SOURCE_X,<sp/>SOURCE_Y,<sp/>0,</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DESTINATION_X,<sp/>DESTINATION_Y,<sp/>SOURCE_WIDTH,<sp/>SOURCE_HEIGHT,<sp/>clip_x,<sp/>clip_y,<sp/>clip_w,<sp/>clip_h);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>std::string<sp/>op_name<sp/>=<sp/>OperationName(test.blit_operation);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Op:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>op_name.c_str());</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>std::string<sp/>color_format_name<sp/>=<sp/>ColorFormatName(test.buffer_color_format);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;BufFmt:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>color_format_name.c_str());</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(test.blit_operation<sp/>!=<sp/>NV09F_SET_OPERATION_SRCCOPY)<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Beta:<sp/>%08X\n&quot;</highlight><highlight class="normal">,<sp/>test.beta);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(test);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>host_.FinishDraw(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>name);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal">std::string<sp/>ImageBlitTests::MakeTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>BlitTest&amp;<sp/>test)<sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[256]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>255,<sp/></highlight><highlight class="stringliteral">&quot;ImgBlt_%s_%s_B%08X&quot;</highlight><highlight class="normal">,<sp/>OperationName(test.blit_operation).c_str(),</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ColorFormatName(test.buffer_color_format).c_str(),<sp/>test.beta);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>OperationName(uint32_t<sp/>operation)<sp/>{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>==<sp/>NV09F_SET_OPERATION_BLEND_AND)<sp/>{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;BLENDAND&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>==<sp/>NV09F_SET_OPERATION_SRCCOPY)<sp/>{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;SRCCOPY&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>==<sp/>NV09F_SET_OPERATION_SRCCOPY_PREMULT)<sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;SRCCOPYPRE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>==<sp/>NV09F_SET_OPERATION_BLEND_AND_PREMULT)<sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;BLENDANDPRE&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;%X&quot;</highlight><highlight class="normal">,<sp/>operation);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>ColorFormatName(uint32_t<sp/>format)<sp/>{</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(format)<sp/>{</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8:</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;XRGB&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV04_SURFACE_2D_FORMAT_A8R8G8B8:</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;ARGB&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8:</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;ZRGB&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;%X&quot;</highlight><highlight class="normal">,<sp/>format);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/image_blit_tests.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d16/structBlendFunc" kind="struct" language="C++" prot="public">
+    <compoundname>BlendFunc</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d2/d16/structBlendFunc_1aff2e3b22930b47c9de47239f47ba2317" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* BlendFunc::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>BlendFunc::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="30" column="14" bodyfile="src/tests/blend_tests.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d16/structBlendFunc_1a5fd6a5396864012210642e6800e2a903" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BlendFunc::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>BlendFunc::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="31" column="12" bodyfile="src/tests/blend_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/blend_tests.cpp" line="29" column="1" bodyfile="src/tests/blend_tests.cpp" bodystart="29" bodyend="32"/>
+    <listofallmembers>
+      <member refid="d2/d16/structBlendFunc_1aff2e3b22930b47c9de47239f47ba2317" prot="public" virt="non-virtual"><scope>BlendFunc</scope><name>name</name></member>
+      <member refid="d2/d16/structBlendFunc_1a5fd6a5396864012210642e6800e2a903" prot="public" virt="non-virtual"><scope>BlendFunc</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

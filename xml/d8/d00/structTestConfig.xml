@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d00/structTestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1ada0b9c7adfe129993f361ad10665e1e7" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TestConfig::fileName</definition>
+        <argsstring></argsstring>
+        <name>fileName</name>
+        <qualifiedname>TestConfig::fileName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="45" column="14" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a3f3b8d675a38d6f5cb25adbaca85836c" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TestConfig::description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <qualifiedname>TestConfig::description</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="46" column="14" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1ae55d25ff4beb55c8e39bab17c071adaa" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TestConfig::attribute_value[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>attribute_value</name>
+        <qualifiedname>TestConfig::attribute_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="47" column="9" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/attribute_float_tests.cpp" line="44" column="1" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="44" bodyend="48"/>
+    <listofallmembers>
+      <member refid="d8/d00/structTestConfig_1ae55d25ff4beb55c8e39bab17c071adaa" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>attribute_value</name></member>
+      <member refid="d8/d00/structTestConfig_1a3f3b8d675a38d6f5cb25adbaca85836c" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>description</name></member>
+      <member refid="d8/d00/structTestConfig_1ada0b9c7adfe129993f361ad10665e1e7" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>fileName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

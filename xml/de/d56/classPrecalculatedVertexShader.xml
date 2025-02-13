@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d56/classPrecalculatedVertexShader" kind="class" language="C++" prot="public">
+    <compoundname>PrecalculatedVertexShader</compoundname>
+    <basecompoundref refid="dc/dfc/classVertexShaderProgram" prot="public" virt="non-virtual">VertexShaderProgram</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="de/d56/classPrecalculatedVertexShader_1a8ddf551ab2245c4c4b2f654d9ec9bf33" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PrecalculatedVertexShader::use_4_component_texcoords_</definition>
+        <argsstring></argsstring>
+        <name>use_4_component_texcoords_</name>
+        <qualifiedname>PrecalculatedVertexShader::use_4_component_texcoords_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/precalculated_vertex_shader.h" line="20" column="8" bodyfile="src/shaders/precalculated_vertex_shader.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/d56/classPrecalculatedVertexShader_1a44b88e8f254d9bf680c8a16d181d49ee" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PrecalculatedVertexShader::PrecalculatedVertexShader</definition>
+        <argsstring>(bool use_4c_texcoords=false)</argsstring>
+        <name>PrecalculatedVertexShader</name>
+        <qualifiedname>PrecalculatedVertexShader::PrecalculatedVertexShader</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>use_4c_texcoords</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/precalculated_vertex_shader.h" line="13" column="12" bodyfile="src/shaders/precalculated_vertex_shader.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="de/d56/classPrecalculatedVertexShader_1a215442b1860018ca29447a214fcd9a35" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void PrecalculatedVertexShader::OnLoadShader</definition>
+        <argsstring>() override</argsstring>
+        <name>OnLoadShader</name>
+        <qualifiedname>PrecalculatedVertexShader::OnLoadShader</qualifiedname>
+        <reimplements refid="dc/dfc/classVertexShaderProgram_1ab9e6ba142e37d2e1128e40ef7f660193">OnLoadShader</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/precalculated_vertex_shader.h" line="17" column="8" bodyfile="src/shaders/precalculated_vertex_shader.cpp" bodystart="15" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PrecalculatedVertexShader</label>
+        <link refid="de/d56/classPrecalculatedVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>PrecalculatedVertexShader</label>
+        <link refid="de/d56/classPrecalculatedVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/shaders/precalculated_vertex_shader.h" line="11" column="1" bodyfile="src/shaders/precalculated_vertex_shader.h" bodystart="11" bodyend="21"/>
+    <listofallmembers>
+      <member refid="dc/dfc/classVertexShaderProgram_1adc97c21deb5d2391f1383aeef73a84cb" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>Activate</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a6bd67167a40b1dd923e7279fd380c269" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>base_transform_constants_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a78c88c32131d71f1a23a6e255b9d3273" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>LoadShaderProgram</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a3768c7c5794e0ff954ee6634a01e6709" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>MergeUniforms</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a962bc8620c201897c0e172308b0705c7" prot="protected" virt="virtual"><scope>PrecalculatedVertexShader</scope><name>OnActivate</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab9cb1f43c6c5301abe86e8d204752de9" prot="protected" virt="virtual"><scope>PrecalculatedVertexShader</scope><name>OnLoadConstants</name></member>
+      <member refid="de/d56/classPrecalculatedVertexShader_1a215442b1860018ca29447a214fcd9a35" prot="protected" virt="virtual"><scope>PrecalculatedVertexShader</scope><name>OnLoadShader</name></member>
+      <member refid="de/d56/classPrecalculatedVertexShader_1a44b88e8f254d9bf680c8a16d181d49ee" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>PrecalculatedVertexShader</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9cffd343fcccb26c2b4566c8f451ca54" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>PrepareDraw</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2a73df681aaefa3e0e6147640fdfbb02" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetBaseUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a6c5e874e3f00bc518989b669f37ed42a" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetBaseUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a23ba86a0a86b31b3b3805457fe77d2c3" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetBaseUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1aab0b2f891410bca536a68adabc7b4df7" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetBaseUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a012dcc9bd1b1eabaf5b1df5c8d67a896" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetBaseUniformI</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1aa2acff1dea1ae2e377cfdd856ad77d2e" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetShaderOverride</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1adb7a585c51b9c3bcdb98441085f59750" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetTransformConstantBlock</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a7004b28739b3237ef27b7daaf2241db8" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a283363b3a4e78756decf55ebcff5aaaf" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a17345848517885462ba3bbd29e1d6903" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a31917831cb6effdf0400c806ae0bb3ee" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetUniformBlock</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2897e78b5db12bbf27ca85c8e980ac34" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a5e778f4148b20e0c342d3f060922923c" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>SetUniformI</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a123728d02c5c2d5343946beb691eac93" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>shader_override_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1af17c1a31c497eba3d5c16b0cca59a89b" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>shader_override_size_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a6fa724e75657c932b5cc16ee19b894a4" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>uniform_start_offset_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab85b5d00bdbe3f2a19b513a8c3ab14f6" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>uniform_upload_required_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a13036fdfa1cbdabb06632f49161544ed" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>uniforms_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a18759a41292da560d41948bb8a6e0408" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>UploadConstants</name></member>
+      <member refid="de/d56/classPrecalculatedVertexShader_1a8ddf551ab2245c4c4b2f654d9ec9bf33" prot="protected" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>use_4_component_texcoords_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a333cf05f5ee1554d16119e661e4b5704" prot="public" virt="non-virtual"><scope>PrecalculatedVertexShader</scope><name>VertexShaderProgram</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9c28c6b3fce19dc5dd22758d79f72e0e" prot="public" virt="virtual"><scope>PrecalculatedVertexShader</scope><name>~VertexShaderProgram</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
