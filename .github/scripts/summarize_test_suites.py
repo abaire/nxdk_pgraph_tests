@@ -87,7 +87,12 @@ class TestSuiteDescriptorReader:
                             logger.warning("Ignoring remark within detaileddescription that lacks para tag")
                             continue
 
-                        test_name, description = element.text.split(" ", 1)
+                        documentation = element.text.split(" ", 1)
+                        if len(documentation) == 2:
+                            test_name, description = documentation
+                        else:
+                            test_name = documentation[0]
+                            description = ""
                         test_descriptions[test_name] = description
 
         return suite_name, test_descriptions

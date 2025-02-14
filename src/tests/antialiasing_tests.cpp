@@ -23,24 +23,58 @@ constexpr uint32_t kCheckerSize = 8;
 static constexpr uint32_t kCheckerboardA = 0xFF808080;
 static constexpr uint32_t kCheckerboardB = 0xFF3333C0;
 
-static constexpr const char kAANone[] = "CreateSurfaceWithCenter1";
-static constexpr const char kAA2[] = "CreateSurfaceWithCenterCorner2";
-static constexpr const char kAA4[] = "CreateSurfaceWithSquareOffset4";
-static constexpr const char kFBAANone[] = "FBSurfaceWithCenter1";
-static constexpr const char kFBAA2[] = "FBSurfaceWithCenterCorner2";
+static constexpr char kAANone[] = "CreateSurfaceWithCenter1";
+static constexpr char kAA2[] = "CreateSurfaceWithCenterCorner2";
+static constexpr char kAA4[] = "CreateSurfaceWithSquareOffset4";
+static constexpr char kFBAANone[] = "FBSurfaceWithCenter1";
+static constexpr char kFBAA2[] = "FBSurfaceWithCenterCorner2";
 // static constexpr const char kFBAA4[] = "FBSurfaceWithSquareOffset4";
-static constexpr const char kOnOffCPUWrite[] = "AAOnThenOffCPUWrite";
-static constexpr const char kModifyNonFramebufferSurface[] = "SurfaceStatesAreIndependent";
-static constexpr const char kFramebufferIsIndependent[] = "FramebufferNotModifiedBySurfaceState";
-static constexpr const char kCPUWriteIgnoresSurfaceConfig[] = "CPUWriteIgnoresSurfaceConfig";
-static constexpr const char kGPUAAWriteAfterCPUWrite[] = "GPUAAWriteAfterCPUWrite";
-static constexpr const char kNonAACPURoundTrip[] = "NonAACPURoundTrip";
+static constexpr char kOnOffCPUWrite[] = "AAOnThenOffCPUWrite";
+static constexpr char kModifyNonFramebufferSurface[] = "SurfaceStatesAreIndependent";
+static constexpr char kFramebufferIsIndependent[] = "FramebufferNotModifiedBySurfaceState";
+static constexpr char kCPUWriteIgnoresSurfaceConfig[] = "CPUWriteIgnoresSurfaceConfig";
+static constexpr char kGPUAAWriteAfterCPUWrite[] = "GPUAAWriteAfterCPUWrite";
+static constexpr char kNonAACPURoundTrip[] = "NonAACPURoundTrip";
 #ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
 static constexpr const char kMultiframeCPUBlit[] = "__MultiframeCPUBlit";
 #endif
 
 static constexpr uint32_t kTextureSize = 128;
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc AAOnThenOffCPUWrite
+ *  Configure the framebuffer surface with some antialiasing mode, clear, change the mode, modify the framebuffer by
+ *  writing directly to VRAM, then render. Used to reproduce xemu-project/xemu#652.
+ *
+ * @tc CPUWriteIgnoresSurfaceConfig
+ *  This test verifies that direct writes to VRAM bypass any surface configuration. It sets up a texture surface with
+ *  antialiasing enabled, then writes directly to texture memory and renders the texture to the screen. It is expected
+ *  that antialiasing has no effect.
+ *
+ * @tc CreateSurfaceWithCenter1
+ *  Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_1
+ *
+ * @tc CreateSurfaceWithCenterCorner2
+ *  Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_CORNER_2
+ *
+ * @tc CreateSurfaceWithSquareOffset4
+ *  Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_SQUARE_OFFSET_4
+ *
+ * @tc FBSurfaceWithCenter1
+ *
+ * @tc FBSurfaceWithCenterCorner2
+ *
+ * @tc FramebufferNotModifiedBySurfaceState
+ *
+ * @tc GPUAAWriteAfterCPUWrite
+ *
+ * @tc NonAACPURoundTrip
+ *
+ * @tc SurfaceStatesAreIndependent
+ *
+ */
 AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Antialiasing tests", config) {
   tests_[kAANone] = [this]() { Test(kAANone, TestHost::AA_CENTER_1); };
@@ -78,16 +112,17 @@ void AntialiasingTests::Initialize() {
   pb_end(p);
 }
 
+/**
+ * Point the color surface at texture memory, configure the surface with some antialiasing mode, clear, then point the
+ * surface back to the framebuffer and render the texture memory.
+ */
 void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa) {
-  // Point the color surface at texture memory, configure the surface with some anti-aliasing mode, clear, then point
-  // the surface back to the framebuffer and render the texture memory.
-
   // Create a texture with an obvious border around it.
   memset(host_.GetTextureMemory(), 0xCC, kTextureSize * kTextureSize * 4);
   GenerateRGBACheckerboard(host_.GetTextureMemory(), 2, 2, kTextureSize - 4, kTextureSize - 4, kTextureSize * 4,
                            kCheckerboardA, kCheckerboardB, kCheckerSize);
   {
-    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti aliasing
+    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the antialiasing
     // mode increase. Technically this should be based off of the AA mode, but in practice it's fine to use the max
     // value.
     static constexpr uint32_t anti_aliasing_multiplier = 4;
@@ -212,18 +247,19 @@ void AntialiasingTests::TestAARenderToFramebufferSurface(const char *name, TestH
                                   host_.GetFramebufferHeight());
 }
 
+/**
+ * Configure the framebuffer surface with some antialiasing mode, clear, change the mode, modify the framebuffer by
+ * writing directly to VRAM, then render.
+ */
 void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
   host_.PrepareDraw(0xFF050505);
-
-  // Configure the framebuffer surface with some anti-aliasing mode, clear, change the mode, modify it by writing
-  // directly to VRAM, then render.
 
   {
     // NOTE: Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti
     // aliasing mode increase (for both color and zeta, even if zeta is not being written to).
     //
     // The actual backbuffer needs to be used in order to display the test results, but pbkit does not allocate
-    // sufficient memory for fullscreen AA. Therefore a nop draw is performed with a reduced size in order to force
+    // sufficient memory for fullscreen AA. Therefore, a nop draw is performed with a reduced size in order to force
     // xemu to create the surface without asserting on an oversize error.
     static constexpr uint32_t kRenderSize = 256;
     static constexpr uint32_t kAAMultiplier = 2;
@@ -274,7 +310,7 @@ void AntialiasingTests::TestModifyNonFramebufferSurface() {
 
   // 2. Configure some other surface (do a nop draw to force xemu to create a surface)
   {
-    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti aliasing
+    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the antialiasing
     // mode increase. Technically this should be based off of the AA mode, but in practice it's fine to use the max
     // value.
     static constexpr uint32_t anti_aliasing_multiplier = 4;
@@ -327,7 +363,7 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
 
   // 1. Configure the framebuffer surface to use a non-standard pitch and size, then render to it.
   {
-    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti aliasing
+    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the antialiasing
     // mode increase. Technically this should be based off of the AA mode, but in practice it's fine to use the max
     // value.
     static constexpr uint32_t anti_aliasing_multiplier = 4;
@@ -365,15 +401,16 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
                                   host_.GetFramebufferHeight());
 }
 
+/**
+ * This test verifies that direct writes to VRAM bypass any surface configuration and must not be interpreted using the
+ * current xemu SurfaceBinding.
+ */
 void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig() {
   host_.PrepareDraw(0xFF050505);
 
-  // This test verifies that direct writes to VRAM bypass any surface configuration and must not be interpreted using
-  // the current xemu SurfaceBinding.
-
   // Configure a surface pointing at texture memory and do a no-op draw to force xemu to create a SurfaceBinding.
   {
-    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the anti aliasing
+    // Hardware will assert with a limit error if the pitch is not sufficiently large to accommodate the antialiasing
     // mode increase. Technically this should be based off of the AA mode, but in practice it's fine to use the max
     // value.
     static constexpr uint32_t anti_aliasing_multiplier = 4;
@@ -494,13 +531,14 @@ void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kGPUAAWriteAfterCPUWrite);
 }
 
+/**
+ * This test verifies that nop draws to a CPU blitted surface are truly nops.
+ */
 void AntialiasingTests::TestNonAACPURoundTrip() {
   host_.PrepareDraw(0xFF050505);
 
-  // This test verifies that nop draws to a CPU blitted surface are truly nops.
-
   // Configure a surface pointing at texture memory and do a no-op draw to force xemu to create a SurfaceBinding.
-  // In this case, anti-aliasing is left off to verify that xemu's behavior is correct when dealing with a pitch that
+  // In this case, antialiasing is left off to verify that xemu's behavior is correct when dealing with a pitch that
   // does not match the content.
   {
     static constexpr uint32_t anti_aliasing_multiplier = 4;
