@@ -1,8 +1,6 @@
 #ifndef NXDK_PGRAPH_TESTS_ANTIALIASING_TESTS_H
 #define NXDK_PGRAPH_TESTS_ANTIALIASING_TESTS_H
 
-#include <functional>
-#include <memory>
 #include <string>
 
 #include "configure.h"
@@ -12,6 +10,13 @@
 struct TextureFormatInfo;
 class VertexBuffer;
 
+/**
+ * Tests the effects of NV097_SET_SURFACE_FORMAT_ANTI_ALIASING in various
+ * scenarios.
+ *
+ * Many of these tests were created to demonstrate specific bugs in xemu and are
+ * not of practical value in typical hardware use cases.
+ */
 class AntialiasingTests : public TestSuite {
  public:
   struct Instruction {

@@ -21,19 +21,24 @@ class VertexShaderProgram;
 struct Vertex;
 class VertexBuffer;
 
-// The first pgraph 0x3D subchannel that can be used by tests.
-// It appears that this must be exactly one more than the last subchannel configured by pbkit or it will trigger an
-// exception in xemu.
+//! The first pgraph 0x3D subchannel that can be used by tests.
+//! It appears that this must be exactly one more than the last subchannel configured by pbkit or else it will trigger
+//! an exception in xemu.
 constexpr uint32_t kNextSubchannel = NEXT_SUBCH;
-// The first pgraph context channel that can be used by tests.
+//! The first pgraph context channel that can be used by tests.
 constexpr int32_t kNextContextChannel = 25;
 
 constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
 
+//! Maximum address of VRAM
 #define VRAM_MAX 0x07FFFFFF
+//! Converts a memory address to a VRAM address accessible by the GPU.
 #define VRAM_ADDR(x) (reinterpret_cast<uint32_t>(x) & 0x03FFFFFF)
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
+/**
+ * Provides utility methods for use by TestSuite subclasses.
+ */
 class TestHost {
  public:
   enum VertexAttribute {
@@ -57,6 +62,7 @@ class TestHost {
 
   static constexpr uint32_t kDefaultVertexFields = POSITION | DIFFUSE | TEXCOORD0;
 
+  //! Enumerates the rendering primitives supported by the NV2A.
   enum DrawPrimitive {
     PRIMITIVE_POINTS = NV097_SET_BEGIN_END_OP_POINTS,
     PRIMITIVE_LINES = NV097_SET_BEGIN_END_OP_LINES,
@@ -179,6 +185,7 @@ class TestHost {
     }
   };
 
+  //! Palette size for palettized surfaces.
   enum PaletteSize {
     PALETTE_32 = 32,
     PALETTE_64 = 64,
@@ -186,6 +193,7 @@ class TestHost {
     PALETTE_256 = 256,
   };
 
+  //! Texture unit modes.
   enum ShaderStageProgram {
     STAGE_NONE = 0,
     STAGE_2D_PROJECTIVE,
@@ -208,12 +216,14 @@ class TestHost {
     STAGE_DOT_REFLECT_SPECULAR_CONST,
   };
 
+  //! Antialiasing settings for surfaces.
   enum AntiAliasingSetting {
     AA_CENTER_1 = NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_1,
     AA_CENTER_CORNER_2 = NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_CORNER_2,
     AA_SQUARE_OFFSET_4 = NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_SQUARE_OFFSET_4,
   };
 
+  //! Color formats for surfaces.
   enum SurfaceColorFormat {
     SCF_X1R5G5B5_Z1R5G5B5 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_Z1R5G5B5,
     SCF_X1R5G5B5_O1R5G5B5 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_O1R5G5B5,
@@ -227,6 +237,7 @@ class TestHost {
     SCF_G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_G8B8,
   };
 
+  //! Depth buffer formats for surfaces.
   enum SurfaceZetaFormat {
     SZF_Z16 = NV097_SET_SURFACE_FORMAT_ZETA_Z16,
     SZF_Z24S8 = NV097_SET_SURFACE_FORMAT_ZETA_Z24S8
@@ -267,106 +278,141 @@ class TestHost {
                                  uint32_t clip_width = 0, uint32_t clip_height = 0,
                                  AntiAliasingSetting aa = AA_CENTER_1);
 
-  SurfaceColorFormat GetColorBufferFormat() const { return surface_color_format_; }
+  //! Returns the current surface color format.
+  [[nodiscard]] SurfaceColorFormat GetColorBufferFormat() const { return surface_color_format_; }
 
-  SurfaceZetaFormat GetDepthBufferFormat() const { return depth_buffer_format_; }
+  //! Returns the current depth buffer format.
+  [[nodiscard]] SurfaceZetaFormat GetDepthBufferFormat() const { return depth_buffer_format_; }
 
+  //! Changes the current depth buffer mode into float (true) or fixed integer (false).
   void SetDepthBufferFloatMode(bool enabled);
-  bool GetDepthBufferFloatMode() const { return depth_buffer_mode_float_; }
+  //! Returns true if the current depth buffer mode is floating point.
+  [[nodiscard]] bool GetDepthBufferFloatMode() const { return depth_buffer_mode_float_; }
 
   void CommitSurfaceFormat() const;
 
-  uint32_t GetMaxTextureWidth() const { return max_texture_width_; }
-  uint32_t GetMaxTextureHeight() const { return max_texture_height_; }
-  uint32_t GetMaxTextureDepth() const { return max_texture_depth_; }
-  uint32_t GetMaxSingleTextureSize() const { return max_single_texture_size_; }
+  //! Returns the maximum width for a texture.
+  [[nodiscard]] uint32_t GetMaxTextureWidth() const { return max_texture_width_; }
+  //! Returns the maximum height for a texture.
+  [[nodiscard]] uint32_t GetMaxTextureHeight() const { return max_texture_height_; }
+  //! Returns the maximum depth for a texture.
+  [[nodiscard]] uint32_t GetMaxTextureDepth() const { return max_texture_depth_; }
+  //! Returns the maximum size in bytes that any single texture can be.
+  [[nodiscard]] uint32_t GetMaxSingleTextureSize() const { return max_single_texture_size_; }
 
-  uint8_t *GetTextureMemory() const { return texture_memory_; }
-  uint32_t GetTextureMemorySize() const { return texture_memory_size_; }
+  //! Returns the base of texture memory.
+  [[nodiscard]] uint8_t *GetTextureMemory() const { return texture_memory_; }
+  //! Returns the allocated size of the entire texture memory region.
+  [[nodiscard]] uint32_t GetTextureMemorySize() const { return texture_memory_size_; }
 
-  uint8_t *GetTextureMemoryForStage(uint32_t stage) const {
+  //! Returns the base of texture memory used by the given texture unit (stage).
+  [[nodiscard]] uint8_t *GetTextureMemoryForStage(uint32_t stage) const {
     return texture_memory_ + texture_stage_[stage].GetTextureOffset();
   }
-  uint32_t *GetPaletteMemoryForStage(uint32_t stage) const {
+  //! Returns the base of the palette memory for an indexed texture used by the given texture unit.
+  [[nodiscard]] uint32_t *GetPaletteMemoryForStage(uint32_t stage) const {
     return reinterpret_cast<uint32_t *>(texture_palette_memory_ + texture_stage_[stage].GetPaletteOffset());
   }
 
-  inline uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
-  inline uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
-  inline float GetFramebufferWidthF() const { return static_cast<float>(framebuffer_width_); }
-  inline float GetFramebufferHeightF() const { return static_cast<float>(framebuffer_height_); }
+  //! Returns the width of the screen, in pixels.
+  [[nodiscard]] inline uint32_t GetFramebufferWidth() const { return framebuffer_width_; }
+  //! Returns the height of the screen, in pixels.
+  [[nodiscard]] inline uint32_t GetFramebufferHeight() const { return framebuffer_height_; }
+  //! Returns the width of the screen in pixels as a float.
+  [[nodiscard]] inline float GetFramebufferWidthF() const { return static_cast<float>(framebuffer_width_); }
+  //! Returns the height of the screen in pixels as a float.
+  [[nodiscard]] inline float GetFramebufferHeightF() const { return static_cast<float>(framebuffer_height_); }
 
+  //! Allocates a VertexBuffer large enough to hold the given number of vertices.
   std::shared_ptr<VertexBuffer> AllocateVertexBuffer(uint32_t num_vertices);
+  //! Sets the active vertex buffer.
   void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
+  //! Returns the active vertex buffer.
   std::shared_ptr<VertexBuffer> GetVertexBuffer() { return vertex_buffer_; }
 
+  //! Clears the active surface and pb_text overlay.
   void Clear(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00) const;
+  //! Sets the contents of a rect within the depth/stencil buffer.
   void ClearDepthStencilRegion(uint32_t depth_value, uint8_t stencil_value, uint32_t left = 0, uint32_t top = 0,
                                uint32_t width = 0, uint32_t height = 0) const;
+  //! Sets the color of a rect within the active surface.
   void ClearColorRegion(uint32_t argb, uint32_t left = 0, uint32_t top = 0, uint32_t width = 0,
                         uint32_t height = 0) const;
+  //! Erases the pb_text overlay.
   static void EraseText();
 
-  // Note: A number of states are expected to be set before this method is called.
-  // E.g., texture stages, shader states
-  // This is not an exhaustive list and is not necessarily up to date. Prefer to call this just before initiating draw
-  // and be suspect of order dependence if you see results that seem to indicate that settings are being ignored.
+  //! Note: A number of states are expected to be set before this method is called.
+  //! E.g., texture stages, shader states
+  //! This is not an exhaustive list and is not necessarily up to date. Prefer to call this just before initiating draw
+  //! and be suspect of order dependence if you see results that seem to indicate that settings are being ignored.
   void PrepareDraw(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00);
 
   void DrawArrays(uint32_t enabled_vertex_fields = kDefaultVertexFields, DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
   void DrawInlineBuffer(uint32_t enabled_vertex_fields = kDefaultVertexFields,
                         DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
-  // Sends vertices as an interleaved array of vertex fields. E.g., [POS_0,DIFFUSE_0,POS_1,DIFFUSE_1,...]
+  //! Sends vertices as an interleaved array of vertex fields. E.g., [POS_0,DIFFUSE_0,POS_1,DIFFUSE_1,...]
   void DrawInlineArray(uint32_t enabled_vertex_fields = kDefaultVertexFields,
                        DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
-  // Sends vertices via an index array. Index values must be < 0xFFFF and are sent two per command.
+  //! Sends vertices via an index array. Index values must be < 0xFFFF and are sent two per command.
   void DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = kDefaultVertexFields,
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
-  // Sends vertices via an index array. Index values are unsigned integers.
+  //! Sends vertices via an index array. Index values are unsigned integers.
   void DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields = kDefaultVertexFields,
                             DrawPrimitive primitive = PRIMITIVE_TRIANGLES);
 
+  //! Marks drawing as completed, potentially causing artifacts (framebuffer, z/stencil-buffer) to be saved to disk.
   void FinishDraw(bool allow_saving, const std::string &output_directory, const std::string &suite_name,
                   const std::string &name, bool save_zbuffer = false);
 
+  //! Sets the z clipping range.
   void SetDepthClip(float min, float max) const;
 
+  //! Sets the active vertex shader. Pass `nullptr` to use the fixed function pipeline.
   void SetVertexShaderProgram(std::shared_ptr<VertexShaderProgram> program);
-  std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
+  //! Returns the active vertex shader.
+  [[nodiscard]] std::shared_ptr<VertexShaderProgram> GetShaderProgram() const { return vertex_shader_program_; }
 
-  // Generates a D3D-style model view matrix.
+  //! Generates a Direct3D-style model view matrix.
   static void BuildD3DModelViewMatrix(matrix4_t &matrix, const vector_t &eye, const vector_t &at, const vector_t &up);
 
-  // Gets a D3D-style matrix suitable for a projection + viewport transform.
+  //! Gets a Direct3D-style matrix suitable for a projection + viewport transform.
   void BuildD3DProjectionViewportMatrix(matrix4_t &result, float fov, float z_near, float z_far) const;
 
   //! Builds an orthographic projection matrix.
   static void BuildD3DOrthographicProjectionMatrix(matrix4_t &result, float left, float right, float top, float bottom,
                                                    float z_near, float z_far);
 
-  // Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin)
+  //! Gets a reasonable default model view matrix (camera at z=-7.0f looking at the origin) similar to the one used by
+  //! the XDK.
   static void BuildDefaultXDKModelViewMatrix(matrix4_t &matrix);
-  // Gets a reasonable default projection matrix (fov = PI/4, near = 1, far = 200)
+  //! Gets a reasonable default projection matrix (fov = PI/4, near = 1, far = 200) similar to the one used by the XDK.
   void BuildDefaultXDKProjectionMatrix(matrix4_t &matrix) const;
 
-  const matrix4_t &GetFixedFunctionInverseCompositeMatrix() const { return fixed_function_inverse_composite_matrix_; }
+  //! Returns the inverse composite matrix for the fixed function pipeline.
+  [[nodiscard]] const matrix4_t &GetFixedFunctionInverseCompositeMatrix() const {
+    return fixed_function_inverse_composite_matrix_;
+  }
 
-  // Set up the viewport and fixed function pipeline matrices to match a default XDK project.
+  //! Set up the viewport and fixed function pipeline matrices to match a default XDK project.
   void SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  // Set up the viewport and fixed function pipeline matrices to match the nxdk settings.
+  //! Set up the viewport and fixed function pipeline matrices to match the nxdk settings.
   void SetDefaultViewportAndFixedFunctionMatrices();
 
-  // Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
+  //! Projects the given point (on the CPU), placing the resulting screen coordinates into `result`.
   void ProjectPoint(vector_t &result, const vector_t &world_point) const;
 
+  //! Unprojects a point in screenspace into 3D worldspace.
   void UnprojectPoint(vector_t &result, const vector_t &screen_point) const;
+  //! Unprojects a point in screenspace into 3D worldspace, setting Z to the given value.
   void UnprojectPoint(vector_t &result, const vector_t &screen_point, float world_z) const;
 
+  //! Toggles whether window clipping considers the rect as inclusive or exclusive.
   static void SetWindowClipExclusive(bool exclusive);
+  //! Sets the window clipping region.
   static void SetWindowClip(uint32_t right, uint32_t bottom, uint32_t left = 0, uint32_t top = 0, uint32_t region = 0);
 
   static void SetViewportOffset(float x, float y, float z, float w);
@@ -374,22 +420,27 @@ class TestHost {
 
   void SetFixedFunctionModelViewMatrix(const matrix4_t model_matrix);
   void SetFixedFunctionProjectionMatrix(const matrix4_t projection_matrix);
-  inline const matrix4_t &GetFixedFunctionModelViewMatrix() const { return fixed_function_model_view_matrix_; }
-  inline const matrix4_t &GetFixedFunctionProjectionMatrix() const { return fixed_function_projection_matrix_; }
+  [[nodiscard]] inline const matrix4_t &GetFixedFunctionModelViewMatrix() const {
+    return fixed_function_model_view_matrix_;
+  }
+  [[nodiscard]] inline const matrix4_t &GetFixedFunctionProjectionMatrix() const {
+    return fixed_function_projection_matrix_;
+  }
 
-  float GetWNear() const { return w_near_; }
-  float GetWFar() const { return w_far_; }
+  [[nodiscard]] float GetWNear() const { return w_near_; }
+  [[nodiscard]] float GetWFar() const { return w_far_; }
 
-  // Start the process of rendering an inline-defined primitive (specified via SetXXXX methods below).
-  // Note that End() must be called to trigger rendering, and that SetVertex() triggers the creation of a vertex.
+  //! Start the process of rendering an inline-defined primitive (specified via SetXXXX methods below).
+  //! Note that End() must be called to trigger rendering, and that SetVertex() triggers the creation of a vertex.
   void Begin(DrawPrimitive primitive) const;
+  //! Triggers the rendering of the primitive specified by the previous call to Begin.
   void End() const;
 
-  // Trigger creation of a vertex, applying the last set attributes.
+  //! Trigger creation of a vertex, applying the last set attributes.
   void SetVertex(float x, float y, float z) const;
-  // Trigger creation of a vertex, applying the last set attributes.
+  //! Trigger creation of a vertex, applying the last set attributes.
   void SetVertex(float x, float y, float z, float w) const;
-  // Trigger creation of a vertex, applying the last set attributes.
+  //! Trigger creation of a vertex, applying the last set attributes.
   inline void SetVertex(const vector_t pt) const { SetVertex(pt[0], pt[1], pt[2], pt[3]); }
 
   void SetWeight(float w) const;
@@ -421,27 +472,39 @@ class TestHost {
   void SetTexCoord3(float s, float t, float p, float q) const;
   void SetTexCoord3S(int s, int t, int p, int q) const;
 
+  //! Returns a human-friendly name for the given DrawPrimitive.
   static std::string GetPrimitiveName(DrawPrimitive primitive);
 
-  bool GetSaveResults() const { return save_results_; }
+  //! Returns the current override flag to allow/prevent artifact saving.
+  [[nodiscard]] bool GetSaveResults() const { return save_results_; }
+  //! Sets the override flag to prevent artifact saving during FinishDraw.
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
+  //! Sets the mask used to enable modification of various color channels during rendering.
   void SetColorMask(uint32_t mask = NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
                                     NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
                                     NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE) const;
 
+  //! Determines how pixels should be blended with existing pixels during rendering operations.
   void SetBlend(bool enable = true, uint32_t func = NV097_SET_BLEND_EQUATION_V_FUNC_ADD,
                 uint32_t sfactor = NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA,
                 uint32_t dfactor = NV097_SET_BLEND_FUNC_DFACTOR_V_ONE_MINUS_SRC_ALPHA) const;
+
   //! Sets the blend color (and alpha) used by the V_CONSTANT_COLOR and V_CONSTANT_ALPHA blend factors.
   void SetBlendColorConstant(uint32_t color) const;
 
+  //! Sets the alpha reference value (NV097_SET_ALPHA_REF) used by NV097_SET_ALPHA_FUNC.
   void SetAlphaReference(uint32_t color) const;
 
-  // Sets up the number of enabled color combiners and behavior flags.
-  //
-  // same_factor0 == true will reuse the C0 constant across all enabled stages.
-  // same_factor1 == true will reuse the C1 constant across all enabled stages.
+  // TODO: Write tests and determine values for NV097_SET_ALPHA_FUNC.
+  // Seen: 0x207, 0x206, 0x205, 0x204, 0x201.
+  // xemu only uses the low nibble, high bits are potentially ignorable.
+  // void SetAlphaFunc(AlphaFunc func) const;
+
+  //! Sets up the number of enabled color combiners and behavior flags.
+  //!
+  //! same_factor0 == true will reuse the C0 constant across all enabled stages.
+  //! same_factor1 == true will reuse the C1 constant across all enabled stages.
   void SetCombinerControl(int num_combiners = 1, bool same_factor0 = false, bool same_factor1 = false,
                           bool mux_msb = false) const;
 
@@ -516,22 +579,23 @@ class TestHost {
   void SetFinalCombinerFactorC1(uint32_t value) const;
   void SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const;
 
-  // Sets the type of texture sampling for each texture.
-  //
-  // If you have a totally blank texture, double check that this is set to something other than STAGE_NONE.
+  //! Sets the type of texture sampling for each texture.
+  //!
+  //! If you have a totally blank texture, double check that this is set to something other than STAGE_NONE.
   void SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1 = STAGE_NONE,
                              ShaderStageProgram stage_2 = STAGE_NONE, ShaderStageProgram stage_3 = STAGE_NONE) const;
-  // Sets the input for shader stage 2 and 3. The value is the 0 based index of the stage whose output should be linked.
-  // E.g., to have stage2 use stage1's input and stage3 use stage2's the params would be (1, 2).
+  //! Sets the input for shader stage 2 and 3. The value is the 0 based index of the stage whose output should be
+  //! linked. E.g., to have stage2 use stage1's input and stage3 use stage2's the params would be (1, 2).
   void SetShaderStageInput(uint32_t stage_2_input = 0, uint32_t stage_3_input = 0) const;
 
   void SetVertexBufferAttributes(uint32_t enabled_fields);
 
-  // Overrides the default calculation of stride for a vertex attribute. "0" is special cased by the hardware to cause
-  // all reads for the attribute to be serviced by the first value in the buffer.
+  //! Overrides the default calculation of stride for a vertex attribute. "0" is special cased by the hardware to cause
+  //! all reads for the attribute to be serviced by the first value in the buffer.
   void OverrideVertexAttributeStride(VertexAttribute attribute, uint32_t stride);
-  // Clears any previously set override.
+  //! Clears any previously set vertex attribute stride override for the given attribute.
   void ClearVertexAttributeStrideOverride(VertexAttribute attribute);
+  //! Clears all vertex attribute stride overrides.
   void ClearAllVertexAttributeStrideOverrides() {
     for (auto i = 0; i < 16; ++i) {
       ClearVertexAttributeStrideOverride(static_cast<VertexAttribute>(1 << i));
@@ -541,33 +605,37 @@ class TestHost {
   //! Set up the control0 register, controlling stencil writing and depth buffer mode.
   void SetupControl0(bool enable_stencil_write = true, bool w_buffered = false) const;
 
-  // Commit any changes to texture stages (called automatically in PrepareDraw but may be useful to call more frequently
-  // in scenes with multiple draws per clear)
+  //! Commit any changes to texture stages (called automatically in PrepareDraw but may be useful to call more
+  //! frequently in scenes with multiple draws per clear)
   void SetupTextureStages() const;
 
+  //! Saves the given texture to the filesystem as a PNG file.
   static std::string SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
                                  uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,
                                  SDL_PixelFormatEnum format);
-  // Saves the given region of memory as a flat binary file.
+  //! Saves the given region of memory as a flat binary file.
   static std::string SaveRawTexture(const std::string &output_directory, const std::string &name,
                                     const uint8_t *texture, uint32_t width, uint32_t height, uint32_t pitch,
                                     uint32_t bits_per_pixel);
+  //! Saves the Z/Stencil buffer to the filesystem/
   [[nodiscard]] std::string SaveZBuffer(const std::string &output_directory, const std::string &name) const;
 
-  // Returns the maximum possible value that can be stored in the depth surface for the given mode.
+  //! Returns the maximum possible value that can be stored in the depth surface for the given mode.
   static float MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mode);
 
+  //! Returns the maximum value for the current depth buffer format.
   [[nodiscard]] float GetMaxDepthBufferValue() const {
     return MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_);
   }
 
-  // Rounds the given integer in the same way as nv2a hardware (only remainders >= 9/16th are rounded up).
+  //! Rounds the given integer in the same way as nv2a hardware (only remainders >= 9/16th are rounded up).
   static float NV2ARound(float input);
 
+  //! Creates the given directory if it does not already exist.
   static void EnsureFolderExists(const std::string &folder_path);
 
  private:
-  // Update matrices when the depth buffer format changes.
+  //! Update matrices when the depth buffer format changes.
   void HandleDepthBufferFormatChange();
   [[nodiscard]] uint32_t MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
                                            CombinerSource b_source, bool b_alpha, CombinerMapping b_mapping,
