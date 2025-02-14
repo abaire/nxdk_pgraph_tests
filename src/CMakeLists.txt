@@ -188,6 +188,8 @@ add_executable(
         nxdk_pgraph_tests
         tests/antialiasing_tests.cpp
         tests/antialiasing_tests.h
+        tests/alpha_func_tests.cpp
+        tests/alpha_func_tests.h
         tests/attribute_carryover_tests.cpp
         tests/attribute_carryover_tests.h
         tests/attribute_explicit_setter_tests.cpp
