@@ -258,6 +258,8 @@ add_executable(
         tests/stencil_tests.h
         tests/stipple_tests.cpp
         tests/stipple_tests.h
+        tests/swath_width_tests.cpp
+        tests/swath_width_tests.h
         tests/surface_clip_tests.cpp
         tests/surface_clip_tests.h
         tests/surface_pitch_tests.cpp

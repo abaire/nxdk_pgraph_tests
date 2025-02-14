@@ -72,6 +72,7 @@
 #include "tests/stipple_tests.h"
 #include "tests/surface_clip_tests.h"
 #include "tests/surface_pitch_tests.h"
+#include "tests/swath_width_tests.h"
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_tests.h"
 #include "tests/texture_border_tests.h"
@@ -405,6 +406,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SetVertexDataTests)
   REG_TEST(ShadeModelTests)
   REG_TEST(SmoothingTests)
+  REG_TEST(SwathWidthTests)
   REG_TEST(SurfaceClipTests)
   REG_TEST(SurfacePitchTests)
   REG_TEST(StencilTests)

@@ -1030,6 +1030,7 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
     p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
     p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
     pb_end(p);
+
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());
 

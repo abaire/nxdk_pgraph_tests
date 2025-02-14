@@ -506,11 +506,13 @@ class TestHost {
   void SetCombinerControl(int num_combiners = 1, bool same_factor0 = false, bool same_factor1 = false,
                           bool mux_msb = false) const;
 
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetInputColorCombiner(int combiner, CombinerInput a, CombinerInput b = ZeroInput(),
                              CombinerInput c = ZeroInput(), CombinerInput d = ZeroInput()) const {
     SetInputColorCombiner(combiner, a.source, a.alpha, a.mapping, b.source, b.alpha, b.mapping, c.source, c.alpha,
                           c.mapping, d.source, d.alpha, d.mapping);
   }
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetInputColorCombiner(int combiner, CombinerSource a_source = SRC_ZERO, bool a_alpha = false,
                              CombinerMapping a_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource b_source = SRC_ZERO,
                              bool b_alpha = false, CombinerMapping b_mapping = MAP_UNSIGNED_IDENTITY,
@@ -520,11 +522,13 @@ class TestHost {
   void ClearInputColorCombiner(int combiner) const;
   void ClearInputColorCombiners() const;
 
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetInputAlphaCombiner(int combiner, CombinerInput a, CombinerInput b = ZeroInput(),
                              CombinerInput c = ZeroInput(), CombinerInput d = ZeroInput()) const {
     SetInputAlphaCombiner(combiner, a.source, a.alpha, a.mapping, b.source, b.alpha, b.mapping, c.source, c.alpha,
                           c.mapping, d.source, d.alpha, d.mapping);
   }
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetInputAlphaCombiner(int combiner, CombinerSource a_source = SRC_ZERO, bool a_alpha = false,
                              CombinerMapping a_mapping = MAP_UNSIGNED_IDENTITY, CombinerSource b_source = SRC_ZERO,
                              bool b_alpha = false, CombinerMapping b_mapping = MAP_UNSIGNED_IDENTITY,
@@ -534,6 +538,7 @@ class TestHost {
   void ClearInputAlphaColorCombiner(int combiner) const;
   void ClearInputAlphaCombiners() const;
 
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetOutputColorCombiner(int combiner, CombinerDest ab_dst = DST_DISCARD, CombinerDest cd_dst = DST_DISCARD,
                               CombinerDest sum_dst = DST_DISCARD, bool ab_dot_product = false,
                               bool cd_dot_product = false, CombinerSumMuxMode sum_or_mux = SM_SUM,
@@ -542,6 +547,7 @@ class TestHost {
   void ClearOutputColorCombiner(int combiner) const;
   void ClearOutputColorCombiners() const;
 
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetOutputAlphaCombiner(int combiner, CombinerDest ab_dst = DST_DISCARD, CombinerDest cd_dst = DST_DISCARD,
                               CombinerDest sum_dst = DST_DISCARD, bool ab_dot_product = false,
                               bool cd_dot_product = false, CombinerSumMuxMode sum_or_mux = SM_SUM,
@@ -553,6 +559,7 @@ class TestHost {
     SetFinalCombiner0(SRC_ZERO, false, false, SRC_ZERO, false, false, SRC_ZERO, false, false, d_source, d_alpha,
                       d_invert);
   }
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetFinalCombiner0(CombinerSource a_source = SRC_ZERO, bool a_alpha = false, bool a_invert = false,
                          CombinerSource b_source = SRC_ZERO, bool b_alpha = false, bool b_invert = false,
                          CombinerSource c_source = SRC_ZERO, bool c_alpha = false, bool c_invert = false,
@@ -561,6 +568,7 @@ class TestHost {
   void SetFinalCombiner1Just(CombinerSource g_source, bool g_alpha = false, bool g_invert = false) const {
     SetFinalCombiner1(SRC_ZERO, false, false, SRC_ZERO, false, false, g_source, g_alpha, g_invert);
   }
+  //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
   void SetFinalCombiner1(CombinerSource e_source = SRC_ZERO, bool e_alpha = false, bool e_invert = false,
                          CombinerSource f_source = SRC_ZERO, bool f_alpha = false, bool f_invert = false,
                          CombinerSource g_source = SRC_ZERO, bool g_alpha = false, bool g_invert = false,
