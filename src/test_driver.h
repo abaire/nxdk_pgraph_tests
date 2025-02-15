@@ -37,21 +37,22 @@ class TestDriver {
   void OnControllerAdded(const SDL_ControllerDeviceEvent &event);
   void OnControllerRemoved(const SDL_ControllerDeviceEvent &event);
   void OnControllerButtonEvent(const SDL_ControllerButtonEvent &event);
+  void OnButtonActivated(SDL_GameControllerButton button, bool is_repeat);
 
   void ShowDebugMessageAndExit();
 
-  void OnBack();
-  void OnStart();
-  void OnBlack();
-  void OnWhite();
-  void OnUp();
-  void OnDown();
-  void OnLeft();
-  void OnRight();
-  void OnA();
-  void OnB();
-  void OnX();
-  void OnY();
+  void OnBack(bool is_repeat);
+  void OnStart(bool is_repeat);
+  void OnBlack(bool is_repeat);
+  void OnWhite(bool is_repeat);
+  void OnUp(bool is_repeat);
+  void OnDown(bool is_repeat);
+  void OnLeft(bool is_repeat);
+  void OnRight(bool is_repeat);
+  void OnA(bool is_repeat);
+  void OnB(bool is_repeat);
+  void OnX(bool is_repeat);
+  void OnY(bool is_repeat);
 
  private:
   volatile bool running_{true};
