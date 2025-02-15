@@ -418,8 +418,8 @@ class TestHost {
   static void SetViewportOffset(float x, float y, float z, float w);
   static void SetViewportScale(float x, float y, float z, float w);
 
-  void SetFixedFunctionModelViewMatrix(const matrix4_t model_matrix);
-  void SetFixedFunctionProjectionMatrix(const matrix4_t projection_matrix);
+  void SetFixedFunctionModelViewMatrix(const matrix4_t &model_matrix);
+  void SetFixedFunctionProjectionMatrix(const matrix4_t &projection_matrix);
   [[nodiscard]] inline const matrix4_t &GetFixedFunctionModelViewMatrix() const {
     return fixed_function_model_view_matrix_;
   }
@@ -633,6 +633,21 @@ class TestHost {
 
   //! Creates the given directory if it does not already exist.
   static void EnsureFolderExists(const std::string &folder_path);
+
+  //! Inserts a pushbuffer command to await idle.
+  static void WaitForGPU() {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
+  }
+
+  //! Does a busywait
+  static void PBKitBusyWait() {
+    while (pb_busy()) {
+      /* Wait for completion... */
+    }
+  }
 
  private:
   //! Update matrices when the depth buffer format changes.

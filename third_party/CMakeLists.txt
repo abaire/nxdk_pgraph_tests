@@ -57,6 +57,8 @@ add_library(
         xbox_math3d/src/xbox_math_matrix.h
         xbox_math3d/src/xbox_math_types.cpp
         xbox_math3d/src/xbox_math_types.h
+        xbox_math3d/src/xbox_math_util.cpp
+        xbox_math3d/src/xbox_math_util.h
         xbox_math3d/src/xbox_math_vector.cpp
         xbox_math3d/src/xbox_math_vector.h
 )
