@@ -32,10 +32,10 @@ struct MenuItem {
 
   virtual bool Deactivate();
 
-  virtual void CursorUp();
-  virtual void CursorDown();
-  virtual void CursorLeft();
-  virtual void CursorRight();
+  virtual void CursorUp(bool is_repeat);
+  virtual void CursorDown(bool is_repeat);
+  virtual void CursorLeft(bool is_repeat);
+  virtual void CursorRight(bool is_repeat);
 
   void CursorUpAndActivate();
   void CursorDownAndActivate();
@@ -81,10 +81,10 @@ struct MenuItemTest : public MenuItem {
   void Activate() override { OnEnter(); }
   bool Deactivate() override;
   void ActivateCurrentSuite() override {}
-  void CursorUp() override;
-  void CursorDown() override;
-  void CursorLeft() override {}
-  void CursorRight() override {}
+  void CursorUp(bool is_repeat) override;
+  void CursorDown(bool is_repeat) override;
+  void CursorLeft(bool is_repeat) override {}
+  void CursorRight(bool is_repeat) override {}
 
   std::shared_ptr<TestSuite> suite;
   bool has_run_once_{false};
@@ -106,10 +106,10 @@ struct MenuItemRoot : public MenuItem {
   void Activate() override;
   void ActivateCurrentSuite() override;
   bool Deactivate() override;
-  void CursorUp() override;
-  void CursorDown() override;
-  void CursorLeft() override;
-  void CursorRight() override;
+  void CursorUp(bool is_repeat) override;
+  void CursorDown(bool is_repeat) override;
+  void CursorLeft(bool is_repeat) override;
+  void CursorRight(bool is_repeat) override;
 
   std::function<void()> on_run_all;
   std::function<void()> on_exit;
@@ -130,10 +130,10 @@ struct MenuItemOptions : public MenuItem {
   void Activate() override;
   void ActivateCurrentSuite() override;
   bool Deactivate() override;
-  void CursorUp() override;
-  void CursorDown() override;
-  void CursorLeft() override;
-  void CursorRight() override;
+  void CursorUp(bool is_repeat) override;
+  void CursorDown(bool is_repeat) override;
+  void CursorLeft(bool is_repeat) override;
+  void CursorRight(bool is_repeat) override;
 
   std::function<void()> on_exit;
   std::chrono::steady_clock::time_point start_time;

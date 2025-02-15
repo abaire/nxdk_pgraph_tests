@@ -266,10 +266,10 @@ void TestDriver::OnY(bool is_repeat) {
   MenuItemTest::SetOneShotMode(save_results);
 }
 
-void TestDriver::OnUp(bool is_repeat) { active_menu_->CursorUp(); }
+void TestDriver::OnUp(bool is_repeat) { active_menu_->CursorUp(is_repeat); }
 
-void TestDriver::OnDown(bool is_repeat) { active_menu_->CursorDown(); }
+void TestDriver::OnDown(bool is_repeat) { active_menu_->CursorDown(is_repeat); }
 
-void TestDriver::OnLeft(bool is_repeat) { active_menu_->CursorLeft(); }
+void TestDriver::OnLeft(bool is_repeat) { active_menu_->CursorLeft(is_repeat); }
 
-void TestDriver::OnRight(bool is_repeat) { active_menu_->CursorRight(); }
+void TestDriver::OnRight(bool is_repeat) { active_menu_->CursorRight(is_repeat); }
