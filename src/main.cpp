@@ -304,28 +304,16 @@ static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSu
 #else
 
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
-  std::map<std::string, std::set<std::string>> historical_crashes;
-
   if (config.enable_progress_log()) {
     std::string log_file = config.output_directory_path() + "\\" + kLogFileName;
 
     DeleteFile(log_file.c_str());
 
     Logger::Initialize(log_file, true);
-
-    if (!historical_crashes.empty()) {
-      Logger::Log() << "<HistoricalCrashes>" << std::endl;
-      for (auto& suite_tests : historical_crashes) {
-        for (auto& test : suite_tests.second) {
-          Logger::Log() << "Crash? " << suite_tests.first << "::" << test << std::endl;
-        }
-      }
-      Logger::Log() << "</HistoricalCrashes>" << std::endl;
-    }
   }
 
-  TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight, !historical_crashes.empty(),
-                    config.disable_autorun(), config.enable_autorun_immediately());
+  TestDriver driver(host, test_suites, kFramebufferWidth, kFramebufferHeight, false, config.disable_autorun(),
+                    config.enable_autorun_immediately());
   driver.Run();
 
   PrintMsg("Test loop completed normally\n");

@@ -5,6 +5,17 @@
 
 class TestHost;
 
+/**
+ * Tests the behavior of various write masks on NV097_CLEAR_SURFACE.
+ *
+ * Each test draws some geometry, then modifies the NV097_SET_COLOR_MASK,
+ * NV097_SET_DEPTH_MASK, and NV097_SET_STENCIL_MASK settings, then invokes
+ * NV097_CLEAR_SURFACE.
+ *
+ * In all cases, the clear color is set to 0x7F7F7F7F and the depth value is
+ * set to 0xFFFFFFFF.
+ *
+ */
 class ClearTests : public TestSuite {
  public:
   ClearTests(TestHost& host, std::string output_dir, const Config& config);

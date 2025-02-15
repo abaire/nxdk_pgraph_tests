@@ -18,13 +18,19 @@ constexpr uint32_t kMaxGamepads = 4;
 
 struct MenuItem;
 
+/**
+ * Handles input processing and test execution.
+ */
 class TestDriver {
  public:
   TestDriver(TestHost &host, const std::vector<std::shared_ptr<TestSuite>> &test_suites, uint32_t framebuffer_width,
              uint32_t framebuffer_height, bool show_options_menu, bool disable_autorun, bool autorun_immediately);
   ~TestDriver();
 
+  //! Enters a loop that reacts to user input until the user requests an exit.
   void Run();
+
+  //! Runs all tests automatically without reacting to any user input.
   void RunAllTestsNonInteractive();
 
  private:
@@ -37,6 +43,7 @@ class TestDriver {
   void OnBack();
   void OnStart();
   void OnBlack();
+  void OnWhite();
   void OnUp();
   void OnDown();
   void OnLeft();
