@@ -1,0 +1,884 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/d80/blend__tests_8cpp" kind="file" language="C++">
+    <compoundname>blend_tests.cpp</compoundname>
+    <includes refid="de/d05/blend__tests_8h" local="yes">blend_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="db/d91/passthrough__vertex__shader_8h" local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes refid="da/d72/texture__generator_8h" local="yes">texture_generator.h</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h_source"/>
+      </node>
+      <node id="25">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>shaders/passthrough_vertex_shader.h</label>
+        <link refid="db/d91/passthrough__vertex__shader_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/blend_tests.cpp</label>
+        <link refid="dd/d80/blend__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>blend_tests.h</label>
+        <link refid="de/d05/blend__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>texture_generator.h</label>
+        <link refid="da/d72/texture__generator_8h_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>texture_stage.h</label>
+        <link refid="d7/d78/texture__stage_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>SDL.h</label>
+      </node>
+      <node id="8">
+        <label>atomic</label>
+      </node>
+      <node id="21">
+        <label>chrono</label>
+      </node>
+      <node id="9">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>functional</label>
+      </node>
+      <node id="27">
+        <label>list</label>
+      </node>
+      <node id="22">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="12">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="13">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="23">
+        <label>set</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="26">
+        <label>strings.h</label>
+      </node>
+      <node id="10">
+        <label>thread</label>
+      </node>
+      <node id="28">
+        <label>utility</label>
+      </node>
+      <node id="11">
+        <label>vector</label>
+      </node>
+      <node id="18">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d2/d16/structBlendFunc" prot="public">BlendFunc</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1ac86d2ca2c760c5e6591685b0578f192e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDefaultDMAChannelA</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAChannelA</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="14" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a2c67f47e94230b17b3734961625b995d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDefaultDMAColorChannel</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAColorChannel</name>
+        <initializer>= 9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="20" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a60badbdfa91cdbe66ac4dbee73c3faf9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCheckerboardA</definition>
+        <argsstring></argsstring>
+        <name>kCheckerboardA</name>
+        <initializer>= 0xFF202020</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="22" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a7fb3ba846c131e16db4e0f482cf869c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCheckerboardB</definition>
+        <argsstring></argsstring>
+        <name>kCheckerboardB</name>
+        <initializer>= 0xFF000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="23" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a119374a2698353fc2e0155d2c75a05cd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kBlendColorConstant</definition>
+        <argsstring></argsstring>
+        <name>kBlendColorConstant</name>
+        <initializer>= 0x55555555</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="25" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1ae24816f5a8b1fe10978bd99605a5530f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint8_t</type>
+        <definition>constexpr uint8_t kColorSwatchBackground</definition>
+        <argsstring></argsstring>
+        <name>kColorSwatchBackground</name>
+        <initializer>= 0x33333333</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="26" column="26" bodyfile="src/tests/blend_tests.cpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1afca4990d6b2ec7f1b7ef5dfa145a2c92" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kBlendCheckerboardSize</definition>
+        <argsstring></argsstring>
+        <name>kBlendCheckerboardSize</name>
+        <initializer>= 16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="27" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a0556e2d11c61edad753530cb4fbfd644" prot="public" static="yes" mutable="no">
+        <type>constexpr struct <ref refid="d2/d16/structBlendFunc" kindref="compound">BlendFunc</ref></type>
+        <definition>constexpr struct BlendFunc kBlendEqns[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kBlendEqns</name>
+        <initializer>= {
+    {&quot;ADD&quot;, NV097_SET_BLEND_EQUATION_V_FUNC_ADD},
+    {&quot;SUB&quot;, NV097_SET_BLEND_EQUATION_V_FUNC_SUBTRACT},
+    {&quot;REVSUB&quot;, NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT},
+    {&quot;MIN&quot;, NV097_SET_BLEND_EQUATION_V_MIN},
+    {&quot;MAX&quot;, NV097_SET_BLEND_EQUATION_V_MAX},
+    {&quot;SADD&quot;, NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED},
+    {&quot;SREVSUB&quot;, NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="34" column="33" bodyfile="src/tests/blend_tests.cpp" bodystart="34" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1ab2d07bd63bae00e55a96a6a8b1b9f267" prot="public" static="yes" mutable="no">
+        <type>constexpr struct <ref refid="d2/d16/structBlendFunc" kindref="compound">BlendFunc</ref></type>
+        <definition>constexpr struct BlendFunc kBlendFactors[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kBlendFactors</name>
+        <initializer>= {
+    {&quot;0&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO},
+    {&quot;1&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE},
+    {&quot;srcRGB&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_COLOR},
+    {&quot;1-srcRGB&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_COLOR},
+    {&quot;srcA&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA},
+    {&quot;1-srcA&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA},
+    {&quot;dstA&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_DST_ALPHA},
+    {&quot;1-dstA&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_ALPHA},
+    {&quot;dstRGB&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_DST_COLOR},
+    {&quot;1-dstRGB&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_COLOR},
+    {&quot;srcAsat&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA_SATURATE},
+    {&quot;cRGB&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_CONSTANT_COLOR},
+    {&quot;1-cRGB&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_COLOR},
+    {&quot;cA&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_CONSTANT_ALPHA},
+    {&quot;1-cA&quot;, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_ALPHA},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="45" column="33" bodyfile="src/tests/blend_tests.cpp" bodystart="45" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1ab06b0d3d79f15cf9b06b9ad35a53aa41" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureSize</definition>
+        <argsstring></argsstring>
+        <name>kTextureSize</name>
+        <initializer>= 256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="63" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a52fb40082c56b7c36db1d3e7700cf853" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTexturePitch</definition>
+        <argsstring></argsstring>
+        <name>kTexturePitch</name>
+        <initializer>= kTextureSize * 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="64" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1ad97f8b14baca6e17b13fdec3b86b9ce6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kColorSwatchSize</definition>
+        <argsstring></argsstring>
+        <name>kColorSwatchSize</name>
+        <initializer>= kTextureSize / 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="66" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a79b1a9f09a50c5fd88fd3b0354530b7d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kColorSwatchTextureHeight</definition>
+        <argsstring></argsstring>
+        <name>kColorSwatchTextureHeight</name>
+        <initializer>= kColorSwatchSize * 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="67" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d80/blend__tests_8cpp_1a8576e13eaeed2fd29e805211c7537c0c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kColorSwatchTexturePitch</definition>
+        <argsstring></argsstring>
+        <name>kColorSwatchTexturePitch</name>
+        <initializer>= kColorSwatchSize * 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.cpp" line="68" column="27" bodyfile="src/tests/blend_tests.cpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;blend_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_generator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_A<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>3<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_A<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAChannelA<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_B<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>11<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_B<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>static<sp/>constexpr<sp/>uint32_t<sp/>kDefaultDMAChannelB<sp/>=<sp/>11;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_COLOR<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>9<sp/>by<sp/>default.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_COLOR<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAColorChannel<sp/>=<sp/>9;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerboardA<sp/>=<sp/>0xFF202020;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerboardB<sp/>=<sp/>0xFF000000;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBlendColorConstant<sp/>=<sp/>0x55555555;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint8_t<sp/>kColorSwatchBackground<sp/>=<sp/>0x33333333;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBlendCheckerboardSize<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="d2/d16/structBlendFunc" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d2/d16/structBlendFunc" kindref="compound">BlendFunc</ref><sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>uint32_t<sp/>value;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d2/d16/structBlendFunc" kindref="compound">BlendFunc</ref><sp/>kBlendEqns[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;ADD&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_FUNC_ADD},</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;SUB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_FUNC_SUBTRACT},</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;REVSUB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT},</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;MIN&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_MIN},</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;MAX&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_MAX},</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;SADD&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;SREVSUB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SFACTORs<sp/>and<sp/>DFACTORS<sp/>are<sp/>all<sp/>identical</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d2/d16/structBlendFunc" kindref="compound">BlendFunc</ref><sp/>kBlendFactors[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;0&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO},</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE},</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;srcRGB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_COLOR},</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1-srcRGB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_COLOR},</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;srcA&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA},</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1-srcA&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_SRC_ALPHA},</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;dstA&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_DST_ALPHA},</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1-dstA&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_ALPHA},</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;dstRGB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_DST_COLOR},</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1-dstRGB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_COLOR},</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;srcAsat&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_SRC_ALPHA_SATURATE},</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;cRGB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_CONSTANT_COLOR},</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1-cRGB&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_COLOR},</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;cA&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_CONSTANT_ALPHA},</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1-cA&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_ALPHA},</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureSize<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTexturePitch<sp/>=<sp/>kTextureSize<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kColorSwatchSize<sp/>=<sp/>kTextureSize<sp/>/<sp/>4;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kColorSwatchTextureHeight<sp/>=<sp/>kColorSwatchSize<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kColorSwatchTexturePitch<sp/>=<sp/>kColorSwatchSize<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal">BlendTests::BlendTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Blend<sp/>tests&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;test_eqn<sp/>:<sp/>kBlendEqns)<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;test_sfactor<sp/>:<sp/>kBlendFactors)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;test_dfactor<sp/>:<sp/>kBlendFactors)<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>sfactor<sp/>=<sp/>test_sfactor.value;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>dfactor<sp/>=<sp/>test_dfactor.value;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>test_sfactor.name;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name<sp/>+=<sp/>test_eqn.name;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>name<sp/>+=<sp/>test_dfactor.name;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(sfactor<sp/>!=<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO<sp/>||<sp/>dfactor<sp/>!=<sp/>NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>&amp;test_eqn,<sp/>sfactor,<sp/>dfactor]()<sp/>{<sp/>Test(name,<sp/>test_eqn.value,<sp/>sfactor,<sp/>dfactor);<sp/>};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d1/dac/classBlendTests_1a99e61844b6ec5faabb9201090efa89b8" kindref="member">BlendTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a766666c4289165a2cf653ac3af156d11" kindref="member">SetXDKDefaultViewportAndFixedFunctionMatrices</ref>();</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1ac1cd19b63c8da6dde8704b86c0897d7a" kindref="member">SetCombinerControl</ref>(1);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a80d34dc4df3b4c8f6b1660d543fcc342" kindref="member">SetVertexShaderProgram</ref>(shader);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_ALPHA_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/>uint32_t<sp/>blend_function,<sp/>uint32_t<sp/>src_factor,<sp/>uint32_t<sp/>dst_factor)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a7343d98d694323b7e42ca44a70a5e42a" kindref="member">PrepareDraw</ref>(0xFE312F31);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>DrawCheckerboardBackground();</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa15a4bd69ed697ccfbd25c154b50b2ba" kindref="member">SetBlendColorConstant</ref>(kBlendColorConstant);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>render_textured_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/>uint32_t<sp/>texture_width,<sp/>uint32_t<sp/>texture_height)<sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kStage<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX1,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(kStage,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_NONE,<sp/>TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(kStage);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetTextureDimensions(texture_width,<sp/>texture_height);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a3eb8e7cbfe182f37d8f6b2b0fa825d11" kindref="member">SetupTextureStages</ref>();</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>left<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(texture_width);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kBottom<sp/>=<sp/>top<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(texture_height);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(kRight,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(kRight,<sp/>kBottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>kBottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(kStage,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prepare_blend_background<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](uint32_t<sp/>texture_width,<sp/>uint32_t<sp/>texture_height,<sp/>uint32_t<sp/>texture_pitch)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>texture_memory<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a88d42d7e4733957d2e5ca6b559103ee4" kindref="member">GetTextureMemoryForStage</ref>(1);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>GenerateSwizzledRGBACheckerboard(texture_memory,<sp/>0,<sp/>0,<sp/>texture_width,<sp/>texture_height,<sp/>texture_pitch,</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kColorSwatchBackground,<sp/>kCheckerboardB,<sp/>kBlendCheckerboardSize);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>RenderToTextureStart(1,<sp/>kTexturePitch);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>kTextureSize,<sp/>kTextureSize,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>texture_memory<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a88d42d7e4733957d2e5ca6b559103ee4" kindref="member">GetTextureMemoryForStage</ref>(1);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>prepare_blend_background(kTextureSize,<sp/>kTextureSize,<sp/>kTexturePitch);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawAlphaStack(blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>(),</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>RenderToTextureEnd();</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kLeft<sp/>=<sp/>(host_.<ref refid="d6/d80/classTestHost_1a5db56e432f77926c556e1e0635c49ef5" kindref="member">GetFramebufferWidthF</ref>()<sp/>-<sp/>kTextureSize)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>(host_.<ref refid="d6/d80/classTestHost_1a503d047fdb4a06159ba4ec33ed3f97c5" kindref="member">GetFramebufferHeightF</ref>()<sp/>-<sp/>kTextureSize)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>render_textured_quad(kLeft,<sp/>kTop,<sp/>kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pb_busy())<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Wait<sp/>for<sp/>completion...<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>color<sp/>swatches<sp/>with<sp/>fixed<sp/>alpha.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>RenderToTextureStart(1,<sp/>kColorSwatchTexturePitch);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>kColorSwatchSize,</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kColorSwatchTextureHeight,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>prepare_blend_background(kColorSwatchSize,<sp/>kColorSwatchTextureHeight,<sp/>kColorSwatchTexturePitch);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawColorStack(blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>(),</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>RenderToTextureEnd();</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>render_textured_quad(16.0f,<sp/>(host_.<ref refid="d6/d80/classTestHost_1a503d047fdb4a06159ba4ec33ed3f97c5" kindref="member">GetFramebufferHeightF</ref>()<sp/>-<sp/>kColorSwatchTextureHeight)<sp/>*<sp/>0.5f,<sp/>kColorSwatchSize,</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kColorSwatchTextureHeight);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pb_busy())<sp/>{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Wait<sp/>for<sp/>completion...<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>fully<sp/>blended<sp/>swatches.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>RenderToTextureStart(1,<sp/>kColorSwatchTexturePitch);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>kColorSwatchSize,</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kColorSwatchTextureHeight,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>prepare_blend_background(kColorSwatchSize,<sp/>kColorSwatchTextureHeight,<sp/>kColorSwatchTexturePitch);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawColorAndAlphaStack(blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>(),</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>RenderToTextureEnd();</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>render_textured_quad(host_.<ref refid="d6/d80/classTestHost_1a5db56e432f77926c556e1e0635c49ef5" kindref="member">GetFramebufferWidthF</ref>()<sp/>-<sp/>(16.0f<sp/>+<sp/>kColorSwatchSize),</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(host_.<ref refid="d6/d80/classTestHost_1a503d047fdb4a06159ba4ec33ed3f97c5" kindref="member">GetFramebufferHeightF</ref>()<sp/>-<sp/>kColorSwatchTextureHeight)<sp/>*<sp/>0.5f,<sp/>kColorSwatchSize,</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kColorSwatchTextureHeight);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pb_busy())<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Wait<sp/>for<sp/>completion...<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>0,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;Bg:<sp/>0x%X|Black<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Constant<sp/>color:<sp/>0x%X\n&quot;</highlight><highlight class="normal">,<sp/>kColorSwatchBackground,<sp/>kBlendColorConstant);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/>pb_printat(16,<sp/>9,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;Center<sp/>alphas:<sp/>G:<sp/>0x7F<sp/>R:<sp/>0xFF<sp/>B:<sp/>0x80<sp/>W:<sp/>0x00\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>name);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::DrawAlphaStack(uint32_t<sp/>blend_function,<sp/>uint32_t<sp/>src_factor,<sp/>uint32_t<sp/>dst_factor)<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>inc<sp/>=<sp/>24.0f;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>kTextureSize;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>kTextureSize;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0x7F00CC00,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/>left<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/>right<sp/>-=<sp/>inc;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/>bottom<sp/>-=<sp/>inc;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xFFCC0000,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>left<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/>right<sp/>-=<sp/>inc;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>bottom<sp/>-=<sp/>inc;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0x800000FF,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/>left<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/>right<sp/>-=<sp/>inc;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>bottom<sp/>-=<sp/>inc;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0x00FFFFFF,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::DrawColorStack(uint32_t<sp/>blend_function,<sp/>uint32_t<sp/>src_factor,<sp/>uint32_t<sp/>dst_factor)<sp/>{</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDD00DD00,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDDDD0000,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDD0000DD,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/>DrawQuad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDDFFFFFF,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::DrawColorAndAlphaStack(uint32_t<sp/>blend_function,<sp/>uint32_t<sp/>src_factor,<sp/>uint32_t<sp/>dst_factor)<sp/>{</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/>uint32_t<sp/>color,<sp/>uint32_t<sp/>func,</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>sfactor,<sp/>uint32_t<sp/>dfactor)<sp/>{</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>func,<sp/>sfactor,<sp/>dfactor);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(color);</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/>draw_quad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDDFFFFFF,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/>draw_quad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDD0000DD,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/>draw_quad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDDDD0000,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/>top<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>kColorSwatchSize;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/>draw_quad(left,<sp/>top,<sp/>right,<sp/>bottom,<sp/>0xDD00DD00,<sp/>blend_function,<sp/>src_factor,<sp/>dst_factor);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::DrawCheckerboardBackground()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerSize<sp/>=<sp/>24;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/>texture_stage.SetTextureDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a3eb8e7cbfe182f37d8f6b2b0fa825d11" kindref="member">SetupTextureStages</ref>();</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>texture_memory<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a88d42d7e4733957d2e5ca6b559103ee4" kindref="member">GetTextureMemoryForStage</ref>(0);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(texture_memory,<sp/>0,<sp/>0,<sp/>kTextureSize,<sp/>kTextureSize,<sp/>kTextureSize<sp/>*<sp/>4,<sp/>kCheckerboardA,</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kCheckerboardB,<sp/>kCheckerSize);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(0.0f,<sp/>0.0f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(host_.<ref refid="d6/d80/classTestHost_1a5db56e432f77926c556e1e0635c49ef5" kindref="member">GetFramebufferWidthF</ref>(),<sp/>0.0f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(host_.<ref refid="d6/d80/classTestHost_1a5db56e432f77926c556e1e0635c49ef5" kindref="member">GetFramebufferWidthF</ref>(),<sp/>host_.<ref refid="d6/d80/classTestHost_1a503d047fdb4a06159ba4ec33ed3f97c5" kindref="member">GetFramebufferHeightF</ref>(),<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(0.0f,<sp/>host_.<ref refid="d6/d80/classTestHost_1a503d047fdb4a06159ba4ec33ed3f97c5" kindref="member">GetFramebufferHeightF</ref>(),<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="347"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::RenderToTextureStart(uint32_t<sp/>stage,<sp/>uint32_t<sp/>texture_pitch)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTextureMemory<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1a88d42d7e4733957d2e5ca6b559103ee4" kindref="member">GetTextureMemoryForStage</ref>(stage));</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFramebufferPitch<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>()<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAChannelA);</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_SURFACE_PITCH,</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>texture_pitch)<sp/>|</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>kFramebufferPitch));</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_SURFACE_COLOR_OFFSET,<sp/>VRAM_ADDR(kTextureMemory));</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="359"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::RenderToTextureEnd()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFramebufferPitch<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>()<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAColorChannel);</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_SURFACE_COLOR_OFFSET,<sp/>0);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_SURFACE_PITCH,</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>kFramebufferPitch)<sp/>|</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>kFramebufferPitch));</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="370"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>BlendTests::DrawQuad(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/>uint32_t<sp/>color,<sp/>uint32_t<sp/>func,</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>sfactor,<sp/>uint32_t<sp/>dfactor,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blend_rgb,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>blend_alpha)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a93585e908bb1376ffba86d21958370db" kindref="member">SetColorMask</ref>(NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE<sp/>|<sp/>NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE<sp/>|</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NV097_SET_COLOR_MASK_RED_WRITE_ENABLE);</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(blend_rgb)<sp/>{</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>func,<sp/>sfactor,<sp/>dfactor);</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(color);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pb_busy())<sp/>{</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Wait<sp/>for<sp/>completion...<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"></highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>the<sp/>alpha<sp/>following<sp/>the<sp/>given<sp/>blend<sp/>mode.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a93585e908bb1376ffba86d21958370db" kindref="member">SetColorMask</ref>(NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(blend_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>func,<sp/>sfactor,<sp/>dfactor);</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(color);</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"></highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a93585e908bb1376ffba86d21958370db" kindref="member">SetColorMask</ref>();</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa270059e1fc7a61c575b3afc342f4653" kindref="member">SetBlend</ref>(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="410"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/blend_tests.cpp"/>
+  </compounddef>
+</doxygen>

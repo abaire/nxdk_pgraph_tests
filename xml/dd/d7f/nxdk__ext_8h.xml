@@ -1,0 +1,3053 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/d7f/nxdk__ext_8h" kind="file" language="C++">
+    <compoundname>nxdk_ext.h</compoundname>
+    <includedby refid="df/d9a/pbkit__ext_8cpp" local="yes">src/pbkit_ext.cpp</includedby>
+    <includedby refid="d2/d61/test__host_8cpp" local="yes">src/test_host.cpp</includedby>
+    <includedby refid="df/d43/test__host_8h" local="yes">src/test_host.h</includedby>
+    <includedby refid="d8/da7/depth__format__fixed__function__tests_8cpp" local="yes">src/tests/depth_format_fixed_function_tests.cpp</includedby>
+    <includedby refid="d6/dd3/depth__format__tests_8cpp" local="yes">src/tests/depth_format_tests.cpp</includedby>
+    <includedby refid="d4/df4/image__blit__tests_8cpp" local="yes">src/tests/image_blit_tests.cpp</includedby>
+    <includedby refid="de/d30/stencil__tests_8cpp" local="yes">src/tests/stencil_tests.cpp</includedby>
+    <includedby refid="dc/d6c/test__suite_8cpp" local="yes">src/tests/test_suite.cpp</includedby>
+    <includedby refid="de/d25/texture__framebuffer__blit__tests_8cpp" local="yes">src/tests/texture_framebuffer_blit_tests.cpp</includedby>
+    <includedby refid="d4/dba/two__d__line__tests_8cpp" local="yes">src/tests/two_d_line_tests.cpp</includedby>
+    <includedby refid="d8/dc0/texture__format_8cpp" local="yes">src/texture_format.cpp</includedby>
+    <includedby refid="d1/dc6/texture__stage_8cpp" local="yes">src/texture_stage.cpp</includedby>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/test_driver.h</label>
+        <link refid="dd/dab/test__driver_8h_source"/>
+      </node>
+      <node id="2">
+        <label>src/test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/tests/antialiasing_tests.h</label>
+        <link refid="d4/d10/antialiasing__tests_8h_source"/>
+      </node>
+      <node id="5">
+        <label>src/tests/attribute_carryover_tests.h</label>
+        <link refid="dc/db4/attribute__carryover__tests_8h_source"/>
+      </node>
+      <node id="6">
+        <label>src/tests/attribute_explicit_setter_tests.h</label>
+        <link refid="d2/dd9/attribute__explicit__setter__tests_8h_source"/>
+      </node>
+      <node id="7">
+        <label>src/tests/attribute_float_tests.h</label>
+        <link refid="d6/dad/attribute__float__tests_8h_source"/>
+      </node>
+      <node id="8">
+        <label>src/tests/blend_tests.h</label>
+        <link refid="de/d05/blend__tests_8h_source"/>
+      </node>
+      <node id="9">
+        <label>src/tests/color_key_tests.h</label>
+        <link refid="dc/d0f/color__key__tests_8h_source"/>
+      </node>
+      <node id="10">
+        <label>src/tests/color_zeta_disable_tests.h</label>
+        <link refid="d0/d2e/color__zeta__disable__tests_8h_source"/>
+      </node>
+      <node id="11">
+        <label>src/tests/color_zeta_overlap_tests.h</label>
+        <link refid="da/dad/color__zeta__overlap__tests_8h_source"/>
+      </node>
+      <node id="12">
+        <label>src/tests/combiner_tests.h</label>
+        <link refid="df/d03/combiner__tests_8h_source"/>
+      </node>
+      <node id="13">
+        <label>src/tests/dma_corruption_around_surface_tests.h</label>
+        <link refid="d7/d89/dma__corruption__around__surface__tests_8h_source"/>
+      </node>
+      <node id="14">
+        <label>src/tests/edge_flag_tests.h</label>
+        <link refid="da/d59/edge__flag__tests_8h_source"/>
+      </node>
+      <node id="15">
+        <label>src/tests/fog_tests.h</label>
+        <link refid="dd/ded/fog__tests_8h_source"/>
+      </node>
+      <node id="16">
+        <label>src/tests/inline_array_size_mismatch.h</label>
+        <link refid="dc/d05/inline__array__size__mismatch_8h_source"/>
+      </node>
+      <node id="17">
+        <label>src/tests/line_width_tests.h</label>
+        <link refid="de/d36/line__width__tests_8h_source"/>
+      </node>
+      <node id="18">
+        <label>src/tests/null_surface_tests.h</label>
+        <link refid="db/d18/null__surface__tests_8h_source"/>
+      </node>
+      <node id="19">
+        <label>src/tests/overlapping_draw_modes_tests.h</label>
+        <link refid="d8/d68/overlapping__draw__modes__tests_8h_source"/>
+      </node>
+      <node id="20">
+        <label>src/tests/pvideo_tests.h</label>
+        <link refid="da/db8/pvideo__tests_8h_source"/>
+      </node>
+      <node id="21">
+        <label>src/tests/shade_model_tests.h</label>
+        <link refid="d0/dbf/shade__model__tests_8h_source"/>
+      </node>
+      <node id="22">
+        <label>src/tests/smoothing_tests.h</label>
+        <link refid="d8/daa/smoothing__tests_8h_source"/>
+      </node>
+      <node id="23">
+        <label>src/tests/stipple_tests.h</label>
+        <link refid="d0/daa/stipple__tests_8h_source"/>
+      </node>
+      <node id="24">
+        <label>src/tests/surface_clip_tests.h</label>
+        <link refid="da/d0b/surface__clip__tests_8h_source"/>
+      </node>
+      <node id="25">
+        <label>src/tests/surface_pitch_tests.h</label>
+        <link refid="da/d8d/surface__pitch__tests_8h_source"/>
+      </node>
+      <node id="26">
+        <label>src/tests/texgen_matrix_tests.h</label>
+        <link refid="d0/d6f/texgen__matrix__tests_8h_source"/>
+      </node>
+      <node id="27">
+        <label>src/tests/texgen_tests.h</label>
+        <link refid="d6/d93/texgen__tests_8h_source"/>
+      </node>
+      <node id="28">
+        <label>src/tests/texture_border_tests.h</label>
+        <link refid="d0/de9/texture__border__tests_8h_source"/>
+      </node>
+      <node id="29">
+        <label>src/tests/texture_cpu_update_tests.h</label>
+        <link refid="de/dca/texture__cpu__update__tests_8h_source"/>
+      </node>
+      <node id="30">
+        <label>src/tests/texture_format_dxt_tests.h</label>
+        <link refid="dd/d61/texture__format__dxt__tests_8h_source"/>
+      </node>
+      <node id="31">
+        <label>src/tests/texture_format_tests.h</label>
+        <link refid="d1/d54/texture__format__tests_8h_source"/>
+      </node>
+      <node id="32">
+        <label>src/tests/texture_framebuffer_blit_tests.h</label>
+        <link refid="dd/d75/texture__framebuffer__blit__tests_8h_source"/>
+      </node>
+      <node id="33">
+        <label>src/tests/texture_matrix_tests.h</label>
+        <link refid="dd/dbe/texture__matrix__tests_8h_source"/>
+      </node>
+      <node id="34">
+        <label>src/tests/texture_render_target_tests.h</label>
+        <link refid="df/d0d/texture__render__target__tests_8h_source"/>
+      </node>
+      <node id="35">
+        <label>src/tests/texture_render_update_in_place_tests.h</label>
+        <link refid="d2/d1d/texture__render__update__in__place__tests_8h_source"/>
+      </node>
+      <node id="36">
+        <label>src/tests/texture_shadow_comparator_tests.h</label>
+        <link refid="d5/dc7/texture__shadow__comparator__tests_8h_source"/>
+      </node>
+      <node id="37">
+        <label>src/tests/texture_signed_component_tests.h</label>
+        <link refid="df/d39/texture__signed__component__tests_8h_source"/>
+      </node>
+      <node id="38">
+        <label>src/tests/three_d_primitive_tests.h</label>
+        <link refid="de/dc5/three__d__primitive__tests_8h_source"/>
+      </node>
+      <node id="39">
+        <label>src/tests/vertex_shader_independence_tests.h</label>
+        <link refid="d0/d3a/vertex__shader__independence__tests_8h_source"/>
+      </node>
+      <node id="40">
+        <label>src/tests/vertex_shader_rounding_tests.h</label>
+        <link refid="d7/d8b/vertex__shader__rounding__tests_8h_source"/>
+      </node>
+      <node id="41">
+        <label>src/tests/vertex_shader_swizzle_tests.h</label>
+        <link refid="dd/d20/vertex__shader__swizzle__tests_8h_source"/>
+      </node>
+      <node id="42">
+        <label>src/tests/viewport_tests.h</label>
+        <link refid="da/d83/viewport__tests_8h_source"/>
+      </node>
+      <node id="43">
+        <label>src/tests/window_clip_tests.h</label>
+        <link refid="d5/ddb/window__clip__tests_8h_source"/>
+      </node>
+      <node id="44">
+        <label>src/tests/z_min_max_control_tests.h</label>
+        <link refid="da/d1c/z__min__max__control__tests_8h_source"/>
+      </node>
+      <node id="45">
+        <label>src/tests/zero_stride_tests.h</label>
+        <link refid="d4/d46/zero__stride__tests_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ac449943a5b8c9ada6f7e192fefa996ca" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_POSITION</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="7" column="9" bodyfile="src/nxdk_ext.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aeda8fc3603fb0106ce2fa358b204fdfb" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_WEIGHT</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="8" column="9" bodyfile="src/nxdk_ext.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3fd3f42564034a2bc24ef6c437664a22" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_NORMAL</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="9" column="9" bodyfile="src/nxdk_ext.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ac7b7ffb53773b224b0a5e2830cef00f8" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_DIFFUSE</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="10" column="9" bodyfile="src/nxdk_ext.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a8eeb85ca8420788dc66c0be72aa90433" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_SPECULAR</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="11" column="9" bodyfile="src/nxdk_ext.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a88eb19656ba1c7f026deda12f51b5148" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_FOG_COORD</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="12" column="9" bodyfile="src/nxdk_ext.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a67da81b82de9206a7e47ab80f83175a3" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_POINT_SIZE</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="13" column="9" bodyfile="src/nxdk_ext.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab2c57b1e8fce2a6fc98a856ee7825c04" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_BACK_DIFFUSE</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="14" column="9" bodyfile="src/nxdk_ext.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7f68b27fada9f51495a132e67a6195b0" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_BACK_SPECULAR</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="15" column="9" bodyfile="src/nxdk_ext.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af17b15ae4ab4676ed23cffe0e99db9d9" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_TEXTURE0</name>
+        <initializer>9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="16" column="9" bodyfile="src/nxdk_ext.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a5a0cc5cdfa98e38a5c1c49d3ddacca1e" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_TEXTURE1</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="17" column="9" bodyfile="src/nxdk_ext.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ae7fe1fd1ce10ef346c60ac537317288d" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_TEXTURE2</name>
+        <initializer>11</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="18" column="9" bodyfile="src/nxdk_ext.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9b8fc580987f2021053978cbc200005b" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_TEXTURE3</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="19" column="9" bodyfile="src/nxdk_ext.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af521c76ecfb60a61fe5c0eaef981ab9d" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_13</name>
+        <initializer>13</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="21" column="9" bodyfile="src/nxdk_ext.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a70f129a2e347b0df5816bc549140bfd5" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_14</name>
+        <initializer>14</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="22" column="9" bodyfile="src/nxdk_ext.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a94a80bdabb6c6fe826063eaf566a88e7" prot="public" static="no">
+        <name>NV2A_VERTEX_ATTR_15</name>
+        <initializer>15</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="23" column="9" bodyfile="src/nxdk_ext.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a414a679ca986d83301b72e395b828945" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8B8</name>
+        <initializer>0x16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="25" column="9" bodyfile="src/nxdk_ext.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af43aa72a1a7dbbcfb4e0a9c5198f44a1" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8</name>
+        <initializer>0x17</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="26" column="9" bodyfile="src/nxdk_ext.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a85d5e4dfc8ed669cd9786dc1635eb8f5" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8</name>
+        <initializer>0x24</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="27" column="9" bodyfile="src/nxdk_ext.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a5696f7fbdd65a079954d486a71050425" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8</name>
+        <initializer>0x25</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="28" column="9" bodyfile="src/nxdk_ext.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a24a2a77c7ea0e36b17469016c6f1f7dc" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FIXED</name>
+        <initializer>0x2C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="29" column="9" bodyfile="src/nxdk_ext.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad291dc73795ec8ab92543ec9ec70759b" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT</name>
+        <initializer>0x31</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="30" column="9" bodyfile="src/nxdk_ext.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6db371e2a8123d50c8d343652b134db8" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FORMAT_COLOR_SZ_B8G8R8A8</name>
+        <initializer>0x3B</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="31" column="9" bodyfile="src/nxdk_ext.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aff509be30dd12763c53feaacc379730b" prot="public" static="no">
+        <name>NV097_SET_CONTROL0_COLOR_SPACE_CONVERT</name>
+        <initializer>0xF0000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="33" column="9" bodyfile="src/nxdk_ext.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a18703f8ea6fbaf1bab3c29d6df760656" prot="public" static="no">
+        <name>NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB</name>
+        <initializer>0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="34" column="9" bodyfile="src/nxdk_ext.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a5fd97335b460ccf73daada193f7bd448" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_CONTROL0_ENABLE</name>
+        <initializer>(1 &lt;&lt; 30)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="36" column="9" bodyfile="src/nxdk_ext.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad345b51688b5b98a68904607f74c1537" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_CONTROL0_MIN_LOD_CLAMP</name>
+        <initializer>0x3FFC0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="37" column="9" bodyfile="src/nxdk_ext.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1afd40f28029a1494f0ae17ff2af407f42" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP</name>
+        <initializer>0x0003FFC0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="38" column="9" bodyfile="src/nxdk_ext.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1e121341f5c449b941b1ce2bd3c9b7bb" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_CONTROL0_ALPHA_KILL_ENABLE</name>
+        <initializer>(1 &lt;&lt; 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="39" column="9" bodyfile="src/nxdk_ext.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ae30a5261b8726169450cf74ce93ef5ee" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE</name>
+        <initializer>0x3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="40" column="9" bodyfile="src/nxdk_ext.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2a9a21a3743bfa4bb1b14cfb79bd54c4" prot="public" static="no">
+        <name>NV097_SET_CONTROL0_Z_FORMAT_FIXED</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="42" column="9" bodyfile="src/nxdk_ext.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a8b2b1e3b1e9fc5d92fbfed5717060cfe" prot="public" static="no">
+        <name>NV097_SET_CONTROL0_Z_FORMAT_FLOAT</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="43" column="9" bodyfile="src/nxdk_ext.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a22405a975f251be757416e8ab3e946c9" prot="public" static="no">
+        <name>NV097_SET_LIGHT_TWO_SIDE_ENABLE</name>
+        <initializer>NV20_TCL_PRIMITIVE_3D_LIGHT_MODEL_TWO_SIDE_ENABLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="45" column="9" bodyfile="src/nxdk_ext.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4518450b214d0898e239b73f0ab4db35" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_NEVER</name>
+        <initializer>0x00000200</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="47" column="9" bodyfile="src/nxdk_ext.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6fe476f8cd71baac6aa9f76bffc7f5a2" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_LESS</name>
+        <initializer>0x00000201</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="48" column="9" bodyfile="src/nxdk_ext.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a068128abed9f92722781a828fcf844dd" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_EQUAL</name>
+        <initializer>0x00000202</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="49" column="9" bodyfile="src/nxdk_ext.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a916f0a1daaeccba87cfd3a2e6f9ed2c5" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_LEQUAL</name>
+        <initializer>0x00000203</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="50" column="9" bodyfile="src/nxdk_ext.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aba84edacdf4d6961ceb6d7fa217a9661" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_GREATER</name>
+        <initializer>0x00000204</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="51" column="9" bodyfile="src/nxdk_ext.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a07bdadbda09da41c2469a4b0c76cad38" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_NOTEQUAL</name>
+        <initializer>0x00000205</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="52" column="9" bodyfile="src/nxdk_ext.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aabe9cba7d805ab349cdd1ade8ff30819" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_GEQUAL</name>
+        <initializer>0x00000206</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="53" column="9" bodyfile="src/nxdk_ext.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ac4b7cd1351f3b33d328379781995efaf" prot="public" static="no">
+        <name>NV097_SET_DEPTH_FUNC_V_ALWAYS</name>
+        <initializer>0x00000207</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="54" column="9" bodyfile="src/nxdk_ext.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1489096f9bd91a8b16fe10f6832fe698" prot="public" static="no">
+        <name>NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_FALSE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="56" column="9" bodyfile="src/nxdk_ext.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a20a1c6da3a91aa93a94c8fb1ad4285f0" prot="public" static="no">
+        <name>NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="57" column="9" bodyfile="src/nxdk_ext.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a58ea5b41bcd85e163e4af0ce66a4e4e8" prot="public" static="no">
+        <name>NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="58" column="9" bodyfile="src/nxdk_ext.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab2031addbf6decfdc1c5cbb02153a5ff" prot="public" static="no">
+        <name>NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CLAMP</name>
+        <initializer>(1 &lt;&lt; 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="59" column="9" bodyfile="src/nxdk_ext.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0d521905639be4e149f22abf9bb57785" prot="public" static="no">
+        <name>NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="60" column="9" bodyfile="src/nxdk_ext.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad61d109ba2fcbba8a46379eaf0ba0652" prot="public" static="no">
+        <name>NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_TRUE</name>
+        <initializer>(1 &lt;&lt; 8)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="61" column="9" bodyfile="src/nxdk_ext.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af0cc04d1115d4a195b155139b92245f7" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_U</name>
+        <initializer>0x0000000F</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="63" column="9" bodyfile="src/nxdk_ext.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1f31a5877ec7b6b5ba234b3781114909" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_U</name>
+        <initializer>0x000000F0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="64" column="9" bodyfile="src/nxdk_ext.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2f07832eebba91f6f138123d7dfdeb33" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_V</name>
+        <initializer>0x00000F00</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="65" column="9" bodyfile="src/nxdk_ext.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7e33341a16f3dad06ed192127b49c436" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_V</name>
+        <initializer>0x0000F000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="66" column="9" bodyfile="src/nxdk_ext.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a992e36bbc6123bdbc0bf5c550289b75a" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_P</name>
+        <initializer>0x000F0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="67" column="9" bodyfile="src/nxdk_ext.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abfb2eae8668a1ce8d4f80d08dc4fcc33" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_P</name>
+        <initializer>0x00F00000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="68" column="9" bodyfile="src/nxdk_ext.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2f6181da1a2c53e068f45261f8a64394" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_Q</name>
+        <initializer>0x0F000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="69" column="9" bodyfile="src/nxdk_ext.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4dc645c45b29c0d8e006da5298e73a08" prot="public" static="no">
+        <name>NV09F_SET_OPERATION_BLEND_AND</name>
+        <initializer>0x02</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="72" column="9" bodyfile="src/nxdk_ext.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab9dba6adac5cb288528bb6234042cf30" prot="public" static="no">
+        <name>NV09F_SET_OPERATION_SRCCOPY</name>
+        <initializer>0x03</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="73" column="9" bodyfile="src/nxdk_ext.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6d37d1656fb919298e2c87548742fa24" prot="public" static="no">
+        <name>NV09F_SET_OPERATION_SRCCOPY_PREMULT</name>
+        <initializer>0x04</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="74" column="9" bodyfile="src/nxdk_ext.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9191bc975b684932dfdad59bf44106f6" prot="public" static="no">
+        <name>NV09F_SET_OPERATION_BLEND_AND_PREMULT</name>
+        <initializer>0x05</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="75" column="9" bodyfile="src/nxdk_ext.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6f3eeadbb0a7eaeae6f5ed368a7afe6f" prot="public" static="no">
+        <name>NV_IMAGE_BLIT_SET_BETA</name>
+        <initializer>0x0194</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="77" column="9" bodyfile="src/nxdk_ext.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4c0db66b7b2b9e4080ff4c00f374d4e0" prot="public" static="no">
+        <name>NV_IMAGE_BLIT_SET_BETA4</name>
+        <initializer>0x0198</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="78" column="9" bodyfile="src/nxdk_ext.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6c61770032b64a55233e002351dc77e8" prot="public" static="no">
+        <name>NV012_BETA</name>
+        <initializer>0x00000012</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="80" column="9" bodyfile="src/nxdk_ext.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2139f1c1f87ec9531407aa69cbff0748" prot="public" static="no">
+        <name>NV012_SET_BETA</name>
+        <initializer>0x0300</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="81" column="9" bodyfile="src/nxdk_ext.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a06835a60c0a6e0be7387cbb3da9c61cb" prot="public" static="no">
+        <name>NV072_BETA_4</name>
+        <initializer>0x00000072</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="83" column="9" bodyfile="src/nxdk_ext.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1acc13aefdb83790bbcd6bde1834400524" prot="public" static="no">
+        <name>NV072_SET_BETA</name>
+        <initializer>0x0300</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="84" column="9" bodyfile="src/nxdk_ext.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4a892b869af587fbe2c88457b62b7e6c" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_Y8</name>
+        <initializer>0x00000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="86" column="9" bodyfile="src/nxdk_ext.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad13af5432c2a591a921043bddc773f8b" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_X1R5G5B5_Z1R5G5B5</name>
+        <initializer>0x00000002</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="87" column="9" bodyfile="src/nxdk_ext.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ae48849c4d337a49bfdc4e1d57419be15" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_X1R5G5B5_X1R5G5B5</name>
+        <initializer>0x00000003</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="88" column="9" bodyfile="src/nxdk_ext.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aa42aa262e4983e755a06d57d531c479d" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_R5G6B5</name>
+        <initializer>0x00000004</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="89" column="9" bodyfile="src/nxdk_ext.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab4e665edb64c758bb8b7ad96d9024d1f" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_Y16</name>
+        <initializer>0x00000005</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="90" column="9" bodyfile="src/nxdk_ext.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a97ff15dcc36a86babdb604400eab71fb" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8</name>
+        <initializer>0x00000006</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="91" column="9" bodyfile="src/nxdk_ext.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af1bcc6021440fa0716eae00430971a0e" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8</name>
+        <initializer>0x00000007</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="92" column="9" bodyfile="src/nxdk_ext.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aafc06f262b35b86e3899c6e7052ab4b8" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_X1A7R8G8B8_Z1A7R8G8B8</name>
+        <initializer>0x00000008</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="93" column="9" bodyfile="src/nxdk_ext.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abd417b2df26ba94cabd055b1c78796f5" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_X1A7R8G8B8_X1A7R8G8B8</name>
+        <initializer>0x00000009</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="94" column="9" bodyfile="src/nxdk_ext.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aacc07376df66d105826c51afc4167a3a" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_A8R8G8B8</name>
+        <initializer>0x0000000a</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="95" column="9" bodyfile="src/nxdk_ext.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af5b6e123e3b96b7faec15bbfe924500f" prot="public" static="no">
+        <name>NV04_SURFACE_2D_FORMAT_Y32</name>
+        <initializer>0x0000000b</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="96" column="9" bodyfile="src/nxdk_ext.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a18077a0f7c1070b0d4b81dc4d5fdb207" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL</name>
+        <initializer>0x298</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="98" column="9" bodyfile="src/nxdk_ext.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab3905fdc8e0096af9236b45b79eccb18" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="99" column="9" bodyfile="src/nxdk_ext.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aef71640bbd2b79d120069dd50627bd8a" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="100" column="9" bodyfile="src/nxdk_ext.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a49726eebe4b682b74e84e8d6e6bf349c" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="101" column="9" bodyfile="src/nxdk_ext.h" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9015d5b00fe0afa717eb7fce43e663a7" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="102" column="9" bodyfile="src/nxdk_ext.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a227b296c4ac11d59ad14e8e91b0453f7" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="103" column="9" bodyfile="src/nxdk_ext.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a578f5b26eab632bdbb1ddcd37263570c" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="104" column="9" bodyfile="src/nxdk_ext.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad065900f9fe362f758ddeee6451ac63d" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="105" column="9" bodyfile="src/nxdk_ext.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7e5fe7c8165f9ebe8841477f51cb7561" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="106" column="9" bodyfile="src/nxdk_ext.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0ee76f84cba0645a285b8901e43f9ffe" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="107" column="9" bodyfile="src/nxdk_ext.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a29d5c465614b1e5c495bebe7f8081af3" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="108" column="9" bodyfile="src/nxdk_ext.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2cbfd0a2ef63e0ee296ac30c465752e1" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="109" column="9" bodyfile="src/nxdk_ext.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0441d0b7d82ecff63d8e9cd0f0c27dda" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 6)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="110" column="9" bodyfile="src/nxdk_ext.h" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3bbf214085867a63104b6a4c4c7609cc" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 6)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="111" column="9" bodyfile="src/nxdk_ext.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1add828da7e77d6d2798b5f0eef285c2e5" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_EMISSIVE_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="112" column="9" bodyfile="src/nxdk_ext.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3e4ff34db74abc235a07096c1652e88a" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_EMISSIVE_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 8)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="113" column="9" bodyfile="src/nxdk_ext.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7362effb117c4abaf0cc59b11e22d8fc" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_EMISSIVE_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 8)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="114" column="9" bodyfile="src/nxdk_ext.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aa04918b667d1058c82cf266d3d6d702b" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_AMBIENT_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="115" column="9" bodyfile="src/nxdk_ext.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aaff9d205894d3b52b77b2e28a2b2f99b" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_AMBIENT_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 10)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="116" column="9" bodyfile="src/nxdk_ext.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a8fc876caed86341f9a99f735e5a8228d" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_AMBIENT_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 10)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="117" column="9" bodyfile="src/nxdk_ext.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3005546e273436a2e724082177d1fe2f" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_DIFFUSE_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="118" column="9" bodyfile="src/nxdk_ext.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4ac26ac58e8e64b2f83fbbf0829c3916" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_DIFFUSE_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 12)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="119" column="9" bodyfile="src/nxdk_ext.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3d9fc8a4817e1b4e64fc0e4c8f3be1b6" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_DIFFUSE_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 12)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="120" column="9" bodyfile="src/nxdk_ext.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad708500de2f187504c91bc7cc97ed4a4" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_SPECULAR_FROM_MATERIAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="121" column="9" bodyfile="src/nxdk_ext.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7bca1bad1d3945db9b8370eaef7483ee" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_SPECULAR_FROM_VERTEX_DIFFUSE</name>
+        <initializer>(1 &lt;&lt; 14)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="122" column="9" bodyfile="src/nxdk_ext.h" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9eacfdfbda293c0dd533dfc9aae984f4" prot="public" static="no">
+        <name>NV097_SET_COLOR_MATERIAL_BACK_SPECULAR_FROM_VERTEX_SPECULAR</name>
+        <initializer>(2 &lt;&lt; 14)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="123" column="9" bodyfile="src/nxdk_ext.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a198a4d0dce4316d89bcc4e62189b9e5a" prot="public" static="no">
+        <name>NV097_SET_LIGHT_CONTROL</name>
+        <initializer>NV20_TCL_PRIMITIVE_3D_LIGHT_CONTROL</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="125" column="9" bodyfile="src/nxdk_ext.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad3890c18097542c65b79841452cc8c03" prot="public" static="no">
+        <name>NV097_SET_MATERIAL_ALPHA</name>
+        <initializer>0x3B4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="126" column="9" bodyfile="src/nxdk_ext.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a24c2e47515ae4fc90119fbef118de04f" prot="public" static="no">
+        <name>NV097_SET_SPECULAR_ENABLE</name>
+        <initializer>0x03b8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="127" column="9" bodyfile="src/nxdk_ext.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab6daebfb7b905988cfa662ae970629aa" prot="public" static="no">
+        <name>NV097_SET_MATERIAL_EMISSION</name>
+        <initializer>0x03a8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="128" column="9" bodyfile="src/nxdk_ext.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1588937784cbbb25ac320f891af8ec4b" prot="public" static="no">
+        <name>NV097_SET_SPECULAR_PARAMS</name>
+        <initializer>0x9E0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="129" column="9" bodyfile="src/nxdk_ext.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3d94221a2d0bb5100f6d52e52ece12a7" prot="public" static="no">
+        <name>NV097_SET_LINE_WIDTH</name>
+        <initializer>0x380</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="132" column="9" bodyfile="src/nxdk_ext.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a18d8a0906fce2461fb27e655f1286351" prot="public" static="no">
+        <name>NV097_SET_LINE_WIDTH_MAX_VALUE</name>
+        <initializer>(63 &lt;&lt; 3)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="133" column="9" bodyfile="src/nxdk_ext.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7b8738928203fce7b22007eb8301ce7e" prot="public" static="no">
+        <name>NV097_SET_LINE_WIDTH_MASK</name>
+        <initializer>((64 &lt;&lt; 3) - 1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="134" column="9" bodyfile="src/nxdk_ext.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6216447c81c9093132cd47dcab49c094" prot="public" static="no">
+        <name>NV097_SET_BACK_MATERIAL_ALPHA</name>
+        <initializer>0x17AC</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="137" column="9" bodyfile="src/nxdk_ext.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4570628436165ccd16a96349f9e661c3" prot="public" static="no">
+        <name>NV097_SET_COLOR_KEY_COLOR</name>
+        <initializer>0x0AE0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="141" column="9" bodyfile="src/nxdk_ext.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a7863a90e24e883a5f62b6da4675113bc" prot="public" static="no">
+        <name>NV042_SET_PITCH</name>
+        <initializer>0x304</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="143" column="9" bodyfile="src/nxdk_ext.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0587987bf01428e591528adb022d1cae" prot="public" static="no">
+        <name>NV042_SET_COLOR_FORMAT</name>
+        <initializer>NV04_CONTEXT_SURFACES_2D_FORMAT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="144" column="9" bodyfile="src/nxdk_ext.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a159082d392ebb6c6a6686f1694bbcb98" prot="public" static="no">
+        <name>NV042_SET_COLOR_FORMAT_LE_A8R8G8B8</name>
+        <initializer>0x0A</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="145" column="9" bodyfile="src/nxdk_ext.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1bf4f14550cc506544c5b438505de5b9" prot="public" static="no">
+        <name>NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5</name>
+        <initializer>0x00000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="147" column="9" bodyfile="src/nxdk_ext.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af59353fab3ebb5e5b798b3611239399e" prot="public" static="no">
+        <name>NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5</name>
+        <initializer>0x00000002</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="148" column="9" bodyfile="src/nxdk_ext.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a992c20950a4a0a21dda11bf0a991d0c9" prot="public" static="no">
+        <name>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8</name>
+        <initializer>0x00000003</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="149" column="9" bodyfile="src/nxdk_ext.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a27e4dde2bdf6e625ba37b5073cea81c4" prot="public" static="no">
+        <name>NV097_BREAK_VERTEX_BUFFER_CACHE</name>
+        <initializer>0x1710</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="154" column="9" bodyfile="src/nxdk_ext.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aacfbeb1bd0a6dc877d19b24a99341aea" prot="public" static="no">
+        <name>NV097_SET_WEIGHT1F</name>
+        <initializer>0x169C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="156" column="9" bodyfile="src/nxdk_ext.h" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ac4588c0b6a56647bff26d0e5e83baf64" prot="public" static="no">
+        <name>NV097_SET_WEIGHT4F</name>
+        <initializer>0x16C0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="157" column="9" bodyfile="src/nxdk_ext.h" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aa7333ea9ad989fc3f3766f2266ae4bce" prot="public" static="no">
+        <name>NV097_SET_NORMAL3F</name>
+        <initializer>0x1530</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="158" column="9" bodyfile="src/nxdk_ext.h" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1adb3c015a9a6a15263dc2d4d3e02c3403" prot="public" static="no">
+        <name>NV097_SET_NORMAL3S</name>
+        <initializer>0x1540</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="159" column="9" bodyfile="src/nxdk_ext.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a30cb2bbdf3e1a651e3f465b47e36111d" prot="public" static="no">
+        <name>NV097_SET_DIFFUSE_COLOR4F</name>
+        <initializer>0x1550</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="160" column="9" bodyfile="src/nxdk_ext.h" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af3398c7c9159717f10d42c16764debf7" prot="public" static="no">
+        <name>NV097_SET_DIFFUSE_COLOR3F</name>
+        <initializer>0x1560</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="161" column="9" bodyfile="src/nxdk_ext.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a57abe0cba398395826ebfe9e75b715e7" prot="public" static="no">
+        <name>NV097_SET_DIFFUSE_COLOR4I</name>
+        <initializer>0x156C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="162" column="9" bodyfile="src/nxdk_ext.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abb432567cf5058d62f915cbdeb79d73d" prot="public" static="no">
+        <name>NV097_SET_SPECULAR_COLOR4F</name>
+        <initializer>0x1570</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="163" column="9" bodyfile="src/nxdk_ext.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af75176f007d3f9806e56de28b84c131b" prot="public" static="no">
+        <name>NV097_SET_SPECULAR_COLOR3F</name>
+        <initializer>0x1580</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="164" column="9" bodyfile="src/nxdk_ext.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af379d40e53a7e2089c92391a525873d0" prot="public" static="no">
+        <name>NV097_SET_SPECULAR_COLOR4I</name>
+        <initializer>0x158C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="165" column="9" bodyfile="src/nxdk_ext.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aeb8513f14c2b6452cb049eeb0858b119" prot="public" static="no">
+        <name>NV097_SET_FOG_COORD</name>
+        <initializer>0x1698</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="166" column="9" bodyfile="src/nxdk_ext.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aabaccc461a8cbb18121744e4a40a1684" prot="public" static="no">
+        <name>NV097_SET_POINT_SIZE</name>
+        <initializer>0x43C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="167" column="9" bodyfile="src/nxdk_ext.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a655512a1d3f91613537648f6a8fba9c4" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD0_2F</name>
+        <initializer>0x1590</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="168" column="9" bodyfile="src/nxdk_ext.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab1c2042aa0c4f2a93b784bde6df4b907" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD0_4F</name>
+        <initializer>0x15A0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="169" column="9" bodyfile="src/nxdk_ext.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0a7956b81b75e1015faee681de559644" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD0_2S</name>
+        <initializer>0x1598</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="170" column="9" bodyfile="src/nxdk_ext.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a340322808492cc442838f84fc81bb0e1" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD0_4S</name>
+        <initializer>0x15B0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="171" column="9" bodyfile="src/nxdk_ext.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a54d26767919b21abcff6dcd9a2371a50" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD1_2F</name>
+        <initializer>0x15B8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="172" column="9" bodyfile="src/nxdk_ext.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ae5131fa6b7dfb5b5e27dbe728387ab73" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD1_4F</name>
+        <initializer>0x15C8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="173" column="9" bodyfile="src/nxdk_ext.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aecb233d4fbb78f5ee7e59dc69f8e23e1" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD1_2S</name>
+        <initializer>0x15C0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="174" column="9" bodyfile="src/nxdk_ext.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af98870159364ecf9df503b737166d48d" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD1_4S</name>
+        <initializer>0x15D8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="175" column="9" bodyfile="src/nxdk_ext.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1043b8e95e818e6821fa60fb1d524003" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD2_2F</name>
+        <initializer>0x15E0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="176" column="9" bodyfile="src/nxdk_ext.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a98e846941a68fbe37c88f2dc5802f3aa" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD2_4F</name>
+        <initializer>0x15F0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="177" column="9" bodyfile="src/nxdk_ext.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a5dc17eb5252e238f4086f832c0065c37" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD2_2S</name>
+        <initializer>0x15E8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="178" column="9" bodyfile="src/nxdk_ext.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad8a761636c3c05c74e678a645f1b8d11" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD2_4S</name>
+        <initializer>0x1600</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="179" column="9" bodyfile="src/nxdk_ext.h" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a72ed1fdb0e6acdd743cf617647fdc132" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD3_2F</name>
+        <initializer>0x1608</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="180" column="9" bodyfile="src/nxdk_ext.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aadf0ea6c6d9b67d846996622d500a43e" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD3_4F</name>
+        <initializer>0x1620</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="181" column="9" bodyfile="src/nxdk_ext.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a255c7a8f456c1838b5729234c8e8e7ac" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD3_2S</name>
+        <initializer>0x1610</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="182" column="9" bodyfile="src/nxdk_ext.h" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a396b445c6398548cc21417e18c4a354b" prot="public" static="no">
+        <name>NV097_SET_TEXCOORD3_4S</name>
+        <initializer>0x1630</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="183" column="9" bodyfile="src/nxdk_ext.h" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a742ac4633afccbc8d27b6303fb671ed0" prot="public" static="no">
+        <name>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_OFF</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="185" column="9" bodyfile="src/nxdk_ext.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9736745923daca95168389146a21edd6" prot="public" static="no">
+        <name>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_INFINITE</name>
+        <initializer>(1 &lt;&lt; 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="186" column="9" bodyfile="src/nxdk_ext.h" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6eb57955f6f478fdf0ea1347c4673143" prot="public" static="no">
+        <name>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_LOCAL</name>
+        <initializer>(2 &lt;&lt; 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="187" column="9" bodyfile="src/nxdk_ext.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0e728a8017ac2d79adbbf38ada5b6612" prot="public" static="no">
+        <name>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_SPOT</name>
+        <initializer>(3 &lt;&lt; 2)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="188" column="9" bodyfile="src/nxdk_ext.h" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aec3594715f147f07ae7fa294ee185d03" prot="public" static="no">
+        <name>NV097_SET_POINT_PARAMS_ENABLE</name>
+        <initializer>0x318</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="190" column="9" bodyfile="src/nxdk_ext.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2fc70822152cc4e3f107889de7728356" prot="public" static="no">
+        <name>NV097_SET_POINT_SMOOTH_ENABLE</name>
+        <initializer>0x31C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="191" column="9" bodyfile="src/nxdk_ext.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4646921ce9fa96eaada13529c74988dc" prot="public" static="no">
+        <name>NV097_SET_SHADE_MODEL</name>
+        <initializer>0x37C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="193" column="9" bodyfile="src/nxdk_ext.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a675c9b5c9a2926796fc70a54dedebd64" prot="public" static="no">
+        <name>NV097_SET_SHADE_MODEL_FLAT</name>
+        <initializer>0x1D00</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="194" column="9" bodyfile="src/nxdk_ext.h" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af2b6fb5ba0f99d22026a6d933acfac65" prot="public" static="no">
+        <name>NV097_SET_SHADE_MODEL_SMOOTH</name>
+        <initializer>0x1D01</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="195" column="9" bodyfile="src/nxdk_ext.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a767f4c0e7ce14d89d5959ee78dc00f93" prot="public" static="no">
+        <name>NV097_SET_FLAT_SHADE_PROVOKING_VERTEX</name>
+        <initializer>0x9FC</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="197" column="9" bodyfile="src/nxdk_ext.h" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0e12f846f136dc83b042c6fd1c45708a" prot="public" static="no">
+        <name>NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST</name>
+        <initializer>0x01</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="198" column="9" bodyfile="src/nxdk_ext.h" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1fdd596ced83fa72945ee4bb85a8b7bf" prot="public" static="no">
+        <name>NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_LAST</name>
+        <initializer>0x00</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="199" column="9" bodyfile="src/nxdk_ext.h" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a65e9eae95f35d3dc2a7c09d7bb4a4d53" prot="public" static="no">
+        <name>NV097_SET_TEXTURE_FILTER_CONVOLUTION_KERNEL</name>
+        <initializer>0x0000E000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="202" column="9" bodyfile="src/nxdk_ext.h" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ae713a40b811cc9657d364cdb465c1c6b" prot="public" static="no">
+        <name>NV097_SET_WINDOW_CLIP_TYPE</name>
+        <initializer>0x2B4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="204" column="9" bodyfile="src/nxdk_ext.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a53461bf87b548e325ec60bab8b39c5f1" prot="public" static="no">
+        <name>NV097_SET_WINDOW_CLIP_HORIZONTAL</name>
+        <initializer>0x2C0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="205" column="9" bodyfile="src/nxdk_ext.h" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af9687c82fac15da5782cddd2f5ce91ea" prot="public" static="no">
+        <name>NV097_SET_WINDOW_CLIP_VERTICAL</name>
+        <initializer>0x2E0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="206" column="9" bodyfile="src/nxdk_ext.h" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aa11f0a91c369cef9bc67c1b77d556539" prot="public" static="no">
+        <name>NV062_SET_COLOR_FORMAT</name>
+        <initializer>NV10_CONTEXT_SURFACES_2D_FORMAT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="208" column="9" bodyfile="src/nxdk_ext.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a56c557b317d7736dde94468a00251bda" prot="public" static="no">
+        <name>NV062_SET_PITCH</name>
+        <initializer>NV10_CONTEXT_SURFACES_2D_PITCH</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="209" column="9" bodyfile="src/nxdk_ext.h" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1afc89e47864d6961fe5772ccdb4ec7235" prot="public" static="no">
+        <name>NV062_SET_OFFSET_SOURCE</name>
+        <initializer>NV10_CONTEXT_SURFACES_2D_OFFSET_SRC</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="210" column="9" bodyfile="src/nxdk_ext.h" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ac2d96e587f3f2111cfccda9743ce3518" prot="public" static="no">
+        <name>NV062_SET_OFFSET_DESTIN</name>
+        <initializer>NV10_CONTEXT_SURFACES_2D_OFFSET_DST</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="211" column="9" bodyfile="src/nxdk_ext.h" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2bd4877a5464b7ffa17af23ae0bc2630" prot="public" static="no">
+        <name>NV09F_CONTROL_POINT_IN</name>
+        <initializer>NV_IMAGE_BLIT_POINT_IN</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="213" column="9" bodyfile="src/nxdk_ext.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9cc435e45e5df5f384822541a4e94fcb" prot="public" static="no">
+        <name>NV09F_CONTROL_POINT_OUT</name>
+        <initializer>NV_IMAGE_BLIT_POINT_OUT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="214" column="9" bodyfile="src/nxdk_ext.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aba1593fb48454f083ac6035910108273" prot="public" static="no">
+        <name>NV09F_SIZE</name>
+        <initializer>NV_IMAGE_BLIT_SIZE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="215" column="9" bodyfile="src/nxdk_ext.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1acb2b1f07db5637bb5ec2044d23f12bc3" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC</name>
+        <initializer>0x00001E6C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="217" column="9" bodyfile="src/nxdk_ext.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6f31a3e068de840bd031b904cb5235f3" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_NEVER</name>
+        <initializer>0x00000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="218" column="9" bodyfile="src/nxdk_ext.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4cb345191b83648617efc4f8789ab5fa" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_GREATER</name>
+        <initializer>0x00000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="219" column="9" bodyfile="src/nxdk_ext.h" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1afd1f7f46b82f92905e2bcab0086b9ff1" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_EQUAL</name>
+        <initializer>0x00000002</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="220" column="9" bodyfile="src/nxdk_ext.h" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a8ee324cd62808faf7050d2b096980aee" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_GEQUAL</name>
+        <initializer>0x00000003</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="221" column="9" bodyfile="src/nxdk_ext.h" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a0b87b42fd71f1862e7e61848b94af50e" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_LESS</name>
+        <initializer>0x00000004</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="222" column="9" bodyfile="src/nxdk_ext.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abeb18d8642783f7395df34fa3a47be05" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_NOTEQUAL</name>
+        <initializer>0x00000005</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="223" column="9" bodyfile="src/nxdk_ext.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a635484eb23cb657f4908d9476f2eee08" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_LEQUAL</name>
+        <initializer>0x00000006</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="224" column="9" bodyfile="src/nxdk_ext.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aea940d551d82700a1d4bdd67754ba126" prot="public" static="no">
+        <name>NV097_SET_SHADOW_COMPARE_FUNC_ALWAYS</name>
+        <initializer>0x00000007</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="225" column="9" bodyfile="src/nxdk_ext.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a92537bca3355a41c2c580a5034d0a2b7" prot="public" static="no">
+        <name>NV097_SET_SMOOTHING_CONTROL</name>
+        <initializer>0x00001D7C</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="227" column="9" bodyfile="src/nxdk_ext.h" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad1076848047ca44d9bfb387a6b6a94e6" prot="public" static="no">
+        <name>NV097_SET_LINE_SMOOTH_ENABLE</name>
+        <initializer>0x00000320</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="228" column="9" bodyfile="src/nxdk_ext.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad3d5a405ab1c4e821dcfc7ea4cb03ec8" prot="public" static="no">
+        <name>NV097_SET_POLY_SMOOTH_ENABLE</name>
+        <initializer>0x00000324</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="229" column="9" bodyfile="src/nxdk_ext.h" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a1db758e5f63018d3f8ebd2f777c50dba" prot="public" static="no">
+        <name>NV097_SET_DOT_RGBMAPPING</name>
+        <initializer>0X00001E74</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="231" column="9" bodyfile="src/nxdk_ext.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a59b40bf165e2c648a87b7aa7ca07777b" prot="public" static="no">
+        <name>NV097_SET_EDGE_FLAG</name>
+        <initializer>NV20_TCL_PRIMITIVE_3D_EDGE_FLAG</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="233" column="9" bodyfile="src/nxdk_ext.h" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4f4cd440e51bef3bedcd1c75ccd856d4" prot="public" static="no">
+        <name>NV097_SET_STIPPLE_ENABLE</name>
+        <initializer>NV20_TCL_PRIMITIVE_3D_POLYGON_STIPPLE_ENABLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="235" column="9" bodyfile="src/nxdk_ext.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab5505ca40720e391467315a867fc8411" prot="public" static="no">
+        <name>NV097_SET_STIPPLE_PATERN</name>
+        <initializer>0x1480</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="237" column="9" bodyfile="src/nxdk_ext.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aa454cb91db5bc5b4d57d4039d41ade72" prot="public" static="no">
+        <name>NV097_SET_STIPPLE_PATERN_SIZE</name>
+        <initializer>NV20_TCL_PRIMITIVE_3D_POLYGON_STIPPLE_PATTERN__SIZE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="238" column="9" bodyfile="src/nxdk_ext.h" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a75144c71cc877054345163bce021f547" prot="public" static="no">
+        <name>NV_PVIDEO_INTR_BUFFER_0</name>
+        <initializer>(1 &lt;&lt; 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="241" column="9" bodyfile="src/nxdk_ext.h" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abf314448cab5145bab263dbc32ad3ee2" prot="public" static="no">
+        <name>NV_PVIDEO_INTR_BUFFER_1</name>
+        <initializer>(1 &lt;&lt; 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="242" column="9" bodyfile="src/nxdk_ext.h" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a8c9515363d8ff8372539842b833ac925" prot="public" static="no">
+        <name>NV_PVIDEO_INTR_EN</name>
+        <initializer>0x00008140</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="243" column="9" bodyfile="src/nxdk_ext.h" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a12b60a68be2f277768ecd5aabeea48ca" prot="public" static="no">
+        <name>NV_PVIDEO_INTR_EN_BUFFER_0</name>
+        <initializer>(1 &lt;&lt; 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="244" column="9" bodyfile="src/nxdk_ext.h" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ad62ddd3f285b1f197c3a9c53fe7793e0" prot="public" static="no">
+        <name>NV_PVIDEO_INTR_EN_BUFFER_1</name>
+        <initializer>(1 &lt;&lt; 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="245" column="9" bodyfile="src/nxdk_ext.h" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a79e5db13e891ad76e09c9153a747ed53" prot="public" static="no">
+        <name>NV_PVIDEO_BUFFER</name>
+        <initializer>0x00008700</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="246" column="9" bodyfile="src/nxdk_ext.h" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1acc7837b6e82fb67adc44325a77773cc7" prot="public" static="no">
+        <name>NV_PVIDEO_BUFFER_0_USE</name>
+        <initializer>(1 &lt;&lt; 0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="247" column="9" bodyfile="src/nxdk_ext.h" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a11ed4722347b1eded02bf42a60585db6" prot="public" static="no">
+        <name>NV_PVIDEO_BUFFER_1_USE</name>
+        <initializer>(1 &lt;&lt; 4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="248" column="9" bodyfile="src/nxdk_ext.h" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aa5ae047865106c64386ab3c0fd440616" prot="public" static="no">
+        <name>NV_PVIDEO_STOP</name>
+        <initializer>0x00008704</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="249" column="9" bodyfile="src/nxdk_ext.h" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3f7dd2929cb0883d5416a8a524aa9ebd" prot="public" static="no">
+        <name>NV_PVIDEO_BASE</name>
+        <initializer>0x00008900</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="250" column="9" bodyfile="src/nxdk_ext.h" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a920d0308e49b4171cab53b608dd651e0" prot="public" static="no">
+        <name>NV_PVIDEO_LIMIT</name>
+        <initializer>0x00008908</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="251" column="9" bodyfile="src/nxdk_ext.h" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a02d8440a0db4d7624489514122ab0605" prot="public" static="no">
+        <name>NV_PVIDEO_LUMINANCE</name>
+        <initializer>0x00008910</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="252" column="9" bodyfile="src/nxdk_ext.h" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a4f2850fe88345e76fc6d2fef064246ba" prot="public" static="no">
+        <name>NV_PVIDEO_CHROMINANCE</name>
+        <initializer>0x00008918</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="253" column="9" bodyfile="src/nxdk_ext.h" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6fa5a79adda4b48d3fe8cfb59dac97de" prot="public" static="no">
+        <name>NV_PVIDEO_OFFSET</name>
+        <initializer>0x00008920</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="254" column="9" bodyfile="src/nxdk_ext.h" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1adb685c0484fd10f81913a85bfd4a9c8e" prot="public" static="no">
+        <name>NV_PVIDEO_SIZE_IN</name>
+        <initializer>0x00008928</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="255" column="9" bodyfile="src/nxdk_ext.h" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3aeefa70bfd95b925820f8afaaa38257" prot="public" static="no">
+        <name>NV_PVIDEO_SIZE_IN_WIDTH</name>
+        <initializer>0x000007FF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="256" column="9" bodyfile="src/nxdk_ext.h" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1ab8d89d84bd409ef60c2152914f9f9d9a" prot="public" static="no">
+        <name>NV_PVIDEO_SIZE_IN_HEIGHT</name>
+        <initializer>0x07FF0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="257" column="9" bodyfile="src/nxdk_ext.h" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a702c3703951ef34586bd669f154f32da" prot="public" static="no">
+        <name>NV_PVIDEO_POINT_IN</name>
+        <initializer>0x00008930</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="258" column="9" bodyfile="src/nxdk_ext.h" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a520d6b8920c06597cd1809a4f5727238" prot="public" static="no">
+        <name>NV_PVIDEO_POINT_IN_S</name>
+        <initializer>0x00007FFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="259" column="9" bodyfile="src/nxdk_ext.h" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a8ec4f835dd2a23bd62431a8d837a25bf" prot="public" static="no">
+        <name>NV_PVIDEO_POINT_IN_T</name>
+        <initializer>0xFFFE0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="260" column="9" bodyfile="src/nxdk_ext.h" bodystart="260" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af0749785fb3230827abf89dff3df39a2" prot="public" static="no">
+        <name>NV_PVIDEO_DS_DX</name>
+        <initializer>0x00008938</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="261" column="9" bodyfile="src/nxdk_ext.h" bodystart="261" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abe4e88458c9035cb6d1c6897428c4e48" prot="public" static="no">
+        <name>NV_PVIDEO_DT_DY</name>
+        <initializer>0x00008940</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="262" column="9" bodyfile="src/nxdk_ext.h" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a761851dd7c7a08c38742b8559ad93e9c" prot="public" static="no">
+        <name>NV_PVIDEO_POINT_OUT</name>
+        <initializer>0x00008948</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="263" column="9" bodyfile="src/nxdk_ext.h" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aaff87fe468195852c2fe6d80c9831ac3" prot="public" static="no">
+        <name>NV_PVIDEO_POINT_OUT_X</name>
+        <initializer>0x00000FFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="264" column="9" bodyfile="src/nxdk_ext.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aee3034628b986fd46f65d3d38e919798" prot="public" static="no">
+        <name>NV_PVIDEO_POINT_OUT_Y</name>
+        <initializer>0x0FFF0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="265" column="9" bodyfile="src/nxdk_ext.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a368f164e1358724c2bcfa1f8d39e0003" prot="public" static="no">
+        <name>NV_PVIDEO_SIZE_OUT</name>
+        <initializer>0x00008950</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="266" column="9" bodyfile="src/nxdk_ext.h" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a63736ee9006e9e1bb9dc6925a32816a6" prot="public" static="no">
+        <name>NV_PVIDEO_SIZE_OUT_WIDTH</name>
+        <initializer>0x00000FFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="267" column="9" bodyfile="src/nxdk_ext.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a9f5c47128e6b8cd539948c4f7d61b8db" prot="public" static="no">
+        <name>NV_PVIDEO_SIZE_OUT_HEIGHT</name>
+        <initializer>0x0FFF0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="268" column="9" bodyfile="src/nxdk_ext.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1adb902c8c51712b1fd901c98089740b7e" prot="public" static="no">
+        <name>NV_PVIDEO_FORMAT</name>
+        <initializer>0x00008958</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="269" column="9" bodyfile="src/nxdk_ext.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a10de19a84062d9256a93453bbe2a3889" prot="public" static="no">
+        <name>NV_PVIDEO_FORMAT_PITCH</name>
+        <initializer>0x00001FFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="270" column="9" bodyfile="src/nxdk_ext.h" bodystart="270" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1abc5368dc9d8a4d169602a70cbe879703" prot="public" static="no">
+        <name>NV_PVIDEO_FORMAT_COLOR</name>
+        <initializer>0x00030000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="271" column="9" bodyfile="src/nxdk_ext.h" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af0944986e26b065118d9bf2ae953a3bc" prot="public" static="no">
+        <name>NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="272" column="9" bodyfile="src/nxdk_ext.h" bodystart="272" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a6c685cbfd7dd1ffe6069dd411393c970" prot="public" static="no">
+        <name>NV_PVIDEO_FORMAT_DISPLAY</name>
+        <initializer>(1 &lt;&lt; 20)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="273" column="9" bodyfile="src/nxdk_ext.h" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1aacdc4bdfa0158e7a207b5d1eca79295f" prot="public" static="no">
+        <name>NV_PVIDEO_FORMAT_DISPLAY_COLOR_KEY</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="274" column="9" bodyfile="src/nxdk_ext.h" bodystart="274" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a2ced7c6eaa425d2614cb67c998ccef2a" prot="public" static="no">
+        <name>NV_PVIDEO_COLOR_KEY</name>
+        <initializer>0x00008B00</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="275" column="9" bodyfile="src/nxdk_ext.h" bodystart="275" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a29355ee58cfb540731699d438ace66da" prot="public" static="no">
+        <name>NV_PVIDEO_COLOR_KEY_RED</name>
+        <initializer>0x00FF0000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="276" column="9" bodyfile="src/nxdk_ext.h" bodystart="276" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a3a82905a154c4fb285c50ec7bb53c1b0" prot="public" static="no">
+        <name>NV_PVIDEO_COLOR_KEY_GREEN</name>
+        <initializer>0x0000FF00</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="277" column="9" bodyfile="src/nxdk_ext.h" bodystart="277" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1af25a65eb0a1249a1ca2b2d5e21d0f4aa" prot="public" static="no">
+        <name>NV_PVIDEO_COLOR_KEY_BLUE</name>
+        <initializer>0x000000FF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="278" column="9" bodyfile="src/nxdk_ext.h" bodystart="278" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dd/d7f/nxdk__ext_8h_1a96f5cbc3048a22b14f07d597630e9e28" prot="public" static="no">
+        <name>NV_PVIDEO_COLOR_KEY_ALPHA</name>
+        <initializer>0xFF000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/nxdk_ext.h" line="279" column="9" bodyfile="src/nxdk_ext.h" bodystart="279" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_ZBUFFER_TESTS_NXDK_MISSING_DEFINES_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_ZBUFFER_TESTS_NXDK_MISSING_DEFINES_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>TODO:<sp/>upstream<sp/>missing<sp/>nv2a<sp/>defines</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>https://github.com/xqemu/xqemu/blob/f9b9a9bad88b3b2df53a1b01db6a37783aa2eb27/hw/xbox/nv2a/nv2a_shaders.c#L296-L312</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_POSITION<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_WEIGHT<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_NORMAL<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_DIFFUSE<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_SPECULAR<sp/>4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_FOG_COORD<sp/>5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_POINT_SIZE<sp/>6</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_BACK_DIFFUSE<sp/>7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_BACK_SPECULAR<sp/>8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_TEXTURE0<sp/>9</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_TEXTURE1<sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_TEXTURE2<sp/>11</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_TEXTURE3<sp/>12</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>These<sp/>do<sp/>not<sp/>have<sp/>a<sp/>default<sp/>semantic<sp/>but<sp/>are<sp/>usable<sp/>from<sp/>custom<sp/>vertex<sp/>shaders.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_13<sp/>13</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_14<sp/>14</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_VERTEX_ATTR_15<sp/>15</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8B8<sp/>0x16</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8<sp/>0x17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8<sp/>0x24</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_YB8CR8YA8CB8<sp/>0x25</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FIXED<sp/>0x2C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT<sp/>0x31</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_SZ_B8G8R8A8<sp/>0x3B</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_CONTROL0_COLOR_SPACE_CONVERT<sp/>0xF0000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB<sp/>0x1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_CONTROL0_ENABLE<sp/>(1<sp/>&lt;&lt;<sp/>30)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_CONTROL0_MIN_LOD_CLAMP<sp/>0x3FFC0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP<sp/>0x0003FFC0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_CONTROL0_ALPHA_KILL_ENABLE<sp/>(1<sp/>&lt;&lt;<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE<sp/>0x3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_CONTROL0_Z_FORMAT_FIXED<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_CONTROL0_Z_FORMAT_FLOAT<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LIGHT_TWO_SIDE_ENABLE<sp/>NV20_TCL_PRIMITIVE_3D_LIGHT_MODEL_TWO_SIDE_ENABLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_NEVER<sp/>0x00000200</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_LESS<sp/>0x00000201</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_EQUAL<sp/>0x00000202</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_LEQUAL<sp/>0x00000203</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_GREATER<sp/>0x00000204</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_NOTEQUAL<sp/>0x00000205</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_GEQUAL<sp/>0x00000206</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DEPTH_FUNC_V_ALWAYS<sp/>0x00000207</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_FALSE<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CLAMP<sp/>(1<sp/>&lt;&lt;<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_TRUE<sp/>(1<sp/>&lt;&lt;<sp/>8)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_U<sp/>0x0000000F</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_U<sp/>0x000000F0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_V<sp/>0x00000F00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_V<sp/>0x0000F000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_P<sp/>0x000F0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_P<sp/>0x00F00000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_Q<sp/>0x0F000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Naming<sp/>from<sp/>xemu&apos;s<sp/>nv2a_regs.h,<sp/>to<sp/>be<sp/>used<sp/>with<sp/>nxdk&apos;s<sp/>NV_IMAGE_BLIT<sp/>definitions.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_SET_OPERATION_BLEND_AND<sp/>0x02</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_SET_OPERATION_SRCCOPY<sp/>0x03</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_SET_OPERATION_SRCCOPY_PREMULT<sp/>0x04</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_SET_OPERATION_BLEND_AND_PREMULT<sp/>0x05</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_IMAGE_BLIT_SET_BETA<sp/>0x0194</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_IMAGE_BLIT_SET_BETA4<sp/>0x0198</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV012_BETA<sp/>0x00000012<sp/><sp/></highlight><highlight class="comment">//<sp/>Alpha<sp/>factor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV012_SET_BETA<sp/>0x0300</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV072_BETA_4<sp/>0x00000072<sp/><sp/></highlight><highlight class="comment">//<sp/>RGBA<sp/>factor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV072_SET_BETA<sp/>0x0300</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_Y8<sp/>0x00000001</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_X1R5G5B5_Z1R5G5B5<sp/>0x00000002</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_X1R5G5B5_X1R5G5B5<sp/>0x00000003</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_R5G6B5<sp/>0x00000004</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_Y16<sp/>0x00000005</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_Z8R8G8B8<sp/>0x00000006</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8<sp/>0x00000007</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_X1A7R8G8B8_Z1A7R8G8B8<sp/>0x00000008</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_X1A7R8G8B8_X1A7R8G8B8<sp/>0x00000009</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_A8R8G8B8<sp/>0x0000000a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV04_SURFACE_2D_FORMAT_Y32<sp/>0x0000000b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL<sp/>0x298</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>6)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>6)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_EMISSIVE_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_EMISSIVE_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>8)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_EMISSIVE_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>8)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_AMBIENT_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_AMBIENT_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>10)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_AMBIENT_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>10)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_DIFFUSE_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_DIFFUSE_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>12)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_DIFFUSE_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>12)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_SPECULAR_FROM_MATERIAL<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_SPECULAR_FROM_VERTEX_DIFFUSE<sp/>(1<sp/>&lt;&lt;<sp/>14)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_MATERIAL_BACK_SPECULAR_FROM_VERTEX_SPECULAR<sp/>(2<sp/>&lt;&lt;<sp/>14)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LIGHT_CONTROL<sp/>NV20_TCL_PRIMITIVE_3D_LIGHT_CONTROL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_MATERIAL_ALPHA<sp/>0x3B4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SPECULAR_ENABLE<sp/>0x03b8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_MATERIAL_EMISSION<sp/>0x03a8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SPECULAR_PARAMS<sp/>0x9E0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="comment">//<sp/>glLineWidth.<sp/>Values<sp/>are<sp/>6.3<sp/>fixed<sp/>point<sp/>and<sp/>anything<sp/>&gt;=<sp/>64.0<sp/>will<sp/>be<sp/>ignored.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LINE_WIDTH<sp/>0x380</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LINE_WIDTH_MAX_VALUE<sp/>(63<sp/>&lt;&lt;<sp/>3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LINE_WIDTH_MASK<sp/>((64<sp/>&lt;&lt;<sp/>3)<sp/>-<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>LithiumX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_BACK_MATERIAL_ALPHA<sp/>0x17AC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>comment<sp/>on<sp/>xemu#713</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="comment">//<sp/>There<sp/>are<sp/>4<sp/>uint32_t<sp/>color<sp/>values,<sp/>one<sp/>for<sp/>each<sp/>texture<sp/>stage.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_COLOR_KEY_COLOR<sp/>0x0AE0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV042_SET_PITCH<sp/>0x304</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV042_SET_COLOR_FORMAT<sp/>NV04_CONTEXT_SURFACES_2D_FORMAT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV042_SET_COLOR_FORMAT_LE_A8R8G8B8<sp/>0x0A</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5<sp/>0x00000001</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5<sp/>0x00000002</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8<sp/>0x00000003</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>is<sp/>sent<sp/>whenever<sp/>a<sp/>vertex<sp/>buffer<sp/>is<sp/>drawn<sp/>after<sp/>being<sp/>locked.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Failing<sp/>to<sp/>send<sp/>it<sp/>in<sp/>a<sp/>tight<sp/>modification<sp/>loop<sp/>will<sp/>cause<sp/>the<sp/>hardware<sp/>to<sp/>re-use<sp/>previously<sp/>set<sp/>data<sp/>even<sp/>if<sp/>new</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="comment">//<sp/>values<sp/>are<sp/>set<sp/>(likely<sp/>it<sp/>skips<sp/>fetching<sp/>the<sp/>updated<sp/>memory<sp/>from<sp/>system<sp/>RAM).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_BREAK_VERTEX_BUFFER_CACHE<sp/>0x1710</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_WEIGHT1F<sp/>0x169C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_WEIGHT4F<sp/>0x16C0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_NORMAL3F<sp/>0x1530</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_NORMAL3S<sp/>0x1540</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DIFFUSE_COLOR4F<sp/>0x1550</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DIFFUSE_COLOR3F<sp/>0x1560</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DIFFUSE_COLOR4I<sp/>0x156C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SPECULAR_COLOR4F<sp/>0x1570</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SPECULAR_COLOR3F<sp/>0x1580</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SPECULAR_COLOR4I<sp/>0x158C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_FOG_COORD<sp/>0x1698</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_POINT_SIZE<sp/>0x43C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD0_2F<sp/>0x1590</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD0_4F<sp/>0x15A0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD0_2S<sp/>0x1598</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD0_4S<sp/>0x15B0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD1_2F<sp/>0x15B8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD1_4F<sp/>0x15C8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD1_2S<sp/>0x15C0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD1_4S<sp/>0x15D8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD2_2F<sp/>0x15E0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD2_4F<sp/>0x15F0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD2_2S<sp/>0x15E8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD2_4S<sp/>0x1600</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD3_2F<sp/>0x1608</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD3_4F<sp/>0x1620</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD3_2S<sp/>0x1610</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXCOORD3_4S<sp/>0x1630</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_OFF<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_INFINITE<sp/>(1<sp/>&lt;&lt;<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_LOCAL<sp/>(2<sp/>&lt;&lt;<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_SPOT<sp/>(3<sp/>&lt;&lt;<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_POINT_PARAMS_ENABLE<sp/>0x318</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_POINT_SMOOTH_ENABLE<sp/>0x31C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADE_MODEL<sp/>0x37C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADE_MODEL_FLAT<sp/>0x1D00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADE_MODEL_SMOOTH<sp/>0x1D01</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_FLAT_SHADE_PROVOKING_VERTEX<sp/>0x9FC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST<sp/>0x01</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_LAST<sp/>0x00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV_PGRAPH_TEXFILTER0_CONVOLUTION_KERNEL<sp/>from<sp/>xemu.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_TEXTURE_FILTER_CONVOLUTION_KERNEL<sp/>0x0000E000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_WINDOW_CLIP_TYPE<sp/>0x2B4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_WINDOW_CLIP_HORIZONTAL<sp/>0x2C0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_WINDOW_CLIP_VERTICAL<sp/>0x2E0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV062_SET_COLOR_FORMAT<sp/>NV10_CONTEXT_SURFACES_2D_FORMAT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV062_SET_PITCH<sp/>NV10_CONTEXT_SURFACES_2D_PITCH</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV062_SET_OFFSET_SOURCE<sp/>NV10_CONTEXT_SURFACES_2D_OFFSET_SRC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV062_SET_OFFSET_DESTIN<sp/>NV10_CONTEXT_SURFACES_2D_OFFSET_DST</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_CONTROL_POINT_IN<sp/>NV_IMAGE_BLIT_POINT_IN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_CONTROL_POINT_OUT<sp/>NV_IMAGE_BLIT_POINT_OUT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV09F_SIZE<sp/>NV_IMAGE_BLIT_SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC<sp/>0x00001E6C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_NEVER<sp/>0x00000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_GREATER<sp/>0x00000001</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_EQUAL<sp/>0x00000002</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_GEQUAL<sp/>0x00000003</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_LESS<sp/>0x00000004</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_NOTEQUAL<sp/>0x00000005</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_LEQUAL<sp/>0x00000006</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SHADOW_COMPARE_FUNC_ALWAYS<sp/>0x00000007</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_SMOOTHING_CONTROL<sp/>0x00001D7C</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_LINE_SMOOTH_ENABLE<sp/>0x00000320</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_POLY_SMOOTH_ENABLE<sp/>0x00000324</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_DOT_RGBMAPPING<sp/>0X00001E74</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_EDGE_FLAG<sp/>NV20_TCL_PRIMITIVE_3D_EDGE_FLAG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_STIPPLE_ENABLE<sp/>NV20_TCL_PRIMITIVE_3D_POLYGON_STIPPLE_ENABLE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="comment">//<sp/>32×32<sp/>bit<sp/>stipple<sp/>pattern</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_STIPPLE_PATERN<sp/>0x1480<sp/><sp/></highlight><highlight class="comment">//<sp/>NV20_TCL_PRIMITIVE_3D_POLYGON_STIPPLE_PATTERN</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV097_SET_STIPPLE_PATERN_SIZE<sp/>NV20_TCL_PRIMITIVE_3D_POLYGON_STIPPLE_PATTERN__SIZE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV_PVIDEO_INTR<sp/>is<sp/>already<sp/>defined<sp/>in<sp/>outer.h</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_INTR_BUFFER_0<sp/>(1<sp/>&lt;&lt;<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_INTR_BUFFER_1<sp/>(1<sp/>&lt;&lt;<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_INTR_EN<sp/>0x00008140</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_INTR_EN_BUFFER_0<sp/>(1<sp/>&lt;&lt;<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_INTR_EN_BUFFER_1<sp/>(1<sp/>&lt;&lt;<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_BUFFER<sp/>0x00008700</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_BUFFER_0_USE<sp/>(1<sp/>&lt;&lt;<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_BUFFER_1_USE<sp/>(1<sp/>&lt;&lt;<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_STOP<sp/>0x00008704</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_BASE<sp/>0x00008900</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_LIMIT<sp/>0x00008908</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_LUMINANCE<sp/>0x00008910</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_CHROMINANCE<sp/>0x00008918</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_OFFSET<sp/>0x00008920</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_SIZE_IN<sp/>0x00008928</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_SIZE_IN_WIDTH<sp/>0x000007FF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_SIZE_IN_HEIGHT<sp/>0x07FF0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_POINT_IN<sp/>0x00008930</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_POINT_IN_S<sp/>0x00007FFF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_POINT_IN_T<sp/>0xFFFE0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_DS_DX<sp/>0x00008938</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_DT_DY<sp/>0x00008940</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_POINT_OUT<sp/>0x00008948</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_POINT_OUT_X<sp/>0x00000FFF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_POINT_OUT_Y<sp/>0x0FFF0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_SIZE_OUT<sp/>0x00008950</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_SIZE_OUT_WIDTH<sp/>0x00000FFF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_SIZE_OUT_HEIGHT<sp/>0x0FFF0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_FORMAT<sp/>0x00008958</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_FORMAT_PITCH<sp/>0x00001FFF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_FORMAT_COLOR<sp/>0x00030000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_FORMAT_DISPLAY<sp/>(1<sp/>&lt;&lt;<sp/>20)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_FORMAT_DISPLAY_COLOR_KEY<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_COLOR_KEY<sp/>0x00008B00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_COLOR_KEY_RED<sp/>0x00FF0000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_COLOR_KEY_GREEN<sp/>0x0000FF00</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_COLOR_KEY_BLUE<sp/>0x000000FF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV_PVIDEO_COLOR_KEY_ALPHA<sp/>0xFF000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_ZBUFFER_TESTS_NXDK_MISSING_DEFINES_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/nxdk_ext.h"/>
+  </compounddef>
+</doxygen>
