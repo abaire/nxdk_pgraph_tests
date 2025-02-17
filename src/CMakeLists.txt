@@ -242,6 +242,10 @@ add_executable(
         tests/null_surface_tests.h
         tests/overlapping_draw_modes_tests.cpp
         tests/overlapping_draw_modes_tests.h
+        tests/point_params_tests.cpp
+        tests/point_params_tests.h
+        tests/point_size_tests.cpp
+        tests/point_size_tests.h
         tests/pvideo_tests.cpp
         tests/pvideo_tests.h
         tests/set_vertex_data_tests.cpp
