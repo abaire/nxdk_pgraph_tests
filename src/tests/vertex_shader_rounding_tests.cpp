@@ -707,6 +707,14 @@ void VertexShaderRoundingTests::TestAdjacentGeometry(float bias) {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
+/**
+ * Draws a light colored quad, then renders quads whose coordinates have had
+ * `bias` added to X and Y. Dark green quads are rendered using a programmable
+ * vertex shader and light green quads are rendered using the fixed function
+ * pipeline.
+ *
+ * @param bias amount to shift the green quads relative to the white background.
+ */
 void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
   auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
@@ -750,7 +758,9 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
     host_.SetVertex(world[0], world[1], z, 1.0f);
   };
 
-  // Draw a background.
+  // Draw a light background to make it obvious where quads are misaligned.
+  // The background is a single quad whose z value ranges from kBackgroundZTop
+  // along the top to kBackgroundZBottom along the bottom edge.
   uint32_t color = 0xFFE0E0E0;
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetDiffuse(color);
@@ -778,21 +788,25 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
     for (uint32_t x = 0; x < 4; ++x, ++i) {
       float right = left + kQuadSize;
 
-      quads[i].ul[0] = left + bias;
-      quads[i].ul[1] = top + bias;
-      quads[i].ul[2] = top_z;
+      {
+        vector_t world_point = {left + bias, top + bias, top_z, 1.f};
+        host_.UnprojectPoint(quads[i].ul, world_point, world_point[2]);
+      }
 
-      quads[i].ur[0] = right + bias;
-      quads[i].ur[1] = top + bias;
-      quads[i].ur[2] = top_z;
+      {
+        vector_t world_point = {right + bias, top + bias, top_z, 1.f};
+        host_.UnprojectPoint(quads[i].ur, world_point, world_point[2]);
+      }
 
-      quads[i].lr[0] = right + bias;
-      quads[i].lr[1] = bottom + bias;
-      quads[i].lr[2] = bottom_z;
+      {
+        vector_t world_point = {right + bias, bottom + bias, bottom_z, 1.f};
+        host_.UnprojectPoint(quads[i].lr, world_point, world_point[2]);
+      }
 
-      quads[i].ll[0] = left + bias;
-      quads[i].ll[1] = bottom + bias;
-      quads[i].ll[2] = bottom_z;
+      {
+        vector_t world_point = {left + bias, bottom + bias, bottom_z, 1.f};
+        host_.UnprojectPoint(quads[i].ll, world_point, world_point[2]);
+      }
 
       left += kQuadSize;
     }
@@ -802,26 +816,28 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   }
 
   // Draw subpixel offset green squares using the programmable pipeline.
-  color = 0xFF009900;
-  for (uint32_t i = 0; i < 4; i += 2) {
-    auto &q = quads[i];
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
-    host_.End();
-  }
-  for (uint32_t i = 5; i < 8; i += 2) {
-    auto &q = quads[i];
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
-    host_.End();
+  {
+    color = 0xFF009900;
+    for (uint32_t i = 0; i < 4; i += 2) {
+      auto &q = quads[i];
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetDiffuse(color);
+      host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+      host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+      host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+      host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
+      host_.End();
+    }
+    for (uint32_t i = 5; i < 8; i += 2) {
+      auto &q = quads[i];
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetDiffuse(color);
+      host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+      host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+      host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+      host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
+      host_.End();
+    }
   }
 
   // Draw subpixel offset green squares using the fixed pipeline.
@@ -831,25 +847,26 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
     auto &q = quads[i];
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
+    host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+    host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+    host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+    host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
     host_.End();
   }
   for (uint32_t i = 4; i < 8; i += 2) {
     auto &q = quads[i];
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
+    host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+    host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+    host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+    host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
     host_.End();
   }
 
   std::string test_name = MakeGeometryTestName(kTestProjectedAdjacentGeometryName, bias);
   pb_print("%s\n", test_name.c_str());
+  pb_print("Dark green: FF Light: Programmable\n");
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
