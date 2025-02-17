@@ -12,6 +12,10 @@ using namespace XboxMath;
 struct TextureFormatInfo;
 class VertexBuffer;
 
+/**
+ * Tests the effects of NV097_SET_VIEWPORT_OFFSET and NV097_SET_VIEWPORT_SCALE
+ * on quads rendered via the fixed function and programmable pipelines.
+ */
 class ViewportTests : public TestSuite {
  public:
   struct Viewport {

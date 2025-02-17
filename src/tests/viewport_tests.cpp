@@ -119,21 +119,25 @@ void ViewportTests::Test(const Viewport &vp) {
     for (uint32_t x = 0; x < 4; ++x, ++i) {
       float right = left + kQuadSize;
 
-      quads[i].ul[0] = left;
-      quads[i].ul[1] = top;
-      quads[i].ul[2] = top_z;
+      {
+        vector_t world_point = {left, top, top_z, 1.f};
+        host_.UnprojectPoint(quads[i].ul, world_point, world_point[2]);
+      }
 
-      quads[i].ur[0] = right;
-      quads[i].ur[1] = top;
-      quads[i].ur[2] = top_z;
+      {
+        vector_t world_point = {right, top, top_z, 1.f};
+        host_.UnprojectPoint(quads[i].ur, world_point, world_point[2]);
+      }
 
-      quads[i].lr[0] = right;
-      quads[i].lr[1] = bottom;
-      quads[i].lr[2] = bottom_z;
+      {
+        vector_t world_point = {right, bottom, bottom_z, 1.f};
+        host_.UnprojectPoint(quads[i].lr, world_point, world_point[2]);
+      }
 
-      quads[i].ll[0] = left;
-      quads[i].ll[1] = bottom;
-      quads[i].ll[2] = bottom_z;
+      {
+        vector_t world_point = {left, bottom, bottom_z, 1.f};
+        host_.UnprojectPoint(quads[i].ll, world_point, world_point[2]);
+      }
 
       left += kQuadSize;
     }
@@ -143,26 +147,28 @@ void ViewportTests::Test(const Viewport &vp) {
   }
 
   // Draw squares using the programmable pipeline.
-  color = 0xFF001199;
-  for (uint32_t i = 0; i < 4; i += 2) {
-    auto &q = quads[i];
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
-    host_.End();
-  }
-  for (uint32_t i = 5; i < 8; i += 2) {
-    auto &q = quads[i];
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
-    host_.End();
+  {
+    color = 0xFF001199;
+    for (uint32_t i = 0; i < 4; i += 2) {
+      auto &q = quads[i];
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetDiffuse(color);
+      host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+      host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+      host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+      host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
+      host_.End();
+    }
+    for (uint32_t i = 5; i < 8; i += 2) {
+      auto &q = quads[i];
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetDiffuse(color);
+      host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+      host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+      host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+      host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
+      host_.End();
+    }
   }
 
   // Draw squares using the fixed pipeline.
@@ -172,20 +178,20 @@ void ViewportTests::Test(const Viewport &vp) {
     auto &q = quads[i];
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
+    host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+    host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+    host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+    host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
     host_.End();
   }
   for (uint32_t i = 4; i < 8; i += 2) {
     auto &q = quads[i];
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(color);
-    set_vertex(q.ul[0], q.ul[1], q.ul[2]);
-    set_vertex(q.ur[0], q.ur[1], q.ur[2]);
-    set_vertex(q.lr[0], q.lr[1], q.lr[2]);
-    set_vertex(q.ll[0], q.ll[1], q.ll[2]);
+    host_.SetVertex(q.ul[0], q.ul[1], q.ul[2]);
+    host_.SetVertex(q.ur[0], q.ur[1], q.ur[2]);
+    host_.SetVertex(q.lr[0], q.lr[1], q.lr[2]);
+    host_.SetVertex(q.ll[0], q.ll[1], q.ll[2]);
     host_.End();
   }
 

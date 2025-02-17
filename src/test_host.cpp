@@ -28,6 +28,7 @@
 #include "xbox_math_d3d.h"
 #include "xbox_math_matrix.h"
 #include "xbox_math_types.h"
+#include "xbox_math_util.h"
 
 using namespace XboxMath;
 
@@ -629,7 +630,7 @@ void TestHost::SetFogCoord(float fc) const {
 
 void TestHost::SetPointSize(float ps) const {
   auto p = pb_begin();
-  p = pb_push1f(p, NV097_SET_POINT_SIZE, ps);
+  p = pb_push1(p, NV097_SET_POINT_SIZE, static_cast<int>(ps * 8.f));
   pb_end(p);
 }
 
@@ -1142,39 +1143,15 @@ void TestHost::BuildDefaultXDKProjectionMatrix(matrix4_t &matrix) const {
 }
 
 void TestHost::ProjectPoint(vector_t &result, const vector_t &world_point) const {
-  vector_t screen_point;
-  VectorMultMatrix(world_point, fixed_function_composite_matrix_, screen_point);
-
-  result[0] = screen_point[0] / screen_point[3];
-  result[1] = screen_point[1] / screen_point[3];
-  result[2] = screen_point[2] / screen_point[3];
-  result[3] = 1.0f;
+  XboxMath::ProjectPoint(world_point, fixed_function_composite_matrix_, result);
 }
 
 void TestHost::UnprojectPoint(vector_t &result, const vector_t &screen_point) const {
-  VectorMultMatrix(screen_point, fixed_function_inverse_composite_matrix_, result);
+  XboxMath::UnprojectPoint(screen_point, fixed_function_inverse_composite_matrix_, result);
 }
 
 void TestHost::UnprojectPoint(vector_t &result, const vector_t &screen_point, float world_z) const {
-  vector_t work;
-  VectorCopyVector(work, screen_point);
-
-  // TODO: Get the near and far plane mappings from the viewport matrix.
-  work[2] = 0.0f;
-  vector_t near_plane;
-  VectorMultMatrix(work, fixed_function_inverse_composite_matrix_, near_plane);
-  VectorEuclidean(near_plane);
-
-  work[2] = 64000.0f;
-  vector_t far_plane;
-  VectorMultMatrix(work, fixed_function_inverse_composite_matrix_, far_plane);
-  VectorEuclidean(far_plane);
-
-  float t = (world_z - near_plane[2]) / (far_plane[2] - near_plane[2]);
-  result[0] = near_plane[0] + (far_plane[0] - near_plane[0]) * t;
-  result[1] = near_plane[1] + (far_plane[1] - near_plane[1]) * t;
-  result[2] = world_z;
-  result[3] = 1.0f;
+  XboxMath::UnprojectPoint(screen_point, fixed_function_inverse_composite_matrix_, world_z, result);
 }
 
 void TestHost::SetWindowClipExclusive(bool exclusive) {
@@ -1203,8 +1180,8 @@ void TestHost::SetViewportScale(float x, float y, float z, float w) {
   pb_end(p);
 }
 
-void TestHost::SetFixedFunctionModelViewMatrix(const matrix4_t model_matrix) {
-  memcpy(fixed_function_model_view_matrix_, model_matrix, sizeof(fixed_function_model_view_matrix_));
+void TestHost::SetFixedFunctionModelViewMatrix(const matrix4_t &model_matrix) {
+  MatrixCopyMatrix(fixed_function_model_view_matrix_, model_matrix);
 
   auto p = pb_begin();
   p = pb_push_transposed_matrix(p, NV097_SET_MODEL_VIEW_MATRIX, fixed_function_model_view_matrix_[0]);
@@ -1219,7 +1196,8 @@ void TestHost::SetFixedFunctionModelViewMatrix(const matrix4_t model_matrix) {
   SetFixedFunctionProjectionMatrix(fixed_function_projection_matrix_);
 }
 
-void TestHost::SetFixedFunctionProjectionMatrix(const matrix4_t projection_matrix) {
+void TestHost::SetFixedFunctionProjectionMatrix(const matrix4_t &projection_matrix) {
+  MatrixCopyMatrix(fixed_function_projection_matrix_, projection_matrix);
   memcpy(fixed_function_projection_matrix_, projection_matrix, sizeof(fixed_function_projection_matrix_));
 
   GetCompositeMatrix(fixed_function_composite_matrix_, fixed_function_model_view_matrix_,
@@ -1229,8 +1207,7 @@ void TestHost::SetFixedFunctionProjectionMatrix(const matrix4_t projection_matri
   p = pb_push_transposed_matrix(p, NV097_SET_COMPOSITE_MATRIX, fixed_function_composite_matrix_[0]);
   pb_end(p);
 
-  MatrixTranspose(fixed_function_composite_matrix_);
-  MatrixInvert(fixed_function_composite_matrix_, fixed_function_inverse_composite_matrix_);
+  BuildInverseCompositeMatrix(fixed_function_composite_matrix_, fixed_function_inverse_composite_matrix_);
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
 
