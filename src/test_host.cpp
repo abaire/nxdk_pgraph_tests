@@ -1308,6 +1308,13 @@ void TestHost::SetAlphaReference(uint32_t alpha) const {
   pb_end(p);
 }
 
+void TestHost::SetAlphaFunc(bool enable, uint32_t func) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, enable);
+  p = pb_push1(p, NV097_SET_ALPHA_FUNC, func);
+  pb_end(p);
+}
+
 void TestHost::SetCombinerControl(int num_combiners, bool same_factor0, bool same_factor1, bool mux_msb) const {
   ASSERT(num_combiners > 0 && num_combiners < 8);
   uint32_t setting = MASK(NV097_SET_COMBINER_CONTROL_ITERATION_COUNT, num_combiners);

@@ -34,6 +34,7 @@
 #include "runtime_config.h"
 #include "test_driver.h"
 #include "test_host.h"
+#include "tests/alpha_func_tests.h"
 #include "tests/antialiasing_tests.h"
 #include "tests/attribute_carryover_tests.h"
 #include "tests/attribute_explicit_setter_tests.h"
@@ -366,6 +367,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
 
   // Remaining tests should be alphabetized.
   // -- Begin REG_TEST --
+  REG_TEST(AlphaFuncTests)
   REG_TEST(AntialiasingTests)
   REG_TEST(AttributeCarryoverTests)
   REG_TEST(AttributeExplicitSetterTests)

@@ -496,10 +496,8 @@ class TestHost {
   //! Sets the alpha reference value (NV097_SET_ALPHA_REF) used by NV097_SET_ALPHA_FUNC.
   void SetAlphaReference(uint32_t color) const;
 
-  // TODO: Write tests and determine values for NV097_SET_ALPHA_FUNC.
-  // Seen: 0x207, 0x206, 0x205, 0x204, 0x201.
-  // xemu only uses the low nibble, high bits are potentially ignorable.
-  // void SetAlphaFunc(AlphaFunc func) const;
+  //! Sets the alpha function used to mask writes based on alpha values.
+  void SetAlphaFunc(bool enable = true, uint32_t func = NV097_SET_ALPHA_FUNC_V_ALWAYS) const;
 
   //! Sets up the number of enabled color combiners and behavior flags.
   //!
@@ -633,6 +631,21 @@ class TestHost {
 
   //! Creates the given directory if it does not already exist.
   static void EnsureFolderExists(const std::string &folder_path);
+
+  //! Inserts a pushbuffer command to await idle.
+  static void WaitForGPU() {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_NO_OPERATION, 0);
+    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
+    pb_end(p);
+  }
+
+  //! Does a busywait
+  static void PBKitBusyWait() {
+    while (pb_busy()) {
+      /* Wait for completion... */
+    }
+  }
 
  private:
   //! Update matrices when the depth buffer format changes.
