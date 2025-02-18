@@ -13,7 +13,7 @@
 
 #include <tiny-json/tiny-json.h>
 
-#define MAX_CONFIG_FILE_SIZE (1024 * 128)
+#define MAX_CONFIG_FILE_SIZE (1024 * 1024)
 
 static bool ParseTestSuites(
     json_t const* test_suites, std::vector<std::string>& errors,
