@@ -2,6 +2,9 @@
 
 #include "ftp_client.h"
 
+static constexpr uint32_t kConnectTimeoutMilliseconds = 100;
+static constexpr uint32_t kTransferProcessTimeoutMilliseconds = 30;
+
 static FTPClientProcessStatus ProcessLoop(FTPClient* context, uint32_t timeout_milliseconds) {
   auto status = FTP_CLIENT_PROCESS_STATUS_SUCCESS;
   do {
@@ -44,7 +47,7 @@ bool FTPLogger::Connect() {
       }
     }
 
-    FTPClientProcessStatus status = ProcessLoop(ftp_client_, 100);
+    FTPClientProcessStatus status = ProcessLoop(ftp_client_, kConnectTimeoutMilliseconds);
     if (FTPClientProcessStatusIsError(status)) {
       char error_message[64] = {0};
       snprintf(error_message, sizeof(error_message) - 1, "Auth process failed %d %d", status,
@@ -81,7 +84,7 @@ bool FTPLogger::WriteFile(const std::string& filename, const std::string& conten
     return false;
   }
 
-  FTPClientProcessStatus status = ProcessLoop(ftp_client_, 300);
+  FTPClientProcessStatus status = ProcessLoop(ftp_client_, kTransferProcessTimeoutMilliseconds);
   if (FTPClientProcessStatusIsError(status)) {
     char error_message[64] = {0};
     snprintf(error_message, sizeof(error_message) - 1, "CopyAndSendBuffer failed %d %d", status,
@@ -109,7 +112,7 @@ bool FTPLogger::AppendFile(const std::string& filename, const std::string& conte
     return false;
   }
 
-  FTPClientProcessStatus status = ProcessLoop(ftp_client_, 300);
+  FTPClientProcessStatus status = ProcessLoop(ftp_client_, kTransferProcessTimeoutMilliseconds);
   if (FTPClientProcessStatusIsError(status)) {
     char error_message[64] = {0};
     snprintf(error_message, sizeof(error_message) - 1, "CopyAndSendBuffer failed %d %d", status,
@@ -137,7 +140,7 @@ bool FTPLogger::PutFile(const std::string& local_filename, const std::string& re
     return false;
   }
 
-  FTPClientProcessStatus status = ProcessLoop(ftp_client_, 300);
+  FTPClientProcessStatus status = ProcessLoop(ftp_client_, kTransferProcessTimeoutMilliseconds);
   if (FTPClientProcessStatusIsError(status)) {
     char error_message[64] = {0};
     snprintf(error_message, sizeof(error_message) - 1, "SendFile failed %d %d", status, FTPClientErrno(ftp_client_));
