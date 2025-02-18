@@ -62,6 +62,8 @@
 #include "tests/material_color_tests.h"
 #include "tests/null_surface_tests.h"
 #include "tests/overlapping_draw_modes_tests.h"
+#include "tests/point_params_tests.h"
+#include "tests/point_size_tests.h"
 #include "tests/pvideo_tests.h"
 #include "tests/set_vertex_data_tests.h"
 #include "tests/shade_model_tests.h"
@@ -397,6 +399,8 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(MaterialColorSourceTests)
   REG_TEST(NullSurfaceTests)
   REG_TEST(OverlappingDrawModesTests)
+  REG_TEST(PointParamsTests)
+  REG_TEST(PointSizeTests)
   REG_TEST(PvideoTests)
   REG_TEST(SetVertexDataTests)
   REG_TEST(ShadeModelTests)
