@@ -1,0 +1,30 @@
+#ifndef NXDK_PGRAPH_TESTS_LIGHTING_CONTROL_TESTS_H
+#define NXDK_PGRAPH_TESTS_LIGHTING_CONTROL_TESTS_H
+
+#include <memory>
+#include <vector>
+
+#include "test_suite.h"
+
+class TestHost;
+class VertexBuffer;
+
+/**
+ * Tests the effects of NV097_SET_LIGHT_CONTROL (0x294).
+ */
+class LightingControlTests : public TestSuite {
+ public:
+  LightingControlTests(TestHost& host, std::string output_dir, const Config& config);
+
+  void Deinitialize() override;
+  void Initialize() override;
+
+ private:
+  void Test(const std::string& name);
+  void TestFixed(const std::string& name);
+
+ private:
+  std::shared_ptr<VertexBuffer> vertex_buffer_;
+};
+
+#endif  // NXDK_PGRAPH_TESTS_LIGHTING_CONTROL_TESTS_H

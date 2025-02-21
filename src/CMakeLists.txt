@@ -231,6 +231,8 @@ add_executable(
         tests/image_blit_tests.h
         tests/inline_array_size_mismatch.cpp
         tests/inline_array_size_mismatch.h
+        tests/lighting_control_tests.cpp
+        tests/lighting_control_tests.h
         tests/lighting_normal_tests.cpp
         tests/lighting_normal_tests.h
         tests/lighting_two_sided_tests.cpp
