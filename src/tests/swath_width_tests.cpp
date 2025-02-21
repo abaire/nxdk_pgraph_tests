@@ -12,8 +12,6 @@ static constexpr uint32_t kDefaultDMAChannelA = 3;
 // From pbkit.c, DMA_COLOR is set to channel 9 by default.
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
 static constexpr uint32_t kDefaultDMAColorChannel = 9;
-// NV097_SET_CONTEXT_DMA_ZETA is set to channel 10 by default.
-static constexpr uint32_t kDefaultDMAZetaChannel = 10;
 
 static constexpr uint32_t kCheckerboardA = 0x33FFFFFF;
 static constexpr uint32_t kCheckerboardB = 0xD0000000;
