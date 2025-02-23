@@ -312,7 +312,7 @@ To create a launch configuration that deploys the devhost to an XBDM-enabled XBO
        binary
     4. Set `Program arguments`
        to
-       `<YOUR_XBOX_IP> -v3 -- mkdir e:\$CMakeCurrentTargetName$ && putfile $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f`
+       `<YOUR_XBOX_IP> -v3 -- mkdir e:\$CMakeCurrentTargetName$ && %syncdir $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f`
     5. Run the target. You will need to do this any time the resources are changed. The XBE can be uploaded as part of
        the debug step.
 
