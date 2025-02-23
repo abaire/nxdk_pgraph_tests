@@ -213,7 +213,7 @@ void StippleTests::Test(const std::string &name, bool stipple_enable, const std:
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_STIPPLE_ENABLE, stipple_enable);
     for (auto i = 0; i < NV097_SET_STIPPLE_PATERN_SIZE; i += 4) {
-      p = pb_push4v(p, NV097_SET_STIPPLE_PATERN + (i * 4), stipple_pattern.data() + i);
+      p = pb_push4v(p, NV097_SET_STIPPLE_PATERN_0 + (i * 4), stipple_pattern.data() + i);
     }
     pb_end(p);
   }

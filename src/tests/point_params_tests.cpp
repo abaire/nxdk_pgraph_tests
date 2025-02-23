@@ -166,8 +166,8 @@ static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t n
     p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, params.scaleFactorB);
     p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, params.scaleFactorC);
     p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE, params.sizeRange);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE_1, params.sizeRangeDup1);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE_2, params.sizeRangeDup2);
+    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, params.sizeRangeDup1);
+    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, params.sizeRangeDup2);
     p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_BIAS, params.scaleBias);
     p = pb_push1f(p, NV097_SET_POINT_PARAMS_MIN_SIZE, params.minSize);
     pb_end(p);

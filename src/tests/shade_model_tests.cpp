@@ -16,8 +16,8 @@ static constexpr uint32_t kShadeModel[] = {
 };
 
 static constexpr uint32_t kProvokingVertex[] = {
-    NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST,
-    NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_LAST,
+    NV097_SET_FLAT_SHADE_OP_VERTEX_FIRST,
+    NV097_SET_FLAT_SHADE_OP_VERTEX_LAST,
 };
 
 static constexpr const char kFixedUntextured[] = "Fixed";
@@ -331,7 +331,7 @@ void ShadeModelTests::TestShadeModelFixed(uint32_t model, uint32_t provoking_ver
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
   p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
-  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, provoking_vertex);
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_OP, provoking_vertex);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
   pb_end(p);
 
@@ -388,7 +388,7 @@ void ShadeModelTests::TestShadeModel(uint32_t model, uint32_t provoking_vertex, 
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
   p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
-  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, provoking_vertex);
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_OP, provoking_vertex);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
   pb_end(p);
 
@@ -431,7 +431,7 @@ void ShadeModelTests::TestShadeModelFixed_W(uint32_t model, uint32_t provoking_v
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
   p = pb_push1(p, NV097_SET_SHADE_MODEL, model);
-  p = pb_push1(p, NV097_SET_FLAT_SHADE_PROVOKING_VERTEX, provoking_vertex);
+  p = pb_push1(p, NV097_SET_FLAT_SHADE_OP, provoking_vertex);
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
   pb_end(p);
 
@@ -495,6 +495,6 @@ static std::string MakeTestName(const char* prefix, uint32_t shade_model, uint32
   char buf[32] = {0};
   snprintf(buf, sizeof(buf), "%s_%s_%s_%s", prefix, primitive_name,
            shade_model == NV097_SET_SHADE_MODEL_SMOOTH ? "Smooth" : "Flat",
-           provoking_vertex == NV097_SET_FLAT_SHADE_PROVOKING_VERTEX_FIRST ? "First" : "Last");
+           provoking_vertex == NV097_SET_FLAT_SHADE_OP_VERTEX_FIRST ? "First" : "Last");
   return buf;
 }
