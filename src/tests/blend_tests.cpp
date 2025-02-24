@@ -23,7 +23,7 @@ static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
 
 static constexpr uint32_t kBlendColorConstant = 0x55555555;
-static constexpr uint8_t kColorSwatchBackground = 0x33333333;
+static constexpr uint32_t kColorSwatchBackground = 0x33333333;
 static constexpr uint32_t kBlendCheckerboardSize = 16;
 
 struct BlendFunc {
@@ -154,7 +154,6 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
     host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
 
-    auto texture_memory = host_.GetTextureMemoryForStage(1);
     prepare_blend_background(kTextureSize, kTextureSize, kTexturePitch);
 
     DrawAlphaStack(blend_function, src_factor, dst_factor);
