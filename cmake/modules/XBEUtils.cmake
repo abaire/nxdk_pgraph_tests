@@ -21,6 +21,7 @@ set(EXTRACT_XISO_TOOL_PATH "${NXDK_DIR}/tools/extract-xiso/build/extract-xiso")
 
 # Makes each path in the given list into an absolute path.
 function(_make_abs_paths list_name)
+    set(ret "")
     foreach (src "${${list_name}}")
         get_filename_component(abs "${src}" ABSOLUTE)
         list(APPEND ret "${abs}")
@@ -54,6 +55,18 @@ function(split_debug)
     )
 endfunction()
 
+# Adds an XBE file and optionally associated resource.
+#
+# RESOURCE_ROOTS is a list providing one or more source directories within which
+# resource files specified in RESOURCE_FILES may be found.
+# RESOURCE_FILES is a list of files that should be copied into the XISO staging
+# area. Any file with a prefix that matches a RESOURCE_ROOTS entry will have the
+# matching part removed during the copy, preserving any path relative to that
+# root.
+# RESOURCE_DIRS is a list of directories whose contents should be copied
+# recursively into the XISO staging area. Any directory with a prefix that
+# matches a RESOURCE_ROOTS entry will have the matching part removed during the
+# copy, preserving any path relative to that root.
 function(add_xbe)
     cmake_parse_arguments(
             PARSE_ARGV
@@ -61,7 +74,7 @@ function(add_xbe)
             "XBE"
             ""
             "XBENAME;TITLE"
-            "RESOURCE_FILES;RESOURCE_DIRS"
+            "RESOURCE_FILES;RESOURCE_DIRS;RESOURCE_ROOTS"
     )
 
     if (${ARGC} LESS 1)
@@ -136,7 +149,6 @@ function(add_xbe)
                 "${CMAKE_COMMAND}" -E copy_if_different "${XBE_RESOURCE_FILES}" "${XBE_STAGING_DIR}"
                 COMMAND
                 "${CMAKE_COMMAND}" -E touch "${RESOURCE_FILES_RECEIPT}"
-                DEPENDS ${XBE_RESOURCE_FILES}
         )
     endif ()
 
@@ -155,16 +167,36 @@ function(add_xbe)
         )
         set(RESOURCE_DIRS_RECEIPT "${${target}_RESOURCE_DIRS_RECEIPT_OUTPUT_PATH}")
         _make_abs_paths(XBE_RESOURCE_DIRS)
+
+        # sync_resource_dirs runs unconditionally on every build. The script
+        # produces RESOURCE_DIRS_RECEIPT as a byproduct if any files in the
+        # staging dir were modified. Users of this rule should depend on
+        # RESOURCE_DIRS_RECEIPT.
+        add_custom_target(
+                sync_resource_dirs
+                BYPRODUCTS
+                "${RESOURCE_DIRS_RECEIPT}.hack"
+                COMMAND
+                "${CMAKE_SOURCE_DIR}/cmake/modules/SyncResourceDirs.py"
+                "${XBE_STAGING_DIR}"
+                --receipt "${RESOURCE_DIRS_RECEIPT}.hack"
+                -r ${XBE_RESOURCE_ROOTS}
+                -d ${XBE_RESOURCE_DIRS}
+                -i "default.xbe"
+                VERBATIM
+        )
+
+        # This custom command allows other targets to depend on execution of
+        # sync_resource_dirs without forcing them to be considered stale as
+        # well.
         add_custom_command(
                 OUTPUT "${RESOURCE_DIRS_RECEIPT}"
                 COMMAND
-                "${CMAKE_COMMAND}" -E env pwd
-                COMMAND
-                "${CMAKE_COMMAND}" -E copy_directory ${XBE_RESOURCE_DIRS} "${XBE_STAGING_DIR}"
-                COMMAND
-                "${CMAKE_COMMAND}" -E touch "${RESOURCE_DIRS_RECEIPT}"
-                DEPENDS ${XBE_RESOURCE_DIRS}
+                "${CMAKE_COMMAND}" -E copy_if_different "${RESOURCE_DIRS_RECEIPT}.hack" "${RESOURCE_DIRS_RECEIPT}"
+                DEPENDS
+                "${RESOURCE_DIRS_RECEIPT}.hack"
         )
+
     endif ()
 endfunction()
 
@@ -202,9 +234,9 @@ function(add_xiso)
             OUTPUT "${XISO_OUTPUT_PATH}"
             COMMAND "${EXTRACT_XISO_TOOL_PATH}" -c "${XBE_STAGING_DIR}" "${XISO_OUTPUT_PATH}"
             DEPENDS
-            "${XBE_OUTPUT_PATH}"
-            "${XBE_RESOURCE_FILES_RECEIPT}"
             "${XBE_RESOURCE_DIRS_RECEIPT}"
+            "${XBE_RESOURCE_FILES_RECEIPT}"
+            "${XBE_OUTPUT_PATH}"
     )
 
     add_custom_target(
