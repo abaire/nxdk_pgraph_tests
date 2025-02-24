@@ -344,7 +344,14 @@ target_link_libraries(
         nxdk_ftp_client_lib::client
 )
 
-add_xbe(xbe_file "${EXECUTABLE_BINARY}" TITLE "PGRAPH Tests" RESOURCE_DIRS "${CMAKE_SOURCE_DIR}/resources")
+add_xbe(
+        xbe_file "${EXECUTABLE_BINARY}"
+        TITLE "PGRAPH Tests"
+        RESOURCE_ROOTS
+        "${CMAKE_SOURCE_DIR}/resources"
+        RESOURCE_DIRS
+        "${CMAKE_SOURCE_DIR}/resources"
+)
 add_xiso(nxdk_pgraph_tests_xiso xbe_file)
 
 
@@ -359,7 +366,6 @@ add_xiso(nxdk_pgraph_tests_xiso xbe_file)
 #
 #add_custom_target(
 #        deploy_with_xbdm
-#        COMMAND "${XBDM_GDB_BRIDGE}" "${XBOX}" -- mkdir "${REMOTE_PATH}"
-#        COMMAND "${XBDM_GDB_BRIDGE}" "${XBOX}" -- putfile "${XBE_STAGING_DIR}" "${REMOTE_PATH}" -f
+#        COMMAND "${XBDM_GDB_BRIDGE}" "${XBOX}" -- %syncdir "${XBE_STAGING_DIR}" "${REMOTE_PATH}" -d
 #        DEPENDS "${XBE_OUTPUT_PATH}"
 #)
