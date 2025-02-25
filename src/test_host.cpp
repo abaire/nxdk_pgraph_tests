@@ -897,12 +897,11 @@ void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered) const {
   bool requires_colorspace_conversion = texture_stage_[0].RequiresColorspaceConversion();
 
   uint32_t control0 = enable_stencil_write ? NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE : 0;
-  control0 |= MASK(NV097_SET_CONTROL0_Z_FORMAT,
-                   depth_buffer_mode_float_ ? NV097_SET_CONTROL0_Z_FORMAT_FLOAT : NV097_SET_CONTROL0_Z_FORMAT_FIXED);
+  control0 |= depth_buffer_mode_float_ ? NV097_SET_CONTROL0_Z_FORMAT_FLOAT : NV097_SET_CONTROL0_Z_FORMAT_FIXED;
   control0 |= MASK(NV097_SET_CONTROL0_Z_PERSPECTIVE_ENABLE, w_buffered ? 1 : 0);
 
   if (requires_colorspace_conversion) {
-    control0 |= MASK(NV097_SET_CONTROL0_COLOR_SPACE_CONVERT, NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB);
+    control0 |= NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB;
   }
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_CONTROL0, control0);
