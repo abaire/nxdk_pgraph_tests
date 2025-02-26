@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d22/classSolidColorModelBuilder" kind="class" language="C++" prot="public">
+    <compoundname>SolidColorModelBuilder</compoundname>
+    <basecompoundref refid="de/dfe/classModelBuilder" prot="public" virt="non-virtual">ModelBuilder</basecompoundref>
+    <derivedcompoundref refid="d6/d71/classFlatGridModel" prot="public" virt="non-virtual">FlatGridModel</derivedcompoundref>
+    <includes refid="d4/d41/model__builder_8h" local="no">model_builder.h</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d8/d22/classSolidColorModelBuilder_1ab82b3bba802766d064d0eb52d5b9ed1a" prot="protected" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t SolidColorModelBuilder::diffuse_</definition>
+        <argsstring></argsstring>
+        <name>diffuse_</name>
+        <qualifiedname>SolidColorModelBuilder::diffuse_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="45" column="12" bodyfile="src/models/model_builder.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d22/classSolidColorModelBuilder_1a1c51802b88cc39ec65b7a5b6f7051847" prot="protected" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t SolidColorModelBuilder::specular_</definition>
+        <argsstring></argsstring>
+        <name>specular_</name>
+        <qualifiedname>SolidColorModelBuilder::specular_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="46" column="12" bodyfile="src/models/model_builder.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/d22/classSolidColorModelBuilder_1adac731f8ff60d9b9d48c26ecff1ab035" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SolidColorModelBuilder::SolidColorModelBuilder</definition>
+        <argsstring>()</argsstring>
+        <name>SolidColorModelBuilder</name>
+        <qualifiedname>SolidColorModelBuilder::SolidColorModelBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="31" column="3" bodyfile="src/models/model_builder.cpp" bodystart="43" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d22/classSolidColorModelBuilder_1af3c8579bd316ac79e1bd067dbce677c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SolidColorModelBuilder::SolidColorModelBuilder</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>SolidColorModelBuilder</name>
+        <qualifiedname>SolidColorModelBuilder::SolidColorModelBuilder</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="32" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d22/classSolidColorModelBuilder_1a040b1cb5488e5f582b3ffc4bb567d330" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SolidColorModelBuilder::PopulateVertexBuffer</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexBuffer &gt; &amp;vertices) const override</argsstring>
+        <name>PopulateVertexBuffer</name>
+        <qualifiedname>SolidColorModelBuilder::PopulateVertexBuffer</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a11d779d53cc03baacc9fde895e7d0718">PopulateVertexBuffer</reimplements>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <briefdescription>
+<para>Populates the given <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> with model data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="35" column="8" bodyfile="src/models/model_builder.cpp" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d22/classSolidColorModelBuilder_1a1be4e3a876f508366584e121a95bdd59" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SolidColorModelBuilder::PopulateVertexBuffer</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexBuffer &gt; &amp;vertices, const float *transformation) const override</argsstring>
+        <name>PopulateVertexBuffer</name>
+        <qualifiedname>SolidColorModelBuilder::PopulateVertexBuffer</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1aaca1b7e8947f53f191a05f3c7cc5351f">PopulateVertexBuffer</reimplements>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>transformation</declname>
+        </param>
+        <briefdescription>
+<para>Populates the given <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> with transformed model data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="38" column="16" bodyfile="src/models/model_builder.cpp" bodystart="59" bodyend="63"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d8/d22/classSolidColorModelBuilder_1a64ff3f7e3de559c3fd72fd8a75618447" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SolidColorModelBuilder::ApplyColors</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexBuffer &gt; &amp;vertices) const</argsstring>
+        <name>ApplyColors</name>
+        <qualifiedname>SolidColorModelBuilder::ApplyColors</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="42" column="8" bodyfile="src/models/model_builder.cpp" bodystart="65" bodyend="73"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Builder for untextured models. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>FlatGridModel</label>
+        <link refid="d6/d71/classFlatGridModel"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="1">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="1">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/model_builder.h" line="29" column="1" bodyfile="src/models/model_builder.h" bodystart="29" bodyend="47"/>
+    <listofallmembers>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a64ff3f7e3de559c3fd72fd8a75618447" prot="private" virt="non-virtual"><scope>SolidColorModelBuilder</scope><name>ApplyColors</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1ab82b3bba802766d064d0eb52d5b9ed1a" prot="protected" virt="non-virtual"><scope>SolidColorModelBuilder</scope><name>diffuse_</name></member>
+      <member refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" prot="public" virt="pure-virtual"><scope>SolidColorModelBuilder</scope><name>GetVertexCount</name></member>
+      <member refid="de/dfe/classModelBuilder_1a4373fb5f6e131cd2b1773908ca7606d5" prot="protected" virt="pure-virtual"><scope>SolidColorModelBuilder</scope><name>GetVertexNormals</name></member>
+      <member refid="de/dfe/classModelBuilder_1a20c0bdf8a4a05256128b2b2e2324fbc0" prot="protected" virt="pure-virtual"><scope>SolidColorModelBuilder</scope><name>GetVertexPositions</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a040b1cb5488e5f582b3ffc4bb567d330" prot="public" virt="virtual"><scope>SolidColorModelBuilder</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a1be4e3a876f508366584e121a95bdd59" prot="public" virt="virtual"><scope>SolidColorModelBuilder</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1adac731f8ff60d9b9d48c26ecff1ab035" prot="public" virt="non-virtual"><scope>SolidColorModelBuilder</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1af3c8579bd316ac79e1bd067dbce677c2" prot="public" virt="non-virtual"><scope>SolidColorModelBuilder</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a1c51802b88cc39ec65b7a5b6f7051847" prot="protected" virt="non-virtual"><scope>SolidColorModelBuilder</scope><name>specular_</name></member>
+      <member refid="de/dfe/classModelBuilder_1a863d4bf0e4318c57683197645615baf4" prot="public" virt="virtual"><scope>SolidColorModelBuilder</scope><name>~ModelBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_bdeba5f06b852fec80257c0bf4c3c36e" kind="dir">
+    <compoundname>src/models</compoundname>
+    <innerfile refid="d0/d54/flat__grid__mesh_8h">flat_grid_mesh.h</innerfile>
+    <innerfile refid="db/d3c/flat__grid__model_8cpp">flat_grid_model.cpp</innerfile>
+    <innerfile refid="db/da2/flat__grid__model_8h">flat_grid_model.h</innerfile>
+    <innerfile refid="d1/d0b/model__builder_8cpp">model_builder.cpp</innerfile>
+    <innerfile refid="d4/d41/model__builder_8h">model_builder.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/models/"/>
+  </compounddef>
+</doxygen>

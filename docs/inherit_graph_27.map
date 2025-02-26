@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$de/dfe/classModelBuilder.html" title="A factory for model meshes." alt="" coords="5,5,113,31"/>
+<area shape="rect" id="Node000001" href="$d8/d22/classSolidColorModelBuilder.html" title="Builder for untextured models." alt="" coords="161,5,336,31"/>
+<area shape="poly" id="edge8_Node000000_Node000001" title=" " alt="" coords="127,15,161,15,161,21,127,21"/>
+<area shape="rect" id="Node000002" href="$d6/d71/classFlatGridModel.html" title=" " alt="" coords="384,5,499,31"/>
+<area shape="poly" id="edge9_Node000001_Node000002" title=" " alt="" coords="350,15,384,15,384,21,350,21"/>
+</map>

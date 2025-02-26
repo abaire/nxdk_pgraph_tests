@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/dfe/classModelBuilder" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>ModelBuilder</compoundname>
+    <derivedcompoundref refid="d8/d22/classSolidColorModelBuilder" prot="public" virt="non-virtual">SolidColorModelBuilder</derivedcompoundref>
+    <includes refid="d4/d41/model__builder_8h" local="no">model_builder.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/dfe/classModelBuilder_1a863d4bf0e4318c57683197645615baf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ModelBuilder::~ModelBuilder</definition>
+        <argsstring>()=default</argsstring>
+        <name>~ModelBuilder</name>
+        <qualifiedname>ModelBuilder::~ModelBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="13" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>uint32_t</type>
+        <definition>virtual uint32_t ModelBuilder::GetVertexCount</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>ModelBuilder::GetVertexCount</qualifiedname>
+        <reimplementedby refid="d6/d71/classFlatGridModel_1a7f5a8e008a0d7e13c967c245e779adb9">GetVertexCount</reimplementedby>
+        <briefdescription>
+<para>Returns the number of kPositions required to hold the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="16" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="de/dfe/classModelBuilder_1a11d779d53cc03baacc9fde895e7d0718" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ModelBuilder::PopulateVertexBuffer</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexBuffer &gt; &amp;vertices) const</argsstring>
+        <name>PopulateVertexBuffer</name>
+        <qualifiedname>ModelBuilder::PopulateVertexBuffer</qualifiedname>
+        <reimplementedby refid="d8/d22/classSolidColorModelBuilder_1a040b1cb5488e5f582b3ffc4bb567d330">PopulateVertexBuffer</reimplementedby>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <briefdescription>
+<para>Populates the given <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> with model data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="19" column="16" bodyfile="src/models/model_builder.cpp" bodystart="7" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="de/dfe/classModelBuilder_1aaca1b7e8947f53f191a05f3c7cc5351f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ModelBuilder::PopulateVertexBuffer</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexBuffer &gt; &amp;vertices, const float *transformation) const</argsstring>
+        <name>PopulateVertexBuffer</name>
+        <qualifiedname>ModelBuilder::PopulateVertexBuffer</qualifiedname>
+        <reimplementedby refid="d8/d22/classSolidColorModelBuilder_1a1be4e3a876f508366584e121a95bdd59">PopulateVertexBuffer</reimplementedby>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> &gt; &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>transformation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="21" column="16" bodyfile="src/models/model_builder.cpp" bodystart="23" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="de/dfe/classModelBuilder_1a20c0bdf8a4a05256128b2b2e2324fbc0" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const float *</type>
+        <definition>virtual const float * ModelBuilder::GetVertexPositions</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>ModelBuilder::GetVertexPositions</qualifiedname>
+        <reimplementedby refid="d6/d71/classFlatGridModel_1ae9a5c30d4c55895137fb2a5b844a3ee0">GetVertexPositions</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="24" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="de/dfe/classModelBuilder_1a4373fb5f6e131cd2b1773908ca7606d5" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const float *</type>
+        <definition>virtual const float * ModelBuilder::GetVertexNormals</definition>
+        <argsstring>() const =0</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>ModelBuilder::GetVertexNormals</qualifiedname>
+        <reimplementedby refid="d6/d71/classFlatGridModel_1aafcc6251870fe77e67c0cf65349c2d84">GetVertexNormals</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/model_builder.h" line="25" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A factory for model meshes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>FlatGridModel</label>
+        <link refid="d6/d71/classFlatGridModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/models/model_builder.h" line="11" column="1" bodyfile="src/models/model_builder.h" bodystart="11" bodyend="26"/>
+    <listofallmembers>
+      <member refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" prot="public" virt="pure-virtual"><scope>ModelBuilder</scope><name>GetVertexCount</name></member>
+      <member refid="de/dfe/classModelBuilder_1a4373fb5f6e131cd2b1773908ca7606d5" prot="protected" virt="pure-virtual"><scope>ModelBuilder</scope><name>GetVertexNormals</name></member>
+      <member refid="de/dfe/classModelBuilder_1a20c0bdf8a4a05256128b2b2e2324fbc0" prot="protected" virt="pure-virtual"><scope>ModelBuilder</scope><name>GetVertexPositions</name></member>
+      <member refid="de/dfe/classModelBuilder_1a11d779d53cc03baacc9fde895e7d0718" prot="public" virt="virtual"><scope>ModelBuilder</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="de/dfe/classModelBuilder_1aaca1b7e8947f53f191a05f3c7cc5351f" prot="public" virt="virtual"><scope>ModelBuilder</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="de/dfe/classModelBuilder_1a863d4bf0e4318c57683197645615baf4" prot="public" virt="virtual"><scope>ModelBuilder</scope><name>~ModelBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

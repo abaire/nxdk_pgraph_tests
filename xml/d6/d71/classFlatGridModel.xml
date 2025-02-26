@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d71/classFlatGridModel" kind="class" language="C++" prot="public">
+    <compoundname>FlatGridModel</compoundname>
+    <basecompoundref refid="d8/d22/classSolidColorModelBuilder" prot="public" virt="non-virtual">SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/d71/classFlatGridModel_1a41493186e03be9ff87747e1f210696cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FlatGridModel::FlatGridModel</definition>
+        <argsstring>()</argsstring>
+        <name>FlatGridModel</name>
+        <qualifiedname>FlatGridModel::FlatGridModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_grid_model.h" line="9" column="3" bodyfile="src/models/flat_grid_model.h" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d71/classFlatGridModel_1a27e3c69e588fd91c7e6d98ca3192cfee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FlatGridModel::FlatGridModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>FlatGridModel</name>
+        <qualifiedname>FlatGridModel::FlatGridModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_grid_model.h" line="10" column="3" bodyfile="src/models/flat_grid_model.h" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d71/classFlatGridModel_1a7f5a8e008a0d7e13c967c245e779adb9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t FlatGridModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>FlatGridModel::GetVertexCount</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8">GetVertexCount</reimplements>
+        <briefdescription>
+<para>Returns the number of kPositions required to hold the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_grid_model.h" line="12" column="13" bodyfile="src/models/flat_grid_model.cpp" bodystart="7" bodyend="7"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d6/d71/classFlatGridModel_1ae9a5c30d4c55895137fb2a5b844a3ee0" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const float *</type>
+        <definition>const float * FlatGridModel::GetVertexPositions</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>FlatGridModel::GetVertexPositions</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a20c0bdf8a4a05256128b2b2e2324fbc0">GetVertexPositions</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_grid_model.h" line="15" column="16" bodyfile="src/models/flat_grid_model.cpp" bodystart="8" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d71/classFlatGridModel_1aafcc6251870fe77e67c0cf65349c2d84" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const float *</type>
+        <definition>const float * FlatGridModel::GetVertexNormals</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>FlatGridModel::GetVertexNormals</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a4373fb5f6e131cd2b1773908ca7606d5">GetVertexNormals</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_grid_model.h" line="16" column="16" bodyfile="src/models/flat_grid_model.cpp" bodystart="9" bodyend="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FlatGridModel</label>
+        <link refid="d6/d71/classFlatGridModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FlatGridModel</label>
+        <link refid="d6/d71/classFlatGridModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/flat_grid_model.h" line="7" column="1" bodyfile="src/models/flat_grid_model.h" bodystart="7" bodyend="17"/>
+    <listofallmembers>
+      <member refid="d8/d22/classSolidColorModelBuilder_1ab82b3bba802766d064d0eb52d5b9ed1a" prot="protected" virt="non-virtual"><scope>FlatGridModel</scope><name>diffuse_</name></member>
+      <member refid="d6/d71/classFlatGridModel_1a41493186e03be9ff87747e1f210696cf" prot="public" virt="non-virtual"><scope>FlatGridModel</scope><name>FlatGridModel</name></member>
+      <member refid="d6/d71/classFlatGridModel_1a27e3c69e588fd91c7e6d98ca3192cfee" prot="public" virt="non-virtual"><scope>FlatGridModel</scope><name>FlatGridModel</name></member>
+      <member refid="d6/d71/classFlatGridModel_1a7f5a8e008a0d7e13c967c245e779adb9" prot="public" virt="virtual"><scope>FlatGridModel</scope><name>GetVertexCount</name></member>
+      <member refid="d6/d71/classFlatGridModel_1aafcc6251870fe77e67c0cf65349c2d84" prot="protected" virt="virtual"><scope>FlatGridModel</scope><name>GetVertexNormals</name></member>
+      <member refid="d6/d71/classFlatGridModel_1ae9a5c30d4c55895137fb2a5b844a3ee0" prot="protected" virt="virtual"><scope>FlatGridModel</scope><name>GetVertexPositions</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a040b1cb5488e5f582b3ffc4bb567d330" prot="public" virt="virtual"><scope>FlatGridModel</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a1be4e3a876f508366584e121a95bdd59" prot="public" virt="virtual"><scope>FlatGridModel</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1adac731f8ff60d9b9d48c26ecff1ab035" prot="public" virt="non-virtual"><scope>FlatGridModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1af3c8579bd316ac79e1bd067dbce677c2" prot="public" virt="non-virtual"><scope>FlatGridModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a1c51802b88cc39ec65b7a5b6f7051847" prot="protected" virt="non-virtual"><scope>FlatGridModel</scope><name>specular_</name></member>
+      <member refid="de/dfe/classModelBuilder_1a863d4bf0e4318c57683197645615baf4" prot="public" virt="virtual"><scope>FlatGridModel</scope><name>~ModelBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
