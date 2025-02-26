@@ -115,6 +115,11 @@ add_library(
         main.cpp
         menu_item.cpp
         menu_item.h
+        models/flat_grid_mesh.h
+        models/flat_grid_model.cpp
+        models/flat_grid_model.h
+        models/model_builder.cpp
+        models/model_builder.h
         logger.cpp
         logger.h
         pbkit_ext.cpp
