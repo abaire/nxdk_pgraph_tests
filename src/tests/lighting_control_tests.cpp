@@ -145,7 +145,7 @@ LightingControlTests::LightingControlTests(TestHost& host, std::string output_di
     for (auto separate_specular : {0, 1}) {
       for (auto sout : {0, 1}) {
         for (auto specular_enabled : {false, true}) {
-          uint32_t light_control = (sout * NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL) +
+          uint32_t light_control = (sout * NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR) +
                                    (local_eye * NV097_SET_LIGHT_CONTROL_V_LOCALEYE) +
                                    (separate_specular * NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
           // TODO: Implement vertex shader tests.
@@ -399,7 +399,8 @@ void LightingControlTests::TestFixed(const std::string& name, uint32_t light_con
   pb_print("0x%X\n", light_control);
   pb_print("SEPARATE_SPECULAR %s\n", (light_control & NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR) ? "ON" : "off");
   pb_print("LOCALEYE %s\n", (light_control & NV097_SET_LIGHT_CONTROL_V_LOCALEYE) ? "ON" : "off");
-  pb_print("ALPHA %s\n", (light_control & NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL) ? "FROM MATERIAL" : "OPAQUE");
+  pb_print("ALPHA %s\n",
+           (light_control & NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR) ? "FROM MATERIAL" : "OPAQUE");
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
