@@ -19,26 +19,141 @@
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
 
-static std::string MakeTestName(uint32_t light_control, bool is_fixed_function) {
+static std::string MakeTestName(uint32_t light_control, bool is_fixed_function, bool specular_enabled) {
   char buf[32] = {0};
-  snprintf(buf, 31, "%s_0x%06X", is_fixed_function ? "FF" : "VS", light_control);
+  snprintf(buf, 31, "%s_0x%06X%s", is_fixed_function ? "FF" : "VS", light_control, specular_enabled ? "" : "NoSpec");
   return buf;
 }
 
 /**
+ * @tc FF_0x000000
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is off, causing the green of the mesh specular to be retained.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is forced to opaque.
  *
+ * @tc FF_0x000000NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *  Visually equivalent to FF_0x000001.
+ *
+ * @tc FF_0x000001
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is on, so the green of the mesh specular is not seen.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is forced to opaque.
+ *
+ * @tc FF_0x000001NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *
+ * @tc FF_0x010000
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is off, causing the green of the mesh specular to be retained.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is forced to opaque.
+ *
+ * @tc FF_0x010000NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *
+ * @tc FF_0x010001
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is on, so the green of the mesh specular is not seen.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is forced to opaque.
+ *
+ * @tc FF_0x010001NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *
+ * @tc FF_0x020000
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is off, causing the green of the mesh specular to be retained.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.
+ *
+ * @tc FF_0x020000NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *
+ * @tc FF_0x020001
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is on, so the green of the mesh specular is not seen.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.
+ *
+ * @tc FF_0x020001NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the
+ *  cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *
+ * @tc FF_0x030000
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is off, causing the green of the mesh specular to be retained.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.
+ *
+ * @tc FF_0x030000NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
+ *
+ * @tc FF_0x030001
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on.
+ *  Separate specular is on, so the green of the mesh specular is not seen.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.
+ *
+ * @tc FF_0x030001NoSpec
+ *  Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off.
+ *  Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen.
+ *  Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point
+ *  light on the cylinder mesh.
+ *  Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.
  */
 LightingControlTests::LightingControlTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Lighting control", config) {
   for (auto local_eye : {0, 1}) {
     for (auto separate_specular : {0, 1}) {
       for (auto sout : {0, 1}) {
-        uint32_t light_control = (sout * NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL) +
-                                 (local_eye * NV097_SET_LIGHT_CONTROL_V_LOCALEYE) +
-                                 (separate_specular * NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
-        // TODO: Implement vertex shader tests.
-        std::string test_name = MakeTestName(light_control, true);
-        tests_[test_name] = [this, test_name, light_control]() { this->TestFixed(test_name, light_control); };
+        for (auto specular_enabled : {false, true}) {
+          uint32_t light_control = (sout * NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL) +
+                                   (local_eye * NV097_SET_LIGHT_CONTROL_V_LOCALEYE) +
+                                   (separate_specular * NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+          // TODO: Implement vertex shader tests.
+          std::string test_name = MakeTestName(light_control, true, specular_enabled);
+          tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
+            this->TestFixed(test_name, light_control, specular_enabled);
+          };
+        }
       }
     }
   }
@@ -97,10 +212,10 @@ void LightingControlTests::Initialize() {
   CreateGeometry();
 }
 
-static void SetupLights(TestHost& host) {
+static void SetupLights(TestHost& host, bool specular_enabled) {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, specular_enabled);
 
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
   p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
@@ -258,7 +373,7 @@ static void DrawCheckerboardBackground(TestHost& host) {
   host.SetShaderStageProgram(TestHost::STAGE_NONE);
 }
 
-void LightingControlTests::TestFixed(const std::string& name, uint32_t light_control) {
+void LightingControlTests::TestFixed(const std::string& name, uint32_t light_control, bool specular_enabled) {
   static constexpr uint32_t kBackgroundColor = 0xFF232623;
   host_.PrepareDraw(kBackgroundColor);
 
@@ -268,7 +383,7 @@ void LightingControlTests::TestFixed(const std::string& name, uint32_t light_con
   p = pb_push1(p, NV097_SET_LIGHT_CONTROL, light_control);
   pb_end(p);
 
-  SetupLights(host_);
+  SetupLights(host_, specular_enabled);
 
   for (auto& vb : {
            vertex_buffer_cone_,
