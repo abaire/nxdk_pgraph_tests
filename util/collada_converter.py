@@ -183,13 +183,14 @@ class ColadaConverter:
         return self._flatten_values(flattened_indices, component_sizes)
 
     def process_geometry(self, geometry):
-        geometry_id = geometry.attrib["id"]
+        geometry_id = geometry.get("id")
         meshes = geometry.findall(f"{SCHEMA}mesh")
         transform = self._transforms.get(geometry_id)
+        name = geometry.get("name").replace(".", "_")
         for mesh in meshes:
-            self.process_mesh(mesh, transform)
+            self.process_mesh(mesh, transform, name)
 
-    def process_mesh(self, mesh, transform_matrix: list[float] | None):
+    def process_mesh(self, mesh, transform_matrix: list[float] | None, mesh_name: str):
         processed_sources = {}
         source_sizes = {}
         for source in mesh.findall(f"./{SCHEMA}source"):
@@ -214,12 +215,31 @@ class ColadaConverter:
         DESIRED_COMPONENTS = {"POSITION", "NORMAL", "TEXCOORD"}
         flattened_values = self.flatten_values(DESIRED_COMPONENTS, processed_sources, source_sizes, split_indices)
 
-        self._write_mesh_header(flattened_values, transform_matrix, mesh)
-        self._write_model_header()
-        self._write_model_impl()
+        self._write_mesh_header(mesh_name, flattened_values, transform_matrix, mesh)
+        self._write_model_header(mesh_name)
+        self._write_model_impl(mesh_name)
+
+    def build_mesh_header_filename(self, mesh_name: str) -> str:
+        artifact_root = os.path.basename(self.output_file_base)
+        return f"{artifact_root}_{mesh_name.lower()}_mesh.h"
+
+    def build_model_header_filename(self, mesh_name: str) -> str:
+        artifact_root = os.path.basename(self.output_file_base)
+        return f"{artifact_root}_{mesh_name.lower()}_model.h"
+
+    def build_model_class_name(self, mesh_name: str) -> str:
+        prefix = "".join(x.title() for x in self.output_file_base.split("_"))
+        return f"{prefix}{mesh_name.title()}Model"
+
+    def build_header_guard(self, mesh_name: str, suffix: str) -> str:
+        return f"_{self.output_file_base.upper()}_{mesh_name.upper()}_{suffix.upper()}_H_"
 
     def _write_mesh_header(
-            self, flattened_values: dict[str, list[float]], transform_matrix: list[float], mesh: ElementTree.Element
+            self,
+            mesh_name: str,
+            flattened_values: dict[str, list[float]],
+            transform_matrix: list[float],
+            mesh: ElementTree.Element,
     ):
         TRANSFORMED_COMPONENTS = {"POSITION", "NORMAL"}
         YZ_SWAPPED_COMPONENTS = {"POSITION", "NORMAL"}
@@ -227,8 +247,8 @@ class ColadaConverter:
             "TEXCOORD": 2,
         }
 
-        header_guard = f"_{self.output_file_base.upper()}_MESH_H_"
-        with open(f"{self.output_file_base}_mesh.h", "w") as outfile:
+        header_guard = self.build_header_guard(mesh_name, "mesh")
+        with open(self.build_mesh_header_filename(mesh_name), "w") as outfile:
             outfile.write(
                 "\n".join(
                     [
@@ -269,14 +289,10 @@ class ColadaConverter:
             print("", file=outfile)
             print(f"#endif  // {header_guard}", file=outfile)
 
-    @property
-    def model_class_name(self) -> str:
-        return f"{self.output_file_base.capitalize()}Model"
-
-    def _write_model_header(self):
-        with open(f"{self.output_file_base}_model.h", "w") as outfile:
-            header_guard = f"_{self.output_file_base.upper()}_MODEL_H_"
-            class_name = self.model_class_name
+    def _write_model_header(self, mesh_name: str):
+        with open(self.build_model_header_filename(mesh_name), "w") as outfile:
+            header_guard = self.build_header_guard(mesh_name, "model")
+            class_name = self.build_model_class_name(mesh_name)
             outfile.write(
                 "\n".join(
                     [
@@ -303,12 +319,11 @@ class ColadaConverter:
                 )
             )
 
-    def _write_model_impl(self):
-        artifact_root = os.path.basename(self.output_file_base)
-        model_header = f"{artifact_root}_model.h"
-        mesh_header = f"{artifact_root}_mesh.h"
-        with open(f"{self.output_file_base}_model.cpp", "w") as outfile:
-            class_name = self.model_class_name
+    def _write_model_impl(self, mesh_name: str):
+        model_header = self.build_model_header_filename(mesh_name)
+        mesh_header = self.build_mesh_header_filename(mesh_name)
+        with open(f"{os.path.splitext(model_header)[0]}.cpp", "w") as outfile:
+            class_name = self.build_model_class_name(mesh_name)
             outfile.write(
                 "\n".join(
                     [

@@ -115,9 +115,21 @@ add_library(
         main.cpp
         menu_item.cpp
         menu_item.h
-        models/flat_grid_mesh.h
-        models/flat_grid_model.cpp
-        models/flat_grid_model.h
+        models/light_control_test_mesh_cone_mesh.h
+        models/light_control_test_mesh_cone_model.cpp
+        models/light_control_test_mesh_cone_model.h
+        models/light_control_test_mesh_cylinder_mesh.h
+        models/light_control_test_mesh_cylinder_model.cpp
+        models/light_control_test_mesh_cylinder_model.h
+        models/light_control_test_mesh_sphere_mesh.h
+        models/light_control_test_mesh_sphere_model.cpp
+        models/light_control_test_mesh_sphere_model.h
+        models/light_control_test_mesh_suzanne_mesh.h
+        models/light_control_test_mesh_suzanne_model.cpp
+        models/light_control_test_mesh_suzanne_model.h
+        models/light_control_test_mesh_torus_mesh.h
+        models/light_control_test_mesh_torus_model.cpp
+        models/light_control_test_mesh_torus_model.h
         models/model_builder.cpp
         models/model_builder.h
         logger.cpp
@@ -231,6 +243,8 @@ add_executable(
         tests/image_blit_tests.h
         tests/inline_array_size_mismatch.cpp
         tests/inline_array_size_mismatch.h
+        tests/lighting_control_tests.cpp
+        tests/lighting_control_tests.h
         tests/lighting_normal_tests.cpp
         tests/lighting_normal_tests.h
         tests/lighting_two_sided_tests.cpp
