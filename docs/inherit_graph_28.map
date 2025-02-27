@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$de/dfe/classModelBuilder.html" title="A factory for model meshes." alt="" coords="5,159,113,184"/>
+<area shape="rect" id="Node000001" href="$d8/d22/classSolidColorModelBuilder.html" title="Builder for untextured models." alt="" coords="161,159,336,184"/>
+<area shape="poly" id="edge8_Node000000_Node000001" title=" " alt="" coords="127,169,161,169,161,174,127,174"/>
+<area shape="rect" id="Node000002" href="$d7/d37/classFlatMeshGridModel.html" title=" " alt="" coords="418,5,567,31"/>
+<area shape="poly" id="edge9_Node000001_Node000002" title=" " alt="" coords="266,146,315,93,347,65,383,41,417,27,419,32,385,46,350,69,318,96,270,149"/>
+<area shape="rect" id="Node000003" href="$d6/df1/classLightControlTestMeshConeModel.html" title=" " alt="" coords="395,55,590,95"/>
+<area shape="poly" id="edge10_Node000001_Node000003" title=" " alt="" coords="285,150,383,105,417,93,419,98,385,110,287,155"/>
+<area shape="rect" id="Node000004" href="$d4/d27/classLightControlTestMeshCylinderModel.html" title=" " alt="" coords="385,119,601,159"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="349,155,384,151,385,156,350,161"/>
+<area shape="rect" id="Node000005" href="$d1/de6/classLightControlTestMeshSphereModel.html" title=" " alt="" coords="389,183,596,223"/>
+<area shape="poly" id="edge12_Node000001_Node000005" title=" " alt="" coords="350,182,390,187,389,192,349,187"/>
+<area shape="rect" id="Node000006" href="$dc/d32/classLightControlTestMeshSuzanneModel.html" title=" " alt="" coords="384,247,601,287"/>
+<area shape="poly" id="edge13_Node000001_Node000006" title=" " alt="" coords="287,188,385,233,419,245,417,250,383,238,285,193"/>
+<area shape="rect" id="Node000007" href="$d6/d1f/classLightControlTestMeshTorusModel.html" title=" " alt="" coords="395,311,591,351"/>
+<area shape="poly" id="edge14_Node000001_Node000007" title=" " alt="" coords="271,193,319,246,351,273,385,297,410,309,408,314,383,302,348,277,315,249,267,197"/>
+</map>

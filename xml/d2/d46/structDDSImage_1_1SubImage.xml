@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d46/structDDSImage_1_1SubImage" kind="struct" language="C++" prot="public">
+    <compoundname>DDSImage::SubImage</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="d2/d46/structDDSImage_1_1SubImage_1a2af9f057522c6d0c6f22a4d49dbf9c28" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Format</name>
+        <qualifiedname>DDSImage::SubImage::Format</qualifiedname>
+        <enumvalue id="d2/d46/structDDSImage_1_1SubImage_1a2af9f057522c6d0c6f22a4d49dbf9c28ab50339a10e1de285ac99d4c3990b8693" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d2/d46/structDDSImage_1_1SubImage_1a2af9f057522c6d0c6f22a4d49dbf9c28a501bd91543c4285acd0d25a2bb2750a8" prot="public">
+          <name>DXT1</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d2/d46/structDDSImage_1_1SubImage_1a2af9f057522c6d0c6f22a4d49dbf9c28a08355da49fbd688e23266ebb09afdffd" prot="public">
+          <name>DXT3</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d2/d46/structDDSImage_1_1SubImage_1a2af9f057522c6d0c6f22a4d49dbf9c28aa3d1190cdb525c3e1c7c06c19005387e" prot="public">
+          <name>DXT5</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="11" column="5" bodyfile="src/dds_image.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1a785ac2caf313bbdd59b40800da7aa4dc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::level</definition>
+        <argsstring></argsstring>
+        <name>level</name>
+        <qualifiedname>DDSImage::SubImage::level</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="13" column="14" bodyfile="src/dds_image.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1a51f7cfc1f88fc1593bb67120d65735ff" prot="public" static="no" mutable="no">
+        <type>Format</type>
+        <definition>Format DDSImage::SubImage::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>DDSImage::SubImage::format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="14" column="12" bodyfile="src/dds_image.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1a9ec3a357f09deba410f72b63fbebb922" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>DDSImage::SubImage::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="15" column="14" bodyfile="src/dds_image.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1a40c118234250dd6c546c5c7629873144" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>DDSImage::SubImage::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="16" column="14" bodyfile="src/dds_image.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1af6eb20e536dddaf932167949e3f9c2f7" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::compressed_width</definition>
+        <argsstring></argsstring>
+        <name>compressed_width</name>
+        <qualifiedname>DDSImage::SubImage::compressed_width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="17" column="14" bodyfile="src/dds_image.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1a1716ecea8ab25b12d26d97b8f5602dc3" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::compressed_height</definition>
+        <argsstring></argsstring>
+        <name>compressed_height</name>
+        <qualifiedname>DDSImage::SubImage::compressed_height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="18" column="14" bodyfile="src/dds_image.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1a24fdf9cda7ba44cf3f36e1bc60e08b9a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::depth</definition>
+        <argsstring></argsstring>
+        <name>depth</name>
+        <qualifiedname>DDSImage::SubImage::depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="19" column="14" bodyfile="src/dds_image.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1ae02bad08d809fd63193021216ca9f68f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::pitch</definition>
+        <argsstring></argsstring>
+        <name>pitch</name>
+        <qualifiedname>DDSImage::SubImage::pitch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="20" column="14" bodyfile="src/dds_image.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1aec9947fe6abbafdedc6cb68dfc405083" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDSImage::SubImage::bytes_per_pixel</definition>
+        <argsstring></argsstring>
+        <name>bytes_per_pixel</name>
+        <qualifiedname>DDSImage::SubImage::bytes_per_pixel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="21" column="14" bodyfile="src/dds_image.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d46/structDDSImage_1_1SubImage_1acf292e921c4bad10e10d822f0cf85aaa" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint8_t &gt;</type>
+        <definition>std::vector&lt;uint8_t&gt; DDSImage::SubImage::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>DDSImage::SubImage::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.h" line="22" column="17" bodyfile="src/dds_image.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/dds_image.h" line="10" column="3" bodyfile="src/dds_image.h" bodystart="10" bodyend="23"/>
+    <listofallmembers>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1aec9947fe6abbafdedc6cb68dfc405083" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>bytes_per_pixel</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a1716ecea8ab25b12d26d97b8f5602dc3" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>compressed_height</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1af6eb20e536dddaf932167949e3f9c2f7" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>compressed_width</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1acf292e921c4bad10e10d822f0cf85aaa" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>data</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a24fdf9cda7ba44cf3f36e1bc60e08b9a" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>depth</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a2af9f057522c6d0c6f22a4d49dbf9c28" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>Format</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a51f7cfc1f88fc1593bb67120d65735ff" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>format</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a40c118234250dd6c546c5c7629873144" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>height</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a785ac2caf313bbdd59b40800da7aa4dc" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>level</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1ae02bad08d809fd63193021216ca9f68f" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>pitch</name></member>
+      <member refid="d2/d46/structDDSImage_1_1SubImage_1a9ec3a357f09deba410f72b63fbebb922" prot="public" virt="non-virtual"><scope>DDSImage::SubImage</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

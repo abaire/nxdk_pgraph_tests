@@ -1,0 +1,915 @@
+{
+  "test_suites": [
+    {
+      "class": "AlphaFuncTests",
+      "description": [
+        "Tests the behavior of NV097_SET_ALPHA_FUNC (0x0000033C)."
+      ],
+      "source_file": "src/tests/alpha_func_tests.h",
+      "source_file_line": 12,
+      "suite": "AlphaFuncTests",
+      "test_descriptions": {
+        "AlphaFuncAlways_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_ALWAYS with NV097_SET_ALPHA_TEST_ENABLE = false ",
+        "AlphaFuncAlways_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_ALWAYS with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncEqual_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_EQUAL with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncEqual_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_EQUAL with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncGreaterThanOrEqual_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_GEQUAL with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncGreaterThanOrEqual_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_GEQUAL with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncGreaterThan_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_GREATER with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncGreaterThan_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_GREATER with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncLessThanOrEqual_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_LEQUAL with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncLessThanOrEqual_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_LEQUAL with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncLessThan_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_LESS with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncLessThan_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_LESS with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncNever_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_NEVER with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncNever_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_NEVER with NV097_SET_ALPHA_TEST_ENABLE = true",
+        "AlphaFuncNotEqual_Disabled": "Tests NV097_SET_ALPHA_FUNC_V_NOTEQUAL with NV097_SET_ALPHA_TEST_ENABLE = false",
+        "AlphaFuncNotEqual_Enabled": "Tests NV097_SET_ALPHA_FUNC_V_NOTEQUAL with NV097_SET_ALPHA_TEST_ENABLE = true"
+      }
+    },
+    {
+      "class": "AntialiasingTests",
+      "description": [
+        "Tests the effects of NV097_SET_SURFACE_FORMAT_ANTI_ALIASING in various scenarios.",
+        "Many of these tests were created to demonstrate specific bugs in xemu and are not of practical value in typical hardware use cases."
+      ],
+      "source_file": "src/tests/antialiasing_tests.h",
+      "source_file_line": 20,
+      "suite": "AntialiasingTests",
+      "test_descriptions": {
+        "AAOnThenOffCPUWrite": "Configure the framebuffer surface with some antialiasing mode, clear, change the mode, modify the framebuffer by writing directly to VRAM, then render. Used to reproduce xemu-project/xemu#652.",
+        "CPUWriteIgnoresSurfaceConfig": "This test verifies that direct writes to VRAM bypass any surface configuration. It sets up a texture surface with antialiasing enabled, then writes directly to texture memory and renders the texture to the screen. It is expected that antialiasing has no effect.",
+        "CreateSurfaceWithCenter1": "Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_1",
+        "CreateSurfaceWithCenterCorner2": "Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_CORNER_2",
+        "CreateSurfaceWithSquareOffset4": "Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_SQUARE_OFFSET_4",
+        "FBSurfaceWithCenter1": "",
+        "FBSurfaceWithCenterCorner2": "",
+        "FramebufferNotModifiedBySurfaceState": "",
+        "GPUAAWriteAfterCPUWrite": "",
+        "NonAACPURoundTrip": "",
+        "SurfaceStatesAreIndependent": ""
+      }
+    },
+    {
+      "class": "AttributeCarryoverTests",
+      "description": [],
+      "source_file": "src/tests/attribute_carryover_tests.h",
+      "source_file_line": 13,
+      "suite": "AttributeCarryoverTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "AttributeExplicitSetterTests",
+      "description": [],
+      "source_file": "src/tests/attribute_explicit_setter_tests.h",
+      "source_file_line": 13,
+      "suite": "AttributeExplicitSetterTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "AttributeFloatTests",
+      "description": [],
+      "source_file": "src/tests/attribute_float_tests.h",
+      "source_file_line": 13,
+      "suite": "AttributeFloatTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "BlendTests",
+      "description": [
+        "Tests the effects of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR on rendering unsigned textures.",
+        "All test names are of the form <sfactor>-<equation>-<dfactor> where:",
+        "sfactor/dfactor are one of: 0 - ZERO, 1 - ONE, srcRGB - SRC_COLOR, 1-srcRGB - ONE_MINUS_SRC_COLOR, srcA - SRC_ALPHA, 1-srcA - ONE_MINUS_SRC_ALPHA, dstA - DST_ALPHA, 1-dstA - ONE_MINUS_DST_ALPHA, dstRGB - DST_COLOR, 1-dstRGB - ONE_MINUS_DST_COLOR, srcAsat - SRC_ALPHA_SATURATE, cRGB - CONSTANT_COLOR, 1-cRGB - ONE_MINUS_CONSTANT_COLOR, cA - CONSTANT_ALPHA, 1-cA - ONE_MINUS_CONSTANT_ALPHA",
+        "equation is one of: ADD - NV097_SET_BLEND_EQUATION_V_FUNC_ADD, SUB - NV097_SET_BLEND_EQUATION_V_FUNC_SUBTRACT, REVSUB - NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT, MIN - NV097_SET_BLEND_EQUATION_V_MIN, MAX - NV097_SET_BLEND_EQUATION_V_MAX, SADD - NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED, SREVSUB - NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED,",
+        "The left, center, and right renders are all composited against a 16 pixel checkerboard pattern alternating between a background color and fully opaque black.",
+        "On the left side of the screen, a column of squares is rendered with colors blended with the checkerboard and alpha always set to 0xDD.",
+        "In the center of the screen, a stack of concentric squares is rendered with colors that are not blended and alpha values blended with the checkerboard (the first 16x16 will be blended with the BG color, the next with full opaque black, etc...). Each square is composited with the previous square from outside to inside, so the outermost is only blended with the checkerboard, the next is blended with both the checkerboard and the result of the outermost blend, etc...",
+        "On the right side of the screen, a column of squares is rendered with both color and alpha values blended."
+      ],
+      "source_file": "src/tests/blend_tests.h",
+      "source_file_line": 60,
+      "suite": "BlendTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ClearTests",
+      "description": [
+        "Tests the behavior of various write masks on NV097_CLEAR_SURFACE.",
+        "Each test draws some geometry, then modifies the NV097_SET_COLOR_MASK, NV097_SET_DEPTH_MASK, and NV097_SET_STENCIL_MASK settings, then invokes NV097_CLEAR_SURFACE.",
+        "In all cases, the clear color is set to 0x7F7F7F7F and the depth value is set to 0xFFFFFFFF."
+      ],
+      "source_file": "src/tests/clear_tests.h",
+      "source_file_line": 19,
+      "suite": "ClearTests",
+      "test_descriptions": {
+        "C00000000_Depth_n": "Framebuffer result after disabling writing to all color channels and to the depth/stencil buffer.",
+        "C00000000_Depth_n_ZB": "Z-buffer result after disabling writing to all color channels and to the depth/stencil buffer.",
+        "C00000000_Depth_y": "Framebuffer result after disabling writing to all color channels and enabling writes to the depth/stencil buffer.",
+        "C00000000_Depth_y_ZB": "Z-buffer result after disabling writing to all color channels and enabling writes to the depth/stencil buffer.",
+        "C00000001_Depth_n": "Framebuffer result after disabling writing to all color channels except blue and to the depth/stencil buffer.",
+        "C00000001_Depth_n_ZB": "Z-buffer result after disabling writing to all color channels except blue and to the depth/stencil buffer.",
+        "C00000001_Depth_y": "Framebuffer result after disabling writing to all color channels except blue enabling writes to the depth/stencil buffer.",
+        "C00000001_Depth_y_ZB": "Z-buffer result after disabling writing to all color channels except blue enabling writes to the depth/stencil buffer.",
+        "C00000100_Depth_n": "Framebuffer result after disabling writing to all color channels except green and to the depth/stencil buffer.",
+        "C00000100_Depth_n_ZB": "Z-buffer result after disabling writing to all color channels except green and to the depth/stencil buffer.",
+        "C00000100_Depth_y": "Framebuffer result after disabling writing to all color channels except green and enabling writes to the depth/stencil buffer.",
+        "C00000100_Depth_y_ZB": "Z-buffer result after disabling writing to all color channels except green and enabling writes to the depth/stencil buffer.",
+        "C00010000_Depth_n": "Framebuffer result after disabling writing to all color channels except red and to the depth/stencil buffer.",
+        "C00010000_Depth_n_ZB": "Z-buffer result after disabling writing to all color channels except red and to the depth/stencil buffer.",
+        "C00010000_Depth_y": "Framebuffer result after disabling writing to all color channels except red and enabling writes to the depth/stencil buffer.",
+        "C00010000_Depth_y_ZB": "Z-buffer result after disabling writing to all color channels except red and enabling writes to the depth/stencil buffer.",
+        "C01000000_Depth_n": "Framebuffer result after disabling writing to all color channels except alpha and to the depth/stencil buffer.",
+        "C01000000_Depth_n_ZB": "Z-buffer result after disabling writing to all color channels except alpha and to the depth/stencil buffer.",
+        "C01000000_Depth_y": "Framebuffer result after disabling writing to all color channels except alpha and enabling writes to the depth/stencil buffer.",
+        "C01000000_Depth_y_ZB": "Z-buffer result after disabling writing to all color channels except alpha and enabling writes to the depth/stencil buffer.",
+        "C01010101_Depth_n": "Framebuffer result after enabling writing to all color channels but disabling writes to the depth/stencil buffer.",
+        "C01010101_Depth_n_ZB": "Z-buffer result after enabling writing to all color channels but disabling writes to the depth/stencil buffer.",
+        "C01010101_Depth_y": "Framebuffer result after enabling writing to all color channels and the depth/stencil buffer.",
+        "C01010101_Depth_y_ZB": "Z-buffer result after enabling writing to all color channels and the depth/stencil buffer. "
+      }
+    },
+    {
+      "class": "ColorKeyTests",
+      "description": [
+        "Tests NV097_SET_COLOR_KEY_COLOR (0x0AE0) and the NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE color key functions.",
+        "NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE is used to instruct the hardware what to do when a texel's value matches a color key. See ColorKeyMode for the supported modes.",
+        "NV097_SET_COLOR_KEY_COLOR is used to instruct the hardware which texels should have the color key mode applied.",
+        "Each test renders a series of quads, with each quad being divided into four subcomponents (NW = northwest/top left, etc...):",
+        "NW: Checkerboard alternating a color-keyed color and a light grey. NE: Checkerboard alternating a dark grey and an alpha-keyed color. SW: Checkerboard alternating the color-keyed color with alpha from the alpha key and the color keyed color with 0xFF alpha that matches none of the keys. SE: Checkerboard alternating a non-keyed color with alpha from the color key and a non-keyed color with alpha from the alpha key."
+      ],
+      "source_file": "src/tests/color_key_tests.h",
+      "source_file_line": 34,
+      "suite": "ColorKeyTests",
+      "test_descriptions": {
+        "FixedTex_Alpha": "With the fixed function pipeline, zero out just the alpha channel for all places where the colorkey matches the value of a texel. RGB channels are unaffected. This should omit all texels that match the color key.",
+        "FixedTex_AlphaColor": "With the fixed function pipeline, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. See IgnAlphaCh_FixedTex_AlphaColor. This should omit all texels that match the color key.",
+        "FixedTex_Color": "With the fixed function pipeline, zero out the color and alpha channels for all places where the color key matches the value of a texel. Note that the Alpha channel is also set to zero. This should omit all texels that match the color key.",
+        "FixedTex_Disabled": "With the fixed function pipeline, make no changes to any texel whose value matches the color key. This should render all texels as fully opaque with their original colors.",
+        "IgnAlphaCh_FixedTex_Alpha": "With the fixed function pipeline, set the color key mode to clear just the alpha channel for matching texels. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render all texels fully opaque with their original colors, since the texel alpha is ignored during texturing.",
+        "IgnAlphaCh_FixedTex_AlphaColor": "With the fixed function pipeline, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This omits killed texels even though the combiner sets them to fully opaque during texturing.",
+        "IgnAlphaCh_FixedTex_Color": "With the fixed function pipeline, zero out the color and alpha channels for all places where the color key matches the value of a texel. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render matching texels as fully black, since their RGB values were zeroed out and the zeroed alpha channel is ignored.",
+        "IgnAlphaCh_FixedTex_Disabled": "With the fixed function pipeline, make no changes to any texel whose value matches the color key. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This should render all texels as fully opaque with their original colors.",
+        "IgnAlphaCh_ProgTex_Alpha": "With a programmable shader, set the color key mode to clear just the alpha channel for matching texels. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render all texels fully opaque with their original colors, since the texel alpha is ignored during texturing.",
+        "IgnAlphaCh_ProgTex_AlphaColor": "With a programmable shader, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This omits killed texels even though the combiner sets them to fully opaque during texturing.",
+        "IgnAlphaCh_ProgTex_Color": "With a programmable shader, zero out the color and alpha channels for all places where the color key matches the value of a texel. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render matching texels as fully black, since their RGB values were zeroed out and the zeroed alpha channel is ignored.",
+        "IgnAlphaCh_ProgTex_Disabled": "With a programmable shader, make no changes to any texel whose value matches the color key. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This should render all texels as fully opaque with their original colors.",
+        "ProgTex_Alpha": "With a programmable shader, zero out just the alpha channel for all places where the colorkey matches the value of a texel. RGB channels are unaffected. This should omit all texels that match the color key.",
+        "ProgTex_AlphaColor": "With a programmable shader, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. See IgnAlphaCh_FixedTex_AlphaColor. This should omit all texels that match the color key.",
+        "ProgTex_Color": "With a programmable shader, zero out the color and alpha channels for all places where the color key matches the value of a texel. Note that the Alpha channel is also set to zero. This should omit all texels that match the color key.",
+        "ProgTex_Disabled": "With a programmable shader, make no changes to any texel whose value matches the color key. This should render all texels as fully opaque with their original colors.",
+        "UnsampledTex": "Demonstrates that the color keys are independent of whether the associated texture stage is used in the final composition or not. With a programable shader, draw two quads with the color key mode set to kill matching texels. In both cases, the final color combiner only samples from texture 0. The left quad renders with the blue color key as key 0. The right quad enables the second texture stage, keeps key 0, and adds the magenta color key with an alpha value forced to 0xFF as key 1. The left image should have the blue color in the NW checkerboard killed. The right image should have the blue color in the NW checkerboard killed, but also the secondary blue color in the SW checkerboard killed. This is because the unsampled magenta texture's SW secondary color matches the magenta + 0xFF alpha enabled as a color key in the second operation. "
+      }
+    },
+    {
+      "class": "ColorMaskBlendTests",
+      "description": [],
+      "source_file": "src/tests/color_mask_blend_tests.h",
+      "source_file_line": 8,
+      "suite": "ColorMaskBlendTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ColorZetaDisableTests",
+      "description": [],
+      "source_file": "src/tests/color_zeta_disable_tests.h",
+      "source_file_line": 13,
+      "suite": "ColorZetaDisableTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ColorZetaOverlapTests",
+      "description": [],
+      "source_file": "src/tests/color_zeta_overlap_tests.h",
+      "source_file_line": 13,
+      "suite": "ColorZetaOverlapTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "CombinerTests",
+      "description": [],
+      "source_file": "src/tests/combiner_tests.h",
+      "source_file_line": 13,
+      "suite": "CombinerTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "DepthFormatFixedFunctionTests",
+      "description": [],
+      "source_file": "src/tests/depth_format_fixed_function_tests.h",
+      "source_file_line": 12,
+      "suite": "DepthFormatFixedFunctionTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "DepthFormatTests",
+      "description": [],
+      "source_file": "src/tests/depth_format_tests.h",
+      "source_file_line": 12,
+      "suite": "DepthFormatTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "DMACorruptionAroundSurfaceTests",
+      "description": [],
+      "source_file": "src/tests/dma_corruption_around_surface_tests.h",
+      "source_file_line": 13,
+      "suite": "DMACorruptionAroundSurfaceTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "EdgeFlagTests",
+      "description": [],
+      "source_file": "src/tests/edge_flag_tests.h",
+      "source_file_line": 14,
+      "suite": "EdgeFlagTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "FogTests",
+      "description": [],
+      "source_file": "src/tests/fog_tests.h",
+      "source_file_line": 15,
+      "suite": "FogTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "FrontFaceTests",
+      "description": [],
+      "source_file": "src/tests/front_face_tests.h",
+      "source_file_line": 8,
+      "suite": "FrontFaceTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ImageBlitTests",
+      "description": [],
+      "source_file": "src/tests/image_blit_tests.h",
+      "source_file_line": 10,
+      "suite": "ImageBlitTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "InlineArraySizeMismatchTests",
+      "description": [],
+      "source_file": "src/tests/inline_array_size_mismatch.h",
+      "source_file_line": 13,
+      "suite": "InlineArraySizeMismatchTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "LightingControlTests",
+      "description": [
+        "Tests the effects of NV097_SET_LIGHT_CONTROL (0x294) in conjunction with NV097_SET_SPECULAR_ENABLE.",
+        "A number of test meshes are rendered and lit with two lights:",
+        "1) A directional light coming from the left and pointing into the screen (direction is {1, 0, 1}).",
+        "2) An attenuated point light on the right at {1.5f, 1.f, -2.5f} with a max rannge of 4. and attenuation of {0.025f, 0.15f, 0.02f}.",
+        "Both lights have ambient {0.f, 0.f, 0.05f}, diffuse {0.25f, 0.f, 0.f}, specular {0.f, 0.2f, 0.4f}.",
+        "Meshes have the specular color of each vertex at {0.f, 0.4, 0.f, 0.25f}.",
+        "All colors are taken from the material (i.e., contributed by the lights). NV097_SET_MATERIAL_ALPHA is set to 0.4 and the scene ambient is a very dark grey at 0.031373."
+      ],
+      "source_file": "src/tests/lighting_control_tests.h",
+      "source_file_line": 33,
+      "suite": "LightingControlTests",
+      "test_descriptions": {
+        "FF_0x000000": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is forced to opaque.",
+        "FF_0x000000NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off. Visually equivalent to FF_0x000001.",
+        "FF_0x000001": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is forced to opaque.",
+        "FF_0x000001NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.",
+        "FF_0x010000": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is forced to opaque.",
+        "FF_0x010000NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.",
+        "FF_0x010001": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is forced to opaque.",
+        "FF_0x010001NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.",
+        "FF_0x020000": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.",
+        "FF_0x020000NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.",
+        "FF_0x020001": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.",
+        "FF_0x020001NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.",
+        "FF_0x030000": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.",
+        "FF_0x030000NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.",
+        "FF_0x030001": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.",
+        "FF_0x030001NoSpec": "Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off. "
+      }
+    },
+    {
+      "class": "LightingNormalTests",
+      "description": [
+        "Tests behavior when lighting is enabled but a normal is not provided in the vertex data.",
+        "The observed behavior on hardware is that the last set normal is reused for the unspecified vertices."
+      ],
+      "source_file": "src/tests/lighting_normal_tests.h",
+      "source_file_line": 17,
+      "suite": "LightingNormalTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "LightingSpotlightTests",
+      "description": [
+        "Tests the behavior of spotlight falloff and attenuation settings.",
+        "The spotlight is placed at {0, 0, -7} (the camera position) pointing directly into the screen, with a maximum range of 15.f. A plane is rendered at {0, 0, 0}, and a cylinder at ~ {1, 1, 0}.",
+        "For the \"At\" prefixed tests, the attenuation factor of the light is adjusted. This factor should decrease the light intensity relative to the distance between the vertex and the light.",
+        "For the \"Fo\" prefixed tests, the falloff factor of the light is adjusted. This factor modifies how the intensity falls off in the zone between the penumbra (the outermost illuminated region) and the umbra (the region within which the light's full intensity is applied). Note that all pixels are still modified by attenuation, which is set to a constant value.",
+        "For the \"PT\" prefixed tests, the phi (penumbra) and theta (umbra) angles are set to various values, including some that would be prevented by DirectX.",
+        "See",
+        "https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor"
+      ],
+      "source_file": "src/tests/lighting_spotlight_tests.h",
+      "source_file_line": 36,
+      "suite": "LightingSpotlightTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "LightingTwoSidedTests",
+      "description": [],
+      "source_file": "src/tests/lighting_two_sided_tests.h",
+      "source_file_line": 14,
+      "suite": "LightingTwoSidedTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "LineWidthTests",
+      "description": [],
+      "source_file": "src/tests/line_width_tests.h",
+      "source_file_line": 14,
+      "suite": "LineWidthTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "MaterialAlphaTests",
+      "description": [],
+      "source_file": "src/tests/material_alpha_tests.h",
+      "source_file_line": 8,
+      "suite": "MaterialAlphaTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "MaterialColorSourceTests",
+      "description": [],
+      "source_file": "src/tests/material_color_source_tests.h",
+      "source_file_line": 13,
+      "suite": "MaterialColorSourceTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "MaterialColorTests",
+      "description": [],
+      "source_file": "src/tests/material_color_tests.h",
+      "source_file_line": 14,
+      "suite": "MaterialColorTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "NullSurfaceTests",
+      "description": [],
+      "source_file": "src/tests/null_surface_tests.h",
+      "source_file_line": 10,
+      "suite": "NullSurfaceTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "OverlappingDrawModesTests",
+      "description": [],
+      "source_file": "src/tests/overlapping_draw_modes_tests.h",
+      "source_file_line": 13,
+      "suite": "OverlappingDrawModesTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "PointParamsTests",
+      "description": [
+        "Tests the behavior of NV097_SET_POINT_PARAMS_ENABLE (0x00000318) and NV097_SET_POINT_PARAMS (0x00000A30).",
+        "See",
+        "https://learn.microsoft.com/en-us/windows/win32/direct3d9/point-sprites",
+        "PointParamsX_SmoothX_PtSize_(FF | VS) Each test renders a grid of points. Point size is set to a test value for all points.",
+        "As points go from top to bottom: Z starts at -5 (eye at -7) and increases by 25 per row (max depth = 193).",
+        "In each row, as points go from left to right, point params are set from the following:",
+        "No scale factors, min size 0, size range 0. Should be 1 pixel.",
+        "No scale factors, min size 16, size range 0. Should be 16 pixels square.",
+        "Negligible constant scale, size range 16, min size 0. Should be 16 pixels.",
+        "Negligible constant scale, size range 16, min size 8. Should be 24 pixels.",
+        "4 constant scale, size range 14, min size 16. Should be ~23 pixels.",
+        "4 constant scale, size range 36, min size 4. Should be ~21 pixels.",
+        "256 constant scale, size range 36, min size 4. Should be ~7 pixels.",
+        "0.25 linear scale, size range 39, min 1.",
+        "0.05 quadratic scale, size range 39, min 1.",
+        "4 constant scale, size range 14, min size 16, bias -0.5.",
+        "4 constant scale, size range 14, min size 16, bias 0.5.",
+        "No scale factors, size range 15, min size 1, bias -100.",
+        "No scale factors, size range 15, min size 1, bias 100.",
+        "Detailed_(FF | VS) Each test renders a grid of points. Point size is set to 128 (16 pixels) for all points.",
+        "As points go from top to bottom: Z starts at -5 (eye at -7) and increases by 25 per row (max depth = 193).",
+        "In each row, as points go from left to right, point params are set from the following:",
+        "0.25 linear scale, size range 39, min size 1, scale bias -1.0",
+        "0.25 linear scale, size range 39, min size 1, scale bias -0.5",
+        "0.25 linear scale, size range 39, min size 1, scale bias -0.25",
+        "0.25 linear scale, size range 39, min size 1, scale bias -0.01",
+        "0.25 linear scale, size range 39, min size 1, scale bias 0",
+        "0.25 linear scale, size range 39, min size 1, scale bias -0.01",
+        "0.25 linear scale, size range 39, min size 1, scale bias -0.25",
+        "0.25 linear scale, size range 39, min size 1, scale bias -0.5",
+        "0.25 linear scale, size range 39, min size 1, scale bias -1.0",
+        "4 constant scale, size range 36, min size 4, scale bias -0.4",
+        "4 constant scale, size range 36, min size 4, scale bias -0.25",
+        "4 constant scale, size range 36, min size 4, scale bias 0.25",
+        "4 constant scale, size range 36, min size 4, scale bias 0.4"
+      ],
+      "source_file": "src/tests/point_params_tests.h",
+      "source_file_line": 63,
+      "suite": "PointParamsTests",
+      "test_descriptions": {
+        "Detailed_FF": "Renders points using the fixed function pipeline with more complex point params.",
+        "Detailed_VS": "Renders points using a programmable shader with more complex point params. ",
+        "PointParamsOff_SmoothOff_128_FF": "Renders points using the fixed function pipeline with point size 128, point smoothing and point params disabled.",
+        "PointParamsOff_SmoothOff_128_VS": "Renders points using a programmable shader with point size 128, point smoothing and point params disabled.",
+        "PointParamsOn_SmoothOff_128_FF": "Renders points using the fixed function pipeline with point size 128, point smoothing disabled and point params enabled.",
+        "PointParamsOn_SmoothOff_128_VS": "Renders points using a programmable shader with point size 128, point smoothing disabled and point params enabled.",
+        "PointParamsOn_SmoothOn_001_FF": "Renders points using the fixed function pipeline with point size 1, point smoothing and point params enabled. Demonstrates that point size is ignored when point params are enabled.",
+        "PointParamsOn_SmoothOn_128_FF": "Renders points using the fixed function pipeline with point size 128, point smoothing and point params enabled.",
+        "PointParamsOn_SmoothOn_128_VS": "Renders points using a programmable shader with point size 128, point smoothing and point params enabled."
+      }
+    },
+    {
+      "class": "PointSizeTests",
+      "description": [
+        "Tests the behavior of NV097_SET_POINT_SIZE and NV097_SET_POINT_SMOOTH_ENABLE",
+        "See",
+        "https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glPointSize.xml",
+        "Each test renders a grid of points.",
+        "As points go from left to right: point size starts at 0 and increases by point_size_increment per point."
+      ],
+      "source_file": "src/tests/point_size_tests.h",
+      "source_file_line": 19,
+      "suite": "PointSizeTests",
+      "test_descriptions": {
+        "PointSmoothOff_01_FF": "Renders points using the fixed function pipeline with point smoothing disabled. Point size starts at 0 and increases by 1 per point starting at the upper left point.",
+        "PointSmoothOff_01_VS": "Renders points using a programmable shader with point smoothing disabled. Point size starts at 0 and increases by 1 per point starting at the upper left point.",
+        "PointSmoothOff_04_FF": "Renders points using the fixed function pipeline with point smoothing disabled. Point size starts at 0 and increases by 4 per point starting at the upper left point.",
+        "PointSmoothOff_04_VS": "Renders points using a programmable shader with point smoothing disabled. Point size starts at 0 and increases by 1 per point starting at the upper left point.",
+        "PointSmoothOff_08_FF": "Renders points using the fixed function pipeline with point smoothing disabled. Point size starts at 0 and increases by 8 per point starting at the upper left point.",
+        "PointSmoothOff_08_VS": "Renders points using a programmable shader with point smoothing disabled. Point size starts at 0 and increases by 8 per point starting at the upper left point.",
+        "PointSmoothOff_16_FF": "Renders points using the fixed function pipeline with point smoothing disabled. Point size starts at 0 and increases by 16 per point starting at the upper left point.",
+        "PointSmoothOff_16_VS": "Renders points using a programmable shader with point smoothing disabled. Point size starts at 0 and increases by 16 per point starting at the upper left point. ",
+        "PointSmoothOn_01_FF": "Renders points using the fixed function pipeline with point smoothing enabled. Point size starts at 0 and increases by 1 per point starting at the upper left point.",
+        "PointSmoothOn_01_VS": "Renders points using a programmable shader with point smoothing enabled. Point size starts at 0 and increases by 1 per point starting at the upper left point.",
+        "PointSmoothOn_04_FF": "Renders points using the fixed function pipeline with point smoothing enabled. Point size starts at 0 and increases by 4 per point starting at the upper left point.",
+        "PointSmoothOn_04_VS": "Renders points using a programmable shader with point smoothing enabled. Point size starts at 0 and increases by 1 per point starting at the upper left point.",
+        "PointSmoothOn_08_FF": "Renders points using the fixed function pipeline with point smoothing enabled. Point size starts at 0 and increases by 8 per point starting at the upper left point.",
+        "PointSmoothOn_08_VS": "Renders points using a programmable shader with point smoothing enabled. Point size starts at 0 and increases by 8 per point starting at the upper left point.",
+        "PointSmoothOn_16_FF": "Renders points using the fixed function pipeline with point smoothing enabled. Point size starts at 0 and increases by 16 per point starting at the upper left point.",
+        "PointSmoothOn_16_VS": "Renders points using a programmable shader with point smoothing enabled. Point size starts at 0 and increases by 16 per point starting at the upper left point."
+      }
+    },
+    {
+      "class": "PvideoTests",
+      "description": [],
+      "source_file": "src/tests/pvideo_tests.h",
+      "source_file_line": 9,
+      "suite": "PvideoTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "SetVertexDataTests",
+      "description": [],
+      "source_file": "src/tests/set_vertex_data_tests.h",
+      "source_file_line": 16,
+      "suite": "SetVertexDataTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ShadeModelTests",
+      "description": [],
+      "source_file": "src/tests/shade_model_tests.h",
+      "source_file_line": 15,
+      "suite": "ShadeModelTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "SmoothingTests",
+      "description": [],
+      "source_file": "src/tests/smoothing_tests.h",
+      "source_file_line": 14,
+      "suite": "SmoothingTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "StencilTests",
+      "description": [],
+      "source_file": "src/tests/stencil_tests.h",
+      "source_file_line": 12,
+      "suite": "StencilTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "StippleTests",
+      "description": [],
+      "source_file": "src/tests/stipple_tests.h",
+      "source_file_line": 14,
+      "suite": "StippleTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "SurfaceClipTests",
+      "description": [],
+      "source_file": "src/tests/surface_clip_tests.h",
+      "source_file_line": 10,
+      "suite": "SurfaceClipTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "SurfacePitchTests",
+      "description": [],
+      "source_file": "src/tests/surface_pitch_tests.h",
+      "source_file_line": 10,
+      "suite": "SurfacePitchTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "SwathWidthTests",
+      "description": [
+        "Tests the behavior of NV097_SET_SWATH_WIDTH (0x09f8)."
+      ],
+      "source_file": "src/tests/swath_width_tests.h",
+      "source_file_line": 12,
+      "suite": "SwathWidthTests",
+      "test_descriptions": {
+        "SwathWidth00": "Sets NV097_SET_SWATH_WIDTH to 0x00.",
+        "SwathWidth01": "Sets NV097_SET_SWATH_WIDTH to 0x01.",
+        "SwathWidth02": "Sets NV097_SET_SWATH_WIDTH to 0x02.",
+        "SwathWidth03": "Sets NV097_SET_SWATH_WIDTH to 0x03.",
+        "SwathWidth04": "Sets NV097_SET_SWATH_WIDTH to 0x04.",
+        "SwathWidth0F": "Sets NV097_SET_SWATH_WIDTH to 0x0F (correlated with turning antialiasing off). "
+      }
+    },
+    {
+      "class": "TexgenMatrixTests",
+      "description": [],
+      "source_file": "src/tests/texgen_matrix_tests.h",
+      "source_file_line": 13,
+      "suite": "TexgenMatrixTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TexgenTests",
+      "description": [],
+      "source_file": "src/tests/texgen_tests.h",
+      "source_file_line": 13,
+      "suite": "TexgenTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureBorderTests",
+      "description": [],
+      "source_file": "src/tests/texture_border_tests.h",
+      "source_file_line": 11,
+      "suite": "TextureBorderTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureCPUUpdateTests",
+      "description": [],
+      "source_file": "src/tests/texture_cpu_update_tests.h",
+      "source_file_line": 11,
+      "suite": "TextureCPUUpdateTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureCubemapTests",
+      "description": [],
+      "source_file": "src/tests/texture_cubemap_tests.h",
+      "source_file_line": 12,
+      "suite": "TextureCubemapTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureFormatDXTTests",
+      "description": [],
+      "source_file": "src/tests/texture_format_dxt_tests.h",
+      "source_file_line": 11,
+      "suite": "TextureFormatDXTTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureFormatTests",
+      "description": [],
+      "source_file": "src/tests/texture_format_tests.h",
+      "source_file_line": 11,
+      "suite": "TextureFormatTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureFramebufferBlitTests",
+      "description": [],
+      "source_file": "src/tests/texture_framebuffer_blit_tests.h",
+      "source_file_line": 11,
+      "suite": "TextureFramebufferBlitTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureMatrixTests",
+      "description": [],
+      "source_file": "src/tests/texture_matrix_tests.h",
+      "source_file_line": 13,
+      "suite": "TextureMatrixTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureRenderTargetTests",
+      "description": [],
+      "source_file": "src/tests/texture_render_target_tests.h",
+      "source_file_line": 13,
+      "suite": "TextureRenderTargetTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureRenderUpdateInPlaceTests",
+      "description": [],
+      "source_file": "src/tests/texture_render_update_in_place_tests.h",
+      "source_file_line": 13,
+      "suite": "TextureRenderUpdateInPlaceTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureShadowComparatorTests",
+      "description": [],
+      "source_file": "src/tests/texture_shadow_comparator_tests.h",
+      "source_file_line": 16,
+      "suite": "TextureShadowComparatorTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "TextureSignedComponentTests",
+      "description": [],
+      "source_file": "src/tests/texture_signed_component_tests.h",
+      "source_file_line": 11,
+      "suite": "TextureSignedComponentTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ThreeDPrimitiveTests",
+      "description": [
+        "Tests behavior when rendering various 3D primitives."
+      ],
+      "source_file": "src/tests/three_d_primitive_tests.h",
+      "source_file_line": 16,
+      "suite": "3D primitive",
+      "test_descriptions": {
+        "LineLoop": "Draws vertices as a line loop using NV097_DRAW_ARRAYS",
+        "LineLoop-inlinearrays": "Draws vertices as a line loop using NV097_INLINE_ARRAY",
+        "LineLoop-inlinearrays-ls": "Draws vertices as a line loop using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "LineLoop-inlinearrays-ls-ps": "Draws vertices as a line loop using NV097_INLINE_ARRAY with line smoothing and polygon smoothing enabled.",
+        "LineLoop-inlinearrays-ps": "Draws vertices as a line loop using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "LineLoop-inlinebuf": "Draws vertices as a line loop using NV097_SET_VERTEX3F",
+        "LineLoop-inlinebuf-ls": "Draws vertices as a line loop using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "LineLoop-inlinebuf-ls-ps": "Draws vertices as a line loop using NV097_SET_VERTEX3F with line smoothing and polygon smoothing enabled.",
+        "LineLoop-inlinebuf-ps": "Draws vertices as a line loop using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "LineLoop-inlineelements": "Draws vertices as a line loop using NV097_ARRAY_ELEMENT16",
+        "LineLoop-inlineelements-ls": "Draws vertices as a line loop using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "LineLoop-inlineelements-ls-ps": "Draws vertices as a line loop using NV097_ARRAY_ELEMENT16 with line smoothing and polygon smoothing enabled.",
+        "LineLoop-inlineelements-ps": "Draws vertices as a line loop using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "LineLoop-ls": "Draws vertices as a line loop using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "LineLoop-ls-ps": "Draws vertices as a line loop using NV097_DRAW_ARRAYS with line smoothing and polygon smoothing enabled.",
+        "LineLoop-ps": "Draws vertices as a line loop using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "LineStrip": "Draws vertices as a line strip using NV097_DRAW_ARRAYS",
+        "LineStrip-inlinearrays": "Draws vertices as a line strip using NV097_INLINE_ARRAY",
+        "LineStrip-inlinearrays-ls": "Draws vertices as a line strip using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "LineStrip-inlinearrays-ls-ps": "Draws vertices as a line strip using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "LineStrip-inlinearrays-ps": "Draws vertices as a line strip using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "LineStrip-inlinebuf": "Draws vertices as a line strip using NV097_SET_VERTEX3F",
+        "LineStrip-inlinebuf-ls": "Draws vertices as a line strip using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "LineStrip-inlinebuf-ls-ps": "Draws vertices as a line strip using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "LineStrip-inlinebuf-ps": "Draws vertices as a line strip using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "LineStrip-inlineelements": "Draws vertices as a line strip using NV097_ARRAY_ELEMENT16",
+        "LineStrip-inlineelements-ls": "Draws vertices as a line strip using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "LineStrip-inlineelements-ls-ps": "Draws vertices as a line strip using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "LineStrip-inlineelements-ps": "Draws vertices as a line strip using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "LineStrip-ls": "Draws vertices as a line strip using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "LineStrip-ls-ps": "Draws vertices as a line strip using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "LineStrip-ps": "Draws vertices as a line strip using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "Lines": "Draws vertices as lines using NV097_DRAW_ARRAYS",
+        "Lines-inlinearrays": "Draws vertices as lines using NV097_INLINE_ARRAY",
+        "Lines-inlinearrays-ls": "Draws vertices as lines using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "Lines-inlinearrays-ls-ps": "Draws vertices as lines using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "Lines-inlinearrays-ps": "Draws vertices as lines using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "Lines-inlinebuf": "Draws vertices as lines using NV097_SET_VERTEX3F",
+        "Lines-inlinebuf-ls": "Draws vertices as lines using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "Lines-inlinebuf-ls-ps": "Draws vertices as lines using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "Lines-inlinebuf-ps": "Draws vertices as lines using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "Lines-inlineelements": "Draws vertices as lines using NV097_ARRAY_ELEMENT16",
+        "Lines-inlineelements-ls": "Draws vertices as lines using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "Lines-inlineelements-ls-ps": "Draws vertices as lines using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "Lines-inlineelements-ps": "Draws vertices as lines using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "Lines-ls": "Draws vertices as lines using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "Lines-ls-ps": "Draws vertices as lines using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "Lines-ps": "Draws vertices as lines using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "Points": "Draws vertices as points using NV097_DRAW_ARRAYS",
+        "Points-inlinearrays": "Draws vertices as points using NV097_INLINE_ARRAY",
+        "Points-inlinearrays-ls": "Draws vertices as points using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "Points-inlinearrays-ls-ps": "Draws vertices as points using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "Points-inlinearrays-ps": "Draws vertices as points using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "Points-inlinebuf": "Draws vertices as points using NV097_SET_VERTEX3F",
+        "Points-inlinebuf-ls": "Draws vertices as points using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "Points-inlinebuf-ls-ps": "Draws vertices as points using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "Points-inlinebuf-ps": "Draws vertices as points using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "Points-inlineelements": "Draws vertices as points using NV097_ARRAY_ELEMENT16",
+        "Points-inlineelements-ls": "Draws vertices as points using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "Points-inlineelements-ls-ps": "Draws vertices as points using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "Points-inlineelements-ps": "Draws vertices as points using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "Points-ls": "Draws vertices as points using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "Points-ls-ps": "Draws vertices as points using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "Points-ps": "Draws vertices as points using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "Polygon": "Draws vertices as a polygon using NV097_DRAW_ARRAYS",
+        "Polygon-inlinearrays": "Draws vertices as a polygon using NV097_INLINE_ARRAY",
+        "Polygon-inlinearrays-ls": "Draws vertices as a polygon using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "Polygon-inlinearrays-ls-ps": "Draws vertices as a polygon using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "Polygon-inlinearrays-ps": "Draws vertices as a polygon using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "Polygon-inlinebuf": "Draws vertices as a polygon using NV097_SET_VERTEX3F",
+        "Polygon-inlinebuf-ls": "Draws vertices as a polygon using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "Polygon-inlinebuf-ls-ps": "Draws vertices as a polygon using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "Polygon-inlinebuf-ps": "Draws vertices as a polygon using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "Polygon-inlineelements": "Draws vertices as a polygon using NV097_ARRAY_ELEMENT16",
+        "Polygon-inlineelements-ls": "Draws vertices as a polygon using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "Polygon-inlineelements-ls-ps": "Draws vertices as a polygon using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "Polygon-inlineelements-ps": "Draws vertices as a polygon using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "Polygon-ls": "Draws vertices as a polygon using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "Polygon-ls-ps": "Draws vertices as a polygon using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "Polygon-ps": "Draws vertices as a polygon using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "QuadStrip": "Draws vertices as a strip of quads using NV097_DRAW_ARRAYS",
+        "QuadStrip-inlinearrays": "Draws vertices as a strip of quads using NV097_INLINE_ARRAY",
+        "QuadStrip-inlinearrays-ls": "Draws vertices as a strip of quads using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "QuadStrip-inlinearrays-ls-ps": "Draws vertices as a strip of quads using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "QuadStrip-inlinearrays-ps": "Draws vertices as a strip of quads using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "QuadStrip-inlinebuf": "Draws vertices as a strip of quads using NV097_SET_VERTEX3F",
+        "QuadStrip-inlinebuf-ls": "Draws vertices as a strip of quads using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "QuadStrip-inlinebuf-ls-ps": "Draws vertices as a strip of quads using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "QuadStrip-inlinebuf-ps": "Draws vertices as a strip of quads using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "QuadStrip-inlineelements": "Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16",
+        "QuadStrip-inlineelements-ls": "Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "QuadStrip-inlineelements-ls-ps": "Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "QuadStrip-inlineelements-ps": "Draws vertices as a strip of quads using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "QuadStrip-ls": "Draws vertices as a strip of quads using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "QuadStrip-ls-ps": "Draws vertices as a strip of quads using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "QuadStrip-ps": "Draws vertices as a strip of quads using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "Quads": "Draws vertices as quads using NV097_DRAW_ARRAYS",
+        "Quads-inlinearrays": "Draws vertices as quads using NV097_INLINE_ARRAY",
+        "Quads-inlinearrays-ls": "Draws vertices as quads using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "Quads-inlinearrays-ls-ps": "Draws vertices as quads using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "Quads-inlinearrays-ps": "Draws vertices as quads using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "Quads-inlinebuf": "Draws vertices as quads using NV097_SET_VERTEX3F",
+        "Quads-inlinebuf-ls": "Draws vertices as quads using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "Quads-inlinebuf-ls-ps": "Draws vertices as quads using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "Quads-inlinebuf-ps": "Draws vertices as quads using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "Quads-inlineelements": "Draws vertices as quads using NV097_ARRAY_ELEMENT16",
+        "Quads-inlineelements-ls": "Draws vertices as quads using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "Quads-inlineelements-ls-ps": "Draws vertices as quads using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "Quads-inlineelements-ps": "Draws vertices as quads using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "Quads-ls": "Draws vertices as quads using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "Quads-ls-ps": "Draws vertices as quads using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "Quads-ps": "Draws vertices as quads using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "TriFan": "Draws vertices as a triangle fan using NV097_DRAW_ARRAYS",
+        "TriFan-inlinearrays": "Draws vertices as a triangle fan using NV097_INLINE_ARRAY",
+        "TriFan-inlinearrays-ls": "Draws vertices as a triangle fan using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "TriFan-inlinearrays-ls-ps": "Draws vertices as a triangle fan using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "TriFan-inlinearrays-ps": "Draws vertices as a triangle fan using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "TriFan-inlinebuf": "Draws vertices as a triangle fan using NV097_SET_VERTEX3F",
+        "TriFan-inlinebuf-ls": "Draws vertices as a triangle fan using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "TriFan-inlinebuf-ls-ps": "Draws vertices as a triangle fan using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "TriFan-inlinebuf-ps": "Draws vertices as a triangle fan using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "TriFan-inlineelements": "Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16",
+        "TriFan-inlineelements-ls": "Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "TriFan-inlineelements-ls-ps": "Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "TriFan-inlineelements-ps": "Draws vertices as a triangle fan using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "TriFan-ls": "Draws vertices as a triangle fan using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "TriFan-ls-ps": "Draws vertices as a triangle fan using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "TriFan-ps": "Draws vertices as a triangle fan using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "TriStrip": "Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS",
+        "TriStrip-inlinearrays": "Draws vertices as a strip of triangles using NV097_INLINE_ARRAY",
+        "TriStrip-inlinearrays-ls": "Draws vertices as a strip of triangles using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "TriStrip-inlinearrays-ls-ps": "Draws vertices as a strip of triangles using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "TriStrip-inlinearrays-ps": "Draws vertices as a strip of triangles using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "TriStrip-inlinebuf": "Draws vertices as a strip of triangles using NV097_SET_VERTEX3F",
+        "TriStrip-inlinebuf-ls": "Draws vertices as a strip of triangles using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "TriStrip-inlinebuf-ls-ps": "Draws vertices as a strip of triangles using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "TriStrip-inlinebuf-ps": "Draws vertices as a strip of triangles using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "TriStrip-inlineelements": "Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16",
+        "TriStrip-inlineelements-ls": "Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "TriStrip-inlineelements-ls-ps": "Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "TriStrip-inlineelements-ps": "Draws vertices as a strip of triangles using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "TriStrip-ls": "Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "TriStrip-ls-ps": "Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "TriStrip-ps": "Draws vertices as a strip of triangles using NV097_DRAW_ARRAYS with polygon smoothing enabled.",
+        "Triangles": "Draws vertices as triangles using NV097_DRAW_ARRAYS ",
+        "Triangles-inlinearrays": "Draws vertices as triangles using NV097_INLINE_ARRAY",
+        "Triangles-inlinearrays-ls": "Draws vertices as triangles using NV097_INLINE_ARRAY with line smoothing enabled.",
+        "Triangles-inlinearrays-ls-ps": "Draws vertices as triangles using NV097_INLINE_ARRAY with line and polygon smoothing enabled.",
+        "Triangles-inlinearrays-ps": "Draws vertices as triangles using NV097_INLINE_ARRAY with polygon smoothing enabled.",
+        "Triangles-inlinebuf": "Draws vertices as triangles using NV097_SET_VERTEX3F",
+        "Triangles-inlinebuf-ls": "Draws vertices as triangles using NV097_SET_VERTEX3F with line smoothing enabled.",
+        "Triangles-inlinebuf-ls-ps": "Draws vertices as triangles using NV097_SET_VERTEX3F with line and polygon smoothing enabled.",
+        "Triangles-inlinebuf-ps": "Draws vertices as triangles using NV097_SET_VERTEX3F with polygon smoothing enabled.",
+        "Triangles-inlineelements": "Draws vertices as triangles using NV097_ARRAY_ELEMENT16",
+        "Triangles-inlineelements-ls": "Draws vertices as triangles using NV097_ARRAY_ELEMENT16 with line smoothing enabled.",
+        "Triangles-inlineelements-ls-ps": "Draws vertices as triangles using NV097_ARRAY_ELEMENT16 with line and polygon smoothing enabled.",
+        "Triangles-inlineelements-ps": "Draws vertices as triangles using NV097_ARRAY_ELEMENT16 with polygon smoothing enabled.",
+        "Triangles-ls": "Draws vertices as triangles using NV097_DRAW_ARRAYS with line smoothing enabled.",
+        "Triangles-ls-ps": "Draws vertices as triangles using NV097_DRAW_ARRAYS with line and polygon smoothing enabled.",
+        "Triangles-ps": "Draws vertices as triangles using NV097_DRAW_ARRAYS with polygon smoothing enabled."
+      }
+    },
+    {
+      "class": "TwoDLineTests",
+      "description": [
+        "Tests various NV04_SOLID_LINE_* 2D graphics acceleration functions by rendering lines into buffers of different color depths."
+      ],
+      "source_file": "src/tests/two_d_line_tests.h",
+      "source_file_line": 14,
+      "suite": "2D Lines",
+      "test_descriptions": {
+        "2DLine-15-C000003E0-400_200-400_400": "XRGB 555 color depth - green vertical line from 400, 200 - 400, 400. ",
+        "2DLine-16-C000007E0-400_200-400_400": "XRGB 565 color depth - green vertical line from 400, 200 - 400, 400. ",
+        "2DLine-24-C00000000-400_200-400_400": "XRGB 888 - black vertical line from 400, 200 - 400, 400 ",
+        "2DLine-24-C0000FF00-400_200-400_400": "XRGB 888 - green vertical line from 400, 200 - 400, 400 ",
+        "2DLine-24-C0000FF00-444_222-444_444": "XRGB 888 - green vertical line from 444, 222 - 444, 444 ",
+        "2DLine-24-C00FF0000-400_200-400_400": "XRGB 888 - red vertical line from 400, 200 - 400, 400 ",
+        "2DLine-24-C00FFFFFF-0_0-639_479": "XRGB 888 - white diagonal line from 0, 0, - 639, 479 (one pixel short of bottom right corner) ",
+        "2DLine-24-C00FFFFFF-222_222-222_222": "XRGB 888 - should display nothing, the line has no length ",
+        "2DLine-24-C00FFFFFF-400_0-400_479": "XRGB 888 - white vertical line from 400, 0 - 400, 479 (one pixel short of bottom) ",
+        "2DLine-24-C00FFFFFF-400_300-400_301": "XRGB 888 - white dot at 400, 300 ",
+        "2DLine-24-C00FFFFFF-400_300-401_300": "XRGB 888 - white dot at 400, 300 ",
+        "2DLine-24-C00FFFFFF-639_479-0_0": "XRGB 888 - white diagonal line from 639, 479 - 0, 0 (one pixel short of the upper left corner) ",
+        "2DLine-24-CFFFFFFFF-100_100-100_400": "XRGB 888 - white vertical line from 100, 100 - 100, 400 - alpha is ignored "
+      }
+    },
+    {
+      "class": "VertexShaderIndependenceTests",
+      "description": [],
+      "source_file": "src/tests/vertex_shader_independence_tests.h",
+      "source_file_line": 13,
+      "suite": "VertexShaderIndependenceTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "VertexShaderRoundingTests",
+      "description": [],
+      "source_file": "src/tests/vertex_shader_rounding_tests.h",
+      "source_file_line": 13,
+      "suite": "VertexShaderRoundingTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "VertexShaderSwizzleTests",
+      "description": [],
+      "source_file": "src/tests/vertex_shader_swizzle_tests.h",
+      "source_file_line": 13,
+      "suite": "VertexShaderSwizzleTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ViewportTests",
+      "description": [
+        "Tests the effects of NV097_SET_VIEWPORT_OFFSET and NV097_SET_VIEWPORT_SCALE on quads rendered via the fixed function and programmable pipelines."
+      ],
+      "source_file": "src/tests/viewport_tests.h",
+      "source_file_line": 19,
+      "suite": "ViewportTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "VolumeTextureTests",
+      "description": [],
+      "source_file": "src/tests/volume_texture_tests.h",
+      "source_file_line": 12,
+      "suite": "VolumeTextureTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "WindowClipTests",
+      "description": [],
+      "source_file": "src/tests/window_clip_tests.h",
+      "source_file_line": 13,
+      "suite": "WindowClipTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "WParamTests",
+      "description": [],
+      "source_file": "src/tests/w_param_tests.h",
+      "source_file_line": 9,
+      "suite": "WParamTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ZeroStrideTests",
+      "description": [],
+      "source_file": "src/tests/zero_stride_tests.h",
+      "source_file_line": 15,
+      "suite": "ZeroStrideTests",
+      "test_descriptions": {}
+    },
+    {
+      "class": "ZMinMaxControlTests",
+      "description": [],
+      "source_file": "src/tests/z_min_max_control_tests.h",
+      "source_file_line": 14,
+      "suite": "ZMinMaxControlTests",
+      "test_descriptions": {}
+    }
+  ]
+}

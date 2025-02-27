@@ -1,0 +1,7 @@
+<map id="FlatMeshGridModel" name="FlatMeshGridModel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="18,152,167,177"/>
+<area shape="rect" id="Node000002" href="$d8/d22/classSolidColorModelBuilder.html" title="Builder for untextured models." alt="" coords="5,79,180,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,118,95,152,90,152,90,118"/>
+<area shape="rect" id="Node000003" href="$de/dfe/classModelBuilder.html" title="A factory for model meshes." alt="" coords="39,5,147,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,44,95,79,90,79,90,44"/>
+</map>

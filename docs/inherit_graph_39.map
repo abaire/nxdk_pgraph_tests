@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d3/db1/structTestHost_1_1CombinerInput.html" title=" " alt="" coords="5,104,188,129"/>
+<area shape="rect" id="Node000001" href="$d9/da8/structTestHost_1_1AlphaInput.html" title=" " alt="" coords="260,5,416,31"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="128,94,177,66,235,40,271,28,273,33,237,44,180,71,131,99"/>
+<area shape="rect" id="Node000002" href="$d0/d6c/structTestHost_1_1ColorInput.html" title=" " alt="" coords="261,55,415,80"/>
+<area shape="poly" id="edge16_Node000000_Node000002" title=" " alt="" coords="172,99,274,77,276,83,173,104"/>
+<area shape="rect" id="Node000003" href="$d5/df4/structTestHost_1_1NegativeOneInput.html" title=" " alt="" coords="236,104,440,129"/>
+<area shape="poly" id="edge17_Node000000_Node000003" title=" " alt="" coords="202,114,236,114,236,119,202,119"/>
+<area shape="rect" id="Node000004" href="$d9/de7/structTestHost_1_1OneInput.html" title=" " alt="" coords="265,153,411,179"/>
+<area shape="poly" id="edge18_Node000000_Node000004" title=" " alt="" coords="173,130,276,151,274,156,172,135"/>
+<area shape="rect" id="Node000005" href="$d5/d56/structTestHost_1_1ZeroInput.html" title=" " alt="" coords="263,203,413,228"/>
+<area shape="poly" id="edge19_Node000000_Node000005" title=" " alt="" coords="131,134,180,161,237,188,277,200,275,205,235,192,178,166,129,139"/>
+</map>
