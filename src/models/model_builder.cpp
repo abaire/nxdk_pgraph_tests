@@ -4,7 +4,7 @@
 
 using namespace XboxMath;
 
-void ModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices) const {
+void ModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices) {
   auto vertex = vertices->Lock();
   auto position = GetVertexPositions();
   auto normal = GetVertexNormals();
@@ -17,11 +17,11 @@ void ModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& ver
     vertex->SetDiffuseGrey(1.f);
     vertex->SetSpecularGrey(1.f);
   }
+  ReleaseData();
   vertices->Unlock();
 }
 
-void ModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices,
-                                        const float* transformation) const {
+void ModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices, const float* transformation) {
   matrix4_t trans_mat;
   memcpy(trans_mat, transformation, sizeof(trans_mat));
   auto position = GetVertexPositions();
@@ -37,6 +37,7 @@ void ModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& ver
     vertex->SetDiffuseGrey(1.f);
     vertex->SetSpecularGrey(1.f);
   }
+  ReleaseData();
   vertices->Unlock();
 }
 
@@ -50,14 +51,14 @@ SolidColorModelBuilder::SolidColorModelBuilder(const XboxMath::vector_t& diffuse
 }
 
 //! Populates the given VertexBuffer with model data.
-void SolidColorModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices) const {
+void SolidColorModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices) {
   ModelBuilder::PopulateVertexBuffer(vertices);
   ApplyColors(vertices);
 }
 
 //! Populates the given VertexBuffer with transformed model data.
 void SolidColorModelBuilder::PopulateVertexBuffer(const std::shared_ptr<VertexBuffer>& vertices,
-                                                  const float* transformation) const {
+                                                  const float* transformation) {
   ModelBuilder::PopulateVertexBuffer(vertices, reinterpret_cast<const float*>(transformation));
   ApplyColors(vertices);
 }

@@ -4,11 +4,13 @@
 # ruff: noqa: N806 Variable in function should be lowercase
 # ruff: noqa: T201 `print` found
 # ruff: noqa: S314 Using `xml` to parse untrusted data is known to be vulnerable to XML attacks; use `defusedxml` equivalents
+# ruff: noqa: FLY002 Consider f-string instead of string join
 
 from __future__ import annotations
 
 import argparse
 import os
+import struct
 import sys
 from xml.etree import ElementTree
 
@@ -19,7 +21,7 @@ def convert(data: str) -> list[float]:
     return [float(x) for x in data.split(" ")]
 
 
-def matrix_mult_vertex(matrix, vertex):
+def matrix_mult_vertex(matrix: list[float], vertex: list[float]) -> list[float]:
     a = matrix
     b = [vertex[0], vertex[1], vertex[2], 1.0]
     ret = [0.0, 0.0, 0.0, 1.0]
@@ -30,8 +32,8 @@ def matrix_mult_vertex(matrix, vertex):
     return ret
 
 
-def transform(values, transform_matrix):
-    ret = []
+def transform(values: list[float], transform_matrix: list[float]) -> list[float]:
+    ret: list[float] = []
     for offset in range(0, len(values), 3):
         vertex = values[offset : offset + 3]
         transformed = matrix_mult_vertex(transform_matrix, vertex)
@@ -44,10 +46,21 @@ def transform(values, transform_matrix):
 class ColadaConverter:
     """Converts a Collada DAE file into a C header."""
 
-    def __init__(self, output_file_base: str, *, switch_winding: bool):
+    def __init__(
+            self,
+            *,
+            output_file_base: str,
+            switch_winding: bool,
+            generate_inline: bool,
+            mesh_resource_dir: str,
+            use_posix_paths: str,
+    ):
         self._switch_winding_enabled = switch_winding
         self._transforms: dict[str, list[float]] = {}
         self.output_file_base = output_file_base
+        self._generate_inline = generate_inline
+        self._mesh_resource_dir = mesh_resource_dir
+        self._use_posix_paths = use_posix_paths
 
     def switch_winding(self, indices):
         if not self._switch_winding_enabled:
@@ -215,13 +228,20 @@ class ColadaConverter:
         DESIRED_COMPONENTS = {"POSITION", "NORMAL", "TEXCOORD"}
         flattened_values = self.flatten_values(DESIRED_COMPONENTS, processed_sources, source_sizes, split_indices)
 
-        self._write_mesh_header(mesh_name, flattened_values, transform_matrix, mesh)
+        if self._generate_inline:
+            self._write_mesh_header(mesh_name, flattened_values, transform_matrix, mesh)
+        else:
+            self._write_mesh_resource(mesh_name, flattened_values, transform_matrix, mesh)
         self._write_model_header(mesh_name)
         self._write_model_impl(mesh_name)
 
     def build_mesh_header_filename(self, mesh_name: str) -> str:
         artifact_root = os.path.basename(self.output_file_base)
         return f"{artifact_root}_{mesh_name.lower()}_mesh.h"
+
+    def build_mesh_resource_filename(self, mesh_name: str) -> str:
+        artifact_root = os.path.basename(self.output_file_base)
+        return f"{artifact_root}_{mesh_name.lower()}.mesh"
 
     def build_model_header_filename(self, mesh_name: str) -> str:
         artifact_root = os.path.basename(self.output_file_base)
@@ -233,6 +253,50 @@ class ColadaConverter:
 
     def build_header_guard(self, mesh_name: str, suffix: str) -> str:
         return f"_{self.output_file_base.upper()}_{mesh_name.upper()}_{suffix.upper()}_H_"
+
+    def _write_mesh_resource(
+            self,
+            mesh_name: str,
+            flattened_values: dict[str, list[float]],
+            transform_matrix: list[float],
+            mesh: ElementTree.Element,
+    ):
+        with open(self.build_mesh_resource_filename(mesh_name), "wb") as outfile:
+            triangles = mesh.find(f"{SCHEMA}triangles")
+            num_vertices = int(triangles.attrib["count"]) * 3
+
+            # 4-byte vertex count
+            outfile.write(struct.pack("<i", num_vertices))
+
+            position_values = flattened_values.get("POSITION", [])
+            position_values = transform(position_values, transform_matrix)
+            # 4-byte position count
+            if len(position_values) // 3 != num_vertices:
+                raise ValueError
+            outfile.write(struct.pack("<i", len(position_values)))
+            for offset in range(0, len(position_values), 3):
+                vertex = [
+                    position_values[offset],
+                    position_values[offset + 2],
+                    position_values[offset + 1],
+                ]
+                outfile.write(struct.pack("<fff", *vertex))
+
+            normal_values = flattened_values.get("NORMAL", [])
+            normal_values = transform(normal_values, transform_matrix)
+            outfile.write(struct.pack("<i", len(normal_values)))
+            for offset in range(0, len(normal_values), 3):
+                vertex = [
+                    normal_values[offset],
+                    normal_values[offset + 2],
+                    normal_values[offset + 1],
+                ]
+                outfile.write(struct.pack("<fff", *vertex))
+
+            texcoord_values = flattened_values.get("TEXCOORD", [])
+            outfile.write(struct.pack("<i", len(texcoord_values)))
+            for value in texcoord_values:
+                outfile.write(struct.pack("<f", value))
 
     def _write_mesh_header(
             self,
@@ -300,7 +364,10 @@ class ColadaConverter:
                         f"#ifndef {header_guard}",
                         f"#define {header_guard}",
                         "",
+                        "#include <cstdint>",
+                        "",
                         '#include "model_builder.h"',
+                        '#include "xbox_math_types.h"',
                         "",
                         f"class {class_name} : public SolidColorModelBuilder {{",
                         " public:",
@@ -310,8 +377,42 @@ class ColadaConverter:
                         "  [[nodiscard]] uint32_t GetVertexCount() const override;",
                         "",
                         " protected:",
-                        "   [[nodiscard]] const float *GetVertexPositions() const override;",
-                        "   [[nodiscard]] const float *GetVertexNormals() const override;",
+                        "  [[nodiscard]] const float *GetVertexPositions() override;",
+                        "  [[nodiscard]] const float *GetVertexNormals() override;",
+                    ]
+                )
+            )
+
+            if not self._generate_inline:
+                outfile.write(
+                    "\n".join(
+                        [
+                            "  void ReleaseData() override {",
+                            "    if (vertices_) {",
+                            "      delete[] vertices_;",
+                            "      vertices_ = nullptr;",
+                            "    }",
+                            "    if (normals_) {",
+                            "      delete[] normals_;",
+                            "      normals_ = nullptr;",
+                            "    }",
+                            "    if (texcoords_) {",
+                            "      delete[] texcoords_;",
+                            "      texcoords_ = nullptr;",
+                            "    }",
+                            "  }",
+                            "",
+                            "  float *vertices_{nullptr};",
+                            "  float *normals_{nullptr};",
+                            "  float *texcoords_{nullptr};",
+                            "",
+                        ]
+                    )
+                )
+
+            outfile.write(
+                "\n".join(
+                    [
                         "};",
                         "",
                         f"#endif  // {header_guard}",
@@ -321,7 +422,6 @@ class ColadaConverter:
 
     def _write_model_impl(self, mesh_name: str):
         model_header = self.build_model_header_filename(mesh_name)
-        mesh_header = self.build_mesh_header_filename(mesh_name)
         with open(f"{os.path.splitext(model_header)[0]}.cpp", "w") as outfile:
             class_name = self.build_model_class_name(mesh_name)
             outfile.write(
@@ -331,15 +431,100 @@ class ColadaConverter:
                         "",
                         f'#include "{model_header}"',
                         "",
-                        f'#include "{mesh_header}"',
-                        "",
-                        f"uint32_t {class_name}::GetVertexCount() const {{ return kNumVertices; }}",
-                        f"const float* {class_name}::GetVertexPositions() const {{ return kPosition; }}",
-                        f"const float* {class_name}::GetVertexNormals() const {{ return kNormal; }}",
-                        "",
                     ]
                 )
             )
+
+            if self._generate_inline:
+                mesh_header = self.build_mesh_header_filename(mesh_name)
+                outfile.write(
+                    "\n".join(
+                        [
+                            f'#include "{mesh_header}"',
+                            "",
+                            f"uint32_t {class_name}::GetVertexCount() const {{ return kNumVertices; }}",
+                            f"const float* {class_name}::GetVertexPositions() {{ return kPosition; }}",
+                            f"const float* {class_name}::GetVertexNormals() {{ return kNormal; }}",
+                            "",
+                        ]
+                    )
+                )
+            else:
+                sep = "/" if self._use_posix_paths else "\\"
+                if self._mesh_resource_dir:
+                    parent_dir = self._mesh_resource_dir.replace("/", sep).replace("\\", sep)
+                    mesh_resource = sep.join([parent_dir, self.build_mesh_resource_filename(mesh_name)])
+                    mesh_resource = mesh_resource.replace("\\", "\\\\")
+                else:
+                    mesh_resource = self.build_mesh_resource_filename(mesh_name)
+
+                outfile.write(
+                    "\n".join(
+                        [
+                            "#include <stdio.h>",
+                            "",
+                            '#include "debug_output.h"',
+                            "",
+                            "#define READ(target, size) \\",
+                            "    if (fread((target), (size), 1, fp) != 1) { \\",
+                            f'      ASSERT(!"Failed to read from {mesh_resource}"); \\',
+                            "    }",
+                            "",
+                            "#define READ_ARRAY(target, size, elements) \\",
+                            "    if (fread((target), (size), (elements), fp) != (elements)) { \\",
+                            f'      ASSERT(!"Failed to read from {mesh_resource}"); \\',
+                            "    }",
+                            "",
+                            "#define SKIP(size) \\",
+                            "    if (fseek(fp, (size), SEEK_CUR)) { \\",
+                            f'      ASSERT(!"Failed to seek in {mesh_resource}"); \\',
+                            "    }",
+                            "",
+                            f"uint32_t {class_name}::GetVertexCount() const {{",
+                            f'  FILE *fp = fopen("{mesh_resource}", "rb");',
+                            f'  ASSERT(fp && "Failed to open {mesh_resource}");',
+                            "  uint32_t num_vertices;",
+                            "  READ(&num_vertices, sizeof(num_vertices))",
+                            "  fclose(fp);",
+                            "  return num_vertices;",
+                            "}",
+                            "",
+                            f"const float* {class_name}::GetVertexPositions() {{",
+                            '  ASSERT(!vertices_ && "vertices_ already populated")',
+                            f'  FILE *fp = fopen("{mesh_resource}", "rb");',
+                            f'  ASSERT(fp && "Failed to open {mesh_resource}");',
+                            "  SKIP(sizeof(uint32_t))",
+                            "",
+                            "  uint32_t num_positions;",
+                            "  READ(&num_positions, sizeof(num_positions))",
+                            "",
+                            "  vertices_ = new float[num_positions];",
+                            "  READ_ARRAY(vertices_, sizeof(*vertices_), num_positions)",
+                            "  fclose(fp);",
+                            "  return vertices_;",
+                            "}",
+                            "",
+                            f"const float* {class_name}::GetVertexNormals() {{",
+                            '  ASSERT(!normals_ && "normals_ already populated")',
+                            f'  FILE *fp = fopen("{mesh_resource}", "rb");',
+                            f'  ASSERT(fp && "Failed to open {mesh_resource}");',
+                            "  SKIP(sizeof(uint32_t))",
+                            "",
+                            "  uint32_t num_positions;",
+                            "  READ(&num_positions, sizeof(num_positions))",
+                            "  SKIP(sizeof(float) * num_positions)",
+                            "",
+                            "  uint32_t num_normals;" "  READ(&num_normals, sizeof(num_normals))",
+                            "  normals_ = new float[num_normals];",
+                            "  READ_ARRAY(normals_, sizeof(*normals_), num_normals)",
+                            "  fclose(fp);",
+                            "",
+                            "  return normals_;",
+                            "}",
+                            "",
+                        ]
+                    )
+                )
 
 
 def _main(args):
@@ -350,7 +535,13 @@ def _main(args):
 
     geometries = root.findall(f".//{SCHEMA}library_geometries/{SCHEMA}geometry")
 
-    processor = ColadaConverter(output_file_base=output_file, switch_winding=args.switch_winding)
+    processor = ColadaConverter(
+        output_file_base=output_file,
+        switch_winding=not args.keep_winding,
+        generate_inline=args.inline,
+        mesh_resource_dir=args.mesh_resource_dir,
+        use_posix_paths=args.use_posix_paths,
+    )
 
     transforms = root.findall(f".//{SCHEMA}library_visual_scenes/{SCHEMA}visual_scene/{SCHEMA}node")
     for transform in transforms:
@@ -372,10 +563,10 @@ if __name__ == "__main__":
         )
 
         parser.add_argument(
-            "--switch-winding",
-            "-w",
+            "--keep-winding",
+            "-k",
             action="store_true",
-            help="Swaps the winding order of triangles",
+            help="Keeps the winding order of triangles",
         )
 
         parser.add_argument(
@@ -383,6 +574,20 @@ if __name__ == "__main__":
             "-o",
             help="Provides the base name (no extension) of the files into which C output should be written. Defaults to the DAE file without extension.",
         )
+
+        parser.add_argument(
+            "--inline",
+            action="store_true",
+            help="Generates source files for meshes instead of runtime-loaded resources.",
+        )
+
+        parser.add_argument(
+            "--mesh-resource-dir",
+            default="d:\\models",
+            help="Sets the path at which resource files will be loaded at runtime.",
+        )
+
+        parser.add_argument("--use-posix-paths", action="store_true", help="Use POSIX-style paths in generated code.")
 
         return parser.parse_args()
 

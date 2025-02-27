@@ -183,7 +183,8 @@ void TestSuite::Initialize() {
   host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false,
                           false, TestHost::SRC_R0);
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
-                          false, false, false, true);
+                          false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
+                          /* specular_clamp */ true);
 
   host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE);
 
