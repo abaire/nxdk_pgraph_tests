@@ -9,6 +9,14 @@
 
 class TestHost;
 
+/**
+ * Tests the behavior of NV097_SET_STENCIL_OP_ZPASS.
+ *
+ * Each test renders a red quad, then enables stencil testing, renders a
+ * smaller quad into the depth/stencil buffer to update stencil values, then
+ * renders a green quad over the original red. Areas that pass the stencil test
+ * will be green, other areas will remain red.
+ */
 class StencilTests : public TestSuite {
  public:
   struct StencilParams {

@@ -129,6 +129,8 @@ add_library(
         models/light_control_test_mesh_torus_model.h
         models/model_builder.cpp
         models/model_builder.h
+        light.cpp
+        light.h
         logger.cpp
         logger.h
         pbkit_ext.cpp
