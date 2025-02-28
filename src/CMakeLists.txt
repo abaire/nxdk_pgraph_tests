@@ -385,6 +385,8 @@ add_executable(
         tests/viewport_tests.h
         tests/volume_texture_tests.cpp
         tests/volume_texture_tests.h
+        tests/wbuf_tests.cpp
+        tests/wbuf_tests.h
         tests/w_param_tests.cpp
         tests/w_param_tests.h
         tests/weight_setter_tests.cpp
