@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/df1/classLightControlTestMeshConeModel" kind="class" language="C++" prot="public">
+    <compoundname>LightControlTestMeshConeModel</compoundname>
+    <basecompoundref refid="d8/d22/classSolidColorModelBuilder" prot="public" virt="non-virtual">SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d6/df1/classLightControlTestMeshConeModel_1a362e01cd8bd7f032cb1ddf94338761cb" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshConeModel::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>LightControlTestMeshConeModel::vertices_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="36" column="9" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/df1/classLightControlTestMeshConeModel_1afb0935fc11870cab2954520cee1beb2c" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshConeModel::normals_</definition>
+        <argsstring></argsstring>
+        <name>normals_</name>
+        <qualifiedname>LightControlTestMeshConeModel::normals_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="37" column="9" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/df1/classLightControlTestMeshConeModel_1aad0896132e51349cfbf150d0b09fa00e" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshConeModel::texcoords_</definition>
+        <argsstring></argsstring>
+        <name>texcoords_</name>
+        <qualifiedname>LightControlTestMeshConeModel::texcoords_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="38" column="9" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="38" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/df1/classLightControlTestMeshConeModel_1a1adffde2eb19b4806e021b4b8113e719" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshConeModel::LightControlTestMeshConeModel</definition>
+        <argsstring>()</argsstring>
+        <name>LightControlTestMeshConeModel</name>
+        <qualifiedname>LightControlTestMeshConeModel::LightControlTestMeshConeModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="12" column="3" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/df1/classLightControlTestMeshConeModel_1a4de265b5e3cb15e486b72846b950372a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshConeModel::LightControlTestMeshConeModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>LightControlTestMeshConeModel</name>
+        <qualifiedname>LightControlTestMeshConeModel::LightControlTestMeshConeModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="13" column="3" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/df1/classLightControlTestMeshConeModel_1a6f69a7e118773380a16f83aa2d7a3626" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t LightControlTestMeshConeModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>LightControlTestMeshConeModel::GetVertexCount</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8">GetVertexCount</reimplements>
+        <briefdescription>
+<para>Returns the number of kPositions required to hold the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="16" column="13" bodyfile="src/models/light_control_test_mesh_cone_model.cpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d6/df1/classLightControlTestMeshConeModel_1a513990d5c160b5ed3bb314d8f7a9cc8d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshConeModel::GetVertexPositions</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>LightControlTestMeshConeModel::GetVertexPositions</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a607f16ec708c56840600b0b59c611b86">GetVertexPositions</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="19" column="16" bodyfile="src/models/light_control_test_mesh_cone_model.cpp" bodystart="33" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/df1/classLightControlTestMeshConeModel_1a2303712c7939653d7a7027c7160d080d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshConeModel::GetVertexNormals</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>LightControlTestMeshConeModel::GetVertexNormals</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a40da29eb81f67fece2865c7fe9d75668">GetVertexNormals</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="20" column="16" bodyfile="src/models/light_control_test_mesh_cone_model.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/df1/classLightControlTestMeshConeModel_1ad765d91f99ed2cf30f8e116631d43358" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void LightControlTestMeshConeModel::ReleaseData</definition>
+        <argsstring>() override</argsstring>
+        <name>ReleaseData</name>
+        <qualifiedname>LightControlTestMeshConeModel::ReleaseData</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1aed68c90f36cf2fd3c0ebce5535900d92">ReleaseData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cone_model.h" line="21" column="8" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="21" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightControlTestMeshConeModel</label>
+        <link refid="d6/df1/classLightControlTestMeshConeModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightControlTestMeshConeModel</label>
+        <link refid="d6/df1/classLightControlTestMeshConeModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/light_control_test_mesh_cone_model.h" line="10" column="1" bodyfile="src/models/light_control_test_mesh_cone_model.h" bodystart="10" bodyend="39"/>
+    <listofallmembers>
+      <member refid="d8/d22/classSolidColorModelBuilder_1ab82b3bba802766d064d0eb52d5b9ed1a" prot="protected" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>diffuse_</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1a6f69a7e118773380a16f83aa2d7a3626" prot="public" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>GetVertexCount</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1a2303712c7939653d7a7027c7160d080d" prot="protected" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>GetVertexNormals</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1a513990d5c160b5ed3bb314d8f7a9cc8d" prot="protected" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>GetVertexPositions</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1a1adffde2eb19b4806e021b4b8113e719" prot="public" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>LightControlTestMeshConeModel</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1a4de265b5e3cb15e486b72846b950372a" prot="public" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>LightControlTestMeshConeModel</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1afb0935fc11870cab2954520cee1beb2c" prot="protected" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>normals_</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1ab94ea31c8580d3bf0aae188e3a2fa100" prot="public" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1aea7e75f21aa199682051b418eefffe4d" prot="public" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1ad765d91f99ed2cf30f8e116631d43358" prot="protected" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>ReleaseData</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1adac731f8ff60d9b9d48c26ecff1ab035" prot="public" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1af3c8579bd316ac79e1bd067dbce677c2" prot="public" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a1c51802b88cc39ec65b7a5b6f7051847" prot="protected" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>specular_</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1aad0896132e51349cfbf150d0b09fa00e" prot="protected" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>texcoords_</name></member>
+      <member refid="d6/df1/classLightControlTestMeshConeModel_1a362e01cd8bd7f032cb1ddf94338761cb" prot="protected" virt="non-virtual"><scope>LightControlTestMeshConeModel</scope><name>vertices_</name></member>
+      <member refid="de/dfe/classModelBuilder_1a863d4bf0e4318c57683197645615baf4" prot="public" virt="virtual"><scope>LightControlTestMeshConeModel</scope><name>~ModelBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

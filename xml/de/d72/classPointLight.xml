@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d72/classPointLight" kind="class" language="C++" prot="public">
+    <compoundname>PointLight</compoundname>
+    <basecompoundref refid="d9/de7/classLight" prot="public" virt="non-virtual">Light</basecompoundref>
+    <includes refid="dd/dd3/light_8h" local="no">light.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="de/d72/classPointLight_1afab15538248b706978e2fcc5265c9949" prot="private" static="no" mutable="no">
+        <type>XboxMath::vector_t</type>
+        <definition>XboxMath::vector_t PointLight::position_</definition>
+        <argsstring></argsstring>
+        <name>position_</name>
+        <qualifiedname>PointLight::position_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="190" column="22" bodyfile="src/light.h" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d72/classPointLight_1a32b54fd613d645df114160717089198b" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointLight::range_</definition>
+        <argsstring></argsstring>
+        <name>range_</name>
+        <qualifiedname>PointLight::range_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="192" column="9" bodyfile="src/light.h" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d72/classPointLight_1a69f6838ae1a9405bcb34a118d09c1d6b" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointLight::attenuation_[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>attenuation_</name>
+        <qualifiedname>PointLight::attenuation_</qualifiedname>
+        <briefdescription>
+<para>Attenuation: {constant, linear (distance), quadratic (distance^2)}. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="195" column="9" bodyfile="src/light.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/d72/classPointLight_1a6ff2d7598949a2801bc8bd52409dcaa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PointLight::PointLight</definition>
+        <argsstring>()=delete</argsstring>
+        <name>PointLight</name>
+        <qualifiedname>PointLight::PointLight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="171" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d72/classPointLight_1ae2aade444101b97137dc266a8d68fdb0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PointLight::PointLight</definition>
+        <argsstring>(uint32_t light_index, const XboxMath::vector_t &amp;position, float range, float attenuation_constant, float attenuation_linear, float attenuation_quadratic)</argsstring>
+        <name>PointLight</name>
+        <qualifiedname>PointLight::PointLight</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>light_index</declname>
+        </param>
+        <param>
+          <type>const XboxMath::vector_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>attenuation_constant</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>attenuation_linear</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>attenuation_quadratic</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a new <ref refid="de/d72/classPointLight" kindref="compound">PointLight</ref> instance. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>light_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Hardware light index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>World coordinates of the spotlight </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>World coordinate maximum range of the light </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attenuation_constant</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constant attenuation factor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attenuation_linear</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Linear attenuation factor </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attenuation_quadratic</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Quadratic attenuation factor</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Attenuation = param1 + (param2 * d) + (param3 * d^2) where d = distance from light to vertex. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="184" column="3" bodyfile="src/light.cpp" bodystart="136" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d72/classPointLight_1ab2d65cb2583472ad9d8ccef946dc7b45" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void PointLight::Commit</definition>
+        <argsstring>(TestHost &amp;host) const override</argsstring>
+        <name>Commit</name>
+        <qualifiedname>PointLight::Commit</qualifiedname>
+        <reimplements refid="d9/de7/classLight_1a08e4c16eb7ebca18fdcabea9184d09f3">Commit</reimplements>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="187" column="8" bodyfile="src/light.cpp" bodystart="146" bodyend="159"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Sets up a point light source. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Light</label>
+        <link refid="d9/de7/classLight"/>
+      </node>
+      <node id="1">
+        <label>PointLight</label>
+        <link refid="de/d72/classPointLight"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Light</label>
+        <link refid="d9/de7/classLight"/>
+      </node>
+      <node id="1">
+        <label>PointLight</label>
+        <link refid="de/d72/classPointLight"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/light.h" line="169" column="1" bodyfile="src/light.h" bodystart="169" bodyend="196"/>
+    <listofallmembers>
+      <member refid="d9/de7/classLight_1a7d884afd5774c199bdb65ed3031f1808" prot="protected" virt="non-virtual"><scope>PointLight</scope><name>ambient_</name></member>
+      <member refid="de/d72/classPointLight_1a69f6838ae1a9405bcb34a118d09c1d6b" prot="private" virt="non-virtual"><scope>PointLight</scope><name>attenuation_</name></member>
+      <member refid="de/d72/classPointLight_1ab2d65cb2583472ad9d8ccef946dc7b45" prot="public" virt="virtual"><scope>PointLight</scope><name>Commit</name></member>
+      <member refid="d9/de7/classLight_1a4dea2fdb959855993b0a3a076a65d6b1" prot="public" virt="virtual" ambiguityscope="Light::"><scope>PointLight</scope><name>Commit</name></member>
+      <member refid="d9/de7/classLight_1a3f3d015dc4ed1d1faf4d4a05a01a8f7b" prot="protected" virt="non-virtual"><scope>PointLight</scope><name>diffuse_</name></member>
+      <member refid="d9/de7/classLight_1a4b679e431c70b5a07e82062d768a4b66" prot="protected" virt="non-virtual"><scope>PointLight</scope><name>Light</name></member>
+      <member refid="d9/de7/classLight_1a9aa222d8181018072d8174e9d1ddc356" prot="public" virt="non-virtual"><scope>PointLight</scope><name>light_enable_mask</name></member>
+      <member refid="d9/de7/classLight_1a3161a67ab691310803263e59b98c9d34" prot="protected" virt="non-virtual"><scope>PointLight</scope><name>light_enable_mask_</name></member>
+      <member refid="d9/de7/classLight_1a51e7112ee24047a6dd5d21c8d8ebab9a" prot="protected" virt="non-virtual"><scope>PointLight</scope><name>light_index_</name></member>
+      <member refid="de/d72/classPointLight_1a6ff2d7598949a2801bc8bd52409dcaa9" prot="public" virt="non-virtual"><scope>PointLight</scope><name>PointLight</name></member>
+      <member refid="de/d72/classPointLight_1ae2aade444101b97137dc266a8d68fdb0" prot="public" virt="non-virtual"><scope>PointLight</scope><name>PointLight</name></member>
+      <member refid="de/d72/classPointLight_1afab15538248b706978e2fcc5265c9949" prot="private" virt="non-virtual"><scope>PointLight</scope><name>position_</name></member>
+      <member refid="de/d72/classPointLight_1a32b54fd613d645df114160717089198b" prot="private" virt="non-virtual"><scope>PointLight</scope><name>range_</name></member>
+      <member refid="d9/de7/classLight_1aa43d04a4d1fae33c82440dd90eaf9898" prot="public" virt="non-virtual"><scope>PointLight</scope><name>SetAmbient</name></member>
+      <member refid="d9/de7/classLight_1aa983623eb68ca3f60dad6f744f70be88" prot="public" virt="non-virtual"><scope>PointLight</scope><name>SetAmbient</name></member>
+      <member refid="d9/de7/classLight_1a4bacc08a24cfed52c72229a1deed0387" prot="public" virt="non-virtual"><scope>PointLight</scope><name>SetDiffuse</name></member>
+      <member refid="d9/de7/classLight_1a81e7b3f3274ff580c99aade404064ef3" prot="public" virt="non-virtual"><scope>PointLight</scope><name>SetDiffuse</name></member>
+      <member refid="d9/de7/classLight_1a9f5052e9340d6fe686cdcd48cb9cd67a" prot="public" virt="non-virtual"><scope>PointLight</scope><name>SetSpecular</name></member>
+      <member refid="d9/de7/classLight_1a6f396ddba1143a850727f22768128335" prot="public" virt="non-virtual"><scope>PointLight</scope><name>SetSpecular</name></member>
+      <member refid="d9/de7/classLight_1addb105b4daea93d32865a575a097f388" prot="protected" virt="non-virtual"><scope>PointLight</scope><name>specular_</name></member>
+      <member refid="d9/de7/classLight_1ae3e3209d4b97d0bbbd614ded5e1213d9" prot="protected" virt="virtual"><scope>PointLight</scope><name>~Light</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
