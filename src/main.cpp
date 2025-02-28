@@ -19,6 +19,7 @@
 #include <lwip/inet.h>
 #include <lwip/netif.h>
 #include <nxdk/net.h>
+#include <tests/occlude_zstencil_tests.h>
 
 #include <algorithm>
 #include <fstream>
@@ -403,6 +404,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(MaterialColorTests)
   REG_TEST(MaterialColorSourceTests)
   REG_TEST(NullSurfaceTests)
+  REG_TEST(OccludeZStencilTests)
   REG_TEST(OverlappingDrawModesTests)
   REG_TEST(PointParamsTests)
   REG_TEST(PointSizeTests)

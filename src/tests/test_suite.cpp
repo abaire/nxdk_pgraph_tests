@@ -157,6 +157,8 @@ void TestSuite::Initialize() {
 
     p = pb_push1(p, NV097_SET_SHADE_MODEL, NV097_SET_SHADE_MODEL_SMOOTH);
     p = pb_push1(p, NV097_SET_FLAT_SHADE_OP, NV097_SET_FLAT_SHADE_OP_VERTEX_LAST);
+
+    p = pb_push1(p, NV097_SET_OCCLUDE_ZSTENCIL_EN, 3);
     pb_end(p);
   }
 

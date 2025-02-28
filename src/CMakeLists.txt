@@ -260,6 +260,8 @@ add_executable(
         tests/material_color_tests.h
         tests/null_surface_tests.cpp
         tests/null_surface_tests.h
+        tests/occlude_zstencil_tests.cpp
+        tests/occlude_zstencil_tests.h
         tests/overlapping_draw_modes_tests.cpp
         tests/overlapping_draw_modes_tests.h
         tests/point_params_tests.cpp

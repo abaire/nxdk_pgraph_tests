@@ -105,6 +105,11 @@
 
 #define NV097_SET_SMOOTHING_CONTROL 0x00001D7C
 
+// From nv_objects.h
+// 0x00001d84
+// bit0:OcclusionCullEnable bit1:StencilCullEnable
+#define NV097_SET_OCCLUDE_ZSTENCIL_EN NV20_TCL_PRIMITIVE_3D_CULL_ENABLE
+
 // NV_PVIDEO_INTR is already defined in outer.h
 #define NV_PVIDEO_INTR_BUFFER_0 (1 << 0)
 #define NV_PVIDEO_INTR_BUFFER_1 (1 << 4)
