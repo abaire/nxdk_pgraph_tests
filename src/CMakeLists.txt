@@ -276,6 +276,8 @@ add_executable(
         tests/smoothing_tests.h
         tests/stencil_tests.cpp
         tests/stencil_tests.h
+        tests/stencil_func_tests.cpp
+        tests/stencil_func_tests.h
         tests/stipple_tests.cpp
         tests/stipple_tests.h
         tests/swath_width_tests.cpp

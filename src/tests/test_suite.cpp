@@ -267,7 +267,14 @@ void TestSuite::Initialize() {
     p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
     p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
     p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-    p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
+    p = pb_push1(p, NV097_SET_STENCIL_MASK, 0xFF);
+    // If the stencil comparison fails, leave the value in the stencil buffer alone.
+    p = pb_push1(p, NV097_SET_STENCIL_OP_FAIL, NV097_SET_STENCIL_OP_V_KEEP);
+    // If the stencil comparison passes but the depth comparison fails, leave the stencil buffer alone.
+    p = pb_push1(p, NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
+    // If the stencil comparison passes and the depth comparison passes, leave the stencil buffer alone.
+    p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
+    p = pb_push1(p, NV097_SET_STENCIL_FUNC_REF, 0x7F);
 
     p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
 

@@ -60,7 +60,7 @@ void StencilTests::Test(const StencilParams &params) {
     p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
     p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
     p = pb_push1(p, NV097_SET_STENCIL_MASK, 0xFF);
-    p = pb_push1(p, NV097_SET_STENCIL_FUNC, 0x207);
+    p = pb_push1(p, NV097_SET_STENCIL_FUNC, NV097_SET_STENCIL_FUNC_V_ALWAYS);
     p = pb_push1(p, NV097_SET_STENCIL_FUNC_REF, params.stencil_ref_value);
     p = pb_push1(p, NV097_SET_STENCIL_FUNC_MASK, 0xFF);
     p = pb_push1(p, NV097_SET_STENCIL_OP_FAIL, NV097_SET_STENCIL_OP_V_KEEP);
@@ -95,7 +95,7 @@ void StencilTests::Test(const StencilParams &params) {
     p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
     p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
     p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, true);
-    p = pb_push1(p, NV097_SET_STENCIL_FUNC, 0x202);
+    p = pb_push1(p, NV097_SET_STENCIL_FUNC, NV097_SET_STENCIL_FUNC_V_EQUAL);
     p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
     pb_end(p);
   }

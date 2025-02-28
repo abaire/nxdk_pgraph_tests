@@ -19,6 +19,7 @@
 #include <lwip/inet.h>
 #include <lwip/netif.h>
 #include <nxdk/net.h>
+#include <tests/stencil_func_tests.h>
 
 #include <algorithm>
 #include <fstream>
@@ -414,6 +415,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SurfaceClipTests)
   REG_TEST(SurfacePitchTests)
   REG_TEST(StencilTests)
+  REG_TEST(StencilFuncTests)
   REG_TEST(StippleTests)
   REG_TEST(TextureBorderTests)
   REG_TEST(TextureCPUUpdateTests)
