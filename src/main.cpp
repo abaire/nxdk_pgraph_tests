@@ -128,6 +128,7 @@
 #include "tests/viewport_tests.h"
 #include "tests/volume_texture_tests.h"
 #include "tests/w_param_tests.h"
+#include "tests/wbuf_tests.h"
 #include "tests/weight_setter_tests.h"
 #include "tests/window_clip_tests.h"
 #include "tests/z_min_max_control_tests.h"
@@ -529,6 +530,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(VertexShaderSwizzleTests)
   REG_TEST(ViewportTests)
   REG_TEST(VolumeTextureTests)
+  REG_TEST(WBufTests)
   REG_TEST(WeightSetterTests)
   REG_TEST(WindowClipTests)
   REG_TEST(WParamTests)
