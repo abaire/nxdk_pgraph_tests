@@ -26,6 +26,8 @@ class WParamTests : public TestSuite {
   void TestNegativeWTriangleStrip(bool texture_perspective_enable);
 
   void TestFixedFunctionZeroW(bool draw_quad, bool texture_perspective_enable);
+  void TestFixedFunctionZeroInfW(bool draw_quad, float w_multiplier);
+  void TestProgZeroInfW(bool draw_quad, float w_multiplier);
 
  private:
   std::shared_ptr<PBKitPlusPlus::VertexBuffer> triangle_strip_;
