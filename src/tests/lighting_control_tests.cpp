@@ -2,6 +2,7 @@
 
 #include <models/flat_mesh_grid_model.h>
 #include <pbkit/pbkit.h>
+#include <shaders/perspective_vertex_shader.h>
 
 #include "debug_output.h"
 #include "models/light_control_test_mesh_cone_model.h"
@@ -16,8 +17,26 @@
 #include "vertex_buffer.h"
 #include "xbox_math_matrix.h"
 
+#ifdef LIGHTING_CONTROL_VS_TESTS_ENABLED
+// clang-format off
+static const uint32_t kFixedFunctionApproximationShader[] = {
+#include "fixed_function_approximation_shader.vshinc"
+};
+// clang-format on
+#endif  // LIGHTING_CONTROL_VS_TESTS_ENABLED
+
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
+
+// From the left, pointing right and into the screen.
+static constexpr vector_t kDirectionalLightDir{1.f, 0.f, 1.f, 1.f};
+static constexpr vector_t kDirectionalLightAmbientColor{0.f, 0.f, 0.05f, 0.f};
+static constexpr vector_t kDirectionalLightDiffuseColor{0.25f, 0.f, 0.f, 0.f};
+static constexpr vector_t kDirectionalLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
+
+static constexpr vector_t kPointLightAmbientColor{0.f, 0.f, 0.05f, 0.f};
+static constexpr vector_t kPointLightDiffuseColor{0.25f, 0.f, 0.f, 0.f};
+static constexpr vector_t kPointLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
 
 static std::string MakeTestName(uint32_t light_control, bool is_fixed_function, bool specular_enabled) {
   char buf[32] = {0};
@@ -148,11 +167,16 @@ LightingControlTests::LightingControlTests(TestHost& host, std::string output_di
           uint32_t light_control = (sout * NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR) +
                                    (local_eye * NV097_SET_LIGHT_CONTROL_V_LOCALEYE) +
                                    (separate_specular * NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
-          // TODO: Implement vertex shader tests.
+
           std::string test_name = MakeTestName(light_control, true, specular_enabled);
           tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
-            this->TestFixed(test_name, light_control, specular_enabled);
+            this->Test(test_name, light_control, specular_enabled, true);
           };
+
+          // test_name = MakeTestName(light_control, false, specular_enabled);
+          // tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
+          //   this->Test(test_name, light_control, specular_enabled, false);
+          // };
         }
       }
     }
@@ -205,10 +229,6 @@ void LightingControlTests::CreateGeometry() {
 
 void LightingControlTests::Initialize() {
   TestSuite::Initialize();
-
-  host_.SetVertexShaderProgram(nullptr);
-  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-
   CreateGeometry();
 }
 
@@ -216,10 +236,6 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, specular_enabled);
-
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
 
   p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, 0.031373, 0.031373, 0.031373);
 
@@ -249,10 +265,8 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
   // Directional light from the left pointing towards the right and into the screen.
   {
     constexpr uint32_t kLightNum = 0;
-
-    // From the left, pointing right and into the screen.
-    vector_t light_dir{1.f, 0.f, 1.f, 1.f};
-    VectorNormalize(light_dir);
+    vector_t normalized_light_dir{0.f, 0.f, 0.f, 1.f};
+    VectorNormalize(kDirectionalLightDir, normalized_light_dir);
 
     // Calculate the Blinn half vector.
     // https://paroj.github.io/gltut/Illumination/Tut11%20BlinnPhong%20Model.html
@@ -266,19 +280,19 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
     VectorNormalize(look_dir);
 
     vector_t half_angle_vector{0.f, 0.f, 0.f, 1.f};
-    VectorAddVector(look_dir, light_dir, half_angle_vector);
+    VectorAddVector(look_dir, normalized_light_dir, half_angle_vector);
     VectorNormalize(half_angle_vector);
 
     // Infinite direction is the direction towards the light source.
-    ScalarMultVector(light_dir, -1.f);
+    ScalarMultVector(normalized_light_dir, -1.f);
     ScalarMultVector(half_angle_vector, -1.f);
 
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), 0.f, 0.f, 0.05f);
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), 0.25f, 0.f, 0.f);
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), 0.f, 0.2f, 0.4f);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), kDirectionalLightAmbientColor);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), kDirectionalLightDiffuseColor);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), kDirectionalLightSpecularColor);
     p = pb_push1f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 1e30f);
     p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_HALF_VECTOR), half_angle_vector);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_DIRECTION), light_dir);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_DIRECTION), normalized_light_dir);
 
     light_mode_bitvector |= LIGHT_MODE(kLightNum, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
   }
@@ -291,9 +305,9 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
     VectorMultMatrix(position, view_matrix);
     position[3] = 1.f;
 
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), 0.f, 0.f, 0.05f);
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), 0.25f, 0.f, 0.f);
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), 0.f, 0.2f, 0.4f);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), kPointLightAmbientColor);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), kPointLightDiffuseColor);
+    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), kPointLightSpecularColor);
     p = pb_push1f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 4.f);
     p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_POSITION), position);
     // Attenuation = param1 + (param2 * d) + (param3 * d^2) where d = distance from light to surface.
@@ -373,15 +387,54 @@ static void DrawCheckerboardBackground(TestHost& host) {
   host.SetShaderStageProgram(TestHost::STAGE_NONE);
 }
 
-void LightingControlTests::TestFixed(const std::string& name, uint32_t light_control, bool specular_enabled) {
+#ifdef LIGHTING_CONTROL_VS_TESTS_ENABLED
+static void SetupVertexShader(TestHost& host) {
+  // Use a custom shader that approximates the interesting lighting portions of the fixed function pipeline.
+  float depth_buffer_max_value = host.GetMaxDepthBufferValue();
+  auto shader = std::make_shared<PerspectiveVertexShader>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
+                                                          depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
+  {
+    shader->SetShaderOverride(kFixedFunctionApproximationShader, sizeof(kFixedFunctionApproximationShader));
+    vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+    shader->LookAt(camera_position, camera_look_at);
+    shader->SetTransposeOnUpload();
+    shader->SetDirectionalLightCastDirection(kDirectionalLightDir);
+
+    auto index = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
+    // #invalid_color vector 120
+    shader->SetUniformF(index++, 1.f, 0.f, 1.f, 1.f);
+    // #light_ambient vector 121
+    shader->SetUniform4F(index++, kDirectionalLightAmbientColor);
+    // #light_diffuse vector 122
+    shader->SetUniform4F(index++, kDirectionalLightDiffuseColor);
+    // #light_specular vector 123
+    shader->SetUniform4F(index++, kDirectionalLightSpecularColor);
+  }
+  host.SetVertexShaderProgram(shader);
+}
+#endif  // LIGHTING_CONTROL_VS_TESTS_ENABLED
+
+void LightingControlTests::Test(const std::string& name, uint32_t light_control, bool specular_enabled,
+                                bool is_fixed_function) {
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  if (is_fixed_function) {
+    host_.SetVertexShaderProgram(nullptr);
+  } else {
+#ifdef LIGHTING_CONTROL_VS_TESTS_ENABLED
+    SetupVertexShader(host_);
+#endif
+  }
   static constexpr uint32_t kBackgroundColor = 0xFF232623;
   host_.PrepareDraw(kBackgroundColor);
 
   DrawCheckerboardBackground(host_);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, light_control);
-  pb_end(p);
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, light_control);
+    pb_end(p);
+  }
 
   SetupLights(host_, specular_enabled);
 
@@ -396,7 +449,7 @@ void LightingControlTests::TestFixed(const std::string& name, uint32_t light_con
     host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE | host_.SPECULAR);
   }
 
-  pb_print("0x%X\n", light_control);
+  pb_print("%s 0x%X\n", name.c_str(), light_control);
   pb_print("SEPARATE_SPECULAR %s\n", (light_control & NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR) ? "ON" : "off");
   pb_print("LOCALEYE %s\n", (light_control & NV097_SET_LIGHT_CONTROL_V_LOCALEYE) ? "ON" : "off");
   pb_print("ALPHA %s\n",
