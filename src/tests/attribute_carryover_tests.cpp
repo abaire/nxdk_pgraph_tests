@@ -62,11 +62,11 @@ void AttributeCarryoverTests::Initialize() {
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Send shader constants (see attribute_carryover_test.inl)
-  // const c[2] = 1 0 2 3
+  // const c[1] = 1 0 2 3
   shader->SetUniformF(1, 1, 0, 2, 3);
-  // const c[3] = 8 9 10 11
+  // const c[2] = 8 9 10 11
   shader->SetUniformF(2, 8, 9, 10, 11);
-  // const c[4] = 1 0 0.75
+  // const c[3] = 1 0 0.75
   shader->SetUniformF(3, 1.0f, 0.0f, 0.75f);
 
   host_.SetVertexShaderProgram(shader);

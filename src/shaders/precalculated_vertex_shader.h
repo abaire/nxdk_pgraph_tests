@@ -8,6 +8,10 @@
 
 using namespace XboxMath;
 
+/**
+ * A vertex shader that passes through position, diffuse, and texture
+ * coordinates without any modification.
+ */
 class PrecalculatedVertexShader : public VertexShaderProgram {
  public:
   explicit PrecalculatedVertexShader(bool use_4c_texcoords = false)

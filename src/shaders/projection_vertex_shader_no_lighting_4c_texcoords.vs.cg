@@ -18,8 +18,7 @@ struct vOut {
   float4 tex3 : TEXCOORD3;
 };
 
-vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix,
-          uniform float4 camera_pos, uniform float4 light_dir) {
+vOut main(vIn I, uniform float4x4 model_matrix, uniform float4x4 view_matrix, uniform float4x4 projection_matrix) {
   vOut result;
 
   // Transform position and normal
