@@ -1,14 +1,11 @@
 #include "test_host.h"
 
-// clang-format off
-#define _USE_MATH_DEFINES
-#include <cmath>
-// clang-format on
-
 #include <SDL.h>
 #include <SDL_image.h>
 #include <fpng/src/fpng.h>
 #include <strings.h>
+
+#include <cmath>
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmacro-redefined"
@@ -259,13 +256,9 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   set(FOG_COORD, NV2A_VERTEX_ATTR_FOG_COORD, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].fog_coord);
   set(POINT_SIZE, NV2A_VERTEX_ATTR_POINT_SIZE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].point_size);
 
-  //  set(BACK_DIFFUSE, NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4,
-  //  &vptr[0].back_diffuse);
-  ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE);
-
-  //  set(BACK_SPECULAR, NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4,
-  //  &vptr[0].back_specular);
-  ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR);
+  set(BACK_DIFFUSE, NV2A_VERTEX_ATTR_BACK_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].back_diffuse);
+  set(BACK_SPECULAR, NV2A_VERTEX_ATTR_BACK_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4,
+      &vptr[0].back_specular);
 
   set(TEXCOORD0, NV2A_VERTEX_ATTR_TEXTURE0, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,
       vertex_buffer_->tex0_coord_count_, &vptr[0].texcoord0);

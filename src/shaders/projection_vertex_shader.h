@@ -35,7 +35,12 @@ class ProjectionVertexShader : public VertexShaderProgram {
   void LookAt(const vector_t &camera_position, const vector_t &look_at_point, const vector_t &up);
   void LookTo(const vector_t &camera_position, const vector_t &camera_direction, const vector_t &up);
   void SetCamera(const vector_t &position, const vector_t &rotation);
+
+  //! Sets the direction from the origin towards the directional light.
   void SetDirectionalLightDirection(const vector_t &direction);
+
+  //! Sets the direction in which the directional light is casting light.
+  void SetDirectionalLightCastDirection(const vector_t &direction);
 
   matrix4_t &GetModelMatrix() { return model_matrix_; }
   matrix4_t &GetViewMatrix() { return view_matrix_; }
@@ -51,6 +56,9 @@ class ProjectionVertexShader : public VertexShaderProgram {
 
   //! Unprojects the given screen point, producing world coordinates that will project there with the given Z value.
   void UnprojectPoint(vector_t &result, const vector_t &screen_point, float world_z) const;
+
+  //! Causes matrices to be transposed before being uploaded to the shader.
+  void SetTransposeOnUpload(bool transpose = true) { transpose_on_upload_ = transpose; }
 
  protected:
   void OnActivate() override;
@@ -84,6 +92,8 @@ class ProjectionVertexShader : public VertexShaderProgram {
 
   vector_t camera_position_ = {0, 0, -2.25, 1};
   vector_t light_direction_ = {0, 0, 1, 1};
+
+  bool transpose_on_upload_{false};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SHADERS_PROJECTION_VERTEX_SHADER_H_

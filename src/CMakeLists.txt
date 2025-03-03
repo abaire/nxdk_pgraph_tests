@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.21)
+
 include(NV2A_VSH REQUIRED)
 include(NV20_CG REQUIRED)
 include(XBEUtils REQUIRED)
@@ -25,6 +27,7 @@ macro(set_opt_compile_and_link_options TARGET_NAME)
             -fno-strict-aliasing
             -Wall
             $<$<COMPILE_LANGUAGE:CXX>:-Wno-builtin-macro-redefined>   # Suppress warning from NXDK undef of __STDC_NO_THREADS__
+            -D_USE_MATH_DEFINES
     )
     target_link_options(
             "${TARGET_NAME}"
@@ -44,6 +47,7 @@ macro(set_compile_and_link_options TARGET_NAME)
                 -Wall
                 -fstandalone-debug
                 $<$<COMPILE_LANGUAGE:CXX>:-Wno-builtin-macro-redefined>   # Suppress warning from NXDK undef of __STDC_NO_THREADS__
+                -D_USE_MATH_DEFINES
         )
         target_link_options(
                 "${TARGET_NAME}"
@@ -59,6 +63,7 @@ endmacro()
 generate_nv2a_vshinc_files(
         generated_nv2a_vertex_shaders
         SOURCES
+        shaders/fixed_function_approximation_shader.vsh
         shaders/fog_infinite_fogc_test.vsh
         shaders/fog_vec4_w.vsh
         shaders/fog_vec4_w_x.vsh

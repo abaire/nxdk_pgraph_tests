@@ -29,6 +29,27 @@ class VertexBuffer;
  *  All colors are taken from the material (i.e., contributed by the lights).
  *  NV097_SET_MATERIAL_ALPHA is set to 0.4 and the scene ambient is a very dark
  *  grey at 0.031373.
+ *
+ *  See also: the OpenGL 2.1 specification lighting model
+ *    https://registry.khronos.org/OpenGL/specs/gl/glspec21.pdf
+ *
+ * Notes on use with the programmable pipeline:
+ *
+ * While it is possible to enable lights when using a vertex shader, it appears
+ * that parts of the pipeline are not fully initialized, leading to
+ * non-deterministic color effects that change with each draw and often differ
+ * across cold boots of the hardware.
+ *
+ * Leaving lighting enabled without enabling any lights via
+ * NV097_SET_LIGHT_ENABLE_MASK will cause all vertices to be black in color, but
+ * alpha will still come from the material when allowed by the light control and
+ * specular enable settings.
+ *
+ * Disabling specular with lighting enabled will still disable the alpha
+ * application.
+ *
+ * Enabling specular with lighting disabled will apply the material alpha and
+ * use the vertex shader output colors.
  */
 class LightingControlTests : public TestSuite {
  public:
@@ -38,8 +59,8 @@ class LightingControlTests : public TestSuite {
   void Initialize() override;
 
  private:
-  //! Tests the behavior of LIGHT_CONTROL using the fixed function pipeline.
-  void TestFixed(const std::string& name, uint32_t light_control, bool specular_enabled);
+  //! Tests the behavior of SET_LIGHT_CONTROL.
+  void Test(const std::string& name, uint32_t light_control, bool specular_enabled, bool is_fixed_function);
 
   void CreateGeometry();
 

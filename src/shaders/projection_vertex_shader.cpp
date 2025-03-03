@@ -107,6 +107,10 @@ void ProjectionVertexShader::SetDirectionalLightDirection(const vector_t &direct
   memcpy(light_direction_, direction, sizeof(light_direction_));
 }
 
+void ProjectionVertexShader::SetDirectionalLightCastDirection(const vector_t &direction) {
+  ScalarMultVector(direction, -1.f, light_direction_);
+}
+
 void ProjectionVertexShader::UpdateMatrices() {
   CalculateProjectionMatrix();
   CalculateViewportMatrix();
@@ -143,7 +147,13 @@ void ProjectionVertexShader::OnLoadConstants() {
 
   int index = 0;
   auto upload_matrix = [this, &index](const matrix4_t &matrix) {
-    SetBaseUniform4x4F(index, matrix);
+    if (transpose_on_upload_) {
+      matrix4_t temp;
+      MatrixTranspose(matrix, temp);
+      SetBaseUniform4x4F(index, temp);
+    } else {
+      SetBaseUniform4x4F(index, matrix);
+    }
     index += 4;
   };
 
@@ -152,6 +162,7 @@ void ProjectionVertexShader::OnLoadConstants() {
     ++index;
   };
 
+  // In performance critical code or shaders where space matters, these matrices would all be premultiplied.
   upload_matrix(model_matrix_);
   upload_matrix(view_matrix_);
   upload_matrix(projection_viewport_matrix_);

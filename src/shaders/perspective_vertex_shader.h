@@ -1,9 +1,8 @@
 #ifndef NXDK_PGRAPH_TESTS_SHADERS_PERSPECTIVE_VERTEX_SHADER_H_
 #define NXDK_PGRAPH_TESTS_SHADERS_PERSPECTIVE_VERTEX_SHADER_H_
 
-#include <cstdint>
-#define _USE_MATH_DEFINES
 #include <cmath>
+#include <cstdint>
 
 #include "projection_vertex_shader.h"
 
