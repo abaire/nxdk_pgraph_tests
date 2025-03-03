@@ -229,7 +229,7 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
     vertex_buffer_->SetCacheValid();
   }
 
-  // FIXME: Linearize on a per-stage basis instead of basing entirely on stage 0.
+  // TODO: FIXME: Linearize on a per-stage basis instead of basing entirely on stage 0.
   // E.g., if texture unit 0 uses linear and 1 uses swizzle, TEX0 should be linearized, TEX1 should be normalized.
   bool is_linear = texture_stage_[0].enabled_ && texture_stage_[0].IsLinear();
   Vertex *vptr = is_linear ? vertex_buffer_->linear_vertex_buffer_ : vertex_buffer_->normalized_vertex_buffer_;
@@ -249,7 +249,7 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 
   set(POSITION, NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->position_count_,
       &vptr[0].pos);
-  set(WEIGHT, NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].weight);
+  set(WEIGHT, NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].weight);
   set(NORMAL, NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, &vptr[0].normal);
   set(DIFFUSE, NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].diffuse);
   set(SPECULAR, NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].specular);
@@ -333,7 +333,7 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
     if (enabled_vertex_fields & WEIGHT) {
-      SetWeight(vertex->weight[0]);
+      SetWeight(vertex->weight);
     }
     if (enabled_vertex_fields & NORMAL) {
       SetNormal(vertex->normal[0], vertex->normal[1], vertex->normal[2]);
@@ -350,17 +350,48 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
     if (enabled_vertex_fields & POINT_SIZE) {
       SetPointSize(vertex->point_size);
     }
+    if (enabled_vertex_fields & BACK_DIFFUSE) {
+      SetBackDiffuse(TO_BGRA(vertex->back_diffuse));
+    }
+    if (enabled_vertex_fields & BACK_SPECULAR) {
+      SetBackSpecular(TO_BGRA(vertex->back_specular));
+    }
+
     if (enabled_vertex_fields & TEXCOORD0) {
-      SetTexCoord0(vertex->texcoord0[0], vertex->texcoord0[1]);
+      if (vertex_buffer_->tex0_coord_count_ == 2) {
+        SetTexCoord0(vertex->texcoord0[0], vertex->texcoord0[1]);
+      } else if (vertex_buffer_->tex0_coord_count_ == 4) {
+        SetTexCoord0(vertex->texcoord0[0], vertex->texcoord0[1], vertex->texcoord0[2], vertex->texcoord0[3]);
+      } else {
+        ASSERT(!"Invalid texcoord count");
+      }
     }
     if (enabled_vertex_fields & TEXCOORD1) {
-      SetTexCoord1(vertex->texcoord1[0], vertex->texcoord1[1]);
+      if (vertex_buffer_->tex1_coord_count_ == 2) {
+        SetTexCoord1(vertex->texcoord1[0], vertex->texcoord1[1]);
+      } else if (vertex_buffer_->tex1_coord_count_ == 4) {
+        SetTexCoord1(vertex->texcoord1[0], vertex->texcoord1[1], vertex->texcoord1[2], vertex->texcoord1[3]);
+      } else {
+        ASSERT(!"Invalid texcoord count");
+      }
     }
     if (enabled_vertex_fields & TEXCOORD2) {
-      SetTexCoord2(vertex->texcoord2[0], vertex->texcoord2[1]);
+      if (vertex_buffer_->tex2_coord_count_ == 2) {
+        SetTexCoord2(vertex->texcoord2[0], vertex->texcoord2[1]);
+      } else if (vertex_buffer_->tex2_coord_count_ == 4) {
+        SetTexCoord2(vertex->texcoord2[0], vertex->texcoord2[1], vertex->texcoord2[2], vertex->texcoord2[3]);
+      } else {
+        ASSERT(!"Invalid texcoord count");
+      }
     }
     if (enabled_vertex_fields & TEXCOORD3) {
-      SetTexCoord3(vertex->texcoord3[0], vertex->texcoord3[1]);
+      if (vertex_buffer_->tex3_coord_count_ == 2) {
+        SetTexCoord3(vertex->texcoord3[0], vertex->texcoord3[1]);
+      } else if (vertex_buffer_->tex3_coord_count_ == 4) {
+        SetTexCoord3(vertex->texcoord3[0], vertex->texcoord3[1], vertex->texcoord3[2], vertex->texcoord3[3]);
+      } else {
+        ASSERT(!"Invalid texcoord count");
+      }
     }
 
     // Setting the position locks in the previously set values and must be done last.
@@ -396,67 +427,72 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
     // Note: Ordering is important and must follow the NV2A_VERTEX_ATTR_POSITION, ... ordering.
     if (enabled_vertex_fields & POSITION) {
-      auto vals = (uint32_t *)vertex->pos;
       if (vertex_buffer_->position_count_ == 3) {
-        p = pb_push3(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2]);
+        p = pb_push3fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->pos);
         num_pushed += 3;
       } else {
-        p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
+        p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->pos);
         num_pushed += 4;
       }
     }
     if (enabled_vertex_fields & WEIGHT) {
-      ASSERT(!"WEIGHT not supported");
+      p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->weight);
+      ++num_pushed;
     }
     if (enabled_vertex_fields & NORMAL) {
-      auto vals = (uint32_t *)vertex->normal;
-      p = pb_push3(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2]);
+      p = pb_push3fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->normal);
       num_pushed += 3;
     }
     if (enabled_vertex_fields & DIFFUSE) {
-      // TODO: Enable sending as a DWORD by changing the type and size sent via SetVertexBufferAttributes.
-      auto vals = (uint32_t *)vertex->diffuse;
-      p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
+      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->diffuse);
       num_pushed += 4;
     }
     if (enabled_vertex_fields & SPECULAR) {
-      // TODO: Enable sending as a DWORD by changing the type and size sent via SetVertexBufferAttributes.
-      auto vals = (uint32_t *)vertex->specular;
-      p = pb_push4(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1], vals[2], vals[3]);
+      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->specular);
       num_pushed += 4;
     }
     if (enabled_vertex_fields & FOG_COORD) {
-      ASSERT(!"FOG_COORD not supported");
+      p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->fog_coord);
+      ++num_pushed;
     }
     if (enabled_vertex_fields & POINT_SIZE) {
-      ASSERT(!"POINT_SIZE not supported");
+      p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->point_size);
+      ++num_pushed;
     }
     if (enabled_vertex_fields & BACK_DIFFUSE) {
-      ASSERT(!"BACK_DIFFUSE not supported");
+      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->back_diffuse);
+      num_pushed += 4;
     }
     if (enabled_vertex_fields & BACK_SPECULAR) {
-      ASSERT(!"BACK_SPECULAR not supported");
+      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->back_specular);
+      num_pushed += 4;
     }
+
+#define PUSH_TEXCOORD(count, field)                                                  \
+  if ((count) == 4) {                                                                \
+    p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), (field)); \
+    num_pushed += 4;                                                                 \
+  } else if ((count) == 2) {                                                         \
+    p = pb_push2fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), (field)); \
+    num_pushed += 2;                                                                 \
+  } else {                                                                           \
+    ASSERT(!"Invalid texcoord count");                                               \
+  }
+
     if (enabled_vertex_fields & TEXCOORD0) {
-      auto vals = (uint32_t *)vertex->texcoord0;
-      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
-      num_pushed += 2;
+      PUSH_TEXCOORD(vertex_buffer_->tex0_coord_count_, vertex->texcoord0)
     }
     if (enabled_vertex_fields & TEXCOORD1) {
-      auto vals = (uint32_t *)vertex->texcoord1;
-      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
-      num_pushed += 2;
+      PUSH_TEXCOORD(vertex_buffer_->tex1_coord_count_, vertex->texcoord1)
     }
     if (enabled_vertex_fields & TEXCOORD2) {
-      auto vals = (uint32_t *)vertex->texcoord2;
-      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
-      num_pushed += 2;
+      PUSH_TEXCOORD(vertex_buffer_->tex2_coord_count_, vertex->texcoord2)
     }
     if (enabled_vertex_fields & TEXCOORD3) {
-      auto vals = (uint32_t *)vertex->texcoord3;
-      p = pb_push2(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vals[0], vals[1]);
-      num_pushed += 2;
+      PUSH_TEXCOORD(vertex_buffer_->tex3_coord_count_, vertex->texcoord3)
     }
+
+#undef PUSH_TEXCOORD
 
     if (num_pushed > kElementsPerPush) {
       pb_end(p);
@@ -624,6 +660,18 @@ void TestHost::SetFogCoord(float fc) const {
 void TestHost::SetPointSize(float ps) const {
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_POINT_SIZE, static_cast<int>(ps * 8.f));
+  pb_end(p);
+}
+
+void TestHost::SetBackDiffuse(uint32_t color) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), color);
+  pb_end(p);
+}
+
+void TestHost::SetBackSpecular(uint32_t color) const {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), color);
   pb_end(p);
 }
 

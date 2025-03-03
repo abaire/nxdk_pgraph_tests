@@ -9,7 +9,24 @@
 
 class VertexBuffer;
 
-// Tests behavior when vertex attributes are not provided but are used by shaders.
+/**
+ * Tests behavior when vertex attributes are not provided but are used by
+ * shaders.
+ *
+ * For various types of geometry, a fully specified primitive is rendered,
+ * followed by an identical (but position-transformed) primitive where only the
+ * vertex positions are provided and all other attributes bleed over from the
+ * fully specified primitive.
+ *
+ * Each test picks a separate vertex attribute (e.g., weight, normal, ...) and
+ * sets it to a test value. The shader code will convert the attribute under
+ * test into a color.
+ *
+ * Attributes with three parameters (iNormal) will have their alpha forced to 1.f.
+ *
+ * Attributes with one parameter (e.g., iWeight) will be repeated into the red
+ * and green channels with their blue and alpha forced to 1.f.
+ */
 class AttributeCarryoverTests : public TestSuite {
  public:
   enum DrawMode {
@@ -19,7 +36,6 @@ class AttributeCarryoverTests : public TestSuite {
     DRAW_INLINE_ELEMENTS,
   };
 
-  // Keep in sync with attribute_carryover_test.vs.cg
   enum Attribute {
     ATTR_WEIGHT = 0,
     ATTR_NORMAL = 1,

@@ -1,4 +1,4 @@
-; A vertex shader performs transformation and applies some of the lighting
+; A vertex shader that performs transformation and applies some of the lighting
 ; calculations that would be done by the fixed function pipeline.
 ;
 
