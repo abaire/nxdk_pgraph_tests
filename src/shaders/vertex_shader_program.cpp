@@ -52,66 +52,74 @@ void VertexShaderProgram::Activate() {
 void VertexShaderProgram::PrepareDraw() {
   OnLoadConstants();
 
-  if (base_transform_constants_.empty() || !uniform_upload_required_) {
-    return;
+  if (uniform_upload_required_) {
+    UploadConstants();
   }
-
-  UploadConstants();
 }
 
 void VertexShaderProgram::UploadConstants() {
-  MergeUniforms();
+  auto load_constants = [](int start_offset, const std::map<uint32_t, TransformConstant> &constants) {
+    if (constants.empty()) {
+      return;
+    }
 
-  auto p = pb_begin();
+    auto first_index = constants.begin()->first;
+    auto last_index = constants.rbegin()->first;
+    auto num_items = last_index - first_index + 1;
 
-  p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 96 + uniform_start_offset_);
+    std::vector<uint32_t> transform_constants(num_items * 4, 0);
+    for (auto &entry : constants) {
+      auto index = (entry.first - first_index) * 4;
+      transform_constants[index++] = entry.second.x;
+      transform_constants[index++] = entry.second.y;
+      transform_constants[index++] = entry.second.z;
+      transform_constants[index] = entry.second.w;
+    }
 
-  uint32_t *uniforms = base_transform_constants_.data();
-  uint32_t values_remaining = base_transform_constants_.size();
-  while (values_remaining > 16) {
-    pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, 16);
-    memcpy(p, uniforms, 16 * 4);
-    uniforms += 16;
-    p += 16;
-    values_remaining -= 16;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, start_offset + first_index);
+
+    uint32_t *uniforms = transform_constants.data();
+    uint32_t values_remaining = transform_constants.size();
+    while (values_remaining > 16) {
+      pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, 16);
+      memcpy(p, uniforms, 16 * 4);
+      uniforms += 16;
+      p += 16;
+      values_remaining -= 16;
+    }
+
+    if (values_remaining) {
+      pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, values_remaining);
+      memcpy(p, uniforms, values_remaining * 4);
+      p += values_remaining;
+    }
+
+    pb_end(p);
+  };
+
+  // Overwriting the lower constants will break the fixed function pipeline.
+  // load_constants(0, base_96_transform_constants_);
+
+  auto merged = base_transform_constants_;
+  for (auto &entry : uniforms_) {
+    merged[entry.first] = entry.second;
   }
+  load_constants(kShaderUserConstantOffset, merged);
 
-  if (values_remaining) {
-    pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, values_remaining);
-    memcpy(p, uniforms, values_remaining * 4);
-    p += values_remaining;
-  }
-
-  pb_end(p);
   uniform_upload_required_ = false;
 }
 
-void VertexShaderProgram::SetTransformConstantBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
-  // Constants are always provided as int4 vectors.
-  uint32_t index = slot * 4;
-  uint32_t num_ints = num_slots * 4;
-  uint32_t required_size = index + num_ints;
-
-  if (base_transform_constants_.size() < required_size) {
-    base_transform_constants_.resize(required_size);
-  }
-
-  uint32_t *data = base_transform_constants_.data() + index;
-  memcpy(data, values, num_ints * sizeof(uint32_t));
-
-  uniform_upload_required_ = true;
-}
-
 void VertexShaderProgram::SetBaseUniform4x4F(uint32_t slot, const matrix4_t &value) {
-  SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
+  SetTransformConstantBlock(base_transform_constants_, slot, reinterpret_cast<const uint32_t *>(value), 4);
 }
 
 void VertexShaderProgram::SetBaseUniform4F(uint32_t slot, const float *value) {
-  SetTransformConstantBlock(slot, reinterpret_cast<const uint32_t *>(value), 1);
+  SetTransformConstantBlock(base_transform_constants_, slot, reinterpret_cast<const uint32_t *>(value), 1);
 }
 
 void VertexShaderProgram::SetBaseUniform4I(uint32_t slot, const uint32_t *value) {
-  SetTransformConstantBlock(slot, value, 1);
+  SetTransformConstantBlock(base_transform_constants_, slot, value, 1);
 }
 
 void VertexShaderProgram::SetBaseUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
@@ -125,14 +133,16 @@ void VertexShaderProgram::SetBaseUniformF(uint32_t slot, float x, float y, float
 }
 
 void VertexShaderProgram::SetUniform4x4F(uint32_t slot, const XboxMath::matrix4_t &value) {
-  SetUniformBlock(slot, reinterpret_cast<const uint32_t *>(value), 4);
+  SetTransformConstantBlock(uniforms_, slot, reinterpret_cast<const uint32_t *>(value), 4);
 }
 
 void VertexShaderProgram::SetUniform4F(uint32_t slot, const float *value) {
-  SetUniformBlock(slot, reinterpret_cast<const uint32_t *>(value), 1);
+  SetTransformConstantBlock(uniforms_, slot, reinterpret_cast<const uint32_t *>(value), 1);
 }
 
-void VertexShaderProgram::SetUniform4I(uint32_t slot, const uint32_t *value) { SetUniformBlock(slot, value, 1); }
+void VertexShaderProgram::SetUniform4I(uint32_t slot, const uint32_t *value) {
+  SetTransformConstantBlock(uniforms_, slot, value, 1);
+}
 
 void VertexShaderProgram::SetUniformI(uint32_t slot, uint32_t x, uint32_t y, uint32_t z, uint32_t w) {
   const uint32_t vector[] = {x, y, z, w};
@@ -144,31 +154,12 @@ void VertexShaderProgram::SetUniformF(uint32_t slot, float x, float y, float z, 
   SetUniform4F(slot, vector);
 }
 
-void VertexShaderProgram::SetUniformBlock(uint32_t slot, const uint32_t *values, uint32_t num_slots) {
+void VertexShaderProgram::SetTransformConstantBlock(std::map<uint32_t, TransformConstant> &constants_map, uint32_t slot,
+                                                    const uint32_t *values, uint32_t num_slots) {
   for (auto i = 0; i < num_slots; ++i, ++slot) {
     TransformConstant val = {*values++, *values++, *values++, *values++};
-    uniforms_[slot] = val;
-  }
-
-  uint32_t index = slot * 4;
-  uint32_t num_ints = num_slots * 4;
-  uint32_t required_size = index + num_ints;
-
-  if (base_transform_constants_.size() < required_size) {
-    base_transform_constants_.resize(required_size);
+    constants_map[slot] = val;
   }
 
   uniform_upload_required_ = true;
-}
-
-void VertexShaderProgram::MergeUniforms() {
-  for (auto item : uniforms_) {
-    uint32_t slot = item.first;
-
-    uint32_t index = slot * 4;
-    base_transform_constants_[index++] = item.second.x;
-    base_transform_constants_[index++] = item.second.y;
-    base_transform_constants_[index++] = item.second.z;
-    base_transform_constants_[index++] = item.second.w;
-  }
 }

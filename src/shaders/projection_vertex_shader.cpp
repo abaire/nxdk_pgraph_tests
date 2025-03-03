@@ -142,24 +142,29 @@ void ProjectionVertexShader::OnLoadConstants() {
    */
 
   int index = 0;
-  SetBaseUniform4x4F(index, model_matrix_);
-  index += 4;
-  SetBaseUniform4x4F(index, view_matrix_);
-  index += 4;
-  SetBaseUniform4x4F(index, projection_viewport_matrix_);
-  index += 4;
-  SetBaseUniform4F(index, camera_position_);
-  ++index;
+  auto upload_matrix = [this, &index](const matrix4_t &matrix) {
+    SetBaseUniform4x4F(index, matrix);
+    index += 4;
+  };
+
+  auto upload_vector = [this, &index](const vector_t &vec) {
+    SetBaseUniform4F(index, vec);
+    ++index;
+  };
+
+  upload_matrix(model_matrix_);
+  upload_matrix(view_matrix_);
+  upload_matrix(projection_viewport_matrix_);
+
+  upload_vector(camera_position_);
 
   if (enable_lighting_) {
-    SetBaseUniform4F(index, light_direction_);
-    ++index;
+    upload_vector(light_direction_);
   }
 
   // Send shader constants
   float constants_0[4] = {0, 0, 0, 0};
-  SetBaseUniform4F(index, constants_0);
-  ++index;
+  upload_vector(constants_0);
 }
 
 void ProjectionVertexShader::CalculateViewportMatrix() {
