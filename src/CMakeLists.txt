@@ -63,6 +63,7 @@ endmacro()
 generate_nv2a_vshinc_files(
         generated_nv2a_vertex_shaders
         SOURCES
+        shaders/attribute_carryover_tests.vsh
         shaders/fixed_function_approximation_shader.vsh
         shaders/fog_infinite_fogc_test.vsh
         shaders/fog_vec4_w.vsh
@@ -97,7 +98,6 @@ generate_pixelshader_inl_files(
 generate_vertexshader_inl_files(
         generated_vp20_vertex_shaders
         SOURCES
-        shaders/attribute_carryover_test.vs.cg
         shaders/attribute_explicit_setter_tests.vs.cg
         shaders/mul_col0_by_const0_vertex_shader.vs.cg
         shaders/precalculated_vertex_shader_2c_texcoords.vs.cg

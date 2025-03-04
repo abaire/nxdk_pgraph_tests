@@ -15,7 +15,7 @@ using namespace XboxMath;
 #pragma pack(1)
 typedef struct Vertex {
   float pos[4];
-  float weight[1];
+  float weight;
   float normal[3];
   float diffuse[4];
   float specular[4];
@@ -37,9 +37,7 @@ typedef struct Vertex {
     pos[3] = w;
   }
 
-  inline void SetWeight(const float* value) { memcpy(weight, value, sizeof(weight)); }
-
-  inline void SetWeight(float w) { weight[0] = w; }
+  inline void SetWeight(float w) { weight = w; }
 
   inline void SetNormal(const float* value) { memcpy(normal, value, sizeof(normal)); }
 
@@ -66,6 +64,9 @@ typedef struct Vertex {
     specular[2] = b;
     specular[3] = a;
   }
+
+  inline void SetFogCoord(float v) { fog_coord = v; }
+  inline void SetPointSize(float v) { point_size = v; }
 
   inline void SetBackDiffuse(const float* value) { memcpy(back_diffuse, value, sizeof(back_diffuse)); }
 

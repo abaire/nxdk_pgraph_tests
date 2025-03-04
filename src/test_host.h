@@ -472,6 +472,16 @@ class TestHost {
   void SetTexCoord3(float s, float t, float p, float q) const;
   void SetTexCoord3S(int s, int t, int p, int q) const;
 
+  //! Sets the back diffuse color for the current vertex.
+  //! NOTE: unlike most vertex attributes, there does not appear to be an explicit command to set this value, so it is
+  //! set via NV097_SET_VERTEX_DATA4UB.
+  void SetBackDiffuse(uint32_t rgba) const;
+
+  //! Sets the back specular color for the current vertex.
+  //! NOTE: unlike most vertex attributes, there does not appear to be an explicit command to set this value, so it is
+  //! set via NV097_SET_VERTEX_DATA4UB.
+  void SetBackSpecular(uint32_t rgba) const;
+
   //! Returns a human-friendly name for the given DrawPrimitive.
   static std::string GetPrimitiveName(DrawPrimitive primitive);
 
