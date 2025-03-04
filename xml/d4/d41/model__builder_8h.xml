@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/d41/model__builder_8h" kind="file" language="C++">
+    <compoundname>model_builder.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">vector</includes>
+    <includes refid="d3/dbd/vertex__buffer_8h" local="yes">vertex_buffer.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <includedby refid="d8/d7c/flat__mesh__grid__model_8h" local="yes">src/models/flat_mesh_grid_model.h</includedby>
+    <includedby refid="db/d93/light__control__test__mesh__cone__model_8h" local="yes">src/models/light_control_test_mesh_cone_model.h</includedby>
+    <includedby refid="df/d44/light__control__test__mesh__cylinder__model_8h" local="yes">src/models/light_control_test_mesh_cylinder_model.h</includedby>
+    <includedby refid="df/dfa/light__control__test__mesh__sphere__model_8h" local="yes">src/models/light_control_test_mesh_sphere_model.h</includedby>
+    <includedby refid="d7/dcf/light__control__test__mesh__suzanne__model_8h" local="yes">src/models/light_control_test_mesh_suzanne_model.h</includedby>
+    <includedby refid="d5/d6d/light__control__test__mesh__torus__model_8h" local="yes">src/models/light_control_test_mesh_torus_model.h</includedby>
+    <includedby refid="d1/d0b/model__builder_8cpp" local="yes">src/models/model_builder.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/models/model_builder.h</label>
+        <link refid="d4/d41/model__builder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="5">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/models/flat_mesh_grid_model.h</label>
+        <link refid="d8/d7c/flat__mesh__grid__model_8h_source"/>
+      </node>
+      <node id="3">
+        <label>src/models/light_control_test_mesh_cone_model.h</label>
+        <link refid="db/d93/light__control__test__mesh__cone__model_8h_source"/>
+      </node>
+      <node id="4">
+        <label>src/models/light_control_test_mesh_cylinder_model.h</label>
+        <link refid="df/d44/light__control__test__mesh__cylinder__model_8h_source"/>
+      </node>
+      <node id="5">
+        <label>src/models/light_control_test_mesh_sphere_model.h</label>
+        <link refid="df/dfa/light__control__test__mesh__sphere__model_8h_source"/>
+      </node>
+      <node id="6">
+        <label>src/models/light_control_test_mesh_suzanne_model.h</label>
+        <link refid="d7/dcf/light__control__test__mesh__suzanne__model_8h_source"/>
+      </node>
+      <node id="7">
+        <label>src/models/light_control_test_mesh_torus_model.h</label>
+        <link refid="d5/d6d/light__control__test__mesh__torus__model_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/models/model_builder.h</label>
+        <link refid="d4/d41/model__builder_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="de/dfe/classModelBuilder" prot="public">ModelBuilder</innerclass>
+    <innerclass refid="d8/d22/classSolidColorModelBuilder" prot="public">SolidColorModelBuilder</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SRC_MODELS_MODEL_BUILDER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SRC_MODELS_MODEL_BUILDER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="de/dfe/classModelBuilder" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="de/dfe/classModelBuilder" kindref="compound">ModelBuilder</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="de/dfe/classModelBuilder" kindref="compound">~ModelBuilder</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" refkind="member"><highlight class="normal"><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>uint32_t<sp/><ref refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" kindref="member">GetVertexCount</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="de/dfe/classModelBuilder_1a4e113094fa7917b11dcd32510dd75b9e" kindref="member">PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;vertices);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="de/dfe/classModelBuilder_1a4e113094fa7917b11dcd32510dd75b9e" kindref="member">PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;vertices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*transformation);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*GetVertexPositions()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>[[nodiscard]]<sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*GetVertexNormals()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Called<sp/>after<sp/>vertex<sp/>arrays<sp/>have<sp/>been<sp/>consumed.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ReleaseData()<sp/>{};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="d8/d22/classSolidColorModelBuilder" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d8/d22/classSolidColorModelBuilder" kindref="compound">SolidColorModelBuilder</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="de/dfe/classModelBuilder" kindref="compound">ModelBuilder</ref><sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><ref refid="d8/d22/classSolidColorModelBuilder" kindref="compound">SolidColorModelBuilder</ref>();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><ref refid="d8/d22/classSolidColorModelBuilder" kindref="compound">SolidColorModelBuilder</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;specular);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/d22/classSolidColorModelBuilder_1ab94ea31c8580d3bf0aae188e3a2fa100" kindref="member">PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;vertices)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/d22/classSolidColorModelBuilder_1ab94ea31c8580d3bf0aae188e3a2fa100" kindref="member">PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;vertices,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*transformation)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ApplyColors(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;vertices)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>vector_t<sp/>diffuse_;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>vector_t<sp/>specular_;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SRC_MODELS_MODEL_BUILDER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/models/model_builder.h"/>
+  </compounddef>
+</doxygen>

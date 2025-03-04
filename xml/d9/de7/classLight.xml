@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/de7/classLight" kind="class" language="C++" prot="public">
+    <compoundname>Light</compoundname>
+    <derivedcompoundref refid="d1/d0a/classDirectionalLight" prot="public" virt="non-virtual">DirectionalLight</derivedcompoundref>
+    <derivedcompoundref refid="de/d72/classPointLight" prot="public" virt="non-virtual">PointLight</derivedcompoundref>
+    <derivedcompoundref refid="d1/d87/classSpotlight" prot="public" virt="non-virtual">Spotlight</derivedcompoundref>
+    <includes refid="dd/dd3/light_8h" local="no">light.h</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d9/de7/classLight_1a51e7112ee24047a6dd5d21c8d8ebab9a" prot="protected" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Light::light_index_</definition>
+        <argsstring></argsstring>
+        <name>light_index_</name>
+        <qualifiedname>Light::light_index_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="59" column="12" bodyfile="src/light.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/de7/classLight_1a3161a67ab691310803263e59b98c9d34" prot="protected" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Light::light_enable_mask_</definition>
+        <argsstring></argsstring>
+        <name>light_enable_mask_</name>
+        <qualifiedname>Light::light_enable_mask_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="60" column="12" bodyfile="src/light.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/de7/classLight_1a7d884afd5774c199bdb65ed3031f1808" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Light::ambient_[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>ambient_</name>
+        <qualifiedname>Light::ambient_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="62" column="9" bodyfile="src/light.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/de7/classLight_1a3f3d015dc4ed1d1faf4d4a05a01a8f7b" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Light::diffuse_[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>diffuse_</name>
+        <qualifiedname>Light::diffuse_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="63" column="9" bodyfile="src/light.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/de7/classLight_1addb105b4daea93d32865a575a097f388" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Light::specular_[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>specular_</name>
+        <qualifiedname>Light::specular_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="64" column="9" bodyfile="src/light.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/de7/classLight_1a08e4c16eb7ebca18fdcabea9184d09f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Light::Commit</definition>
+        <argsstring>(TestHost &amp;host) const</argsstring>
+        <name>Commit</name>
+        <qualifiedname>Light::Commit</qualifiedname>
+        <reimplementedby refid="d1/d87/classSpotlight_1ac664e95adb306d9a3fe6a8708c81d32b">Commit</reimplementedby>
+        <reimplementedby refid="d1/d0a/classDirectionalLight_1aaa1bbc3c7fcffac7cb066c67a0d4d8bb">Commit</reimplementedby>
+        <reimplementedby refid="de/d72/classPointLight_1ab2d65cb2583472ad9d8ccef946dc7b45">Commit</reimplementedby>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="15" column="16" bodyfile="src/light.cpp" bodystart="29" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1a4dea2fdb959855993b0a3a076a65d6b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Light::Commit</definition>
+        <argsstring>(TestHost &amp;host, const XboxMath::vector_t &amp;look_direction) const</argsstring>
+        <name>Commit</name>
+        <qualifiedname>Light::Commit</qualifiedname>
+        <reimplementedby refid="d1/d0a/classDirectionalLight_1a17fbb652344160265bd37e2f95ce4524">Commit</reimplementedby>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>const XboxMath::vector_t &amp;</type>
+          <declname>look_direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets up nv2a registers for this <ref refid="d9/de7/classLight" kindref="compound">Light</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>host</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> used to render this <ref refid="d9/de7/classLight" kindref="compound">Light</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>look_direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Normalized forward vector of the camera </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="22" column="16" bodyfile="src/light.cpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1a9aa222d8181018072d8174e9d1ddc356" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Light::light_enable_mask</definition>
+        <argsstring>() const</argsstring>
+        <name>light_enable_mask</name>
+        <qualifiedname>Light::light_enable_mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="24" column="13" bodyfile="src/light.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1aa43d04a4d1fae33c82440dd90eaf9898" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Light::SetAmbient</definition>
+        <argsstring>(float *ambient)</argsstring>
+        <name>SetAmbient</name>
+        <qualifiedname>Light::SetAmbient</qualifiedname>
+        <param>
+          <type>float *</type>
+          <declname>ambient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="26" column="8" bodyfile="src/light.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1aa983623eb68ca3f60dad6f744f70be88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Light::SetAmbient</definition>
+        <argsstring>(float r, float g, float b)</argsstring>
+        <name>SetAmbient</name>
+        <qualifiedname>Light::SetAmbient</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="28" column="8" bodyfile="src/light.h" bodystart="28" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1a4bacc08a24cfed52c72229a1deed0387" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Light::SetDiffuse</definition>
+        <argsstring>(float *diffuse)</argsstring>
+        <name>SetDiffuse</name>
+        <qualifiedname>Light::SetDiffuse</qualifiedname>
+        <param>
+          <type>float *</type>
+          <declname>diffuse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="34" column="8" bodyfile="src/light.h" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1a81e7b3f3274ff580c99aade404064ef3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Light::SetDiffuse</definition>
+        <argsstring>(float r, float g, float b)</argsstring>
+        <name>SetDiffuse</name>
+        <qualifiedname>Light::SetDiffuse</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="36" column="8" bodyfile="src/light.h" bodystart="36" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1a9f5052e9340d6fe686cdcd48cb9cd67a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Light::SetSpecular</definition>
+        <argsstring>(float *specular)</argsstring>
+        <name>SetSpecular</name>
+        <qualifiedname>Light::SetSpecular</qualifiedname>
+        <param>
+          <type>float *</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="42" column="8" bodyfile="src/light.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1a6f396ddba1143a850727f22768128335" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Light::SetSpecular</definition>
+        <argsstring>(float r, float g, float b)</argsstring>
+        <name>SetSpecular</name>
+        <qualifiedname>Light::SetSpecular</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="44" column="8" bodyfile="src/light.h" bodystart="44" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d9/de7/classLight_1a4b679e431c70b5a07e82062d768a4b66" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Light::Light</definition>
+        <argsstring>(uint32_t light_index, uint32_t enable_mask)</argsstring>
+        <name>Light</name>
+        <qualifiedname>Light::Light</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>light_index</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>enable_mask</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs a <ref refid="d9/de7/classLight" kindref="compound">Light</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>light_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- The hardware light to configure. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>enable_mask</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- The unshifted NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_x value specifying the type of the light. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="54" column="3" bodyfile="src/light.cpp" bodystart="14" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/de7/classLight_1ae3e3209d4b97d0bbbd614ded5e1213d9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual Light::~Light</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Light</name>
+        <qualifiedname>Light::~Light</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.h" line="56" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides functionality to set up a hardware light source. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>DirectionalLight</label>
+        <link refid="d1/d0a/classDirectionalLight"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Light</label>
+        <link refid="d9/de7/classLight"/>
+      </node>
+      <node id="3">
+        <label>PointLight</label>
+        <link refid="de/d72/classPointLight"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Spotlight</label>
+        <link refid="d1/d87/classSpotlight"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/light.h" line="13" column="1" bodyfile="src/light.h" bodystart="13" bodyend="65"/>
+    <listofallmembers>
+      <member refid="d9/de7/classLight_1a7d884afd5774c199bdb65ed3031f1808" prot="protected" virt="non-virtual"><scope>Light</scope><name>ambient_</name></member>
+      <member refid="d9/de7/classLight_1a08e4c16eb7ebca18fdcabea9184d09f3" prot="public" virt="virtual"><scope>Light</scope><name>Commit</name></member>
+      <member refid="d9/de7/classLight_1a4dea2fdb959855993b0a3a076a65d6b1" prot="public" virt="virtual"><scope>Light</scope><name>Commit</name></member>
+      <member refid="d9/de7/classLight_1a3f3d015dc4ed1d1faf4d4a05a01a8f7b" prot="protected" virt="non-virtual"><scope>Light</scope><name>diffuse_</name></member>
+      <member refid="d9/de7/classLight_1a4b679e431c70b5a07e82062d768a4b66" prot="protected" virt="non-virtual"><scope>Light</scope><name>Light</name></member>
+      <member refid="d9/de7/classLight_1a9aa222d8181018072d8174e9d1ddc356" prot="public" virt="non-virtual"><scope>Light</scope><name>light_enable_mask</name></member>
+      <member refid="d9/de7/classLight_1a3161a67ab691310803263e59b98c9d34" prot="protected" virt="non-virtual"><scope>Light</scope><name>light_enable_mask_</name></member>
+      <member refid="d9/de7/classLight_1a51e7112ee24047a6dd5d21c8d8ebab9a" prot="protected" virt="non-virtual"><scope>Light</scope><name>light_index_</name></member>
+      <member refid="d9/de7/classLight_1aa43d04a4d1fae33c82440dd90eaf9898" prot="public" virt="non-virtual"><scope>Light</scope><name>SetAmbient</name></member>
+      <member refid="d9/de7/classLight_1aa983623eb68ca3f60dad6f744f70be88" prot="public" virt="non-virtual"><scope>Light</scope><name>SetAmbient</name></member>
+      <member refid="d9/de7/classLight_1a4bacc08a24cfed52c72229a1deed0387" prot="public" virt="non-virtual"><scope>Light</scope><name>SetDiffuse</name></member>
+      <member refid="d9/de7/classLight_1a81e7b3f3274ff580c99aade404064ef3" prot="public" virt="non-virtual"><scope>Light</scope><name>SetDiffuse</name></member>
+      <member refid="d9/de7/classLight_1a9f5052e9340d6fe686cdcd48cb9cd67a" prot="public" virt="non-virtual"><scope>Light</scope><name>SetSpecular</name></member>
+      <member refid="d9/de7/classLight_1a6f396ddba1143a850727f22768128335" prot="public" virt="non-virtual"><scope>Light</scope><name>SetSpecular</name></member>
+      <member refid="d9/de7/classLight_1addb105b4daea93d32865a575a097f388" prot="protected" virt="non-virtual"><scope>Light</scope><name>specular_</name></member>
+      <member refid="d9/de7/classLight_1ae3e3209d4b97d0bbbd614ded5e1213d9" prot="protected" virt="virtual"><scope>Light</scope><name>~Light</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

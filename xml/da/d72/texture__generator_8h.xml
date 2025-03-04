@@ -1,0 +1,355 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d72/texture__generator_8h" kind="file" language="C++">
+    <compoundname>texture_generator.h</compoundname>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">cstdint</includes>
+    <includedby refid="db/d79/antialiasing__tests_8cpp" local="yes">src/tests/antialiasing_tests.cpp</includedby>
+    <includedby refid="dd/d80/blend__tests_8cpp" local="yes">src/tests/blend_tests.cpp</includedby>
+    <includedby refid="d4/d9a/color__key__tests_8cpp" local="yes">src/tests/color_key_tests.cpp</includedby>
+    <includedby refid="d0/d7a/color__zeta__disable__tests_8cpp" local="yes">src/tests/color_zeta_disable_tests.cpp</includedby>
+    <includedby refid="dc/d66/dma__corruption__around__surface__tests_8cpp" local="yes">src/tests/dma_corruption_around_surface_tests.cpp</includedby>
+    <includedby refid="de/dac/lighting__control__tests_8cpp" local="yes">src/tests/lighting_control_tests.cpp</includedby>
+    <includedby refid="d0/d2d/lighting__spotlight__tests_8cpp" local="yes">src/tests/lighting_spotlight_tests.cpp</includedby>
+    <includedby refid="d1/d80/pvideo__tests_8cpp" local="yes">src/tests/pvideo_tests.cpp</includedby>
+    <includedby refid="d1/d76/shade__model__tests_8cpp" local="yes">src/tests/shade_model_tests.cpp</includedby>
+    <includedby refid="d3/d23/surface__pitch__tests_8cpp" local="yes">src/tests/surface_pitch_tests.cpp</includedby>
+    <includedby refid="db/d39/swath__width__tests_8cpp" local="no">src/tests/swath_width_tests.cpp</includedby>
+    <includedby refid="df/d62/texgen__matrix__tests_8cpp" local="yes">src/tests/texgen_matrix_tests.cpp</includedby>
+    <includedby refid="d5/d38/texgen__tests_8cpp" local="yes">src/tests/texgen_tests.cpp</includedby>
+    <includedby refid="d5/d6d/texture__border__tests_8cpp" local="yes">src/tests/texture_border_tests.cpp</includedby>
+    <includedby refid="d6/d8f/texture__cubemap__tests_8cpp" local="yes">src/tests/texture_cubemap_tests.cpp</includedby>
+    <includedby refid="d9/da7/texture__matrix__tests_8cpp" local="yes">src/tests/texture_matrix_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <includedby refid="df/d5a/vertex__shader__rounding__tests_8cpp" local="yes">src/tests/vertex_shader_rounding_tests.cpp</includedby>
+    <includedby refid="d6/dbc/vertex__shader__swizzle__tests_8cpp" local="yes">src/tests/vertex_shader_swizzle_tests.cpp</includedby>
+    <includedby refid="d5/dc7/w__param__tests_8cpp" local="yes">src/tests/w_param_tests.cpp</includedby>
+    <includedby refid="da/dc3/texture__generator_8cpp" local="yes">src/texture_generator.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/texture_generator.h</label>
+        <link refid="da/d72/texture__generator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SDL.h</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1aea994d31a0197c61e0fa6cd5fc5ade59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GenerateRGBACheckerboard</definition>
+        <argsstring>(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width, uint32_t height, uint32_t pitch, uint32_t first_color=0xFF00FFFF, uint32_t second_color=0xFF000000, uint32_t checker_size=8)</argsstring>
+        <name>GenerateRGBACheckerboard</name>
+        <param>
+          <type>void *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>x_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>first_color</declname>
+          <defval>0xFF00FFFF</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>second_color</declname>
+          <defval>0xFF000000</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>checker_size</declname>
+          <defval>8</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="9" column="6" bodyfile="src/texture_generator.cpp" bodystart="5" bodyend="27" declfile="src/texture_generator.h" declline="9" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1a6d1fdb35a36d95385786bef8a37023bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GenerateColoredCheckerboard</definition>
+        <argsstring>(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width, uint32_t height, uint32_t pitch, const uint32_t *colors, uint32_t num_colors, uint32_t checker_size=8)</argsstring>
+        <name>GenerateColoredCheckerboard</name>
+        <param>
+          <type>void *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>x_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pitch</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>colors</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_colors</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>checker_size</declname>
+          <defval>8</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="13" column="6" bodyfile="src/texture_generator.cpp" bodystart="127" bodyend="153" declfile="src/texture_generator.h" declline="13" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1ad13e63d5b95b4ccf7ebd0ef64f765aa5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GenerateSwizzledRGBACheckerboard</definition>
+        <argsstring>(void *buffer, uint32_t x_offset, uint32_t y_offset, uint32_t width, uint32_t height, uint32_t pitch, uint32_t first_color=0xFF00FFFF, uint32_t second_color=0xFF000000, uint32_t checker_size=8)</argsstring>
+        <name>GenerateSwizzledRGBACheckerboard</name>
+        <param>
+          <type>void *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>x_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>first_color</declname>
+          <defval>0xFF00FFFF</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>second_color</declname>
+          <defval>0xFF000000</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>checker_size</declname>
+          <defval>8</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="17" column="6" bodyfile="src/texture_generator.cpp" bodystart="29" bodyend="40" declfile="src/texture_generator.h" declline="17" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1ad5762ae4c6e2b4a6942c6a8289bd0e17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GenerateRGBATestPattern</definition>
+        <argsstring>(void *target, uint32_t width, uint32_t height)</argsstring>
+        <name>GenerateRGBATestPattern</name>
+        <param>
+          <type>void *</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="21" column="6" bodyfile="src/texture_generator.cpp" bodystart="42" bodyend="52" declfile="src/texture_generator.h" declline="21" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1aec525275af8cae568e9639e819cbb522" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int GenerateSurface</definition>
+        <argsstring>(SDL_Surface **surface, int width, int height)</argsstring>
+        <name>GenerateSurface</name>
+        <param>
+          <type>SDL_Surface **</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="23" column="5" bodyfile="src/texture_generator.cpp" bodystart="54" bodyend="78" declfile="src/texture_generator.h" declline="23" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1a378fe28d94bfb05d301d44ea74e948ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int GenerateCheckerboardSurface</definition>
+        <argsstring>(SDL_Surface **surface, int width, int height, uint32_t first_color=0xFF00FFFF, uint32_t second_color=0xFF000000, uint32_t checker_size=8)</argsstring>
+        <name>GenerateCheckerboardSurface</name>
+        <param>
+          <type>SDL_Surface **</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>first_color</declname>
+          <defval>0xFF00FFFF</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>second_color</declname>
+          <defval>0xFF000000</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>checker_size</declname>
+          <defval>8</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="24" column="5" bodyfile="src/texture_generator.cpp" bodystart="106" bodyend="125" declfile="src/texture_generator.h" declline="24" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d72/texture__generator_8h_1a6f8acdfe72713b293067aa8a623b5e0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int GenerateColoredCheckerboardSurface</definition>
+        <argsstring>(SDL_Surface **surface, int width, int height, uint32_t checker_size=4)</argsstring>
+        <name>GenerateColoredCheckerboardSurface</name>
+        <param>
+          <type>SDL_Surface **</type>
+          <declname>surface</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>checker_size</declname>
+          <defval>4</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_generator.h" line="26" column="5" bodyfile="src/texture_generator.cpp" bodystart="155" bodyend="185" declfile="src/texture_generator.h" declline="26" declcolumn="5"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_TEXTURE_GENERATOR_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_TEXTURE_GENERATOR_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Inserts<sp/>a<sp/>rectangular<sp/>checkerboard<sp/>pattern<sp/>into<sp/>the<sp/>given<sp/>32bpp<sp/>texture<sp/>buffer.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateRGBACheckerboard(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buffer,<sp/>uint32_t<sp/>x_offset,<sp/>uint32_t<sp/>y_offset,<sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>pitch,<sp/>uint32_t<sp/>first_color<sp/>=<sp/>0xFF00FFFF,<sp/>uint32_t<sp/>second_color<sp/>=<sp/>0xFF000000,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>checker_size<sp/>=<sp/>8);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateColoredCheckerboard(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buffer,<sp/>uint32_t<sp/>x_offset,<sp/>uint32_t<sp/>y_offset,<sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>pitch,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*colors,<sp/>uint32_t<sp/>num_colors,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>checker_size<sp/>=<sp/>8);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateSwizzledRGBACheckerboard(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*buffer,<sp/>uint32_t<sp/>x_offset,<sp/>uint32_t<sp/>y_offset,<sp/>uint32_t<sp/>width,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>height,<sp/>uint32_t<sp/>pitch,<sp/>uint32_t<sp/>first_color<sp/>=<sp/>0xFF00FFFF,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>second_color<sp/>=<sp/>0xFF000000,<sp/>uint32_t<sp/>checker_size<sp/>=<sp/>8);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateRGBATestPattern(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*target,<sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>GenerateSurface(SDL_Surface<sp/>**surface,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>GenerateCheckerboardSurface(SDL_Surface<sp/>**surface,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height,<sp/>uint32_t<sp/>first_color<sp/>=<sp/>0xFF00FFFF,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>second_color<sp/>=<sp/>0xFF000000,<sp/>uint32_t<sp/>checker_size<sp/>=<sp/>8);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>GenerateColoredCheckerboardSurface(SDL_Surface<sp/>**surface,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height,<sp/>uint32_t<sp/>checker_size<sp/>=<sp/>4);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_TEXTURE_GENERATOR_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/texture_generator.h"/>
+  </compounddef>
+</doxygen>

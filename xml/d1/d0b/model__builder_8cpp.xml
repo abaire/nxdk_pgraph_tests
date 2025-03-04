@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d0b/model__builder_8cpp" kind="file" language="C++">
+    <compoundname>model_builder.cpp</compoundname>
+    <includes refid="d4/d41/model__builder_8h" local="yes">model_builder.h</includes>
+    <includes local="yes">xbox_math_matrix.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/models/model_builder.cpp</label>
+        <link refid="d1/d0b/model__builder_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>model_builder.h</label>
+        <link refid="d4/d41/model__builder_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="7">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="6">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="d1/d24/namespaceXboxMath">XboxMath</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;model_builder.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_matrix.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="de/dfe/classModelBuilder_1a4e113094fa7917b11dcd32510dd75b9e" kindref="member">ModelBuilder::PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;&amp;<sp/>vertices)<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>vertices-&gt;Lock();</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>position<sp/>=<sp/>GetVertexPositions();</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>normal<sp/>=<sp/>GetVertexNormals();</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_count<sp/>=<sp/><ref refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" kindref="member">GetVertexCount</ref>();</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>vertex_count;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>pos<sp/>=<sp/>{*position++,<sp/>*position++,<sp/>*position++,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(pos);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetNormal(normal);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>normal<sp/>+=<sp/>3;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuseGrey(1.f);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetSpecularGrey(1.f);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>ReleaseData();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>vertices-&gt;Unlock();</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="de/dfe/classModelBuilder_1a4e113094fa7917b11dcd32510dd75b9e" kindref="member">ModelBuilder::PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;&amp;<sp/>vertices,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>transformation)<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>trans_mat;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>memcpy(trans_mat,<sp/>transformation,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(trans_mat));</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>position<sp/>=<sp/>GetVertexPositions();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>normal<sp/>=<sp/>GetVertexNormals();</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_count<sp/>=<sp/><ref refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" kindref="member">GetVertexCount</ref>();</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>vertices-&gt;Lock();</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>vertex_count;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>pos<sp/>=<sp/>{*position++,<sp/>*position++,<sp/>*position++,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>VectorMultMatrix(pos,<sp/>trans_mat);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(pos);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetNormal(normal);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>normal<sp/>+=<sp/>3;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuseGrey(1.f);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetSpecularGrey(1.f);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>ReleaseData();</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>vertices-&gt;Unlock();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal">SolidColorModelBuilder::SolidColorModelBuilder()</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>diffuse_{1.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f},<sp/>specular_{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f}<sp/>{}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal">SolidColorModelBuilder::SolidColorModelBuilder(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>specular)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="de/dfe/classModelBuilder" kindref="compound">ModelBuilder</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>memcpy(diffuse_,<sp/>diffuse,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(diffuse_));</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>memcpy(specular_,<sp/>specular,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(specular_));</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/d22/classSolidColorModelBuilder_1ab94ea31c8580d3bf0aae188e3a2fa100" kindref="member">SolidColorModelBuilder::PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;&amp;<sp/>vertices)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><ref refid="de/dfe/classModelBuilder_1a4e113094fa7917b11dcd32510dd75b9e" kindref="member">ModelBuilder::PopulateVertexBuffer</ref>(vertices);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>ApplyColors(vertices);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/d22/classSolidColorModelBuilder_1ab94ea31c8580d3bf0aae188e3a2fa100" kindref="member">SolidColorModelBuilder::PopulateVertexBuffer</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;&amp;<sp/>vertices,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>transformation)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><ref refid="de/dfe/classModelBuilder_1a4e113094fa7917b11dcd32510dd75b9e" kindref="member">ModelBuilder::PopulateVertexBuffer</ref>(vertices,<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(transformation));</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>ApplyColors(vertices);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SolidColorModelBuilder::ApplyColors(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;&amp;<sp/>vertices)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_count<sp/>=<sp/><ref refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8" kindref="member">GetVertexCount</ref>();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>vertices-&gt;Lock();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>vertex_count;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(diffuse_);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetSpecular(specular_);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>vertices-&gt;Unlock();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/models/model_builder.cpp"/>
+  </compounddef>
+</doxygen>

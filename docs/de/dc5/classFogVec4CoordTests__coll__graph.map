@@ -1,0 +1,13 @@
+<map id="FogVec4CoordTests" name="FogVec4CoordTests">
+<area shape="rect" id="Node000001" title=" " alt="" coords="37,317,183,343"/>
+<area shape="rect" id="Node000002" href="$dc/d25/classFogCustomShaderTests.html" title=" " alt="" coords="23,243,197,268"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,282,113,317,107,317,107,282"/>
+<area shape="rect" id="Node000003" href="$d6/de7/classFogTests.html" title=" " alt="" coords="71,168,149,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="113,208,113,242,107,242,107,208"/>
+<area shape="rect" id="Node000004" href="$d2/d3e/classTestSuite.html" title=" " alt="" coords="69,93,151,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="113,133,113,168,107,168,107,133"/>
+<area shape="rect" id="Node000005" href="$d6/d80/classTestHost.html" title=" " alt="" coords="5,5,84,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="64,40,103,91,99,94,60,43"/>
+<area shape="rect" id="Node000006" href="$dd/df8/structPGRAPHDiffToken.html" title=" " alt="" coords="109,5,245,31"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="161,43,121,94,117,91,157,40"/>
+</map>
