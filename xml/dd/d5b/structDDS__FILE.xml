@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/d5b/structDDS__FILE" kind="struct" language="C++" prot="public">
+    <compoundname>DDS_FILE</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dd/d5b/structDDS__FILE_1aebdc120a32d4d0ba5e53bee4a3ba07c8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_FILE::dwMagic</definition>
+        <argsstring></argsstring>
+        <name>dwMagic</name>
+        <qualifiedname>DDS_FILE::dwMagic</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="91" column="12" bodyfile="src/dds_image.cpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d5b/structDDS__FILE_1a73980239363cbf069361385fd4bcd5cf" prot="public" static="no" mutable="no">
+        <type><ref refid="db/db1/structDDS__HEADER" kindref="compound">DDS_HEADER</ref></type>
+        <definition>DDS_HEADER DDS_FILE::header</definition>
+        <argsstring></argsstring>
+        <name>header</name>
+        <qualifiedname>DDS_FILE::header</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="92" column="14" bodyfile="src/dds_image.cpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>DDS_FILE</label>
+        <link refid="dd/d5b/structDDS__FILE"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>header</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>DDS_HEADER</label>
+        <link refid="db/db1/structDDS__HEADER"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>ddspf</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>DDS_PIXELFORMAT</label>
+        <link refid="dd/ddc/structDDS__PIXELFORMAT"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/dds_image.cpp" line="90" column="1" bodyfile="src/dds_image.cpp" bodystart="90" bodyend="93"/>
+    <listofallmembers>
+      <member refid="dd/d5b/structDDS__FILE_1aebdc120a32d4d0ba5e53bee4a3ba07c8" prot="public" virt="non-virtual"><scope>DDS_FILE</scope><name>dwMagic</name></member>
+      <member refid="dd/d5b/structDDS__FILE_1a73980239363cbf069361385fd4bcd5cf" prot="public" virt="non-virtual"><scope>DDS_FILE</scope><name>header</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

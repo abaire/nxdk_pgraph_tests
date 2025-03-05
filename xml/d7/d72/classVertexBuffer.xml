@@ -1,0 +1,1553 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d72/classVertexBuffer" kind="class" language="C++" prot="public">
+    <compoundname>VertexBuffer</compoundname>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="d7/d72/classVertexBuffer_1ad3d8034f4b38f403ff642e90a4f7433f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class TestHost</definition>
+        <argsstring></argsstring>
+        <name>TestHost</name>
+        <qualifiedname>VertexBuffer::TestHost</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="299" column="16" bodyfile="src/vertex_buffer.h" bodystart="299" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1ad787d2495098285a6600cb4467c99a0a" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::num_vertices_</definition>
+        <argsstring></argsstring>
+        <name>num_vertices_</name>
+        <qualifiedname>VertexBuffer::num_vertices_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="301" column="12" bodyfile="src/vertex_buffer.h" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1a9109c1181e8214a41ec1988dfb87a291" prot="private" static="no" mutable="no">
+        <type><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref> *</type>
+        <definition>Vertex* VertexBuffer::linear_vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>linear_vertex_buffer_</name>
+        <qualifiedname>VertexBuffer::linear_vertex_buffer_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="302" column="10" bodyfile="src/vertex_buffer.h" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1afab163de48fe730cecf9c228759bb8ce" prot="private" static="no" mutable="no">
+        <type><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref> *</type>
+        <definition>Vertex* VertexBuffer::normalized_vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>normalized_vertex_buffer_</name>
+        <qualifiedname>VertexBuffer::normalized_vertex_buffer_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="303" column="10" bodyfile="src/vertex_buffer.h" bodystart="303" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1a104848f61420cee6427f9690f4bf030b" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::position_count_</definition>
+        <argsstring></argsstring>
+        <name>position_count_</name>
+        <qualifiedname>VertexBuffer::position_count_</qualifiedname>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="306" column="12" bodyfile="src/vertex_buffer.h" bodystart="306" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1a6340e79133be306a180e94638a4e152c" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::tex0_coord_count_</definition>
+        <argsstring></argsstring>
+        <name>tex0_coord_count_</name>
+        <qualifiedname>VertexBuffer::tex0_coord_count_</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="309" column="12" bodyfile="src/vertex_buffer.h" bodystart="309" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1a0f450f85c673acf69ad7d131a382d55c" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::tex1_coord_count_</definition>
+        <argsstring></argsstring>
+        <name>tex1_coord_count_</name>
+        <qualifiedname>VertexBuffer::tex1_coord_count_</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="310" column="12" bodyfile="src/vertex_buffer.h" bodystart="310" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1a30771f5bc44896f68f6d46ff2ef3376b" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::tex2_coord_count_</definition>
+        <argsstring></argsstring>
+        <name>tex2_coord_count_</name>
+        <qualifiedname>VertexBuffer::tex2_coord_count_</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="311" column="12" bodyfile="src/vertex_buffer.h" bodystart="311" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1ac1197d397aa27a04d2d0ef5176f11019" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::tex3_coord_count_</definition>
+        <argsstring></argsstring>
+        <name>tex3_coord_count_</name>
+        <qualifiedname>VertexBuffer::tex3_coord_count_</qualifiedname>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="312" column="12" bodyfile="src/vertex_buffer.h" bodystart="312" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d72/classVertexBuffer_1a78d4f3cd39b9d52f58cb07fa3653d11d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VertexBuffer::cache_valid_</definition>
+        <argsstring></argsstring>
+        <name>cache_valid_</name>
+        <qualifiedname>VertexBuffer::cache_valid_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="314" column="8" bodyfile="src/vertex_buffer.h" bodystart="314" bodyend="314"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a8b02e8c5d1993dc94956ddf8cd1275ea" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexBuffer::VertexBuffer</definition>
+        <argsstring>(uint32_t num_vertices)</argsstring>
+        <name>VertexBuffer</name>
+        <qualifiedname>VertexBuffer::VertexBuffer</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_vertices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="206" column="12" bodyfile="src/vertex_buffer.cpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a5216726fdd43b2ae8e1439e347717fdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexBuffer::~VertexBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>~VertexBuffer</name>
+        <qualifiedname>VertexBuffer::~VertexBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="207" column="3" bodyfile="src/vertex_buffer.cpp" bodystart="23" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a21b252170466b2e62bdd4de2e87814cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; VertexBuffer &gt; VertexBuffer::ConvertFromTriangleStripToTriangles</definition>
+        <argsstring>() const</argsstring>
+        <name>ConvertFromTriangleStripToTriangles</name>
+        <qualifiedname>VertexBuffer::ConvertFromTriangleStripToTriangles</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="211" column="19" bodyfile="src/vertex_buffer.cpp" bodystart="326" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a9d6e302a784d5f6489999c3f3a45ef11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref> *</type>
+        <definition>Vertex * VertexBuffer::Lock</definition>
+        <argsstring>()</argsstring>
+        <name>Lock</name>
+        <qualifiedname>VertexBuffer::Lock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="213" column="10" bodyfile="src/vertex_buffer.cpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1ab84539bede618c151f988bc614c5132b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::Unlock</definition>
+        <argsstring>()</argsstring>
+        <name>Unlock</name>
+        <qualifiedname>VertexBuffer::Unlock</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="214" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1adada7f2ab4e871454d4ae775c18268a9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexBuffer::GetNumVertices</definition>
+        <argsstring>() const</argsstring>
+        <name>GetNumVertices</name>
+        <qualifiedname>VertexBuffer::GetNumVertices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="216" column="12" bodyfile="src/vertex_buffer.h" bodystart="216" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a4981a6baa322c9b2cc760a88f9762d46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetCacheValid</definition>
+        <argsstring>(bool valid=true)</argsstring>
+        <name>SetCacheValid</name>
+        <qualifiedname>VertexBuffer::SetCacheValid</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>valid</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="218" column="8" bodyfile="src/vertex_buffer.h" bodystart="218" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a29bdaeadcfe8832b0cddd37f447ca725" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool VertexBuffer::IsCacheValid</definition>
+        <argsstring>() const</argsstring>
+        <name>IsCacheValid</name>
+        <qualifiedname>VertexBuffer::IsCacheValid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="219" column="8" bodyfile="src/vertex_buffer.h" bodystart="219" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a5b107718506f0065eb13d66126adb9bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::Linearize</definition>
+        <argsstring>(float texture_width, float texture_height)</argsstring>
+        <name>Linearize</name>
+        <qualifiedname>VertexBuffer::Linearize</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>texture_width</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>texture_height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="221" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="39" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a7650f9e86d7a4c3cf6da7c570232a0ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangleCCW</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three)</argsstring>
+        <name>DefineTriangleCCW</name>
+        <qualifiedname>VertexBuffer::DefineTriangleCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="224" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a680d0ef862891435414478de510e30ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangleCCW</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three, const float *normal_one, const float *normal_two, const float *normal_three)</argsstring>
+        <name>DefineTriangleCCW</name>
+        <qualifiedname>VertexBuffer::DefineTriangleCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="225" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="59" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a8f48dc25d64df3a01dbee4f14268229f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangleCCW</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three, const Color &amp;one_diffuse, const Color &amp;two_diffuse, const Color &amp;three_diffuse)</argsstring>
+        <name>DefineTriangleCCW</name>
+        <qualifiedname>VertexBuffer::DefineTriangleCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>one_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>two_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>three_diffuse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="227" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="65" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a1d30ccf679603c3151b04b1422427cba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangleCCW</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three, const float *normal_one, const float *normal_two, const float *normal_three, const Color &amp;diffuse_one, const Color &amp;diffuse_two, const Color &amp;diffuse_three)</argsstring>
+        <name>DefineTriangleCCW</name>
+        <qualifiedname>VertexBuffer::DefineTriangleCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_three</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_one</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_two</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="229" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="71" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a02f2618a2318c192d2d56adea7d24956" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangle</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three)</argsstring>
+        <name>DefineTriangle</name>
+        <qualifiedname>VertexBuffer::DefineTriangle</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="232" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="82" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1abf284e3bd6c115232f2d4eaeab1425de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangle</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three, const float *normal_one, const float *normal_two, const float *normal_three)</argsstring>
+        <name>DefineTriangle</name>
+        <qualifiedname>VertexBuffer::DefineTriangle</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="233" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="87" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a668ac0e945a8e2a917db5472cd34677c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangle</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three, const Color &amp;diffuse_one, const Color &amp;diffuse_two, const Color &amp;diffuse_three)</argsstring>
+        <name>DefineTriangle</name>
+        <qualifiedname>VertexBuffer::DefineTriangle</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_one</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_two</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="235" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="93" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1acb084c3f2ca610e6f0e6b6eb29f6631e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineTriangle</definition>
+        <argsstring>(uint32_t start_index, const float *one, const float *two, const float *three, const float *normal_one, const float *normal_two, const float *normal_three, const Color &amp;diffuse_one, const Color &amp;diffuse_two, const Color &amp;diffuse_three)</argsstring>
+        <name>DefineTriangle</name>
+        <qualifiedname>VertexBuffer::DefineTriangle</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>three</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_one</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_two</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal_three</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_one</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_two</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>diffuse_three</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="237" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="99" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a6c8a59a53dd6b7c31906bf86dc399674" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTriCCW</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom)</argsstring>
+        <name>DefineBiTriCCW</name>
+        <qualifiedname>VertexBuffer::DefineBiTriCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="242" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="128" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a38c1b34ba6c6b26a94ccf0a0869d499d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTriCCW</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float z)</argsstring>
+        <name>DefineBiTriCCW</name>
+        <qualifiedname>VertexBuffer::DefineBiTriCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="243" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="132" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1aa6a0af11da11692eb7aa161e54c2777a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTriCCW</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z)</argsstring>
+        <name>DefineBiTriCCW</name>
+        <qualifiedname>VertexBuffer::DefineBiTriCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ul_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ll_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lr_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ur_z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="244" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="136" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a8e260d4321f482ef8e7bda3e11da50f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTriCCW</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z, const Color &amp;ul_diffuse, const Color &amp;ll_diffuse, const Color &amp;lr_diffuse, const Color &amp;ur_diffuse)</argsstring>
+        <name>DefineBiTriCCW</name>
+        <qualifiedname>VertexBuffer::DefineBiTriCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ul_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ll_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lr_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ur_z</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_diffuse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="246" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="142" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a3a62fd960deb70e9a000f051d843b8bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTriCCW</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z, const Color &amp;ul_diffuse, const Color &amp;ll_diffuse, const Color &amp;lr_diffuse, const Color &amp;ur_diffuse, const Color &amp;ul_specular, const Color &amp;ll_specular, const Color &amp;lr_specular, const Color &amp;ur_specular)</argsstring>
+        <name>DefineBiTriCCW</name>
+        <qualifiedname>VertexBuffer::DefineBiTriCCW</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ul_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ll_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lr_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ur_z</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="249" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="150" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a7143aec45ca599c7c73308214c512fe0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="254" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="210" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a70426a94c0bdb0e700df3d75a2f83165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float z)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="255" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="214" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a6ac349dec2379ff3fd0e23227f8f2b13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ul_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ll_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lr_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ur_z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="256" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="218" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a4448e0591b5a3440016ff418bac34b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z, const Color &amp;ul_diffuse, const Color &amp;ll_diffuse, const Color &amp;lr_diffuse, const Color &amp;ur_diffuse)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ul_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ll_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lr_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ur_z</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_diffuse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="258" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="224" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1acdb35c6cf0a379dac6db357d31ca58da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, float left, float top, float right, float bottom, float ul_z, float ll_z, float lr_z, float ur_z, const Color &amp;ul_diffuse, const Color &amp;ll_diffuse, const Color &amp;lr_diffuse, const Color &amp;ur_diffuse, const Color &amp;ul_specular, const Color &amp;ll_specular, const Color &amp;lr_specular, const Color &amp;ur_specular)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ul_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ll_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>lr_z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ur_z</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="261" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="232" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1abc9db792c68d970bb3596ed844c4f7a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, const vector_t ul, const vector_t ll, const vector_t lr, const vector_t ur)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ul</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ll</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>lr</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ur</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="266" column="15" bodyfile="src/vertex_buffer.h" bodystart="266" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a62d959af888d6d55c2fae10b90e4137c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, const vector_t ul, const vector_t ll, const vector_t lr, const vector_t ur, const Color &amp;ul_diffuse, const Color &amp;ll_diffuse, const Color &amp;lr_diffuse, const Color &amp;ur_diffuse)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ul</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ll</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>lr</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ur</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_diffuse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="274" column="15" bodyfile="src/vertex_buffer.h" bodystart="274" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a6dfa5044ba954243f8dc8972643db117" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::DefineBiTri</definition>
+        <argsstring>(uint32_t start_index, const vector_t ul, const vector_t ll, const vector_t lr, const vector_t ur, const Color &amp;ul_diffuse, const Color &amp;ll_diffuse, const Color &amp;lr_diffuse, const Color &amp;ur_diffuse, const Color &amp;ul_specular, const Color &amp;ll_specular, const Color &amp;lr_specular, const Color &amp;ur_specular)</argsstring>
+        <name>DefineBiTri</name>
+        <qualifiedname>VertexBuffer::DefineBiTri</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>start_index</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ul</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ll</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>lr</declname>
+        </param>
+        <param>
+          <type>const vector_t</type>
+          <declname>ur</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_diffuse</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ul_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ll_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>lr_specular</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>ur_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="282" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="248" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1ab4d37cb23feadfb64268a2accb4db708" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetDiffuse</definition>
+        <argsstring>(uint32_t vertex_index, const Color &amp;color)</argsstring>
+        <name>SetDiffuse</name>
+        <qualifiedname>VertexBuffer::SetDiffuse</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>vertex_index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="287" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="308" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1af02160c1668256dc3cff871dabb1980a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetSpecular</definition>
+        <argsstring>(uint32_t vertex_index, const Color &amp;color)</argsstring>
+        <name>SetSpecular</name>
+        <qualifiedname>VertexBuffer::SetSpecular</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>vertex_index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d0/da2/structColor" kindref="compound">Color</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="288" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="317" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1aa89d19702d19abf4c6331ab1d087a911" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetPositionIncludesW</definition>
+        <argsstring>(bool enabled=true)</argsstring>
+        <name>SetPositionIncludesW</name>
+        <qualifiedname>VertexBuffer::SetPositionIncludesW</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="290" column="15" bodyfile="src/vertex_buffer.h" bodystart="290" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1ae23c5719bf3e9161e1fa7e2ab0d13fe4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetTexCoord0Count</definition>
+        <argsstring>(uint32_t val)</argsstring>
+        <name>SetTexCoord0Count</name>
+        <qualifiedname>VertexBuffer::SetTexCoord0Count</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="291" column="15" bodyfile="src/vertex_buffer.h" bodystart="291" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a49a9881a8e2b2728ce41ae61e69485f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetTexCoord1Count</definition>
+        <argsstring>(uint32_t val)</argsstring>
+        <name>SetTexCoord1Count</name>
+        <qualifiedname>VertexBuffer::SetTexCoord1Count</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="292" column="15" bodyfile="src/vertex_buffer.h" bodystart="292" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a0724613adf5bf6b0cf4aad198ed70d92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetTexCoord2Count</definition>
+        <argsstring>(uint32_t val)</argsstring>
+        <name>SetTexCoord2Count</name>
+        <qualifiedname>VertexBuffer::SetTexCoord2Count</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="293" column="15" bodyfile="src/vertex_buffer.h" bodystart="293" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1acde7ba0a8f5aa1b105b402910cb0dbd3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::SetTexCoord3Count</definition>
+        <argsstring>(uint32_t val)</argsstring>
+        <name>SetTexCoord3Count</name>
+        <qualifiedname>VertexBuffer::SetTexCoord3Count</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="294" column="15" bodyfile="src/vertex_buffer.h" bodystart="294" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d72/classVertexBuffer_1a355fbbaaa7606730a71e996d88ec6538" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexBuffer::Translate</definition>
+        <argsstring>(float x, float y, float z, float w=0.0f)</argsstring>
+        <name>Translate</name>
+        <qualifiedname>VertexBuffer::Translate</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+          <defval>0.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="296" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="358" bodyend="364"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/vertex_buffer.h" line="204" column="1" bodyfile="src/vertex_buffer.h" bodystart="204" bodyend="315"/>
+    <listofallmembers>
+      <member refid="d7/d72/classVertexBuffer_1a78d4f3cd39b9d52f58cb07fa3653d11d" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>cache_valid_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a21b252170466b2e62bdd4de2e87814cc" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>ConvertFromTriangleStripToTriangles</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a7143aec45ca599c7c73308214c512fe0" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a70426a94c0bdb0e700df3d75a2f83165" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a6ac349dec2379ff3fd0e23227f8f2b13" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a4448e0591b5a3440016ff418bac34b74" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1acdb35c6cf0a379dac6db357d31ca58da" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1abc9db792c68d970bb3596ed844c4f7a0" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a62d959af888d6d55c2fae10b90e4137c" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a6dfa5044ba954243f8dc8972643db117" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTri</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a6c8a59a53dd6b7c31906bf86dc399674" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTriCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a38c1b34ba6c6b26a94ccf0a0869d499d" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTriCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1aa6a0af11da11692eb7aa161e54c2777a" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTriCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a8e260d4321f482ef8e7bda3e11da50f2" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTriCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a3a62fd960deb70e9a000f051d843b8bc" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineBiTriCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a02f2618a2318c192d2d56adea7d24956" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangle</name></member>
+      <member refid="d7/d72/classVertexBuffer_1abf284e3bd6c115232f2d4eaeab1425de" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangle</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a668ac0e945a8e2a917db5472cd34677c" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangle</name></member>
+      <member refid="d7/d72/classVertexBuffer_1acb084c3f2ca610e6f0e6b6eb29f6631e" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangle</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a7650f9e86d7a4c3cf6da7c570232a0ba" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangleCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a680d0ef862891435414478de510e30ba" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangleCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a8f48dc25d64df3a01dbee4f14268229f" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangleCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a1d30ccf679603c3151b04b1422427cba" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>DefineTriangleCCW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1adada7f2ab4e871454d4ae775c18268a9" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>GetNumVertices</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a29bdaeadcfe8832b0cddd37f447ca725" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>IsCacheValid</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a9109c1181e8214a41ec1988dfb87a291" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>linear_vertex_buffer_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a5b107718506f0065eb13d66126adb9bc" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>Linearize</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a9d6e302a784d5f6489999c3f3a45ef11" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>Lock</name></member>
+      <member refid="d7/d72/classVertexBuffer_1afab163de48fe730cecf9c228759bb8ce" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>normalized_vertex_buffer_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1ad787d2495098285a6600cb4467c99a0a" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>num_vertices_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a104848f61420cee6427f9690f4bf030b" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>position_count_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a4981a6baa322c9b2cc760a88f9762d46" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetCacheValid</name></member>
+      <member refid="d7/d72/classVertexBuffer_1ab4d37cb23feadfb64268a2accb4db708" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetDiffuse</name></member>
+      <member refid="d7/d72/classVertexBuffer_1aa89d19702d19abf4c6331ab1d087a911" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetPositionIncludesW</name></member>
+      <member refid="d7/d72/classVertexBuffer_1af02160c1668256dc3cff871dabb1980a" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetSpecular</name></member>
+      <member refid="d7/d72/classVertexBuffer_1ae23c5719bf3e9161e1fa7e2ab0d13fe4" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetTexCoord0Count</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a49a9881a8e2b2728ce41ae61e69485f1" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetTexCoord1Count</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a0724613adf5bf6b0cf4aad198ed70d92" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetTexCoord2Count</name></member>
+      <member refid="d7/d72/classVertexBuffer_1acde7ba0a8f5aa1b105b402910cb0dbd3" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>SetTexCoord3Count</name></member>
+      <member refid="d7/d72/classVertexBuffer_1ad3d8034f4b38f403ff642e90a4f7433f" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>TestHost</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a6340e79133be306a180e94638a4e152c" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>tex0_coord_count_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a0f450f85c673acf69ad7d131a382d55c" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>tex1_coord_count_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a30771f5bc44896f68f6d46ff2ef3376b" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>tex2_coord_count_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1ac1197d397aa27a04d2d0ef5176f11019" prot="private" virt="non-virtual"><scope>VertexBuffer</scope><name>tex3_coord_count_</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a355fbbaaa7606730a71e996d88ec6538" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>Translate</name></member>
+      <member refid="d7/d72/classVertexBuffer_1ab84539bede618c151f988bc614c5132b" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>Unlock</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a8b02e8c5d1993dc94956ddf8cd1275ea" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>VertexBuffer</name></member>
+      <member refid="d7/d72/classVertexBuffer_1a5216726fdd43b2ae8e1439e347717fdd" prot="public" virt="non-virtual"><scope>VertexBuffer</scope><name>~VertexBuffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

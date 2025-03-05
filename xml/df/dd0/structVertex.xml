@@ -1,0 +1,1007 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/dd0/structVertex" kind="struct" language="C++" prot="public">
+    <compoundname>Vertex</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="df/dd0/structVertex_1ae4e242ee2001d5c392d1a54145b8aae3" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::pos[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>pos</name>
+        <qualifiedname>Vertex::pos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="17" column="9" bodyfile="src/vertex_buffer.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a68276f9eb766c47f3a1fcb4a747b33e8" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::weight</definition>
+        <argsstring></argsstring>
+        <name>weight</name>
+        <qualifiedname>Vertex::weight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="18" column="9" bodyfile="src/vertex_buffer.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a44dd0d22dccb4684ba4c8cb7400536fc" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::normal[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>normal</name>
+        <qualifiedname>Vertex::normal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="19" column="9" bodyfile="src/vertex_buffer.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a4fc9ad11ff65d7e964b2ccb2f6c64084" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::diffuse[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>diffuse</name>
+        <qualifiedname>Vertex::diffuse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="20" column="9" bodyfile="src/vertex_buffer.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1afc0ff5df87a0924d23c7c069811be3dc" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::specular[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>specular</name>
+        <qualifiedname>Vertex::specular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="21" column="9" bodyfile="src/vertex_buffer.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a6f846158f0dc4a2bb47e36174b09cc46" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::fog_coord</definition>
+        <argsstring></argsstring>
+        <name>fog_coord</name>
+        <qualifiedname>Vertex::fog_coord</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="22" column="9" bodyfile="src/vertex_buffer.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a8895087b2b86a350b09f37f2979ee7c2" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::point_size</definition>
+        <argsstring></argsstring>
+        <name>point_size</name>
+        <qualifiedname>Vertex::point_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="23" column="9" bodyfile="src/vertex_buffer.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a0abc33235d801964603b37f2d3e32a65" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::back_diffuse[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>back_diffuse</name>
+        <qualifiedname>Vertex::back_diffuse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="24" column="9" bodyfile="src/vertex_buffer.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a466454a3f63879038f9d8866247a3826" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::back_specular[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>back_specular</name>
+        <qualifiedname>Vertex::back_specular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="25" column="9" bodyfile="src/vertex_buffer.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1ae4b88fe20fd97681a8e2ed947b4bd2c6" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::texcoord0[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>texcoord0</name>
+        <qualifiedname>Vertex::texcoord0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="26" column="9" bodyfile="src/vertex_buffer.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a01f7bea607ad64e4e6ebc41ac9332808" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::texcoord1[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>texcoord1</name>
+        <qualifiedname>Vertex::texcoord1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="27" column="9" bodyfile="src/vertex_buffer.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a5821f653333d9b8ccd7dd7f04b0eac99" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::texcoord2[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>texcoord2</name>
+        <qualifiedname>Vertex::texcoord2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="28" column="9" bodyfile="src/vertex_buffer.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dd0/structVertex_1a5af87fc9b9572dbc0f6bd8236159c35d" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Vertex::texcoord3[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>texcoord3</name>
+        <qualifiedname>Vertex::texcoord3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="29" column="9" bodyfile="src/vertex_buffer.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="df/dd0/structVertex_1ad47ee858dbe74ee43cec8897fcc6aaf6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetPosition</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetPosition</name>
+        <qualifiedname>Vertex::SetPosition</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="31" column="15" bodyfile="src/vertex_buffer.h" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a04863acc72c74c9439e5f26b4d62d215" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetPosition</definition>
+        <argsstring>(float x, float y, float z, float w=1.0f)</argsstring>
+        <name>SetPosition</name>
+        <qualifiedname>Vertex::SetPosition</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="33" column="15" bodyfile="src/vertex_buffer.h" bodystart="33" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a14c16b86303c283370429f291c289ae4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetWeight</definition>
+        <argsstring>(float w)</argsstring>
+        <name>SetWeight</name>
+        <qualifiedname>Vertex::SetWeight</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="40" column="15" bodyfile="src/vertex_buffer.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ab0aea1379ef2f0d12e2a6e6a0ea3f774" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetNormal</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetNormal</name>
+        <qualifiedname>Vertex::SetNormal</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="42" column="15" bodyfile="src/vertex_buffer.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a7c3b8fdbc048a1364ff4a6f2b4fa70fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetNormal</definition>
+        <argsstring>(float x, float y, float z)</argsstring>
+        <name>SetNormal</name>
+        <qualifiedname>Vertex::SetNormal</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="44" column="15" bodyfile="src/vertex_buffer.h" bodystart="44" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1abc540b20d7069b69ac923e9e2c6a7c19" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetDiffuse</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetDiffuse</name>
+        <qualifiedname>Vertex::SetDiffuse</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="50" column="15" bodyfile="src/vertex_buffer.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a3339e252c8ea1507531619ad58682c07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetDiffuse</definition>
+        <argsstring>(float r, float g, float b, float a=1.0f)</argsstring>
+        <name>SetDiffuse</name>
+        <qualifiedname>Vertex::SetDiffuse</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="52" column="15" bodyfile="src/vertex_buffer.h" bodystart="52" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a9c9f733ba9d53591929659edede6d194" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetSpecular</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetSpecular</name>
+        <qualifiedname>Vertex::SetSpecular</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="59" column="15" bodyfile="src/vertex_buffer.h" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ad22989a66d834a7be2b8f221cc68c75f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetSpecular</definition>
+        <argsstring>(float r, float g, float b, float a=1.0f)</argsstring>
+        <name>SetSpecular</name>
+        <qualifiedname>Vertex::SetSpecular</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="61" column="15" bodyfile="src/vertex_buffer.h" bodystart="61" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1aa88d09d2b1fb4b6fb0b56dde23499a66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetFogCoord</definition>
+        <argsstring>(float v)</argsstring>
+        <name>SetFogCoord</name>
+        <qualifiedname>Vertex::SetFogCoord</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="68" column="15" bodyfile="src/vertex_buffer.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ac103a01a0bcfe89cdecb18d79bd08003" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetPointSize</definition>
+        <argsstring>(float v)</argsstring>
+        <name>SetPointSize</name>
+        <qualifiedname>Vertex::SetPointSize</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="69" column="15" bodyfile="src/vertex_buffer.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a9d2f9c91f9b9729e0e5f66484d2938f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetBackDiffuse</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetBackDiffuse</name>
+        <qualifiedname>Vertex::SetBackDiffuse</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="71" column="15" bodyfile="src/vertex_buffer.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ac1f0f1b20321867d0b01a84b7426a0bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetBackDiffuse</definition>
+        <argsstring>(float r, float g, float b, float a=1.0f)</argsstring>
+        <name>SetBackDiffuse</name>
+        <qualifiedname>Vertex::SetBackDiffuse</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="73" column="15" bodyfile="src/vertex_buffer.h" bodystart="73" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1aa462820a47fbae6cafddc10d5dd5391d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetBackSpecular</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetBackSpecular</name>
+        <qualifiedname>Vertex::SetBackSpecular</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="80" column="15" bodyfile="src/vertex_buffer.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a4caa2167868d9af9d947aa82016d4ccb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetBackSpecular</definition>
+        <argsstring>(float r, float g, float b, float a=1.0f)</argsstring>
+        <name>SetBackSpecular</name>
+        <qualifiedname>Vertex::SetBackSpecular</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="82" column="15" bodyfile="src/vertex_buffer.h" bodystart="82" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a88805ea397d9d0468e7aa0ea9abb95c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord0</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetTexCoord0</name>
+        <qualifiedname>Vertex::SetTexCoord0</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="89" column="15" bodyfile="src/vertex_buffer.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a8812d36a392374f302ce028ce439d07b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord0</definition>
+        <argsstring>(const float u, const float v)</argsstring>
+        <name>SetTexCoord0</name>
+        <qualifiedname>Vertex::SetTexCoord0</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="91" column="15" bodyfile="src/vertex_buffer.h" bodystart="91" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1aca03418121a05b4be9603e9ddc209f08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord0</definition>
+        <argsstring>(const float u, const float v, const float s, const float q)</argsstring>
+        <name>SetTexCoord0</name>
+        <qualifiedname>Vertex::SetTexCoord0</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="96" column="15" bodyfile="src/vertex_buffer.h" bodystart="96" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ab0dd2cdb029ed612c84755e3cc1e8a65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord1</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetTexCoord1</name>
+        <qualifiedname>Vertex::SetTexCoord1</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="103" column="15" bodyfile="src/vertex_buffer.h" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a217a1a226934e03c75f4e5a0de50a6c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord1</definition>
+        <argsstring>(const float u, const float v)</argsstring>
+        <name>SetTexCoord1</name>
+        <qualifiedname>Vertex::SetTexCoord1</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="105" column="15" bodyfile="src/vertex_buffer.h" bodystart="105" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ae4ae0e0feffea6d7aacdeb29ce035825" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord1</definition>
+        <argsstring>(const float u, const float v, const float s, const float q)</argsstring>
+        <name>SetTexCoord1</name>
+        <qualifiedname>Vertex::SetTexCoord1</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="110" column="15" bodyfile="src/vertex_buffer.h" bodystart="110" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a391f67c9a24f8da8134913f5f33114c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord2</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetTexCoord2</name>
+        <qualifiedname>Vertex::SetTexCoord2</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="117" column="15" bodyfile="src/vertex_buffer.h" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a013a1d526b030c88d873bbd211036a73" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord2</definition>
+        <argsstring>(const float u, const float v)</argsstring>
+        <name>SetTexCoord2</name>
+        <qualifiedname>Vertex::SetTexCoord2</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="119" column="15" bodyfile="src/vertex_buffer.h" bodystart="119" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a0f676c37ed583267a68e1620d3d0630d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord2</definition>
+        <argsstring>(const float u, const float v, const float s, const float q)</argsstring>
+        <name>SetTexCoord2</name>
+        <qualifiedname>Vertex::SetTexCoord2</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="124" column="15" bodyfile="src/vertex_buffer.h" bodystart="124" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1aa18926e3939b516b98ce3ecc1a94e953" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord3</definition>
+        <argsstring>(const float *value)</argsstring>
+        <name>SetTexCoord3</name>
+        <qualifiedname>Vertex::SetTexCoord3</qualifiedname>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="131" column="15" bodyfile="src/vertex_buffer.h" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a0658940d1f11407f84781e9c70f3b4ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord3</definition>
+        <argsstring>(const float u, const float v)</argsstring>
+        <name>SetTexCoord3</name>
+        <qualifiedname>Vertex::SetTexCoord3</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="133" column="15" bodyfile="src/vertex_buffer.h" bodystart="133" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a298036bdb4aac28d823d2a10adb3739d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetTexCoord3</definition>
+        <argsstring>(const float u, const float v, const float s, const float q)</argsstring>
+        <name>SetTexCoord3</name>
+        <qualifiedname>Vertex::SetTexCoord3</qualifiedname>
+        <param>
+          <type>const float</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>const float</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="138" column="15" bodyfile="src/vertex_buffer.h" bodystart="138" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1acca8015d1f3f4053b0377308bd998d4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetDiffuseGrey</definition>
+        <argsstring>(float val)</argsstring>
+        <name>SetDiffuseGrey</name>
+        <qualifiedname>Vertex::SetDiffuseGrey</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="145" column="15" bodyfile="src/vertex_buffer.h" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1af988bf285267da90d15f869743aa1df9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetDiffuseGrey</definition>
+        <argsstring>(float val, float alpha)</argsstring>
+        <name>SetDiffuseGrey</name>
+        <qualifiedname>Vertex::SetDiffuseGrey</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="147" column="8" bodyfile="src/vertex_buffer.h" bodystart="147" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a94aa4568ca11057cce4b97c2172e245d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetSpecularGrey</definition>
+        <argsstring>(float val)</argsstring>
+        <name>SetSpecularGrey</name>
+        <qualifiedname>Vertex::SetSpecularGrey</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="149" column="15" bodyfile="src/vertex_buffer.h" bodystart="149" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1a16d9f1e9d0d79f214320035e50beb150" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::SetSpecularGrey</definition>
+        <argsstring>(float val, float alpha)</argsstring>
+        <name>SetSpecularGrey</name>
+        <qualifiedname>Vertex::SetSpecularGrey</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="151" column="8" bodyfile="src/vertex_buffer.h" bodystart="151" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ac09490fb62dbb29f16cad117f3089c1b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Vertex::GetDiffuseARGB</definition>
+        <argsstring>() const</argsstring>
+        <name>GetDiffuseARGB</name>
+        <qualifiedname>Vertex::GetDiffuseARGB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="153" column="12" bodyfile="src/vertex_buffer.h" bodystart="153" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1adeab92719eba83e6e5acea4ac03d6d48" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Vertex::GetSpecularARGB</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSpecularARGB</name>
+        <qualifiedname>Vertex::GetSpecularARGB</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="155" column="12" bodyfile="src/vertex_buffer.h" bodystart="155" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dd0/structVertex_1ad01ebab4c1615e5bf4bf99a3c064923e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Vertex::Translate</definition>
+        <argsstring>(float x, float y, float z, float w)</argsstring>
+        <name>Translate</name>
+        <qualifiedname>Vertex::Translate</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="157" column="8" bodyfile="src/vertex_buffer.cpp" bodystart="10" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/vertex_buffer.h" line="16" column="1" bodyfile="src/vertex_buffer.h" bodystart="16" bodyend="158"/>
+    <listofallmembers>
+      <member refid="df/dd0/structVertex_1a0abc33235d801964603b37f2d3e32a65" prot="public" virt="non-virtual"><scope>Vertex</scope><name>back_diffuse</name></member>
+      <member refid="df/dd0/structVertex_1a466454a3f63879038f9d8866247a3826" prot="public" virt="non-virtual"><scope>Vertex</scope><name>back_specular</name></member>
+      <member refid="df/dd0/structVertex_1a4fc9ad11ff65d7e964b2ccb2f6c64084" prot="public" virt="non-virtual"><scope>Vertex</scope><name>diffuse</name></member>
+      <member refid="df/dd0/structVertex_1a6f846158f0dc4a2bb47e36174b09cc46" prot="public" virt="non-virtual"><scope>Vertex</scope><name>fog_coord</name></member>
+      <member refid="df/dd0/structVertex_1ac09490fb62dbb29f16cad117f3089c1b" prot="public" virt="non-virtual"><scope>Vertex</scope><name>GetDiffuseARGB</name></member>
+      <member refid="df/dd0/structVertex_1adeab92719eba83e6e5acea4ac03d6d48" prot="public" virt="non-virtual"><scope>Vertex</scope><name>GetSpecularARGB</name></member>
+      <member refid="df/dd0/structVertex_1a44dd0d22dccb4684ba4c8cb7400536fc" prot="public" virt="non-virtual"><scope>Vertex</scope><name>normal</name></member>
+      <member refid="df/dd0/structVertex_1a8895087b2b86a350b09f37f2979ee7c2" prot="public" virt="non-virtual"><scope>Vertex</scope><name>point_size</name></member>
+      <member refid="df/dd0/structVertex_1ae4e242ee2001d5c392d1a54145b8aae3" prot="public" virt="non-virtual"><scope>Vertex</scope><name>pos</name></member>
+      <member refid="df/dd0/structVertex_1a9d2f9c91f9b9729e0e5f66484d2938f1" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetBackDiffuse</name></member>
+      <member refid="df/dd0/structVertex_1ac1f0f1b20321867d0b01a84b7426a0bd" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetBackDiffuse</name></member>
+      <member refid="df/dd0/structVertex_1aa462820a47fbae6cafddc10d5dd5391d" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetBackSpecular</name></member>
+      <member refid="df/dd0/structVertex_1a4caa2167868d9af9d947aa82016d4ccb" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetBackSpecular</name></member>
+      <member refid="df/dd0/structVertex_1abc540b20d7069b69ac923e9e2c6a7c19" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetDiffuse</name></member>
+      <member refid="df/dd0/structVertex_1a3339e252c8ea1507531619ad58682c07" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetDiffuse</name></member>
+      <member refid="df/dd0/structVertex_1acca8015d1f3f4053b0377308bd998d4f" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetDiffuseGrey</name></member>
+      <member refid="df/dd0/structVertex_1af988bf285267da90d15f869743aa1df9" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetDiffuseGrey</name></member>
+      <member refid="df/dd0/structVertex_1aa88d09d2b1fb4b6fb0b56dde23499a66" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetFogCoord</name></member>
+      <member refid="df/dd0/structVertex_1ab0aea1379ef2f0d12e2a6e6a0ea3f774" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetNormal</name></member>
+      <member refid="df/dd0/structVertex_1a7c3b8fdbc048a1364ff4a6f2b4fa70fb" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetNormal</name></member>
+      <member refid="df/dd0/structVertex_1ac103a01a0bcfe89cdecb18d79bd08003" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetPointSize</name></member>
+      <member refid="df/dd0/structVertex_1ad47ee858dbe74ee43cec8897fcc6aaf6" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetPosition</name></member>
+      <member refid="df/dd0/structVertex_1a04863acc72c74c9439e5f26b4d62d215" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetPosition</name></member>
+      <member refid="df/dd0/structVertex_1a9c9f733ba9d53591929659edede6d194" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetSpecular</name></member>
+      <member refid="df/dd0/structVertex_1ad22989a66d834a7be2b8f221cc68c75f" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetSpecular</name></member>
+      <member refid="df/dd0/structVertex_1a94aa4568ca11057cce4b97c2172e245d" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetSpecularGrey</name></member>
+      <member refid="df/dd0/structVertex_1a16d9f1e9d0d79f214320035e50beb150" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetSpecularGrey</name></member>
+      <member refid="df/dd0/structVertex_1a88805ea397d9d0468e7aa0ea9abb95c2" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord0</name></member>
+      <member refid="df/dd0/structVertex_1a8812d36a392374f302ce028ce439d07b" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord0</name></member>
+      <member refid="df/dd0/structVertex_1aca03418121a05b4be9603e9ddc209f08" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord0</name></member>
+      <member refid="df/dd0/structVertex_1ab0dd2cdb029ed612c84755e3cc1e8a65" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord1</name></member>
+      <member refid="df/dd0/structVertex_1a217a1a226934e03c75f4e5a0de50a6c5" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord1</name></member>
+      <member refid="df/dd0/structVertex_1ae4ae0e0feffea6d7aacdeb29ce035825" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord1</name></member>
+      <member refid="df/dd0/structVertex_1a391f67c9a24f8da8134913f5f33114c5" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord2</name></member>
+      <member refid="df/dd0/structVertex_1a013a1d526b030c88d873bbd211036a73" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord2</name></member>
+      <member refid="df/dd0/structVertex_1a0f676c37ed583267a68e1620d3d0630d" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord2</name></member>
+      <member refid="df/dd0/structVertex_1aa18926e3939b516b98ce3ecc1a94e953" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord3</name></member>
+      <member refid="df/dd0/structVertex_1a0658940d1f11407f84781e9c70f3b4ec" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord3</name></member>
+      <member refid="df/dd0/structVertex_1a298036bdb4aac28d823d2a10adb3739d" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetTexCoord3</name></member>
+      <member refid="df/dd0/structVertex_1a14c16b86303c283370429f291c289ae4" prot="public" virt="non-virtual"><scope>Vertex</scope><name>SetWeight</name></member>
+      <member refid="df/dd0/structVertex_1afc0ff5df87a0924d23c7c069811be3dc" prot="public" virt="non-virtual"><scope>Vertex</scope><name>specular</name></member>
+      <member refid="df/dd0/structVertex_1ae4b88fe20fd97681a8e2ed947b4bd2c6" prot="public" virt="non-virtual"><scope>Vertex</scope><name>texcoord0</name></member>
+      <member refid="df/dd0/structVertex_1a01f7bea607ad64e4e6ebc41ac9332808" prot="public" virt="non-virtual"><scope>Vertex</scope><name>texcoord1</name></member>
+      <member refid="df/dd0/structVertex_1a5821f653333d9b8ccd7dd7f04b0eac99" prot="public" virt="non-virtual"><scope>Vertex</scope><name>texcoord2</name></member>
+      <member refid="df/dd0/structVertex_1a5af87fc9b9572dbc0f6bd8236159c35d" prot="public" virt="non-virtual"><scope>Vertex</scope><name>texcoord3</name></member>
+      <member refid="df/dd0/structVertex_1ad01ebab4c1615e5bf4bf99a3c064923e" prot="public" virt="non-virtual"><scope>Vertex</scope><name>Translate</name></member>
+      <member refid="df/dd0/structVertex_1a68276f9eb766c47f3a1fcb4a747b33e8" prot="public" virt="non-virtual"><scope>Vertex</scope><name>weight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

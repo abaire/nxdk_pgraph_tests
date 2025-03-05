@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d09/structLightColors" kind="struct" language="C++" prot="public">
+    <compoundname>LightColors</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/d09/structLightColors_1a7a2655f6ea5a2aa9e1820b931c3002e3" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color LightColors::diffuse</definition>
+        <argsstring></argsstring>
+        <name>diffuse</name>
+        <qualifiedname>LightColors::diffuse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="19" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d09/structLightColors_1a5d0ff006be204f9883982f2985950358" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color LightColors::specular</definition>
+        <argsstring></argsstring>
+        <name>specular</name>
+        <qualifiedname>LightColors::specular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="20" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d09/structLightColors_1ac888b12940a236a44a96ed5e3e4394c4" prot="public" static="no" mutable="no">
+        <type><ref refid="d0/da2/structColor" kindref="compound">Color</ref></type>
+        <definition>Color LightColors::ambient</definition>
+        <argsstring></argsstring>
+        <name>ambient</name>
+        <qualifiedname>LightColors::ambient</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.cpp" line="21" column="9" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>Color</label>
+        <link refid="d0/da2/structColor"/>
+      </node>
+      <node id="1">
+        <label>LightColors</label>
+        <link refid="db/d09/structLightColors"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ambient</edgelabel>
+          <edgelabel>diffuse</edgelabel>
+          <edgelabel>specular</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/material_color_source_tests.cpp" line="18" column="1" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="18" bodyend="22"/>
+    <listofallmembers>
+      <member refid="db/d09/structLightColors_1ac888b12940a236a44a96ed5e3e4394c4" prot="public" virt="non-virtual"><scope>LightColors</scope><name>ambient</name></member>
+      <member refid="db/d09/structLightColors_1a7a2655f6ea5a2aa9e1820b931c3002e3" prot="public" virt="non-virtual"><scope>LightColors</scope><name>diffuse</name></member>
+      <member refid="db/d09/structLightColors_1a5d0ff006be204f9883982f2985950358" prot="public" virt="non-virtual"><scope>LightColors</scope><name>specular</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

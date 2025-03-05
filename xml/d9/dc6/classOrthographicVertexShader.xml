@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/dc6/classOrthographicVertexShader" kind="class" language="C++" prot="public">
+    <compoundname>OrthographicVertexShader</compoundname>
+    <basecompoundref refid="d2/d17/classProjectionVertexShader" prot="public" virt="non-virtual">ProjectionVertexShader</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d9/dc6/classOrthographicVertexShader_1ac920549a36b9e8ebdefe0ceddd6bf099" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float OrthographicVertexShader::width_</definition>
+        <argsstring></argsstring>
+        <name>width_</name>
+        <qualifiedname>OrthographicVertexShader::width_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/orthographic_vertex_shader.h" line="15" column="9" bodyfile="src/shaders/orthographic_vertex_shader.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/dc6/classOrthographicVertexShader_1a01ef906267010c71130e8cfd518acdaa" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float OrthographicVertexShader::height_</definition>
+        <argsstring></argsstring>
+        <name>height_</name>
+        <qualifiedname>OrthographicVertexShader::height_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/orthographic_vertex_shader.h" line="16" column="9" bodyfile="src/shaders/orthographic_vertex_shader.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/dc6/classOrthographicVertexShader_1ab785328b4da01d1eb94b4ebb8c3ee54c" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float OrthographicVertexShader::far_minus_near_</definition>
+        <argsstring></argsstring>
+        <name>far_minus_near_</name>
+        <qualifiedname>OrthographicVertexShader::far_minus_near_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/orthographic_vertex_shader.h" line="17" column="9" bodyfile="src/shaders/orthographic_vertex_shader.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/dc6/classOrthographicVertexShader_1abd3a5c2386f41e155f943a5354258ba8" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float OrthographicVertexShader::far_plus_near_</definition>
+        <argsstring></argsstring>
+        <name>far_plus_near_</name>
+        <qualifiedname>OrthographicVertexShader::far_plus_near_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/orthographic_vertex_shader.h" line="18" column="9" bodyfile="src/shaders/orthographic_vertex_shader.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/dc6/classOrthographicVertexShader_1ad140baba4f225dc6aabca607320d9b2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>OrthographicVertexShader::OrthographicVertexShader</definition>
+        <argsstring>(uint32_t framebuffer_width, uint32_t framebuffer_height, float left, float right, float bottom, float top, float near, float far, float z_min=0, float z_max=0x7FFF)</argsstring>
+        <name>OrthographicVertexShader</name>
+        <qualifiedname>OrthographicVertexShader::OrthographicVertexShader</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>near</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>far</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_min</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_max</declname>
+          <defval>0x7FFF</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/orthographic_vertex_shader.h" line="8" column="3" bodyfile="src/shaders/orthographic_vertex_shader.cpp" bodystart="5" bodyend="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d9/dc6/classOrthographicVertexShader_1a3e43b7b2b0a470d8579f53935f403fe4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void OrthographicVertexShader::CalculateProjectionMatrix</definition>
+        <argsstring>() override</argsstring>
+        <name>CalculateProjectionMatrix</name>
+        <qualifiedname>OrthographicVertexShader::CalculateProjectionMatrix</qualifiedname>
+        <reimplements refid="d2/d17/classProjectionVertexShader_1ab054fcb91b754c77e0f076258bec9e78">CalculateProjectionMatrix</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/orthographic_vertex_shader.h" line="12" column="8" bodyfile="src/shaders/orthographic_vertex_shader.cpp" bodystart="15" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>OrthographicVertexShader</label>
+        <link refid="d9/dc6/classOrthographicVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ProjectionVertexShader</label>
+        <link refid="d2/d17/classProjectionVertexShader"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>OrthographicVertexShader</label>
+        <link refid="d9/dc6/classOrthographicVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ProjectionVertexShader</label>
+        <link refid="d2/d17/classProjectionVertexShader"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/shaders/orthographic_vertex_shader.h" line="6" column="1" bodyfile="src/shaders/orthographic_vertex_shader.h" bodystart="6" bodyend="19"/>
+    <listofallmembers>
+      <member refid="dc/dfc/classVertexShaderProgram_1adc97c21deb5d2391f1383aeef73a84cb" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>Activate</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1acbb229f37b91f56cd84faf1ab851714f" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>base_transform_constants_</name></member>
+      <member refid="d9/dc6/classOrthographicVertexShader_1a3e43b7b2b0a470d8579f53935f403fe4" prot="protected" virt="virtual"><scope>OrthographicVertexShader</scope><name>CalculateProjectionMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa9bbb5f052d9f69798df39b077e939dc" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>camera_position_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a49a863c4700294a97801d74f189e1373" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>composite_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a541b881fc2728bea1109a9e6056a4680" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>enable_lighting_</name></member>
+      <member refid="d9/dc6/classOrthographicVertexShader_1ab785328b4da01d1eb94b4ebb8c3ee54c" prot="private" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>far_minus_near_</name></member>
+      <member refid="d9/dc6/classOrthographicVertexShader_1abd3a5c2386f41e155f943a5354258ba8" prot="private" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>far_plus_near_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a8460d689e8f678e8f390a49089f77d29" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>framebuffer_height_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab12efa0638d24507d2a77ee36c964643" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>framebuffer_width_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a2bb059bb49c9835b8621a6b4dccbdf76" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetModelMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a69e15e1a5d2453aa9070421ffb4f81ce" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetProjectionMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5dae3bc3bbac3effcaa2f67cb6ae1fd0" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetProjectionViewportMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a68d71090253fe64db76d391ad7ea405d" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetViewMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa03ca27a01003834cdb12bcce42546c3" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetViewportMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ac8c5e7b7f7bc9119d4dd3a86ad8ebd8a" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetZMax</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a69addf33cc970b66274cb120a824f755" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>GetZMin</name></member>
+      <member refid="d9/dc6/classOrthographicVertexShader_1a01ef906267010c71130e8cfd518acdaa" prot="private" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>height_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a8e45551a2afc13d0df379a4d5e9ac2e6" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>inverse_composite_matrix_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a74e922605302d47f91c2e05c96744f59" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>kShaderUserConstantOffset</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a79d2c813dc942ec8e8bf55f3b3ca2c45" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>light_direction_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a78c88c32131d71f1a23a6e255b9d3273" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>LoadShaderProgram</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa6cf3a5551b44ca6cfec7e7b4c330bff" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>LookAt</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a7c4bd19843c15053dae11d2c795a63c3" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>LookAt</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a0006e499aaad9644b7973a5282912947" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>LookTo</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a87aec37b06a5fbf653cad3111bdbc22b" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>model_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aeab2cda130f4376813a4e64de86ad267" prot="protected" virt="virtual"><scope>OrthographicVertexShader</scope><name>OnActivate</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a0a389903fa4e1daa939b96ad7c3ad5da" prot="protected" virt="virtual"><scope>OrthographicVertexShader</scope><name>OnLoadConstants</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a75aa52b281f2bbd82c8b35fda69e4f0e" prot="protected" virt="virtual"><scope>OrthographicVertexShader</scope><name>OnLoadShader</name></member>
+      <member refid="d9/dc6/classOrthographicVertexShader_1ad140baba4f225dc6aabca607320d9b2c" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>OrthographicVertexShader</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9cffd343fcccb26c2b4566c8f451ca54" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>PrepareDraw</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a0e043dcb82d5f1a19b647e49f0376580" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>projection_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5a8f69b6452c396358772be9335523b0" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>projection_viewport_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a3374d6a596409801d37dc30b89236238" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>ProjectionVertexShader</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5261463c6867ffd2952d06f54f33c9c1" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>ProjectPoint</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2a73df681aaefa3e0e6147640fdfbb02" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetBaseUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a6c5e874e3f00bc518989b669f37ed42a" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetBaseUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a23ba86a0a86b31b3b3805457fe77d2c3" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetBaseUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1aab0b2f891410bca536a68adabc7b4df7" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetBaseUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a012dcc9bd1b1eabaf5b1df5c8d67a896" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetBaseUniformI</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1afa21d63c4b8854a390c4c249459b4e6c" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetCamera</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab65057436d14b751d5b5295c85e7e65d" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetDirectionalLightCastDirection</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a80e99f76c72f690473ed21dc7e1c0e96" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetDirectionalLightDirection</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab484182e10a3fcadd0481c03fa57d5f7" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetLightingEnabled</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab0e7e017bbe8284cbbb2534b6186511d" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetShaderOverride</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a12f97160cede1b3cad6e59da59b375d0" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetTransformConstantBlock</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a48de7a33eb79b03662a27d803bccab18" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetTransposeOnUpload</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a7004b28739b3237ef27b7daaf2241db8" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a283363b3a4e78756decf55ebcff5aaaf" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a17345848517885462ba3bbd29e1d6903" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2897e78b5db12bbf27ca85c8e980ac34" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a5e778f4148b20e0c342d3f060922923c" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUniformI</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5f34e0301f354d309065b9e9b1cbbad4" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUse4ComponentTexcoords</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a4a4a6f5032702d5f49decaa4afb62fe3" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetUseD3DStyleViewport</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a42bec0d08ad2ff05690e02dbd2b328f7" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetZMax</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ae554cb938dc7bdcbae493fb70f25886d" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>SetZMin</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a123728d02c5c2d5343946beb691eac93" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>shader_override_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1af17c1a31c497eba3d5c16b0cca59a89b" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>shader_override_size_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa62bae58e3e49261d5fa1f1d51bd7035" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>transpose_on_upload_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab85b5d00bdbe3f2a19b513a8c3ab14f6" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>uniform_upload_required_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a13036fdfa1cbdabb06632f49161544ed" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>uniforms_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a7d3bddedb366302e508cbe22c7bff41e" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>UnprojectPoint</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a53c874166154cce9c2c9a689afdd3154" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>UnprojectPoint</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a18759a41292da560d41948bb8a6e0408" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>UploadConstants</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a1d30a5c6f1edf3ec965887ce5bf41b97" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>use_4_component_texcoords_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a9381731226b71e4433e6423409047b97" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>use_d3d_style_viewport_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a333cf05f5ee1554d16119e661e4b5704" prot="public" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>VertexShaderProgram</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ada0499a65528dd47943ad95869cd9b23" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>view_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a1102098a864bd8497185766f07adb0e4" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>viewport_matrix_</name></member>
+      <member refid="d9/dc6/classOrthographicVertexShader_1ac920549a36b9e8ebdefe0ceddd6bf099" prot="private" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>width_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a04650560bf6dbdcf25a5b658c97c3077" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>z_max_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a98db6c6866fffcbf6a7c6b7227281bf7" prot="protected" virt="non-virtual"><scope>OrthographicVertexShader</scope><name>z_min_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9c28c6b3fce19dc5dd22758d79f72e0e" prot="public" virt="virtual"><scope>OrthographicVertexShader</scope><name>~VertexShaderProgram</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

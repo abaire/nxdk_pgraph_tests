@@ -1,0 +1,931 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d17/classProjectionVertexShader" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>ProjectionVertexShader</compoundname>
+    <basecompoundref refid="dc/dfc/classVertexShaderProgram" prot="public" virt="non-virtual">VertexShaderProgram</basecompoundref>
+    <derivedcompoundref refid="d9/dc6/classOrthographicVertexShader" prot="public" virt="non-virtual">OrthographicVertexShader</derivedcompoundref>
+    <derivedcompoundref refid="d9/de2/classPerspectiveVertexShader" prot="public" virt="non-virtual">PerspectiveVertexShader</derivedcompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1ab12efa0638d24507d2a77ee36c964643" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ProjectionVertexShader::framebuffer_width_</definition>
+        <argsstring></argsstring>
+        <name>framebuffer_width_</name>
+        <qualifiedname>ProjectionVertexShader::framebuffer_width_</qualifiedname>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="74" column="9" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a8460d689e8f678e8f390a49089f77d29" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ProjectionVertexShader::framebuffer_height_</definition>
+        <argsstring></argsstring>
+        <name>framebuffer_height_</name>
+        <qualifiedname>ProjectionVertexShader::framebuffer_height_</qualifiedname>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="75" column="9" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a98db6c6866fffcbf6a7c6b7227281bf7" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ProjectionVertexShader::z_min_</definition>
+        <argsstring></argsstring>
+        <name>z_min_</name>
+        <qualifiedname>ProjectionVertexShader::z_min_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="76" column="9" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a04650560bf6dbdcf25a5b658c97c3077" prot="protected" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ProjectionVertexShader::z_max_</definition>
+        <argsstring></argsstring>
+        <name>z_max_</name>
+        <qualifiedname>ProjectionVertexShader::z_max_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="77" column="9" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a541b881fc2728bea1109a9e6056a4680" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ProjectionVertexShader::enable_lighting_</definition>
+        <argsstring></argsstring>
+        <name>enable_lighting_</name>
+        <qualifiedname>ProjectionVertexShader::enable_lighting_</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="79" column="8" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a1d30a5c6f1edf3ec965887ce5bf41b97" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ProjectionVertexShader::use_4_component_texcoords_</definition>
+        <argsstring></argsstring>
+        <name>use_4_component_texcoords_</name>
+        <qualifiedname>ProjectionVertexShader::use_4_component_texcoords_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="80" column="8" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a9381731226b71e4433e6423409047b97" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ProjectionVertexShader::use_d3d_style_viewport_</definition>
+        <argsstring></argsstring>
+        <name>use_d3d_style_viewport_</name>
+        <qualifiedname>ProjectionVertexShader::use_d3d_style_viewport_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="82" column="8" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a87aec37b06a5fbf653cad3111bdbc22b" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::model_matrix_</definition>
+        <argsstring></argsstring>
+        <name>model_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::model_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="84" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1ada0499a65528dd47943ad95869cd9b23" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::view_matrix_</definition>
+        <argsstring></argsstring>
+        <name>view_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::view_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="85" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a0e043dcb82d5f1a19b647e49f0376580" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::projection_matrix_</definition>
+        <argsstring></argsstring>
+        <name>projection_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::projection_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="86" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a1102098a864bd8497185766f07adb0e4" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::viewport_matrix_</definition>
+        <argsstring></argsstring>
+        <name>viewport_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::viewport_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="87" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a5a8f69b6452c396358772be9335523b0" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::projection_viewport_matrix_</definition>
+        <argsstring></argsstring>
+        <name>projection_viewport_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::projection_viewport_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="88" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a49a863c4700294a97801d74f189e1373" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::composite_matrix_</definition>
+        <argsstring></argsstring>
+        <name>composite_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::composite_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="90" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a8e45551a2afc13d0df379a4d5e9ac2e6" prot="protected" static="no" mutable="no">
+        <type>matrix4_t</type>
+        <definition>matrix4_t ProjectionVertexShader::inverse_composite_matrix_</definition>
+        <argsstring></argsstring>
+        <name>inverse_composite_matrix_</name>
+        <qualifiedname>ProjectionVertexShader::inverse_composite_matrix_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="91" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1aa9bbb5f052d9f69798df39b077e939dc" prot="protected" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t ProjectionVertexShader::camera_position_</definition>
+        <argsstring></argsstring>
+        <name>camera_position_</name>
+        <qualifiedname>ProjectionVertexShader::camera_position_</qualifiedname>
+        <initializer>= {0, 0, -2.25, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="93" column="12" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1a79d2c813dc942ec8e8bf55f3b3ca2c45" prot="protected" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t ProjectionVertexShader::light_direction_</definition>
+        <argsstring></argsstring>
+        <name>light_direction_</name>
+        <qualifiedname>ProjectionVertexShader::light_direction_</qualifiedname>
+        <initializer>= {0, 0, 1, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="94" column="12" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d17/classProjectionVertexShader_1aa62bae58e3e49261d5fa1f1d51bd7035" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ProjectionVertexShader::transpose_on_upload_</definition>
+        <argsstring></argsstring>
+        <name>transpose_on_upload_</name>
+        <qualifiedname>ProjectionVertexShader::transpose_on_upload_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="96" column="8" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="96" bodyend="96"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a3374d6a596409801d37dc30b89236238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ProjectionVertexShader::ProjectionVertexShader</definition>
+        <argsstring>(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min=0, float z_max=0x7FFF, bool enable_lighting=true, bool use_4_component_texcoords=false)</argsstring>
+        <name>ProjectionVertexShader</name>
+        <qualifiedname>ProjectionVertexShader::ProjectionVertexShader</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_min</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_max</declname>
+          <defval>0x7FFF</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>enable_lighting</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_4_component_texcoords</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="13" column="3" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="31" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1ab484182e10a3fcadd0481c03fa57d5f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetLightingEnabled</definition>
+        <argsstring>(bool enabled=true)</argsstring>
+        <name>SetLightingEnabled</name>
+        <qualifiedname>ProjectionVertexShader::SetLightingEnabled</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="16" column="8" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a5f34e0301f354d309065b9e9b1cbbad4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetUse4ComponentTexcoords</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>SetUse4ComponentTexcoords</name>
+        <qualifiedname>ProjectionVertexShader::SetUse4ComponentTexcoords</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="18" column="15" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a4a4a6f5032702d5f49decaa4afb62fe3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetUseD3DStyleViewport</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>SetUseD3DStyleViewport</name>
+        <qualifiedname>ProjectionVertexShader::SetUseD3DStyleViewport</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="19" column="15" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="19" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1ae554cb938dc7bdcbae493fb70f25886d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetZMin</definition>
+        <argsstring>(float val)</argsstring>
+        <name>SetZMin</name>
+        <qualifiedname>ProjectionVertexShader::SetZMin</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="24" column="15" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a42bec0d08ad2ff05690e02dbd2b328f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetZMax</definition>
+        <argsstring>(float val)</argsstring>
+        <name>SetZMax</name>
+        <qualifiedname>ProjectionVertexShader::SetZMax</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="25" column="15" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a69addf33cc970b66274cb120a824f755" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float ProjectionVertexShader::GetZMin</definition>
+        <argsstring>() const</argsstring>
+        <name>GetZMin</name>
+        <qualifiedname>ProjectionVertexShader::GetZMin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="27" column="16" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1ac8c5e7b7f7bc9119d4dd3a86ad8ebd8a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float ProjectionVertexShader::GetZMax</definition>
+        <argsstring>() const</argsstring>
+        <name>GetZMax</name>
+        <qualifiedname>ProjectionVertexShader::GetZMax</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="28" column="16" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1aa6cf3a5551b44ca6cfec7e7b4c330bff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::LookAt</definition>
+        <argsstring>(const vector_t &amp;camera_position, const vector_t &amp;look_at_point)</argsstring>
+        <name>LookAt</name>
+        <qualifiedname>ProjectionVertexShader::LookAt</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>camera_position</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>look_at_point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="30" column="15" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a7c4bd19843c15053dae11d2c795a63c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::LookAt</definition>
+        <argsstring>(const vector_t &amp;camera_position, const vector_t &amp;look_at_point, const vector_t &amp;up)</argsstring>
+        <name>LookAt</name>
+        <qualifiedname>ProjectionVertexShader::LookAt</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>camera_position</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>look_at_point</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>up</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="35" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="47" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a0006e499aaad9644b7973a5282912947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::LookTo</definition>
+        <argsstring>(const vector_t &amp;camera_position, const vector_t &amp;camera_direction, const vector_t &amp;up)</argsstring>
+        <name>LookTo</name>
+        <qualifiedname>ProjectionVertexShader::LookTo</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>camera_position</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>camera_direction</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>up</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="36" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="58" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1afa21d63c4b8854a390c4c249459b4e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetCamera</definition>
+        <argsstring>(const vector_t &amp;position, const vector_t &amp;rotation)</argsstring>
+        <name>SetCamera</name>
+        <qualifiedname>ProjectionVertexShader::SetCamera</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="37" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="98" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a80e99f76c72f690473ed21dc7e1c0e96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetDirectionalLightDirection</definition>
+        <argsstring>(const vector_t &amp;direction)</argsstring>
+        <name>SetDirectionalLightDirection</name>
+        <qualifiedname>ProjectionVertexShader::SetDirectionalLightDirection</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+<para>Sets the direction from the origin towards the directional light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="40" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="106" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1ab65057436d14b751d5b5295c85e7e65d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetDirectionalLightCastDirection</definition>
+        <argsstring>(const vector_t &amp;direction)</argsstring>
+        <name>SetDirectionalLightCastDirection</name>
+        <qualifiedname>ProjectionVertexShader::SetDirectionalLightCastDirection</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+<para>Sets the direction in which the directional light is casting light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="43" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="110" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a2bb059bb49c9835b8621a6b4dccbdf76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>matrix4_t &amp;</type>
+        <definition>matrix4_t &amp; ProjectionVertexShader::GetModelMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>GetModelMatrix</name>
+        <qualifiedname>ProjectionVertexShader::GetModelMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="45" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a68d71090253fe64db76d391ad7ea405d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>matrix4_t &amp;</type>
+        <definition>matrix4_t &amp; ProjectionVertexShader::GetViewMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>GetViewMatrix</name>
+        <qualifiedname>ProjectionVertexShader::GetViewMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="46" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a69e15e1a5d2453aa9070421ffb4f81ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>matrix4_t &amp;</type>
+        <definition>matrix4_t &amp; ProjectionVertexShader::GetProjectionMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>GetProjectionMatrix</name>
+        <qualifiedname>ProjectionVertexShader::GetProjectionMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="47" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1aa03ca27a01003834cdb12bcce42546c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>matrix4_t &amp;</type>
+        <definition>matrix4_t &amp; ProjectionVertexShader::GetViewportMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>GetViewportMatrix</name>
+        <qualifiedname>ProjectionVertexShader::GetViewportMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="48" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a5dae3bc3bbac3effcaa2f67cb6ae1fd0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>matrix4_t &amp;</type>
+        <definition>matrix4_t &amp; ProjectionVertexShader::GetProjectionViewportMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>GetProjectionViewportMatrix</name>
+        <qualifiedname>ProjectionVertexShader::GetProjectionViewportMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="49" column="13" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a5261463c6867ffd2952d06f54f33c9c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::ProjectPoint</definition>
+        <argsstring>(vector_t &amp;result, const vector_t &amp;world_point) const</argsstring>
+        <name>ProjectPoint</name>
+        <qualifiedname>ProjectionVertexShader::ProjectPoint</qualifiedname>
+        <param>
+          <type>vector_t &amp;</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>world_point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="52" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="200" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a7d3bddedb366302e508cbe22c7bff41e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::UnprojectPoint</definition>
+        <argsstring>(vector_t &amp;result, const vector_t &amp;screen_point) const</argsstring>
+        <name>UnprojectPoint</name>
+        <qualifiedname>ProjectionVertexShader::UnprojectPoint</qualifiedname>
+        <param>
+          <type>vector_t &amp;</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>screen_point</declname>
+        </param>
+        <briefdescription>
+<para>Unprojects the given screen point, producing world coordinates that will project there. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="55" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="204" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a53c874166154cce9c2c9a689afdd3154" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::UnprojectPoint</definition>
+        <argsstring>(vector_t &amp;result, const vector_t &amp;screen_point, float world_z) const</argsstring>
+        <name>UnprojectPoint</name>
+        <qualifiedname>ProjectionVertexShader::UnprojectPoint</qualifiedname>
+        <param>
+          <type>vector_t &amp;</type>
+          <declname>result</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>screen_point</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>world_z</declname>
+        </param>
+        <briefdescription>
+<para>Unprojects the given screen point, producing world coordinates that will project there with the given Z value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="58" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="208" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a48de7a33eb79b03662a27d803bccab18" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::SetTransposeOnUpload</definition>
+        <argsstring>(bool transpose=true)</argsstring>
+        <name>SetTransposeOnUpload</name>
+        <qualifiedname>ProjectionVertexShader::SetTransposeOnUpload</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>transpose</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Causes matrices to be transposed before being uploaded to the shader. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="61" column="8" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1aeab2cda130f4376813a4e64de86ad267" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::OnActivate</definition>
+        <argsstring>() override</argsstring>
+        <name>OnActivate</name>
+        <qualifiedname>ProjectionVertexShader::OnActivate</qualifiedname>
+        <reimplements refid="dc/dfc/classVertexShaderProgram_1a962bc8620c201897c0e172308b0705c7">OnActivate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="64" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="126" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a75aa52b281f2bbd82c8b35fda69e4f0e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::OnLoadShader</definition>
+        <argsstring>() override</argsstring>
+        <name>OnLoadShader</name>
+        <qualifiedname>ProjectionVertexShader::OnLoadShader</qualifiedname>
+        <reimplements refid="dc/dfc/classVertexShaderProgram_1ab9e6ba142e37d2e1128e40ef7f660193">OnLoadShader</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="65" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="128" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a0a389903fa4e1daa939b96ad7c3ad5da" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::OnLoadConstants</definition>
+        <argsstring>() override</argsstring>
+        <name>OnLoadConstants</name>
+        <qualifiedname>ProjectionVertexShader::OnLoadConstants</qualifiedname>
+        <reimplements refid="dc/dfc/classVertexShaderProgram_1ab9cb1f43c6c5301abe86e8d204752de9">OnLoadConstants</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="66" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="140" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1ab054fcb91b754c77e0f076258bec9e78" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void ProjectionVertexShader::CalculateProjectionMatrix</definition>
+        <argsstring>()=0</argsstring>
+        <name>CalculateProjectionMatrix</name>
+        <qualifiedname>ProjectionVertexShader::CalculateProjectionMatrix</qualifiedname>
+        <reimplementedby refid="d9/dc6/classOrthographicVertexShader_1a3e43b7b2b0a470d8579f53935f403fe4">CalculateProjectionMatrix</reimplementedby>
+        <reimplementedby refid="d9/de2/classPerspectiveVertexShader_1ac216885d3f1b5eb6d79921807d734114">CalculateProjectionMatrix</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="67" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1aa3ba14778795d97e11ae250dbc071971" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::UpdateMatrices</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateMatrices</name>
+        <qualifiedname>ProjectionVertexShader::UpdateMatrices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="70" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="114" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d17/classProjectionVertexShader_1a84bdacbd0ee3cbd99ee3e585656f3ff8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ProjectionVertexShader::CalculateViewportMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>CalculateViewportMatrix</name>
+        <qualifiedname>ProjectionVertexShader::CalculateViewportMatrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/projection_vertex_shader.h" line="71" column="8" bodyfile="src/shaders/projection_vertex_shader.cpp" bodystart="181" bodyend="198"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>OrthographicVertexShader</label>
+        <link refid="d9/dc6/classOrthographicVertexShader"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>PerspectiveVertexShader</label>
+        <link refid="d9/de2/classPerspectiveVertexShader"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ProjectionVertexShader</label>
+        <link refid="d2/d17/classProjectionVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ProjectionVertexShader</label>
+        <link refid="d2/d17/classProjectionVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/shaders/projection_vertex_shader.h" line="11" column="1" bodyfile="src/shaders/projection_vertex_shader.h" bodystart="11" bodyend="97"/>
+    <listofallmembers>
+      <member refid="dc/dfc/classVertexShaderProgram_1adc97c21deb5d2391f1383aeef73a84cb" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>Activate</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1acbb229f37b91f56cd84faf1ab851714f" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>base_transform_constants_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab054fcb91b754c77e0f076258bec9e78" prot="protected" virt="pure-virtual"><scope>ProjectionVertexShader</scope><name>CalculateProjectionMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a84bdacbd0ee3cbd99ee3e585656f3ff8" prot="private" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>CalculateViewportMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa9bbb5f052d9f69798df39b077e939dc" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>camera_position_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a49a863c4700294a97801d74f189e1373" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>composite_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a541b881fc2728bea1109a9e6056a4680" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>enable_lighting_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a8460d689e8f678e8f390a49089f77d29" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>framebuffer_height_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab12efa0638d24507d2a77ee36c964643" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>framebuffer_width_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a2bb059bb49c9835b8621a6b4dccbdf76" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetModelMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a69e15e1a5d2453aa9070421ffb4f81ce" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetProjectionMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5dae3bc3bbac3effcaa2f67cb6ae1fd0" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetProjectionViewportMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a68d71090253fe64db76d391ad7ea405d" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetViewMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa03ca27a01003834cdb12bcce42546c3" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetViewportMatrix</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ac8c5e7b7f7bc9119d4dd3a86ad8ebd8a" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetZMax</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a69addf33cc970b66274cb120a824f755" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>GetZMin</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a8e45551a2afc13d0df379a4d5e9ac2e6" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>inverse_composite_matrix_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a74e922605302d47f91c2e05c96744f59" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>kShaderUserConstantOffset</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a79d2c813dc942ec8e8bf55f3b3ca2c45" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>light_direction_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a78c88c32131d71f1a23a6e255b9d3273" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>LoadShaderProgram</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa6cf3a5551b44ca6cfec7e7b4c330bff" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>LookAt</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a7c4bd19843c15053dae11d2c795a63c3" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>LookAt</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a0006e499aaad9644b7973a5282912947" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>LookTo</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a87aec37b06a5fbf653cad3111bdbc22b" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>model_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aeab2cda130f4376813a4e64de86ad267" prot="protected" virt="virtual"><scope>ProjectionVertexShader</scope><name>OnActivate</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a0a389903fa4e1daa939b96ad7c3ad5da" prot="protected" virt="virtual"><scope>ProjectionVertexShader</scope><name>OnLoadConstants</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a75aa52b281f2bbd82c8b35fda69e4f0e" prot="protected" virt="virtual"><scope>ProjectionVertexShader</scope><name>OnLoadShader</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9cffd343fcccb26c2b4566c8f451ca54" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>PrepareDraw</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a0e043dcb82d5f1a19b647e49f0376580" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>projection_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5a8f69b6452c396358772be9335523b0" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>projection_viewport_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a3374d6a596409801d37dc30b89236238" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>ProjectionVertexShader</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5261463c6867ffd2952d06f54f33c9c1" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>ProjectPoint</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2a73df681aaefa3e0e6147640fdfbb02" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetBaseUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a6c5e874e3f00bc518989b669f37ed42a" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetBaseUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a23ba86a0a86b31b3b3805457fe77d2c3" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetBaseUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1aab0b2f891410bca536a68adabc7b4df7" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetBaseUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a012dcc9bd1b1eabaf5b1df5c8d67a896" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetBaseUniformI</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1afa21d63c4b8854a390c4c249459b4e6c" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetCamera</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab65057436d14b751d5b5295c85e7e65d" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetDirectionalLightCastDirection</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a80e99f76c72f690473ed21dc7e1c0e96" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetDirectionalLightDirection</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ab484182e10a3fcadd0481c03fa57d5f7" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetLightingEnabled</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab0e7e017bbe8284cbbb2534b6186511d" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetShaderOverride</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a12f97160cede1b3cad6e59da59b375d0" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetTransformConstantBlock</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a48de7a33eb79b03662a27d803bccab18" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetTransposeOnUpload</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a7004b28739b3237ef27b7daaf2241db8" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a283363b3a4e78756decf55ebcff5aaaf" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a17345848517885462ba3bbd29e1d6903" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2897e78b5db12bbf27ca85c8e980ac34" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a5e778f4148b20e0c342d3f060922923c" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUniformI</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a5f34e0301f354d309065b9e9b1cbbad4" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUse4ComponentTexcoords</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a4a4a6f5032702d5f49decaa4afb62fe3" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetUseD3DStyleViewport</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a42bec0d08ad2ff05690e02dbd2b328f7" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetZMax</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ae554cb938dc7bdcbae493fb70f25886d" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>SetZMin</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a123728d02c5c2d5343946beb691eac93" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>shader_override_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1af17c1a31c497eba3d5c16b0cca59a89b" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>shader_override_size_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa62bae58e3e49261d5fa1f1d51bd7035" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>transpose_on_upload_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab85b5d00bdbe3f2a19b513a8c3ab14f6" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>uniform_upload_required_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a13036fdfa1cbdabb06632f49161544ed" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>uniforms_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a7d3bddedb366302e508cbe22c7bff41e" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>UnprojectPoint</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a53c874166154cce9c2c9a689afdd3154" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>UnprojectPoint</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1aa3ba14778795d97e11ae250dbc071971" prot="private" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>UpdateMatrices</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a18759a41292da560d41948bb8a6e0408" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>UploadConstants</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a1d30a5c6f1edf3ec965887ce5bf41b97" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>use_4_component_texcoords_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a9381731226b71e4433e6423409047b97" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>use_d3d_style_viewport_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a333cf05f5ee1554d16119e661e4b5704" prot="public" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>VertexShaderProgram</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1ada0499a65528dd47943ad95869cd9b23" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>view_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a1102098a864bd8497185766f07adb0e4" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>viewport_matrix_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a04650560bf6dbdcf25a5b658c97c3077" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>z_max_</name></member>
+      <member refid="d2/d17/classProjectionVertexShader_1a98db6c6866fffcbf6a7c6b7227281bf7" prot="protected" virt="non-virtual"><scope>ProjectionVertexShader</scope><name>z_min_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9c28c6b3fce19dc5dd22758d79f72e0e" prot="public" virt="virtual"><scope>ProjectionVertexShader</scope><name>~VertexShaderProgram</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

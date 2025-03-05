@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/db1/structDDS__HEADER" kind="struct" language="C++" prot="public">
+    <compoundname>DDS_HEADER</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1ac6da67fa6ae48450cae9d3e0f20bb27e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwSize</definition>
+        <argsstring></argsstring>
+        <name>dwSize</name>
+        <qualifiedname>DDS_HEADER::dwSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="74" column="12" bodyfile="src/dds_image.cpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1ab4c488ec87709e7b7d0dd7a597a24a86" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwFlags</definition>
+        <argsstring></argsstring>
+        <name>dwFlags</name>
+        <qualifiedname>DDS_HEADER::dwFlags</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="75" column="12" bodyfile="src/dds_image.cpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a976ea0dfe4180ca2a0cbe6cd7614fecf" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwHeight</definition>
+        <argsstring></argsstring>
+        <name>dwHeight</name>
+        <qualifiedname>DDS_HEADER::dwHeight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="76" column="12" bodyfile="src/dds_image.cpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a787f8575d80bfa996a81d6074414d004" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwWidth</definition>
+        <argsstring></argsstring>
+        <name>dwWidth</name>
+        <qualifiedname>DDS_HEADER::dwWidth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="77" column="12" bodyfile="src/dds_image.cpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1ad4130cd27a613c3b8eb0871b1302846b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwPitchOrLinearSize</definition>
+        <argsstring></argsstring>
+        <name>dwPitchOrLinearSize</name>
+        <qualifiedname>DDS_HEADER::dwPitchOrLinearSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="78" column="12" bodyfile="src/dds_image.cpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a5015842344c5b714333efd9012f3d4c2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwDepth</definition>
+        <argsstring></argsstring>
+        <name>dwDepth</name>
+        <qualifiedname>DDS_HEADER::dwDepth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="79" column="12" bodyfile="src/dds_image.cpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1ad921413e2b844a2c0fabff680a3604cf" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwMipMapCount</definition>
+        <argsstring></argsstring>
+        <name>dwMipMapCount</name>
+        <qualifiedname>DDS_HEADER::dwMipMapCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="80" column="12" bodyfile="src/dds_image.cpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1ac97200e0dac37e901c3310c406f0d8b3" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwReserved1[11]</definition>
+        <argsstring>[11]</argsstring>
+        <name>dwReserved1</name>
+        <qualifiedname>DDS_HEADER::dwReserved1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="81" column="12" bodyfile="src/dds_image.cpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a27445ea81444c05a620469f266bff154" prot="public" static="no" mutable="no">
+        <type><ref refid="dd/ddc/structDDS__PIXELFORMAT" kindref="compound">DDS_PIXELFORMAT</ref></type>
+        <definition>DDS_PIXELFORMAT DDS_HEADER::ddspf</definition>
+        <argsstring></argsstring>
+        <name>ddspf</name>
+        <qualifiedname>DDS_HEADER::ddspf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="82" column="19" bodyfile="src/dds_image.cpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a7ec61ee1221011628dcc0bd26ca6d1d1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwCaps</definition>
+        <argsstring></argsstring>
+        <name>dwCaps</name>
+        <qualifiedname>DDS_HEADER::dwCaps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="83" column="12" bodyfile="src/dds_image.cpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a942e8226601267e46b92ff1e85e7ebe8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwCaps2</definition>
+        <argsstring></argsstring>
+        <name>dwCaps2</name>
+        <qualifiedname>DDS_HEADER::dwCaps2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="84" column="12" bodyfile="src/dds_image.cpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1ad4ce78d7685cc23a0145b625e3df11f4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwCaps3</definition>
+        <argsstring></argsstring>
+        <name>dwCaps3</name>
+        <qualifiedname>DDS_HEADER::dwCaps3</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="85" column="12" bodyfile="src/dds_image.cpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1af1645f32f9932f7a31caaba89579f0bf" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwCaps4</definition>
+        <argsstring></argsstring>
+        <name>dwCaps4</name>
+        <qualifiedname>DDS_HEADER::dwCaps4</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="86" column="12" bodyfile="src/dds_image.cpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/db1/structDDS__HEADER_1a4bd451f74aeba534f1488bfd18b2c06b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_HEADER::dwReserved2</definition>
+        <argsstring></argsstring>
+        <name>dwReserved2</name>
+        <qualifiedname>DDS_HEADER::dwReserved2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="87" column="12" bodyfile="src/dds_image.cpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>DDS_HEADER</label>
+        <link refid="db/db1/structDDS__HEADER"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>ddspf</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>DDS_PIXELFORMAT</label>
+        <link refid="dd/ddc/structDDS__PIXELFORMAT"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/dds_image.cpp" line="73" column="1" bodyfile="src/dds_image.cpp" bodystart="73" bodyend="88"/>
+    <listofallmembers>
+      <member refid="db/db1/structDDS__HEADER_1a27445ea81444c05a620469f266bff154" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>ddspf</name></member>
+      <member refid="db/db1/structDDS__HEADER_1a7ec61ee1221011628dcc0bd26ca6d1d1" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwCaps</name></member>
+      <member refid="db/db1/structDDS__HEADER_1a942e8226601267e46b92ff1e85e7ebe8" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwCaps2</name></member>
+      <member refid="db/db1/structDDS__HEADER_1ad4ce78d7685cc23a0145b625e3df11f4" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwCaps3</name></member>
+      <member refid="db/db1/structDDS__HEADER_1af1645f32f9932f7a31caaba89579f0bf" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwCaps4</name></member>
+      <member refid="db/db1/structDDS__HEADER_1a5015842344c5b714333efd9012f3d4c2" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwDepth</name></member>
+      <member refid="db/db1/structDDS__HEADER_1ab4c488ec87709e7b7d0dd7a597a24a86" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwFlags</name></member>
+      <member refid="db/db1/structDDS__HEADER_1a976ea0dfe4180ca2a0cbe6cd7614fecf" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwHeight</name></member>
+      <member refid="db/db1/structDDS__HEADER_1ad921413e2b844a2c0fabff680a3604cf" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwMipMapCount</name></member>
+      <member refid="db/db1/structDDS__HEADER_1ad4130cd27a613c3b8eb0871b1302846b" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwPitchOrLinearSize</name></member>
+      <member refid="db/db1/structDDS__HEADER_1ac97200e0dac37e901c3310c406f0d8b3" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwReserved1</name></member>
+      <member refid="db/db1/structDDS__HEADER_1a4bd451f74aeba534f1488bfd18b2c06b" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwReserved2</name></member>
+      <member refid="db/db1/structDDS__HEADER_1ac6da67fa6ae48450cae9d3e0f20bb27e" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwSize</name></member>
+      <member refid="db/db1/structDDS__HEADER_1a787f8575d80bfa996a81d6074414d004" prot="public" virt="non-virtual"><scope>DDS_HEADER</scope><name>dwWidth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
