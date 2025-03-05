@@ -143,8 +143,8 @@ void AlphaFuncTests::Test(const std::string& name, uint32_t alpha_func, bool ena
 
   pb_print("%s\n", name.c_str());
   pb_print("Alpha ref 0x7F\n");
-  pb_print("Blue rect alpha 1 -> 0 Alpha ref: 0x7F\n");
-  pb_print("Red rect alpha 0 -> 1 Alpha ref 0x3F\n");
+  pb_print("Blue rect alpha 1 -> 0\n");
+  pb_print("Red rect alpha 0 -> 1\n");
   pb_print("Green rect alpha 0.495 - 0.505\n");
   pb_print("White rect alpha 0x7F\n");
   pb_draw_text_screen();
