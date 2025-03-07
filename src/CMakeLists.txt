@@ -94,6 +94,7 @@ generate_nv2a_vshinc_files(
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
         shaders/projection_vertex_shader_no_lighting_rcp_fog.vsh
+        shaders/rcc_clamp_test.vsh
         shaders/weight_to_color.vsh
 )
 
