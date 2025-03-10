@@ -98,7 +98,7 @@ void TestHost::ClearDepthStencilRegion(uint32_t depth_value, uint8_t stencil_val
     height = framebuffer_height_;
   }
 
-  set_depth_stencil_buffer_region(depth_buffer_format_, depth_value, stencil_value, left, top, width, height);
+  pb_set_depth_stencil_buffer_region(depth_buffer_format_, depth_value, stencil_value, left, top, width, height);
 }
 
 void TestHost::ClearColorRegion(uint32_t argb, uint32_t left, uint32_t top, uint32_t width, uint32_t height) const {
