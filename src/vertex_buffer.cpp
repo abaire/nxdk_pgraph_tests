@@ -1,5 +1,6 @@
 #include "vertex_buffer.h"
 
+#include <pbkit/pbkit.h>
 #include <xboxkrnl/xboxkrnl.h>
 
 #include <memory>

@@ -14,7 +14,7 @@ static std::string MakeTestName(bool stipple_enabled, const std::string &stipple
   return stipple_pattern_name + "_" + (stipple_enabled ? "On" : "Off");
 }
 
-static std::map<std::string, const std::vector<uint32_t>> kStipplePatterns = {
+static std::map<std::string, const std::vector<DWORD>> kStipplePatterns = {
     {"Zero", {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}},
     {"Border",
      {
@@ -206,7 +206,7 @@ static void Draw(TestHost &host, float x, float y) {
   }
 }
 
-void StippleTests::Test(const std::string &name, bool stipple_enable, const std::vector<uint32_t> &stipple_pattern) {
+void StippleTests::Test(const std::string &name, bool stipple_enable, const std::vector<DWORD> &stipple_pattern) {
   host_.PrepareDraw(0xFF202224);
 
   {

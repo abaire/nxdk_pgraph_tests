@@ -19,7 +19,7 @@ class StippleTests : public TestSuite {
   void TearDownTest() override;
 
  private:
-  void Test(const std::string& name, bool stipple_enable, const std::vector<uint32_t>& stipple_pattern);
+  void Test(const std::string& name, bool stipple_enable, const std::vector<DWORD>& stipple_pattern);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_STIPPLE_TESTS_H
