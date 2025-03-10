@@ -56,6 +56,9 @@
 #define NV04_SURFACE_2D_FORMAT_A8R8G8B8 0x0000000a
 #define NV04_SURFACE_2D_FORMAT_Y32 0x0000000b
 
+// From https://github.com/xemu-project/xemu/pull/1937#issuecomment-2692650398
+#define NV097_SET_CONTROL0_TEXTURE_PERSPECTIVE_ENABLE (1 << 20)
+
 // Used to set light parameters for lights beyond 0.
 // Supported params:
 //    NV097_SET_LIGHT_AMBIENT_COLOR

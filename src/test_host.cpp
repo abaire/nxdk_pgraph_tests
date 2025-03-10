@@ -932,7 +932,7 @@ std::string TestHost::SaveRawTexture(const std::string &output_directory, const 
   return target_file;
 }
 
-void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered) const {
+void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered, bool texture_perspective_enable) const {
   // FIXME: Figure out what to do in cases where there are multiple stages with different conversion needs.
   // Is this supported by hardware?
   bool requires_colorspace_conversion = texture_stage_[0].RequiresColorspaceConversion();
@@ -940,6 +940,10 @@ void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered) const {
   uint32_t control0 = enable_stencil_write ? NV097_SET_CONTROL0_STENCIL_WRITE_ENABLE : 0;
   control0 |= depth_buffer_mode_float_ ? NV097_SET_CONTROL0_Z_FORMAT_FLOAT : NV097_SET_CONTROL0_Z_FORMAT_FIXED;
   control0 |= MASK(NV097_SET_CONTROL0_Z_PERSPECTIVE_ENABLE, w_buffered ? 1 : 0);
+
+  if (texture_perspective_enable) {
+    control0 |= NV097_SET_CONTROL0_TEXTURE_PERSPECTIVE_ENABLE;
+  }
 
   if (requires_colorspace_conversion) {
     control0 |= NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB;
