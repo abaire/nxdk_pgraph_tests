@@ -64,7 +64,8 @@ def _sync_resource_dir(local_resource_path: str, target_path: str, target_ignore
             continue
         matched_files.add(target_file_path)
         if _copy_if_needed(file, target_file_path):
-            ret.add(target_path)
+            stat_results = os.stat(target_file_path)
+            ret.add(f"{target_file_path}={stat_results.st_mtime}")
 
     extra_files = existing_files - matched_files
     extra_files -= target_ignore_files

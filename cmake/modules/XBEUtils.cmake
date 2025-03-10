@@ -169,7 +169,7 @@ function(add_xbe)
         _make_abs_paths(XBE_RESOURCE_DIRS)
 
         # sync_resource_dirs runs unconditionally on every build. The script
-        # produces RESOURCE_DIRS_RECEIPT as a byproduct if any files in the
+        # produces RESOURCE_DIRS_RECEIPT.hack as a byproduct if any files in the
         # staging dir were modified. Users of this rule should depend on
         # RESOURCE_DIRS_RECEIPT.
         add_custom_target(
