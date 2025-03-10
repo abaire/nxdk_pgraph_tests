@@ -620,7 +620,7 @@ class TestHost {
 
   //! Set up the control0 register, controlling stencil writing and depth buffer mode.
   void SetupControl0(bool enable_stencil_write = true, bool w_buffered = false,
-                     bool texture_perspective_enable = false) const;
+                     bool texture_perspective_enable = true) const;
 
   //! Commit any changes to texture stages (called automatically in PrepareDraw but may be useful to call more
   //! frequently in scenes with multiple draws per clear)
