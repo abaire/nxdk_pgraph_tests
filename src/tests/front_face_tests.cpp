@@ -13,7 +13,7 @@ static std::string CullFaceName(uint32_t cull_face);
 static constexpr uint32_t kWindings[] = {
     NV097_SET_FRONT_FACE_V_CW, NV097_SET_FRONT_FACE_V_CCW,
     0,   // https://github.com/mborgerson/xemu/issues/321
-    99,  // Random value to verify that HW behavior is to map all unknowns to CCW.
+    99,  // Random value to verify that HW behavior is to ignore unknowns and retain the last setting.
 };
 
 static constexpr uint32_t kCullFaces[] = {
@@ -22,6 +22,69 @@ static constexpr uint32_t kCullFaces[] = {
     NV097_SET_CULL_FACE_V_FRONT_AND_BACK,
 };
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc FrontFace_0_CF_B
+ *   Sets the winding to 0 with back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Only the right quad should be rendered.
+ *
+ * @tc FrontFace_0_CF_F
+ *   Sets the winding to 0 with front faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Only the left quad should be rendered.
+ *
+ * @tc FrontFace_0_CF_FaB
+ *   Sets the winding to 0 with front and back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Neither quad should be rendered.
+ *
+ * @tc FrontFace_63_CF_B
+ *   Sets the winding to 0x63 with back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Only the right quad should be rendered.
+ *
+ * @tc FrontFace_63_CF_F
+ *   Sets the winding to 0x63 with front faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Only the left quad should be rendered.
+ *
+ * @tc FrontFace_63_CF_FaB
+ *   Sets the winding to 0x63 with front and back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Neither quad should be rendered.
+ *
+ * @tc FrontFace_CCW_CF_B
+ *   Sets the winding to counter-clockwise with back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Only the left quad should be rendered.
+ *
+ * @tc FrontFace_CCW_CF_F
+ *   Sets the winding to counter-clockwise with front faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Only the right quad should be rendered.
+ *
+ * @tc FrontFace_CCW_CF_FaB
+ *   Sets the winding to counter-clockwise with front and back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CW.
+ *   Neither quad should be rendered.
+ *
+ * @tc FrontFace_CW_CF_B
+ *   Sets the winding to clockwise with back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CCW.
+ *   Only the right quad should be rendered.
+ *
+ * @tc FrontFace_CW_CF_F
+ *   Sets the winding to clockwise with front faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CCW.
+ *   Only the left quad should be rendered.
+ *
+ * @tc FrontFace_CW_CF_FaB
+ *   Sets the winding to clockwise with front and back faces culled.
+ *   Prior to starting the test, NV097_SET_FRONT_FACE is set to CCW.
+ *   Neither quad should be rendered.
+ */
 FrontFaceTests::FrontFaceTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Front face", config) {
   for (auto winding : kWindings) {
@@ -39,7 +102,7 @@ void FrontFaceTests::Initialize() {
 
   {
     auto p = pb_begin();
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_CULL_FACE_ENABLE, true);
+    p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
     pb_end(p);
   }
 
@@ -50,8 +113,8 @@ void FrontFaceTests::Initialize() {
 }
 
 void FrontFaceTests::CreateGeometry() {
-  auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
-  auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
+  auto fb_width = host_.GetFramebufferWidthF();
+  auto fb_height = host_.GetFramebufferHeightF();
 
   float left = floorf(fb_width / 5.0f);
   float right = left + (fb_width - left * 2.0f);
@@ -61,7 +124,6 @@ void FrontFaceTests::CreateGeometry() {
 
   uint32_t num_quads = 2;
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6 * num_quads);
-  buffer->SetPositionIncludesW();
 
   Color ul{1.0, 0.0, 0.0, 1.0};
   Color ll{0.0, 1.0, 0.0, 1.0};
@@ -70,16 +132,6 @@ void FrontFaceTests::CreateGeometry() {
 
   float z = 10.0f;
   buffer->DefineBiTriCCW(0, left + 10, top + 4, mid_width - 10, bottom - 10, z, z, z, z, ul, ll, lr, ur);
-
-  buffer->SetPositionIncludesW();
-  auto vtx = buffer->Lock();
-  vtx[0].pos[3] = INFINITY;
-  vtx[1].pos[3] = 0.980578f;
-  vtx[2].pos[3] = 0.0f;
-  vtx[3].pos[3] = INFINITY;
-  vtx[4].pos[3] = INFINITY;
-  vtx[5].pos[3] = INFINITY;
-  buffer->Unlock();
 
   Color tmp = ul;
   ul = lr;
@@ -109,8 +161,7 @@ void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face) {
     pb_end(p);
   }
 
-  while (pb_busy()) {
-  }
+  host_.PBKitBusyWait();
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_FRONT_FACE, front_face);
@@ -135,6 +186,7 @@ std::string FrontFaceTests::MakeTestName(uint32_t front_face, uint32_t cull_face
   ret += WindingName(front_face);
   ret += "_CF_";
   ret += CullFaceName(cull_face);
+
   return std::move(ret);
 }
 
@@ -146,7 +198,7 @@ static std::string WindingName(uint32_t winding) {
   }
 
   char buf[16] = {0};
-  snprintf(buf, 15, "%X", winding);
+  snprintf(buf, 15, "0x%02X", winding);
   return buf;
 }
 

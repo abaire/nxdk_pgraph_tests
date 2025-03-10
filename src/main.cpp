@@ -20,6 +20,7 @@
 #include <lwip/netif.h>
 #include <nxdk/net.h>
 #include <tests/stencil_func_tests.h>
+#include <tests/texture_perspective_enable_tests.h>
 
 #include <algorithm>
 #include <fstream>
@@ -426,6 +427,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(TextureFormatTests)
   REG_TEST(TextureFramebufferBlitTests)
   REG_TEST(TextureMatrixTests)
+  REG_TEST(TexturePerspectiveEnableTests)
   REG_TEST(TextureRenderTargetTests)
   REG_TEST(TextureRenderUpdateInPlaceTests)
   REG_TEST(TextureShadowComparatorTests)
