@@ -15,15 +15,15 @@ class WParamTests : public TestSuite {
 
  private:
   void CreateGeometryWGaps();
-  void TestWGaps();
+  void TestWGaps(bool texture_perspective_enable);
 
   void CreateGeometryPositiveWTriangleStrip();
-  void TestPositiveWTriangleStrip();
+  void TestPositiveWTriangleStrip(bool texture_perspective_enable);
 
   void CreateGeometryNegativeWTriangleStrip();
-  void TestNegativeWTriangleStrip();
+  void TestNegativeWTriangleStrip(bool texture_perspective_enable);
 
-  void TestFixedFunctionZeroW(bool draw_quad);
+  void TestFixedFunctionZeroW(bool draw_quad, bool texture_perspective_enable);
 
  private:
   std::shared_ptr<VertexBuffer> triangle_strip_;

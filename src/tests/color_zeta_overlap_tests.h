@@ -10,6 +10,12 @@
 struct TextureFormatInfo;
 class VertexBuffer;
 
+/**
+ * Tests behavior when the color buffer and z/stencil buffers overlap in RAM.
+ *
+ * WARNING: These tests are non-deterministic on Xbox hardware. The primary
+ * intent of these tests is to verify that emulators do not crash.
+ */
 class ColorZetaOverlapTests : public TestSuite {
  public:
   ColorZetaOverlapTests(TestHost& host, std::string output_dir, const Config& config);

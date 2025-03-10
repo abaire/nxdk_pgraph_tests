@@ -117,6 +117,9 @@ void TexturePerspectiveEnableTests::Test(const std::string& name, bool texture_e
     host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
   }
 
+  // Disable texture perspective.
+  host_.SetupControl0(false, false, false);
+
   draw_bitri(quad_width, quad_top, kWUpperLeft, kWUpperRight, kWLowerRight, kWLowerLeft);
   draw_bitri(quad_width, quad_top * 3.f, kWUpperLeftTwo, kWUpperRightTwo, kWLowerRightTwo, kWLowerLeftTwo);
 

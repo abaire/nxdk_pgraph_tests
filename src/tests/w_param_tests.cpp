@@ -8,23 +8,42 @@
 #include "texture_generator.h"
 #include "vertex_buffer.h"
 
-static constexpr const char kTestWGaps[] = "w_gaps";
-static constexpr const char kTestWPositiveTriangleStrip[] = "w_pos_strip";
-static constexpr const char kTestWNegativeTriangleStrip[] = "w_neg_strip";
-static constexpr const char kTestFixedFunctionZeroW[] = "ff_w_zero_";
+static constexpr char kTexturePerspectiveEnabledSuffix[] = "_tex_persp";
+static constexpr char kTestWGaps[] = "w_gaps";
+static constexpr char kTestWPositiveTriangleStrip[] = "w_pos_strip";
+static constexpr char kTestWNegativeTriangleStrip[] = "w_neg_strip";
+static constexpr char kTestFixedFunctionZeroW[] = "ff_w_zero_";
 
-static std::string MakeFFZeroWTestName(bool draw_quad) {
-  return std::string(kTestFixedFunctionZeroW) + (draw_quad ? "_quad" : "_bitri");
+static std::string AugmentTestName(const std::string &test_name, bool texture_perspective_enable) {
+  return test_name + (texture_perspective_enable ? kTexturePerspectiveEnabledSuffix : "");
+}
+static std::string MakeFFZeroWTestName(bool draw_quad, bool texture_perspective_enable) {
+  return std::string(kTestFixedFunctionZeroW) + (draw_quad ? "_quad" : "_bitri") +
+         (texture_perspective_enable ? kTexturePerspectiveEnabledSuffix : "");
 }
 
 WParamTests::WParamTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "W param", config) {
-  tests_[kTestWGaps] = [this]() { this->TestWGaps(); };
-  tests_[kTestWPositiveTriangleStrip] = [this]() { this->TestPositiveWTriangleStrip(); };
-  tests_[kTestWNegativeTriangleStrip] = [this]() { this->TestNegativeWTriangleStrip(); };
+  for (auto texture_perspective_enable : {false, true}) {
+    auto fullname = [texture_perspective_enable](const std::string &test_name) {
+      return AugmentTestName(test_name, texture_perspective_enable);
+    };
 
-  for (auto quad : {false, true}) {
-    tests_[MakeFFZeroWTestName(quad)] = [this, quad]() { this->TestFixedFunctionZeroW(quad); };
+    tests_[fullname(kTestWGaps)] = [this, texture_perspective_enable]() {
+      this->TestWGaps(texture_perspective_enable);
+    };
+    tests_[fullname(kTestWPositiveTriangleStrip)] = [this, texture_perspective_enable]() {
+      this->TestPositiveWTriangleStrip(texture_perspective_enable);
+    };
+    tests_[fullname(kTestWNegativeTriangleStrip)] = [this, texture_perspective_enable]() {
+      this->TestNegativeWTriangleStrip(texture_perspective_enable);
+    };
+
+    for (auto quad : {false, true}) {
+      tests_[MakeFFZeroWTestName(quad, texture_perspective_enable)] = [this, quad, texture_perspective_enable]() {
+        this->TestFixedFunctionZeroW(quad, texture_perspective_enable);
+      };
+    }
   }
 }
 
@@ -123,9 +142,13 @@ void WParamTests::CreateGeometryWGaps() {
   triangles_->Translate(-6.0f, 6.0f + (bottom - top) * 0.5f, 0.0f, 0.0f);
 }
 
-void WParamTests::TestWGaps() {
+void WParamTests::TestWGaps(bool texture_perspective_enable) {
   CreateGeometryWGaps();
   host_.PrepareDraw();
+
+  if (!texture_perspective_enable) {
+    host_.SetupControl0(true, false, false);
+  }
 
   host_.SetVertexBuffer(triangle_strip_);
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
@@ -173,7 +196,8 @@ void WParamTests::TestWGaps() {
   pb_printat(15, 39, (char *)"inf,inf");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestWGaps);
+  host_.SetupControl0();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, AugmentTestName(kTestWGaps, texture_perspective_enable));
 }
 
 void WParamTests::CreateGeometryPositiveWTriangleStrip() {
@@ -206,12 +230,19 @@ void WParamTests::CreateGeometryPositiveWTriangleStrip() {
   add_vertex(right, top, 10.5, 0.7f, 0.9f, 0.2f);
 }
 
-void WParamTests::TestPositiveWTriangleStrip() {
+void WParamTests::TestPositiveWTriangleStrip(bool texture_perspective_enable) {
   CreateGeometryPositiveWTriangleStrip();
   host_.SetVertexBuffer(triangle_strip_);
   host_.PrepareDraw();
+  if (!texture_perspective_enable) {
+    host_.SetupControl0(true, false, false);
+  }
+
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestWPositiveTriangleStrip);
+
+  host_.SetupControl0();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_,
+                   AugmentTestName(kTestWPositiveTriangleStrip, texture_perspective_enable));
 }
 
 void WParamTests::CreateGeometryNegativeWTriangleStrip() {
@@ -248,10 +279,14 @@ void WParamTests::CreateGeometryNegativeWTriangleStrip() {
   triangle_strip_->Unlock();
 }
 
-void WParamTests::TestNegativeWTriangleStrip() {
+void WParamTests::TestNegativeWTriangleStrip(bool texture_perspective_enable) {
   CreateGeometryNegativeWTriangleStrip();
   host_.SetVertexBuffer(triangle_strip_);
   host_.PrepareDraw();
+
+  if (!texture_perspective_enable) {
+    host_.SetupControl0(true, false, false);
+  }
 
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
@@ -270,10 +305,12 @@ void WParamTests::TestNegativeWTriangleStrip() {
   p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
   pb_end(p);
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestWNegativeTriangleStrip);
+  host_.SetupControl0();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_,
+                   AugmentTestName(kTestWNegativeTriangleStrip, texture_perspective_enable));
 }
 
-void WParamTests::TestFixedFunctionZeroW(bool draw_quad) {
+void WParamTests::TestFixedFunctionZeroW(bool draw_quad, bool texture_perspective_enable) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
@@ -295,6 +332,10 @@ void WParamTests::TestFixedFunctionZeroW(bool draw_quad) {
 
     host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
     host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+  }
+
+  if (!texture_perspective_enable) {
+    host_.SetupControl0(true, false, false);
   }
 
   {
@@ -342,7 +383,8 @@ void WParamTests::TestFixedFunctionZeroW(bool draw_quad) {
     }
   }
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeFFZeroWTestName(draw_quad));
+  host_.SetupControl0();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeFFZeroWTestName(draw_quad, texture_perspective_enable));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
