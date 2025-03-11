@@ -1,7 +1,14 @@
 #include "specular_tests.h"
 
+#include <light.h>
+#include <models/light_control_test_mesh_cone_model.h>
+#include <models/light_control_test_mesh_cylinder_model.h>
+#include <models/light_control_test_mesh_sphere_model.h>
+#include <models/light_control_test_mesh_suzanne_model.h>
+#include <models/light_control_test_mesh_torus_model.h>
 #include <pbkit/pbkit.h>
 #include <shaders/perspective_vertex_shader.h>
+#include <xbox_math_vector.h>
 
 #include "../test_host.h"
 #include "debug_output.h"
@@ -22,6 +29,28 @@ static constexpr vector_t kSpecularUL{1.f, 0.f, 0.f, 0.15f};
 static constexpr vector_t kSpecularUR{1.f, 0.f, 0.f, 0.75f};
 static constexpr vector_t kSpecularLR{0.f, 1.f, 0.f, 1.f};
 static constexpr vector_t kSpecularLL{0.f, 1.f, 0.f, 0.20f};
+
+// From the left, pointing right and into the screen.
+static constexpr vector_t kDirectionalLightDir{1.f, 0.f, 1.f, 1.f};
+static constexpr vector_t kDirectionalLightAmbientColor{0.f, 0.f, 0.05f, 0.f};
+static constexpr vector_t kDirectionalLightDiffuseColor{0.25f, 0.f, 0.f, 0.f};
+static constexpr vector_t kDirectionalLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
+
+static constexpr vector_t kPointLightAmbientColor{0.f, 0.f, 0.05f, 0.f};
+static constexpr vector_t kPointLightDiffuseColor{0.25f, 0.f, 0.f, 0.f};
+static constexpr vector_t kPointLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
+
+struct SpecularParamTestCase {
+  const char name[32];
+  const float params[6];
+};
+
+static constexpr SpecularParamTestCase kSpecularParamSets[]{
+    {"MechAssault", {-0.838916f, -2.887156f, 3.048239f, -0.706496f, -2.507095f, 2.800600f}},
+    {"NinjaGaidenBlack", {-0.932112f, -3.097628f, 3.165516f, -0.869210f, -2.935466f, 3.066255f}},
+    {"AllZero", {0.f, 0.f, 0.f, 0.f, 0.f, 0.f}},
+    {"InvMechAssault", {0.838916f, 2.887156f, -3.048239f, 0.706496f, 2.507095f, -2.800600f}},
+};
 
 /**
  * Initializes the test suite and creates test cases.
@@ -88,6 +117,21 @@ static constexpr vector_t kSpecularLL{0.f, 1.f, 0.f, 0.20f};
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
  *
+ * @tc SpecParams_FF_AllZero
+ *  Renders a number of meshes with a directional light and a point light, shading the specular channel only.
+ *  LIGHT_CONTROL is set to SEPARATE_SPECULAR and SET_SPECULAR_PARAMS is set to the values displayed in the image.
+ *
+ * @tc SpecParams_FF_InvMechAssault
+ *  Renders a number of meshes with a directional light and a point light, shading the specular channel only.
+ *  LIGHT_CONTROL is set to SEPARATE_SPECULAR and SET_SPECULAR_PARAMS is set to the values displayed in the image.
+ *
+ * @tc SpecParams_FF_MechAssault
+ *  Renders a number of meshes with a directional light and a point light, shading the specular channel only.
+ *  LIGHT_CONTROL is set to SEPARATE_SPECULAR and SET_SPECULAR_PARAMS is set to the values displayed in the image.
+ *
+ * @tc SpecParams_FF_NinjaGaidenBlack
+ *  Renders a number of meshes with a directional light and a point light, shading the specular channel only.
+ *  LIGHT_CONTROL is set to SEPARATE_SPECULAR and SET_SPECULAR_PARAMS is set to the values displayed in the image.
  */
 SpecularTests::SpecularTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Specular", config) {
@@ -101,6 +145,49 @@ SpecularTests::SpecularTests(TestHost& host, std::string output_dir, const Confi
     this->TestControlFlags(kTestControlFlagsFixedFunction, true, true);
   };
   tests_[kTestControlFlagsShader] = [this]() { this->TestControlFlags(kTestControlFlagsShader, false, true); };
+
+  for (auto& test_case : kSpecularParamSets) {
+    std::string name = "SpecParams_FF_";
+    name += test_case.name;
+
+    tests_[name] = [this, name, &test_case]() { this->TestSpecularParams(name, test_case.params); };
+  }
+}
+
+void SpecularTests::CreateGeometry() {
+  // SET_COLOR_MATERIAL below causes per-vertex diffuse color to be ignored entirely.
+  vector_t diffuse{0.f, 0.f, 0.0f, 0.75f};
+
+  // However:
+  // 1) the alpha from the specular value is added to the material alpha.
+  // 2) the color is added to the computed vertex color if SEPARATE_SPECULAR is OFF
+  vector_t specular{0.f, 0.4, 0.f, 0.25f};
+
+  auto construct_model = [this](ModelBuilder& model, std::shared_ptr<VertexBuffer>& vertex_buffer) {
+    vertex_buffer = host_.AllocateVertexBuffer(model.GetVertexCount());
+    model.PopulateVertexBuffer(vertex_buffer);
+  };
+
+  {
+    auto model = LightControlTestMeshConeModel(diffuse, specular);
+    construct_model(model, vertex_buffer_cone_);
+  }
+  {
+    auto model = LightControlTestMeshCylinderModel(diffuse, specular);
+    construct_model(model, vertex_buffer_cylinder_);
+  }
+  {
+    auto model = LightControlTestMeshSphereModel(diffuse, specular);
+    construct_model(model, vertex_buffer_sphere_);
+  }
+  {
+    auto model = LightControlTestMeshSuzanneModel(diffuse, specular);
+    construct_model(model, vertex_buffer_suzanne_);
+  }
+  {
+    auto model = LightControlTestMeshTorusModel(diffuse, specular);
+    construct_model(model, vertex_buffer_torus_);
+  }
 }
 
 void SpecularTests::Initialize() {
@@ -115,14 +202,6 @@ void SpecularTests::Initialize() {
     p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
     p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
     p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.1f);  // Only affects the diffuse channel alpha.
-
-    // Values taken from MechAssault
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
     pb_end(p);
   }
 
@@ -141,6 +220,16 @@ void SpecularTests::Initialize() {
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
                           false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                           /* specular_clamp */ true);
+
+  CreateGeometry();
+}
+
+void SpecularTests::Deinitialize() {
+  vertex_buffer_cone_.reset();
+  vertex_buffer_cylinder_.reset();
+  vertex_buffer_sphere_.reset();
+  vertex_buffer_suzanne_.reset();
+  vertex_buffer_torus_.reset();
 }
 
 static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host) {
@@ -306,5 +395,89 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
   pb_printat(13, 0, "SPEC_EN=T");
   pb_draw_text_screen();
 
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void SpecularTests::TestSpecularParams(const std::string& name, const float* specular_params) {
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  std::shared_ptr<PerspectiveVertexShader> shader;
+  host_.SetVertexShaderProgram(nullptr);
+
+  host_.PrepareDraw(0xFE313131);
+  host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 20);
+
+  {
+    uint32_t light_mode_bitvector = 0;
+    {
+      auto light = DirectionalLight(0, kDirectionalLightDir);
+      light.SetAmbient(kDirectionalLightAmbientColor);
+      light.SetDiffuse(kDirectionalLightDiffuseColor);
+      light.SetSpecular(kDirectionalLightSpecularColor);
+
+      vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+      vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+
+      vector_t look_dir{0.f, 0.f, 0.f, 1.f};
+      VectorSubtractVector(at, eye, look_dir);
+      VectorNormalize(look_dir);
+      light.Commit(host_, look_dir);
+
+      light_mode_bitvector |= light.light_enable_mask();
+    }
+
+    {
+      vector_t position{1.5f, 1.f, -2.5f, 1.f};
+      static constexpr auto kRange = 4.f;
+      static constexpr auto kAttenuationConstant = 0.025f;
+      static constexpr auto kAttentuationLinear = 0.15f;
+      static constexpr auto kAttenuationQuadratic = 0.02f;
+      auto light = PointLight(1, position, kRange, kAttenuationConstant, kAttentuationLinear, kAttenuationQuadratic);
+
+      light.SetAmbient(kPointLightAmbientColor);
+      light.SetDiffuse(kPointLightDiffuseColor);
+      light.SetSpecular(kPointLightSpecularColor);
+      light.Commit(host_);
+
+      light_mode_bitvector |= light.light_enable_mask();
+    }
+
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
+    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+
+    static constexpr vector_t kBrightAmbientColor{0.1f, 0.1f, 0.1f, 0.f};
+    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kBrightAmbientColor);
+
+    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.40f);
+
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+
+    for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
+      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
+    }
+
+    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+
+    pb_end(p);
+  }
+
+  for (auto& vb : {
+           vertex_buffer_cone_,
+           vertex_buffer_cylinder_,
+           vertex_buffer_sphere_,
+           vertex_buffer_suzanne_,
+           vertex_buffer_torus_,
+       }) {
+    host_.SetVertexBuffer(vb);
+    host_.DrawArrays(TestHost::POSITION | TestHost::NORMAL | TestHost::DIFFUSE | TestHost::SPECULAR);
+  }
+
+  pb_print("%s\n", name.c_str());
+  for (auto i = 0; i < 6; ++i) {
+    pb_print_with_floats("%f\n", specular_params[i]);
+  }
+  pb_draw_text_screen();
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
