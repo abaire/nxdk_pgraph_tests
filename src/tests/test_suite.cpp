@@ -186,8 +186,6 @@ void TestSuite::Initialize() {
                           false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                           /* specular_clamp */ true);
 
-  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE);
-
   while (pb_busy()) {
     /* Wait for completion... */
   }

@@ -12,6 +12,7 @@
 #include <windows.h>
 #pragma clang diagnostic pop
 
+#include <texture_generator.h>
 #include <xboxkrnl/xboxkrnl.h>
 
 #include <algorithm>
@@ -1516,11 +1517,13 @@ uint32_t TestHost::MakeOutputCombiner(TestHost::CombinerDest ab_dst, TestHost::C
 void TestHost::SetFinalCombiner0(TestHost::CombinerSource a_source, bool a_alpha, bool a_invert,
                                  TestHost::CombinerSource b_source, bool b_alpha, bool b_invert,
                                  TestHost::CombinerSource c_source, bool c_alpha, bool c_invert,
-                                 TestHost::CombinerSource d_source, bool d_alpha, bool d_invert) const {
+                                 TestHost::CombinerSource d_source, bool d_alpha, bool d_invert) {
   auto channel = [](CombinerSource src, bool alpha, bool invert) { return src + (alpha << 4) + (invert << 5); };
 
   uint32_t value = (channel(a_source, a_alpha, a_invert) << 24) + (channel(b_source, b_alpha, b_invert) << 16) +
                    (channel(c_source, c_alpha, c_invert) << 8) + channel(d_source, d_alpha, d_invert);
+
+  last_specular_fog_cw0_ = value;
 
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, value);
@@ -1530,7 +1533,7 @@ void TestHost::SetFinalCombiner0(TestHost::CombinerSource a_source, bool a_alpha
 void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha, bool e_invert,
                                  TestHost::CombinerSource f_source, bool f_alpha, bool f_invert,
                                  TestHost::CombinerSource g_source, bool g_alpha, bool g_invert,
-                                 bool specular_add_invert_r0, bool specular_add_invert_v1, bool specular_clamp) const {
+                                 bool specular_add_invert_r0, bool specular_add_invert_v1, bool specular_clamp) {
   auto channel = [](CombinerSource src, bool alpha, bool invert) { return src + (alpha << 4) + (invert << 5); };
 
   // The V1+R0 sum is not available in CW1.
@@ -1549,8 +1552,19 @@ void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha
     value += NV097_SET_COMBINER_SPECULAR_FOG_CW1_SPECULAR_CLAMP;
   }
 
+  last_specular_fog_cw1_ = value;
+
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, value);
+  pb_end(p);
+}
+
+void TestHost::RestoreFinalCombinerState(const std::pair<uint32_t, uint32_t> &state) {
+  last_specular_fog_cw0_ = state.first;
+  last_specular_fog_cw1_ = state.second;
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, state.first);
+  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, state.second);
   pb_end(p);
 }
 
@@ -1661,4 +1675,58 @@ static void ClearVertexAttribute(uint32_t index) {
 
 static void GetCompositeMatrix(matrix4_t &result, const matrix4_t &model_view, const matrix4_t &projection) {
   MatrixMultMatrix(model_view, projection, result);
+}
+
+void TestHost::DrawCheckerboardUnproject(uint32_t first_color, uint32_t second_color, uint32_t checker_size) {
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
+  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
+  pb_end(p);
+
+  auto combiner_state = GetFinalCombinerState();
+
+  SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  SetTextureStageEnabled(0, true);
+  SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  static constexpr uint32_t kTextureSize = 256;
+
+  auto &texture_stage = GetTextureStage(0);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+  texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
+  SetupTextureStages();
+
+  auto texture_memory = GetTextureMemoryForStage(0);
+  GenerateSwizzledRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, first_color,
+                                   second_color, checker_size);
+
+  Begin(PRIMITIVE_QUADS);
+  SetTexCoord0(0.0f, 0.0f);
+  vector_t world_point;
+  vector_t screen_point = {0.f, 0.f, 0.0f, 1.0f};
+  UnprojectPoint(world_point, screen_point, 1.f);
+  SetVertex(world_point);
+
+  SetTexCoord0(1.0f, 0.0f);
+  screen_point[0] = GetFramebufferWidthF();
+  UnprojectPoint(world_point, screen_point, 1.f);
+  SetVertex(world_point);
+
+  SetTexCoord0(1.0f, 1.0f);
+  screen_point[1] = GetFramebufferHeightF();
+  UnprojectPoint(world_point, screen_point, 1.f);
+  SetVertex(world_point);
+
+  SetTexCoord0(0.0f, 1.0f);
+  screen_point[0] = 0.f;
+  UnprojectPoint(world_point, screen_point, 1.f);
+  SetVertex(world_point);
+
+  End();
+
+  SetTextureStageEnabled(0, false);
+  SetShaderStageProgram(STAGE_NONE);
+
+  RestoreFinalCombinerState(combiner_state);
 }

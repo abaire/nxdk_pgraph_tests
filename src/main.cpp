@@ -19,8 +19,6 @@
 #include <lwip/inet.h>
 #include <lwip/netif.h>
 #include <nxdk/net.h>
-#include <tests/stencil_func_tests.h>
-#include <tests/texture_perspective_enable_tests.h>
 
 #include <algorithm>
 #include <fstream>
@@ -72,6 +70,8 @@
 #include "tests/set_vertex_data_tests.h"
 #include "tests/shade_model_tests.h"
 #include "tests/smoothing_tests.h"
+#include "tests/specular_tests.h"
+#include "tests/stencil_func_tests.h"
 #include "tests/stencil_tests.h"
 #include "tests/stipple_tests.h"
 #include "tests/surface_clip_tests.h"
@@ -86,6 +86,7 @@
 #include "tests/texture_format_tests.h"
 #include "tests/texture_framebuffer_blit_tests.h"
 #include "tests/texture_matrix_tests.h"
+#include "tests/texture_perspective_enable_tests.h"
 #include "tests/texture_render_target_tests.h"
 #include "tests/texture_render_update_in_place_tests.h"
 #include "tests/texture_shadow_comparator_tests.h"
@@ -412,6 +413,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SetVertexDataTests)
   REG_TEST(ShadeModelTests)
   REG_TEST(SmoothingTests)
+  REG_TEST(SpecularTests)
   REG_TEST(SwathWidthTests)
   REG_TEST(SurfaceClipTests)
   REG_TEST(SurfacePitchTests)

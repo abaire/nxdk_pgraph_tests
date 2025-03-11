@@ -6,13 +6,17 @@
 #view_matrix matrix4 100
 #projection_matrix matrix4 104
 #camera_pos vector 108
-#light_direction vector 109
-#zero_constant vector 114
+#light_vector vector 109
+#zero_constant vector 110
+; -1, -0.5, 0.5, 1
+#basic_constants vector 111
 
 #invalid_color vector 120
 #light_ambient vector 121
 #light_diffuse vector 122
 #light_specular vector 123
+#material_shininess vector 124
+#scene_ambient vector 125
 
 ; -- Transform the vertex. -----------------
 %matmul4x4 r0 iPos #model_matrix
@@ -26,29 +30,54 @@ mov oPos.w, r0
 ; ------------------------------------------
 
 
-; Transform the normal by the model matrix and normalize --
+; -- Transform the normal by the model matrix and normalize -----
 %matmul4x4 r2 iNormal #model_matrix
-;%normalize3 r2 r2 r0
-dp3 r0.x, r2, r2  ; r0.x = len(transformed_normal)^2
-rsq r0.w, r0.x  ; r0.w = 1 / len(transformed_normal)
-mul r2.xyz, r2, r0.w  ; r2.xyz = normalized(transformed_normal)
-; ---------------------------------------------------------
+%norm3 r2 r2 r11
+; ---------------------------------------------------------------
 
-; Normalize the light direction
-%norm3 r3 #light_direction r0
+; For an infinite light, VPpli is the normalized position of the light
+%norm3 r3 #light_vector r11
 
 ; Calculate contribution from directional light source
-; directional_contribution = r0.x = max(normal <dot> light_direction, 0)
+; directional_contribution = r0.x = max(normal <dot> light_vector, 0)
 dp3 r0.x, r2, r3
 max r0.x, r0.x, #zero_constant.x
 
-; Diffuse = #light_ambient.rgb + (directional_contribution * #light_diffuse.rgb)
-; TODO: Specular using half infinite vector.
-;   normalize(#camera_pos + #light_direction)
+; Diffuse =
+;  #scene_ambient.rgb +
+;  #light_ambient.rgb + (directional_contribution * #light_diffuse.rgb)
 mul r1, #light_diffuse.rgb, r0.x
+add r1, r1, #scene_ambient.rgb
 add oDiffuse, r1, #light_ambient.rgb
 
-mov oSpecular, iSpecular
+; -- Specular ---------------------------------------------------
+
+; (normal <dot> half_angle) ^ specular_exponent * #light_specular.rgb
+
+; -- Calculate infinite half vector ----
+
+; Assume camera is infinitely distant (LOCAL_EYE = false)
+; The half-angle vector in this case should be
+;   norm(norm(VPpli) + (0, 0, -1))
+
+mov r0.xy, #zero_constant
+mov r0.z, #basic_constants.x
+add r0, r3, r0
+%norm3 r0 r0 r11
+
+; r0.x = normal <dot> half_angle
+dp3 r0, r2, r0
+
+; pow(r0.x, #material_shininess.x)
+mov r5.w, #material_shininess.x
+mov r5.xy, r0.x
+lit r0, r5
+
+mul oSpecular, #light_specular.rgb, r0.zzz
+mov oSpecular.a, iSpecular.a
+
+; ---------------------------------------------------------------
+
 
 ; Set back diffuse/specular to magenta to make it clear that they are not being
 ; calculated by this shader.

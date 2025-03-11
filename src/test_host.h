@@ -447,9 +447,11 @@ class TestHost {
   void SetWeight(float w1, float w2, float w3, float w4) const;
   void SetNormal(float x, float y, float z) const;
   void SetNormal3S(int x, int y, int z) const;
+  void SetDiffuse(const vector_t &color) const { SetDiffuse(color[0], color[1], color[2], color[3]); }
   void SetDiffuse(float r, float g, float b, float a) const;
   void SetDiffuse(float r, float g, float b) const;
   void SetDiffuse(uint32_t rgba) const;
+  void SetSpecular(const vector_t &color) const { SetSpecular(color[0], color[1], color[2], color[3]); }
   void SetSpecular(float r, float g, float b, float a) const;
   void SetSpecular(float r, float g, float b) const;
   void SetSpecular(uint32_t rgba) const;
@@ -565,7 +567,7 @@ class TestHost {
   void ClearOutputAlphaColorCombiner(int combiner) const;
   void ClearOutputAlphaCombiners() const;
 
-  void SetFinalCombiner0Just(CombinerSource d_source, bool d_alpha = false, bool d_invert = false) const {
+  void SetFinalCombiner0Just(CombinerSource d_source, bool d_alpha = false, bool d_invert = false) {
     SetFinalCombiner0(SRC_ZERO, false, false, SRC_ZERO, false, false, SRC_ZERO, false, false, d_source, d_alpha,
                       d_invert);
   }
@@ -573,9 +575,9 @@ class TestHost {
   void SetFinalCombiner0(CombinerSource a_source = SRC_ZERO, bool a_alpha = false, bool a_invert = false,
                          CombinerSource b_source = SRC_ZERO, bool b_alpha = false, bool b_invert = false,
                          CombinerSource c_source = SRC_ZERO, bool c_alpha = false, bool c_invert = false,
-                         CombinerSource d_source = SRC_ZERO, bool d_alpha = false, bool d_invert = false) const;
+                         CombinerSource d_source = SRC_ZERO, bool d_alpha = false, bool d_invert = false);
 
-  void SetFinalCombiner1Just(CombinerSource g_source, bool g_alpha = false, bool g_invert = false) const {
+  void SetFinalCombiner1Just(CombinerSource g_source, bool g_alpha = false, bool g_invert = false) {
     SetFinalCombiner1(SRC_ZERO, false, false, SRC_ZERO, false, false, g_source, g_alpha, g_invert);
   }
   //! See https://github.com/abaire/nxdk_pgraph_tests/wiki/nv2a-pixel-shaders-(combiner-stages)
@@ -583,7 +585,7 @@ class TestHost {
                          CombinerSource f_source = SRC_ZERO, bool f_alpha = false, bool f_invert = false,
                          CombinerSource g_source = SRC_ZERO, bool g_alpha = false, bool g_invert = false,
                          bool specular_add_invert_r0 = false, bool specular_add_invert_v1 = false,
-                         bool specular_clamp = false) const;
+                         bool specular_clamp = false);
 
   void SetCombinerFactorC0(int combiner, uint32_t value) const;
   void SetCombinerFactorC0(int combiner, float red, float green, float blue, float alpha) const;
@@ -594,6 +596,12 @@ class TestHost {
   void SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const;
   void SetFinalCombinerFactorC1(uint32_t value) const;
   void SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const;
+
+  [[nodiscard]] std::pair<uint32_t, uint32_t> GetFinalCombinerState() const {
+    return std::make_pair(last_specular_fog_cw0_, last_specular_fog_cw1_);
+  }
+
+  void RestoreFinalCombinerState(const std::pair<uint32_t, uint32_t> &state);
 
   //! Sets the type of texture sampling for each texture.
   //!
@@ -666,6 +674,13 @@ class TestHost {
     }
   }
 
+  //! Renders a 256x256 checkerboard pattern that is stretched and unprojected to fill the framebuffer.
+  //!
+  //! Note: this leaves the tex0 stage disabled, disables all shader stage programs, and sets the final combiner to
+  //! SRC_R0
+  void DrawCheckerboardUnproject(uint32_t first_color = 0xFF00FFFF, uint32_t second_color = 0xFF000000,
+                                 uint32_t checker_size = 8);
+
  private:
   //! Update matrices when the depth buffer format changes.
   void HandleDepthBufferFormatChange();
@@ -725,6 +740,11 @@ class TestHost {
   float w_far_{0.f};
 
   bool save_results_{true};
+
+  //! The most recently set final combiner 0 state.
+  uint32_t last_specular_fog_cw0_{0};
+  //! The most recently set final combiner 1 state.
+  uint32_t last_specular_fog_cw1_{0};
 
   std::shared_ptr<FTPLogger> ftp_logger_;
 
