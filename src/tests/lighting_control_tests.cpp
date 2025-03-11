@@ -17,13 +17,11 @@
 #include "vertex_buffer.h"
 #include "xbox_math_matrix.h"
 
-#ifdef LIGHTING_CONTROL_VS_TESTS_ENABLED
 // clang-format off
 static const uint32_t kFixedFunctionApproximationShader[] = {
 #include "fixed_function_approximation_shader.vshinc"
 };
 // clang-format on
-#endif  // LIGHTING_CONTROL_VS_TESTS_ENABLED
 
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
@@ -39,8 +37,9 @@ static constexpr vector_t kPointLightDiffuseColor{0.25f, 0.f, 0.f, 0.f};
 static constexpr vector_t kPointLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
 
 static std::string MakeTestName(uint32_t light_control, bool is_fixed_function, bool specular_enabled) {
-  char buf[32] = {0};
-  snprintf(buf, 31, "%s_0x%06X%s", is_fixed_function ? "FF" : "VS", light_control, specular_enabled ? "" : "NoSpec");
+  char buf[36] = {0};
+  snprintf(buf, 31, "%s_0x%06X%s%s", is_fixed_function ? "FF" : "VS", light_control, specular_enabled ? "" : "NoSpec",
+           is_fixed_function ? "" : "_LightOff");
   return buf;
 }
 
@@ -173,10 +172,10 @@ LightingControlTests::LightingControlTests(TestHost& host, std::string output_di
             this->Test(test_name, light_control, specular_enabled, true);
           };
 
-          // test_name = MakeTestName(light_control, false, specular_enabled);
-          // tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
-          //   this->Test(test_name, light_control, specular_enabled, false);
-          // };
+          test_name = MakeTestName(light_control, false, specular_enabled);
+          tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
+            this->Test(test_name, light_control, specular_enabled, false);
+          };
         }
       }
     }
@@ -387,7 +386,6 @@ static void DrawCheckerboardBackground(TestHost& host) {
   host.SetShaderStageProgram(TestHost::STAGE_NONE);
 }
 
-#ifdef LIGHTING_CONTROL_VS_TESTS_ENABLED
 static void SetupVertexShader(TestHost& host) {
   // Use a custom shader that approximates the interesting lighting portions of the fixed function pipeline.
   float depth_buffer_max_value = host.GetMaxDepthBufferValue();
@@ -413,7 +411,6 @@ static void SetupVertexShader(TestHost& host) {
   }
   host.SetVertexShaderProgram(shader);
 }
-#endif  // LIGHTING_CONTROL_VS_TESTS_ENABLED
 
 void LightingControlTests::Test(const std::string& name, uint32_t light_control, bool specular_enabled,
                                 bool is_fixed_function) {
@@ -421,9 +418,7 @@ void LightingControlTests::Test(const std::string& name, uint32_t light_control,
   if (is_fixed_function) {
     host_.SetVertexShaderProgram(nullptr);
   } else {
-#ifdef LIGHTING_CONTROL_VS_TESTS_ENABLED
     SetupVertexShader(host_);
-#endif
   }
   static constexpr uint32_t kBackgroundColor = 0xFF232623;
   host_.PrepareDraw(kBackgroundColor);
@@ -437,6 +432,12 @@ void LightingControlTests::Test(const std::string& name, uint32_t light_control,
   }
 
   SetupLights(host_, specular_enabled);
+
+  if (!is_fixed_function) {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
+    pb_end(p);
+  }
 
   for (auto& vb : {
            vertex_buffer_cone_,
@@ -454,6 +455,9 @@ void LightingControlTests::Test(const std::string& name, uint32_t light_control,
   pb_print("LOCALEYE %s\n", (light_control & NV097_SET_LIGHT_CONTROL_V_LOCALEYE) ? "ON" : "off");
   pb_print("ALPHA %s\n",
            (light_control & NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR) ? "FROM MATERIAL" : "OPAQUE");
+  if (!is_fixed_function) {
+    pb_print("(Lighting disabled)\n");
+  }
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
