@@ -86,6 +86,8 @@ generate_nv2a_vshinc_files(
         shaders/fog_vec4_zw.vsh
         shaders/fog_vec4_unset.vsh
         shaders/passthrough.vsh
+        shaders/projection_vertex_shader_colorless_light.vsh
+        shaders/projection_vertex_shader_no_lighting.vsh
 )
 
 generate_pixelshader_inl_files(
@@ -102,9 +104,6 @@ generate_vertexshader_inl_files(
         shaders/mul_col0_by_const0_vertex_shader.vs.cg
         shaders/precalculated_vertex_shader_2c_texcoords.vs.cg
         shaders/precalculated_vertex_shader_4c_texcoords.vs.cg
-        shaders/projection_vertex_shader.vs.cg
-        shaders/projection_vertex_shader_no_lighting.vs.cg
-        shaders/projection_vertex_shader_no_lighting_4c_texcoords.vs.cg
 )
 
 # Sources that should be optimized regardless of standard debug settings.
@@ -279,6 +278,8 @@ add_executable(
         tests/shade_model_tests.h
         tests/smoothing_tests.cpp
         tests/smoothing_tests.h
+        tests/specular_tests.cpp
+        tests/specular_tests.h
         tests/stencil_tests.cpp
         tests/stencil_tests.h
         tests/stencil_func_tests.cpp

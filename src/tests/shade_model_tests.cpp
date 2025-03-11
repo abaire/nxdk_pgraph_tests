@@ -366,7 +366,6 @@ static void SetShader(TestHost& host_) {
                                                           0.0f, depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
     shader->SetLightingEnabled(false);
-    shader->SetUse4ComponentTexcoords();
     shader->SetUseD3DStyleViewport();
     vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
     vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};

@@ -26,6 +26,8 @@ static const uint32_t kFixedFunctionApproximationShader[] = {
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
 
+static constexpr vector_t kSceneAmbientColor{0.031373f, 0.031373f, 0.031373f, 0.f};
+
 // From the left, pointing right and into the screen.
 static constexpr vector_t kDirectionalLightDir{1.f, 0.f, 1.f, 1.f};
 static constexpr vector_t kDirectionalLightAmbientColor{0.f, 0.f, 0.05f, 0.f};
@@ -35,6 +37,8 @@ static constexpr vector_t kDirectionalLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
 static constexpr vector_t kPointLightAmbientColor{0.f, 0.f, 0.05f, 0.f};
 static constexpr vector_t kPointLightDiffuseColor{0.25f, 0.f, 0.f, 0.f};
 static constexpr vector_t kPointLightSpecularColor{0.f, 0.2f, 0.4f, 0.f};
+
+static constexpr float kShininessFactor = 10.5f;
 
 static std::string MakeTestName(uint32_t light_control, bool is_fixed_function, bool specular_enabled) {
   char buf[36] = {0};
@@ -236,7 +240,7 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, specular_enabled);
 
-  p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, 0.031373, 0.031373, 0.031373);
+  p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
 
   p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
   p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
@@ -322,6 +326,7 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
   host.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
                              false, TestHost::MAP_UNSIGNED_INVERT, TestHost::SRC_SPECULAR, false,
                              TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false, TestHost::MAP_UNSIGNED_INVERT);
+
   host.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false,
                              TestHost::MAP_UNSIGNED_INVERT, TestHost::SRC_SPECULAR, true,
                              TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false, TestHost::MAP_UNSIGNED_INVERT);
@@ -333,57 +338,6 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
   host.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
                          false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                          /* specular_clamp */ true);
-}
-
-static void DrawCheckerboardBackground(TestHost& host) {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-  pb_end(p);
-
-  host.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-  host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
-  host.SetTextureStageEnabled(0, true);
-  host.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-
-  static constexpr uint32_t kTextureSize = 256;
-  static constexpr uint32_t kCheckerSize = 24;
-
-  auto& texture_stage = host.GetTextureStage(0);
-  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
-  texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
-  host.SetupTextureStages();
-
-  auto texture_memory = host.GetTextureMemoryForStage(0);
-  GenerateSwizzledRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kCheckerboardA,
-                                   kCheckerboardB, kCheckerSize);
-
-  host.Begin(TestHost::PRIMITIVE_QUADS);
-  host.SetTexCoord0(0.0f, 0.0f);
-  vector_t world_point;
-  vector_t screen_point = {0.f, 0.f, 0.0f, 1.0f};
-  host.UnprojectPoint(world_point, screen_point, 1.f);
-  host.SetVertex(world_point);
-
-  host.SetTexCoord0(1.0f, 0.0f);
-  screen_point[0] = host.GetFramebufferWidthF();
-  host.UnprojectPoint(world_point, screen_point, 1.f);
-  host.SetVertex(world_point);
-
-  host.SetTexCoord0(1.0f, 1.0f);
-  screen_point[1] = host.GetFramebufferHeightF();
-  host.UnprojectPoint(world_point, screen_point, 1.f);
-  host.SetVertex(world_point);
-
-  host.SetTexCoord0(0.0f, 1.0f);
-  screen_point[0] = 0.f;
-  host.UnprojectPoint(world_point, screen_point, 1.f);
-  host.SetVertex(world_point);
-
-  host.End();
-
-  host.SetTextureStageEnabled(0, false);
-  host.SetShaderStageProgram(TestHost::STAGE_NONE);
 }
 
 static void SetupVertexShader(TestHost& host) {
@@ -402,12 +356,22 @@ static void SetupVertexShader(TestHost& host) {
     auto index = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
     // #invalid_color vector 120
     shader->SetUniformF(index++, 1.f, 0.f, 1.f, 1.f);
+    vector_t combined_ambient = {
+        kDirectionalLightAmbientColor[0] + kPointLightAmbientColor[0],
+        kDirectionalLightAmbientColor[1] + kPointLightAmbientColor[1],
+        kDirectionalLightAmbientColor[2] + kPointLightAmbientColor[2],
+        kDirectionalLightAmbientColor[3] + kPointLightAmbientColor[3],
+    };
     // #light_ambient vector 121
-    shader->SetUniform4F(index++, kDirectionalLightAmbientColor);
+    shader->SetUniform4F(index++, combined_ambient);
     // #light_diffuse vector 122
     shader->SetUniform4F(index++, kDirectionalLightDiffuseColor);
     // #light_specular vector 123
     shader->SetUniform4F(index++, kDirectionalLightSpecularColor);
+    // #material_specular_factor vector 124
+    shader->SetUniformF(index++, kShininessFactor, 0.f, 0.f, 0.f);
+    // #scene_ambient vector 125
+    shader->SetUniform4F(index++, kSceneAmbientColor);
   }
   host.SetVertexShaderProgram(shader);
 }
@@ -423,7 +387,7 @@ void LightingControlTests::Test(const std::string& name, uint32_t light_control,
   static constexpr uint32_t kBackgroundColor = 0xFF232623;
   host_.PrepareDraw(kBackgroundColor);
 
-  DrawCheckerboardBackground(host_);
+  host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 24);
 
   {
     auto p = pb_begin();

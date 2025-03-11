@@ -16,27 +16,22 @@ using namespace XboxMath;
 
 // clang-format off
 static constexpr uint32_t kVertexShaderLighting[] = {
-#include "projection_vertex_shader.inl"
+#include "projection_vertex_shader_colorless_light.vshinc"
 };
 
 static constexpr uint32_t kVertexShaderNoLighting[] = {
-#include "projection_vertex_shader_no_lighting.inl"
-};
-
-static constexpr uint32_t kVertexShaderNoLighting4ComponentTexcoord[] = {
-#include "projection_vertex_shader_no_lighting_4c_texcoords.inl"
+#include "projection_vertex_shader_no_lighting.vshinc"
 };
 // clang-format on
 
 ProjectionVertexShader::ProjectionVertexShader(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min,
-                                               float z_max, bool enable_lighting, bool use_4_component_texcoords)
+                                               float z_max, bool enable_lighting)
     : VertexShaderProgram(),
       framebuffer_width_(static_cast<float>(framebuffer_width)),
       framebuffer_height_(static_cast<float>(framebuffer_height)),
       z_min_(z_min),
       z_max_(z_max),
-      enable_lighting_{enable_lighting},
-      use_4_component_texcoords_{use_4_component_texcoords} {
+      enable_lighting_{enable_lighting} {
   MatrixSetIdentity(model_matrix_);
   MatrixSetIdentity(view_matrix_);
 
@@ -126,14 +121,11 @@ void ProjectionVertexShader::UpdateMatrices() {
 void ProjectionVertexShader::OnActivate() { UpdateMatrices(); }
 
 void ProjectionVertexShader::OnLoadShader() {
+  transpose_on_upload_ = true;
   if (enable_lighting_) {
     LoadShaderProgram(kVertexShaderLighting, sizeof(kVertexShaderLighting));
   } else {
-    if (use_4_component_texcoords_) {
-      LoadShaderProgram(kVertexShaderNoLighting4ComponentTexcoord, sizeof(kVertexShaderNoLighting4ComponentTexcoord));
-    } else {
-      LoadShaderProgram(kVertexShaderNoLighting, sizeof(kVertexShaderLighting));
-    }
+    LoadShaderProgram(kVertexShaderNoLighting, sizeof(kVertexShaderLighting));
   }
 }
 
@@ -173,9 +165,18 @@ void ProjectionVertexShader::OnLoadConstants() {
     upload_vector(light_direction_);
   }
 
-  // Send shader constants
+  // #zero_constant
   float constants_0[4] = {0, 0, 0, 0};
   upload_vector(constants_0);
+
+  // #basic_constants
+  float constants_basic[4] = {-1.f, -0.5f, 0.5f, 1.f};
+  upload_vector(constants_basic);
+
+  if (enable_lighting_) {
+    vertex_t invalid_color{1.f, 0.f, 1.f, 1.f};
+    upload_vector(invalid_color);
+  }
 }
 
 void ProjectionVertexShader::CalculateViewportMatrix() {
