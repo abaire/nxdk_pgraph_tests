@@ -23,7 +23,7 @@ class Light {
 
   [[nodiscard]] uint32_t light_enable_mask() const { return light_enable_mask_; }
 
-  void SetAmbient(float* ambient) { memcpy(ambient_, ambient, sizeof(ambient_)); }
+  void SetAmbient(const float* ambient) { memcpy(ambient_, ambient, sizeof(ambient_)); }
 
   void SetAmbient(float r, float g, float b) {
     ambient_[0] = r;
@@ -31,7 +31,7 @@ class Light {
     ambient_[2] = b;
   }
 
-  void SetDiffuse(float* diffuse) { memcpy(diffuse_, diffuse, sizeof(diffuse_)); }
+  void SetDiffuse(const float* diffuse) { memcpy(diffuse_, diffuse, sizeof(diffuse_)); }
 
   void SetDiffuse(float r, float g, float b) {
     diffuse_[0] = r;
@@ -39,7 +39,7 @@ class Light {
     diffuse_[2] = b;
   }
 
-  void SetSpecular(float* specular) { memcpy(specular_, specular, sizeof(specular_)); }
+  void SetSpecular(const float* specular) { memcpy(specular_, specular, sizeof(specular_)); }
 
   void SetSpecular(float r, float g, float b) {
     specular_[0] = r;
