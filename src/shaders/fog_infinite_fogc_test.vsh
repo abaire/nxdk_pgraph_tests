@@ -1,23 +1,13 @@
 #model_matrix matrix4 96
 #view_matrix matrix4 100
 #projection_matrix matrix4 104
-; #fog_value vector 108
-#one_and_zero vector 109
+; #fog_value vector 120
+; {1, 0, 0, 0}
+#one_and_zero vector 121
 
-mul r0, iPos.y, #model_matrix[1]
-mad r0, iPos.x, #model_matrix[0], r0
-mad r0, iPos.z, #model_matrix[2], r0
-mad r0, iPos.w, #model_matrix[3], r0
-
-mul r1, r0.y, #view_matrix[1]
-mad r1, r0.x, #view_matrix[0], r1
-mad r1, r0.z, #view_matrix[2], r1
-mad r0, r0.w, #view_matrix[3], r1
-
-mul r1, r0.y, #projection_matrix[1]
-mad r1, r0.x, #projection_matrix[0], r1
-mad r1, r0.z, #projection_matrix[2], r1
-mad r0, r0.w, #projection_matrix[3], r1
+%matmul4x4 r0 iPos #model_matrix
+%matmul4x4 r1 r0 #view_matrix
+%matmul4x4 r0 r1 #projection_matrix
 
 ; oPos.xyz = r0.xyz / r0.w
 rcp r1.x, r0.w
@@ -27,5 +17,4 @@ mov oPos.w, r0
 mov oD0, iDiffuse
 
 ; Set oFog to 1 / 0
-rcp r1.x, #one_and_zero.y
-mov oFog.x, r1.x
+rcp oFog.x, #one_and_zero.y

@@ -1,5 +1,6 @@
 ; A vertex shader that performs transformation and passes through all other
-; vertex attributes without modification.
+; vertex attributes apart from fog, which is calculated using the transformed W,
+; without modification.
 
 #model_matrix matrix4 96
 #view_matrix matrix4 100
@@ -21,7 +22,9 @@ mov oDiffuse, iDiffuse
 mov oSpecular, iSpecular
 mov oBackDiffuse, iBackDiffuse
 mov oBackSpecular, iBackSpecular
-mov oFog, iFog
+
+mov oFog, r12.w
+
 mov oPts, iPts
 mov oTex0, iTex0
 mov oTex1, iTex1
