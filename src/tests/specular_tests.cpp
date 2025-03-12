@@ -15,6 +15,8 @@
 #include "shaders/precalculated_vertex_shader.h"
 #include "texture_generator.h"
 
+static constexpr char kTestControlFlagsLightOffFixedFunction[] = "ControlFlagsLightDisable_FF";
+static constexpr char kTestControlLightOffFlagsShader[] = "ControlFlagsLightDisable_VS";
 static constexpr char kTestControlFlagsNoLightFixedFunction[] = "ControlFlagsNoLight_FF";
 static constexpr char kTestControlNoLightFlagsShader[] = "ControlFlagsNoLight_VS";
 static constexpr char kTestControlFlagsFixedFunction[] = "ControlFlags_FF";
@@ -29,6 +31,11 @@ static constexpr vector_t kSpecularUL{1.f, 0.f, 0.f, 0.15f};
 static constexpr vector_t kSpecularUR{1.f, 0.f, 0.f, 0.75f};
 static constexpr vector_t kSpecularLR{0.f, 1.f, 0.f, 1.f};
 static constexpr vector_t kSpecularLL{0.f, 1.f, 0.f, 0.20f};
+
+static constexpr vector_t kDiffuseUL{0.f, 0.f, 0.5f, 1.f};
+static constexpr vector_t kDiffuseUR{0.f, 0.f, 0.75f, 1.f};
+static constexpr vector_t kDiffuseLR{0.f, 0.f, 1.f, 1.f};
+static constexpr vector_t kDiffuseLL{0.f, 0.f, 0.25f, 1.f};
 
 // From the left, pointing right and into the screen.
 static constexpr vector_t kDirectionalLightDir{1.f, 0.f, 1.f, 1.f};
@@ -65,15 +72,58 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
 /**
  * Initializes the test suite and creates test cases.
  *
- * @tc ControlFlagsNoLight_FF
+ * @tc ControlFlagsLightDisable_FF
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1.
- *  Renders two rows of 4 quads each with the fixed function pipeline. Lighting is disabled. Each quad has a specular
- *  color of:
- *    UL = {1.f, 0.f, 0.f, 0.15f},
- *    UR = {1.f, 0.f, 0.f, 0.75f},
- *    LR = {0.f, 1.f, 0.f, 1.f},
- *    LL = {0.f, 1.f, 0.f, 0.2f}
+ *
+ *  Renders two groups of two rows of 4 quads each with the fixed function pipeline. The first row is the specular
+ *  component, the second is the diffuse. Lighting is disabled.
+ *
+ *  Each quad has specular and diffuse colors of:
+ *    UL = {1.f, 0.f, 0.f, 0.15f}, {0.f, 0.f, 0.5f, 1.f}
+ *    UR = {1.f, 0.f, 0.f, 0.75f}, {0.f, 0.f, 0.75f, 1.f}
+ *    LR = {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f}
+ *    LL = {0.f, 1.f, 0.f, 0.2f}, {0.f, 0.f, 0.25f, 1.f}
+ *
+ *  The upper two rows have SET_SPECULAR_ENABLE = false. The lower rows have it true.
+ *  The first column has SET_LIGHT_CONTROL = SEPARATE_SPECULAR + ALPHA_FROM_MATERIAL_SPECULAR
+ *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
+ *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
+ *  The fourth has SET_LIGHT_CONTROL = 0
+ *
+ * @tc ControlFlagsLightDisable_VS
+ *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
+ *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1.
+ *
+ *  Renders two groups of two rows of 4 quads each with the fixed function pipeline. The first row is the specular
+ *  component, the second is the diffuse. Lighting is disabled.
+ *
+ *  Each quad has specular and diffuse colors of:
+ *    UL = {1.f, 0.f, 0.f, 0.15f}, {0.f, 0.f, 0.5f, 1.f}
+ *    UR = {1.f, 0.f, 0.f, 0.75f}, {0.f, 0.f, 0.75f, 1.f}
+ *    LR = {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f}
+ *    LL = {0.f, 1.f, 0.f, 0.2f}, {0.f, 0.f, 0.25f, 1.f}
+ *
+ *  The upper row has SET_SPECULAR_ENABLE = false. The lower row has it true.
+ *  The first column has SET_LIGHT_CONTROL = SEPARATE_SPECULAR + ALPHA_FROM_MATERIAL_SPECULAR
+ *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
+ *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
+ *  The fourth has SET_LIGHT_CONTROL = 0
+ *
+ * @tc ControlFlagsNoLight_FF
+ *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
+ *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
+ *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
+ *
+ *  Renders two groups of two rows of 4 quads each with the fixed function pipeline. The first row is the specular
+ *  component, the second is the diffuse. Lighting is enabled but no light exists.
+ *
+ *  Each quad has specular and diffuse colors of:
+ *    UL = {1.f, 0.f, 0.f, 0.15f}, {0.f, 0.f, 0.5f, 1.f}
+ *    UR = {1.f, 0.f, 0.f, 0.75f}, {0.f, 0.f, 0.75f, 1.f}
+ *    LR = {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f}
+ *    LL = {0.f, 1.f, 0.f, 0.2f}, {0.f, 0.f, 0.25f, 1.f}
+ *
  *  The upper row has SET_SPECULAR_ENABLE = false. The lower row has it true.
  *  The first column has SET_LIGHT_CONTROL = SEPARATE_SPECULAR + ALPHA_FROM_MATERIAL_SPECULAR
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
@@ -82,13 +132,18 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *
  * @tc ControlFlagsNoLight_VS
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
- *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1.
- *  Renders two rows of 4 quads each with a vertex shader that passes through diffuse and specular. Lighting is
- *  disabled. Each quad has a specular color of:
- *    UL = {1.f, 0.f, 0.f, 0.15f},
- *    UR = {1.f, 0.f, 0.f, 0.75f},
- *    LR = {0.f, 1.f, 0.f, 1.f},
- *    LL = {0.f, 1.f, 0.f, 0.2f}
+ *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
+ *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
+ *
+ *  Renders two groups of two rows of 4 quads each with the fixed function pipeline. The first row is the specular
+ *  component, the second is the diffuse. Lighting is enabled but no light exists.
+ *
+ *  Each quad has specular and diffuse colors of:
+ *    UL = {1.f, 0.f, 0.f, 0.15f}, {0.f, 0.f, 0.5f, 1.f}
+ *    UR = {1.f, 0.f, 0.f, 0.75f}, {0.f, 0.f, 0.75f, 1.f}
+ *    LR = {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f}
+ *    LL = {0.f, 1.f, 0.f, 0.2f}, {0.f, 0.f, 0.25f, 1.f}
+ *
  *  The upper row has SET_SPECULAR_ENABLE = false. The lower row has it true.
  *  The first column has SET_LIGHT_CONTROL = SEPARATE_SPECULAR + ALPHA_FROM_MATERIAL_SPECULAR
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
@@ -99,28 +154,36 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
  *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
- *  Renders two rows of 4 quads each with the fixed function pipeline. Lighting is enabled, but there are no lights.
- *  Each quad has a specular color of:
- *    UL = {1.f, 0.f, 0.f, 0.15f},
- *    UR = {1.f, 0.f, 0.f, 0.75f},
- *    LR = {0.f, 1.f, 0.f, 1.f},
- *    LL = {0.f, 1.f, 0.f, 0.2f}
+ *
+ *  Renders two groups of two rows of 4 quads each with the fixed function pipeline. The first row is the specular
+ *  component, the second is the diffuse. Lighting is enabled but with a directional light pointing at {1, 0, 1}.
+ *
+ *  Each quad has specular and diffuse colors of:
+ *    UL = {1.f, 0.f, 0.f, 0.15f}, {0.f, 0.f, 0.5f, 1.f}
+ *    UR = {1.f, 0.f, 0.f, 0.75f}, {0.f, 0.f, 0.75f, 1.f}
+ *    LR = {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f}
+ *    LL = {0.f, 1.f, 0.f, 0.2f}, {0.f, 0.f, 0.25f, 1.f}
+ *
  *  The upper row has SET_SPECULAR_ENABLE = false. The lower row has it true.
  *  The first column has SET_LIGHT_CONTROL = SEPARATE_SPECULAR + ALPHA_FROM_MATERIAL_SPECULAR
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
  *
- * @tc ControlFlagsNoLight_VS
+ * @tc ControlFlags_VS
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
  *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
- *  Renders two rows of 4 quads each with a vertex shader that passes through diffuse and specular. Lighting is
- *  enabled, but there are no lights. Each quad has a specular color of:
- *    UL = {1.f, 0.f, 0.f, 0.15f},
- *    UR = {1.f, 0.f, 0.f, 0.75f},
- *    LR = {0.f, 1.f, 0.f, 1.f},
- *    LL = {0.f, 1.f, 0.f, 0.2f}
+ *
+ *  Renders two groups of two rows of 4 quads each with the fixed function pipeline. The first row is the specular
+ *  component, the second is the diffuse. Lighting is enabled but with a directional light pointing at {1, 0, 1}.
+ *
+ *  Each quad has specular and diffuse colors of:
+ *    UL = {1.f, 0.f, 0.f, 0.15f}, {0.f, 0.f, 0.5f, 1.f}
+ *    UR = {1.f, 0.f, 0.f, 0.75f}, {0.f, 0.f, 0.75f, 1.f}
+ *    LR = {0.f, 1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f}
+ *    LL = {0.f, 1.f, 0.f, 0.2f}, {0.f, 0.f, 0.25f, 1.f}
+ *
  *  The upper row has SET_SPECULAR_ENABLE = false. The lower row has it true.
  *  The first column has SET_LIGHT_CONTROL = SEPARATE_SPECULAR + ALPHA_FROM_MATERIAL_SPECULAR
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
@@ -146,15 +209,22 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
 SpecularTests::SpecularTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Specular", config) {
   tests_[kTestControlFlagsNoLightFixedFunction] = [this]() {
-    this->TestControlFlags(kTestControlFlagsNoLightFixedFunction, true, false);
+    this->TestControlFlags(kTestControlFlagsNoLightFixedFunction, true, true, false);
   };
   tests_[kTestControlNoLightFlagsShader] = [this]() {
-    this->TestControlFlags(kTestControlNoLightFlagsShader, false, false);
+    this->TestControlFlags(kTestControlNoLightFlagsShader, false, true, false);
   };
   tests_[kTestControlFlagsFixedFunction] = [this]() {
-    this->TestControlFlags(kTestControlFlagsFixedFunction, true, true);
+    this->TestControlFlags(kTestControlFlagsFixedFunction, true, true, true);
   };
-  tests_[kTestControlFlagsShader] = [this]() { this->TestControlFlags(kTestControlFlagsShader, false, true); };
+  tests_[kTestControlFlagsShader] = [this]() { this->TestControlFlags(kTestControlFlagsShader, false, true, true); };
+
+  tests_[kTestControlFlagsLightOffFixedFunction] = [this]() {
+    this->TestControlFlags(kTestControlFlagsLightOffFixedFunction, true, false, false);
+  };
+  tests_[kTestControlLightOffFlagsShader] = [this]() {
+    this->TestControlFlags(kTestControlLightOffFlagsShader, false, false, false);
+  };
 
   for (auto& test_case : kSpecularParamSets) {
     std::string name = "SpecParams_FF_";
@@ -211,7 +281,7 @@ void SpecularTests::Initialize() {
 
     p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
     p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.1f);  // Only affects the diffuse channel alpha.
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.5f);  // Only affects the diffuse channel alpha.
     pb_end(p);
   }
 
@@ -257,7 +327,8 @@ static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host
   return shader;
 }
 
-void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_function, bool enable_lighting) {
+void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_function, bool enable_lighting,
+                                     bool enable_light) {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
   std::shared_ptr<PerspectiveVertexShader> shader;
   if (use_fixed_function) {
@@ -270,9 +341,36 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
   host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 14);
 
+  uint32_t light_mode_bitvector = 0;
+  if (enable_light) {
+    {
+      auto light = DirectionalLight(0, kDirectionalLightDir);
+      light.SetAmbient(kDirectionalLightAmbientColor);
+      light.SetDiffuse(kDirectionalLightDiffuseColor);
+      light.SetSpecular(kDirectionalLightSpecularColor);
+
+      vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+      vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+
+      vector_t look_dir{0.f, 0.f, 0.f, 1.f};
+      VectorSubtractVector(at, eye, look_dir);
+      VectorNormalize(look_dir);
+      light.Commit(host_, look_dir);
+
+      light_mode_bitvector |= light.light_enable_mask();
+    }
+  }
+
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, enable_lighting);
+    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+
+    // Pow 16
+    const float specular_params[]{-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433};
+    for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
+      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
+    }
     pb_end(p);
   }
 
@@ -281,7 +379,7 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
   const auto quad_spacing = 15.f;
   const auto quad_width = fb_width / 6.f;
-  const auto quad_height = fb_height / 5.f;
+  const auto quad_height = fb_height / 6.f;
   static constexpr auto quad_z = 1.f;
   static constexpr auto quad_w = 1.f;
 
@@ -302,26 +400,30 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
     vector_t world_point{0.f, 0.f, 0.f, 1.f};
 
-    host_.SetDiffuse(0.f, 0.f, 0.5f, 1.f);
+    host_.SetDiffuse(kDiffuseUL);
     host_.SetSpecular(kSpecularUL);
+    host_.SetNormal(-0.099014754297667f, -0.099014754297667, -0.990147542976674f);
     host_.SetTexCoord0(0.f, 0.f);
     unproject(world_point, left, top);
     host_.SetVertex(world_point);
 
-    host_.SetDiffuse(0.f, 0.f, 0.75f, 1.f);
+    host_.SetDiffuse(kDiffuseUR);
     host_.SetSpecular(kSpecularUR);
+    host_.SetNormal(0.099014754297667f, -0.099014754297667, -0.990147542976674f);
     host_.SetTexCoord0(1.f, 0.f);
     unproject(world_point, right, top);
     host_.SetVertex(world_point);
 
-    host_.SetDiffuse(0.f, 0.f, 1.f, 1.f);
+    host_.SetDiffuse(kDiffuseLR);
     host_.SetSpecular(kSpecularLR);
+    host_.SetNormal(0.099014754297667f, 0.099014754297667, -0.990147542976674f);
     host_.SetTexCoord0(1.f, 1.f);
     unproject(world_point, right, bottom);
     host_.SetVertex(world_point);
 
-    host_.SetDiffuse(0.f, 0.f, 0.25f, 1.f);
+    host_.SetDiffuse(kDiffuseLL);
     host_.SetSpecular(kSpecularLL);
+    host_.SetNormal(-0.099014754297667f, 0.099014754297667, -0.990147542976674f);
     host_.SetTexCoord0(0.f, 1.f);
     unproject(world_point, left, bottom);
     host_.SetVertex(world_point);
@@ -377,8 +479,14 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
   // Specular disabled row
 
-  auto top = quad_height;
-  const auto inc_y = quad_height * 2.f + quad_spacing;
+  auto top = quad_height + 15.f;
+  const auto inc_y = quad_height + quad_spacing;
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_SPECULAR, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_SPECULAR, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
 
   {
     auto p = pb_begin();
@@ -386,14 +494,38 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
     pb_end(p);
   }
   draw_row(top);
+  top += inc_y;
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  draw_row(top);
+  top += inc_y;
 
   // Specular enabled row
-  top += inc_y;
+  host_.SetInputColorCombiner(0, TestHost::SRC_SPECULAR, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_SPECULAR, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
     pb_end(p);
   }
+  draw_row(top);
+  top += inc_y;
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
   draw_row(top);
 
   pb_print("%s\n", name.c_str());
@@ -415,6 +547,12 @@ void SpecularTests::TestSpecularParams(const std::string& name, const float* spe
 
   host_.PrepareDraw(0xFE313131);
   host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 20);
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_SPECULAR, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_SPECULAR, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
 
   {
     uint32_t light_mode_bitvector = 0;
