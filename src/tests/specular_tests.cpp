@@ -45,12 +45,22 @@ struct SpecularParamTestCase {
   const float params[6];
 };
 
+// val[2] = 1.f + val[0] - val[1]
+// val[5] = 1.f + val[3] - val[4]
+// Every time power is doubled, the second triplet of power * 2 == the first triplet of power.
+// Values less than 1.0 have the second triplet values close to 1/2 the first triplet, with the third value ~= power.
 static constexpr SpecularParamTestCase kSpecularParamSets[]{
     {"MechAssault", {-0.838916f, -2.887156f, 3.048239f, -0.706496f, -2.507095f, 2.800600f}},
     {"NinjaGaidenBlack", {-0.932112f, -3.097628f, 3.165516f, -0.869210f, -2.935466f, 3.066255f}},
     {"AllZero", {0.f, 0.f, 0.f, 0.f, 0.f, 0.f}},
     {"InvMechAssault", {0.838916f, 2.887156f, -3.048239f, 0.706496f, 2.507095f, -2.800600f}},
-};
+    {"Pow0_1", {-0.0, 0.9, 0.1, -0.0, 0.95, 0.05}},
+    {"Pow1_0", {-0.0, -0.494592, 1.49459, -0.000244, 0.500122, 0.499634}},
+    {"Pow2_0", {-0.170208, -0.855843, 1.68563, -0.0, -0.494592, 1.49459}},
+    {"Pow4_0", {-0.421539, -1.70592, 2.28438, -0.170208, -0.855842, 1.68563}},
+    {"Pow8_0", {-0.64766, -2.36199, 2.71433, -0.421539, -1.70592, 2.28438}},
+    {"Pow16_0", {-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433}},
+    {"Pow24_0", {-0.863702, -2.92701, 3.06331, -0.747554, -2.6184, 2.87085}}};
 
 /**
  * Initializes the test suite and creates test cases.
