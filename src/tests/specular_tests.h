@@ -19,7 +19,7 @@ class SpecularTests : public TestSuite {
 
  private:
   //! Tests handling of LIGHTING_ENABLE, SPECULAR_ENABLE, and SEPARATE_SPECULAR.
-  void TestControlFlags(const std::string& name, bool use_fixed_function, bool enable_lighting);
+  void TestControlFlags(const std::string& name, bool use_fixed_function, bool enable_lighting, bool enable_light);
 
   //! Tests the behavior of NV097_SET_SPECULAR_PARAMS.
   void TestSpecularParams(const std::string& name, const float* specular_params);
