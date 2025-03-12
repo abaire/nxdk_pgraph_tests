@@ -250,8 +250,6 @@ void FogInfiniteFogCoordinateTests::Initialize() {
 
   auto shader = host_.GetShaderProgram();
   shader->SetShaderOverride(kInfiniteFogCShader, sizeof(kInfiniteFogCShader));
-  // const c[12] = 0
-  shader->SetUniformF(12, 0.0f);
   host_.SetVertexShaderProgram(shader);
 }
 
@@ -466,9 +464,12 @@ void FogVec4CoordTests::TestUnset() {
 void FogVec4CoordTests::SetShader(const FogVec4CoordTests::TestConfig& config) const {
   auto shader = host_.GetShaderProgram();
   shader->SetShaderOverride(config.shader, config.shader_size);
-  shader->SetUniformF(12, config.fog[0], config.fog[1], config.fog[2], config.fog[3]);
-  // const c[13] = 1 0
-  shader->SetUniformF(13, 1.0f, 0.0f);
+
+  auto index = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
+  // c[120].xyzw = fog test value
+  shader->SetUniformF(index++, config.fog[0], config.fog[1], config.fog[2], config.fog[3]);
+  // #one_and_zero vector
+  shader->SetUniformF(index++, 1.0f, 0.0f);
   host_.SetVertexShaderProgram(shader);
 }
 
