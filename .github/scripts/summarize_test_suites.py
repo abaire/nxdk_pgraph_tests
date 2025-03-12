@@ -93,6 +93,12 @@ class TestSuiteDescriptorReader:
                         else:
                             test_name = documentation[0]
                             description = ""
+
+                        if not description:
+                            # Handle the case where a \parblock is used to allow preformatted documentation.
+                            parblock = element.find("parblock")
+                            if parblock:
+                                description = "\n".join([para.text for para in parblock.iter("para")])
                         test_descriptions[test_name] = description
 
         return suite_name, test_descriptions

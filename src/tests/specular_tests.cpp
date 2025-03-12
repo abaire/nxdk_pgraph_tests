@@ -73,6 +73,7 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  * Initializes the test suite and creates test cases.
  *
  * @tc ControlFlagsLightDisable_FF
+ * \parblock
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1.
  *
@@ -90,8 +91,10 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
+ * \endparblock
  *
  * @tc ControlFlagsLightDisable_VS
+ * \parblock
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1.
  *
@@ -109,8 +112,10 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
+ * \endparblock
  *
  * @tc ControlFlagsNoLight_FF
+ * \parblock
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
  *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
@@ -129,8 +134,13 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
+ *
+ *  Because lighting is enabled, the diffuse alpha is entirely dictated by SET_MATERIAL_ALPHA, and RGB is entirely set
+ *  by the lighting calculations.
+ * \endparblock
  *
  * @tc ControlFlagsNoLight_VS
+ * \parblock
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
  *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
@@ -150,7 +160,12 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
  *
+ *  Because lighting is enabled, the diffuse alpha is entirely dictated by SET_MATERIAL_ALPHA, and RGB is entirely set
+ *  by the lighting calculations.
+ * \endparblock
+ *
  * @tc ControlFlags_FF
+ * \parblock
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
  *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
@@ -169,8 +184,13 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
+ *
+ *  Because lighting is enabled, the diffuse alpha is entirely dictated by SET_MATERIAL_ALPHA, and RGB is entirely set
+ *  by the lighting calculations.
+ * \endparblock
  *
  * @tc ControlFlags_VS
+ * \parblock
  *  Demonstrates that SET_SPECULAR_ENABLE = false forces specular values to {0, 0, 0, 1}. Also demonstrates that failing
  *  to set SEPARATE_SPECULAR will cause the specular alpha to be set to 1 and failing to set
  *  ALPHA_FROM_MATERIAL_SPECULAR will pass through vertex specular RGB instead of performing the light calculation.
@@ -189,6 +209,10 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  *  The second has SET_LIGHT_CONTROL = SEPARATE_SPECULAR
  *  The third has SET_LIGHT_CONTROL = ALPHA_FROM_MATERIAL_SPECULAR
  *  The fourth has SET_LIGHT_CONTROL = 0
+ *
+ *  Because lighting is enabled, the diffuse alpha is entirely dictated by SET_MATERIAL_ALPHA, and RGB is entirely set
+ *  by the lighting calculations.
+ * \endparblock
  *
  * @tc SpecParams_FF_AllZero
  *  Renders a number of meshes with a directional light and a point light, shading the specular channel only.
@@ -281,7 +305,7 @@ void SpecularTests::Initialize() {
 
     p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
     p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.5f);  // Only affects the diffuse channel alpha.
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.75f);  // Only affects the diffuse channel alpha.
     pb_end(p);
   }
 
@@ -598,7 +622,7 @@ void SpecularTests::TestSpecularParams(const std::string& name, const float* spe
 
     p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
     p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.40f);
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.75f);
 
     p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
 
