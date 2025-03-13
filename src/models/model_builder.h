@@ -31,8 +31,10 @@ class ModelBuilder {
 //! Builder for untextured models.
 class SolidColorModelBuilder : public ModelBuilder {
  public:
-  SolidColorModelBuilder();
+  SolidColorModelBuilder() = default;
   SolidColorModelBuilder(const vector_t &diffuse, const vector_t &specular);
+  SolidColorModelBuilder(const vector_t &diffuse, const vector_t &specular, const vector_t &back_diffuse,
+                         const vector_t &back_specular);
 
   //! Populates the given VertexBuffer with model data.
   void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices) override;
@@ -45,8 +47,10 @@ class SolidColorModelBuilder : public ModelBuilder {
   void ApplyColors(const std::shared_ptr<VertexBuffer> &vertices) const;
 
  protected:
-  vector_t diffuse_;
-  vector_t specular_;
+  vector_t diffuse_{1.0f, 1.0f, 1.0f, 1.0f};
+  vector_t specular_{0.0f, 0.0f, 0.0f, 1.0f};
+  vector_t back_diffuse_{1.0f, 1.0f, 1.0f, 1.0f};
+  vector_t back_specular_{0.0f, 0.0f, 0.0f, 1.0f};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SRC_MODELS_MODEL_BUILDER_H_

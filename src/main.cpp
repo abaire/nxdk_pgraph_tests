@@ -70,6 +70,7 @@
 #include "tests/set_vertex_data_tests.h"
 #include "tests/shade_model_tests.h"
 #include "tests/smoothing_tests.h"
+#include "tests/specular_back_tests.h"
 #include "tests/specular_tests.h"
 #include "tests/stencil_func_tests.h"
 #include "tests/stencil_tests.h"
@@ -413,6 +414,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SetVertexDataTests)
   REG_TEST(ShadeModelTests)
   REG_TEST(SmoothingTests)
+  REG_TEST(SpecularBackTests)
   REG_TEST(SpecularTests)
   REG_TEST(SwathWidthTests)
   REG_TEST(SurfaceClipTests)

@@ -36,6 +36,10 @@ constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
 #define VRAM_ADDR(x) (reinterpret_cast<uint32_t>(x) & 0x03FFFFFF)
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
+#define TO_RGBA(float_vals)                                                                      \
+  (((uint32_t)((float_vals)[3] * 255.0f) << 24) + ((uint32_t)((float_vals)[2] * 255.0f) << 16) + \
+   ((uint32_t)((float_vals)[1] * 255.0f) << 8) + ((uint32_t)((float_vals)[0] * 255.0f)))
+
 /**
  * Provides utility methods for use by TestSuite subclasses.
  */
@@ -110,7 +114,7 @@ class TestHost {
     DST_TEX3,         // Texcoord3
     DST_R0,           // R0 from the vertex shader
     DST_R1,           // R1 from the vertex shader
-    DST_SPEC_R0_SUM,  // Specular + R1
+    DST_SPEC_R0_SUM,  // Specular + R0
     DST_EF_PROD,      // Combiner param E * F
   };
 
@@ -446,6 +450,7 @@ class TestHost {
   void SetWeight(float w) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
   void SetNormal(float x, float y, float z) const;
+  void SetNormal(const float *vals) const;
   void SetNormal3S(int x, int y, int z) const;
   void SetDiffuse(const vector_t &color) const { SetDiffuse(color[0], color[1], color[2], color[3]); }
   void SetDiffuse(float r, float g, float b, float a) const;
@@ -479,10 +484,23 @@ class TestHost {
   //! set via NV097_SET_VERTEX_DATA4UB.
   void SetBackDiffuse(uint32_t rgba) const;
 
+  void SetBackDiffuse(const float *vals) const { SetBackDiffuse(TO_RGBA(vals)); }
+  void SetBackDiffuse(float r, float g, float b, float a = 1.f) const {
+    const float vals[]{r, g, b, a};
+    SetBackDiffuse(TO_RGBA(vals));
+  }
+
   //! Sets the back specular color for the current vertex.
   //! NOTE: unlike most vertex attributes, there does not appear to be an explicit command to set this value, so it is
   //! set via NV097_SET_VERTEX_DATA4UB.
   void SetBackSpecular(uint32_t rgba) const;
+
+  void SetBackSpecular(const float *vals) const { SetBackSpecular(TO_RGBA(vals)); }
+
+  void SetBackSpecular(float r, float g, float b, float a = 1.f) const {
+    const float vals[]{r, g, b, a};
+    SetBackSpecular(TO_RGBA(vals));
+  }
 
   //! Returns a human-friendly name for the given DrawPrimitive.
   static std::string GetPrimitiveName(DrawPrimitive primitive);

@@ -12,25 +12,17 @@ static constexpr float PI_OVER_180 = (float)M_PI / 180.0f;
 #define DEG2RAD(c) ((float)(c) * PI_OVER_180)
 
 Light::Light(uint32_t light_index, uint32_t enable_mask)
-    : light_index_(light_index), light_enable_mask_(LIGHT_MODE(light_index, enable_mask)) {
-  ambient_[0] = 0.f;
-  ambient_[1] = 0.f;
-  ambient_[2] = 0.f;
-
-  diffuse_[0] = 1.f;
-  diffuse_[1] = 1.f;
-  diffuse_[2] = 1.f;
-
-  specular_[0] = 0.f;
-  specular_[1] = 0.f;
-  specular_[2] = 0.f;
-};
+    : light_index_(light_index), light_enable_mask_(LIGHT_MODE(light_index, enable_mask)) {}
 
 void Light::Commit(TestHost& host) const {
   auto p = pb_begin();
   p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_AMBIENT_COLOR), ambient_);
   p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_DIFFUSE_COLOR), diffuse_);
   p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_SPECULAR_COLOR), specular_);
+
+  p = pb_push3fv(p, SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_AMBIENT_COLOR), back_ambient_);
+  p = pb_push3fv(p, SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_DIFFUSE_COLOR), back_diffuse_);
+  p = pb_push3fv(p, SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_SPECULAR_COLOR), back_specular_);
   pb_end(p);
 }
 

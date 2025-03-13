@@ -287,6 +287,16 @@ void TestSuite::Initialize() {
     p = pb_push4f(p, NV097_SET_TEXCOORD1_4F, 0.f, 0.f, 0.f, 0.f);
     p = pb_push4f(p, NV097_SET_TEXCOORD2_4F, 0.f, 0.f, 0.f, 0.f);
     p = pb_push4f(p, NV097_SET_TEXCOORD3_4F, 0.f, 0.f, 0.f, 0.f);
+
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.f);
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA_BACK, 1.f);
+
+    // Pow 16
+    const float specular_params[]{-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433};
+    for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
+      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
+      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS_BACK + offset, 0);
+    }
     pb_end(p);
   }
 
