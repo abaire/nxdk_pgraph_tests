@@ -373,6 +373,7 @@ class ColadaConverter:
                         " public:",
                         f"  {class_name}() : SolidColorModelBuilder() {{}}",
                         f"  {class_name}(const vector_t &diffuse, const vector_t &specular) : SolidColorModelBuilder(diffuse, specular) {{}}",
+                        f"  {class_name}(const vector_t &diffuse, const vector_t &specular, const vector_t &back_diffuse, const vector_t &back_specular) : SolidColorModelBuilder(diffuse, specular, back_diffuse, back_specular) {{}}",
                         "",
                         "  [[nodiscard]] uint32_t GetVertexCount() const override;",
                         "",

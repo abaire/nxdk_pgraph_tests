@@ -47,6 +47,30 @@ class Light {
     specular_[2] = b;
   }
 
+  void SetBackAmbient(const float* ambient) { memcpy(back_ambient_, ambient, sizeof(back_ambient_)); }
+
+  void SetBackAmbient(float r, float g, float b) {
+    back_ambient_[0] = r;
+    back_ambient_[1] = g;
+    back_ambient_[2] = b;
+  }
+
+  void SetBackDiffuse(const float* diffuse) { memcpy(back_diffuse_, diffuse, sizeof(back_diffuse_)); }
+
+  void SetBackDiffuse(float r, float g, float b) {
+    back_diffuse_[0] = r;
+    back_diffuse_[1] = g;
+    back_diffuse_[2] = b;
+  }
+
+  void SetBackSpecular(const float* specular) { memcpy(back_specular_, specular, sizeof(back_specular_)); }
+
+  void SetBackSpecular(float r, float g, float b) {
+    back_specular_[0] = r;
+    back_specular_[1] = g;
+    back_specular_[2] = b;
+  }
+
  protected:
   //! Constructs a Light.
   //! @param light_index - The hardware light to configure.
@@ -59,9 +83,12 @@ class Light {
   uint32_t light_index_;
   uint32_t light_enable_mask_;
 
-  float ambient_[3];
-  float diffuse_[3];
-  float specular_[3];
+  float ambient_[3]{0.f, 0.f, 0.f};
+  float diffuse_[3]{1.f, 1.f, 1.f};
+  float specular_[3]{0.f, 0.f, 0.f};
+  float back_ambient_[3]{0.f, 0.f, 0.f};
+  float back_diffuse_[3]{1.f, 1.f, 1.f};
+  float back_specular_[3]{0.f, 0.f, 0.f};
 };
 
 /**

@@ -352,10 +352,10 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
       SetPointSize(vertex->point_size);
     }
     if (enabled_vertex_fields & BACK_DIFFUSE) {
-      SetBackDiffuse(TO_BGRA(vertex->back_diffuse));
+      SetBackDiffuse(vertex->back_diffuse);
     }
     if (enabled_vertex_fields & BACK_SPECULAR) {
-      SetBackSpecular(TO_BGRA(vertex->back_specular));
+      SetBackSpecular(vertex->back_specular);
     }
 
     if (enabled_vertex_fields & TEXCOORD0) {
@@ -604,7 +604,13 @@ void TestHost::SetWeight(float w) const {
 
 void TestHost::SetNormal(float x, float y, float z) const {
   auto p = pb_begin();
-  p = pb_push3(p, NV097_SET_NORMAL3F, *(uint32_t *)&x, *(uint32_t *)&y, *(uint32_t *)&z);
+  p = pb_push3f(p, NV097_SET_NORMAL3F, x, y, z);
+  pb_end(p);
+}
+
+void TestHost::SetNormal(const float *vals) const {
+  auto p = pb_begin();
+  p = pb_push3fv(p, NV097_SET_NORMAL3F, vals);
   pb_end(p);
 }
 

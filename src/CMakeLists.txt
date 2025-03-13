@@ -278,6 +278,8 @@ add_executable(
         tests/shade_model_tests.h
         tests/smoothing_tests.cpp
         tests/smoothing_tests.h
+        tests/specular_back_tests.cpp
+        tests/specular_back_tests.h
         tests/specular_tests.cpp
         tests/specular_tests.h
         tests/stencil_tests.cpp
