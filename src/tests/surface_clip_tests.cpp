@@ -26,6 +26,11 @@ static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
     {0, 0, 640, 480},
     // The extents must stay within the surface size to avoid a buffer limit error on HW.
     {8, 16, 640 - 8, 480 - 16},
+
+  // Halo2 multiplayer 2-player
+  {0,240,640,240},
+  // Halo2 multiplayer 4-player
+  {320, 240,320,240},
 };
 // clang-format on
 
@@ -38,11 +43,149 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
   return buffer;
 }
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc XemuBug420
+ *  Reproduction case for xemu#420. A 32-bit surface is created, then immediately changed to a 16-bit one, followed by a
+ *  region clear. This caused an assertion in versions before xemu#919
+ *
+ * @tc rt_x0y0_w0h0
+ *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No geometry should be
+ *  seen, since width and height of the clip region are 0.
+ *
+ * @tc rt_x0y0_w512h384
+ *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 512x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen,
+ *  and the light green quads should be fully visible.
+ *
+ * @tc rt_x0y0_w640h480
+ *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 640x480, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary.The texture is then rendered into an 8888 backbuffer. No red should be seen,
+ *  and the light green quads should be fully visible.
+ *
+ * @tc rt_x16y8_w512h384
+ *  Configures a texture target as R5G6B5 and sets the clip region to 16,8 512x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen,
+ *  and the light green quads should be fully visible.
+ *
+ * @tc rt_x8y16_w632h464
+ *  Configures a texture target as R5G6B5 and sets the clip region to 8,16 632x464, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen,
+ *  and the light green quads should be fully visible.
+ *
+ * @tc rt_x0y240_w640h240
+ *  Configures a texture target as R5G6B5 and sets the clip region to 0,240 640x240, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen,
+ *  and the light green quads should be fully visible.
+ *
+ * @tc rt_x320y240_w320h240
+ *  Configures a texture target as R5G6B5 and sets the clip region to 320,240 320x240, then clears the clipped region
+ *  and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen,
+ *  and the light green quads should be fully visible.
+ *
+ * @tc x0y0_w0h0
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x0y0_w512h384
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 512x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x0y0_w640h480
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 640x480, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x16y8_w512h384
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 16,8 512x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x8y16_w632h464
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 8,16 632x464, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x0y240_w640h240
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,240 640x240, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x320y240_w320h240
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 320,240 320x240, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x0y0_w0h0_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 0x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.
+ *
+ * @tc x0y0_w512h384_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 512x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *
+ * @tc x0y0_w640h480_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 640x480, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *
+ * @tc x16y8_w512h384_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 16,8 512x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *
+ * @tc x8y16_w632h464_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 8,16 632x464, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *
+ * @tc x0y240_w640h240_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,240 640x240, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ *
+ * @tc x320y240_w320h240_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 320,240 320x240, then clears the clipped region
+ *  and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.
+ */
 SurfaceClipTests::SurfaceClipTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Surface clip", config) {
   for (auto &rect : kTestRects) {
-    tests_[MakeTestName(false, rect)] = [this, &rect]() { Test(rect); };
-    tests_[MakeTestName(true, rect)] = [this, &rect]() { TestRenderTarget(rect); };
+    std::string name = MakeTestName(false, rect);
+    tests_[name] = [this, &rect, name]() { Test(name, rect, TestHost::SCF_R5G6B5); };
+    name += "_A8R8G8B8";
+    tests_[name] = [this, &rect, name]() { Test(name, rect, TestHost::SCF_A8R8G8B8); };
+
+    name = MakeTestName(true, rect);
+    tests_[name] = [this, &rect, name]() { TestRenderTarget(name, rect); };
   }
 
   tests_[kXemuBug420Test] = [this]() { TestXemuBug420(); };
@@ -54,12 +197,10 @@ void SurfaceClipTests::Initialize() {
   host_.SetVertexShaderProgram(shader);
 }
 
-void SurfaceClipTests::Test(const ClipRect &rect) {
-  std::string name = MakeTestName(false, rect);
-
+void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestHost::SurfaceColorFormat color_format) {
   host_.PrepareDraw(0xFC111155);
 
-  host_.SetSurfaceFormatImmediate(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
   host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
 
@@ -94,9 +235,7 @@ void SurfaceClipTests::TestXemuBug420() {
                                   host_.GetFramebufferHeight());
 }
 
-void SurfaceClipTests::TestRenderTarget(const ClipRect &rect) {
-  std::string name = MakeTestName(true, rect);
-
+void SurfaceClipTests::TestRenderTarget(const std::string &name, const ClipRect &rect) {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
   // Point the color buffer at the texture memory.

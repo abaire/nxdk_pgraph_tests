@@ -7,6 +7,10 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests behavior of NV097_SET_SURFACE_CLIP_HORIZONTAL and
+ * NV097_SET_SURFACE_CLIP_VERTICAL.
+ */
 class SurfaceClipTests : public TestSuite {
  public:
   struct ClipRect {
@@ -21,8 +25,8 @@ class SurfaceClipTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void Test(const ClipRect &rect);
-  void TestRenderTarget(const ClipRect &rect);
+  void Test(const std::string &name, const ClipRect &rect, TestHost::SurfaceColorFormat color_format);
+  void TestRenderTarget(const std::string &name, const ClipRect &rect);
 
   void TestXemuBug420();
 
