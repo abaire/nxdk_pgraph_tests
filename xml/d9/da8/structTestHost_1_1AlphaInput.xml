@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/da8/structTestHost_1_1AlphaInput" kind="struct" language="C++" prot="public">
+    <compoundname>TestHost::AlphaInput</compoundname>
+    <basecompoundref refid="d3/db1/structTestHost_1_1CombinerInput" prot="public" virt="non-virtual">TestHost::CombinerInput</basecompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/da8/structTestHost_1_1AlphaInput_1ab9afcfe82a2f51e6354f81db01f1e0e8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TestHost::AlphaInput::AlphaInput</definition>
+        <argsstring>(CombinerSource s, CombinerMapping m=MAP_UNSIGNED_IDENTITY)</argsstring>
+        <name>AlphaInput</name>
+        <qualifiedname>TestHost::AlphaInput::AlphaInput</qualifiedname>
+        <param>
+          <type>CombinerSource</type>
+          <declname>s</declname>
+        </param>
+        <param>
+          <type>CombinerMapping</type>
+          <declname>m</declname>
+          <defval>MAP_UNSIGNED_IDENTITY</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="161" column="14" bodyfile="src/test_host.h" bodystart="161" bodyend="165"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>TestHost::AlphaInput</label>
+        <link refid="d9/da8/structTestHost_1_1AlphaInput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestHost::CombinerInput</label>
+        <link refid="d3/db1/structTestHost_1_1CombinerInput"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>TestHost::AlphaInput</label>
+        <link refid="d9/da8/structTestHost_1_1AlphaInput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestHost::CombinerInput</label>
+        <link refid="d3/db1/structTestHost_1_1CombinerInput"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/test_host.h" line="160" column="3" bodyfile="src/test_host.h" bodystart="160" bodyend="166"/>
+    <listofallmembers>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a49def257fe8d44a737a9b8277517f6c6" prot="public" virt="non-virtual"><scope>TestHost::AlphaInput</scope><name>alpha</name></member>
+      <member refid="d9/da8/structTestHost_1_1AlphaInput_1ab9afcfe82a2f51e6354f81db01f1e0e8" prot="public" virt="non-virtual"><scope>TestHost::AlphaInput</scope><name>AlphaInput</name></member>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a0762521b0b5c40968605180edc921c07" prot="public" virt="non-virtual"><scope>TestHost::AlphaInput</scope><name>mapping</name></member>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a2ac27274709f7198478607072b07f424" prot="public" virt="non-virtual"><scope>TestHost::AlphaInput</scope><name>source</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

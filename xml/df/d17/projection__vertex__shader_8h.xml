@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d17/projection__vertex__shader_8h" kind="file" language="C++">
+    <compoundname>projection_vertex_shader.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes refid="da/d63/vertex__shader__program_8h" local="yes">vertex_shader_program.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <includedby refid="d1/d01/orthographic__vertex__shader_8h" local="yes">src/shaders/orthographic_vertex_shader.h</includedby>
+    <includedby refid="d8/d5f/perspective__vertex__shader_8h" local="yes">src/shaders/perspective_vertex_shader.h</includedby>
+    <includedby refid="dc/dea/projection__vertex__shader_8cpp" local="yes">src/shaders/projection_vertex_shader.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/shaders/projection_vertex_shader.h</label>
+        <link refid="df/d17/projection__vertex__shader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>map</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="6">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>src/shaders/orthographic_vertex_shader.h</label>
+        <link refid="d1/d01/orthographic__vertex__shader_8h_source"/>
+      </node>
+      <node id="3">
+        <label>src/shaders/perspective_vertex_shader.h</label>
+        <link refid="d8/d5f/perspective__vertex__shader_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/shaders/projection_vertex_shader.h</label>
+        <link refid="df/d17/projection__vertex__shader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="d2/d17/classProjectionVertexShader" prot="public">ProjectionVertexShader</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SHADERS_PROJECTION_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SHADERS_PROJECTION_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_shader_program.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="d2/d17/classProjectionVertexShader" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d2/d17/classProjectionVertexShader" kindref="compound">ProjectionVertexShader</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="dc/dfc/classVertexShaderProgram" kindref="compound">VertexShaderProgram</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><ref refid="d2/d17/classProjectionVertexShader" kindref="compound">ProjectionVertexShader</ref>(uint32_t<sp/>framebuffer_width,<sp/>uint32_t<sp/>framebuffer_height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_min<sp/>=<sp/>0,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_max<sp/>=<sp/>0x7FFF,</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_lighting<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetLightingEnabled(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{<sp/>enable_lighting_<sp/>=<sp/>enabled;<sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetUseD3DStyleViewport(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>use_d3d_style_viewport_<sp/>=<sp/>enable;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>UpdateMatrices();</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetZMin(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{<sp/>z_min_<sp/>=<sp/>val;<sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetZMax(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{<sp/>z_max_<sp/>=<sp/>val;<sp/>}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>GetZMin()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>z_min_;<sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>GetZMax()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>z_max_;<sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LookAt(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;camera_position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;look_at_point)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>y_axis{0,<sp/>1,<sp/>0,<sp/>1};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>LookAt(camera_position,<sp/>look_at_point,<sp/>y_axis);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LookAt(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;camera_position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;look_at_point,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;up);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LookTo(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;camera_position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;camera_direction,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;up);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCamera(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;rotation);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d2/d17/classProjectionVertexShader_1a80e99f76c72f690473ed21dc7e1c0e96" kindref="member">SetDirectionalLightDirection</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;direction);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d2/d17/classProjectionVertexShader_1ab65057436d14b751d5b5295c85e7e65d" kindref="member">SetDirectionalLightCastDirection</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;direction);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>&amp;GetModelMatrix()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>model_matrix_;<sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>&amp;GetViewMatrix()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>view_matrix_;<sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>&amp;GetProjectionMatrix()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>projection_matrix_;<sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>&amp;GetViewportMatrix()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>viewport_matrix_;<sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>&amp;GetProjectionViewportMatrix()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>projection_viewport_matrix_;<sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Projects<sp/>the<sp/>given<sp/>point<sp/>(on<sp/>the<sp/>CPU),<sp/>placing<sp/>the<sp/>resulting<sp/>screen<sp/>coordinates<sp/>into<sp/>`result`.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ProjectPoint(vector_t<sp/>&amp;result,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;world_point)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d2/d17/classProjectionVertexShader_1a7d3bddedb366302e508cbe22c7bff41e" kindref="member">UnprojectPoint</ref>(vector_t<sp/>&amp;result,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;screen_point)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d2/d17/classProjectionVertexShader_1a7d3bddedb366302e508cbe22c7bff41e" kindref="member">UnprojectPoint</ref>(vector_t<sp/>&amp;result,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>&amp;screen_point,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>world_z)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="d2/d17/classProjectionVertexShader_1a48de7a33eb79b03662a27d803bccab18" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d2/d17/classProjectionVertexShader_1a48de7a33eb79b03662a27d803bccab18" kindref="member">SetTransposeOnUpload</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>transpose<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{<sp/>transpose_on_upload_<sp/>=<sp/>transpose;<sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnActivate()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnLoadShader()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnLoadConstants()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>CalculateProjectionMatrix()<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>UpdateMatrices();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>CalculateViewportMatrix();</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>framebuffer_width_{0.0};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>framebuffer_height_{0.0};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_min_;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_max_;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_lighting_{</highlight><highlight class="keyword">true</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>viewport<sp/>matrix<sp/>that<sp/>matches<sp/>XDK/D3D<sp/>behavior.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_d3d_style_viewport_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>model_matrix_{};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>view_matrix_{};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>projection_matrix_{};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>viewport_matrix_{};</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>projection_viewport_matrix_{};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>composite_matrix_{};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>inverse_composite_matrix_{};</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>vector_t<sp/>camera_position_<sp/>=<sp/>{0,<sp/>0,<sp/>-2.25,<sp/>1};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>vector_t<sp/>light_direction_<sp/>=<sp/>{0,<sp/>0,<sp/>1,<sp/>1};</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>transpose_on_upload_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SHADERS_PROJECTION_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/projection_vertex_shader.h"/>
+  </compounddef>
+</doxygen>
