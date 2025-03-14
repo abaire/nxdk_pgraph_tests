@@ -866,8 +866,15 @@ std::string TestHost::SaveBackBuffer(const std::string &output_directory, const 
 
   FILE *pFile = fopen(target_file.c_str(), "wb");
   ASSERT(pFile && "Failed to open output PNG image");
-  if (fwrite(out_buf.data(), 1, out_buf.size(), pFile) != out_buf.size()) {
-    ASSERT(!"Failed to write output PNG image");
+  auto bytes_remaining = out_buf.size();
+  auto data = out_buf.data();
+  while (bytes_remaining > 0) {
+    auto bytes_written = fwrite(data, 1, bytes_remaining, pFile);
+    if (!bytes_written) {
+      ASSERT(!"Failed to write output PNG image");
+    }
+    data += bytes_written;
+    bytes_remaining -= bytes_written;
   }
   if (fclose(pFile)) {
     ASSERT(!"Failed to close output PNG image");
