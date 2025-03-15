@@ -13,6 +13,7 @@ typedef struct TextureFormatInfo {
   bool xbox_linear{true};
   bool require_conversion{false};
   const char *name{nullptr};
+  bool use_compressed_length_as_pitch{false};
 } TextureFormatInfo;
 
 extern const TextureFormatInfo kTextureFormats[];

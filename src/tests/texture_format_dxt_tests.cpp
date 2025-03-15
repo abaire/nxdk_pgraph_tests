@@ -4,23 +4,26 @@
 #include <pbkit/pbkit.h>
 
 #include <memory>
-#include <utility>
 
 #include "dds_image.h"
 #include "debug_output.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 
-static constexpr const char kAlphaDXT1[] = "D:\\dxt_images\\plasma_alpha_dxt1.dds";
-static constexpr const char kAlphaDXT3[] = "D:\\dxt_images\\plasma_alpha_dxt3.dds";
-static constexpr const char kAlphaDXT5[] = "D:\\dxt_images\\plasma_alpha_dxt5.dds";
-static constexpr const char kOpaqueDXT1[] = "D:\\dxt_images\\plasma_dxt1.dds";
-static constexpr const char kOpaqueDXT3[] = "D:\\dxt_images\\plasma_dxt3.dds";
-static constexpr const char kOpaqueDXT5[] = "D:\\dxt_images\\plasma_dxt5.dds";
+static constexpr char kAlphaDXT1[] = "D:\\dxt_images\\plasma_alpha_dxt1.dds";
+static constexpr char kAlphaDXT3[] = "D:\\dxt_images\\plasma_alpha_dxt3.dds";
+static constexpr char kAlphaDXT5[] = "D:\\dxt_images\\plasma_alpha_dxt5.dds";
+static constexpr char kOpaqueDXT1[] = "D:\\dxt_images\\plasma_dxt1.dds";
+static constexpr char kOpaqueDXT3[] = "D:\\dxt_images\\plasma_dxt3.dds";
+static constexpr char kOpaqueDXT5[] = "D:\\dxt_images\\plasma_dxt5.dds";
 
-static constexpr const char kOpaqueDXT1NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt1.dds";
-static constexpr const char kOpaqueDXT3NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt3.dds";
-static constexpr const char kOpaqueDXT5NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt5.dds";
+static constexpr char kOpaqueDXT1NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt1.dds";
+static constexpr char kOpaqueDXT3NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt3.dds";
+static constexpr char kOpaqueDXT5NonSquare[] = "D:\\dxt_images\\64x256_bands_dxt5.dds";
+
+static constexpr char kAlphaDXT1NonDivisibleByFour[] = "D:\\dxt_images\\plasma_alpha_28x28_dxt1.dds";
+static constexpr char kAlphaDXT3NonDivisibleByFour[] = "D:\\dxt_images\\plasma_alpha_28x28_dxt3.dds";
+static constexpr char kAlphaDXT5NonDivisibleByFour[] = "D:\\dxt_images\\plasma_alpha_28x28_dxt5.dds";
 
 struct TestCase {
   const char *filename;
@@ -36,7 +39,10 @@ static constexpr TestCase kTestCases[] = {
     {kOpaqueDXT5, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
 };
 
-static constexpr TestCase kNonSquareTestCases[] = {
+static constexpr TestCase kMipmapOnlyTestCases[] = {
+    {kAlphaDXT1NonDivisibleByFour, TextureFormatDXTTests::CompressedTextureFormat::DXT1},
+    {kAlphaDXT3NonDivisibleByFour, TextureFormatDXTTests::CompressedTextureFormat::DXT3},
+    {kAlphaDXT5NonDivisibleByFour, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
     {kOpaqueDXT1NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT1},
     {kOpaqueDXT3NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT3},
     {kOpaqueDXT5NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
@@ -53,7 +59,7 @@ TextureFormatDXTTests::TextureFormatDXTTests(TestHost &host, std::string output_
     };
   }
 
-  for (auto &test : kNonSquareTestCases) {
+  for (auto &test : kMipmapOnlyTestCases) {
     tests_[MakeTestName(test.filename, test.format, true)] = [this, &test]() {
       TestMipmap(test.filename, test.format);
     };
@@ -99,7 +105,16 @@ void TextureFormatDXTTests::Test(const char *filename, CompressedTextureFormat t
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));
-  texture_stage.SetTextureDimensions(data->width, data->height);
+
+  // Compressed textures use the next power of 2 for their texture dimensions
+  uint32_t u = NearestEnclosingPowerOf2(data->width);
+  uint32_t v = NearestEnclosingPowerOf2(data->height);
+  texture_stage.SetTextureDimensions(u, v);
+  texture_stage.SetCompressedImageLength(data->compressed_height * data->pitch);
+
+  texture_stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
+  texture_stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
+
   host_.SetRawTexture(data->data.data(), data->compressed_width, data->compressed_height, data->depth, data->pitch,
                       data->bytes_per_pixel, false);
   host_.SetupTextureStages();
@@ -161,7 +176,15 @@ void TextureFormatDXTTests::TestMipmap(const char *filename,
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));
-  texture_stage.SetTextureDimensions(primary_image->width, primary_image->height);
+  // Compressed textures use the next power of 2 for their texture dimensions
+  uint32_t u = NearestEnclosingPowerOf2(primary_image->width);
+  uint32_t v = NearestEnclosingPowerOf2(primary_image->height);
+  texture_stage.SetTextureDimensions(u, v);
+  texture_stage.SetCompressedImageLength(primary_image->compressed_height * primary_image->pitch);
+
+  texture_stage.SetUWrap(TextureStage::WRAP_REPEAT, false);
+  texture_stage.SetVWrap(TextureStage::WRAP_REPEAT, false);
+
   texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD);
 
   texture_stage.SetMipMapLevels(img.NumLevels());

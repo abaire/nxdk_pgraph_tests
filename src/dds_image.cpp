@@ -1,7 +1,7 @@
 // Partial implementation of DDS file loading.
 //
 // See https://docs.microsoft.com/en-us/windows/win32/direct3ddds/dx-graphics-dds-pguide
-// Use https://developer.nvidia.com/gpu-accelerated-texture-compression to create files
+// Use nvcompress from https://developer.nvidia.com/gpu-accelerated-texture-compression to create files
 
 #include "dds_image.h"
 

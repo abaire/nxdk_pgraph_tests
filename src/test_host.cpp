@@ -1743,3 +1743,21 @@ void TestHost::DrawCheckerboardUnproject(uint32_t first_color, uint32_t second_c
 
   RestoreFinalCombinerState(combiner_state);
 }
+
+uint32_t NearestEnclosingPowerOf2(uint32_t value) {
+  if (!(value & (value - 1))) {
+    return value;
+  }
+
+  if (!value) {
+    return 0;
+  }
+
+  uint32_t pow = 1;
+  while (value) {
+    pow <<= 1;
+    value >>= 1;
+  }
+
+  return pow;
+}

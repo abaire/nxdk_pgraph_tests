@@ -40,6 +40,9 @@ constexpr uint32_t kNoStrideOverride = 0xFFFFFFFF;
   (((uint32_t)((float_vals)[3] * 255.0f) << 24) + ((uint32_t)((float_vals)[2] * 255.0f) << 16) + \
    ((uint32_t)((float_vals)[1] * 255.0f) << 8) + ((uint32_t)((float_vals)[0] * 255.0f)))
 
+//! Returns the lowest power of 2 that is >= value.
+uint32_t NearestEnclosingPowerOf2(uint32_t value);
+
 /**
  * Provides utility methods for use by TestSuite subclasses.
  */

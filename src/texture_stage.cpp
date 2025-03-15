@@ -74,9 +74,9 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   // NV097_SET_TEXTURE_FORMAT
   p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FORMAT(stage_), format);
 
-  uint32_t pitch_param = (format_.xbox_bpp * width_ / 8) << 16;
+  uint32_t pitch = format_.use_compressed_length_as_pitch ? compressed_image_length_ : (format_.xbox_bpp * width_ / 8);
   // NV097_SET_TEXTURE_CONTROL1
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch_param);
+  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch << 16);
 
   uint32_t size_param = (width_ << 16) | (height_ & 0xFFFF);
   // NV097_SET_TEXTURE_IMAGE_RECT

@@ -8,6 +8,9 @@
 
 struct TextureFormatInfo;
 
+/**
+ * Tests processing of ST3-compressed textures in various formats.
+ */
 class TextureFormatDXTTests : public TestSuite {
  public:
   enum class CompressedTextureFormat {

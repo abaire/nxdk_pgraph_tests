@@ -154,6 +154,8 @@ class TextureStage {
     size_p_ = depth;
   }
 
+  void SetCompressedImageLength(uint32_t length = 0) { compressed_image_length_ = length; }
+
   uint32_t GetDimensionality() const;
 
   void SetFilter(uint32_t lod_bias = 0, ConvolutionKernel kernel = K_QUINCUNX, MinFilter min = MIN_BOX_LOD0,
@@ -215,6 +217,7 @@ class TextureStage {
   uint32_t height_{0};
   uint32_t depth_{0};
   uint32_t texture_memory_offset_{0};
+  uint32_t compressed_image_length_{0};
 
   uint32_t size_u_{0};
   uint32_t size_v_{0};
