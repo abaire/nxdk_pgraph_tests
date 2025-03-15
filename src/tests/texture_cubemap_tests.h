@@ -26,7 +26,7 @@ class TextureCubemapTests : public TestSuite {
   };
 
  private:
-  void TestCubemap();
+  void TestCubemap(float q_coord);
   void TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping);
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
   void TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, ReflectTest mode);
