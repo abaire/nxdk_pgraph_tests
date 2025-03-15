@@ -30,6 +30,8 @@ class SurfaceClipTests : public TestSuite {
 
   void TestXemuBug420();
 
+  void TestDebugTextIsClipped();
+
   void DrawTestImage(const ClipRect &rect);
 };
 
