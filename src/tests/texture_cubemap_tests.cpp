@@ -114,6 +114,19 @@ static const DotProductMappedTest kDotReflectDiffuseTests[] = {
     {"DotReflectDiffuse_HiLoHemi", 0x777},
 };
 
+static std::string MakeCubemapTestName(float q_coord) {
+  char q_str[32] = {0};
+
+  if (*(uint32_t *)&q_coord == 0x80000000) {
+    // snprintf doesn't handle sign of negative zero
+    snprintf(q_str, sizeof(q_str), "-0.0");
+  } else {
+    snprintf(q_str, sizeof(q_str), "%.01f", q_coord);
+  }
+
+  return std::string(kCubemapTest) + "_q" + q_str;
+}
+
 /**
  * Initializes the test suite and creates test cases.
  *
@@ -243,7 +256,9 @@ static const DotProductMappedTest kDotReflectDiffuseTests[] = {
  */
 TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Texture cubemap", config) {
-  tests_[kCubemapTest] = [this]() { TestCubemap(); };
+  for (auto q_coord : {-INFINITY, -1.0f, -0.0f, 0.0f, 1.0f, INFINITY}) {
+    tests_[MakeCubemapTestName(q_coord)] = [this, q_coord]() { TestCubemap(q_coord); };
+  }
 
   for (auto &test : kDotSTRCubeTests) {
     tests_[test.name] = [this, &test] { TestDotSTRCubemap(test.name, test.dot_rgbmapping); };
@@ -335,7 +350,7 @@ void TextureCubemapTests::Initialize() {
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
 }
 
-void TextureCubemapTests::TestCubemap() {
+void TextureCubemapTests::TestCubemap(float q_coord) {
   host_.SetTextureStageEnabled(0, false);
   host_.SetTextureStageEnabled(1, false);
   host_.SetTextureStageEnabled(2, false);
@@ -351,7 +366,7 @@ void TextureCubemapTests::TestCubemap() {
 
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
-  auto draw = [this, &shader](float x, float y, float z, float r_x, float r_y, float r_z) {
+  auto draw = [this, &shader, q_coord](float x, float y, float z, float r_x, float r_y, float r_z) {
     matrix4_t matrix;
     vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
     vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
@@ -375,7 +390,7 @@ void TextureCubemapTests::TestCubemap() {
 
     for (auto index : kCubeIndices) {
       const float *vertex = kCubeVertices[index];
-      host_.SetTexCoord3(vertex[0], vertex[1], vertex[2], 1.0f);
+      host_.SetTexCoord3(vertex[0], vertex[1], vertex[2], q_coord);
       host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
     }
 
@@ -390,9 +405,14 @@ void TextureCubemapTests::TestCubemap() {
   draw(1.5f, 0.0f, z, M_PI * 1.25f, M_PI * 0.25f, 0.0f);
 
   pb_print("%s\n", kCubemapTest);
+  if (*(uint32_t *)&q_coord == 0x80000000) {
+    pb_print("q=-0.0f\n");
+  } else {
+    pb_print("q=%.01f\n", q_coord);
+  }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kCubemapTest);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeCubemapTestName(q_coord));
 }
 
 void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping) {
