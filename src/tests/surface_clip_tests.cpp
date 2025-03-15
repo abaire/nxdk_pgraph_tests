@@ -34,7 +34,8 @@ static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
 };
 // clang-format on
 
-static constexpr const char kXemuBug420Test[] = "XemuBug420";
+static constexpr char kXemuBug420Test[] = "XemuBug420";
+static constexpr char kTestDebugTextIsClipped[] = "DebugTextShouldClip";
 
 static std::string MakeTestName(bool render_target, const SurfaceClipTests::ClipRect &rect) {
   char buffer[32];
@@ -46,6 +47,9 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
 /**
  * Initializes the test suite and creates test cases.
  *
+ * @tc DebugTextShouldClip
+ *  Sets a tiny clip area and renders debug text. No text should be visible.
+ *
  * @tc XemuBug420
  *  Reproduction case for xemu#420. A 32-bit surface is created, then immediately changed to a 16-bit one, followed by a
  *  region clear. This caused an assertion in versions before xemu#919
@@ -53,8 +57,7 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
  * @tc rt_x0y0_w0h0
  *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and
  *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
- *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No geometry should be
- *  seen, since width and height of the clip region are 0.
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.
  *
  * @tc rt_x0y0_w512h384
  *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 512x384, then clears the clipped region and
@@ -95,7 +98,7 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
  * @tc x0y0_w0h0
  *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and
  *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
- *  green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.
+ *  green quads along the clip boundary.
  *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
  *  pink.
  *
@@ -189,6 +192,8 @@ SurfaceClipTests::SurfaceClipTests(TestHost &host, std::string output_dir, const
   }
 
   tests_[kXemuBug420Test] = [this]() { TestXemuBug420(); };
+
+  tests_[kTestDebugTextIsClipped] = [this]() { TestDebugTextIsClipped(); };
 }
 
 void SurfaceClipTests::Initialize() {
@@ -206,8 +211,14 @@ void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestH
 
   DrawTestImage(rect);
 
+  host_.PBKitBusyWait();
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
+
+  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
@@ -227,10 +238,32 @@ void SurfaceClipTests::TestXemuBug420() {
   // `(pg->color_binding->width == pg->zeta_binding->width) && (pg->color_binding->height == pg->zeta_binding->height)'
   host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
 
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
   pb_print("%s", kXemuBug420Test);
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemuBug420Test);
+
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
+}
+
+void SurfaceClipTests::TestDebugTextIsClipped() {
+  host_.PrepareDraw(0xFC111155);
+
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight(), false, 0.f, 240.f, 640.f, 240.f);
+
+  host_.ClearDepthStencilRegion(0xFFFFFF, 0x0);
+
+  pb_printat(0, 0, "%s", kTestDebugTextIsClipped);
+  pb_printat(1, 0, "This text should be clipped and invisible.");
+  pb_printat(12, 0, "%s", kTestDebugTextIsClipped);
+  pb_printat(13, 0, "The text above midscreen should be clipped and invisible.");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestDebugTextIsClipped);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
 }
