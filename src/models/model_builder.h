@@ -40,8 +40,7 @@ class SolidColorModelBuilder : public ModelBuilder {
   void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices) override;
 
   //! Populates the given VertexBuffer with transformed model data.
-  virtual void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices,
-                                    const float *transformation) override;
+  void PopulateVertexBuffer(const std::shared_ptr<VertexBuffer> &vertices, const float *transformation) override;
 
  private:
   void ApplyColors(const std::shared_ptr<VertexBuffer> &vertices) const;
