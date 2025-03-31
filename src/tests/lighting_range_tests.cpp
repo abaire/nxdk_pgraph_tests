@@ -184,7 +184,7 @@ void LightingRangeTests::Test(const std::string& name, std::shared_ptr<Light> li
   host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE | host_.SPECULAR);
 
   static constexpr float kQuadWidth = 128.f;
-  static constexpr float kQuadHeight = 256.f;
+  static constexpr float kQuadHeight = 128.f;
 
   auto unproject = [this](vector_t& world_point, float x, float y, float z) {
     vector_t screen_point{x, y, z, 1.f};
@@ -224,12 +224,13 @@ void LightingRangeTests::Test(const std::string& name, std::shared_ptr<Light> li
     host_.End();
   };
 
-  draw_quad(24.f, 64.f, -2.f);
-  draw_quad(host_.GetFramebufferWidthF() - (24.f + kQuadWidth), 64.f, 2.f);
+  draw_quad(24.f, 64.f, 0.99f);
+  draw_quad(host_.GetFramebufferWidthF() - (24.f + kQuadWidth), 64.f, 1.f);
+  draw_quad(host_.GetFramebufferWidthF() - (24.f + kQuadWidth), 256.f, 1.01f);
 
   pb_print("%s\n", name.c_str());
-  pb_printat(12, 4, "z=-2");
-  pb_printat(12, 53, "z=2");
+  pb_printat(12, 4, "z=0.99");
+  pb_printat(12, 53, "z=1.01");
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
