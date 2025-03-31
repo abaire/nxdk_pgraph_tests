@@ -1,6 +1,8 @@
 #ifndef NXDK_PGRAPH_TESTS_MATERIAL_COLOR_SOURCE_TESTS_H
 #define NXDK_PGRAPH_TESTS_MATERIAL_COLOR_SOURCE_TESTS_H
 
+#include <xbox_math_types.h>
+
 #include <memory>
 #include <vector>
 
@@ -9,7 +11,10 @@
 class TestHost;
 class VertexBuffer;
 
-// Tests behavior when lighting is enabled and color components are requested from various sources.
+/**
+ * Tests behavior when lighting is enabled and color components are requested from various sources. Also tests the
+ * behavior of non-zero NV097_SET_MATERIAL_EMISSION values.
+ */
 class MaterialColorSourceTests : public TestSuite {
  public:
   enum SourceMode {
@@ -24,15 +29,9 @@ class MaterialColorSourceTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void CreateGeometry();
-  void Test(SourceMode source_mode);
-  static std::string MakeTestName(SourceMode source_mode);
+  void Test(const std::string& name, SourceMode source_mode, const XboxMath::vector_t& material_emission);
 
- private:
-  std::shared_ptr<VertexBuffer> diffuse_buffer_;
-  std::shared_ptr<VertexBuffer> specular_buffer_;
-  std::shared_ptr<VertexBuffer> emissive_buffer_;
-  std::shared_ptr<VertexBuffer> ambient_buffer_;
+  static std::string MakeTestName(SourceMode source_mode);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_MATERIAL_COLOR_SOURCE_TESTS_H
