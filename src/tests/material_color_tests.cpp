@@ -206,6 +206,7 @@ void MaterialColorTests::Test(TestConfig config) {
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
   p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
 
+  // Setup colors similar to XDK behavior.
   float r, g, b;
 
   // NV097_SET_SCENE_AMBIENT_COLOR is a combination of scene ambient (D3DRS_AMBIENT), material ambient, and material
@@ -240,7 +241,6 @@ void MaterialColorTests::Test(TestConfig config) {
   p = pb_push3f(p, NV097_SET_LIGHT_SPECULAR_COLOR, r, g, b);
 
   // material.a // Ignored? Maybe it goes into NV097_SET_SPECULAR_PARAMS?
-  // material.Power // Maybe it goes into NV097_SET_SPECULAR_PARAMS?
   // material.Power = 125.0f;
   p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xBF78DF9C);       // -0.972162
   p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 4, 0xC04D3531);   // -3.20637
@@ -259,7 +259,8 @@ void MaterialColorTests::Test(TestConfig config) {
   p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 20, 0x401C1BCE);  // 2.4392
  */
 
-  // It seems like material emission is already incorporated into scene_ambient_color and is set to 0.
+  // Material emission is already incorporated into scene_ambient_color above and is set to 0. In cases where ambient
+  // or emissive is taken from vertex colors rather than the material, this would be non-zero.
   p = pb_push3f(p, NV097_SET_MATERIAL_EMISSION, 0, 0, 0);
 
   pb_end(p);
