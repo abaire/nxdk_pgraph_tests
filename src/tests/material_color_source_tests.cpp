@@ -30,8 +30,8 @@ static constexpr vector_t kMaterialDiffuse{0.f, 0.4f, 0.f, 0.f};
 static constexpr vector_t kMaterialSpecular{0.4f, 0.f, 0.f, 0.f};
 static constexpr vector_t kMaterialEmissive{0.f, 0.f, 0.4f, 0.f};
 
-static constexpr float kQuadWidth = 192.f;
-static constexpr float kQuadHeight = 128.f;
+static constexpr float kQuadWidth = 128.f;
+static constexpr float kQuadHeight = 96.f;
 
 void MaterialColorSourceTests::Initialize() {
   TestSuite::Initialize();
@@ -59,71 +59,71 @@ void MaterialColorSourceTests::Initialize() {
  * Initializes the test suite and creates test cases.
  *
  * @tc FromMaterial
- *   Draws 4 quads with all colors taken from the material settings.
+ *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
  * @tc FromVertexDiffuse
- *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
  * @tc FromVertexSpecular
- *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
  * @tc FromMaterial_matemission0_15
- *   Draws 4 quads with all colors taken from the material settings.
+ *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
  * @tc FromVertexDiffuse_matemission0_15
- *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
  * @tc FromVertexSpecular_matemission0_15
- *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
  * @tc FromMaterial_matemission0_5
- *   Draws 4 quads with all colors taken from the material settings.
+ *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
  * @tc FromVertexDiffuse_matemission0_5
- *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
  * @tc FromVertexSpecular_matemission0_5
- *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
  * @tc FromMaterial_matemission1_0
- *   Draws 4 quads with all colors taken from the material settings.
+ *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
  * @tc FromVertexDiffuse_matemission1_0
- *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
  * @tc FromVertexSpecular_matemission1_0
- *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
@@ -343,11 +343,11 @@ static void DrawLegend(TestHost& host, float left, float top, float right, float
 
   pb_printat(4, 0, "vD");
   pb_printat(5, 0, "vS");
-  pb_printat(7, 0, "sA");
-  pb_printat(8, 0, "mD");
-  pb_printat(10, 0, "mS");
-  pb_printat(11, 0, "mE");
-  pb_printat(13, 0, "mA");
+  pb_printat(6, 0, "sA");
+  pb_printat(7, 0, "mD");
+  pb_printat(8, 0, "mS");
+  pb_printat(9, 0, "mE");
+  pb_printat(10, 0, "mA");
 }
 
 void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_mode,
@@ -374,75 +374,48 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
 
   SetLightAndMaterial(material_emission);
 
-  auto p = pb_begin();
-  switch (source_mode) {
-    case SOURCE_MATERIAL:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-      break;
+  static constexpr auto kLeftColumn = 126;
+  static constexpr auto kMidColumn = kLeftColumn + kQuadWidth + 4.f;
+  static constexpr auto kRightColumn = kMidColumn + kQuadWidth + 4.f;
+  static constexpr auto kTopRow = 100.f;
+  static constexpr auto kMidRow = kTopRow + kQuadHeight + 4.f;
+  static constexpr auto kBottomRow = kMidRow + kQuadHeight + 4.f;
 
-    case SOURCE_DIFFUSE:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE);
-      break;
+  auto render_quad = [this, source_mode](float left, float top, bool diffuse, bool specular, bool emissive,
+                                         bool ambient) {
+    uint32_t source_selector = NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL;
 
-    case SOURCE_SPECULAR:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR);
-      break;
-  }
-  pb_end(p);
-  DrawQuad(host_, 126.f, 114.f, 0.f);
+    if (source_mode == SOURCE_DIFFUSE) {
+      source_selector += NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE * diffuse;
+      source_selector += NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_DIFFUSE * specular;
+      source_selector += NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_DIFFUSE * emissive;
+      source_selector += NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_DIFFUSE * ambient;
+    } else if (source_mode == SOURCE_SPECULAR) {
+      source_selector += NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR * diffuse;
+      source_selector += NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_SPECULAR * specular;
+      source_selector += NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_SPECULAR * emissive;
+      source_selector += NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR * ambient;
+    }
 
-  p = pb_begin();
-  switch (source_mode) {
-    case SOURCE_MATERIAL:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-      break;
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, source_selector);
+    pb_end(p);
+    DrawQuad(host_, left, top, 0.f);
+  };
 
-    case SOURCE_DIFFUSE:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_DIFFUSE);
-      break;
+  render_quad(kLeftColumn, kTopRow, true, false, false, false);
+  render_quad(kMidColumn, kTopRow, true, true, false, false);
+  render_quad(kRightColumn, kTopRow, false, true, false, false);
 
-    case SOURCE_SPECULAR:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_SPECULAR);
-      break;
-  }
-  pb_end(p);
-  DrawQuad(host_, 130.f + kQuadWidth, 114.f, 0.f);
+  render_quad(kLeftColumn, kMidRow, true, false, true, false);
+  render_quad(kMidColumn, kMidRow, true, true, true, true);
+  render_quad(kRightColumn, kMidRow, false, true, false, true);
 
-  p = pb_begin();
-  switch (source_mode) {
-    case SOURCE_MATERIAL:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-      break;
+  render_quad(kLeftColumn, kBottomRow, false, false, true, false);
+  render_quad(kMidColumn, kBottomRow, false, false, true, true);
+  render_quad(kRightColumn, kBottomRow, false, false, false, true);
 
-    case SOURCE_DIFFUSE:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_DIFFUSE);
-      break;
-
-    case SOURCE_SPECULAR:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_SPECULAR);
-      break;
-  }
-  pb_end(p);
-  DrawQuad(host_, 126.f, 114.f + kQuadHeight + 4.f, 0.f);
-
-  p = pb_begin();
-  switch (source_mode) {
-    case SOURCE_MATERIAL:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-      break;
-
-    case SOURCE_DIFFUSE:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_DIFFUSE);
-      break;
-
-    case SOURCE_SPECULAR:
-      p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR);
-      break;
-  }
-  pb_end(p);
-  DrawQuad(host_, 130.f + kQuadWidth, 114.f + kQuadHeight + 4.f, 0.f);
-
-  DrawLegend(host_, 16.f, 114.4, 126.f - 16.f, 118.4 + kQuadHeight * 2.f);
+  DrawLegend(host_, 16.f, 120.f, 126.f - 16.f, 296.f);
 
   pb_printat(0, 0, "Src: %s\n", name.c_str());
   pb_printat(2, 17, (char*)"Diffuse");
