@@ -73,60 +73,142 @@ void MaterialColorSourceTests::Initialize() {
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
- * @tc FromMaterial_matemission0_15
+ * @tc FromMaterial_me0_15
  *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
- * @tc FromVertexDiffuse_matemission0_15
+ * @tc FromVertexDiffuse_me0_15
  *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
- * @tc FromVertexSpecular_matemission0_15
+ * @tc FromVertexSpecular_me0_15
  *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
- * @tc FromMaterial_matemission0_5
+ * @tc FromMaterial_me0_5
  *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
- * @tc FromVertexDiffuse_matemission0_5
+ * @tc FromVertexDiffuse_me0_5
  *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
- * @tc FromVertexSpecular_matemission0_5
+ * @tc FromVertexSpecular_me0_5
  *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
- * @tc FromMaterial_matemission1_0
+ * @tc FromMaterial_me1_0
  *   Draws 9 quads with all colors taken from the material settings.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
- * @tc FromVertexDiffuse_matemission1_0
+ * @tc FromVertexDiffuse_me1_0
  *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
- * @tc FromVertexSpecular_matemission1_0
+ * @tc FromVertexSpecular_me1_0
  *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
  *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
  *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
+ *
+ * @tc FromMaterial_2light
+ *   Draws 9 quads with all colors taken from the material settings.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexDiffuse_2light
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexSpecular_2light
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromMaterial_me0_15_2light
+ *   Draws 9 quads with all colors taken from the material settings.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexDiffuse_me0_15_2light
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexSpecular_me0_15_2light
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromMaterial_me0_5_2light
+ *   Draws 9 quads with all colors taken from the material settings.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexDiffuse_me0_5_2light
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexSpecular_me0_5_2light
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromMaterial_me1_0_2light
+ *   Draws 9 quads with all colors taken from the material settings.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexDiffuse_me1_0_2light
+ *   Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
+ *
+ * @tc FromVertexSpecular_me1_0_2light
+ *   Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
+ *   There are two lights with all colors set to (0.25, 0.25, 0.25).
  *
  */
 MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string output_dir, const Config& config)
@@ -138,22 +220,43 @@ MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string o
       this->Test(name, source, material_emission);
     };
 
-    auto new_name = name + "_matemission0_15";
+    auto new_name = name + "_2light";
+    tests_[new_name] = [this, source, new_name]() {
+      vector_t material_emission{0.f, 0.f, 0.f, 0.f};
+      this->Test(new_name, source, material_emission, 2);
+    };
+
+    new_name = name + "_me0_15";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.15f, 0.15f, 0.15f, 0.f};
       this->Test(new_name, source, material_emission);
     };
+    new_name += "_2light";
+    tests_[new_name] = [this, source, new_name]() {
+      vector_t material_emission{0.15f, 0.15f, 0.15f, 0.f};
+      this->Test(new_name, source, material_emission, 2);
+    };
 
-    new_name = name + "_matemission0_5";
+    new_name = name + "_me0_5";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.5f, 0.5f, 0.5f, 0.f};
       this->Test(new_name, source, material_emission);
     };
+    new_name += "_2light";
+    tests_[new_name] = [this, source, new_name]() {
+      vector_t material_emission{0.5f, 0.5f, 0.5f, 0.f};
+      this->Test(new_name, source, material_emission, 2);
+    };
 
-    new_name = name + "_matemission1_0";
+    new_name = name + "_me1_0";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{1.f, 1.f, 1.f, 1.f};
       this->Test(new_name, source, material_emission);
+    };
+    new_name += "_2light";
+    tests_[new_name] = [this, source, new_name]() {
+      vector_t material_emission{1.f, 1.f, 1.f, 1.f};
+      this->Test(new_name, source, material_emission, 2);
     };
   }
 }
@@ -212,20 +315,37 @@ static void SetLightAndMaterial(const vector_t& material_emission) {
   pb_end(p);
 }
 
-static uint32_t SetupLights(TestHost& host) {
-  DirectionalLight light(0, kDirectionalLightDir);
-  light.SetAmbient(kLightAmbientColor);
-  light.SetDiffuse(kLightDiffuseColor);
-  light.SetSpecular(kLightSpecularColor);
+static uint32_t SetupLights(TestHost& host, uint32_t num_lights) {
   vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
   vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
 
   vector_t look_dir{0.f, 0.f, 0.f, 1.f};
   VectorSubtractVector(at, eye, look_dir);
   VectorNormalize(look_dir);
-  light.Commit(host, look_dir);
 
-  return light.light_enable_mask();
+  uint32_t light_enable_mask = 0;
+
+  vector_t ambient{kLightAmbientColor[0], kLightAmbientColor[1], kLightAmbientColor[2], kLightAmbientColor[3]};
+  vector_t diffuse{kLightDiffuseColor[0], kLightDiffuseColor[1], kLightDiffuseColor[2], kLightDiffuseColor[3]};
+  vector_t specular{kLightSpecularColor[0], kLightSpecularColor[1], kLightSpecularColor[2], kLightSpecularColor[3]};
+  if (num_lights > 1) {
+    for (auto i = 0; i < 3; ++i) {
+      ambient[i] *= 0.25f;
+      diffuse[i] *= 0.25f;
+      specular[i] *= 0.25f;
+    }
+  }
+
+  for (uint32_t i = 0; i < num_lights; ++i) {
+    DirectionalLight light(i, kDirectionalLightDir);
+    light.SetAmbient(ambient);
+    light.SetDiffuse(diffuse);
+    light.SetSpecular(specular);
+    light.Commit(host, look_dir);
+    light_enable_mask |= light.light_enable_mask();
+  }
+
+  return light_enable_mask;
 }
 
 static void Unproject(vector_t& world_point, TestHost& host, float x, float y, float z) {
@@ -350,14 +470,14 @@ static void DrawLegend(TestHost& host, float left, float top, float right, float
   pb_printat(10, 0, "mA");
 }
 
-void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_mode,
-                                    const vector_t& material_emission) {
+void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_mode, const vector_t& material_emission,
+                                    uint32_t num_lights) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
   host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 20);
 
-  auto light_mode_bitvector = SetupLights(host_);
+  auto light_mode_bitvector = SetupLights(host_, num_lights);
 
   {
     auto p = pb_begin();
