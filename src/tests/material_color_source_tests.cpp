@@ -18,79 +18,114 @@ static constexpr vector_t kLightAmbientColor{1.f, 1.f, 1.f, 0.f};
 static constexpr vector_t kLightDiffuseColor{1.f, 1.f, 1.f, 0.f};
 static constexpr vector_t kLightSpecularColor{1.f, 1.f, 1.f, 0.f};
 
+// Colors should be chosen such that the brightest possible combination is not oversaturated.
 static constexpr float kMaterialAlpha = 0.75f;
-static constexpr vector_t kVertexDiffuse{0.f, 0.5f, 0.75f, 0.25f};
-static constexpr vector_t kVertexSpecular{0.75f, 0.5f, 0.f, 0.25f};
+static constexpr vector_t kSceneAmbient{0.2f, 0.2f, 0.2f, 1.f};
+
+static constexpr vector_t kVertexDiffuse{0.1f, 0.4f, 0.1f, 0.25f};
+static constexpr vector_t kVertexSpecular{0.4f, 0.1f, 0.1f, 0.25f};
+
+static constexpr vector_t kMaterialAmbient{0.1f, 0.1f, 0.1f, 0.f};
+static constexpr vector_t kMaterialDiffuse{0.f, 0.4f, 0.f, 0.f};
+static constexpr vector_t kMaterialSpecular{0.4f, 0.f, 0.f, 0.f};
+static constexpr vector_t kMaterialEmissive{0.f, 0.f, 0.4f, 0.f};
 
 static constexpr float kQuadWidth = 192.f;
 static constexpr float kQuadHeight = 128.f;
 
-struct MaterialColors {
-  Color diffuse;
-  Color specular;
-  Color ambient;
-  Color emissive;
-  float specular_power{0.0f};
-};
+void MaterialColorSourceTests::Initialize() {
+  TestSuite::Initialize();
 
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_CONTROL0, NV097_SET_CONTROL0_TEXTURE_PERSPECTIVE_ENABLE);
+    pb_end(p);
+  }
+
+  host_.SetCombinerControl(1);
+
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
+                          false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
+                          /* specular_clamp */ true);
+}
 /**
  * Initializes the test suite and creates test cases.
  *
  * @tc FromMaterial
  *   Draws 4 quads with all colors taken from the material settings.
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
  * @tc FromVertexDiffuse
- *   Draws 4 quads with all colors taken from the vertex diffuse color (1, 0.5, 0, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
  * @tc FromVertexSpecular
- *   Draws 4 quads with all colors taken from the vertex specular color (0, 0.5, 1, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *
  * @tc FromMaterial_matemission0_15
  *   Draws 4 quads with all colors taken from the material settings.
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
  * @tc FromVertexDiffuse_matemission0_15
- *   Draws 4 quads with all colors taken from the vertex diffuse color (1, 0.5, 0, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
  * @tc FromVertexSpecular_matemission0_15
- *   Draws 4 quads with all colors taken from the vertex specular color (0, 0.5, 1, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).
  *
  * @tc FromMaterial_matemission0_5
  *   Draws 4 quads with all colors taken from the material settings.
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
  * @tc FromVertexDiffuse_matemission0_5
- *   Draws 4 quads with all colors taken from the vertex diffuse color (1, 0.5, 0, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
  * @tc FromVertexSpecular_matemission0_5
- *   Draws 4 quads with all colors taken from the vertex specular color (0, 0.5, 1, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).
  *
  * @tc FromMaterial_matemission1_0
  *   Draws 4 quads with all colors taken from the material settings.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
  * @tc FromVertexDiffuse_matemission1_0
- *   Draws 4 quads with all colors taken from the vertex diffuse color (1, 0.5, 0, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
  * @tc FromVertexSpecular_matemission1_0
- *   Draws 4 quads with all colors taken from the vertex specular color (0, 0.5, 1, 0.25).
- *   Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both.
+ *   Draws 4 quads with all colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}.
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *
  */
@@ -123,30 +158,7 @@ MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string o
   }
 }
 
-void MaterialColorSourceTests::Initialize() {
-  TestSuite::Initialize();
-
-  host_.SetVertexShaderProgram(nullptr);
-  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-
-  {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTROL0, NV097_SET_CONTROL0_TEXTURE_PERSPECTIVE_ENABLE);
-    pb_end(p);
-  }
-
-  host_.SetCombinerControl(1);
-
-  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
-  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
-
-  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
-                          false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
-                          /* specular_clamp */ true);
-}
-
-static void SetCombiner(TestHost& host, bool diffuse, bool specular) {
+static void SetCombiner(TestHost& host, bool diffuse, bool specular, bool force_opaque = false) {
   auto diffuse_multiplier = diffuse ? TestHost::MAP_UNSIGNED_INVERT : TestHost::MAP_UNSIGNED_IDENTITY;
   auto specular_multiplier = specular ? TestHost::MAP_UNSIGNED_INVERT : TestHost::MAP_UNSIGNED_IDENTITY;
 
@@ -154,13 +166,18 @@ static void SetCombiner(TestHost& host, bool diffuse, bool specular) {
                              false, diffuse_multiplier, TestHost::SRC_SPECULAR, false, TestHost::MAP_UNSIGNED_IDENTITY,
                              TestHost::SRC_ZERO, false, specular_multiplier);
 
-  host.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO, false,
-                             diffuse_multiplier, TestHost::SRC_SPECULAR, true, TestHost::MAP_UNSIGNED_IDENTITY,
-                             TestHost::SRC_ZERO, false, specular_multiplier);
+  if (force_opaque) {
+    host.SetInputAlphaCombiner(0, TestHost::SRC_ZERO, true, TestHost::MAP_UNSIGNED_INVERT, TestHost::SRC_ZERO, true,
+                               TestHost::MAP_UNSIGNED_INVERT, TestHost::SRC_ZERO, true, TestHost::MAP_UNSIGNED_INVERT,
+                               TestHost::SRC_ZERO, true, TestHost::MAP_UNSIGNED_INVERT);
+  } else {
+    host.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                               false, diffuse_multiplier, TestHost::SRC_SPECULAR, true, TestHost::MAP_UNSIGNED_IDENTITY,
+                               TestHost::SRC_ZERO, false, specular_multiplier);
+  }
 }
 
-static void SetLightAndMaterial(const Color& scene_ambient, const MaterialColors& material,
-                                const vector_t& material_emission) {
+static void SetLightAndMaterial(const vector_t& material_emission) {
   auto p = pb_begin();
 
   float r, g, b;
@@ -168,15 +185,15 @@ static void SetLightAndMaterial(const Color& scene_ambient, const MaterialColors
   // This intentionally departs from how the XDK composes colors to make it easier to reason about how various commands
   // impact the final color. See material_color_tests for XDK approximation.
 
-  r = scene_ambient.r + material.emissive.r;
-  g = scene_ambient.g + material.emissive.g;
-  b = scene_ambient.b + material.emissive.b;
+  r = kSceneAmbient[0] + kMaterialEmissive[0];
+  g = kSceneAmbient[1] + kMaterialEmissive[1];
+  b = kSceneAmbient[2] + kMaterialEmissive[2];
   p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, r, g, b);
 
   p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, kMaterialAlpha);
-  p = pb_push3f(p, NV097_SET_LIGHT_AMBIENT_COLOR, material.ambient.r, material.ambient.g, material.ambient.b);
-  p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, material.diffuse.r, material.diffuse.g, material.diffuse.b);
-  p = pb_push3f(p, NV097_SET_LIGHT_SPECULAR_COLOR, material.specular.r, material.specular.g, material.specular.b);
+  p = pb_push3fv(p, NV097_SET_LIGHT_AMBIENT_COLOR, kMaterialAmbient);
+  p = pb_push3fv(p, NV097_SET_LIGHT_DIFFUSE_COLOR, kMaterialDiffuse);
+  p = pb_push3fv(p, NV097_SET_LIGHT_SPECULAR_COLOR, kMaterialSpecular);
 
   // material.Power = 125.0f;
   p = pb_push3(p, NV097_SET_SPECULAR_PARAMS,
@@ -217,52 +234,80 @@ static void Unproject(vector_t& world_point, TestHost& host, float x, float y, f
 }
 
 static void DrawQuad(TestHost& host, float left, float top, float z) {
-  const auto right = left + kQuadWidth;
-  auto draw = [&host, left, right, z](float top, float bottom) {
+  auto draw = [&host, z](float left, float top, float right, float bottom) {
     host.Begin(TestHost::PRIMITIVE_QUADS);
 
     vector_t world_point{0.f, 0.f, 0.f, 1.f};
 
     host.SetDiffuse(kVertexDiffuse);
     host.SetSpecular(kVertexSpecular);
+    host.SetNormal(0.f, 0.f, -1.f);
 
-    host.SetNormal(-0.099014754297667f, -0.099014754297667, -0.990147542976674f);
     Unproject(world_point, host, left, top, z);
     host.SetVertex(world_point);
 
-    host.SetNormal(0.099014754297667f, -0.099014754297667, -0.990147542976674f);
     Unproject(world_point, host, right, top, z);
     host.SetVertex(world_point);
 
-    host.SetNormal(0.099014754297667f, 0.099014754297667, -0.990147542976674f);
     Unproject(world_point, host, right, bottom, z);
     host.SetVertex(world_point);
 
-    host.SetNormal(-0.099014754297667f, 0.099014754297667, -0.990147542976674f);
     Unproject(world_point, host, left, bottom, z);
     host.SetVertex(world_point);
 
     host.End();
   };
 
+  float opaque_start = floorf(left + kQuadWidth / 2.f);
+  const auto right = left + kQuadWidth;
+
   auto segment_top = top;
   const auto segment_height = floorf(kQuadHeight / 3.f);
 
   SetCombiner(host, true, false);
-  draw(segment_top, segment_top + segment_height);
+  draw(left, segment_top, opaque_start, segment_top + segment_height);
+  SetCombiner(host, true, false, true);
+  draw(opaque_start, segment_top, right, segment_top + segment_height);
   segment_top += segment_height;
 
   SetCombiner(host, false, true);
-  draw(segment_top, segment_top + segment_height);
+  draw(left, segment_top, opaque_start, segment_top + segment_height);
+  SetCombiner(host, false, true, true);
+  draw(opaque_start, segment_top, right, segment_top + segment_height);
   segment_top += segment_height;
 
   SetCombiner(host, true, true);
-  draw(segment_top, segment_top + segment_height);
+  draw(left, segment_top, opaque_start, segment_top + segment_height);
+  SetCombiner(host, true, true, true);
+  draw(opaque_start, segment_top, right, segment_top + segment_height);
 }
 
-static void DrawLegend(TestHost& host, float left, float top, float right, float bottom, const vector_t& scene_ambient,
-                       const vector_t& material_diffuse, const vector_t& material_specular,
-                       const vector_t& material_emissive, const vector_t& material_ambient) {
+static void DrawColorSwatch(TestHost& host, float left, float top, float right, float bottom, const vector_t& color,
+                            bool ignore_alpha = true) {
+  host.Begin(TestHost::PRIMITIVE_QUADS);
+
+  vector_t world_point{0.f, 0.f, 0.f, 1.f};
+
+  if (ignore_alpha) {
+    vector_t adjusted_color{color[0], color[1], color[2], 1.f};
+    host.SetDiffuse(adjusted_color);
+  } else {
+    host.SetDiffuse(color);
+  }
+
+  Unproject(world_point, host, left, top, 0.f);
+  host.SetVertex(world_point);
+  Unproject(world_point, host, right, top, 0.f);
+  host.SetVertex(world_point);
+  Unproject(world_point, host, right, bottom, 0.f);
+  host.SetVertex(world_point);
+  Unproject(world_point, host, left, bottom, 0.f);
+  host.SetVertex(world_point);
+
+  host.End();
+}
+
+static void DrawLegend(TestHost& host, float left, float top, float right, float bottom) {
   auto p = pb_begin();
   // Draw a legend of colors along the left side.
   p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
@@ -272,21 +317,7 @@ static void DrawLegend(TestHost& host, float left, float top, float right, float
 
   const auto height = floorf((bottom - top) / 7.f);
   auto draw_quad = [&host, left, right, height](float t, const vector_t& color) {
-    host.Begin(TestHost::PRIMITIVE_QUADS);
-
-    vector_t world_point{0.f, 0.f, 0.f, 1.f};
-
-    host.SetDiffuse(color);
-    Unproject(world_point, host, left, t, 0.f);
-    host.SetVertex(world_point);
-    Unproject(world_point, host, right, t, 0.f);
-    host.SetVertex(world_point);
-    Unproject(world_point, host, right, t + height, 0.f);
-    host.SetVertex(world_point);
-    Unproject(world_point, host, left, t + height, 0.f);
-    host.SetVertex(world_point);
-
-    host.End();
+    DrawColorSwatch(host, left, t, right, t + height, color);
   };
 
   float t = top;
@@ -296,19 +327,27 @@ static void DrawLegend(TestHost& host, float left, float top, float right, float
   draw_quad(t, kVertexSpecular);
   t += height;
 
-  draw_quad(t, scene_ambient);
+  draw_quad(t, kSceneAmbient);
   t += height;
 
-  draw_quad(t, material_diffuse);
+  draw_quad(t, kMaterialDiffuse);
   t += height;
 
-  draw_quad(t, material_specular);
+  draw_quad(t, kMaterialSpecular);
   t += height;
 
-  draw_quad(t, material_emissive);
+  draw_quad(t, kMaterialEmissive);
   t += height;
 
-  draw_quad(t, material_ambient);
+  draw_quad(t, kMaterialAmbient);
+
+  pb_printat(4, 0, "vD");
+  pb_printat(5, 0, "vS");
+  pb_printat(7, 0, "sA");
+  pb_printat(8, 0, "mD");
+  pb_printat(10, 0, "mS");
+  pb_printat(11, 0, "mE");
+  pb_printat(13, 0, "mA");
 }
 
 void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_mode,
@@ -333,16 +372,7 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
     pb_end(p);
   }
 
-  Color scene_ambient{0.25, 0.25, 0.25, 1.0};
-
-  MaterialColors material{
-      {0.75f, 0.f, 0.f, 0.f},   // Diffuse
-      {0.f, 0.75f, 0.f, 0.f},   // Specular
-      {0.1f, 0.1f, 0.1f, 0.f},  // Ambient
-      {0.f, 0.f, 0.75f, 0.f},   // Emissive
-  };
-
-  SetLightAndMaterial(scene_ambient, material, material_emission);
+  SetLightAndMaterial(material_emission);
 
   auto p = pb_begin();
   switch (source_mode) {
@@ -412,29 +442,13 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
   pb_end(p);
   DrawQuad(host_, 130.f + kQuadWidth, 114.f + kQuadHeight + 4.f, 0.f);
 
-  {
-    vector_t legend_scene_ambient{scene_ambient.r, scene_ambient.g, scene_ambient.b, 1.f};
-    vector_t material_diffuse{material.diffuse.r, material.diffuse.g, material.diffuse.b, kMaterialAlpha};
-    vector_t material_specular{material.specular.r, material.specular.g, material.specular.b, 1.f};
-    vector_t material_ambient{material.ambient.r, material.ambient.g, material.ambient.b, 1.f};
-    vector_t material_emissive{material.emissive.r, material.emissive.g, material.emissive.b, 1.f};
-    DrawLegend(host_, 16.f, 114.4, 126.f - 16.f, 118.4 + kQuadHeight * 2.f, legend_scene_ambient, material_diffuse,
-               material_specular, material_emissive, material_ambient);
-  }
+  DrawLegend(host_, 16.f, 114.4, 126.f - 16.f, 118.4 + kQuadHeight * 2.f);
 
-  pb_print("Src: %s\n", name.c_str());
+  pb_printat(0, 0, "Src: %s\n", name.c_str());
   pb_printat(2, 17, (char*)"Diffuse");
   pb_printat(2, 35, (char*)" Specular");
   pb_printat(15, 17, (char*)"Emissive");
   pb_printat(15, 36, (char*)"Ambient");
-
-  pb_printat(4, 0, "vD");
-  pb_printat(5, 0, "vS");
-  pb_printat(7, 0, "sA");
-  pb_printat(8, 0, "mD");
-  pb_printat(10, 0, "mS");
-  pb_printat(11, 0, "mE");
-  pb_printat(13, 0, "mA");
 
   pb_draw_text_screen();
 
