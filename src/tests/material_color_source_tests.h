@@ -35,7 +35,8 @@ class MaterialColorSourceTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void Test(const std::string& name, SourceMode source_mode, const XboxMath::vector_t& material_emission);
+  void Test(const std::string& name, SourceMode source_mode, const XboxMath::vector_t& material_emission,
+            uint32_t num_lights = 1);
 
   static std::string MakeTestName(SourceMode source_mode);
 };
