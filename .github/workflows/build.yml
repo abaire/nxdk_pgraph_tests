@@ -62,7 +62,9 @@ jobs:
 
       - name: Prewarm nxdk
         working-directory: nxdk_pgraph_tests
-        run: bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
+        run: |
+          export CMAKE_POLICY_VERSION_MINIMUM=3.5
+          ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
 
       - name: Compile
         run: |
