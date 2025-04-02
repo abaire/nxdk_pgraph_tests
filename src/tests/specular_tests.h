@@ -24,6 +24,9 @@ class SpecularTests : public TestSuite {
   //! Tests the behavior of NV097_SET_SPECULAR_PARAMS.
   void TestSpecularParams(const std::string& name, const float* specular_params);
 
+  //! Tests the behavior of specular lighting when applied to non-unit normals.
+  void TestNonUnitNormals(const std::string& name, float normal_length);
+
   //! Loads test model meshes.
   void CreateGeometry();
 
