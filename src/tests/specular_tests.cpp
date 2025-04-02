@@ -24,6 +24,7 @@ static constexpr char kTestControlFlagsShader[] = "ControlFlags_VS";
 
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
+static constexpr uint32_t kCheckerboardC = 0xFF909090;
 
 static constexpr vector_t kSceneAmbientColor{0.031373f, 0.031373f, 0.031373f, 0.f};
 
@@ -229,6 +230,26 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
  * @tc SpecParams_FF_NinjaGaidenBlack
  *  Renders a number of meshes with a directional light and a point light, shading the specular channel only.
  *  LIGHT_CONTROL is set to SEPARATE_SPECULAR and SET_SPECULAR_PARAMS is set to the values displayed in the image.
+ *
+ *  @tc NonUnitNormal_0.972
+ *   Renders a triangle fan with spherical normals that are scaled to be 0.972 in length.
+ *   0.972 is small enough that no pixels are illuminated.
+ *
+ * @tc NonUnitNormal_0.973
+ *   Renders a triangle fan with spherical normals that are scaled to be 0.973 in length.
+ *   0.973 is large enough that center pixels are non-0.
+ *
+ * @tc NonUnitNormal_1.000
+ *   Renders a triangle fan with spherical unit-length normals. This is the control image.
+ *
+ * @tc NonUnitNormal_1.008
+ *   Renders a triangle fan with spherical normals that are scaled to be 1.008 in length.
+ *   This is close enough to 1.0 that the color is still applied.
+ *
+ * @tc NonUnitNormal_1.009
+ *   Renders a triangle fan with spherical normals that are scaled to be 1.009 in length.
+ *   This demonstrates that specular color is reset to 0 when overflowing ~1.0.
+ *
  */
 SpecularTests::SpecularTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Specular", config) {
@@ -255,6 +276,15 @@ SpecularTests::SpecularTests(TestHost& host, std::string output_dir, const Confi
     name += test_case.name;
 
     tests_[name] = [this, name, &test_case]() { this->TestSpecularParams(name, test_case.params); };
+  }
+
+  for (auto normal_length : {0.972f, 0.973f, 1.f, 1.008f, 1.009f}) {
+    std::string name = "NonUnitNormal_";
+    char buf[16];
+    snprintf(buf, sizeof(buf), "%.3f", normal_length);
+    name += buf;
+
+    tests_[name] = [this, name, normal_length]() { TestNonUnitNormals(name, normal_length); };
   }
 }
 
@@ -651,5 +681,105 @@ void SpecularTests::TestSpecularParams(const std::string& name, const float* spe
     pb_print_with_floats("%f\n", specular_params[i]);
   }
   pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void SpecularTests::TestNonUnitNormals(const std::string& name, float normal_length) {
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetVertexShaderProgram(nullptr);
+
+  host_.PrepareDraw(0xFE323232);
+  host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardC, 14);
+
+  {
+    vector_t light_direction{0.f, 0.f, 1.f, 1.f};
+    auto light = DirectionalLight(0, light_direction);
+    vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+    vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+
+    vector_t look_dir{0.f, 0.f, 0.f, 1.f};
+    VectorSubtractVector(at, eye, look_dir);
+    VectorNormalize(look_dir);
+    light.Commit(host_, look_dir);
+
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light.light_enable_mask());
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
+                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_LOCALEYE |
+                     NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
+    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.f);
+    p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, 0.f, 0.f, 0.f);
+    p = pb_push3f(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0.f, 0.f, 0.f);
+    p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 1.f, 1.f, 1.f);
+    p = pb_push3f(p, NV097_SET_LIGHT_SPECULAR_COLOR, 1.f, 1.f, 1.f);
+
+    // material.Power = 125.0f;
+    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS,
+                 0xBF78DF9C,  // -0.972162
+                 0xC04D3531,  // -3.20637
+                 0x404EFD4A   // 3.23421
+    );
+    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS + 0x0C,
+                 0xBF71F52E,  // -0.945147
+                 0xC048FA21,  // -3.14027
+                 0x404C7CD6   // 3.19512
+    );
+
+    pb_end(p);
+  }
+
+  auto unproject = [this](vector_t& world_point, float x, float y) {
+    vector_t screen_point{x, y, 0.f, 1.f};
+    host_.UnprojectPoint(world_point, screen_point, 0.f);
+  };
+
+  auto set_normal = [this, normal_length](float x, float y, float z) {
+    vector_t normal{x, y, z, 1.f};
+    ScalarMultVector(normal, normal_length);
+    host_.SetNormal(normal);
+  };
+
+  host_.SetInputColorCombiner(0, TestHost::SRC_SPECULAR, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
+                              false, TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_ZERO, true, TestHost::MAP_UNSIGNED_INVERT, TestHost::SRC_ZERO, false,
+                              TestHost::MAP_UNSIGNED_INVERT);
+
+  host_.Begin(TestHost::PRIMITIVE_TRIANGLE_FAN);
+
+  vector_t world_point{0.f, 0.f, 0.f, 1.f};
+
+  const auto fb_width = host_.GetFramebufferWidthF();
+  const auto fb_height = host_.GetFramebufferHeightF();
+  const float cx = floorf(fb_width * 0.5f);
+  const float cy = floorf(fb_height * 0.5f);
+
+  set_normal(0.f, 0.f, -1.f);
+  unproject(world_point, cx, cy);
+  host_.SetVertex(world_point);
+
+  static constexpr auto kNumSegments = 64;
+  static constexpr auto kRadius = 128.f;
+  float angle_increment = (2.f * M_PI) / static_cast<float>(kNumSegments);
+
+  for (int i = 0; i <= kNumSegments; ++i) {
+    auto current_angle = static_cast<float>(i % kNumSegments) * angle_increment;
+    auto x = cx + kRadius * cosf(current_angle);
+    auto y = cy + kRadius * sinf(current_angle);
+    unproject(world_point, x, y);
+
+    vector_t normal{-world_point[0], -world_point[1], -3.f, 1.f};
+    VectorNormalize(normal);
+    set_normal(normal[0], normal[1], normal[2]);
+    host_.SetVertex(world_point);
+  }
+
+  host_.End();
+
+  pb_print("%s\n", name.c_str());
+  pb_draw_text_screen();
+
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
