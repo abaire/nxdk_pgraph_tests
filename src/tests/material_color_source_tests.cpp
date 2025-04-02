@@ -210,6 +210,13 @@ void MaterialColorSourceTests::Initialize() {
  *   NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).
  *   There are two lights with all colors set to (0.25, 0.25, 0.25).
  *
+ * @tc Emissive_me0
+ *   Draws 9 quads with combinations of emissive and ambient color taken from vertex diffuse and specular.
+ *   The combinations in (emissive_src, ambient_src) format are: (D, D), (S, D), (D, S), (S, S), (M, S), (S, M), (M, D),
+ *   (D, M), (M, M).
+ *   Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is
+ *   also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.
+ *   NV097_SET_MATERIAL_EMISSION is set to (0, 0, 0).
  */
 MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Material color source", config) {
@@ -257,6 +264,29 @@ MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string o
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{1.f, 1.f, 1.f, 1.f};
       this->Test(new_name, source, material_emission, 2);
+    };
+  }
+
+  {
+    std::string name = "Emissive_me0";
+    tests_[name] = [this, name]() {
+      vector_t material_emission{0.f, 0.f, 0.f, 0.f};
+      TestEmissive(name, material_emission);
+    };
+    name = "Emissive_me0_15";
+    tests_[name] = [this, name]() {
+      vector_t material_emission{0.15f, 0.15f, 0.15f, 0.f};
+      TestEmissive(name, material_emission);
+    };
+    name = "Emissive_me0_5";
+    tests_[name] = [this, name]() {
+      vector_t material_emission{0.5f, 0.5f, 0.5f, 0.f};
+      TestEmissive(name, material_emission);
+    };
+    name = "Emissive_me1_0";
+    tests_[name] = [this, name]() {
+      vector_t material_emission{1.f, 1.f, 1.f, 1.f};
+      TestEmissive(name, material_emission);
     };
   }
 }
@@ -483,8 +513,6 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
     auto p = pb_begin();
 
     p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
-    p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
-
     p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
                  NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
     p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
@@ -542,6 +570,121 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
   pb_printat(2, 35, (char*)" Specular");
   pb_printat(15, 17, (char*)"Emissive");
   pb_printat(15, 36, (char*)"Ambient");
+
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void MaterialColorSourceTests::TestEmissive(const std::string& name, const vector_t& material_emission) {
+  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 20);
+
+  vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+  vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
+  vector_t look_dir{0.f, 0.f, 0.f, 1.f};
+  VectorSubtractVector(at, eye, look_dir);
+  VectorNormalize(look_dir);
+
+  vector_t ambient{0.4f, 0.1f, 0.1f, 1.f};
+  vector_t diffuse{0.1f, 0.4f, 0.1f, 1.f};
+  vector_t specular{0.1f, 0.1f, 0.4f, 1.f};
+
+  DirectionalLight light(0, kDirectionalLightDir);
+  light.SetAmbient(ambient);
+  light.SetDiffuse(diffuse);
+  light.SetSpecular(specular);
+  light.Commit(host_, look_dir);
+  auto light_mode_bitvector = light.light_enable_mask();
+
+  {
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
+                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
+    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, kMaterialAlpha);
+    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbient);
+    p = pb_push3fv(p, NV097_SET_LIGHT_AMBIENT_COLOR, kMaterialAmbient);
+    p = pb_push3fv(p, NV097_SET_LIGHT_DIFFUSE_COLOR, kMaterialDiffuse);
+    p = pb_push3fv(p, NV097_SET_LIGHT_SPECULAR_COLOR, kMaterialSpecular);
+
+    // material.Power = 125.0f;
+    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS,
+                 0xBF78DF9C,  // -0.972162
+                 0xC04D3531,  // -3.20637
+                 0x404EFD4A   // 3.23421
+    );
+    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS + 0x0C,
+                 0xBF71F52E,  // -0.945147
+                 0xC048FA21,  // -3.14027
+                 0x404C7CD6   // 3.19512
+    );
+
+    p = pb_push3fv(p, NV097_SET_MATERIAL_EMISSION, material_emission);
+
+    pb_end(p);
+  }
+
+  static constexpr auto kLeftColumn = 126;
+  static constexpr auto kMidColumn = kLeftColumn + kQuadWidth + 4.f;
+  static constexpr auto kRightColumn = kMidColumn + kQuadWidth + 4.f;
+  static constexpr auto kTopRow = 100.f;
+  static constexpr auto kMidRow = kTopRow + kQuadHeight + 4.f;
+  static constexpr auto kBottomRow = kMidRow + kQuadHeight + 4.f;
+
+  auto render_quad = [this](float left, float top, SourceMode diffuse, SourceMode specular, SourceMode emissive,
+                            SourceMode ambient) {
+    uint32_t source_selector = NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL;
+
+    if (diffuse == SOURCE_DIFFUSE) {
+      source_selector += NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE;
+    } else if (diffuse == SOURCE_SPECULAR) {
+      source_selector += NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR;
+    }
+
+    if (specular == SOURCE_DIFFUSE) {
+      source_selector += NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_DIFFUSE;
+    } else if (specular == SOURCE_SPECULAR) {
+      source_selector += NV097_SET_COLOR_MATERIAL_SPECULAR_FROM_VERTEX_SPECULAR;
+    }
+
+    if (emissive == SOURCE_DIFFUSE) {
+      source_selector += NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_DIFFUSE;
+    } else if (emissive == SOURCE_SPECULAR) {
+      source_selector += NV097_SET_COLOR_MATERIAL_EMISSIVE_FROM_VERTEX_SPECULAR;
+    }
+
+    if (ambient == SOURCE_DIFFUSE) {
+      source_selector += NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_DIFFUSE;
+    } else if (ambient == SOURCE_SPECULAR) {
+      source_selector += NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR;
+    }
+
+    auto p = pb_begin();
+    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, source_selector);
+    pb_end(p);
+    DrawQuad(host_, left, top, 0.f);
+  };
+
+  render_quad(kLeftColumn, kTopRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_DIFFUSE, SOURCE_DIFFUSE);
+  render_quad(kMidColumn, kTopRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_SPECULAR, SOURCE_DIFFUSE);
+  render_quad(kRightColumn, kTopRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_DIFFUSE, SOURCE_SPECULAR);
+
+  render_quad(kLeftColumn, kMidRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_SPECULAR, SOURCE_SPECULAR);
+  render_quad(kMidColumn, kMidRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_SPECULAR);
+  render_quad(kRightColumn, kMidRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_SPECULAR, SOURCE_MATERIAL);
+
+  render_quad(kLeftColumn, kBottomRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_DIFFUSE);
+  render_quad(kMidColumn, kBottomRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_DIFFUSE, SOURCE_MATERIAL);
+  render_quad(kRightColumn, kBottomRow, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_MATERIAL, SOURCE_MATERIAL);
+
+  DrawLegend(host_, 16.f, 120.f, 126.f - 16.f, 296.f);
+
+  pb_printat(0, 0, "Src: %s\n", name.c_str());
 
   pb_draw_text_screen();
 
