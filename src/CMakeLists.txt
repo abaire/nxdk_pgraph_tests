@@ -88,6 +88,7 @@ generate_nv2a_vshinc_files(
         shaders/passthrough.vsh
         shaders/projection_vertex_shader_colorless_light.vsh
         shaders/projection_vertex_shader_no_lighting.vsh
+        shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
 )
 
 generate_pixelshader_inl_files(
@@ -238,6 +239,8 @@ add_executable(
         tests/dma_corruption_around_surface_tests.h
         tests/edge_flag_tests.cpp
         tests/edge_flag_tests.h
+        tests/fog_exceptional_value_tests.cpp
+        tests/fog_exceptional_value_tests.h
         tests/fog_tests.cpp
         tests/fog_tests.h
         tests/front_face_tests.cpp
