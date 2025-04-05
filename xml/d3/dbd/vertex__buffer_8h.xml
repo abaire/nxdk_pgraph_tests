@@ -1,0 +1,787 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/dbd/vertex__buffer_8h" kind="file" language="C++">
+    <compoundname>vertex_buffer.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">vector</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <includedby refid="d4/d41/model__builder_8h" local="yes">src/models/model_builder.h</includedby>
+    <includedby refid="d2/d61/test__host_8cpp" local="yes">src/test_host.cpp</includedby>
+    <includedby refid="df/d43/test__host_8h" local="yes">src/test_host.h</includedby>
+    <includedby refid="de/def/attribute__carryover__tests_8cpp" local="yes">src/tests/attribute_carryover_tests.cpp</includedby>
+    <includedby refid="d0/de5/attribute__explicit__setter__tests_8cpp" local="yes">src/tests/attribute_explicit_setter_tests.cpp</includedby>
+    <includedby refid="df/d05/clear__tests_8cpp" local="yes">src/tests/clear_tests.cpp</includedby>
+    <includedby refid="d4/d9a/color__key__tests_8cpp" local="yes">src/tests/color_key_tests.cpp</includedby>
+    <includedby refid="d4/dfb/color__mask__blend__tests_8cpp" local="yes">src/tests/color_mask_blend_tests.cpp</includedby>
+    <includedby refid="d6/d38/combiner__tests_8cpp" local="yes">src/tests/combiner_tests.cpp</includedby>
+    <includedby refid="d8/da7/depth__format__fixed__function__tests_8cpp" local="yes">src/tests/depth_format_fixed_function_tests.cpp</includedby>
+    <includedby refid="d6/dd3/depth__format__tests_8cpp" local="yes">src/tests/depth_format_tests.cpp</includedby>
+    <includedby refid="d4/d88/edge__flag__tests_8cpp" local="yes">src/tests/edge_flag_tests.cpp</includedby>
+    <includedby refid="d7/d99/fog__tests_8cpp" local="yes">src/tests/fog_tests.cpp</includedby>
+    <includedby refid="dd/ded/fog__tests_8h" local="yes">src/tests/fog_tests.h</includedby>
+    <includedby refid="d7/d81/front__face__tests_8cpp" local="yes">src/tests/front_face_tests.cpp</includedby>
+    <includedby refid="d4/df4/image__blit__tests_8cpp" local="yes">src/tests/image_blit_tests.cpp</includedby>
+    <includedby refid="de/dac/lighting__control__tests_8cpp" local="yes">src/tests/lighting_control_tests.cpp</includedby>
+    <includedby refid="db/d72/lighting__normal__tests_8cpp" local="yes">src/tests/lighting_normal_tests.cpp</includedby>
+    <includedby refid="d2/d8d/lighting__range__tests_8cpp" local="yes">src/tests/lighting_range_tests.cpp</includedby>
+    <includedby refid="d0/d2d/lighting__spotlight__tests_8cpp" local="yes">src/tests/lighting_spotlight_tests.cpp</includedby>
+    <includedby refid="de/dd3/lighting__two__sided__tests_8cpp" local="yes">src/tests/lighting_two_sided_tests.cpp</includedby>
+    <includedby refid="d8/d29/line__width__tests_8cpp" local="yes">src/tests/line_width_tests.cpp</includedby>
+    <includedby refid="de/d8f/material__alpha__tests_8cpp" local="yes">src/tests/material_alpha_tests.cpp</includedby>
+    <includedby refid="db/dcb/material__color__source__tests_8cpp" local="yes">src/tests/material_color_source_tests.cpp</includedby>
+    <includedby refid="d3/d33/material__color__tests_8cpp" local="yes">src/tests/material_color_tests.cpp</includedby>
+    <includedby refid="db/d75/material__color__tests_8h" local="yes">src/tests/material_color_tests.h</includedby>
+    <includedby refid="d8/d50/overlapping__draw__modes__tests_8cpp" local="yes">src/tests/overlapping_draw_modes_tests.cpp</includedby>
+    <includedby refid="d5/d25/set__vertex__data__tests_8cpp" local="yes">src/tests/set_vertex_data_tests.cpp</includedby>
+    <includedby refid="d1/d76/shade__model__tests_8cpp" local="yes">src/tests/shade_model_tests.cpp</includedby>
+    <includedby refid="d6/da7/smoothing__tests_8cpp" local="yes">src/tests/smoothing_tests.cpp</includedby>
+    <includedby refid="d8/daa/smoothing__tests_8h" local="yes">src/tests/smoothing_tests.h</includedby>
+    <includedby refid="d9/d6a/stencil__func__tests_8cpp" local="yes">src/tests/stencil_func_tests.cpp</includedby>
+    <includedby refid="de/d30/stencil__tests_8cpp" local="yes">src/tests/stencil_tests.cpp</includedby>
+    <includedby refid="de/dde/stipple__tests_8cpp" local="yes">src/tests/stipple_tests.cpp</includedby>
+    <includedby refid="df/d62/texgen__matrix__tests_8cpp" local="yes">src/tests/texgen_matrix_tests.cpp</includedby>
+    <includedby refid="d5/d38/texgen__tests_8cpp" local="yes">src/tests/texgen_tests.cpp</includedby>
+    <includedby refid="d5/d6d/texture__border__tests_8cpp" local="yes">src/tests/texture_border_tests.cpp</includedby>
+    <includedby refid="dc/d48/texture__cpu__update__tests_8cpp" local="yes">src/tests/texture_cpu_update_tests.cpp</includedby>
+    <includedby refid="df/ddd/texture__format__tests_8cpp" local="yes">src/tests/texture_format_tests.cpp</includedby>
+    <includedby refid="de/d25/texture__framebuffer__blit__tests_8cpp" local="yes">src/tests/texture_framebuffer_blit_tests.cpp</includedby>
+    <includedby refid="d9/da7/texture__matrix__tests_8cpp" local="yes">src/tests/texture_matrix_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <includedby refid="df/d73/three__d__primitive__tests_8cpp" local="yes">src/tests/three_d_primitive_tests.cpp</includedby>
+    <includedby refid="de/dc5/three__d__primitive__tests_8h" local="yes">src/tests/three_d_primitive_tests.h</includedby>
+    <includedby refid="d0/d31/volume__texture__tests_8cpp" local="yes">src/tests/volume_texture_tests.cpp</includedby>
+    <includedby refid="d5/dc7/w__param__tests_8cpp" local="yes">src/tests/w_param_tests.cpp</includedby>
+    <includedby refid="d2/dc9/z__min__max__control__tests_8cpp" local="yes">src/tests/z_min_max_control_tests.cpp</includedby>
+    <includedby refid="d1/d7d/zero__stride__tests_8cpp" local="yes">src/tests/zero_stride_tests.cpp</includedby>
+    <includedby refid="d4/d46/zero__stride__tests_8h" local="yes">src/tests/zero_stride_tests.h</includedby>
+    <includedby refid="d7/dd5/vertex__buffer_8cpp" local="yes">src/vertex_buffer.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>src/models/flat_mesh_grid_model.h</label>
+        <link refid="d8/d7c/flat__mesh__grid__model_8h_source"/>
+      </node>
+      <node id="4">
+        <label>src/models/light_control_test_mesh_cone_model.h</label>
+        <link refid="db/d93/light__control__test__mesh__cone__model_8h_source"/>
+      </node>
+      <node id="5">
+        <label>src/models/light_control_test_mesh_cylinder_model.h</label>
+        <link refid="df/d44/light__control__test__mesh__cylinder__model_8h_source"/>
+      </node>
+      <node id="6">
+        <label>src/models/light_control_test_mesh_sphere_model.h</label>
+        <link refid="df/dfa/light__control__test__mesh__sphere__model_8h_source"/>
+      </node>
+      <node id="7">
+        <label>src/models/light_control_test_mesh_suzanne_model.h</label>
+        <link refid="d7/dcf/light__control__test__mesh__suzanne__model_8h_source"/>
+      </node>
+      <node id="8">
+        <label>src/models/light_control_test_mesh_torus_model.h</label>
+        <link refid="d5/d6d/light__control__test__mesh__torus__model_8h_source"/>
+      </node>
+      <node id="2">
+        <label>src/models/model_builder.h</label>
+        <link refid="d4/d41/model__builder_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/test_driver.h</label>
+        <link refid="dd/dab/test__driver_8h_source"/>
+      </node>
+      <node id="9">
+        <label>src/test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>src/tests/alpha_func_tests.h</label>
+        <link refid="da/da3/alpha__func__tests_8h_source"/>
+      </node>
+      <node id="12">
+        <label>src/tests/antialiasing_tests.h</label>
+        <link refid="d4/d10/antialiasing__tests_8h_source"/>
+      </node>
+      <node id="13">
+        <label>src/tests/attribute_carryover_tests.h</label>
+        <link refid="dc/db4/attribute__carryover__tests_8h_source"/>
+      </node>
+      <node id="14">
+        <label>src/tests/attribute_explicit_setter_tests.h</label>
+        <link refid="d2/dd9/attribute__explicit__setter__tests_8h_source"/>
+      </node>
+      <node id="15">
+        <label>src/tests/attribute_float_tests.h</label>
+        <link refid="d6/dad/attribute__float__tests_8h_source"/>
+      </node>
+      <node id="16">
+        <label>src/tests/blend_tests.h</label>
+        <link refid="de/d05/blend__tests_8h_source"/>
+      </node>
+      <node id="17">
+        <label>src/tests/color_key_tests.h</label>
+        <link refid="dc/d0f/color__key__tests_8h_source"/>
+      </node>
+      <node id="18">
+        <label>src/tests/color_zeta_disable_tests.h</label>
+        <link refid="d0/d2e/color__zeta__disable__tests_8h_source"/>
+      </node>
+      <node id="19">
+        <label>src/tests/color_zeta_overlap_tests.h</label>
+        <link refid="da/dad/color__zeta__overlap__tests_8h_source"/>
+      </node>
+      <node id="20">
+        <label>src/tests/combiner_tests.h</label>
+        <link refid="df/d03/combiner__tests_8h_source"/>
+      </node>
+      <node id="21">
+        <label>src/tests/dma_corruption_around_surface_tests.h</label>
+        <link refid="d7/d89/dma__corruption__around__surface__tests_8h_source"/>
+      </node>
+      <node id="22">
+        <label>src/tests/edge_flag_tests.h</label>
+        <link refid="da/d59/edge__flag__tests_8h_source"/>
+      </node>
+      <node id="23">
+        <label>src/tests/fog_tests.h</label>
+        <link refid="dd/ded/fog__tests_8h_source"/>
+      </node>
+      <node id="24">
+        <label>src/tests/inline_array_size_mismatch.h</label>
+        <link refid="dc/d05/inline__array__size__mismatch_8h_source"/>
+      </node>
+      <node id="25">
+        <label>src/tests/line_width_tests.h</label>
+        <link refid="de/d36/line__width__tests_8h_source"/>
+      </node>
+      <node id="57">
+        <label>src/tests/material_color_tests.h</label>
+        <link refid="db/d75/material__color__tests_8h_source"/>
+      </node>
+      <node id="26">
+        <label>src/tests/null_surface_tests.h</label>
+        <link refid="db/d18/null__surface__tests_8h_source"/>
+      </node>
+      <node id="27">
+        <label>src/tests/overlapping_draw_modes_tests.h</label>
+        <link refid="d8/d68/overlapping__draw__modes__tests_8h_source"/>
+      </node>
+      <node id="28">
+        <label>src/tests/point_params_tests.h</label>
+        <link refid="d1/d5c/point__params__tests_8h_source"/>
+      </node>
+      <node id="29">
+        <label>src/tests/point_size_tests.h</label>
+        <link refid="d7/d75/point__size__tests_8h_source"/>
+      </node>
+      <node id="30">
+        <label>src/tests/pvideo_tests.h</label>
+        <link refid="da/db8/pvideo__tests_8h_source"/>
+      </node>
+      <node id="31">
+        <label>src/tests/shade_model_tests.h</label>
+        <link refid="d0/dbf/shade__model__tests_8h_source"/>
+      </node>
+      <node id="32">
+        <label>src/tests/smoothing_tests.h</label>
+        <link refid="d8/daa/smoothing__tests_8h_source"/>
+      </node>
+      <node id="33">
+        <label>src/tests/stipple_tests.h</label>
+        <link refid="d0/daa/stipple__tests_8h_source"/>
+      </node>
+      <node id="34">
+        <label>src/tests/surface_clip_tests.h</label>
+        <link refid="da/d0b/surface__clip__tests_8h_source"/>
+      </node>
+      <node id="35">
+        <label>src/tests/surface_pitch_tests.h</label>
+        <link refid="da/d8d/surface__pitch__tests_8h_source"/>
+      </node>
+      <node id="36">
+        <label>src/tests/swath_width_tests.h</label>
+        <link refid="df/db5/swath__width__tests_8h_source"/>
+      </node>
+      <node id="37">
+        <label>src/tests/texgen_matrix_tests.h</label>
+        <link refid="d0/d6f/texgen__matrix__tests_8h_source"/>
+      </node>
+      <node id="38">
+        <label>src/tests/texgen_tests.h</label>
+        <link refid="d6/d93/texgen__tests_8h_source"/>
+      </node>
+      <node id="39">
+        <label>src/tests/texture_border_tests.h</label>
+        <link refid="d0/de9/texture__border__tests_8h_source"/>
+      </node>
+      <node id="40">
+        <label>src/tests/texture_cpu_update_tests.h</label>
+        <link refid="de/dca/texture__cpu__update__tests_8h_source"/>
+      </node>
+      <node id="41">
+        <label>src/tests/texture_format_dxt_tests.h</label>
+        <link refid="dd/d61/texture__format__dxt__tests_8h_source"/>
+      </node>
+      <node id="42">
+        <label>src/tests/texture_format_tests.h</label>
+        <link refid="d1/d54/texture__format__tests_8h_source"/>
+      </node>
+      <node id="43">
+        <label>src/tests/texture_framebuffer_blit_tests.h</label>
+        <link refid="dd/d75/texture__framebuffer__blit__tests_8h_source"/>
+      </node>
+      <node id="44">
+        <label>src/tests/texture_matrix_tests.h</label>
+        <link refid="dd/dbe/texture__matrix__tests_8h_source"/>
+      </node>
+      <node id="45">
+        <label>src/tests/texture_render_target_tests.h</label>
+        <link refid="df/d0d/texture__render__target__tests_8h_source"/>
+      </node>
+      <node id="46">
+        <label>src/tests/texture_render_update_in_place_tests.h</label>
+        <link refid="d2/d1d/texture__render__update__in__place__tests_8h_source"/>
+      </node>
+      <node id="47">
+        <label>src/tests/texture_shadow_comparator_tests.h</label>
+        <link refid="d5/dc7/texture__shadow__comparator__tests_8h_source"/>
+      </node>
+      <node id="48">
+        <label>src/tests/texture_signed_component_tests.h</label>
+        <link refid="df/d39/texture__signed__component__tests_8h_source"/>
+      </node>
+      <node id="49">
+        <label>src/tests/three_d_primitive_tests.h</label>
+        <link refid="de/dc5/three__d__primitive__tests_8h_source"/>
+      </node>
+      <node id="50">
+        <label>src/tests/vertex_shader_independence_tests.h</label>
+        <link refid="d0/d3a/vertex__shader__independence__tests_8h_source"/>
+      </node>
+      <node id="51">
+        <label>src/tests/vertex_shader_rounding_tests.h</label>
+        <link refid="d7/d8b/vertex__shader__rounding__tests_8h_source"/>
+      </node>
+      <node id="52">
+        <label>src/tests/vertex_shader_swizzle_tests.h</label>
+        <link refid="dd/d20/vertex__shader__swizzle__tests_8h_source"/>
+      </node>
+      <node id="53">
+        <label>src/tests/viewport_tests.h</label>
+        <link refid="da/d83/viewport__tests_8h_source"/>
+      </node>
+      <node id="54">
+        <label>src/tests/window_clip_tests.h</label>
+        <link refid="d5/ddb/window__clip__tests_8h_source"/>
+      </node>
+      <node id="55">
+        <label>src/tests/z_min_max_control_tests.h</label>
+        <link refid="da/d1c/z__min__max__control__tests_8h_source"/>
+      </node>
+      <node id="56">
+        <label>src/tests/zero_stride_tests.h</label>
+        <link refid="d4/d46/zero__stride__tests_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="df/dd0/structVertex" prot="public">Vertex</innerclass>
+    <innerclass refid="d0/da2/structColor" prot="public">Color</innerclass>
+    <innerclass refid="d7/d72/classVertexBuffer" prot="public">VertexBuffer</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="d3/dbd/vertex__buffer_8h_1adf9c158e92a780ac6fb16fde398d6f53" prot="public" static="no">
+        <name>TO_BGRA</name>
+        <param><defname>float_vals</defname></param>
+        <initializer>  (((uint32_t)((float_vals)[3] * 255.0f) &lt;&lt; 24) + ((uint32_t)((float_vals)[0] * 255.0f) &lt;&lt; 16) + \
+   ((uint32_t)((float_vals)[1] * 255.0f) &lt;&lt; 8) + ((uint32_t)((float_vals)[2] * 255.0f)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="11" column="9" bodyfile="src/vertex_buffer.h" bodystart="11" bodyend="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="d3/dbd/vertex__buffer_8h_1a2e1662af5233d0fe6a6f061445d2ff25" prot="public" static="no">
+        <type>struct <ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref></type>
+        <definition>typedef struct Vertex Vertex</definition>
+        <argsstring></argsstring>
+        <name>Vertex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="158" column="8"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS__VERTEX_BUFFER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS__VERTEX_BUFFER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TO_BGRA(float_vals)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="12"><highlight class="preprocessor"><sp/><sp/>(((uint32_t)((float_vals)[3]<sp/>*<sp/>255.0f)<sp/>&lt;&lt;<sp/>24)<sp/>+<sp/>((uint32_t)((float_vals)[0]<sp/>*<sp/>255.0f)<sp/>&lt;&lt;<sp/>16)<sp/>+<sp/>\</highlight></codeline>
+<codeline lineno="13"><highlight class="preprocessor"><sp/><sp/><sp/>((uint32_t)((float_vals)[1]<sp/>*<sp/>255.0f)<sp/>&lt;&lt;<sp/>8)<sp/>+<sp/>((uint32_t)((float_vals)[2]<sp/>*<sp/>255.0f)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>pack(1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="df/dd0/structVertex" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pos[4];</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>weight;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>normal[3];</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>diffuse[4];</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>specular[4];</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fog_coord;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>point_size;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>back_diffuse[4];</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>back_specular[4];</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>texcoord0[4];</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>texcoord1[4];</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>texcoord2[4];</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>texcoord3[4];</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPosition(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(pos,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(pos));<sp/>}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPosition(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w<sp/>=<sp/>1.0f)<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>pos[0]<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>pos[1]<sp/>=<sp/>y;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>pos[2]<sp/>=<sp/>z;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>pos[3]<sp/>=<sp/>w;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetWeight(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w)<sp/>{<sp/>weight<sp/>=<sp/>w;<sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetNormal(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(normal,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(normal));<sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetNormal(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>normal[0]<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>normal[1]<sp/>=<sp/>y;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>normal[2]<sp/>=<sp/>z;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDiffuse(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(diffuse,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(diffuse));<sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDiffuse(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.0f)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>diffuse[0]<sp/>=<sp/>r;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>diffuse[1]<sp/>=<sp/>g;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>diffuse[2]<sp/>=<sp/>b;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>diffuse[3]<sp/>=<sp/>a;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSpecular(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(specular,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(specular));<sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSpecular(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.0f)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>specular[0]<sp/>=<sp/>r;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>specular[1]<sp/>=<sp/>g;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>specular[2]<sp/>=<sp/>b;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>specular[3]<sp/>=<sp/>a;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetFogCoord(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v)<sp/>{<sp/>fog_coord<sp/>=<sp/>v;<sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPointSize(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v)<sp/>{<sp/>point_size<sp/>=<sp/>v;<sp/>}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetBackDiffuse(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(back_diffuse,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(back_diffuse));<sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetBackDiffuse(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.0f)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>back_diffuse[0]<sp/>=<sp/>r;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>back_diffuse[1]<sp/>=<sp/>g;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>back_diffuse[2]<sp/>=<sp/>b;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>back_diffuse[3]<sp/>=<sp/>a;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetBackSpecular(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(back_specular,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(back_specular));<sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetBackSpecular(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>a<sp/>=<sp/>1.0f)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>back_specular[0]<sp/>=<sp/>r;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>back_specular[1]<sp/>=<sp/>g;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>back_specular[2]<sp/>=<sp/>b;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>back_specular[3]<sp/>=<sp/>a;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord0(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(texcoord0,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(texcoord0));<sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord0(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord0[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord0[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord0(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>q)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord0[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord0[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord0[2]<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord0[3]<sp/>=<sp/>q;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord1(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(texcoord1,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(texcoord1));<sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord1(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord1[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord1[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord1(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>q)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord1[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord1[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord1[2]<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord1[3]<sp/>=<sp/>q;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord2(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(texcoord2,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(texcoord2));<sp/>}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord2(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord2[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord2[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord2(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>q)<sp/>{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord2[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord2[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord2[2]<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord2[3]<sp/>=<sp/>q;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord3(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>value)<sp/>{<sp/>memcpy(texcoord3,<sp/>value,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(texcoord3));<sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord3(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v)<sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord3[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord3[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord3(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>v,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>s,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>q)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord3[0]<sp/>=<sp/>u;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord3[1]<sp/>=<sp/>v;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord3[2]<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>texcoord3[3]<sp/>=<sp/>q;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDiffuseGrey(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{<sp/>SetDiffuse(val,<sp/>val,<sp/>val);<sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDiffuseGrey(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>alpha)<sp/>{<sp/>SetDiffuse(val,<sp/>val,<sp/>val,<sp/>alpha);<sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSpecularGrey(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{<sp/>SetSpecular(val,<sp/>val,<sp/>val);<sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSpecularGrey(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>alpha)<sp/>{<sp/>SetSpecular(val,<sp/>val,<sp/>val,<sp/>alpha);<sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>uint32_t<sp/>GetDiffuseARGB()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>TO_BGRA(diffuse);<sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>uint32_t<sp/>GetSpecularARGB()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>TO_BGRA(specular);<sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Translate(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}<sp/><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref>;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>pack()</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="d0/da2/structColor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d0/da2/structColor" kindref="compound">Color</ref><sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>red,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>green,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>blue,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>alpha<sp/>=<sp/>1.0f)<sp/>:<sp/>r(red),<sp/>g(green),<sp/>b(blue),<sp/>a(alpha)<sp/>{}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetRGB(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>red,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>green,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>blue)<sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>r<sp/>=<sp/>red;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>g<sp/>=<sp/>green;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>b<sp/>=<sp/>blue;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetRGBA(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>red,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>green,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>blue,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>alpha)<sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>r<sp/>=<sp/>red;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>g<sp/>=<sp/>green;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>b<sp/>=<sp/>blue;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>a<sp/>=<sp/>alpha;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetGrey(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)<sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/>r<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>g<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>b<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetGreyA(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>alpha)<sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>r<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>g<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>b<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>a<sp/>=<sp/>alpha;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>uint32_t<sp/>AsBGRA()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>vals[4]<sp/>=<sp/>{r,<sp/>g,<sp/>b,<sp/>a};</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>TO_BGRA(vals);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r{0.0f};</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g{0.0f};</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b{0.0};</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>a{1.0};</highlight></codeline>
+<codeline lineno="200"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204" refid="d7/d72/classVertexBuffer" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref><sp/>{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="d7/d72/classVertexBuffer" kindref="compound">VertexBuffer</ref>(uint32_t<sp/>num_vertices);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><ref refid="d7/d72/classVertexBuffer" kindref="compound">~VertexBuffer</ref>();</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Returns<sp/>a<sp/>new<sp/>VertexBuffer<sp/>containing<sp/>vertices<sp/>suitable<sp/>for<sp/>rendering<sp/>as<sp/>triangles<sp/>by<sp/>treating<sp/>the<sp/>contents<sp/>of<sp/>this</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>buffer<sp/>as<sp/>a<sp/>triangle<sp/>strip.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>ConvertFromTriangleStripToTriangles()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref>*<sp/>Lock();</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Unlock();</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>uint32_t<sp/>GetNumVertices()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>num_vertices_;<sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetCacheValid(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>valid<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{<sp/>cache_valid_<sp/>=<sp/>valid;<sp/>}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsCacheValid()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cache_valid_;<sp/>}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Linearize(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>texture_width,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>texture_height);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Defines<sp/>a<sp/>triangle<sp/>with<sp/>the<sp/>give<sp/>3-element<sp/>vertices.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangleCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangleCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three,</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_three);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangleCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three,</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>one_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>two_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>three_diffuse);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangleCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three,</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_three,</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_three);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangle(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangle(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three,</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_three);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangle(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three,</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_three);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineTriangle(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>three,</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>normal_three,</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_one,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_two,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>diffuse_three);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Defines<sp/>a<sp/>quad<sp/>made<sp/>of<sp/>two<sp/>coplanar<sp/>triangles<sp/>(i.e.,<sp/>6<sp/>vertices<sp/>suitable<sp/>for<sp/>rendering<sp/>as<sp/>triangle<sp/>primitives)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTriCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTriCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTriCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ul_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ll_z,</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lr_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ur_z);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTriCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ul_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ll_z,</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lr_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ur_z,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_diffuse,</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_diffuse);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTriCCW(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ul_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ll_z,</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lr_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ur_z,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_diffuse,</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_specular,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_specular,</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_specular,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_specular);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z);</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ul_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ll_z,</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lr_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ur_z);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ul_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ll_z,</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lr_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ur_z,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_diffuse,</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_diffuse);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ul_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ll_z,</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lr_z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ur_z,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_diffuse,</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_specular,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_specular,</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_specular,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_specular);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ul,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ll,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>lr,</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ur)<sp/>{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref><sp/>diffuse(1.0,<sp/>1.0,<sp/>1.0,<sp/>1.0);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref><sp/>specular(1.0,<sp/>1.0,<sp/>1.0,<sp/>1.0);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>DefineBiTri(start_index,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur,<sp/>diffuse,<sp/>diffuse,<sp/>diffuse,<sp/>diffuse,<sp/>specular,<sp/>specular,<sp/>specular,</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>specular);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ul,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ll,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>lr,</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ur,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_diffuse,</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_diffuse)<sp/>{</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref><sp/>specular(1.0,<sp/>1.0,<sp/>1.0,<sp/>1.0);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/>DefineBiTri(start_index,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur,<sp/>ul_diffuse,<sp/>ll_diffuse,<sp/>lr_diffuse,<sp/>ur_diffuse,<sp/>specular,<sp/>specular,</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>specular,<sp/>specular);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DefineBiTri(uint32_t<sp/>start_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ul,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ll,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>lr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t<sp/>ur,</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_diffuse,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_diffuse,</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ul_specular,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ll_specular,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>lr_specular,</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>ur_specular);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDiffuse(uint32_t<sp/>vertex_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSpecular(uint32_t<sp/>vertex_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/da2/structColor" kindref="compound">Color</ref>&amp;<sp/>color);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPositionIncludesW(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enabled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{<sp/>position_count_<sp/>=<sp/>enabled<sp/>?<sp/>4<sp/>:<sp/>3;<sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord0Count(uint32_t<sp/>val)<sp/>{<sp/>tex0_coord_count_<sp/>=<sp/>val;<sp/>}</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord1Count(uint32_t<sp/>val)<sp/>{<sp/>tex1_coord_count_<sp/>=<sp/>val;<sp/>}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord2Count(uint32_t<sp/>val)<sp/>{<sp/>tex2_coord_count_<sp/>=<sp/>val;<sp/>}</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetTexCoord3Count(uint32_t<sp/>val)<sp/>{<sp/>tex3_coord_count_<sp/>=<sp/>val;<sp/>}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Translate(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w<sp/>=<sp/>0.0f);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/>uint32_t<sp/>num_vertices_;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref>*<sp/>linear_vertex_buffer_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>texcoords<sp/>0<sp/>to<sp/>kFramebufferWidth/kFramebufferHeight</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><ref refid="df/dd0/structVertex" kindref="compound">Vertex</ref>*<sp/>normalized_vertex_buffer_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/><sp/></highlight><highlight class="comment">//<sp/>texcoords<sp/>normalized<sp/>0<sp/>to<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>components<sp/>in<sp/>the<sp/>vertex<sp/>position<sp/>(3<sp/>or<sp/>4).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/>uint32_t<sp/>position_count_<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Number<sp/>of<sp/>components<sp/>in<sp/>the<sp/>vertex<sp/>texcoord<sp/>fields.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>uint32_t<sp/>tex0_coord_count_<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/>uint32_t<sp/>tex1_coord_count_<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/>uint32_t<sp/>tex2_coord_count_<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/>uint32_t<sp/>tex3_coord_count_<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>cache_valid_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/></highlight><highlight class="comment">//<sp/>Indicates<sp/>whether<sp/>the<sp/>HW<sp/>should<sp/>be<sp/>forced<sp/>to<sp/>reload<sp/>this<sp/>buffer.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS__VERTEX_BUFFER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/vertex_buffer.h"/>
+  </compounddef>
+</doxygen>
