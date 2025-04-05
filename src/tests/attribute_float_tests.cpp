@@ -64,6 +64,43 @@ static const TestConfig testConfigs[]{
     {"-Min_Min", "-Min (subnormal) to +Min (subnormal)", {f(negMinSubNorm), f(posMinSubNorm)}},
 };
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc 0_1
+ *  Ranges values from 0 to 1.
+ *
+ * @tc 0_8
+ *  Ranges values from 0 to 8.
+ *
+ * @tc -1_1
+ *  Ranges values from -1 to 1.
+ *
+ * @tc -8_1
+ *  Ranges values from -8 to 1.
+ *
+ * @tc -INF_INF
+ *  Ranges values from -infinity to infinity.
+ *
+ * @tc -Max_Max
+ *  Ranges values from -Max (normal) to +Max (normal).
+ *
+ * @tc -MaxSN_MaxSN
+ *  Ranges values from -Max (subnormal) to +Max (subnormal).
+ *
+ * @tc -Min_Min
+ *  Ranges values from -Min (subnormal) to +Min (subnormal).
+ *
+ * @tc -MinN_MinN
+ *  Ranges values from -Min (normal) to +Min (normal).
+ *
+ * @tc -NaNq_NaNq
+ *  Ranges values from -NaN to +NaN (quiet).
+ *
+ * @tc -NaNs_NaNs
+ *  Ranges values from -NaN to +NaN (signaling).
+ *
+ */
 AttributeFloatTests::AttributeFloatTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Attrib float", config) {
   for (auto testConfig : testConfigs) {
@@ -104,7 +141,7 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
   float totalWidth = (1.f - 2 * inset);
   float colWidth = totalWidth / static_cast<float>(mulVals.size());
 
-  for (int i = 0; i < 1 + mulVals.size(); i++) {
+  for (int i = 0; i < 1 + mulVals.size(); ++i) {
     vb.clear();
 
     float left = inset + static_cast<float>(i) * colWidth;
