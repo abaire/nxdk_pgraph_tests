@@ -243,6 +243,8 @@ add_executable(
         tests/fog_exceptional_value_tests.h
         tests/fog_gen_tests.cpp
         tests/fog_gen_tests.h
+        tests/fog_param_tests.cpp
+        tests/fog_param_tests.h
         tests/fog_tests.cpp
         tests/fog_tests.h
         tests/front_face_tests.cpp
