@@ -52,6 +52,7 @@
 #include "tests/edge_flag_tests.h"
 #include "tests/fog_exceptional_value_tests.h"
 #include "tests/fog_gen_tests.h"
+#include "tests/fog_param_tests.h"
 #include "tests/fog_tests.h"
 #include "tests/front_face_tests.h"
 #include "tests/image_blit_tests.h"
@@ -400,6 +401,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(FogExceptionalValueTests)
   REG_TEST(FogGenTests)
   REG_TEST(FogInfiniteFogCoordinateTests)
+  REG_TEST(FogParamTests)
   REG_TEST(FogVec4CoordTests)
   REG_TEST(FrontFaceTests)
   REG_TEST(ImageBlitTests)
