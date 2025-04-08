@@ -133,21 +133,18 @@ void TestSuite::Initialize() {
 
     p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
     p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x20001);
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
+                 NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR | NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
     p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
     p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
     p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
     p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
     p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
-    p = pb_push1f(p, NV097_SET_BACK_MATERIAL_ALPHA, 0.f);
+    p = pb_push1f(p, NV097_SET_BACK_MATERIAL_ALPHA, 1.f);
 
     p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
     p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
     p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
 
     p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
     p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
@@ -251,6 +248,11 @@ void TestSuite::Initialize() {
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
+    p = pb_push4f(p, NV097_SET_FOG_PLANE, 0.f, 0.f, 1.f, 0.f);
+    p = pb_push1(p, NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_PLANAR);
+    p = pb_push1(p, NV097_SET_FOG_MODE, NV097_SET_FOG_MODE_V_LINEAR);
+    p = pb_push1(p, NV097_SET_FOG_COLOR, 0xFFFFFFFF);
+
     p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
     p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
@@ -276,20 +278,16 @@ void TestSuite::Initialize() {
 
     p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
 
-    // Prevent bleedover between tests by setting default values.
     p = pb_push4f(p, NV097_SET_WEIGHT4F, 0.f, 0.f, 0.f, 0.f);
     p = pb_push3f(p, NV097_SET_NORMAL3F, 0.f, 0.f, 0.f);
     p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0x00000000);
     p = pb_push1(p, NV097_SET_SPECULAR_COLOR4I, 0x00000000);
-    p = pb_push1f(p, NV097_SET_SPECULAR_COLOR4I, 0.f);
-    p = pb_push1(p, NV097_SET_POINT_SIZE, 0x8);
     p = pb_push4f(p, NV097_SET_TEXCOORD0_4F, 0.f, 0.f, 0.f, 0.f);
     p = pb_push4f(p, NV097_SET_TEXCOORD1_4F, 0.f, 0.f, 0.f, 0.f);
     p = pb_push4f(p, NV097_SET_TEXCOORD2_4F, 0.f, 0.f, 0.f, 0.f);
     p = pb_push4f(p, NV097_SET_TEXCOORD3_4F, 0.f, 0.f, 0.f, 0.f);
-
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.f);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA_BACK, 1.f);
+    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
+    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
 
     // Pow 16
     const float specular_params[]{-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433};
@@ -321,6 +319,7 @@ void TestSuite::Initialize() {
     pgraph_diff_.Capture();
   }
 
+  // Perform some nops to tag the end of the default initialization sequence for log processing.
   TagNV2ATrace(2);
   {
     auto p = pb_begin();

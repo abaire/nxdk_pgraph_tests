@@ -241,6 +241,8 @@ add_executable(
         tests/edge_flag_tests.h
         tests/fog_exceptional_value_tests.cpp
         tests/fog_exceptional_value_tests.h
+        tests/fog_gen_tests.cpp
+        tests/fog_gen_tests.h
         tests/fog_tests.cpp
         tests/fog_tests.h
         tests/front_face_tests.cpp
