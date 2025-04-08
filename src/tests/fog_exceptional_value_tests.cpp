@@ -6,11 +6,8 @@
 #include <shaders/perspective_vertex_shader.h>
 
 #include "debug_output.h"
-#include "pbkit_ext.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
-#include "texture_generator.h"
-#include "xbox_math_matrix.h"
 
 // clang-format off
 static constexpr uint32_t kVertexShader[] = {
@@ -28,6 +25,12 @@ static constexpr vector_t kDiffuseUL{0.25f, 0.5f, 0.5f, 1.f};
 static constexpr vector_t kDiffuseUR{0.25f, 0.25f, 0.75f, 1.f};
 static constexpr vector_t kDiffuseLR{0.25f, 0.f, 1.f, 1.f};
 static constexpr vector_t kDiffuseLL{0.25f, 0.75f, 0.25f, 1.f};
+
+// Specular alpha is used for NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA
+static constexpr vector_t kSpecularUL{0.f, 0.f, 0.f, 0.f};
+static constexpr vector_t kSpecularUR{0.f, 0.f, 0.f, 1.f};
+static constexpr vector_t kSpecularLR{0.f, 0.f, 0.f, 0.75f};
+static constexpr vector_t kSpecularLL{0.f, 0.f, 0.f, 0.25f};
 
 // Infinities
 static constexpr uint32_t posInf = 0x7F800000;
@@ -276,6 +279,8 @@ void FogExceptionalValueTests::Initialize() {
   {
     auto p = pb_begin();
     p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
+    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
     pb_end(p);
   }
 
@@ -313,7 +318,7 @@ static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host
   return shader;
 }
 
-void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
+static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
   auto p = pb_begin();
   // Note: Fog color is ABGR and not ARGB
   p = pb_push1(p, NV097_SET_FOG_COLOR, kFogColor);
@@ -365,7 +370,7 @@ void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
 void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode) {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
   auto shader = SetupVertexShader(host_);
-  const auto fog_value_index = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
+  static constexpr auto kFogValueIndex = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
 
   SetupFogParams(fog_mode, fog_gen_mode);
 
@@ -376,9 +381,9 @@ void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, 
   static constexpr float kQuadHeight = 64.f;
   static constexpr float kQuadZ = 0.f;
 
-  auto unproject = [shader](vector_t& world_point, float x, float y) {
-    vector_t screen_point{x, y, kQuadZ, 1.f};
-    shader->UnprojectPoint(world_point, screen_point, kQuadZ);
+  auto unproject = [shader](vector_t& world_point, float x, float y, float z) {
+    vector_t screen_point{x, y, z, 1.f};
+    shader->UnprojectPoint(world_point, screen_point, z);
   };
 
   auto draw_quad = [this, unproject](float left, float top) {
@@ -390,23 +395,27 @@ void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, 
     vector_t world_point{0.f, 0.f, 0.f, 1.f};
 
     host_.SetDiffuse(kDiffuseUL);
+    host_.SetSpecular(kSpecularUL);
     host_.SetNormal(-0.099014754297667f, -0.099014754297667, -0.990147542976674f);
-    unproject(world_point, left, top);
+    unproject(world_point, left, top, kQuadZ);
     host_.SetVertex(world_point);
 
     host_.SetDiffuse(kDiffuseUR);
+    host_.SetSpecular(kSpecularUR);
     host_.SetNormal(0.099014754297667f, -0.099014754297667, -0.990147542976674f);
-    unproject(world_point, right, top);
+    unproject(world_point, right, top, kQuadZ + 2.f);
     host_.SetVertex(world_point);
 
     host_.SetDiffuse(kDiffuseLR);
+    host_.SetSpecular(kSpecularLR);
     host_.SetNormal(0.099014754297667f, 0.099014754297667, -0.990147542976674f);
-    unproject(world_point, right, bottom);
+    unproject(world_point, right, bottom, kQuadZ + 2.f);
     host_.SetVertex(world_point);
 
     host_.SetDiffuse(kDiffuseLL);
+    host_.SetSpecular(kSpecularLL);
     host_.SetNormal(-0.099014754297667f, 0.099014754297667, -0.990147542976674f);
-    unproject(world_point, left, bottom);
+    unproject(world_point, left, bottom, kQuadZ);
     host_.SetVertex(world_point);
 
     host_.End();
@@ -425,7 +434,7 @@ void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, 
 
   for (auto& fog_entry : kFogValues) {
     // Set #fog_value
-    shader->SetUniformF(fog_value_index, *(float*)(&fog_entry.int_value), 0.f, 0.f, 0.f);
+    shader->SetUniformF(kFogValueIndex, *(float*)(&fog_entry.int_value), 0.f, 0.f, 0.f);
     shader->PrepareDraw();
 
     draw_quad(left, top);

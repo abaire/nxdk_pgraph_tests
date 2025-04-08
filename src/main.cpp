@@ -51,6 +51,7 @@
 #include "tests/dma_corruption_around_surface_tests.h"
 #include "tests/edge_flag_tests.h"
 #include "tests/fog_exceptional_value_tests.h"
+#include "tests/fog_gen_tests.h"
 #include "tests/fog_tests.h"
 #include "tests/front_face_tests.h"
 #include "tests/image_blit_tests.h"
@@ -397,6 +398,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(FogTests)
   REG_TEST(FogCustomShaderTests)
   REG_TEST(FogExceptionalValueTests)
+  REG_TEST(FogGenTests)
   REG_TEST(FogInfiniteFogCoordinateTests)
   REG_TEST(FogVec4CoordTests)
   REG_TEST(FrontFaceTests)
