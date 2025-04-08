@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d9/de7/classLight.html" title=" " alt="" coords="5,55,60,80"/>
+<area shape="rect" id="Node000001" href="$d1/d0a/classDirectionalLight.html" title=" " alt="" coords="108,5,233,31"/>
+<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="72,51,133,28,135,33,74,56"/>
+<area shape="rect" id="Node000002" href="$de/d72/classPointLight.html" title=" " alt="" coords="127,55,214,80"/>
+<area shape="poly" id="edge3_Node000000_Node000002" title=" " alt="" coords="74,65,127,65,127,70,74,70"/>
+<area shape="rect" id="Node000003" href="$d1/d87/classSpotlight.html" title=" " alt="" coords="131,104,211,129"/>
+<area shape="poly" id="edge4_Node000000_Node000003" title=" " alt="" coords="74,79,135,101,133,106,72,84"/>
+</map>
