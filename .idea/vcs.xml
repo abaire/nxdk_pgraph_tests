@@ -26,6 +26,5 @@
     <mapping directory="$PROJECT_DIR$/third_party/pbkitplusplus" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/printf" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/tiny-json" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/third_party/xbox_math3d" vcs="Git" />
   </component>
 </project>
