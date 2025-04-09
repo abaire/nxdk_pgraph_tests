@@ -19,6 +19,8 @@ static int GeneratePalettizedGradientSurface(uint8_t **gradient_surface, int wid
                                              TestHost::PaletteSize size);
 static uint32_t *GeneratePalette(TestHost::PaletteSize size);
 
+static constexpr char kZeroMipPrefix[] = "0Mip_";
+
 static const TestHost::PaletteSize kPaletteSizes[] = {
     TestHost::PALETTE_256,
     TestHost::PALETTE_128,
@@ -41,6 +43,17 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
   }
 }
 
+static bool SupportsZeroMipMap(const TextureFormatInfo &format) {
+  switch (format.xbox_format) {
+    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_Y8:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y8:
+      return true;
+
+    default:
+      return false;
+  }
+}
+
 TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Texture format", config) {
   for (auto i = 0; i < kNumFormats; ++i) {
@@ -48,6 +61,10 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, c
     if (!RequiresSpecialTest(format)) {
       std::string name = MakeTestName(format);
       tests_[name] = [this, format]() { Test(format); };
+
+      if (SupportsZeroMipMap(format)) {
+        tests_[kZeroMipPrefix + name] = [this, format]() { TestZeroMipMap(format); };
+      }
 
       //      if (format.xbox_swizzled) {
       //        std::string mip_name = MakeTestName(format, true);
@@ -138,6 +155,42 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
 
   pb_print("N: %s\n", texture_format.name);
   pb_print("Ps: %d\n", size);
+  pb_print("F: 0x%x\n", texture_format.xbox_format);
+  pb_print("SZ: %d\n", texture_format.xbox_swizzled);
+  pb_print("C: %d\n", texture_format.require_conversion);
+  pb_print("W: %d\n", host_.GetMaxTextureWidth());
+  pb_print("H: %d\n", host_.GetMaxTextureHeight());
+  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+}
+
+void TextureFormatTests::TestZeroMipMap(const TextureFormatInfo &texture_format) {
+  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  shader->SetLightingEnabled(false);
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetTextureFormat(texture_format);
+  std::string test_name = MakeTestName(texture_format);
+
+  SDL_Surface *gradient_surface;
+  int update_texture_result =
+      GenerateGradientSurface(&gradient_surface, (int)host_.GetMaxTextureWidth(), (int)host_.GetMaxTextureHeight());
+  ASSERT(!update_texture_result && "Failed to generate SDL surface");
+
+  update_texture_result = host_.SetTexture(gradient_surface);
+  SDL_FreeSurface(gradient_surface);
+  ASSERT(!update_texture_result && "Failed to set texture");
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetMipMapLevels(0);
+  host_.SetupTextureStages();
+
+  host_.PrepareDraw(0xFE202020);
+  host_.DrawArrays();
+
+  pb_print("ZeroMipMap %s\n", texture_format.name);
   pb_print("F: 0x%x\n", texture_format.xbox_format);
   pb_print("SZ: %d\n", texture_format.xbox_swizzled);
   pb_print("C: %d\n", texture_format.require_conversion);
