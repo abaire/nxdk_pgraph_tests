@@ -301,6 +301,8 @@ add_executable(
         tests/swath_width_tests.h
         tests/surface_clip_tests.cpp
         tests/surface_clip_tests.h
+        tests/surface_format_tests.cpp
+        tests/surface_format_tests.h
         tests/surface_pitch_tests.cpp
         tests/surface_pitch_tests.h
         tests/test_suite.cpp
