@@ -1,5 +1,7 @@
 #include "texture_generator.h"
 
+#include <debug_output.h>
+
 #include "swizzle.h"
 
 void GenerateRGBACheckerboard(void *target, uint32_t x_offset, uint32_t y_offset, uint32_t width, uint32_t height,
@@ -39,6 +41,27 @@ void GenerateSwizzledRGBACheckerboard(void *target, uint32_t x_offset, uint32_t 
   delete[] temp_buffer;
 }
 
+static void GenerateRGBTestPattern(void *target, uint32_t width, uint32_t height, uint8_t alpha, uint32_t pitch) {
+  auto row = static_cast<uint32_t *>(target);
+
+  const uint32_t alpha_channel = static_cast<uint32_t>(alpha) << 24;
+  for (uint32_t y = 0; y < height; ++y) {
+    auto y_normal = static_cast<uint32_t>(static_cast<float>(y) * 255.0f / static_cast<float>(height));
+
+    auto pixels = row;
+    for (uint32_t x = 0; x < width; ++x, ++pixels) {
+      auto x_normal = static_cast<uint32_t>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
+      *pixels = y_normal + (x_normal << 8) + ((255 - y_normal) << 16) + alpha_channel;
+    }
+
+    row += pitch;
+  }
+}
+
+void GenerateRGBTestPattern(void *target, uint32_t width, uint32_t height, uint8_t alpha) {
+  GenerateRGBTestPattern(target, width, height, alpha, width * 4);
+}
+
 void GenerateRGBATestPattern(void *target, uint32_t width, uint32_t height) {
   auto pixels = static_cast<uint32_t *>(target);
   for (uint32_t y = 0; y < height; ++y) {
@@ -47,6 +70,39 @@ void GenerateRGBATestPattern(void *target, uint32_t width, uint32_t height) {
     for (uint32_t x = 0; x < width; ++x, ++pixels) {
       auto x_normal = static_cast<uint32_t>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
       *pixels = y_normal + (x_normal << 8) + ((255 - y_normal) << 16) + ((x_normal + y_normal) << 24);
+    }
+  }
+}
+
+void GenerateRGBRadialATestPattern(void *target, uint32_t width, uint32_t height) {
+  ASSERT(!(width & 1) && "Width must be even");
+  ASSERT(!(height & 1) && "Height must be even");
+
+  auto pixels = static_cast<uint32_t *>(target);
+
+  auto half_width = width >> 1;
+  auto half_height = height >> 1;
+
+  auto ur_pixels = pixels + half_width;
+
+  GenerateRGBTestPattern(pixels, half_width, half_height, 0x00, width);
+  GenerateRGBTestPattern(ur_pixels, half_width, half_height, 0x00, width);
+
+  auto ll_pixels = pixels + half_height * width;
+  memcpy(ll_pixels, pixels, width * half_height * 4);
+
+  auto cx = static_cast<float>(half_width);
+  auto cy = static_cast<float>(half_height);
+  auto max_distance = cx * cx + cy * cy;
+
+  for (uint32_t y = 0; y < height; ++y) {
+    auto dy = static_cast<float>(y) - cx;
+
+    for (uint32_t x = 0; x < width; ++x, ++pixels) {
+      auto dx = static_cast<float>(x) - cx;
+      auto distance = dx * dx + dy * dy;
+      auto alpha = static_cast<uint32_t>(255.0f * (1.f - distance / max_distance));
+      *pixels = (*pixels & 0x00FFFFFF) + (alpha << 24);
     }
   }
 }

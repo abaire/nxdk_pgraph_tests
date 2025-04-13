@@ -251,9 +251,10 @@ static int GenerateGradientSurface(SDL_Surface **gradient_surface, int width, in
 
   auto pixels = static_cast<uint32_t *>((*gradient_surface)->pixels);
   for (int y = 0; y < height; ++y) {
+    auto y_normal = static_cast<int>(static_cast<float>(y) * 255.0f / static_cast<float>(height));
+
     for (int x = 0; x < width; ++x, ++pixels) {
-      int x_normal = static_cast<int>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
-      int y_normal = static_cast<int>(static_cast<float>(y) * 255.0f / static_cast<float>(height));
+      auto x_normal = static_cast<int>(static_cast<float>(x) * 255.0f / static_cast<float>(width));
       *pixels = SDL_MapRGBA((*gradient_surface)->format, y_normal, x_normal, 255 - y_normal, x_normal + y_normal);
     }
   }

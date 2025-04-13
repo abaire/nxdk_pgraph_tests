@@ -80,6 +80,7 @@
 #include "tests/stencil_tests.h"
 #include "tests/stipple_tests.h"
 #include "tests/surface_clip_tests.h"
+#include "tests/surface_format_tests.h"
 #include "tests/surface_pitch_tests.h"
 #include "tests/swath_width_tests.h"
 #include "tests/texgen_matrix_tests.h"
@@ -426,6 +427,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SpecularTests)
   REG_TEST(SwathWidthTests)
   REG_TEST(SurfaceClipTests)
+  REG_TEST(SurfaceFormatTests)
   REG_TEST(SurfacePitchTests)
   REG_TEST(StencilTests)
   REG_TEST(StencilFuncTests)

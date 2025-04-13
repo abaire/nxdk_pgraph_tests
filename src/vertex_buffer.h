@@ -208,15 +208,15 @@ class VertexBuffer {
 
   // Returns a new VertexBuffer containing vertices suitable for rendering as triangles by treating the contents of this
   // buffer as a triangle strip.
-  std::shared_ptr<VertexBuffer> ConvertFromTriangleStripToTriangles() const;
+  [[nodiscard]] std::shared_ptr<VertexBuffer> ConvertFromTriangleStripToTriangles() const;
 
   Vertex* Lock();
   void Unlock();
 
-  uint32_t GetNumVertices() const { return num_vertices_; }
+  [[nodiscard]] uint32_t GetNumVertices() const { return num_vertices_; }
 
   void SetCacheValid(bool valid = true) { cache_valid_ = valid; }
-  bool IsCacheValid() const { return cache_valid_; }
+  [[nodiscard]] bool IsCacheValid() const { return cache_valid_; }
 
   void Linearize(float texture_width, float texture_height);
 
