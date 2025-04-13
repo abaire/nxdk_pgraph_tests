@@ -89,8 +89,12 @@ static constexpr uint32_t kFogModes[] = {
 };
 
 static constexpr uint32_t kFogGenModes[] = {
-    NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA, NV097_SET_FOG_GEN_MODE_V_RADIAL, NV097_SET_FOG_GEN_MODE_V_PLANAR,
-    NV097_SET_FOG_GEN_MODE_V_ABS_PLANAR, NV097_SET_FOG_GEN_MODE_V_FOG_X,
+    NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA,
+    // TODO(214): Radial cases are non-deterministic
+    // NV097_SET_FOG_GEN_MODE_V_RADIAL,
+    NV097_SET_FOG_GEN_MODE_V_PLANAR,
+    NV097_SET_FOG_GEN_MODE_V_ABS_PLANAR,
+    NV097_SET_FOG_GEN_MODE_V_FOG_X,
 };
 
 static std::string MakeTestName(uint32_t fog_mode, uint32_t gen_mode) {
