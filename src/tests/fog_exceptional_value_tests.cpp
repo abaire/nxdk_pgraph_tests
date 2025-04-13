@@ -123,9 +123,10 @@ static std::string MakeTestName(uint32_t fog_mode, uint32_t gen_mode) {
     case NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA:
       ret += "-spec_alpha";
       break;
-    case NV097_SET_FOG_GEN_MODE_V_RADIAL:
-      ret += "-radial";
-      break;
+    // TODO(214): Radial cases are non-deterministic
+    // case NV097_SET_FOG_GEN_MODE_V_RADIAL:
+    //   ret += "-radial";
+    //   break;
     case NV097_SET_FOG_GEN_MODE_V_PLANAR:
       ret += "-planar";
       break;
