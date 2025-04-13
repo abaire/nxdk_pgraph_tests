@@ -13,6 +13,11 @@ static constexpr uint32_t kDefaultDMAColorChannel = 9;
 
 static constexpr float kTestRectThickness = 4.0f;
 
+struct NamedSurfaceFormat {
+  const char *suffix;
+  TestHost::SurfaceColorFormat format;
+};
+
 // clang-format off
 static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
     {0, 0, 0, 0},
@@ -31,6 +36,15 @@ static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
   {0,240,640,240},
   // Halo2 multiplayer 4-player
   {320, 240,320,240},
+ };
+
+static constexpr NamedSurfaceFormat kSurfaceFormats[] {
+  {"", TestHost::SCF_R5G6B5},
+  {"_A8R8G8B8", TestHost::SCF_A8R8G8B8},
+
+  // TODO: These trigger a zeta buffer limit error.
+  //   {"_B8", TestHost::SCF_B8},
+  // {"_G8B8", TestHost::SCF_G8B8},
 };
 // clang-format on
 
@@ -182,12 +196,12 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
 SurfaceClipTests::SurfaceClipTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Surface clip", config) {
   for (auto &rect : kTestRects) {
-    std::string name = MakeTestName(false, rect);
-    tests_[name] = [this, &rect, name]() { Test(name, rect, TestHost::SCF_R5G6B5); };
-    name += "_A8R8G8B8";
-    tests_[name] = [this, &rect, name]() { Test(name, rect, TestHost::SCF_A8R8G8B8); };
+    for (auto &format : kSurfaceFormats) {
+      auto name = MakeTestName(false, rect) + format.suffix;
+      tests_[name] = [this, &rect, name, &format]() { Test(name, rect, format.format); };
+    }
 
-    name = MakeTestName(true, rect);
+    auto name = MakeTestName(true, rect);
     tests_[name] = [this, &rect, name]() { TestRenderTarget(name, rect); };
   }
 
@@ -200,24 +214,28 @@ void SurfaceClipTests::Initialize() {
   TestSuite::Initialize();
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
+
+  // Failing to disable alpha blending on B8 and G8B8 will trigger a hardware exception.
+  host_.SetBlend(false);
 }
 
 void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestHost::SurfaceColorFormat color_format) {
   host_.PrepareDraw(0xFC111155);
 
-  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+  // Note: Depth must be set to Z16 for B8 and G8B8 formats.
+  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
   host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
 
   DrawTestImage(rect);
 
   host_.PBKitBusyWait();
-  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);

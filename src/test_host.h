@@ -1,6 +1,7 @@
 #ifndef NXDK_PGRAPH_TESTS_TEST_HOST_H
 #define NXDK_PGRAPH_TESTS_TEST_HOST_H
 
+#include <debug_output.h>
 #include <ftp_logger.h>
 #include <pbkit/pbkit.h>
 #include <printf/printf.h>
@@ -237,6 +238,8 @@ class TestHost {
     SCF_X1A7R8G8B8_Z1A7R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_Z1A7R8G8B8,
     SCF_X1A7R8G8B8_O1A7R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_O1A7R8G8B8,
     SCF_A8R8G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8,
+
+    // NOTE: Failing to disable alpha blending on B8 and G8B8 will trigger a hardware exception.
     SCF_B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_B8,
     SCF_G8B8 = NV097_SET_SURFACE_FORMAT_COLOR_LE_G8B8,
   };
@@ -288,6 +291,51 @@ class TestHost {
   //! Returns the current depth buffer format.
   [[nodiscard]] SurfaceZetaFormat GetDepthBufferFormat() const { return depth_buffer_format_; }
 
+  [[nodiscard]] static bool SurfaceSupportsAlpha(SurfaceColorFormat fmt) {
+    switch (fmt) {
+      case SCF_X1R5G5B5_Z1R5G5B5:
+      case SCF_X1R5G5B5_O1R5G5B5:
+      case SCF_X8R8G8B8_Z8R8G8B8:
+      case SCF_X8R8G8B8_O8R8G8B8:
+      case SCF_X1A7R8G8B8_Z1A7R8G8B8:
+      case SCF_X1A7R8G8B8_O1A7R8G8B8:
+      case SCF_A8R8G8B8:
+        return true;
+
+      case SCF_R5G6B5:
+      case SCF_G8B8:
+      case SCF_B8:
+        return false;
+
+      default:
+        ASSERT(!"Invalid surface color format");
+    }
+  }
+
+  //! Returns the pitch (bytes per row) for the given format and width in pixels.
+  [[nodiscard]] static uint32_t GetSurfaceColorPitch(SurfaceColorFormat fmt, uint32_t width) {
+    switch (fmt) {
+      case SCF_X1R5G5B5_Z1R5G5B5:
+      case SCF_X1R5G5B5_O1R5G5B5:
+      case SCF_R5G6B5:
+      case SCF_G8B8:
+        return width << 1;
+
+      case SCF_X8R8G8B8_Z8R8G8B8:
+      case SCF_X8R8G8B8_O8R8G8B8:
+      case SCF_X1A7R8G8B8_Z1A7R8G8B8:
+      case SCF_X1A7R8G8B8_O1A7R8G8B8:
+      case SCF_A8R8G8B8:
+        return width << 2;
+
+      case SCF_B8:
+        return width;
+
+      default:
+        ASSERT(!"Invalid surface color format");
+    }
+  }
+
   //! Changes the current depth buffer mode into float (true) or fixed integer (false).
   void SetDepthBufferFloatMode(bool enabled);
   //! Returns true if the current depth buffer mode is floating point.
@@ -333,6 +381,8 @@ class TestHost {
   void SetVertexBuffer(std::shared_ptr<VertexBuffer> buffer);
   //! Returns the active vertex buffer.
   std::shared_ptr<VertexBuffer> GetVertexBuffer() { return vertex_buffer_; }
+  //! Removes the active vertex buffer.
+  void ClearVertexBuffer() { vertex_buffer_.reset(); }
 
   //! Clears the active surface and pb_text overlay.
   void Clear(uint32_t argb = 0xFF000000, uint32_t depth_value = 0xFFFFFFFF, uint8_t stencil_value = 0x00) const;
@@ -446,6 +496,22 @@ class TestHost {
   void SetVertex(float x, float y, float z, float w) const;
   //! Trigger creation of a vertex, applying the last set attributes.
   inline void SetVertex(const vector_t pt) const { SetVertex(pt[0], pt[1], pt[2], pt[3]); }
+
+  //! Unprojects the given coordinates and calls SetVertex.
+  void SetScreenVertex(float x, float y, float screen_z) const {
+    vector_t screen{x, y, screen_z, 1.f};
+    vector_t world;
+    UnprojectPoint(world, screen, screen_z);
+    SetVertex(world);
+  }
+
+  //! Unprojects the given coordinates and calls SetVertex.
+  void SetScreenVertex(float x, float y) const {
+    vector_t screen{x, y, 0.f, 1.f};
+    vector_t world;
+    UnprojectPoint(world, screen);
+    SetVertex(world);
+  }
 
   void SetWeight(float w) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
