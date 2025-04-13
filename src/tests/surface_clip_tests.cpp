@@ -41,10 +41,8 @@ static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
 static constexpr NamedSurfaceFormat kSurfaceFormats[] {
   {"", TestHost::SCF_R5G6B5},
   {"_A8R8G8B8", TestHost::SCF_A8R8G8B8},
-
-  // TODO: These trigger a zeta buffer limit error.
-  //   {"_B8", TestHost::SCF_B8},
-  // {"_G8B8", TestHost::SCF_G8B8},
+  {"_B8", TestHost::SCF_B8},
+  {"_G8B8", TestHost::SCF_G8B8},
 };
 // clang-format on
 
@@ -222,20 +220,20 @@ void SurfaceClipTests::Initialize() {
 void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestHost::SurfaceColorFormat color_format) {
   host_.PrepareDraw(0xFC111155);
 
-  // Note: Depth must be set to Z16 for B8 and G8B8 formats.
-  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
-  host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
+  // Note: Clearing the depth stencil in B8 and G8B8 formats will result in a zeta limit exception.
+  // host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
 
   DrawTestImage(rect);
 
   host_.PBKitBusyWait();
-  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+  host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
