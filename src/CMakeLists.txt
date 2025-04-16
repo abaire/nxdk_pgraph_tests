@@ -86,6 +86,7 @@ generate_nv2a_vshinc_files(
         shaders/fog_vec4_zw.vsh
         shaders/fog_vec4_unset.vsh
         shaders/passthrough.vsh
+        shaders/passthrough_just_position_and_color.vsh
         shaders/projection_vertex_shader_colorless_light.vsh
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
@@ -240,6 +241,8 @@ add_executable(
         tests/dma_corruption_around_surface_tests.h
         tests/edge_flag_tests.cpp
         tests/edge_flag_tests.h
+        tests/fog_carryover_tests.cpp
+        tests/fog_carryover_tests.h
         tests/fog_exceptional_value_tests.cpp
         tests/fog_exceptional_value_tests.h
         tests/fog_gen_tests.cpp

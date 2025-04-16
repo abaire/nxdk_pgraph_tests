@@ -50,6 +50,7 @@
 #include "tests/depth_format_tests.h"
 #include "tests/dma_corruption_around_surface_tests.h"
 #include "tests/edge_flag_tests.h"
+#include "tests/fog_carryover_tests.h"
 #include "tests/fog_exceptional_value_tests.h"
 #include "tests/fog_gen_tests.h"
 #include "tests/fog_param_tests.h"
@@ -399,6 +400,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(EdgeFlagTests)
   REG_TEST(FogTests)
+  REG_TEST(FogCarryoverTests)
   REG_TEST(FogCustomShaderTests)
   REG_TEST(FogExceptionalValueTests)
   REG_TEST(FogGenTests)
