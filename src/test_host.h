@@ -514,6 +514,8 @@ class TestHost {
   }
 
   void SetWeight(float w) const;
+  void SetWeight(float w1, float w2) const;
+  void SetWeight(float w1, float w2, float w3) const;
   void SetWeight(float w1, float w2, float w3, float w4) const;
   void SetNormal(float x, float y, float z) const;
   void SetNormal(const float *vals) const;

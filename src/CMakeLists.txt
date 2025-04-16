@@ -89,6 +89,7 @@ generate_nv2a_vshinc_files(
         shaders/projection_vertex_shader_colorless_light.vsh
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
+        shaders/weight_to_color.vsh
 )
 
 generate_pixelshader_inl_files(
@@ -351,6 +352,8 @@ add_executable(
         tests/volume_texture_tests.h
         tests/w_param_tests.cpp
         tests/w_param_tests.h
+        tests/weight_setter_tests.cpp
+        tests/weight_setter_tests.h
         tests/window_clip_tests.cpp
         tests/window_clip_tests.h
         tests/z_min_max_control_tests.cpp
