@@ -494,10 +494,10 @@ void FogParamTests::TestBiasZeroPoint(const std::string& name, uint32_t fog_mode
   };
   host_.SetFogCoord(-1.f);
 
-  static constexpr float kTopPadding = 70.f;
+  static constexpr float kTopPadding = 46.f;
   static constexpr float kSidePadding = 48.f;
   static constexpr float kQuadSpacingH = 2.f;
-  static constexpr float kQuadSpacingV = 2.f;
+  static constexpr float kQuadSpacingV = 1.f;
 
   const float right = host_.GetFramebufferWidthF() - (kSidePadding + kQuadWidth);
   const float bottom = host_.GetFramebufferHeightF() - kQuadHeight;
@@ -527,6 +527,11 @@ void FogParamTests::TestBiasZeroPoint(const std::string& name, uint32_t fog_mode
   }
 
   pb_print("%s\n", name.c_str());
+
+  for (auto i = 0; i < 15; ++i) {
+    pb_printat(i + 1, 0, "%d.%d", 1 + (i / 10), i % 10);
+  }
+
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
