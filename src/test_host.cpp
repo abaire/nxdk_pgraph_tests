@@ -602,6 +602,18 @@ void TestHost::SetWeight(float w) const {
   pb_end(p);
 }
 
+void TestHost::SetWeight(float w1, float w2) const {
+  auto p = pb_begin();
+  p = pb_push2f(p, NV097_SET_WEIGHT2F, w1, w2);
+  pb_end(p);
+}
+
+void TestHost::SetWeight(float w1, float w2, float w3) const {
+  auto p = pb_begin();
+  p = pb_push3f(p, NV097_SET_WEIGHT3F, w1, w2, w3);
+  pb_end(p);
+}
+
 void TestHost::SetNormal(float x, float y, float z) const {
   auto p = pb_begin();
   p = pb_push3f(p, NV097_SET_NORMAL3F, x, y, z);
