@@ -16,7 +16,8 @@ inline uint32_t *pb_push4(uint32_t *p, DWORD command, DWORD param1, DWORD param2
 inline uint32_t *pb_push4f(uint32_t *p, DWORD command, float param1, float param2, float param3, float param4) {
   return p;
 }
-inline void pb_end(uint32_t *pEnd) {};
+inline void pb_end(uint32_t *pEnd) {}
 inline int pb_busy() { return 0; }
+inline void pb_reset() {}
 
 #endif  // NV_REGS_H
