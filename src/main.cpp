@@ -58,6 +58,7 @@
 #include "tests/front_face_tests.h"
 #include "tests/image_blit_tests.h"
 #include "tests/inline_array_size_mismatch.h"
+#include "tests/lighting_accumulation_tests.h"
 #include "tests/lighting_control_tests.h"
 #include "tests/lighting_normal_tests.h"
 #include "tests/lighting_range_tests.h"
@@ -410,6 +411,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(FrontFaceTests)
   REG_TEST(ImageBlitTests)
   REG_TEST(InlineArraySizeMismatchTests)
+  REG_TEST(LightingAccumulationTests)
   REG_TEST(LightingControlTests)
   REG_TEST(LightingRangeTests)
   REG_TEST(LightingSpotlightTests)

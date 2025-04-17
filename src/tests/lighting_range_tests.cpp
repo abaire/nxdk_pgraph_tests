@@ -1,17 +1,12 @@
 #include "lighting_range_tests.h"
 
 #include <light.h>
-#include <models/flat_mesh_grid_model.h>
 #include <pbkit/pbkit.h>
-#include <shaders/perspective_vertex_shader.h>
 
 #include "debug_output.h"
-#include "models/light_control_test_mesh_cone_model.h"
-#include "models/light_control_test_mesh_cylinder_model.h"
-#include "models/light_control_test_mesh_sphere_model.h"
-#include "models/light_control_test_mesh_suzanne_model.h"
-#include "models/light_control_test_mesh_torus_model.h"
+#include "models/flat_mesh_grid_model.h"
 #include "pbkit_ext.h"
+#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
@@ -27,11 +22,12 @@ static constexpr vector_t kLightAmbientColor{0.05f, 0.05f, 0.05f, 0.f};
 static constexpr vector_t kLightDiffuseColor{1.f, 1.f, 0.f, 0.f};
 static constexpr vector_t kLightSpecularColor{0.f, 0.f, 1.f, 0.f};
 
-// From the left, pointing right and into the screen.
+// Pointing into the screen.
 static constexpr vector_t kDirectionalLightDir{0.f, 0.f, 1.f, 1.f};
 
 static constexpr vector_t kPositionalLightPosition{0.f, 0.f, -7.f, 1.f};
 static constexpr float kLightRange = 8.f;
+// Force attentuation to be infinite so that range is the only value impacting whether a vertex is lit or not.
 static constexpr float kAttenuationConstant = 0.f;
 static constexpr float kAttenuationLinear = 0.f;
 static constexpr float kAttenuationQuadratic = 0.f;
@@ -93,7 +89,7 @@ void LightingRangeTests::Deinitialize() { vertex_buffer_mesh_.reset(); }
 void LightingRangeTests::CreateGeometry() {
   // SET_COLOR_MATERIAL below causes per-vertex diffuse color to be ignored entirely.
   vector_t diffuse{0.f, 0.f, 0.0f, 0.f};
-  vector_t specular{1.f, 1., 1.f, 0.25f};
+  vector_t specular{1.f, 1.f, 1.f, 0.25f};
 
   auto model = FlatMeshGridModel(diffuse, specular);
   vertex_buffer_mesh_ = host_.AllocateVertexBuffer(model.GetVertexCount());
