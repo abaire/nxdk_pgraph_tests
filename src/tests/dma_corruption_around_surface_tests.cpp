@@ -52,13 +52,12 @@ void DMACorruptionAroundSurfaceTests::Test() {
   // Configure a surface pointing at texture memory and do a no-op draw to force xemu to create a SurfaceBinding.
   {
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory + kHalfTextureSize));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory + kHalfTextureSize));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize);
     NoOpDraw();
@@ -72,13 +71,12 @@ void DMACorruptionAroundSurfaceTests::Test() {
   // Point the output surface back at the framebuffer.
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
 
   // Restore the surface format to allow the texture to be rendered.
@@ -140,8 +138,8 @@ void DMACorruptionAroundSurfaceTests::NoOpDraw() const {
 }
 
 void DMACorruptionAroundSurfaceTests::WaitForGPU() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::End();
 }

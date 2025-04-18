@@ -328,15 +328,15 @@ void SpecularTests::Initialize() {
   TestSuite::Initialize();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
 
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
 
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.75f);  // Only affects the diffuse channel alpha.
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.75f);  // Only affects the diffuse channel alpha.
+    Pushbuffer::End();
   }
 
   // Setup pixel shader to just utilize specular component.
@@ -416,16 +416,16 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
   }
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, enable_lighting);
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, enable_lighting);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
 
     // Pow 16
     const float specular_params[]{-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433};
     for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
     }
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   const auto fb_width = host_.GetFramebufferWidthF();
@@ -491,11 +491,10 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
     // Separate specular + alpha from material.
     {
-      auto p = pb_begin();
-      p = pb_push1(
-          p, NV097_SET_LIGHT_CONTROL,
-          NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                    NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -503,9 +502,9 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
     // Separate specular
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -513,9 +512,9 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
     // Alpha from material
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -523,9 +522,9 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
 
     // None
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, 0);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -543,9 +542,9 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
                               false, TestHost::MAP_UNSIGNED_INVERT);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+    Pushbuffer::End();
   }
   draw_row(top);
   top += inc_y;
@@ -567,9 +566,9 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
                               false, TestHost::MAP_UNSIGNED_INVERT);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::End();
   }
   draw_row(top);
   top += inc_y;
@@ -643,26 +642,26 @@ void SpecularTests::TestSpecularParams(const std::string& name, const float* spe
       light_mode_bitvector |= light.light_enable_mask();
     }
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
 
     static constexpr vector_t kBrightAmbientColor{0.1f, 0.1f, 0.1f, 0.f};
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kBrightAmbientColor);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kBrightAmbientColor);
 
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.75f);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.75f);
 
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
 
     for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
     }
 
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   for (auto& vb : {
@@ -702,32 +701,32 @@ void SpecularTests::TestNonUnitNormals(const std::string& name, float normal_len
     VectorNormalize(look_dir);
     light.Commit(host_, look_dir);
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light.light_enable_mask());
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_LOCALEYE |
-                     NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.f);
-    p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, 0.f, 0.f, 0.f);
-    p = pb_push3f(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0.f, 0.f, 0.f);
-    p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 1.f, 1.f, 1.f);
-    p = pb_push3f(p, NV097_SET_LIGHT_SPECULAR_COLOR, 1.f, 1.f, 1.f);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light.light_enable_mask());
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_LOCALEYE |
+                                                  NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 1.f);
+    Pushbuffer::PushF(NV097_SET_SCENE_AMBIENT_COLOR, 0.f, 0.f, 0.f);
+    Pushbuffer::PushF(NV097_SET_LIGHT_AMBIENT_COLOR, 0.f, 0.f, 0.f);
+    Pushbuffer::PushF(NV097_SET_LIGHT_DIFFUSE_COLOR, 1.f, 1.f, 1.f);
+    Pushbuffer::PushF(NV097_SET_LIGHT_SPECULAR_COLOR, 1.f, 1.f, 1.f);
 
     // material.Power = 125.0f;
-    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS,
-                 0xBF78DF9C,  // -0.972162
-                 0xC04D3531,  // -3.20637
-                 0x404EFD4A   // 3.23421
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS,
+                     0xBF78DF9C,  // -0.972162
+                     0xC04D3531,  // -3.20637
+                     0x404EFD4A   // 3.23421
     );
-    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS + 0x0C,
-                 0xBF71F52E,  // -0.945147
-                 0xC048FA21,  // -3.14027
-                 0x404C7CD6   // 3.19512
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x0C,
+                     0xBF71F52E,  // -0.945147
+                     0xC048FA21,  // -3.14027
+                     0x404C7CD6   // 3.19512
     );
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   auto unproject = [this](vector_t& world_point, float x, float y) {

@@ -40,9 +40,9 @@ void MaterialColorSourceTests::Initialize() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTROL0, NV097_SET_CONTROL0_TEXTURE_PERSPECTIVE_ENABLE);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTROL0, NV097_SET_CONTROL0_TEXTURE_PERSPECTIVE_ENABLE);
+    Pushbuffer::End();
   }
 
   host_.SetCombinerControl(1);
@@ -311,7 +311,7 @@ static void SetCombiner(TestHost& host, bool diffuse, bool specular, bool force_
 }
 
 static void SetLightAndMaterial(const vector_t& material_emission) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
   float r, g, b;
 
@@ -321,28 +321,28 @@ static void SetLightAndMaterial(const vector_t& material_emission) {
   r = kSceneAmbient[0] + kMaterialEmissive[0];
   g = kSceneAmbient[1] + kMaterialEmissive[1];
   b = kSceneAmbient[2] + kMaterialEmissive[2];
-  p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, r, g, b);
+  Pushbuffer::PushF(NV097_SET_SCENE_AMBIENT_COLOR, r, g, b);
 
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, kMaterialAlpha);
-  p = pb_push3fv(p, NV097_SET_LIGHT_AMBIENT_COLOR, kMaterialAmbient);
-  p = pb_push3fv(p, NV097_SET_LIGHT_DIFFUSE_COLOR, kMaterialDiffuse);
-  p = pb_push3fv(p, NV097_SET_LIGHT_SPECULAR_COLOR, kMaterialSpecular);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, kMaterialAlpha);
+  Pushbuffer::Push3F(NV097_SET_LIGHT_AMBIENT_COLOR, kMaterialAmbient);
+  Pushbuffer::Push3F(NV097_SET_LIGHT_DIFFUSE_COLOR, kMaterialDiffuse);
+  Pushbuffer::Push3F(NV097_SET_LIGHT_SPECULAR_COLOR, kMaterialSpecular);
 
   // material.Power = 125.0f;
-  p = pb_push3(p, NV097_SET_SPECULAR_PARAMS,
-               0xBF78DF9C,  // -0.972162
-               0xC04D3531,  // -3.20637
-               0x404EFD4A   // 3.23421
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS,
+                   0xBF78DF9C,  // -0.972162
+                   0xC04D3531,  // -3.20637
+                   0x404EFD4A   // 3.23421
   );
-  p = pb_push3(p, NV097_SET_SPECULAR_PARAMS + 0x0C,
-               0xBF71F52E,  // -0.945147
-               0xC048FA21,  // -3.14027
-               0x404C7CD6   // 3.19512
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x0C,
+                   0xBF71F52E,  // -0.945147
+                   0xC048FA21,  // -3.14027
+                   0x404C7CD6   // 3.19512
   );
 
-  p = pb_push3fv(p, NV097_SET_MATERIAL_EMISSION, material_emission);
+  Pushbuffer::Push3F(NV097_SET_MATERIAL_EMISSION, material_emission);
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 static uint32_t SetupLights(TestHost& host, uint32_t num_lights) {
@@ -458,10 +458,10 @@ static void DrawColorSwatch(TestHost& host, float left, float top, float right, 
 }
 
 static void DrawLegend(TestHost& host, float left, float top, float right, float bottom) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // Draw a legend of colors along the left side.
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
+  Pushbuffer::End();
 
   SetCombiner(host, true, false);
 
@@ -510,14 +510,14 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
   auto light_mode_bitvector = SetupLights(host_, num_lights);
 
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
 
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::End();
   }
 
   SetLightAndMaterial(material_emission);
@@ -545,9 +545,9 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
       source_selector += NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR * ambient;
     }
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, source_selector);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, source_selector);
+    Pushbuffer::End();
     DrawQuad(host_, left, top, 0.f);
   };
 
@@ -600,33 +600,33 @@ void MaterialColorSourceTests::TestEmissive(const std::string& name, const vecto
   auto light_mode_bitvector = light.light_enable_mask();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, kMaterialAlpha);
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbient);
-    p = pb_push3fv(p, NV097_SET_LIGHT_AMBIENT_COLOR, kMaterialAmbient);
-    p = pb_push3fv(p, NV097_SET_LIGHT_DIFFUSE_COLOR, kMaterialDiffuse);
-    p = pb_push3fv(p, NV097_SET_LIGHT_SPECULAR_COLOR, kMaterialSpecular);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, kMaterialAlpha);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbient);
+    Pushbuffer::Push3F(NV097_SET_LIGHT_AMBIENT_COLOR, kMaterialAmbient);
+    Pushbuffer::Push3F(NV097_SET_LIGHT_DIFFUSE_COLOR, kMaterialDiffuse);
+    Pushbuffer::Push3F(NV097_SET_LIGHT_SPECULAR_COLOR, kMaterialSpecular);
 
     // material.Power = 125.0f;
-    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS,
-                 0xBF78DF9C,  // -0.972162
-                 0xC04D3531,  // -3.20637
-                 0x404EFD4A   // 3.23421
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS,
+                     0xBF78DF9C,  // -0.972162
+                     0xC04D3531,  // -3.20637
+                     0x404EFD4A   // 3.23421
     );
-    p = pb_push3(p, NV097_SET_SPECULAR_PARAMS + 0x0C,
-                 0xBF71F52E,  // -0.945147
-                 0xC048FA21,  // -3.14027
-                 0x404C7CD6   // 3.19512
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x0C,
+                     0xBF71F52E,  // -0.945147
+                     0xC048FA21,  // -3.14027
+                     0x404C7CD6   // 3.19512
     );
 
-    p = pb_push3fv(p, NV097_SET_MATERIAL_EMISSION, material_emission);
+    Pushbuffer::Push3F(NV097_SET_MATERIAL_EMISSION, material_emission);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   static constexpr auto kLeftColumn = 126;
@@ -664,9 +664,9 @@ void MaterialColorSourceTests::TestEmissive(const std::string& name, const vecto
       source_selector += NV097_SET_COLOR_MATERIAL_AMBIENT_FROM_VERTEX_SPECULAR;
     }
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, source_selector);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, source_selector);
+    Pushbuffer::End();
     DrawQuad(host_, left, top, 0.f);
   };
 

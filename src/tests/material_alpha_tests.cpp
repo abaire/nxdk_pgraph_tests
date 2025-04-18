@@ -48,10 +48,10 @@ void MaterialAlphaTests::Initialize() {
 }
 
 void MaterialAlphaTests::Deinitialize() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 0);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, 0);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, 0);
+  Pushbuffer::End();
   TestSuite::Deinitialize();
 }
 
@@ -107,66 +107,56 @@ void MaterialAlphaTests::Test(uint32_t diffuse_source, float material_alpha) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
   // Set up a directional light.
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
+  Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
 
   // Ambient color comes from the material's diffuse color.
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_AMBIENT_COLOR, 9);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x3F6EEEEF;  // 0.933333 0xEE
-  *(p++) = 0x3F3BBBBC;  // 0.733333 0xBB
-  *(p++) = 0x3F2AAAAB;  // 0.666667 0xAA
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e+30
-  pb_push_to(SUBCH_3D, p++, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 6);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x3F800000;
+  Pushbuffer::Push(NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
+  Pushbuffer::Push(NV097_SET_LIGHT_DIFFUSE_COLOR, 0x3F6EEEEF, 0x3F3BBBBC, 0x3F2AAAAB);
+  Pushbuffer::Push(NV097_SET_LIGHT_SPECULAR_COLOR, 0, 0, 0);
 
-  p = pb_push1(p, NV097_SET_CONTROL0, 0x100001);
+  Pushbuffer::Push(NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e+30
 
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x0C, 0xFFFFFFFF);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x10, 0);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + 0x20, 0);
+  Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
+  Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR + 0x0C, 0, 0, 0x3F800000);
 
-  p = pb_push1(p, NV10_TCL_PRIMITIVE_3D_POINT_PARAMETERS_ENABLE, 0x0);
+  Pushbuffer::Push(NV097_SET_CONTROL0, 0x100001);
 
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xBF7730E0);
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 4, 0xC0497B30);
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 8, 0x404BAEF8);
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 12, 0xBF6E9EE4);
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 16, 0xC0463F88);
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 20, 0x404A97CF);
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + 0x0C, 0xFFFFFFFF);
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + 0x10, 0);
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + 0x1C, 0xFFFFFFFF);
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + 0x20, 0);
 
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
+  Pushbuffer::Push(NV10_TCL_PRIMITIVE_3D_POINT_PARAMETERS_ENABLE, 0x0);
 
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, 0x1);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, 0x1);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS, 0xBF7730E0);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 4, 0xC0497B30);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 8, 0x404BAEF8);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 12, 0xBF6E9EE4);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 16, 0xC0463F88);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 20, 0x404A97CF);
 
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, diffuse_source);
-  p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x3C6DDACA, 0x0);
+  Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, 0x10001);
 
-  p = pb_push1(p, NV097_SET_MATERIAL_EMISSION, 0x0);
-  p = pb_push1(p, NV097_SET_MATERIAL_EMISSION + 4, 0x0);
-  p = pb_push1(p, NV097_SET_MATERIAL_EMISSION + 8, 0x0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, 0x1);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, 0x1);
+
+  Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, diffuse_source);
+  Pushbuffer::Push(NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x3C6DDACA, 0x0);
+
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0);
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION + 4, 0x0);
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION + 8, 0x0);
+  Pushbuffer::End();
 
   // Material's diffuse alpha float
   PGRAPHDiffToken diff_token(true, false);
-  p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t alpha_int = *(uint32_t*)&material_alpha;
-  p = pb_push1(p, NV097_SET_MATERIAL_ALPHA, alpha_int);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_MATERIAL_ALPHA, alpha_int);
+  Pushbuffer::End();
   diff_token.DumpDiff();
 
   host_.DrawArrays(host_.POSITION | host_.NORMAL | host_.DIFFUSE | host_.SPECULAR);

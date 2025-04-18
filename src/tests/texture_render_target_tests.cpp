@@ -127,31 +127,28 @@ void TextureRenderTargetTests::ResetAndDrawFromRenderTarget() const {
     host_.SetWindowClip(host_.GetFramebufferWidth() - 1, host_.GetFramebufferHeight() - 1);
     host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::End();
 
     host_.PrepareDraw(0xFE212021);
 
     // PrepareDraw overwrites the texture offset.
-    p = pb_begin();
-    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, render_target_address);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, render_target_address);
+    Pushbuffer::End();
 
     host_.SetVertexBuffer(framebuffer_vertex_buffer_);
     host_.DrawArrays();
   }
 
   // Restore the texture source.
-  {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, normal_texture_address);
-    pb_end(p);
-  }
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, normal_texture_address);
+  Pushbuffer::End();
 }
 
 void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
@@ -178,17 +175,16 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
 
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     auto shader = std::make_shared<PrecalculatedVertexShader>();
     host_.SetVertexShaderProgram(shader);
@@ -242,16 +238,15 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
 
   // Redirect the color output to the target texture.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     auto shader = std::make_shared<PrecalculatedVertexShader>();
     host_.SetVertexShaderProgram(shader);

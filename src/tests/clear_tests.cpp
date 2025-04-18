@@ -139,9 +139,9 @@ void ClearTests::Initialize() {
 
   CreateGeometry();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
 }
 
 void ClearTests::CreateGeometry() {
@@ -175,22 +175,23 @@ void ClearTests::Test(uint32_t color_mask, bool depth_write_enable) {
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE);
 
   host_.SetupControl0(false);
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // This is not strictly necessary, but causes xemu to flag the color surface as dirty, exercising xemu bug #730.
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_COLOR_MASK, color_mask);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, depth_write_enable);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, depth_write_enable);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, color_mask);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, depth_write_enable);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, depth_write_enable);
 
-  p = pb_push1(p, NV097_SET_COLOR_CLEAR_VALUE, 0x7F7F7F7F);
-  p = pb_push1(p, NV097_CLEAR_SURFACE, NV097_CLEAR_SURFACE_COLOR | NV097_CLEAR_SURFACE_Z | NV097_CLEAR_SURFACE_STENCIL);
+  Pushbuffer::Push(NV097_SET_COLOR_CLEAR_VALUE, 0x7F7F7F7F);
+  Pushbuffer::Push(NV097_CLEAR_SURFACE,
+                   NV097_CLEAR_SURFACE_COLOR | NV097_CLEAR_SURFACE_Z | NV097_CLEAR_SURFACE_STENCIL);
 
-  p = pb_push1(p, NV097_SET_COLOR_MASK,
-               NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                   NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, true);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_COLOR_MASK,
+                   NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                       NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, true);
+  Pushbuffer::End();
 
   pb_print("C: 0x%08X\n", color_mask);
   pb_print("D: %s\n", depth_write_enable ? "Y" : "N");

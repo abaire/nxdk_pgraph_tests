@@ -236,31 +236,31 @@ void LightingControlTests::Initialize() {
 }
 
 static void SetupLights(TestHost& host, bool specular_enabled) {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, specular_enabled);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, specular_enabled);
 
-  p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
+  Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
 
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.40f);
+  Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.40f);
 
   // Values taken from MechAssault
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
 
   // // Values from Ninja Gaiden Black
-  // p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x00,0xBF6E9EE5); //  -0.932112)
-  // p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x04,0xC0463F88); //  -3.097628)
-  // p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x08,0x404A97CF); //  3.165516)
-  // p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x0c,0xBF5E8491); //  -0.869210)
-  // p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x10,0xC03BDEAB); //  -2.935466)
-  // p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x14,0x40443D87); //  3.066255)
+  // Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 0x00,0xBF6E9EE5); //  -0.932112)
+  // Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 0x04,0xC0463F88); //  -3.097628)
+  // Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 0x08,0x404A97CF); //  3.165516)
+  // Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 0x0c,0xBF5E8491); //  -0.869210)
+  // Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 0x10,0xC03BDEAB); //  -2.935466)
+  // Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 0x14,0x40443D87); //  3.066255)
 
   // Collects the modes of each hardware light.
   uint32_t light_mode_bitvector = 0;
@@ -290,12 +290,12 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
     ScalarMultVector(normalized_light_dir, -1.f);
     ScalarMultVector(half_angle_vector, -1.f);
 
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), kDirectionalLightAmbientColor);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), kDirectionalLightDiffuseColor);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), kDirectionalLightSpecularColor);
-    p = pb_push1f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 1e30f);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_HALF_VECTOR), half_angle_vector);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_DIRECTION), normalized_light_dir);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), kDirectionalLightAmbientColor);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), kDirectionalLightDiffuseColor);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), kDirectionalLightSpecularColor);
+    Pushbuffer::PushF(SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 1e30f);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_HALF_VECTOR), half_angle_vector);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_INFINITE_DIRECTION), normalized_light_dir);
 
     light_mode_bitvector |= LIGHT_MODE(kLightNum, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
   }
@@ -308,19 +308,19 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
     VectorMultMatrix(position, view_matrix);
     position[3] = 1.f;
 
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), kPointLightAmbientColor);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), kPointLightDiffuseColor);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), kPointLightSpecularColor);
-    p = pb_push1f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 4.f);
-    p = pb_push3fv(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_POSITION), position);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_AMBIENT_COLOR), kPointLightAmbientColor);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_DIFFUSE_COLOR), kPointLightDiffuseColor);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_SPECULAR_COLOR), kPointLightSpecularColor);
+    Pushbuffer::PushF(SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_RANGE), 4.f);
+    Pushbuffer::Push3F(SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_POSITION), position);
     // Attenuation = param1 + (param2 * d) + (param3 * d^2) where d = distance from light to surface.
-    p = pb_push3f(p, SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_ATTENUATION), 0.025f, 0.15f, 0.02f);
+    Pushbuffer::PushF(SET_LIGHT(kLightNum, NV097_SET_LIGHT_LOCAL_ATTENUATION), 0.025f, 0.15f, 0.02f);
 
     light_mode_bitvector |= LIGHT_MODE(kLightNum, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_LOCAL);
   }
 
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+  Pushbuffer::End();
 
   host.SetCombinerControl(1);
   host.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
@@ -390,17 +390,17 @@ void LightingControlTests::Test(const std::string& name, uint32_t light_control,
   host_.DrawCheckerboardUnproject(kCheckerboardA, kCheckerboardB, 24);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, light_control);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, light_control);
+    Pushbuffer::End();
   }
 
   SetupLights(host_, specular_enabled);
 
   if (!is_fixed_function) {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
+    Pushbuffer::End();
   }
 
   for (auto& vb : {

@@ -10,6 +10,7 @@
 #include <memory>
 
 #include "nxdk_ext.h"
+#include "pushbuffer.h"
 #include "string"
 #include "texture_format.h"
 #include "texture_stage.h"
@@ -747,10 +748,10 @@ class TestHost {
 
   //! Inserts a pushbuffer command to await idle.
   static void WaitForGPU() {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
   }
 
   //! Does a busywait

@@ -96,10 +96,10 @@ void BlendTests::Initialize() {
   auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ALPHA_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
 }
 
 void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {
@@ -348,24 +348,22 @@ void BlendTests::DrawCheckerboardBackground() const {
 void BlendTests::RenderToTextureStart(uint32_t stage, uint32_t texture_pitch) const {
   const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(stage));
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, texture_pitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, texture_pitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+  Pushbuffer::End();
 }
 
 void BlendTests::RenderToTextureEnd() const {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::End();
 }
 
 void BlendTests::DrawQuad(float left, float top, float right, float bottom, uint32_t color, uint32_t func,

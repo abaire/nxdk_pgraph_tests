@@ -313,11 +313,11 @@ void TextureBorderTests::Test2D() {
 }
 
 static void SetAddressMode(TextureStage::WrapMode mode) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t texture_address = MASK(NV097_SET_TEXTURE_ADDRESS_U, mode) | MASK(NV097_SET_TEXTURE_ADDRESS_V, mode) |
                              MASK(NV097_SET_TEXTURE_ADDRESS_P, mode);
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), texture_address);
-  pb_end(p);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_WRAP(0), texture_address);
+  Pushbuffer::End();
 }
 
 void TextureBorderTests::TestXemu1034() {
@@ -359,18 +359,18 @@ void TextureBorderTests::TestXemu1034() {
     host_.DrawArrays();
 
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, 0xF0559FFF);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_TEXTURE_BORDER_COLOR, 0xF0559FFF);
+      Pushbuffer::End();
     }
     SetAddressMode(TextureStage::WRAP_BORDER);
     host_.SetVertexBuffer(vertex_buffers_[3]);
     host_.DrawArrays();
 
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, 0xF0FF5533);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_TEXTURE_BORDER_COLOR, 0xF0FF5533);
+      Pushbuffer::End();
     }
     host_.SetVertexBuffer(vertex_buffers_[4]);
     host_.DrawArrays();
