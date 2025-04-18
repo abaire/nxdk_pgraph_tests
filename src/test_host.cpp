@@ -250,6 +250,7 @@ void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
 
   set(POSITION, NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, vertex_buffer_->position_count_,
       &vptr[0].pos);
+  // TODO: Support multi-component weights.
   set(WEIGHT, NV2A_VERTEX_ATTR_WEIGHT, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 1, &vptr[0].weight);
   set(NORMAL, NV2A_VERTEX_ATTR_NORMAL, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, &vptr[0].normal);
   set(DIFFUSE, NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, &vptr[0].diffuse);
@@ -286,27 +287,42 @@ void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitiv
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawArrays.");
-  static constexpr int kVerticesPerPush = 120;
+  auto num_vertices = vertex_buffer_->num_vertices_;
+  ASSERT(num_vertices <= 0x100FE &&
+         "NV097_DRAW_ARRAYS only allows start indices below 0xFFFF and 0xFF vertices per push");
 
   SetVertexBufferAttributes(enabled_vertex_fields);
-  int num_vertices = static_cast<int>(vertex_buffer_->num_vertices_);
 
-  int start = 0;
+  // Max 0xFF due to NV097_DRAW_ARRAYS_COUNT bitmask.
+  static constexpr uint32_t kVerticesPerPush = 0xFF;
+  PBKitFlushPushbufer();
+
+  auto p = pb_begin();
+  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+  uint32_t num_pushed = 2;
+  static constexpr uint32_t kElementsPerPush = 64;  // pbkit limit is 128 DWORDS, each push1 is a command + param = 2.
+
+  uint32_t start = 0;
   while (start < num_vertices) {
-    int count = std::min(num_vertices - start, kVerticesPerPush);
-
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+    auto remaining = num_vertices - start;
+    auto count = remaining < kVerticesPerPush ? remaining : kVerticesPerPush;
 
     p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
                  MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
-
-    p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-
-    pb_end(p);
+    num_pushed += 2;
 
     start += count;
+
+    if (num_pushed >= kElementsPerPush) {
+      pb_end(p);
+      PBKitFlushPushbufer();
+      p = pb_begin();
+      num_pushed = 0;
+    }
   }
+
+  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  pb_end(p);
 }
 
 void TestHost::Begin(DrawPrimitive primitive) const {
@@ -329,10 +345,17 @@ void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive pr
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineBuffer.");
   SetVertexBufferAttributes(enabled_vertex_fields);
 
+  PBKitFlushPushbufer();
+
   Begin(primitive);
 
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
+    // Flush the pushbuffer occasionally.
+    if ((i & 0x0FFF) == 0) {
+      PBKitFlushPushbufer();
+    }
+
     if (enabled_vertex_fields & WEIGHT) {
       SetWeight(vertex->weight);
     }
@@ -420,10 +443,11 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
 
   SetVertexBufferAttributes(enabled_vertex_fields);
 
+  PBKitFlushPushbufer();
   auto p = pb_begin();
   p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+  uint32_t num_pushed = 1;
 
-  int num_pushed = 0;
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
     // Note: Ordering is important and must follow the NV2A_VERTEX_ATTR_POSITION, ... ordering.
@@ -436,6 +460,7 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
         num_pushed += 4;
       }
     }
+    // TODO: Support multi-element weights.
     if (enabled_vertex_fields & WEIGHT) {
       p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->weight);
       ++num_pushed;
@@ -497,6 +522,7 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
 
     if (num_pushed > kElementsPerPush) {
       pb_end(p);
+      PBKitFlushPushbufer();
       p = pb_begin();
       num_pushed = 0;
     }
@@ -515,7 +541,8 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
-  static constexpr int kIndicesPerPush = 64;
+  static constexpr int kIndicesPerPush = 32;
+  PBKitFlushPushbufer();
 
   SetVertexBufferAttributes(enabled_vertex_fields);
 
@@ -529,6 +556,7 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
   while (indices_remaining >= 2) {
     if (num_pushed++ > kIndicesPerPush) {
       pb_end(p);
+      PBKitFlushPushbufer();
       p = pb_begin();
       num_pushed = 0;
     }
@@ -556,7 +584,8 @@ void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
-  static constexpr int kIndicesPerPush = 64;
+  static constexpr int kIndicesPerPush = 32;
+  PBKitFlushPushbufer();
 
   SetVertexBufferAttributes(enabled_vertex_fields);
 
@@ -567,6 +596,7 @@ void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32
   for (auto index : indices) {
     if (num_pushed++ > kIndicesPerPush) {
       pb_end(p);
+      PBKitFlushPushbufer();
       p = pb_begin();
       num_pushed = 0;
     }

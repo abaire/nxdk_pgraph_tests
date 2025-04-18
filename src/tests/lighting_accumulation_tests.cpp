@@ -6,7 +6,6 @@
 #include "debug_output.h"
 #include "models/flat_mesh_grid_model.h"
 #include "pbkit_ext.h"
-#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
@@ -153,7 +152,7 @@ void LightingAccumulationTests::Initialize() {
   host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
   host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
 
-  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_SPECULAR);
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
                           false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                           /* specular_clamp */ true);
