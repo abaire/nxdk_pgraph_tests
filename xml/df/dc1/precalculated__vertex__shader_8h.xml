@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/dc1/precalculated__vertex__shader_8h" kind="file" language="C++">
+    <compoundname>precalculated_vertex_shader.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes refid="da/d63/vertex__shader__program_8h" local="yes">vertex_shader_program.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <includedby refid="d6/d2f/precalculated__vertex__shader_8cpp" local="yes">src/shaders/precalculated_vertex_shader.cpp</includedby>
+    <includedby refid="d7/d1d/alpha__func__tests_8cpp" local="yes">src/tests/alpha_func_tests.cpp</includedby>
+    <includedby refid="db/d79/antialiasing__tests_8cpp" local="yes">src/tests/antialiasing_tests.cpp</includedby>
+    <includedby refid="de/def/attribute__carryover__tests_8cpp" local="yes">src/tests/attribute_carryover_tests.cpp</includedby>
+    <includedby refid="d0/de5/attribute__explicit__setter__tests_8cpp" local="yes">src/tests/attribute_explicit_setter_tests.cpp</includedby>
+    <includedby refid="d8/d42/attribute__float__tests_8cpp" local="yes">src/tests/attribute_float_tests.cpp</includedby>
+    <includedby refid="df/d05/clear__tests_8cpp" local="yes">src/tests/clear_tests.cpp</includedby>
+    <includedby refid="d4/dfb/color__mask__blend__tests_8cpp" local="yes">src/tests/color_mask_blend_tests.cpp</includedby>
+    <includedby refid="d0/d7a/color__zeta__disable__tests_8cpp" local="yes">src/tests/color_zeta_disable_tests.cpp</includedby>
+    <includedby refid="d8/da7/depth__format__fixed__function__tests_8cpp" local="yes">src/tests/depth_format_fixed_function_tests.cpp</includedby>
+    <includedby refid="d6/dd3/depth__format__tests_8cpp" local="yes">src/tests/depth_format_tests.cpp</includedby>
+    <includedby refid="dc/d66/dma__corruption__around__surface__tests_8cpp" local="yes">src/tests/dma_corruption_around_surface_tests.cpp</includedby>
+    <includedby refid="d4/d88/edge__flag__tests_8cpp" local="yes">src/tests/edge_flag_tests.cpp</includedby>
+    <includedby refid="d4/d99/fog__exceptional__value__tests_8cpp" local="yes">src/tests/fog_exceptional_value_tests.cpp</includedby>
+    <includedby refid="d7/d81/front__face__tests_8cpp" local="yes">src/tests/front_face_tests.cpp</includedby>
+    <includedby refid="d3/d4c/high__vertex__count__tests_8cpp" local="yes">src/tests/high_vertex_count_tests.cpp</includedby>
+    <includedby refid="df/d14/inline__array__size__mismatch_8cpp" local="yes">src/tests/inline_array_size_mismatch.cpp</includedby>
+    <includedby refid="de/d64/lighting__accumulation__tests_8cpp" local="yes">src/tests/lighting_accumulation_tests.cpp</includedby>
+    <includedby refid="de/dac/lighting__control__tests_8cpp" local="yes">src/tests/lighting_control_tests.cpp</includedby>
+    <includedby refid="db/d72/lighting__normal__tests_8cpp" local="yes">src/tests/lighting_normal_tests.cpp</includedby>
+    <includedby refid="d2/d8d/lighting__range__tests_8cpp" local="yes">src/tests/lighting_range_tests.cpp</includedby>
+    <includedby refid="de/dd3/lighting__two__sided__tests_8cpp" local="yes">src/tests/lighting_two_sided_tests.cpp</includedby>
+    <includedby refid="d8/d29/line__width__tests_8cpp" local="yes">src/tests/line_width_tests.cpp</includedby>
+    <includedby refid="de/d8f/material__alpha__tests_8cpp" local="yes">src/tests/material_alpha_tests.cpp</includedby>
+    <includedby refid="db/dcb/material__color__source__tests_8cpp" local="yes">src/tests/material_color_source_tests.cpp</includedby>
+    <includedby refid="d3/d33/material__color__tests_8cpp" local="yes">src/tests/material_color_tests.cpp</includedby>
+    <includedby refid="d5/dd2/null__surface__tests_8cpp" local="yes">src/tests/null_surface_tests.cpp</includedby>
+    <includedby refid="da/dbd/point__params__tests_8cpp" local="yes">src/tests/point_params_tests.cpp</includedby>
+    <includedby refid="d4/d33/point__size__tests_8cpp" local="yes">src/tests/point_size_tests.cpp</includedby>
+    <includedby refid="d1/d80/pvideo__tests_8cpp" local="yes">src/tests/pvideo_tests.cpp</includedby>
+    <includedby refid="d5/d25/set__vertex__data__tests_8cpp" local="yes">src/tests/set_vertex_data_tests.cpp</includedby>
+    <includedby refid="d1/d76/shade__model__tests_8cpp" local="yes">src/tests/shade_model_tests.cpp</includedby>
+    <includedby refid="d6/da7/smoothing__tests_8cpp" local="yes">src/tests/smoothing_tests.cpp</includedby>
+    <includedby refid="dd/d82/specular__back__tests_8cpp" local="yes">src/tests/specular_back_tests.cpp</includedby>
+    <includedby refid="da/d0c/specular__tests_8cpp" local="yes">src/tests/specular_tests.cpp</includedby>
+    <includedby refid="d9/d6a/stencil__func__tests_8cpp" local="yes">src/tests/stencil_func_tests.cpp</includedby>
+    <includedby refid="de/d30/stencil__tests_8cpp" local="yes">src/tests/stencil_tests.cpp</includedby>
+    <includedby refid="de/dde/stipple__tests_8cpp" local="yes">src/tests/stipple_tests.cpp</includedby>
+    <includedby refid="dd/d85/surface__clip__tests_8cpp" local="yes">src/tests/surface_clip_tests.cpp</includedby>
+    <includedby refid="d3/d23/surface__pitch__tests_8cpp" local="yes">src/tests/surface_pitch_tests.cpp</includedby>
+    <includedby refid="db/d39/swath__width__tests_8cpp" local="yes">src/tests/swath_width_tests.cpp</includedby>
+    <includedby refid="d5/d6d/texture__border__tests_8cpp" local="yes">src/tests/texture_border_tests.cpp</includedby>
+    <includedby refid="dc/d48/texture__cpu__update__tests_8cpp" local="yes">src/tests/texture_cpu_update_tests.cpp</includedby>
+    <includedby refid="d9/d13/texture__format__dxt__tests_8cpp" local="yes">src/tests/texture_format_dxt_tests.cpp</includedby>
+    <includedby refid="df/ddd/texture__format__tests_8cpp" local="yes">src/tests/texture_format_tests.cpp</includedby>
+    <includedby refid="db/d8b/texture__perspective__enable__tests_8cpp" local="yes">src/tests/texture_perspective_enable_tests.cpp</includedby>
+    <includedby refid="d6/d40/texture__render__target__tests_8cpp" local="yes">src/tests/texture_render_target_tests.cpp</includedby>
+    <includedby refid="d1/dbf/texture__render__update__in__place__tests_8cpp" local="yes">src/tests/texture_render_update_in_place_tests.cpp</includedby>
+    <includedby refid="d1/d5e/texture__shadow__comparator__tests_8cpp" local="yes">src/tests/texture_shadow_comparator_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <includedby refid="df/d73/three__d__primitive__tests_8cpp" local="yes">src/tests/three_d_primitive_tests.cpp</includedby>
+    <includedby refid="dc/d26/vertex__shader__independence__tests_8cpp" local="yes">src/tests/vertex_shader_independence_tests.cpp</includedby>
+    <includedby refid="df/d5a/vertex__shader__rounding__tests_8cpp" local="yes">src/tests/vertex_shader_rounding_tests.cpp</includedby>
+    <includedby refid="d6/dbc/vertex__shader__swizzle__tests_8cpp" local="yes">src/tests/vertex_shader_swizzle_tests.cpp</includedby>
+    <includedby refid="d3/db7/viewport__tests_8cpp" local="yes">src/tests/viewport_tests.cpp</includedby>
+    <includedby refid="d5/dc7/w__param__tests_8cpp" local="yes">src/tests/w_param_tests.cpp</includedby>
+    <includedby refid="d4/d70/window__clip__tests_8cpp" local="yes">src/tests/window_clip_tests.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/shaders/precalculated_vertex_shader.h</label>
+        <link refid="df/dc1/precalculated__vertex__shader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>map</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="6">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="de/d56/classPrecalculatedVertexShader" prot="public">PrecalculatedVertexShader</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SHADERS_PRECALCULATED_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SHADERS_PRECALCULATED_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_shader_program.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="de/d56/classPrecalculatedVertexShader" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="de/d56/classPrecalculatedVertexShader" kindref="compound">PrecalculatedVertexShader</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="dc/dfc/classVertexShaderProgram" kindref="compound">VertexShaderProgram</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="de/d56/classPrecalculatedVertexShader" kindref="compound">PrecalculatedVertexShader</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_4c_texcoords<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="dc/dfc/classVertexShaderProgram" kindref="compound">VertexShaderProgram</ref>(),<sp/>use_4_component_texcoords_(use_4c_texcoords)<sp/>{};</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OnLoadShader()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_4_component_texcoords_;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SHADERS_PRECALCULATED_VERTEX_SHADER_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/precalculated_vertex_shader.h"/>
+  </compounddef>
+</doxygen>
