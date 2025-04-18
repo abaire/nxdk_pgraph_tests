@@ -760,6 +760,14 @@ class TestHost {
     }
   }
 
+  //! Waits for the pushbuffer to empty then resets it to head.
+  //!
+  //! It is illegal to call this within a pb_begin/pb_end block, doing so may crash or lead to undefined behavior.
+  static void PBKitFlushPushbufer() {
+    PBKitBusyWait();
+    pb_reset();
+  }
+
   //! Renders a 256x256 checkerboard pattern that is stretched and unprojected to fill the framebuffer.
   //!
   //! Note: this leaves the tex0 stage disabled, disables all shader stage programs, and sets the final combiner to

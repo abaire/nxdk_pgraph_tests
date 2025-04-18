@@ -5,6 +5,7 @@
 
 #include "debug_output.h"
 #include "models/flat_mesh_grid_model.h"
+#include "models/light_control_test_mesh_suzanne_model.h"
 #include "pbkit_ext.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
@@ -130,7 +131,8 @@ void LightingAccumulationTests::CreateGeometry() {
   vector_t diffuse{0.f, 0.f, 0.0f, 0.f};
   vector_t specular{1.f, 1.f, 1.f, 0.25f};
 
-  auto model = FlatMeshGridModel(diffuse, specular);
+  // auto model = FlatMeshGridModel(diffuse, specular);
+  auto model = LightControlTestMeshSuzanneModel(diffuse, specular);
   vertex_buffer_mesh_ = host_.AllocateVertexBuffer(model.GetVertexCount());
   model.PopulateVertexBuffer(vertex_buffer_mesh_);
 }
@@ -153,7 +155,7 @@ void LightingAccumulationTests::Initialize() {
   host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
   host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
 
-  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_SPECULAR);
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
                           false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                           /* specular_clamp */ true);
