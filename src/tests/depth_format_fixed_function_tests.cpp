@@ -243,14 +243,14 @@ void DepthFormatFixedFunctionTests::Test(const DepthFormat &format, bool compres
   // Override the depth clip to ensure that max_val depths (post-projection) are never clipped.
   host_.SetDepthClip(0.0f, 16777216);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-  p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
-  p = pb_push1(p, NV097_SET_COMPRESS_ZBUFFER_EN, compress_z);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+  Pushbuffer::Push(NV097_SET_COMPRESS_ZBUFFER_EN, compress_z);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 
   host_.DrawArrays();
 

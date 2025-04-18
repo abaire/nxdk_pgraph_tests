@@ -189,22 +189,22 @@ void MaterialColorTests::Test(TestConfig config) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
+  Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
 
-  p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
-  p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
-  p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
+  Pushbuffer::Push(NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
+  Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
+  Pushbuffer::PushF(NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
 
-  p = pb_push1(p, NV097_SET_CONTROL0, 0x100001);
+  Pushbuffer::Push(NV097_SET_CONTROL0, 0x100001);
 
-  p = pb_push1(p, NV10_TCL_PRIMITIVE_3D_POINT_PARAMETERS_ENABLE, false);
+  Pushbuffer::Push(NV10_TCL_PRIMITIVE_3D_POINT_PARAMETERS_ENABLE, false);
 
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
+  Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, 0x10001);
 
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
 
   // Setup colors similar to XDK behavior.
   float r, g, b;
@@ -215,55 +215,55 @@ void MaterialColorTests::Test(TestConfig config) {
   r = config.scene_ambient.r * config.material_ambient.r + config.material_emissive.r;
   g = config.scene_ambient.g * config.material_ambient.g + config.material_emissive.g;
   b = config.scene_ambient.b * config.material_ambient.b + config.material_emissive.b;
-  p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, r, g, b);
+  Pushbuffer::PushF(NV097_SET_SCENE_AMBIENT_COLOR, r, g, b);
 
   // NV097_SET_LIGHT_AMBIENT_COLOR is a product of scene ambient (D3DRS_AMBIENT) and light ambient
   // (scene.Ambient.rgb * light.Ambient.rgb) => NV097_SET_LIGHT_AMBIENT_COLOR
   r = config.scene_ambient.r * config.light_ambient.r;
   g = config.scene_ambient.g * config.light_ambient.g;
   b = config.scene_ambient.b * config.light_ambient.b;
-  p = pb_push3f(p, NV097_SET_LIGHT_AMBIENT_COLOR, r, g, b);
+  Pushbuffer::PushF(NV097_SET_LIGHT_AMBIENT_COLOR, r, g, b);
 
   // material.Diffuse.rgb * light.Diffuse.rgb => NV097_SET_LIGHT_DIFFUSE_COLOR
   r = config.material_diffuse.r * config.light_diffuse.r;
   g = config.material_diffuse.g * config.light_diffuse.g;
   b = config.material_diffuse.b * config.light_diffuse.b;
-  p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, r, g, b);
+  Pushbuffer::PushF(NV097_SET_LIGHT_DIFFUSE_COLOR, r, g, b);
 
   // material.Diffuse.a => NV097_SET_MATERIAL_ALPHA (Depending on NV097_SET_LIGHT_DIFFUSE_COLOR, assuming it's set up to
   // come from material and not diffuse/specular)
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, config.material_diffuse.a);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, config.material_diffuse.a);
 
   // material.Specular.rgb * light.Specular.rgb => NV097_SET_LIGHT_SPECULAR_COLOR
   r = config.material_specular.r * config.light_specular.r;
   g = config.material_specular.g * config.light_specular.g;
   b = config.material_specular.b * config.light_specular.b;
-  p = pb_push3f(p, NV097_SET_LIGHT_SPECULAR_COLOR, r, g, b);
+  Pushbuffer::PushF(NV097_SET_LIGHT_SPECULAR_COLOR, r, g, b);
 
   // material.a // Ignored? Maybe it goes into NV097_SET_SPECULAR_PARAMS?
   // material.Power = 125.0f;
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xBF78DF9C);       // -0.972162
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 4, 0xC04D3531);   // -3.20637
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 8, 0x404EFD4A);   // 3.23421
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 12, 0xBF71F52E);  // -0.945147
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 16, 0xC048FA21);  // -3.14027
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 20, 0x404C7CD6);  // 3.19512
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS, 0xBF78DF9C);       // -0.972162
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 4, 0xC04D3531);   // -3.20637
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 8, 0x404EFD4A);   // 3.23421
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 12, 0xBF71F52E);  // -0.945147
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 16, 0xC048FA21);  // -3.14027
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 20, 0x404C7CD6);  // 3.19512
 
   /*
   // material.Power = 10.0f;
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xBF34DCE5);  // -0.706496
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 4, 0xC020743F);  // -2.5071
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 8, 0x40333D06);  // 2.8006
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 12, 0xBF003612);  // -0.500825
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 16, 0xBFF852A5);  // -1.94002
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 20, 0x401C1BCE);  // 2.4392
+  Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS, 0xBF34DCE5);  // -0.706496
+  Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 4, 0xC020743F);  // -2.5071
+  Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 8, 0x40333D06);  // 2.8006
+  Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 12, 0xBF003612);  // -0.500825
+  Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 16, 0xBFF852A5);  // -1.94002
+  Pushbuffer::Push( NV097_SET_SPECULAR_PARAMS + 20, 0x401C1BCE);  // 2.4392
  */
 
   // Material emission is already incorporated into scene_ambient_color above and is set to 0. In cases where ambient
   // or emissive is taken from vertex colors rather than the material, this would be non-zero.
-  p = pb_push3f(p, NV097_SET_MATERIAL_EMISSION, 0, 0, 0);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_EMISSION, 0, 0, 0);
 
-  pb_end(p);
+  Pushbuffer::End();
 
   host_.DrawArrays(host_.POSITION | host_.NORMAL);
 

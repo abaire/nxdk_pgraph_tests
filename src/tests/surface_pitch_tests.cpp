@@ -49,18 +49,17 @@ void SurfacePitchTests::TestSwizzle() {
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, false);
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
 
     for (auto addr : kTextureTargets) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(addr));
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(addr));
+      Pushbuffer::End();
 
       host_.Begin(TestHost::PRIMITIVE_QUADS);
       host_.SetDiffuse(0xFF00AA00);
@@ -84,10 +83,10 @@ void SurfacePitchTests::TestSwizzle() {
     GenerateSwizzledRGBACheckerboard((void *)kInnerTextureMemory, 0, 0, kSmallTextureSize, kSmallTextureSize,
                                      kSmallTexturePitch, color, 0x00000000, 4);
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(kInnerTextureMemory));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(color_surface_addr));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(kInnerTextureMemory));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(color_surface_addr));
+    Pushbuffer::End();
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetTexCoord0(0.0f, 0.0f);
@@ -108,11 +107,10 @@ void SurfacePitchTests::TestSwizzle() {
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSmallTextureSize, kSmallTextureSize,
                                     true);
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
 
     draw_inner_quad(0xFFFF2222, kTextureTargets[0]);
   }
@@ -121,11 +119,10 @@ void SurfacePitchTests::TestSwizzle() {
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSmallTextureSize, kSmallTextureSize,
                                     true);
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSmallTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSmallTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
 
     draw_inner_quad(0xFFFF2277, kTextureTargets[1]);
   }
@@ -133,11 +130,10 @@ void SurfacePitchTests::TestSwizzle() {
   // Swizzled surface matching the original with pitch matching the outer surface.
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
 
     draw_inner_quad(0xFF2222FF, kTextureTargets[2]);
   }
@@ -145,11 +141,10 @@ void SurfacePitchTests::TestSwizzle() {
   // Swizzled surface matching the original with pitch matching the smaller surface.
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSmallTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSmallTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
 
     draw_inner_quad(0xFF7722FF, kTextureTargets[3]);
   }
@@ -172,18 +167,17 @@ void SurfacePitchTests::DrawResults(const uint32_t *result_textures, const uint3
 
   // Draw textured quads containing each of the results.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
 
     auto draw_quad = [this](float left, float right, float top, float bottom, uint32_t texture_addr) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(texture_addr));
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(texture_addr));
+      Pushbuffer::End();
 
       host_.Begin(TestHost::PRIMITIVE_QUADS);
       host_.SetTexCoord0(0.0f, 0.0f);
@@ -236,9 +230,9 @@ void SurfacePitchTests::DrawResults(const uint32_t *result_textures, const uint3
     const float right = left + kSmallTextureSize;
     const float top = (host_.GetFramebufferHeightF() - kSmallTextureSize) * 0.5f;
     const float bottom = top + kSmallTextureSize;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(demo_memory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(demo_memory));
+    Pushbuffer::End();
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetTexCoord0(0.0f, 0.0f);

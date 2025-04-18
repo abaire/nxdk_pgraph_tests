@@ -66,39 +66,39 @@ void SetVertexDataTests::CreateGeometry() {
 }
 
 static void SetLightAndMaterial() {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS, 0xbf34dce5);
-  p = pb_push1(p, 0x09e4, 0xc020743f);
-  p = pb_push1(p, 0x09e8, 0x40333d06);
-  p = pb_push1(p, 0x09ec, 0xbf003612);
-  p = pb_push1(p, 0x09f0, 0xbff852a5);
-  p = pb_push1(p, 0x09f4, 0x401c1bce);
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS, 0xbf34dce5);
+  Pushbuffer::Push(0x09e4, 0xc020743f);
+  Pushbuffer::Push(0x09e8, 0x40333d06);
+  Pushbuffer::Push(0x09ec, 0xbf003612);
+  Pushbuffer::Push(0x09f0, 0xbff852a5);
+  Pushbuffer::Push(0x09f4, 0x401c1bce);
 
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
-  p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
+  Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+  Pushbuffer::Push(NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 1.0f);
 
   {
-    p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
-    p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 0.0f, 0.25f, 0.8f);
-    p = pb_push3(p, NV097_SET_LIGHT_SPECULAR_COLOR, 0, 0, 0);
-    p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
-    p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
-    p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION, 1.0f, 0.0f, 0.0f);
+    Pushbuffer::Push(NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
+    Pushbuffer::PushF(NV097_SET_LIGHT_DIFFUSE_COLOR, 0.0f, 0.25f, 0.8f);
+    Pushbuffer::Push(NV097_SET_LIGHT_SPECULAR_COLOR, 0, 0, 0);
+    Pushbuffer::Push(NV097_SET_LIGHT_LOCAL_RANGE, 0x7149f2ca);  // 1e30
+    Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
+    Pushbuffer::PushF(NV097_SET_LIGHT_INFINITE_DIRECTION, 1.0f, 0.0f, 0.0f);
   }
 
   {
-    p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR + 128, 0, 0, 0);
-    p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR + 128, 0.8f, 0.25f, 0.33f);
-    p = pb_push3(p, NV097_SET_LIGHT_SPECULAR_COLOR + 128, 0, 0, 0);
-    p = pb_push1(p, NV097_SET_LIGHT_LOCAL_RANGE + 128, 0x7149f2ca);  // 1e30
-    p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR + 128, 0, 0, 0);
-    p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION + 128, -1.0f, 0.0f, 0.0f);
+    Pushbuffer::Push(NV097_SET_LIGHT_AMBIENT_COLOR + 128, 0, 0, 0);
+    Pushbuffer::PushF(NV097_SET_LIGHT_DIFFUSE_COLOR + 128, 0.8f, 0.25f, 0.33f);
+    Pushbuffer::Push(NV097_SET_LIGHT_SPECULAR_COLOR + 128, 0, 0, 0);
+    Pushbuffer::Push(NV097_SET_LIGHT_LOCAL_RANGE + 128, 0x7149f2ca);  // 1e30
+    Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR + 128, 0, 0, 0);
+    Pushbuffer::PushF(NV097_SET_LIGHT_INFINITE_DIRECTION + 128, -1.0f, 0.0f, 0.0f);
   }
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 void SetVertexDataTests::Test(SetFunction func, const Color& diffuse, bool saturate_signed) {
@@ -125,81 +125,81 @@ void SetVertexDataTests::Test(SetFunction func, const Color& diffuse, bool satur
     return 0xFFFF;
   };
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
 
   switch (func) {
     case FUNC_4UB:
-      p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.AsBGRA());
+      Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.AsBGRA());
       break;
 
     case FUNC_4F_M:
-      p = pb_push4f(p, NV097_SET_VERTEX_DATA4F_M + (16 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.b, diffuse.g, diffuse.r,
-                    diffuse.a);
+      Pushbuffer::PushF(NV097_SET_VERTEX_DATA4F_M + (16 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.b, diffuse.g, diffuse.r,
+                        diffuse.a);
       break;
 
     case FUNC_2S: {
       auto rg_pair = get_sign(diffuse.r) + (get_sign(diffuse.g) << 16);
-      p = pb_push1(p, NV097_SET_VERTEX_DATA2S + (4 * NV2A_VERTEX_ATTR_DIFFUSE), rg_pair);
+      Pushbuffer::Push(NV097_SET_VERTEX_DATA2S + (4 * NV2A_VERTEX_ATTR_DIFFUSE), rg_pair);
     } break;
 
     case FUNC_2F_M:
-      p = pb_push2f(p, NV097_SET_VERTEX_DATA2F_M + (8 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.b, diffuse.g);
+      Pushbuffer::PushF(NV097_SET_VERTEX_DATA2F_M + (8 * NV2A_VERTEX_ATTR_DIFFUSE), diffuse.b, diffuse.g);
       break;
 
     case FUNC_4S_M: {
       auto rg_pair = get_sign(diffuse.r) + (get_sign(diffuse.g) << 16);
       auto ba_pair = get_sign(diffuse.b) + (get_sign(diffuse.a) << 16);
-      p = pb_push2(p, NV097_SET_VERTEX_DATA4S_M + (8 * NV2A_VERTEX_ATTR_DIFFUSE), rg_pair, ba_pair);
+      Pushbuffer::Push(NV097_SET_VERTEX_DATA4S_M + (8 * NV2A_VERTEX_ATTR_DIFFUSE), rg_pair, ba_pair);
     } break;
   }
 
-  pb_end(p);
+  Pushbuffer::End();
 
   SetLightAndMaterial();
 
   host_.SetVertexBuffer(diffuse_buffer_);
   host_.DrawInlineBuffer(host_.POSITION);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-  p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x10001);
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK,
-               NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE | NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_INFINITE);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, 0x10001);
+  Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK,
+                   NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE | NV097_SET_LIGHT_ENABLE_MASK_LIGHT1_INFINITE);
 
   // Set diffuse to pure white so the resultant color is just from the light.
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_DIFFUSE), 0xFFFFFFFF);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_DIFFUSE), 0xFFFFFFFF);
+  Pushbuffer::End();
 
   auto set_normal = [func, get_sign](float x, float y, float z) {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     switch (func) {
       case FUNC_4UB: {
         uint32_t value = ((uint32_t)(x * 255.0f) & 0xFF) + (((uint32_t)(y * 255.0f) & 0xFF) << 8) +
                          (((uint32_t)(z * 255.0f) & 0xFF) << 16);
-        p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_NORMAL), value);
+        Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_NORMAL), value);
       } break;
 
       case FUNC_4F_M:
-        p = pb_push4f(p, NV097_SET_VERTEX_DATA4F_M + (16 * NV2A_VERTEX_ATTR_NORMAL), x, y, z, 1.0f);
+        Pushbuffer::PushF(NV097_SET_VERTEX_DATA4F_M + (16 * NV2A_VERTEX_ATTR_NORMAL), x, y, z, 1.0f);
         break;
 
       case FUNC_2S: {
         uint32_t xy = get_sign(x) + (get_sign(y) << 16);
-        p = pb_push1(p, NV097_SET_VERTEX_DATA2S + (4 * NV2A_VERTEX_ATTR_NORMAL), xy);
+        Pushbuffer::Push(NV097_SET_VERTEX_DATA2S + (4 * NV2A_VERTEX_ATTR_NORMAL), xy);
       } break;
 
       case FUNC_2F_M:
-        p = pb_push2f(p, NV097_SET_VERTEX_DATA2F_M + (8 * NV2A_VERTEX_ATTR_NORMAL), x, y);
+        Pushbuffer::PushF(NV097_SET_VERTEX_DATA2F_M + (8 * NV2A_VERTEX_ATTR_NORMAL), x, y);
         break;
 
       case FUNC_4S_M: {
         uint32_t xy = (get_sign(x) + (get_sign(y) << 16));
         uint32_t zw = (get_sign(z) + (1 << 16));
-        p = pb_push2(p, NV097_SET_VERTEX_DATA4S_M + (8 * NV2A_VERTEX_ATTR_NORMAL), xy, zw);
+        Pushbuffer::Push(NV097_SET_VERTEX_DATA4S_M + (8 * NV2A_VERTEX_ATTR_NORMAL), xy, zw);
       } break;
     }
-    pb_end(p);
+    Pushbuffer::End();
   };
 
   set_normal(1.0f, 0.0f, 0.0f);

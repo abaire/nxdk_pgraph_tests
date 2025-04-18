@@ -34,7 +34,7 @@ class StencilTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void CreateGeometry(const float sideLength, const float r, const float g, const float b);
+  void CreateGeometry(const float side_length, const float r, const float g, const float b);
   void Test(const StencilParams &params);
 
   void AddTestEntry(const StencilParams &params);

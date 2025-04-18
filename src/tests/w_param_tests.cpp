@@ -153,38 +153,38 @@ void WParamTests::TestWGaps(bool texture_perspective_enable) {
   host_.SetVertexBuffer(triangle_strip_);
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Push(NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
+  Pushbuffer::End();
 
   host_.DrawArrays(TestHost::POSITION, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::End();
 
   host_.SetVertexBuffer(triangles_);
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Push(NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
+  Pushbuffer::End();
 
   host_.DrawArrays(TestHost::POSITION);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::End();
 
   pb_printat(5, 0, (char *)"Strip");
   pb_printat(12, 0, (char *)"Tris");
@@ -290,20 +290,20 @@ void WParamTests::TestNegativeWTriangleStrip(bool texture_perspective_enable) {
 
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Push(NV097_SET_DIFFUSE_COLOR4I, 0xFFFFFFFF);
+  Pushbuffer::End();
 
   host_.DrawArrays(TestHost::POSITION, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::End();
 
   host_.SetupControl0();
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_,

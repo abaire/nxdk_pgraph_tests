@@ -59,16 +59,15 @@ void NullSurfaceTests::TestXemuBug893() {
   {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false);
 
-    auto p = pb_begin();
-    p = pb_push1(
-        p, NV097_SET_SURFACE_PITCH,
-        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(pb_back_buffer()) & 0x03FFFFFF);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, kTextureMemory & 0x03FFFFFF);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(pb_back_buffer()) & 0x03FFFFFF);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, kTextureMemory & 0x03FFFFFF);
     // Note: Enabling depth testing is critical to reproducing the bug.
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, 1);
-    p = pb_push1(p, NV097_SET_COLOR_MASK, 0x1010101);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, 1);
+    Pushbuffer::Push(NV097_SET_COLOR_MASK, 0x1010101);
+    Pushbuffer::End();
   }
 
   DrawTestQuad(false);
@@ -76,13 +75,13 @@ void NullSurfaceTests::TestXemuBug893() {
   // Set the color offset to something that overlaps but is not exactly equal to the zeta surface and clear out the
   // zeta surface.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, (kTextureMemory + kSurfacePitch) & 0x03FFFFFF);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_DEPTH_MASK, 0);
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, 0);
-    p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, (kTextureMemory + kSurfacePitch) & 0x03FFFFFF);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, 0);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, 0);
+    Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, 0);
+    Pushbuffer::End();
   }
 
   DrawTestQuad(false);
@@ -92,18 +91,17 @@ void NullSurfaceTests::TestXemuBug893() {
 
   RestoreSurfaceDMAs();
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_DEPTH_MASK, 1);
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, 0);
-    p = pb_push1(p, NV097_SET_COLOR_MASK,
-                 NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                     NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, 1);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, 0);
+    Pushbuffer::Push(NV097_SET_COLOR_MASK,
+                     NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                         NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
+    Pushbuffer::End();
   }
 
   host_.PrepareDraw(0xFE134415);
@@ -116,17 +114,17 @@ void NullSurfaceTests::TestXemuBug893() {
 }
 
 void NullSurfaceTests::SetSurfaceDMAs() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
+  Pushbuffer::End();
 }
 
 void NullSurfaceTests::RestoreSurfaceDMAs() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::End();
 }
 
 void NullSurfaceTests::DrawTestQuad(bool swizzle) const {

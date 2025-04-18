@@ -31,6 +31,7 @@
 #include "configure.h"
 #include "debug_output.h"
 #include "logger.h"
+#include "pushbuffer.h"
 #include "runtime_config.h"
 #include "test_driver.h"
 #include "test_host.h"
@@ -171,6 +172,8 @@ int main() {
     pb_kill();
     return 1;
   }
+
+  Pushbuffer::Initialize();
 
   RuntimeConfig config;
 #ifndef DUMP_CONFIG_FILE

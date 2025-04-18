@@ -51,14 +51,14 @@ void DepthFormatTests::Test(const DepthFormat &format, bool compress_z, uint32_t
   host_.SetDepthBufferFloatMode(format.floating_point);
   host_.PrepareDraw(0xFF000000, depth_cutoff, 0x00);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-  p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
-  p = pb_push1(p, NV097_SET_COMPRESS_ZBUFFER_EN, compress_z);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+  Pushbuffer::Push(NV097_SET_COMPRESS_ZBUFFER_EN, compress_z);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 
   host_.DrawArrays();
 

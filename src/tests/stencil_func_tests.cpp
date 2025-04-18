@@ -99,21 +99,21 @@ void StencilFuncTests::Initialize() {
                          host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-    p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
-    p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+    Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
     // If the stencil comparison fails, leave the value in the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_FAIL, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_FAIL, NV097_SET_STENCIL_OP_V_KEEP);
     // If the stencil comparison passes but the depth comparison fails, leave the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
     // If the stencil comparison passes and the depth comparison passes, leave the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
 
     // Set the reference value used by the NV097_SET_STENCIL_FUNC test.
-    p = pb_push1(p, NV097_SET_STENCIL_FUNC_REF, kStencilFuncRef);
+    Pushbuffer::Push(NV097_SET_STENCIL_FUNC_REF, kStencilFuncRef);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 }
 
@@ -131,10 +131,10 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
   *crash_register = crash_register_pre_test & (~0x800);
 
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     // Stencil testing must be enabled to allow anything to be written to the stencil buffer.
-    p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, true);
+    Pushbuffer::End();
   }
 
   const auto kLeft = (host_.GetFramebufferWidthF() - kQuadSize) * 0.5f;
@@ -160,30 +160,30 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
 
   auto draw_background = [this, &draw_quad]() {
     host_.SetDiffuse(0.f, 0.f, 1.f);
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_MASK,
-                 NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                     NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_MASK, NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
+                                               NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                                               NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE);
 
     // The value written is dictated by the STENCIL_OP_* operations. In this case, depth testing is disabled so Z will
     // always pass. The stencil value function is set to always pass (NV097_SET_STENCIL_FUNC_V_ALWAYS), so the action is
     // determined by ZPASS.
-    p = pb_push1(p, NV097_SET_STENCIL_FUNC, NV097_SET_STENCIL_FUNC_V_ALWAYS);
+    Pushbuffer::Push(NV097_SET_STENCIL_FUNC, NV097_SET_STENCIL_FUNC_V_ALWAYS);
     // Since the stencil value was cleared to 0 above, the INVERT operation will change it to 0xFF. However,
     // NV097_SET_STENCIL_MASK can be used to prevent some bits from being modified.
-    p = pb_push1(p, NV097_SET_STENCIL_MASK, kStencilFuncRef);
-    p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
+    Pushbuffer::Push(NV097_SET_STENCIL_MASK, kStencilFuncRef);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
 
-    pb_end(p);
+    Pushbuffer::End();
 
     draw_quad();
 
     // Clean up for the invisible quad that will overlay this patch.
     host_.SetDiffuse(1.f, 1.f, 1.f);
-    p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_MASK, 0);
-    p = pb_push1(p, NV097_SET_STENCIL_MASK, 0xFF);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_MASK, 0);
+    Pushbuffer::Push(NV097_SET_STENCIL_MASK, 0xFF);
+    Pushbuffer::End();
 
     // Stencil testing was enabled w/ func == "always pass", depth testing was disabled (equivalent to "always pass"),
     // so the operation chosen for OP_ZPASS was taken. Since the depth buffer was set to 0 and the operation was INVERT,
@@ -196,21 +196,21 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     // With colorbuffer writing disabled, update the stencil buffer with a number of quads using different masks to
     // modify the values.
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_COLOR_MASK, 0);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_COLOR_MASK, 0);
 
       // In this case we just want to force the value to be set via the ZPASS operation without any masking.
-      p = pb_push1(p, NV097_SET_STENCIL_MASK, 0xFF);
-      pb_end(p);
+      Pushbuffer::Push(NV097_SET_STENCIL_MASK, 0xFF);
+      Pushbuffer::End();
     }
 
     // Zero out a region
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
+        Pushbuffer::End();
         draw_quad();
       }
       left += kWidth + 1.f;
@@ -220,15 +220,15 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_REPLACE);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_REPLACE);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_DECR);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_DECR);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -239,9 +239,9 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_REPLACE);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_REPLACE);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -252,15 +252,15 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_REPLACE);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_REPLACE);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INCR);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INCR);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -271,15 +271,15 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -293,15 +293,15 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_DECR);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_DECR);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -312,15 +312,15 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_DECRSAT);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_DECRSAT);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -331,21 +331,21 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INCR);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INCR);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -356,21 +356,21 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
     {
       draw_background();
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_ZERO);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INVERT);
+        Pushbuffer::End();
         draw_quad();
       }
       {
-        auto p = pb_begin();
-        p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INCRSAT);
-        pb_end(p);
+        Pushbuffer::Begin();
+        Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_INCRSAT);
+        Pushbuffer::End();
         draw_quad();
       }
 
@@ -380,18 +380,18 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
 
   // Finally draw a large green quad across the entire test area.
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     // Reenable writing to the color buffer.
-    p = pb_push1(p, NV097_SET_COLOR_MASK,
-                 NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                     NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE);
+    Pushbuffer::Push(NV097_SET_COLOR_MASK, NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
+                                               NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                                               NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE);
 
     // This isn't really relevant since this is the last draw of the test, but leave the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
 
     // Set the stencil function to the function under test.
-    p = pb_push1(p, NV097_SET_STENCIL_FUNC, stencil_func);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_STENCIL_FUNC, stencil_func);
+    Pushbuffer::End();
   }
 
   // Draw a green overlay across the entire patch region.

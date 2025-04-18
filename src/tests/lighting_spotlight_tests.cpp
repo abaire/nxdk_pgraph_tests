@@ -17,11 +17,11 @@ static constexpr uint32_t kCheckerboardB = 0xFF000000;
 static constexpr float PI_OVER_180 = (float)M_PI / 180.0f;
 #define DEG2RAD(c) ((float)(c) * PI_OVER_180)
 
-static constexpr char kFalloffName[] = "Fo";
+// static constexpr char kFalloffName[] = "Fo";
 static constexpr char kFalloffFixedName[] = "FoFixed";
-static constexpr char kPhiThetaName[] = "PT";
+// static constexpr char kPhiThetaName[] = "PT";
 static constexpr char kPhiThetaFixedName[] = "PTFixed";
-static constexpr char kAttenuationName[] = "At";
+// static constexpr char kAttenuationName[] = "At";
 static constexpr char kAttenuationFixedName[] = "AtFixed";
 
 static constexpr float kLightRange = 15.f;
@@ -134,34 +134,34 @@ void LightingSpotlightTests::Initialize() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR | NV097_SET_LIGHT_CONTROL_V_LOCALEYE |
-                     NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_LOCALEYE |
+                                                  NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
 
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0);
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0);
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0);
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
+    Pushbuffer::End();
   }
 
   CreateGeometry();
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
   // Values taken from MechAssault
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
-  p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
+  Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
 
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, 0.01f, 0.01f, 0.01f);
-  p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.40f);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+  Pushbuffer::PushF(NV097_SET_SCENE_AMBIENT_COLOR, 0.01f, 0.01f, 0.01f);
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.40f);
+  Pushbuffer::End();
 }
 
 void LightingSpotlightTests::Deinitialize() {
@@ -227,25 +227,25 @@ void LightingSpotlightTests::Spotlight::Commit(uint32_t light_index, const XboxM
   ScalarMultVector(normalized_direction, inv_scale);
   normalized_direction[3] = cos_half_phi * inv_scale;
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
-  p = pb_push3(p, SET_LIGHT(light_index, NV097_SET_LIGHT_AMBIENT_COLOR), 0, 0, 0);
-  p = pb_push3f(p, SET_LIGHT(light_index, NV097_SET_LIGHT_DIFFUSE_COLOR), 1.f, 0.f, 0.f);
-  p = pb_push3f(p, SET_LIGHT(light_index, NV097_SET_LIGHT_SPECULAR_COLOR), 0.f, 0.f, 0.5f);
-  p = pb_push1f(p, SET_LIGHT(light_index, NV097_SET_LIGHT_LOCAL_RANGE), kLightRange);
-  p = pb_push3fv(p, SET_LIGHT(light_index, NV097_SET_LIGHT_LOCAL_POSITION), transformed_position);
-  p = pb_push3fv(p, SET_LIGHT(light_index, NV097_SET_LIGHT_LOCAL_ATTENUATION), attenuation);
-  p = pb_push3fv(p, SET_LIGHT(light_index, NV097_SET_LIGHT_SPOT_FALLOFF), falloff);
-  p = pb_push4fv(p, SET_LIGHT(light_index, NV097_SET_LIGHT_SPOT_DIRECTION), normalized_direction);
+  Pushbuffer::Push(SET_LIGHT(light_index, NV097_SET_LIGHT_AMBIENT_COLOR), 0, 0, 0);
+  Pushbuffer::PushF(SET_LIGHT(light_index, NV097_SET_LIGHT_DIFFUSE_COLOR), 1.f, 0.f, 0.f);
+  Pushbuffer::PushF(SET_LIGHT(light_index, NV097_SET_LIGHT_SPECULAR_COLOR), 0.f, 0.f, 0.5f);
+  Pushbuffer::PushF(SET_LIGHT(light_index, NV097_SET_LIGHT_LOCAL_RANGE), kLightRange);
+  Pushbuffer::Push3F(SET_LIGHT(light_index, NV097_SET_LIGHT_LOCAL_POSITION), transformed_position);
+  Pushbuffer::Push3F(SET_LIGHT(light_index, NV097_SET_LIGHT_LOCAL_ATTENUATION), attenuation);
+  Pushbuffer::Push3F(SET_LIGHT(light_index, NV097_SET_LIGHT_SPOT_FALLOFF), falloff);
+  Pushbuffer::Push4F(SET_LIGHT(light_index, NV097_SET_LIGHT_SPOT_DIRECTION), normalized_direction);
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 static void DrawCheckerboardBackground(TestHost& host) {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+  Pushbuffer::End();
 
   host.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
@@ -309,11 +309,11 @@ static void SetupLighting(TestHost& host, uint32_t light_mode_bitvector) {
                          false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                          /* specular_clamp */ true);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+  Pushbuffer::End();
 }
 
 void LightingSpotlightTests::Test(const std::string& name, const Spotlight& light) {}

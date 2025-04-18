@@ -156,15 +156,14 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
     host_.SetWindowClip(texture_width - 1, texture_height - 1);
 
     // Point the color buffer at the texture and mix the left hand side with itself multiple times.
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     // Initialize the texture to magenta.
     auto pixel = reinterpret_cast<uint32_t *>(host_.GetTextureMemory());
@@ -192,15 +191,14 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());
 
-    p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
   };
 
   host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
@@ -287,15 +285,14 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
     host_.SetWindowClip(kTextureSize - 1, kTextureSize - 1);
 
     // Point the color buffer at the texture and mix the left hand side with itself multiple times.
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     // Initialize the texture to magenta.
     auto pixel = reinterpret_cast<uint32_t *>(host_.GetTextureMemory());
@@ -323,15 +320,14 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());
 
-    p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
   };
 
   host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
@@ -418,16 +414,15 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   // Redirect the color output to the target texture.
   {
-    auto p = pb_begin();
-    p = pb_push1(
-        p, NV097_SET_SURFACE_PITCH,
-        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kTexturePitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(render_target_));
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kTexturePitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(render_target_));
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureWidth, kTextureHeight, true);
 
@@ -441,29 +436,29 @@ void VertexShaderRoundingTests::TestRenderTarget() {
 
   // Manually load the vertex shader.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0x0);
-    p = pb_push1(
-        p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_START, 0x0);
+    Pushbuffer::Push(
+        NV097_SET_TRANSFORM_EXECUTION_MODE,
         MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_PROGRAM) |
             MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
-    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0);
 
-    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_LOAD, 0x0);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_LOAD, 0x0);
 
     //  MOV(oD0,xyzw, v3);
-    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020061B, 0x0836106C, 0x2070F818);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020061B, 0x0836106C, 0x2070F818);
 
     //  MOV(oPos,xyzw, v0);
-    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020001B, 0x0836106C, 0x2070F800);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0020001B, 0x0836106C, 0x2070F800);
 
     //  MUL(oPos,xyz, R12, c[58]);
     //  RCC(R1,x, R12.w);
-    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0647401B, 0xC4361BFF, 0x1078E800);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0647401B, 0xC4361BFF, 0x1078E800);
 
     // MAD(oPos,xyz, R12, R1.x, c[59]);
-    p = pb_push4(p, NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0087601B, 0xC400286C, 0x3070E801);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM, 0x00000000, 0x0087601B, 0xC400286C, 0x3070E801);
+    Pushbuffer::End();
   }
 
   host_.SetCombinerControl(1, true, true);
@@ -504,13 +499,12 @@ void VertexShaderRoundingTests::TestRenderTarget() {
     texture_stage.SetImageDimensions(kTextureWidth, kTextureHeight);
     host_.SetupTextureStages();
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::End();
     host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                            host_.GetFramebufferHeight());
 
@@ -562,17 +556,16 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
 
   // Point the color buffer at the texture and mix the left hand side with itself multiple times.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
 
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 0.5f);
     host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::OneInput());
@@ -611,13 +604,13 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
   host_.SetVertexShaderProgram(nullptr);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
   // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::End();
 
   {
     const float left = -1.75;

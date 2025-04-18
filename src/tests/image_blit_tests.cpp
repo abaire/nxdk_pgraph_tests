@@ -149,47 +149,45 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
                                uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
                                uint32_t clip_height) const {
   PrintMsg("ImageBlit: %d beta: 0x%08X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
-  auto p = pb_begin();
-  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
-  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
 
-  p = pb_begin();
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_OPERATION, operation);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_OPERATION, operation);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
 
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_FORMAT, surface_format);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_FORMAT, surface_format);
 
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_PITCH, source_pitch | (destination_pitch << 16));
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_OFFSET_SRC, source_offset);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_OFFSET_DST, destination_offset);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_PITCH, source_pitch | (destination_pitch << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_SRC, source_offset);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_DST, destination_offset);
 
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
 
   if (operation != NV09F_SET_OPERATION_BLEND_AND) {
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA, null_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA, null_ctx_.ChannelID);
   } else {
-    p = pb_push1_to(SUBCH_CLASS_12, p, NV012_SET_BETA, beta);
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA, beta_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_12, NV012_SET_BETA, beta);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA, beta_ctx_.ChannelID);
   }
 
   if (operation != NV09F_SET_OPERATION_SRCCOPY_PREMULT && operation != NV09F_SET_OPERATION_BLEND_AND_PREMULT) {
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
   } else {
     // beta is ARGB
-    p = pb_push1_to(SUBCH_CLASS_72, p, NV072_SET_BETA, beta);
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, beta4_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_72, NV072_SET_BETA, beta);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA4, beta4_ctx_.ChannelID);
   }
 
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_POINT_IN, source_x | (source_y << 16));
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_POINT_OUT, destination_x | (destination_y << 16));
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SIZE, width | (height << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_POINT_IN, source_x | (source_y << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_POINT_OUT, destination_x | (destination_y << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SIZE, width | (height << 16));
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 void ImageBlitTests::Test(const BlitTest& test) {

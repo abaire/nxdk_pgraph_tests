@@ -3,6 +3,7 @@
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "pushbuffer.h"
 #include "swizzle.h"
 #include "xbox_math_matrix.h"
 #include "xbox_math_types.h"
@@ -23,10 +24,10 @@ bool TextureStage::RequiresColorspaceConversion() const {
 
 void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offset) const {
   if (!enabled_) {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     // NV097_SET_TEXTURE_CONTROL0
-    p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_), false);
-    pb_end(p);
+    Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_), false);
+    Pushbuffer::End();
     return;
   }
 
@@ -35,19 +36,19 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
     ASSERT(!"No texture format specified. This will cause an invalid pgraph state exception and a crash.");
   }
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t offset = reinterpret_cast<uint32_t>(memory_dma_offset) + texture_memory_offset_;
   uint32_t texture_addr = offset & 0x03ffffff;
   // NV097_SET_TEXTURE_OFFSET
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_OFFSET(stage_), texture_addr);
 
   // NV097_SET_TEXTURE_CONTROL0
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
-               NV097_SET_TEXTURE_CONTROL0_ENABLE |
-                   MASK(NV097_SET_TEXTURE_CONTROL0_ALPHA_KILL_ENABLE, alpha_kill_enable_) |
-                   MASK(NV097_SET_TEXTURE_CONTROL0_MIN_LOD_CLAMP, lod_min_) |
-                   MASK(NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP, lod_max_) |
-                   MASK(NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE, color_key_mode_));
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_ENABLE(stage_),
+                   NV097_SET_TEXTURE_CONTROL0_ENABLE |
+                       MASK(NV097_SET_TEXTURE_CONTROL0_ALPHA_KILL_ENABLE, alpha_kill_enable_) |
+                       MASK(NV097_SET_TEXTURE_CONTROL0_MIN_LOD_CLAMP, lod_min_) |
+                       MASK(NV097_SET_TEXTURE_CONTROL0_MAX_LOD_CLAMP, lod_max_) |
+                       MASK(NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE, color_key_mode_));
 
   uint32_t dimensionality = GetDimensionality();
 
@@ -72,15 +73,15 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
                     MASK(NV097_SET_TEXTURE_FORMAT_BASE_SIZE_P, size_p);
 
   // NV097_SET_TEXTURE_FORMAT
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FORMAT(stage_), format);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_FORMAT(stage_), format);
 
   uint32_t pitch_param = (format_.xbox_bpp * width_ / 8) << 16;
   // NV097_SET_TEXTURE_CONTROL1
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch_param);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_NPOT_PITCH(stage_), pitch_param);
 
   uint32_t size_param = (width_ << 16) | (height_ & 0xFFFF);
   // NV097_SET_TEXTURE_IMAGE_RECT
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(stage_), size_param);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_NPOT_SIZE(stage_), size_param);
 
   // NV097_SET_TEXTURE_ADDRESS
   uint32_t texture_address = MASK(NV097_SET_TEXTURE_ADDRESS_U, wrap_modes_[0]) |
@@ -90,10 +91,10 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
                              MASK(NV097_SET_TEXTURE_ADDRESS_P, wrap_modes_[2]) |
                              MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_P, cylinder_wrap_[2]) |
                              MASK(NV097_SET_TEXTURE_ADDRESS_CYLINDERWRAP_Q, cylinder_wrap_[3]);
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_WRAP(stage_), texture_address);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_WRAP(stage_), texture_address);
 
   // NV097_SET_TEXTURE_FILTER
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), texture_filter_);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_FILTER(stage_), texture_filter_);
 
   uint32_t palette_config = 0;
   if (format_.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8) {
@@ -105,25 +106,25 @@ void TextureStage::Commit(uint32_t memory_dma_offset, uint32_t palette_dma_offse
   }
 
   // NV097_SET_TEXTURE_PALETTE
-  p = pb_push1(p, NV20_TCL_PRIMITIVE_3D_TX_PALETTE_OFFSET(stage_), palette_config);
+  Pushbuffer::Push(NV20_TCL_PRIMITIVE_3D_TX_PALETTE_OFFSET(stage_), palette_config);
 
-  p = pb_push1(p, NV097_SET_TEXTURE_BORDER_COLOR, border_color_);
+  Pushbuffer::Push(NV097_SET_TEXTURE_BORDER_COLOR, border_color_);
 
-  p = pb_push4f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_MAT, bump_env_material[0], bump_env_material[1], bump_env_material[2],
-                bump_env_material[3]);
-  p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE, bump_env_scale);
-  p = pb_push1f(p, NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET, bump_env_offset);
-  p = pb_push1(p, NV097_SET_TEXTURE_MATRIX_ENABLE + (4 * stage_), texture_matrix_enable_);
+  Pushbuffer::PushF(NV097_SET_TEXTURE_SET_BUMP_ENV_MAT, bump_env_material[0], bump_env_material[1],
+                    bump_env_material[2], bump_env_material[3]);
+  Pushbuffer::PushF(NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE, bump_env_scale);
+  Pushbuffer::PushF(NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET, bump_env_offset);
+  Pushbuffer::Push(NV097_SET_TEXTURE_MATRIX_ENABLE + (4 * stage_), texture_matrix_enable_);
   if (texture_matrix_enable_) {
-    p = pb_push_4x4_matrix(p, NV097_SET_TEXTURE_MATRIX + 64 * stage_, texture_matrix_[0]);
+    Pushbuffer::Push4x4Matrix(NV097_SET_TEXTURE_MATRIX + 64 * stage_, texture_matrix_[0]);
   }
 
-  p = pb_push1(p, NV097_SET_TEXGEN_S, texgen_s_);
-  p = pb_push1(p, NV097_SET_TEXGEN_T, texgen_t_);
-  p = pb_push1(p, NV097_SET_TEXGEN_R, texgen_r_);
-  p = pb_push1(p, NV097_SET_TEXGEN_Q, texgen_q_);
+  Pushbuffer::Push(NV097_SET_TEXGEN_S, texgen_s_);
+  Pushbuffer::Push(NV097_SET_TEXGEN_T, texgen_t_);
+  Pushbuffer::Push(NV097_SET_TEXGEN_R, texgen_r_);
+  Pushbuffer::Push(NV097_SET_TEXGEN_Q, texgen_q_);
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 void TextureStage::SetFilter(uint32_t lod_bias, TextureStage::ConvolutionKernel kernel, TextureStage::MinFilter min,

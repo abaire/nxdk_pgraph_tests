@@ -70,11 +70,11 @@ void ZMinMaxControlTests::TearDownTest() {
   host_.SetupControl0();
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL,
-               NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE | NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
-                   NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE |
+                                                   NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
+                                                   NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
+  Pushbuffer::End();
 }
 
 static void AddVertex(TestHost& host, const vector_t& position, float r, float g, float b) {
@@ -216,9 +216,9 @@ void ZMinMaxControlTests::Test(const std::string& name, uint32_t mode, bool w_bu
     host_.SetDepthClip(kZNear, kZFar);
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL, mode);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, mode);
+  Pushbuffer::End();
 
   const float zscale = host_.GetMaxDepthBufferValue();
   host_.SetupControl0(false, w_buffered);
@@ -294,9 +294,9 @@ void ZMinMaxControlTests::TestFixed(const std::string& name, uint32_t mode, bool
     host_.SetDepthClip(kZNear, kZFar);
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL, mode);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, mode);
+  Pushbuffer::End();
 
   const float zscale = host_.GetMaxDepthBufferValue();
   host_.SetupControl0(false, w_buffered);

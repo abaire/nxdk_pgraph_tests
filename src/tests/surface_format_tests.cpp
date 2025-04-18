@@ -217,13 +217,12 @@ void SurfaceFormatTests::RenderToTextureStart(TestHost::SurfaceColorFormat color
 
   const uint32_t texture_pitch = TestHost::GetSurfaceColorPitch(color_format, host_.GetFramebufferWidth());
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, texture_pitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, texture_pitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+  Pushbuffer::End();
 
   // Failing to disable alpha blending on B8 and G8B8 will trigger a hardware exception.
   host_.SetBlend(TestHost::SurfaceSupportsAlpha(color_format));
@@ -235,13 +234,12 @@ void SurfaceFormatTests::RenderToTextureStart(TestHost::SurfaceColorFormat color
 
 void SurfaceFormatTests::RenderToTextureEnd() const {
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::End();
 
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight(), false);

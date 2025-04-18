@@ -54,52 +54,42 @@ void InlineArraySizeMismatchTests::Test() {
 
   const float right_middle = host_.GetFramebufferWidthF() - left_middle;
   const float right_left = right_middle - triangle_width;
-  const float right_right = right_middle + triangle_width;
+  // const float right_right = right_middle + triangle_width;
 
   const float z = 0.0f;
 
   const float top = host_.GetFramebufferHeightF() * 0.25f;
   const float bottom = host_.GetFramebufferHeightF() - top;
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
 
-  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), left_left, bottom, z);
-  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 1.0f, 0.0f, 0.0f, 1.0f);
-  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), left_left, bottom, z);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 1.0f, 0.0f, 0.0f, 1.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
 
-  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), left_middle, top, z);
-  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 1.0f, 1.0f, 0.0f, 1.0f);
-  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), left_middle, top, z);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 1.0f, 1.0f, 0.0f, 1.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
 
-  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), left_right, bottom, z);
-  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 1.0f, 0.0f, 1.0f, 1.0f);
-  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), left_right, bottom, z);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 1.0f, 0.0f, 1.0f, 1.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
 
-  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_left, bottom, z);
-  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f, 1.0f, 1.0f);
-  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_left, bottom, z);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f, 1.0f, 1.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
 
-  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_middle, top, z);
-  //  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 1.0f, 1.0f, 1.0f);
-  //  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
+  Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_middle, top, z);
+  //  Pushbuffer::PushF( NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 1.0f, 1.0f, 1.0f);
+  //  Pushbuffer::PushF( NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
   //
-  //  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_right, bottom, z);
-  //  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f, 1.0f, 1.0f);
-  //  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  //  Pushbuffer::PushF( NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_right, bottom, z);
+  //  Pushbuffer::PushF( NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f, 1.0f, 1.0f);
+  //  Pushbuffer::PushF( NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
 
-  // Verify that the excess data is entirely ignored by doing another partial draw that adds in the missing data.
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
-  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 1.0f, 1.0f, 1.0f);
-  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
-
-  p = pb_push3f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), right_right, bottom, z);
-  p = pb_push4f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f, 1.0f, 1.0f);
-  p = pb_push2f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), 0.0f, 0.0f);
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 
   pb_print("%s\n\n", kTestName);
   pb_draw_text_screen();
@@ -108,12 +98,12 @@ void InlineArraySizeMismatchTests::Test() {
 }
 
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride) {
-  uint32_t *p = pb_begin();
-  p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
-               MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
-                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE, size) |
-                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE, stride));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
+                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
+                       MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE, size) |
+                       MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE, stride));
+  Pushbuffer::End();
 }
 
 static void ClearVertexAttribute(uint32_t index) {

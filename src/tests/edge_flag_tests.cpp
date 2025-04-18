@@ -23,23 +23,23 @@ void EdgeFlagTests::Initialize() {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
   // Edge flag has no visible effect if fill is enabled.
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_LINE);
+  Pushbuffer::End();
   host_.SetBlend(true);
 }
 
 void EdgeFlagTests::Deinitialize() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_EDGE_FLAG, true);
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_EDGE_FLAG, true);
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::End();
 }
 
 static constexpr uint32_t kPalette[] = {
@@ -178,9 +178,9 @@ void EdgeFlagTests::Test(const std::string &name, bool edge_flag) {
   host_.PrepareDraw(0xFF303234);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_EDGE_FLAG, edge_flag);
+    Pushbuffer::End();
   }
 
   const float x = host_.GetFramebufferWidthF() * 0.25f;
@@ -203,9 +203,9 @@ void EdgeFlagTests::Test(const std::string &name, bool edge_flag) {
     host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
     uint32_t i = 0;
     for (auto pt : kVertices) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag || (i & 0x01));
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_EDGE_FLAG, edge_flag || (i & 0x01));
+      Pushbuffer::End();
       host_.SetDiffuse(kPalette[i]);
       host_.SetVertex(x + pt[0], y + pt[1], 1.0f);
       i = (i + 1) % kNumPaletteEntries;
@@ -222,9 +222,9 @@ void EdgeFlagTests::Test(const std::string &name, bool edge_flag) {
     host_.Begin(TestHost::PRIMITIVE_POLYGON);
     uint32_t i = 0;
     for (auto pt : kVertices) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag || !(i & 0x01));
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_EDGE_FLAG, edge_flag || !(i & 0x01));
+      Pushbuffer::End();
       host_.SetDiffuse(kPalette[i]);
       host_.SetVertex(x + pt[0], y + pt[1], 1.0f);
       i = (i + 1) % kNumPaletteEntries;
@@ -244,9 +244,9 @@ void EdgeFlagTests::Test(const std::string &name, bool edge_flag) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     uint32_t i = 0;
     for (auto pt : kVertices) {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_EDGE_FLAG, edge_flag || !(i & 0x01));
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_EDGE_FLAG, edge_flag || !(i & 0x01));
+      Pushbuffer::End();
       host_.SetDiffuse(kPalette[i]);
       host_.SetVertex(x + pt[0], y + pt[1], 1.0f);
       i = (i + 1) % kNumPaletteEntries;

@@ -49,14 +49,14 @@ void ColorZetaDisableTests::Test() {
   auto crash_register_pre_test = *crash_register;
   *crash_register = crash_register_pre_test & (~0x800);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COLOR_MASK, 0);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_FUNC, 2);
-  p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
-  p = pb_push1(p, NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, 0);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_FUNC, 2);
+  Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
+  Pushbuffer::Push(NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
+  Pushbuffer::End();
 
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   // Set RGBA to a distinct pattern.
@@ -67,11 +67,11 @@ void ColorZetaDisableTests::Test() {
   host_.SetVertex(left, bottom, z, 1.0f);
   host_.End();
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_COLOR_MASK,
-               NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                   NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK,
+                   NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                       NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
+  Pushbuffer::End();
 
   pb_print("%s\n\n", kTestName);
   pb_draw_text_screen();

@@ -8,6 +8,7 @@
 
 #include "configure.h"
 #include "debug_output.h"
+#include "pushbuffer.h"
 #include "tests/test_suite.h"
 
 static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
@@ -20,7 +21,7 @@ bool MenuItemTest::one_shot_mode_ = true;
 void MenuItem::PrepareDraw(uint32_t background_color) const {
   pb_wait_for_vbl();
   pb_target_back_buffer();
-  pb_reset();
+  Pushbuffer::Flush();
   pb_fill(0, 0, width, height, background_color);
   pb_erase_text_screen();
 }

@@ -124,23 +124,23 @@ void LightingRangeTests::Initialize() {
                           /* specular_clamp */ true);
 
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
 
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
 
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.75f);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.75f);
 
     // Values taken from MechAssault
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
-    p = pb_push1(p, NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x00, 0xBF56C33A);  // -0.838916
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x04, 0xC038C729);  // -2.887156
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x08, 0x4043165A);  // 3.048239
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x0c, 0xBF34DCE5);  // -0.706496
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x10, 0xC020743F);  // -2.507095
+    Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS + 0x14, 0x40333D06);  // 2.800600
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 }
 
@@ -164,16 +164,16 @@ void LightingRangeTests::Test(const std::string& name, std::shared_ptr<Light> li
   auto light_mode_bitvector = light->light_enable_mask();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
 
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
 
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   host_.SetVertexBuffer(vertex_buffer_mesh_);

@@ -3,7 +3,7 @@
 
 #include "nxdk/lib/pbkit/nv_objects.h"
 #include "nxdk/lib/pbkit/nv_regs.h"
-#include "xbox_types.h"
+#include "xboxkrnl/xboxdef.h"
 
 #define NEXT_SUBCH 5
 

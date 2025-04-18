@@ -158,19 +158,19 @@ void LightingAccumulationTests::Initialize() {
                           /* specular_clamp */ true);
 
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
 
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
 
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.f);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 1.f);
 
     // Power 2.0
-    p = pb_push3f(p, NV097_SET_SPECULAR_PARAMS + 0x00, -0.170208f, -0.855843f, 1.68563f);
-    p = pb_push3f(p, NV097_SET_SPECULAR_PARAMS + 0x0c, -0.0f, -0.494592f, 1.49459f);
+    Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + 0x00, -0.170208f, -0.855843f, 1.68563f);
+    Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + 0x0c, -0.0f, -0.494592f, 1.49459f);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 }
 
@@ -196,16 +196,16 @@ void LightingAccumulationTests::Test(const std::string& name, std::vector<std::s
   }
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
 
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
 
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   host_.SetVertexBuffer(vertex_buffer_mesh_);
