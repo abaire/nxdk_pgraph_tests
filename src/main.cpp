@@ -56,6 +56,7 @@
 #include "tests/fog_param_tests.h"
 #include "tests/fog_tests.h"
 #include "tests/front_face_tests.h"
+#include "tests/high_vertex_count_tests.h"
 #include "tests/image_blit_tests.h"
 #include "tests/inline_array_size_mismatch.h"
 #include "tests/lighting_accumulation_tests.h"
@@ -409,6 +410,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(FogParamTests)
   REG_TEST(FogVec4CoordTests)
   REG_TEST(FrontFaceTests)
+  REG_TEST(HighVertexCountTests)
   REG_TEST(ImageBlitTests)
   REG_TEST(InlineArraySizeMismatchTests)
   REG_TEST(LightingAccumulationTests)

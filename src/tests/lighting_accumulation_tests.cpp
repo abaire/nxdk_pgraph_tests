@@ -6,7 +6,6 @@
 #include "debug_output.h"
 #include "models/flat_mesh_grid_model.h"
 #include "pbkit_ext.h"
-#include "shaders/perspective_vertex_shader.h"
 #include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"

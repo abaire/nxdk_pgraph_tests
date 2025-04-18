@@ -253,6 +253,8 @@ add_executable(
         tests/fog_tests.h
         tests/front_face_tests.cpp
         tests/front_face_tests.h
+        tests/high_vertex_count_tests.cpp
+        tests/high_vertex_count_tests.h
         tests/image_blit_tests.cpp
         tests/image_blit_tests.h
         tests/inline_array_size_mismatch.cpp
