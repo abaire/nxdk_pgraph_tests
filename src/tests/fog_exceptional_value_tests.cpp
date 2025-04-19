@@ -281,11 +281,11 @@ void FogExceptionalValueTests::Initialize() {
   TestSuite::Initialize();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_FOG_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+    Pushbuffer::End();
   }
 
   // Just pass through the diffuse color.
@@ -323,12 +323,12 @@ static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host
 }
 
 static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // Note: Fog color is ABGR and not ARGB
-  p = pb_push1(p, NV097_SET_FOG_COLOR, kFogColor);
+  Pushbuffer::Push(NV097_SET_FOG_COLOR, kFogColor);
 
-  p = pb_push1(p, NV097_SET_FOG_GEN_MODE, fog_gen_mode);
-  p = pb_push1(p, NV097_SET_FOG_MODE, fog_mode);
+  Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, fog_gen_mode);
+  Pushbuffer::Push(NV097_SET_FOG_MODE, fog_mode);
 
   // Linear parameters.
   // TODO: Parameterize.
@@ -366,9 +366,9 @@ static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
   }
 
   // TODO: Figure out what the third parameter is. In all examples I've seen it's always been 0.
-  p = pb_push3f(p, NV097_SET_FOG_PARAMS, bias_param, multiplier_param, 0.0f);
+  Pushbuffer::PushF(NV097_SET_FOG_PARAMS, bias_param, multiplier_param, 0.0f);
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode) {

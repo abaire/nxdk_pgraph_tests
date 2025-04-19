@@ -86,9 +86,9 @@ void ZeroStrideTests::CreateGeometry() {
 void ZeroStrideTests::Test(DrawMode draw_mode) {
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::End();
 
   host_.OverrideVertexAttributeStride(TestHost::DIFFUSE, 0);
 

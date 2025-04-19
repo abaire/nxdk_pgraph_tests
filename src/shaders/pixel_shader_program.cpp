@@ -2,6 +2,8 @@
 
 #include <pbkit/pbkit.h>
 
+#include "pushbuffer.h"
+
 void PixelShaderProgram::LoadTexturedPixelShader() {
   uint32_t *p = pb_begin();
 
@@ -23,7 +25,7 @@ void PixelShaderProgram::LoadUntexturedPixelShader() {
 }
 
 void PixelShaderProgram::DisablePixelShader() {
-  uint32_t *p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADER_STAGE_PROGRAM, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SHADER_STAGE_PROGRAM, 0);
+  Pushbuffer::End();
 }

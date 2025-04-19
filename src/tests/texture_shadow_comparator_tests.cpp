@@ -251,10 +251,10 @@ void TextureShadowComparatorTests::Initialize() {
   raw_value_shader_ = std::make_shared<PrecalculatedVertexShader>(true);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 }
 
 void TextureShadowComparatorTests::Deinitialize() {
@@ -397,9 +397,9 @@ void TextureShadowComparatorTests::TestRawValues(uint32_t depth_format, uint32_t
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
   auto &stage = host_.GetTextureStage(0);
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADOW_COMPARE_FUNC, shadow_comp_function);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SHADOW_COMPARE_FUNC, shadow_comp_function);
+  Pushbuffer::End();
 
   stage.SetFormat(GetTextureFormatInfo(texture_format));
   host_.SetShaderStageProgram(mode);
@@ -521,16 +521,16 @@ void TextureShadowComparatorTests::TestProjected(
     uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function,
     float min_val, float max_val, float ref_val, std::function<void(vector_t &, const vector_t &)> project_point,
     std::function<void(vector_t &, const vector_t &, float)> unproject_point, const std::string &name) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // Depth test must be enabled or nothing will be written to the depth target.
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-  p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
 
   // Point the depth buffer at the base of texture memory.
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, texture_target_ctx_.ChannelID);
-  p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, texture_target_ctx_.ChannelID);
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
+  Pushbuffer::End();
 
   host_.PrepareDraw(0xFE332211);
 
@@ -636,12 +636,12 @@ void TextureShadowComparatorTests::TestProjected(
   }
 #endif
 
-  p = pb_begin();
+  Pushbuffer::Begin();
   // Restore the depth buffer.
-  p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
 
   // Clear the visible part.
   host_.ClearColorRegion(0xFE443333);
@@ -653,9 +653,9 @@ void TextureShadowComparatorTests::TestProjected(
 
   auto &stage = host_.GetTextureStage(0);
   PGRAPHDiffToken diff_token(true, false);
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADOW_COMPARE_FUNC, shadow_comp_function);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SHADOW_COMPARE_FUNC, shadow_comp_function);
+  Pushbuffer::End();
   diff_token.DumpDiff();
 
   host_.SetShaderStageProgram(mode);
@@ -667,9 +667,9 @@ void TextureShadowComparatorTests::TestProjected(
 
   // Override the texture-format dependent pitch since it is governed by the zeta buffer tiling strategy which has not
   // been updated.
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_TEXTURE_CONTROL1, texture_pitch << 16);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXTURE_CONTROL1, texture_pitch << 16);
+  Pushbuffer::End();
 
   float projected_ref_val = ref_val;
   {

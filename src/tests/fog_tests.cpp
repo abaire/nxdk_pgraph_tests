@@ -56,9 +56,9 @@ void FogTests::Initialize() {
                           false);
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FOG_ENABLE, true);
+  Pushbuffer::End();
 }
 
 void FogTests::Deinitialize() {
@@ -107,12 +107,12 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   static constexpr uint32_t kBackgroundColor = 0xFF303030;
   host_.PrepareDraw(kBackgroundColor);
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // Note: Fog color is ABGR and not ARGB
-  p = pb_push1(p, NV097_SET_FOG_COLOR, 0x7F2030 + (fog_alpha << 24));
+  Pushbuffer::Push(NV097_SET_FOG_COLOR, 0x7F2030 + (fog_alpha << 24));
 
-  p = pb_push1(p, NV097_SET_FOG_GEN_MODE, gen_mode);
-  p = pb_push1(p, NV097_SET_FOG_MODE, fog_mode);
+  Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, gen_mode);
+  Pushbuffer::Push(NV097_SET_FOG_MODE, fog_mode);
 
   // Linear parameters.
   // TODO: Parameterize.
@@ -150,9 +150,9 @@ void FogTests::Test(FogTests::FogMode fog_mode, FogTests::FogGenMode gen_mode, u
   }
 
   // TODO: Figure out what the third parameter is. In all examples I've seen it's always been 0.
-  p = pb_push3f(p, NV097_SET_FOG_PARAMS, bias_param, multiplier_param, 0.0f);
+  Pushbuffer::PushF(NV097_SET_FOG_PARAMS, bias_param, multiplier_param, 0.0f);
 
-  pb_end(p);
+  Pushbuffer::End();
 
   host_.DrawArrays(host_.POSITION | host_.DIFFUSE);
 
@@ -403,16 +403,16 @@ void FogVec4CoordTests::Initialize() {
   // fog factor.
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // Note: Fog color is ABGR and not ARGB
-  p = pb_push1(p, NV097_SET_FOG_COLOR, 0x00FF00);
+  Pushbuffer::Push(NV097_SET_FOG_COLOR, 0x00FF00);
   // Gen mode does not seem to matter when using a vertex shader.
-  p = pb_push1(p, NV097_SET_FOG_GEN_MODE, FOG_GEN_SPEC_ALPHA);
-  p = pb_push1(p, NV097_SET_FOG_MODE, FOG_LINEAR);
+  Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, FOG_GEN_SPEC_ALPHA);
+  Pushbuffer::Push(NV097_SET_FOG_MODE, FOG_LINEAR);
 
   // The final fog calculation should be exactly the output of the shader.
-  p = pb_push3f(p, NV097_SET_FOG_PARAMS, 1.0f, 1.0f, 0.0f);
-  pb_end(p);
+  Pushbuffer::PushF(NV097_SET_FOG_PARAMS, 1.0f, 1.0f, 0.0f);
+  Pushbuffer::End();
 }
 
 void FogVec4CoordTests::Test(const TestConfig& config) {

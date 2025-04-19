@@ -181,18 +181,17 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
 
   // Point the color buffer at the texture memory.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF);
 
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kImageWidth * 4) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kImageWidth * 4) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
 
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kImageWidth, kImageHeight, false);
   }
 
@@ -200,13 +199,12 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
 
   // Restore the color buffer and render the texture to a quad.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::End();
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight(), false);
   }

@@ -62,16 +62,16 @@ void StippleTests::Initialize() {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
   host_.SetBlend(true);
 }
 
 void StippleTests::TearDownTest() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_STIPPLE_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_STIPPLE_ENABLE, false);
+  Pushbuffer::End();
 }
 
 static constexpr uint32_t kPalette[] = {
@@ -210,12 +210,12 @@ void StippleTests::Test(const std::string &name, bool stipple_enable, const std:
   host_.PrepareDraw(0xFF202224);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_STIPPLE_ENABLE, stipple_enable);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_STIPPLE_ENABLE, stipple_enable);
     for (auto i = 0; i < NV097_SET_STIPPLE_PATERN_SIZE; i += 4) {
-      p = pb_push4v(p, NV097_SET_STIPPLE_PATERN_0 + (i * 4), stipple_pattern.data() + i);
+      Pushbuffer::Push4(NV097_SET_STIPPLE_PATERN_0 + (i * 4), stipple_pattern.data() + i);
     }
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   const float x = host_.GetFramebufferWidthF() * 0.25f;

@@ -130,9 +130,9 @@ void TextureCubemapTests::Initialize() {
     host_.SetupTextureStages();
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::End();
 
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
@@ -231,9 +231,9 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
                               TestHost::STAGE_DOT_STR_CUBE);
   host_.SetupTextureStages();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, dot_rgb_mapping);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, dot_rgb_mapping);
+  Pushbuffer::End();
 
   host_.PrepareDraw(0xFE131313);
 
@@ -293,9 +293,9 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
   draw(1.5f, 0.0f, z, M_PI * 1.25f, M_PI * 0.25f, 0.0f);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, 0);
+  Pushbuffer::End();
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();

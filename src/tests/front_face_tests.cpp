@@ -101,9 +101,9 @@ void FrontFaceTests::Initialize() {
   TestSuite::Initialize();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, true);
+    Pushbuffer::End();
   }
 
   auto shader = std::make_shared<PrecalculatedVertexShader>();
@@ -152,21 +152,21 @@ void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face) {
   // Note that the setup steps done by host_ will set the front face to CCW, so CW is preferred to differentiate the
   // behavior from simply running tests in sequence.
   if (front_face != NV097_SET_FRONT_FACE_V_CW) {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
+    Pushbuffer::End();
   } else {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+    Pushbuffer::End();
   }
 
   host_.PBKitBusyWait();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_FACE, front_face);
-  p = pb_push1(p, NV097_SET_CULL_FACE, cull_face);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_FACE, front_face);
+  Pushbuffer::Push(NV097_SET_CULL_FACE, cull_face);
+  Pushbuffer::End();
   host_.DrawArrays();
 
   std::string winding_name = WindingName(front_face);

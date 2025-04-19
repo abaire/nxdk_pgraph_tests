@@ -83,21 +83,21 @@ void TwoDLineTests::Initialize() {
 void TwoDLineTests::Test(const TestCase& test) {
   host_.PrepareDraw(0xFF440011);  // alpha + RRGGBB
 
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
-  p = pb_push1_to(SUBCH_CLASS_42, p, NV04_CONTEXT_SURFACES_2D_SET_DMA_IMAGE_DST, DMA_CHANNEL_PIXEL_RENDERER);
-  p = pb_push1_to(SUBCH_CLASS_42, p, NV042_SET_PITCH, (pb_back_buffer_pitch() << 16) | pb_back_buffer_pitch());
-  p = pb_push1_to(SUBCH_CLASS_42, p, NV042_SET_COLOR_FORMAT, NV042_SET_COLOR_FORMAT_LE_A8R8G8B8);
+  Pushbuffer::PushTo(SUBCH_CLASS_42, NV04_CONTEXT_SURFACES_2D_SET_DMA_IMAGE_DST, DMA_CHANNEL_PIXEL_RENDERER);
+  Pushbuffer::PushTo(SUBCH_CLASS_42, NV042_SET_PITCH, (pb_back_buffer_pitch() << 16) | pb_back_buffer_pitch());
+  Pushbuffer::PushTo(SUBCH_CLASS_42, NV042_SET_COLOR_FORMAT, NV042_SET_COLOR_FORMAT_LE_A8R8G8B8);
 
-  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_OPERATION, NV09F_SET_OPERATION_SRCCOPY);
-  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_COLOR_VALUE, test.object_color);
-  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_SURFACE, surface_destination_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_5C, NV04_SOLID_LINE_OPERATION, NV09F_SET_OPERATION_SRCCOPY);
+  Pushbuffer::PushTo(SUBCH_CLASS_5C, NV04_SOLID_LINE_COLOR_VALUE, test.object_color);
+  Pushbuffer::PushTo(SUBCH_CLASS_5C, NV04_SOLID_LINE_SURFACE, surface_destination_ctx_.ChannelID);
 
-  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_COLOR_FORMAT, test.color_format);
-  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_START, (test.start_y << 16) | test.start_x);
-  p = pb_push1_to(SUBCH_CLASS_5C, p, NV04_SOLID_LINE_END, (test.end_y << 16) | test.end_x);
+  Pushbuffer::PushTo(SUBCH_CLASS_5C, NV04_SOLID_LINE_COLOR_FORMAT, test.color_format);
+  Pushbuffer::PushTo(SUBCH_CLASS_5C, NV04_SOLID_LINE_START, (test.start_y << 16) | test.start_x);
+  Pushbuffer::PushTo(SUBCH_CLASS_5C, NV04_SOLID_LINE_END, (test.end_y << 16) | test.end_x);
 
-  pb_end(p);
+  Pushbuffer::End();
 
   pb_print("2D Line: (%lu, %lu) - (%lu, %lu)\n", test.start_x, test.start_y, test.end_x, test.end_y);
   std::string color_format_name = ColorFormatName(test.color_format, false);

@@ -303,16 +303,16 @@ void SpecularBackTests::Initialize() {
   TestSuite::Initialize();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
 
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kSceneAmbientColor);
 
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
 
-    p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_LIGHT_TWO_SIDE_ENABLE, true);
+    Pushbuffer::End();
   }
 
   // Setup pixel shader to just utilize specular component.
@@ -354,18 +354,18 @@ static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host
 }
 
 static void MakeBackFaceFront() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
-  p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_FRONT);
-  p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CCW);
+  Pushbuffer::Push(NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_FRONT);
+  Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, true);
+  Pushbuffer::End();
 }
 
 static void MakeFrontFaceFront() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
-  p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
+  Pushbuffer::Push(NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
+  Pushbuffer::End();
 }
 
 void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed_function, bool enable_lighting,
@@ -409,23 +409,23 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
   MakeBackFaceFront();
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, enable_lighting);
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, enable_lighting);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
 
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.15f);  // Should not be used since only backs are rendered.
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA_BACK, 0.75f);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.15f);  // Should not be used since only backs are rendered.
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA_BACK, 0.75f);
 
     // Pow 16
     const float specular_params[]{-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433};
     // Set up the back specular params and set the front specular to 0 so that it will be very obvious if anything
     // uses it.
     for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, 0);
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS_BACK + offset, specular_params[i]);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + offset, 0);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS_BACK + offset, specular_params[i]);
     }
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   const auto fb_width = host_.GetFramebufferWidthF();
@@ -510,11 +510,10 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
     // Separate specular + alpha from material.
     {
-      auto p = pb_begin();
-      p = pb_push1(
-          p, NV097_SET_LIGHT_CONTROL,
-          NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR | NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR |
+                                                    NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -522,9 +521,9 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
     // Separate specular
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -532,9 +531,9 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
     // Alpha from material
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -542,9 +541,9 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
     // None
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0);
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, 0);
+      Pushbuffer::End();
     }
     draw_quad(left, top);
     host_.PBKitBusyWait();
@@ -555,9 +554,9 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
   // Specular disabled row
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+    Pushbuffer::End();
   }
 
   PixelShaderJustSpecular(host_);
@@ -570,9 +569,9 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
 
   // Specular enabled row
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::End();
   }
 
   PixelShaderJustSpecular(host_);
@@ -688,33 +687,33 @@ void SpecularBackTests::TestSpecularParams(const std::string& name, const float*
       light_mode_bitvector |= light.light_enable_mask();
     }
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, true);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
 
     static constexpr vector_t kBrightAmbientColor{0.1f, 0.1f, 0.1f, 0.f};
-    p = pb_push3fv(p, NV097_SET_SCENE_AMBIENT_COLOR, kBrightAmbientColor);
+    Pushbuffer::Push3F(NV097_SET_SCENE_AMBIENT_COLOR, kBrightAmbientColor);
 
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
 
     // These should both be irrelevant since only the specular color is rendered and
     // NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR is not set.
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 0.15f);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA_BACK, 0.75f);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 0.15f);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA_BACK, 0.75f);
 
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
 
     // Set up the back specular params and set the front specular to 0 so that it will be very obvious if anything
     // uses it.
     for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, 0);
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS_BACK + offset, specular_params[i]);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + offset, 0);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS_BACK + offset, specular_params[i]);
     }
 
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, light_mode_bitvector);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   MakeBackFaceFront();

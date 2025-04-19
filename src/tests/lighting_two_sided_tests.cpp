@@ -16,37 +16,37 @@ LightingTwoSidedTests::LightingTwoSidedTests(TestHost &host, std::string output_
 }
 
 static void SetLight() {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
-  p = pb_push3(p, NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
-  p = pb_push3f(p, NV097_SET_LIGHT_DIFFUSE_COLOR, 1.f, 0.f, 0.25f);
-  p = pb_push3f(p, NV097_SET_LIGHT_SPECULAR_COLOR, 0.f, 1.f, 0.f);
+  Pushbuffer::Push(NV097_SET_LIGHT_AMBIENT_COLOR, 0, 0, 0);
+  Pushbuffer::PushF(NV097_SET_LIGHT_DIFFUSE_COLOR, 1.f, 0.f, 0.25f);
+  Pushbuffer::PushF(NV097_SET_LIGHT_SPECULAR_COLOR, 0.f, 1.f, 0.f);
 
-  p = pb_push3f(p, NV097_SET_BACK_LIGHT_AMBIENT_COLOR, 0, 0, 0.25f);
-  p = pb_push3f(p, NV097_SET_BACK_LIGHT_DIFFUSE_COLOR, 0.f, 0.75f, 0.35f);
-  p = pb_push3f(p, NV097_SET_BACK_LIGHT_SPECULAR_COLOR, 0.66f, 0.f, 0.66f);
+  Pushbuffer::PushF(NV097_SET_BACK_LIGHT_AMBIENT_COLOR, 0, 0, 0.25f);
+  Pushbuffer::PushF(NV097_SET_BACK_LIGHT_DIFFUSE_COLOR, 0.f, 0.75f, 0.35f);
+  Pushbuffer::PushF(NV097_SET_BACK_LIGHT_SPECULAR_COLOR, 0.66f, 0.f, 0.66f);
 
-  //  p = pb_push1f(p, NV097_SET_LIGHT_LOCAL_RANGE, 10.f);
-  //  p = pb_push3f(p, NV097_SET_LIGHT_LOCAL_POSITION, 0.f, 0.f, 2.f);
-  //  p = pb_push3f(p, NV097_SET_LIGHT_LOCAL_ATTENUATION, 0.25f, 0.5f, 0.25f);
-  //  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_LOCAL);
+  //  Pushbuffer::PushF( NV097_SET_LIGHT_LOCAL_RANGE, 10.f);
+  //  Pushbuffer::PushF( NV097_SET_LIGHT_LOCAL_POSITION, 0.f, 0.f, 2.f);
+  //  Pushbuffer::PushF( NV097_SET_LIGHT_LOCAL_ATTENUATION, 0.25f, 0.5f, 0.25f);
+  //  Pushbuffer::Push( NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_LOCAL);
 
-  p = pb_push1f(p, NV097_SET_LIGHT_LOCAL_RANGE, 1e30f);
-  p = pb_push3(p, NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
-  p = pb_push3f(p, NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
-  p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
+  Pushbuffer::PushF(NV097_SET_LIGHT_LOCAL_RANGE, 1e30f);
+  Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR, 0, 0, 0);
+  Pushbuffer::PushF(NV097_SET_LIGHT_INFINITE_DIRECTION, 0.0f, 0.0f, 1.0f);
+  Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 static void SetLightAndMaterial() {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
 
-  p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-  p = pb_push3f(p, NV097_SET_SCENE_AMBIENT_COLOR, 0.031373, 0.031373, 0.031373);
-  p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-  p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+  Pushbuffer::PushF(NV097_SET_SCENE_AMBIENT_COLOR, 0.031373, 0.031373, 0.031373);
+  Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+  Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 1.0f);
+  Pushbuffer::End();
 
   SetLight();
 }
@@ -58,24 +58,24 @@ void LightingTwoSidedTests::Initialize() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, true);
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL, 0x1);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, 0x1);
 
-    p = pb_push4f(p, NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_DIFFUSE), 1.f, 1.f, 1.f, 1.f);
-    p = pb_push4f(p, NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0.f, 1.f, 0.f, 1.f);
-    p = pb_push4f(p, NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0.7f, 0.f, 1.f, 1.f);
-    p = pb_push4f(p, NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0.5f, 0.f, 0.5f, 1.f);
+    Pushbuffer::PushF(NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_DIFFUSE), 1.f, 1.f, 1.f, 1.f);
+    Pushbuffer::PushF(NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_SPECULAR), 0.f, 1.f, 0.f, 1.f);
+    Pushbuffer::PushF(NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0.7f, 0.f, 1.f, 1.f);
+    Pushbuffer::PushF(NV097_SET_VERTEX_DATA4F_M + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0.5f, 0.f, 0.5f, 1.f);
 
     // Culling must be disabled for two-sided lighting to have any effect.
-    p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, false);
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
 
     // By default back alpha is 0, so it must be set in the test.
     // It is set to half transparent to demonstrate that it has no effect when two sided lighting is off.
-    p = pb_push1f(p, NV097_SET_BACK_MATERIAL_ALPHA, 0.5f);
+    Pushbuffer::PushF(NV097_SET_BACK_MATERIAL_ALPHA, 0.5f);
 
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   host_.SetCombinerControl(1);
@@ -105,9 +105,9 @@ void LightingTwoSidedTests::Test() {
   host_.PrepareDraw(kBackgroundColor);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_TWO_SIDE_ENABLE, true);
+    Pushbuffer::End();
   }
 
   static constexpr float z = -1.f;
@@ -150,9 +150,9 @@ void LightingTwoSidedTests::Test() {
   }
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
+    Pushbuffer::End();
   }
 
   // Front face

@@ -212,10 +212,10 @@ void ColorKeyTests::Initialize() {
 
 void ColorKeyTests::TearDownTest() {
   TestSuite::TearDownTest();
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   // Zero out the color keys.
-  p = pb_push4(p, NV097_SET_COLOR_KEY_COLOR, 0, 0, 0, 0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR, 0, 0, 0, 0);
+  Pushbuffer::End();
 }
 
 static void AddVertex(TestHost& host, float x, float y, float u, float v) {
@@ -228,9 +228,9 @@ static void AddVertex(TestHost& host, float x, float y, float u, float v) {
 };
 
 static void DrawQuads(TestHost& host, float x = 0.f, float y = 0.f) {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
+  Pushbuffer::End();
 
   host.Begin(TestHost::PRIMITIVE_QUADS);
 
@@ -267,15 +267,15 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x0, kColorKeys[0]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x0, kColorKeys[0]);
+    Pushbuffer::End();
     DrawQuads(host, -2.6f, 1.25f);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x0, kAlphaKeys[0]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x0, kAlphaKeys[0]);
+    Pushbuffer::End();
     DrawQuads(host, -1.f, 1.25f);
   }
 
@@ -285,15 +285,15 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x4, kColorKeys[1]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x4, kColorKeys[1]);
+    Pushbuffer::End();
     DrawQuads(host, 1.f, 1.25f);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x4, kAlphaKeys[1]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x4, kAlphaKeys[1]);
+    Pushbuffer::End();
     DrawQuads(host, 2.6f, 1.25f);
   }
 
@@ -303,15 +303,15 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_TEX2, true);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x8, kColorKeys[2]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x8, kColorKeys[2]);
+    Pushbuffer::End();
     DrawQuads(host, -2.6f, -1.25f);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x8, kAlphaKeys[2]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x8, kAlphaKeys[2]);
+    Pushbuffer::End();
     DrawQuads(host, -1.f, -1.25f);
   }
 
@@ -322,15 +322,15 @@ static void DrawScreen(TestHost& host, bool alpha_from_texture) {
     host.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0xC, kColorKeys[3]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0xC, kColorKeys[3]);
+    Pushbuffer::End();
     DrawQuads(host, 1.f, -1.25f);
   }
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0xC, kAlphaKeys[3]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0xC, kAlphaKeys[3]);
+    Pushbuffer::End();
     DrawQuads(host, 2.6f, -1.25f);
   }
 }
@@ -400,9 +400,9 @@ void ColorKeyTests::TestUnsampled(const std::string& name) {
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x0, kColorKeys[0]);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x0, kColorKeys[0]);
+    Pushbuffer::End();
     DrawQuads(host_, -1.6f, 0.f);
   }
 
@@ -411,9 +411,9 @@ void ColorKeyTests::TestUnsampled(const std::string& name) {
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_2D_PROJECTIVE);
   uint32_t tex1_color_key = (kColorKeys[1] & 0x00FFFFFF) | 0xFF000000;
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_COLOR_KEY_COLOR + 0x4, tex1_color_key);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x4, tex1_color_key);
+    Pushbuffer::End();
     DrawQuads(host_, 1.6f, 0.f);
   }
 

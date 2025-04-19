@@ -54,9 +54,9 @@ void TextureRenderUpdateInPlaceTests::Deinitialize() {
     MmFreeContiguousMemory(render_target_);
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, kDefaultDMAChannelA);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_A, kDefaultDMAChannelA);
+  Pushbuffer::End();
 }
 
 void TextureRenderUpdateInPlaceTests::CreateGeometry() {
@@ -94,16 +94,15 @@ void TextureRenderUpdateInPlaceTests::Test() {
 
   // Set the render target as the color output and render a pure white rectangle.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, render_target_address);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kTexturePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, render_target_address);
     // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-    p = pb_push1(p, NV097_NO_OPERATION, 0);
-    p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+    Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+    Pushbuffer::End();
 
     host_.SetWindowClip(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
     host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
@@ -117,10 +116,10 @@ void TextureRenderUpdateInPlaceTests::Test() {
 
   // Set the render target as the input texture and remove the blue channel.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, texture_target_ctx_.ChannelID);
-    p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, render_target_address);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_A, texture_target_ctx_.ChannelID);
+    Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, render_target_address);
+    Pushbuffer::End();
 
     host_.SetCombinerFactorC0(0, 1.0f, 1.0f, 0.0f, 1.0f);
     host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 1.0f);
@@ -136,9 +135,9 @@ void TextureRenderUpdateInPlaceTests::Test() {
   // Switch the target texture to the normal texture memory, leaving the same texture offset (input) address. Then
   // modulate the texture further, zeroing the red channel and increasing the alpha.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, normal_texture_address);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, normal_texture_address);
+    Pushbuffer::End();
 
     host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 1.0f, 1.0f);
     host_.SetCombinerFactorC1(0, 0.0f, 0.0f, 0.0f, 1.0f);
@@ -155,14 +154,13 @@ void TextureRenderUpdateInPlaceTests::Test() {
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, normal_texture_address);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, normal_texture_address);
+  Pushbuffer::End();
 
   host_.SetVertexBuffer(framebuffer_vertex_buffer_);
   host_.PrepareDraw(0xFE252525);

@@ -9,6 +9,7 @@
 #include "logger.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "pushbuffer.h"
 #include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -120,41 +121,40 @@ void TestSuite::Initialize() {
                          host_.GetFramebufferHeight());
 
   {
-    auto p = pb_begin();
-    p = pb_push4f(p, NV097_SET_EYE_POSITION, 0.0f, 0.0f, 0.0f, 1.0f);
-    p = pb_push1(p, NV097_SET_ZMIN_MAX_CONTROL,
-                 NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE | NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
-                     NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, host_.GetFramebufferWidth() << 16);
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, host_.GetFramebufferHeight() << 16);
+    Pushbuffer::Begin();
+    Pushbuffer::PushF(NV097_SET_EYE_POSITION, 0.0f, 0.0f, 0.0f, 1.0f);
+    Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE |
+                                                     NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
+                                                     NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, host_.GetFramebufferWidth() << 16);
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, host_.GetFramebufferHeight() << 16);
 
-    p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-    p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-    p = pb_push1(p, NV097_SET_LIGHT_CONTROL,
-                 NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR | NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
-    p = pb_push1(p, NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
-    p = pb_push1(p, NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
-    p = pb_push3(p, NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
-    p = pb_push3(p, NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
-    p = pb_push1f(p, NV097_SET_MATERIAL_ALPHA, 1.0f);
-    p = pb_push1f(p, NV097_SET_BACK_MATERIAL_ALPHA, 1.f);
+    Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_LIGHT_CONTROL, NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR |
+                                                  NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);
+    Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK, NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_OFF);
+    Pushbuffer::Push(NV097_SET_COLOR_MATERIAL, NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);
+    Pushbuffer::Push(NV097_SET_SCENE_AMBIENT_COLOR, 0x0, 0x0, 0x0);
+    Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION, 0x0, 0x0, 0x0);
+    Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA, 1.0f);
+    Pushbuffer::PushF(NV097_SET_BACK_MATERIAL_ALPHA, 1.f);
 
-    p = pb_push1(p, NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
-    p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
-    p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+    Pushbuffer::Push(NV097_SET_LIGHT_TWO_SIDE_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+    Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
 
-    p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
+    Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_SIZE, 8);
 
-    p = pb_push1(p, NV097_SET_DOT_RGBMAPPING, 0);
+    Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, 0);
 
-    p = pb_push1(p, NV097_SET_SHADE_MODEL, NV097_SET_SHADE_MODEL_SMOOTH);
-    p = pb_push1(p, NV097_SET_FLAT_SHADE_OP, NV097_SET_FLAT_SHADE_OP_VERTEX_LAST);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_SHADE_MODEL, NV097_SET_SHADE_MODEL_SMOOTH);
+    Pushbuffer::Push(NV097_SET_FLAT_SHADE_OP, NV097_SET_FLAT_SHADE_OP_VERTEX_LAST);
+    Pushbuffer::End();
   }
 
   host_.SetWindowClipExclusive(false);
@@ -214,88 +214,84 @@ void TestSuite::Initialize() {
 
   // TODO: Set up with TextureStage instances in host_.
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     uint32_t address = NV097_SET_TEXTURE_ADDRESS;
     uint32_t control = NV097_SET_TEXTURE_CONTROL0;
     uint32_t filter = NV097_SET_TEXTURE_FILTER;
-    p = pb_push1(p, address, 0x10101);
-    p = pb_push1(p, control, 0x3ffc0);
-    p = pb_push1(p, filter, 0x1012000);
+    Pushbuffer::Push(address, 0x10101);
+    Pushbuffer::Push(control, 0x3ffc0);
+    Pushbuffer::Push(filter, 0x1012000);
 
     address += 0x40;
     control += 0x40;
     filter += 0x40;
-    p = pb_push1(p, address, 0x10101);
-    p = pb_push1(p, control, 0x3ffc0);
-    p = pb_push1(p, filter, 0x1012000);
+    Pushbuffer::Push(address, 0x10101);
+    Pushbuffer::Push(control, 0x3ffc0);
+    Pushbuffer::Push(filter, 0x1012000);
 
     address += 0x40;
     control += 0x40;
     filter += 0x40;
-    p = pb_push1(p, address, 0x10101);
-    p = pb_push1(p, control, 0x3ffc0);
-    p = pb_push1(p, filter, 0x1012000);
+    Pushbuffer::Push(address, 0x10101);
+    Pushbuffer::Push(control, 0x3ffc0);
+    Pushbuffer::Push(filter, 0x1012000);
 
     address += 0x40;
     control += 0x40;
     filter += 0x40;
-    p = pb_push1(p, address, 0x10101);
-    p = pb_push1(p, control, 0x3ffc0);
-    p = pb_push1(p, filter, 0x1012000);
-    pb_end(p);
-  }
+    Pushbuffer::Push(address, 0x10101);
+    Pushbuffer::Push(control, 0x3ffc0);
+    Pushbuffer::Push(filter, 0x1012000);
 
-  {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-    p = pb_push4f(p, NV097_SET_FOG_PLANE, 0.f, 0.f, 1.f, 0.f);
-    p = pb_push1(p, NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_PLANAR);
-    p = pb_push1(p, NV097_SET_FOG_MODE, NV097_SET_FOG_MODE_V_LINEAR);
-    p = pb_push1(p, NV097_SET_FOG_COLOR, 0xFFFFFFFF);
+    Pushbuffer::Push(NV097_SET_FOG_ENABLE, false);
+    Pushbuffer::PushF(NV097_SET_FOG_PLANE, 0.f, 0.f, 1.f, 0.f);
+    Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_PLANAR);
+    Pushbuffer::Push(NV097_SET_FOG_MODE, NV097_SET_FOG_MODE_V_LINEAR);
+    Pushbuffer::Push(NV097_SET_FOG_COLOR, 0xFFFFFFFF);
 
-    p = pb_push4(p, NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
+    Pushbuffer::Push(NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
-    p = pb_push1(p, NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
-    p = pb_push1(p, NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
-    p = pb_push1(p, NV097_SET_CULL_FACE_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
+    Pushbuffer::Push(NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
+    Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, true);
 
-    p = pb_push1(p, NV097_SET_COLOR_MASK,
-                 NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
-                     NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
+    Pushbuffer::Push(NV097_SET_COLOR_MASK,
+                     NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                         NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
 
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-    p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-    p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
-    p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-    p = pb_push1(p, NV097_SET_STENCIL_MASK, 0xFF);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+    Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+    Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_STENCIL_MASK, 0xFF);
     // If the stencil comparison fails, leave the value in the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_FAIL, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_FAIL, NV097_SET_STENCIL_OP_V_KEEP);
     // If the stencil comparison passes but the depth comparison fails, leave the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_ZFAIL, NV097_SET_STENCIL_OP_V_KEEP);
     // If the stencil comparison passes and the depth comparison passes, leave the stencil buffer alone.
-    p = pb_push1(p, NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
-    p = pb_push1(p, NV097_SET_STENCIL_FUNC_REF, 0x7F);
+    Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS, NV097_SET_STENCIL_OP_V_KEEP);
+    Pushbuffer::Push(NV097_SET_STENCIL_FUNC_REF, 0x7F);
 
-    p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_NORMALIZATION_ENABLE, false);
 
-    p = pb_push4f(p, NV097_SET_WEIGHT4F, 0.f, 0.f, 0.f, 0.f);
-    p = pb_push3f(p, NV097_SET_NORMAL3F, 0.f, 0.f, 0.f);
-    p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, 0x00000000);
-    p = pb_push1(p, NV097_SET_SPECULAR_COLOR4I, 0x00000000);
-    p = pb_push4f(p, NV097_SET_TEXCOORD0_4F, 0.f, 0.f, 0.f, 0.f);
-    p = pb_push4f(p, NV097_SET_TEXCOORD1_4F, 0.f, 0.f, 0.f, 0.f);
-    p = pb_push4f(p, NV097_SET_TEXCOORD2_4F, 0.f, 0.f, 0.f, 0.f);
-    p = pb_push4f(p, NV097_SET_TEXCOORD3_4F, 0.f, 0.f, 0.f, 0.f);
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
-    p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
+    Pushbuffer::PushF(NV097_SET_WEIGHT4F, 0.f, 0.f, 0.f, 0.f);
+    Pushbuffer::PushF(NV097_SET_NORMAL3F, 0.f, 0.f, 0.f);
+    Pushbuffer::Push(NV097_SET_DIFFUSE_COLOR4I, 0x00000000);
+    Pushbuffer::Push(NV097_SET_SPECULAR_COLOR4I, 0x00000000);
+    Pushbuffer::PushF(NV097_SET_TEXCOORD0_4F, 0.f, 0.f, 0.f, 0.f);
+    Pushbuffer::PushF(NV097_SET_TEXCOORD1_4F, 0.f, 0.f, 0.f, 0.f);
+    Pushbuffer::PushF(NV097_SET_TEXCOORD2_4F, 0.f, 0.f, 0.f, 0.f);
+    Pushbuffer::PushF(NV097_SET_TEXCOORD3_4F, 0.f, 0.f, 0.f, 0.f);
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), 0xFFFFFFFF);
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), 0);
 
     // Pow 16
     const float specular_params[]{-0.803673, -2.7813, 2.97762, -0.64766, -2.36199, 2.71433};
     for (uint32_t i = 0, offset = 0; i < 6; ++i, offset += 4) {
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
-      p = pb_push1f(p, NV097_SET_SPECULAR_PARAMS_BACK + offset, 0);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS + offset, specular_params[i]);
+      Pushbuffer::PushF(NV097_SET_SPECULAR_PARAMS_BACK + offset, 0);
     }
-    pb_end(p);
+    Pushbuffer::End();
   }
 
   host_.SetDefaultViewportAndFixedFunctionMatrices();
@@ -322,19 +318,21 @@ void TestSuite::Initialize() {
   // Perform some nops to tag the end of the default initialization sequence for log processing.
   TagNV2ATrace(2);
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
-    p = pb_push1(p, NV097_SET_FOG_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_FOG_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_FOG_ENABLE, false);
+    Pushbuffer::End();
   }
   TagNV2ATrace(4);
 }
 
 void TestSuite::TagNV2ATrace(uint32_t num_nops) {
   ASSERT(num_nops < 32 && "Too many nops in TagNV2ATrace");
-  auto p = pb_begin();
-  for (auto i = 0; i < num_nops; ++i) p = pb_push1(p, NV097_NO_OPERATION, 0x00);
-  pb_end(p);
+  Pushbuffer::Begin();
+  for (auto i = 0; i < num_nops; ++i) {
+    Pushbuffer::Push(NV097_NO_OPERATION, 0x00);
+  }
+  Pushbuffer::End();
 }
 
 void TestSuite::Deinitialize() {

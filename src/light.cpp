@@ -7,6 +7,7 @@
 
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "pushbuffer.h"
 
 static constexpr float PI_OVER_180 = (float)M_PI / 180.0f;
 #define DEG2RAD(c) ((float)(c) * PI_OVER_180)
@@ -15,15 +16,15 @@ Light::Light(uint32_t light_index, uint32_t enable_mask)
     : light_index_(light_index), light_enable_mask_(LIGHT_MODE(light_index, enable_mask)) {}
 
 void Light::Commit(TestHost& host) const {
-  auto p = pb_begin();
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_AMBIENT_COLOR), ambient_);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_DIFFUSE_COLOR), diffuse_);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_SPECULAR_COLOR), specular_);
+  Pushbuffer::Begin();
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_AMBIENT_COLOR), ambient_);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_DIFFUSE_COLOR), diffuse_);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_SPECULAR_COLOR), specular_);
 
-  p = pb_push3fv(p, SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_AMBIENT_COLOR), back_ambient_);
-  p = pb_push3fv(p, SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_DIFFUSE_COLOR), back_diffuse_);
-  p = pb_push3fv(p, SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_SPECULAR_COLOR), back_specular_);
-  pb_end(p);
+  Pushbuffer::Push3F(SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_AMBIENT_COLOR), back_ambient_);
+  Pushbuffer::Push3F(SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_DIFFUSE_COLOR), back_diffuse_);
+  Pushbuffer::Push3F(SET_BACK_LIGHT(light_index_, NV097_SET_BACK_LIGHT_SPECULAR_COLOR), back_specular_);
+  Pushbuffer::End();
 }
 
 void Light::Commit(TestHost& host, const XboxMath::vector_t& look_direction) const { Commit(host); }
@@ -88,13 +89,13 @@ void Spotlight::Commit(TestHost& host) const {
   ScalarMultVector(normalized_direction, inv_scale);
   normalized_direction[3] = cos_half_phi * inv_scale;
 
-  auto p = pb_begin();
-  p = pb_push1f(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_RANGE), range_);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_POSITION), transformed_position);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_ATTENUATION), attenuation_);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_SPOT_FALLOFF), falloff_);
-  p = pb_push4fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_SPOT_DIRECTION), normalized_direction);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_RANGE), range_);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_POSITION), transformed_position);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_ATTENUATION), attenuation_);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_SPOT_FALLOFF), falloff_);
+  Pushbuffer::Push4F(SET_LIGHT(light_index_, NV097_SET_LIGHT_SPOT_DIRECTION), normalized_direction);
+  Pushbuffer::End();
 }
 
 DirectionalLight::DirectionalLight(uint32_t light_index, const XboxMath::vector_t& direction)
@@ -118,11 +119,11 @@ void DirectionalLight::Commit(TestHost& host, const vector_t& look_dir) const {
   vector_t infinite_direction;
   ScalarMultVector(direction_, -1.f, infinite_direction);
 
-  auto p = pb_begin();
-  p = pb_push1f(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_RANGE), 1e30f);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_INFINITE_HALF_VECTOR), half_angle_vector);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_INFINITE_DIRECTION), infinite_direction);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_RANGE), 1e30f);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_INFINITE_HALF_VECTOR), half_angle_vector);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_INFINITE_DIRECTION), infinite_direction);
+  Pushbuffer::End();
 }
 
 PointLight::PointLight(uint32_t light_index, const XboxMath::vector_t& position, float range,
@@ -143,9 +144,9 @@ void PointLight::Commit(TestHost& host) const {
   VectorMultMatrix(position_, view_matrix, transformed_position);
   transformed_position[3] = 1.f;
 
-  auto p = pb_begin();
-  p = pb_push1f(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_RANGE), range_);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_POSITION), transformed_position);
-  p = pb_push3fv(p, SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_ATTENUATION), attenuation_);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_RANGE), range_);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_POSITION), transformed_position);
+  Pushbuffer::Push3F(SET_LIGHT(light_index_, NV097_SET_LIGHT_LOCAL_ATTENUATION), attenuation_);
+  Pushbuffer::End();
 }

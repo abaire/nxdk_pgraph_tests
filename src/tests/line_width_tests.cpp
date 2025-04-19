@@ -71,26 +71,26 @@ void LineWidthTests::Initialize() {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
   host_.SetBlend(true);
 }
 
 static void SetFill(bool enabled) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t fill_mode = enabled ? NV097_SET_FRONT_POLYGON_MODE_V_FILL : NV097_SET_FRONT_POLYGON_MODE_V_LINE;
-  p = pb_push1(p, NV097_SET_FRONT_POLYGON_MODE, fill_mode);
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, fill_mode);
   // Note: This shouldn't strictly be necessary, but at the moment xemu disallows different fill modes for front and
   // back.
-  p = pb_push1(p, NV097_SET_BACK_POLYGON_MODE, fill_mode);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, fill_mode);
+  Pushbuffer::End();
 }
 
 void LineWidthTests::TearDownTest() {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LINE_WIDTH, kDefaultWidth);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LINE_WIDTH, kDefaultWidth);
+  Pushbuffer::End();
   SetFill(true);
 }
 
@@ -231,9 +231,9 @@ void LineWidthTests::Test(const std::string &name, bool fill, fixed_t width) {
 
   SetFill(fill);
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LINE_WIDTH, width);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LINE_WIDTH, width);
+    Pushbuffer::End();
   }
 
   const float x = host_.GetFramebufferWidthF() * 0.25f;

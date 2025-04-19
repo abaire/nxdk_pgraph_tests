@@ -5,38 +5,33 @@
 #include <memory>
 
 #include "pbkit_ext.h"
+#include "pushbuffer.h"
 
 using namespace XboxMath;
 
 void VertexShaderProgram::LoadShaderProgram(const uint32_t *shader, uint32_t shader_size) const {
-  uint32_t *p;
   int i;
 
-  p = pb_begin();
+  Pushbuffer::Begin();
 
   // Set run address of shader
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_START, 0);
+  Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_START, 0);
 
-  p = pb_push1(
-      p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+  Pushbuffer::Push(
+      NV097_SET_TRANSFORM_EXECUTION_MODE,
       MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_PROGRAM) |
           MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
 
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0);
 
   // Set cursor and begin copying program
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_LOAD, 0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_LOAD, 0);
 
   for (i = 0; i < shader_size / 16; i++) {
-    p = pb_begin();
-    pb_push(p++, NV097_SET_TRANSFORM_PROGRAM, 4);
-    memcpy(p, &shader[i * 4], 4 * 4);
-    p += 4;
-    pb_end(p);
+    auto *value = reinterpret_cast<const DWORD *>(shader + (i * 4));
+    Pushbuffer::Push4(NV097_SET_TRANSFORM_PROGRAM, value);
   }
+  Pushbuffer::End();
 }
 
 void VertexShaderProgram::Activate() {
@@ -76,26 +71,22 @@ void VertexShaderProgram::UploadConstants() {
       transform_constants[index] = entry.second.w;
     }
 
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, start_offset + first_index);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_TRANSFORM_CONSTANT_LOAD, start_offset + first_index);
 
-    uint32_t *uniforms = transform_constants.data();
+    auto *uniforms = reinterpret_cast<DWORD *>(transform_constants.data());
     uint32_t values_remaining = transform_constants.size();
     while (values_remaining > 16) {
-      pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, 16);
-      memcpy(p, uniforms, 16 * 4);
+      Pushbuffer::PushN(NV097_SET_TRANSFORM_CONSTANT, 16, uniforms);
       uniforms += 16;
-      p += 16;
       values_remaining -= 16;
     }
 
     if (values_remaining) {
-      pb_push(p++, NV097_SET_TRANSFORM_CONSTANT, values_remaining);
-      memcpy(p, uniforms, values_remaining * 4);
-      p += values_remaining;
+      Pushbuffer::PushN(NV097_SET_TRANSFORM_CONSTANT, values_remaining, uniforms);
     }
 
-    pb_end(p);
+    Pushbuffer::End();
   };
 
   // Overwriting the lower constants will break the fixed function pipeline.
