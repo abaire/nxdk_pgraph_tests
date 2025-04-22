@@ -9,7 +9,8 @@
 class TestHost;
 class VertexBuffer;
 
-// Tests behavior when vertex attributes have a 0 stride.
+//! Tests behavior of NV097_SET_COMBINER_* and NV097_SET_SPECULAR_* final
+//! combiner operations.
 class CombinerTests : public TestSuite {
  public:
   CombinerTests(TestHost& host, std::string output_dir, const Config& config);
@@ -22,6 +23,8 @@ class CombinerTests : public TestSuite {
   void TestCombinerIndependence();
   void TestCombinerColorAlphaIndependence();
   void TestFlags();
+  void TestUnboundTexture();
+  void TestUnboundTextureSamplers();
 
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];

@@ -3,20 +3,50 @@
 #include <pbkit/pbkit.h>
 
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
+#include "texture_generator.h"
 #include "vertex_buffer.h"
 
 static constexpr const char* kMuxTestName = "Mux";
 static constexpr const char* kIndependenceTestName = "Independence";
 static constexpr const char* kColorAlphaIndependenceTestName = "ColorAlphaIndependence";
 static constexpr const char* kFlagsTestName = "Flags";
+static constexpr const char* kUnboundTextureSamplerTestName = "UnboundTexSampler";
 
+static constexpr vector_t kDiffuseUL{1.f, 0.f, 0.f, 1.f};
+static constexpr vector_t kDiffuseUR{0.f, 1.f, 0.f, 1.f};
+static constexpr vector_t kDiffuseLR{0.f, 0.f, 1.f, 1.f};
+static constexpr vector_t kDiffuseLL{0.5f, 0.5f, 0.5f, 1.f};
+
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc ColorAlphaIndependence
+ *   Demonstrates that setting color on a combiner register does not affect alpha.
+ *
+ * @tc Flags
+ *   Tests behavior of specular_add_invert_r0, specular_add_invert_v1, and specular_clamp on final combiners.
+ *
+ * @tc Independence
+ *   Demonstrates that setting a register's value in a combiner stage does not mutate the value until after it is
+ *   assigned as an output. The test performs several draws where R0 is initialized to some color then both mutated and
+ *   copied into R1, demonstrating that the original value of R0 is copied into R1 before being replaced with the new
+ *   value.
+ *
+ * @tc Mux
+ *   Tests behavior of the "MUX" combiner mode, in which R0.a is used to select between the AB and CD outputs.
+ *
+ * @tc UnboundTex
+ *   Demonstrates that the alpha channel for unbound textures is set to 1.0.
+ */
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Combiner", config) {
   tests_[kMuxTestName] = [this]() { TestMux(); };
   tests_[kIndependenceTestName] = [this]() { TestCombinerIndependence(); };
   tests_[kColorAlphaIndependenceTestName] = [this]() { TestCombinerColorAlphaIndependence(); };
   tests_[kFlagsTestName] = [this]() { TestFlags(); };
+  tests_[kUnboundTextureSamplerTestName] = [this]() { TestUnboundTextureSamplers(); };
 }
 
 void CombinerTests::Initialize() {
@@ -247,7 +277,7 @@ void CombinerTests::TestCombinerColorAlphaIndependence() {
     host_.SetOutputColorCombiner(0, TestHost::DST_R0);
 
     // Turn R0 100% blue and set R1 alpha to R0 (which is 0% when entering this stage).
-    host_.SetCombinerFactorC0(1, 0.0f, 0.0f, 1.0f, 0.0f);
+    host_.SetCombinerFactorC0(1, 0.0f, 0.0f, 1.0f, 1.0f);
     host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
     host_.SetOutputColorCombiner(1, TestHost::DST_R0);
 
@@ -352,4 +382,84 @@ void CombinerTests::TestFlags() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFlagsTestName);
+}
+
+void CombinerTests::TestUnboundTextureSamplers() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  auto unproject = [this](vector_t& world_point, float x, float y, float z) {
+    vector_t screen_point{x, y, z, 1.f};
+    host_.UnprojectPoint(world_point, screen_point, z);
+  };
+
+  static constexpr auto kQuadSize = 64.f;
+  static constexpr float kQuadZ = 0.f;
+
+  auto draw_quad = [this, unproject](float left, float top) {
+    const auto right = left + kQuadSize;
+    const auto bottom = top + kQuadSize;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    vector_t world_point{0.f, 0.f, 0.f, 1.f};
+
+    host_.SetDiffuse(kDiffuseUL);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+
+    host_.SetDiffuse(kDiffuseUR);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+
+    host_.SetDiffuse(kDiffuseLR);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+
+    host_.SetDiffuse(kDiffuseLL);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+
+    host_.End();
+  };
+
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  static constexpr auto kQuadSpacing = kQuadSize + 8.f;
+  const auto kLeft = floor((host_.GetFramebufferWidthF() - (kQuadSize + kQuadSpacing)) * 0.5f);
+  float top = 96.f;
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  draw_quad(kLeft, top);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0, true);
+  draw_quad(kLeft + kQuadSpacing, top);
+
+  top += kQuadSpacing;
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+  draw_quad(kLeft, top);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX1, true);
+  draw_quad(kLeft + kQuadSpacing, top);
+
+  top += kQuadSpacing;
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX2);
+  draw_quad(kLeft, top);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX2, true);
+  draw_quad(kLeft + kQuadSpacing, top);
+
+  top += kQuadSpacing;
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  draw_quad(kLeft, top);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3, true);
+  draw_quad(kLeft + kQuadSpacing, top);
+
+  pb_printat(0, 0, "%s", kUnboundTextureSamplerTestName);
+  pb_printat(4, 18, "tex0");
+  pb_printat(7, 18, "tex1");
+  pb_printat(10, 18, "tex2");
+  pb_printat(12, 18, "tex3");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kUnboundTextureSamplerTestName);
+
+  host_.SetVertexShaderProgram(nullptr);
 }
