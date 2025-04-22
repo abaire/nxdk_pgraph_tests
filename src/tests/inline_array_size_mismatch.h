@@ -10,6 +10,10 @@
 struct TextureFormatInfo;
 class VertexBuffer;
 
+//! Verifies that using an NV097_INLINE_ARRAY draw loop that ends with a partial vertex description silently ignores
+//! any partial vertices.
+//!
+//! See xemu#985
 class InlineArraySizeMismatchTests : public TestSuite {
  public:
   InlineArraySizeMismatchTests(TestHost& host, std::string output_dir, const Config& config);

@@ -46,9 +46,9 @@ void ColorMaskBlendTests::Initialize() {
 
   CreateGeometry();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BLEND_ENABLE, true);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BLEND_ENABLE, true);
+  Pushbuffer::End();
 }
 
 void ColorMaskBlendTests::CreateGeometry() {
@@ -119,12 +119,12 @@ void ColorMaskBlendTests::Test(uint32_t color_mask, uint32_t blend_op, uint32_t 
     host_.End();
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COLOR_MASK, color_mask);
-  p = pb_push1(p, NV097_SET_BLEND_EQUATION, blend_op);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, sfactor);
-  p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, dfactor);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, color_mask);
+  Pushbuffer::Push(NV097_SET_BLEND_EQUATION, blend_op);
+  Pushbuffer::Push(NV097_SET_BLEND_FUNC_SFACTOR, sfactor);
+  Pushbuffer::Push(NV097_SET_BLEND_FUNC_DFACTOR, dfactor);
+  Pushbuffer::End();
 
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE);
 

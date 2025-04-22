@@ -127,12 +127,12 @@ void PointParamsTests::Initialize() {
 
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 }
 
 template <typename RowStartCB, typename RenderPointCB>
@@ -161,16 +161,16 @@ static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t n
     const auto& params = param_sets[param_index % num_params];
     ++param_index;
 
-    auto p = pb_begin();
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, params.scaleFactorA);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, params.scaleFactorB);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, params.scaleFactorC);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE, params.sizeRange);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, params.sizeRangeDup1);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, params.sizeRangeDup2);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_SCALE_BIAS, params.scaleBias);
-    p = pb_push1f(p, NV097_SET_POINT_PARAMS_MIN_SIZE, params.minSize);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, params.scaleFactorA);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, params.scaleFactorB);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, params.scaleFactorC);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE, params.sizeRange);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, params.sizeRangeDup1);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, params.sizeRangeDup2);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_BIAS, params.scaleBias);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_MIN_SIZE, params.minSize);
+    Pushbuffer::End();
 
     host.Begin(TestHost::PRIMITIVE_POINTS);
 
@@ -202,20 +202,20 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
 
   host_.PrepareDraw(0xFF222323);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, point_params_enabled);
-  p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, point_smooth_enabled);
-  p = pb_push1(p, NV097_SET_POINT_SIZE, point_size);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, point_params_enabled);
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, point_smooth_enabled);
+  Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
+  Pushbuffer::End();
 
   RenderLoop(host_, kBasicPointParams, kNumBasicPointParamsSets, use_shader);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_SIZE, 8);
+    Pushbuffer::End();
   }
 
   pb_print("%s\n", name.c_str());
@@ -233,20 +233,20 @@ void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
 
   host_.PrepareDraw(0xFF222324);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, 1);
-  p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, 1);
-  p = pb_push1(p, NV097_SET_POINT_SIZE, 128);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, 1);
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, 1);
+  Pushbuffer::Push(NV097_SET_POINT_SIZE, 128);
+  Pushbuffer::End();
 
   RenderLoop(host_, kDetailedPointParams, kNumDetailedPointParamsSets, use_shader);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POINT_PARAMS_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POINT_SIZE, 8);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_SIZE, 8);
+    Pushbuffer::End();
   }
 
   pb_print("%s\n", name.c_str());

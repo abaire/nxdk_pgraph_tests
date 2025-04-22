@@ -70,12 +70,12 @@ void SwathWidthTests::Initialize() {
 
   host_.SetBlend(true);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 }
 
 static void RenderGeometry(TestHost &host) {
@@ -189,14 +189,13 @@ static void RenderToAntialiasedTextureBegin(TestHost &host) {
   GenerateRGBACheckerboard(host.GetTextureMemoryForStage(0), 0, 0, kFramebufferWidth * 2, kFramebufferHeight,
                            kAAFramebufferPitch, 0x3322AAAA, 0x33AA22AA, 64);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
-                   SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kAAFramebufferPitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kAAFramebufferPitch));
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
 
-  pb_end(p);
+  Pushbuffer::End();
 
   host.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kFramebufferWidth,
                                  host.GetFramebufferHeight(), false, 0, 0, 0, 0, TestHost::AA_CENTER_CORNER_2);
@@ -213,13 +212,12 @@ static void RenderToAntialiasedTextureEnd(TestHost &host) {
 
   // Direct output to the framebuffer.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::End();
     host.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kFramebufferWidth, kFramebufferHeight);
   }
 
@@ -266,12 +264,12 @@ void SwathWidthTests::Test(const std::string &name, uint32_t swath_width) {
   host_.PrepareDraw(0xFF222322);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SWATH_WIDTH, swath_width);
-    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
-    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, true);
-    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, true);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SWATH_WIDTH, swath_width);
+    Pushbuffer::Push(NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
+    Pushbuffer::Push(NV097_SET_LINE_SMOOTH_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_POLY_SMOOTH_ENABLE, true);
+    Pushbuffer::End();
   }
 
   RenderToAntialiasedTextureBegin(host_);
@@ -287,12 +285,12 @@ void SwathWidthTests::Test(const std::string &name, uint32_t swath_width) {
   RenderTexturedQuad(host_, kLeft, kTop, kLeft + kQuadWidth, kTop + kQuadHeight);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0000);
-    p = pb_push1(p, NV097_SET_SWATH_WIDTH, NV097_SET_SWATH_WIDTH_V_OFF);
-    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SMOOTHING_CONTROL, 0xFFFF0000);
+    Pushbuffer::Push(NV097_SET_SWATH_WIDTH, NV097_SET_SWATH_WIDTH_V_OFF);
+    Pushbuffer::Push(NV097_SET_LINE_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POLY_SMOOTH_ENABLE, false);
+    Pushbuffer::End();
   }
 
   RenderToAntialiasedTextureEnd(host_);

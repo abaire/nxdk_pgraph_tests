@@ -87,27 +87,27 @@ void TextureFramebufferBlitTests::Initialize() {
 
   // The texture DMA channel is overridden to use a context that can address arbitrary RAM.
   // (pbkit sets up a channel that can only address a subset of video RAM)
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, texture_target_ctx_.ChannelID);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_A, texture_target_ctx_.ChannelID);
+  Pushbuffer::End();
 }
 
 void TextureFramebufferBlitTests::Deinitialize() {
   TestSuite::Deinitialize();
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-  p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
   // Note: Leaving arbitrary offsets for these values will lead to a color buffer limit error in the two_d_line_tests.
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_OFFSET_SOURCE, 0);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_OFFSET_DESTIN, 0);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_A, kDefaultDMAChannelA);
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV062_SET_OFFSET_SOURCE, 0);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV062_SET_OFFSET_DESTIN, 0);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_A, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::End();
 }
 
 void TextureFramebufferBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel,
@@ -117,45 +117,45 @@ void TextureFramebufferBlitTests::ImageBlit(uint32_t operation, uint32_t beta, u
                                             uint32_t destination_x, uint32_t destination_y, uint32_t width,
                                             uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
                                             uint32_t clip_height) const {
-  auto p = pb_begin();
-  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
-  p = pb_push1_to(SUBCH_CLASS_19, p, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
+  Pushbuffer::Begin();
+  Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
 
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_OPERATION, operation);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_OPERATION, operation);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
 
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV10_CONTEXT_SURFACES_2D_FORMAT, surface_format);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_FORMAT, surface_format);
 
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_PITCH, source_pitch | (destination_pitch << 16));
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_OFFSET_SOURCE, source_offset);
-  p = pb_push1_to(SUBCH_CLASS_62, p, NV062_SET_OFFSET_DESTIN, destination_offset);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV062_SET_PITCH, source_pitch | (destination_pitch << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV062_SET_OFFSET_SOURCE, source_offset);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV062_SET_OFFSET_DESTIN, destination_offset);
 
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
 
   if (operation != NV09F_SET_OPERATION_BLEND_AND) {
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA, null_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA, null_ctx_.ChannelID);
   } else {
-    p = pb_push1_to(SUBCH_CLASS_12, p, NV012_SET_BETA, beta);
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA, beta_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_12, NV012_SET_BETA, beta);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA, beta_ctx_.ChannelID);
   }
 
   if (operation != NV09F_SET_OPERATION_SRCCOPY_PREMULT && operation != NV09F_SET_OPERATION_BLEND_AND_PREMULT) {
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
   } else {
     // beta is ARGB
-    p = pb_push1_to(SUBCH_CLASS_72, p, NV072_SET_BETA, beta);
-    p = pb_push1_to(SUBCH_CLASS_9F, p, NV_IMAGE_BLIT_SET_BETA4, beta4_ctx_.ChannelID);
+    Pushbuffer::PushTo(SUBCH_CLASS_72, NV072_SET_BETA, beta);
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA4, beta4_ctx_.ChannelID);
   }
 
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV09F_CONTROL_POINT_IN, source_x | (source_y << 16));
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV09F_CONTROL_POINT_OUT, destination_x | (destination_y << 16));
-  p = pb_push1_to(SUBCH_CLASS_9F, p, NV09F_SIZE, width | (height << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV09F_CONTROL_POINT_IN, source_x | (source_y << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV09F_CONTROL_POINT_OUT, destination_x | (destination_y << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV09F_SIZE, width | (height << 16));
 
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 void TextureFramebufferBlitTests::CreateGeometry() {
@@ -230,29 +230,29 @@ void TextureFramebufferBlitTests::TestRenderTarget(const char* test_name) {
       (uint8_t*)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
   ASSERT(target && "Failed to allocate target surface.");
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(target) & 0x03FFFFFF);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH,
+                   SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, texture_target_ctx_.ChannelID);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, reinterpret_cast<uint32_t>(target) & 0x03FFFFFF);
   // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::End();
 
   // Render something into the texture. The expectation is that this will not actually be displayed since the test will
   // completely blit over it.
   host_.PrepareDraw(0xF0AA00AA);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-               SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH,
+                   SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
   // TODO: Investigate if this is actually necessary. Morrowind does this after changing offsets.
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::End();
 
   Test(reinterpret_cast<uint32_t>(target), test_name);
 
@@ -264,14 +264,14 @@ void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char*
 
   texture_destination &= 0x03FFFFFF;
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
 
   // Trigger https://github.com/mborgerson/xemu/issues/788 by forcing xemu to consider the zeta buffer as dirty.
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::End();
 
   // Render test content to the framebuffer, then blit it into texture memory.
   {
@@ -310,9 +310,9 @@ void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char*
   // The texture stage utilities always operate off of the texture memory managed by the test_host. Because this test
   // needs to reference arbitrary texture destinations, the offset must be applied manually after the rest of the params
   // are committed.
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_TEXTURE_OFFSET, texture_destination);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, texture_destination);
+  Pushbuffer::End();
 
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);

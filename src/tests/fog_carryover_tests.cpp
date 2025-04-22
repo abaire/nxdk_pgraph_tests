@@ -76,14 +76,14 @@ void FogCarryoverTests::Initialize() {
   TestSuite::Initialize();
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_FOG_ENABLE, true);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_FOG_ENABLE, true);
     // Note: Fog color is ABGR and not ARGB
-    p = pb_push1(p, NV097_SET_FOG_COLOR, kFogColor);
+    Pushbuffer::Push(NV097_SET_FOG_COLOR, kFogColor);
     // Fog gen mode is set to just use the fog coordinate from the shader.
-    p = pb_push1(p, NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_FOG_X);
-    p = pb_push4f(p, NV097_SET_FOG_PLANE, 0.f, 0.f, 2.f, 0.f);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_FOG_X);
+    Pushbuffer::PushF(NV097_SET_FOG_PLANE, 0.f, 0.f, 2.f, 0.f);
+    Pushbuffer::End();
   }
 
   // Just pass through the diffuse color.
@@ -151,11 +151,11 @@ void FogCarryoverTests::Test() {
     shader->PrepareDraw();
 
     {
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_FOG_MODE, fog_mode);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_FOG_MODE, fog_mode);
       // The last parameter never seems to have an effect.
-      p = pb_push3f(p, NV097_SET_FOG_PARAMS, ZeroBias(fog_mode), -1.f, 0.f);
-      pb_end(p);
+      Pushbuffer::PushF(NV097_SET_FOG_PARAMS, ZeroBias(fog_mode), -1.f, 0.f);
+      Pushbuffer::End();
     }
 
     draw_tri(start_x, top);

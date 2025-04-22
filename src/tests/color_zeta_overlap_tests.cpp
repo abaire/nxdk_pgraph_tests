@@ -55,14 +55,14 @@ void ColorZetaOverlapTests::Initialize() {
 
   // Depth test must be enabled or nothing will be written to the depth target.
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_BLEND_ENABLE, false);
-    p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, false);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_BLEND_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_ALPHA_TEST_ENABLE, false);
 
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-    p = pb_push1(p, NV097_SET_DEPTH_MASK, true);
-    p = pb_push1(p, NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+    Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+    Pushbuffer::End();
   }
 }
 
@@ -78,9 +78,9 @@ void ColorZetaOverlapTests::TestColorIntoDepth() {
 
   host_.PrepareDraw(0xFE242424, 0);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAZetaChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAZetaChannel);
+  Pushbuffer::End();
 
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetDiffuse(kColor);
@@ -90,9 +90,9 @@ void ColorZetaOverlapTests::TestColorIntoDepth() {
   host_.SetVertex(kLeft, kBottom, kZ, 1.0f);
   host_.End();
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::End();
 
   host_.ClearColorRegion(0xFE242424);
 
@@ -114,9 +114,9 @@ void ColorZetaOverlapTests::TestDepthIntoColor() {
 
   host_.PrepareDraw(0xFE242424, 0);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAColorChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAColorChannel);
+  Pushbuffer::End();
 
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetDiffuse(kColor);
@@ -126,9 +126,9 @@ void ColorZetaOverlapTests::TestDepthIntoColor() {
   host_.SetVertex(kLeft * kScale, kBottom * kScale, kZ, 1.0f);
   host_.End();
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::End();
 
   pb_print("%s\nC~=0xFF2454FE\nNondeterministic!", kDepthIntoColorTestName);
   pb_draw_text_screen();
@@ -146,10 +146,10 @@ void ColorZetaOverlapTests::TestSwap() {
 
   host_.PrepareDraw(0xFE242424, 0);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAZetaChannel);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAColorChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAZetaChannel);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAColorChannel);
+  Pushbuffer::End();
 
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetDiffuse(kColor);
@@ -159,10 +159,10 @@ void ColorZetaOverlapTests::TestSwap() {
   host_.SetVertex(kLeft * kScale, kBottom * kScale, kZ, 1.0f);
   host_.End();
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::End();
 
   pb_print("%s\nC=0xFF2416E9\nZB=0x00A8BF00", kSwapTestName);
   pb_draw_text_screen();
@@ -189,13 +189,12 @@ void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset(bool swizzle) 
   static constexpr uint32_t kClipH = kSurfaceHeight - 2;
   {
     const uint32_t texture_memory = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
-    auto p = pb_begin();
-    p = pb_push1(
-        p, NV097_SET_SURFACE_PITCH,
-        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, texture_memory);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, texture_memory + kSurfacePitch * kSurfaceHeight);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, texture_memory);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, texture_memory + kSurfacePitch * kSurfaceHeight);
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false);
 
@@ -204,10 +203,10 @@ void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset(bool swizzle) 
 
     host_.Clear();
 
-    p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, (kClipW << 16) + kClipX);
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (kClipH << 16) + kClipY);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, (kClipW << 16) + kClipX);
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (kClipH << 16) + kClipY);
+    Pushbuffer::End();
     // Set the surface clip to 1, 1. This will cause xemu to erroneously treat the color surface as kSurfaceWidth + 1,
     // kSurfaceHeight + 1.
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, swizzle,
@@ -226,13 +225,12 @@ void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset(bool swizzle) 
 
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    Pushbuffer::End();
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());
   }
@@ -259,13 +257,12 @@ void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithAA() {
   static constexpr uint32_t kSurfacePitch = kSurfaceWidth * 4;
   {
     const uint32_t texture_memory = reinterpret_cast<uint32_t>(host_.GetTextureMemory()) & 0x03FFFFFF;
-    auto p = pb_begin();
-    p = pb_push1(
-        p, NV097_SET_SURFACE_PITCH,
-        SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, texture_memory);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, texture_memory + kSurfacePitch * kSurfaceHeight);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kSurfacePitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kSurfacePitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, texture_memory);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, texture_memory + kSurfacePitch * kSurfaceHeight);
+    Pushbuffer::End();
     // Enable anti aliasing.
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kSurfaceWidth, kSurfaceHeight, false,
                                     0, 0, 0, 0, TestHost::AA_SQUARE_OFFSET_4);
@@ -286,13 +283,12 @@ void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithAA() {
 
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    Pushbuffer::End();
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());
   }
@@ -304,15 +300,15 @@ void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithAA() {
 }
 
 void ColorZetaOverlapTests::SetSurfaceDMAs() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
+  Pushbuffer::End();
 }
 
 void ColorZetaOverlapTests::RestoreSurfaceDMAs() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-  p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+  Pushbuffer::End();
 }

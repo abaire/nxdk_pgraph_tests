@@ -87,9 +87,9 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
   float x = left;
   float y = top;
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_NORMALIZATION_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_NORMALIZATION_ENABLE, false);
+  Pushbuffer::End();
 
 #define DO_DRAW(method, attrib, mask, bias, multiplier)           \
   do {                                                            \
@@ -598,9 +598,9 @@ void AttributeExplicitSetterTests::Draw(float x, float y, const std::function<vo
   shader->PrepareDraw();
 
   const float z = 3.0f;
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  Pushbuffer::End();
 
   attribute_setter(0);
   host_.SetVertex(x, y, z);
@@ -611,9 +611,9 @@ void AttributeExplicitSetterTests::Draw(float x, float y, const std::function<vo
   attribute_setter(2);
   host_.SetVertex(x + (test_triangle_width * 0.5f), y + test_triangle_height, z);
 
-  p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 }
 
 // static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeExplicitSetterTests::Attribute attribute) {

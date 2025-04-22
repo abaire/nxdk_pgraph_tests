@@ -104,12 +104,12 @@ void AntialiasingTests::Initialize() {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 }
 
 /**
@@ -129,13 +129,12 @@ void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa)
 
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
   }
 
   // To allow the test to be run more than once, a dummy draw is done so that the next surface format call will recreate
@@ -153,13 +152,12 @@ void AntialiasingTests::Test(const char *name, TestHost::AntiAliasingSetting aa)
 
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
 
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
@@ -193,13 +191,13 @@ void AntialiasingTests::TestAARenderToFramebufferSurface(const char *name, TestH
 
   {
     const uint32_t pitch = host_.GetFramebufferWidth() * 4 * aa_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH,
+                     SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, pitch) | SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, pitch));
     // Point zeta at an unbounded DMA channel so it won't fail limit checks, it won't be written to anyway.
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(host_.GetTextureMemory()));
+    Pushbuffer::End();
   }
 
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
@@ -235,13 +233,12 @@ void AntialiasingTests::TestAARenderToFramebufferSurface(const char *name, TestH
 
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_ZETA_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA, kDefaultDMAZetaChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, 0);
+    Pushbuffer::End();
   }
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
@@ -264,11 +261,10 @@ void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
     static constexpr uint32_t kRenderSize = 256;
     static constexpr uint32_t kAAMultiplier = 2;
     const uint32_t kAAFramebufferPitch = kRenderSize * 4 * kAAMultiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kAAFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kAAFramebufferPitch));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kRenderSize, kRenderSize, false, 0, 0, 0,
                                     0, TestHost::AA_CENTER_CORNER_2);
@@ -280,11 +276,10 @@ void AntialiasingTests::TestAAOnThenOffThenCPUWrite() {
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
     WaitForGPU();
     GenerateRGBACheckerboard(pb_back_buffer(), 0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                              kFramebufferPitch, kCheckerboardA, 0xFF5555FF, kCheckerSize);
@@ -317,13 +312,12 @@ void AntialiasingTests::TestModifyNonFramebufferSurface() {
 
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0, 0,
                                     0, 0, TestHost::AA_CENTER_CORNER_2);
@@ -345,13 +339,12 @@ void AntialiasingTests::TestModifyNonFramebufferSurface() {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kModifyNonFramebufferSurface);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
 }
 
@@ -369,11 +362,10 @@ void AntialiasingTests::TestFramebufferIsIndependentOfSurface() {
     static constexpr uint32_t anti_aliasing_multiplier = 4;
 
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0, 0,
                                     0, 0, TestHost::AA_CENTER_CORNER_2);
@@ -417,13 +409,12 @@ void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig() {
 
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0, 0,
                                     0, 0, TestHost::AA_SQUARE_OFFSET_4);
@@ -438,13 +429,12 @@ void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig() {
   // Point the output surface back at the framebuffer.
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
 
   // Restore the surface format to allow the texture to be rendered.
@@ -471,13 +461,12 @@ void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
     static constexpr uint32_t anti_aliasing_multiplier = 4;
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0, 0,
                                     0, 0, TestHost::AA_SQUARE_OFFSET_4);
@@ -507,13 +496,12 @@ void AntialiasingTests::TestGPUAAWriteAfterCPUWrite() {
   // Point the output surface back at the framebuffer.
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
 
   // Restore the surface format to allow the texture to be rendered.
@@ -544,13 +532,12 @@ void AntialiasingTests::TestNonAACPURoundTrip() {
     static constexpr uint32_t anti_aliasing_multiplier = 4;
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
     const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize);
     NoOpDraw();
@@ -564,13 +551,12 @@ void AntialiasingTests::TestNonAACPURoundTrip() {
   // Point the output surface back at the framebuffer.
   {
     const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
 
   // Restore the surface format to allow the texture to be rendered.
@@ -608,11 +594,10 @@ void AntialiasingTests::TestMultiframeCPUBlit() {
     {
       static constexpr uint32_t anti_aliasing_multiplier = 2;
       const uint32_t kRenderBufferPitch = kTextureSize * 4 * anti_aliasing_multiplier;
-      auto p = pb_begin();
-      p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                   SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
-                       SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
-      pb_end(p);
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kRenderBufferPitch) |
+                                                    SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kRenderBufferPitch));
+      Pushbuffer::End();
 
       host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, kTextureSize, kTextureSize, false, 0,
                                       0, 0, 0, TestHost::AA_CENTER_CORNER_2);
@@ -628,11 +613,10 @@ void AntialiasingTests::TestMultiframeCPUBlit() {
   }
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::End();
   }
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
@@ -685,8 +669,8 @@ void AntialiasingTests::NoOpDraw() const {
 }
 
 void AntialiasingTests::WaitForGPU() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_NO_OPERATION, 0);
-  p = pb_push1(p, NV097_WAIT_FOR_IDLE, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::End();
 }

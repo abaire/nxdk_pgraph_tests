@@ -21,6 +21,7 @@
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "pushbuffer.h"
 #include "shaders/vertex_shader_program.h"
 #include "vertex_buffer.h"
 #include "xbox_math_d3d.h"
@@ -159,25 +160,25 @@ void TestHost::CommitSurfaceFormat() const {
     value |= SET_MASK(NV097_SET_SURFACE_FORMAT_HEIGHT, log_height);
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SURFACE_FORMAT, value);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_FORMAT, value);
   if (!surface_swizzle_) {
     uint32_t width = surface_clip_width_ ? surface_clip_width_ : surface_width_;
     uint32_t height = surface_clip_height_ ? surface_clip_height_ : surface_height_;
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_HORIZONTAL, (width << 16) + surface_clip_x_);
-    p = pb_push1(p, NV097_SET_SURFACE_CLIP_VERTICAL, (height << 16) + surface_clip_y_);
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, (width << 16) + surface_clip_x_);
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (height << 16) + surface_clip_y_);
   }
-  pb_end(p);
+  Pushbuffer::End();
 
   float max_depth = MaxDepthBufferValue(depth_buffer_format_, depth_buffer_mode_float_);
   SetDepthClip(0.0f, max_depth);
 }
 
 void TestHost::SetDepthClip(float min, float max) const {
-  auto p = pb_begin();
-  p = pb_push1f(p, NV097_SET_CLIP_MIN, min);
-  p = pb_push1f(p, NV097_SET_CLIP_MAX, max);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_CLIP_MIN, min);
+  Pushbuffer::PushF(NV097_SET_CLIP_MAX, max);
+  Pushbuffer::End();
 }
 
 float TestHost::MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mode) {
@@ -203,7 +204,7 @@ float TestHost::MaxDepthBufferValue(uint32_t depth_buffer_format, bool float_mod
 
 void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_value) {
   pb_wait_for_vbl();
-  pb_reset();
+  Pushbuffer::Flush();
 
   SetupTextureStages();
   CommitSurfaceFormat();
@@ -224,9 +225,9 @@ void TestHost::PrepareDraw(uint32_t argb, uint32_t depth_value, uint8_t stencil_
 void TestHost::SetVertexBufferAttributes(uint32_t enabled_fields) {
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling SetVertexBufferAttributes.");
   if (!vertex_buffer_->IsCacheValid()) {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
+    Pushbuffer::End();
     vertex_buffer_->SetCacheValid();
   }
 
@@ -291,50 +292,39 @@ void TestHost::DrawArrays(uint32_t enabled_vertex_fields, DrawPrimitive primitiv
   ASSERT(num_vertices <= 0x100FE &&
          "NV097_DRAW_ARRAYS only allows start indices below 0xFFFF and 0xFF vertices per push");
 
-  SetVertexBufferAttributes(enabled_vertex_fields);
-
   // Max 0xFF due to NV097_DRAW_ARRAYS_COUNT bitmask.
   static constexpr uint32_t kVerticesPerPush = 0xFF;
-  PBKitFlushPushbufer();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
-  uint32_t num_pushed = 2;
-  static constexpr uint32_t kElementsPerPush = 64;  // pbkit limit is 128 DWORDS, each push1 is a command + param = 2.
+  SetVertexBufferAttributes(enabled_vertex_fields);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, primitive);
 
   uint32_t start = 0;
   while (start < num_vertices) {
     auto remaining = num_vertices - start;
     auto count = remaining < kVerticesPerPush ? remaining : kVerticesPerPush;
 
-    p = pb_push1(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                 MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
-    num_pushed += 2;
+    Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
+                     MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, start));
 
     start += count;
-
-    if (num_pushed >= kElementsPerPush) {
-      pb_end(p);
-      PBKitFlushPushbufer();
-      p = pb_begin();
-      num_pushed = 0;
-    }
   }
 
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 }
 
 void TestHost::Begin(DrawPrimitive primitive) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, primitive);
+  Pushbuffer::End();
 }
 
 void TestHost::End() const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 }
 
 void TestHost::DrawInlineBuffer(uint32_t enabled_vertex_fields, DrawPrimitive primitive) {
@@ -439,70 +429,55 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineArray.");
-  static constexpr int kElementsPerPush = 64;
-
   SetVertexBufferAttributes(enabled_vertex_fields);
 
   PBKitFlushPushbufer();
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
-  uint32_t num_pushed = 1;
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, primitive);
 
   auto vertex = vertex_buffer_->Lock();
   for (auto i = 0; i < vertex_buffer_->GetNumVertices(); ++i, ++vertex) {
     // Note: Ordering is important and must follow the NV2A_VERTEX_ATTR_POSITION, ... ordering.
     if (enabled_vertex_fields & POSITION) {
       if (vertex_buffer_->position_count_ == 3) {
-        p = pb_push3fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->pos);
-        num_pushed += 3;
+        Pushbuffer::Push3F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->pos);
       } else {
-        p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->pos);
-        num_pushed += 4;
+        Pushbuffer::Push4F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->pos);
       }
     }
     // TODO: Support multi-element weights.
     if (enabled_vertex_fields & WEIGHT) {
-      p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->weight);
-      ++num_pushed;
+      Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->weight);
     }
     if (enabled_vertex_fields & NORMAL) {
-      p = pb_push3fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->normal);
-      num_pushed += 3;
+      Pushbuffer::Push3F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->normal);
     }
     if (enabled_vertex_fields & DIFFUSE) {
-      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->diffuse);
-      num_pushed += 4;
+      Pushbuffer::Push4F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->diffuse);
     }
     if (enabled_vertex_fields & SPECULAR) {
-      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->specular);
-      num_pushed += 4;
+      Pushbuffer::Push4F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->specular);
     }
     if (enabled_vertex_fields & FOG_COORD) {
-      p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->fog_coord);
-      ++num_pushed;
+      Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->fog_coord);
     }
     if (enabled_vertex_fields & POINT_SIZE) {
-      p = pb_push1f(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->point_size);
-      ++num_pushed;
+      Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->point_size);
     }
     if (enabled_vertex_fields & BACK_DIFFUSE) {
-      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->back_diffuse);
-      num_pushed += 4;
+      Pushbuffer::Push4F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->back_diffuse);
     }
     if (enabled_vertex_fields & BACK_SPECULAR) {
-      p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->back_specular);
-      num_pushed += 4;
+      Pushbuffer::Push4F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), vertex->back_specular);
     }
 
-#define PUSH_TEXCOORD(count, field)                                                  \
-  if ((count) == 4) {                                                                \
-    p = pb_push4fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), (field)); \
-    num_pushed += 4;                                                                 \
-  } else if ((count) == 2) {                                                         \
-    p = pb_push2fv(p, NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), (field)); \
-    num_pushed += 2;                                                                 \
-  } else {                                                                           \
-    ASSERT(!"Invalid texcoord count");                                               \
+#define PUSH_TEXCOORD(count, field)                                                   \
+  if ((count) == 4) {                                                                 \
+    Pushbuffer::Push4F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), (field)); \
+  } else if ((count) == 2) {                                                          \
+    Pushbuffer::Push2F(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY), (field)); \
+  } else {                                                                            \
+    ASSERT(!"Invalid texcoord count");                                                \
   }
 
     if (enabled_vertex_fields & TEXCOORD0) {
@@ -519,19 +494,12 @@ void TestHost::DrawInlineArray(uint32_t enabled_vertex_fields, DrawPrimitive pri
     }
 
 #undef PUSH_TEXCOORD
-
-    if (num_pushed > kElementsPerPush) {
-      pb_end(p);
-      PBKitFlushPushbufer();
-      p = pb_begin();
-      num_pushed = 0;
-    }
   }
   vertex_buffer_->Unlock();
   vertex_buffer_->SetCacheValid();
 
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 }
 
 void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
@@ -541,40 +509,30 @@ void TestHost::DrawInlineElements16(const std::vector<uint32_t> &indices, uint32
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElements.");
-  static constexpr int kIndicesPerPush = 32;
-  PBKitFlushPushbufer();
 
   SetVertexBufferAttributes(enabled_vertex_fields);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, primitive);
 
   ASSERT(indices.size() < 0x7FFFFFFF);
   int indices_remaining = static_cast<int>(indices.size());
-  int num_pushed = 0;
   const uint32_t *next_index = indices.data();
   while (indices_remaining >= 2) {
-    if (num_pushed++ > kIndicesPerPush) {
-      pb_end(p);
-      PBKitFlushPushbufer();
-      p = pb_begin();
-      num_pushed = 0;
-    }
-
     uint32_t index_pair = *next_index++ & 0xFFFF;
     index_pair += *next_index++ << 16;
 
-    p = pb_push1(p, NV097_ARRAY_ELEMENT16, index_pair);
+    Pushbuffer::Push(NV097_ARRAY_ELEMENT16, index_pair);
 
     indices_remaining -= 2;
   }
 
   if (indices_remaining) {
-    p = pb_push1(p, NV097_ARRAY_ELEMENT32, *next_index);
+    Pushbuffer::Push(NV097_ARRAY_ELEMENT32, *next_index);
   }
 
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 }
 
 void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32_t enabled_vertex_fields,
@@ -584,157 +542,146 @@ void TestHost::DrawInlineElements32(const std::vector<uint32_t> &indices, uint32
   }
 
   ASSERT(vertex_buffer_ && "Vertex buffer must be set before calling DrawInlineElementsForce32.");
-  static constexpr int kIndicesPerPush = 32;
-  PBKitFlushPushbufer();
-
   SetVertexBufferAttributes(enabled_vertex_fields);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BEGIN_END, primitive);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BEGIN_END, primitive);
 
-  int num_pushed = 0;
   for (auto index : indices) {
-    if (num_pushed++ > kIndicesPerPush) {
-      pb_end(p);
-      PBKitFlushPushbufer();
-      p = pb_begin();
-      num_pushed = 0;
-    }
-
-    p = pb_push1(p, NV097_ARRAY_ELEMENT32, index);
+    Pushbuffer::Push(NV097_ARRAY_ELEMENT32, index);
   }
 
-  p = pb_push1(p, NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
 }
 
 void TestHost::SetVertex(float x, float y, float z) const {
-  auto p = pb_begin();
-  p = pb_push3f(p, NV097_SET_VERTEX3F, x, y, z);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_VERTEX3F, x, y, z);
+  Pushbuffer::End();
 }
 
 void TestHost::SetVertex(float x, float y, float z, float w) const {
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_VERTEX4F, x, y, z, w);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_VERTEX4F, x, y, z, w);
+  Pushbuffer::End();
 }
 
 void TestHost::SetWeight(float w1, float w2, float w3, float w4) const {
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_WEIGHT4F, w1, w2, w3, w4);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_WEIGHT4F, w1, w2, w3, w4);
+  Pushbuffer::End();
 }
 
 void TestHost::SetWeight(float w) const {
-  auto p = pb_begin();
-  p = pb_push1f(p, NV097_SET_WEIGHT1F, w);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_WEIGHT1F, w);
+  Pushbuffer::End();
 }
 
 void TestHost::SetWeight(float w1, float w2) const {
-  auto p = pb_begin();
-  p = pb_push2f(p, NV097_SET_WEIGHT2F, w1, w2);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_WEIGHT2F, w1, w2);
+  Pushbuffer::End();
 }
 
 void TestHost::SetWeight(float w1, float w2, float w3) const {
-  auto p = pb_begin();
-  p = pb_push3f(p, NV097_SET_WEIGHT3F, w1, w2, w3);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_WEIGHT3F, w1, w2, w3);
+  Pushbuffer::End();
 }
 
 void TestHost::SetNormal(float x, float y, float z) const {
-  auto p = pb_begin();
-  p = pb_push3f(p, NV097_SET_NORMAL3F, x, y, z);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_NORMAL3F, x, y, z);
+  Pushbuffer::End();
 }
 
 void TestHost::SetNormal(const float *vals) const {
-  auto p = pb_begin();
-  p = pb_push3fv(p, NV097_SET_NORMAL3F, vals);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push3F(NV097_SET_NORMAL3F, vals);
+  Pushbuffer::End();
 }
 
 void TestHost::SetNormal3S(int x, int y, int z) const {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t xy = (x & 0xFFFF) | y << 16;
   uint32_t z0 = z & 0xFFFF;
-  p = pb_push2(p, NV097_SET_NORMAL3S, xy, z0);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_NORMAL3S, xy, z0);
+  Pushbuffer::End();
 }
 
 void TestHost::SetDiffuse(float r, float g, float b, float a) const {
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_DIFFUSE_COLOR4F, r, g, b, a);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_DIFFUSE_COLOR4F, r, g, b, a);
+  Pushbuffer::End();
 }
 
 void TestHost::SetDiffuse(float r, float g, float b) const {
-  auto p = pb_begin();
-  p = pb_push3f(p, NV097_SET_DIFFUSE_COLOR3F, r, g, b);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_DIFFUSE_COLOR3F, r, g, b);
+  Pushbuffer::End();
 }
 
 void TestHost::SetDiffuse(uint32_t color) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DIFFUSE_COLOR4I, color);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DIFFUSE_COLOR4I, color);
+  Pushbuffer::End();
 }
 
 void TestHost::SetSpecular(float r, float g, float b, float a) const {
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_SPECULAR_COLOR4F, r, g, b, a);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_SPECULAR_COLOR4F, r, g, b, a);
+  Pushbuffer::End();
 }
 
 void TestHost::SetSpecular(float r, float g, float b) const {
-  auto p = pb_begin();
-  p = pb_push3f(p, NV097_SET_SPECULAR_COLOR3F, r, g, b);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_SPECULAR_COLOR3F, r, g, b);
+  Pushbuffer::End();
 }
 
 void TestHost::SetSpecular(uint32_t color) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_COLOR4I, color);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SPECULAR_COLOR4I, color);
+  Pushbuffer::End();
 }
 
 void TestHost::SetFogCoord(float fc) const {
-  auto p = pb_begin();
-  p = pb_push1f(p, NV097_SET_FOG_COORD, fc);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_FOG_COORD, fc);
+  Pushbuffer::End();
 }
 
 void TestHost::SetPointSize(float ps) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_POINT_SIZE, static_cast<int>(ps * 8.f));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_SIZE, static_cast<int>(ps * 8.f));
+  Pushbuffer::End();
 }
 
 void TestHost::SetBackDiffuse(uint32_t color) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), color);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_DIFFUSE), color);
+  Pushbuffer::End();
 }
 
 void TestHost::SetBackSpecular(uint32_t color) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), color);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB + (4 * NV2A_VERTEX_ATTR_BACK_SPECULAR), color);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord0(float u, float v) const {
-  auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD0_2F, *(uint32_t *)&u, *(uint32_t *)&v);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXCOORD0_2F, *(uint32_t *)&u, *(uint32_t *)&v);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord0S(int u, int v) const {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
-  p = pb_push1(p, NV097_SET_TEXCOORD0_2S, uv);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_TEXCOORD0_2S, uv);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord0(float s, float t, float p, float q) const {
@@ -752,16 +699,16 @@ void TestHost::SetTexCoord0S(int s, int t, int p, int q) const {
 }
 
 void TestHost::SetTexCoord1(float u, float v) const {
-  auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD1_2F, *(uint32_t *)&u, *(uint32_t *)&v);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXCOORD1_2F, *(uint32_t *)&u, *(uint32_t *)&v);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord1S(int u, int v) const {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
-  p = pb_push1(p, NV097_SET_TEXCOORD1_2S, uv);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_TEXCOORD1_2S, uv);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord1(float s, float t, float p, float q) const {
@@ -779,16 +726,16 @@ void TestHost::SetTexCoord1S(int s, int t, int p, int q) const {
 }
 
 void TestHost::SetTexCoord2(float u, float v) const {
-  auto p = pb_begin();
-  p = pb_push2f(p, NV097_SET_TEXCOORD2_2F, u, v);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_TEXCOORD2_2F, u, v);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord2S(int u, int v) const {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
-  p = pb_push1(p, NV097_SET_TEXCOORD2_2S, uv);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_TEXCOORD2_2S, uv);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord2(float s, float t, float p, float q) const {
@@ -806,16 +753,16 @@ void TestHost::SetTexCoord2S(int s, int t, int p, int q) const {
 }
 
 void TestHost::SetTexCoord3(float u, float v) const {
-  auto p = pb_begin();
-  p = pb_push2(p, NV097_SET_TEXCOORD3_2F, *(uint32_t *)&u, *(uint32_t *)&v);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXCOORD3_2F, *(uint32_t *)&u, *(uint32_t *)&v);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord3S(int u, int v) const {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   uint32_t uv = (u & 0xFFFF) | (v << 16);
-  p = pb_push1(p, NV097_SET_TEXCOORD3_2S, uv);
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_TEXCOORD3_2S, uv);
+  Pushbuffer::End();
 }
 
 void TestHost::SetTexCoord3(float s, float t, float p, float q) const {
@@ -1004,9 +951,9 @@ void TestHost::SetupControl0(bool enable_stencil_write, bool w_buffered, bool te
   if (requires_colorspace_conversion) {
     control0 |= NV097_SET_CONTROL0_COLOR_SPACE_CONVERT_CRYCB_TO_RGB;
   }
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_CONTROL0, control0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTROL0, control0);
+  Pushbuffer::End();
 }
 
 void TestHost::SetupTextureStages() const {
@@ -1086,9 +1033,7 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
     pb_draw_text_screen();
   }
 
-  while (pb_busy()) {
-    /* Wait for completion... */
-  }
+  PBKitBusyWait();
 
   if (perform_save) {
     // TODO: See why waiting for tiles to be non-busy results in the screen not updating anymore.
@@ -1125,14 +1070,14 @@ void TestHost::SetVertexShaderProgram(std::shared_ptr<VertexShaderProgram> progr
   if (vertex_shader_program_) {
     vertex_shader_program_->Activate();
   } else {
-    auto p = pb_begin();
-    p = pb_push1(
-        p, NV097_SET_TRANSFORM_EXECUTION_MODE,
+    Pushbuffer::Begin();
+    Pushbuffer::Push(
+        NV097_SET_TRANSFORM_EXECUTION_MODE,
         MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_MODE_FIXED) |
             MASK(NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE, NV097_SET_TRANSFORM_EXECUTION_MODE_RANGE_MODE_PRIV));
-    p = pb_push1(p, NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0x0);
-    p = pb_push1(p, NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x0);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_PROGRAM_CXT_WRITE_EN, 0x0);
+    Pushbuffer::Push(NV097_SET_TRANSFORM_CONSTANT_LOAD, 0x0);
+    Pushbuffer::End();
   }
 }
 
@@ -1255,40 +1200,40 @@ void TestHost::UnprojectPoint(vector_t &result, const vector_t &screen_point, fl
 }
 
 void TestHost::SetWindowClipExclusive(bool exclusive) {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_WINDOW_CLIP_TYPE, exclusive);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_WINDOW_CLIP_TYPE, exclusive);
+  Pushbuffer::End();
 }
 
 void TestHost::SetWindowClip(uint32_t right, uint32_t bottom, uint32_t left, uint32_t top, uint32_t region) {
-  auto p = pb_begin();
+  Pushbuffer::Begin();
   const uint32_t offset = region * 4;
-  p = pb_push1(p, NV097_SET_WINDOW_CLIP_HORIZONTAL + offset, left + (right << 16));
-  p = pb_push1(p, NV097_SET_WINDOW_CLIP_VERTICAL + offset, top + (bottom << 16));
-  pb_end(p);
+  Pushbuffer::Push(NV097_SET_WINDOW_CLIP_HORIZONTAL + offset, left + (right << 16));
+  Pushbuffer::Push(NV097_SET_WINDOW_CLIP_VERTICAL + offset, top + (bottom << 16));
+  Pushbuffer::End();
 }
 
 void TestHost::SetViewportOffset(float x, float y, float z, float w) {
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_VIEWPORT_OFFSET, x, y, z, w);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_VIEWPORT_OFFSET, x, y, z, w);
+  Pushbuffer::End();
 }
 
 void TestHost::SetViewportScale(float x, float y, float z, float w) {
-  auto p = pb_begin();
-  p = pb_push4f(p, NV097_SET_VIEWPORT_SCALE, x, y, z, w);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushF(NV097_SET_VIEWPORT_SCALE, x, y, z, w);
+  Pushbuffer::End();
 }
 
 void TestHost::SetFixedFunctionModelViewMatrix(const matrix4_t &model_matrix) {
   MatrixCopyMatrix(fixed_function_model_view_matrix_, model_matrix);
 
-  auto p = pb_begin();
-  p = pb_push_transposed_matrix(p, NV097_SET_MODEL_VIEW_MATRIX, fixed_function_model_view_matrix_[0]);
+  Pushbuffer::Begin();
+  Pushbuffer::PushTransposedMatrix(NV097_SET_MODEL_VIEW_MATRIX, fixed_function_model_view_matrix_[0]);
   matrix4_t inverse;
   MatrixInvert(fixed_function_model_view_matrix_, inverse);
-  p = pb_push_4x3_matrix(p, NV097_SET_INVERSE_MODEL_VIEW_MATRIX, inverse[0]);
-  pb_end(p);
+  Pushbuffer::Push4x3Matrix(NV097_SET_INVERSE_MODEL_VIEW_MATRIX, inverse[0]);
+  Pushbuffer::End();
 
   fixed_function_matrix_mode_ = MATRIX_MODE_USER;
 
@@ -1303,9 +1248,9 @@ void TestHost::SetFixedFunctionProjectionMatrix(const matrix4_t &projection_matr
   GetCompositeMatrix(fixed_function_composite_matrix_, fixed_function_model_view_matrix_,
                      fixed_function_projection_matrix_);
 
-  auto p = pb_begin();
-  p = pb_push_transposed_matrix(p, NV097_SET_COMPOSITE_MATRIX, fixed_function_composite_matrix_[0]);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::PushTransposedMatrix(NV097_SET_COMPOSITE_MATRIX, fixed_function_composite_matrix_[0]);
+  Pushbuffer::End();
 
   BuildInverseCompositeMatrix(fixed_function_composite_matrix_, fixed_function_inverse_composite_matrix_);
 
@@ -1357,39 +1302,39 @@ std::string TestHost::GetPrimitiveName(TestHost::DrawPrimitive primitive) {
 }
 
 void TestHost::SetColorMask(uint32_t mask) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COLOR_MASK, mask);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, mask);
+  Pushbuffer::End();
 }
 
 void TestHost::SetBlend(bool enable, uint32_t func, uint32_t sfactor, uint32_t dfactor) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BLEND_ENABLE, enable);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BLEND_ENABLE, enable);
   if (enable) {
-    p = pb_push1(p, NV097_SET_BLEND_EQUATION, func);
-    p = pb_push1(p, NV097_SET_BLEND_FUNC_SFACTOR, sfactor);
-    p = pb_push1(p, NV097_SET_BLEND_FUNC_DFACTOR, dfactor);
+    Pushbuffer::Push(NV097_SET_BLEND_EQUATION, func);
+    Pushbuffer::Push(NV097_SET_BLEND_FUNC_SFACTOR, sfactor);
+    Pushbuffer::Push(NV097_SET_BLEND_FUNC_DFACTOR, dfactor);
   }
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 void TestHost::SetBlendColorConstant(uint32_t color) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_BLEND_COLOR, color);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_BLEND_COLOR, color);
+  Pushbuffer::End();
 }
 
 void TestHost::SetAlphaReference(uint32_t alpha) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_ALPHA_REF, alpha);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ALPHA_REF, alpha);
+  Pushbuffer::End();
 }
 
 void TestHost::SetAlphaFunc(bool enable, uint32_t func) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, enable);
-  p = pb_push1(p, NV097_SET_ALPHA_FUNC, func);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ALPHA_TEST_ENABLE, enable);
+  Pushbuffer::Push(NV097_SET_ALPHA_FUNC, func);
+  Pushbuffer::End();
 }
 
 void TestHost::SetCombinerControl(int num_combiners, bool same_factor0, bool same_factor1, bool mux_msb) const {
@@ -1405,9 +1350,9 @@ void TestHost::SetCombinerControl(int num_combiners, bool same_factor0, bool sam
     setting |= MASK(NV097_SET_COMBINER_CONTROL_MUX_SELECT, NV097_SET_COMBINER_CONTROL_MUX_SELECT_MSB);
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_CONTROL, setting);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_CONTROL, setting);
+  Pushbuffer::End();
 }
 
 void TestHost::SetInputColorCombiner(int combiner, CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
@@ -1416,29 +1361,22 @@ void TestHost::SetInputColorCombiner(int combiner, CombinerSource a_source, bool
                                      CombinerSource d_source, bool d_alpha, CombinerMapping d_mapping) const {
   uint32_t value = MakeInputCombiner(a_source, a_alpha, a_mapping, b_source, b_alpha, b_mapping, c_source, c_alpha,
                                      c_mapping, d_source, d_alpha, d_mapping);
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner * 4, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_ICW + combiner * 4, value);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearInputColorCombiner(int combiner) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_ICW + combiner * 4, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_ICW + combiner * 4, 0);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearInputColorCombiners() const {
-  auto p = pb_begin();
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_ICW, 8);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_ICW, 0, 0, 0, 0);
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_ICW + 0x0C, 0, 0, 0, 0);
+  Pushbuffer::End();
 }
 
 void TestHost::SetInputAlphaCombiner(int combiner, CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
@@ -1447,29 +1385,22 @@ void TestHost::SetInputAlphaCombiner(int combiner, CombinerSource a_source, bool
                                      CombinerSource d_source, bool d_alpha, CombinerMapping d_mapping) const {
   uint32_t value = MakeInputCombiner(a_source, a_alpha, a_mapping, b_source, b_alpha, b_mapping, c_source, c_alpha,
                                      c_mapping, d_source, d_alpha, d_mapping);
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner * 4, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_ICW + combiner * 4, value);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearInputAlphaColorCombiner(int combiner) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_ICW + combiner * 4, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_ICW + combiner * 4, 0);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearInputAlphaCombiners() const {
-  auto p = pb_begin();
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_ICW, 8);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_ICW, 0, 0, 0, 0);
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_ICW + 0x0C, 0, 0, 0, 0);
+  Pushbuffer::End();
 }
 
 uint32_t TestHost::MakeInputCombiner(CombinerSource a_source, bool a_alpha, CombinerMapping a_mapping,
@@ -1497,58 +1428,44 @@ void TestHost::SetOutputColorCombiner(int combiner, TestHost::CombinerDest ab_ds
     value |= (1 << 18);
   }
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner * 4, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_OCW + combiner * 4, value);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearOutputColorCombiner(int combiner) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_COLOR_OCW + combiner * 4, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_OCW + combiner * 4, 0);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearOutputColorCombiners() const {
-  auto p = pb_begin();
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_COLOR_OCW, 8);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_OCW, 0, 0, 0, 0);
+  Pushbuffer::Push(NV097_SET_COMBINER_COLOR_OCW + 0x0C, 0, 0, 0, 0);
+  Pushbuffer::End();
 }
 
 void TestHost::SetOutputAlphaCombiner(int combiner, CombinerDest ab_dst, CombinerDest cd_dst, CombinerDest sum_dst,
                                       bool ab_dot_product, bool cd_dot_product, CombinerSumMuxMode sum_or_mux,
                                       CombinerOutOp op) const {
   uint32_t value = MakeOutputCombiner(ab_dst, cd_dst, sum_dst, ab_dot_product, cd_dot_product, sum_or_mux, op);
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, value);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearOutputAlphaColorCombiner(int combiner) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, 0);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_OCW + combiner * 4, 0);
+  Pushbuffer::End();
 }
 
 void TestHost::ClearOutputAlphaCombiners() const {
-  auto p = pb_begin();
-  pb_push_to(SUBCH_3D, p++, NV097_SET_COMBINER_ALPHA_OCW, 8);
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  *(p++) = 0x0;
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_OCW, 0, 0, 0, 0);
+  Pushbuffer::Push(NV097_SET_COMBINER_ALPHA_OCW + 0x0C, 0, 0, 0, 0);
+  Pushbuffer::End();
 }
 
 uint32_t TestHost::MakeOutputCombiner(TestHost::CombinerDest ab_dst, TestHost::CombinerDest cd_dst,
@@ -1580,9 +1497,9 @@ void TestHost::SetFinalCombiner0(TestHost::CombinerSource a_source, bool a_alpha
 
   last_specular_fog_cw0_ = value;
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_SPECULAR_FOG_CW0, value);
+  Pushbuffer::End();
 }
 
 void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha, bool e_invert,
@@ -1609,24 +1526,24 @@ void TestHost::SetFinalCombiner1(TestHost::CombinerSource e_source, bool e_alpha
 
   last_specular_fog_cw1_ = value;
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_SPECULAR_FOG_CW1, value);
+  Pushbuffer::End();
 }
 
 void TestHost::RestoreFinalCombinerState(const std::pair<uint32_t, uint32_t> &state) {
   last_specular_fog_cw0_ = state.first;
   last_specular_fog_cw1_ = state.second;
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW0, state.first);
-  p = pb_push1(p, NV097_SET_COMBINER_SPECULAR_FOG_CW1, state.second);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_SPECULAR_FOG_CW0, state.first);
+  Pushbuffer::Push(NV097_SET_COMBINER_SPECULAR_FOG_CW1, state.second);
+  Pushbuffer::End();
 }
 
 void TestHost::SetCombinerFactorC0(int combiner, uint32_t value) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_FACTOR0 + 4 * combiner, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_FACTOR0 + 4 * combiner, value);
+  Pushbuffer::End();
 }
 
 void TestHost::SetCombinerFactorC0(int combiner, float red, float green, float blue, float alpha) const {
@@ -1635,9 +1552,9 @@ void TestHost::SetCombinerFactorC0(int combiner, float red, float green, float b
 }
 
 void TestHost::SetCombinerFactorC1(int combiner, uint32_t value) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_COMBINER_FACTOR1 + 4 * combiner, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COMBINER_FACTOR1 + 4 * combiner, value);
+  Pushbuffer::End();
 }
 
 void TestHost::SetCombinerFactorC1(int combiner, float red, float green, float blue, float alpha) const {
@@ -1646,9 +1563,9 @@ void TestHost::SetCombinerFactorC1(int combiner, float red, float green, float b
 }
 
 void TestHost::SetFinalCombinerFactorC0(uint32_t value) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SPECULAR_FOG_FACTOR, value);
+  Pushbuffer::End();
 }
 
 void TestHost::SetFinalCombinerFactorC0(float red, float green, float blue, float alpha) const {
@@ -1657,9 +1574,9 @@ void TestHost::SetFinalCombinerFactorC0(float red, float green, float blue, floa
 }
 
 void TestHost::SetFinalCombinerFactorC1(uint32_t value) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SPECULAR_FOG_FACTOR + 0x04, value);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SPECULAR_FOG_FACTOR + 0x04, value);
+  Pushbuffer::End();
 }
 
 void TestHost::SetFinalCombinerFactorC1(float red, float green, float blue, float alpha) const {
@@ -1669,21 +1586,21 @@ void TestHost::SetFinalCombinerFactorC1(float red, float green, float blue, floa
 
 void TestHost::SetShaderStageProgram(ShaderStageProgram stage_0, ShaderStageProgram stage_1, ShaderStageProgram stage_2,
                                      ShaderStageProgram stage_3) const {
-  auto p = pb_begin();
-  p = pb_push1(
-      p, NV097_SET_SHADER_STAGE_PROGRAM,
-      MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE0, stage_0) | MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE1, stage_1) |
-          MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE2, stage_2) | MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE3, stage_3));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SHADER_STAGE_PROGRAM, MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE0, stage_0) |
+                                                       MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE1, stage_1) |
+                                                       MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE2, stage_2) |
+                                                       MASK(NV097_SET_SHADER_STAGE_PROGRAM_STAGE3, stage_3));
+  Pushbuffer::End();
 }
 
 void TestHost::SetShaderStageInput(uint32_t stage_2_input, uint32_t stage_3_input) const {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_SHADER_OTHER_STAGE_INPUT,
-               MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE1, 0) |
-                   MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE2, stage_2_input) |
-                   MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE3, stage_3_input));
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SHADER_OTHER_STAGE_INPUT,
+                   MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE1, 0) |
+                       MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE2, stage_2_input) |
+                       MASK(NV097_SET_SHADER_OTHER_STAGE_INPUT_STAGE3, stage_3_input));
+  Pushbuffer::End();
 }
 
 void TestHost::OverrideVertexAttributeStride(TestHost::VertexAttribute attribute, uint32_t stride) {
@@ -1712,15 +1629,15 @@ float TestHost::NV2ARound(float input) {
 }
 
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
-  uint32_t *p = pb_begin();
-  p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
-               MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
-                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE, size) |
-                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE, stride));
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
+                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
+                       MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE, size) |
+                       MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE, stride));
   if (size && data) {
-    p = pb_push1(p, NV097_SET_VERTEX_DATA_ARRAY_OFFSET + index * 4, (uint32_t)data & 0x03ffffff);
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_OFFSET + index * 4, (uint32_t)data & 0x03ffffff);
   }
-  pb_end(p);
+  Pushbuffer::End();
 }
 
 static void ClearVertexAttribute(uint32_t index) {
@@ -1733,10 +1650,10 @@ static void GetCompositeMatrix(matrix4_t &result, const matrix4_t &model_view, c
 }
 
 void TestHost::DrawCheckerboardUnproject(uint32_t first_color, uint32_t second_color, uint32_t checker_size) {
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_LIGHTING_ENABLE, false);
-  p = pb_push1(p, NV097_SET_SPECULAR_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+  Pushbuffer::End();
 
   auto combiner_state = GetFinalCombinerState();
 

@@ -108,12 +108,12 @@ void PointSizeTests::Initialize() {
 
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_DEPTH_MASK, false);
-  p = pb_push1(p, NV097_SET_STENCIL_TEST_ENABLE, false);
-  p = pb_push1(p, NV097_SET_STENCIL_MASK, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
 }
 
 template <typename RenderPointCB>
@@ -142,18 +142,18 @@ void PointSizeTests::Test(const std::string& name, bool point_smooth_enabled, in
   host_.PrepareDraw(0xFF222322);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, point_smooth_enabled);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, point_smooth_enabled);
+    Pushbuffer::End();
   }
 
   uint32_t point_size = 0;
   auto on_render_point = [this, use_shader, &point_size, point_size_increment](float x, float y, float z, float red,
                                                                                float green, float blue) {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_POINT_SIZE, point_size);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
     point_size += point_size_increment;
-    pb_end(p);
+    Pushbuffer::End();
 
     host_.Begin(TestHost::PRIMITIVE_POINTS);
 
@@ -179,9 +179,9 @@ void PointSizeTests::Test(const std::string& name, bool point_smooth_enabled, in
   RenderPoints(on_render_point, x_inc, y_inc);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_POINT_SMOOTH_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+    Pushbuffer::End();
   }
 
   pb_print("%s\n", name.c_str());

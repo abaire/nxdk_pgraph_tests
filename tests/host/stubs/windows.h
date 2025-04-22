@@ -1,7 +1,7 @@
 #ifndef WINDOWS_H
 #define WINDOWS_H
 
-#include "xbox_types.h"
+#include "xboxkrnl/xboxdef.h"
 
 #define DbgPrint printf
 

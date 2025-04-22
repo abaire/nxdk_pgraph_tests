@@ -936,26 +936,25 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
   if (line_smooth || poly_smooth) {
     const uint32_t kAAFramebufferPitch = host_.GetFramebufferWidth() * 4 * 2;
     const auto kTextureMemory = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(0));
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kAAFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(kTextureMemory));
+    Pushbuffer::End();
     host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                            host_.GetFramebufferHeight(), false, 0, 0, 0, 0, TestHost::AA_CENTER_CORNER_2);
   }
   host_.PrepareDraw(kBackgroundColor);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, true);
-    p = pb_push1(p, NV097_SET_ALPHA_TEST_ENABLE, true);
-    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0000);  // From MS Dashboard, this enables poly smoothing
-    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
-    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_ALPHA_TEST_ENABLE, true);
+    Pushbuffer::Push(NV097_SET_SMOOTHING_CONTROL, 0xFFFF0000);  // From MS Dashboard, this enables poly smoothing
+    Pushbuffer::Push(NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
+    Pushbuffer::Push(NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
+    Pushbuffer::End();
   }
   host_.SetBlend(true);
 
@@ -1012,24 +1011,23 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
   }
 
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     // From Tenchu: Return from Darkness, this disables poly smoothing regardless of whether the individual flags are
     // enabled.
-    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
-    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
+    Pushbuffer::Push(NV097_SET_LINE_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POLY_SMOOTH_ENABLE, false);
+    Pushbuffer::End();
   }
 
   // Render the antialiased texture to the screen.
   if (line_smooth || poly_smooth) {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SURFACE_PITCH,
-                 SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
-                     SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
-    p = pb_push1(p, NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
-    p = pb_push1(p, NV097_SET_SURFACE_COLOR_OFFSET, 0);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                  SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+    Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+    Pushbuffer::End();
 
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                                     host_.GetFramebufferHeight());

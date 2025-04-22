@@ -34,9 +34,9 @@ void SmoothingTests::Initialize() {
   auto shader = std::make_shared<PrecalculatedVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
-  auto p = pb_begin();
-  p = pb_push1(p, NV097_SET_DEPTH_TEST_ENABLE, false);
-  pb_end(p);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
 }
 
 static constexpr uint32_t kPalette[] = {
@@ -197,17 +197,17 @@ void SmoothingTests::Test(const std::string& name, uint32_t smooth_control) {
   host_.PrepareDraw(0xFF32343A);
 
   {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, smooth_control);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SMOOTHING_CONTROL, smooth_control);
+    Pushbuffer::End();
   }
   host_.SetBlend(true);
 
   auto draw = [this](float x, float y, bool line_smooth, bool poly_smooth) {
-    auto p = pb_begin();
-    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
-    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
-    pb_end(p);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_LINE_SMOOTH_ENABLE, line_smooth);
+    Pushbuffer::Push(NV097_SET_POLY_SMOOTH_ENABLE, poly_smooth);
+    Pushbuffer::End();
 
     Draw(host_, x, y);
   };
@@ -220,13 +220,13 @@ void SmoothingTests::Test(const std::string& name, uint32_t smooth_control) {
   draw(mid_x, mid_y, true, true);
 
   {
-    auto p = pb_begin();
+    Pushbuffer::Begin();
     // From Tenchu: Return from Darkness, this disables poly smoothing regardless of whether the individual flags are
     // enabled.
-    p = pb_push1(p, NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
-    p = pb_push1(p, NV097_SET_LINE_SMOOTH_ENABLE, false);
-    p = pb_push1(p, NV097_SET_POLY_SMOOTH_ENABLE, false);
-    pb_end(p);
+    Pushbuffer::Push(NV097_SET_SMOOTHING_CONTROL, 0xFFFF0001);
+    Pushbuffer::Push(NV097_SET_LINE_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POLY_SMOOTH_ENABLE, false);
+    Pushbuffer::End();
   }
 
   pb_print("%s\n", name.c_str());
