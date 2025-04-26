@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 
 static constexpr const char kTestName[] = "ExtraElements";
@@ -21,7 +21,7 @@ InlineArraySizeMismatchTests::InlineArraySizeMismatchTests(TestHost &host, std::
 void InlineArraySizeMismatchTests::Initialize() {
   TestSuite::Initialize();
   host_.SetCombinerControl(1);
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);

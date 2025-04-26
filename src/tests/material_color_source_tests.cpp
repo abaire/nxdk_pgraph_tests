@@ -5,7 +5,7 @@
 #include <pbkit/pbkit.h>
 
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -224,46 +224,46 @@ MaterialColorSourceTests::MaterialColorSourceTests(TestHost& host, std::string o
     std::string name = MakeTestName(source);
     tests_[name] = [this, source, name]() {
       vector_t material_emission{0.f, 0.f, 0.f, 0.f};
-      this->Test(name, source, material_emission);
+      Test(name, source, material_emission);
     };
 
     auto new_name = name + "_2light";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.f, 0.f, 0.f, 0.f};
-      this->Test(new_name, source, material_emission, 2);
+      Test(new_name, source, material_emission, 2);
     };
 
     new_name = name + "_me0_15";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.15f, 0.15f, 0.15f, 0.f};
-      this->Test(new_name, source, material_emission);
+      Test(new_name, source, material_emission);
     };
     new_name += "_2light";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.15f, 0.15f, 0.15f, 0.f};
-      this->Test(new_name, source, material_emission, 2);
+      Test(new_name, source, material_emission, 2);
     };
 
     new_name = name + "_me0_5";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.5f, 0.5f, 0.5f, 0.f};
-      this->Test(new_name, source, material_emission);
+      Test(new_name, source, material_emission);
     };
     new_name += "_2light";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{0.5f, 0.5f, 0.5f, 0.f};
-      this->Test(new_name, source, material_emission, 2);
+      Test(new_name, source, material_emission, 2);
     };
 
     new_name = name + "_me1_0";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{1.f, 1.f, 1.f, 1.f};
-      this->Test(new_name, source, material_emission);
+      Test(new_name, source, material_emission);
     };
     new_name += "_2light";
     tests_[new_name] = [this, source, new_name]() {
       vector_t material_emission{1.f, 1.f, 1.f, 1.f};
-      this->Test(new_name, source, material_emission, 2);
+      Test(new_name, source, material_emission, 2);
     };
   }
 

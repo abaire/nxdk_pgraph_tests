@@ -8,7 +8,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
@@ -89,7 +89,7 @@ WindowClipTests::WindowClipTests(TestHost &host, std::string output_dir, const C
 
 void WindowClipTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 

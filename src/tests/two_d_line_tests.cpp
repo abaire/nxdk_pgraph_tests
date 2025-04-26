@@ -58,7 +58,7 @@ TwoDLineTests::TwoDLineTests(TestHost& host, std::string output_dir, const Confi
   for (auto test : kTests) {
     std::string name = MakeTestName(test, false);
 
-    auto test_method = [this, test]() { this->Test(test); };
+    auto test_method = [this, test]() { Test(test); };
     tests_[name] = test_method;
   }
 }

@@ -8,7 +8,7 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-class PrecalculatedVertexShader;
+class PassthroughVertexShader;
 class PerspectiveVertexShader;
 struct TextureFormatInfo;
 class VertexBuffer;
@@ -38,7 +38,7 @@ class TextureShadowComparatorTests : public TestSuite {
 
  private:
   struct s_CtxDma texture_target_ctx_{};
-  std::shared_ptr<PrecalculatedVertexShader> raw_value_shader_;
+  std::shared_ptr<PassthroughVertexShader> raw_value_shader_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_SHADOW_COMPARATOR_TESTS_H

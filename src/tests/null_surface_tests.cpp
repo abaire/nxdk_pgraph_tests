@@ -1,6 +1,6 @@
 #include "null_surface_tests.h"
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -25,7 +25,7 @@ NullSurfaceTests::NullSurfaceTests(TestHost& host, std::string output_dir, const
 
 void NullSurfaceTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 

@@ -7,7 +7,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 static std::string MakeTestName(bool stipple_enabled, const std::string &stipple_pattern_name) {
@@ -59,7 +59,7 @@ StippleTests::StippleTests(TestHost &host, std::string output_dir, const Config 
 void StippleTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   Pushbuffer::Begin();

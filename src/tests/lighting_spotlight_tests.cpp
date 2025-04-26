@@ -96,33 +96,33 @@ LightingSpotlightTests::LightingSpotlightTests(TestHost& host, std::string outpu
   for (auto& light : kFalloffTests) {
     //    {
     //      auto name = MakeFalloffTestName(kFalloffName, light);
-    //      tests_[name] = [this, name, light]() { this->Test(name, light); };
+    //      tests_[name] = [this, name, light]() { Test(name, light); };
     //    }
     {
       auto name = MakeFalloffTestName(kFalloffFixedName, light);
-      tests_[name] = [this, name, light]() { this->TestFixed(name, light); };
+      tests_[name] = [this, name, light]() { TestFixed(name, light); };
     }
   }
 
   for (auto& light : kPhiThetaTests) {
     //    {
     //      auto name = MakePhiThetaTestName(kPhiThetaName, light);
-    //      tests_[name] = [this, name, light]() { this->Test(name, light); };
+    //      tests_[name] = [this, name, light]() { Test(name, light); };
     //    }
     {
       auto name = MakePhiThetaTestName(kPhiThetaFixedName, light);
-      tests_[name] = [this, name, light]() { this->TestFixed(name, light); };
+      tests_[name] = [this, name, light]() { TestFixed(name, light); };
     }
   }
 
   for (auto& light : kAttenuationTests) {
     //    {
     //      auto name = MakeAttenuationTestName(kAttenuationFixedName, light);
-    //      tests_[name] = [this, name, light]() { this->Test(name, light); };
+    //      tests_[name] = [this, name, light]() { Test(name, light); };
     //    }
     {
       auto name = MakeAttenuationTestName(kAttenuationFixedName, light);
-      tests_[name] = [this, name, light]() { this->TestFixed(name, light); };
+      tests_[name] = [this, name, light]() { TestFixed(name, light); };
     }
   }
 }
@@ -198,8 +198,8 @@ LightingSpotlightTests::Spotlight::Spotlight(const XboxMath::vector_t& position,
                                              float phi, float theta, float attenuation_1, float attenuation_2,
                                              float attenuation_3, float falloff_1, float falloff_2, float falloff_3)
     : phi(phi), theta(theta) {
-  memcpy(this->position, position, sizeof(this->position));
-  memcpy(this->direction, direction, sizeof(this->direction));
+  memcpy(this->position, position, sizeof(position));
+  memcpy(this->direction, direction, sizeof(direction));
   attenuation[0] = attenuation_1;
   attenuation[1] = attenuation_2;
   attenuation[2] = attenuation_3;

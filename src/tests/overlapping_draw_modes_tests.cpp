@@ -39,7 +39,7 @@ void OverlappingDrawModesTests::CreateTriangleStrip() {
   auto add_vertex = [&vertex, &index, this](float x, float y, float z, float r, float g, float b) {
     vertex->SetPosition(x, y, z);
     vertex->SetDiffuse(r, g, b);
-    this->index_buffer_.push_back(index++);
+    index_buffer_.push_back(index++);
     ++vertex;
   };
 

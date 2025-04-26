@@ -8,7 +8,7 @@
 #pragma clang diagnostic pop
 
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "swizzle.h"
 #include "texture_generator.h"
 
@@ -54,7 +54,7 @@ PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &c
 
 void PvideoTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);

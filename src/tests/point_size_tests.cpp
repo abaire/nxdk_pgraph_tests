@@ -5,7 +5,7 @@
 
 #include <memory>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
 struct TestConfig {
   const char* name;
@@ -97,8 +97,7 @@ PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Con
     : TestSuite(host, std::move(output_dir), "Point size", config) {
   for (auto testConfig : testConfigs) {
     tests_[testConfig.name] = [this, testConfig]() {
-      this->Test(testConfig.name, testConfig.point_smooth_enabled, testConfig.point_size_increment,
-                 testConfig.use_shader);
+      Test(testConfig.name, testConfig.point_smooth_enabled, testConfig.point_size_increment, testConfig.use_shader);
     };
   }
 }
@@ -133,7 +132,7 @@ static void RenderPoints(RenderPointCB&& on_render_point, int x_inc, int y_inc) 
 void PointSizeTests::Test(const std::string& name, bool point_smooth_enabled, int point_size_increment,
                           bool use_shader) {
   if (use_shader) {
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);

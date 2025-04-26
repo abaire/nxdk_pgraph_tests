@@ -7,9 +7,9 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "shaders/pixel_shader_program.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
@@ -106,7 +106,7 @@ void TextureSignedComponentTests::Test(const TextureFormatInfo &texture_format, 
 
 void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format,
                                                 uint32_t blend_op) {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetTextureFormat(texture_format);

@@ -5,7 +5,7 @@
 #include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 // clang-format off
@@ -47,7 +47,7 @@ AttributeCarryoverTests::AttributeCarryoverTests(TestHost& host, std::string out
     for (auto attr : kTestAttributes) {
       for (auto config : kTestConfigs) {
         std::string name = MakeTestName(primitive, attr, config);
-        tests_[name] = [this, primitive, attr, config]() { this->Test(primitive, attr, config); };
+        tests_[name] = [this, primitive, attr, config]() { Test(primitive, attr, config); };
       }
     }
   }
@@ -56,7 +56,7 @@ AttributeCarryoverTests::AttributeCarryoverTests(TestHost& host, std::string out
 void AttributeCarryoverTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Keep in sync with attribute_carryover_tests.vsh

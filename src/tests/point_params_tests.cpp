@@ -6,8 +6,14 @@
 
 #include <memory>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
+// clang-format off
+static constexpr uint32_t kPassthroughNoPointSizeShader[] = {
+#include "passthrough_no_point_size.vshinc"
+
+};
+// clang-format on
 struct TestConfig {
   const char* name;
   bool point_params_enabled;
@@ -105,8 +111,8 @@ PointParamsTests::PointParamsTests(TestHost& host, std::string output_dir, const
     : TestSuite(host, std::move(output_dir), "Point params", config) {
   for (auto test_config : kBasicTestConfigs) {
     tests_[test_config.name] = [this, test_config]() {
-      this->Test(test_config.name, test_config.point_params_enabled, test_config.point_smooth_enabled,
-                 test_config.point_size, test_config.use_shader);
+      Test(test_config.name, test_config.point_params_enabled, test_config.point_smooth_enabled, test_config.point_size,
+           test_config.use_shader);
     };
   }
 
@@ -175,6 +181,7 @@ static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t n
     host.Begin(TestHost::PRIMITIVE_POINTS);
 
     host.SetDiffuse(red, green, blue);
+    host.SetPointSize(1.f);
 
     vector_t screen_point{x, y, z, 1.f};
     if (!use_shader) {
@@ -194,7 +201,8 @@ static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t n
 void PointParamsTests::Test(const std::string& name, bool point_params_enabled, bool point_smooth_enabled,
                             int point_size, bool use_shader) {
   if (use_shader) {
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
+    shader->SetShaderOverride(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);
@@ -225,7 +233,8 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
 
 void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
   if (use_shader) {
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
+    shader->SetShaderOverride(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);

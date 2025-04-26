@@ -7,7 +7,7 @@
 #include <utility>
 
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"
@@ -26,7 +26,7 @@ TextureCPUUpdateTests::TextureCPUUpdateTests(TestHost &host, std::string output_
 void TextureCPUUpdateTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetTextureStageEnabled(0, true);

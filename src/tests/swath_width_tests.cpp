@@ -4,7 +4,7 @@
 
 #include <memory>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
 // From pbkit.c, DMA_A is set to channel 3 by default
 // NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
@@ -58,14 +58,14 @@ static const TestConfig testConfigs[]{
 SwathWidthTests::SwathWidthTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Swath width", config) {
   for (auto testConfig : testConfigs) {
-    tests_[testConfig.name] = [this, testConfig]() { this->Test(testConfig.name, testConfig.swath_width); };
+    tests_[testConfig.name] = [this, testConfig]() { Test(testConfig.name, testConfig.swath_width); };
   }
 }
 
 void SwathWidthTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetBlend(true);

@@ -2,7 +2,7 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../shaders/precalculated_vertex_shader.h"
+#include "../shaders/passthrough_vertex_shader.h"
 #include "../test_host.h"
 #include "debug_output.h"
 #include "nxdk_ext.h"
@@ -41,7 +41,7 @@ void DepthFormatTests::Initialize() {
   TestSuite::Initialize();
   SetDefaultTextureFormat();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 
@@ -200,8 +200,8 @@ void DepthFormatTests::AddTestEntry(const DepthFormatTests::DepthFormat &format,
   std::string name = MakeTestName(format, compress_z, depth_cutoff);
 
   auto test = [this, format, compress_z, depth_cutoff]() {
-    this->CreateGeometry(format);
-    this->Test(format, compress_z, depth_cutoff);
+    CreateGeometry(format);
+    Test(format, compress_z, depth_cutoff);
   };
 
   tests_[name] = test;

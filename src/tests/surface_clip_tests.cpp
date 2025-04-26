@@ -1,6 +1,6 @@
 #include "surface_clip_tests.h"
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -210,7 +210,7 @@ SurfaceClipTests::SurfaceClipTests(TestHost &host, std::string output_dir, const
 
 void SurfaceClipTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   // Failing to disable alpha blending on B8 and G8B8 will trigger a hardware exception.

@@ -13,7 +13,7 @@
 
 #include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "texture_generator.h"
 
 static constexpr char kTestControlFlagsLightOffFixedFunction[] = "ControlFlagsLightDisable_FF";
@@ -258,28 +258,28 @@ static constexpr SpecularParamTestCase kSpecularParamSets[]{
 SpecularBackTests::SpecularBackTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Specular back", config) {
   tests_[kTestControlFlagsNoLightFixedFunction] = [this]() {
-    this->TestControlFlags(kTestControlFlagsNoLightFixedFunction, true, true, false);
+    TestControlFlags(kTestControlFlagsNoLightFixedFunction, true, true, false);
   };
   tests_[kTestControlNoLightFlagsShader] = [this]() {
-    this->TestControlFlags(kTestControlNoLightFlagsShader, false, true, false);
+    TestControlFlags(kTestControlNoLightFlagsShader, false, true, false);
   };
   tests_[kTestControlFlagsFixedFunction] = [this]() {
-    this->TestControlFlags(kTestControlFlagsFixedFunction, true, true, true);
+    TestControlFlags(kTestControlFlagsFixedFunction, true, true, true);
   };
-  tests_[kTestControlFlagsShader] = [this]() { this->TestControlFlags(kTestControlFlagsShader, false, true, true); };
+  tests_[kTestControlFlagsShader] = [this]() { TestControlFlags(kTestControlFlagsShader, false, true, true); };
 
   tests_[kTestControlFlagsLightOffFixedFunction] = [this]() {
-    this->TestControlFlags(kTestControlFlagsLightOffFixedFunction, true, false, false);
+    TestControlFlags(kTestControlFlagsLightOffFixedFunction, true, false, false);
   };
   tests_[kTestControlLightOffFlagsShader] = [this]() {
-    this->TestControlFlags(kTestControlLightOffFlagsShader, false, false, false);
+    TestControlFlags(kTestControlLightOffFlagsShader, false, false, false);
   };
 
   for (auto& test_case : kSpecularParamSets) {
     std::string name = "SpecParams_FF_";
     name += test_case.name;
 
-    tests_[name] = [this, name, &test_case]() { this->TestSpecularParams(name, test_case.params); };
+    tests_[name] = [this, name, &test_case]() { TestSpecularParams(name, test_case.params); };
   }
 }
 

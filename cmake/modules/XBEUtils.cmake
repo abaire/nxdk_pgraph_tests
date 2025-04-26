@@ -49,7 +49,7 @@ function(split_debug)
             COMMAND "${CMAKE_COMMAND}" -E copy "${exe_file}" "${output}"
             COMMAND "${CMAKE_OBJCOPY}" --strip-debug "${exe_file}"
             COMMAND "${CMAKE_OBJCOPY}" "--add-gnu-debuglink=${output}" "${exe_file}"
-            COMMENT Splitting debug information to reduce binary size...
+            COMMENT "Splitting debug information to reduce binary size..."
             VERBATIM
             BYPRODUCTS "${output}"
     )

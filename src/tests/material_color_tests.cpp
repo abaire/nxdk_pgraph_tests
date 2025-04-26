@@ -4,7 +4,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -154,7 +154,7 @@ MaterialColorTests::MaterialColorTests(TestHost& host, std::string output_dir, c
     : TestSuite(host, std::move(output_dir), "Material color", config) {
   for (const auto& test_case : kTests) {
     auto config = test_case.BuildConfig();
-    auto test = [this, config]() { this->Test(config); };
+    auto test = [this, config]() { Test(config); };
     tests_[config.name] = test;
   }
 }

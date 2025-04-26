@@ -6,7 +6,7 @@
 #include <utility>
 
 #include "configure.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 
@@ -101,7 +101,7 @@ AntialiasingTests::AntialiasingTests(TestHost &host, std::string output_dir, con
 void AntialiasingTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   Pushbuffer::Begin();

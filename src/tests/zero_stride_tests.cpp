@@ -24,7 +24,7 @@ ZeroStrideTests::ZeroStrideTests(TestHost& host, std::string output_dir, const C
     : TestSuite(host, std::move(output_dir), "Zero stride", config) {
   for (const auto draw_mode : kDrawModes) {
     const std::string test_name = MakeTestName(draw_mode);
-    auto test = [this, draw_mode]() { this->Test(draw_mode); };
+    auto test = [this, draw_mode]() { Test(draw_mode); };
     tests_[test_name] = test;
   }
 }

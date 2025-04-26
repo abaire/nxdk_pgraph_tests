@@ -5,7 +5,7 @@
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -34,7 +34,7 @@ void StencilTests::Initialize() {
   TestSuite::Initialize();
   SetDefaultTextureFormat();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 
@@ -70,7 +70,7 @@ void StencilTests::Test(const StencilParams &params) {
   }
 
   // Draw a red quad in the center of the screen
-  this->CreateGeometry(kQuadSize, 1, 0, 0);
+  CreateGeometry(kQuadSize, 1, 0, 0);
   host_.DrawArrays();
 
   // Disable all masks except stencil, setup stencil test
@@ -85,7 +85,7 @@ void StencilTests::Test(const StencilParams &params) {
   }
 
   // Draw a smaller quad to the zeta buffer
-  this->CreateGeometry(kQuadSize / 2.0f, 0, 0, 1);
+  CreateGeometry(kQuadSize / 2.0f, 0, 0, 1);
   host_.DrawArrays();
 
   // Reenable masks, stencil test
@@ -101,7 +101,7 @@ void StencilTests::Test(const StencilParams &params) {
   }
 
   // Draw the first quad again, with a different color
-  this->CreateGeometry(kQuadSize, 0, 1, 0);
+  CreateGeometry(kQuadSize, 0, 1, 0);
   host_.DrawArrays();
 
   pb_print("Stencil Op: %s\n", params.stencil_op_zpass_str);
@@ -152,7 +152,7 @@ std::string StencilTests::MakeTestName(const StencilParams &params) {
 void StencilTests::AddTestEntry(const StencilTests::StencilParams &format) {
   std::string name = MakeTestName(format);
 
-  auto test = [this, format]() { this->Test(format); };
+  auto test = [this, format]() { Test(format); };
 
   tests_[name] = test;
 }

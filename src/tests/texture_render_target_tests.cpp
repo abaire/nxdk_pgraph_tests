@@ -8,7 +8,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 
@@ -186,7 +186,7 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
     Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
     Pushbuffer::End();
 
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
     host_.SetVertexShaderProgram(shader);
 
     TestHost::SetWindowClip(kTextureWidth - 1, kTextureHeight - 1);
@@ -248,7 +248,7 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
     Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
     Pushbuffer::End();
 
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
     host_.SetVertexShaderProgram(shader);
 
     host_.SetVertexBuffer(render_target_vertex_buffer_);

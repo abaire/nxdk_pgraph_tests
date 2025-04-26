@@ -7,8 +7,8 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "swizzle.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -421,7 +421,7 @@ void TextureBorderTests::TestXemu1034() {
 //}
 
 void TextureBorderTests::Test2DBorderedSwizzled() {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(0xFE181818);
@@ -550,7 +550,7 @@ void TextureBorderTests::Test2DBorderedSwizzled() {
 }
 
 void TextureBorderTests::Test3DBorderedSwizzled(const std::string &name, uint32_t width, uint32_t height) {
-  auto shader = std::make_shared<PrecalculatedVertexShader>(true);
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(0xFE181818);

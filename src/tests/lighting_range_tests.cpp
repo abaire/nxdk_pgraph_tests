@@ -6,8 +6,8 @@
 #include "debug_output.h"
 #include "models/flat_mesh_grid_model.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
@@ -27,8 +27,9 @@ static constexpr vector_t kDirectionalLightDir{0.f, 0.f, 1.f, 1.f};
 
 static constexpr vector_t kPositionalLightPosition{0.f, 0.f, -7.f, 1.f};
 static constexpr float kLightRange = 8.f;
-// Force attentuation to be infinite so that range is the only value impacting whether a vertex is lit or not.
-static constexpr float kAttenuationConstant = 0.f;
+// Force attentuation to be tiny so that range is the only value impacting whether a vertex is lit or not.
+// It is possible to set attenuation to 0 (making the final term inf), but it results in a blue specular hue.
+static constexpr float kAttenuationConstant = 0.0001f;
 static constexpr float kAttenuationLinear = 0.f;
 static constexpr float kAttenuationQuadratic = 0.f;
 
@@ -65,14 +66,14 @@ LightingRangeTests::LightingRangeTests(TestHost& host, std::string output_dir, c
   tests_[kDirectionalName] = [this, light_common_setup]() {
     auto light = std::make_shared<DirectionalLight>(0, kDirectionalLightDir);
     light_common_setup(light);
-    this->Test(kDirectionalName, light);
+    Test(kDirectionalName, light);
   };
 
   tests_[kPointName] = [this, light_common_setup]() {
     auto light = std::make_shared<PointLight>(0, kPositionalLightPosition, kLightRange, kAttenuationConstant,
                                               kAttenuationLinear, kAttenuationQuadratic);
     light_common_setup(light);
-    this->Test(kPointName, light);
+    Test(kPointName, light);
   };
 
   tests_[kSpotName] = [this, light_common_setup]() {
@@ -80,7 +81,7 @@ LightingRangeTests::LightingRangeTests(TestHost& host, std::string output_dir, c
                                              kFalloffPenumbraDegrees, kFalloffUmbraDegrees, kAttenuationConstant,
                                              kAttenuationLinear, kAttenuationQuadratic, 0.f, -0.494592f, 1.494592f);
     light_common_setup(light);
-    this->Test(kSpotName, light);
+    Test(kSpotName, light);
   };
 }
 

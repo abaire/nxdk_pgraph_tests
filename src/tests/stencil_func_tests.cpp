@@ -5,7 +5,7 @@
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -91,7 +91,7 @@ void StencilFuncTests::Initialize() {
   TestSuite::Initialize();
   SetDefaultTextureFormat();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetSurfaceFormat(host_.GetColorBufferFormat(),

@@ -7,8 +7,8 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
@@ -101,7 +101,7 @@ void VertexShaderRoundingTests::TestGeometry(float bias) {
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   const float height = floorf(host_.GetFramebufferHeightF() / 4.0f) * 2.0f;
@@ -140,7 +140,7 @@ void VertexShaderRoundingTests::TestGeometry(float bias) {
 }
 
 void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
   host_.PrepareDraw(0xFE414041);
 
@@ -267,7 +267,7 @@ void VertexShaderRoundingTests::TestGeometrySubscreen(float bias) {
 }
 
 void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
   host_.PrepareDraw(0xFE414041);
 
@@ -396,7 +396,7 @@ void VertexShaderRoundingTests::TestGeometrySuperscreen(float bias) {
 }
 
 void VertexShaderRoundingTests::TestRenderTarget() {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
@@ -538,7 +538,7 @@ void VertexShaderRoundingTests::TestCompositingRenderTarget(int z) {
 
   host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
@@ -651,7 +651,7 @@ void VertexShaderRoundingTests::TestAdjacentGeometry(float bias) {
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   static constexpr float kQuadSize = 100.0f;

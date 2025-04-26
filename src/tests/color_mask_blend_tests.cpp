@@ -4,7 +4,7 @@
 
 #include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 typedef struct TestCase {
@@ -41,7 +41,7 @@ ColorMaskBlendTests::ColorMaskBlendTests(TestHost &host, std::string output_dir,
 void ColorMaskBlendTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   CreateGeometry();

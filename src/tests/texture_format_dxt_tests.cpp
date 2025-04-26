@@ -8,7 +8,7 @@
 
 #include "dds_image.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 
 static constexpr const char kAlphaDXT1[] = "D:\\dxt_images\\plasma_alpha_dxt1.dds";
@@ -63,7 +63,7 @@ TextureFormatDXTTests::TextureFormatDXTTests(TestHost &host, std::string output_
 void TextureFormatDXTTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
