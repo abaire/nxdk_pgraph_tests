@@ -3,7 +3,7 @@
 #include <pbkit/pbkit.h>
 
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -31,7 +31,7 @@ SmoothingTests::SmoothingTests(TestHost& host, std::string output_dir, const Con
 void SmoothingTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   Pushbuffer::Begin();

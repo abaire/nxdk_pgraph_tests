@@ -5,14 +5,14 @@
 #include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 HighVertexCountTests::HighVertexCountTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "High vertex count", config) {
   for (auto draw_mode : {DRAW_ARRAYS, DRAW_INLINE_BUFFERS, DRAW_INLINE_ARRAYS, DRAW_INLINE_ELEMENTS}) {
     std::string name = MakeTestName(draw_mode);
-    tests_[name] = [this, name, draw_mode]() { this->Test(name, draw_mode); };
+    tests_[name] = [this, name, draw_mode]() { Test(name, draw_mode); };
   }
 }
 
@@ -147,7 +147,7 @@ static void CreateGeometry(TestHost& host, std::shared_ptr<VertexBuffer>& vertex
 void HighVertexCountTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   CreateGeometry(host_, vertex_buffer_, index_buffer_);

@@ -5,7 +5,7 @@
 #include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 static constexpr SetVertexDataTests::SetFunction kTests[] = {
@@ -19,7 +19,7 @@ SetVertexDataTests::SetVertexDataTests(TestHost& host, std::string output_dir, c
     for (auto set_func : kTests) {
       std::string name = MakeTestName(set_func, saturate_sign);
       Color diffuse{0.25f, 1.0f, 0.5f, 0.75f};
-      tests_[name] = [this, set_func, diffuse, saturate_sign]() { this->Test(set_func, diffuse, saturate_sign); };
+      tests_[name] = [this, set_func, diffuse, saturate_sign]() { Test(set_func, diffuse, saturate_sign); };
     }
   }
 }

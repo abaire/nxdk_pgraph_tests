@@ -21,6 +21,8 @@ class AttributeFloatTests : public TestSuite {
 
  private:
   void Test(const TestConfig &testConfig);
+
+  void TestColors(const std::string &test_name);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_ATTRIBUTE_NAN_TESTS_H

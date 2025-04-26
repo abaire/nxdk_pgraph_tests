@@ -87,6 +87,8 @@ generate_nv2a_vshinc_files(
         shaders/fog_vec4_unset.vsh
         shaders/passthrough.vsh
         shaders/passthrough_just_position_and_color.vsh
+        shaders/passthrough_mul_color_by_constant.vsh
+        shaders/passthrough_no_point_size.vsh
         shaders/projection_vertex_shader_colorless_light.vsh
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
@@ -104,9 +106,6 @@ generate_vertexshader_inl_files(
         generated_vp20_vertex_shaders
         SOURCES
         shaders/attribute_explicit_setter_tests.vs.cg
-        shaders/mul_col0_by_const0_vertex_shader.vs.cg
-        shaders/precalculated_vertex_shader_2c_texcoords.vs.cg
-        shaders/precalculated_vertex_shader_4c_texcoords.vs.cg
 )
 
 # Sources that should be optimized regardless of standard debug settings.
@@ -156,8 +155,6 @@ add_library(
         shaders/pixel_shader_program.h
         shaders/passthrough_vertex_shader.cpp
         shaders/passthrough_vertex_shader.h
-        shaders/precalculated_vertex_shader.cpp
-        shaders/precalculated_vertex_shader.h
         shaders/projection_vertex_shader.cpp
         shaders/projection_vertex_shader.h
         shaders/vertex_shader_program.cpp

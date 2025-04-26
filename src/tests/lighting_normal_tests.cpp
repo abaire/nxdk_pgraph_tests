@@ -5,7 +5,7 @@
 #include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 struct MaterialParams {
@@ -35,7 +35,7 @@ LightingNormalTests::LightingNormalTests(TestHost& host, std::string output_dir,
   for (auto draw_mode : kDrawMode) {
     for (auto params : kTests) {
       std::string name = MakeTestName(params.set_normal, params.normal, draw_mode);
-      tests_[name] = [this, params, draw_mode]() { this->Test(params.set_normal, params.normal, draw_mode); };
+      tests_[name] = [this, params, draw_mode]() { Test(params.set_normal, params.normal, draw_mode); };
     }
   }
 }

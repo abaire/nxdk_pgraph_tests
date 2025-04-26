@@ -145,16 +145,16 @@ ColorKeyTests::ColorKeyTests(TestHost& host, std::string output_dir, const Confi
     for (auto mode : kColorKeyModes) {
       {
         std::string name = MakeTestName(kFixedTextured, mode, alpha);
-        tests_[name] = [this, name, mode, alpha]() { this->TestFixedFunction(name, mode, alpha); };
+        tests_[name] = [this, name, mode, alpha]() { TestFixedFunction(name, mode, alpha); };
       }
       {
         std::string name = MakeTestName(kTextured, mode, alpha);
-        tests_[name] = [this, name, mode, alpha]() { this->Test(name, mode, alpha); };
+        tests_[name] = [this, name, mode, alpha]() { Test(name, mode, alpha); };
       }
     }
   }
 
-  tests_[kUnsampledTexturesStillActivate] = [this]() { this->TestUnsampled(kUnsampledTexturesStillActivate); };
+  tests_[kUnsampledTexturesStillActivate] = [this]() { TestUnsampled(kUnsampledTexturesStillActivate); };
 }
 
 void ColorKeyTests::Initialize() {

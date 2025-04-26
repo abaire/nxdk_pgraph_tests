@@ -6,7 +6,7 @@
 #include <shaders/perspective_vertex_shader.h>
 
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 
 // clang-format off

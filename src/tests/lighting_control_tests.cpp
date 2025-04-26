@@ -11,7 +11,7 @@
 #include "models/light_control_test_mesh_suzanne_model.h"
 #include "models/light_control_test_mesh_torus_model.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
@@ -173,12 +173,12 @@ LightingControlTests::LightingControlTests(TestHost& host, std::string output_di
 
           std::string test_name = MakeTestName(light_control, true, specular_enabled);
           tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
-            this->Test(test_name, light_control, specular_enabled, true);
+            Test(test_name, light_control, specular_enabled, true);
           };
 
           test_name = MakeTestName(light_control, false, specular_enabled);
           tests_[test_name] = [this, test_name, light_control, specular_enabled]() {
-            this->Test(test_name, light_control, specular_enabled, false);
+            Test(test_name, light_control, specular_enabled, false);
           };
         }
       }

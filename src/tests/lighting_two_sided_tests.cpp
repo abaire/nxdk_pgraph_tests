@@ -4,7 +4,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -12,7 +12,7 @@ static constexpr char kTestName[] = "TwoSidedLighting";
 
 LightingTwoSidedTests::LightingTwoSidedTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Lighting Two Sided", config) {
-  tests_[kTestName] = [this]() { this->Test(); };
+  tests_[kTestName] = [this]() { Test(); };
 }
 
 static void SetLight() {

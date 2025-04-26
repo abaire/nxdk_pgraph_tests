@@ -4,7 +4,7 @@
 
 #include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "texture_generator.h"
 
 static constexpr auto kWUpperLeft = INFINITY;
@@ -45,14 +45,14 @@ TexturePerspectiveEnableTests::TexturePerspectiveEnableTests(TestHost& host, std
     : TestSuite(host, std::move(output_dir), "Texture perspective enable", config) {
   for (auto texture_enabled : {false, true}) {
     auto name = MakeTestName(texture_enabled);
-    tests_[name] = [this, name, texture_enabled]() { this->Test(name, texture_enabled); };
+    tests_[name] = [this, name, texture_enabled]() { Test(name, texture_enabled); };
   }
 }
 
 void TexturePerspectiveEnableTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 

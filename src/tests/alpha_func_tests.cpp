@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
 struct TestConfig {
   const char* name;
@@ -81,13 +81,13 @@ AlphaFuncTests::AlphaFuncTests(TestHost& host, std::string output_dir, const Con
     {
       std::string test_name = testConfig.name;
       test_name += "_Enabled";
-      tests_[test_name] = [this, testConfig, test_name]() { this->Test(test_name, testConfig.alpha_func, true); };
+      tests_[test_name] = [this, testConfig, test_name]() { Test(test_name, testConfig.alpha_func, true); };
     }
 
     {
       std::string test_name = testConfig.name;
       test_name += "_Disabled";
-      tests_[test_name] = [this, testConfig, test_name]() { this->Test(test_name, testConfig.alpha_func, false); };
+      tests_[test_name] = [this, testConfig, test_name]() { Test(test_name, testConfig.alpha_func, false); };
     }
   }
 }
@@ -95,7 +95,7 @@ AlphaFuncTests::AlphaFuncTests(TestHost& host, std::string output_dir, const Con
 void AlphaFuncTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   Pushbuffer::Begin();

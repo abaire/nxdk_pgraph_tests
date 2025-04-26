@@ -5,7 +5,7 @@
 #include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 // clang-format off
@@ -24,14 +24,14 @@ static constexpr AttributeExplicitSetterTests::TestConfig kTestConfigs[] = {
 AttributeExplicitSetterTests::AttributeExplicitSetterTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Attrib setter", config) {
   for (auto& config : kTestConfigs) {
-    tests_[config.test_name] = [this, &config]() { this->Test(config); };
+    tests_[config.test_name] = [this, &config]() { Test(config); };
   }
 }
 
 void AttributeExplicitSetterTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   shader->SetShaderOverride(kShader, sizeof(kShader));
 
   // Send shader constants (see attribute_carryover_test.inl)

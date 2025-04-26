@@ -4,7 +4,7 @@
 
 #include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 static std::string WindingName(uint32_t winding);
@@ -91,7 +91,7 @@ FrontFaceTests::FrontFaceTests(TestHost& host, std::string output_dir, const Con
     for (auto cull_face : kCullFaces) {
       std::string name = MakeTestName(winding, cull_face);
 
-      auto test = [this, winding, cull_face]() { this->Test(winding, cull_face); };
+      auto test = [this, winding, cull_face]() { Test(winding, cull_face); };
       tests_[name] = test;
     }
   }
@@ -106,7 +106,7 @@ void FrontFaceTests::Initialize() {
     Pushbuffer::End();
   }
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   CreateGeometry();

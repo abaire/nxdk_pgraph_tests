@@ -3,7 +3,7 @@
 #include <pbkit/pbkit.h>
 
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -655,7 +655,7 @@ ThreeDPrimitiveTests::ThreeDPrimitiveTests(TestHost& host, std::string output_di
         for (const auto draw_mode : kDrawModes) {
           const std::string test_name = MakeTestName(primitive, draw_mode, line_smooth, poly_smooth);
           auto test = [this, primitive, draw_mode, line_smooth, poly_smooth]() {
-            this->Test(primitive, draw_mode, line_smooth, poly_smooth);
+            Test(primitive, draw_mode, line_smooth, poly_smooth);
           };
           tests_[test_name] = test;
         }
@@ -792,7 +792,7 @@ void ThreeDPrimitiveTests::CreateTriangleStrip() {
   auto add_vertex = [&vertex, &index, this](float x, float y, float z, float r, float g, float b) {
     vertex->SetPosition(x, y, z);
     vertex->SetDiffuse(r, g, b);
-    this->index_buffer_.push_back(index++);
+    index_buffer_.push_back(index++);
     ++vertex;
   };
 
@@ -824,7 +824,7 @@ void ThreeDPrimitiveTests::CreateTriangleFan() {
   auto add_vertex = [&vertex, &index, this](float x, float y, float z, float r, float g, float b) {
     vertex->SetPosition(x, y, z);
     vertex->SetDiffuse(r, g, b);
-    this->index_buffer_.push_back(index++);
+    index_buffer_.push_back(index++);
     ++vertex;
   };
 
@@ -856,7 +856,7 @@ void ThreeDPrimitiveTests::CreateQuads() {
   auto add_vertex = [&vertex, &index, this](float x, float y, float z, float r, float g, float b) {
     vertex->SetPosition(x, y, z);
     vertex->SetDiffuse(r, g, b);
-    this->index_buffer_.push_back(index++);
+    index_buffer_.push_back(index++);
     ++vertex;
   };
 
@@ -889,7 +889,7 @@ void ThreeDPrimitiveTests::CreateQuadStrip() {
   auto add_vertex = [&vertex, &index, this](float x, float y, float z, float r, float g, float b) {
     vertex->SetPosition(x, y, z);
     vertex->SetDiffuse(r, g, b);
-    this->index_buffer_.push_back(index++);
+    index_buffer_.push_back(index++);
     ++vertex;
   };
 
@@ -915,7 +915,7 @@ void ThreeDPrimitiveTests::CreatePolygon() {
   auto add_vertex = [&vertex, &index, this](float x, float y, float z, float r, float g, float b) {
     vertex->SetPosition(x, y, z);
     vertex->SetDiffuse(r, g, b);
-    this->index_buffer_.push_back(index++);
+    index_buffer_.push_back(index++);
     ++vertex;
   };
 
@@ -1041,7 +1041,7 @@ void ThreeDPrimitiveTests::Test(TestHost::DrawPrimitive primitive, DrawMode draw
     texture_stage.SetImageDimensions(host_.GetFramebufferWidth() * 2, host_.GetFramebufferHeight());
     host_.SetupTextureStages();
 
-    auto shader = std::make_shared<PrecalculatedVertexShader>();
+    auto shader = std::make_shared<PassthroughVertexShader>();
     host_.SetVertexShaderProgram(shader);
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);

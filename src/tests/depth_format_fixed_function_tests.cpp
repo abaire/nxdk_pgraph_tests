@@ -2,7 +2,7 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../shaders/precalculated_vertex_shader.h"
+#include "../shaders/passthrough_vertex_shader.h"
 #include "../test_host.h"
 #include "debug_output.h"
 #include "nxdk_ext.h"

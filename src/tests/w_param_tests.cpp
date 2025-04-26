@@ -4,7 +4,7 @@
 
 #include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
 
@@ -29,19 +29,17 @@ WParamTests::WParamTests(TestHost &host, std::string output_dir, const Config &c
       return AugmentTestName(test_name, texture_perspective_enable);
     };
 
-    tests_[fullname(kTestWGaps)] = [this, texture_perspective_enable]() {
-      this->TestWGaps(texture_perspective_enable);
-    };
+    tests_[fullname(kTestWGaps)] = [this, texture_perspective_enable]() { TestWGaps(texture_perspective_enable); };
     tests_[fullname(kTestWPositiveTriangleStrip)] = [this, texture_perspective_enable]() {
-      this->TestPositiveWTriangleStrip(texture_perspective_enable);
+      TestPositiveWTriangleStrip(texture_perspective_enable);
     };
     tests_[fullname(kTestWNegativeTriangleStrip)] = [this, texture_perspective_enable]() {
-      this->TestNegativeWTriangleStrip(texture_perspective_enable);
+      TestNegativeWTriangleStrip(texture_perspective_enable);
     };
 
     for (auto quad : {false, true}) {
       tests_[MakeFFZeroWTestName(quad, texture_perspective_enable)] = [this, quad, texture_perspective_enable]() {
-        this->TestFixedFunctionZeroW(quad, texture_perspective_enable);
+        TestFixedFunctionZeroW(quad, texture_perspective_enable);
       };
     }
   }
@@ -49,7 +47,7 @@ WParamTests::WParamTests(TestHost &host, std::string output_dir, const Config &c
 
 void WParamTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 
@@ -389,7 +387,7 @@ void WParamTests::TestFixedFunctionZeroW(bool draw_quad, bool texture_perspectiv
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
   host_.SetDefaultViewportAndFixedFunctionMatrices();
 

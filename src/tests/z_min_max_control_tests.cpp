@@ -35,11 +35,11 @@ ZMinMaxControlTests::ZMinMaxControlTests(TestHost& host, std::string output_dir,
           uint32_t mode = cull | z_clamp | ignore_w;
           {
             std::string name = MakeTestName(kTestName, mode, w_buffered);
-            tests_[name] = [this, name, mode, w_buffered]() { this->Test(name, mode, w_buffered); };
+            tests_[name] = [this, name, mode, w_buffered]() { Test(name, mode, w_buffered); };
           }
           {
             std::string name = MakeTestName(kTestFixedName, mode, w_buffered);
-            tests_[name] = [this, name, mode, w_buffered]() { this->TestFixed(name, mode, w_buffered); };
+            tests_[name] = [this, name, mode, w_buffered]() { TestFixed(name, mode, w_buffered); };
           }
         }
       }

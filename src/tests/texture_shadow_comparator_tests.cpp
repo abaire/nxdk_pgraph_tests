@@ -6,8 +6,8 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "swizzle.h"
 #include "test_host.h"
 
@@ -248,7 +248,7 @@ void TextureShadowComparatorTests::Initialize() {
   pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &texture_target_ctx_);
   pb_bind_channel(&texture_target_ctx_);
 
-  raw_value_shader_ = std::make_shared<PrecalculatedVertexShader>(true);
+  raw_value_shader_ = std::make_shared<PassthroughVertexShader>();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
   Pushbuffer::Begin();

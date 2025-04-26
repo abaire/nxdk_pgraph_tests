@@ -6,7 +6,7 @@
 #include "debug_output.h"
 #include "models/flat_mesh_grid_model.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
@@ -67,7 +67,7 @@ LightingAccumulationTests::LightingAccumulationTests(TestHost& host, std::string
         lights.emplace_back(light);
       }
 
-      this->Test(name, lights);
+      Test(name, lights);
     };
 
     name = MakeTestName(kPointName, num_lights);
@@ -79,7 +79,7 @@ LightingAccumulationTests::LightingAccumulationTests(TestHost& host, std::string
         light_common_setup(light);
         lights.emplace_back(light);
       }
-      this->Test(name, lights);
+      Test(name, lights);
     };
 
     name = MakeTestName(kSpotName, num_lights);
@@ -93,7 +93,7 @@ LightingAccumulationTests::LightingAccumulationTests(TestHost& host, std::string
         light_common_setup(light);
         lights.emplace_back(light);
       }
-      this->Test(name, lights);
+      Test(name, lights);
     };
   }
 
@@ -118,7 +118,7 @@ LightingAccumulationTests::LightingAccumulationTests(TestHost& host, std::string
       light_common_setup(light);
       lights.emplace_back(light);
     }
-    this->Test(kMixed, lights);
+    Test(kMixed, lights);
   };
 }
 

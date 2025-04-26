@@ -1,6 +1,6 @@
 #include "surface_pitch_tests.h"
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "texture_generator.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
@@ -26,7 +26,7 @@ SurfacePitchTests::SurfacePitchTests(TestHost &host, std::string output_dir, con
 
 void SurfacePitchTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);

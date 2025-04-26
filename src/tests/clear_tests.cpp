@@ -4,7 +4,7 @@
 
 #include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
@@ -134,7 +134,7 @@ ClearTests::ClearTests(TestHost& host, std::string output_dir, const Config& con
 void ClearTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   CreateGeometry();

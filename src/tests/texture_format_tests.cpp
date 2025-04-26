@@ -7,9 +7,9 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "shaders/pixel_shader_program.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"
@@ -151,7 +151,7 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
 
 // TODO: Implement mipmap generation and fully populate the texture.
 // void TextureFormatTests::TestMipMap(const TextureFormatInfo &texture_format) {
-//  auto shader = std::make_shared<PrecalculatedVertexShader>();
+//  auto shader = std::make_shared<PassthroughVertexShader>();
 //  host_.SetVertexShaderProgram(shader);
 //
 //  host_.SetTextureFormat(texture_format);

@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 
 static constexpr const char kTestName[] = "MAC_ILU_Independence";
@@ -80,7 +80,7 @@ void VertexShaderIndependenceTests::CreateGeometry() {
 void VertexShaderIndependenceTests::Test() {
   host_.PrepareDraw(0xFE333333);
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   shader->SetShaderOverride(kShader, sizeof(kShader));
   // Only the X component is actually used. The expected blue channel should be the reciprocal square root of this
   // constant's X value.

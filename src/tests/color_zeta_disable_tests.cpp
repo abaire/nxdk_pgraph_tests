@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 
@@ -27,7 +27,7 @@ void ColorZetaDisableTests::Initialize() {
 }
 
 void ColorZetaDisableTests::Test() {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(0xFE312F31);

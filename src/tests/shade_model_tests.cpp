@@ -5,8 +5,8 @@
 #include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
 
@@ -74,33 +74,33 @@ ShadeModelTests::ShadeModelTests(TestHost& host, std::string output_dir, const C
         {
           std::string name = MakeTestName(kFixedUntextured, model, provoking_vertex, primitive);
           tests_[name] = [this, model, provoking_vertex, primitive]() {
-            this->TestShadeModelFixed(model, provoking_vertex, primitive, false);
+            TestShadeModelFixed(model, provoking_vertex, primitive, false);
           };
           name = "W_" + name;
           tests_[name] = [this, model, provoking_vertex, primitive]() {
-            this->TestShadeModelFixed_W(model, provoking_vertex, primitive, false, 0.5f, 0.05f);
+            TestShadeModelFixed_W(model, provoking_vertex, primitive, false, 0.5f, 0.05f);
           };
         }
         {
           std::string name = MakeTestName(kFixedTextured, model, provoking_vertex, primitive);
           tests_[name] = [this, model, provoking_vertex, primitive]() {
-            this->TestShadeModelFixed(model, provoking_vertex, primitive, true);
+            TestShadeModelFixed(model, provoking_vertex, primitive, true);
           };
           name = "W_" + name;
           tests_[name] = [this, model, provoking_vertex, primitive]() {
-            this->TestShadeModelFixed_W(model, provoking_vertex, primitive, true, 0.5f, 0.05f);
+            TestShadeModelFixed_W(model, provoking_vertex, primitive, true, 0.5f, 0.05f);
           };
         }
         {
           std::string name = MakeTestName(kUntextured, model, provoking_vertex, primitive);
           tests_[name] = [this, model, provoking_vertex, primitive]() {
-            this->TestShadeModel(model, provoking_vertex, primitive, false);
+            TestShadeModel(model, provoking_vertex, primitive, false);
           };
         }
         {
           std::string name = MakeTestName(kTextured, model, provoking_vertex, primitive);
           tests_[name] = [this, model, provoking_vertex, primitive]() {
-            this->TestShadeModel(model, provoking_vertex, primitive, true);
+            TestShadeModel(model, provoking_vertex, primitive, true);
           };
         }
       }

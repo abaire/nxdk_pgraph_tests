@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 
@@ -391,7 +391,7 @@ void VertexShaderSwizzleTests::Deinitialize() {
 
 void VertexShaderSwizzleTests::Test(const std::string &name, const Instruction *instructions, uint32_t count,
                                     bool full_opacity) {
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(0xFE312F31);

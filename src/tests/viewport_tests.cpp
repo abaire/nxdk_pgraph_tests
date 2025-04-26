@@ -8,8 +8,8 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
-#include "shaders/precalculated_vertex_shader.h"
 #include "test_host.h"
 
 static constexpr ViewportTests::Viewport kTestCases[] = {

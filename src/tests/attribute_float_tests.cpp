@@ -5,15 +5,12 @@
 #include <vector>
 
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 
 // clang-format off
-static const std::vector<uint32_t> passthrough{
-#include "precalculated_vertex_shader_4c_texcoords.inl"
-};
+static constexpr uint32_t kPassthroughMulColorsShader[] = {
+#include "passthrough_mul_color_by_constant.vshinc"
 
-static const std::vector<uint32_t> mulColour{
-#include "mul_col0_by_const0_vertex_shader.inl"
 };
 // clang-format on
 
@@ -40,6 +37,8 @@ static constexpr uint32_t posMinSubNorm = 0x00000001;
 static constexpr uint32_t negMinSubNorm = 0x80000001;
 
 static float f(uint32_t v) { return *((float *)&v); }
+
+static constexpr char kColorTestName[] = "Colors";
 
 struct TestConfig {
   const char *fileName;  // must be valid for a filename
@@ -100,12 +99,16 @@ static const TestConfig testConfigs[]{
  * @tc -NaNs_NaNs
  *  Ranges values from -NaN to +NaN (signaling).
  *
+ * @tc colors
+ *   Tests behavior of the color channels when given -NaN and NaN.
  */
 AttributeFloatTests::AttributeFloatTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Attrib float", config) {
   for (auto testConfig : testConfigs) {
-    tests_[testConfig.description] = [this, testConfig]() { this->Test(testConfig); };
+    tests_[testConfig.description] = [this, testConfig]() { Test(testConfig); };
   }
+
+  tests_[kColorTestName] = [this]() { TestColors(kColorTestName); };
 }
 
 static void CreateGeometry(float x, float y, float width, float height, float from, float to, std::vector<float> &vb) {
@@ -153,17 +156,16 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
     // Set VS
     // First use a passthrough shader
     // Then use a shader that multiplies the colour
-    auto vs = std::make_shared<PrecalculatedVertexShader>();
+    auto vs = std::make_shared<PassthroughVertexShader>();
     bool mulShader = i != 0;
-    const std::vector<uint32_t> *shader;
-    if (!mulShader) {
-      shader = &passthrough;
-    } else {
-      shader = &mulColour;
+    if (mulShader) {
+      vs->SetShaderOverride(kPassthroughMulColorsShader, sizeof(kPassthroughMulColorsShader));
       float mul = mulVals[i - 1].second;
-      vs->SetUniformF(0, mul, mul, mul, 1);  // See mul_col0_by_const0_vertex_shader.inl
+      vs->SetUniformF(120 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, 1);
+      vs->SetUniformF(121 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, 1);
+      vs->SetUniformF(122 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, 1);
+      vs->SetUniformF(123 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, 1);
     }
-    vs->SetShaderOverride(shader->data(), shader->size() * sizeof(uint32_t));
     vs->Activate();
     vs->PrepareDraw();
 
@@ -186,4 +188,102 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, tConfig.fileName);
+}
+
+void AttributeFloatTests::TestColors(const std::string &test_name) {
+  std::vector<float> vb;
+
+  static constexpr auto kQuadSize = 128;
+
+  static constexpr auto kTop = 64.f;
+  static constexpr auto kQuadPaddingV = 16.f;
+
+  static constexpr auto kNumQuads = 2;
+  const auto kQuadPaddingH = floor((host_.GetFramebufferWidthF() - (kQuadSize * kNumQuads)) / (kNumQuads + 1.f));
+
+  static constexpr uint32_t kBackgroundColor = 0xFF333333;
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  auto vs = std::make_shared<PassthroughVertexShader>();
+  vs->SetShaderOverride(kPassthroughMulColorsShader, sizeof(kPassthroughMulColorsShader));
+  host_.SetVertexShaderProgram(vs);
+
+  static constexpr vector_t kDiffuse{1.f, 0.f, 0.5f, 1.f};
+  static constexpr vector_t kSpecular{0.f, 1.f, 0.5f, 1.f};
+  static constexpr vector_t kBackDiffuse{1.f, 0.5f, 1.f, 1.f};
+  static constexpr vector_t kBackSpecular{0.5f, 1.f, 1.f, 1.f};
+
+  host_.SetDiffuse(kDiffuse);
+  host_.SetSpecular(kSpecular);
+  host_.SetBackDiffuse(kBackDiffuse);
+  host_.SetBackSpecular(kBackSpecular);
+
+  auto draw_quad = [this](float left, float top) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetVertex(left, top, 0.1f, 1.0f);
+    host_.SetVertex(left + kQuadSize, top, 0.1f, 1.0f);
+    host_.SetVertex(left + kQuadSize, top + kQuadSize * 0.5f, 0.1f, 1.0f);
+    host_.SetVertex(left, top + kQuadSize * 0.5f, 0.1f, 1.0f);
+    host_.End();
+  };
+
+  // Renders a row of quads using various color channels. Each quad is split into a top and bottom half, with the top
+  // using alpha from the color channel and the bottom forced opaque.
+  auto draw_row = [this, &draw_quad, &kQuadPaddingH](float top) {
+    auto draw_half_row = [this, &draw_quad, &kQuadPaddingH](float top, bool use_alpha) {
+      if (!use_alpha) {
+        host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+      }
+
+      float left = kQuadPaddingH;
+
+      host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+      if (use_alpha) {
+        host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+      }
+      draw_quad(left, top);
+
+      left += kQuadSize + kQuadPaddingH;
+      host_.SetFinalCombiner0Just(TestHost::SRC_SPECULAR);
+      if (use_alpha) {
+        host_.SetFinalCombiner1Just(TestHost::SRC_SPECULAR, true);
+      }
+      draw_quad(left, top);
+    };
+
+    draw_half_row(top, false);
+    draw_half_row(top + kQuadSize * 0.5f, true);
+  };
+
+  auto mul = f(posNanQ);
+  vs->SetUniformF(120 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->SetUniformF(121 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->SetUniformF(122 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->SetUniformF(123 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->Activate();
+  vs->PrepareDraw();
+
+  draw_row(kTop);
+  pb_printat(4, 0, "NaN");
+
+  mul = f(negNanQ);
+  vs->SetUniformF(120 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->SetUniformF(121 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->SetUniformF(122 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->SetUniformF(123 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, mul);
+  vs->Activate();
+  vs->PrepareDraw();
+
+  draw_row(kTop + kQuadSize + kQuadPaddingV);
+  pb_printat(9, 0, "-NaN");
+
+  host_.SetVertexShaderProgram(nullptr);
+
+  pb_printat(0, 0, "%s\n", test_name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }

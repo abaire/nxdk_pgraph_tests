@@ -4,7 +4,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 #include "xbox_math_matrix.h"
@@ -30,7 +30,7 @@ MaterialAlphaTests::MaterialAlphaTests(TestHost& host, std::string output_dir, c
     for (auto alpha : kAlphaValues) {
       std::string name = MakeTestName(source, alpha);
 
-      auto test = [this, source, alpha]() { this->Test(source, alpha); };
+      auto test = [this, source, alpha]() { Test(source, alpha); };
       tests_[name] = test;
     }
   }

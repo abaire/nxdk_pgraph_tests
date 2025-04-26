@@ -8,7 +8,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 
@@ -39,7 +39,7 @@ DMACorruptionAroundSurfaceTests::DMACorruptionAroundSurfaceTests(TestHost &host,
 
 void DMACorruptionAroundSurfaceTests::Initialize() {
   TestSuite::Initialize();
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 }
 

@@ -4,7 +4,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 static constexpr LineWidthTests::fixed_t kDefaultWidth = (1 << 3);
@@ -68,7 +68,7 @@ LineWidthTests::LineWidthTests(TestHost &host, std::string output_dir, const Con
 void LineWidthTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   Pushbuffer::Begin();

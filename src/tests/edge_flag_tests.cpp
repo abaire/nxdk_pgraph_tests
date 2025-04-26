@@ -4,7 +4,7 @@
 
 #include "debug_output.h"
 #include "pbkit_ext.h"
-#include "shaders/precalculated_vertex_shader.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "vertex_buffer.h"
 
 static std::string MakeTestName(bool edge_flag) { return edge_flag ? "Enabled" : "Disabled"; }
@@ -20,7 +20,7 @@ EdgeFlagTests::EdgeFlagTests(TestHost &host, std::string output_dir, const Confi
 void EdgeFlagTests::Initialize() {
   TestSuite::Initialize();
 
-  auto shader = std::make_shared<PrecalculatedVertexShader>();
+  auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
 
   Pushbuffer::Begin();
