@@ -475,8 +475,6 @@ void CombinerTests::TestUnboundTextureSamplers() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kUnboundTextureSamplerTestName);
-
-  host_.SetVertexShaderProgram(nullptr);
 }
 
 void CombinerTests::TestAlphaFromBlue() {
@@ -586,8 +584,6 @@ void CombinerTests::TestAlphaFromBlue() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kAlphaFromBlueTestName);
-
-  host_.SetVertexShaderProgram(nullptr);
 }
 
 void CombinerTests::TestCombinerOps() {
@@ -691,8 +687,124 @@ void CombinerTests::TestCombinerOps() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kCombinerOpsTestName);
-
-  host_.SetVertexShaderProgram(nullptr);
 }
 
-void CombinerTests::TestFinalCombinerSpecialInputs() {}
+void CombinerTests::TestFinalCombinerSpecialInputs() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  auto unproject = [this](vector_t& world_point, float x, float y, float z) {
+    vector_t screen_point{x, y, z, 1.f};
+    host_.UnprojectPoint(world_point, screen_point, z);
+  };
+
+  static constexpr auto kQuadSize = 64.f;
+  static constexpr float kQuadZ = 0.f;
+
+  auto draw_quad = [this, unproject](float left, float top) {
+    auto right = left + kQuadSize;
+    const auto bottom = top + kQuadSize;
+
+    vector_t world_point{0.f, 0.f, 0.f, 1.f};
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    host_.End();
+  };
+
+  static constexpr auto kQuadSpacing = kQuadSize + 8.f;
+  static constexpr auto kTop = 74.f;
+  static constexpr auto kLeftCol = 200.f;
+  static constexpr auto kRightCol = 500.f;
+  float top = kTop;
+
+  host_.SetFinalCombinerFactorC0(1.f, 0.75f, 0.5f, 1.f);
+  host_.SetFinalCombinerFactorC1(0.5f, 0.5f, 0.5f, 0.5f);
+  host_.SetFinalCombiner0Just(TestHost::SRC_EF_PROD);
+  host_.SetFinalCombiner1(TestHost::SRC_C0, false, false, TestHost::SRC_C1, false, false, TestHost::SRC_ZERO, true,
+                          true);
+  draw_quad(kLeftCol, top);
+  pb_printat(3, 0, "EFProd");
+
+  auto set_spec_flags = [this](bool specular_add_invert_r0 = false, bool specular_add_invert_v1 = false,
+                               bool specular_clamp = false) {
+    host_.SetFinalCombiner1(TestHost::SRC_C0, false, false, TestHost::SRC_C1, false, false, TestHost::SRC_ZERO, true,
+                            true, specular_add_invert_r0, specular_add_invert_v1, specular_clamp);
+  };
+
+  pb_printat(5, 22, "SPEC_R0_SUM");
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.75f, 0.f);
+  host_.SetCombinerFactorC1(0, 0.70f, 0.5f, 0.15f, 0.5f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+  host_.SetInputAlphaCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR);
+  host_.SetFinalCombiner0Just(TestHost::SRC_SPEC_R0_SUM);
+
+  top += kQuadSpacing + 24.f;
+  set_spec_flags(false, false, false);
+  draw_quad(kLeftCol, top);
+  pb_printat(7, 0, "No flags");
+
+  pb_printat(7, 30, "INV R0");
+  set_spec_flags(true, false, false);
+  draw_quad(kRightCol, top);
+
+  top += kQuadSpacing;
+
+  pb_printat(10, 0, "INV SPEC");
+  set_spec_flags(false, true, false);
+  draw_quad(kLeftCol, top);
+
+  // TODO: Figure out how to get clamp to something interesting.
+  // The inputs to the SPEC_R0_SUM operation are always clamped to [0..1], and it seems that the sum is also always
+  // clamped to 0..1 even without the flag.
+  // The code below attempts to have SPEC_R0_SUM be > 1, then inverts it to get a negative value which is added to R1.
+  // In practice, the (1 - SPEC_R0_SUM) is set to 0 even without the clamp, so this just writes R1 in both cases.
+  // {
+  //   pb_printat(12, 11, "SPEC_R0_SUM - Clamp (negative R0)");
+  //   top += kQuadSpacing + 30.f;
+  //   host_.SetCombinerControl(2, true, true);
+  //
+  //   host_.SetCombinerFactorC0(0, 1.f, 0.5f, 0.1f, 0.25f);
+  //   host_.SetCombinerFactorC1(0, 1.f, 0.25f, 0.1f, 0.5f);
+  //
+  //   host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+  //                               TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+  //   host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR, TestHost::DST_DISCARD, false, false,
+  //                                TestHost::SM_SUM);
+  //
+  //   host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  //   host_.SetOutputColorCombiner(1, TestHost::DST_R1);
+  //
+  //   // rgb = 1 - (spec + r0) + mix(r1, 0, 0)
+  //   host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R1,
+  //   false,
+  //                           false, TestHost::SRC_SPEC_R0_SUM, false, true);
+  //
+  //   pb_printat(14, 0, "No clamp");
+  //   set_spec_flags(false, false, false);
+  //   draw_quad(kLeftCol, top);
+  //
+  //   pb_printat(14, 30, "CLAMP");
+  //   set_spec_flags(false, false, true);
+  //   draw_quad(kRightCol, top);
+  //
+  //   host_.SetCombinerControl(1);
+  // }
+
+  pb_printat(0, 0, "%s", kFinalCombinerSpecialInputsTestName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFinalCombinerSpecialInputsTestName);
+}
