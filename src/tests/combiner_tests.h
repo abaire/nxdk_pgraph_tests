@@ -26,6 +26,8 @@ class CombinerTests : public TestSuite {
   void TestUnboundTexture();
   void TestUnboundTextureSamplers();
 
+  void TestAlphaFromBlue();
+
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];
 };
