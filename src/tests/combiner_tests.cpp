@@ -13,6 +13,9 @@ static constexpr const char* kIndependenceTestName = "Independence";
 static constexpr const char* kColorAlphaIndependenceTestName = "ColorAlphaIndependence";
 static constexpr const char* kFlagsTestName = "Flags";
 static constexpr const char* kUnboundTextureSamplerTestName = "UnboundTexSampler";
+static constexpr const char* kAlphaFromBlueTestName = "AlphaFromBlue";
+static constexpr const char* kCombinerOpsTestName = "CombinerOps";
+static constexpr const char* kFinalCombinerSpecialInputsTestName = "SpecialInputs";
 
 static constexpr vector_t kDiffuseUL{1.f, 0.f, 0.f, 1.f};
 static constexpr vector_t kDiffuseUR{0.f, 1.f, 0.f, 1.f};
@@ -39,6 +42,15 @@ static constexpr vector_t kDiffuseLL{0.5f, 0.5f, 0.5f, 1.f};
  *
  * @tc UnboundTex
  *   Demonstrates that the alpha channel for unbound textures is set to 1.0.
+ *
+ * @tc AlphaFromBlue
+ *   Demonstrates behavior of the "blue to alpha" flags.
+ *
+ * @tc CombinerOps
+ *   Tests the various output operations.
+ *
+ * @tc SpecialInputs
+ *   Tests the special input registers in the final combiner.
  */
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Combiner", config) {
@@ -47,6 +59,9 @@ CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Confi
   tests_[kColorAlphaIndependenceTestName] = [this]() { TestCombinerColorAlphaIndependence(); };
   tests_[kFlagsTestName] = [this]() { TestFlags(); };
   tests_[kUnboundTextureSamplerTestName] = [this]() { TestUnboundTextureSamplers(); };
+  tests_[kAlphaFromBlueTestName] = [this]() { TestAlphaFromBlue(); };
+  tests_[kCombinerOpsTestName] = [this]() { TestCombinerOps(); };
+  tests_[kFinalCombinerSpecialInputsTestName] = [this]() { TestFinalCombinerSpecialInputs(); };
 }
 
 void CombinerTests::Initialize() {
@@ -460,6 +475,336 @@ void CombinerTests::TestUnboundTextureSamplers() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kUnboundTextureSamplerTestName);
+}
 
-  host_.SetVertexShaderProgram(nullptr);
+void CombinerTests::TestAlphaFromBlue() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  auto unproject = [this](vector_t& world_point, float x, float y, float z) {
+    vector_t screen_point{x, y, z, 1.f};
+    host_.UnprojectPoint(world_point, screen_point, z);
+  };
+
+  static constexpr auto kQuadSize = 64.f;
+  static constexpr float kQuadZ = 0.f;
+  static constexpr vector_t kDiffuse{1.f, 1.f, 1.f, 0.f};
+
+  auto draw_quad = [this, unproject](float left, float top) {
+    auto right = left + kQuadSize * 0.5f;
+    const auto bottom = top + kQuadSize;
+
+    vector_t world_point{0.f, 0.f, 0.f, 1.f};
+    host_.SetDiffuse(kDiffuse);
+
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    host_.End();
+
+    host_.SetFinalCombiner1Just(TestHost::SRC_R0, true, false);
+    left = right;
+    right += kQuadSize * 0.5f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+
+    host_.End();
+  };
+
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+  static constexpr auto kQuadSpacing = kQuadSize + 8.f;
+  const auto kLeft = 128.f;
+  float left = kLeft;
+  float top = 192.f;
+
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::ColorInput(TestHost::SRC_DIFFUSE),
+                              TestHost::ColorInput(TestHost::SRC_C0), TestHost::ColorInput(TestHost::SRC_DIFFUSE));
+
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY, true);
+
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 1.f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.75f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.5f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.25f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.f, 0.f);
+  draw_quad(left, top);
+
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_R0, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY, false, true);
+  left = kLeft;
+  top += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 1.f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.75f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.5f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.25f, 0.f);
+  draw_quad(left, top);
+  left += kQuadSpacing;
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.f, 0.f);
+  draw_quad(left, top);
+
+  pb_printat(0, 0, "%s", kAlphaFromBlueTestName);
+  pb_printat(2, 0, "The left half of each quad has alpha forced to 1.");
+  pb_printat(3, 0, "The right is taken from the final combiner blue channel.");
+  pb_printat(8, 8, "AB");
+  pb_printat(11, 8, "CD");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kAlphaFromBlueTestName);
+}
+
+void CombinerTests::TestCombinerOps() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  auto unproject = [this](vector_t& world_point, float x, float y, float z) {
+    vector_t screen_point{x, y, z, 1.f};
+    host_.UnprojectPoint(world_point, screen_point, z);
+  };
+
+  static constexpr auto kQuadSize = 64.f;
+  static constexpr float kQuadZ = 0.f;
+
+  auto draw_quad = [this, unproject](float left, float top) {
+    auto right = left + kQuadSize * 0.5f;
+    const auto bottom = top + kQuadSize;
+
+    vector_t world_point{0.f, 0.f, 0.f, 1.f};
+
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    host_.End();
+
+    host_.SetFinalCombiner1Just(TestHost::SRC_R0, true, false);
+    left = right;
+    right += kQuadSize * 0.5f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+
+    host_.End();
+  };
+
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetInputAlphaCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+  static constexpr auto kQuadSpacing = kQuadSize + 8.f;
+  const auto kTop = 74.f;
+  float left = 200.f;
+  float top = kTop;
+
+  auto set_op = [this](TestHost::CombinerOutOp op) {
+    host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                                 TestHost::SM_SUM, op);
+    host_.SetOutputAlphaCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                                 TestHost::SM_SUM, op);
+  };
+
+  host_.SetCombinerFactorC0(0, 0.1f, 0.25f, 1.f, 0.5f);
+
+  set_op(TestHost::OP_IDENTITY);
+  draw_quad(left, top);
+  pb_printat(3, 0, "Identity");
+  top += kQuadSpacing;
+
+  set_op(TestHost::OP_BIAS);
+  draw_quad(left, top);
+  pb_printat(6, 0, "Bias");
+  top += kQuadSpacing;
+
+  set_op(TestHost::OP_SHIFT_LEFT_1);
+  draw_quad(left, top);
+  pb_printat(9, 0, "Shift Left 1");
+  top += kQuadSpacing;
+
+  set_op(TestHost::OP_SHIFT_LEFT_1_BIAS);
+  draw_quad(left, top);
+  pb_printat(12, 0, "Shift Left 1 Bias");
+  top += kQuadSpacing;
+
+  set_op(TestHost::OP_SHIFT_LEFT_2);
+  draw_quad(left, top);
+  pb_printat(15, 0, "Shift Left 2");
+  top = kTop;
+  left = 500.f;
+
+  set_op(TestHost::OP_SHIFT_RIGHT_1);
+  draw_quad(left, top);
+  pb_printat(3, 30, "Shift Right 1");
+
+  pb_printat(0, 0, "%s", kCombinerOpsTestName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kCombinerOpsTestName);
+}
+
+void CombinerTests::TestFinalCombinerSpecialInputs() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  auto unproject = [this](vector_t& world_point, float x, float y, float z) {
+    vector_t screen_point{x, y, z, 1.f};
+    host_.UnprojectPoint(world_point, screen_point, z);
+  };
+
+  static constexpr auto kQuadSize = 64.f;
+  static constexpr float kQuadZ = 0.f;
+
+  auto draw_quad = [this, unproject](float left, float top) {
+    auto right = left + kQuadSize;
+    const auto bottom = top + kQuadSize;
+
+    vector_t world_point{0.f, 0.f, 0.f, 1.f};
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    unproject(world_point, left, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, top, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, right, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    unproject(world_point, left, bottom, kQuadZ);
+    host_.SetVertex(world_point);
+    host_.End();
+  };
+
+  static constexpr auto kQuadSpacing = kQuadSize + 8.f;
+  static constexpr auto kTop = 74.f;
+  static constexpr auto kLeftCol = 200.f;
+  static constexpr auto kRightCol = 500.f;
+  float top = kTop;
+
+  host_.SetFinalCombinerFactorC0(1.f, 0.75f, 0.5f, 1.f);
+  host_.SetFinalCombinerFactorC1(0.5f, 0.5f, 0.5f, 0.5f);
+  host_.SetFinalCombiner0Just(TestHost::SRC_EF_PROD);
+  host_.SetFinalCombiner1(TestHost::SRC_C0, false, false, TestHost::SRC_C1, false, false, TestHost::SRC_ZERO, true,
+                          true);
+  draw_quad(kLeftCol, top);
+  pb_printat(3, 0, "EFProd");
+
+  auto set_spec_flags = [this](bool specular_add_invert_r0 = false, bool specular_add_invert_v1 = false,
+                               bool specular_clamp = false) {
+    host_.SetFinalCombiner1(TestHost::SRC_C0, false, false, TestHost::SRC_C1, false, false, TestHost::SRC_ZERO, true,
+                            true, specular_add_invert_r0, specular_add_invert_v1, specular_clamp);
+  };
+
+  pb_printat(5, 22, "SPEC_R0_SUM");
+  host_.SetCombinerFactorC0(0, 0.25f, 0.5f, 0.75f, 0.f);
+  host_.SetCombinerFactorC1(0, 0.70f, 0.5f, 0.15f, 0.5f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+  host_.SetInputAlphaCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR);
+  host_.SetFinalCombiner0Just(TestHost::SRC_SPEC_R0_SUM);
+
+  top += kQuadSpacing + 24.f;
+  set_spec_flags(false, false, false);
+  draw_quad(kLeftCol, top);
+  pb_printat(7, 0, "No flags");
+
+  pb_printat(7, 30, "INV R0");
+  set_spec_flags(true, false, false);
+  draw_quad(kRightCol, top);
+
+  top += kQuadSpacing;
+
+  pb_printat(10, 0, "INV SPEC");
+  set_spec_flags(false, true, false);
+  draw_quad(kLeftCol, top);
+
+  // TODO: Figure out how to get clamp to something interesting.
+  // The inputs to the SPEC_R0_SUM operation are always clamped to [0..1], and it seems that the sum is also always
+  // clamped to 0..1 even without the flag.
+  // The code below attempts to have SPEC_R0_SUM be > 1, then inverts it to get a negative value which is added to R1.
+  // In practice, the (1 - SPEC_R0_SUM) is set to 0 even without the clamp, so this just writes R1 in both cases.
+  // {
+  //   pb_printat(12, 11, "SPEC_R0_SUM - Clamp (negative R0)");
+  //   top += kQuadSpacing + 30.f;
+  //   host_.SetCombinerControl(2, true, true);
+  //
+  //   host_.SetCombinerFactorC0(0, 1.f, 0.5f, 0.1f, 0.25f);
+  //   host_.SetCombinerFactorC1(0, 1.f, 0.25f, 0.1f, 0.5f);
+  //
+  //   host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+  //                               TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+  //   host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR, TestHost::DST_DISCARD, false, false,
+  //                                TestHost::SM_SUM);
+  //
+  //   host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  //   host_.SetOutputColorCombiner(1, TestHost::DST_R1);
+  //
+  //   // rgb = 1 - (spec + r0) + mix(r1, 0, 0)
+  //   host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R1,
+  //   false,
+  //                           false, TestHost::SRC_SPEC_R0_SUM, false, true);
+  //
+  //   pb_printat(14, 0, "No clamp");
+  //   set_spec_flags(false, false, false);
+  //   draw_quad(kLeftCol, top);
+  //
+  //   pb_printat(14, 30, "CLAMP");
+  //   set_spec_flags(false, false, true);
+  //   draw_quad(kRightCol, top);
+  //
+  //   host_.SetCombinerControl(1);
+  // }
+
+  pb_printat(0, 0, "%s", kFinalCombinerSpecialInputsTestName);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFinalCombinerSpecialInputsTestName);
 }
