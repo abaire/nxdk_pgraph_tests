@@ -238,6 +238,8 @@ add_executable(
         tests/depth_format_tests.h
         tests/dma_corruption_around_surface_tests.cpp
         tests/dma_corruption_around_surface_tests.h
+        tests/dma_top_of_memory_tests.cpp
+        tests/dma_top_of_memory_tests.h
         tests/edge_flag_tests.cpp
         tests/edge_flag_tests.h
         tests/fog_carryover_tests.cpp
