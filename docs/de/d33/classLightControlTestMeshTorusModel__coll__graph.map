@@ -1,0 +1,7 @@
+<map id="LightControlTestMeshTorusModel" name="LightControlTestMeshTorusModel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,152,201,192"/>
+<area shape="rect" id="Node000002" href="$d8/d22/classSolidColorModelBuilder.html" title="Builder for untextured models." alt="" coords="16,79,191,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,118,106,152,101,152,101,118"/>
+<area shape="rect" id="Node000003" href="$de/dfe/classModelBuilder.html" title="A factory for model meshes." alt="" coords="49,5,157,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,44,106,79,101,79,101,44"/>
+</map>

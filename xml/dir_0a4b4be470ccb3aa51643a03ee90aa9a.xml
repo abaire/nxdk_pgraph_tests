@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_0a4b4be470ccb3aa51643a03ee90aa9a" kind="dir">
+    <compoundname>src/shaders</compoundname>
+    <innerfile refid="d3/d91/orthographic__vertex__shader_8cpp">orthographic_vertex_shader.cpp</innerfile>
+    <innerfile refid="d1/d01/orthographic__vertex__shader_8h">orthographic_vertex_shader.h</innerfile>
+    <innerfile refid="d9/d26/passthrough__vertex__shader_8cpp">passthrough_vertex_shader.cpp</innerfile>
+    <innerfile refid="db/d91/passthrough__vertex__shader_8h">passthrough_vertex_shader.h</innerfile>
+    <innerfile refid="d4/db2/perspective__vertex__shader_8cpp">perspective_vertex_shader.cpp</innerfile>
+    <innerfile refid="d8/d5f/perspective__vertex__shader_8h">perspective_vertex_shader.h</innerfile>
+    <innerfile refid="dd/db9/pixel__shader__program_8cpp">pixel_shader_program.cpp</innerfile>
+    <innerfile refid="d1/d7d/pixel__shader__program_8h">pixel_shader_program.h</innerfile>
+    <innerfile refid="dc/dea/projection__vertex__shader_8cpp">projection_vertex_shader.cpp</innerfile>
+    <innerfile refid="df/d17/projection__vertex__shader_8h">projection_vertex_shader.h</innerfile>
+    <innerfile refid="d3/db9/vertex__shader__program_8cpp">vertex_shader_program.cpp</innerfile>
+    <innerfile refid="da/d63/vertex__shader__program_8h">vertex_shader_program.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/shaders/"/>
+  </compounddef>
+</doxygen>

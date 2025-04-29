@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/da2/structDotSTRTest" kind="struct" language="C++" prot="public">
+    <compoundname>DotSTRTest</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="da/da2/structDotSTRTest_1ad2b9cb5fd56230da3461d140bed87a65" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* DotSTRTest::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>DotSTRTest::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="71" column="14" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/da2/structDotSTRTest_1abfef01652a3cdd16e9dfa6812be22635" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DotSTRTest::dot_rgbmapping</definition>
+        <argsstring></argsstring>
+        <name>dot_rgbmapping</name>
+        <qualifiedname>DotSTRTest::dot_rgbmapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="72" column="12" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_cubemap_tests.cpp" line="70" column="1" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="70" bodyend="73"/>
+    <listofallmembers>
+      <member refid="da/da2/structDotSTRTest_1abfef01652a3cdd16e9dfa6812be22635" prot="public" virt="non-virtual"><scope>DotSTRTest</scope><name>dot_rgbmapping</name></member>
+      <member refid="da/da2/structDotSTRTest_1ad2b9cb5fd56230da3461d140bed87a65" prot="public" virt="non-virtual"><scope>DotSTRTest</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/da2/structColor" kind="struct" language="C++" prot="public">
+    <compoundname>Color</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d0/da2/structColor_1a3958a556b47d2de3dd45c75aac833c20" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Color::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <qualifiedname>Color::r</qualifiedname>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="196" column="9" bodyfile="src/vertex_buffer.h" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/da2/structColor_1a5defbb21620e480e556181772d665f34" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Color::g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <qualifiedname>Color::g</qualifiedname>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="197" column="9" bodyfile="src/vertex_buffer.h" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/da2/structColor_1a33e482be18d6ea31d2b403bee13683b7" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Color::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>Color::b</qualifiedname>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="198" column="9" bodyfile="src/vertex_buffer.h" bodystart="198" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/da2/structColor_1a98047aee65fc3d825f88a76da728fd27" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float Color::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>Color::a</qualifiedname>
+        <initializer>{1.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="199" column="9" bodyfile="src/vertex_buffer.h" bodystart="199" bodyend="199"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/da2/structColor_1a6fae8aa8b75d27cb134234e75b41caf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Color::Color</definition>
+        <argsstring>()=default</argsstring>
+        <name>Color</name>
+        <qualifiedname>Color::Color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="162" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/da2/structColor_1a34ca93d8b24845027b476a5b2ec12680" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Color::Color</definition>
+        <argsstring>(float red, float green, float blue, float alpha=1.0f)</argsstring>
+        <name>Color</name>
+        <qualifiedname>Color::Color</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>red</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>green</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>blue</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>alpha</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="163" column="3" bodyfile="src/vertex_buffer.h" bodystart="163" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/da2/structColor_1a22966499ca5d0bbb2787cf9600226d1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Color::SetRGB</definition>
+        <argsstring>(float red, float green, float blue)</argsstring>
+        <name>SetRGB</name>
+        <qualifiedname>Color::SetRGB</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>red</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>green</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>blue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="165" column="8" bodyfile="src/vertex_buffer.h" bodystart="165" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/da2/structColor_1a3c116212f22cd1ce0b8126123706880c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Color::SetRGBA</definition>
+        <argsstring>(float red, float green, float blue, float alpha)</argsstring>
+        <name>SetRGBA</name>
+        <qualifiedname>Color::SetRGBA</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>red</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>green</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>blue</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="171" column="8" bodyfile="src/vertex_buffer.h" bodystart="171" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/da2/structColor_1a8b33756f6b7932702c970fb10324f136" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Color::SetGrey</definition>
+        <argsstring>(float val)</argsstring>
+        <name>SetGrey</name>
+        <qualifiedname>Color::SetGrey</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="178" column="8" bodyfile="src/vertex_buffer.h" bodystart="178" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/da2/structColor_1a22e0a272b434c06fdcffb9349046eeba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Color::SetGreyA</definition>
+        <argsstring>(float val, float alpha)</argsstring>
+        <name>SetGreyA</name>
+        <qualifiedname>Color::SetGreyA</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="184" column="8" bodyfile="src/vertex_buffer.h" bodystart="184" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/da2/structColor_1aa18d80ca85f6f795b9198dfdb0835f0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t Color::AsBGRA</definition>
+        <argsstring>() const</argsstring>
+        <name>AsBGRA</name>
+        <qualifiedname>Color::AsBGRA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/vertex_buffer.h" line="191" column="12" bodyfile="src/vertex_buffer.h" bodystart="191" bodyend="194"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/vertex_buffer.h" line="161" column="1" bodyfile="src/vertex_buffer.h" bodystart="161" bodyend="200"/>
+    <listofallmembers>
+      <member refid="d0/da2/structColor_1a98047aee65fc3d825f88a76da728fd27" prot="public" virt="non-virtual"><scope>Color</scope><name>a</name></member>
+      <member refid="d0/da2/structColor_1aa18d80ca85f6f795b9198dfdb0835f0c" prot="public" virt="non-virtual"><scope>Color</scope><name>AsBGRA</name></member>
+      <member refid="d0/da2/structColor_1a33e482be18d6ea31d2b403bee13683b7" prot="public" virt="non-virtual"><scope>Color</scope><name>b</name></member>
+      <member refid="d0/da2/structColor_1a6fae8aa8b75d27cb134234e75b41caf2" prot="public" virt="non-virtual"><scope>Color</scope><name>Color</name></member>
+      <member refid="d0/da2/structColor_1a34ca93d8b24845027b476a5b2ec12680" prot="public" virt="non-virtual"><scope>Color</scope><name>Color</name></member>
+      <member refid="d0/da2/structColor_1a5defbb21620e480e556181772d665f34" prot="public" virt="non-virtual"><scope>Color</scope><name>g</name></member>
+      <member refid="d0/da2/structColor_1a3958a556b47d2de3dd45c75aac833c20" prot="public" virt="non-virtual"><scope>Color</scope><name>r</name></member>
+      <member refid="d0/da2/structColor_1a8b33756f6b7932702c970fb10324f136" prot="public" virt="non-virtual"><scope>Color</scope><name>SetGrey</name></member>
+      <member refid="d0/da2/structColor_1a22e0a272b434c06fdcffb9349046eeba" prot="public" virt="non-virtual"><scope>Color</scope><name>SetGreyA</name></member>
+      <member refid="d0/da2/structColor_1a22966499ca5d0bbb2787cf9600226d1c" prot="public" virt="non-virtual"><scope>Color</scope><name>SetRGB</name></member>
+      <member refid="d0/da2/structColor_1a3c116212f22cd1ce0b8126123706880c" prot="public" virt="non-virtual"><scope>Color</scope><name>SetRGBA</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

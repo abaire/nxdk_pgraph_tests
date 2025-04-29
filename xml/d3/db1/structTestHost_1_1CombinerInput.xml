@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/db1/structTestHost_1_1CombinerInput" kind="struct" language="C++" prot="public">
+    <compoundname>TestHost::CombinerInput</compoundname>
+    <derivedcompoundref refid="d9/da8/structTestHost_1_1AlphaInput" prot="public" virt="non-virtual">TestHost::AlphaInput</derivedcompoundref>
+    <derivedcompoundref refid="d0/d6c/structTestHost_1_1ColorInput" prot="public" virt="non-virtual">TestHost::ColorInput</derivedcompoundref>
+    <derivedcompoundref refid="d5/df4/structTestHost_1_1NegativeOneInput" prot="public" virt="non-virtual">TestHost::NegativeOneInput</derivedcompoundref>
+    <derivedcompoundref refid="d9/de7/structTestHost_1_1OneInput" prot="public" virt="non-virtual">TestHost::OneInput</derivedcompoundref>
+    <derivedcompoundref refid="d5/d56/structTestHost_1_1ZeroInput" prot="public" virt="non-virtual">TestHost::ZeroInput</derivedcompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d3/db1/structTestHost_1_1CombinerInput_1a2ac27274709f7198478607072b07f424" prot="public" static="no" mutable="no">
+        <type>CombinerSource</type>
+        <definition>CombinerSource TestHost::CombinerInput::source</definition>
+        <argsstring></argsstring>
+        <name>source</name>
+        <qualifiedname>TestHost::CombinerInput::source</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="149" column="20" bodyfile="src/test_host.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/db1/structTestHost_1_1CombinerInput_1a49def257fe8d44a737a9b8277517f6c6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestHost::CombinerInput::alpha</definition>
+        <argsstring></argsstring>
+        <name>alpha</name>
+        <qualifiedname>TestHost::CombinerInput::alpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="150" column="10" bodyfile="src/test_host.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/db1/structTestHost_1_1CombinerInput_1a0762521b0b5c40968605180edc921c07" prot="public" static="no" mutable="no">
+        <type>CombinerMapping</type>
+        <definition>CombinerMapping TestHost::CombinerInput::mapping</definition>
+        <argsstring></argsstring>
+        <name>mapping</name>
+        <qualifiedname>TestHost::CombinerInput::mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="151" column="21" bodyfile="src/test_host.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestHost::AlphaInput</label>
+        <link refid="d9/da8/structTestHost_1_1AlphaInput"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost::ColorInput</label>
+        <link refid="d0/d6c/structTestHost_1_1ColorInput"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TestHost::CombinerInput</label>
+        <link refid="d3/db1/structTestHost_1_1CombinerInput"/>
+      </node>
+      <node id="4">
+        <label>TestHost::NegativeOneInput</label>
+        <link refid="d5/df4/structTestHost_1_1NegativeOneInput"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>TestHost::OneInput</label>
+        <link refid="d9/de7/structTestHost_1_1OneInput"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>TestHost::ZeroInput</label>
+        <link refid="d5/d56/structTestHost_1_1ZeroInput"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="src/test_host.h" line="148" column="3" bodyfile="src/test_host.h" bodystart="148" bodyend="152"/>
+    <listofallmembers>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a49def257fe8d44a737a9b8277517f6c6" prot="public" virt="non-virtual"><scope>TestHost::CombinerInput</scope><name>alpha</name></member>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a0762521b0b5c40968605180edc921c07" prot="public" virt="non-virtual"><scope>TestHost::CombinerInput</scope><name>mapping</name></member>
+      <member refid="d3/db1/structTestHost_1_1CombinerInput_1a2ac27274709f7198478607072b07f424" prot="public" virt="non-virtual"><scope>TestHost::CombinerInput</scope><name>source</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

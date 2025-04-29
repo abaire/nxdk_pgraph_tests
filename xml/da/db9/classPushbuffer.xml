@@ -1,0 +1,855 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/db9/classPushbuffer" kind="class" language="C++" prot="public">
+    <compoundname>Pushbuffer</compoundname>
+    <includes refid="d3/dc2/pushbuffer_8h" local="no">pushbuffer.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="da/db9/classPushbuffer_1ad2ad61ca86eef81987bbcf361f9071b4" prot="private" static="no" mutable="no">
+        <type>uint32_t *</type>
+        <definition>uint32_t* Pushbuffer::head_</definition>
+        <argsstring></argsstring>
+        <name>head_</name>
+        <qualifiedname>Pushbuffer::head_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="108" column="12" bodyfile="src/pushbuffer.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/db9/classPushbuffer_1a30207d8a7d6e1cde4f3a6bda2dd575e0" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Pushbuffer::current_block_elements_</definition>
+        <argsstring></argsstring>
+        <name>current_block_elements_</name>
+        <qualifiedname>Pushbuffer::current_block_elements_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The number of dwords in the current begin/end block. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="111" column="12" bodyfile="src/pushbuffer.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/db9/classPushbuffer_1aa4eb6eea3ec7a07ceb9da53a5e917b05" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t Pushbuffer::total_block_elements_</definition>
+        <argsstring></argsstring>
+        <name>total_block_elements_</name>
+        <qualifiedname>Pushbuffer::total_block_elements_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>The total number of dwords submitted since the last flush/reset. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="114" column="12" bodyfile="src/pushbuffer.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="da/db9/classPushbuffer_1afcb50e855ca45badad056fb01d96d999" prot="private" static="yes" mutable="no">
+        <type><ref refid="da/db9/classPushbuffer" kindref="compound">Pushbuffer</ref> *</type>
+        <definition>Pushbuffer * Pushbuffer::singleton_</definition>
+        <argsstring></argsstring>
+        <name>singleton_</name>
+        <qualifiedname>Pushbuffer::singleton_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="116" column="21" bodyfile="src/pushbuffer.h" bodystart="116" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a41b2f7d7dd4c48b7cb78656bdc36c4d8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>Pushbuffer::Initialize</qualifiedname>
+        <briefdescription>
+<para>Initializes the pushbuffer singleton. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="16" column="15" bodyfile="src/pushbuffer.cpp" bodystart="14" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Begin</definition>
+        <argsstring>()</argsstring>
+        <name>Begin</name>
+        <qualifiedname>Pushbuffer::Begin</qualifiedname>
+        <briefdescription>
+<para>Starts a logical pushbuffer block. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="19" column="15" bodyfile="src/pushbuffer.cpp" bodystart="20" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::End</definition>
+        <argsstring>(bool flush=false)</argsstring>
+        <name>End</name>
+        <qualifiedname>Pushbuffer::End</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>flush</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Commits any outstanding pushbuffer messages. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="22" column="15" bodyfile="src/pushbuffer.cpp" bodystart="28" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a53a1309ab7cc3cad0f8eb8cb7b6a151c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Flush</definition>
+        <argsstring>()</argsstring>
+        <name>Flush</name>
+        <qualifiedname>Pushbuffer::Flush</qualifiedname>
+        <briefdescription>
+<para>Flushes and ressets the underlying pushbuffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="25" column="15" bodyfile="src/pushbuffer.cpp" bodystart="41" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushTo</definition>
+        <argsstring>(uint32_t subchannel, uint32_t command, uint32_t param1)</argsstring>
+        <name>PushTo</name>
+        <qualifiedname>Pushbuffer::PushTo</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>subchannel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and param to the given subchannel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="28" column="15" bodyfile="src/pushbuffer.cpp" bodystart="70" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a30b0e34db52cb99d6353ab1f9dcbf14e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushTo</definition>
+        <argsstring>(uint32_t subchannel, uint32_t command, uint32_t param1, uint32_t param2)</argsstring>
+        <name>PushTo</name>
+        <qualifiedname>Pushbuffer::PushTo</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>subchannel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param2</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and params to the given subchannel. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pushes the given command and params to the given subchannel, returning a pointer to the next pushbuffer index to facilitate chaining. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="31" column="15" bodyfile="src/pushbuffer.cpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a437734244e41572f9e5cef98dbe35acc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushTo</definition>
+        <argsstring>(uint32_t subchannel, uint32_t command, uint32_t param1, uint32_t param2, uint32_t param3)</argsstring>
+        <name>PushTo</name>
+        <qualifiedname>Pushbuffer::PushTo</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>subchannel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param3</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and params to the given subchannel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="34" column="15" bodyfile="src/pushbuffer.cpp" bodystart="82" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a7a3efc436db8d206ef5428065470af84" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushTo</definition>
+        <argsstring>(uint32_t subchannel, uint32_t command, uint32_t param1, uint32_t param2, uint32_t param3, uint32_t param4)</argsstring>
+        <name>PushTo</name>
+        <qualifiedname>Pushbuffer::PushTo</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>subchannel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param3</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param4</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and params to the given subchannel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="37" column="15" bodyfile="src/pushbuffer.cpp" bodystart="87" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a9087b755d1e81f6a62f54e897a1adadc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushTo</definition>
+        <argsstring>(uint32_t subchannel, uint32_t command, float param1, float param2, float param3, float param4)</argsstring>
+        <name>PushTo</name>
+        <qualifiedname>Pushbuffer::PushTo</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>subchannel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param3</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param4</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and floating point params to the given subchannel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="41" column="15" bodyfile="src/pushbuffer.cpp" bodystart="93" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushF</definition>
+        <argsstring>(uint32_t command, float param1)</argsstring>
+        <name>PushF</name>
+        <qualifiedname>Pushbuffer::PushF</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and floating point param to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="44" column="15" bodyfile="src/pushbuffer.cpp" bodystart="98" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a53d02c22a8bb74e10e9d1dea1671943b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushF</definition>
+        <argsstring>(uint32_t command, float param1, float param2)</argsstring>
+        <name>PushF</name>
+        <qualifiedname>Pushbuffer::PushF</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param2</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and floating point params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="47" column="15" bodyfile="src/pushbuffer.cpp" bodystart="103" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a2f24e1e41df4aff0de0ac5d05f7788e9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushF</definition>
+        <argsstring>(uint32_t command, float param1, float param2, float param3)</argsstring>
+        <name>PushF</name>
+        <qualifiedname>Pushbuffer::PushF</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param3</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and floating point params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="50" column="15" bodyfile="src/pushbuffer.cpp" bodystart="108" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a20f6fc2e9da9bfb32bdd232b3ebb1317" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushF</definition>
+        <argsstring>(uint32_t command, float param1, float param2, float param3, float param4)</argsstring>
+        <name>PushF</name>
+        <qualifiedname>Pushbuffer::PushF</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param3</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>param4</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and floating point params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="53" column="15" bodyfile="src/pushbuffer.cpp" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push</definition>
+        <argsstring>(uint32_t command, uint32_t param1)</argsstring>
+        <name>Push</name>
+        <qualifiedname>Pushbuffer::Push</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and param to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="56" column="15" bodyfile="src/pushbuffer.cpp" bodystart="118" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a5c0f055d5b05113e620f1517a10c770e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push</definition>
+        <argsstring>(uint32_t command, uint32_t param1, uint32_t param2)</argsstring>
+        <name>Push</name>
+        <qualifiedname>Pushbuffer::Push</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param2</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="59" column="15" bodyfile="src/pushbuffer.cpp" bodystart="123" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a0ab7a85041710a414e65e38df76f0f47" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push</definition>
+        <argsstring>(uint32_t command, uint32_t param1, uint32_t param2, uint32_t param3)</argsstring>
+        <name>Push</name>
+        <qualifiedname>Pushbuffer::Push</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param3</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="62" column="15" bodyfile="src/pushbuffer.cpp" bodystart="128" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1abd58705aa029f2bb5ea7db5b44485ef3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push</definition>
+        <argsstring>(uint32_t command, uint32_t param1, uint32_t param2, uint32_t param3, uint32_t param4)</argsstring>
+        <name>Push</name>
+        <qualifiedname>Pushbuffer::Push</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param1</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param2</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param3</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>param4</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="65" column="15" bodyfile="src/pushbuffer.cpp" bodystart="133" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1aa8962af6fd20bd0768ea19fa772a0143" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push2F</definition>
+        <argsstring>(uint32_t command, const float *vector2)</argsstring>
+        <name>Push2F</name>
+        <qualifiedname>Pushbuffer::Push2F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pushes the given command and 2-element vector of floating point params to the subchannel assigned for 3D operations. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="69" column="15" bodyfile="src/pushbuffer.cpp" bodystart="138" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push3F</definition>
+        <argsstring>(uint32_t command, const float *vector3)</argsstring>
+        <name>Push3F</name>
+        <qualifiedname>Pushbuffer::Push3F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pushes the given command and 3-element vector of floating point params to the subchannel assigned for 3D operations. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="73" column="15" bodyfile="src/pushbuffer.cpp" bodystart="143" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a8442ca4cf79bd9b67300a8d63e40ced8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push4F</definition>
+        <argsstring>(uint32_t command, const float *vector4)</argsstring>
+        <name>Push4F</name>
+        <qualifiedname>Pushbuffer::Push4F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>vector4</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pushes the given command and 4-element vector of floating point params to the subchannel assigned for 3D operations. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="77" column="15" bodyfile="src/pushbuffer.cpp" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1ae48bdaec46fa476ddabbe8e70e4933b7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push2</definition>
+        <argsstring>(uint32_t command, const DWORD *vector2)</argsstring>
+        <name>Push2</name>
+        <qualifiedname>Pushbuffer::Push2</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const DWORD *</type>
+          <declname>vector2</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and 2-element vector of uint32_t params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="80" column="15" bodyfile="src/pushbuffer.cpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a71f8c37d6620d50cfc79d5baaea4acb0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push3</definition>
+        <argsstring>(uint32_t command, const DWORD *vector3)</argsstring>
+        <name>Push3</name>
+        <qualifiedname>Pushbuffer::Push3</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const DWORD *</type>
+          <declname>vector3</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and 3-element vector of uint32_t params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="83" column="15" bodyfile="src/pushbuffer.cpp" bodystart="158" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a65890793e621338243eff919e4b27a6a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push4</definition>
+        <argsstring>(uint32_t command, const DWORD *vector4)</argsstring>
+        <name>Push4</name>
+        <qualifiedname>Pushbuffer::Push4</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const DWORD *</type>
+          <declname>vector4</declname>
+        </param>
+        <briefdescription>
+<para>Pushes the given command and 4-element vector of uint32_t params to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="86" column="15" bodyfile="src/pushbuffer.cpp" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a6a97cdfc29f1f02dd61f35f23b1d21b6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushN</definition>
+        <argsstring>(uint32_t command, uint32_t num_values, const DWORD *values)</argsstring>
+        <name>PushN</name>
+        <qualifiedname>Pushbuffer::PushN</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_values</declname>
+        </param>
+        <param>
+          <type>const DWORD *</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>Pushes an arbitrary number of values to the subchannel assigned for 3D operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="89" column="15" bodyfile="src/pushbuffer.cpp" bodystart="168" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a4ea240e584b607e6c05d74f7c549453f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::PushTransposedMatrix</definition>
+        <argsstring>(uint32_t command, const float *m)</argsstring>
+        <name>PushTransposedMatrix</name>
+        <qualifiedname>Pushbuffer::PushTransposedMatrix</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pushes the given command and 4x4 floating point matrix to the subchannel assigned for 3D operations. The matrix is pushed in transposed order. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="93" column="15" bodyfile="src/pushbuffer.cpp" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a86ec9121676e2f88b6ded792dfd0f677" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push4x3Matrix</definition>
+        <argsstring>(uint32_t command, const float *m)</argsstring>
+        <name>Push4x3Matrix</name>
+        <qualifiedname>Pushbuffer::Push4x3Matrix</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pushes a 4 column x 3 row matrix (used to push the inverse model view matrix which intentionally omits the 4th row and is not transposed). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="97" column="15" bodyfile="src/pushbuffer.cpp" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1aba386a3dc25d1c670fd0cf8e3f6e8ecd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Push4x4Matrix</definition>
+        <argsstring>(uint32_t command, const float *m)</argsstring>
+        <name>Push4x4Matrix</name>
+        <qualifiedname>Pushbuffer::Push4x4Matrix</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>command</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+<para>Pushes a 4x4 matrix without transposing it. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="100" column="15" bodyfile="src/pushbuffer.cpp" bodystart="185" bodyend="188"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="da/db9/classPushbuffer_1a53779cbb1ff836612da80188c6236265" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Pushbuffer::Pushbuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>Pushbuffer</name>
+        <qualifiedname>Pushbuffer::Pushbuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="103" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="da/db9/classPushbuffer_1aa00d75c65dd86eea9ba778865ca2ae50" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Pushbuffer::Reserve</definition>
+        <argsstring>(uint32_t num_dwords)</argsstring>
+        <name>Reserve</name>
+        <qualifiedname>Pushbuffer::Reserve</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_dwords</declname>
+        </param>
+        <briefdescription>
+<para>Ensures that at least num_dwords values may be added to the pushbuffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.h" line="106" column="8" bodyfile="src/pushbuffer.cpp" bodystart="54" bodyend="68"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Manages pb_kit pushbuffers to prevent overflows and optimize resets.</para>
+<para>In particular, this class manages the underlying pbkit begin/end block to transparently break large logical blocks into chunks under the max size allowed by pbkit. </para>
+    </detaileddescription>
+    <location file="src/pushbuffer.h" line="13" column="1" bodyfile="src/pushbuffer.h" bodystart="13" bodyend="117"/>
+    <listofallmembers>
+      <member refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Begin</name></member>
+      <member refid="da/db9/classPushbuffer_1a30207d8a7d6e1cde4f3a6bda2dd575e0" prot="private" virt="non-virtual"><scope>Pushbuffer</scope><name>current_block_elements_</name></member>
+      <member refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>End</name></member>
+      <member refid="da/db9/classPushbuffer_1a53a1309ab7cc3cad0f8eb8cb7b6a151c" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Flush</name></member>
+      <member refid="da/db9/classPushbuffer_1ad2ad61ca86eef81987bbcf361f9071b4" prot="private" virt="non-virtual"><scope>Pushbuffer</scope><name>head_</name></member>
+      <member refid="da/db9/classPushbuffer_1a41b2f7d7dd4c48b7cb78656bdc36c4d8" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Initialize</name></member>
+      <member refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push</name></member>
+      <member refid="da/db9/classPushbuffer_1a5c0f055d5b05113e620f1517a10c770e" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push</name></member>
+      <member refid="da/db9/classPushbuffer_1a0ab7a85041710a414e65e38df76f0f47" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push</name></member>
+      <member refid="da/db9/classPushbuffer_1abd58705aa029f2bb5ea7db5b44485ef3" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push</name></member>
+      <member refid="da/db9/classPushbuffer_1ae48bdaec46fa476ddabbe8e70e4933b7" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push2</name></member>
+      <member refid="da/db9/classPushbuffer_1aa8962af6fd20bd0768ea19fa772a0143" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push2F</name></member>
+      <member refid="da/db9/classPushbuffer_1a71f8c37d6620d50cfc79d5baaea4acb0" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push3</name></member>
+      <member refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push3F</name></member>
+      <member refid="da/db9/classPushbuffer_1a65890793e621338243eff919e4b27a6a" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push4</name></member>
+      <member refid="da/db9/classPushbuffer_1a8442ca4cf79bd9b67300a8d63e40ced8" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push4F</name></member>
+      <member refid="da/db9/classPushbuffer_1a86ec9121676e2f88b6ded792dfd0f677" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push4x3Matrix</name></member>
+      <member refid="da/db9/classPushbuffer_1aba386a3dc25d1c670fd0cf8e3f6e8ecd" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>Push4x4Matrix</name></member>
+      <member refid="da/db9/classPushbuffer_1a53779cbb1ff836612da80188c6236265" prot="private" virt="non-virtual"><scope>Pushbuffer</scope><name>Pushbuffer</name></member>
+      <member refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushF</name></member>
+      <member refid="da/db9/classPushbuffer_1a53d02c22a8bb74e10e9d1dea1671943b" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushF</name></member>
+      <member refid="da/db9/classPushbuffer_1a2f24e1e41df4aff0de0ac5d05f7788e9" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushF</name></member>
+      <member refid="da/db9/classPushbuffer_1a20f6fc2e9da9bfb32bdd232b3ebb1317" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushF</name></member>
+      <member refid="da/db9/classPushbuffer_1a6a97cdfc29f1f02dd61f35f23b1d21b6" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushN</name></member>
+      <member refid="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushTo</name></member>
+      <member refid="da/db9/classPushbuffer_1a30b0e34db52cb99d6353ab1f9dcbf14e" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushTo</name></member>
+      <member refid="da/db9/classPushbuffer_1a437734244e41572f9e5cef98dbe35acc" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushTo</name></member>
+      <member refid="da/db9/classPushbuffer_1a7a3efc436db8d206ef5428065470af84" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushTo</name></member>
+      <member refid="da/db9/classPushbuffer_1a9087b755d1e81f6a62f54e897a1adadc" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushTo</name></member>
+      <member refid="da/db9/classPushbuffer_1a4ea240e584b607e6c05d74f7c549453f" prot="public" virt="non-virtual"><scope>Pushbuffer</scope><name>PushTransposedMatrix</name></member>
+      <member refid="da/db9/classPushbuffer_1aa00d75c65dd86eea9ba778865ca2ae50" prot="private" virt="non-virtual"><scope>Pushbuffer</scope><name>Reserve</name></member>
+      <member refid="da/db9/classPushbuffer_1afcb50e855ca45badad056fb01d96d999" prot="private" virt="non-virtual"><scope>Pushbuffer</scope><name>singleton_</name></member>
+      <member refid="da/db9/classPushbuffer_1aa4eb6eea3ec7a07ceb9da53a5e917b05" prot="private" virt="non-virtual"><scope>Pushbuffer</scope><name>total_block_elements_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

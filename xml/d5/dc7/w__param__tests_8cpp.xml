@@ -1,0 +1,771 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/dc7/w__param__tests_8cpp" kind="file" language="C++">
+    <compoundname>w_param_tests.cpp</compoundname>
+    <includes refid="db/ddf/w__param__tests_8h" local="yes">w_param_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">../test_host.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="db/d91/passthrough__vertex__shader_8h" local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="da/d72/texture__generator_8h" local="yes">texture_generator.h</includes>
+    <includes refid="d3/dbd/vertex__buffer_8h" local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="19">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h_source"/>
+      </node>
+      <node id="15">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>pushbuffer.h</label>
+        <link refid="d3/dc2/pushbuffer_8h_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>shaders/passthrough_vertex_shader.h</label>
+        <link refid="db/d91/passthrough__vertex__shader_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>../test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/w_param_tests.cpp</label>
+        <link refid="d5/dc7/w__param__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>w_param_tests.h</label>
+        <link refid="db/ddf/w__param__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>texture_generator.h</label>
+        <link refid="da/d72/texture__generator_8h_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>texture_stage.h</label>
+        <link refid="d7/d78/texture__stage_8h_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>SDL.h</label>
+      </node>
+      <node id="5">
+        <label>atomic</label>
+      </node>
+      <node id="11">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="16">
+        <label>list</label>
+      </node>
+      <node id="12">
+        <label>map</label>
+      </node>
+      <node id="22">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="21">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="13">
+        <label>set</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="9">
+        <label>thread</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="20">
+        <label>windows.h</label>
+      </node>
+      <node id="29">
+        <label>xbox_math_types.h</label>
+      </node>
+      <node id="25">
+        <label>xboxkrnl/xboxdef.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d5/dc7/w__param__tests_8cpp_1a46b970bf86c77487b3447b5a1baeb98c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTexturePerspectiveEnabledSuffix[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTexturePerspectiveEnabledSuffix</name>
+        <initializer>= &quot;_tex_persp&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="11" column="23" bodyfile="src/tests/w_param_tests.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/dc7/w__param__tests_8cpp_1a69a54f76f52ac5deef0345b21a051802" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTestWGaps[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestWGaps</name>
+        <initializer>= &quot;w_gaps&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="12" column="23" bodyfile="src/tests/w_param_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/dc7/w__param__tests_8cpp_1ab1b79a0b309baff2ee8ca3d6aebb5d83" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTestWPositiveTriangleStrip[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestWPositiveTriangleStrip</name>
+        <initializer>= &quot;w_pos_strip&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="13" column="23" bodyfile="src/tests/w_param_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/dc7/w__param__tests_8cpp_1a8d0ba11722e043188bca6a5d9df49439" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTestWNegativeTriangleStrip[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestWNegativeTriangleStrip</name>
+        <initializer>= &quot;w_neg_strip&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="14" column="23" bodyfile="src/tests/w_param_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/dc7/w__param__tests_8cpp_1a76d24b213de6460f569548409cec3764" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTestFixedFunctionZeroW[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestFixedFunctionZeroW</name>
+        <initializer>= &quot;ff_w_zero_&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="15" column="23" bodyfile="src/tests/w_param_tests.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d5/dc7/w__param__tests_8cpp_1ad2f887c66fca0efb332ff6f586a9777b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string AugmentTestName</definition>
+        <argsstring>(const std::string &amp;test_name, bool texture_perspective_enable)</argsstring>
+        <name>AugmentTestName</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test_name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>texture_perspective_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="17" column="20" bodyfile="src/tests/w_param_tests.cpp" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/dc7/w__param__tests_8cpp_1ac91d049460ee23f1ed2552c44203ba53" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeFFZeroWTestName</definition>
+        <argsstring>(bool draw_quad, bool texture_perspective_enable)</argsstring>
+        <name>MakeFFZeroWTestName</name>
+        <param>
+          <type>bool</type>
+          <declname>draw_quad</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>texture_perspective_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.cpp" line="20" column="20" bodyfile="src/tests/w_param_tests.cpp" bodystart="20" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;w_param_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_generator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTexturePerspectiveEnabledSuffix[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;_tex_persp&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestWGaps[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;w_gaps&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestWPositiveTriangleStrip[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;w_pos_strip&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestWNegativeTriangleStrip[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;w_neg_strip&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestFixedFunctionZeroW[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ff_w_zero_&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>AugmentTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;test_name,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>test_name<sp/>+<sp/>(texture_perspective_enable<sp/>?<sp/>kTexturePerspectiveEnabledSuffix<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeFFZeroWTestName(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>draw_quad,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::string(kTestFixedFunctionZeroW)<sp/>+<sp/>(draw_quad<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;_quad&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;_bitri&quot;</highlight><highlight class="normal">)<sp/>+</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(texture_perspective_enable<sp/>?<sp/>kTexturePerspectiveEnabledSuffix<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal">WParamTests::WParamTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;W<sp/>param&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>texture_perspective_enable<sp/>:<sp/>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">})<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fullname<sp/>=<sp/>[texture_perspective_enable](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;test_name)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>AugmentTestName(test_name,<sp/>texture_perspective_enable);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[fullname(kTestWGaps)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>texture_perspective_enable]()<sp/>{<sp/>TestWGaps(texture_perspective_enable);<sp/>};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[fullname(kTestWPositiveTriangleStrip)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>texture_perspective_enable]()<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestPositiveWTriangleStrip(texture_perspective_enable);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[fullname(kTestWNegativeTriangleStrip)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>texture_perspective_enable]()<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestNegativeWTriangleStrip(texture_perspective_enable);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quad<sp/>:<sp/>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">})<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[MakeFFZeroWTestName(quad,<sp/>texture_perspective_enable)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>quad,<sp/>texture_perspective_enable]()<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestFixedFunctionZeroW(quad,<sp/>texture_perspective_enable);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/dab/classWParamTests_1a1ae0f18391997e3058573b59f0029255" kindref="member">WParamTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a80d34dc4df3b4c8f6b1660d543fcc342" kindref="member">SetVertexShaderProgram</ref>(shader);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/dab/classWParamTests_1ab961aa33a1ccfd2892ea3b069c9af3af" kindref="member">WParamTests::Deinitialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>triangle_strip_.reset();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>triangles_.reset();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" kindref="member">TestSuite::Deinitialize</ref>();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::CreateGeometryWGaps()<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>());</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(fb_width<sp/>/<sp/>5.0f);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf(fb_height<sp/>/<sp/>6.0f);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>(fb_height<sp/>-<sp/>top<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>(fb_width<sp/>-<sp/>left<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width<sp/>=<sp/>right<sp/>-<sp/>left;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_height<sp/>=<sp/>top<sp/>+<sp/>(bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f<sp/>-<sp/>4;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>triangle_strip_<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1af4ec9b26754f7e90af601d60f8d04740" kindref="member">AllocateVertexBuffer</ref>(40);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>triangle_strip_-&gt;SetPositionIncludesW();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>triangle_strip_-&gt;Lock();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>0.0,<sp/>w);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>left;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>inc<sp/>=<sp/>width<sp/>/<sp/>14.0f;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_visible_quad<sp/>=<sp/>[add_vertex,<sp/>&amp;x,<sp/>mid_height,<sp/>top,<sp/>inc](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>INFINITY,<sp/>0.75,<sp/>0.75,<sp/>0.75);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>add_vertex(x,<sp/>top,<sp/>INFINITY,<sp/>1.0,<sp/>1.0,<sp/>1.0);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>INFINITY,<sp/>0.5,<sp/>0.5,<sp/>0.5);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>add_vertex(x,<sp/>top,<sp/>INFINITY,<sp/>r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>add_visible_quad(0.0f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invisible<sp/>quad<sp/>with<sp/>0<sp/>w.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>top,<sp/>0.0,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>0.0,<sp/>0.5,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>add_visible_quad(0.75f,<sp/>0.75f,<sp/>0.1f);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invisible<sp/>quad<sp/>with<sp/>1<sp/>&gt;<sp/>w<sp/>&gt;<sp/>0.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>top,<sp/>0.9,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>0.0,<sp/>0.5,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>add_visible_quad(0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invisible<sp/>quad<sp/>with<sp/>w<sp/>&gt;<sp/>1.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>top,<sp/>10.9,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>0.0,<sp/>0.5,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>add_visible_quad(0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invisible<sp/>quad<sp/>with<sp/>0<sp/>&gt;<sp/>w<sp/>&gt;<sp/>-1.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>top,<sp/>-0.9,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>0.0,<sp/>0.5,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>add_visible_quad(0.0f,<sp/>0.5,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invisible<sp/>quad<sp/>with<sp/>-1<sp/>&gt;<sp/>w.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>top,<sp/>-10.9,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>10.0,<sp/>0.5,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>add_visible_quad(0.5f,<sp/>0.5f,<sp/>0.5f);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Invisible<sp/>quad<sp/>with<sp/>INFINITE<sp/>w.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>top,<sp/>INFINITY,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>x<sp/>+=<sp/>inc;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>add_vertex(x,<sp/>mid_height,<sp/>INFINITY,<sp/>0.5,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>add_visible_quad(0.3f,<sp/>1.0f,<sp/>0.3f);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>triangle_strip_-&gt;Unlock();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>triangles_<sp/>=<sp/>triangle_strip_-&gt;ConvertFromTriangleStripToTriangles();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>triangles_-&gt;Translate(-6.0f,<sp/>6.0f<sp/>+<sp/>(bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::TestWGaps(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>CreateGeometryWGaps();</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a7343d98d694323b7e42ca44a70a5e42a" kindref="member">PrepareDraw</ref>();</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa88206bceeafea2111a9b18abfaa7ee7" kindref="member">SetVertexBuffer</ref>(triangle_strip_);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>This<sp/>shouldn&apos;t<sp/>strictly<sp/>be<sp/>necessary,<sp/>but<sp/>at<sp/>the<sp/>moment<sp/>xemu<sp/>disallows<sp/>different<sp/>fill<sp/>modes<sp/>for<sp/>front<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>back.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_DIFFUSE_COLOR4I,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa88206bceeafea2111a9b18abfaa7ee7" kindref="member">SetVertexBuffer</ref>(triangles_);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>This<sp/>shouldn&apos;t<sp/>strictly<sp/>be<sp/>necessary,<sp/>but<sp/>at<sp/>the<sp/>moment<sp/>xemu<sp/>disallows<sp/>different<sp/>fill<sp/>modes<sp/>for<sp/>front<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>back.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_DIFFUSE_COLOR4I,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>pb_printat(5,<sp/>0,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;Strip&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>pb_printat(12,<sp/>0,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;Tris&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>14,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;0,0&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>18,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;0.9,0&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>23,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;10.9,0&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>28,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;-0.9,0&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>33,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;-10.9,10&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>39,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;inf,inf&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>();</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>AugmentTestName(kTestWGaps,<sp/>texture_perspective_enable));</highlight></codeline>
+<codeline lineno="199"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::CreateGeometryPositiveWTriangleStrip()<sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>());</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(fb_width<sp/>/<sp/>5.0f);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf(fb_height<sp/>/<sp/>6.0f);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>(fb_height<sp/>-<sp/>top<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>(fb_width<sp/>-<sp/>left<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width<sp/>=<sp/>right<sp/>-<sp/>left;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_width<sp/>=<sp/>left<sp/>+<sp/>width<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>triangle_strip_<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1af4ec9b26754f7e90af601d60f8d04740" kindref="member">AllocateVertexBuffer</ref>(6);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>triangle_strip_-&gt;SetPositionIncludesW();</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>triangle_strip_-&gt;Lock();</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>0.0,<sp/>w);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>bottom,<sp/>0.0f,<sp/>0.75f,<sp/>0.75f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>INFINITY,<sp/>0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>add_vertex(mid_width,<sp/>bottom,<sp/>0.1f,<sp/>1.0f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>add_vertex(mid_width,<sp/>top,<sp/>0.5,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>bottom,<sp/>1.5,<sp/>0.0f,<sp/>0.5f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>top,<sp/>10.5,<sp/>0.7f,<sp/>0.9f,<sp/>0.2f);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::TestPositiveWTriangleStrip(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/>CreateGeometryPositiveWTriangleStrip();</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa88206bceeafea2111a9b18abfaa7ee7" kindref="member">SetVertexBuffer</ref>(triangle_strip_);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a7343d98d694323b7e42ca44a70a5e42a" kindref="member">PrepareDraw</ref>();</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>();</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AugmentTestName(kTestWPositiveTriangleStrip,<sp/>texture_perspective_enable));</highlight></codeline>
+<codeline lineno="244"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::CreateGeometryNegativeWTriangleStrip()<sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>());</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(fb_width<sp/>/<sp/>5.0f);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf(fb_height<sp/>/<sp/>6.0f);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>(fb_height<sp/>-<sp/>top<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>(fb_width<sp/>-<sp/>left<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width<sp/>=<sp/>right<sp/>-<sp/>left;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_width<sp/>=<sp/>left<sp/>+<sp/>width<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/>triangle_strip_<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1af4ec9b26754f7e90af601d60f8d04740" kindref="member">AllocateVertexBuffer</ref>(6);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>triangle_strip_-&gt;SetPositionIncludesW();</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>triangle_strip_-&gt;Lock();</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>0.0,<sp/>w);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>w<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>bottom,<sp/>w,<sp/>0.75,<sp/>0.75,<sp/>0.75);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>w,<sp/>1.0,<sp/>1.0,<sp/>1.0);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/>add_vertex(mid_width,<sp/>bottom,<sp/>w,<sp/>0.5,<sp/>0.5,<sp/>0.5);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>add_vertex(mid_width,<sp/>top,<sp/>w,<sp/>0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/>add_vertex(mid_width,<sp/>top,<sp/>-0.1,<sp/>1.0,<sp/>0.0,<sp/>0.0);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>bottom,<sp/>w,<sp/>0.0,<sp/>0.5,<sp/>0.5);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>triangle_strip_-&gt;Unlock();</highlight></codeline>
+<codeline lineno="278"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::TestNegativeWTriangleStrip(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/>CreateGeometryNegativeWTriangleStrip();</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aa88206bceeafea2111a9b18abfaa7ee7" kindref="member">SetVertexBuffer</ref>(triangle_strip_);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a7343d98d694323b7e42ca44a70a5e42a" kindref="member">PrepareDraw</ref>();</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP);</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>This<sp/>shouldn&apos;t<sp/>strictly<sp/>be<sp/>necessary,<sp/>but<sp/>at<sp/>the<sp/>moment<sp/>xemu<sp/>disallows<sp/>different<sp/>fill<sp/>modes<sp/>for<sp/>front<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>back.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_DIFFUSE_COLOR4I,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/>host_.DrawArrays(TestHost::POSITION,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP);</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>();</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AugmentTestName(kTestWNegativeTriangleStrip,<sp/>texture_perspective_enable));</highlight></codeline>
+<codeline lineno="309"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WParamTests::TestFixedFunctionZeroW(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>draw_quad,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a80d34dc4df3b4c8f6b1660d543fcc342" kindref="member">SetVertexShaderProgram</ref>(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a766666c4289165a2cf653ac3af156d11" kindref="member">SetXDKDefaultViewportAndFixedFunctionMatrices</ref>();</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a7343d98d694323b7e42ca44a70a5e42a" kindref="member">PrepareDraw</ref>(0xFE251135);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Generate<sp/>a<sp/>distinct<sp/>texture.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureSize<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/>memset(host_.<ref refid="d6/d80/classTestHost_1a39c9e6941824390fc5699094abb322a9" kindref="member">GetTextureMemory</ref>(),<sp/>0,<sp/>host_.<ref refid="d6/d80/classTestHost_1ab26677fa4a6420826aef5a26e2c1bf50" kindref="member">GetTextureMemorySize</ref>());</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>GenerateRGBACheckerboard(host_.<ref refid="d6/d80/classTestHost_1a39c9e6941824390fc5699094abb322a9" kindref="member">GetTextureMemory</ref>(),<sp/>0,<sp/>0,<sp/>kTextureSize,<sp/>kTextureSize,<sp/>kTextureSize<sp/>*<sp/>4);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetTextureDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetImageDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a3eb8e7cbfe182f37d8f6b2b0fa825d11" kindref="member">SetupTextureStages</ref>();</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!texture_perspective_enable)<sp/>{</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>-1.75f;</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>1.75f;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>1.75f;</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>-1.75f;</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>depth<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(draw_quad)<sp/>{</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>top,<sp/>depth,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>top,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>bottom,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>bottom,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>top,<sp/>depth,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>top,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>bottom,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>bottom,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>bottom,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"></highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>top,<sp/>depth,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5b3744b7cf851f375a17ecbf184b0b00" kindref="member">SetupControl0</ref>();</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>MakeFFZeroWTestName(draw_quad,<sp/>texture_perspective_enable));</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a80d34dc4df3b4c8f6b1660d543fcc342" kindref="member">SetVertexShaderProgram</ref>(shader);</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a5e69a9ed400e2f17efb13f63bc482447" kindref="member">SetDefaultViewportAndFixedFunctionMatrices</ref>();</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"></highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="396"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/w_param_tests.cpp"/>
+  </compounddef>
+</doxygen>
