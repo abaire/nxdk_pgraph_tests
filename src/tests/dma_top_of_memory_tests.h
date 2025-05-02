@@ -16,10 +16,11 @@ class DMATopOfMemoryTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void Test();
+  void TestReadTextureBeyondTopOfMemory();
+  void TestClearSurfaceBeyondTopOfMemory();
 
  private:
-  struct s_CtxDma texture_top_of_memory_ctx_{};
+  struct s_CtxDma all_memory_ctx_{};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_DMA_TOP_OF_MEMORY_TESTS_H
