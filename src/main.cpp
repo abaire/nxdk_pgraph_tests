@@ -89,6 +89,7 @@
 #include "tests/swath_width_tests.h"
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_tests.h"
+#include "tests/texture_border_color_tests.h"
 #include "tests/texture_border_tests.h"
 #include "tests/texture_cpu_update_tests.h"
 #include "tests/texture_cubemap_tests.h"
@@ -443,6 +444,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(StencilFuncTests)
   REG_TEST(StippleTests)
   REG_TEST(TextureBorderTests)
+  REG_TEST(TextureBorderColorTests)
   REG_TEST(TextureCPUUpdateTests)
   REG_TEST(TextureCubemapTests)
   REG_TEST(TexgenMatrixTests)
