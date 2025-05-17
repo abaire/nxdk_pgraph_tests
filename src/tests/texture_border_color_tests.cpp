@@ -8,7 +8,7 @@
 static constexpr const char* kTestName = "TextureBorderColor";
 
 static constexpr uint32_t kTextureSize = 8;
-static constexpr uint32_t kTestBorderColor = 0xAADDEEBB;
+static constexpr uint32_t kTestBorderColor = 0x33FF22CC;
 static constexpr auto kQuadSize = 64.f;
 static constexpr auto kTextureByteValue = 0x80;
 
@@ -70,7 +70,7 @@ void TextureBorderColorTests::Test() {
   static constexpr uint32_t kBackgroundColor = 0xFF101010;
   host_.PrepareDraw(kBackgroundColor);
 
-  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+  host_.DrawCheckerboardUnproject(0xFF000000, 0xFF444444);
 
   host_.PBKitBusyWait();
   memset(host_.GetTextureMemoryForStage(0), kTextureByteValue, kTextureSize * kTextureSize * 4);
