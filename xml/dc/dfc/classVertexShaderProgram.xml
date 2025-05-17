@@ -1,0 +1,644 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/dfc/classVertexShaderProgram" kind="class" language="C++" prot="public">
+    <compoundname>VertexShaderProgram</compoundname>
+    <derivedcompoundref refid="db/dfa/classPassthroughVertexShader" prot="public" virt="non-virtual">PassthroughVertexShader</derivedcompoundref>
+    <derivedcompoundref refid="d2/d17/classProjectionVertexShader" prot="public" virt="non-virtual">ProjectionVertexShader</derivedcompoundref>
+    <includes refid="da/d63/vertex__shader__program_8h" local="no">vertex_shader_program.h</includes>
+    <innerclass refid="d5/d65/structVertexShaderProgram_1_1TransformConstant" prot="protected">VertexShaderProgram::TransformConstant</innerclass>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="dc/dfc/classVertexShaderProgram_1a74e922605302d47f91c2e05c96744f59" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto VertexShaderProgram::kShaderUserConstantOffset</definition>
+        <argsstring></argsstring>
+        <name>kShaderUserConstantOffset</name>
+        <qualifiedname>VertexShaderProgram::kShaderUserConstantOffset</qualifiedname>
+        <initializer>= 96</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="16" column="25" bodyfile="src/shaders/vertex_shader_program.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="dc/dfc/classVertexShaderProgram_1a123728d02c5c2d5343946beb691eac93" prot="protected" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* VertexShaderProgram::shader_override_</definition>
+        <argsstring></argsstring>
+        <name>shader_override_</name>
+        <qualifiedname>VertexShaderProgram::shader_override_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Compiled vertex shader code that should be used instead of using OnLoadShader. Note that this data is not owned by this <ref refid="dc/dfc/classVertexShaderProgram" kindref="compound">VertexShaderProgram</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="66" column="18" bodyfile="src/shaders/vertex_shader_program.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/dfc/classVertexShaderProgram_1af17c1a31c497eba3d5c16b0cca59a89b" prot="protected" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderProgram::shader_override_size_</definition>
+        <argsstring></argsstring>
+        <name>shader_override_size_</name>
+        <qualifiedname>VertexShaderProgram::shader_override_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="67" column="12" bodyfile="src/shaders/vertex_shader_program.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/dfc/classVertexShaderProgram_1acbb229f37b91f56cd84faf1ab851714f" prot="protected" static="no" mutable="no">
+        <type>std::map&lt; uint32_t, <ref refid="d5/d65/structVertexShaderProgram_1_1TransformConstant" kindref="compound">TransformConstant</ref> &gt;</type>
+        <definition>std::map&lt;uint32_t, TransformConstant&gt; VertexShaderProgram::base_transform_constants_</definition>
+        <argsstring></argsstring>
+        <name>base_transform_constants_</name>
+        <qualifiedname>VertexShaderProgram::base_transform_constants_</qualifiedname>
+        <briefdescription>
+<para>Map of index to constants that will be loaded starting at c[96]. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="73" column="12" bodyfile="src/shaders/vertex_shader_program.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/dfc/classVertexShaderProgram_1a13036fdfa1cbdabb06632f49161544ed" prot="protected" static="no" mutable="no">
+        <type>std::map&lt; uint32_t, <ref refid="d5/d65/structVertexShaderProgram_1_1TransformConstant" kindref="compound">TransformConstant</ref> &gt;</type>
+        <definition>std::map&lt;uint32_t, TransformConstant&gt; VertexShaderProgram::uniforms_</definition>
+        <argsstring></argsstring>
+        <name>uniforms_</name>
+        <qualifiedname>VertexShaderProgram::uniforms_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Map of index to constants that will overwrite/extend the base values. This allows a <ref refid="dc/dfc/classVertexShaderProgram" kindref="compound">VertexShaderProgram</ref> subclass to populate values that are overwritten by users of the class. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="78" column="12" bodyfile="src/shaders/vertex_shader_program.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/dfc/classVertexShaderProgram_1ab85b5d00bdbe3f2a19b513a8c3ab14f6" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VertexShaderProgram::uniform_upload_required_</definition>
+        <argsstring></argsstring>
+        <name>uniform_upload_required_</name>
+        <qualifiedname>VertexShaderProgram::uniform_upload_required_</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="80" column="8" bodyfile="src/shaders/vertex_shader_program.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a333cf05f5ee1554d16119e661e4b5704" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexShaderProgram::VertexShaderProgram</definition>
+        <argsstring>()=default</argsstring>
+        <name>VertexShaderProgram</name>
+        <qualifiedname>VertexShaderProgram::VertexShaderProgram</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="19" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a9c28c6b3fce19dc5dd22758d79f72e0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual VertexShaderProgram::~VertexShaderProgram</definition>
+        <argsstring>()=default</argsstring>
+        <name>~VertexShaderProgram</name>
+        <qualifiedname>VertexShaderProgram::~VertexShaderProgram</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="20" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1adc97c21deb5d2391f1383aeef73a84cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::Activate</definition>
+        <argsstring>()</argsstring>
+        <name>Activate</name>
+        <qualifiedname>VertexShaderProgram::Activate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="22" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="37" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a9cffd343fcccb26c2b4566c8f451ca54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::PrepareDraw</definition>
+        <argsstring>()</argsstring>
+        <name>PrepareDraw</name>
+        <qualifiedname>VertexShaderProgram::PrepareDraw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="23" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="47" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1ab0e7e017bbe8284cbbb2534b6186511d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetShaderOverride</definition>
+        <argsstring>(const uint32_t *shader, uint32_t shader_size)</argsstring>
+        <name>SetShaderOverride</name>
+        <qualifiedname>VertexShaderProgram::SetShaderOverride</qualifiedname>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>shader</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shader_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="27" column="8" bodyfile="src/shaders/vertex_shader_program.h" bodystart="27" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a17345848517885462ba3bbd29e1d6903" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetUniform4x4F</definition>
+        <argsstring>(uint32_t slot, const XboxMath::matrix4_t &amp;value)</argsstring>
+        <name>SetUniform4x4F</name>
+        <qualifiedname>VertexShaderProgram::SetUniform4x4F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const XboxMath::matrix4_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="32" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="126" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a7004b28739b3237ef27b7daaf2241db8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetUniform4F</definition>
+        <argsstring>(uint32_t slot, const float *value)</argsstring>
+        <name>SetUniform4F</name>
+        <qualifiedname>VertexShaderProgram::SetUniform4F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="33" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="130" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a283363b3a4e78756decf55ebcff5aaaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetUniform4I</definition>
+        <argsstring>(uint32_t slot, const uint32_t *value)</argsstring>
+        <name>SetUniform4I</name>
+        <qualifiedname>VertexShaderProgram::SetUniform4I</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="34" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="134" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a2897e78b5db12bbf27ca85c8e980ac34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetUniformF</definition>
+        <argsstring>(uint32_t slot, float x, float y=0.0f, float z=0.0f, float w=0.0f)</argsstring>
+        <name>SetUniformF</name>
+        <qualifiedname>VertexShaderProgram::SetUniformF</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+          <defval>0.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="36" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="143" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a5e778f4148b20e0c342d3f060922923c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetUniformI</definition>
+        <argsstring>(uint32_t slot, uint32_t x, uint32_t y=0, uint32_t z=0, uint32_t w=0)</argsstring>
+        <name>SetUniformI</name>
+        <qualifiedname>VertexShaderProgram::SetUniformI</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>z</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>w</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="37" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="138" bodyend="141"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a962bc8620c201897c0e172308b0705c7" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void VertexShaderProgram::OnActivate</definition>
+        <argsstring>()</argsstring>
+        <name>OnActivate</name>
+        <qualifiedname>VertexShaderProgram::OnActivate</qualifiedname>
+        <reimplementedby refid="d2/d17/classProjectionVertexShader_1aeab2cda130f4376813a4e64de86ad267">OnActivate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="45" column="16" bodyfile="src/shaders/vertex_shader_program.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1ab9e6ba142e37d2e1128e40ef7f660193" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void VertexShaderProgram::OnLoadShader</definition>
+        <argsstring>()</argsstring>
+        <name>OnLoadShader</name>
+        <qualifiedname>VertexShaderProgram::OnLoadShader</qualifiedname>
+        <reimplementedby refid="db/dfa/classPassthroughVertexShader_1a43c580041f388e10c3fe2d2a4b71f057">OnLoadShader</reimplementedby>
+        <reimplementedby refid="d2/d17/classProjectionVertexShader_1a75aa52b281f2bbd82c8b35fda69e4f0e">OnLoadShader</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="46" column="16" bodyfile="src/shaders/vertex_shader_program.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1ab9cb1f43c6c5301abe86e8d204752de9" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void VertexShaderProgram::OnLoadConstants</definition>
+        <argsstring>()</argsstring>
+        <name>OnLoadConstants</name>
+        <qualifiedname>VertexShaderProgram::OnLoadConstants</qualifiedname>
+        <reimplementedby refid="d2/d17/classProjectionVertexShader_1a0a389903fa4e1daa939b96ad7c3ad5da">OnLoadConstants</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="47" column="16" bodyfile="src/shaders/vertex_shader_program.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a78c88c32131d71f1a23a6e255b9d3273" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::LoadShaderProgram</definition>
+        <argsstring>(const uint32_t *shader, uint32_t shader_size) const</argsstring>
+        <name>LoadShaderProgram</name>
+        <qualifiedname>VertexShaderProgram::LoadShaderProgram</qualifiedname>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>shader</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shader_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="49" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="12" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a12f97160cede1b3cad6e59da59b375d0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetTransformConstantBlock</definition>
+        <argsstring>(std::map&lt; uint32_t, TransformConstant &gt; &amp;constants_map, uint32_t slot, const uint32_t *values, uint32_t num_slots)</argsstring>
+        <name>SetTransformConstantBlock</name>
+        <qualifiedname>VertexShaderProgram::SetTransformConstantBlock</qualifiedname>
+        <param>
+          <type>std::map&lt; uint32_t, <ref refid="d5/d65/structVertexShaderProgram_1_1TransformConstant" kindref="compound">TransformConstant</ref> &gt; &amp;</type>
+          <declname>constants_map</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_slots</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="51" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="148" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a23ba86a0a86b31b3b3805457fe77d2c3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetBaseUniform4x4F</definition>
+        <argsstring>(uint32_t slot, const XboxMath::matrix4_t &amp;value)</argsstring>
+        <name>SetBaseUniform4x4F</name>
+        <qualifiedname>VertexShaderProgram::SetBaseUniform4x4F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const XboxMath::matrix4_t &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="54" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="104" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a2a73df681aaefa3e0e6147640fdfbb02" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetBaseUniform4F</definition>
+        <argsstring>(uint32_t slot, const float *value)</argsstring>
+        <name>SetBaseUniform4F</name>
+        <qualifiedname>VertexShaderProgram::SetBaseUniform4F</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="55" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="108" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a6c5e874e3f00bc518989b669f37ed42a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetBaseUniform4I</definition>
+        <argsstring>(uint32_t slot, const uint32_t *value)</argsstring>
+        <name>SetBaseUniform4I</name>
+        <qualifiedname>VertexShaderProgram::SetBaseUniform4I</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="56" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="112" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1aab0b2f891410bca536a68adabc7b4df7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetBaseUniformF</definition>
+        <argsstring>(uint32_t slot, float x, float y=0.0f, float z=0.0f, float w=0.0f)</argsstring>
+        <name>SetBaseUniformF</name>
+        <qualifiedname>VertexShaderProgram::SetBaseUniformF</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w</declname>
+          <defval>0.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="58" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="121" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a012dcc9bd1b1eabaf5b1df5c8d67a896" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::SetBaseUniformI</definition>
+        <argsstring>(uint32_t slot, uint32_t x, uint32_t y=0, uint32_t z=0, uint32_t w=0)</argsstring>
+        <name>SetBaseUniformI</name>
+        <qualifiedname>VertexShaderProgram::SetBaseUniformI</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>slot</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>y</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>z</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>w</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="59" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="116" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/dfc/classVertexShaderProgram_1a18759a41292da560d41948bb8a6e0408" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderProgram::UploadConstants</definition>
+        <argsstring>()</argsstring>
+        <name>UploadConstants</name>
+        <qualifiedname>VertexShaderProgram::UploadConstants</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="61" column="8" bodyfile="src/shaders/vertex_shader_program.cpp" bodystart="55" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides methods to manage and upload a vertex shader. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>OrthographicVertexShader</label>
+        <link refid="d9/dc6/classOrthographicVertexShader"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PassthroughVertexShader</label>
+        <link refid="db/dfa/classPassthroughVertexShader"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>PerspectiveVertexShader</label>
+        <link refid="d9/de2/classPerspectiveVertexShader"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ProjectionVertexShader</label>
+        <link refid="d2/d17/classProjectionVertexShader"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>VertexShaderProgram</label>
+        <link refid="dc/dfc/classVertexShaderProgram"/>
+      </node>
+    </inheritancegraph>
+    <location file="src/shaders/vertex_shader_program.h" line="13" column="1" bodyfile="src/shaders/vertex_shader_program.h" bodystart="13" bodyend="81"/>
+    <listofallmembers>
+      <member refid="dc/dfc/classVertexShaderProgram_1adc97c21deb5d2391f1383aeef73a84cb" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>Activate</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1acbb229f37b91f56cd84faf1ab851714f" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>base_transform_constants_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a74e922605302d47f91c2e05c96744f59" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>kShaderUserConstantOffset</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a78c88c32131d71f1a23a6e255b9d3273" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>LoadShaderProgram</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a962bc8620c201897c0e172308b0705c7" prot="protected" virt="virtual"><scope>VertexShaderProgram</scope><name>OnActivate</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab9cb1f43c6c5301abe86e8d204752de9" prot="protected" virt="virtual"><scope>VertexShaderProgram</scope><name>OnLoadConstants</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab9e6ba142e37d2e1128e40ef7f660193" prot="protected" virt="virtual"><scope>VertexShaderProgram</scope><name>OnLoadShader</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9cffd343fcccb26c2b4566c8f451ca54" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>PrepareDraw</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2a73df681aaefa3e0e6147640fdfbb02" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetBaseUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a6c5e874e3f00bc518989b669f37ed42a" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetBaseUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a23ba86a0a86b31b3b3805457fe77d2c3" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetBaseUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1aab0b2f891410bca536a68adabc7b4df7" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetBaseUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a012dcc9bd1b1eabaf5b1df5c8d67a896" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetBaseUniformI</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab0e7e017bbe8284cbbb2534b6186511d" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetShaderOverride</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a12f97160cede1b3cad6e59da59b375d0" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetTransformConstantBlock</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a7004b28739b3237ef27b7daaf2241db8" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetUniform4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a283363b3a4e78756decf55ebcff5aaaf" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetUniform4I</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a17345848517885462ba3bbd29e1d6903" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetUniform4x4F</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a2897e78b5db12bbf27ca85c8e980ac34" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetUniformF</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a5e778f4148b20e0c342d3f060922923c" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>SetUniformI</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a123728d02c5c2d5343946beb691eac93" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>shader_override_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1af17c1a31c497eba3d5c16b0cca59a89b" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>shader_override_size_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1ab85b5d00bdbe3f2a19b513a8c3ab14f6" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>uniform_upload_required_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a13036fdfa1cbdabb06632f49161544ed" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>uniforms_</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a18759a41292da560d41948bb8a6e0408" prot="protected" virt="non-virtual"><scope>VertexShaderProgram</scope><name>UploadConstants</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a333cf05f5ee1554d16119e661e4b5704" prot="public" virt="non-virtual"><scope>VertexShaderProgram</scope><name>VertexShaderProgram</name></member>
+      <member refid="dc/dfc/classVertexShaderProgram_1a9c28c6b3fce19dc5dd22758d79f72e0e" prot="public" virt="virtual"><scope>VertexShaderProgram</scope><name>~VertexShaderProgram</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

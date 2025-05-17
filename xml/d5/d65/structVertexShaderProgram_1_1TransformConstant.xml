@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/d65/structVertexShaderProgram_1_1TransformConstant" kind="struct" language="C++" prot="protected">
+    <compoundname>VertexShaderProgram::TransformConstant</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d5/d65/structVertexShaderProgram_1_1TransformConstant_1abd1e9cd75a3613381a067645102ae55d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderProgram::TransformConstant::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>VertexShaderProgram::TransformConstant::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="41" column="14" bodyfile="src/shaders/vertex_shader_program.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d65/structVertexShaderProgram_1_1TransformConstant_1a1c9f1687d7fe54fce8a3e0e9a0fa871a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderProgram::TransformConstant::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>VertexShaderProgram::TransformConstant::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="41" column="16" bodyfile="src/shaders/vertex_shader_program.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d65/structVertexShaderProgram_1_1TransformConstant_1a5edad9df30a8a430193f4ade634c542c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderProgram::TransformConstant::z</definition>
+        <argsstring></argsstring>
+        <name>z</name>
+        <qualifiedname>VertexShaderProgram::TransformConstant::z</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="41" column="18" bodyfile="src/shaders/vertex_shader_program.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d65/structVertexShaderProgram_1_1TransformConstant_1a2c134d6e4f6abe77eeabb980b37ed94a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderProgram::TransformConstant::w</definition>
+        <argsstring></argsstring>
+        <name>w</name>
+        <qualifiedname>VertexShaderProgram::TransformConstant::w</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/vertex_shader_program.h" line="41" column="20" bodyfile="src/shaders/vertex_shader_program.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/shaders/vertex_shader_program.h" line="40" column="3" bodyfile="src/shaders/vertex_shader_program.h" bodystart="40" bodyend="42"/>
+    <listofallmembers>
+      <member refid="d5/d65/structVertexShaderProgram_1_1TransformConstant_1a2c134d6e4f6abe77eeabb980b37ed94a" prot="public" virt="non-virtual"><scope>VertexShaderProgram::TransformConstant</scope><name>w</name></member>
+      <member refid="d5/d65/structVertexShaderProgram_1_1TransformConstant_1abd1e9cd75a3613381a067645102ae55d" prot="public" virt="non-virtual"><scope>VertexShaderProgram::TransformConstant</scope><name>x</name></member>
+      <member refid="d5/d65/structVertexShaderProgram_1_1TransformConstant_1a1c9f1687d7fe54fce8a3e0e9a0fa871a" prot="public" virt="non-virtual"><scope>VertexShaderProgram::TransformConstant</scope><name>y</name></member>
+      <member refid="d5/d65/structVertexShaderProgram_1_1TransformConstant_1a5edad9df30a8a430193f4ade634c542c" prot="public" virt="non-virtual"><scope>VertexShaderProgram::TransformConstant</scope><name>z</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

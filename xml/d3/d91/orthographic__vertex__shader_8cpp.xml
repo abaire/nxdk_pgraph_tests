@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/d91/orthographic__vertex__shader_8cpp" kind="file" language="C++">
+    <compoundname>orthographic_vertex_shader.cpp</compoundname>
+    <includes refid="d1/d01/orthographic__vertex__shader_8h" local="yes">orthographic_vertex_shader.h</includes>
+    <includes local="yes">xbox_math_matrix.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/shaders/orthographic_vertex_shader.cpp</label>
+        <link refid="d3/d91/orthographic__vertex__shader_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>orthographic_vertex_shader.h</label>
+        <link refid="d1/d01/orthographic__vertex__shader_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>projection_vertex_shader.h</label>
+        <link refid="df/d17/projection__vertex__shader_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="6">
+        <label>map</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="9">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="8">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;orthographic_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_matrix.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">OrthographicVertexShader::OrthographicVertexShader(uint32_t<sp/>framebuffer_width,<sp/>uint32_t<sp/>framebuffer_height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>near,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>far,</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_min,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_max)</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d17/classProjectionVertexShader" kindref="compound">ProjectionVertexShader</ref>(framebuffer_width,<sp/>framebuffer_height,<sp/>z_min,<sp/>z_max)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>width_<sp/>=<sp/>right<sp/>-<sp/>left;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>height_<sp/>=<sp/>bottom<sp/>-<sp/>top;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/>far_minus_near_<sp/>=<sp/>far<sp/>-<sp/>near;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/>far_plus_near_<sp/>=<sp/>far<sp/>+<sp/>near;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OrthographicVertexShader::CalculateProjectionMatrix()<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>MatrixSetIdentity(projection_matrix_);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>projection_matrix_[0][0]<sp/>=<sp/>2.0f<sp/>/<sp/>width_;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>projection_matrix_[1][1]<sp/>=<sp/>2.0f<sp/>/<sp/>height_;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>projection_matrix_[2][2]<sp/>=<sp/>-2.0f<sp/>/<sp/>far_minus_near_;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>projection_matrix_[3][2]<sp/>=<sp/>-1.0f<sp/>*<sp/>(far_plus_near_<sp/>/<sp/>far_minus_near_);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>projection_matrix_[3][3]<sp/>=<sp/>1.0;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/orthographic_vertex_shader.cpp"/>
+  </compounddef>
+</doxygen>
