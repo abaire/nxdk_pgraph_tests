@@ -320,6 +320,8 @@ add_executable(
         tests/texgen_tests.h
         tests/texture_border_tests.cpp
         tests/texture_border_tests.h
+        tests/texture_border_color_tests.cpp
+        tests/texture_border_color_tests.h
         tests/texture_cpu_update_tests.cpp
         tests/texture_cpu_update_tests.h
         tests/texture_cubemap_tests.cpp
