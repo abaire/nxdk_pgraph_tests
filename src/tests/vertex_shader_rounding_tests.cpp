@@ -871,6 +871,12 @@ void VertexShaderRoundingTests::TestProjectedAdjacentGeometry(float bias) {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
 }
 
+static float decrease(float f) {
+  uint32_t u = *(uint32_t *)&f;
+  u--;
+  return *(float *)&u;
+}
+
 void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
   if (fixed) {
     host_.SetVertexShaderProgram(nullptr);
@@ -888,153 +894,345 @@ void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
 
   host_.PrepareDraw(0xFF202224);
 
+  float x = 4.0f;
+  float dx = 4.0f;
+  float y0 = 45.0f;
+  float y1 = 135.0f;
+  float y2 = 315.0f;
+  float y3 = 450.0f;
+
   for (int i = 0; i < 20; i++) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(4.4376f + 4.0f * i, 44.0f, 1.0f);
-    host_.SetVertex(5.9f + 4.0f * i, 44.0f, 1.0f);
-    host_.SetVertex(5.9f + 4.0f * i, 300.5001f, 1.0f);
-    host_.SetVertex(4.5f + 4.0f * i + i * 0.0625f + 0.001f, 300.5001f, 1.0f);
+    host_.SetVertex(decrease(x + 0.5f), y0, 1.0f);
+    host_.SetVertex(x + 1.9f, y0, 1.0f);
+    host_.SetVertex(x + 1.9f, y2, 1.0f);
+    host_.SetVertex(x + 0.5f + i * 0.0625f, y2, 1.0f);
     host_.End();
+
+    x += dx;
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
+    for (int i = 0; i < 16; i++) {
+      host_.SetDiffuse(0xFFFFFFFF);
+      host_.SetVertex(decrease(x + 0.5f - i * 0.0625f), y0, 1.0f);
+      host_.SetVertex(x + 0.5625f + i * 0.0625f, y3, 1.0f);
+      host_.SetVertex(decrease(x + 0.5f - i * 0.0625f), y3, 1.0f);
+      x += dx;
+    }
+    host_.End();
+  }
+
+  {
+    // Should be invisible when MSAA not used
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(x + 0.9f, y0, 1.0f);
+    host_.SetVertex(x + 1.1f, y0, 1.0f);
+    host_.SetVertex(x + 1.1f, y3, 1.0f);
+    host_.SetVertex(x + 0.9f, y3, 1.0f);
+
+    x += dx;
+    host_.SetVertex(x, y0, 1.0f);
+    host_.SetVertex(x + 0.5f, y0, 1.0f);
+    host_.SetVertex(x + 0.5f, y3, 1.0f);
+    host_.SetVertex(x, y3, 1.0f);
+    host_.End();
+
+    x += dx;
   }
 
   {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(288.0f, 0.0f, 1.0f);
-    host_.SetVertex(352.0f, 0.0f, 1.0f);
-    host_.SetVertex(352.0f, 448.5001f, 1.0f);
-    host_.SetVertex(288.0f, 448.5001f, 1.0f);
+    host_.SetVertex(x + 0.4f, y0, 1.0f);
+    host_.SetVertex(x + 0.6f, y0, 1.0f);
+    host_.SetVertex(x + 0.6f, y3, 1.0f);
+    host_.SetVertex(x + 0.4f, y3, 1.0f);
     host_.End();
+
+    x += dx;
+  }
+
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(0xFFFFFFFF);
+  host_.SetVertex(x + 0.5f, y0, 1.0f);
+  host_.SetVertex(x + 2.4f, y0, 1.0f);
+  host_.SetVertex(x + 2.4f, y1, 1.0f);
+  host_.SetVertex(x + 0.5f, y1, 1.0f);
+
+  host_.SetVertex(decrease(x + 0.5625f), y1, 1.0f);
+  host_.SetVertex(x + 2.4f, y1, 1.0f);
+  host_.SetVertex(x + 2.4f, y2, 1.0f);
+  host_.SetVertex(decrease(x + 0.5625f), y2, 1.0f);
+
+  host_.SetVertex(x + 0.5625f, y2, 1.0f);
+  host_.SetVertex(x + 2.4f, y2, 1.0f);
+  host_.SetVertex(x + 2.4f, y3, 1.0f);
+  host_.SetVertex(x + 0.5625f, y3, 1.0f);
+
+  x += dx;
+  host_.SetVertex(x + 0.5f, y0, 1.0f);
+  host_.SetVertex(x + 1.0f, y0, 1.0f);
+  host_.SetVertex(x + 1.0f, y1, 1.0f);
+  host_.SetVertex(x + 0.5f, y1, 1.0f);
+
+  host_.SetVertex(x + 0.5f, y1, 1.0f);
+  host_.SetVertex(decrease(x + 1.5625f), y1, 1.0f);
+  host_.SetVertex(decrease(x + 1.5625f), y2, 1.0f);
+  host_.SetVertex(x + 0.5f, y2, 1.0f);
+
+  host_.SetVertex(x + 0.5f, y2, 1.0f);
+  host_.SetVertex(x + 1.5625f, y2, 1.0f);
+  host_.SetVertex(x + 1.5625f, y3, 1.0f);
+  host_.SetVertex(x + 0.5f, y3, 1.0f);
+
+  host_.End();
+
+  x += 5 * dx;
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    // Expected interpolated RGB 0x808080 (due to vertex rounding)
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(decrease(x + 0.5f), 100.0f, 1.0f);
+    host_.SetVertex(decrease(x + 0.5f), 50.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(x + 0.5625f, 50.0f, 1.0f);
+    host_.SetVertex(x + 0.5625f, 100.0f, 1.0f);
+
+    // Expected interpolated RGB 0x808080
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(x + 0.4375f, 200.0f, 1.0f);
+    host_.SetVertex(x + 0.4375f, 150.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(x + 0.5625f, 150.0f, 1.0f);
+    host_.SetVertex(x + 0.5625f, 200.0f, 1.0f);
+
+    // Expected interpolated RGB 0x000000
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(x + 0.5f, 300.0f, 1.0f);
+    host_.SetVertex(x + 0.5f, 250.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(x + 0.5625f, 250.0f, 1.0f);
+    host_.SetVertex(x + 0.5625f, 300.0f, 1.0f);
+
+    host_.End();
+  }
+
+  float y = y0;
+  float dy = 4.0f;
+  float x0 = 320.0f;
+  float x1 = 420.0f;
+  float x2 = 520.0f;
+  float x3 = 620.0f;
+
+  for (int i = 0; i < 20; i++) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(x0, y + 1.9f, 1.0f);
+    host_.SetVertex(x0, decrease(y + 0.5f), 1.0f);
+    host_.SetVertex(x2, y + 0.5f + i * 0.0625f, 1.0f);
+    host_.SetVertex(x2, y + 1.9f, 1.0f);
+    host_.End();
+
+    y += dy;
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
+    for (int i = 0; i < 16; i++) {
+      host_.SetDiffuse(0xFFFFFFFF);
+      host_.SetVertex(x0, decrease(y + 0.5f - i * 0.0625f), 1.0f);
+      host_.SetVertex(x3, decrease(y + 0.5f - i * 0.0625f), 1.0f);
+      host_.SetVertex(x3, y + 0.5625f + i * 0.0625f, 1.0f);
+      y += dy;
+    }
+    host_.End();
+  }
+
+  {
+    // Should be invisible when MSAA not used
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(x3, y + 0.9f, 1.0f);
+    host_.SetVertex(x3, y + 1.1f, 1.0f);
+    host_.SetVertex(x0, y + 1.1f, 1.0f);
+    host_.SetVertex(x0, y + 0.9f, 1.0f);
+
+    y += dy;
+    host_.SetVertex(x3, y, 1.0f);
+    host_.SetVertex(x3, y + 0.5f, 1.0f);
+    host_.SetVertex(x0, y + 0.5f, 1.0f);
+    host_.SetVertex(x0, y, 1.0f);
+    host_.End();
+
+    y += dy;
   }
 
   {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(209.9f, 0.0f, 1.0f);
-    host_.SetVertex(210.1f, 0.0f, 1.0f);
-    host_.SetVertex(210.1f, 448.5001f, 1.0f);
-    host_.SetVertex(209.9f, 448.5001f, 1.0f);
+    host_.SetVertex(x3, y + 0.4f, 1.0f);
+    host_.SetVertex(x3, y + 0.6f, 1.0f);
+    host_.SetVertex(x0, y + 0.6f, 1.0f);
+    host_.SetVertex(x0, y + 0.4f, 1.0f);
+    host_.End();
+
+    y += dy;
+  }
+
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(0xFFFFFFFF);
+  host_.SetVertex(x1, y + 0.5f, 1.0f);
+  host_.SetVertex(x1, y + 2.4f, 1.0f);
+  host_.SetVertex(x0, y + 2.4f, 1.0f);
+  host_.SetVertex(x0, y + 0.5f, 1.0f);
+
+  host_.SetVertex(x2, decrease(y + 0.5625f), 1.0f);
+  host_.SetVertex(x2, y + 2.4f, 1.0f);
+  host_.SetVertex(x1, y + 2.4f, 1.0f);
+  host_.SetVertex(x1, decrease(y + 0.5625f), 1.0f);
+
+  host_.SetVertex(x3, y + 0.5625f, 1.0f);
+  host_.SetVertex(x3, y + 2.4f, 1.0f);
+  host_.SetVertex(x2, y + 2.4f, 1.0f);
+  host_.SetVertex(x2, y + 0.5625f, 1.0f);
+
+  y += dy;
+  host_.SetVertex(x1, y + 0.5f, 1.0f);
+  host_.SetVertex(x1, y + 1.0f, 1.0f);
+  host_.SetVertex(x0, y + 1.0f, 1.0f);
+  host_.SetVertex(x0, y + 0.5f, 1.0f);
+
+  host_.SetVertex(x2, y + 0.5f, 1.0f);
+  host_.SetVertex(x2, decrease(y + 1.5625f), 1.0f);
+  host_.SetVertex(x1, decrease(y + 1.5625f), 1.0f);
+  host_.SetVertex(x1, y + 0.5f, 1.0f);
+
+  host_.SetVertex(x3, y + 0.5f, 1.0f);
+  host_.SetVertex(x3, y + 1.5625f, 1.0f);
+  host_.SetVertex(x2, y + 1.5625f, 1.0f);
+  host_.SetVertex(x2, y + 0.5f, 1.0f);
+
+  host_.End();
+
+  y += 5 * dy;
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    // Expected interpolated RGB 0x808080 (due to vertex rounding)
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(320.0f, decrease(y + 0.5f), 1.0f);
+    host_.SetVertex(380.0f, decrease(y + 0.5f), 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(380.0f, y + 0.5625f, 1.0f);
+    host_.SetVertex(320.0f, y + 0.5625f, 1.0f);
+
+    // Expected interpolated RGB 0x808080
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(440.0f, y + 0.4375f, 1.0f);
+    host_.SetVertex(500.0f, y + 0.4375f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(500.0f, y + 0.5625f, 1.0f);
+    host_.SetVertex(440.0f, y + 0.5625f, 1.0f);
+
+    // Expected interpolated RGB 0x000000
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(560.0f, y + 0.5f, 1.0f);
+    host_.SetVertex(620.0f, y + 0.5f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(620.0f, y + 0.5625f, 1.0f);
+    host_.SetVertex(560.0f, y + 0.5625f, 1.0f);
+
     host_.End();
   }
 
   {
+    // two pixels high with top-left rastization rule
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(410.4f, 0.0f, 1.0f);
-    host_.SetVertex(410.6f, 0.0f, 1.0f);
-    host_.SetVertex(410.6f, 448.5001f, 1.0f);
-    host_.SetVertex(410.4f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(550.53125f, 0.0f, 1.0f);
-    host_.SetVertex(551.9f, 0.0f, 1.0f);
-    host_.SetVertex(551.9f, 448.5001f, 1.0f);
-    host_.SetVertex(550.53125f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(460.5624f, 0.0f, 1.0f);
-    host_.SetVertex(461.9f, 0.0f, 1.0f);
-    host_.SetVertex(461.9f, 448.5001f, 1.0f);
-    host_.SetVertex(460.5624f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(470.5626f, 0.0f, 1.0f);
-    host_.SetVertex(471.9f, 0.0f, 1.0f);
-    host_.SetVertex(471.9f, 448.5001f, 1.0f);
-    host_.SetVertex(470.5626f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(480.5624f, 0.0f, 1.0f);
-    host_.SetVertex(481.9f, 0.0f, 1.0f);
-    host_.SetVertex(481.9f, 448.5001f, 1.0f);
-    host_.SetVertex(480.5626f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(490.5001f, 0.0f, 1.0f);
-    host_.SetVertex(491.9f, 0.0f, 1.0f);
-    host_.SetVertex(491.9f, 448.5001f, 1.0f);
-    host_.SetVertex(490.5626f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(500.5001f, 0.0f, 1.0f);
-    host_.SetVertex(501.9f, 0.0f, 1.0f);
-    host_.SetVertex(501.9f, 448.5001f, 1.0f);
-    host_.SetVertex(500.5624f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(510.4999f, 0.0f, 1.0f);
-    host_.SetVertex(511.9f, 0.0f, 1.0f);
-    host_.SetVertex(511.9f, 448.5001f, 1.0f);
-    host_.SetVertex(510.5626f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(520.4999f, 0.0f, 1.0f);
-    host_.SetVertex(521.9f, 0.0f, 1.0f);
-    host_.SetVertex(521.9f, 448.5001f, 1.0f);
-    host_.SetVertex(520.5624f, 448.5001f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(10.0f, 450.5f, 1.0f);
-    host_.SetVertex(630.0f, 450.5f, 1.0f);
-    host_.SetVertex(630.0f, 451.6f, 1.0f);
-    host_.SetVertex(10.0f, 451.6f, 1.0f);
-    host_.End();
-  }
-
-  {
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFFFFFFFF);
-    host_.SetVertex(10.0f, 455.5626f, 1.0f);
-    host_.SetVertex(630.0f, 455.5626f, 1.0f);
+    host_.SetVertex(10.0f, 455.5f, 1.0f);
+    host_.SetVertex(630.0f, 455.5f, 1.0f);
     host_.SetVertex(630.0f, 456.6f, 1.0f);
     host_.SetVertex(10.0f, 456.6f, 1.0f);
     host_.End();
   }
 
   {
+    // two pixels high with bottom-left rastization rule
     host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetDiffuse(0xFF00FF00);
-    host_.SetVertex(320.5625f, 140.5f, 1.0f);
-    host_.SetVertex(420.5625f, 140.5f, 1.0f);
-    host_.SetVertex(420.5f, 240.5f, 1.0f);
-    host_.SetVertex(320.5f, 240.5f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(10.0f, 460.4f, 1.0f);
+    host_.SetVertex(630.0f, 460.4f, 1.0f);
+    host_.SetVertex(630.0f, 461.5f, 1.0f);
+    host_.SetVertex(10.0f, 461.5f, 1.0f);
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    // Expected interpolated RGB 0x878787
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(-0.0625f, 100.0f, 1.0f);
+    host_.SetVertex(-0.0625f, 50.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(1.0f, 50.0f, 1.0f);
+    host_.SetVertex(1.0f, 100.0f, 1.0f);
+
+    // Expected interpolated RGB 0x808080 (due to vertex rounding)
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(-0.0624f, 200.0f, 1.0f);
+    host_.SetVertex(-0.0624f, 150.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(1.0f, 150.0f, 1.0f);
+    host_.SetVertex(1.0f, 200.0f, 1.0f);
+
+    // Expected interpolated RGB 0x808080
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(0.0f, 300.0f, 1.0f);
+    host_.SetVertex(0.0f, 250.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(1.0f, 250.0f, 1.0f);
+    host_.SetVertex(1.0f, 300.0f, 1.0f);
+
+    host_.End();
+  }
+
+  {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+    // Expected interpolated RGB 0x878787
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(320.0f, -0.0625f, 1.0f);
+    host_.SetVertex(380.0f, -0.0625f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(380.0f, 1.0f, 1.0f);
+    host_.SetVertex(320.0f, 1.0f, 1.0f);
+
+    // Expected interpolated RGB 0x808080 (due to vertex rounding)
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(440.0f, -0.0624f, 1.0f);
+    host_.SetVertex(500.0f, -0.0624f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(500.0f, 1.0f, 1.0f);
+    host_.SetVertex(440.0f, 1.0f, 1.0f);
+
+    // Expected interpolated RGB 0x808080
+    host_.SetDiffuse(0xFF000000);
+    host_.SetVertex(560.0f, 0.0f, 1.0f);
+    host_.SetVertex(620.0f, 0.0f, 1.0f);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetVertex(620.0f, 1.0f, 1.0f);
+    host_.SetVertex(560.0f, 1.0f, 1.0f);
+
     host_.End();
   }
 
