@@ -81,7 +81,7 @@ void FogCarryoverTests::Initialize() {
     // Note: Fog color is ABGR and not ARGB
     Pushbuffer::Push(NV097_SET_FOG_COLOR, kFogColor);
     // Fog gen mode is set to just use the fog coordinate from the shader.
-    Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_FOG_X);
+    Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA);
     Pushbuffer::PushF(NV097_SET_FOG_PLANE, 0.f, 0.f, 2.f, 0.f);
     Pushbuffer::End();
   }
@@ -118,6 +118,7 @@ void FogCarryoverTests::Test() {
       host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
 
       host_.SetDiffuse(kDiffuse);
+      host_.SetSpecular(kDiffuse);
 
       float fog_coord = 1.f;
       switch (fog_mode) {
@@ -158,7 +159,13 @@ void FogCarryoverTests::Test() {
       Pushbuffer::End();
     }
 
-    draw_tri(start_x, top);
+    // Draw with the fog coordinates explicitly set to put the hardware into a consistent state.
+    // This is done repeatedly to fix an apparent issue with parallelism, drawing only once can lead to a situation
+    // where one or more of the vertices in the "unset" draw case below still have arbitrary values from previous
+    // operations and are non-hermetic, leading to test results that are dependent on previous draws.
+    for (uint32_t i = 0; i < 2; ++i) {
+      draw_tri(start_x, top);
+    }
 
     shader->SetShaderOverride(kShader, sizeof(kShader));
     shader->PrepareDraw();
