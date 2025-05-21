@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d8a/texture__format_8h" kind="file" language="C++">
+    <compoundname>texture_format.h</compoundname>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">cstdint</includes>
+    <includedby refid="df/d43/test__host_8h" local="yes">src/test_host.h</includedby>
+    <includedby refid="dc/d6c/test__suite_8cpp" local="yes">src/tests/test_suite.cpp</includedby>
+    <includedby refid="df/d62/texgen__matrix__tests_8cpp" local="yes">src/tests/texgen_matrix_tests.cpp</includedby>
+    <includedby refid="d5/d38/texgen__tests_8cpp" local="yes">src/tests/texgen_tests.cpp</includedby>
+    <includedby refid="d5/d6d/texture__border__tests_8cpp" local="yes">src/tests/texture_border_tests.cpp</includedby>
+    <includedby refid="dc/d48/texture__cpu__update__tests_8cpp" local="yes">src/tests/texture_cpu_update_tests.cpp</includedby>
+    <includedby refid="d6/d8f/texture__cubemap__tests_8cpp" local="yes">src/tests/texture_cubemap_tests.cpp</includedby>
+    <includedby refid="d8/d42/texture__cubemap__tests_8h" local="yes">src/tests/texture_cubemap_tests.h</includedby>
+    <includedby refid="df/ddd/texture__format__tests_8cpp" local="yes">src/tests/texture_format_tests.cpp</includedby>
+    <includedby refid="d9/da7/texture__matrix__tests_8cpp" local="yes">src/tests/texture_matrix_tests.cpp</includedby>
+    <includedby refid="d6/d40/texture__render__target__tests_8cpp" local="yes">src/tests/texture_render_target_tests.cpp</includedby>
+    <includedby refid="d1/dbf/texture__render__update__in__place__tests_8cpp" local="yes">src/tests/texture_render_update_in_place_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <includedby refid="df/d5a/vertex__shader__rounding__tests_8cpp" local="yes">src/tests/vertex_shader_rounding_tests.cpp</includedby>
+    <includedby refid="d0/d31/volume__texture__tests_8cpp" local="yes">src/tests/volume_texture_tests.cpp</includedby>
+    <includedby refid="d9/d00/volume__texture__tests_8h" local="yes">src/tests/volume_texture_tests.h</includedby>
+    <includedby refid="d8/dc0/texture__format_8cpp" local="yes">src/texture_format.cpp</includedby>
+    <includedby refid="d7/d78/texture__stage_8h" local="yes">src/texture_stage.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>SDL.h</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>src/test_driver.h</label>
+        <link refid="dd/dab/test__driver_8h_source"/>
+      </node>
+      <node id="2">
+        <label>src/test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/tests/alpha_func_tests.h</label>
+        <link refid="da/da3/alpha__func__tests_8h_source"/>
+      </node>
+      <node id="5">
+        <label>src/tests/antialiasing_tests.h</label>
+        <link refid="d4/d10/antialiasing__tests_8h_source"/>
+      </node>
+      <node id="6">
+        <label>src/tests/attribute_carryover_tests.h</label>
+        <link refid="dc/db4/attribute__carryover__tests_8h_source"/>
+      </node>
+      <node id="7">
+        <label>src/tests/attribute_explicit_setter_tests.h</label>
+        <link refid="d2/dd9/attribute__explicit__setter__tests_8h_source"/>
+      </node>
+      <node id="8">
+        <label>src/tests/attribute_float_tests.h</label>
+        <link refid="d6/dad/attribute__float__tests_8h_source"/>
+      </node>
+      <node id="9">
+        <label>src/tests/blend_tests.h</label>
+        <link refid="de/d05/blend__tests_8h_source"/>
+      </node>
+      <node id="10">
+        <label>src/tests/color_key_tests.h</label>
+        <link refid="dc/d0f/color__key__tests_8h_source"/>
+      </node>
+      <node id="11">
+        <label>src/tests/color_zeta_disable_tests.h</label>
+        <link refid="d0/d2e/color__zeta__disable__tests_8h_source"/>
+      </node>
+      <node id="12">
+        <label>src/tests/color_zeta_overlap_tests.h</label>
+        <link refid="da/dad/color__zeta__overlap__tests_8h_source"/>
+      </node>
+      <node id="13">
+        <label>src/tests/combiner_tests.h</label>
+        <link refid="df/d03/combiner__tests_8h_source"/>
+      </node>
+      <node id="14">
+        <label>src/tests/dma_corruption_around_surface_tests.h</label>
+        <link refid="d7/d89/dma__corruption__around__surface__tests_8h_source"/>
+      </node>
+      <node id="15">
+        <label>src/tests/edge_flag_tests.h</label>
+        <link refid="da/d59/edge__flag__tests_8h_source"/>
+      </node>
+      <node id="16">
+        <label>src/tests/fog_tests.h</label>
+        <link refid="dd/ded/fog__tests_8h_source"/>
+      </node>
+      <node id="17">
+        <label>src/tests/high_vertex_count_tests.h</label>
+        <link refid="d8/d40/high__vertex__count__tests_8h_source"/>
+      </node>
+      <node id="18">
+        <label>src/tests/inline_array_size_mismatch.h</label>
+        <link refid="dc/d05/inline__array__size__mismatch_8h_source"/>
+      </node>
+      <node id="19">
+        <label>src/tests/line_width_tests.h</label>
+        <link refid="de/d36/line__width__tests_8h_source"/>
+      </node>
+      <node id="20">
+        <label>src/tests/null_surface_tests.h</label>
+        <link refid="db/d18/null__surface__tests_8h_source"/>
+      </node>
+      <node id="21">
+        <label>src/tests/overlapping_draw_modes_tests.h</label>
+        <link refid="d8/d68/overlapping__draw__modes__tests_8h_source"/>
+      </node>
+      <node id="22">
+        <label>src/tests/point_params_tests.h</label>
+        <link refid="d1/d5c/point__params__tests_8h_source"/>
+      </node>
+      <node id="23">
+        <label>src/tests/point_size_tests.h</label>
+        <link refid="d7/d75/point__size__tests_8h_source"/>
+      </node>
+      <node id="24">
+        <label>src/tests/pvideo_tests.h</label>
+        <link refid="da/db8/pvideo__tests_8h_source"/>
+      </node>
+      <node id="25">
+        <label>src/tests/shade_model_tests.h</label>
+        <link refid="d0/dbf/shade__model__tests_8h_source"/>
+      </node>
+      <node id="26">
+        <label>src/tests/smoothing_tests.h</label>
+        <link refid="d8/daa/smoothing__tests_8h_source"/>
+      </node>
+      <node id="27">
+        <label>src/tests/stipple_tests.h</label>
+        <link refid="d0/daa/stipple__tests_8h_source"/>
+      </node>
+      <node id="28">
+        <label>src/tests/surface_clip_tests.h</label>
+        <link refid="da/d0b/surface__clip__tests_8h_source"/>
+      </node>
+      <node id="29">
+        <label>src/tests/surface_format_tests.h</label>
+        <link refid="dd/dfe/surface__format__tests_8h_source"/>
+      </node>
+      <node id="30">
+        <label>src/tests/surface_pitch_tests.h</label>
+        <link refid="da/d8d/surface__pitch__tests_8h_source"/>
+      </node>
+      <node id="31">
+        <label>src/tests/swath_width_tests.h</label>
+        <link refid="df/db5/swath__width__tests_8h_source"/>
+      </node>
+      <node id="32">
+        <label>src/tests/texgen_matrix_tests.h</label>
+        <link refid="d0/d6f/texgen__matrix__tests_8h_source"/>
+      </node>
+      <node id="33">
+        <label>src/tests/texgen_tests.h</label>
+        <link refid="d6/d93/texgen__tests_8h_source"/>
+      </node>
+      <node id="34">
+        <label>src/tests/texture_border_color_tests.h</label>
+        <link refid="d5/d61/texture__border__color__tests_8h_source"/>
+      </node>
+      <node id="35">
+        <label>src/tests/texture_border_tests.h</label>
+        <link refid="d0/de9/texture__border__tests_8h_source"/>
+      </node>
+      <node id="36">
+        <label>src/tests/texture_cpu_update_tests.h</label>
+        <link refid="de/dca/texture__cpu__update__tests_8h_source"/>
+      </node>
+      <node id="53">
+        <label>src/tests/texture_cubemap_tests.h</label>
+        <link refid="d8/d42/texture__cubemap__tests_8h_source"/>
+      </node>
+      <node id="37">
+        <label>src/tests/texture_format_dxt_tests.h</label>
+        <link refid="dd/d61/texture__format__dxt__tests_8h_source"/>
+      </node>
+      <node id="38">
+        <label>src/tests/texture_format_tests.h</label>
+        <link refid="d1/d54/texture__format__tests_8h_source"/>
+      </node>
+      <node id="39">
+        <label>src/tests/texture_framebuffer_blit_tests.h</label>
+        <link refid="dd/d75/texture__framebuffer__blit__tests_8h_source"/>
+      </node>
+      <node id="40">
+        <label>src/tests/texture_matrix_tests.h</label>
+        <link refid="dd/dbe/texture__matrix__tests_8h_source"/>
+      </node>
+      <node id="41">
+        <label>src/tests/texture_render_target_tests.h</label>
+        <link refid="df/d0d/texture__render__target__tests_8h_source"/>
+      </node>
+      <node id="42">
+        <label>src/tests/texture_render_update_in_place_tests.h</label>
+        <link refid="d2/d1d/texture__render__update__in__place__tests_8h_source"/>
+      </node>
+      <node id="43">
+        <label>src/tests/texture_shadow_comparator_tests.h</label>
+        <link refid="d5/dc7/texture__shadow__comparator__tests_8h_source"/>
+      </node>
+      <node id="44">
+        <label>src/tests/texture_signed_component_tests.h</label>
+        <link refid="df/d39/texture__signed__component__tests_8h_source"/>
+      </node>
+      <node id="45">
+        <label>src/tests/three_d_primitive_tests.h</label>
+        <link refid="de/dc5/three__d__primitive__tests_8h_source"/>
+      </node>
+      <node id="46">
+        <label>src/tests/vertex_shader_independence_tests.h</label>
+        <link refid="d0/d3a/vertex__shader__independence__tests_8h_source"/>
+      </node>
+      <node id="47">
+        <label>src/tests/vertex_shader_rounding_tests.h</label>
+        <link refid="d7/d8b/vertex__shader__rounding__tests_8h_source"/>
+      </node>
+      <node id="48">
+        <label>src/tests/vertex_shader_swizzle_tests.h</label>
+        <link refid="dd/d20/vertex__shader__swizzle__tests_8h_source"/>
+      </node>
+      <node id="49">
+        <label>src/tests/viewport_tests.h</label>
+        <link refid="da/d83/viewport__tests_8h_source"/>
+      </node>
+      <node id="54">
+        <label>src/tests/volume_texture_tests.h</label>
+        <link refid="d9/d00/volume__texture__tests_8h_source"/>
+      </node>
+      <node id="50">
+        <label>src/tests/window_clip_tests.h</label>
+        <link refid="d5/ddb/window__clip__tests_8h_source"/>
+      </node>
+      <node id="51">
+        <label>src/tests/z_min_max_control_tests.h</label>
+        <link refid="da/d1c/z__min__max__control__tests_8h_source"/>
+      </node>
+      <node id="52">
+        <label>src/tests/zero_stride_tests.h</label>
+        <link refid="d4/d46/zero__stride__tests_8h_source"/>
+      </node>
+      <node id="1">
+        <label>src/texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>src/texture_stage.h</label>
+        <link refid="d7/d78/texture__stage_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="db/df0/structTextureFormatInfo" prot="public">TextureFormatInfo</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="db/d8a/texture__format_8h_1a1cdc893ec37d60d97ddf1d01399ad5c3" prot="public" static="no">
+        <type>struct <ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref></type>
+        <definition>typedef struct TextureFormatInfo TextureFormatInfo</definition>
+        <argsstring></argsstring>
+        <name>TextureFormatInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="16" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="db/d8a/texture__format_8h_1adaa07d5f2a9f9025c58da80c3db8aaa8" prot="public" static="no" constexpr="yes" extern="yes" mutable="no">
+        <type>const <ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref></type>
+        <definition>const TextureFormatInfo kTextureFormats[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTextureFormats</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="18" column="32" bodyfile="src/texture_format.cpp" bodystart="12" bodyend="82" declfile="src/texture_format.h" declline="18" declcolumn="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d8a/texture__format_8h_1aa978197e4fe8a47c919b4bd4ab9537a8" prot="public" static="no" constexpr="yes" extern="yes" mutable="no">
+        <type>const int</type>
+        <definition>const int kNumFormats</definition>
+        <argsstring></argsstring>
+        <name>kNumFormats</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="19" column="18" bodyfile="src/texture_format.cpp" bodystart="84" bodyend="-1" declfile="src/texture_format.h" declline="19" declcolumn="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="db/d8a/texture__format_8h_1afa4385ceddd5aea36c3bd5a90e9fe06e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref> &amp;</type>
+        <definition>const TextureFormatInfo &amp; GetTextureFormatInfo</definition>
+        <argsstring>(uint32_t nv_texture_format)</argsstring>
+        <name>GetTextureFormatInfo</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>nv_texture_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="21" column="25" bodyfile="src/texture_format.cpp" bodystart="86" bodyend="95" declfile="src/texture_format.h" declline="21" declcolumn="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="db/df0/structTextureFormatInfo" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>SDL_PixelFormatEnum<sp/>sdl_format{SDL_PIXELFORMAT_ARGB8888};</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>uint32_t<sp/>xbox_format{0};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/>uint32_t<sp/>xbox_bpp{32};<sp/><sp/></highlight><highlight class="comment">//<sp/>bits<sp/>per<sp/>pixel</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>xbox_swizzled{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>xbox_linear{</highlight><highlight class="keyword">true</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>require_conversion{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal">}<sp/><ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref><sp/>kTextureFormats[];</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumFormats;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="db/df0/structTextureFormatInfo" kindref="compound">TextureFormatInfo</ref><sp/>&amp;GetTextureFormatInfo(uint32_t<sp/>nv_texture_format);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/texture_format.h"/>
+  </compounddef>
+</doxygen>

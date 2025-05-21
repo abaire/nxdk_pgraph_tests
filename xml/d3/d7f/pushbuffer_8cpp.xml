@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/d7f/pushbuffer_8cpp" kind="file" language="C++">
+    <compoundname>pushbuffer.cpp</compoundname>
+    <includes refid="d3/dc2/pushbuffer_8h" local="yes">pushbuffer.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/pushbuffer.cpp</label>
+        <link refid="d3/d7f/pushbuffer_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>pushbuffer.h</label>
+        <link refid="d3/dc2/pushbuffer_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="5">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="9">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="3">
+        <label>xboxkrnl/xboxdef.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d3/d7f/pushbuffer_8cpp_1a664b17051bc2ad604d106494181eeeae" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kMaxElementsPerBlock</definition>
+        <argsstring></argsstring>
+        <name>kMaxElementsPerBlock</name>
+        <initializer>= 96</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.cpp" line="8" column="27" bodyfile="src/pushbuffer.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d7f/pushbuffer_8cpp_1a51aa40216dcc8bf86501ccf5475382f5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kMaxElements</definition>
+        <argsstring></argsstring>
+        <name>kMaxElements</name>
+        <initializer>= PBKIT_PUSHBUFFER_SIZE / 5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pushbuffer.cpp" line="10" column="27" bodyfile="src/pushbuffer.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;pushbuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Maximum<sp/>number<sp/>of<sp/>DWORDS<sp/>per<sp/>begin/end<sp/>block,<sp/>as<sp/>enforced<sp/>by<sp/>pbkit<sp/>with<sp/>some<sp/>headroom.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kMaxElementsPerBlock<sp/>=<sp/>96;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Maximum<sp/>number<sp/>of<sp/>DWORDs<sp/>in<sp/>the<sp/>pushbuffer,<sp/>as<sp/>defined<sp/>by<sp/>pbkit<sp/>with<sp/>some<sp/>headroom.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kMaxElements<sp/>=<sp/>PBKIT_PUSHBUFFER_SIZE<sp/>/<sp/>5;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><ref refid="da/db9/classPushbuffer" kindref="compound">Pushbuffer</ref><sp/>*Pushbuffer::singleton_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a41b2f7d7dd4c48b7cb78656bdc36c4d8" kindref="member">Pushbuffer::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!singleton_)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>singleton_<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer" kindref="compound">Pushbuffer</ref>();</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>ASSERT(singleton_);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>ASSERT(!singleton_-&gt;head_<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Nested<sp/>pushbuffer<sp/>blocks<sp/>are<sp/>not<sp/>supported&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>singleton_-&gt;current_block_elements_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>flush)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>ASSERT(singleton_-&gt;head_<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;End<sp/>must<sp/>not<sp/>be<sp/>called<sp/>without<sp/>Begin&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>pb_end(singleton_-&gt;head_);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>singleton_-&gt;current_block_elements_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(flush)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a53a1309ab7cc3cad0f8eb8cb7b6a151c" kindref="member">Flush</ref>();</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a53a1309ab7cc3cad0f8eb8cb7b6a151c" kindref="member">Pushbuffer::Flush</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>ASSERT(!singleton_-&gt;head_<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Flush<sp/>must<sp/>not<sp/>be<sp/>called<sp/>within<sp/>a<sp/>pushbuffer<sp/>block&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pb_busy())<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Wait<sp/>for<sp/>completion...<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>pb_reset();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>singleton_-&gt;current_block_elements_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>singleton_-&gt;total_block_elements_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Pushbuffer::Reserve(uint32_t<sp/>num_dwords)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>total_block_elements_<sp/>+=<sp/>num_dwords;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>current_block_elements_<sp/>+=<sp/>num_dwords;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(total_block_elements_<sp/>&gt;=<sp/>kMaxElements)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">End</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Begin</ref>();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(current_block_elements_<sp/>&gt;=<sp/>kMaxElementsPerBlock)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Begin</ref>();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" kindref="member">Pushbuffer::PushTo</ref>(uint32_t<sp/>subchannel,<sp/>uint32_t<sp/>command,<sp/>uint32_t<sp/>param1)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(2);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push1_to(subchannel,<sp/>singleton_-&gt;head_,<sp/>command,<sp/>param1);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" kindref="member">Pushbuffer::PushTo</ref>(uint32_t<sp/>subchannel,<sp/>uint32_t<sp/>command,<sp/>uint32_t<sp/>param1,<sp/>uint32_t<sp/>param2)<sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(3);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push2_to(subchannel,<sp/>singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" kindref="member">Pushbuffer::PushTo</ref>(uint32_t<sp/>subchannel,<sp/>uint32_t<sp/>command,<sp/>uint32_t<sp/>param1,<sp/>uint32_t<sp/>param2,<sp/>uint32_t<sp/>param3)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(4);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push3_to(subchannel,<sp/>singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" kindref="member">Pushbuffer::PushTo</ref>(uint32_t<sp/>subchannel,<sp/>uint32_t<sp/>command,<sp/>uint32_t<sp/>param1,<sp/>uint32_t<sp/>param2,<sp/>uint32_t<sp/>param3,</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>param4)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(5);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push4_to(subchannel,<sp/>singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3,<sp/>param4);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a389ba8106c72fc097ace7d4cad3b1d46" kindref="member">Pushbuffer::PushTo</ref>(uint32_t<sp/>subchannel,<sp/>uint32_t<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param3,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param4)<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(5);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push4f_to(subchannel,<sp/>singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3,<sp/>param4);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1)<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(2);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push1f(singleton_-&gt;head_,<sp/>command,<sp/>param1);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param2)<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(3);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push2f(singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param3)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(4);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push3f(singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param3,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>param4)<sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(5);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push4f(singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3,<sp/>param4);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(uint32_t<sp/>command,<sp/>uint32_t<sp/>param1)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(2);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push1(singleton_-&gt;head_,<sp/>command,<sp/>param1);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(uint32_t<sp/>command,<sp/>uint32_t<sp/>param1,<sp/>uint32_t<sp/>param2)<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(3);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push2(singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(uint32_t<sp/>command,<sp/>uint32_t<sp/>param1,<sp/>uint32_t<sp/>param2,<sp/>uint32_t<sp/>param3)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(4);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push3(singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(uint32_t<sp/>command,<sp/>uint32_t<sp/>param1,<sp/>uint32_t<sp/>param2,<sp/>uint32_t<sp/>param3,<sp/>uint32_t<sp/>param4)<sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(5);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push4(singleton_-&gt;head_,<sp/>command,<sp/>param1,<sp/>param2,<sp/>param3,<sp/>param4);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1aa8962af6fd20bd0768ea19fa772a0143" kindref="member">Pushbuffer::Push2F</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vector2)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(3);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push2fv(singleton_-&gt;head_,<sp/>command,<sp/>vector2);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vector3)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(4);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push3fv(singleton_-&gt;head_,<sp/>command,<sp/>vector3);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a8442ca4cf79bd9b67300a8d63e40ced8" kindref="member">Pushbuffer::Push4F</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vector4)<sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(5);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push4fv(singleton_-&gt;head_,<sp/>command,<sp/>vector4);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1ae48bdaec46fa476ddabbe8e70e4933b7" kindref="member">Pushbuffer::Push2</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DWORD<sp/>*vector2)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(3);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push2v(singleton_-&gt;head_,<sp/>command,<sp/>vector2);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a71f8c37d6620d50cfc79d5baaea4acb0" kindref="member">Pushbuffer::Push3</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DWORD<sp/>*vector3)<sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(4);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push3v(singleton_-&gt;head_,<sp/>command,<sp/>vector3);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a65890793e621338243eff919e4b27a6a" kindref="member">Pushbuffer::Push4</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DWORD<sp/>*vector4)<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(5);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push4v(singleton_-&gt;head_,<sp/>command,<sp/>vector4);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a6a97cdfc29f1f02dd61f35f23b1d21b6" kindref="member">Pushbuffer::PushN</ref>(uint32_t<sp/>command,<sp/>uint32_t<sp/>num_values,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>DWORD<sp/>*values)<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(num_values<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>pb_push(singleton_-&gt;head_++,<sp/>command,<sp/>num_values);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>memcpy(singleton_-&gt;head_,<sp/>values,<sp/>num_values<sp/>*<sp/>4);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>+=<sp/>num_values;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a4ea240e584b607e6c05d74f7c549453f" kindref="member">Pushbuffer::PushTransposedMatrix</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*m)<sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(17);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push_transposed_matrix(singleton_-&gt;head_,<sp/>command,<sp/>m);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1a86ec9121676e2f88b6ded792dfd0f677" kindref="member">Pushbuffer::Push4x3Matrix</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*m)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(13);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push_4x3_matrix(singleton_-&gt;head_,<sp/>command,<sp/>m);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db9/classPushbuffer_1aba386a3dc25d1c670fd0cf8e3f6e8ecd" kindref="member">Pushbuffer::Push4x4Matrix</ref>(uint32_t<sp/>command,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*m)<sp/>{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>singleton_-&gt;Reserve(17);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>singleton_-&gt;head_<sp/>=<sp/>pb_push_4x4_matrix(singleton_-&gt;head_,<sp/>command,<sp/>m);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/pushbuffer.cpp"/>
+  </compounddef>
+</doxygen>

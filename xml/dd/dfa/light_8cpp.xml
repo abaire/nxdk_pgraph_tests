@@ -1,0 +1,466 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/dfa/light_8cpp" kind="file" language="C++">
+    <compoundname>light.cpp</compoundname>
+    <includes refid="dd/dd3/light_8h" local="yes">light.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="no">debug_output.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="df/d43/test__host_8h" local="no">test_host.h</includes>
+    <includes local="no">xbox_math_matrix.h</includes>
+    <includes refid="dd/d7f/nxdk__ext_8h" local="yes">nxdk_ext.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes refid="d3/dc2/pushbuffer_8h" local="yes">pushbuffer.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/light.cpp</label>
+        <link refid="dd/dfa/light_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>light.h</label>
+        <link refid="dd/dd3/light_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h_source"/>
+      </node>
+      <node id="27">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+        <link refid="d3/dc2/pushbuffer_8h_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h_source"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>texture_stage.h</label>
+        <link refid="d7/d78/texture__stage_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>SDL.h</label>
+      </node>
+      <node id="13">
+        <label>atomic</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>cstring</label>
+      </node>
+      <node id="14">
+        <label>functional</label>
+      </node>
+      <node id="28">
+        <label>list</label>
+      </node>
+      <node id="17">
+        <label>memory</label>
+      </node>
+      <node id="10">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="9">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="15">
+        <label>thread</label>
+      </node>
+      <node id="16">
+        <label>vector</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="26">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="24">
+        <label>xbox_math_types.h</label>
+      </node>
+      <node id="5">
+        <label>xbox_math_vector.h</label>
+      </node>
+      <node id="20">
+        <label>xboxkrnl/xboxdef.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="dd/dfa/light_8cpp_1af0239e64aafec16a0577e832631d1757" prot="public" static="no">
+        <name>DEG2RAD</name>
+        <param><defname>c</defname></param>
+        <initializer>((float)(c) * PI_OVER_180)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.cpp" line="13" column="9" bodyfile="src/light.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="dd/dfa/light_8cpp_1a370bd21d4305db789e9ed70aca6679ab" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float PI_OVER_180</definition>
+        <argsstring></argsstring>
+        <name>PI_OVER_180</name>
+        <initializer>= (float)M_PI / 180.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.cpp" line="12" column="24" bodyfile="src/light.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/dfa/light_8cpp_1a27bbf5901a0feaf81192a3e744b838d5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kFalloffFactors[][3]</definition>
+        <argsstring>[][3]</argsstring>
+        <name>kFalloffFactors</name>
+        <initializer>= {
+    {-0.f, 1.f, 0.f},                     
+    {-0.000244f, 0.500122f, 0.499634f},   
+    {0.f, -0.494592f, 1.494592f},         
+    {-0.170208f, -0.855843f, 1.685635f},  
+    {-0.706496f, -2.507095f, 2.800600f},  
+    {-0.932112f, -3.097628f, 3.165516f},  
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.cpp" line="32" column="24" bodyfile="src/light.cpp" bodystart="32" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="dd/dfa/light_8cpp_1a836d61d74a9a3accb6eea84f46ccebca" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float GetFalloffFactorOne</definition>
+        <argsstring>(Spotlight::FalloffFactor factor)</argsstring>
+        <name>GetFalloffFactorOne</name>
+        <param>
+          <type>Spotlight::FalloffFactor</type>
+          <declname>factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.cpp" line="41" column="14" bodyfile="src/light.cpp" bodystart="41" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/dfa/light_8cpp_1a0b0ae9d0352eff5f9ac5b76077d18357" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float GetFalloffFactorTwo</definition>
+        <argsstring>(Spotlight::FalloffFactor factor)</argsstring>
+        <name>GetFalloffFactorTwo</name>
+        <param>
+          <type>Spotlight::FalloffFactor</type>
+          <declname>factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.cpp" line="44" column="14" bodyfile="src/light.cpp" bodystart="44" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/dfa/light_8cpp_1acb40d5e6cfcbf2e80f8cf4aff3b7c74c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float GetFalloffFactorThree</definition>
+        <argsstring>(Spotlight::FalloffFactor factor)</argsstring>
+        <name>GetFalloffFactorThree</name>
+        <param>
+          <type>Spotlight::FalloffFactor</type>
+          <declname>factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/light.cpp" line="47" column="14" bodyfile="src/light.cpp" bodystart="47" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;light.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;debug_output.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;test_host.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;xbox_math_matrix.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pushbuffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>PI_OVER_180<sp/>=<sp/>(float)M_PI<sp/>/<sp/>180.0f;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEG2RAD(c)<sp/>((float)(c)<sp/>*<sp/>PI_OVER_180)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><ref refid="d9/de7/classLight_1a4b679e431c70b5a07e82062d768a4b66" kindref="member">Light::Light</ref>(uint32_t<sp/>light_index,<sp/>uint32_t<sp/>enable_mask)</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>light_index_(light_index),<sp/>light_enable_mask_(LIGHT_MODE(light_index,<sp/>enable_mask))<sp/>{}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Light::Commit(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_AMBIENT_COLOR),<sp/>ambient_);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_DIFFUSE_COLOR),<sp/>diffuse_);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_SPECULAR_COLOR),<sp/>specular_);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_BACK_LIGHT(light_index_,<sp/>NV097_SET_BACK_LIGHT_AMBIENT_COLOR),<sp/>back_ambient_);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_BACK_LIGHT(light_index_,<sp/>NV097_SET_BACK_LIGHT_DIFFUSE_COLOR),<sp/>back_diffuse_);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_BACK_LIGHT(light_index_,<sp/>NV097_SET_BACK_LIGHT_SPECULAR_COLOR),<sp/>back_specular_);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Light::Commit(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>look_direction)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>Commit(host);<sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFalloffFactors[][3]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>{-0.f,<sp/>1.f,<sp/>0.f},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>falloff<sp/>=<sp/>0.f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>{-0.000244f,<sp/>0.500122f,<sp/>0.499634f},<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=0.5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{0.f,<sp/>-0.494592f,<sp/>1.494592f},<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>falloff<sp/>=<sp/>1.f<sp/>(default)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>{-0.170208f,<sp/>-0.855843f,<sp/>1.685635f},<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>{-0.706496f,<sp/>-2.507095f,<sp/>2.800600f},<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=10.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{-0.932112f,<sp/>-3.097628f,<sp/>3.165516f},<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=50.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>GetFalloffFactorOne(Spotlight::FalloffFactor<sp/>factor)<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>kFalloffFactors[</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(factor)][0];</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>GetFalloffFactorTwo(Spotlight::FalloffFactor<sp/>factor)<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>kFalloffFactors[</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(factor)][1];</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>GetFalloffFactorThree(Spotlight::FalloffFactor<sp/>factor)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>kFalloffFactors[</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(factor)][2];</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">Spotlight::Spotlight(uint32_t<sp/>light_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>direction,</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>range,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>phi,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>theta,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_constant,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_linear,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_quadratic,<sp/>FalloffFactor<sp/>falloff)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d1/d87/classSpotlight" kindref="compound">Spotlight</ref>(light_index,<sp/>position,<sp/>direction,<sp/>range,<sp/>phi,<sp/>theta,<sp/>attenuation_constant,<sp/>attenuation_linear,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>attenuation_quadratic,<sp/>GetFalloffFactorOne(falloff),<sp/>GetFalloffFactorTwo(falloff),</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GetFalloffFactorThree(falloff))<sp/>{}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">Spotlight::Spotlight(uint32_t<sp/>light_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>direction,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>range,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>phi,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>theta,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_constant,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_linear,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_quadratic,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>falloff_1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>falloff_2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>falloff_3)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d9/de7/classLight" kindref="compound">Light</ref>(light_index,<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_SPOT),<sp/>range_(range),<sp/>phi_(phi),<sp/>theta_(theta)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>memcpy(position_,<sp/>position,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(position_));</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>memcpy(direction_,<sp/>direction,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(direction_));</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>attenuation_[0]<sp/>=<sp/>attenuation_constant;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>attenuation_[1]<sp/>=<sp/>attenuation_linear;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>attenuation_[2]<sp/>=<sp/>attenuation_quadratic;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>falloff_[0]<sp/>=<sp/>falloff_1;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>falloff_[1]<sp/>=<sp/>falloff_2;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>falloff_[2]<sp/>=<sp/>falloff_3;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Spotlight::Commit(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>Light::Commit(host);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>XboxMath::vector_t<sp/>transformed_position;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>XboxMath::VectorMultMatrix(position_,<sp/>host.GetFixedFunctionModelViewMatrix(),<sp/>transformed_position);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>transformed_position[3]<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Direction<sp/>should<sp/>probably<sp/>be<sp/>transformed<sp/>as<sp/>well.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>vector_t<sp/>normalized_direction{0.f,<sp/>0.f,<sp/>0.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>VectorNormalize(direction_,<sp/>normalized_direction);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cos_half_theta<sp/>=<sp/>cosf(0.5f<sp/>*<sp/>DEG2RAD(theta_));</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cos_half_phi<sp/>=<sp/>cosf(0.5f<sp/>*<sp/>DEG2RAD(phi_));</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>inv_scale<sp/>=<sp/>-1.f<sp/>/<sp/>(cos_half_theta<sp/>-<sp/>cos_half_phi);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>ScalarMultVector(normalized_direction,<sp/>inv_scale);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>normalized_direction[3]<sp/>=<sp/>cos_half_phi<sp/>*<sp/>inv_scale;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_RANGE),<sp/>range_);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_POSITION),<sp/>transformed_position);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_ATTENUATION),<sp/>attenuation_);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_SPOT_FALLOFF),<sp/>falloff_);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a8442ca4cf79bd9b67300a8d63e40ced8" kindref="member">Pushbuffer::Push4F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_SPOT_DIRECTION),<sp/>normalized_direction);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal">DirectionalLight::DirectionalLight(uint32_t<sp/>light_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>direction)</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d9/de7/classLight" kindref="compound">Light</ref>(light_index,<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>memcpy(direction_,<sp/>direction,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(direction_));</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d1/d0a/classDirectionalLight_1aaa1bbc3c7fcffac7cb066c67a0d4d8bb" kindref="member">DirectionalLight::Commit</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;DirectionLight<sp/>must<sp/>use<sp/>the<sp/>look_dir<sp/>Commit<sp/>variant&quot;</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d1/d0a/classDirectionalLight_1aaa1bbc3c7fcffac7cb066c67a0d4d8bb" kindref="member">DirectionalLight::Commit</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>vector_t&amp;<sp/>look_dir)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>Light::Commit(host);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Calculate<sp/>the<sp/>Blinn<sp/>half<sp/>vector.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>https://paroj.github.io/gltut/Illumination/Tut11%20BlinnPhong%20Model.html</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>vector_t<sp/>half_angle_vector{0.f,<sp/>0.f,<sp/>0.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>VectorAddVector(look_dir,<sp/>direction_,<sp/>half_angle_vector);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>VectorNormalize(half_angle_vector);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>ScalarMultVector(half_angle_vector,<sp/>-1.f);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Infinite<sp/>direction<sp/>is<sp/>the<sp/>direction<sp/>towards<sp/>the<sp/>light<sp/>source.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>vector_t<sp/>infinite_direction;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>ScalarMultVector(direction_,<sp/>-1.f,<sp/>infinite_direction);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_RANGE),<sp/>1e30f);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_INFINITE_HALF_VECTOR),<sp/>half_angle_vector);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_INFINITE_DIRECTION),<sp/>infinite_direction);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal">PointLight::PointLight(uint32_t<sp/>light_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>position,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>range,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_constant,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_linear,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_quadratic)</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d9/de7/classLight" kindref="compound">Light</ref>(light_index,<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_LOCAL),<sp/>range_(range)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>memcpy(position_,<sp/>position,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(position_));</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>attenuation_[0]<sp/>=<sp/>attenuation_constant;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>attenuation_[1]<sp/>=<sp/>attenuation_linear;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>attenuation_[2]<sp/>=<sp/>attenuation_quadratic;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PointLight::Commit(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>Light::Commit(host);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>vector_t<sp/>transformed_position;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>matrix4_t&amp;<sp/>view_matrix<sp/>=<sp/>host.GetFixedFunctionModelViewMatrix();</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>VectorMultMatrix(position_,<sp/>view_matrix,<sp/>transformed_position);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>transformed_position[3]<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ac4e22b54fbe2bb622ed04b6c6b0ffd03" kindref="member">Pushbuffer::PushF</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_RANGE),<sp/>range_);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_POSITION),<sp/>transformed_position);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1ad8635336b6a3bb0c00128cfc77cf4a74" kindref="member">Pushbuffer::Push3F</ref>(SET_LIGHT(light_index_,<sp/>NV097_SET_LIGHT_LOCAL_ATTENUATION),<sp/>attenuation_);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/light.cpp"/>
+  </compounddef>
+</doxygen>

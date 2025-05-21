@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d2d/structTextureFramebufferBlitTests_1_1beta4__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>TextureFramebufferBlitTests::beta4_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_framebuffer_blit_tests.h" line="38" column="3" bodyfile="src/tests/texture_framebuffer_blit_tests.h" bodystart="38" bodyend="38"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
