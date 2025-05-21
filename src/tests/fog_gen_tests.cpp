@@ -115,13 +115,6 @@ void FogGenTests::Initialize() {
     Pushbuffer::End();
   }
 
-  // Just pass through the diffuse color.
-  host_.SetCombinerControl(1);
-  host_.SetInputColorCombiner(0, TestHost::SRC_DIFFUSE, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
-                              false, TestHost::MAP_UNSIGNED_INVERT);
-  host_.SetInputAlphaCombiner(0, TestHost::SRC_DIFFUSE, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_ZERO,
-                              false, TestHost::MAP_UNSIGNED_INVERT);
-
   // Mix between the output pixel color and the fog color using the fog alpha value.
   host_.SetFinalCombiner0(TestHost::SRC_FOG, true, false, TestHost::SRC_DIFFUSE, false, false, TestHost::SRC_FOG, false,
                           false);
@@ -149,7 +142,7 @@ static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host
   return shader;
 }
 
-static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
+static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode, bool use_fixed_function) {
   Pushbuffer::Begin();
   // Note: Fog color is ABGR and not ARGB
   Pushbuffer::Push(NV097_SET_FOG_COLOR, kFogColor);
@@ -175,7 +168,7 @@ static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
   switch (fog_mode) {
     case NV097_SET_FOG_MODE_V_LINEAR:
     case NV097_SET_FOG_MODE_V_LINEAR_ABS:
-      if (fog_gen_mode == NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA) {
+      if (fog_gen_mode == NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA && use_fixed_function) {
         // bias_param + alpha * multiplier_param - 1.0
         // Map to the range -1 to 1
         bias_param = 0.f;
@@ -188,7 +181,7 @@ static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
 
     case NV097_SET_FOG_MODE_V_EXP:
     case NV097_SET_FOG_MODE_V_EXP_ABS:
-      if (fog_gen_mode == NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA) {
+      if (fog_gen_mode == NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA && use_fixed_function) {
         // (bias_param + 2^ (alpha * multiplier_param * 16)) - 1.5
         // Map to the range 0..1 using xemu's (apparently incorrect) calculation
         bias_param = 0.5f;
@@ -201,7 +194,7 @@ static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
 
     case NV097_SET_FOG_MODE_V_EXP2:
     case NV097_SET_FOG_MODE_V_EXP2_ABS:
-      if (fog_gen_mode == NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA) {
+      if (fog_gen_mode == NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA && use_fixed_function) {
         // (bias_param + 2^ (-alpha * alpha * multiplier_param^2 * 32)) - 1.5
         // Map to the range 0..1 using xemu's (apparently incorrect) calculation
         bias_param = 0.5f;
@@ -232,7 +225,7 @@ void FogGenTests::Test(const std::string& name, uint32_t fog_mode, uint32_t fog_
   }
   static constexpr auto kFogValueIndex = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
 
-  SetupFogParams(fog_mode, fog_gen_mode);
+  SetupFogParams(fog_mode, fog_gen_mode, use_fixed_function);
 
   static constexpr uint32_t kBackgroundColor = 0xFF232623;
   host_.PrepareDraw(kBackgroundColor);
