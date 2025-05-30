@@ -31,6 +31,8 @@ class ImageBlitTests : public TestSuite {
 
   static std::string MakeTestName(const BlitTest& test);
 
+  void TestDirtyOverlappedDestinationSurface();
+
   uint32_t image_pitch_{0};
   uint32_t image_height_{0};
   uint8_t* source_image_{nullptr};

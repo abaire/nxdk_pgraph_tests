@@ -24,6 +24,8 @@ static constexpr uint32_t SUBCH_CLASS_12 = SUBCH_CLASS_19 + 1;
 // Subchannel reserved for interaction with the class 72 channel.
 static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
+static constexpr char kDirtyOverlappedDestSurfaceTest[] = "DirtyOverlappedDestSurf";
+
 #define SOURCE_X 8
 #define SOURCE_Y 8
 #define SOURCE_WIDTH 128
@@ -95,24 +97,28 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
     auto test_method = [this, test]() { Test(test); };
     tests_[name] = test_method;
   }
+
+  tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
 }
 
 void ImageBlitTests::Initialize() {
   TestSuite::Initialize();
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
   SetDefaultTextureFormat();
 
   SDL_Surface* temp = IMG_Load("D:\\image_blit\\TestImage.png");
   ASSERT(temp);
   SDL_Surface* test_image = SDL_ConvertSurfaceFormat(temp, SDL_PIXELFORMAT_BGRA32, 0);
-  SDL_free(temp);
+  SDL_FreeSurface(temp);
 
   image_pitch_ = test_image->pitch;
   image_height_ = test_image->h;
   uint32_t image_bytes = image_pitch_ * image_height_;
 
-  source_image_ = static_cast<uint8_t*>(MmAllocateContiguousMemory(image_bytes));
+  source_image_ = static_cast<uint8_t*>(
+      MmAllocateContiguousMemoryEx(image_bytes, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE));
   memcpy(source_image_, test_image->pixels, image_bytes);
-  SDL_free(test_image);
+  SDL_FreeSurface(test_image);
 
   // TODO: Provide a mechanism to find the next unused channel.
   auto channel = kNextContextChannel;
@@ -138,8 +144,11 @@ void ImageBlitTests::Initialize() {
 }
 
 void ImageBlitTests::Deinitialize() {
-  MmFreeContiguousMemory(source_image_);
-  source_image_ = nullptr;
+  if (source_image_) {
+    MmFreeContiguousMemory(source_image_);
+    source_image_ = nullptr;
+  }
+  TestSuite::Deinitialize();
 }
 
 void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
@@ -217,6 +226,73 @@ void ImageBlitTests::Test(const BlitTest& test) {
 
   std::string name = MakeTestName(test);
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
+  host_.PrepareDraw(0xFF111111);
+
+  uint32_t image_bytes = image_pitch_ * image_height_;
+  pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
+
+  // Do a 3D render to a surface render target within the destination blit area.
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  auto subtexture = reinterpret_cast<uint8_t*>(pb_back_buffer()) + 64 + 64 * pb_back_buffer_pitch();
+  host_.RenderToSurfaceStart(subtexture, TestHost::SCF_A8R8G8B8, 128, 128);
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+  host_.SetDiffuse(1.f, 0.f, 0.f);
+  host_.SetScreenVertex(0.f, 0.f, 0.f);
+
+  host_.SetDiffuse(0.f, 1.f, 0.f);
+  host_.SetScreenVertex(128.f, 0.f, 0.f);
+
+  host_.SetDiffuse(0.f, 0.f, 1.f);
+  host_.SetScreenVertex(128.f, 128.f, 0.f);
+
+  host_.SetDiffuse(0.75, 0.65f, 0.55f);
+  host_.SetScreenVertex(0.f, 128.f, 0.f);
+
+  host_.End();
+  host_.RenderToSurfaceEnd();
+
+  // 2) Do a 2D image srccopy that completely overwrites the destination area.
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, image_pitch_, 4 * host_.GetFramebufferWidth(),
+            0,    // source_offset
+            0,    // source_x
+            0,    // source_y
+            0,    // destination_offset
+            0,    // destination_x
+            0,    // destination_y
+            256,  // width
+            256,  // height
+            0,    // clip_x
+            0,    // clip_y
+            256,  // clip_width
+            256   // clip_height
+  );
+
+  // 3) Draw an unrelated quad to force the 3D hardware to wait on the 2D blit completion.
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+  host_.SetDiffuse(1.f, 0.f, 0.f);
+  host_.SetScreenVertex(320.f, 240.f, 0.f);
+
+  host_.SetDiffuse(0.f, 1.f, 0.f);
+  host_.SetScreenVertex(324.f, 240.f, 0.f);
+
+  host_.SetDiffuse(0.f, 0.f, 1.f);
+  host_.SetScreenVertex(324.f, 244.f, 0.f);
+
+  host_.SetDiffuse(0.75, 0.65f, 0.55f);
+  host_.SetScreenVertex(320.f, 244.f, 0.f);
+
+  host_.End();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDirtyOverlappedDestSurfaceTest);
 }
 
 std::string ImageBlitTests::MakeTestName(const BlitTest& test) {

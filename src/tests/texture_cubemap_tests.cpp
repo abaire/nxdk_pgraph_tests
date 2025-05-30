@@ -117,7 +117,7 @@ void TextureCubemapTests::Initialize() {
     stage.SetTextureDimensions(normal_map->w, normal_map->h);
     host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8), 0);
     host_.SetTexture(normal_map);
-    SDL_free(normal_map);
+    SDL_FreeSurface(normal_map);
   }
 
   // Load the cube map into stage3

@@ -172,12 +172,14 @@ void MenuItem::CursorRight(bool is_repeat) {
 }
 
 void MenuItem::CursorUpAndActivate() {
+  active_submenu->Deactivate();
   active_submenu = nullptr;
   CursorUp(false);
   Activate();
 }
 
 void MenuItem::CursorDownAndActivate() {
+  active_submenu->Deactivate();
   active_submenu = nullptr;
   CursorDown(false);
   Activate();
@@ -211,6 +213,9 @@ void MenuItemTest::OnEnter() {
   pb_print("Running %s", name.c_str());
   Swap();
 
+  if (has_run_once_) {
+    suite->Deinitialize();
+  }
   suite->Initialize();
   suite->SetSavingAllowed(true);
   has_run_once_ = false;
@@ -218,6 +223,7 @@ void MenuItemTest::OnEnter() {
 
 bool MenuItemTest::Deactivate() {
   suite->Deinitialize();
+  has_run_once_ = false;
   return MenuItem::Deactivate();
 }
 
