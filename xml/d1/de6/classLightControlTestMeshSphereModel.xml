@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/de6/classLightControlTestMeshSphereModel" kind="class" language="C++" prot="public">
+    <compoundname>LightControlTestMeshSphereModel</compoundname>
+    <basecompoundref refid="d8/d22/classSolidColorModelBuilder" prot="public" virt="non-virtual">SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d1/de6/classLightControlTestMeshSphereModel_1a04948db471d08607c877bea471379aeb" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshSphereModel::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>LightControlTestMeshSphereModel::vertices_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="39" column="9" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/de6/classLightControlTestMeshSphereModel_1aaffc58ae2682e51e7bd1fe10882d5075" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshSphereModel::normals_</definition>
+        <argsstring></argsstring>
+        <name>normals_</name>
+        <qualifiedname>LightControlTestMeshSphereModel::normals_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="40" column="9" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/de6/classLightControlTestMeshSphereModel_1abf578fab23c5bb803ab66ff367a5af94" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshSphereModel::texcoords_</definition>
+        <argsstring></argsstring>
+        <name>texcoords_</name>
+        <qualifiedname>LightControlTestMeshSphereModel::texcoords_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="41" column="9" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1a88635f72ab7d4d8fe1919ef34ea2b885" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshSphereModel::LightControlTestMeshSphereModel</definition>
+        <argsstring>()</argsstring>
+        <name>LightControlTestMeshSphereModel</name>
+        <qualifiedname>LightControlTestMeshSphereModel::LightControlTestMeshSphereModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="12" column="3" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1af32e30b98b7a7acacdf65952f174b230" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshSphereModel::LightControlTestMeshSphereModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>LightControlTestMeshSphereModel</name>
+        <qualifiedname>LightControlTestMeshSphereModel::LightControlTestMeshSphereModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="13" column="3" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1aca8f0ef5cc3bea87e1921dd04850dd70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshSphereModel::LightControlTestMeshSphereModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular, const vector_t &amp;back_diffuse, const vector_t &amp;back_specular)</argsstring>
+        <name>LightControlTestMeshSphereModel</name>
+        <qualifiedname>LightControlTestMeshSphereModel::LightControlTestMeshSphereModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="15" column="3" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1af5ddf6533973501686c6817d94798904" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t LightControlTestMeshSphereModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>LightControlTestMeshSphereModel::GetVertexCount</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a32b21d46ed0201d13e8053a9e90844d8">GetVertexCount</reimplements>
+        <briefdescription>
+<para>Returns the number of kPositions required to hold the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="19" column="13" bodyfile="src/models/light_control_test_mesh_sphere_model.cpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1a456086a639eceb9fe636d64ca3adf59d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshSphereModel::GetVertexPositions</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>LightControlTestMeshSphereModel::GetVertexPositions</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a607f16ec708c56840600b0b59c611b86">GetVertexPositions</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="22" column="16" bodyfile="src/models/light_control_test_mesh_sphere_model.cpp" bodystart="33" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1adb60790402f552cb8839f68977667ff0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshSphereModel::GetVertexNormals</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>LightControlTestMeshSphereModel::GetVertexNormals</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1a40da29eb81f67fece2865c7fe9d75668">GetVertexNormals</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="23" column="16" bodyfile="src/models/light_control_test_mesh_sphere_model.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/de6/classLightControlTestMeshSphereModel_1a31444f1227d92176966ac5763608e683" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void LightControlTestMeshSphereModel::ReleaseData</definition>
+        <argsstring>() override</argsstring>
+        <name>ReleaseData</name>
+        <qualifiedname>LightControlTestMeshSphereModel::ReleaseData</qualifiedname>
+        <reimplements refid="de/dfe/classModelBuilder_1aed68c90f36cf2fd3c0ebce5535900d92">ReleaseData</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_sphere_model.h" line="24" column="8" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="24" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightControlTestMeshSphereModel</label>
+        <link refid="d1/de6/classLightControlTestMeshSphereModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightControlTestMeshSphereModel</label>
+        <link refid="d1/de6/classLightControlTestMeshSphereModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ModelBuilder</label>
+        <link refid="de/dfe/classModelBuilder"/>
+      </node>
+      <node id="2">
+        <label>SolidColorModelBuilder</label>
+        <link refid="d8/d22/classSolidColorModelBuilder"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/light_control_test_mesh_sphere_model.h" line="10" column="1" bodyfile="src/models/light_control_test_mesh_sphere_model.h" bodystart="10" bodyend="42"/>
+    <listofallmembers>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a4bf9de48b1fe48bf7ab982916fbd2613" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>back_diffuse_</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a6b4cbcef74a1e0b2aa6080b461147d24" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>back_specular_</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1ab82b3bba802766d064d0eb52d5b9ed1a" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>diffuse_</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1af5ddf6533973501686c6817d94798904" prot="public" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>GetVertexCount</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1adb60790402f552cb8839f68977667ff0" prot="protected" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>GetVertexNormals</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1a456086a639eceb9fe636d64ca3adf59d" prot="protected" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>GetVertexPositions</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1a88635f72ab7d4d8fe1919ef34ea2b885" prot="public" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>LightControlTestMeshSphereModel</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1af32e30b98b7a7acacdf65952f174b230" prot="public" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>LightControlTestMeshSphereModel</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1aca8f0ef5cc3bea87e1921dd04850dd70" prot="public" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>LightControlTestMeshSphereModel</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1aaffc58ae2682e51e7bd1fe10882d5075" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>normals_</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1ab94ea31c8580d3bf0aae188e3a2fa100" prot="public" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1aea7e75f21aa199682051b418eefffe4d" prot="public" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>PopulateVertexBuffer</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1a31444f1227d92176966ac5763608e683" prot="protected" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>ReleaseData</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a560b253c40286ca62cda4a93032cf92e" prot="public" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1af3c8579bd316ac79e1bd067dbce677c2" prot="public" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1aefb94f8cdf394959d1b643f0e1883cc2" prot="public" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>SolidColorModelBuilder</name></member>
+      <member refid="d8/d22/classSolidColorModelBuilder_1a1c51802b88cc39ec65b7a5b6f7051847" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>specular_</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1abf578fab23c5bb803ab66ff367a5af94" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>texcoords_</name></member>
+      <member refid="d1/de6/classLightControlTestMeshSphereModel_1a04948db471d08607c877bea471379aeb" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSphereModel</scope><name>vertices_</name></member>
+      <member refid="de/dfe/classModelBuilder_1a863d4bf0e4318c57683197645615baf4" prot="public" virt="virtual"><scope>LightControlTestMeshSphereModel</scope><name>~ModelBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

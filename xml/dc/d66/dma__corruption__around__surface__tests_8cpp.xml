@@ -1,0 +1,557 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/d66/dma__corruption__around__surface__tests_8cpp" kind="file" language="C++">
+    <compoundname>dma_corruption_around_surface_tests.cpp</compoundname>
+    <includes refid="d7/d89/dma__corruption__around__surface__tests_8h" local="yes">dma_corruption_around_surface_tests.h</includes>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes refid="db/d91/passthrough__vertex__shader_8h" local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes refid="da/d72/texture__generator_8h" local="yes">texture_generator.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>nxdk_ext.h</label>
+        <link refid="dd/d7f/nxdk__ext_8h_source"/>
+      </node>
+      <node id="29">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>pushbuffer.h</label>
+        <link refid="d3/dc2/pushbuffer_8h_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>shaders/passthrough_vertex_shader.h</label>
+        <link refid="db/d91/passthrough__vertex__shader_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>vertex_shader_program.h</label>
+        <link refid="da/d63/vertex__shader__program_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/dma_corruption_around_surface_tests.cpp</label>
+        <link refid="dc/d66/dma__corruption__around__surface__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>dma_corruption_around_surface_tests.h</label>
+        <link refid="d7/d89/dma__corruption__around__surface__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+        <link refid="db/d8a/texture__format_8h_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>texture_generator.h</label>
+        <link refid="da/d72/texture__generator_8h_source"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+        <link refid="d7/d78/texture__stage_8h_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>vertex_buffer.h</label>
+        <link refid="d3/dbd/vertex__buffer_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>SDL.h</label>
+      </node>
+      <node id="10">
+        <label>atomic</label>
+      </node>
+      <node id="25">
+        <label>chrono</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="30">
+        <label>list</label>
+      </node>
+      <node id="26">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="8">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="27">
+        <label>set</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="13">
+        <label>thread</label>
+      </node>
+      <node id="31">
+        <label>utility</label>
+      </node>
+      <node id="14">
+        <label>vector</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+      <node id="18">
+        <label>xboxkrnl/xboxdef.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1ae1de504b43f0d2fb4384f0bcd6318813" prot="public" static="no">
+        <name>SET_MASK</name>
+        <param><defname>mask</defname></param>
+        <param><defname>val</defname></param>
+        <initializer>(((val) &lt;&lt; (__builtin_ffs(mask) - 1)) &amp; (mask))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="15" column="9" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1af5395d70a206569fcd15fc88bdad1b43" prot="public" static="no">
+        <name>NV2A_MMIO_BASE</name>
+        <initializer>0xFD000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="17" column="9" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1ac4066fc8b5dcdd9c00fc9e3cfa5bdf15" prot="public" static="no">
+        <name>BLOCKPGRAPH_ADDR</name>
+        <initializer>0x400000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="18" column="9" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1a52fdb28fd2222e1cd6296da52bac2785" prot="public" static="no">
+        <name>PGRAPH_ADDR</name>
+        <param><defname>a</defname></param>
+        <initializer>(NV2A_MMIO_BASE + BLOCKPGRAPH_ADDR + (a))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="19" column="9" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1ac86d2ca2c760c5e6591685b0578f192e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDefaultDMAChannelA</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAChannelA</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="23" column="27" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1a2c67f47e94230b17b3734961625b995d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDefaultDMAColorChannel</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAColorChannel</name>
+        <initializer>= 9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="26" column="27" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1a9748afb1f9fc31d71c665afa5c9d65ee" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTestName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestName</name>
+        <initializer>= &quot;DMAOverlap&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="28" column="23" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1ab06b0d3d79f15cf9b06b9ad35a53aa41" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureSize</definition>
+        <argsstring></argsstring>
+        <name>kTextureSize</name>
+        <initializer>= 128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="29" column="27" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1a2fd3fd41c184cf40dc5675d7b97da3f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCheckerSize</definition>
+        <argsstring></argsstring>
+        <name>kCheckerSize</name>
+        <initializer>= 8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="31" column="27" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d66/dma__corruption__around__surface__tests_8cpp_1a7fb3ba846c131e16db4e0f482cf869c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCheckerboardB</definition>
+        <argsstring></argsstring>
+        <name>kCheckerboardB</name>
+        <initializer>= 0xFF3333C0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/dma_corruption_around_surface_tests.cpp" line="32" column="27" bodyfile="src/tests/dma_corruption_around_surface_tests.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;dma_corruption_around_surface_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_generator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SET_MASK(mask,<sp/>val)<sp/>(((val)<sp/>&lt;&lt;<sp/>(__builtin_ffs(mask)<sp/>-<sp/>1))<sp/>&amp;<sp/>(mask))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_MMIO_BASE<sp/>0xFD000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BLOCKPGRAPH_ADDR<sp/>0x400000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PGRAPH_ADDR(a)<sp/>(NV2A_MMIO_BASE<sp/>+<sp/>BLOCKPGRAPH_ADDR<sp/>+<sp/>(a))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_A<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>3<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_A<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAChannelA<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_COLOR<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>9<sp/>by<sp/>default.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_COLOR<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAColorChannel<sp/>=<sp/>9;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DMAOverlap&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureSize<sp/>=<sp/>128;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerSize<sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerboardB<sp/>=<sp/>0xFF3333C0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal">DMACorruptionAroundSurfaceTests::DMACorruptionAroundSurfaceTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;DMA<sp/>corruption<sp/>around<sp/>surfaces&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>tests_[kTestName]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test();<sp/>};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d5/d34/classDMACorruptionAroundSurfaceTests_1a1f90076dfb7f1df72027d3dac86c3f35" kindref="member">DMACorruptionAroundSurfaceTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a80d34dc4df3b4c8f6b1660d543fcc342" kindref="member">SetVertexShaderProgram</ref>(shader);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DMACorruptionAroundSurfaceTests::Test()<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a7343d98d694323b7e42ca44a70a5e42a" kindref="member">PrepareDraw</ref>(0xFF050505);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kRenderBufferPitch<sp/>=<sp/>kTextureSize<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kHalfTextureSize<sp/>=<sp/>kRenderBufferPitch<sp/>*<sp/>(kTextureSize<sp/>&gt;&gt;<sp/>1);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Configure<sp/>a<sp/>surface<sp/>pointing<sp/>at<sp/>texture<sp/>memory<sp/>and<sp/>do<sp/>a<sp/>no-op<sp/>draw<sp/>to<sp/>force<sp/>xemu<sp/>to<sp/>create<sp/>a<sp/>SurfaceBinding.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTextureMemory<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.<ref refid="d6/d80/classTestHost_1a88d42d7e4733957d2e5ca6b559103ee4" kindref="member">GetTextureMemoryForStage</ref>(0));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_SURFACE_PITCH,<sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>kRenderBufferPitch)<sp/>|</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>kRenderBufferPitch));</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAChannelA);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_SURFACE_COLOR_OFFSET,<sp/>VRAM_ADDR(kTextureMemory<sp/>+<sp/>kHalfTextureSize));</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z16,<sp/>kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>NoOpDraw();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Do<sp/>a<sp/>CPU<sp/>copy<sp/>to<sp/>texture<sp/>memory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>WaitForGPU();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>GenerateRGBACheckerboard(host_.<ref refid="d6/d80/classTestHost_1a88d42d7e4733957d2e5ca6b559103ee4" kindref="member">GetTextureMemoryForStage</ref>(0),<sp/>0,<sp/>0,<sp/>kTextureSize,<sp/>kTextureSize,<sp/>kRenderBufferPitch,</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0xFFCC3333,<sp/>kCheckerboardB,<sp/>kCheckerSize);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Point<sp/>the<sp/>output<sp/>surface<sp/>back<sp/>at<sp/>the<sp/>framebuffer.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFramebufferPitch<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>()<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAColorChannel);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_SURFACE_COLOR_OFFSET,<sp/>0);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_SET_SURFACE_PITCH,<sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>kFramebufferPitch)<sp/>|</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>kFramebufferPitch));</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Restore<sp/>the<sp/>surface<sp/>format<sp/>to<sp/>allow<sp/>the<sp/>texture<sp/>to<sp/>be<sp/>rendered.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z16,<sp/>host_.<ref refid="d6/d80/classTestHost_1acbfa15cdd62fb004893a7bc8776a79f6" kindref="member">GetFramebufferWidth</ref>(),</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a258c96ce47752d8d15c4217825b9adc6" kindref="member">GetFramebufferHeight</ref>());</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>a<sp/>quad<sp/>with<sp/>the<sp/>texture.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>Draw();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>kTestName);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>kTestName);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DMACorruptionAroundSurfaceTests::Draw()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>texture_stage.SetImageDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a3eb8e7cbfe182f37d8f6b2b0fa825d11" kindref="member">SetupTextureStages</ref>();</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>inset<sp/>=<sp/>64.0f;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>inset;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a5db56e432f77926c556e1e0635c49ef5" kindref="member">GetFramebufferWidthF</ref>()<sp/>-<sp/>inset;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>inset;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a503d047fdb4a06159ba4ec33ed3f97c5" kindref="member">GetFramebufferHeightF</ref>()<sp/>-<sp/>inset;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_x<sp/>=<sp/>left<sp/>+<sp/>(right<sp/>-<sp/>left)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_y<sp/>=<sp/>top<sp/>+<sp/>(bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(left,<sp/>mid_y,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(mid_x,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(right,<sp/>mid_y,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(mid_x,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a444f4b457f1e7c5bd0dac956e7b7e49f" kindref="member">SetShaderStageProgram</ref>(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DMACorruptionAroundSurfaceTests::NoOpDraw()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1aca2c164aa95df6c0285d8abe46fea675" kindref="member">Begin</ref>(TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(0.0f,<sp/>0.0f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(0.0f,<sp/>0.0f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a9410c67a73b22b0682fc1468e3eafb93" kindref="member">SetVertex</ref>(0.0f,<sp/>0.0f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a6f7560a6a0050766bef3335cf3a2b3a5" kindref="member">End</ref>();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DMACorruptionAroundSurfaceTests::WaitForGPU()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a65c7ff3c4ee7ce273a4cd9ce6ebd1bfa" kindref="member">Pushbuffer::Begin</ref>();</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_NO_OPERATION,<sp/>0);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a2ed66baabdd96ab047f97945d8455df2" kindref="member">Pushbuffer::Push</ref>(NV097_WAIT_FOR_IDLE,<sp/>0);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><ref refid="da/db9/classPushbuffer_1a0b3abd7d46fb61026bdafb5aff9b4b6f" kindref="member">Pushbuffer::End</ref>();</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/dma_corruption_around_surface_tests.cpp"/>
+  </compounddef>
+</doxygen>

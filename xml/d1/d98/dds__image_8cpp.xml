@@ -1,0 +1,664 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d98/dds__image_8cpp" kind="file" language="C++">
+    <compoundname>dds_image.cpp</compoundname>
+    <includes refid="d2/d7c/dds__image_8h" local="yes">dds_image.h</includes>
+    <includes local="no">cstdio</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/dds_image.cpp</label>
+        <link refid="d1/d98/dds__image_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>dds_image.h</label>
+        <link refid="d2/d7c/dds__image_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="6">
+        <label>cstdio</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="10">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="9">
+        <label>string</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="8">
+        <label>windows.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="dd/ddc/structDDS__PIXELFORMAT" prot="public">DDS_PIXELFORMAT</innerclass>
+    <innerclass refid="db/db1/structDDS__HEADER" prot="public">DDS_HEADER</innerclass>
+    <innerclass refid="dd/d5b/structDDS__FILE" prot="public">DDS_FILE</innerclass>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="d1/d98/dds__image_8cpp_1a722770517d540d9b99c03c460bba8cbd" prot="public" static="no">
+        <name>FOURCC</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <param><defname>c</defname></param>
+        <param><defname>d</defname></param>
+        <initializer>(((a) &amp; 0xFF) | (((b) &amp; 0xFF) &lt;&lt; 8) | (((c) &amp; 0xFF) &lt;&lt; 16) | (((d) &amp; 0xFF) &lt;&lt; 24))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="12" column="9" bodyfile="src/dds_image.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7da" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DDH_FLAGS</name>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daac2c9c2e1d98f0bd375267489f47f8f1e" prot="public">
+          <name>DDSD_CAPS</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daa51e3c73813f4799e4faf24670c2099b5" prot="public">
+          <name>DDSD_HEIGHT</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daa6424c30f96c1841e62dc6739b6209c1c" prot="public">
+          <name>DDSD_WIDTH</name>
+          <initializer>= 0x4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daaefcb9dea0df2dea6e6925e6fe6284148" prot="public">
+          <name>DDSD_PITCH</name>
+          <initializer>= 0x8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daa742f48da2594a81de68b4981bc103cfa" prot="public">
+          <name>DDSD_PIXELFORMAT</name>
+          <initializer>= 0x1000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daa521fe57df7f54b197c5a9b926d619079" prot="public">
+          <name>DDSD_MIPMAPCOUNT</name>
+          <initializer>= 0x20000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daa4c4af87fc662fd5f9dedb374f86e7aaa" prot="public">
+          <name>DDSD_LINEARSIZE</name>
+          <initializer>= 0x80000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a04ce4227de3c699145fbdb66d12ba7daaa845798ce97f276865da26d3591dba0c" prot="public">
+          <name>DDSD_DEPTH</name>
+          <initializer>= 0x800000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="23" column="1" bodyfile="src/dds_image.cpp" bodystart="23" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="enum" id="d1/d98/dds__image_8cpp_1a6794b11c3359bdc73033c4ca3800369c" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DDH_CAPS</name>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a6794b11c3359bdc73033c4ca3800369ca37467a180fd450972387c20cd3cd4d8e" prot="public">
+          <name>DDSCAPS_COMPLEX</name>
+          <initializer>= 0x08</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a6794b11c3359bdc73033c4ca3800369ca357228732c2659ab0776f960f030cd72" prot="public">
+          <name>DDSCAPS_TEXTURE</name>
+          <initializer>= 0x1000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a6794b11c3359bdc73033c4ca3800369caede877257d52468712ea66cbab30e409" prot="public">
+          <name>DDSCAPS_MIPMAP</name>
+          <initializer>= 0x400000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="34" column="1" bodyfile="src/dds_image.cpp" bodystart="34" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="enum" id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545d" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DDH_CAPS2</name>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545da3f390e41f6aab48a838d74119f9080ac" prot="public">
+          <name>DDSCAPS2_CUBEMAP</name>
+          <initializer>= 0x200</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545dad6a0f91fa04fbd36b73b71a5bed747b8" prot="public">
+          <name>DDSCAPS2_CUBEMAP_POSITIVEX</name>
+          <initializer>= 0x400</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545da07d80c3ccb9eaf0686f0ba295419c83f" prot="public">
+          <name>DDSCAPS2_CUBEMAP_NEGATIVEX</name>
+          <initializer>= 0x800</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545da3569d1392a86bb1ca8f9e204b5853ee0" prot="public">
+          <name>DDSCAPS2_CUBEMAP_POSITIVEY</name>
+          <initializer>= 0x1000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545dadfa7b2ef16799e78d27d42bcdd827e9d" prot="public">
+          <name>DDSCAPS2_CUBEMAP_NEGATIVEY</name>
+          <initializer>= 0x2000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545da96c48d4dd5fccc375f820cfab0b6f900" prot="public">
+          <name>DDSCAPS2_CUBEMAP_POSITIVEZ</name>
+          <initializer>= 0x4000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545da59757a7be07079c4b7c7e37f549ad548" prot="public">
+          <name>DDSCAPS2_CUBEMAP_NEGATIVEZ</name>
+          <initializer>= 0x8000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1ae6c365ac7eb6667f7861dd8e4734545dacdb6f61b352f3b197188e7f83e9dce7e" prot="public">
+          <name>DDSCAPS2_VOLUME</name>
+          <initializer>= 0x200000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="40" column="1" bodyfile="src/dds_image.cpp" bodystart="40" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="enum" id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DDPF_FLAGS</name>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8acbb4c2700cb616aec2b730399105b5f3" prot="public">
+          <name>DDPF_ALPHAPIXELS</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8a4873b6c43fcec14e34a9a70970035ebf" prot="public">
+          <name>DDPF_ALPHA</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8a81a0a371d1a6b253afa21c702e6987da" prot="public">
+          <name>DDPF_FOURCC</name>
+          <initializer>= 0x4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8a1c7df89aa01866a224b2b0bd4e6d58e4" prot="public">
+          <name>DDPF_RGB</name>
+          <initializer>= 0x40</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8a1631821df60168672fa3d592ebaf2c54" prot="public">
+          <name>DDPF_YUV</name>
+          <initializer>= 0x200</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d1/d98/dds__image_8cpp_1a350586b5f6496090df27fc8ac9332be8a8465280be2155f5472048831bbc06f65" prot="public">
+          <name>DDPF_LUMINANCE</name>
+          <initializer>= 0x20000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="51" column="1" bodyfile="src/dds_image.cpp" bodystart="51" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d1/d98/dds__image_8cpp_1ae6090c1adaf7b1353fa36905088c6f99" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDDSMagic</definition>
+        <argsstring></argsstring>
+        <name>kDDSMagic</name>
+        <initializer>= FOURCC(&apos;D&apos;, &apos;D&apos;, &apos;S&apos;, &apos; &apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="14" column="20" bodyfile="src/dds_image.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d98/dds__image_8cpp_1adf72a3c3c75823f80164fdd458b0b198" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDX10Magic</definition>
+        <argsstring></argsstring>
+        <name>kDX10Magic</name>
+        <initializer>= FOURCC(&apos;D&apos;, &apos;X&apos;, &apos;1&apos;, &apos;0&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="15" column="20" bodyfile="src/dds_image.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d98/dds__image_8cpp_1a52eece086490b108e2ff9de7eb48a980" prot="public" static="yes" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t kDXT1Magic</definition>
+        <argsstring></argsstring>
+        <name>kDXT1Magic</name>
+        <initializer>= FOURCC(&apos;D&apos;, &apos;X&apos;, &apos;T&apos;, &apos;1&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="17" column="23" bodyfile="src/dds_image.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d98/dds__image_8cpp_1ae6a47c8db2438168b00d48f9c752df53" prot="public" static="yes" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t kDXT3Magic</definition>
+        <argsstring></argsstring>
+        <name>kDXT3Magic</name>
+        <initializer>= FOURCC(&apos;D&apos;, &apos;X&apos;, &apos;T&apos;, &apos;3&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="19" column="23" bodyfile="src/dds_image.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d98/dds__image_8cpp_1a9840272176527059f058d5b3eb4db50c" prot="public" static="yes" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t kDXT5Magic</definition>
+        <argsstring></argsstring>
+        <name>kDXT5Magic</name>
+        <initializer>= FOURCC(&apos;D&apos;, &apos;X&apos;, &apos;T&apos;, &apos;5&apos;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="21" column="23" bodyfile="src/dds_image.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d1/d98/dds__image_8cpp_1af89c4caab7fc3cbba6080fe8539da25a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>static uint32_t compressed_size</definition>
+        <argsstring>(uint32_t uncompressed_size)</argsstring>
+        <name>compressed_size</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>uncompressed_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="96" column="24" bodyfile="src/dds_image.cpp" bodystart="96" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Partial<sp/>implementation<sp/>of<sp/>DDS<sp/>file<sp/>loading.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>https://docs.microsoft.com/en-us/windows/win32/direct3ddds/dx-graphics-dds-pguide</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Use<sp/>https://developer.nvidia.com/gpu-accelerated-texture-compression<sp/>to<sp/>create<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;dds_image.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdio&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FOURCC(a,<sp/>b,<sp/>c,<sp/>d)<sp/>(((a)<sp/>&amp;<sp/>0xFF)<sp/>|<sp/>(((b)<sp/>&amp;<sp/>0xFF)<sp/>&lt;&lt;<sp/>8)<sp/>|<sp/>(((c)<sp/>&amp;<sp/>0xFF)<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>(((d)<sp/>&amp;<sp/>0xFF)<sp/>&lt;&lt;<sp/>24))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDDSMagic<sp/>=<sp/>FOURCC(</highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;S&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDX10Magic<sp/>=<sp/>FOURCC(</highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;X&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;1&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;0&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDXT1Magic<sp/>=<sp/>FOURCC(</highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;X&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;T&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;1&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>static<sp/>const<sp/>uint32_t<sp/>kDXT2Magic<sp/>=<sp/>FOURCC(&apos;D&apos;,<sp/>&apos;X&apos;,<sp/>&apos;T&apos;,<sp/>&apos;2&apos;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDXT3Magic<sp/>=<sp/>FOURCC(</highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;X&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;T&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;3&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>static<sp/>const<sp/>uint32_t<sp/>kDXT4Magic<sp/>=<sp/>FOURCC(&apos;D&apos;,<sp/>&apos;X&apos;,<sp/>&apos;T&apos;,<sp/>&apos;4&apos;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDXT5Magic<sp/>=<sp/>FOURCC(</highlight><highlight class="charliteral">&apos;D&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;X&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;T&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;5&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>DDH_FLAGS<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>DDSD_CAPS<sp/>=<sp/>0x1,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>DDSD_HEIGHT<sp/>=<sp/>0x2,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>DDSD_WIDTH<sp/>=<sp/>0x4,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>DDSD_PITCH<sp/>=<sp/>0x8,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>DDSD_PIXELFORMAT<sp/>=<sp/>0x1000,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>DDSD_MIPMAPCOUNT<sp/>=<sp/>0x20000,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>DDSD_LINEARSIZE<sp/>=<sp/>0x80000,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>DDSD_DEPTH<sp/>=<sp/>0x800000,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>DDH_CAPS<sp/>{</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>DDSCAPS_COMPLEX<sp/>=<sp/>0x08,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>DDSCAPS_TEXTURE<sp/>=<sp/>0x1000,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>DDSCAPS_MIPMAP<sp/>=<sp/>0x400000,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>DDH_CAPS2<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP<sp/>=<sp/>0x200,</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP_POSITIVEX<sp/>=<sp/>0x400,</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP_NEGATIVEX<sp/>=<sp/>0x800,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP_POSITIVEY<sp/>=<sp/>0x1000,</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP_NEGATIVEY<sp/>=<sp/>0x2000,</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP_POSITIVEZ<sp/>=<sp/>0x4000,</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>DDSCAPS2_CUBEMAP_NEGATIVEZ<sp/>=<sp/>0x8000,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>DDSCAPS2_VOLUME<sp/>=<sp/>0x200000,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/>DDPF_FLAGS<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>DDPF_ALPHAPIXELS<sp/>=<sp/>0x1,</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>DDPF_ALPHA<sp/>=<sp/>0x2,</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>DDPF_FOURCC<sp/>=<sp/>0x4,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>DDPF_RGB<sp/>=<sp/>0x40,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>DDPF_YUV<sp/>=<sp/>0x200,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>DDPF_LUMINANCE<sp/>=<sp/>0x20000,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>pack(push)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>pack(1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="dd/ddc/structDDS__PIXELFORMAT" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="dd/ddc/structDDS__PIXELFORMAT" kindref="compound">DDS_PIXELFORMAT</ref><sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwSize;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwFlags;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwFourCC;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwRGBBitCount;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwRBitMask;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwGBitMask;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwBBitMask;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwABitMask;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="db/db1/structDDS__HEADER" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="db/db1/structDDS__HEADER" kindref="compound">DDS_HEADER</ref><sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwSize;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwFlags;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwHeight;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwWidth;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwPitchOrLinearSize;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwDepth;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwMipMapCount;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwReserved1[11];</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><ref refid="dd/ddc/structDDS__PIXELFORMAT" kindref="compound">DDS_PIXELFORMAT</ref><sp/>ddspf;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwCaps;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwCaps2;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwCaps3;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwCaps4;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwReserved2;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="dd/d5b/structDDS__FILE" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="dd/d5b/structDDS__FILE" kindref="compound">DDS_FILE</ref><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dwMagic;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><ref refid="db/db1/structDDS__HEADER" kindref="compound">DDS_HEADER</ref><sp/>header;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>pack(pop)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>uint32_t<sp/>compressed_size(uint32_t<sp/>uncompressed_size)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>uint32_t<sp/>ret<sp/>=<sp/>(uncompressed_size<sp/>+<sp/>3)<sp/>/<sp/>4;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ret<sp/>&lt;<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ret;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>DDSImage::LoadFile(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>load_mipmaps)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>FILE<sp/>*f<sp/>=<sp/>fopen(filename,<sp/></highlight><highlight class="stringliteral">&quot;rb&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!f)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><ref refid="dd/d5b/structDDS__FILE" kindref="compound">DDS_FILE</ref><sp/>file{};</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fread(&amp;file,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(file),<sp/>1,<sp/>f)<sp/>!=<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>fclose(f);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>ASSERT(file.dwMagic<sp/>==<sp/>kDDSMagic<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Invalid<sp/>DDS<sp/>file<sp/>-<sp/>bad<sp/>fourcc&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(file.header.dwDepth<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>file.header.dwDepth<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="db/db1/structDDS__HEADER" kindref="compound">DDS_HEADER</ref><sp/>&amp;header<sp/>=<sp/>file.header;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>ASSERT(header.dwSize<sp/>==<sp/>124);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>ASSERT(header.dwCaps2<sp/>==<sp/>0<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Multidimensional<sp/>textures<sp/>not<sp/>supported.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="dd/ddc/structDDS__PIXELFORMAT" kindref="compound">DDS_PIXELFORMAT</ref><sp/>&amp;pixelformat<sp/>=<sp/>header.ddspf;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pixelformat.dwFlags<sp/>&amp;<sp/>DDPF_FOURCC)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT((pixelformat.dwFourCC<sp/>!=<sp/>kDX10Magic)<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;DX10<sp/>format<sp/>not<sp/>supported.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>block_size<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>SubImage::Format<sp/>format<sp/>=<sp/>SubImage::Format::NONE;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>bytes_per_pixel<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>compressed_width<sp/>=<sp/>compressed_size(header.dwWidth);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>compressed_height<sp/>=<sp/>compressed_size(header.dwHeight);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(pixelformat.dwFourCC)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>kDXT1Magic:</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>block_size<sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bytes_per_pixel<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>format<sp/>=<sp/>SubImage::Format::DXT1;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>kDXT3Magic:</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>block_size<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bytes_per_pixel<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>format<sp/>=<sp/>SubImage::Format::DXT3;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>kDXT5Magic:</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>block_size<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bytes_per_pixel<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>format<sp/>=<sp/>SubImage::Format::DXT5;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PrintMsg(</highlight><highlight class="stringliteral">&quot;Unsupported<sp/>FourCC<sp/>format:<sp/>0x%X\n&quot;</highlight><highlight class="normal">,<sp/>pixelformat.dwFourCC);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unsupported<sp/>FourCC<sp/>format&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fclose(f);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>read_image<sp/>=<sp/>[block_size,<sp/>format,<sp/>&amp;f,<sp/>bytes_per_pixel](</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height,<sp/>uint32_t<sp/>depth,<sp/>uint32_t<sp/>compressed_width,</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>compressed_height)<sp/>-&gt;<sp/>std::shared_ptr&lt;SubImage&gt;<sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>pitch<sp/>=<sp/>compressed_width<sp/>*<sp/>block_size;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>compressed_bytes<sp/>=<sp/>pitch<sp/>*<sp/>compressed_height<sp/>*<sp/>depth;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::shared_ptr&lt;SubImage&gt;<sp/>ret<sp/>=<sp/>std::make_shared&lt;SubImage&gt;();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;level<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;format<sp/>=<sp/>format;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;width<sp/>=<sp/>width;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;height<sp/>=<sp/>height;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;compressed_width<sp/>=<sp/>compressed_width;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;compressed_height<sp/>=<sp/>compressed_height;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;depth<sp/>=<sp/>depth;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;pitch<sp/>=<sp/>pitch;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;bytes_per_pixel<sp/>=<sp/>bytes_per_pixel;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret-&gt;data.resize(compressed_bytes);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fread(ret-&gt;data.data(),<sp/>compressed_bytes,<sp/>1,<sp/>f)<sp/>!=<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ret;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>primary_image<sp/>=</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>read_image(header.dwWidth,<sp/>header.dwHeight,<sp/>header.dwDepth,<sp/>compressed_width,<sp/>compressed_height);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!primary_image)<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>read<sp/>image<sp/>data.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>fclose(f);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>sub_images_.push_back(primary_image);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(load_mipmaps)<sp/>{</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>width<sp/>=<sp/>header.dwWidth;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>height<sp/>=<sp/>header.dwHeight;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>1;<sp/>i<sp/>&lt;<sp/>header.dwMipMapCount;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>width<sp/>&gt;&gt;=<sp/>1;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(width<sp/>&lt;<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>width<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>height<sp/>&gt;&gt;=<sp/>1;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(height<sp/>&lt;<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>height<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>subimage<sp/>=<sp/>read_image(width,<sp/>height,<sp/>header.dwDepth,<sp/>compressed_size(width),<sp/>compressed_size(height));</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!subimage)<sp/>{</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>read<sp/>mipmap<sp/>data.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fclose(f);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sub_images_.push_back(subimage);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT((header.dwFlags<sp/>&amp;<sp/>DDSD_PITCH)<sp/>&amp;&amp;<sp/>(pixelformat.dwFlags<sp/>&amp;<sp/>DDPF_RGB)<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>not<sp/>flagged<sp/>as<sp/>uncompressed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Implement<sp/>if<sp/>necessary.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Uncompressed<sp/>texture<sp/>formats<sp/>not<sp/>implemented&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>fclose(f);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>loaded_<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal">std::shared_ptr&lt;DDSImage::SubImage&gt;<sp/>DDSImage::GetSubImage(uint32_t<sp/>mipmap_level)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/>ASSERT(mipmap_level<sp/>&lt;<sp/>sub_images_.size()<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Mipmap<sp/>level<sp/>&gt;<sp/>number<sp/>of<sp/>loaded<sp/>mipmaps&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mipmap_level<sp/>&lt;<sp/>sub_images_.size())<sp/>{</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>sub_images_[mipmap_level];</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{};</highlight></codeline>
+<codeline lineno="238"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/dds_image.cpp"/>
+  </compounddef>
+</doxygen>
