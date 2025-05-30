@@ -776,6 +776,14 @@ class TestHost {
   void DrawCheckerboardUnproject(uint32_t first_color = 0xFF00FFFF, uint32_t second_color = 0xFF000000,
                                  uint32_t checker_size = 8);
 
+  //! Sets up rendering to write to a non-framebuffer address.
+  void RenderToSurfaceStart(void *surface_address, SurfaceColorFormat color_format, uint32_t width, uint32_t height,
+                            bool swizzle = false, uint32_t clip_x = 0, uint32_t clip_y = 0, uint32_t clip_width = 0,
+                            uint32_t clip_height = 0, AntiAliasingSetting aa = AA_CENTER_1);
+
+  //! Restores rendering to the backbuffer.
+  void RenderToSurfaceEnd();
+
  private:
   //! Update matrices when the depth buffer format changes.
   void HandleDepthBufferFormatChange();
@@ -847,6 +855,9 @@ class TestHost {
       kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride,
       kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride,
       kNoStrideOverride, kNoStrideOverride, kNoStrideOverride, kNoStrideOverride};
+
+  //! Used to restore the color format after rendering to a non-framebuffer surface.
+  SurfaceColorFormat framebuffer_surface_color_format_{SCF_A8R8G8B8};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEST_HOST_H

@@ -39,6 +39,13 @@ static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, u
 static void ClearVertexAttribute(uint32_t index);
 static void GetCompositeMatrix(matrix4_t &result, const matrix4_t &model_view, const matrix4_t &projection);
 
+// From pbkit.c, DMA_A is set to channel 3 by default
+// NV097_SET_CONTEXT_DMA_A == NV20_TCL_PRIMITIVE_3D_SET_OBJECT1
+static constexpr uint32_t kDefaultDMAChannelA = 3;
+// From pbkit.c, DMA_COLOR is set to channel 9 by default
+// NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
+const uint32_t kDefaultDMAColorChannel = 9;
+
 TestHost::TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
                    uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth)
     : framebuffer_width_(framebuffer_width),
@@ -1701,4 +1708,42 @@ void TestHost::DrawCheckerboardUnproject(uint32_t first_color, uint32_t second_c
   SetShaderStageProgram(STAGE_NONE);
 
   RestoreFinalCombinerState(combiner_state);
+}
+
+void TestHost::RenderToSurfaceStart(void *surface_address, SurfaceColorFormat color_format, uint32_t width,
+                                    uint32_t height, bool swizzle, uint32_t clip_x, uint32_t clip_y,
+                                    uint32_t clip_width, uint32_t clip_height, AntiAliasingSetting aa) {
+  const auto kFramebufferPitch = GetFramebufferWidth() * 4;
+
+  const uint32_t surface_pitch = TestHost::GetSurfaceColorPitch(color_format, GetFramebufferWidth());
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAChannelA);
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, surface_pitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(surface_address));
+  Pushbuffer::End();
+
+  framebuffer_surface_color_format_ = surface_color_format_;
+
+  // Failing to disable alpha blending on B8 and G8B8 will trigger a hardware exception.
+  SetBlend(SurfaceSupportsAlpha(color_format));
+
+  SetSurfaceFormatImmediate(color_format, depth_buffer_format_, width, height, swizzle, clip_x, clip_y, clip_width,
+                            clip_height, aa);
+}
+
+void TestHost::RenderToSurfaceEnd() {
+  const uint32_t kFramebufferPitch = GetFramebufferWidth() * 4;
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR, kDefaultDMAColorChannel);
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, 0);
+  Pushbuffer::Push(NV097_SET_SURFACE_PITCH, SET_MASK(NV097_SET_SURFACE_PITCH_COLOR, kFramebufferPitch) |
+                                                SET_MASK(NV097_SET_SURFACE_PITCH_ZETA, kFramebufferPitch));
+  Pushbuffer::End();
+
+  SetSurfaceFormatImmediate(framebuffer_surface_color_format_, depth_buffer_format_, GetFramebufferWidth(),
+                            GetFramebufferHeight(), false);
+
+  SetBlend(true);
 }
