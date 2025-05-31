@@ -13,7 +13,9 @@ class WBufTests : public TestSuite {
   void Deinitialize() override;
 
  private:
-  void Test(bool zbias, bool vsh);
+  template <typename Func>
+  void Test(int depthf, bool zbias, bool zslope, bool vsh, const char *prim_name, Func draw_prim,
+            uint32_t clip_left = 150, uint32_t clip_top = 0);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_WBUF_TESTS_H
