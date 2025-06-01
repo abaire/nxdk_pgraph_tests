@@ -19,7 +19,8 @@ class ShadeModelTests : public TestSuite {
 
  private:
   void TestShadeModelFixed(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive, bool texture);
-  void TestShadeModel(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive, bool texture);
+  void TestShadeModel(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive, bool texture,
+                      bool line_mode = false);
 
   void TestShadeModelFixed_W(uint32_t model, uint32_t provoking_vertex, TestHost::DrawPrimitive primitive, bool texture,
                              float w, float w_inc);
