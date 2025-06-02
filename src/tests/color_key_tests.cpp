@@ -11,6 +11,7 @@
 static constexpr const char kFixedTextured[] = "FixedTex";
 static constexpr const char kTextured[] = "ProgTex";
 static constexpr const char kUnsampledTexturesStillActivate[] = "UnsampledTex";
+static constexpr const char kXAlphaFormatTextureTest[] = "XAlphaFormat";
 
 static constexpr uint32_t kColorKeyModes[] = {
     TextureStage::CKM_DISABLE,
@@ -138,6 +139,11 @@ static std::string MakeTestName(const char* prefix, uint32_t mode, bool alpha_fr
  *    The right image should have the blue color in the NW checkerboard killed, but also the secondary blue color in the
  *    SW checkerboard killed. This is because the unsampled magenta texture's SW secondary color matches the
  *    magenta + 0xFF alpha enabled as a color key in the second operation.
+ *
+ * @tc XAlphaFormat
+ *    Demonstrates that the alpha component of textures using an "X" alpha mode (e.g.,
+ *    NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8) are matched against color keys without respect to their alpha
+ *    value.
  */
 ColorKeyTests::ColorKeyTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Color key", config) {
@@ -155,59 +161,59 @@ ColorKeyTests::ColorKeyTests(TestHost& host, std::string output_dir, const Confi
   }
 
   tests_[kUnsampledTexturesStillActivate] = [this]() { TestUnsampled(kUnsampledTexturesStillActivate); };
+  tests_[kXAlphaFormatTextureTest] = [this]() { TestXAlphaFormatTexture(kXAlphaFormatTextureTest); };
+}
+
+static void GenerateTestTexture(TestHost& host, uint32_t textureUnit) {
+  constexpr uint32_t kCheckerSize = 8;
+
+  static uint32_t half_texture_size = kTextureSize >> 1;
+
+  auto texture = host.GetTextureMemoryForStage(textureUnit);
+  uint32_t other_colors[3];
+  uint32_t other_alphas[3];
+  {
+    uint32_t* other_c = other_colors;
+    uint32_t* other_a = other_alphas;
+    for (auto i = 0; i < 4; ++i) {
+      if (i == textureUnit) {
+        continue;
+      }
+      *other_c++ = kColorKeys[i];
+      *other_a++ = kAlphaKeys[i];
+    }
+  }
+
+  // This color, but with modified alpha such that it matches no key.
+  uint32_t color_with_modified_alpha = kColorKeys[textureUnit] | 0xFF000000;
+  // This color but with alpha from the alpha key
+  uint32_t color_with_alpha_alpha = (kColorKeys[textureUnit] & 0x00FFFFFF) | (kAlphaKeys[textureUnit] & 0xFF000000);
+
+  // Color keyed
+  GenerateRGBACheckerboard(texture, 0, 0, half_texture_size, half_texture_size, kTextureSize * 4, kCheckerboardA,
+                           kColorKeys[textureUnit], kCheckerSize);
+  // Alpha keyed
+  GenerateRGBACheckerboard(texture, half_texture_size, 0, half_texture_size, half_texture_size, kTextureSize * 4,
+                           kCheckerboardB, kAlphaKeys[textureUnit], kCheckerSize >> 1);
+
+  GenerateRGBACheckerboard(texture, 0, half_texture_size, half_texture_size, half_texture_size, kTextureSize * 4,
+                           color_with_alpha_alpha, color_with_modified_alpha, kCheckerSize);
+
+  uint32_t other_color_with_color_alpha = (other_colors[0] & 0x00FFFFFF) | (kColorKeys[textureUnit] & 0xFF000000);
+  uint32_t other_color_with_alpha_alpha = (other_colors[0] & 0x00FFFFFF) | (kAlphaKeys[textureUnit] & 0xFF000000);
+  // Half other color but with alpha set to match the color key and half other color with alpha set to match the alpha
+  // key.
+  GenerateRGBACheckerboard(texture, half_texture_size, half_texture_size, half_texture_size, half_texture_size,
+                           kTextureSize * 4, other_color_with_color_alpha, other_color_with_alpha_alpha, kCheckerSize);
 }
 
 void ColorKeyTests::Initialize() {
   TestSuite::Initialize();
 
-  constexpr uint32_t kCheckerSize = 8;
-
-  static uint32_t half_texture_size = kTextureSize >> 1;
-
-  auto generate = [this](uint32_t stage) {
-    auto texture = host_.GetTextureMemoryForStage(stage);
-    uint32_t other_colors[3];
-    uint32_t other_alphas[3];
-    {
-      uint32_t* other_c = other_colors;
-      uint32_t* other_a = other_alphas;
-      for (auto i = 0; i < 4; ++i) {
-        if (i == stage) {
-          continue;
-        }
-        *other_c++ = kColorKeys[i];
-        *other_a++ = kAlphaKeys[i];
-      }
-    }
-
-    // This color, but with modified alpha such that it matches no key.
-    uint32_t color_with_modified_alpha = kColorKeys[stage] | 0xFF000000;
-    // This color but with alpha from the alpha key
-    uint32_t color_with_alpha_alpha = (kColorKeys[stage] & 0x00FFFFFF) | (kAlphaKeys[stage] & 0xFF000000);
-
-    // Color keyed
-    GenerateRGBACheckerboard(texture, 0, 0, half_texture_size, half_texture_size, kTextureSize * 4, kCheckerboardA,
-                             kColorKeys[stage], kCheckerSize);
-    // Alpha keyed
-    GenerateRGBACheckerboard(texture, half_texture_size, 0, half_texture_size, half_texture_size, kTextureSize * 4,
-                             kCheckerboardB, kAlphaKeys[stage], kCheckerSize >> 1);
-
-    GenerateRGBACheckerboard(texture, 0, half_texture_size, half_texture_size, half_texture_size, kTextureSize * 4,
-                             color_with_alpha_alpha, color_with_modified_alpha, kCheckerSize);
-
-    uint32_t other_color_with_color_alpha = (other_colors[0] & 0x00FFFFFF) | (kColorKeys[stage] & 0xFF000000);
-    uint32_t other_color_with_alpha_alpha = (other_colors[0] & 0x00FFFFFF) | (kAlphaKeys[stage] & 0xFF000000);
-    // Half other color but with alpha set to match the color key and half other color with alpha set to match the alpha
-    // key.
-    GenerateRGBACheckerboard(texture, half_texture_size, half_texture_size, half_texture_size, half_texture_size,
-                             kTextureSize * 4, other_color_with_color_alpha, other_color_with_alpha_alpha,
-                             kCheckerSize);
-  };
-
-  generate(0);
-  generate(1);
-  generate(2);
-  generate(3);
+  GenerateTestTexture(host_, 0);
+  GenerateTestTexture(host_, 1);
+  GenerateTestTexture(host_, 2);
+  GenerateTestTexture(host_, 3);
 }
 
 void ColorKeyTests::TearDownTest() {
@@ -426,6 +432,47 @@ void ColorKeyTests::TestUnsampled(const std::string& name) {
   pb_printat(13, 35, (char*)"CK1: 0x%08X", tex1_color_key);
   pb_draw_text_screen();
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void ColorKeyTests::TestXAlphaFormatTexture(const std::string& name) {
+  SetShader(host_);
+
+  host_.PrepareDraw(0xFF999999);
+
+  host_.SetTextureStageEnabled(0, true);
+  auto& texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8));
+  texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+  texture_stage.SetColorKeyMode(TextureStage::CKM_KILL_TEXEL);
+  host_.SetupTextureStages();
+
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+
+  static constexpr uint32_t kColorKeyColorWithAlpha = 0xCC00FF00;
+  static constexpr uint32_t kColorKeyColorNoAlpha = kColorKeyColorWithAlpha & 0x00FFFFFF;
+
+  auto texture = host_.GetTextureMemoryForStage(0);
+  GenerateRGBACheckerboard(texture, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kColorKeyColorWithAlpha,
+                           kColorKeyColorNoAlpha, kTextureSize >> 2);
+
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_KEY_COLOR + 0x0, kColorKeyColorWithAlpha);
+    Pushbuffer::End();
+    DrawQuads(host_, 0.0f, 0.f);
+  }
+
+  DisableAllTextureStages();
+
+  pb_print("%s\n", name.c_str());
+  pb_print("No geometry should be visible as colors are checked without alpha in X alpha formats.\n");
+  pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+
+  GenerateTestTexture(host_, 0);
 }
 
 void ColorKeyTests::SetupTextureStage(uint32_t stage, uint32_t mode) const {

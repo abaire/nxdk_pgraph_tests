@@ -48,6 +48,9 @@ class ColorKeyTests : public TestSuite {
   //! Demonstrate the fact that unsampled texels will kill pixels entirely.
   void TestUnsampled(const std::string& name);
 
+  // Demonstrates the behavior of texture formats with an "X" alpha channel.
+  void TestXAlphaFormatTexture(const std::string& name);
+
   void SetupTextureStage(uint32_t stage, uint32_t mode) const;
   void SetupAllTextureStages(uint32_t mode) const;
   void DisableAllTextureStages() const;
