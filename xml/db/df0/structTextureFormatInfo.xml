@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/df0/structTextureFormatInfo" kind="struct" language="C++" prot="public">
+    <compoundname>TextureFormatInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1a187131a9c517d8836115098b8af16903" prot="public" static="no" mutable="no">
+        <type>SDL_PixelFormatEnum</type>
+        <definition>SDL_PixelFormatEnum TextureFormatInfo::sdl_format</definition>
+        <argsstring></argsstring>
+        <name>sdl_format</name>
+        <qualifiedname>TextureFormatInfo::sdl_format</qualifiedname>
+        <initializer>{SDL_PIXELFORMAT_ARGB8888}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="9" column="23" bodyfile="src/texture_format.h" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1aafc974b3c8778f924f7f366ab783ca69" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TextureFormatInfo::xbox_format</definition>
+        <argsstring></argsstring>
+        <name>xbox_format</name>
+        <qualifiedname>TextureFormatInfo::xbox_format</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="10" column="12" bodyfile="src/texture_format.h" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1a4f8ae749256c1765b65bc0a55f8a28ec" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TextureFormatInfo::xbox_bpp</definition>
+        <argsstring></argsstring>
+        <name>xbox_bpp</name>
+        <qualifiedname>TextureFormatInfo::xbox_bpp</qualifiedname>
+        <initializer>{32}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="11" column="12" bodyfile="src/texture_format.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1a978bbc98a0c5dcdd15a81062dfc4a60d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TextureFormatInfo::xbox_swizzled</definition>
+        <argsstring></argsstring>
+        <name>xbox_swizzled</name>
+        <qualifiedname>TextureFormatInfo::xbox_swizzled</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="12" column="8" bodyfile="src/texture_format.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1a3c6ce27550e3a48a845524afd2ccc464" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TextureFormatInfo::xbox_linear</definition>
+        <argsstring></argsstring>
+        <name>xbox_linear</name>
+        <qualifiedname>TextureFormatInfo::xbox_linear</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="13" column="8" bodyfile="src/texture_format.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1a5a8bf228be8a6e4533c9ffe3e41b1259" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TextureFormatInfo::require_conversion</definition>
+        <argsstring></argsstring>
+        <name>require_conversion</name>
+        <qualifiedname>TextureFormatInfo::require_conversion</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="14" column="8" bodyfile="src/texture_format.h" bodystart="14" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/df0/structTextureFormatInfo_1aa4ba470ddef7bcf946f65b4c545d6d74" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TextureFormatInfo::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>TextureFormatInfo::name</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/texture_format.h" line="15" column="14" bodyfile="src/texture_format.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/texture_format.h" line="8" column="1" bodyfile="src/texture_format.h" bodystart="8" bodyend="16"/>
+    <listofallmembers>
+      <member refid="db/df0/structTextureFormatInfo_1aa4ba470ddef7bcf946f65b4c545d6d74" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>name</name></member>
+      <member refid="db/df0/structTextureFormatInfo_1a5a8bf228be8a6e4533c9ffe3e41b1259" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>require_conversion</name></member>
+      <member refid="db/df0/structTextureFormatInfo_1a187131a9c517d8836115098b8af16903" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>sdl_format</name></member>
+      <member refid="db/df0/structTextureFormatInfo_1a4f8ae749256c1765b65bc0a55f8a28ec" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>xbox_bpp</name></member>
+      <member refid="db/df0/structTextureFormatInfo_1aafc974b3c8778f924f7f366ab783ca69" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>xbox_format</name></member>
+      <member refid="db/df0/structTextureFormatInfo_1a3c6ce27550e3a48a845524afd2ccc464" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>xbox_linear</name></member>
+      <member refid="db/df0/structTextureFormatInfo_1a978bbc98a0c5dcdd15a81062dfc4a60d" prot="public" virt="non-virtual"><scope>TextureFormatInfo</scope><name>xbox_swizzled</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

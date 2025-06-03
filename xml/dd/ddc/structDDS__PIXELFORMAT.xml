@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/ddc/structDDS__PIXELFORMAT" kind="struct" language="C++" prot="public">
+    <compoundname>DDS_PIXELFORMAT</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1a0f75b5d6c7f6733755fdc05984ea6348" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwSize</definition>
+        <argsstring></argsstring>
+        <name>dwSize</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="63" column="12" bodyfile="src/dds_image.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1a2e48294f3110545d38d6823eafdb8ad2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwFlags</definition>
+        <argsstring></argsstring>
+        <name>dwFlags</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwFlags</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="64" column="12" bodyfile="src/dds_image.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1ab2348a2a5c63273e223b36ad553925a2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwFourCC</definition>
+        <argsstring></argsstring>
+        <name>dwFourCC</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwFourCC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="65" column="12" bodyfile="src/dds_image.cpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1ad24e1ec0de1b8ccb439951ade6e0582e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwRGBBitCount</definition>
+        <argsstring></argsstring>
+        <name>dwRGBBitCount</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwRGBBitCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="66" column="12" bodyfile="src/dds_image.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1a4f049b50368d137f2dc0b60c7ab0c85d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwRBitMask</definition>
+        <argsstring></argsstring>
+        <name>dwRBitMask</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwRBitMask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="67" column="12" bodyfile="src/dds_image.cpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1a2485b89c4d366fca015a169ec1502bc6" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwGBitMask</definition>
+        <argsstring></argsstring>
+        <name>dwGBitMask</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwGBitMask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="68" column="12" bodyfile="src/dds_image.cpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1ac0872d399ea1c782ce56991a7bab6cf5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwBBitMask</definition>
+        <argsstring></argsstring>
+        <name>dwBBitMask</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwBBitMask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="69" column="12" bodyfile="src/dds_image.cpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/ddc/structDDS__PIXELFORMAT_1ae8a3b5edeaceee18d89c47511e89c38b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DDS_PIXELFORMAT::dwABitMask</definition>
+        <argsstring></argsstring>
+        <name>dwABitMask</name>
+        <qualifiedname>DDS_PIXELFORMAT::dwABitMask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/dds_image.cpp" line="70" column="12" bodyfile="src/dds_image.cpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/dds_image.cpp" line="62" column="1" bodyfile="src/dds_image.cpp" bodystart="62" bodyend="71"/>
+    <listofallmembers>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1ae8a3b5edeaceee18d89c47511e89c38b" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwABitMask</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1ac0872d399ea1c782ce56991a7bab6cf5" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwBBitMask</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1a2e48294f3110545d38d6823eafdb8ad2" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwFlags</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1ab2348a2a5c63273e223b36ad553925a2" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwFourCC</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1a2485b89c4d366fca015a169ec1502bc6" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwGBitMask</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1a4f049b50368d137f2dc0b60c7ab0c85d" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwRBitMask</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1ad24e1ec0de1b8ccb439951ade6e0582e" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwRGBBitCount</name></member>
+      <member refid="dd/ddc/structDDS__PIXELFORMAT_1a0f75b5d6c7f6733755fdc05984ea6348" prot="public" virt="non-virtual"><scope>DDS_PIXELFORMAT</scope><name>dwSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

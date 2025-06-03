@@ -1,0 +1,169 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d2/d3e/classTestSuite.html" title=" " alt="" coords="5,1985,87,2011"/>
+<area shape="rect" id="Node000001" href="$d5/d33/classAlphaFuncTests.html" title=" " alt="" coords="189,5,311,31"/>
+<area shape="poly" id="edge23_Node000000_Node000001" title=" " alt="" coords="45,1972,50,1585,65,950,76,626,91,344,110,137,120,73,133,40,158,22,188,14,189,19,160,27,137,44,126,75,115,138,96,344,82,626,70,950,56,1585,50,1972"/>
+<area shape="rect" id="Node000002" href="$d5/d1f/classAntialiasingTests.html" title=" " alt="" coords="184,55,316,80"/>
+<area shape="poly" id="edge24_Node000000_Node000002" title=" " alt="" coords="45,1971,51,1593,66,975,77,659,92,385,110,184,121,122,133,90,156,72,183,64,184,69,158,77,137,93,126,123,115,185,97,385,82,660,71,975,56,1593,50,1971"/>
+<area shape="rect" id="Node000003" href="$d6/d49/classAttributeCarryoverTests.html" title=" " alt="" coords="162,104,338,129"/>
+<area shape="poly" id="edge25_Node000000_Node000003" title=" " alt="" coords="45,1972,51,1602,66,1000,78,694,93,426,111,231,121,170,132,139,145,128,160,120,163,125,148,132,137,142,126,172,116,232,98,427,83,694,72,1001,56,1603,50,1972"/>
+<area shape="rect" id="Node000004" href="$d8/d6b/classAttributeExplicitSetterTests.html" title=" " alt="" coords="151,153,349,179"/>
+<area shape="poly" id="edge26_Node000000_Node000004" title=" " alt="" coords="45,1972,51,1611,67,1026,79,727,93,467,111,278,121,219,132,188,149,175,152,179,137,192,126,220,116,278,99,468,84,728,72,1026,57,1611,50,1972"/>
+<area shape="rect" id="Node000005" href="$df/dab/classAttributeFloatTests.html" title=" " alt="" coords="177,203,323,228"/>
+<area shape="poly" id="edge27_Node000000_Node000005" title=" " alt="" coords="45,1971,52,1619,68,1050,80,760,94,508,112,324,121,267,133,238,153,222,176,214,178,219,155,227,137,241,127,268,117,325,99,509,85,761,73,1050,57,1619,50,1971"/>
+<area shape="rect" id="Node000006" href="$d1/dac/classBlendTests.html" title=" " alt="" coords="204,252,296,277"/>
+<area shape="poly" id="edge28_Node000000_Node000006" title=" " alt="" coords="45,1972,52,1629,68,1076,80,795,95,550,112,371,122,316,132,287,148,274,166,266,203,259,204,265,167,271,151,279,137,290,127,317,117,372,100,551,86,795,74,1077,57,1630,50,1972"/>
+<area shape="rect" id="Node000007" href="$d1/d38/classClearTests.html" title=" " alt="" coords="205,301,295,327"/>
+<area shape="poly" id="edge29_Node000000_Node000007" title=" " alt="" coords="45,1971,53,1637,69,1101,81,828,96,591,113,418,122,364,132,336,148,323,166,315,204,309,205,314,168,320,151,328,137,340,127,365,118,419,101,591,87,828,75,1101,58,1637,50,1971"/>
+<area shape="rect" id="Node000008" href="$d1/d50/classColorKeyTests.html" title=" " alt="" coords="193,351,307,376"/>
+<area shape="poly" id="edge30_Node000000_Node000008" title=" " alt="" coords="45,1971,53,1646,70,1126,82,862,96,632,113,465,122,413,132,386,145,374,160,366,193,359,194,364,162,371,148,379,137,389,127,414,118,465,102,633,87,862,75,1126,58,1647,51,1972"/>
+<area shape="rect" id="Node000009" href="$d0/d16/classColorMaskBlendTests.html" title=" " alt="" coords="169,400,331,425"/>
+<area shape="poly" id="edge31_Node000000_Node000009" title=" " alt="" coords="45,1972,53,1656,71,1152,83,896,97,674,114,511,123,461,132,435,149,421,168,413,170,418,152,426,137,438,128,462,119,512,102,674,88,896,76,1152,59,1656,51,1972"/>
+<area shape="rect" id="Node000010" href="$d0/d91/classColorZetaDisableTests.html" title=" " alt="" coords="166,449,334,475"/>
+<area shape="poly" id="edge32_Node000000_Node000010" title=" " alt="" coords="45,1971,54,1664,72,1176,84,929,98,715,114,558,123,509,132,484,147,472,164,464,167,468,150,476,137,488,128,511,119,559,103,715,89,930,77,1177,59,1664,51,1971"/>
+<area shape="rect" id="Node000011" href="$db/d92/classColorZetaOverlapTests.html" title=" " alt="" coords="165,499,335,524"/>
+<area shape="poly" id="edge33_Node000000_Node000011" title=" " alt="" coords="44,1972,44,1684,51,1225,61,990,77,781,88,693,100,621,115,567,133,534,147,521,163,513,166,518,150,526,137,537,120,569,105,622,93,694,82,781,66,990,56,1225,49,1684,50,1972"/>
+<area shape="rect" id="Node000012" href="$dd/d5f/classCombinerTests.html" title=" " alt="" coords="191,548,309,573"/>
+<area shape="poly" id="edge34_Node000000_Node000012" title=" " alt="" coords="44,1971,44,1692,53,1250,63,1023,79,822,89,738,101,669,116,617,133,584,159,566,190,557,191,562,161,570,137,588,121,619,107,670,94,739,84,823,68,1024,58,1250,50,1692,50,1971"/>
+<area shape="rect" id="Node000013" href="$d5/d34/classDMACorruptionAroundSurfaceTests.html" title=" " alt="" coords="142,598,358,638"/>
+<area shape="poly" id="edge35_Node000000_Node000013" title=" " alt="" coords="45,1971,46,1704,56,1283,66,1067,82,876,104,729,117,679,133,648,145,636,149,640,137,652,122,681,109,731,87,876,72,1068,61,1283,51,1704,50,1972"/>
+<area shape="rect" id="Node000014" href="$dc/de3/classDepthFormatFixedFunctionTests.html" title=" " alt="" coords="152,662,348,702"/>
+<area shape="poly" id="edge36_Node000000_Node000014" title=" " alt="" coords="45,1972,47,1716,58,1315,68,1110,84,928,105,789,118,742,133,712,150,697,153,701,137,716,123,744,110,790,89,929,74,1111,63,1316,52,1716,50,1972"/>
+<area shape="rect" id="Node000015" href="$d5/d96/classDepthFormatTests.html" title=" " alt="" coords="180,727,320,752"/>
+<area shape="poly" id="edge37_Node000000_Node000015" title=" " alt="" coords="45,1972,47,1724,58,1339,68,1142,84,968,105,835,118,790,133,762,154,746,179,737,181,742,156,750,137,765,123,792,110,836,89,968,74,1142,63,1339,52,1724,50,1972"/>
+<area shape="rect" id="Node000016" href="$df/d7b/classDepthFunctionTests.html" title=" " alt="" coords="175,776,325,801"/>
+<area shape="poly" id="edge38_Node000000_Node000016" title=" " alt="" coords="45,1972,48,1733,59,1363,70,1175,85,1008,106,881,118,838,133,811,152,796,174,788,176,793,154,801,137,814,123,840,111,882,91,1009,75,1175,64,1364,53,1733,50,1972"/>
+<area shape="rect" id="Node000017" href="$d2/d65/classEdgeFlagTests.html" title=" " alt="" coords="193,825,307,851"/>
+<area shape="poly" id="edge39_Node000000_Node000017" title=" " alt="" coords="45,1972,48,1742,61,1388,72,1208,87,1049,107,927,119,886,133,860,145,849,160,842,192,834,193,839,162,847,148,854,137,864,124,888,112,928,92,1049,77,1208,66,1388,54,1742,50,1972"/>
+<area shape="rect" id="Node000018" href="$d1/d48/classFogCarryoverTests.html" title=" " alt="" coords="179,875,321,900"/>
+<area shape="poly" id="edge40_Node000000_Node000018" title=" " alt="" coords="45,1971,49,1750,62,1412,73,1241,88,1089,108,973,119,934,133,910,153,894,178,885,180,891,156,899,137,913,124,936,113,975,93,1090,79,1241,67,1413,54,1750,50,1971"/>
+<area shape="rect" id="Node000019" href="$da/db7/classFogExceptionalValueTests.html" title=" " alt="" coords="155,924,345,949"/>
+<area shape="poly" id="edge41_Node000000_Node000019" title=" " alt="" coords="45,1972,50,1760,64,1438,75,1274,90,1130,109,1020,120,982,133,959,153,943,156,948,137,962,125,984,114,1021,95,1130,80,1275,69,1438,55,1760,50,1972"/>
+<area shape="rect" id="Node000020" href="$db/de4/classFogGenTests.html" title=" " alt="" coords="198,973,302,999"/>
+<area shape="poly" id="edge42_Node000000_Node000020" title=" " alt="" coords="45,1971,51,1768,65,1462,76,1307,91,1170,110,1066,120,1030,133,1008,146,997,163,989,197,981,198,987,164,994,149,1001,137,1012,125,1032,115,1067,96,1171,82,1307,70,1462,56,1769,50,1972"/>
+<area shape="rect" id="Node000021" href="$d9/d20/classFogParamTests.html" title=" " alt="" coords="191,1023,309,1048"/>
+<area shape="poly" id="edge43_Node000000_Node000021" title=" " alt="" coords="45,1971,52,1777,67,1487,78,1340,93,1211,111,1112,121,1078,133,1058,159,1039,190,1031,191,1037,161,1044,137,1061,126,1081,116,1113,98,1211,83,1341,72,1487,57,1778,51,1972"/>
+<area shape="rect" id="Node000022" href="$d6/de7/classFogTests.html" title=" " alt="" coords="211,1072,289,1097"/>
+<area shape="poly" id="edge44_Node000000_Node000022" title=" " alt="" coords="45,1971,52,1787,68,1512,80,1373,94,1251,112,1158,122,1127,133,1107,149,1094,169,1085,210,1079,211,1085,171,1090,152,1098,137,1110,126,1129,117,1160,99,1252,85,1374,73,1512,58,1787,51,1972"/>
+<area shape="rect" id="Node000026" href="$da/d9a/classFrontFaceTests.html" title=" " alt="" coords="191,1121,309,1147"/>
+<area shape="poly" id="edge48_Node000000_Node000026" title=" " alt="" coords="46,1972,53,1796,70,1537,81,1407,96,1292,113,1205,122,1175,133,1156,159,1138,191,1130,192,1135,162,1143,137,1160,127,1177,118,1206,101,1293,87,1407,75,1538,59,1796,51,1972"/>
+<area shape="rect" id="Node000027" href="$d3/d92/classHighVertexCountTests.html" title=" " alt="" coords="167,1171,333,1196"/>
+<area shape="poly" id="edge49_Node000000_Node000027" title=" " alt="" coords="46,1971,54,1804,71,1561,83,1440,97,1332,114,1251,123,1223,133,1206,148,1193,166,1185,168,1190,151,1198,137,1209,128,1225,119,1252,102,1333,88,1440,77,1562,60,1805,51,1971"/>
+<area shape="rect" id="Node000028" href="$d0/d2c/classImageBlitTests.html" title=" " alt="" coords="191,1220,309,1245"/>
+<area shape="poly" id="edge50_Node000000_Node000028" title=" " alt="" coords="46,1971,55,1814,73,1587,99,1373,115,1297,123,1271,133,1255,159,1237,190,1229,191,1234,161,1242,137,1258,128,1273,120,1298,104,1374,78,1587,61,1814,51,1972"/>
+<area shape="rect" id="Node000029" href="$d8/de6/classInlineArraySizeMismatchTests.html" title=" " alt="" coords="141,1269,359,1295"/>
+<area shape="poly" id="edge51_Node000000_Node000029" title=" " alt="" coords="44,1972,44,1834,53,1633,63,1530,79,1435,102,1358,116,1327,133,1304,146,1293,150,1297,137,1308,121,1330,107,1359,85,1437,69,1531,58,1634,49,1834,49,1972"/>
+<area shape="rect" id="Node000030" href="$de/db7/classLightingAccumulationTests.html" title=" " alt="" coords="152,1319,348,1344"/>
+<area shape="poly" id="edge52_Node000000_Node000030" title=" " alt="" coords="44,1971,46,1841,56,1656,67,1561,82,1474,104,1403,117,1375,133,1353,150,1340,153,1344,137,1357,122,1377,109,1404,88,1475,72,1562,61,1657,51,1842,50,1971"/>
+<area shape="rect" id="Node000031" href="$d1/d24/classLightingControlTests.html" title=" " alt="" coords="173,1368,327,1393"/>
+<area shape="poly" id="edge53_Node000000_Node000031" title=" " alt="" coords="45,1971,48,1850,59,1680,70,1593,85,1513,106,1448,118,1422,133,1403,151,1389,171,1381,173,1386,153,1394,137,1407,123,1425,111,1450,91,1514,75,1594,64,1680,53,1851,50,1971"/>
+<area shape="rect" id="Node000032" href="$df/dc4/classLightingNormalTests.html" title=" " alt="" coords="173,1417,327,1443"/>
+<area shape="poly" id="edge54_Node000000_Node000032" title=" " alt="" coords="45,1972,49,1860,62,1704,73,1625,88,1552,108,1493,120,1470,133,1452,151,1439,171,1431,173,1436,153,1443,137,1456,124,1473,113,1495,94,1554,79,1626,68,1705,55,1860,50,1972"/>
+<area shape="rect" id="Node000033" href="$d7/d91/classLightingRangeTests.html" title=" " alt="" coords="176,1467,324,1492"/>
+<area shape="poly" id="edge55_Node000000_Node000033" title=" " alt="" coords="46,1972,51,1869,66,1728,77,1657,91,1591,110,1538,133,1502,152,1487,175,1479,177,1484,155,1492,137,1505,115,1540,96,1593,82,1658,71,1729,57,1869,51,1972"/>
+<area shape="rect" id="Node000034" href="$d9/d39/classLightingSpotlightTests.html" title=" " alt="" coords="167,1516,333,1541"/>
+<area shape="poly" id="edge56_Node000000_Node000034" title=" " alt="" coords="46,1971,53,1878,69,1752,80,1688,94,1631,112,1583,133,1551,148,1539,166,1531,168,1536,151,1543,137,1554,117,1586,99,1632,85,1689,74,1753,59,1878,51,1972"/>
+<area shape="rect" id="Node000035" href="$d2/d54/classLightingTwoSidedTests.html" title=" " alt="" coords="166,1565,334,1591"/>
+<area shape="poly" id="edge57_Node000000_Node000035" title=" " alt="" coords="47,1972,56,1888,72,1776,97,1670,114,1628,133,1600,148,1589,165,1581,167,1586,150,1593,137,1604,118,1631,102,1672,77,1777,61,1888,52,1972"/>
+<area shape="rect" id="Node000036" href="$d0/d9d/classLineWidthTests.html" title=" " alt="" coords="190,1615,310,1640"/>
+<area shape="poly" id="edge58_Node000000_Node000036" title=" " alt="" coords="48,1971,58,1896,76,1800,101,1709,116,1674,133,1649,159,1633,189,1625,190,1630,161,1638,137,1653,120,1676,106,1711,81,1801,63,1897,53,1972"/>
+<area shape="rect" id="Node000037" href="$dc/d3e/classMaterialAlphaTests.html" title=" " alt="" coords="177,1664,323,1689"/>
+<area shape="poly" id="edge59_Node000000_Node000037" title=" " alt="" coords="44,1971,47,1914,59,1841,70,1802,85,1764,106,1729,133,1699,153,1685,175,1677,177,1682,155,1690,136,1703,110,1732,90,1767,75,1804,64,1842,52,1915,49,1971"/>
+<area shape="rect" id="Node000038" href="$dc/d66/classMaterialColorSourceTests.html" title=" " alt="" coords="157,1713,343,1739"/>
+<area shape="poly" id="edge60_Node000000_Node000038" title=" " alt="" coords="46,1971,52,1922,66,1862,91,1801,110,1772,133,1748,155,1734,158,1739,136,1752,114,1776,96,1803,71,1864,57,1923,51,1971"/>
+<area shape="rect" id="Node000039" href="$de/d67/classMaterialColorTests.html" title=" " alt="" coords="179,1763,321,1788"/>
+<area shape="poly" id="edge61_Node000000_Node000039" title=" " alt="" coords="49,1971,57,1932,73,1885,97,1837,114,1816,133,1797,154,1785,177,1777,179,1782,156,1789,136,1801,118,1819,102,1840,78,1887,62,1933,54,1972"/>
+<area shape="rect" id="Node000040" href="$d6/df9/classNullSurfaceTests.html" title=" " alt="" coords="185,1812,315,1837"/>
+<area shape="poly" id="edge62_Node000000_Node000040" title=" " alt="" coords="53,1971,64,1942,81,1908,104,1875,133,1847,157,1834,184,1826,185,1831,159,1839,136,1851,108,1878,85,1911,69,1944,58,1973"/>
+<area shape="rect" id="Node000041" href="$d0/db0/classOverlappingDrawModesTests.html" title=" " alt="" coords="145,1861,355,1887"/>
+<area shape="poly" id="edge63_Node000000_Node000041" title=" " alt="" coords="60,1972,90,1932,110,1912,133,1896,158,1884,161,1889,136,1900,114,1916,94,1936,64,1975"/>
+<area shape="rect" id="Node000042" href="$d0/d54/classPointParamsTests.html" title=" " alt="" coords="182,1911,318,1936"/>
+<area shape="poly" id="edge64_Node000000_Node000042" title=" " alt="" coords="76,1975,134,1945,181,1931,183,1936,136,1950,79,1980"/>
+<area shape="rect" id="Node000043" href="$d0/dd4/classPointSizeTests.html" title=" " alt="" coords="193,1960,307,1985"/>
+<area shape="poly" id="edge65_Node000000_Node000043" title=" " alt="" coords="100,1989,192,1977,193,1982,101,1994"/>
+<area shape="rect" id="Node000044" href="$da/d4d/classPvideoTests.html" title=" " alt="" coords="201,2009,299,2035"/>
+<area shape="poly" id="edge66_Node000000_Node000044" title=" " alt="" coords="101,2002,201,2014,200,2019,100,2007"/>
+<area shape="rect" id="Node000045" href="$da/d67/classSetVertexDataTests.html" title=" " alt="" coords="175,2059,325,2084"/>
+<area shape="poly" id="edge67_Node000000_Node000045" title=" " alt="" coords="79,2015,136,2044,177,2056,176,2061,134,2048,77,2020"/>
+<area shape="rect" id="Node000046" href="$db/dff/classShadeModelTests.html" title=" " alt="" coords="183,2108,317,2133"/>
+<area shape="poly" id="edge68_Node000000_Node000046" title=" " alt="" coords="64,2020,95,2059,114,2077,136,2093,159,2103,183,2111,181,2116,157,2108,133,2098,111,2081,91,2062,60,2024"/>
+<area shape="rect" id="Node000047" href="$d9/d95/classSmoothingTests.html" title=" " alt="" coords="187,2157,313,2183"/>
+<area shape="poly" id="edge69_Node000000_Node000047" title=" " alt="" coords="58,2023,86,2084,108,2116,136,2143,161,2155,188,2163,186,2168,159,2160,133,2147,104,2119,82,2087,53,2025"/>
+<area shape="rect" id="Node000048" href="$da/d00/classSpecularBackTests.html" title=" " alt="" coords="179,2207,321,2232"/>
+<area shape="poly" id="edge70_Node000000_Node000048" title=" " alt="" coords="54,2023,63,2062,78,2107,102,2153,118,2174,136,2192,156,2204,179,2212,177,2217,154,2209,133,2196,114,2178,98,2156,73,2110,58,2063,49,2025"/>
+<area shape="rect" id="Node000049" href="$df/d44/classSpecularTests.html" title=" " alt="" coords="195,2256,305,2281"/>
+<area shape="poly" id="edge71_Node000000_Node000049" title=" " alt="" coords="51,2024,57,2072,71,2131,97,2191,114,2218,136,2241,164,2257,195,2265,194,2270,162,2262,133,2245,110,2221,92,2193,66,2132,52,2073,46,2025"/>
+<area shape="rect" id="Node000050" href="$d2/d28/classStencilFuncTests.html" title=" " alt="" coords="185,2305,315,2331"/>
+<area shape="poly" id="edge72_Node000000_Node000050" title=" " alt="" coords="50,2024,52,2080,64,2152,75,2190,91,2227,111,2261,136,2291,159,2305,186,2313,184,2318,157,2310,133,2295,106,2264,86,2229,70,2192,59,2154,47,2081,44,2025"/>
+<area shape="rect" id="Node000051" href="$d2/d2e/classStencilTests.html" title=" " alt="" coords="201,2355,299,2380"/>
+<area shape="poly" id="edge73_Node000000_Node000051" title=" " alt="" coords="53,2024,64,2098,81,2193,106,2283,121,2317,137,2340,150,2350,166,2358,201,2365,200,2370,165,2363,148,2355,133,2344,116,2320,101,2285,76,2194,58,2099,48,2025"/>
+<area shape="rect" id="Node000052" href="$d9/d5b/classStippleTests.html" title=" " alt="" coords="200,2404,300,2429"/>
+<area shape="poly" id="edge74_Node000000_Node000052" title=" " alt="" coords="52,2024,61,2108,78,2218,103,2322,119,2363,137,2390,150,2400,166,2407,200,2415,199,2420,164,2412,147,2404,133,2393,114,2365,98,2324,73,2219,56,2108,47,2025"/>
+<area shape="rect" id="Node000053" href="$da/d24/classSurfaceClipTests.html" title=" " alt="" coords="185,2453,315,2479"/>
+<area shape="poly" id="edge75_Node000000_Node000053" title=" " alt="" coords="51,2024,59,2117,74,2242,86,2305,100,2362,117,2408,137,2439,159,2454,186,2462,184,2467,157,2459,133,2443,112,2410,95,2363,81,2306,69,2243,54,2117,46,2024"/>
+<area shape="rect" id="Node000054" href="$d5/de3/classSurfaceFormatTests.html" title=" " alt="" coords="175,2503,325,2528"/>
+<area shape="poly" id="edge76_Node000000_Node000054" title=" " alt="" coords="51,2025,57,2127,71,2266,82,2337,97,2401,115,2453,137,2488,154,2501,176,2509,174,2514,152,2506,133,2492,110,2455,92,2402,77,2338,66,2267,52,2127,46,2025"/>
+<area shape="rect" id="Node000055" href="$df/d85/classSurfacePitchTests.html" title=" " alt="" coords="182,2552,318,2577"/>
+<area shape="poly" id="edge77_Node000000_Node000055" title=" " alt="" coords="50,2024,55,2135,68,2290,79,2368,94,2440,113,2498,124,2521,137,2537,157,2552,182,2560,181,2566,155,2557,133,2541,120,2524,108,2500,89,2441,74,2369,63,2290,50,2135,45,2024"/>
+<area shape="rect" id="Node000056" href="$de/d3c/classSwathWidthTests.html" title=" " alt="" coords="183,2601,317,2627"/>
+<area shape="poly" id="edge78_Node000000_Node000056" title=" " alt="" coords="50,2024,53,2145,65,2314,76,2400,91,2479,111,2544,123,2568,137,2587,158,2602,184,2610,182,2615,156,2607,133,2591,119,2571,106,2546,86,2481,70,2401,60,2314,48,2145,45,2025"/>
+<area shape="rect" id="Node000057" href="$da/d51/classTexgenMatrixTests.html" title=" " alt="" coords="179,2651,321,2676"/>
+<area shape="poly" id="edge79_Node000000_Node000057" title=" " alt="" coords="50,2025,51,2154,62,2338,72,2432,88,2518,109,2589,122,2616,137,2636,156,2650,179,2659,178,2664,153,2655,133,2640,118,2619,104,2591,83,2520,67,2433,56,2338,46,2154,44,2025"/>
+<area shape="rect" id="Node000058" href="$d2/ddb/classTexgenTests.html" title=" " alt="" coords="199,2700,301,2725"/>
+<area shape="poly" id="edge80_Node000000_Node000058" title=" " alt="" coords="49,2025,50,2163,59,2362,69,2464,85,2557,107,2634,121,2663,137,2686,150,2696,165,2704,200,2711,198,2717,163,2709,147,2701,133,2689,116,2666,102,2636,80,2559,64,2465,53,2362,44,2163,44,2025"/>
+<area shape="rect" id="Node000059" href="$da/d85/classTextureBorderColorTests.html" title="Tests behavior of texture border colors with various texture formats." alt="" coords="160,2749,340,2775"/>
+<area shape="poly" id="edge81_Node000000_Node000059" title=" " alt="" coords="51,2024,61,2181,78,2407,104,2620,120,2695,128,2720,137,2735,161,2752,158,2756,133,2738,123,2722,115,2696,99,2621,73,2408,55,2181,46,2025"/>
+<area shape="rect" id="Node000060" href="$d3/df1/classTextureBorderTests.html" title=" " alt="" coords="177,2799,323,2824"/>
+<area shape="poly" id="edge82_Node000000_Node000060" title=" " alt="" coords="51,2024,60,2191,77,2432,89,2554,103,2661,119,2741,128,2768,137,2784,155,2798,177,2806,176,2811,152,2803,133,2788,123,2770,114,2743,97,2661,83,2554,72,2433,54,2191,46,2025"/>
+<area shape="rect" id="Node000061" href="$d1/dcf/classTextureCPUUpdateTests.html" title=" " alt="" coords="161,2848,339,2873"/>
+<area shape="poly" id="edge83_Node000000_Node000061" title=" " alt="" coords="51,2024,59,2199,75,2457,87,2587,101,2701,118,2788,127,2816,137,2834,162,2851,159,2855,133,2837,122,2819,113,2789,96,2702,82,2587,70,2457,53,2199,46,2024"/>
+<area shape="rect" id="Node000062" href="$d1/df8/classTextureCubemapTests.html" title=" " alt="" coords="167,2897,333,2923"/>
+<area shape="poly" id="edge84_Node000000_Node000062" title=" " alt="" coords="51,2024,58,2208,74,2482,85,2620,100,2742,117,2834,127,2865,137,2883,151,2895,168,2903,166,2907,148,2899,133,2886,122,2867,112,2835,94,2742,80,2621,68,2482,53,2209,45,2024"/>
+<area shape="rect" id="Node000063" href="$da/df8/classTextureFormatDXTTests.html" title=" " alt="" coords="162,2947,338,2972"/>
+<area shape="poly" id="edge85_Node000000_Node000063" title=" " alt="" coords="51,2024,57,2218,72,2507,84,2653,98,2782,116,2880,126,2913,137,2932,149,2943,163,2950,161,2955,146,2947,133,2936,121,2915,111,2881,93,2783,78,2654,67,2507,52,2218,45,2025"/>
+<area shape="rect" id="Node000064" href="$dc/df4/classTextureFormatTests.html" title=" " alt="" coords="175,2996,325,3021"/>
+<area shape="poly" id="edge86_Node000000_Node000064" title=" " alt="" coords="51,2024,56,2227,71,2532,82,2686,97,2823,115,2926,125,2961,137,2982,154,2995,176,3004,174,3009,152,3000,133,2985,121,2963,110,2928,91,2824,77,2687,65,2532,51,2227,45,2024"/>
+<area shape="rect" id="Node000065" href="$d3/d10/classTextureFramebufferBlitTests.html" title=" " alt="" coords="148,3045,352,3071"/>
+<area shape="poly" id="edge87_Node000000_Node000065" title=" " alt="" coords="50,2024,55,2235,69,2557,80,2719,95,2863,114,2973,125,3009,137,3031,152,3043,148,3047,133,3034,120,3011,109,2974,90,2864,75,2720,64,2557,50,2236,45,2024"/>
+<area shape="rect" id="Node000066" href="$df/d18/classTextureMatrixTests.html" title=" " alt="" coords="177,3095,323,3120"/>
+<area shape="poly" id="edge88_Node000000_Node000066" title=" " alt="" coords="50,2024,55,2245,68,2582,79,2753,94,2904,113,3019,124,3057,137,3080,155,3095,178,3103,176,3108,152,3099,133,3084,119,3059,108,3020,88,2905,74,2753,62,2582,49,2245,45,2025"/>
+<area shape="rect" id="Node000067" href="$d1/d5c/classTexturePerspectiveEnableTests.html" title=" " alt="" coords="155,3145,345,3185"/>
+<area shape="poly" id="edge89_Node000000_Node000067" title=" " alt="" coords="50,2024,55,2253,67,2605,79,2784,94,2943,113,3064,124,3105,137,3130,156,3146,153,3150,133,3133,119,3107,108,3065,88,2944,73,2785,62,2605,49,2253,45,2024"/>
+<area shape="rect" id="Node000068" href="$d1/da7/classTextureRenderTargetTests.html" title=" " alt="" coords="155,3209,345,3235"/>
+<area shape="poly" id="edge90_Node000000_Node000068" title=" " alt="" coords="50,2024,53,2265,64,2639,75,2829,90,2998,111,3126,123,3169,137,3195,157,3210,153,3214,133,3198,118,3171,106,3127,85,2999,70,2830,59,2639,48,2265,45,2024"/>
+<area shape="rect" id="Node000069" href="$dd/de1/classTextureRenderUpdateInPlaceTests.html" title=" " alt="" coords="145,3259,355,3299"/>
+<area shape="poly" id="edge91_Node000000_Node000069" title=" " alt="" coords="50,2025,53,2274,64,2663,75,2861,90,3038,111,3172,123,3217,137,3244,151,3257,147,3261,133,3248,118,3219,106,3173,85,3038,70,2862,59,2663,48,2274,45,2025"/>
+<area shape="rect" id="Node000070" href="$dc/d5d/classTextureShadowComparatorTests.html" title=" " alt="" coords="135,3324,365,3349"/>
+<area shape="poly" id="edge92_Node000000_Node000070" title=" " alt="" coords="50,2024,51,2286,61,2696,71,2906,87,3092,109,3234,122,3281,137,3310,151,3322,148,3326,133,3313,117,3283,103,3235,82,3093,66,2906,56,2696,46,2286,45,2024"/>
+<area shape="rect" id="Node000071" href="$d2/d66/classTextureSignedComponentTests.html" title=" " alt="" coords="139,3373,361,3399"/>
+<area shape="poly" id="edge93_Node000000_Node000071" title=" " alt="" coords="50,2024,50,2294,59,2721,70,2939,85,3133,96,3213,108,3280,121,3329,137,3359,151,3371,148,3375,133,3362,116,3331,102,3281,90,3214,80,3133,64,2939,54,2721,45,2294,44,2024"/>
+<area shape="rect" id="Node000072" href="$db/d65/classThreeDPrimitiveTests.html" title=" " alt="" coords="169,3423,331,3448"/>
+<area shape="poly" id="edge94_Node000000_Node000072" title=" " alt="" coords="50,2025,50,2304,58,2746,68,2972,84,3173,94,3257,107,3326,121,3377,137,3408,152,3421,170,3429,168,3434,149,3425,133,3412,116,3379,101,3327,89,3258,79,3174,63,2973,53,2746,44,2304,44,2025"/>
+<area shape="rect" id="Node000073" href="$db/df8/classTwoDLineTests.html" title=" " alt="" coords="191,3472,309,3497"/>
+<area shape="poly" id="edge95_Node000000_Node000073" title=" " alt="" coords="50,2024,49,2312,57,2770,67,3005,83,3213,93,3301,106,3372,120,3426,137,3458,161,3475,192,3483,190,3488,159,3480,133,3461,115,3428,100,3373,88,3301,77,3214,61,3005,51,2770,44,2312,44,2024"/>
+<area shape="rect" id="Node000074" href="$d0/d1d/classVertexShaderIndependenceTests.html" title=" " alt="" coords="150,3522,350,3562"/>
+<area shape="poly" id="edge96_Node000000_Node000074" title=" " alt="" coords="50,2025,49,2321,57,2793,67,3037,83,3253,93,3343,106,3418,120,3473,137,3507,151,3520,148,3524,133,3510,115,3475,101,3419,88,3344,78,3253,62,3037,52,2794,44,2321,44,2025"/>
+<area shape="rect" id="Node000075" href="$d9/df9/classVertexShaderRoundingTests.html" title=" " alt="" coords="149,3587,351,3612"/>
+<area shape="poly" id="edge97_Node000000_Node000075" title=" " alt="" coords="51,2025,59,2343,76,2852,88,3110,102,3334,119,3498,128,3548,137,3572,151,3584,147,3588,132,3576,123,3549,113,3498,97,3335,83,3110,71,2852,53,2343,45,2025"/>
+<area shape="rect" id="Node000076" href="$d7/de4/classVertexShaderSwizzleTests.html" title=" " alt="" coords="155,3636,345,3661"/>
+<area shape="poly" id="edge98_Node000000_Node000076" title=" " alt="" coords="51,2025,58,2353,75,2877,87,3144,102,3376,118,3544,127,3596,137,3622,156,3637,153,3641,133,3625,122,3598,113,3545,96,3376,82,3144,70,2878,53,2353,45,2025"/>
+<area shape="rect" id="Node000077" href="$df/daa/classViewportTests.html" title=" " alt="" coords="193,3685,307,3711"/>
+<area shape="poly" id="edge99_Node000000_Node000077" title=" " alt="" coords="50,2024,58,2360,74,2902,86,3177,101,3416,118,3591,127,3645,137,3671,148,3681,162,3689,194,3697,193,3702,160,3694,145,3686,132,3674,122,3646,112,3592,96,3417,81,3177,69,2902,53,2361,45,2024"/>
+<area shape="rect" id="Node000078" href="$d7/d06/classVolumeTextureTests.html" title=" " alt="" coords="174,3735,326,3760"/>
+<area shape="poly" id="edge100_Node000000_Node000078" title=" " alt="" coords="50,2024,57,2370,74,2927,86,3211,100,3458,117,3638,127,3693,137,3720,154,3734,175,3742,173,3747,151,3739,132,3724,122,3695,112,3639,95,3458,80,3211,68,2927,52,2370,45,2024"/>
+<area shape="rect" id="Node000079" href="$d8/dab/classWParamTests.html" title=" " alt="" coords="195,3784,305,3809"/>
+<area shape="poly" id="edge101_Node000000_Node000079" title=" " alt="" coords="50,2024,57,2379,73,2953,85,3245,99,3499,117,3685,127,3742,137,3770,149,3780,163,3788,196,3796,194,3801,161,3793,146,3785,132,3773,121,3743,112,3685,94,3499,79,3245,68,2953,52,2379,45,2025"/>
+<area shape="rect" id="Node000080" href="$d0/d2f/classWeightSetterTests.html" title=" " alt="" coords="181,3833,319,3859"/>
+<area shape="poly" id="edge102_Node000000_Node000080" title=" " alt="" coords="50,2025,57,2388,72,2978,84,3279,99,3540,116,3732,126,3790,137,3819,156,3834,181,3843,179,3848,154,3839,133,3822,121,3792,111,3732,93,3541,79,3279,67,2978,51,2388,45,2025"/>
+<area shape="rect" id="Node000081" href="$d1/d55/classWindowClipTests.html" title=" " alt="" coords="184,3883,316,3908"/>
+<area shape="poly" id="edge103_Node000000_Node000081" title=" " alt="" coords="50,2025,56,2397,72,3003,83,3312,98,3582,116,3778,126,3839,137,3868,158,3884,184,3893,183,3898,156,3889,133,3872,121,3840,111,3779,93,3582,78,3313,66,3003,51,2397,45,2025"/>
+<area shape="rect" id="Node000082" href="$dd/d22/classZMinMaxControlTests.html" title=" " alt="" coords="169,3932,331,3957"/>
+<area shape="poly" id="edge104_Node000000_Node000082" title=" " alt="" coords="50,2025,56,2405,71,3028,82,3346,97,3623,115,3825,126,3887,137,3918,151,3930,169,3938,167,3943,148,3935,132,3921,121,3889,110,3826,92,3623,77,3346,66,3028,51,2405,45,2025"/>
+<area shape="rect" id="Node000083" href="$df/d84/classZeroStrideTests.html" title=" " alt="" coords="189,3981,311,4007"/>
+<area shape="poly" id="edge105_Node000000_Node000083" title=" " alt="" coords="50,2025,56,2414,70,3053,82,3380,96,3664,115,3872,125,3936,137,3967,160,3984,189,3992,188,3997,158,3989,133,3970,120,3937,110,3872,91,3664,76,3380,65,3053,50,2414,45,2025"/>
+<area shape="rect" id="Node000023" href="$dc/d25/classFogCustomShaderTests.html" title=" " alt="" coords="413,1072,587,1097"/>
+<area shape="poly" id="edge45_Node000022_Node000023" title=" " alt="" coords="303,1082,413,1082,413,1087,303,1087"/>
+<area shape="rect" id="Node000024" href="$df/d53/classFogInfiniteFogCoordinateTests.html" title=" " alt="" coords="635,1035,819,1075"/>
+<area shape="poly" id="edge46_Node000023_Node000024" title=" " alt="" coords="600,1069,634,1065,635,1070,601,1074"/>
+<area shape="rect" id="Node000025" href="$d4/d92/classFogVec4CoordTests.html" title=" " alt="" coords="653,1100,800,1125"/>
+<area shape="poly" id="edge47_Node000023_Node000025" title=" " alt="" coords="601,1094,653,1101,653,1106,600,1100"/>
+</map>
