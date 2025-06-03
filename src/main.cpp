@@ -49,6 +49,7 @@
 #include "tests/combiner_tests.h"
 #include "tests/depth_format_fixed_function_tests.h"
 #include "tests/depth_format_tests.h"
+#include "tests/depth_function_tests.h"
 #include "tests/dma_corruption_around_surface_tests.h"
 #include "tests/edge_flag_tests.h"
 #include "tests/fog_carryover_tests.h"
@@ -403,6 +404,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(CombinerTests)
   REG_TEST(DepthFormatTests)
   REG_TEST(DepthFormatFixedFunctionTests)
+  REG_TEST(DepthFunctionTests)
   REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(EdgeFlagTests)
   REG_TEST(FogTests)

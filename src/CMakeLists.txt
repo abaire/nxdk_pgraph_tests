@@ -236,6 +236,8 @@ add_executable(
         tests/depth_format_fixed_function_tests.h
         tests/depth_format_tests.cpp
         tests/depth_format_tests.h
+        tests/depth_function_tests.cpp
+        tests/depth_function_tests.h
         tests/dma_corruption_around_surface_tests.cpp
         tests/dma_corruption_around_surface_tests.h
         tests/edge_flag_tests.cpp

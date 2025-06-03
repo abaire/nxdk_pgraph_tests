@@ -498,11 +498,21 @@ class TestHost {
   //! Trigger creation of a vertex, applying the last set attributes.
   inline void SetVertex(const vector_t pt) const { SetVertex(pt[0], pt[1], pt[2], pt[3]); }
 
+  //! Draws a quad by unprojecting the given coordinates.
+  void DrawScreenQuad(float left, float top, float right, float bottom, float world_z) const {
+    Begin(PRIMITIVE_QUADS);
+    SetScreenVertex(left, top, world_z);
+    SetScreenVertex(right, top, world_z);
+    SetScreenVertex(right, bottom, world_z);
+    SetScreenVertex(left, bottom, world_z);
+    End();
+  }
+
   //! Unprojects the given coordinates and calls SetVertex.
-  void SetScreenVertex(float x, float y, float screen_z) const {
-    vector_t screen{x, y, screen_z, 1.f};
+  void SetScreenVertex(float x, float y, float world_z) const {
+    vector_t screen{x, y, world_z, 1.f};
     vector_t world;
-    UnprojectPoint(world, screen, screen_z);
+    UnprojectPoint(world, screen, world_z);
     SetVertex(world);
   }
 
