@@ -7,6 +7,9 @@ Based on code from https://github.com/Ernegien/nxdk/tree/test/texture-formats/sa
 
 Golden test results from XBOX hardware are [available here](https://github.com/abaire/nxdk_pgraph_tests_golden_results)
 
+If you're interested in nv2a graphics debugging, check out 
+[the wiki for this repo](https://github.com/abaire/nxdk_pgraph_tests/wiki) for tools and tips.
+
 ## Usage
 
 Tests will be executed automatically if no gamepad input is given within an initial timeout.
