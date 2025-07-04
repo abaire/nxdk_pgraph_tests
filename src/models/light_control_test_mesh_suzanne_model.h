@@ -4,10 +4,10 @@
 
 #include <cstdint>
 
-#include "model_builder.h"
+#include "models/model_builder.h"
 #include "xbox_math_types.h"
 
-class LightControlTestMeshSuzanneModel : public SolidColorModelBuilder {
+class LightControlTestMeshSuzanneModel : public PBKitPlusPlus::SolidColorModelBuilder {
  public:
   LightControlTestMeshSuzanneModel() : SolidColorModelBuilder() {}
   LightControlTestMeshSuzanneModel(const vector_t &diffuse, const vector_t &specular)

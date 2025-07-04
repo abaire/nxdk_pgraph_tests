@@ -9,7 +9,6 @@
 #include "test_suite.h"
 
 class TestHost;
-class VertexBuffer;
 
 /**
  * Tests behavior when lighting is enabled and color components are requested from various sources. Also tests the

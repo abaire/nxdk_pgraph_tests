@@ -168,12 +168,14 @@ function(add_xbe)
         set(RESOURCE_DIRS_RECEIPT "${${target}_RESOURCE_DIRS_RECEIPT_OUTPUT_PATH}")
         _make_abs_paths(XBE_RESOURCE_DIRS)
 
+        string(REPLACE "/" "_" sync_resource_dirs_target_name "${RESOURCE_DIRS_RECEIPT}")
+
         # sync_resource_dirs runs unconditionally on every build. The script
         # produces RESOURCE_DIRS_RECEIPT.hack as a byproduct if any files in the
         # staging dir were modified. Users of this rule should depend on
         # RESOURCE_DIRS_RECEIPT.
         add_custom_target(
-                sync_resource_dirs
+                "sync_resource_dirs_${sync_resource_dirs_target_name}"
                 BYPRODUCTS
                 "${RESOURCE_DIRS_RECEIPT}.hack"
                 COMMAND

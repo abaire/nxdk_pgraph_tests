@@ -7,7 +7,11 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests behavior when massive numbers of vertices are specified without an END

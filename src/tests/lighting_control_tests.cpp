@@ -11,17 +11,12 @@
 #include "models/light_control_test_mesh_suzanne_model.h"
 #include "models/light_control_test_mesh_torus_model.h"
 #include "pbkit_ext.h"
+#include "shaders/fixed_function_approximation_shader.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
 #include "xbox_math_matrix.h"
-
-// clang-format off
-static const uint32_t kFixedFunctionApproximationShader[] = {
-#include "fixed_function_approximation_shader.vshinc"
-};
-// clang-format on
 
 static constexpr uint32_t kCheckerboardA = 0xFF202020;
 static constexpr uint32_t kCheckerboardB = 0xFF000000;
@@ -343,10 +338,10 @@ static void SetupLights(TestHost& host, bool specular_enabled) {
 static void SetupVertexShader(TestHost& host) {
   // Use a custom shader that approximates the interesting lighting portions of the fixed function pipeline.
   float depth_buffer_max_value = host.GetMaxDepthBufferValue();
-  auto shader = std::make_shared<PerspectiveVertexShader>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
-                                                          depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
+  auto shader =
+      std::make_shared<FixedFunctionApproximationShader>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
+                                                         depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
-    shader->SetShaderOverride(kFixedFunctionApproximationShader, sizeof(kFixedFunctionApproximationShader));
     vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
     vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
     shader->LookAt(camera_position, camera_look_at);

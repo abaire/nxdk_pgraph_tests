@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-class VertexBuffer;
-
 class TexgenTests : public TestSuite {
  public:
   TexgenTests(TestHost& host, std::string output_dir, const Config& config);

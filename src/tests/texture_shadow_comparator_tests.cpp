@@ -7,9 +7,9 @@
 #include "debug_output.h"
 #include "pbkit_ext.h"
 #include "shaders/passthrough_vertex_shader.h"
-#include "shaders/perspective_vertex_shader.h"
-#include "swizzle.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "test_host.h"
+#include "xbox-swizzle/swizzle.h"
 
 // Uncomment to save the depth texture as an additional artifact.
 // #define DEBUG_DUMP_DEPTH_TEXTURE
@@ -496,10 +496,10 @@ void TextureShadowComparatorTests::TestProgrammable(uint32_t depth_format, bool 
                                                     float min_val, float max_val, float ref_val,
                                                     const std::string &name) {
   float depth_buffer_max_value = host_.MaxDepthBufferValue(depth_format, float_depth);
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                                                           0.0f, depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
-    shader->SetLightingEnabled(false);
     shader->SetUseD3DStyleViewport();
     vector_t camera_position = {0.0f, 0.0f, kCameraZ, 1.0f};
     vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};

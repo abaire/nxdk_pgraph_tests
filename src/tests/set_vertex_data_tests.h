@@ -8,9 +8,14 @@
 
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 struct Color;
-class TestHost;
 class VertexBuffer;
+}  // namespace PBKitPlusPlus
+
+class TestHost;
+
+using namespace PBKitPlusPlus;
 
 // Tests behavior of various SET_VERTEX_DATAX methods.
 class SetVertexDataTests : public TestSuite {

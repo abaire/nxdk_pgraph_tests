@@ -8,8 +8,6 @@
 #include "test_suite.h"
 #include "vertex_buffer.h"
 
-class VertexBuffer;
-
 // Tests behavior when lighting is enabled and color components are requested from various sources.
 class SmoothingTests : public TestSuite {
  public:

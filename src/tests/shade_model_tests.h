@@ -8,7 +8,6 @@
 #include "test_suite.h"
 
 class TestHost;
-class VertexBuffer;
 
 // Tests behavior when lighting is enabled but a normal is not provided in the vertex data.
 // The observed behavior on hardware is that the last set normal is reused for the unspecified vertices.

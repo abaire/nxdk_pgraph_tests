@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-class VertexBuffer;
-
 /**
  * Tests behavior when the color buffer and z/stencil buffers overlap in RAM.
  *

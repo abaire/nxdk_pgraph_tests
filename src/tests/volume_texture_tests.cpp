@@ -7,7 +7,6 @@
 #include <utility>
 
 #include "debug_output.h"
-#include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "vertex_buffer.h"

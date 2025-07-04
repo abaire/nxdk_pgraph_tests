@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.18)
 
 include(NV2A_VSH REQUIRED)
 include(NV20_CG REQUIRED)
@@ -61,20 +61,23 @@ endmacro()
 
 # Vertex shaders.
 generate_nv2a_vshinc_files(
-        generated_nv2a_vertex_shaders
+        OUTPUT_VARIABLE _VERTEX_SHADER_FILES
+        INCLUDE_DIRECTORIES_VARIABLE _VERTEX_SHADER_INCLUDE_DIRS
+        GENERATION_TARGET_VARIABLE _VERTEX_SHADER_GEN_TARGET
         SOURCES
         shaders/attribute_carryover_tests.vsh
         shaders/fixed_function_approximation_shader.vsh
         shaders/fog_infinite_fogc_test.vsh
+        shaders/fog_vec4_unset.vsh
         shaders/fog_vec4_w.vsh
         shaders/fog_vec4_w_x.vsh
         shaders/fog_vec4_w_y.vsh
         shaders/fog_vec4_w_z_y_x.vsh
         shaders/fog_vec4_x.vsh
+        shaders/fog_vec4_x_y_z_w.vsh
         shaders/fog_vec4_xw.vsh
         shaders/fog_vec4_xy.vsh
         shaders/fog_vec4_xyz.vsh
-        shaders/fog_vec4_x_y_z_w.vsh
         shaders/fog_vec4_xyzw.vsh
         shaders/fog_vec4_xz.vsh
         shaders/fog_vec4_xzw.vsh
@@ -84,12 +87,10 @@ generate_nv2a_vshinc_files(
         shaders/fog_vec4_yzw.vsh
         shaders/fog_vec4_z.vsh
         shaders/fog_vec4_zw.vsh
-        shaders/fog_vec4_unset.vsh
         shaders/passthrough.vsh
         shaders/passthrough_just_position_and_color.vsh
         shaders/passthrough_mul_color_by_constant.vsh
         shaders/passthrough_no_point_size.vsh
-        shaders/projection_vertex_shader_colorless_light.vsh
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
         shaders/weight_to_color.vsh
@@ -112,8 +113,6 @@ generate_vertexshader_inl_files(
 add_library(
         optimized_sources
         STATIC
-        dds_image.cpp
-        dds_image.h
         debug_output.cpp
         debug_output.h
         ftp_logger.cpp
@@ -133,44 +132,25 @@ add_library(
         models/light_control_test_mesh_suzanne_model.h
         models/light_control_test_mesh_torus_model.cpp
         models/light_control_test_mesh_torus_model.h
-        models/model_builder.cpp
-        models/model_builder.h
-        light.cpp
-        light.h
         logger.cpp
         logger.h
         pbkit_ext.cpp
         pbkit_ext.h
         pgraph_diff_token.cpp
         pgraph_diff_token.h
-        pushbuffer.cpp
-        pushbuffer.h
         runtime_config.cpp
         runtime_config.h
-        shaders/orthographic_vertex_shader.cpp
-        shaders/orthographic_vertex_shader.h
-        shaders/perspective_vertex_shader.cpp
-        shaders/perspective_vertex_shader.h
+        shaders/fixed_function_approximation_shader.cpp
+        shaders/fixed_function_approximation_shader.h
+        shaders/perspective_vertex_shader_no_lighting.cpp
+        shaders/perspective_vertex_shader_no_lighting.h
         shaders/pixel_shader_program.cpp
         shaders/pixel_shader_program.h
-        shaders/passthrough_vertex_shader.cpp
-        shaders/passthrough_vertex_shader.h
-        shaders/projection_vertex_shader.cpp
-        shaders/projection_vertex_shader.h
-        shaders/vertex_shader_program.cpp
-        shaders/vertex_shader_program.h
         test_driver.cpp
         test_driver.h
         test_host.cpp
         test_host.h
-        texture_format.cpp
-        texture_format.h
-        texture_generator.cpp
-        texture_generator.h
-        texture_stage.cpp
-        texture_stage.h
-        vertex_buffer.cpp
-        vertex_buffer.h
+        ${_VERTEX_SHADER_FILES}
 )
 
 if (NOT NO_OPT)
@@ -181,10 +161,12 @@ endif ()
 
 target_include_directories(
         optimized_sources
-        PRIVATE
+        PUBLIC
         "${CMAKE_CURRENT_SOURCE_DIR}"
         "${CMAKE_SOURCE_DIR}/third_party"
         "${CMAKE_CURRENT_BINARY_DIR}"
+        PRIVATE
+        ${_VERTEX_SHADER_INCLUDE_DIRS}
 )
 
 target_link_libraries(
@@ -194,16 +176,20 @@ target_link_libraries(
         generated_vp20_vertex_shaders
         generated_nv2a_vertex_shaders
         nxdk_ftp_client_lib::client
+        pbkitplusplus
         PRIVATE
         fpng
         printf
-        swizzle
         tiny-json
-        xbox_math3d
         NXDK::NXDK
         NXDK::NXDK_CXX
         NXDK::SDL2
         NXDK::SDL2_Image
+)
+
+add_dependencies(
+        optimized_sources
+        ${_VERTEX_SHADER_GEN_TARGET}
 )
 
 add_executable(

@@ -7,8 +7,10 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 struct TextureFormatInfo;
 class VertexBuffer;
+}  // namespace PBKitPlusPlus
 
 /**
  * Tests the effects of NV097_SET_SURFACE_FORMAT_ANTI_ALIASING in various

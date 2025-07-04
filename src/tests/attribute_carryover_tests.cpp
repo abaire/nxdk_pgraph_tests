@@ -2,10 +2,10 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../test_host.h"
 #include "debug_output.h"
 #include "pbkit_ext.h"
 #include "shaders/passthrough_vertex_shader.h"
+#include "test_host.h"
 #include "vertex_buffer.h"
 
 // clang-format off
@@ -57,7 +57,7 @@ void AttributeCarryoverTests::Initialize() {
   TestSuite::Initialize();
 
   auto shader = std::make_shared<PassthroughVertexShader>();
-  shader->SetShaderOverride(kShader, sizeof(kShader));
+  shader->SetShader(kShader, sizeof(kShader));
 
   // Keep in sync with attribute_carryover_tests.vsh
 

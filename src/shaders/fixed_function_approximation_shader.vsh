@@ -6,10 +6,11 @@
 #view_matrix matrix4 100
 #projection_matrix matrix4 104
 #camera_pos vector 108
-#light_vector vector 109
-#zero_constant vector 110
+#zero_constant vector 109
 ; -1, -0.5, 0.5, 1
-#basic_constants vector 111
+#basic_constants vector 110
+
+#light_vector vector 111
 
 #invalid_color vector 120
 #light_ambient vector 121

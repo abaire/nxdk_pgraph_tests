@@ -8,9 +8,9 @@
 [submodule "third_party/fpng"]
 	path = third_party/fpng
 	url = https://github.com/richgel999/fpng
-[submodule "third_party/xbox_math3d"]
-	path = third_party/xbox_math3d
-	url = https://github.com/abaire/xbox_math3d.git
 [submodule "third_party/tiny-json"]
 	path = third_party/tiny-json
 	url = https://github.com/rafagafe/tiny-json.git
+[submodule "third_party/pbkitplusplus"]
+	path = third_party/pbkitplusplus
+	url = https://github.com/abaire/pbkitplusplus.git

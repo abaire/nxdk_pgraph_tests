@@ -2,9 +2,9 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../test_host.h"
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
+#include "test_host.h"
 #include "texture_generator.h"
 
 static constexpr auto kWUpperLeft = INFINITY;

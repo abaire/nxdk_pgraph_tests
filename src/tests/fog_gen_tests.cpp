@@ -1,19 +1,16 @@
 #include "fog_gen_tests.h"
 
-#include <light.h>
-#include <models/flat_mesh_grid_model.h>
 #include <pbkit/pbkit.h>
-#include <shaders/perspective_vertex_shader.h>
 
 #include "debug_output.h"
+#include "light.h"
+#include "models/flat_mesh_grid_model.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "test_host.h"
 
 // clang-format off
 static constexpr uint32_t kVertexShader[] = {
 #include "projection_vertex_shader_no_lighting_explicit_fog.vshinc"
-
-
-
 };
 // clang-format on
 
@@ -128,10 +125,10 @@ static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host
   // transforming shader is used to better reproduce observed issues with Otogi:
   // https://github.com/xemu-project/xemu/issues/365
   float depth_buffer_max_value = host.GetMaxDepthBufferValue();
-  auto shader = std::make_shared<PerspectiveVertexShader>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
                                                           depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
-  shader->SetShaderOverride(kVertexShader, sizeof(kVertexShader));
-  shader->SetLightingEnabled(false);
+  shader->SetShader(kVertexShader, sizeof(kVertexShader));
   shader->SetTransposeOnUpload();
   vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
   vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};

@@ -2,11 +2,11 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../shaders/passthrough_vertex_shader.h"
-#include "../test_host.h"
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
+#include "test_host.h"
 #include "vertex_buffer.h"
 
 static constexpr uint32_t kF16MaxFixedRepresentation = 0x0000FFFF;

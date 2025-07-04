@@ -7,7 +7,11 @@
 #include "test_suite.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests the effects of NV097_SET_LIGHT_CONTROL (0x294) in conjunction with

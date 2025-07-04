@@ -3,8 +3,12 @@
 
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
 class TestHost;
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests handling of back specular color with interesting combinations of

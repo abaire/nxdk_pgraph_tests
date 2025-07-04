@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-class VertexBuffer;
-
 //! Verifies that using an NV097_INLINE_ARRAY draw loop that ends with a partial vertex description silently ignores
 //! any partial vertices.
 //!

@@ -10,10 +10,9 @@
 #include <shaders/perspective_vertex_shader.h>
 #include <xbox_math_vector.h>
 
-#include "../test_host.h"
 #include "debug_output.h"
-#include "shaders/passthrough_vertex_shader.h"
-#include "texture_generator.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
+#include "test_host.h"
 
 static constexpr char kTestControlFlagsLightOffFixedFunction[] = "ControlFlagsLightDisable_FF";
 static constexpr char kTestControlLightOffFlagsShader[] = "ControlFlagsLightDisable_VS";
@@ -369,9 +368,9 @@ void SpecularTests::Deinitialize() {
 static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host) {
   // Use a custom shader that approximates the interesting lighting portions of the fixed function pipeline.
   float depth_buffer_max_value = host.GetMaxDepthBufferValue();
-  auto shader = std::make_shared<PerspectiveVertexShader>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
                                                           depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
-  shader->SetLightingEnabled(false);
   vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
   vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
   shader->LookAt(camera_position, camera_look_at);

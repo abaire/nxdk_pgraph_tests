@@ -6,8 +6,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-
 class TextureCPUUpdateTests : public TestSuite {
  public:
   TextureCPUUpdateTests(TestHost& host, std::string output_dir, const Config& config);

@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-class VertexBuffer;
-
 class VertexShaderIndependenceTests : public TestSuite {
  public:
   VertexShaderIndependenceTests(TestHost& host, std::string output_dir, const Config& config);

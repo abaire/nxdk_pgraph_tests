@@ -7,8 +7,11 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 class TextureRenderUpdateInPlaceTests : public TestSuite {
  public:

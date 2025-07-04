@@ -81,7 +81,7 @@ void VertexShaderIndependenceTests::Test() {
   host_.PrepareDraw(0xFE333333);
 
   auto shader = std::make_shared<PassthroughVertexShader>();
-  shader->SetShaderOverride(kShader, sizeof(kShader));
+  shader->SetShader(kShader, sizeof(kShader));
   // Only the X component is actually used. The expected blue channel should be the reciprocal square root of this
   // constant's X value.
   shader->SetUniformF(0, 1.0f, 0.0f, 0.0f, 0.0f);

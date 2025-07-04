@@ -8,10 +8,11 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 class PassthroughVertexShader;
-class PerspectiveVertexShader;
-struct TextureFormatInfo;
-class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 class TextureShadowComparatorTests : public TestSuite {
  public:

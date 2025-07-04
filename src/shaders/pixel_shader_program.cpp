@@ -4,6 +4,8 @@
 
 #include "pushbuffer.h"
 
+using namespace PBKitPlusPlus;
+
 void PixelShaderProgram::LoadTexturedPixelShader() {
   uint32_t *p = pb_begin();
 

@@ -6,9 +6,6 @@
 
 #include "test_host.h"
 #include "test_suite.h"
-#include "vertex_buffer.h"
-
-class VertexBuffer;
 
 /**
  * Tests behavior when rendering various 3D primitives.

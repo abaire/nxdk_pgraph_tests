@@ -6,7 +6,10 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 struct TextureFormatInfo;
+}
+using namespace PBKitPlusPlus;
 
 class TextureFormatTests : public TestSuite {
  public:

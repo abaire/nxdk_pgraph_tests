@@ -7,8 +7,7 @@
 #include <utility>
 
 #include "debug_output.h"
-#include "shaders/passthrough_vertex_shader.h"
-#include "shaders/perspective_vertex_shader.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -78,8 +77,8 @@ void TextureFormatTests::CreateGeometry() {
 }
 
 void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  shader->SetLightingEnabled(false);
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetVertexShaderProgram(shader);
 
   host_.SetTextureFormat(texture_format);
@@ -110,8 +109,8 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
 }
 
 void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  shader->SetLightingEnabled(false);
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetVertexShaderProgram(shader);
 
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);

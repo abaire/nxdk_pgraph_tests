@@ -31,6 +31,20 @@ macro(set_common_target_options TARGET_NAME)
     )
 endmacro()
 
+find_package(XboxMath QUIET)
+if (XboxMath_FOUND)
+    message(STATUS "Using installed XboxMath version ${XboxMath_VERSION}")
+else ()
+    FetchContent_Declare(
+            XboxMath_fetched
+            GIT_REPOSITORY https://github.com/abaire/xbox_math3d.git
+            GIT_TAG main
+    )
+    FetchContent_MakeAvailable(XboxMath_fetched)
+endif ()
+if (TARGET xbox_math3d AND NOT TARGET XboxMath::xbox_math3d)
+    add_library(XboxMath::xbox_math3d ALIAS xbox_math3d)
+endif ()
 
 #
 # RuntimeConfig tests
@@ -39,20 +53,19 @@ add_library(
         runtime_config
         "${CMAKE_SOURCE_DIR}/src/debug_output.cpp"
         "${CMAKE_SOURCE_DIR}/src/debug_output.h"
-        "${CMAKE_SOURCE_DIR}/src/nxdk_ext.h"
         "${CMAKE_SOURCE_DIR}/src/runtime_config.cpp"
         "${CMAKE_SOURCE_DIR}/src/runtime_config.h"
         "${CMAKE_SOURCE_DIR}/src/test_host.h"
         "${CMAKE_SOURCE_DIR}/src/tests/test_suite.h"
-        "${CMAKE_SOURCE_DIR}/src/texture_format.cpp"
-        "${CMAKE_SOURCE_DIR}/src/texture_format.h"
 )
+
 set_common_target_options(runtime_config)
+
 target_link_libraries(
         runtime_config
         PRIVATE
         printf
-        xbox_math3d
+        XboxMath::xbox_math3d
         tiny-json
 )
 
@@ -60,10 +73,13 @@ add_executable(
         test_runtime_config
         test_runtime_config.cpp
 )
+
 set_common_target_options(test_runtime_config)
-target_link_libraries(test_runtime_config
+
+target_link_libraries(
+        test_runtime_config
         runtime_config
-        xbox_math3d
+        XboxMath::xbox_math3d
         GTest::gmock_main
 )
 

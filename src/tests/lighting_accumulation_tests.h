@@ -6,9 +6,14 @@
 
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 class Light;
-class TestHost;
 class VertexBuffer;
+}  // namespace PBKitPlusPlus
+
+class TestHost;
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests the effects of multiple lights.

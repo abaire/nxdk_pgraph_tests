@@ -6,8 +6,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-
 class TextureFormatDXTTests : public TestSuite {
  public:
   enum class CompressedTextureFormat {
