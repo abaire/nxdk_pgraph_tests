@@ -202,7 +202,7 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
                             int point_size, bool use_shader) {
   if (use_shader) {
     auto shader = std::make_shared<PassthroughVertexShader>();
-    shader->SetShaderOverride(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
+    shader->SetShader(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);
@@ -234,7 +234,7 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
 void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
   if (use_shader) {
     auto shader = std::make_shared<PassthroughVertexShader>();
-    shader->SetShaderOverride(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
+    shader->SetShader(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);

@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-class TestHost;
-class VertexBuffer;
-
 // Tests behavior of 0x16BC - glEdgeFlag
 class EdgeFlagTests : public TestSuite {
  public:

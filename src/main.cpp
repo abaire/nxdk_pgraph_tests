@@ -123,17 +123,19 @@ static constexpr int kFramebufferHeight = 480;
 static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 256;
 
+#ifndef DUMP_CONFIG_FILE
 static constexpr const char* kLogFileName = "pgraph_progress_log.txt";
+#endif
 
 const UCHAR kSMCSlaveAddress = 0x20;
 const UCHAR kSMCRegisterPower = 0x02;
 const UCHAR kSMCPowerShutdown = 0x80;
 
 static bool EnsureDriveMounted(char drive_letter);
-static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors);
 #ifdef DUMP_CONFIG_FILE
 static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 #else
+static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors);
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 #endif
 static void RegisterSuites(TestHost& host, RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites,
@@ -292,22 +294,6 @@ static bool EnsureDriveMounted(char drive_letter) {
   return nxMountDrive(drive_letter, device_path);
 }
 
-static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors) {
-#ifdef RUNTIME_CONFIG_PATH
-  if (!EnsureDriveMounted(RUNTIME_CONFIG_PATH[0])) {
-    debugPrint("Ignoring missing config at %s\n", RUNTIME_CONFIG_PATH);
-  } else {
-    if (config.LoadConfig(RUNTIME_CONFIG_PATH, errors)) {
-      return true;
-    } else {
-      debugPrint("Failed to load config at %s\n", RUNTIME_CONFIG_PATH);
-    }
-  }
-#endif
-
-  return config.LoadConfig("d:\\nxdk_pgraph_tests_config.json", errors);
-}
-
 #ifdef DUMP_CONFIG_FILE
 static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   std::string output_path = config.output_directory_path() + "\\sample-config.json";
@@ -325,7 +311,23 @@ static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSu
   Sleep(4000);
   Shutdown();
 }
-#else
+#else  // #ifdef DUMP_CONFIG_FILE
+
+static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors) {
+#ifdef RUNTIME_CONFIG_PATH
+  if (!EnsureDriveMounted(RUNTIME_CONFIG_PATH[0])) {
+    debugPrint("Ignoring missing config at %s\n", RUNTIME_CONFIG_PATH);
+  } else {
+    if (config.LoadConfig(RUNTIME_CONFIG_PATH, errors)) {
+      return true;
+    } else {
+      debugPrint("Failed to load config at %s\n", RUNTIME_CONFIG_PATH);
+    }
+  }
+#endif
+
+  return config.LoadConfig("d:\\nxdk_pgraph_tests_config.json", errors);
+}
 
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
   if (config.enable_progress_log()) {
@@ -358,7 +360,7 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
     Sleep(4000);
   }
 }
-#endif  // DUMP_CONFIG_FILE
+#endif  // #ifdef DUMP_CONFIG_FILE
 
 static void Shutdown() {
   // TODO: HalInitiateShutdown doesn't seem to cause Xemu to actually close.

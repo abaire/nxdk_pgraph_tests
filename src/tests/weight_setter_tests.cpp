@@ -30,7 +30,7 @@ void WeightSetterTests::Initialize() {
 
 void WeightSetterTests::Test() {
   auto shader = std::make_shared<PassthroughVertexShader>();
-  shader->SetShaderOverride(kShader, sizeof(kShader));
+  shader->SetShader(kShader, sizeof(kShader));
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(0xFF202020);

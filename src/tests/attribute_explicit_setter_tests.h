@@ -7,8 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-class VertexBuffer;
-
 // Tests behavior when vertex attributes are not provided but are used by shaders.
 class AttributeExplicitSetterTests : public TestSuite {
  public:

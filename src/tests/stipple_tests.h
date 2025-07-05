@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-class TestHost;
-class VertexBuffer;
-
 // Tests behavior of 0x147C - 3D_POLYGON_STIPPLE_ENABLE
 class StippleTests : public TestSuite {
  public:

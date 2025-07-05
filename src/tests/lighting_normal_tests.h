@@ -7,7 +7,11 @@
 #include "test_suite.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests behavior when lighting is enabled but a normal is not provided in the vertex data.

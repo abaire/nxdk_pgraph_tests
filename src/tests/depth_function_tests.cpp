@@ -2,11 +2,11 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../shaders/passthrough_vertex_shader.h"
-#include "../test_host.h"
 #include "debug_output.h"
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
+#include "shaders/passthrough_vertex_shader.h"
+#include "test_host.h"
 #include "vertex_buffer.h"
 
 static constexpr char kTestName[] = "DepthFunc";
@@ -117,7 +117,6 @@ void DepthFunctionTests::Test() {
 
     host_.SetDiffuse(kBackdropColor);
 
-    static constexpr float kInvalidRowTop = 240.f;
     left = 32.f;
     column = 2;
     uint32_t unsupported_value = 0x00;

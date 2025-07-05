@@ -9,8 +9,8 @@
 
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
-#include "swizzle.h"
 #include "texture_generator.h"
+#include "xbox-swizzle/swizzle.h"
 
 static constexpr const char kStopBehavior[] = "Stop";
 // static constexpr const char kAlternateStop[] = "Stop Alt";

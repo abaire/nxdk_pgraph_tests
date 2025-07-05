@@ -240,7 +240,7 @@ See [the README in the nv2a_vsh_asm repository](https://github.com/abaire/nv2a_v
 `*.vsh` files are assembed via the `generate_nv2a_vshinc_files` function in CMakeLists.txt. Each vsh file produces a
 corresponding `.vshinc` file that contains a C-style list of 32-bit integers containing the vertex shader operations.
 This file is intended to be included from test source files to initialize a constant array which may then be used to
-populate a `VertexShaderProgram` via `SetShaderOverride`.
+populate a `VertexShaderProgram` via `SetShader`.
 
 For example:
 
@@ -254,7 +254,7 @@ static const uint32_t kPassthroughVsh[] = {
 // ...
 
   auto shader = std::make_shared<VertexShaderProgram>();
-  shader->SetShaderOverride(kPassthroughVsh, sizeof(kPassthroughVsh));
+  shader->SetShader(kPassthroughVsh, sizeof(kPassthroughVsh));
   host_.SetVertexShaderProgram(shader);
 
 ```

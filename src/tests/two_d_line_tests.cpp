@@ -2,9 +2,9 @@
 
 #include <pbkit/pbkit.h>
 
-#include "../nxdk_ext.h"
-#include "../pbkit_ext.h"
-#include "../test_host.h"
+#include "nxdk_ext.h"
+#include "pbkit_ext.h"
+#include "test_host.h"
 
 // 5C is the class for NV04_RENDER_SOLID_LIN (nv32.h) / NV04_SOLID_LINE (nv_objects.h)
 static constexpr uint32_t SUBCH_CLASS_5C = kNextSubchannel;

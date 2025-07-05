@@ -159,7 +159,7 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
     auto vs = std::make_shared<PassthroughVertexShader>();
     bool mulShader = i != 0;
     if (mulShader) {
-      vs->SetShaderOverride(kPassthroughMulColorsShader, sizeof(kPassthroughMulColorsShader));
+      vs->SetShader(kPassthroughMulColorsShader, sizeof(kPassthroughMulColorsShader));
       float mul = mulVals[i - 1].second;
       vs->SetUniformF(120 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, 1);
       vs->SetUniformF(121 - PassthroughVertexShader::kShaderUserConstantOffset, mul, mul, mul, 1);
@@ -208,7 +208,7 @@ void AttributeFloatTests::TestColors(const std::string &test_name) {
   host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
 
   auto vs = std::make_shared<PassthroughVertexShader>();
-  vs->SetShaderOverride(kPassthroughMulColorsShader, sizeof(kPassthroughMulColorsShader));
+  vs->SetShader(kPassthroughMulColorsShader, sizeof(kPassthroughMulColorsShader));
   host_.SetVertexShaderProgram(vs);
 
   static constexpr vector_t kDiffuse{1.f, 0.f, 0.5f, 1.f};

@@ -7,9 +7,7 @@
 #include <utility>
 
 #include "debug_output.h"
-#include "pbkit_ext.h"
-#include "shaders/passthrough_vertex_shader.h"
-#include "shaders/perspective_vertex_shader.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "test_host.h"
 
 static constexpr ViewportTests::Viewport kTestCases[] = {
@@ -47,10 +45,10 @@ void ViewportTests::Test(const Viewport &vp) {
   host_.PrepareDraw(0xFE111213);
 
   float depth_buffer_max_value = host_.GetMaxDepthBufferValue();
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight(),
                                                           0.0f, depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
   {
-    shader->SetLightingEnabled(false);
     shader->SetUseD3DStyleViewport();
     vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
     vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};

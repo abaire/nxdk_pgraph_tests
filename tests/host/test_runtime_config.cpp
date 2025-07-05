@@ -1091,10 +1091,8 @@ static void PopulateConfig(RuntimeConfig& config, const std::string& json) {
 #pragma mark Stub definitions
 
 TestHost::TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
-                   uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth) {}
-TestHost::~TestHost() {}
-
-TextureStage::TextureStage() {}
+                   uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth)
+    : PBKitPlusPlus::NV2AState() {}
 
 static void NoOpTestBody() {}
 

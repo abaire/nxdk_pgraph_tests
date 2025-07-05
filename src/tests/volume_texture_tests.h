@@ -8,6 +8,12 @@
 
 class TestHost;
 
+namespace PBKitPlusPlus {
+struct TextureFormatInfo;
+}
+
+using namespace PBKitPlusPlus;
+
 // Tests 3d texture behavior.
 class VolumeTextureTests : public TestSuite {
  public:

@@ -8,7 +8,7 @@
 
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
-#include "shaders/perspective_vertex_shader.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
@@ -70,8 +70,8 @@ void TextureSignedComponentTests::CreateGeometry() {
 
 void TextureSignedComponentTests::Test(const TextureFormatInfo &texture_format, uint32_t signed_flags,
                                        const std::string &test_name) {
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  shader->SetLightingEnabled(false);
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   host_.SetVertexShaderProgram(shader);
 
   host_.SetTextureFormat(texture_format);

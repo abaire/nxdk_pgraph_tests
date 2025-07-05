@@ -423,7 +423,7 @@ void VertexShaderSwizzleTests::Test(const std::string &name, const Instruction *
 
   for (uint32_t i = 0; i < count; ++i) {
     memcpy(shader_code_ + sizeof(kShaderHeader) / 4, instructions[i].instruction, sizeof(instructions[i].instruction));
-    shader->SetShaderOverride(shader_code_, shader_code_size_);
+    shader->SetShader(shader_code_, shader_code_size_);
     // Set the default color for unset components.
     shader->SetUniformF(0, kDefault, kDefault, kDefault, kDefault);
     shader->Activate();

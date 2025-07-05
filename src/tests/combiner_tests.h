@@ -7,7 +7,10 @@
 #include "test_suite.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+using namespace PBKitPlusPlus;
 
 //! Tests behavior of NV097_SET_COMBINER_* and NV097_SET_SPECULAR_* final
 //! combiner operations.

@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="nxdk_pgraph_tests_xiso - xbdm bridge" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="192.168.80.87 -v3 -- mkdir e:\$CMakeCurrentTargetName$ &amp;&amp; putfile $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nxdk_pgraph_tests" TARGET_NAME="nxdk_pgraph_tests_xiso" CONFIG_NAME="Release" RUN_PATH="$PROJECT_DIR$/../xbdm_gdb_bridge/cmake-build-release/xbdm_gdb_bridge">
+  <configuration default="false" name="nxdk_pgraph_tests_xiso - xbdm bridge" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="192.168.80.87 -v3 -- mkdir e:\$CMakeCurrentTargetName$ &amp;&amp; putfile $CMakeCurrentBuildDir$/xbe/xbe_file e:\$CMakeCurrentTargetName$ -f" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nxdk_pgraph_tests" TARGET_NAME="nxdk_pgraph_tests_xiso" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/../xbdm_gdb_bridge/cmake-build-release/xbdm_gdb_bridge">
     <method v="2">
       <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
     </method>

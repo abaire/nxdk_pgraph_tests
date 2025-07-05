@@ -167,7 +167,7 @@ void FogCarryoverTests::Test() {
       draw_tri(start_x, top);
     }
 
-    shader->SetShaderOverride(kShader, sizeof(kShader));
+    shader->SetShader(kShader, sizeof(kShader));
     shader->PrepareDraw();
     shader->Activate();
 

@@ -9,7 +9,11 @@
 #include "xbox_math_types.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests the behavior of spotlight falloff and attenuation settings.

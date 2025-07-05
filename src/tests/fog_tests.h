@@ -9,7 +9,11 @@
 #include "vertex_buffer.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 // Tests behavior of the Fog code.
 class FogTests : public TestSuite {

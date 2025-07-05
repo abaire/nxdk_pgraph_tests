@@ -8,9 +8,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-class VertexBuffer;
-
 /**
  * Tests the effects of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR on
  * rendering unsigned textures.

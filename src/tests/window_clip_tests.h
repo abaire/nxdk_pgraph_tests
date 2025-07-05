@@ -7,8 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
 
 class WindowClipTests : public TestSuite {
  public:
@@ -31,7 +32,7 @@ class WindowClipTests : public TestSuite {
             uint32_t c1_bottom, uint32_t c2_left, uint32_t c2_top, uint32_t c2_right, uint32_t c2_bottom);
 
  private:
-  std::shared_ptr<VertexBuffer> framebuffer_vertex_buffer_;
+  std::shared_ptr<PBKitPlusPlus::VertexBuffer> framebuffer_vertex_buffer_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_WINDOW_CLIP_TESTS_H

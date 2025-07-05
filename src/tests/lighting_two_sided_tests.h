@@ -8,7 +8,11 @@
 #include "test_suite.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 // Tests two-sided lighting.
 class LightingTwoSidedTests : public TestSuite {

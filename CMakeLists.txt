@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.18)
 project(nxdk_pgraph_tests)
 
-set(
+list(
+        APPEND
         CMAKE_MODULE_PATH
-        ${CMAKE_MODULE_PATH}
-        "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/"
+        "${CMAKE_CURRENT_LIST_DIR}/cmake/modules"
+        "${CMAKE_CURRENT_LIST_DIR}/third_party/pbkitplusplus/cmake/modules"
 )
 
 set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "Generate verbose Makefile")
@@ -104,7 +105,7 @@ else ()
 endif ()
 
 find_package(Doxygen)
-if(DOXYGEN_FOUND)
+if (DOXYGEN_FOUND)
     add_custom_target(
             doc
             COMMAND ${DOXYGEN_EXECUTABLE} Doxyfile

@@ -5,7 +5,7 @@
 #include <utility>
 
 #include "pbkit_ext.h"
-#include "shaders/perspective_vertex_shader.h"
+#include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
 
@@ -221,7 +221,8 @@ FogCustomShaderTests::FogCustomShaderTests(TestHost& host, std::string output_di
 void FogCustomShaderTests::Initialize() {
   FogTests::Initialize();
 
-  auto shader = std::make_shared<PerspectiveVertexShader>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  auto shader =
+      std::make_shared<PerspectiveVertexShaderNoLighting>(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   shader->SetNear(kFogStart);
   shader->SetFar(kFogEnd);
   vector_t camera_position{0.0f, 0.0f, -7.0f, 1.0f};
@@ -229,7 +230,6 @@ void FogCustomShaderTests::Initialize() {
 
   shader->LookAt(camera_position, look_at);
 
-  shader->SetLightingEnabled(false);
   host_.SetVertexShaderProgram(shader);
 }
 
@@ -249,7 +249,7 @@ void FogInfiniteFogCoordinateTests::Initialize() {
   FogCustomShaderTests::Initialize();
 
   auto shader = host_.GetShaderProgram();
-  shader->SetShaderOverride(kInfiniteFogCShader, sizeof(kInfiniteFogCShader));
+  shader->SetShader(kInfiniteFogCShader, sizeof(kInfiniteFogCShader));
   host_.SetVertexShaderProgram(shader);
 }
 
@@ -445,7 +445,7 @@ void FogVec4CoordTests::TestUnset() {
   }
 
   // Draw a second time, leaving the coordinates alone.
-  shader->SetShaderOverride(kFogVec4Unset, sizeof(kFogVec4Unset));
+  shader->SetShader(kFogVec4Unset, sizeof(kFogVec4Unset));
   host_.SetVertexShaderProgram(shader);
 
   host_.PrepareDraw(0xFF341010);
@@ -463,7 +463,7 @@ void FogVec4CoordTests::TestUnset() {
 
 void FogVec4CoordTests::SetShader(const FogVec4CoordTests::TestConfig& config) const {
   auto shader = host_.GetShaderProgram();
-  shader->SetShaderOverride(config.shader, config.shader_size);
+  shader->SetShader(config.shader, config.shader_size);
 
   auto index = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
   // c[120].xyzw = fog test value

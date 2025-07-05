@@ -7,7 +7,6 @@
 #include "test_suite.h"
 
 class TestHost;
-class VertexBuffer;
 
 /**
  * Tests NV097_SET_COLOR_KEY_COLOR (0x0AE0) and the

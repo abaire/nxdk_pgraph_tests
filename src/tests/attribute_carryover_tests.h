@@ -7,7 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
 
 /**
  * Tests behavior when vertex attributes are not provided but are used by

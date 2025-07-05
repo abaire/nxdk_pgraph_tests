@@ -7,10 +7,7 @@
 #include "models/flat_mesh_grid_model.h"
 #include "pbkit_ext.h"
 #include "shaders/passthrough_vertex_shader.h"
-#include "shaders/perspective_vertex_shader.h"
 #include "test_host.h"
-#include "texture_generator.h"
-#include "vertex_buffer.h"
 #include "xbox_math_matrix.h"
 
 static constexpr uint32_t kCheckerboardA = 0xFF202020;

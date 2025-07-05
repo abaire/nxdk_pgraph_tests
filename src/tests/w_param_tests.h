@@ -4,7 +4,9 @@
 #include "test_suite.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
 
 class WParamTests : public TestSuite {
  public:
@@ -26,8 +28,8 @@ class WParamTests : public TestSuite {
   void TestFixedFunctionZeroW(bool draw_quad, bool texture_perspective_enable);
 
  private:
-  std::shared_ptr<VertexBuffer> triangle_strip_;
-  std::shared_ptr<VertexBuffer> triangles_;
+  std::shared_ptr<PBKitPlusPlus::VertexBuffer> triangle_strip_;
+  std::shared_ptr<PBKitPlusPlus::VertexBuffer> triangles_;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_INF_TESTS_H

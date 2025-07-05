@@ -6,9 +6,13 @@
 
 #include "test_suite.h"
 
-class Light;
 class TestHost;
+namespace PBKitPlusPlus {
+class Light;
 class VertexBuffer;
+}  // namespace PBKitPlusPlus
+
+using namespace PBKitPlusPlus;
 
 /**
  * Tests the effects of NV097_SET_LIGHT_LOCAL_RANGE (0x1024).

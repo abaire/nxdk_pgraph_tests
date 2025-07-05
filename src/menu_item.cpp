@@ -11,6 +11,8 @@
 #include "pushbuffer.h"
 #include "tests/test_suite.h"
 
+using namespace PBKitPlusPlus;
+
 static constexpr uint32_t kAutoTestAllTimeoutMilliseconds = 3000;
 static constexpr uint32_t kNumItemsPerPage = 12;
 static constexpr uint32_t kNumItemsPerHalfPage = kNumItemsPerPage >> 1;

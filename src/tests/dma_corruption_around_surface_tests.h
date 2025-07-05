@@ -7,9 +7,6 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-struct TextureFormatInfo;
-class VertexBuffer;
-
 class DMACorruptionAroundSurfaceTests : public TestSuite {
  public:
   DMACorruptionAroundSurfaceTests(TestHost& host, std::string output_dir, const Config& config);

@@ -4,10 +4,10 @@
 
 #include <cstdint>
 
-#include "model_builder.h"
+#include "models/model_builder.h"
 #include "xbox_math_types.h"
 
-class FlatMeshGridModel : public SolidColorModelBuilder {
+class FlatMeshGridModel : public PBKitPlusPlus::SolidColorModelBuilder {
  public:
   FlatMeshGridModel() : SolidColorModelBuilder() {}
   FlatMeshGridModel(const vector_t &diffuse, const vector_t &specular) : SolidColorModelBuilder(diffuse, specular) {}

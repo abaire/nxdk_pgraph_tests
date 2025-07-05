@@ -8,7 +8,11 @@
 #include "vertex_buffer.h"
 
 class TestHost;
+namespace PBKitPlusPlus {
 class VertexBuffer;
+}
+
+using namespace PBKitPlusPlus;
 
 // Tests behavior when lighting is enabled and color components are requested from various sources.
 class MaterialColorTests : public TestSuite {
