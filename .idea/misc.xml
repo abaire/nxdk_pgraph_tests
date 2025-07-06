@@ -14,6 +14,10 @@
       <file path="$PROJECT_DIR$/cmake-build-debug" />
       <file path="$PROJECT_DIR$/cmake-build-dump-config-file" />
       <file path="$PROJECT_DIR$/cmake-build-forcedebug" />
+      <file path="$PROJECT_DIR$/cmake-build-host-debug" />
+      <file path="$PROJECT_DIR$/cmake-build-host-debug---dump-mode" />
+      <file path="$PROJECT_DIR$/cmake-build-host-debug---dump-mode-coverage" />
+      <file path="$PROJECT_DIR$/cmake-build-host-debug-coverage" />
       <file path="$PROJECT_DIR$/cmake-build-release" />
       <file path="$PROJECT_DIR$/docs" />
       <file path="$PROJECT_DIR$/xml" />

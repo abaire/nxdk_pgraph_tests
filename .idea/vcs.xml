@@ -5,6 +5,10 @@
     <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/nxdkftplib-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cmake-build-dump-config-file/_deps/nxdkftplib-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cmake-build-forcedebug/_deps/nxdkftplib-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-host-debug---dump-mode-coverage/_deps/xboxmath_fetched-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-host-debug---dump-mode/_deps/xboxmath_fetched-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-host-debug-coverage/_deps/xboxmath_fetched-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-host-debug/_deps/xboxmath_fetched-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cmake-build-release/_deps/nxdkftplib-src" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/fpng" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/nxdk" vcs="Git" />
@@ -19,6 +23,7 @@
     <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/usb/libusbohci" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/nxdk/lib/zlib/zlib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/nxdk/tools/extract-xiso" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/third_party/pbkitplusplus" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/printf" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/tiny-json" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/third_party/xbox_math3d" vcs="Git" />

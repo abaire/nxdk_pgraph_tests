@@ -60,7 +60,7 @@ void TestDriver::Run() {
           break;
 
         case SDL_CONTROLLERBUTTONDOWN: {
-          auto now = std::chrono::high_resolution_clock::now();
+          auto now = std::chrono::steady_clock::now();
           button_repeat_map[static_cast<SDL_GameControllerButton>(event.cbutton.button)] = now;
         } break;
 
@@ -74,12 +74,12 @@ void TestDriver::Run() {
       }
     }
 
-    auto now = std::chrono::high_resolution_clock::now();
+    auto now = std::chrono::steady_clock::now();
     for (const auto &pair : button_repeat_map) {
       auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - pair.second).count();
       if (elapsed > kButtonRepeatMilliseconds) {
         OnButtonActivated(pair.first, true);
-        button_repeat_map[pair.first] = std::chrono::high_resolution_clock::now();
+        button_repeat_map[pair.first] = std::chrono::steady_clock::now();
       }
     }
 

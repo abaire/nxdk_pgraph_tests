@@ -291,13 +291,13 @@ void MenuItemRoot::ActivateCurrentSuite() {
 
 void MenuItemRoot::Draw() {
   if (!timer_valid) {
-    start_time = std::chrono::high_resolution_clock::now();
+    start_time = std::chrono::steady_clock::now();
     timer_valid = true;
   }
 
   if (!disable_autorun_) {
     if (!timer_cancelled) {
-      auto now = std::chrono::high_resolution_clock::now();
+      auto now = std::chrono::steady_clock::now();
       auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
 
       if (autorun_immediately_ || elapsed > kAutoTestAllTimeoutMilliseconds) {
@@ -400,11 +400,11 @@ MenuItemOptions::MenuItemOptions(const std::vector<std::shared_ptr<TestSuite>> &
 
 void MenuItemOptions::Draw() {
   if (!timer_valid) {
-    start_time = std::chrono::high_resolution_clock::now();
+    start_time = std::chrono::steady_clock::now();
     timer_valid = true;
   }
   if (!timer_cancelled) {
-    auto now = std::chrono::high_resolution_clock::now();
+    auto now = std::chrono::steady_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time).count();
     if (elapsed > kAutoTestAllTimeoutMilliseconds) {
       cursor_position = 0;

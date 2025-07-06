@@ -371,12 +371,12 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
     Sleep(delay_milliseconds_between_tests_);
   }
 
-  return std::chrono::high_resolution_clock::now();
+  return std::chrono::steady_clock::now();
 }
 
 long TestSuite::LogTestEnd(const std::string& test_name,
                            const std::chrono::steady_clock::time_point& start_time) const {
-  auto now = std::chrono::high_resolution_clock::now();
+  auto now = std::chrono::steady_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time);
   auto elapsed = static_cast<long>((duration.count() & 0xFFFFFFFF));
 
