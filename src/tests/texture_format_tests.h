@@ -21,7 +21,6 @@ class TextureFormatTests : public TestSuite {
   void CreateGeometry();
 
   void Test(const TextureFormatInfo &texture_format);
-  //  void TestMipMap(const TextureFormatInfo &texture_format);
   void TestPalettized(TestHost::PaletteSize size);
 
   static std::string MakeTestName(const TextureFormatInfo &texture_format, bool mipmap = false);
