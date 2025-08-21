@@ -3,6 +3,7 @@
 #include "shaders/passthrough_vertex_shader.h"
 
 static constexpr char kGraphicsClassZeroTest[] = "GRZero";
+static constexpr char kInvalidTextureFormatWithNoCtxIgnored[] = "InvalidTxtFormat";
 
 /**
  * Initializes the test suite and creates test cases.
@@ -13,6 +14,7 @@ static constexpr char kGraphicsClassZeroTest[] = "GRZero";
 ContextSwitchTests::ContextSwitchTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Context switch", config) {
   tests_[kGraphicsClassZeroTest] = [this]() { Test(); };
+  tests_[kInvalidTextureFormatWithNoCtxIgnored] = [this]() { TestSteelBattalionInvalidTextureFormatIgnored(); };
 }
 
 void ContextSwitchTests::Initialize() {
@@ -22,22 +24,22 @@ void ContextSwitchTests::Initialize() {
   host_.SetVertexShaderProgram(shader);
 }
 
+static uint32_t SetCrashRegister(uint32_t reg, uint32_t value) {
+  auto crash_register = reinterpret_cast<uint32_t *>(PGRAPH_REGISTER_BASE + reg);
+  auto ret = *crash_register;
+  *crash_register = value;
+  return ret;
+}
+
+static void FlushPushbuffer() {
+  Pushbuffer::Begin();
+  for (auto i = 0; i < 16; ++i) {
+    Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  }
+  Pushbuffer::End(true);
+}
+
 void ContextSwitchTests::Test() {
-  auto set_crash_register = [](uint32_t reg, uint32_t value) -> uint32_t {
-    auto crash_register = reinterpret_cast<uint32_t *>(PGRAPH_REGISTER_BASE + reg);
-    auto ret = *crash_register;
-    *crash_register = value;
-    return ret;
-  };
-
-  auto flush = []() {
-    Pushbuffer::Begin();
-    for (auto i = 0; i < 16; ++i) {
-      Pushbuffer::Push(NV097_NO_OPERATION, 0);
-    }
-    Pushbuffer::End(true);
-  };
-
   host_.PrepareDraw(0xFE1F1F1F);
 
   host_.DrawCheckerboard(0xFF333333, 0xFF444444);
@@ -65,9 +67,9 @@ void ContextSwitchTests::Test() {
   host_.SetDiffuse(0.3f, 0.4f, 0.7f, 0.66f);
   host_.SetVertex(right, midline, 0.1f, 1.0f);
 
-  flush();
+  FlushPushbuffer();
 
-  auto original_value = set_crash_register(NV_PGRAPH_CTX_SWITCH1 & ~PGRAPH_REGISTER_BASE, 0);
+  auto original_value = SetCrashRegister(NV_PGRAPH_CTX_SWITCH1 & ~PGRAPH_REGISTER_BASE, 0);
 
   host_.SetDiffuse(0.9f, 0.f, 0.3f, 0.4f);
   host_.SetVertex(right, bottom, 0.1f, 1.0f);
@@ -78,8 +80,8 @@ void ContextSwitchTests::Test() {
   host_.SetDiffuse(1.f, 0.9f, 0.4f, 0.75f);
   host_.SetVertex(left, midline, 0.1f, 1.0f);
 
-  flush();
-  set_crash_register(NV_PGRAPH_CTX_SWITCH1 & ~PGRAPH_REGISTER_BASE, original_value);
+  FlushPushbuffer();
+  SetCrashRegister(NV_PGRAPH_CTX_SWITCH1 & ~PGRAPH_REGISTER_BASE, original_value);
 
   host_.End();
 
@@ -95,4 +97,27 @@ void ContextSwitchTests::Test() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kGraphicsClassZeroTest);
+}
+
+void ContextSwitchTests::TestSteelBattalionInvalidTextureFormatIgnored() {
+  host_.PrepareDraw(0xFE202020);
+
+  FlushPushbuffer();
+  auto original_value = SetCrashRegister(NV_PGRAPH_CTX_SWITCH1 & ~PGRAPH_REGISTER_BASE, 0);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXTURE_FORMAT, 0xFF000000);
+  Pushbuffer::Push(NV097_SET_TEXTURE_CONTROL1, 0x40000000);
+  Pushbuffer::Push(NV097_SET_TEXTURE_IMAGE_RECT, 0x10001);
+  Pushbuffer::End(true);
+
+  FlushPushbuffer();
+  SetCrashRegister(NV_PGRAPH_CTX_SWITCH1 & ~PGRAPH_REGISTER_BASE, original_value);
+
+  pb_print("%s\n", kInvalidTextureFormatWithNoCtxIgnored);
+  pb_print("The fact that this test hasn't crashed\n");
+  pb_print("indicates success.\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kInvalidTextureFormatWithNoCtxIgnored);
 }

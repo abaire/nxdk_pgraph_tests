@@ -17,6 +17,7 @@ class ContextSwitchTests : public TestSuite {
 
  private:
   void Test();
+  void TestSteelBattalionInvalidTextureFormatIgnored();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_CONTEXT_SWITCH_TESTS_H
