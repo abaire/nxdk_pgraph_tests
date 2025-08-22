@@ -89,13 +89,45 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
     //    {NV09F_SET_OPERATION_SRCCOPY_PREMULT, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0x00000033},
 };
 
+struct ClipRegion {
+  uint32_t x;
+  uint32_t y;
+  uint32_t width;
+  uint32_t height;
+};
+
+static constexpr ClipRegion kClipRegionTests[] = {
+    {0, 0, 640, 480}, {320, 240, 64, 40}, {320, 240, 640, 480}, {300, 200, 16, 24},
+    {320, 240, 0, 0}, {320, 240, 1, 1},   {320, 240, 0, 10},
+};
+
+static std::string MakeTestName(const ImageBlitTests::BlitTest& test) {
+  char buf[256] = {0};
+  snprintf(buf, 255, "ImgBlt_%s_%s_B%08X", OperationName(test.blit_operation).c_str(),
+           ColorFormatName(test.buffer_color_format).c_str(), test.beta);
+  return buf;
+}
+
+static std::string MakeTestName(uint32_t clip_x, uint32_t clip_y, uint32_t clip_w, uint32_t clip_h) {
+  char buf[256] = {0};
+  snprintf(buf, 255, "ImgBlt_Clip_%d_%d_%d_%d", clip_x, clip_y, clip_w, clip_h);
+  return buf;
+}
+
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Image blit", config) {
-  for (auto test : kTests) {
+  for (auto& test : kTests) {
     std::string name = MakeTestName(test);
+    tests_[name] = [this, test]() { Test(test); };
+  }
 
-    auto test_method = [this, test]() { Test(test); };
-    tests_[name] = test_method;
+  {
+    ImageBlitTests::BlitTest blit_setup{NV09F_SET_OPERATION_SRCCOPY, NV04_SURFACE_2D_FORMAT_A8R8G8B8, 0};
+    for (auto& test : kClipRegionTests) {
+      tests_[MakeTestName(test.x, test.y, test.width, test.height)] = [this, blit_setup, &test] {
+        TestWithClipRectangle(blit_setup, test.x, test.y, test.width, test.height);
+      };
+    }
   }
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
@@ -228,6 +260,30 @@ void ImageBlitTests::Test(const BlitTest& test) {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
+void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test, uint32_t clip_x, uint32_t clip_y,
+                                           uint32_t clip_w, uint32_t clip_h) {
+  host_.PrepareDraw(0xF0440011);
+
+  uint32_t image_bytes = image_pitch_ * image_height_;
+  pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
+
+  ImageBlit(test.blit_operation, test.beta, image_src_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, SOURCE_X, SOURCE_Y, 0,
+            DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
+
+  std::string name = MakeTestName(clip_x, clip_y, clip_w, clip_h);
+  pb_print("%s\n", name.c_str());
+  std::string color_format_name = ColorFormatName(test.buffer_color_format);
+  pb_print("BufFmt: %s\n", color_format_name.c_str());
+  if (test.blit_operation != NV09F_SET_OPERATION_SRCCOPY) {
+    pb_print("Beta: %08X\n", test.beta);
+  }
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
 void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   host_.PrepareDraw(0xFF111111);
 
@@ -293,13 +349,6 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   host_.End();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDirtyOverlappedDestSurfaceTest);
-}
-
-std::string ImageBlitTests::MakeTestName(const BlitTest& test) {
-  char buf[256] = {0};
-  snprintf(buf, 255, "ImgBlt_%s_%s_B%08X", OperationName(test.blit_operation).c_str(),
-           ColorFormatName(test.buffer_color_format).c_str(), test.beta);
-  return buf;
 }
 
 static std::string OperationName(uint32_t operation) {
