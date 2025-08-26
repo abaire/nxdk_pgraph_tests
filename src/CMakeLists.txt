@@ -220,6 +220,8 @@ add_executable(
         tests/combiner_tests.h
         tests/context_switch_tests.cpp
         tests/context_switch_tests.h
+        tests/degenerate_begin_end_tests.cpp
+        tests/degenerate_begin_end_tests.h
         tests/depth_format_fixed_function_tests.cpp
         tests/depth_format_fixed_function_tests.h
         tests/depth_format_tests.cpp

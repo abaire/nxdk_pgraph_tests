@@ -48,6 +48,7 @@
 #include "tests/color_zeta_overlap_tests.h"
 #include "tests/combiner_tests.h"
 #include "tests/context_switch_tests.h"
+#include "tests/degenerate_begin_end_tests.h"
 #include "tests/depth_format_fixed_function_tests.h"
 #include "tests/depth_format_tests.h"
 #include "tests/depth_function_tests.h"
@@ -406,6 +407,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(ColorZetaOverlapTests)
   REG_TEST(CombinerTests)
   REG_TEST(ContextSwitchTests)
+  REG_TEST(DegenerateBeginEndTests)
   REG_TEST(DepthFormatTests)
   REG_TEST(DepthFormatFixedFunctionTests)
   REG_TEST(DepthFunctionTests)
