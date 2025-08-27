@@ -25,7 +25,7 @@ static constexpr uint32_t SUBCH_CLASS_12 = SUBCH_CLASS_19 + 1;
 static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
 static constexpr char kDirtyOverlappedDestSurfaceTest[] = "DirtyOverlappedDestSurf";
-static constexpr char kBlitRenderBlit[] = "BlitRenderBlit";
+static constexpr char kBlitRenderBlitTest[] = "BlitRenderBlit";
 
 #define SOURCE_X 8
 #define SOURCE_Y 8
@@ -115,6 +115,24 @@ static std::string MakeTestName(uint32_t clip_x, uint32_t clip_y, uint32_t clip_
   return buf;
 }
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc DirtyOverlappedDestSurf
+ *   Performs a 3d render into the backbuffer, then a 2D srccopy that completely overwrites it. Finally performs another
+ *   3d render, demonstrating incorrect behavior in various versions of xemu.
+ *
+ * @tc BlitRenderBlit
+ *   Blits an image into a render surface, then performs a 3d render on top of the surface, then another blit on top of
+ *   the composited two. Finally does a srccopy to blit the finished composition to the framebuffer. Demonstrates
+ *   apparent incorrect ordering in various versions of xemu.
+ *
+ * @tc ImgBlt_Clip_0_0_640_480
+ *   Demonstrates expected behavior of the contextual clip rectangle (class 0x19) during image blits.
+ *
+ * @tc ImgBlt_BLENDAND_XRGB_B00000000
+ *   Demonstrates expected behavior of the contextual beta (class 0x12) during image blits.
+ */
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Image blit", config) {
   for (auto& test : kTests) {
@@ -132,7 +150,7 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
   }
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
-  tests_[kBlitRenderBlit] = [this]() { BlitRenderBlit(); };
+  tests_[kBlitRenderBlitTest] = [this]() { TestBlitRenderBlit(); };
 }
 
 void ImageBlitTests::Initialize() {
@@ -175,6 +193,9 @@ void ImageBlitTests::Initialize() {
   pb_create_gr_ctx(channel++, GR_CLASS_72, &beta4_ctx_);
   pb_bind_channel(&beta4_ctx_);
   pb_bind_subchannel(SUBCH_CLASS_72, &beta4_ctx_);
+
+  pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &render_target_dma_ctx_);
+  pb_bind_channel(&render_target_dma_ctx_);
 }
 
 void ImageBlitTests::Deinitialize() {
@@ -297,7 +318,8 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
   auto subtexture = reinterpret_cast<uint8_t*>(pb_back_buffer()) + 64 + 64 * pb_back_buffer_pitch();
-  host_.RenderToSurfaceStart(subtexture, TestHost::SCF_A8R8G8B8, 128, 128);
+  host_.RenderToSurfaceStart(subtexture, TestHost::SCF_A8R8G8B8, host_.GetFramebufferWidth(),
+                             host_.GetFramebufferHeight());
   host_.Begin(TestHost::PRIMITIVE_QUADS);
 
   host_.SetDiffuse(1.f, 0.f, 0.f);
@@ -353,72 +375,104 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDirtyOverlappedDestSurfaceTest);
 }
 
-void ImageBlitTests::BlitRenderBlit() {
+void ImageBlitTests::TestBlitRenderBlit() {
   host_.PrepareDraw(0xFF112233);
 
   uint32_t image_bytes = image_pitch_ * image_height_;
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
 
-  // 1) Blit an image.
-  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID,
-            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
-            NV04_SURFACE_2D_FORMAT_A8R8G8B8, image_pitch_, 4 * host_.GetFramebufferWidth(),
-            0,    // source_offset
-            0,    // source_x
-            0,    // source_y
-            0,    // destination_offset
-            0,    // destination_x
-            0,    // destination_y
-            256,  // width
-            256,  // height
-            0,    // clip_x
-            0,    // clip_y
-            256,  // clip_width
-            256   // clip_height
+  // Allocate a render target in texture memory.
+  uint32_t rt_width = 256;
+  uint32_t rt_height = 256;
+  uint32_t rt_pitch = rt_width * 4;
+  uint32_t rt_size = rt_pitch * rt_height;
+  auto render_target = host_.GetTextureMemoryForStage(0);
+  memset(render_target, 0, rt_size);
+  pb_set_dma_address(&render_target_dma_ctx_, render_target, rt_size - 1);
+
+  // 1) Blit an image to the render target.
+  ImageBlit(NV09F_SET_OPERATION_BLEND_AND, 0x444fffff, image_src_dma_ctx_.ChannelID, render_target_dma_ctx_.ChannelID,
+            NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, image_pitch_, rt_pitch,
+            0,         // source_offset
+            0,         // source_x
+            0,         // source_y
+            0,         // destination_offset
+            0,         // destination_x
+            0,         // destination_y
+            128,       // width
+            128,       // height
+            0,         // clip_x
+            0,         // clip_y
+            rt_width,  // clip_width
+            rt_height  // clip_height
   );
 
-  // 2) Render a quad to a region of the screen.
+  // 2) Render a quad to a region of the render target.
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
-  auto subtexture = reinterpret_cast<uint8_t*>(pb_back_buffer()) + 64 + 64 * pb_back_buffer_pitch();
-  host_.RenderToSurfaceStart(subtexture, TestHost::SCF_A8R8G8B8, 128, 128);
+  host_.RenderToSurfaceStart(render_target, TestHost::SCF_A8R8G8B8, rt_width, rt_height, false, 64, 64, 128, 128);
   host_.Begin(TestHost::PRIMITIVE_QUADS);
 
   host_.SetDiffuse(1.f, 0.f, 0.f);
-  host_.SetScreenVertex(0.f, 0.f, 0.f);
+  host_.SetScreenVertex(64.f, 64.f, 0.f);
 
   host_.SetDiffuse(0.f, 1.f, 0.f);
-  host_.SetScreenVertex(128.f, 0.f, 0.f);
+  host_.SetScreenVertex(192.f, 64.f, 0.f);
 
   host_.SetDiffuse(0.f, 0.f, 1.f);
-  host_.SetScreenVertex(128.f, 128.f, 0.f);
+  host_.SetScreenVertex(192.f, 192.f, 0.f);
 
   host_.SetDiffuse(0.75, 0.65f, 0.55f);
-  host_.SetScreenVertex(0.f, 128.f, 0.f);
+  host_.SetScreenVertex(64.f, 192.f, 0.f);
 
   host_.End();
   host_.RenderToSurfaceEnd();
 
-  // 3) Blit again, to a different region, to demonstrate that the hardware is in a bad state.
-  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID,
-            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
-            NV04_SURFACE_2D_FORMAT_A8R8G8B8, image_pitch_, 4 * host_.GetFramebufferWidth(),
-            0,      // source_offset
-            0,      // source_x
-            0,      // source_y
-            0,      // destination_offset
-            320,    // destination_x
-            200,    // destination_y
-            128,    // width
-            128,    // height
-            0,      // clip_x
-            0,      // clip_y
-            640,    // clip_width
-            480     // clip_height
+  // 3) Blit again to the render target.
+  ImageBlit(NV09F_SET_OPERATION_BLEND_AND, 0x66800000, image_src_dma_ctx_.ChannelID, render_target_dma_ctx_.ChannelID,
+            NV04_SURFACE_2D_FORMAT_X8R8G8B8_X8R8G8B8, image_pitch_, rt_pitch,
+            0,         // source_offset
+            0,         // source_x
+            0,         // source_y
+            0,         // destination_offset
+            128,       // destination_x
+            128,       // destination_y
+            128,       // width
+            128,       // height
+            0,         // clip_x
+            0,         // clip_y
+            rt_width,  // clip_width
+            rt_height  // clip_height
   );
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kBlitRenderBlit);
+  // 4) Blit the render target to the screen to show the result.
+  static constexpr auto y_offset = 72;
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, render_target_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, rt_pitch, 4 * host_.GetFramebufferWidth(),
+            0,                                                                     // source_offset
+            0,                                                                     // source_x
+            0,                                                                     // source_y
+            0,                                                                     // destination_offset
+            (host_.GetFramebufferWidth() - rt_width) / 2,                          // destination_x
+            y_offset + (host_.GetFramebufferHeight() - y_offset - rt_height) / 2,  // destination_y
+            rt_width,                                                              // width
+            rt_height,                                                             // height
+            0,                                                                     // clip_x
+            0,                                                                     // clip_y
+            host_.GetFramebufferWidth(),                                           // clip_width
+            host_.GetFramebufferHeight()                                           // clip_height
+  );
+
+  pb_print("%s\n", kBlitRenderBlitTest);
+  pb_print("  Test image is rendered with low alpha to UL\n");
+  pb_print("  Quad is rendered to LL\n");
+  pb_print("  Test image is rendered with high alpha to LR\n");
+  pb_print("  Surface is blit via SRCCOPY to framebuffer\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kBlitRenderBlitTest);
 }
 
 static std::string OperationName(uint32_t operation) {

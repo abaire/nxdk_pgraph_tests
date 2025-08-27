@@ -40,7 +40,7 @@ class ImageBlitTests : public TestSuite {
 
   //! Reproduces an issue where blitting, rendering, then blitting again causes corruption.
   //! https://github.com/xemu-project/xemu/issues/2199
-  void BlitRenderBlit();
+  void TestBlitRenderBlit();
 
   uint32_t image_pitch_{0};
   uint32_t image_height_{0};
@@ -51,6 +51,7 @@ class ImageBlitTests : public TestSuite {
   struct s_CtxDma clip_rect_ctx_{};
   struct s_CtxDma beta_ctx_{};
   struct s_CtxDma beta4_ctx_{};
+  struct s_CtxDma render_target_dma_ctx_{};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_IMAGE_BLIT_TESTS_H
