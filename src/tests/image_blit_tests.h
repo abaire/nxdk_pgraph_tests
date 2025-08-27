@@ -38,6 +38,10 @@ class ImageBlitTests : public TestSuite {
 
   void TestDirtyOverlappedDestinationSurface();
 
+  //! Reproduces an issue where blitting, rendering, then blitting again causes corruption.
+  //! https://github.com/xemu-project/xemu/issues/2199
+  void BlitRenderBlit();
+
   uint32_t image_pitch_{0};
   uint32_t image_height_{0};
   uint8_t* source_image_{nullptr};

@@ -25,6 +25,7 @@ static constexpr uint32_t SUBCH_CLASS_12 = SUBCH_CLASS_19 + 1;
 static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
 static constexpr char kDirtyOverlappedDestSurfaceTest[] = "DirtyOverlappedDestSurf";
+static constexpr char kBlitRenderBlit[] = "BlitRenderBlit";
 
 #define SOURCE_X 8
 #define SOURCE_Y 8
@@ -131,6 +132,7 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
   }
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
+  tests_[kBlitRenderBlit] = [this]() { BlitRenderBlit(); };
 }
 
 void ImageBlitTests::Initialize() {
@@ -349,6 +351,74 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   host_.End();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDirtyOverlappedDestSurfaceTest);
+}
+
+void ImageBlitTests::BlitRenderBlit() {
+  host_.PrepareDraw(0xFF112233);
+
+  uint32_t image_bytes = image_pitch_ * image_height_;
+  pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
+
+  // 1) Blit an image.
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, image_pitch_, 4 * host_.GetFramebufferWidth(),
+            0,    // source_offset
+            0,    // source_x
+            0,    // source_y
+            0,    // destination_offset
+            0,    // destination_x
+            0,    // destination_y
+            256,  // width
+            256,  // height
+            0,    // clip_x
+            0,    // clip_y
+            256,  // clip_width
+            256   // clip_height
+  );
+
+  // 2) Render a quad to a region of the screen.
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  auto subtexture = reinterpret_cast<uint8_t*>(pb_back_buffer()) + 64 + 64 * pb_back_buffer_pitch();
+  host_.RenderToSurfaceStart(subtexture, TestHost::SCF_A8R8G8B8, 128, 128);
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+  host_.SetDiffuse(1.f, 0.f, 0.f);
+  host_.SetScreenVertex(0.f, 0.f, 0.f);
+
+  host_.SetDiffuse(0.f, 1.f, 0.f);
+  host_.SetScreenVertex(128.f, 0.f, 0.f);
+
+  host_.SetDiffuse(0.f, 0.f, 1.f);
+  host_.SetScreenVertex(128.f, 128.f, 0.f);
+
+  host_.SetDiffuse(0.75, 0.65f, 0.55f);
+  host_.SetScreenVertex(0.f, 128.f, 0.f);
+
+  host_.End();
+  host_.RenderToSurfaceEnd();
+
+  // 3) Blit again, to a different region, to demonstrate that the hardware is in a bad state.
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, image_pitch_, 4 * host_.GetFramebufferWidth(),
+            0,      // source_offset
+            0,      // source_x
+            0,      // source_y
+            0,      // destination_offset
+            320,    // destination_x
+            200,    // destination_y
+            128,    // width
+            128,    // height
+            0,      // clip_x
+            0,      // clip_y
+            640,    // clip_width
+            480     // clip_height
+  );
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kBlitRenderBlit);
 }
 
 static std::string OperationName(uint32_t operation) {
