@@ -117,6 +117,7 @@
 #include "tests/window_clip_tests.h"
 #include "tests/z_min_max_control_tests.h"
 #include "tests/zero_stride_tests.h"
+#include "tests/zpass_pixel_count_tests.h"
 
 static constexpr int kDelayOnFailureMilliseconds = 4000;
 
@@ -477,6 +478,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(WParamTests)
   REG_TEST(WindowClipTests)
   REG_TEST(ZMinMaxControlTests)
+  REG_TEST(ZPassPixelCountTests)
   REG_TEST(ZeroStrideTests)
 
   // -- End REG_TEST --

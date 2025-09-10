@@ -42,7 +42,7 @@ void DegenerateBeginEndTests::TestBeginWithoutEnd() {
   float cy = kHeader + height;
   const float y_offset = height * 2.f;
 
-  auto draw_triangle = [this, &cx, &cy, x_offset, height]() {
+  auto draw_triangle = [&cx, &cy, x_offset, height]() {
     const float left = floorf(cx - width / 2.f);
     const float right = floorf(left + width);
     const float top = floorf(cy - (height / 2.f));
@@ -55,7 +55,7 @@ void DegenerateBeginEndTests::TestBeginWithoutEnd() {
     cx += x_offset;
   };
 
-  auto draw_quad = [this, &cx, &cy, x_offset, height]() {
+  auto draw_quad = [&cx, &cy, x_offset, height]() {
     const float left = floorf(cx - width / 2.f);
     const float right = floorf(left + width);
     const float top = floorf(cy - (height / 2.f));
