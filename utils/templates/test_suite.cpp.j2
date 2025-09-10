@@ -1,0 +1,22 @@
+#include "{{ header_name }}"
+#include "test_host.h"
+
+static constexpr char kDummyTest[] = "DummyTest";
+
+{{ class_name }}::{{ class_name }}(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "{{ suite_name_pretty }}", config) {
+  tests_[kDummyTest] = [this]() { Test(); };
+}
+
+void {{ class_name }}::Initialize() {
+  TestSuite::Initialize();
+}
+
+void {{ class_name }}::Test() {
+  host_.PrepareDraw();
+
+  pb_print("TODO: FINISHME");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDummyTest);
+}
