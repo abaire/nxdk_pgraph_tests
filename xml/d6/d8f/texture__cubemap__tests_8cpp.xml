@@ -1,0 +1,847 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d8f/texture__cubemap__tests_8cpp" kind="file" language="C++">
+    <compoundname>texture_cubemap_tests.cpp</compoundname>
+    <includes refid="d8/d42/texture__cubemap__tests_8h" local="yes">texture_cubemap_tests.h</includes>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">SDL_image.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="d7/d3a/perspective__vertex__shader__no__lighting_8h" local="yes">shaders/perspective_vertex_shader_no_lighting.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">texture_format.h</includes>
+    <includes local="yes">texture_generator.h</includes>
+    <includes local="yes">xbox_math_matrix.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <incdepgraph>
+      <node id="23">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>shaders/perspective_vertex_shader_no_lighting.h</label>
+        <link refid="d7/d3a/perspective__vertex__shader__no__lighting_8h_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texture_cubemap_tests.cpp</label>
+        <link refid="d6/d8f/texture__cubemap__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texture_cubemap_tests.h</label>
+        <link refid="d8/d42/texture__cubemap__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>SDL.h</label>
+      </node>
+      <node id="19">
+        <label>SDL_image.h</label>
+      </node>
+      <node id="6">
+        <label>atomic</label>
+      </node>
+      <node id="11">
+        <label>chrono</label>
+      </node>
+      <node id="7">
+        <label>cstdint</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="16">
+        <label>list</label>
+      </node>
+      <node id="12">
+        <label>map</label>
+      </node>
+      <node id="21">
+        <label>memory</label>
+      </node>
+      <node id="29">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="30">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="20">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="25">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="31">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="13">
+        <label>set</label>
+      </node>
+      <node id="27">
+        <label>shaders/perspective_vertex_shader.h</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="17">
+        <label>texture_format.h</label>
+      </node>
+      <node id="35">
+        <label>texture_generator.h</label>
+      </node>
+      <node id="32">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="9">
+        <label>thread</label>
+      </node>
+      <node id="22">
+        <label>utility</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="33">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="24">
+        <label>windows.h</label>
+      </node>
+      <node id="36">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="34">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="da/da2/structDotSTRTest" prot="public">DotSTRTest</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a155d9a9f086ee40cf36ce36bc227f419" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kSize</definition>
+        <argsstring></argsstring>
+        <name>kSize</name>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="20" column="24" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a242e8ccf91d01821bc5f6a7fc41dedf3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kRightSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kRightSide</name>
+        <initializer>= {3, 7, 6, 2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="23" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a4817ce2851fa5a5ce8d0091f0c93c7f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kLeftSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kLeftSide</name>
+        <initializer>= {1, 5, 4, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="24" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a5cad43c5bdd645630758ab384ccb8289" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTopSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTopSide</name>
+        <initializer>= {4, 5, 6, 7}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="25" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a1aa7b0a5978c77c53176b96e69522445" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kBottomSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kBottomSide</name>
+        <initializer>= {1, 0, 3, 2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="26" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a83c57ec659d9fb4e6bdae085671e94ab" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kBackSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kBackSide</name>
+        <initializer>= {2, 6, 5, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="27" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1afee799b8e5858c1088aaa272185f4f86" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFrontSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFrontSide</name>
+        <initializer>= {0, 4, 7, 3}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="28" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a74c4cd8b1144099d379cf63679fe867c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const uint32_t *</type>
+        <definition>constexpr const uint32_t* kCubeFaces[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kCubeFaces</name>
+        <initializer>= {
+  kRightSide,
+  kLeftSide,
+  kTopSide,
+  kBottomSide,
+  kBackSide,
+  kFrontSide,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="31" column="33" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="31" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a56568dfea77492f348745fa0fd97374b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kCubePoints[][3]</definition>
+        <argsstring>[][3]</argsstring>
+        <name>kCubePoints</name>
+        <initializer>= {
+  {-kSize, -kSize, -kSize},
+  {-kSize, -kSize, kSize},
+  {kSize, -kSize, kSize},
+  {kSize, -kSize, -kSize},
+  {-kSize, kSize, -kSize},
+  {-kSize, kSize, kSize},
+  {kSize, kSize, kSize},
+  {kSize, kSize, -kSize},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="40" column="24" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="40" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1aea5c2e826f18a14ef79907fc00d0121c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const float</type>
+        <definition>constexpr const float kCubeSTPoints[][4][2]</definition>
+        <argsstring>[][4][2]</argsstring>
+        <name>kCubeSTPoints</name>
+        <initializer>= {
+  {{0.000000f, 0.000000f}, {0.000000f, 0.333333f}, {0.333333f, 0.333333f}, {0.333333f, 0.000000f}},
+  {{0.333333f, 0.000000f}, {0.333333f, 0.333333f}, {0.666667f, 0.333333f}, {0.666667f, 0.000000f}},
+  {{0.333333f, 0.333333f}, {0.333333f, 0.666667f}, {0.666667f, 0.666667f}, {0.666667f, 0.333333f}},
+  {{0.000000f, 0.333333f}, {0.000000f, 0.666667f}, {0.333333f, 0.666667f}, {0.333333f, 0.333333f}},
+  {{0.000000f, 0.666667f}, {0.000000f, 1.000000f}, {0.333333f, 1.000000f}, {0.333333f, 0.666667f}},
+  {{0.666667f, 0.000000f}, {0.666667f, 0.333333f}, {1.000000f, 0.333333f}, {1.000000f, 0.000000f}},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="51" column="30" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a5e471bd5d80fd56a984140f70622e4c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureWidth</definition>
+        <argsstring></argsstring>
+        <name>kTextureWidth</name>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="62" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a52fb40082c56b7c36db1d3e7700cf853" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTexturePitch</definition>
+        <argsstring></argsstring>
+        <name>kTexturePitch</name>
+        <initializer>= kTextureWidth * 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="63" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1aa68568112c7c845891ebf9821978aa81" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureHeight</definition>
+        <argsstring></argsstring>
+        <name>kTextureHeight</name>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="64" column="27" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a4504a97433c34b73a7a596903b6ebe5b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kCubemapTest[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kCubemapTest</name>
+        <initializer>= &quot;Cubemap&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="66" column="29" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d8f/texture__cubemap__tests_8cpp_1a291d1dbf9c908aaf86ffc33e2c25dd65" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="da/da2/structDotSTRTest" kindref="compound">DotSTRTest</ref></type>
+        <definition>const DotSTRTest kDotSTRTests[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kDotSTRTests</name>
+        <initializer>= {
+    {&quot;DotSTRCube_0to1&quot;, 0x000},
+    {&quot;DotSTRCube_-1to1D3D&quot;, 0x111},
+    {&quot;DotSTRCube_-1to1GL&quot;, 0x222},
+    {&quot;DotSTRCube_-1to1&quot;, 0x333},
+    {&quot;DotSTRCube_HiLo_1&quot;, 0x444},
+    
+    
+    {&quot;DotSTRCube_HiLoHemi&quot;, 0x777},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="75" column="25" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="75" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d6/d8f/texture__cubemap__tests_8cpp_1a8f34c03472430a85aa75df8d59fabb17" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GenerateCubemap</definition>
+        <argsstring>(uint8_t *buffer)</argsstring>
+        <name>GenerateCubemap</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_cubemap_tests.cpp" line="306" column="13" bodyfile="src/tests/texture_cubemap_tests.cpp" bodystart="306" bodyend="336" declfile="src/tests/texture_cubemap_tests.cpp" declline="68" declcolumn="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texture_cubemap_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL_image.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/perspective_vertex_shader_no_lighting.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_format.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_generator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_matrix.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kSize<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Must<sp/>be<sp/>ordered<sp/>to<sp/>match<sp/>kCubeSTPoints<sp/>for<sp/>each<sp/>face.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kRightSide[]<sp/>=<sp/>{3,<sp/>7,<sp/>6,<sp/>2};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kLeftSide[]<sp/>=<sp/>{1,<sp/>5,<sp/>4,<sp/>0};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTopSide[]<sp/>=<sp/>{4,<sp/>5,<sp/>6,<sp/>7};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBottomSide[]<sp/>=<sp/>{1,<sp/>0,<sp/>3,<sp/>2};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackSide[]<sp/>=<sp/>{2,<sp/>6,<sp/>5,<sp/>1};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFrontSide[]<sp/>=<sp/>{0,<sp/>4,<sp/>7,<sp/>3};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*kCubeFaces[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>kRightSide,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>kLeftSide,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>kTopSide,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>kBottomSide,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>kBackSide,</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>kFrontSide,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kCubePoints[][3]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>-kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>-kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>{kSize,<sp/>-kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>{kSize,<sp/>-kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>{kSize,<sp/>kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>{kSize,<sp/>kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kCubeSTPoints[][4][2]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>{{0.000000f,<sp/>0.000000f},<sp/>{0.000000f,<sp/>0.333333f},<sp/>{0.333333f,<sp/>0.333333f},<sp/>{0.333333f,<sp/>0.000000f}},</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>{{0.333333f,<sp/>0.000000f},<sp/>{0.333333f,<sp/>0.333333f},<sp/>{0.666667f,<sp/>0.333333f},<sp/>{0.666667f,<sp/>0.000000f}},</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>{{0.333333f,<sp/>0.333333f},<sp/>{0.333333f,<sp/>0.666667f},<sp/>{0.666667f,<sp/>0.666667f},<sp/>{0.666667f,<sp/>0.333333f}},</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>{{0.000000f,<sp/>0.333333f},<sp/>{0.000000f,<sp/>0.666667f},<sp/>{0.333333f,<sp/>0.666667f},<sp/>{0.333333f,<sp/>0.333333f}},</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>{{0.000000f,<sp/>0.666667f},<sp/>{0.000000f,<sp/>1.000000f},<sp/>{0.333333f,<sp/>1.000000f},<sp/>{0.333333f,<sp/>0.666667f}},</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>{{0.666667f,<sp/>0.000000f},<sp/>{0.666667f,<sp/>0.333333f},<sp/>{1.000000f,<sp/>0.333333f},<sp/>{1.000000f,<sp/>0.000000f}},</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureWidth<sp/>=<sp/>64;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTexturePitch<sp/>=<sp/>kTextureWidth<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureHeight<sp/>=<sp/>64;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kCubemapTest[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Cubemap&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateCubemap(uint8_t<sp/>*buffer);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="da/da2/structDotSTRTest" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="da/da2/structDotSTRTest" kindref="compound">DotSTRTest</ref><sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>uint32_t<sp/>dot_rgbmapping;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="da/da2/structDotSTRTest" kindref="compound">DotSTRTest</ref><sp/>kDotSTRTests[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;DotSTRCube_0to1&quot;</highlight><highlight class="normal">,<sp/>0x000},</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;DotSTRCube_-1to1D3D&quot;</highlight><highlight class="normal">,<sp/>0x111},</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;DotSTRCube_-1to1GL&quot;</highlight><highlight class="normal">,<sp/>0x222},</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;DotSTRCube_-1to1&quot;</highlight><highlight class="normal">,<sp/>0x333},</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;DotSTRCube_HiLo_1&quot;</highlight><highlight class="normal">,<sp/>0x444},</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{&quot;DotSTRCube_HiLoHemiD3D&quot;,<sp/>0x555},<sp/><sp/>//<sp/>Does<sp/>not<sp/>appear<sp/>to<sp/>be<sp/>supported<sp/>on<sp/>HW<sp/>(invalid<sp/>data<sp/>error)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{&quot;DotSTRCube_HiLoHemiGL&quot;,<sp/>0x666},<sp/><sp/>//<sp/>Does<sp/>not<sp/>appear<sp/>to<sp/>be<sp/>supported<sp/>on<sp/>HW<sp/>(invalid<sp/>data<sp/>error)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;DotSTRCube_HiLoHemi&quot;</highlight><highlight class="normal">,<sp/>0x777},</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal">TextureCubemapTests::TextureCubemapTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>cubemap&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>tests_[kCubemapTest]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestCubemap();<sp/>};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;test<sp/>:<sp/>kDotSTRTests)<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[test.name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;test]<sp/>{<sp/>TestDotSTRCubemap(test.name,<sp/>test.dot_rgbmapping);<sp/>};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d1/df8/classTextureCubemapTests_1a961540b3b8234dd697ef48c0e4c5d19c" kindref="member">TextureCubemapTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>depth_buffer_max_value<sp/>=<sp/>host_.GetMaxDepthBufferValue();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::make_shared&lt;PerspectiveVertexShaderNoLighting&gt;(host_.GetFramebufferWidth(),<sp/>host_.GetFramebufferHeight(),</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0.0f,<sp/>depth_buffer_max_value,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>1.0f,<sp/>200.0f);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;SetUseD3DStyleViewport();</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>camera_position<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>-7.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>camera_look_at<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;LookAt(camera_position,<sp/>camera_look_at);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>normal<sp/>map<sp/>into<sp/>stage0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>SDL_Surface<sp/>*normal_map<sp/>=<sp/>IMG_Load(</highlight><highlight class="stringliteral">&quot;D:\\texture_cubemap\\cube_normals_object_space.png&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT(normal_map<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>load<sp/>normal<sp/>map&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetTextureDimensions(normal_map-&gt;w,<sp/>normal_map-&gt;h);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8),<sp/>0);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexture(normal_map);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>SDL_FreeSurface(normal_map);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>cube<sp/>map<sp/>into<sp/>stage3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>GenerateCubemap(host_.GetTextureMemoryForStage(3));</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8),<sp/>3);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;stage<sp/>=<sp/>host_.GetTextureStage(3);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetTextureDimensions(kTextureWidth,<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetCubemapEnable();</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX3,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureCubemapTests::TestCubemap()<sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(1,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(2,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(3,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_NONE,<sp/>TestHost::STAGE_NONE,<sp/>TestHost::STAGE_NONE,</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::STAGE_CUBE_MAP);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE121212);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::static_pointer_cast&lt;PerspectiveVertexShader&gt;(host_.GetShaderProgram());</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;shader](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_z)<sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix4_t<sp/>matrix;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>eye{0.0f,<sp/>0.0f,<sp/>-7.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>at{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>up{0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>TestHost::BuildD3DModelViewMatrix(matrix,<sp/>eye,<sp/>at,<sp/>up);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;model_matrix<sp/>=<sp/>shader-&gt;GetModelMatrix();</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixSetIdentity(model_matrix);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>rotation<sp/>=<sp/>{r_x,<sp/>r_y,<sp/>r_z};</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixRotate(model_matrix,<sp/>rotation);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>translation<sp/>=<sp/>{x,<sp/>y,<sp/>z};</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixTranslate(model_matrix,<sp/>translation);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix4_t<sp/>mv_matrix;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixMultMatrix(matrix,<sp/>shader-&gt;GetModelMatrix(),<sp/>mv_matrix);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFixedFunctionModelViewMatrix(mv_matrix);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>face<sp/>:<sp/>kCubeFaces)<sp/>{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>4;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>index<sp/>=<sp/>face[i];</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vertex<sp/>=<sp/>kCubePoints[index];</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord3(vertex[0],<sp/>vertex[1],<sp/>vertex[2],<sp/>1.0f);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(vertex[0],<sp/>vertex[1],<sp/>vertex[2],<sp/>1.0f);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>2.0f;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>draw(-1.5f,<sp/>0.0f,<sp/>z,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>draw(1.5f,<sp/>0.0f,<sp/>z,<sp/>M_PI<sp/>*<sp/>1.25f,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>kCubemapTest);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>kCubemapTest);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureCubemapTests::TestDotSTRCubemap(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/>uint32_t<sp/>dot_rgb_mapping)<sp/>{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/><sp/>//<sp/>https://xboxdevwiki.net/NV2A/Pixel_Combiner<sp/>seemingly<sp/>erroneously<sp/>indicates<sp/>that<sp/>PS_TEXTUREMODES_DOT_STR_CUBE</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/><sp/>should</highlight></codeline>
+<codeline lineno="202"><highlight class="comment"><sp/><sp/>//<sp/>perform<sp/>a<sp/>reflected<sp/>lookup<sp/>using<sp/>texm3x3vspec.<sp/>In<sp/>practice,<sp/>it<sp/>seems<sp/>that<sp/>the<sp/>w<sp/>tex<sp/>coordinate<sp/>is<sp/>ignored<sp/>in<sp/>this</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/><sp/>//<sp/>test,<sp/>so<sp/>it<sp/>is<sp/>more<sp/>likely<sp/>that<sp/>a<sp/>texm3x3tex<sp/>is<sp/>the<sp/>analog.</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"></highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/><sp/>//<sp/>See<sp/>https://web.archive.org/web/20210614122128/https://www.nvidia.com/docs/IO/8228/D3DTutorial2_FX_HLSL.pdf</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"></highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/><sp/>//<sp/>texm3x3tex:</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/><sp/>//<sp/>tex0<sp/>is<sp/>used<sp/>to<sp/>look<sp/>up<sp/>the<sp/>normal<sp/>for<sp/>a<sp/>given<sp/>pixel</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/><sp/>//<sp/>The<sp/>tex1,<sp/>2,<sp/>and<sp/>3<sp/>combine<sp/>contain<sp/>the<sp/>matrix<sp/>needed<sp/>to<sp/>unproject<sp/>a<sp/>fragment<sp/>back<sp/>to<sp/>the<sp/>world-space<sp/>point<sp/>(used</highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/><sp/>//<sp/>to<sp/>position<sp/>the<sp/>normal<sp/>in<sp/>worldspace)</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/><sp/>//<sp/>The<sp/>final<sp/>value<sp/>is<sp/>a<sp/>lookup<sp/>from<sp/>the<sp/>cube<sp/>map<sp/>in<sp/>t3<sp/>using<sp/>the<sp/>world<sp/>adjusted<sp/>normal.</highlight></codeline>
+<codeline lineno="212"><highlight class="comment"></highlight></codeline>
+<codeline lineno="213"><highlight class="comment"><sp/><sp/>//<sp/>texm3x3vspec:</highlight></codeline>
+<codeline lineno="214"><highlight class="comment"><sp/><sp/>//<sp/>tex0<sp/>is<sp/>used<sp/>to<sp/>look<sp/>up<sp/>the<sp/>normal<sp/>for<sp/>a<sp/>given<sp/>pixel</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"><sp/><sp/>//<sp/>The<sp/>tex1,<sp/>2,<sp/>and<sp/>3<sp/>combine:</highlight></codeline>
+<codeline lineno="216"><highlight class="comment"><sp/><sp/>//<sp/><sp/><sp/>1)<sp/>The<sp/>matrix<sp/>needed<sp/>to<sp/>unproject<sp/>a<sp/>fragment<sp/>back<sp/>to<sp/>the<sp/>world-space<sp/>point<sp/>(used<sp/>to<sp/>position<sp/>the<sp/>normal<sp/>in</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/><sp/>//<sp/><sp/><sp/><sp/><sp/><sp/>worldspace)</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/><sp/>//<sp/><sp/><sp/>2)<sp/>The<sp/>q<sp/>component<sp/>of<sp/>the<sp/>three<sp/>are<sp/>combined<sp/>to<sp/>provide<sp/>the<sp/>eye<sp/>vector<sp/>for<sp/>the<sp/>vertex<sp/>(in<sp/>worldspace).</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/><sp/>//</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/><sp/>//<sp/>The<sp/>hardware<sp/>then<sp/>creates<sp/>a<sp/>reflection<sp/>vector<sp/>using<sp/>the<sp/>normal<sp/>and<sp/>eye<sp/>vectors<sp/>and<sp/>uses<sp/>that<sp/>to<sp/>index<sp/>into<sp/>the</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/><sp/>//<sp/>cubemap<sp/>to<sp/>find<sp/>the<sp/>final<sp/>pixel<sp/>value.</highlight></codeline>
+<codeline lineno="222"><highlight class="comment"><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::static_pointer_cast&lt;PerspectiveVertexShader&gt;(host_.GetShaderProgram());</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(1,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(2,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(3,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE,<sp/>TestHost::STAGE_DOT_PRODUCT,<sp/>TestHost::STAGE_DOT_PRODUCT,</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::STAGE_DOT_STR_CUBE);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING,<sp/>dot_rgb_mapping);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE131313);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;shader](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_z)<sp/>{</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix4_t<sp/>matrix;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>eye{0.0f,<sp/>0.0f,<sp/>-7.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>at{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>up{0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>TestHost::BuildD3DModelViewMatrix(matrix,<sp/>eye,<sp/>at,<sp/>up);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;model_matrix<sp/>=<sp/>shader-&gt;GetModelMatrix();</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixSetIdentity(model_matrix);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>rotation<sp/>=<sp/>{r_x,<sp/>r_y,<sp/>r_z};</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixRotate(model_matrix,<sp/>rotation);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>translation<sp/>=<sp/>{x,<sp/>y,<sp/>z};</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixTranslate(model_matrix,<sp/>translation);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix4_t<sp/>mv_matrix;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixMultMatrix(model_matrix,<sp/>matrix,<sp/>mv_matrix);</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFixedFunctionModelViewMatrix(mv_matrix);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inv_projection<sp/>=<sp/>host_.GetFixedFunctionInverseCompositeMatrix();</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>face_index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>face<sp/>:<sp/>kCubeFaces)<sp/>{</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>normals<sp/>=<sp/>kCubeSTPoints[face_index++];</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>4;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>index<sp/>=<sp/>face[i];</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vertex<sp/>=<sp/>kCubePoints[index];</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*normal_st<sp/>=<sp/>normals[i];</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>These<sp/>would<sp/>be<sp/>necessary<sp/>if<sp/>the<sp/>method<sp/>actually<sp/>used<sp/>eye-relative<sp/>reflection.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_t<sp/>padded_vertex<sp/>=<sp/>{vertex[0],<sp/>vertex[1],<sp/>vertex[2],<sp/>1.0f};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_apply(padded_vertex,<sp/>padded_vertex,<sp/>model_matrix);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>padded_vertex[0]<sp/>/=<sp/>padded_vertex[3];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>padded_vertex[1]<sp/>/=<sp/>padded_vertex[3];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>padded_vertex[2]<sp/>/=<sp/>padded_vertex[3];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>padded_vertex[3]<sp/>=<sp/>1.0f;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_t<sp/>eye_vec<sp/>=<sp/>{0.0f};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_subtract(eye_vec,<sp/>eye,<sp/>padded_vertex);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vector_normalize(eye_vec);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(normal_st[0],<sp/>normal_st[1]);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord1(inv_projection[0][0],<sp/>inv_projection[0][1],<sp/>inv_projection[0][2],<sp/>1);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord2(inv_projection[1][0],<sp/>inv_projection[1][1],<sp/>inv_projection[1][2],<sp/>0);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord3(inv_projection[2][0],<sp/>inv_projection[2][1],<sp/>inv_projection[2][2],<sp/>0);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(vertex[0],<sp/>vertex[1],<sp/>vertex[2],<sp/>1.0f);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>2.0f;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/>draw(-1.5f,<sp/>0.0f,<sp/>z,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/>draw(1.5f,<sp/>0.0f,<sp/>z,<sp/>M_PI<sp/>*<sp/>1.25f,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING,<sp/>0);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/>host_.<ref refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" kindref="member">FinishDraw</ref>(allow_saving_,<sp/>output_dir_,<sp/>suite_name_,<sp/>name);</highlight></codeline>
+<codeline lineno="304"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateCubemap(uint8_t<sp/>*buffer)<sp/>{</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kSliceSize<sp/>=<sp/>kTexturePitch<sp/>*<sp/>kTextureHeight;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>+X</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(buffer,<sp/>0,<sp/>0,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTexturePitch,<sp/>0xFF5555FF,<sp/>0xFF666666,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/>buffer<sp/>+=<sp/>kSliceSize;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>-X</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(buffer,<sp/>0,<sp/>0,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTexturePitch,<sp/>0xFF3333AA,<sp/>0xFF444444,</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/>buffer<sp/>+=<sp/>kSliceSize;</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>+Y</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(buffer,<sp/>0,<sp/>0,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTexturePitch,<sp/>0xFF55FF55,<sp/>0xFF666666,</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/>buffer<sp/>+=<sp/>kSliceSize;</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>-Y</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(buffer,<sp/>0,<sp/>0,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTexturePitch,<sp/>0xFF33AA33,<sp/>0xFF444444,</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4);</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/>buffer<sp/>+=<sp/>kSliceSize;</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>+Z</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(buffer,<sp/>0,<sp/>0,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTexturePitch,<sp/>0xFFFF5555,<sp/>0xFF666666,</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/>buffer<sp/>+=<sp/>kSliceSize;</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>-Z</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(buffer,<sp/>0,<sp/>0,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTexturePitch,<sp/>0xFFAA3333,<sp/>0xFF444444,</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>4);</highlight></codeline>
+<codeline lineno="336"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texture_cubemap_tests.cpp"/>
+  </compounddef>
+</doxygen>
