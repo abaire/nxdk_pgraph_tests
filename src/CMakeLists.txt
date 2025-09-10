@@ -358,6 +358,8 @@ add_executable(
         tests/window_clip_tests.h
         tests/z_min_max_control_tests.cpp
         tests/z_min_max_control_tests.h
+        tests/zpass_pixel_count_tests.cpp
+        tests/zpass_pixel_count_tests.h
         tests/zero_stride_tests.cpp
         tests/zero_stride_tests.h
 )
