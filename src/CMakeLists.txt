@@ -138,6 +138,8 @@ add_library(
         pbkit_ext.h
         pgraph_diff_token.cpp
         pgraph_diff_token.h
+        pvideo_control.cpp
+        pvideo_control.h
         runtime_config.cpp
         runtime_config.h
         shaders/fixed_function_approximation_shader.cpp

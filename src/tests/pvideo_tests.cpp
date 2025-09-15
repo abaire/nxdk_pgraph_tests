@@ -8,9 +8,12 @@
 #pragma clang diagnostic pop
 
 #include "debug_output.h"
+#include "pvideo_control.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "texture_generator.h"
 #include "xbox-swizzle/swizzle.h"
+
+using namespace PvideoControl;
 
 static constexpr const char kStopBehaviorTest[] = "Stop";
 // static constexpr const char kAlternateStop[] = "Stop Alt";
@@ -28,6 +31,8 @@ static constexpr const char kPitchLessThanCompactTest[] = "Pitch less than compa
 static constexpr const char kPitchLargerThanCompactTest[] = "Pitch larger than compact";
 static constexpr const char kPALIntoNTSCTest[] = "PAL into NTSC overlay";
 
+static constexpr const char kOverlay2Test[] = "Overlay2";
+static constexpr const char kOverlappedOverlaysTest[] = "Overlapped overlays";
 static constexpr const char kColorKeyTest[] = "Color key";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &config)
@@ -54,6 +59,8 @@ PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &c
   tests_[kPitchLargerThanCompactTest] = [this]() { TestPitchLargerThanCompact(); };
 
   tests_[kColorKeyTest] = [this]() { TestColorKey(); };
+
+  tests_[kOverlay2Test] = [this]() { TestOverlay2(); };
 }
 
 void PvideoTests::Initialize() {
@@ -67,6 +74,9 @@ void PvideoTests::Initialize() {
   const uint32_t size = host_.GetFramebufferWidth() * 4 * host_.GetFramebufferHeight();
   video_ = (uint8_t *)MmAllocateContiguousMemory(size);
   memset(video_, 0x7F, size);
+
+  video2_ = (uint8_t *)MmAllocateContiguousMemory(size);
+  memset(video2_, 0x7F, size);
 }
 
 void PvideoTests::Deinitialize() {
@@ -75,43 +85,17 @@ void PvideoTests::Deinitialize() {
     MmFreeContiguousMemory(video_);
     video_ = nullptr;
   }
+  if (video2_) {
+    MmFreeContiguousMemory(video2_);
+    video2_ = nullptr;
+  }
 }
 
-void PvideoTests::SetCheckerboardVideoFrameCR8YB8CB8YA8(uint32_t first_color, uint32_t second_color,
-                                                        uint32_t checker_size, uint32_t x_offset, uint32_t y_offset,
-                                                        uint32_t width, uint32_t height) {
-  if (!width) {
-    width = host_.GetFramebufferWidth();
+static void SetVideoFrameCR8YB8CB8YA8(uint8_t *row, const void *pixels, uint32_t width, uint32_t height,
+                                      uint32_t dest_pitch = 0) {
+  if (!dest_pitch) {
+    dest_pitch = width * 2;
   }
-  if (!height) {
-    height = host_.GetFramebufferHeight();
-  }
-
-  const uint32_t pitch = width * 4;
-  auto *temp = new uint8_t[pitch * height];
-  GenerateRGBACheckerboard(temp, 0, 0, width, height, pitch, first_color, second_color, checker_size);
-  SetVideoFrameCR8YB8CB8YA8(temp, width, height);
-  delete[] temp;
-}
-
-void PvideoTests::SetTestPatternVideoFrameCR8YB8CB8YA8(uint32_t width, uint32_t height) {
-  if (!width) {
-    width = host_.GetFramebufferWidth();
-  }
-  if (!height) {
-    height = host_.GetFramebufferHeight();
-  }
-
-  const uint32_t pitch = width * 4;
-  auto *temp = new uint8_t[pitch * height];
-  GenerateRGBATestPattern(temp, width, height);
-  SetVideoFrameCR8YB8CB8YA8(temp, width, height);
-  delete[] temp;
-}
-
-void PvideoTests::SetVideoFrameCR8YB8CB8YA8(const void *pixels, uint32_t width, uint32_t height) {
-  uint8_t *row = video_;
-  uint32_t dest_pitch = host_.GetFramebufferWidth() * 2;
 
   auto source = reinterpret_cast<const uint32_t *>(pixels);
   for (int y = 0; y < height; ++y) {
@@ -137,103 +121,30 @@ void PvideoTests::SetVideoFrameCR8YB8CB8YA8(const void *pixels, uint32_t width, 
   }
 }
 
-static void ClearPvideoInterrupts() { VIDEOREG(NV_PVIDEO_INTR) = 0x00000011; }
-
-static void SetPvideoInterruptEnabled(bool enable_zero, bool enable_one) {
-  uint32_t val = SET_MASK(NV_PVIDEO_INTR_EN_BUFFER_0, enable_zero) | SET_MASK(NV_PVIDEO_INTR_EN_BUFFER_1, enable_one);
-  VIDEOREG(NV_PVIDEO_INTR_EN) = val;
+static void SetCheckerboardVideoFrameCR8YB8CB8YA8(uint8_t *target, uint32_t first_color, uint32_t second_color,
+                                                  uint32_t checker_size, uint32_t width = 0, uint32_t height = 0,
+                                                  uint32_t x_offset = 0, uint32_t y_offset = 0) {
+  const uint32_t pitch = width * 4;
+  auto *temp = new uint8_t[pitch * height];
+  GenerateRGBACheckerboard(temp, 0, 0, width, height, pitch, first_color, second_color, checker_size);
+  SetVideoFrameCR8YB8CB8YA8(target, temp, width, height);
+  delete[] temp;
 }
 
-static void SetPvideoBuffer(bool enable_zero, bool enable_one) {
-  uint32_t val = SET_MASK(NV_PVIDEO_BUFFER_0_USE, enable_zero) | SET_MASK(NV_PVIDEO_BUFFER_1_USE, enable_one);
-  VIDEOREG(NV_PVIDEO_BUFFER) = val;
-}
-
-static void SetPvideoStop(uint32_t value = 0) { VIDEOREG(NV_PVIDEO_STOP) = value; }
-
-static void SetPvideoBase(uint32_t addr) { VIDEOREG(NV_PVIDEO_BASE) = addr; }
-
-static void SetPvideoLimit(uint32_t limit) { VIDEOREG(NV_PVIDEO_LIMIT) = limit; }
-
-static void SetPvideoOffset(uint32_t offset) { VIDEOREG(NV_PVIDEO_OFFSET) = offset; }
-
-static void SetPvideoIn(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
-  VIDEOREG(NV_PVIDEO_POINT_IN) = SET_MASK(NV_PVIDEO_POINT_IN_S, x) | SET_MASK(NV_PVIDEO_POINT_IN_T, y);
-  VIDEOREG(NV_PVIDEO_SIZE_IN) = SET_MASK(NV_PVIDEO_SIZE_IN_WIDTH, width) | SET_MASK(NV_PVIDEO_SIZE_IN_HEIGHT, height);
-}
-
-static void SetPvideoOut(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
-  VIDEOREG(NV_PVIDEO_POINT_OUT) = SET_MASK(NV_PVIDEO_POINT_OUT_X, x) | SET_MASK(NV_PVIDEO_POINT_OUT_Y, y);
-  VIDEOREG(NV_PVIDEO_SIZE_OUT) =
-      SET_MASK(NV_PVIDEO_SIZE_OUT_WIDTH, width) | SET_MASK(NV_PVIDEO_SIZE_OUT_HEIGHT, height);
-}
-
-static void SetPvideoFormat(uint32_t format, uint32_t pitch, bool color_keyed) {
-  VIDEOREG(NV_PVIDEO_FORMAT) = SET_MASK(NV_PVIDEO_FORMAT_PITCH, pitch) | SET_MASK(NV_PVIDEO_FORMAT_COLOR, format) |
-                               SET_MASK(NV_PVIDEO_FORMAT_DISPLAY, color_keyed);
-}
-
-static void SetPvideoColorKey(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-  VIDEOREG(NV_PVIDEO_COLOR_KEY) = SET_MASK(NV_PVIDEO_COLOR_KEY_RED, r) | SET_MASK(NV_PVIDEO_COLOR_KEY_GREEN, g) |
-                                  SET_MASK(NV_PVIDEO_COLOR_KEY_BLUE, b) | SET_MASK(NV_PVIDEO_COLOR_KEY_ALPHA, a);
-}
-
-static void SetPvideoColorKey(uint32_t color_key) {
-  SetPvideoColorKey(color_key & 0xFF, (color_key >> 8) & 0xFF, (color_key >> 16) & 0xFF, (color_key & 24) & 0xFF);
-}
-
-static void SetPvideoLuminanceChrominance() {
-  VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x00001000;
-  VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x00001000;
-}
-
-static void PvideoInit() {
-  // Reset behavior based on observations of Dragon Ball Z Sagas FMV.
-  ClearPvideoInterrupts();
-  SetPvideoOffset(0);
-  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
-  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
-  SetPvideoBase(0);
-  SetPvideoLuminanceChrominance();
-}
-
-static void PvideoTeardown() {
-  SetPvideoStop(1);
-  SetPvideoInterruptEnabled(false, false);
-  SetPvideoBuffer(false, false);
-  ClearPvideoInterrupts();
-  VIDEOREG(NV_PVIDEO_OFFSET) = 0;
-  VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
-  VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
-  VIDEOREG(NV_PVIDEO_BASE) = 0;
-  VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x1000;
-  VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x1000;
-}
-
-static inline uint32_t CalculateDelta(uint32_t in_size, uint32_t out_size) {
-  ASSERT(in_size > 1);
-  ASSERT(out_size > 1);
-  return ((in_size - 1) << 20) / (out_size - 1);
-}
-
-static void SetDsDx(uint32_t in_width, uint32_t out_width) {
-  VIDEOREG(NV_PVIDEO_DS_DX) = CalculateDelta(in_width, out_width);
-}
-
-static void SetDtDy(uint32_t in_height, uint32_t out_height) {
-  VIDEOREG(NV_PVIDEO_DT_DY) = CalculateDelta(in_height, out_height);
-}
-
-/** Sets the texel mapping to 1:1 for both X and Y. */
-static void SetSquareDsDxDtDy() {
-  SetDsDx(2, 2);
-  SetDtDy(2, 2);
+static void SetTestPatternVideoFrameCR8YB8CB8YA8(uint8_t *target, uint32_t width, uint32_t height) {
+  const uint32_t pitch = width * 4;
+  auto *temp = new uint8_t[pitch * height];
+  GenerateRGBATestPattern(temp, width, height);
+  SetVideoFrameCR8YB8CB8YA8(target, temp, width, height);
+  delete[] temp;
 }
 
 void PvideoTests::TestStopBehavior() {
   host_.PrepareDraw(0xFF250535);
 
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF00FFFF, 0xFF000000, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF00FFFF, 0xFF000000, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
+
   PvideoInit();
   DbgPrint("Displaying video overlay...\n");
 
@@ -265,7 +176,8 @@ void PvideoTests::TestStopBehavior() {
 void PvideoTests::TestAlternateStopBehavior() {
   host_.PrepareDraw(0xFF250535);
 
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF00FFFF, 0xFF000000, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF00FFFF, 0xFF000000, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   PvideoInit();
   DbgPrint("Displaying video overlay...\n");
   DrawFullscreenOverlay();
@@ -312,7 +224,8 @@ void PvideoTests::TestSizeInMaxUnityDeltas() {
   PvideoInit();
 
   DbgPrint("Displaying video overlay...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFFFF00, 0xFF333333, 16, 0, 0, host_.GetFramebufferWidth(),
+
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFFFFFF00, 0xFF333333, 16, host_.GetFramebufferWidth(),
                                         host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     DrawFullscreenOverlay();
@@ -320,7 +233,8 @@ void PvideoTests::TestSizeInMaxUnityDeltas() {
   }
 
   DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen, dI/dO unity...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF33, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF113311, 0xFF33FF33, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -352,7 +266,7 @@ void PvideoTests::TestSizeInMaxLargeDelta() {
   PvideoInit();
 
   DbgPrint("Displaying video overlay...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFFFF00, 0xFF333333, 16, 0, 0, host_.GetFramebufferWidth(),
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFFFFFF00, 0xFF333333, 16, host_.GetFramebufferWidth(),
                                         host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     DrawFullscreenOverlay();
@@ -360,7 +274,8 @@ void PvideoTests::TestSizeInMaxLargeDelta() {
   }
 
   DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen, dI/dO implies larger...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF88FF33, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF113311, 0xFF88FF33, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -392,7 +307,7 @@ void PvideoTests::TestSizeInMaxSmallDelta() {
   PvideoInit();
 
   DbgPrint("Displaying video overlay...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFFFFFF00, 0xFF333333, 16, 0, 0, host_.GetFramebufferWidth(),
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFFFFFF00, 0xFF333333, 16, host_.GetFramebufferWidth(),
                                         host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     DrawFullscreenOverlay();
@@ -400,7 +315,8 @@ void PvideoTests::TestSizeInMaxSmallDelta() {
   }
 
   DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to fullscreen, dI/dO implies smaller...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF88, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF113311, 0xFF33FF88, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -432,7 +348,8 @@ void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
   PvideoInit();
 
   DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to subscreen, dI/dO unity...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF111133, 0xFF3333FF, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF111133, 0xFF3333FF, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -464,7 +381,8 @@ void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
   PvideoInit();
 
   DbgPrint("Setting size_in to 0xFFFFFFFF, out_size to subscreen, dI/dO correct...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF111133, 0xFF3377FF, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF111133, 0xFF3377FF, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -496,7 +414,8 @@ void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
   PvideoInit();
 
   DbgPrint("Setting size_in to 2x size_out, dI/dO unity...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF33, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF113311, 0xFF33FF33, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -527,7 +446,8 @@ void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
   PvideoInit();
 
   DbgPrint("Setting size_in to 2x size_out, dI/dO correct...\n");
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF113311, 0xFF33FF33, 8);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF113311, 0xFF33FF33, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -558,7 +478,7 @@ void PvideoTests::TestPALIntoNTSC() {
   PvideoInit();
 
   DbgPrint("Setting size_in PAL rendering to NTSC, dI/dO correct...\n");
-  SetTestPatternVideoFrameCR8YB8CB8YA8();
+  SetTestPatternVideoFrameCR8YB8CB8YA8(video_, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -590,7 +510,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
 
   DbgPrint("Setting size_in to 2x size_out, dI/dO unity...\n");
   memset(video_, 0xFF, host_.GetFramebufferWidth() * 2 * host_.GetFramebufferHeight());
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF33337F, 8, 0, 0, 128, 64);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF666600, 0xFF33337F, 8, 128, 64);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -622,7 +542,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
 
   DbgPrint("Setting size_in to 2x size_out, dI/dO correct...\n");
   memset(video_, 0x7F, host_.GetFramebufferWidth() * 2 * host_.GetFramebufferHeight());
-  SetCheckerboardVideoFrameCR8YB8CB8YA8(0xFF666600, 0xFF7F3333, 8, 0, 0, 128, 64);
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFF666600, 0xFF7F3333, 8, 128, 64);
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -653,7 +573,7 @@ void PvideoTests::TestPitchLessThanCompact() {
   PvideoInit();
 
   DbgPrint("Setting pitch < width * 2...\n");
-  SetTestPatternVideoFrameCR8YB8CB8YA8();
+  SetTestPatternVideoFrameCR8YB8CB8YA8(video_, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -685,7 +605,7 @@ void PvideoTests::TestPitchLargerThanCompact() {
   PvideoInit();
 
   DbgPrint("Setting pitch > width * 2 (likely would crash if limit did not allow reads past the buffer)...\n");
-  SetTestPatternVideoFrameCR8YB8CB8YA8();
+  SetTestPatternVideoFrameCR8YB8CB8YA8(video_, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   for (uint32_t i = 0; i < 30; ++i) {
     SetPvideoStop();
     SetPvideoColorKey(0, 0, 0, 0);
@@ -762,7 +682,7 @@ void PvideoTests::TestColorKey() {
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
-  static constexpr uint32_t kFramesPerColorKey = 60;
+  static constexpr uint32_t kFramesPerColorKey = 40;
   static constexpr uint32_t kColorKeys[] = {
       0xFF000000,
       0x03FF0000,
@@ -805,7 +725,7 @@ void PvideoTests::TestColorKey() {
 
       PvideoInit();
 
-      SetTestPatternVideoFrameCR8YB8CB8YA8();
+      SetTestPatternVideoFrameCR8YB8CB8YA8(video_, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
       for (uint32_t i = 0; i < kFramesPerColorKey; ++i) {
         SetPvideoStop();
         SetPvideoColorKey(color_key);
@@ -840,6 +760,66 @@ void PvideoTests::TestColorKey() {
   host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
 
   host_.SetBlend();
+}
+
+void PvideoTests::TestOverlay2() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  SetTestPatternVideoFrameCR8YB8CB8YA8(video2_, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoOffset(VRAM_ADDR(video2_), 1);
+    SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(), 1);
+    SetSquareDsDxDtDy(1);
+    SetPvideoOut(0, 64, host_.GetFramebufferWidth(), host_.GetFramebufferHeight() - 64, 1);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false, 1);
+    SetPvideoLimit(VRAM_MAX, 1);
+    SetPvideoInterruptEnabled(false, true);
+    SetPvideoBuffer(false, true);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_printat(0, 0, "DONE\n");
+  pb_printat(1, 0, "Video was displayed using overlay 1\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
+}
+
+void PvideoTests::TestOverlappedOverlays() {
+  host_.PrepareDraw(0xFF250535);
+
+  PvideoInit();
+
+  SetTestPatternVideoFrameCR8YB8CB8YA8(video_, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video2_, 0xFF00FFFF, 0xFF000000, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
+  for (uint32_t i = 0; i < 30; ++i) {
+    SetPvideoStop();
+    SetPvideoOffset(VRAM_ADDR(video_), 1);
+    SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight(), 1);
+    SetSquareDsDxDtDy(1);
+    SetPvideoOut(0, 64, host_.GetFramebufferWidth(), host_.GetFramebufferHeight() - 64, 1);
+    SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false, 1);
+    SetPvideoLimit(VRAM_MAX, 1);
+    SetPvideoInterruptEnabled(false, true);
+    SetPvideoBuffer(false, true);
+    Sleep(33);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  pb_printat(0, 0, "DONE\n");
+  pb_printat(1, 0, "Video was displayed using overlay 1\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
 }
 
 void PvideoTests::DrawFullscreenOverlay() {
