@@ -37,7 +37,8 @@ class PvideoTests : public TestSuite {
 
   void TestColorKey();
 
-  void TestOverlay2();
+  void TestSimpleFullscreenOverlay0();
+  void TestOverlay1();
   void TestOverlappedOverlays();
 
   void DrawFullscreenOverlay();

@@ -77,9 +77,11 @@ void PvideoInit() {
 
 void PvideoTeardown() {
   SetPvideoStop(1);
+
   SetPvideoInterruptEnabled(false, false);
   SetPvideoBuffer(false, false);
   ClearPvideoInterrupts();
+
   VIDEOREG(NV_PVIDEO_OFFSET) = 0;
   VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
   VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
