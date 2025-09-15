@@ -37,13 +37,13 @@ class PvideoTests : public TestSuite {
 
   void TestColorKey();
 
-  void SetCheckerboardVideoFrameCR8YB8CB8YA8(uint32_t first_color, uint32_t second_color, uint32_t checker_size,
-                                             uint32_t x_offset = 0, uint32_t y_offset = 0, uint32_t width = 0,
-                                             uint32_t height = 0);
-  void SetTestPatternVideoFrameCR8YB8CB8YA8(uint32_t width = 0, uint32_t height = 0);
-  void SetVideoFrameCR8YB8CB8YA8(const void *pixels, uint32_t width, uint32_t height);
+  void TestSimpleFullscreenOverlay0();
+  void TestOverlay1();
+  void TestOverlappedOverlays();
+
   void DrawFullscreenOverlay();
 
  private:
   uint8_t *video_{nullptr};
+  uint8_t *video2_{nullptr};
 };
