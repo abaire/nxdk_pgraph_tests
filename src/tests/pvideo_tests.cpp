@@ -12,44 +12,48 @@
 #include "texture_generator.h"
 #include "xbox-swizzle/swizzle.h"
 
-static constexpr const char kStopBehavior[] = "Stop";
+static constexpr const char kStopBehaviorTest[] = "Stop";
 // static constexpr const char kAlternateStop[] = "Stop Alt";
 
-static constexpr const char kSizeInMaxUnity[] = "Size In Max - dI/dO = 1";
-static constexpr const char kSizeInMaxLarge[] = "Size In Max - dI/dO > 1";
-static constexpr const char kSizeInMaxSmall[] = "Size In Max - dI/dO < 1";
-static constexpr const char kSizeInMaxOutSmallUnity[] = "Size In Max Out Small - dI/dO = 1";
-static constexpr const char kSizeInMaxOutSmallCorrect[] = "Size In Max Out Small - dI/d0 Correct";
-static constexpr const char kSizeInLargerThanSizeOutUnity[] = "Size In larger than out - dI/dO = 1";
-static constexpr const char kSizeInLargerThanSizeOutCorrect[] = "Size In larger than out - dI/d0 Correct";
-static constexpr const char kSizeInSmallerThanSizeOutUnity[] = "Size In smaller than out - dI/dO = 1";
-static constexpr const char kSizeInSmallerThanSizeOutCorrect[] = "Size In smaller than out - dI/d0 Correct";
-static constexpr const char kPitchLessThanCompact[] = "Pitch less than compact";
-static constexpr const char kPitchLargerThanCompact[] = "Pitch larger than compact";
-static constexpr const char kPALIntoNTSC[] = "PAL into NTSC overlay";
+static constexpr const char kSizeInMaxUnityTest[] = "Size In Max - dI/dO = 1";
+static constexpr const char kSizeInMaxLargeTest[] = "Size In Max - dI/dO > 1";
+static constexpr const char kSizeInMaxSmallTest[] = "Size In Max - dI/dO < 1";
+static constexpr const char kSizeInMaxOutSmallUnityTest[] = "Size In Max Out Small - dI/dO = 1";
+static constexpr const char kSizeInMaxOutSmallCorrectTest[] = "Size In Max Out Small - dI/d0 Correct";
+static constexpr const char kSizeInLargerThanSizeOutUnityTest[] = "Size In larger than out - dI/dO = 1";
+static constexpr const char kSizeInLargerThanSizeOutCorrectTest[] = "Size In larger than out - dI/d0 Correct";
+static constexpr const char kSizeInSmallerThanSizeOutUnityTest[] = "Size In smaller than out - dI/dO = 1";
+static constexpr const char kSizeInSmallerThanSizeOutCorrectTest[] = "Size In smaller than out - dI/d0 Correct";
+static constexpr const char kPitchLessThanCompactTest[] = "Pitch less than compact";
+static constexpr const char kPitchLargerThanCompactTest[] = "Pitch larger than compact";
+static constexpr const char kPALIntoNTSCTest[] = "PAL into NTSC overlay";
+
+static constexpr const char kColorKeyTest[] = "Color key";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "PVIDEO", config) {
-  tests_[kPALIntoNTSC] = [this]() { TestPALIntoNTSC(); };
-  tests_[kStopBehavior] = [this]() { TestStopBehavior(); };
+  tests_[kPALIntoNTSCTest] = [this]() { TestPALIntoNTSC(); };
+  tests_[kStopBehaviorTest] = [this]() { TestStopBehavior(); };
   // This seems to permanently kill video output on 1.0 devkit.
   //  tests_[kAlternateStop] = [this]() { TestAlternateStopBehavior(); };
 
-  tests_[kSizeInMaxUnity] = [this]() { TestSizeInMaxUnityDeltas(); };
-  tests_[kSizeInMaxLarge] = [this]() { TestSizeInMaxLargeDelta(); };
-  tests_[kSizeInMaxSmall] = [this]() { TestSizeInMaxSmallDelta(); };
+  tests_[kSizeInMaxUnityTest] = [this]() { TestSizeInMaxUnityDeltas(); };
+  tests_[kSizeInMaxLargeTest] = [this]() { TestSizeInMaxLargeDelta(); };
+  tests_[kSizeInMaxSmallTest] = [this]() { TestSizeInMaxSmallDelta(); };
 
-  tests_[kSizeInMaxOutSmallUnity] = [this]() { TestSizeMaxOutSmallUnityDeltas(); };
-  tests_[kSizeInMaxOutSmallCorrect] = [this]() { TestSizeMaxOutSmallCorrectDeltas(); };
+  tests_[kSizeInMaxOutSmallUnityTest] = [this]() { TestSizeMaxOutSmallUnityDeltas(); };
+  tests_[kSizeInMaxOutSmallCorrectTest] = [this]() { TestSizeMaxOutSmallCorrectDeltas(); };
 
-  tests_[kSizeInLargerThanSizeOutUnity] = [this]() { TestSizeInLargerThanSizeOutUnityDeltas(); };
-  tests_[kSizeInLargerThanSizeOutCorrect] = [this]() { TestSizeInLargerThanSizeOutCorrectDeltas(); };
+  tests_[kSizeInLargerThanSizeOutUnityTest] = [this]() { TestSizeInLargerThanSizeOutUnityDeltas(); };
+  tests_[kSizeInLargerThanSizeOutCorrectTest] = [this]() { TestSizeInLargerThanSizeOutCorrectDeltas(); };
 
-  tests_[kSizeInSmallerThanSizeOutUnity] = [this]() { TestSizeInSmallerThanSizeOutUnityDeltas(); };
-  tests_[kSizeInSmallerThanSizeOutCorrect] = [this]() { TestSizeInSmallerThanSizeOutCorrectDeltas(); };
+  tests_[kSizeInSmallerThanSizeOutUnityTest] = [this]() { TestSizeInSmallerThanSizeOutUnityDeltas(); };
+  tests_[kSizeInSmallerThanSizeOutCorrectTest] = [this]() { TestSizeInSmallerThanSizeOutCorrectDeltas(); };
 
-  tests_[kPitchLessThanCompact] = [this]() { TestPitchLessThanCompact(); };
-  tests_[kPitchLargerThanCompact] = [this]() { TestPitchLargerThanCompact(); };
+  tests_[kPitchLessThanCompactTest] = [this]() { TestPitchLessThanCompact(); };
+  tests_[kPitchLargerThanCompactTest] = [this]() { TestPitchLargerThanCompact(); };
+
+  tests_[kColorKeyTest] = [this]() { TestColorKey(); };
 }
 
 void PvideoTests::Initialize() {
@@ -174,6 +178,10 @@ static void SetPvideoColorKey(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
                                   SET_MASK(NV_PVIDEO_COLOR_KEY_BLUE, b) | SET_MASK(NV_PVIDEO_COLOR_KEY_ALPHA, a);
 }
 
+static void SetPvideoColorKey(uint32_t color_key) {
+  SetPvideoColorKey(color_key & 0xFF, (color_key >> 8) & 0xFF, (color_key >> 16) & 0xFF, (color_key & 24) & 0xFF);
+}
+
 static void SetPvideoLuminanceChrominance() {
   VIDEOREG(NV_PVIDEO_LUMINANCE) = 0x00001000;
   VIDEOREG(NV_PVIDEO_CHROMINANCE) = 0x00001000;
@@ -216,6 +224,12 @@ static void SetDtDy(uint32_t in_height, uint32_t out_height) {
   VIDEOREG(NV_PVIDEO_DT_DY) = CalculateDelta(in_height, out_height);
 }
 
+/** Sets the texel mapping to 1:1 for both X and Y. */
+static void SetSquareDsDxDtDy() {
+  SetDsDx(2, 2);
+  SetDtDy(2, 2);
+}
+
 void PvideoTests::TestStopBehavior() {
   host_.PrepareDraw(0xFF250535);
 
@@ -245,7 +259,7 @@ void PvideoTests::TestStopBehavior() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehavior);
+  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehaviorTest);
 }
 
 void PvideoTests::TestAlternateStopBehavior() {
@@ -266,13 +280,11 @@ void PvideoTests::TestAlternateStopBehavior() {
   //  VIDEOREG(NV_PVIDEO_UNKNOWN_8C) = 0x04000400;
 
   SetPvideoLuminanceChrominance();
-  VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-  VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+  SetSquareDsDxDtDy();
   VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
   VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
   SetPvideoLuminanceChrominance();
-  VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-  VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+  SetSquareDsDxDtDy();
   VIDEOREG(NV_PVIDEO_POINT_IN) = 0;
   VIDEOREG(NV_PVIDEO_SIZE_IN) = 0xFFFFFFFF;
 
@@ -287,7 +299,7 @@ void PvideoTests::TestAlternateStopBehavior() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehavior);
+  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehaviorTest);
 
   Sleep(2000);
 
@@ -331,7 +343,7 @@ void PvideoTests::TestSizeInMaxUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxUnityTest);
 }
 
 void PvideoTests::TestSizeInMaxLargeDelta() {
@@ -371,7 +383,7 @@ void PvideoTests::TestSizeInMaxLargeDelta() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxLarge);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxLargeTest);
 }
 
 void PvideoTests::TestSizeInMaxSmallDelta() {
@@ -411,7 +423,7 @@ void PvideoTests::TestSizeInMaxSmallDelta() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxSmall);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxSmallTest);
 }
 
 void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
@@ -443,7 +455,7 @@ void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallUnityTest);
 }
 
 void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
@@ -475,7 +487,7 @@ void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallCorrectTest);
 }
 
 void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
@@ -506,7 +518,7 @@ void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutUnityTest);
 }
 
 void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
@@ -537,7 +549,7 @@ void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrectTest);
 }
 
 void PvideoTests::TestPALIntoNTSC() {
@@ -568,7 +580,7 @@ void PvideoTests::TestPALIntoNTSC() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrectTest);
 }
 
 void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
@@ -600,7 +612,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutUnity);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutUnityTest);
 }
 
 void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
@@ -632,7 +644,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutCorrect);
+  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutCorrectTest);
 }
 
 void PvideoTests::TestPitchLessThanCompact() {
@@ -647,8 +659,7 @@ void PvideoTests::TestPitchLessThanCompact() {
     SetPvideoColorKey(0, 0, 0, 0);
     SetPvideoOffset(VRAM_ADDR(video_));
     SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-    VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-    VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+    SetSquareDsDxDtDy();
     SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
 
     // Set the pitch to the width (1/2 of a YUYV line, which is 2bpp).
@@ -665,7 +676,7 @@ void PvideoTests::TestPitchLessThanCompact() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLessThanCompact);
+  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLessThanCompactTest);
 }
 
 void PvideoTests::TestPitchLargerThanCompact() {
@@ -680,8 +691,7 @@ void PvideoTests::TestPitchLargerThanCompact() {
     SetPvideoColorKey(0, 0, 0, 0);
     SetPvideoOffset(VRAM_ADDR(video_));
     SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-    VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-    VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+    SetSquareDsDxDtDy();
     SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 4, false);
     SetPvideoLimit(VRAM_MAX);
@@ -696,7 +706,140 @@ void PvideoTests::TestPitchLargerThanCompact() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLargerThanCompact);
+  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLargerThanCompactTest);
+}
+
+static void RenderColorKeyTargetScreen(TestHost &host) {
+  static constexpr auto kTop = 64.f;
+  static constexpr auto kQuadSize = 148.f;
+
+  static constexpr uint32_t kColors[]{
+      0xFFFF0000, 0x7FFF0000, 0x00FF0000, 0xFF000000, 0x80000000, 0x7F000000, 0x01000000, 0x00000000,
+  };
+  static constexpr uint32_t kNumQuads = sizeof(kColors) / sizeof(kColors[0]);
+
+  const float width = host.GetFramebufferWidthF();
+  const float height = host.GetFramebufferWidthF() - kTop;
+  const auto quads_per_row = static_cast<uint32_t>(width / kQuadSize);
+  const auto rows = kNumQuads / quads_per_row;
+
+  const auto x_start = floorf((width - kQuadSize * static_cast<float>(quads_per_row)) * 0.5f);
+  const auto y_start = floorf((height - kQuadSize * static_cast<float>(rows)) * 0.5f);
+  static constexpr auto kZ = 1.f;
+
+  auto x = x_start;
+  auto y = y_start;
+  auto quad = 0;
+
+  auto text_row = 7;
+  auto text_column = 3;
+
+  for (auto color : kColors) {
+    host.SetDiffuse(color);
+    host.Begin(TestHost::PRIMITIVE_QUADS);
+    host.SetVertex(x, y, kZ);
+    host.SetVertex(x + kQuadSize, y, kZ);
+    host.SetVertex(x + kQuadSize, y + kQuadSize, kZ);
+    host.SetVertex(x, y + kQuadSize, kZ);
+    host.End();
+
+    pb_printat(text_row, text_column, "0x%X", color);
+
+    if (++quad >= quads_per_row) {
+      x = x_start;
+      y += kQuadSize;
+      quad = 0;
+      text_row += 6;
+      text_column = 3;
+    } else {
+      x += kQuadSize;
+      text_column += 15;
+    }
+  }
+}
+
+void PvideoTests::TestColorKey() {
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+  static constexpr uint32_t kFramesPerColorKey = 60;
+  static constexpr uint32_t kColorKeys[] = {
+      0xFF000000,
+      0x03FF0000,
+  };
+
+  struct SurfaceFormatInfo {
+    const char *name;
+    TestHost::SurfaceColorFormat format;
+  };
+  static constexpr SurfaceFormatInfo kSurfaceFormats[] = {
+      // TODO: change video mode via XVideoSetMode to test 16bpp formats.
+      //      {"Fmt_X1R5G5B5_Z1R5G5B5", TestHost::SCF_X1R5G5B5_Z1R5G5B5},
+      //      {"Fmt_X1R5G5B5_O1R5G5B5", TestHost::SCF_X1R5G5B5_O1R5G5B5},
+      //      {"Fmt_R5G6B5", TestHost::SCF_R5G6B5},
+      {"Fmt_X8R8G8B8_Z8R8G8B8", TestHost::SCF_X8R8G8B8_Z8R8G8B8},
+      // TODO: Reenable when xemu#2427 is fixed.
+      //      {"Fmt_X8R8G8B8_O8R8G8B8", TestHost::SCF_X8R8G8B8_O8R8G8B8},
+      // TODO: Reenable when xemu#2426 is fixed.
+      //      {"Fmt_X1A7R8G8B8_Z1A7R8G8B8", TestHost::SCF_X1A7R8G8B8_Z1A7R8G8B8},
+      //      {"Fmt_X1A7R8G8B8_O1A7R8G8B8", TestHost::SCF_X1A7R8G8B8_O1A7R8G8B8},
+      {"Fmt_A8R8G8B8", TestHost::SCF_A8R8G8B8},
+  };
+
+  // Alpha blending is disabled so that the alpha values written into the framebuffer will be dictated by the quads.
+  host_.SetBlend(false);
+
+  for (const auto &surface_format_info : kSurfaceFormats) {
+    for (auto color_key : kColorKeys) {
+      host_.SetSurfaceFormat(surface_format_info.format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                             host_.GetFramebufferHeight());
+      host_.PrepareDraw(0xFF250530);
+
+      RenderColorKeyTargetScreen(host_);
+
+      pb_printat(1, 0, "Surface format: %s", surface_format_info.name);
+      pb_printat(2, 0, "Gradient overlay color key: 0x%X\n", color_key);
+      pb_draw_text_screen();
+
+      host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
+
+      PvideoInit();
+
+      SetTestPatternVideoFrameCR8YB8CB8YA8();
+      for (uint32_t i = 0; i < kFramesPerColorKey; ++i) {
+        SetPvideoStop();
+        SetPvideoColorKey(color_key);
+        SetPvideoOffset(VRAM_ADDR(video_));
+        SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+        SetSquareDsDxDtDy();
+        SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+        SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, true);
+        SetPvideoLimit(VRAM_MAX);
+        SetPvideoInterruptEnabled(true, false);
+        SetPvideoBuffer(true, false);
+        Sleep(33);
+      }
+
+      DbgPrint("Stopping video overlay\n");
+      PvideoTeardown();
+    }
+  }
+
+  // Draw results
+  pb_erase_text_screen();
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
+  host_.PrepareDraw(0xFF116611);
+
+  RenderColorKeyTargetScreen(host_);
+  pb_draw_text_screen();
+
+  pb_printat(0, 0, "DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
+
+  host_.SetBlend();
 }
 
 void PvideoTests::DrawFullscreenOverlay() {
@@ -704,8 +847,7 @@ void PvideoTests::DrawFullscreenOverlay() {
   SetPvideoColorKey(0, 0, 0, 0);
   SetPvideoOffset(VRAM_ADDR(video_));
   SetPvideoIn(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  VIDEOREG(NV_PVIDEO_DS_DX) = 0x00100000;
-  VIDEOREG(NV_PVIDEO_DT_DY) = 0x00100000;
+  SetSquareDsDxDtDy();
   SetPvideoOut(0, 0, host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
   SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, false);
 
