@@ -36,7 +36,8 @@ class TestSuite {
 
  public:
   TestSuite() = delete;
-  TestSuite(TestHost &host, std::string output_dir, std::string suite_name, const Config &config);
+  TestSuite(TestHost &host, std::string output_dir, std::string suite_name, const Config &config,
+            bool interactive_only = false);
   virtual ~TestSuite() = default;
 
   [[nodiscard]] const std::string &Name() const { return suite_name_; };
@@ -62,6 +63,7 @@ class TestSuite {
 
   void RunAll();
 
+  bool IsInteractiveOnly() const { return interactive_only_; }
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
 
   //! Inserts a pattern of NV097_NO_OPERATION's into the pushbuffer to allow identification when viewing nv2a traces.
@@ -78,6 +80,9 @@ class TestSuite {
   TestHost &host_;
   std::string output_dir_;
   std::string suite_name_;
+
+  // Flag indicating that suite should be skipped if not directly invoked by the user.
+  bool interactive_only_;
 
   // Flag to forcibly disallow saving of output (e.g., when in multiframe test mode for debugging).
   bool allow_saving_{true};

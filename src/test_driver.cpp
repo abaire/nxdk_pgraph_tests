@@ -97,6 +97,10 @@ void TestDriver::Run() {
 
 void TestDriver::RunAllTestsNonInteractive() {
   for (auto &suite : test_suites_) {
+    if (suite->IsInteractiveOnly()) {
+      continue;
+    }
+
     suite->Initialize();
     suite->RunAll();
     suite->Deinitialize();

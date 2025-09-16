@@ -22,10 +22,12 @@ static constexpr char kFTPLogProgressFilename[] = "nxdk_pgraph_tests_progress.lo
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
-TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name, const Config& config)
+TestSuite::TestSuite(TestHost& host, std::string output_dir, std::string suite_name, const Config& config,
+                     bool interactive_only)
     : host_(host),
       output_dir_(std::move(output_dir)),
       suite_name_(std::move(suite_name)),
+      interactive_only_(interactive_only),
       pgraph_diff_(false, config.enable_progress_log),
       enable_progress_log_{config.enable_progress_log},
       enable_pgraph_region_diff_{config.enable_pgraph_region_diff},
