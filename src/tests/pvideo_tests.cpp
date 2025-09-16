@@ -1138,7 +1138,7 @@ void PvideoTests::TestInSize() {
   static constexpr uint32_t kTestWidthTexels = 16;
 
   static constexpr float kMeasurementBoxSize = 8.f;
-  static constexpr float kMeasurementStripTop = 64.f;
+  static constexpr float kMeasurementStripTop = 96.f;
   static constexpr float kZ = 1.f;
 
   auto draw_measurement_boxes = [this]() {
