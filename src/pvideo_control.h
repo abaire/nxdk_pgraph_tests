@@ -72,6 +72,15 @@ void SetPvideoIn(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32
  */
 void SetPvideoOut(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t buffer = 0);
 
+/**
+ * Sets the format of the PVIDEO input buffer.
+ *
+ * @param format The color format (e.g., NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8).
+ * @param pitch The pitch of the output overlay. As the overlay is always fullscreen, this should be framebuffer width
+ * * 2.
+ * @param color_keyed Whether the overlay should be color keyed
+ * @param buffer The buffer whose format should be set.
+ */
 void SetPvideoFormat(uint32_t format, uint32_t pitch, bool color_keyed, uint32_t buffer = 0);
 
 /** Sets the RGB value for PVIDEO overlay color keying.
