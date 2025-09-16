@@ -40,6 +40,7 @@ static constexpr const char kInPointTest[] = "In point";
 static constexpr const char kInSizeTest[] = "In size";
 static constexpr const char kOutPointTest[] = "Out point";
 static constexpr const char kOutSizeTest[] = "Out size";
+static constexpr const char kRatioTest[] = "Ratio";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "PVIDEO", config) {
@@ -74,6 +75,7 @@ PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &c
   tests_[kInSizeTest] = [this]() { TestInSize(); };
   tests_[kOutPointTest] = [this]() { TestOutPoint(); };
   tests_[kOutSizeTest] = [this]() { TestOutSize(); };
+  tests_[kRatioTest] = [this]() { TestRatios(); };
 }
 
 void PvideoTests::Initialize() {
@@ -127,6 +129,23 @@ static void SetVideoFrameCR8YB8CB8YA8(uint8_t *dest, const void *pixels, uint32_
   }
 }
 
+static void DrawBorder(uint8_t *target, uint32_t width, uint32_t height, uint32_t color = 0xFFFFFFFF) {
+  auto *pixel = reinterpret_cast<uint32_t *>(target);
+
+  const auto bottom_row_offset = (height - 1) * width;
+  for (auto x = 0; x < width; ++x) {
+    *pixel = color;
+    *(pixel + bottom_row_offset) = color;
+  }
+
+  pixel = reinterpret_cast<uint32_t *>(target);
+  for (auto y = 0; y < height; ++y) {
+    *pixel = color;
+    *(pixel + width - 1) = color;
+    pixel += width;
+  }
+}
+
 static void SetCheckerboardVideoFrameCR8YB8CB8YA8(uint8_t *target, uint32_t first_color, uint32_t second_color,
                                                   uint32_t checker_size, uint32_t width, uint32_t height,
                                                   uint32_t x_offset = 0, uint32_t y_offset = 0) {
@@ -158,10 +177,16 @@ static void SetTestPatternVideoFrameCR8YB8CB8YA8(uint8_t *target, uint32_t width
 }
 
 static void SetStepPatternVideoFrameCR8YB8CB8YA8(uint8_t *target, uint32_t width, uint32_t height,
-                                                 uint32_t line_spacing = 16, uint32_t background_color = 0) {
+                                                 uint32_t line_spacing = 16, uint32_t background_color = 0,
+                                                 bool draw_border = false) {
   const uint32_t pitch = width * 4;
   auto *temp = new uint8_t[pitch * height];
   GenerateRGBDiagonalLinePattern(temp, width, height, line_spacing, background_color);
+
+  if (draw_border) {
+    DrawBorder(temp, width, height);
+  }
+
   SetVideoFrameCR8YB8CB8YA8(target, temp, width, height);
   delete[] temp;
 }
@@ -726,7 +751,6 @@ void PvideoTests::TestPitch() {
   SetPvideoOut((host_.GetFramebufferWidth() - kTestRegion) / 2, (host_.GetFramebufferHeight() - kTestRegion) / 2,
                kTestRegion, kTestRegion, 0);
   SetPvideoLimit(VRAM_MAX, 0);
-  SetPvideoBuffer(true, false);
 
   const uint32_t pitches[] = {
       kTestRegion, kTestRegion * 2, kTestRegion * 4, host_.GetFramebufferWidth(), host_.GetFramebufferWidth() * 2,
@@ -979,43 +1003,6 @@ void PvideoTests::TestOverlay1() {
   PvideoTeardown();
 
   host_.PrepareDraw(kBackgroundColor);
-  //
-  //  {
-  //    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-  //    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
-  //    host_.SetTextureStageEnabled(0, true);
-  //    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-  //
-  //    auto &texture_stage = host_.GetTextureStage(0);
-  //    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LC_IMAGE_CR8YB8CB8YA8));
-  //    texture_stage.SetImageDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  //    texture_stage.SetTextureDimensions(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
-  //
-  //    SetTestPatternVideoFrameCR8YB8CB8YA8(host_.GetTextureMemoryForStage(0), host_.GetFramebufferWidth(),
-  //    host_.GetFramebufferHeight(), 16); host_.SetupTextureStages();
-  //
-  //
-  //
-  //    host_.SetDiffuse(0xFFFFFFFF);
-  //    host_.Begin(TestHost::PRIMITIVE_QUADS);
-  //    host_.SetTexCoord0(0.f, 0.f);
-  //    host_.SetVertex(0.f, 0.f, 1.f);
-  //
-  //    host_.SetTexCoord0(640.f, 0.f);
-  //    host_.SetVertex(640.f, 0.f, 1.f);
-  //
-  //    host_.SetTexCoord0(640.f, 480.f);
-  //    host_.SetVertex(640.f, 480.f, 1.f);
-  //
-  //    host_.SetTexCoord0(0.f, 480.f);
-  //    host_.SetVertex(0.f, 480.f, 1.f);
-  //
-  //    host_.End();
-  //
-  //    host_.SetTextureStageEnabled(0, false);
-  //    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
-  //
-  //  }
 
   pb_printat(0, 0, "DONE\n");
   pb_printat(1, 0, "Video was displayed using overlay 1\n");
@@ -1407,6 +1394,78 @@ void PvideoTests::TestOutSize() {
   pb_draw_text_screen();
 
   host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+
+  host_.SetBlend();
+}
+
+void PvideoTests::TestRatios() {
+  host_.SetBlend(false);
+
+  static constexpr auto kBackgroundColor = 0xFF250535;
+
+  PvideoInit();
+
+  static constexpr uint32_t kTestRegion = 256;
+
+  SetCheckerboardVideoFrameCR8YB8CB8YA8(video_, 0xFFCCCC33, 0xFF222222, 8, host_.GetFramebufferWidth(),
+                                        host_.GetFramebufferHeight());
+
+  SetPvideoStop();
+  SetPvideoColorKey(kBackgroundColor);
+  SetPvideoOffset(VRAM_ADDR(video_), 0);
+  SetPvideoIn(0, 0, kTestRegion / 2, kTestRegion, 0);
+  SetPvideoOut((host_.GetFramebufferWidth() - kTestRegion) / 2, (host_.GetFramebufferHeight() - kTestRegion) / 2,
+               kTestRegion, kTestRegion, 0);
+  SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, host_.GetFramebufferWidth() * 2, true, 0);
+  SetPvideoLimit(VRAM_MAX, 0);
+
+  static constexpr uint32_t kRatioNumerators[] = {10,  25,  50,  60,  75,  80,  85,  90,
+                                                  100, 110, 125, 150, 175, 200, 250, 400};
+
+  SetSquareDsDxDtDy(0);
+  for (auto ratio_numerator : kRatioNumerators) {
+    host_.PrepareDraw(kBackgroundColor);
+    pb_erase_text_screen();
+    pb_printat(0, 0, "DsDx: %d : 100", ratio_numerator);
+    pb_draw_text_screen();
+    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+
+    SetPvideoStop();
+
+    SetDsDx(ratio_numerator, 100, 0);
+
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+
+    Sleep(200);
+  }
+
+  SetSquareDsDxDtDy(0);
+  for (auto ratio_numerator : kRatioNumerators) {
+    host_.PrepareDraw(kBackgroundColor);
+    pb_erase_text_screen();
+    pb_printat(0, 0, "DtDy: %d : 100", ratio_numerator);
+    pb_draw_text_screen();
+    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+
+    SetPvideoStop();
+
+    SetDtDy(ratio_numerator, 100, 0);
+
+    SetPvideoInterruptEnabled(true, false);
+    SetPvideoBuffer(true, false);
+
+    Sleep(200);
+  }
+
+  DbgPrint("Stopping video overlay\n");
+  PvideoTeardown();
+
+  host_.PrepareDraw(kBackgroundColor);
+  pb_printat(0, 0, "DONE\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(false, output_dir_, suite_name_, kPitchTest);
 
   host_.SetBlend();
 }
