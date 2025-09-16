@@ -41,6 +41,11 @@ class PvideoTests : public TestSuite {
   void TestOverlay1();
   void TestOverlappedOverlays();
 
+  void TestInPoint();
+  void TestInSize();
+  void TestOutPoint();
+  void TestOutSize();
+
   void DrawFullscreenOverlay();
 
  private:

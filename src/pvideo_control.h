@@ -50,11 +50,25 @@ void SetPvideoOffset(uint32_t offset, uint32_t buffer = 0);
 
 /**
  * Defines the region in the source video buffer that the overlay will read from.
+ *
+ * @param x The horizontal offset in .4 fixed point format.
+ * @param y The vertical offset in .3 fixed point format.
+ * @param width The width of the buffer in texels. Each texel is 2 pixels wide.
+ * @param height The height of the buffer in texels. Each texel is 1 pixel high.
+ * @param buffer The buffer whose input region should be set.
  */
 void SetPvideoIn(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t buffer = 0);
 
 /**
  * Defines the screen region that will be covered by the overlay.
+ *
+ * Note: If the output region is larger than the input region specified via SetPvideoIn excess values will be clamped.
+ *
+ * @param x The horizontal screen position in pixels.
+ * @param y The vertical screen position in pixels.
+ * @param width The width of the region in pixels.
+ * @param height The height of the region in pixels.
+ * @param buffer The buffer whose input region should be set.
  */
 void SetPvideoOut(uint32_t x, uint32_t y, uint32_t width, uint32_t height, uint32_t buffer = 0);
 
