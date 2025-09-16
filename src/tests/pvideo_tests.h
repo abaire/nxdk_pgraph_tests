@@ -34,6 +34,7 @@ class PvideoTests : public TestSuite {
 
   void TestPitchLessThanCompact();
   void TestPitchLargerThanCompact();
+  void TestPitch();
 
   void TestColorKey();
 
@@ -45,6 +46,7 @@ class PvideoTests : public TestSuite {
   void TestInSize();
   void TestOutPoint();
   void TestOutSize();
+  void TestRatios();
 
   void DrawFullscreenOverlay();
 
