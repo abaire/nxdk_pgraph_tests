@@ -1083,7 +1083,7 @@ void PvideoTests::TestInPoint() {
   for (auto s = 0; s < (kBoxSize * 2 << 4); ++s) {
     host_.PrepareDraw(kBackgroundColor);
     pb_erase_text_screen();
-    pb_printat(0, 0, "S 8.4 - the texture will move 2 boxes from right to left");
+    pb_printat(0, 0, "S 8.4 - Texture moves 2 boxes from right to left");
     pb_printat(1, 0, "S: 0x%X (%d) - %d.%d", s, s, s >> 4, s & 0xF);
     pb_draw_text_screen();
     host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
@@ -1100,7 +1100,7 @@ void PvideoTests::TestInPoint() {
   for (auto t = 0; t < (kBoxSize * 2 << 3); ++t) {
     host_.PrepareDraw(kBackgroundColor);
     pb_erase_text_screen();
-    pb_printat(0, 0, "T - the texture will move 2 boxes from top to bottom");
+    pb_printat(0, 0, "T - Texture moves 2 boxes from bottom to top");
     pb_printat(1, 0, "T: 0x%X (%d) - %d.%d", t, t, t >> 3, t & 0x7);
     pb_draw_text_screen();
     host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
