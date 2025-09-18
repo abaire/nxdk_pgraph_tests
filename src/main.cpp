@@ -99,6 +99,7 @@
 #include "tests/texture_format_dxt_tests.h"
 #include "tests/texture_format_tests.h"
 #include "tests/texture_framebuffer_blit_tests.h"
+#include "tests/texture_lod_bias_tests.h"
 #include "tests/texture_matrix_tests.h"
 #include "tests/texture_perspective_enable_tests.h"
 #include "tests/texture_render_target_tests.h"
@@ -395,6 +396,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
 
   // Remaining tests should be alphabetized.
   // -- Begin REG_TEST --
+
   REG_TEST(AlphaFuncTests)
   REG_TEST(AntialiasingTests)
   REG_TEST(AttributeCarryoverTests)
@@ -409,18 +411,18 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(CombinerTests)
   REG_TEST(ContextSwitchTests)
   REG_TEST(DegenerateBeginEndTests)
-  REG_TEST(DepthFormatTests)
   REG_TEST(DepthFormatFixedFunctionTests)
+  REG_TEST(DepthFormatTests)
   REG_TEST(DepthFunctionTests)
   REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(EdgeFlagTests)
-  REG_TEST(FogTests)
   REG_TEST(FogCarryoverTests)
   REG_TEST(FogCustomShaderTests)
   REG_TEST(FogExceptionalValueTests)
   REG_TEST(FogGenTests)
   REG_TEST(FogInfiniteFogCoordinateTests)
   REG_TEST(FogParamTests)
+  REG_TEST(FogTests)
   REG_TEST(FogVec4CoordTests)
   REG_TEST(FrontFaceTests)
   REG_TEST(HighVertexCountTests)
@@ -433,8 +435,8 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(LightingTwoSidedTests)
   REG_TEST(LineWidthTests)
   REG_TEST(MaterialAlphaTests)
-  REG_TEST(MaterialColorTests)
   REG_TEST(MaterialColorSourceTests)
+  REG_TEST(MaterialColorTests)
   REG_TEST(NullSurfaceTests)
   REG_TEST(OverlappingDrawModesTests)
   REG_TEST(PointParamsTests)
@@ -445,22 +447,23 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SmoothingTests)
   REG_TEST(SpecularBackTests)
   REG_TEST(SpecularTests)
-  REG_TEST(SwathWidthTests)
+  REG_TEST(StencilFuncTests)
+  REG_TEST(StencilTests)
+  REG_TEST(StippleTests)
   REG_TEST(SurfaceClipTests)
   REG_TEST(SurfaceFormatTests)
   REG_TEST(SurfacePitchTests)
-  REG_TEST(StencilTests)
-  REG_TEST(StencilFuncTests)
-  REG_TEST(StippleTests)
-  REG_TEST(TextureBorderTests)
-  REG_TEST(TextureBorderColorTests)
-  REG_TEST(TextureCPUUpdateTests)
-  REG_TEST(TextureCubemapTests)
+  REG_TEST(SwathWidthTests)
   REG_TEST(TexgenMatrixTests)
   REG_TEST(TexgenTests)
+  REG_TEST(TextureBorderColorTests)
+  REG_TEST(TextureBorderTests)
+  REG_TEST(TextureCPUUpdateTests)
+  REG_TEST(TextureCubemapTests)
   REG_TEST(TextureFormatDXTTests)
   REG_TEST(TextureFormatTests)
   REG_TEST(TextureFramebufferBlitTests)
+  REG_TEST(TextureLodBiasTests)
   REG_TEST(TextureMatrixTests)
   REG_TEST(TexturePerspectiveEnableTests)
   REG_TEST(TextureRenderTargetTests)
@@ -475,12 +478,11 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(ViewportTests)
   REG_TEST(VolumeTextureTests)
   REG_TEST(WeightSetterTests)
-  REG_TEST(WParamTests)
   REG_TEST(WindowClipTests)
+  REG_TEST(WParamTests)
+  REG_TEST(ZeroStrideTests)
   REG_TEST(ZMinMaxControlTests)
   REG_TEST(ZPassPixelCountTests)
-  REG_TEST(ZeroStrideTests)
-
   // -- End REG_TEST --
 
 #undef REG_TEST

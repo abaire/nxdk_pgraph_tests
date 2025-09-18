@@ -196,10 +196,10 @@ add_dependencies(
 
 add_executable(
         nxdk_pgraph_tests
-        tests/antialiasing_tests.cpp
-        tests/antialiasing_tests.h
         tests/alpha_func_tests.cpp
         tests/alpha_func_tests.h
+        tests/antialiasing_tests.cpp
+        tests/antialiasing_tests.h
         tests/attribute_carryover_tests.cpp
         tests/attribute_carryover_tests.h
         tests/attribute_explicit_setter_tests.cpp
@@ -292,30 +292,30 @@ add_executable(
         tests/specular_back_tests.h
         tests/specular_tests.cpp
         tests/specular_tests.h
-        tests/stencil_tests.cpp
-        tests/stencil_tests.h
         tests/stencil_func_tests.cpp
         tests/stencil_func_tests.h
+        tests/stencil_tests.cpp
+        tests/stencil_tests.h
         tests/stipple_tests.cpp
         tests/stipple_tests.h
-        tests/swath_width_tests.cpp
-        tests/swath_width_tests.h
         tests/surface_clip_tests.cpp
         tests/surface_clip_tests.h
         tests/surface_format_tests.cpp
         tests/surface_format_tests.h
         tests/surface_pitch_tests.cpp
         tests/surface_pitch_tests.h
+        tests/swath_width_tests.cpp
+        tests/swath_width_tests.h
         tests/test_suite.cpp
         tests/test_suite.h
         tests/texgen_matrix_tests.cpp
         tests/texgen_matrix_tests.h
         tests/texgen_tests.cpp
         tests/texgen_tests.h
-        tests/texture_border_tests.cpp
-        tests/texture_border_tests.h
         tests/texture_border_color_tests.cpp
         tests/texture_border_color_tests.h
+        tests/texture_border_tests.cpp
+        tests/texture_border_tests.h
         tests/texture_cpu_update_tests.cpp
         tests/texture_cpu_update_tests.h
         tests/texture_cubemap_tests.cpp
@@ -326,6 +326,8 @@ add_executable(
         tests/texture_format_tests.h
         tests/texture_framebuffer_blit_tests.cpp
         tests/texture_framebuffer_blit_tests.h
+        tests/texture_lod_bias_tests.cpp
+        tests/texture_lod_bias_tests.h
         tests/texture_matrix_tests.cpp
         tests/texture_matrix_tests.h
         tests/texture_perspective_enable_tests.cpp
@@ -360,10 +362,10 @@ add_executable(
         tests/window_clip_tests.h
         tests/z_min_max_control_tests.cpp
         tests/z_min_max_control_tests.h
-        tests/zpass_pixel_count_tests.cpp
-        tests/zpass_pixel_count_tests.h
         tests/zero_stride_tests.cpp
         tests/zero_stride_tests.h
+        tests/zpass_pixel_count_tests.cpp
+        tests/zpass_pixel_count_tests.h
 )
 
 # Pull debug info out of the binary into a host-side linked binary.
