@@ -77,7 +77,7 @@ def update_cmakelists(suite_name_snake):
     files.sort()
 
     new_file_list_str = "\n        ".join(files)
-    new_content = content.replace(file_list_str, f"\n        {new_file_list_str}\n")
+    new_content = content.replace(file_list_str, f"{new_file_list_str}\n")
 
     with open(cmake_path, "w") as f:
         f.write(new_content)
