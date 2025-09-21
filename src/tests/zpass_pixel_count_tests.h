@@ -31,6 +31,8 @@ class ZPassPixelCountTests : public TestSuite {
 
  private:
   void Test();
+  void TestPointSize(uint32_t point_size);
+  void TestLineWidth(uint32_t line_width);
 
  private:
   struct s_CtxDma semaphore_dma_ctx_{};
