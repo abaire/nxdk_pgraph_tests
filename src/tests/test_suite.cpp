@@ -151,6 +151,7 @@ void TestSuite::Initialize() {
     Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
     Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
     Pushbuffer::Push(NV097_SET_POINT_SIZE, 8);
+    Pushbuffer::Push(NV097_SET_LINE_WIDTH, 8);
 
     Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, 0);
 
