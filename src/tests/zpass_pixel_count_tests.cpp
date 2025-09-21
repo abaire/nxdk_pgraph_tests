@@ -23,9 +23,9 @@ const uint32_t kDefaultReportContextChannel = 12;
 // https://github.com/XboxDev/nxdk/blob/4171d5bfe5260c0dd2d42f4efeb9ec1d44788867/lib/pbkit/nv_objects.h#L862
 // https://github.com/XboxDev/nxdk/blob/4171d5bfe5260c0dd2d42f4efeb9ec1d44788867/lib/pbkit/nv_regs.h#L44
 
-static std::string MakePointSizeTestName(uint32_t point_size) {
+static std::string MakePointSizeTestName(uint32_t point_size, bool programmable = false) {
   char buf[32];
-  snprintf(buf, sizeof(buf), "ZPassPointSize-0x%04X", point_size);
+  snprintf(buf, sizeof(buf), "ZPassPointSize%s-0x%04X", programmable ? "VS" : "", point_size);
   return buf;
 }
 
@@ -50,12 +50,13 @@ ZPassPixelCountTests::ZPassPixelCountTests(TestHost &host, std::string output_di
     : TestSuite(host, std::move(output_dir), "ZPass pixel count", config) {
   tests_[kTestName] = [this]() { Test(); };
 
-  static constexpr uint32_t kPointSizeTests[] = {0, 1, 4, 8, 16, 64, 255};
+  static constexpr uint32_t kPointSizeTests[] = {0, 1, 4, 7, 8, 9, 15, 16, 64, 255, 256, (63 << 3), ((63 << 3) + 7)};
   for (auto point_size : kPointSizeTests) {
     tests_[MakePointSizeTestName(point_size)] = [this, point_size]() { TestPointSize(point_size); };
+    tests_[MakePointSizeTestName(point_size, true)] = [this, point_size]() { TestPointSizeProgrammable(point_size); };
   }
 
-  static constexpr uint32_t kLineWidthTests[] = {0, 1, 4, 8, 16, 64, 255};
+  static constexpr uint32_t kLineWidthTests[] = {0, 1, 4, 8, 15, 16, 64, 255, 504};
   for (auto line_width : kLineWidthTests) {
     tests_[MakeLineWidthTestName(line_width)] = [this, line_width]() { TestLineWidth(line_width); };
   }
@@ -251,7 +252,15 @@ void ZPassPixelCountTests::TestPointSize(uint32_t point_size) {
   static constexpr uint32_t kQuadPixels = kQuadSize * kQuadSize;
 
   // Expect 1 full quad and one pixel.
-  static constexpr uint32_t kExpectedPassedPixels = kQuadPixels + 1;
+  const auto fractional_point_size = static_cast<float>(point_size) / 8.f;
+  uint32_t point_pixels;
+  if (fractional_point_size < 1.f) {
+    point_pixels = 1.f;
+  } else {
+    point_pixels = static_cast<uint32_t>(fractional_point_size);
+    point_pixels *= point_pixels;
+  }
+  const uint32_t expected_pass_pixels = kQuadPixels + point_pixels;
 
   // Disable z-pass counting and request the report.
   static constexpr auto kReportOffset = 0;  // DMA context already points directly at the buffer.
@@ -285,13 +294,126 @@ void ZPassPixelCountTests::TestPointSize(uint32_t point_size) {
   pb_print("GET_REPORT at 0x%X\n", offset);
   // Timestamp is a 64-bit nanosecond counter. To avoid non-determinism, it is omitted.
   //    pb_print(".timestamp: 0x%llX\n", report.timestamp);
-  pb_print(".report: 0x%X (%u) [%s]\n", report.report, report.report,
-           (report.report == kExpectedPassedPixels) ? "PASS" : "FAIL");
+  pb_print(".report: 0x%X (%u) =? %d [%s]\n", report.report, report.report, expected_pass_pixels,
+           (report.report == expected_pass_pixels) ? "PASS" : "FAIL");
   pb_print(".reserved: 0x%X\n", report.reserved);
 
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name, true);
+}
+
+void ZPassPixelCountTests::TestPointSizeProgrammable(uint32_t point_size) {
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.PrepareDraw(0xFF333333);
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_SEMAPHORE, semaphore_dma_ctx_.ChannelID);
+  // NOTE: This test assumes that SET_SEMAPHORE_OFFSET is 0.
+  // TODO: Try to read back the current semaphore offset and set it to 0 if it is not, then restore at end of test.
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_REPORT, report_dma_ctx_.ChannelID);
+
+  Pushbuffer::Push(NV097_CLEAR_REPORT_VALUE, NV097_CLEAR_REPORT_VALUE_TYPE_ZPASS_PIXEL_CNT);
+  Pushbuffer::Push(NV097_SET_ZPASS_PIXEL_COUNT_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+
+  Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
+  Pushbuffer::End();
+
+  static constexpr auto kQuadSize = 128.f;
+  static constexpr auto kFrontX = 32.f;
+  static constexpr auto kFrontY = 240.f;
+  static constexpr auto kFrontZ = 0.f;
+
+  static constexpr auto kNonOverlapX = kFrontX + kQuadSize * 2;
+
+  // Draw a quad at Z = 0 to prime the depth buffer.
+  host_.SetDiffuse(0xFF773377);
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetVertex(kFrontX, kFrontY, kFrontZ);
+  host_.SetVertex(kFrontX + kQuadSize, kFrontY, kFrontZ);
+  host_.SetVertex(kFrontX + kQuadSize, kFrontY + kQuadSize, kFrontZ);
+  host_.SetVertex(kFrontX, kFrontY + kQuadSize, kFrontZ);
+  host_.End();
+
+  // Draw a point at the center of the quad and another point in a fresh location.
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
+  host_.SetDiffuse(0xFFFFFFFF);
+  host_.SetVertex(kFrontX + kQuadSize * 0.5f, kFrontY + kQuadSize * 0.5f, kFrontZ + 1.5f);
+
+  host_.SetVertex(kNonOverlapX, kFrontY + kQuadSize * 0.5f, kFrontZ);
+  host_.End();
+
+  // The number of pixels that should be written by the test quad.
+  static constexpr uint32_t kQuadPixels = kQuadSize * kQuadSize;
+
+  // Expect 1 full quad and one pixel.
+  const auto fractional_point_size = static_cast<float>(point_size) / 8.f;
+  uint32_t point_pixels;
+  if (point_size == 0) {
+    // Point size 0 is special cased by the HW to be 1 pixel.
+    point_pixels = 1;
+  } else if (fractional_point_size < 1.f) {
+    point_pixels = 0;
+  } else if (fractional_point_size == 63.f) {
+    // 63 is rounded up to 64, unlike all the other whole numbers which remain the same.
+    point_pixels = 64 * 64;
+  } else {
+    // The fractional point size provides the size of one side of a quad.
+    point_pixels = static_cast<uint32_t>(ceilf(fractional_point_size));
+    point_pixels *= point_pixels;
+  }
+  const uint32_t expected_pass_pixels = kQuadPixels + point_pixels;
+
+  // Disable z-pass counting and request the report.
+  static constexpr auto kReportOffset = 0;  // DMA context already points directly at the buffer.
+  static constexpr auto kSemaphoreReleaseValue = 0xCBA;
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ZPASS_PIXEL_COUNT_ENABLE, false);
+  Pushbuffer::Push(NV097_GET_REPORT,
+                   SET_MASK(NV097_GET_REPORT_TYPE, NV097_GET_REPORT_TYPE_ZPASS_PIXEL_CNT) | kReportOffset);
+  Pushbuffer::Push(NV097_BACK_END_WRITE_SEMAPHORE_RELEASE, kSemaphoreReleaseValue);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_REPORT, kDefaultReportContextChannel);
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_SEMAPHORE, kDefaultSemaphoreContextChannel);
+  Pushbuffer::End(true);
+
+  host_.WaitForGPU();
+  // TODO: See if there is a better mechanism to delay until the report is fetched without spin locking.
+  for (auto i = 0; i < 32 && *semaphore_context_object_ != kSemaphoreReleaseValue; ++i) {
+    Sleep(1);
+  }
+
+  const std::string test_name = MakePointSizeTestName(point_size, true);
+  pb_print("%s\n", test_name.c_str());
+  pb_print("\n");
+  pb_print("SEMAPHORE at 0x%X = 0x%X [%s]\n", semaphore_context_object_, *semaphore_context_object_,
+           *semaphore_context_object_ == kSemaphoreReleaseValue ? "PASS" : "FAIL");
+
+  const auto &report = report_context_object_[0];
+  pb_print("\n");
+  // Timestamp is a 64-bit nanosecond counter. To avoid non-determinism, it is omitted.
+  //    pb_print(".timestamp: 0x%llX\n", report.timestamp);
+  pb_print(".report: 0x%X (%u) =? %d [%s]\n", report.report, report.report, expected_pass_pixels,
+           (report.report == expected_pass_pixels) ? "PASS" : "FAIL");
+  pb_print(".reserved: 0x%X\n", report.reserved);
+
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name, true);
+
+  host_.SetVertexShaderProgram(nullptr);
 }
 
 void ZPassPixelCountTests::TestLineWidth(uint32_t line_width) {
@@ -319,6 +441,7 @@ void ZPassPixelCountTests::TestLineWidth(uint32_t line_width) {
   Pushbuffer::End();
 
   static constexpr auto kQuadSize = 128.f;
+  static constexpr auto kHalfQuadSize = kQuadSize * 0.5f;
   static constexpr auto kFrontX = 32.f;
   static constexpr auto kFrontY = 240.f;
   static constexpr auto kFrontZ = 0.f;
@@ -333,18 +456,27 @@ void ZPassPixelCountTests::TestLineWidth(uint32_t line_width) {
   host_.Begin(TestHost::PRIMITIVE_LINES);
   host_.SetDiffuse(0xFFFFFFFF);
 
-  host_.SetScreenVertex(kFrontX, kFrontY + kQuadSize * 0.5f, kFrontZ + 1.5f);
-  host_.SetScreenVertex(kFrontX + kQuadSize, kFrontY + kQuadSize * 0.5f, kFrontZ + 1.5f);
+  host_.SetScreenVertex(kFrontX, kFrontY + kHalfQuadSize, kFrontZ + 1.5f);
+  host_.SetScreenVertex(kFrontX + kHalfQuadSize, kFrontY + kHalfQuadSize, kFrontZ + 1.5f);
 
-  host_.SetScreenVertex(kNonOverlapX, kFrontY + kQuadSize * 0.5f, kFrontZ + 1.5f);
-  host_.SetScreenVertex(kNonOverlapX + kQuadSize, kFrontY + kQuadSize * 0.5f, kFrontZ + 1.5f);
+  host_.SetScreenVertex(kNonOverlapX, kFrontY + kHalfQuadSize, kFrontZ + 1.5f);
+  host_.SetScreenVertex(kNonOverlapX + kHalfQuadSize, kFrontY + kHalfQuadSize, kFrontZ + 1.5f);
   host_.End();
 
   // The number of pixels that should be written by the test quad.
   static constexpr uint32_t kQuadPixels = kQuadSize * kQuadSize;
 
+  // Convert fixed point line width to whole pixels.
+  auto pixel_line_width = static_cast<float>(line_width) / 8.f;
+  if (pixel_line_width > 0.f && pixel_line_width < 1.f) {
+    pixel_line_width = 1.f;
+  } else {
+    pixel_line_width = floorf(pixel_line_width);
+  }
+  const auto line_pixel_area = kHalfQuadSize * floorf(pixel_line_width);
+
   // Expect 1 full quad and one line of pixels.
-  static constexpr uint32_t kExpectedPassedPixels = kQuadPixels + kQuadSize;
+  const auto expected_pass_pixels = static_cast<uint32_t>(kQuadPixels) + static_cast<uint32_t>(line_pixel_area);
 
   // Disable z-pass counting and request the report.
   static constexpr auto kReportOffset = 0;  // DMA context already points directly at the buffer.
@@ -372,14 +504,12 @@ void ZPassPixelCountTests::TestLineWidth(uint32_t line_width) {
   pb_print("SEMAPHORE at 0x%X = 0x%X [%s]\n", semaphore_context_object_, *semaphore_context_object_,
            *semaphore_context_object_ == kSemaphoreReleaseValue ? "PASS" : "FAIL");
 
-  const auto offset = kReportOffset;
   const auto &report = report_context_object_[0];
   pb_print("\n");
-  pb_print("GET_REPORT at 0x%X\n", offset);
   // Timestamp is a 64-bit nanosecond counter. To avoid non-determinism, it is omitted.
   //    pb_print(".timestamp: 0x%llX\n", report.timestamp);
-  pb_print(".report: 0x%X (%u) [%s]\n", report.report, report.report,
-           (report.report == kExpectedPassedPixels) ? "PASS" : "FAIL");
+  pb_print(".report: 0x%X (%u) =? %d [%s]\n", report.report, report.report, expected_pass_pixels,
+           (report.report == expected_pass_pixels) ? "PASS" : "FAIL");
   pb_print(".reserved: 0x%X\n", report.reserved);
 
   pb_draw_text_screen();
