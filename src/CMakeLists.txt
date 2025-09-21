@@ -312,6 +312,8 @@ add_executable(
         tests/texgen_matrix_tests.h
         tests/texgen_tests.cpp
         tests/texgen_tests.h
+        tests/texture_anisotropy_tests.cpp
+        tests/texture_anisotropy_tests.h
         tests/texture_border_color_tests.cpp
         tests/texture_border_color_tests.h
         tests/texture_border_tests.cpp
