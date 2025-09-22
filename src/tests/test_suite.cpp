@@ -205,6 +205,7 @@ void TestSuite::Initialize() {
     stage.SetAlphaKillEnable(false);
     stage.SetColorKeyMode(TextureStage::CKM_DISABLE);
     stage.SetLODClamp(0, 4095);
+    stage.SetAnisotropy(1);
 
     stage.SetTextureMatrixEnable(false);
     stage.SetTextureMatrix(identity_matrix);
