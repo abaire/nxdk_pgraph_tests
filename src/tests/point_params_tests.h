@@ -10,6 +10,9 @@
  * Tests the behavior of NV097_SET_POINT_PARAMS_ENABLE (0x00000318) and
  * NV097_SET_POINT_PARAMS (0x00000A30).
  *
+ * The scale factors are used to calculate a multiplier for the point size using
+ * the formula SFactor = sqrt(1/(A + B * Deye + C * Deye ^ 2)).
+ *
  * See https://learn.microsoft.com/en-us/windows/win32/direct3d9/point-sprites
  *
  * PointParamsX_SmoothX_PtSize_(FF | VS)
@@ -71,5 +74,7 @@ class PointParamsTests : public TestSuite {
             bool use_shader);
 
   void TestDetailed(const std::string &name, bool use_shader);
+
+  void TestScaleParams(bool scale_a, bool scale_b, bool scale_c, bool use_shader);
 };
 #endif  // POINTPARAMSTESTS_H
