@@ -9,6 +9,9 @@ class NV2AState {
  public:
   NV2AState() = default;
   virtual ~NV2AState() = default;
+
+  [[nodiscard]] float GetFramebufferWidthF() const { return 640.f; }
+  [[nodiscard]] float GetFramebufferHeightF() const { return 480.f; }
 };
 
 }  // namespace PBKitPlusPlus
