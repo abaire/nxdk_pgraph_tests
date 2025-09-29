@@ -117,6 +117,8 @@ add_library(
         debug_output.h
         ftp_logger.cpp
         ftp_logger.h
+        image_resource.cpp
+        image_resource.h
         main.cpp
         menu_item.cpp
         menu_item.h
@@ -276,6 +278,8 @@ add_executable(
         tests/null_surface_tests.h
         tests/overlapping_draw_modes_tests.cpp
         tests/overlapping_draw_modes_tests.h
+        tests/pixel_shader_tests.cpp
+        tests/pixel_shader_tests.h
         tests/point_params_tests.cpp
         tests/point_params_tests.h
         tests/point_size_tests.cpp

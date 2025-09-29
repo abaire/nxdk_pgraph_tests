@@ -58,6 +58,25 @@ class TestHost : public NV2AState {
   //! Creates the given directory if it does not already exist.
   static void EnsureFolderExists(const std::string &folder_path);
 
+  //! Returns an X coordinate sufficient to center a primitive with the given width within the framebuffer.
+  inline float CenterX(float item_width, bool pixel_align = true) {
+    float ret = (GetFramebufferWidthF() - item_width) * 0.5f;
+    if (pixel_align) {
+      return floorf(ret);
+    }
+
+    return ret;
+  }
+
+  //! Returns a Y coordinate sufficient to center a primitive with the given height within the framebuffer.
+  inline float CenterY(float item_height, bool pixel_align = true) {
+    float ret = (GetFramebufferHeightF() - item_height) * 0.5f;
+    if (pixel_align) {
+      return floorf(ret);
+    }
+    return ret;
+  }
+
  private:
   static std::string PrepareSaveFile(std::string output_directory, const std::string &filename,
                                      const std::string &ext = ".png");

@@ -202,7 +202,7 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   // perform a reflected lookup using texm3x3vspec. In practice, it seems that the w tex coordinate is ignored in this
   // test, so it is more likely that a texm3x3tex is the analog.
 
-  // See https://web.archive.org/web/20210614122128/https://www.nvidia.com/docs/IO/8228/D3DTutorial2_FX_HLSL.pdf
+  // See https://web.archive.org/web/20240629060504/https://www.nvidia.com/docs/IO/8228/D3DTutorial2_FX_HLSL.pdf
 
   // texm3x3tex:
   // tex0 is used to look up the normal for a given pixel
