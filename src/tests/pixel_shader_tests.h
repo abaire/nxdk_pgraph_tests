@@ -27,17 +27,17 @@ class PixelShaderTests : public TestSuite {
   //! `NV097_SET_SHADER_CLIP_PLANE_MODE`.
   void TestClipPlane();
 
-  //! Tests PS_TEXTUREMODES_BUMPENVMAP
+  //! Tests PS_TEXTUREMODES_BUMPENVMAP and PS_TEXTUREMODES_BUMPENVMAP_LUM
   //! Demonstrates the use of NV097_SET_TEXTURE_SET_BUMP_ENV_MAT to modify texture UV coordinates with a normal map.
+  //!
+  //! In luminance mode, demonstrates use of NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE and
+  //! NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET to calculate final RGB color from the normal map's blue channel via
+  //! `out_color = out_color * (lum_scale * nm.b + lum_bias)`.
   //!
   //! u' = u + BUMPENVMAT00 * normalmap.r + BUMPENVMAT10 * normalmap.g
   //! v' = v + BUMPENVMAT01 * normalmap.r + BUMPENVMAT11 * normalmap.g
-  void TestBumpEnvMap();
+  void TestBumpEnvMap(bool luminance = false);
 
-  //  //! Tests PS_TEXTUREMODES_BUMPENVMAP_LUM
-  //  //! Demonstrates
-  //  void Test();
-  //
   //  //! Tests PS_TEXTUREMODES_BRDF
   //  //! Demonstrates
   //  void Test();
@@ -81,7 +81,7 @@ class PixelShaderTests : public TestSuite {
   //! Draws a basic 2d sampled quad at the given coordinates.
   //!
   //! Note: This modifies texture stage settings, shader stage programs, and combiner settings.
-  void DrawPlainImage(float x, float y, const ImageResource &image, float quad_size);
+  void DrawPlainImage(float x, float y, const ImageResource &image, float quad_size, bool border = true);
 
  private:
   ImageResource water_bump_map_;

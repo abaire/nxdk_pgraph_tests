@@ -21,9 +21,34 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
   tests_[kPassthrough] = [this]() { TestPassthrough(); };
   tests_[kClipPlane] = [this]() { TestClipPlane(); };
   tests_[kBumpEnvMap] = [this]() { TestBumpEnvMap(); };
+  tests_[kBumpEnvMapLuminance] = [this]() { TestBumpEnvMap(true); };
   //  tests_[kDotReflectDiffuse] = [this]() { TestDotReflectDiffuse(); };
 }
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc Passthru
+ *  Demonstrates behavior of PS_TEXTUREMODES_PASSTHRU, which simply utilizes texture coordinates as colors.
+ *
+ * @tc ClipPlane
+ *   Demonstrates behavior of PS_TEXTUREMODES_CLIPPLANE. Various mock values for clipping planes are assigned to texture
+ *   coordinates for stages 0 (red), 1 (green), and 2 (blue). The values of the coordinates are summarized in the image,
+ *   with "1" used to indicate a positive value and "-" to indicate a negative one. The comparator function is set for
+ *   each quad in the image with a similar shorthand indicating whether results < 0 are clipped ("-") or >= 0 ("0").
+ *
+ * @tc BumpEnvMap
+ *   Demonstrates behavior of PS_TEXTUREMODES_BUMPENVMAP with various values for the NV097_SET_TEXTURE_SET_BUMP_ENV_MAT
+ *   matrix. Values are {-1.f, 0.f, 1.f, 0.f}, {1.f, 1.f, 1.f, 1.f}, {0.f, 0.2f, 0.f, 0.75f},
+ *   {0.5f, -0.5f, 0.5f, -0.5f}, {0.3f, 0.5f, 0.7f, 1.f}, {0.f, 1.f, -1.f, 0.f}, {0.f, 0.f, 1.f, 1.f},
+ *   {0.5f, 0.8f, 0.f, 0.f},
+ *
+ * @tc BumpEnvMapLuminance
+ *   Demonstrates behavior of PS_TEXTUREMODES_BUMPENVMAP_LUM with various values for
+ *   NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE and NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET. Outputs are grouped by the env bump
+ *   matrix (the value of each element is identical and printed in row 1). Columns are divided up by the scale factor,
+ *   whose value is printed in row 2. Rows are defined by the offset value: {0, 0.25, 0.75, 1.0}.
+ */
 void PixelShaderTests::Initialize() {
   TestSuite::Initialize();
 
@@ -180,20 +205,20 @@ void PixelShaderTests::TestClipPlane() {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kClipPlane);
 }
 
-void PixelShaderTests::TestBumpEnvMap() {
-  host_.PrepareDraw(0xFF111111);
+void PixelShaderTests::TestBumpEnvMap(bool luminance) {
+  host_.PrepareDraw(0xFF222222);
 
   static constexpr auto kTop = 64.f;
-  static constexpr auto kReferenceQuadSize = 128.f;
-  static constexpr auto kQuadSize = 128.f;
-  static constexpr auto kQuadSpacing = kQuadSize + 16.f;
+  const auto kQuadSize = luminance ? 64.f : 128.f;
+  const auto kQuadSpacing = kQuadSize + 16.f;
   static constexpr auto kReferenceLeft = 8.f;
-  DrawPlainImage(kReferenceLeft, kTop, bump_map_test_image_, kReferenceQuadSize);
-  DrawPlainImage(kReferenceLeft, kTop + kReferenceQuadSize + 16.f, water_bump_map_, kReferenceQuadSize);
+  DrawPlainImage(kReferenceLeft, kTop, bump_map_test_image_, kQuadSize);
+  DrawPlainImage(kReferenceLeft, kTop + kQuadSize + 16.f, water_bump_map_, kQuadSize);
 
   // The BumpEnv stage reads the normal map from a previous stage (for stage 1, only stage 0 may be used, for later
   // stages SetShaderStageInput could be used to pick a previous stage).
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_BUMPENVMAP);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE,
+                              luminance ? TestHost::STAGE_BUMPENVMAP_LUMINANCE : TestHost::STAGE_BUMPENVMAP);
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(1, true);
 
@@ -214,7 +239,7 @@ void PixelShaderTests::TestBumpEnvMap() {
   }
   host_.SetupTextureStages();
 
-  auto draw_quad = [this](float left, float top) {
+  auto draw_quad = [this, kQuadSize](float left, float top) {
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetTexCoord0(0.f, 0.f);
     host_.SetTexCoord1(0.f, 0.f);
@@ -234,29 +259,67 @@ void PixelShaderTests::TestBumpEnvMap() {
     host_.End();
   };
 
-  static constexpr auto kLeft = kReferenceLeft + kReferenceQuadSize + 16.f;
+  const auto kLeft = kReferenceLeft + kQuadSize + 16.f;
 
   float left = kLeft;
   float top = kTop;
 
   // Note that values must be in the range -1, 1 or hardware will assert.
-  static constexpr float kEnvMapMatrices[][4] = {
-      // {0.f, 0.f, 0.f, 0.f}, // 0.f cancels out the normal map jitter entirely and produces the source image.
-      {-1.f, 0.f, 1.f, 0.f},   {1.f, 1.f, 1.f, 1.f},  {0.f, 0.2f, 0.f, 0.75f}, {0.5f, -0.5f, 0.5f, -0.5f},
-      {0.3f, 0.5f, 0.7f, 1.f}, {0.f, 1.f, -1.f, 0.f}, {0.f, 0.f, 1.f, 1.f},    {0.5f, 0.8f, 0.f, 0.f},
-  };
+  if (luminance) {
+    static constexpr float kEnvMapMatrices[][4] = {
+        {0.f, 0.f, 0.f, 0.f},  // 0.f cancels out the normal map jitter entirely and produces the source image.
+        {0.5f, 0.5f, 0.5f, 0.5f},
+    };
 
-  for (auto matrix : kEnvMapMatrices) {
-    auto &texture_stage = host_.GetTextureStage(1);
-    texture_stage.SetBumpEnv(matrix[0], matrix[1], matrix[2], matrix[3]);
-    host_.SetupTextureStages();
+    static constexpr float kLuminanceTitleSpace = 32.f;
+    top += kLuminanceTitleSpace;
 
-    draw_quad(left, top);
+    int matrix_col = 17;
+    int scale_col = 10;
 
-    left += kQuadSpacing;
-    if (left + kQuadSize > host_.GetFramebufferWidthF()) {
-      left = kLeft;
-      top += kQuadSpacing;
+    for (auto matrix : kEnvMapMatrices) {
+      pb_printat(1, matrix_col, "0.%d", static_cast<int>(matrix[0] * 10));
+      matrix_col += 27;
+
+      for (auto scale : {0.f, 1.f, 2.f}) {
+        for (auto offset : {0.f, 0.25f, 0.75f, 1.f}) {
+          auto &texture_stage = host_.GetTextureStage(1);
+          texture_stage.SetBumpEnv(matrix[0], matrix[1], matrix[2], matrix[3], scale, offset);
+          host_.SetupTextureStages();
+
+          draw_quad(left, top);
+
+          top += kQuadSpacing;
+        }
+
+        top = kTop + kLuminanceTitleSpace;
+        left += kQuadSpacing;
+        pb_printat(2, scale_col, "%d", static_cast<int>(scale));
+        scale_col += 8;
+      }
+
+      left += kQuadSpacing * 0.5f;
+      scale_col += 4;
+    }
+  } else {
+    static constexpr float kEnvMapMatrices[][4] = {
+        // {0.f, 0.f, 0.f, 0.f}, // 0.f cancels out the normal map jitter entirely and produces the source image.
+        {-1.f, 0.f, 1.f, 0.f},   {1.f, 1.f, 1.f, 1.f},  {0.f, 0.2f, 0.f, 0.75f}, {0.5f, -0.5f, 0.5f, -0.5f},
+        {0.3f, 0.5f, 0.7f, 1.f}, {0.f, 1.f, -1.f, 0.f}, {0.f, 0.f, 1.f, 1.f},    {0.5f, 0.8f, 0.f, 0.f},
+    };
+
+    for (auto matrix : kEnvMapMatrices) {
+      auto &texture_stage = host_.GetTextureStage(1);
+      texture_stage.SetBumpEnv(matrix[0], matrix[1], matrix[2], matrix[3]);
+      host_.SetupTextureStages();
+
+      draw_quad(left, top);
+
+      left += kQuadSpacing;
+      if (left + kQuadSize > host_.GetFramebufferWidthF()) {
+        left = kLeft;
+        top += kQuadSpacing;
+      }
     }
   }
 
@@ -264,13 +327,27 @@ void PixelShaderTests::TestBumpEnvMap() {
   host_.SetTextureStageEnabled(1, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 
-  pb_print("%s\n", kBumpEnvMap);
+  pb_printat(0, 0, "%s\n", luminance ? kBumpEnvMapLuminance : kBumpEnvMap);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kBumpEnvMap);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, luminance ? kBumpEnvMapLuminance : kBumpEnvMap);
 }
 
-void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &image, float quad_size) {
+void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &image, float quad_size, bool border) {
+  if (border) {
+    static constexpr float kBorderThickness = 2.f;
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.SetScreenVertex(x - kBorderThickness, y - kBorderThickness);
+    host_.SetScreenVertex(x + quad_size + kBorderThickness, y - kBorderThickness);
+    host_.SetScreenVertex(x + quad_size + kBorderThickness, y + quad_size + kBorderThickness);
+    host_.SetScreenVertex(x - kBorderThickness, y + quad_size + kBorderThickness);
+    host_.End();
+  }
+
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(1, false);
@@ -304,4 +381,6 @@ void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &ima
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.PBKitBusyWait();
 }
