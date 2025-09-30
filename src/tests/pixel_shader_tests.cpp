@@ -1,12 +1,13 @@
 #include "pixel_shader_tests.h"
 
 #include "test_host.h"
+#include "xbox_math_matrix.h"
 
 static constexpr char kPassthrough[] = "Passthru";
 static constexpr char kClipPlane[] = "ClipPlane";
 static constexpr char kBumpEnvMap[] = "BumpEnvMap";
 static constexpr char kBumpEnvMapLuminance[] = "BumpEnvMapLuminance";
-static constexpr char kBRDF[] = "BRDF";
+// static constexpr char kBRDF[] = "BRDF";
 static constexpr char kDotST[] = "DotST";
 static constexpr char kDotZW[] = "DotZW";
 static constexpr char kDotReflectDiffuse[] = "DotReflectDiffuse";
@@ -22,6 +23,10 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
   tests_[kClipPlane] = [this]() { TestClipPlane(); };
   tests_[kBumpEnvMap] = [this]() { TestBumpEnvMap(); };
   tests_[kBumpEnvMapLuminance] = [this]() { TestBumpEnvMap(true); };
+
+  tests_[kDotST] = [this]() { TestDotST(); };
+  tests_[kDotZW] = [this]() { TestDotZW(); };
+
   //  tests_[kDotReflectDiffuse] = [this]() { TestDotReflectDiffuse(); };
 }
 
@@ -48,9 +53,25 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
  *   NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE and NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET. Outputs are grouped by the env bump
  *   matrix (the value of each element is identical and printed in row 1). Columns are divided up by the scale factor,
  *   whose value is printed in row 2. Rows are defined by the offset value: {0, 0.25, 0.75, 1.0}.
+ *
+ * @tc DotST
+ *   Renders a quad using PS_TEXTUREMODES_DOT_ST. Texture stage 0 is set to a bump map, stage 2 to an image with
+ *   diagonal lines. Texture coordinates 1 are set to a normalized vector from the eye coordinate to each vertex
+ *   (technically to a virtual position rather than the actual vertex position) and coordinate 2 is set to a normalized
+ *   vector from the vertex to a virtual light. See
+ *   https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2tex---ps
+ *
+ * @tc DotZW
+ *   Renders a quad using PS_TEXTUREMODES_DOT_ZW. Texture stage 0 is set to a bump map. Tex coords for stages 1 and 2
+ *   define a 3x2 matrix multiplied against the texture 0 sampler to determine the Z and W components of the fragment's
+ *   depth (z = tex1.uvw * tex0.rgb, w = tex2.uvw * tex0.rgb, final depth = z/w).
+ *   See https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2depth---ps
  */
 void PixelShaderTests::Initialize() {
   TestSuite::Initialize();
+
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
 
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
@@ -333,7 +354,179 @@ void PixelShaderTests::TestBumpEnvMap(bool luminance) {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, luminance ? kBumpEnvMapLuminance : kBumpEnvMap);
 }
 
-void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &image, float quad_size, bool border) {
+void PixelShaderTests::TestDotST() {
+  host_.PrepareDraw(0xFF222222);
+
+  static constexpr auto kQuadSize = 256.f;
+
+  auto set_look_and_light_vectors = [this](const vector_t &at) {
+    const vector_t eye{0.f, 0.f, -7.f, 1.f};
+    const vector_t light{-1.5f, 5.f, 0.f, 1.f};
+
+    vector_t look_dir{0.f, 0.f, 0.f, 1.f};
+    VectorSubtractVector(at, eye, look_dir);
+    VectorNormalize(look_dir);
+
+    vector_t light_dir{0.f, 0.f, 0.f, 1.f};
+    VectorSubtractVector(light, at, light_dir);
+    VectorNormalize(light_dir);
+
+    host_.SetTexCoord1(look_dir[0], look_dir[1], look_dir[2], look_dir[3]);
+    host_.SetTexCoord2(light_dir[0], light_dir[1], light_dir[2], light_dir[3]);
+  };
+
+  auto draw_quad = [this, set_look_and_light_vectors](float left, float top) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    // Tex 0 is the source bump map.
+    host_.SetTexCoord0(0.f, 0.f);
+    // Tex 1 and 2 specify a 3x2 matrix combined with the tex0 sample to produce the u,v coordinate used to sample tex2.
+    set_look_and_light_vectors({-1.f, 1.f, 4.f, 1.f});
+    host_.SetScreenVertex(left, top);
+
+    host_.SetTexCoord0(static_cast<float>(water_bump_map_.width), 0.f);
+    set_look_and_light_vectors({1.f, 1.f, 7.f, 1.f});
+    host_.SetScreenVertex(left + kQuadSize, top);
+
+    host_.SetTexCoord0(static_cast<float>(water_bump_map_.width), static_cast<float>(water_bump_map_.height));
+    set_look_and_light_vectors({1.f, -2.f, 6.f, 1.f});
+    host_.SetScreenVertex(left + kQuadSize, top + kQuadSize);
+
+    host_.SetTexCoord0(0.f, static_cast<float>(water_bump_map_.height));
+    set_look_and_light_vectors({-1.f, -2.f, 4.f, 1.f});
+    host_.SetScreenVertex(left, top + kQuadSize);
+
+    host_.End();
+  };
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, true);
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_ST);
+  host_.SetShaderStageInput(0);
+
+  {
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+    texture_stage.SetImageDimensions(water_bump_map_.width, water_bump_map_.height);
+    water_bump_map_.CopyTo(host_.GetTextureMemoryForStage(0));
+  }
+  {
+    auto &texture_stage = host_.GetTextureStage(2);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    texture_stage.SetTextureDimensions(bump_map_test_image_.width, bump_map_test_image_.height);
+    bump_map_test_image_.SwizzleTo(host_.GetTextureMemoryForStage(2));
+  }
+  host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX2);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX2, true);
+
+  draw_quad(host_.CenterX(kQuadSize), host_.CenterY(kQuadSize));
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_printat(0, 0, "%s\n", kDotST);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDotST);
+}
+
+void PixelShaderTests::TestDotZW() {
+  host_.PrepareDraw(0xFF222222);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_STENCIL_MASK, false);
+  Pushbuffer::End();
+
+  // Override the depth clip to ensure that max_val depths (post-projection) are never clipped.
+  host_.SetDepthClip(0.0f, 16777216);
+
+  static constexpr auto kQuadSize = 256.f;
+  static constexpr auto kZ = 0;
+
+  auto set_matrix = [this](const vector_t &row0, const vector_t &row1) {
+    host_.SetTexCoord1(row0[0], row0[1], row0[2], row0[3]);
+    host_.SetTexCoord2(row1[0], row1[1], row1[2], row1[3]);
+  };
+
+  auto draw_quad = [this, set_matrix](float left, float top) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    // Tex 0 is the source bump map.
+    host_.SetTexCoord0(0.f, 0.f);
+    // Tex 1 and 2 specify a 3x2 matrix combined with the tex0 sample to produce the z,w values used to produce fragment
+    // depth = z/w.
+    //
+    // A typical value from the texture would be 0.5, 0.5, 0.9
+    // Final values must fit in the range supported by the current depth buffer.
+    set_matrix({1000.f, 1000.f, 1000.f, 1.f}, {0.1f, 0.1f, 0.1f, 1.f});
+    host_.SetScreenVertex(left, top, kZ);
+
+    host_.SetTexCoord0(static_cast<float>(water_bump_map_.width), 0.f);
+    set_matrix({100.f, 100.f, 40000.f, 1.f}, {1.f, 1.f, 0.f, 1.f});
+    host_.SetScreenVertex(left + kQuadSize, top, kZ);
+
+    host_.SetTexCoord0(static_cast<float>(water_bump_map_.width), static_cast<float>(water_bump_map_.height));
+    set_matrix({10.f, 100.f, 1000.f, 1.f}, {1.f, 0.f, 0.f, 1.f});
+    host_.SetScreenVertex(left + kQuadSize, top + kQuadSize, kZ);
+
+    host_.SetTexCoord0(0.f, static_cast<float>(water_bump_map_.height));
+    set_matrix({100.f, 100.f, 100.f, 1.f}, {0.f, 0.f, 1.f, 1.f});
+    host_.SetScreenVertex(left, top + kQuadSize, kZ);
+
+    host_.End();
+  };
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, true);
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_ZW);
+  host_.SetShaderStageInput(0);
+
+  {
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+    texture_stage.SetImageDimensions(water_bump_map_.width, water_bump_map_.height);
+    water_bump_map_.CopyTo(host_.GetTextureMemoryForStage(0));
+  }
+  host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+
+  draw_quad(host_.CenterX(kQuadSize), host_.CenterY(kQuadSize));
+
+  host_.PBKitBusyWait();
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+
+  {
+    // Render the Z buffer over the quad.
+    const float left = host_.CenterX(kQuadSize);
+    const float top = host_.CenterY(kQuadSize);
+    DrawZBuffer(left, top, static_cast<uint32_t>(left), static_cast<uint32_t>(top), kQuadSize);
+  }
+
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_printat(0, 0, "%s\n", kDotZW);
+  pb_printat(1, 0, "Quad at z = %d but reassigned via DOT_ZW\n", kZ);
+  pb_printat(2, 0, "Depth buffer as R5G6B5\n");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDotZW);
+}
+
+void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &image, float quad_size,
+                                      bool border) const {
   if (border) {
     static constexpr float kBorderThickness = 2.f;
     host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
@@ -383,4 +576,68 @@ void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &ima
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
 
   host_.PBKitBusyWait();
+}
+
+void PixelShaderTests::DrawZBuffer(float left, float top, uint32_t src_x, uint32_t src_y, uint32_t quad_size) const {
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, false);
+
+  const auto *z_buffer = reinterpret_cast<const uint8_t *>(
+      pb_agp_access(const_cast<void *>(static_cast<const void *>(pb_depth_stencil_buffer()))));
+  const auto z_buffer_pitch = pb_depth_stencil_pitch();
+
+  z_buffer += src_x * 2 + src_y * z_buffer_pitch;
+  const auto byte_length = static_cast<uint32_t>(quad_size * 2);
+
+  auto texture = host_.GetTextureMemoryForStage(0);
+  for (auto y = 0; y < static_cast<uint32_t>(quad_size); ++y) {
+    memcpy(texture, z_buffer, byte_length);
+    z_buffer += z_buffer_pitch;
+    texture += byte_length;
+  }
+
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R5G6B5));
+  texture_stage.SetImageDimensions(quad_size, quad_size);
+  host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+  host_.SetBlend(false);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
+
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetTexCoord0(0.f, 0.f);
+  host_.SetScreenVertex(left, top);
+
+  host_.SetTexCoord0(quad_size, 0.f);
+  host_.SetScreenVertex(left + quad_size, top);
+
+  host_.SetTexCoord0(quad_size, quad_size);
+  host_.SetScreenVertex(left + quad_size, top + quad_size);
+
+  host_.SetTexCoord0(0.f, quad_size);
+  host_.SetScreenVertex(left, top + quad_size);
+
+  host_.End();
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.PBKitBusyWait();
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
+
+  host_.SetBlend(true);
 }

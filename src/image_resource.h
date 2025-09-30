@@ -9,6 +9,7 @@ struct ImageResource {
   uint32_t width{0};
   uint32_t height{0};
   uint32_t pitch{0};
+  uint32_t bytes_per_pixel{0};
 
   ImageResource() = default;
 
@@ -23,6 +24,10 @@ struct ImageResource {
 
   //! Copies the image data to the given target, which must be allocated and sufficiently large.
   void CopyTo(uint8_t *target) const;
+
+  //! Copies the image data to the given target, which must be allocated and sufficiently large, and performs texture
+  //! swizzling.
+  void SwizzleTo(uint8_t *target) const;
 };
 
 #endif  // NXDK_PGRAPH_TESTS_SRC_IMAGERESOURCE_H_
