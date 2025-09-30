@@ -10,12 +10,8 @@ static constexpr char kBumpEnvMapLuminance[] = "BumpEnvMapLuminance";
 // static constexpr char kBRDF[] = "BRDF";
 static constexpr char kDotST[] = "DotST";
 static constexpr char kDotZW[] = "DotZW";
-static constexpr char kDotReflectDiffuse[] = "DotReflectDiffuse";
-static constexpr char kDotReflectSpecular[] = "DotReflectSpecular";
-static constexpr char kDotStr3D[] = "DotSTR3D";
 static constexpr char kStageDependentAR[] = "StageDependentAlphaRed";
 static constexpr char kStageDependentGB[] = "StageDependentGreenBlue";
-static constexpr char kDotReflectSpecularConst[] = "DotReflectSpecularConst";
 
 PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Pixel shader", config) {
@@ -26,8 +22,6 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
 
   tests_[kDotST] = [this]() { TestDotST(); };
   tests_[kDotZW] = [this]() { TestDotZW(); };
-
-  //  tests_[kDotReflectDiffuse] = [this]() { TestDotReflectDiffuse(); };
 }
 
 /**

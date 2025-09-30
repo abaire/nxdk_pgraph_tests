@@ -7,7 +7,7 @@ Based on code from https://github.com/Ernegien/nxdk/tree/test/texture-formats/sa
 
 Golden test results from XBOX hardware are [available here](https://github.com/abaire/nxdk_pgraph_tests_golden_results)
 
-If you're interested in nv2a graphics debugging, check out 
+If you're interested in nv2a graphics debugging, check out
 [the wiki for this repo](https://github.com/abaire/nxdk_pgraph_tests/wiki) for tools and tips.
 
 ## Usage
@@ -224,7 +224,6 @@ See `two_d_line_tests.h` for an example.
 
 ---
 
-
 ### Using nv2a log events from [xemu](https://xemu.app/)
 
 1. Enable tracing of nv2a log events as normal (see xemu documentation) and exercise the event of interest within the
@@ -276,6 +275,19 @@ which would be populated via
 ```c++
   shader->shader->SetUniformF(0, -1.f, 1.5f, 0.f, 1.f);
 ```
+
+## Resource preparation
+
+### .mesh files
+
+Test meshes are generally created using [Blender](https://www.blender.org/), then exported as Collada (DAE) files and
+converted with the `collada_converter.py` script in the utils/resource_preparation directory.
+
+### Cubemap normals
+
+Some tests utilize cubemaps to represent per-pixel surface normals. These are generated
+via [Blender](https://www.blender.org/) along with the meshes themselves.
+See [abaire/nxdk_pgraph_test_assets](https://github.com/abaire/nxdk_pgraph_test_assets) for instructions.
 
 ## Running with CLion
 
