@@ -15,7 +15,7 @@ ImageResource::~ImageResource() {
 
 void ImageResource::LoadPNG(const std::string& source_path) {
   SDL_Surface* temp = IMG_Load(source_path.c_str());
-  ASSERT(temp);
+  ASSERT(temp && "IMG_Load failed");
   SDL_Surface* test_image = SDL_ConvertSurfaceFormat(temp, SDL_PIXELFORMAT_BGRA32, 0);
   SDL_FreeSurface(temp);
 

@@ -17,7 +17,9 @@ class TextureCubemapTests : public TestSuite {
 
  private:
   void TestCubemap();
+  void TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping);
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
+  void TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, bool reflect_diffuse = false);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_CUBEMAP_TESTS_H

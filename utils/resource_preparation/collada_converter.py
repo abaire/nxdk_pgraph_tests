@@ -75,6 +75,9 @@ class ColadaConverter:
 
     def add_transform(self, transform):
         target = transform.find(f"{SCHEMA}instance_geometry")
+        if target is None:
+            msg = f"Missing `instance_geometry` in transform - possible non-geometry objects in scene?:\n`{transform}`"
+            raise ValueError(msg)
         target_geometry = target.attrib["url"][1:]  # Drop the leading '#'
 
         matrix = transform.find(f"{SCHEMA}matrix")
@@ -366,10 +369,10 @@ class ColadaConverter:
                         "",
                         "#include <cstdint>",
                         "",
-                        '#include "model_builder.h"',
+                        '#include "models/model_builder.h"',
                         '#include "xbox_math_types.h"',
                         "",
-                        f"class {class_name} : public SolidColorModelBuilder {{",
+                        f"class {class_name} : public PBKitPlusPlus::SolidColorModelBuilder {{",
                         " public:",
                         f"  {class_name}() : SolidColorModelBuilder() {{}}",
                         f"  {class_name}(const vector_t &diffuse, const vector_t &specular) : SolidColorModelBuilder(diffuse, specular) {{}}",

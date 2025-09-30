@@ -47,22 +47,6 @@ class PixelShaderTests : public TestSuite {
   //! Tests PS_TEXTUREMODES_DOT_ZW.
   void TestDotZW();
 
-  //  //! Tests PS_TEXTUREMODES_DOT_RFLCT_DIFF
-  //  //! Demonstrates
-  //  void Test();
-  //
-  //  //! Tests PS_TEXTUREMODES_DOT_RFLCT_SPEC
-  //  //! Demonstrates
-  //  void Test();
-  //
-  //  //! Tests PS_TEXTUREMODES_DOT_STR_3D
-  //  //! Demonstrates
-  //  void Test();
-  //
-  //  //! Tests PS_TEXTUREMODES_DOT_STR_CUBE
-  //  //! Demonstrates
-  //  void Test();
-  //
   //  //! Tests PS_TEXTUREMODES_DPNDNT_AR
   //  //! Demonstrates
   //  void Test();
@@ -70,16 +54,12 @@ class PixelShaderTests : public TestSuite {
   //  //! Tests PS_TEXTUREMODES_DPNDNT_GB
   //  //! Demonstrates
   //  void Test();
-  //
-  //  //! Tests PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST
-  //  //! Demonstrates
-  //  void Test();
 
   //! Draws a basic 2d sampled quad at the given coordinates.
   //!
   //! Note: This modifies texture stage settings, shader stage programs, and combiner settings.
   void DrawPlainImage(float x, float y, const ImageResource &image, float quad_size, bool border = true) const;
-  void PixelShaderTests::DrawZBuffer(float left, float top, uint32_t src_x, uint32_t src_y, uint32_t quad_size) const;
+  void DrawZBuffer(float left, float top, uint32_t src_x, uint32_t src_y, uint32_t quad_size) const;
 
  private:
   ImageResource water_bump_map_;
