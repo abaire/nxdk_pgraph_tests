@@ -5,6 +5,7 @@
 #include <pbkit/pbkit_dma.h>
 
 #include "debug_output.h"
+#include "xbox-swizzle/swizzle.h"
 
 ImageResource::~ImageResource() {
   if (data) {
@@ -21,6 +22,7 @@ void ImageResource::LoadPNG(const std::string& source_path) {
   pitch = test_image->pitch;
   height = test_image->h;
   width = test_image->w;
+  bytes_per_pixel = test_image->format->BytesPerPixel;
 
   uint32_t size = pitch * height;
   data =
@@ -31,3 +33,7 @@ void ImageResource::LoadPNG(const std::string& source_path) {
 }
 
 void ImageResource::CopyTo(uint8_t* target) const { memcpy(target, data, pitch * height); }
+
+void ImageResource::SwizzleTo(uint8_t* target) const {
+  swizzle_rect(data, width, height, target, pitch, bytes_per_pixel);
+}
