@@ -1,6 +1,7 @@
 #include "pixel_shader_tests.h"
 
 #include "test_host.h"
+#include "texture_generator.h"
 #include "xbox_math_matrix.h"
 
 static constexpr char kPassthrough[] = "Passthru";
@@ -22,6 +23,9 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
 
   tests_[kDotST] = [this]() { TestDotST(); };
   tests_[kDotZW] = [this]() { TestDotZW(); };
+
+  tests_[kStageDependentAR] = [this]() { TestDependentColorChannel(); };
+  tests_[kStageDependentGB] = [this]() { TestDependentColorChannel(true); };
 }
 
 /**
@@ -60,6 +64,15 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
  *   define a 3x2 matrix multiplied against the texture 0 sampler to determine the Z and W components of the fragment's
  *   depth (z = tex1.uvw * tex0.rgb, w = tex2.uvw * tex0.rgb, final depth = z/w).
  *   See https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2depth---ps
+ *
+ * @tc StageDependentAlphaRed
+ *   Renders a quad using PS_TEXTUREMODES_DPNDNT_AR. Texture stage 0 is set to a gradient textured. The sampled alpha
+ *   and red channels from this texture are used as UV coordinates into the texture at stage 2.
+ *
+ * @tc StageDependentGreenBlue
+ *   Renders a quad using PS_TEXTUREMODES_DPNDNT_GB. Texture stage 0 is set to a gradient textured. The sampled green
+ *   and blue channels from this texture are used as UV coordinates into the texture at stage 2.
+ *
  */
 void PixelShaderTests::Initialize() {
   TestSuite::Initialize();
@@ -517,6 +530,67 @@ void PixelShaderTests::TestDotZW() {
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDotZW);
+}
+
+void PixelShaderTests::TestDependentColorChannel(bool use_blue_green) {
+  host_.PrepareDraw(0xFF282828);
+
+  static constexpr auto kQuadSize = 256.f;
+
+  auto draw_quad = [this](float left, float top) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.f, 0.f);
+    host_.SetScreenVertex(left, top);
+
+    host_.SetTexCoord0(1.f, 0.f);
+    host_.SetScreenVertex(left + kQuadSize, top);
+
+    host_.SetTexCoord0(1.f, 1.f);
+    host_.SetScreenVertex(left + kQuadSize, top + kQuadSize);
+
+    host_.SetTexCoord0(0.f, 1.f);
+    host_.SetScreenVertex(left, top + kQuadSize);
+
+    host_.End();
+  };
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, true);
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE,  // TestHost::STAGE_NONE,
+                              use_blue_green ? TestHost::STAGE_DEPENDENT_GB : TestHost::STAGE_DEPENDENT_AR);
+  host_.SetShaderStageInput(0);
+
+  {
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    texture_stage.SetTextureDimensions(kQuadSize, kQuadSize);
+    GenerateSwizzledRGBRadialATestPattern(host_.GetTextureMemoryForStage(0), kQuadSize, kQuadSize);
+  }
+  {
+    auto &texture_stage = host_.GetTextureStage(1);
+    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    texture_stage.SetTextureDimensions(kQuadSize, kQuadSize);
+    GenerateSwizzledRGBATestPattern(host_.GetTextureMemoryForStage(1), kQuadSize, kQuadSize);
+  }
+  host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
+
+  draw_quad(host_.CenterX(kQuadSize), host_.CenterY(kQuadSize));
+
+  host_.PBKitBusyWait();
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_printat(0, 0, "%s\n", use_blue_green ? kStageDependentGB : kStageDependentAR);
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, use_blue_green ? kStageDependentGB : kStageDependentAR);
 }
 
 void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &image, float quad_size,

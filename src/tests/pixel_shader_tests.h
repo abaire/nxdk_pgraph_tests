@@ -47,13 +47,8 @@ class PixelShaderTests : public TestSuite {
   //! Tests PS_TEXTUREMODES_DOT_ZW.
   void TestDotZW();
 
-  //  //! Tests PS_TEXTUREMODES_DPNDNT_AR
-  //  //! Demonstrates
-  //  void Test();
-  //
-  //  //! Tests PS_TEXTUREMODES_DPNDNT_GB
-  //  //! Demonstrates
-  //  void Test();
+  //! Tests PS_TEXTUREMODES_DPNDNT_AR and PS_TEXTUREMODES_DPNDNT_GB.
+  void TestDependentColorChannel(bool use_green_blue = false);
 
   //! Draws a basic 2d sampled quad at the given coordinates.
   //!
