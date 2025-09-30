@@ -17,44 +17,25 @@
 
 using namespace XboxMath;
 
-static constexpr float kSize = 1.0f;
-
-// Must be ordered to match kCubeSTPoints for each face.
-static constexpr uint32_t kRightSide[] = {3, 7, 6, 2};
-static constexpr uint32_t kLeftSide[] = {1, 5, 4, 0};
-static constexpr uint32_t kTopSide[] = {4, 5, 6, 7};
-static constexpr uint32_t kBottomSide[] = {1, 0, 3, 2};
-static constexpr uint32_t kBackSide[] = {2, 6, 5, 1};
-static constexpr uint32_t kFrontSide[] = {0, 4, 7, 3};
-
-// clang-format off
-static constexpr const uint32_t *kCubeFaces[] = {
-  kRightSide,
-  kLeftSide,
-  kTopSide,
-  kBottomSide,
-  kBackSide,
-  kFrontSide,
+static constexpr uint32_t kCubeIndices[] = {
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
 };
 
-static constexpr float kCubePoints[][3] = {
-  {-kSize, -kSize, -kSize},
-  {-kSize, -kSize, kSize},
-  {kSize, -kSize, kSize},
-  {kSize, -kSize, -kSize},
-  {-kSize, kSize, -kSize},
-  {-kSize, kSize, kSize},
-  {kSize, kSize, kSize},
-  {kSize, kSize, -kSize},
+static constexpr float kCubeVertices[24][3] = {
+    {-1.00f, -1.00f, 1.00f},  {1.00f, -1.00f, 1.00f},   {1.00f, 1.00f, 1.00f},   {-1.00f, 1.00f, 1.00f},
+    {1.00f, -1.00f, -1.00f},  {-1.00f, -1.00f, -1.00f}, {-1.00f, 1.00f, -1.00f}, {1.00f, 1.00f, -1.00f},
+    {1.00f, -1.00f, 1.00f},   {1.00f, -1.00f, -1.00f},  {1.00f, 1.00f, -1.00f},  {1.00f, 1.00f, 1.00f},
+    {-1.00f, -1.00f, -1.00f}, {-1.00f, -1.00f, 1.00f},  {-1.00f, 1.00f, 1.00f},  {-1.00f, 1.00f, -1.00f},
+    {-1.00f, 1.00f, 1.00f},   {1.00f, 1.00f, 1.00f},    {1.00f, 1.00f, -1.00f},  {-1.00f, 1.00f, -1.00f},
+    {-1.00f, -1.00f, -1.00f}, {1.00f, -1.00f, -1.00f},  {1.00f, -1.00f, 1.00f},  {-1.00f, -1.00f, 1.00f},
 };
 
-static constexpr const float kCubeSTPoints[][4][2] = {
-  {{0.000000f, 0.000000f}, {0.000000f, 0.333333f}, {0.333333f, 0.333333f}, {0.333333f, 0.000000f}},
-  {{0.333333f, 0.000000f}, {0.333333f, 0.333333f}, {0.666667f, 0.333333f}, {0.666667f, 0.000000f}},
-  {{0.333333f, 0.333333f}, {0.333333f, 0.666667f}, {0.666667f, 0.666667f}, {0.666667f, 0.333333f}},
-  {{0.000000f, 0.333333f}, {0.000000f, 0.666667f}, {0.333333f, 0.666667f}, {0.333333f, 0.333333f}},
-  {{0.000000f, 0.666667f}, {0.000000f, 1.000000f}, {0.333333f, 1.000000f}, {0.333333f, 0.666667f}},
-  {{0.666667f, 0.000000f}, {0.666667f, 0.333333f}, {1.000000f, 0.333333f}, {1.000000f, 0.000000f}},
+static constexpr float kCubeTextureCoords[24][2] = {
+    {0.2500f, 0.3750f}, {0.5000f, 0.3750f}, {0.5000f, 0.6250f}, {0.2500f, 0.6250f}, {0.7500f, 0.3750f},
+    {1.0000f, 0.3750f}, {1.0000f, 0.6250f}, {0.7500f, 0.6250f}, {0.5000f, 0.3750f}, {0.7500f, 0.3750f},
+    {0.7500f, 0.6250f}, {0.5000f, 0.6250f}, {0.0000f, 0.3750f}, {0.2500f, 0.3750f}, {0.2500f, 0.6250f},
+    {0.0000f, 0.6250f}, {0.2500f, 0.6250f}, {0.5000f, 0.6250f}, {0.5000f, 0.8750f}, {0.2500f, 0.8750f},
+    {0.2500f, 0.1250f}, {0.5000f, 0.1250f}, {0.5000f, 0.3750f}, {0.2500f, 0.3750f},
 };
 
 // clang-format on
@@ -65,7 +46,13 @@ static constexpr uint32_t kTextureHeight = 64;
 
 static constexpr const char kCubemapTest[] = "Cubemap";
 
-static void GenerateCubemap(uint8_t *buffer, uint32_t box_size = 4, bool use_alternate_colors = false);
+enum class CubemapGeneratorMode {
+  kRadialGradient,
+  kCheckerboard,
+  kNoise,
+};
+
+static void GenerateCubemap(uint8_t *buffer, CubemapGeneratorMode mode);
 
 struct DotProductMappedTest {
   const char *name;
@@ -105,6 +92,17 @@ static const DotProductMappedTest kDotReflectSpecularTests[] = {
     {"DotReflectSpec_HiLoHemi", 0x777},
 };
 
+static const DotProductMappedTest kDotReflectSpecularConstTests[] = {
+    {"DotReflectSpecConst_0to1", 0x000},
+    {"DotReflectSpecConst_-1to1D3D", 0x111},
+    {"DotReflectSpecConst_-1to1GL", 0x222},
+    {"DotReflectSpecConst_-1to1", 0x333},
+    {"DotReflectSpecConst_HiLo_1", 0x444},
+    //    {"DotReflectSpecConst_HiLoHemiD3D", 0x555},  // Does not appear to be supported on HW (invalid data error)
+    //    {"DotReflectSpecConst_HiLoHemiGL", 0x666},  // Does not appear to be supported on HW (invalid data error)
+    {"DotReflectSpecConst_HiLoHemi", 0x777},
+};
+
 static const DotProductMappedTest kDotReflectDiffuseTests[] = {
     {"DotReflectDiffuse_0to1", 0x000},
     {"DotReflectDiffuse_-1to1D3D", 0x111},
@@ -118,6 +116,129 @@ static const DotProductMappedTest kDotReflectDiffuseTests[] = {
 
 /**
  * Initializes the test suite and creates test cases.
+ *
+ * @tc Cubemap
+ *   Renders two angles of a cube utilizing a cubemap texture.
+ *
+ * @tc DotReflectDiffuse_-1to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_minus1_to_1.
+ *
+ * @tc DotReflectDiffuse_-1to1D3D
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_minus1_to_1_d3d.
+ *
+ * @tc DotReflectDiffuse_-1to1GL
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_minus1_to_1_gl.
+ *
+ * @tc DotReflectDiffuse_0to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_zero_to_one.
+ *
+ * @tc DotReflectDiffuse_HiLo_1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_hilo_1.
+ *
+ * @tc DotReflectDiffuse_HiLoHemi
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_hilo_hemisphere.
+ *
+ * @tc DotReflectSpec_-1to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_minus1_to_1.
+ *
+ * @tc DotReflectSpec_-1to1D3D
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_minus1_to_1_d3df.
+ *
+ * @tc DotReflectSpec_-1to1GL
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_minus1_to_1_glf.
+ *
+ * @tc DotReflectSpec_0to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_zero_to_onef.
+ *
+ * @tc DotReflectSpec_HiLo_1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_hilo_1f.
+ *
+ * @tc DotReflectSpec_HiLoHemi
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode. The NV097_DOT_RGBMAPPING
+ *   is set to dotmap_hilo_hemispheref.
+ *
+ * @tc DotReflectSpecConst_-1to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST pixel shading mode. The
+ *   NV097_DOT_RGBMAPPING is set to dotmap_minus1_to_1.
+ *
+ * @tc DotReflectSpecConst_-1to1D3D
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST pixel shading mode. The
+ *   NV097_DOT_RGBMAPPING is set to dotmap_minus1_to_1_d3d.
+ *
+ * @tc DotReflectSpecConst_-1to1GL
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST pixel shading mode. The
+ *   NV097_DOT_RGBMAPPING is set to dotmap_minus1_to_1_gl.
+ *
+ * @tc DotReflectSpecConst_0to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST pixel shading mode. The
+ *   NV097_DOT_RGBMAPPING is set to dotmap_zero_to_one.
+ *
+ * @tc DotReflectSpecConst_HiLo_1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST pixel shading mode. The
+ *   NV097_DOT_RGBMAPPING is set to dotmap_hilo_1.
+ *
+ * @tc DotReflectSpecConst_HiLoHemi
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST pixel shading mode. The
+ *   NV097_DOT_RGBMAPPING is set to dotmap_hilo_hemisphere.
+ *
+ * @tc DotSTR3D_-1to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_minus1_to_1.
+ *
+ * @tc DotSTR3D_-1to1D3D
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_minus1_to_1_d3d.
+ *
+ * @tc DotSTR3D_-1to1GL
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_minus1_to_1_gl.
+ *
+ * @tc DotSTR3D_0to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_zero_to_one.
+ *
+ * @tc DotSTR3D_HiLo_1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_hilo_1.
+ *
+ * @tc DotSTR3D_HiLoHemi
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_hilo_hemisphere.
+ *
+ * @tc DotSTRCube_-1to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_minus1_to_1.
+ *
+ * @tc DotSTRCube_-1to1D3D
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_minus1_to_1_d3d.
+ *
+ * @tc DotSTRCube_-1to1GL
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_minus1_to_1_gl.
+ *
+ * @tc DotSTRCube_0to1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_zero_to_one.
+ *
+ * @tc DotSTRCube_HiLo_1
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_hilo_1.
+ *
+ * @tc DotSTRCube_HiLoHemi
+ *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode. The NV097_DOT_RGBMAPPING is
+ *   set to dotmap_hilo_hemisphere.
  *
  */
 TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir, const Config &config)
@@ -133,11 +254,15 @@ TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir,
   }
 
   for (auto &test : kDotReflectSpecularTests) {
-    tests_[test.name] = [this, &test] { TestDotReflect(test.name, test.dot_rgbmapping); };
+    tests_[test.name] = [this, &test] { TestDotReflect(test.name, test.dot_rgbmapping, ReflectTest::kSpecular); };
+  }
+
+  for (auto &test : kDotReflectSpecularConstTests) {
+    tests_[test.name] = [this, &test] { TestDotReflect(test.name, test.dot_rgbmapping, ReflectTest::kSpecularConst); };
   }
 
   for (auto &test : kDotReflectDiffuseTests) {
-    tests_[test.name] = [this, &test] { TestDotReflect(test.name, test.dot_rgbmapping, true); };
+    tests_[test.name] = [this, &test] { TestDotReflect(test.name, test.dot_rgbmapping, ReflectTest::kDiffuse); };
   }
 }
 
@@ -171,21 +296,21 @@ void TextureCubemapTests::Initialize() {
 
   // Load the diffuse map into stage2 (only used by PS_TEXTUREMODES_DOT_RFLCT_DIFF tests)
   {
-    GenerateCubemap(host_.GetTextureMemoryForStage(2), 2, true);
+    GenerateCubemap(host_.GetTextureMemoryForStage(2), CubemapGeneratorMode::kCheckerboard);
     auto &stage = host_.GetTextureStage(2);
     stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
     stage.SetCubemapEnable();
   }
 
-  // Load the cube map into stage3
+  // Load the cube map into stage3. Tests are responsible for populating the texture.
   {
-    GenerateCubemap(host_.GetTextureMemoryForStage(3));
     auto &stage = host_.GetTextureStage(3);
     stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
     stage.SetCubemapEnable();
   }
+
   host_.SetupTextureStages();
 
   Pushbuffer::Begin();
@@ -203,6 +328,9 @@ void TextureCubemapTests::TestCubemap() {
   host_.SetTextureStageEnabled(3, true);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
                               TestHost::STAGE_CUBE_MAP);
+
+  // Use a simple checkerboard texture with a different color for each face of the cube.
+  GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kCheckerboard);
   host_.SetupTextureStages();
 
   host_.PrepareDraw(0xFE121212);
@@ -231,13 +359,10 @@ void TextureCubemapTests::TestCubemap() {
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
 
-    for (auto face : kCubeFaces) {
-      for (auto i = 0; i < 4; ++i) {
-        uint32_t index = face[i];
-        const float *vertex = kCubePoints[index];
-        host_.SetTexCoord3(vertex[0], vertex[1], vertex[2], 1.0f);
-        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
-      }
+    for (auto index : kCubeIndices) {
+      const float *vertex = kCubeVertices[index];
+      host_.SetTexCoord3(vertex[0], vertex[1], vertex[2], 1.0f);
+      host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
     }
 
     host_.End();
@@ -264,6 +389,8 @@ void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb
    * - The final value is a lookup from the cube map in t3 using the world adjusted normal.
   */
 
+  GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kNoise);
+
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);
@@ -278,17 +405,13 @@ void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb
   Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, dot_rgb_mapping);
   Pushbuffer::End();
 
-  host_.PrepareDraw(0xFE131313);
+  host_.PrepareDraw(0xFE141414);
 
   matrix4_t model_view_matrix;
   vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
   vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
   vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
   TestHost::BuildD3DModelViewMatrix(model_view_matrix, eye, at, up);
-
-  Pushbuffer::Begin();
-  Pushbuffer::Push3F(NV097_SET_EYE_VECTOR, eye);
-  Pushbuffer::End();
 
   auto draw = [this, &shader, model_view_matrix](float x, float y, float z, float r_x, float r_y, float r_z) {
     auto &model_matrix = shader->GetModelMatrix();
@@ -307,24 +430,22 @@ void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
 
-    uint32_t face_index = 0;
-    for (auto face : kCubeFaces) {
-      const auto normals = kCubeSTPoints[face_index++];
-      for (auto i = 0; i < 4; ++i) {
-        uint32_t index = face[i];
-        const float *vertex = kCubePoints[index];
-        const float *normal_st = normals[i];
+    for (auto index : kCubeIndices) {
+      const float *vertex = kCubeVertices[index];
+      const float *normal_st = kCubeTextureCoords[index];
 
-        host_.SetTexCoord0(normal_st[0], normal_st[1]);
-        host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], 1.f);
-        host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], 1.f);
-        host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], 1.f);
-        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
-      }
+      host_.SetTexCoord0(normal_st[0], normal_st[1]);
+      host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], 0.f);
+      host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], 0.f);
+      host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], 0.f);
+      host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
     }
 
     host_.End();
   };
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
 
   const float z = 2.0f;
   draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
@@ -340,7 +461,7 @@ void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
-void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, bool reflect_diffuse) {
+void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, ReflectTest mode) {
   /*
    * See https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x3spec---ps
    * texm3x3spec is used for specular reflection and environment mapping.
@@ -352,15 +473,19 @@ void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_r
    * - The eye-ray vector is provided via NV097_SET_EYE_VECTOR.
   */
 
+  GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kRadialGradient);
+
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(1, true);
   host_.SetTextureStageEnabled(2, true);
   host_.SetTextureStageEnabled(3, true);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT,
-                              reflect_diffuse ? TestHost::STAGE_DOT_REFLECT_DIFFUSE : TestHost::STAGE_DOT_PRODUCT,
-                              TestHost::STAGE_DOT_REFLECT_SPECULAR);
+  host_.SetShaderStageProgram(
+      TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT,
+      mode == ReflectTest::kDiffuse ? TestHost::STAGE_DOT_REFLECT_DIFFUSE : TestHost::STAGE_DOT_PRODUCT,
+      mode == ReflectTest::kSpecularConst ? TestHost::STAGE_DOT_REFLECT_SPECULAR_CONST
+                                          : TestHost::STAGE_DOT_REFLECT_SPECULAR);
   host_.SetupTextureStages();
 
   Pushbuffer::Begin();
@@ -396,24 +521,27 @@ void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_r
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
 
-    uint32_t face_index = 0;
-    for (auto face : kCubeFaces) {
-      const auto normals = kCubeSTPoints[face_index++];
-      for (auto i = 0; i < 4; ++i) {
-        uint32_t index = face[i];
-        const float *vertex = kCubePoints[index];
-        const float *normal_st = normals[i];
+    for (auto index : kCubeIndices) {
+      const float *vertex = kCubeVertices[index];
+      const float *normal_st = kCubeTextureCoords[index];
 
-        host_.SetTexCoord0(normal_st[0], normal_st[1]);
-        host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], 1.f);
-        host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], 1.f);
-        host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], 1.f);
-        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
-      }
+      host_.SetTexCoord0(normal_st[0], normal_st[1]);
+      host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], 1.f);
+      host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], 1.f);
+      host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], 1.f);
+      host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
     }
 
     host_.End();
   };
+
+  if (mode == ReflectTest::kDiffuse) {
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX2);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX2, true);
+  } else {
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
+  }
 
   const float z = 2.0f;
   draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
@@ -430,21 +558,8 @@ void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_r
 }
 
 void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping) {
-  // https://xboxdevwiki.net/NV2A/Pixel_Combiner indicates that PS_TEXTUREMODES_DOT_STR_CUBE should
-  // perform a reflected lookup using texm3x3vspec.
-  // In practice, it seems that the w tex coordinate is ignored in this test and this is analogous to teerm3x3spec with
-  // the eye coordinate taken from NV097_SET_EYE_VECTOR.
-
-  // See https://web.archive.org/web/20240629060504/https://www.nvidia.com/docs/IO/8228/D3DTutorial2_FX_HLSL.pdf
-  // See https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x3spec---ps
   // See https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x3vspec---ps
-
-  // texm3x3tex:
-  // tex0 is used to look up the normal for a given pixel
-  // The tex1, 2, and 3 combine contain the matrix needed to unproject a fragment back to the world-space point (used
-  // to position the normal in worldspace)
-  // The final value is a lookup from the cube map in t3 using the world adjusted normal.
-
+  //
   // texm3x3vspec:
   // tex0 is used to look up the normal for a given pixel
   // The tex1, 2, and 3 combine:
@@ -454,6 +569,8 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   //
   // The hardware then creates a reflection vector using the normal and eye vectors and uses that to index into the
   // cubemap to find the final pixel value.
+
+  GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kRadialGradient);
 
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
@@ -472,12 +589,14 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   host_.PrepareDraw(0xFE131313);
 
   matrix4_t model_view_matrix;
-  vector_t eye{0.0f, 0.0f, -7.0f, 1.0f};
+  vector_t eye{0.0f, 0.0f, -7.f, 1.0f};
   vector_t at{0.0f, 0.0f, 0.0f, 1.0f};
   vector_t up{0.0f, 1.0f, 0.0f, 1.0f};
   TestHost::BuildD3DModelViewMatrix(model_view_matrix, eye, at, up);
+
+  // Set an arbitrary but incorrect eye vector to confirm that it is not used by this mode.
   Pushbuffer::Begin();
-  Pushbuffer::Push3F(NV097_SET_EYE_VECTOR, eye);
+  Pushbuffer::PushF(NV097_SET_EYE_VECTOR, -1.f, 10.f, 3.f);
   Pushbuffer::End();
 
   auto draw = [this, &shader, model_view_matrix, eye](float x, float y, float z, float r_x, float r_y, float r_z) {
@@ -497,35 +616,33 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
 
-    uint32_t face_index = 0;
-    for (auto face : kCubeFaces) {
-      const auto normals = kCubeSTPoints[face_index++];
-      for (auto i = 0; i < 4; ++i) {
-        uint32_t index = face[i];
-        const float *vertex = kCubePoints[index];
-        const float *normal_st = normals[i];
+    for (auto index : kCubeIndices) {
+      const float *vertex = kCubeVertices[index];
+      const float *normal_st = kCubeTextureCoords[index];
 
-        vector_t padded_vertex = {vertex[0], vertex[1], vertex[2], 1.0f};
-        VectorMultMatrix(padded_vertex, model_matrix);
-        padded_vertex[0] /= padded_vertex[3];
-        padded_vertex[1] /= padded_vertex[3];
-        padded_vertex[2] /= padded_vertex[3];
-        padded_vertex[3] = 1.0f;
+      vector_t padded_vertex = {vertex[0], vertex[1], vertex[2], 1.0f};
+      VectorMultMatrix(padded_vertex, model_matrix);
+      padded_vertex[0] /= padded_vertex[3];
+      padded_vertex[1] /= padded_vertex[3];
+      padded_vertex[2] /= padded_vertex[3];
+      padded_vertex[3] = 1.0f;
 
-        vector_t eye_vec = {0.0f};
-        VectorSubtractVector(eye, padded_vertex, eye_vec);
-        VectorNormalize(eye_vec);
+      vector_t eye_vec = {0.0f};
+      VectorSubtractVector(padded_vertex, eye, eye_vec);
+      VectorNormalize(eye_vec);
 
-        host_.SetTexCoord0(normal_st[0], normal_st[1]);
-        host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], eye_vec[0]);
-        host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], eye_vec[1]);
-        host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], eye_vec[2]);
-        host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
-      }
+      host_.SetTexCoord0(normal_st[0], normal_st[1]);
+      host_.SetTexCoord1(inv_projection[0][0], inv_projection[0][1], inv_projection[0][2], eye_vec[0]);
+      host_.SetTexCoord2(inv_projection[1][0], inv_projection[1][1], inv_projection[1][2], eye_vec[1]);
+      host_.SetTexCoord3(inv_projection[2][0], inv_projection[2][1], inv_projection[2][2], eye_vec[2]);
+      host_.SetVertex(vertex[0], vertex[1], vertex[2], 1.0f);
     }
 
     host_.End();
   };
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
 
   const float z = 2.0f;
   draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);
@@ -541,47 +658,34 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
-static void GenerateCubemap(uint8_t *buffer, uint32_t box_size, bool use_alternate_colors) {
+static void GenerateCubemap(uint8_t *buffer, CubemapGeneratorMode mode) {
   static constexpr uint32_t kSliceSize = kTexturePitch * kTextureHeight;
 
-  static constexpr uint32_t kStandardColors[6][2] = {
-      {0xFF5555FF, 0xFF666666}, {0xFF3333AA, 0xFF444444}, {0xFF55FF55, 0xFF666666},
-      {0xFF33AA33, 0xFF444444}, {0xFFFF5555, 0xFF666666}, {0xFFAA3333, 0xFF444444},
+  static constexpr uint32_t kBoxSize = 4;
+  static constexpr uint32_t kAlpha = 0xFF;
+
+  static constexpr uint32_t kColorMasks[] = {0x0000FF, 0xFF00FF, 0x00FF00, 0x00FFFF, 0xFF0000, 0xFFFF00};
+
+  static constexpr uint32_t kCheckboxColors[6][2] = {
+      {0xFF7777FF, 0xFF222222}, {0xFF553366, 0xFFDDDDDD}, {0xFF55FF55, 0xFF222222},
+      {0xFF33AAAA, 0xFFDDDDDD}, {0xFFFF5555, 0xFF222222}, {0xFFAAAA33, 0xFFDDDDDD},
   };
 
-  static constexpr uint32_t kAlternateColors[6][2] = {
-      {0xFFCCCCCC, 0xFF00007F}, {0xFFAAAAAA, 0xFF7F007F}, {0xFFCCCCCC, 0xFF007F00},
-      {0xFFAAAAAA, 0xFF007F7F}, {0xFFCCCCCC, 0xFF7F0000}, {0xFFAAAAAA, 0xFF7F7F00},
-  };
+  // +X, -X, +Y, -Y, +Z, -Z
+  for (auto index = 0; index < 6; ++index) {
+    switch (mode) {
+      case CubemapGeneratorMode::kRadialGradient:
+        GenerateSwizzledRGBRadialGradient(buffer, kTextureWidth, kTextureHeight, kColorMasks[index], kAlpha, false);
+        break;
+      case CubemapGeneratorMode::kCheckerboard:
+        GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch,
+                                         kCheckboxColors[index][0], kCheckboxColors[index][1], kBoxSize);
+        break;
+      case CubemapGeneratorMode::kNoise:
+        GenerateSwizzledRGBMaxContrastNoisePattern(buffer, kTextureWidth, kTextureHeight, kColorMasks[index]);
+        break;
+    }
 
-  auto color_set = use_alternate_colors ? kAlternateColors : kStandardColors;
-
-  // +X
-  GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch, color_set[0][0],
-                                   color_set[0][1], box_size);
-  buffer += kSliceSize;
-
-  // -X
-  GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch, color_set[1][0],
-                                   color_set[1][1], box_size);
-  buffer += kSliceSize;
-
-  // +Y
-  GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch, color_set[2][0],
-                                   color_set[2][1], box_size);
-  buffer += kSliceSize;
-
-  // -Y
-  GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch, color_set[3][0],
-                                   color_set[3][1], box_size);
-  buffer += kSliceSize;
-
-  // +Z
-  GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch, color_set[4][0],
-                                   color_set[4][1], box_size);
-  buffer += kSliceSize;
-
-  // -Z
-  GenerateSwizzledRGBACheckerboard(buffer, 0, 0, kTextureWidth, kTextureHeight, kTexturePitch, color_set[5][0],
-                                   color_set[5][1], box_size);
+    buffer += kSliceSize;
+  }
 }
