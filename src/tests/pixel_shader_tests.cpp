@@ -14,20 +14,6 @@ static constexpr char kDotZW[] = "DotZW";
 static constexpr char kStageDependentAR[] = "StageDependentAlphaRed";
 static constexpr char kStageDependentGB[] = "StageDependentGreenBlue";
 
-PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const Config &config)
-    : TestSuite(host, std::move(output_dir), "Pixel shader", config) {
-  tests_[kPassthrough] = [this]() { TestPassthrough(); };
-  tests_[kClipPlane] = [this]() { TestClipPlane(); };
-  tests_[kBumpEnvMap] = [this]() { TestBumpEnvMap(); };
-  tests_[kBumpEnvMapLuminance] = [this]() { TestBumpEnvMap(true); };
-
-  tests_[kDotST] = [this]() { TestDotST(); };
-  tests_[kDotZW] = [this]() { TestDotZW(); };
-
-  tests_[kStageDependentAR] = [this]() { TestDependentColorChannel(); };
-  tests_[kStageDependentGB] = [this]() { TestDependentColorChannel(true); };
-}
-
 /**
  * Initializes the test suite and creates test cases.
  *
@@ -74,6 +60,20 @@ PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const
  *   and blue channels from this texture are used as UV coordinates into the texture at stage 2.
  *
  */
+PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Pixel shader", config) {
+  tests_[kPassthrough] = [this]() { TestPassthrough(); };
+  tests_[kClipPlane] = [this]() { TestClipPlane(); };
+  tests_[kBumpEnvMap] = [this]() { TestBumpEnvMap(); };
+  tests_[kBumpEnvMapLuminance] = [this]() { TestBumpEnvMap(true); };
+
+  tests_[kDotST] = [this]() { TestDotST(); };
+  tests_[kDotZW] = [this]() { TestDotZW(); };
+
+  tests_[kStageDependentAR] = [this]() { TestDependentColorChannel(); };
+  tests_[kStageDependentGB] = [this]() { TestDependentColorChannel(true); };
+}
+
 void PixelShaderTests::Initialize() {
   TestSuite::Initialize();
 
