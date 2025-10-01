@@ -16,10 +16,17 @@ class TextureCubemapTests : public TestSuite {
   void Initialize() override;
 
  private:
+  enum class ReflectTest {
+    kSpecular,
+    kDiffuse,
+    kSpecularConst,
+  };
+
+ private:
   void TestCubemap();
   void TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping);
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
-  void TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, bool reflect_diffuse = false);
+  void TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, ReflectTest mode);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_CUBEMAP_TESTS_H
