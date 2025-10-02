@@ -38,13 +38,11 @@ static constexpr float kCubeTextureCoords[24][2] = {
     {0.2500f, 0.1250f}, {0.5000f, 0.1250f}, {0.5000f, 0.3750f}, {0.2500f, 0.3750f},
 };
 
-// clang-format on
-
 static constexpr uint32_t kTextureWidth = 64;
 static constexpr uint32_t kTexturePitch = kTextureWidth * 4;
 static constexpr uint32_t kTextureHeight = 64;
 
-static constexpr const char kCubemapTest[] = "Cubemap";
+static constexpr char kCubemapTest[] = "Cubemap";
 
 enum class CubemapGeneratorMode {
   kRadialGradient,
@@ -367,6 +365,9 @@ void TextureCubemapTests::TestCubemap() {
 
     host_.End();
   };
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
 
   const float z = 2.0f;
   draw(-1.5f, 0.0f, z, M_PI * 0.25f, M_PI * 0.25f, 0.0f);

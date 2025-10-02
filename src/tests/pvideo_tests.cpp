@@ -924,9 +924,9 @@ void PvideoTests::TestColorKey() {
   host_.SetBlend();
 }
 
-static inline uint32_t abgr_to_argb(uint32_t color) {
-  return (color & 0xFF000000) | (color & 0xFF) << 16 | (color & 0x0000FF00) | ((color >> 16) & 0xFF);
-}
+// static inline uint32_t abgr_to_argb(uint32_t color) {
+//   return (color & 0xFF000000) | (color & 0xFF) << 16 | (color & 0x0000FF00) | ((color >> 16) & 0xFF);
+// }
 
 void PvideoTests::TestSimpleFullscreenOverlay0() {
   host_.SetBlend(false);
