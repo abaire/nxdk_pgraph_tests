@@ -40,6 +40,7 @@
 #include "tests/attribute_carryover_tests.h"
 #include "tests/attribute_explicit_setter_tests.h"
 #include "tests/attribute_float_tests.h"
+#include "tests/blend_surface_tests.h"
 #include "tests/blend_tests.h"
 #include "tests/clear_tests.h"
 #include "tests/color_key_tests.h"
@@ -405,6 +406,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(AttributeCarryoverTests)
   REG_TEST(AttributeExplicitSetterTests)
   REG_TEST(AttributeFloatTests)
+  REG_TEST(BlendSurfaceTests)
   REG_TEST(BlendTests)
   REG_TEST(ClearTests)
   REG_TEST(ColorKeyTests)
