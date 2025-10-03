@@ -208,6 +208,8 @@ add_executable(
         tests/attribute_explicit_setter_tests.h
         tests/attribute_float_tests.cpp
         tests/attribute_float_tests.h
+        tests/blend_surface_tests.cpp
+        tests/blend_surface_tests.h
         tests/blend_tests.cpp
         tests/blend_tests.h
         tests/clear_tests.cpp

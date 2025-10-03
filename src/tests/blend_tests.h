@@ -69,6 +69,7 @@ class BlendTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests interactions of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR.
   void Test(const std::string &name, uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
 
   //! Renders a series of concentric squares in green, red, blue, and white with their alpha channels blended.
