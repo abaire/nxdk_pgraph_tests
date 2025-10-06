@@ -74,7 +74,7 @@ void BlendSurfaceTests::Test(const std::string &name, TestHost::SurfaceColorForm
   static constexpr uint32_t kMultipassSwatchSize = 8;
 
   // Set texture 2 to a low opacity grey color.
-  memset(host_.GetTextureMemoryForStage(2), 0x88, kMultipassSwatchSize * kMultipassSwatchSize * 4);
+  memset(host_.GetTextureMemoryForStage(2), 0x44, kMultipassSwatchSize * kMultipassSwatchSize * 4);
 
   auto prepare_texture = [this, surface_format, blend_func, sfactor, dfactor](uint32_t texture_format) {
     host_.RenderToSurfaceStart(host_.GetTextureMemoryForStage(0), surface_format, kTextureSize, kTextureSize);
