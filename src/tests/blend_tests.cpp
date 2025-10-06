@@ -67,6 +67,9 @@ static constexpr uint32_t kColorSwatchSize = kTextureSize / 4;
 static constexpr uint32_t kColorSwatchTextureHeight = kColorSwatchSize * 4;
 static constexpr uint32_t kColorSwatchTexturePitch = kColorSwatchSize * 4;
 
+/**
+ * Initializes the test suite and creates test cases.
+ */
 BlendTests::BlendTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Blend tests", config) {
   for (const auto &test_eqn : kBlendEqns) {
