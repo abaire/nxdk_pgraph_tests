@@ -14,6 +14,9 @@ class BlendSurfaceTests : public TestSuite {
  private:
   void Test(const std::string &name, TestHost::SurfaceColorFormat surface_format, uint32_t blend_func, uint32_t sfactor,
             uint32_t dfactor);
+
+  //! Tests the behavior of DstAlpha blending for surfaces with forced alpha values.
+  void TestDstAlpha(const std::string &name, TestHost::SurfaceColorFormat surface_format);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_BLEND_SURFACE_TESTS_H
