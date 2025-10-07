@@ -468,7 +468,7 @@ void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceC
 
   auto draw_quad = [this, surface_format](float left, float top) {
     host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
     host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
     auto &texture_stage = host_.GetTextureStage(0);
@@ -477,7 +477,12 @@ void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceC
     texture_stage.SetImageDimensions(kSwatchSize, kSwatchSize);
     host_.SetupTextureStages();
 
-    host_.DrawTexturedScreenQuad(left, top, left + kSwatchSize, top + kSwatchSize, 0.f, kSwatchSize, kSwatchSize);
+    float middle = floorf(top + (kSwatchSize * 0.5f));
+
+    host_.DrawTexturedScreenQuad(left, top, left + kSwatchSize, middle, 0.f, kSwatchSize, kSwatchSize);
+
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.DrawTexturedScreenQuad(left, middle, left + kSwatchSize, top + kSwatchSize, 0.f, kSwatchSize, kSwatchSize);
 
     texture_stage.SetEnabled(false);
     host_.SetupTextureStages();
