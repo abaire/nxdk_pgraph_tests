@@ -36,11 +36,172 @@ static constexpr uint32_t kTextureSize = 128;
 
 /**
  * Initializes the test suite and creates test cases.
+ *
+ * @tc DstAlpha_ARGB8
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8. The background is initialized to various colors (see labels) via a
+ *   DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer with
+ *   alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_R5G6B5
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5. The background is initialized to various colors (see labels) via a
+ *   DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer with
+ *   alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_X_O1RGB5
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_O1R5G5B5. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_X_ORGB8
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_O8R8G8B8. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_X_Z1RGB5
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_Z1R5G5B5. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_X_ZRGB8
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_Z8R8G8B8. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_XA_O1A7RGB8
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_O1A7R8G8B8. The background is initialized to various colors (see
+ *   labels) via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the
+ *   backbuffer with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc DstAlpha_XA_Z1A7RGB8
+ *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_Z1A7R8G8B8. The background is initialized to various colors (see
+ *   labels) via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the
+ *   backbuffer with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc ARGB8_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc ARGB8_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc R5G6B5_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc R5G6B5_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_O1RGB5_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_O1R5G5B5 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_O1RGB5_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_O1R5G5B5 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_ORGB8_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_O8R8G8B8 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_ORGB8_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_O8R8G8B8 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_Z1RGB5_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_Z1R5G5B5 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_Z1RGB5_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_Z1R5G5B5 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_ZRGB8_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_Z8R8G8B8 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc X_ZRGB8_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_Z8R8G8B8 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc XA_O1A7RGB8_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_O1A7R8G8B8 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc XA_O1A7RGB8_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_O1A7R8G8B8 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc XA_Z1A7RGB8_Add_SrcA_1-SrcA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_Z1A7R8G8B8 and blend factors {SrcAlpha, 1 - SrcAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
+ * @tc XA_Z1A7RGB8_Add_SrcA_DstA
+ *  Demonstrates the behavior of blending various texture formats with the surface mode set to
+ *  NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_Z1A7R8G8B8 and blend factors {SrcAlpha, DstAlpha}.
+ *  A test pattern is rendered multiple times, partially overlapping itself. A low opacity grey quad is rendered in the
+ *  upper left, then composited against itself multiple times in the upper right. A zero alpha (or zero high nibble for
+ *  non-alpha formats) quad is rendered in the lower left and composited against itself in the lower right.
+ *
  */
 BlendSurfaceTests::BlendSurfaceTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Blend surface", config) {
-  for (auto &blend_config : kBlendConfigs) {
-    for (const auto &test : kSurfaceFormatBlendTests) {
+  for (const auto &test : kSurfaceFormatBlendTests) {
+    for (auto &blend_config : kBlendConfigs) {
       std::string name = test.name;
       name += "_";
       name += blend_config.name;
@@ -49,6 +210,10 @@ BlendSurfaceTests::BlendSurfaceTests(TestHost &host, std::string output_dir, con
         Test(name, test.format, blend_config.func, blend_config.source_factor, blend_config.destination_factor);
       };
     }
+
+    std::string name = "DstAlpha_";
+    name += test.name;
+    tests_[name] = [this, name, &test] { TestDstAlpha(name, test.format); };
   }
 }
 
@@ -265,6 +430,97 @@ void BlendSurfaceTests::Test(const std::string &name, TestHost::SurfaceColorForm
   host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
   pb_printat(0, 0, (char *)"%s\n", name.c_str());
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceColorFormat surface_format) {
+  host_.PrepareDraw(0xFF555555);
+
+  static constexpr uint32_t kSwatchColor = 0x22FFFFFF;
+  static constexpr uint32_t kSwatchSize = 128;
+
+  auto prepare_texture = [this, surface_format](uint32_t background_color) {
+    host_.RenderToSurfaceStart(host_.GetTextureMemoryForStage(0), surface_format, kSwatchSize, kSwatchSize);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+    // Set the initial background.
+    {
+      host_.SetBlend(false);
+      host_.SetDiffuse(background_color);
+      host_.DrawScreenQuad(0.0, 0.0, kSwatchSize, kSwatchSize, 1.f);
+    }
+
+    // Render a white rect on top of the background, forcing alpha to opaque and blending the color using DstAlpha
+    // as the source factor.
+    {
+      host_.SetBlend(true, NV097_SET_BLEND_EQUATION_V_FUNC_ADD, NV097_SET_BLEND_FUNC_SFACTOR_V_DST_ALPHA,
+                     NV097_SET_BLEND_FUNC_DFACTOR_V_ZERO);
+      host_.SetDiffuse(kSwatchColor);
+      host_.DrawScreenQuad(0.0, 0.0, kSwatchSize, kSwatchSize, 1.f);
+      host_.SetBlend(false);
+    }
+    host_.RenderToSurfaceEnd();
+  };
+
+  auto draw_quad = [this, surface_format](float left, float top) {
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetEnabled();
+    texture_stage.SetFormat(GetTextureFormatInfo(TextureFormatForSurfaceFormat(surface_format, true)));
+    texture_stage.SetImageDimensions(kSwatchSize, kSwatchSize);
+    host_.SetupTextureStages();
+
+    host_.DrawTexturedScreenQuad(left, top, left + kSwatchSize, top + kSwatchSize, 0.f, kSwatchSize, kSwatchSize);
+
+    texture_stage.SetEnabled(false);
+    host_.SetupTextureStages();
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  };
+
+  static constexpr float kMargin = 32.f;
+  float left = kMargin;
+  float top = 92.f;
+  static constexpr int kTextColumnStart = 4;
+  int text_col = kTextColumnStart;
+  int text_row = 2;
+  static constexpr auto kTextureSpacing = kSwatchSize + 16.f;
+
+  static constexpr uint32_t kBackgroundAlphas[] = {
+      0x00000000, 0x40000000, 0x80000000, 0xFF000000, 0x00FF0000, 0x40FF0000, 0x80FF0000, 0xFFFF0000,
+  };
+
+  for (auto &background_color : kBackgroundAlphas) {
+    prepare_texture(background_color);
+
+    draw_quad(left, top);
+    pb_printat(text_row, text_col, "0x%08X", background_color);
+
+    auto foo = reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(0));
+    DbgPrint("SRC: 0x%08X DST: 0x%08X = 0x%08X\n", kSwatchColor, background_color, *foo++);
+
+    left += kTextureSpacing;
+    text_col += 14;
+
+    if (left + kTextureSpacing >= host_.GetFramebufferWidthF()) {
+      left = kMargin;
+      top += kTextureSpacing + 16.f;
+      text_col = kTextColumnStart;
+      text_row += 6;
+    }
+  }
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+  pb_printat(0, 0, (char *)"%s\n", name.c_str());
+  pb_printat(1, 0, "Blend 0x%08X ADD DstAlpha + 0", kSwatchColor);
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
