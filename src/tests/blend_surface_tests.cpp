@@ -37,6 +37,54 @@ static constexpr uint32_t kTextureSize = 128;
 /**
  * Initializes the test suite and creates test cases.
  *
+ * @tc 1-DstAlpha_ARGB8
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8. The background is initialized to various colors (see labels) via a
+ *   DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer with
+ *   alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_R5G6B5
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_R5G6B5. The background is initialized to various colors (see labels) via a
+ *   DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer with
+ *   alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_X_O1RGB5
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_O1R5G5B5. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_X_ORGB8
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_O8R8G8B8. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_X_Z1RGB5
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1R5G5B5_Z1R5G5B5. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_X_ZRGB8
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X8R8G8B8_Z8R8G8B8. The background is initialized to various colors (see labels)
+ *   via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the backbuffer
+ *   with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_XA_O1A7RGB8
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_O1A7R8G8B8. The background is initialized to various colors (see
+ *   labels) via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the
+ *   backbuffer with alpha forced to 1.0 to display the effect on the color channels.
+ *
+ * @tc 1-DstAlpha_XA_Z1A7RGB8
+ *   Demonstrates behavior of blend func ADD (1 - DstAlpha) (Zero) with surface mode
+ *   NV097_SET_SURFACE_FORMAT_COLOR_LE_X1A7R8G8B8_Z1A7R8G8B8. The background is initialized to various colors (see
+ *   labels) via a DIFFUSE quad render. A white quad is then blended on top and the final composition rendered to the
+ *   backbuffer with alpha forced to 1.0 to display the effect on the color channels.
+ *
  * @tc DstAlpha_ARGB8
  *   Demonstrates behavior of blend func ADD (DstAlpha) (Zero) with surface mode
  *   NV097_SET_SURFACE_FORMAT_COLOR_LE_A8R8G8B8. The background is initialized to various colors (see labels) via a
@@ -213,7 +261,13 @@ BlendSurfaceTests::BlendSurfaceTests(TestHost &host, std::string output_dir, con
 
     std::string name = "DstAlpha_";
     name += test.name;
-    tests_[name] = [this, name, &test] { TestDstAlpha(name, test.format); };
+    tests_[name] = [this, name, &test] { TestDstAlpha(name, test.format, NV097_SET_BLEND_FUNC_SFACTOR_V_DST_ALPHA); };
+
+    name = "1-DstAlpha_";
+    name += test.name;
+    tests_[name] = [this, name, &test] {
+      TestDstAlpha(name, test.format, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_DST_ALPHA);
+    };
   }
 }
 
@@ -435,13 +489,14 @@ void BlendSurfaceTests::Test(const std::string &name, TestHost::SurfaceColorForm
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
-void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceColorFormat surface_format) {
+void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceColorFormat surface_format,
+                                     uint32_t sfactor) {
   host_.PrepareDraw(0xFF555555);
 
   static constexpr uint32_t kSwatchColor = 0x22FFFFFF;
   static constexpr uint32_t kSwatchSize = 128;
 
-  auto prepare_texture = [this, surface_format](uint32_t background_color) {
+  auto prepare_texture = [this, surface_format, sfactor](uint32_t background_color) {
     host_.RenderToSurfaceStart(host_.GetTextureMemoryForStage(0), surface_format, kSwatchSize, kSwatchSize);
 
     host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
@@ -457,8 +512,7 @@ void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceC
     // Render a white rect on top of the background, forcing alpha to opaque and blending the color using DstAlpha
     // as the source factor.
     {
-      host_.SetBlend(true, NV097_SET_BLEND_EQUATION_V_FUNC_ADD, NV097_SET_BLEND_FUNC_SFACTOR_V_DST_ALPHA,
-                     NV097_SET_BLEND_FUNC_DFACTOR_V_ZERO);
+      host_.SetBlend(true, NV097_SET_BLEND_EQUATION_V_FUNC_ADD, sfactor, NV097_SET_BLEND_FUNC_DFACTOR_V_ZERO);
       host_.SetDiffuse(kSwatchColor);
       host_.DrawScreenQuad(0.0, 0.0, kSwatchSize, kSwatchSize, 1.f);
       host_.SetBlend(false);
@@ -506,9 +560,6 @@ void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceC
 
     draw_quad(left, top);
     pb_printat(text_row, text_col, "0x%08X", background_color);
-
-    auto foo = reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(0));
-    DbgPrint("SRC: 0x%08X DST: 0x%08X = 0x%08X\n", kSwatchColor, background_color, *foo++);
 
     left += kTextureSpacing;
     text_col += 14;
