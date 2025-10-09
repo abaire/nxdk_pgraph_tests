@@ -93,6 +93,7 @@ generate_nv2a_vshinc_files(
         shaders/passthrough_no_point_size.vsh
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
+        shaders/projection_vertex_shader_no_lighting_rcp_fog.vsh
         shaders/weight_to_color.vsh
 )
 
