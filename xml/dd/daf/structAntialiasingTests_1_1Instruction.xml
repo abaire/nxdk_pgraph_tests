@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/daf/structAntialiasingTests_1_1Instruction" kind="struct" language="C++" prot="public">
+    <compoundname>AntialiasingTests::Instruction</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dd/daf/structAntialiasingTests_1_1Instruction_1a7eacc20364b8b5c187c4051287475439" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AntialiasingTests::Instruction::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>AntialiasingTests::Instruction::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="25" column="16" bodyfile="src/tests/antialiasing_tests.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/daf/structAntialiasingTests_1_1Instruction_1a3e4b645770b601b96f7201ae8e01fe1e" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AntialiasingTests::Instruction::mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <qualifiedname>AntialiasingTests::Instruction::mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="26" column="16" bodyfile="src/tests/antialiasing_tests.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/daf/structAntialiasingTests_1_1Instruction_1a2c3d1459ef45ef324abfe3f4c0833bb0" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AntialiasingTests::Instruction::swizzle</definition>
+        <argsstring></argsstring>
+        <name>swizzle</name>
+        <qualifiedname>AntialiasingTests::Instruction::swizzle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="27" column="16" bodyfile="src/tests/antialiasing_tests.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/daf/structAntialiasingTests_1_1Instruction_1a84425b03fd083bfadfd0bfe8fc636b5b" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t AntialiasingTests::Instruction::instruction[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>instruction</name>
+        <qualifiedname>AntialiasingTests::Instruction::instruction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="28" column="20" bodyfile="src/tests/antialiasing_tests.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/antialiasing_tests.h" line="24" column="3" bodyfile="src/tests/antialiasing_tests.h" bodystart="24" bodyend="29"/>
+    <listofallmembers>
+      <member refid="dd/daf/structAntialiasingTests_1_1Instruction_1a84425b03fd083bfadfd0bfe8fc636b5b" prot="public" virt="non-virtual"><scope>AntialiasingTests::Instruction</scope><name>instruction</name></member>
+      <member refid="dd/daf/structAntialiasingTests_1_1Instruction_1a3e4b645770b601b96f7201ae8e01fe1e" prot="public" virt="non-virtual"><scope>AntialiasingTests::Instruction</scope><name>mask</name></member>
+      <member refid="dd/daf/structAntialiasingTests_1_1Instruction_1a7eacc20364b8b5c187c4051287475439" prot="public" virt="non-virtual"><scope>AntialiasingTests::Instruction</scope><name>name</name></member>
+      <member refid="dd/daf/structAntialiasingTests_1_1Instruction_1a2c3d1459ef45ef324abfe3f4c0833bb0" prot="public" virt="non-virtual"><scope>AntialiasingTests::Instruction</scope><name>swizzle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
