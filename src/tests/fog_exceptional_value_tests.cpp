@@ -11,7 +11,12 @@
 // clang-format off
 static constexpr uint32_t kVertexShader[] = {
 #include "projection_vertex_shader_no_lighting_explicit_fog.vshinc"
+};
+// clang-format on
 
+// clang-format off
+static constexpr uint32_t kRCPFogVertexShader[] = {
+#include "projection_vertex_shader_no_lighting_rcp_fog.vshinc"
 };
 // clang-format on
 
@@ -271,7 +276,11 @@ FogExceptionalValueTests::FogExceptionalValueTests(TestHost& host, std::string o
   for (auto fog_gen_mode : kFogGenModes) {
     for (auto fog_mode : kFogModes) {
       std::string name = MakeTestName(fog_mode, fog_gen_mode);
-      tests_[name] = [this, name, fog_mode, fog_gen_mode]() { Test(name, fog_mode, fog_gen_mode); };
+      tests_[name] = [this, name, fog_mode, fog_gen_mode]() { Test(name, fog_mode, fog_gen_mode, false); };
+
+      std::string rcp_name = "RCP-";
+      rcp_name += name;
+      tests_[rcp_name] = [this, rcp_name, fog_mode, fog_gen_mode]() { Test(rcp_name, fog_mode, fog_gen_mode, true); };
     }
   }
 }
@@ -302,14 +311,18 @@ void FogExceptionalValueTests::Initialize() {
                           /* specular_clamp */ true);
 }
 
-static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host) {
+static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost& host, bool use_rcp_shader = false) {
   // Note: This could just as easily use the PassthroughVertexShader and specify all values via vertex vals, but a
   // transforming shader is used to better reproduce observed issues with Otogi:
   // https://github.com/xemu-project/xemu/issues/365
   float depth_buffer_max_value = host.GetMaxDepthBufferValue();
   auto shader = std::make_shared<PerspectiveVertexShader>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
                                                           depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
-  shader->SetShader(kVertexShader, sizeof(kVertexShader));
+  if (use_rcp_shader) {
+    shader->SetShader(kRCPFogVertexShader, sizeof(kRCPFogVertexShader));
+  } else {
+    shader->SetShader(kVertexShader, sizeof(kVertexShader));
+  }
   shader->SetTransposeOnUpload();
   vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
   vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -369,9 +382,9 @@ static void SetupFogParams(uint32_t fog_mode, uint32_t fog_gen_mode) {
   Pushbuffer::End();
 }
 
-void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode) {
+void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode, bool use_rcp) {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
-  auto shader = SetupVertexShader(host_);
+  auto shader = SetupVertexShader(host_, use_rcp);
   static constexpr auto kFogValueIndex = 120 - PerspectiveVertexShader::kShaderUserConstantOffset;
 
   SetupFogParams(fog_mode, fog_gen_mode);
@@ -441,7 +454,7 @@ void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, 
 
     draw_quad(left, top);
 
-    pb_printat(text_row, text_col, "%s", fog_entry.name.c_str());
+    pb_printat(text_row, text_col, "%s%s", use_rcp ? "1/" : "", fog_entry.name.c_str());
 
     left += kQuadWidth + kQuadSpacingH;
     text_col += 9;

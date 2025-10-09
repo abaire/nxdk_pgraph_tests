@@ -22,7 +22,7 @@ class FogExceptionalValueTests : public TestSuite {
   void Initialize() override;
 
  private:
-  void Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode);
+  void Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode, bool use_rcp);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_EXCEPTIONAL_VALUE_TESTS_H
