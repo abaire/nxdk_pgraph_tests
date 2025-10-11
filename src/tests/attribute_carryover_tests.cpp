@@ -41,7 +41,395 @@ static const AttributeCarryoverTests::TestConfig kTestConfigs[] = {
 
 static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryoverTests::Attribute attribute);
 
-AttributeCarryoverTests::AttributeCarryoverTests(TestHost& host, std::string output_dir, const Config& config)
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc L-bd0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw
+ *  mode draw arrays.
+ *
+ * @tc L-bd0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw
+ *  mode inline elements.
+ *
+ * @tc L-bd0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw
+ *  mode inline arrays.
+ *
+ * @tc L-bd0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw
+ *  mode inline buffers.
+ *
+ * @tc L-bs0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using draw
+ *  mode draw arrays.
+ *
+ * @tc L-bs0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using draw
+ *  mode inline elements.
+ *
+ * @tc L-bs0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using using
+ *  draw mode inline arrays.
+ *
+ * @tc L-bs0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using draw
+ *  mode inline buffers.
+ *
+ * @tc L-d0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode
+ *  draw arrays.
+ *
+ * @tc L-d0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode
+ *  inline elements.
+ *
+ * @tc L-d0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode
+ *  inline arrays.
+ *
+ * @tc L-d0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode
+ *  inline buffers.
+ *
+ * @tc L-fc0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode draw
+ *  arrays.
+ *
+ * @tc L-fc0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode
+ *  inline elements.
+ *
+ * @tc L-fc0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode
+ *  inline arrays.
+ *
+ * @tc L-fc0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode
+ *  inline buffers.
+ *
+ * @tc L-n0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode
+ *  draw arrays.
+ *
+ * @tc L-n0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode
+ *  inline elements.
+ *
+ * @tc L-n0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode
+ *  inline arrays.
+ *
+ * @tc L-n0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode
+ *  inline buffers.
+ *
+ * @tc L-ps0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw
+ *  mode draw arrays.
+ *
+ * @tc L-ps0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw
+ *  mode inline elements.
+ *
+ * @tc L-ps0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw
+ *  mode inline arrays.
+ *
+ * @tc L-ps0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw
+ *  mode inline buffers.
+ *
+ * @tc L-s0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode
+ *  draw arrays.
+ *
+ * @tc L-s0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode
+ *  inline elements.
+ *
+ * @tc L-s0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode
+ *  inline arrays.
+ *
+ * @tc L-s0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode
+ *  inline buffers.
+ *
+ * @tc L-t00.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode draw
+ *  arrays.
+ *
+ * @tc L-t00.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode
+ *  inline elements.
+ *
+ * @tc L-t00.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode
+ *  inline arrays.
+ *
+ * @tc L-t00.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode
+ *  inline buffers.
+ *
+ * @tc L-t10.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode draw
+ *  arrays.
+ *
+ * @tc L-t10.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode
+ *  inline elements.
+ *
+ * @tc L-t10.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode
+ *  inline arrays.
+ *
+ * @tc L-t10.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode
+ *  inline buffers.
+ *
+ * @tc L-t20.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode draw
+ *  arrays.
+ *
+ * @tc L-t20.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode
+ *  inline elements.
+ *
+ * @tc L-t20.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode
+ *  inline arrays.
+ *
+ * @tc L-t20.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode
+ *  inline buffers.
+ *
+ * @tc L-t30.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode draw
+ *  arrays.
+ *
+ * @tc L-t30.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode
+ *  inline elements.
+ *
+ * @tc L-t30.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode
+ *  inline arrays.
+ *
+ * @tc L-t30.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode
+ *  inline buffers.
+ *
+ * @tc L-w0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode
+ *  draw arrays.
+ *
+ * @tc L-w0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode
+ *  inline elements.
+ *
+ * @tc L-w0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode
+ *  inline arrays.
+ *
+ * @tc L-w0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode
+ *  inline buffers.
+ *
+ * @tc T-bd0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw
+ *  mode draw arrays.
+ *
+ * @tc T-bd0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw
+ *  mode inline elements.
+ *
+ * @tc T-bd0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw
+ *  mode inline arrays.
+ *
+ * @tc T-bd0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw
+ *  mode inline buffers.
+ *
+ * @tc T-bs0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using draw
+ *  mode draw arrays.
+ *
+ * @tc T-bs0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using draw
+ *  mode inline elements.
+ *
+ * @tc T-bs0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using using
+ *  draw mode inline arrays.
+ *
+ * @tc T-bs0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using draw
+ *  mode inline buffers.
+ *
+ * @tc T-d0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode
+ *  draw arrays.
+ *
+ * @tc T-d0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode
+ *  inline elements.
+ *
+ * @tc T-d0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode
+ *  inline arrays.
+ *
+ * @tc T-d0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode
+ *  inline buffers.
+ *
+ * @tc T-fc0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode draw
+ *  arrays.
+ *
+ * @tc T-fc0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode
+ *  inline elements.
+ *
+ * @tc T-fc0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode
+ *  inline arrays.
+ *
+ * @tc T-fc0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode
+ *  inline buffers.
+ *
+ * @tc T-n0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode
+ *  draw arrays.
+ *
+ * @tc T-n0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode
+ *  inline elements.
+ *
+ * @tc T-n0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode
+ *  inline arrays.
+ *
+ * @tc T-n0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode
+ *  inline buffers.
+ *
+ * @tc T-ps0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw
+ *  mode draw arrays.
+ *
+ * @tc T-ps0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw
+ *  mode inline elements.
+ *
+ * @tc T-ps0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw
+ *  mode inline arrays.
+ *
+ * @tc T-ps0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw
+ *  mode inline buffers.
+ *
+ * @tc T-s0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode
+ *  draw arrays.
+ *
+ * @tc T-s0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode
+ *  inline elements.
+ *
+ * @tc T-s0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode
+ *  inline arrays.
+ *
+ * @tc T-s0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode
+ *  inline buffers.
+ *
+ * @tc T-t00.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode draw
+ *  arrays.
+ *
+ * @tc T-t00.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode
+ *  inline elements.
+ *
+ * @tc T-t00.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode
+ *  inline arrays.
+ *
+ * @tc T-t00.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode
+ *  inline buffers.
+ *
+ * @tc T-t10.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode draw
+ *  arrays.
+ *
+ * @tc T-t10.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode
+ *  inline elements.
+ *
+ * @tc T-t10.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode
+ *  inline arrays.
+ *
+ * @tc T-t10.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode
+ *  inline buffers.
+ *
+ * @tc T-t20.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode draw
+ *  arrays.
+ *
+ * @tc T-t20.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode
+ *  inline elements.
+ *
+ * @tc T-t20.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode
+ *  inline arrays.
+ *
+ * @tc T-t20.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode
+ *  inline buffers.
+ *
+ * @tc T-t30.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode draw
+ *  arrays.
+ *
+ * @tc T-t30.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode
+ *  inline elements.
+ *
+ * @tc T-t30.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode
+ *  inline arrays.
+ *
+ * @tc T-t30.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode
+ *  inline buffers.
+ *
+ * @tc T-w0.1_0.0_1.0_1.0-da
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode
+ *  draw arrays.
+ *
+ * @tc T-w0.2_0.0_0.6_1.0-ie
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode
+ *  inline elements.
+ *
+ * @tc T-w0.5_0.0_0.0_1.0-ia
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode
+ *  inline arrays.
+ *
+ * @tc T-w0.8_0.0_0.0_1.0-ib
+ *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode
+ *  inline buffers.
+ *
+ */
+AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Attrib carryover", config) {
   for (auto primitive : kPrimitives) {
     for (auto attr : kTestAttributes) {
@@ -83,8 +471,8 @@ void AttributeCarryoverTests::Deinitialize() {
   TestSuite::Deinitialize();
 }
 
-static void CreateLinePair(TestHost& host, std::shared_ptr<VertexBuffer>& bleed_buffer,
-                           std::shared_ptr<VertexBuffer>& test_buffer, std::vector<uint32_t>& index_buffer) {
+static void CreateLinePair(TestHost &host, std::shared_ptr<VertexBuffer> &bleed_buffer,
+                           std::shared_ptr<VertexBuffer> &test_buffer, std::vector<uint32_t> &index_buffer) {
   auto fb_width = static_cast<float>(host.GetFramebufferWidth());
   auto fb_height = static_cast<float>(host.GetFramebufferHeight());
 
@@ -139,8 +527,8 @@ static void CreateLinePair(TestHost& host, std::shared_ptr<VertexBuffer>& bleed_
   index_buffer.push_back(0);
 }
 
-static void CreateTrianglePair(TestHost& host, std::shared_ptr<VertexBuffer>& bleed_buffer,
-                               std::shared_ptr<VertexBuffer>& test_buffer, std::vector<uint32_t>& index_buffer) {
+static void CreateTrianglePair(TestHost &host, std::shared_ptr<VertexBuffer> &bleed_buffer,
+                               std::shared_ptr<VertexBuffer> &test_buffer, std::vector<uint32_t> &index_buffer) {
   auto fb_width = static_cast<float>(host.GetFramebufferWidth());
   auto fb_height = static_cast<float>(host.GetFramebufferHeight());
 
@@ -205,7 +593,7 @@ void AttributeCarryoverTests::CreateGeometry(TestHost::DrawPrimitive primitive) 
 }
 
 void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute test_attribute,
-                                   const TestConfig& config) {
+                                   const TestConfig &config) {
   auto shader = host_.GetShaderProgram();
 
   static constexpr uint32_t kBackgroundColor = 0xFF444444;
@@ -309,7 +697,7 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute 
 }
 
 std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
-                                                  const TestConfig& config) {
+                                                  const TestConfig &config) {
   std::string ret;
 
   switch (primitive) {
@@ -369,22 +757,23 @@ std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primit
            config.attribute_value[2], config.attribute_value[3]);
   ret += buf;
 
-  switch (config.draw_mode) {
-    case DRAW_ARRAYS:
-      ret += "-da";
-      break;
-    case DRAW_INLINE_BUFFERS:
-      ret += "-ib";
-      break;
-    case DRAW_INLINE_ARRAYS:
-      ret += "-ia";
-      break;
-    case DRAW_INLINE_ELEMENTS:
-      ret += "-ie";
-      break;
-  }
+  ret += "-";
+  ret += DrawModeLabel(config.draw_mode);
 
   return ret;
+}
+
+std::string AttributeCarryoverTests::DrawModeLabel(DrawMode mode) {
+  switch (mode) {
+    case DRAW_ARRAYS:
+      return "da";
+    case DRAW_INLINE_BUFFERS:
+      return "ib";
+    case DRAW_INLINE_ARRAYS:
+      return "ia";
+    case DRAW_INLINE_ELEMENTS:
+      return "ie";
+  }
 }
 
 static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryoverTests::Attribute attribute) {

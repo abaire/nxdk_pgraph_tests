@@ -235,3 +235,28 @@ void TestHost::FinishDraw(bool allow_saving, const std::string &output_directory
     /* Not ready to swap yet */
   }
 }
+
+std::string TestHost::GetDrawPrimitiveName(DrawPrimitive primitive) {
+  switch (primitive) {
+    case PRIMITIVE_POINTS:
+      return "Points";
+    case PRIMITIVE_LINES:
+      return "Lines";
+    case PRIMITIVE_LINE_LOOP:
+      return "LineLoop";
+    case PRIMITIVE_LINE_STRIP:
+      return "LineStrip";
+    case PRIMITIVE_TRIANGLES:
+      return "Tris";
+    case PRIMITIVE_TRIANGLE_STRIP:
+      return "TriStrip";
+    case PRIMITIVE_TRIANGLE_FAN:
+      return "TriFan";
+    case PRIMITIVE_QUADS:
+      return "Quads";
+    case PRIMITIVE_QUAD_STRIP:
+      return "QuadStrip";
+    case PRIMITIVE_POLYGON:
+      return "Poly";
+  }
+}

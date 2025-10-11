@@ -77,6 +77,9 @@ class TestHost : public NV2AState {
     return ret;
   }
 
+  //! Returns a string name for the given DrawPrimitive.
+  static std::string GetDrawPrimitiveName(DrawPrimitive primitive);
+
  private:
   static std::string PrepareSaveFile(std::string output_directory, const std::string &filename,
                                      const std::string &ext = ".png");

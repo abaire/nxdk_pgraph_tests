@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 
+#include "test_host.h"
 #include "test_suite.h"
 
 class TestHost;
@@ -21,6 +22,7 @@ class FogCarryoverTests : public TestSuite {
 
  private:
   void Test();
+  void TestPrimitive(const std::string& name, TestHost::DrawPrimitive primitive);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_CARRYOVER_TESTS_H

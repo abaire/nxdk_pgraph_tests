@@ -15,19 +15,22 @@ class VertexBuffer;
  * Tests behavior when vertex attributes are not provided but are used by
  * shaders.
  *
- * For various types of geometry, a fully specified primitive is rendered,
- * followed by an identical (but position-transformed) primitive where only the
- * vertex positions are provided and all other attributes bleed over from the
- * fully specified primitive.
+ * \parblock
+ *   For various types of geometry, a fully specified primitive is rendered,
+ *   followed by an identical (but position-transformed) primitive where only
+ *   the vertex positions are provided and all other attributes bleed over from
+ *   the fully specified primitive.
  *
- * Each test picks a separate vertex attribute (e.g., weight, normal, ...) and
- * sets it to a test value. The shader code will convert the attribute under
- * test into a color.
+ *   Each test picks a separate vertex attribute (e.g., weight, normal, ...) and
+ *   sets it to a test value. The shader code will convert the attribute under
+ *   test into a color.
  *
- * Attributes with three parameters (iNormal) will have their alpha forced to 1.f.
+ *   Attributes with three parameters (iNormal) will have their alpha forced to
+ *   1.f.
  *
- * Attributes with one parameter (e.g., iWeight) will be repeated into the red
- * and green channels with their blue and alpha forced to 1.f.
+ *   Attributes with one parameter (e.g., iWeight) will be repeated into the red
+ *   and green channels with their blue and alpha forced to 1.f.
+ * \endparblock
  */
 class AttributeCarryoverTests : public TestSuite {
  public:
@@ -70,6 +73,8 @@ class AttributeCarryoverTests : public TestSuite {
 
   static std::string MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
                                   const TestConfig &config);
+
+  static std::string DrawModeLabel(DrawMode mode);
 
  private:
   // Buffer containing vertices that set the attribute(s) under test.
