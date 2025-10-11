@@ -12,6 +12,7 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 from typing import Any, NamedTuple
+from xml.etree.ElementTree import Element
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,22 @@ class TestSuiteDescriptor(NamedTuple):
             "test_descriptions": self.test_descriptions,
         }
 
+def _process_detailed_description(element: Element) -> list[str]:
+    ret: list[str] = []
+
+    for subelement in element.iter("para"):
+        preformatted = subelement.find("parblock")
+        if preformatted is not None:
+            if subelement.text:
+                ret.append(subelement.text)
+
+            preformatted_text = "\n".join(item for item in preformatted.itertext()).strip()
+            ret.append(re.sub(r'\n{3,}', '\n\n', preformatted_text))
+            continue
+
+        ret.extend(item.rstrip() for item in subelement.itertext())
+
+    return ret
 
 class TestSuiteDescriptorReader:
     """Loads test suite descriptors from the Doxygen XML."""
@@ -97,7 +114,7 @@ class TestSuiteDescriptorReader:
                         if not description:
                             # Handle the case where a \parblock is used to allow preformatted documentation.
                             parblock = element.find("parblock")
-                            if parblock:
+                            if parblock is not None:
                                 description = "\n".join([para.text for para in parblock.iter("para")])
                         test_descriptions[test_name] = description
 
@@ -150,7 +167,7 @@ class TestSuiteDescriptorReader:
         if element is None:
             logger.warning("No detailed description for test suite %s", class_name)
         else:
-            detailed_description = [item.strip() for item in element.itertext() if item.strip()]
+            detailed_description = _process_detailed_description(element)
 
         suite_name, test_descriptions = self._process_class_descriptor(class_name, class_descriptor)
 
