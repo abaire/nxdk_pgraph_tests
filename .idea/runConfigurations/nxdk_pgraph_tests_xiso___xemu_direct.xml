@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="nxdk_pgraph_tests_xiso - xemu direct" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-s -dvd_path $CMakeCurrentBuildDir$/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nxdk_pgraph_tests" TARGET_NAME="nxdk_pgraph_tests_xiso" CONFIG_NAME="Debug" RUN_PATH="$PROJECT_DIR$/../xemu/build/qemu-system-i386">
+  <configuration default="false" name="nxdk_pgraph_tests_xiso - xemu direct" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-s -dvd_path $CMakeCurrentBuildDir$/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="nxdk_pgraph_tests" TARGET_NAME="nxdk_pgraph_tests_xiso" CONFIG_NAME="ForceDebug" RUN_PATH="$PROJECT_DIR$/../xemu/build/qemu-system-i386">
     <envs>
       <env name="DYLD_FALLBACK_LIBRARY_PATH" value="$PROJECT_DIR$/../xemu/dist/xemu.app/Contents/Libraries/arm64" />
     </envs>
