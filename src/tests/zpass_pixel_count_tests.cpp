@@ -182,7 +182,7 @@ void ZPassPixelCountTests::Test() {
 
   pb_print("%s\n", kTestName);
   pb_print("\n");
-  pb_print("SEMAPHORE at 0x%X = 0x%X [%s]\n", semaphore_context_object_, *semaphore_context_object_,
+  pb_print("SEMAPHORE 0x%X [%s]\n", *semaphore_context_object_,
            *semaphore_context_object_ == kSemaphoreReleaseValue ? "PASS" : "FAIL");
 
   auto print_report = [this](uint32_t report_index, uint32_t expected_pixels) {
@@ -285,7 +285,7 @@ void ZPassPixelCountTests::TestPointSize(uint32_t point_size) {
   const std::string test_name = MakePointSizeTestName(point_size);
   pb_print("%s\n", test_name.c_str());
   pb_print("\n");
-  pb_print("SEMAPHORE at 0x%X = 0x%X [%s]\n", semaphore_context_object_, *semaphore_context_object_,
+  pb_print("SEMAPHORE = 0x%X [%s]\n", *semaphore_context_object_,
            *semaphore_context_object_ == kSemaphoreReleaseValue ? "PASS" : "FAIL");
 
   const auto offset = kReportOffset;
@@ -398,7 +398,7 @@ void ZPassPixelCountTests::TestPointSizeProgrammable(uint32_t point_size) {
   const std::string test_name = MakePointSizeTestName(point_size, true);
   pb_print("%s\n", test_name.c_str());
   pb_print("\n");
-  pb_print("SEMAPHORE at 0x%X = 0x%X [%s]\n", semaphore_context_object_, *semaphore_context_object_,
+  pb_print("SEMAPHORE = 0x%X [%s]\n", *semaphore_context_object_,
            *semaphore_context_object_ == kSemaphoreReleaseValue ? "PASS" : "FAIL");
 
   const auto &report = report_context_object_[0];
@@ -501,7 +501,7 @@ void ZPassPixelCountTests::TestLineWidth(uint32_t line_width) {
   const std::string test_name = MakeLineWidthTestName(line_width);
   pb_print("%s\n", test_name.c_str());
   pb_print("\n");
-  pb_print("SEMAPHORE at 0x%X = 0x%X [%s]\n", semaphore_context_object_, *semaphore_context_object_,
+  pb_print("SEMAPHORE = 0x%X [%s]\n", *semaphore_context_object_,
            *semaphore_context_object_ == kSemaphoreReleaseValue ? "PASS" : "FAIL");
 
   const auto &report = report_context_object_[0];
