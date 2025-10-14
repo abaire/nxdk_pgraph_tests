@@ -23,12 +23,8 @@ static constexpr int kTextureHeight = 128;
 static std::string TestNameForTexGenMode(TextureStage::TexGen mode);
 
 static TextureStage::TexGen kTestModes[] = {
-    TextureStage::TG_DISABLE,
-    TextureStage::TG_EYE_LINEAR,
-    // TextureStage::TG_OBJECT_LINEAR, // xemu "untested" assert (generate_fixed_function) (works on HW)
-    // TextureStage::TG_SPHERE_MAP,  // xemu "channel < 2" assert (kelvin_map_texgen) (works on HW)
-    TextureStage::TG_NORMAL_MAP,
-    TextureStage::TG_REFLECTION_MAP,
+    TextureStage::TG_DISABLE,    TextureStage::TG_EYE_LINEAR, TextureStage::TG_OBJECT_LINEAR,
+    TextureStage::TG_SPHERE_MAP, TextureStage::TG_NORMAL_MAP, TextureStage::TG_REFLECTION_MAP,
 };
 
 TexgenMatrixTests::TexgenMatrixTests(TestHost &host, std::string output_dir, const Config &config)
