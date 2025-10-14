@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/dc7/structBlendConfig" kind="struct" language="C++" prot="public">
+    <compoundname>BlendConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d3/dc7/structBlendConfig_1aa04f2697f9610eec03876d4a68f639c4" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* BlendConfig::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>BlendConfig::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_surface_tests.cpp" line="22" column="14" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dc7/structBlendConfig_1a33f85340e2d025d8ea935413af0c39a4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BlendConfig::func</definition>
+        <argsstring></argsstring>
+        <name>func</name>
+        <qualifiedname>BlendConfig::func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_surface_tests.cpp" line="23" column="12" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dc7/structBlendConfig_1a6b67f227ee0b3f6489f478c5e49ce38c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BlendConfig::source_factor</definition>
+        <argsstring></argsstring>
+        <name>source_factor</name>
+        <qualifiedname>BlendConfig::source_factor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_surface_tests.cpp" line="24" column="12" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dc7/structBlendConfig_1aa1a744cf6ad372c433e8c71726ae234c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BlendConfig::destination_factor</definition>
+        <argsstring></argsstring>
+        <name>destination_factor</name>
+        <qualifiedname>BlendConfig::destination_factor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_surface_tests.cpp" line="25" column="12" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/blend_surface_tests.cpp" line="21" column="1" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="21" bodyend="26"/>
+    <listofallmembers>
+      <member refid="d3/dc7/structBlendConfig_1aa1a744cf6ad372c433e8c71726ae234c" prot="public" virt="non-virtual"><scope>BlendConfig</scope><name>destination_factor</name></member>
+      <member refid="d3/dc7/structBlendConfig_1a33f85340e2d025d8ea935413af0c39a4" prot="public" virt="non-virtual"><scope>BlendConfig</scope><name>func</name></member>
+      <member refid="d3/dc7/structBlendConfig_1aa04f2697f9610eec03876d4a68f639c4" prot="public" virt="non-virtual"><scope>BlendConfig</scope><name>name</name></member>
+      <member refid="d3/dc7/structBlendConfig_1a6b67f227ee0b3f6489f478c5e49ce38c" prot="public" virt="non-virtual"><scope>BlendConfig</scope><name>source_factor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

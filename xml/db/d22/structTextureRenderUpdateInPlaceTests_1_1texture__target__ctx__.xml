@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d22/structTextureRenderUpdateInPlaceTests_1_1texture__target__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>TextureRenderUpdateInPlaceTests::texture_target_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_render_update_in_place_tests.h" line="29" column="3" bodyfile="src/tests/texture_render_update_in_place_tests.h" bodystart="29" bodyend="29"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
