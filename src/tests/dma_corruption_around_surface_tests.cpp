@@ -27,17 +27,37 @@ static constexpr uint32_t kDefaultDMAChannelA = 3;
 static constexpr uint32_t kDefaultDMAColorChannel = 9;
 
 static constexpr char kDMAOverlapTestName[] = "DMAOverlap";
-static constexpr char kReadFromFileTestName[] = "xemuReadFromFileIntoSurface";
+static constexpr char kReadFromFileToSurfaceTestName[] = "xemuReadFromFileIntoSurface";
+static constexpr char kReadFromFileToTextureTestName[] = "xemuReadFromFileIntoTexture";
 static constexpr uint32_t kTextureSize = 128;
 
 static constexpr uint32_t kCheckerSize = 8;
 static constexpr uint32_t kCheckerboardB = 0xFF3333C0;
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc DMAOverlap
+ *   Sets up a render target in uninitialized data and triggers a nop (degenerate triangle) draw. Then uses the guest
+ *   CPU to populate the memory within the render target. Sets the render target back to the framebuffer and renders
+ *   the previous surface as a texture. The texture should not exhibit any corruption from the initial state of the
+ *   texture.
+ *
+ * @tc xemuReadFromFileIntoSurface
+ *   Sets up a render target and initializes it with a dark color. Then reads new data from a file into the render
+ *   target and triggers a nop (degenerate triangle) draw. Sets the render target back to the framebuffer and renders
+ *   the previous surface as a texture. The texture should be bright white, the data provided in the test file.
+ *
+ * @tc xemuReadFromFileIntoTexture
+ *   Draws a texture, then reads new data from a file over the same location in memory and draws a second time. The
+ *   rendered content should change across the draws.
+ */
 DMACorruptionAroundSurfaceTests::DMACorruptionAroundSurfaceTests(TestHost &host, std::string output_dir,
                                                                  const Config &config)
     : TestSuite(host, std::move(output_dir), "DMA corruption around surfaces", config) {
   tests_[kDMAOverlapTestName] = [this]() { Test(); };
-  tests_[kReadFromFileTestName] = [this]() { TestReadFromFileIntoSurface(); };
+  tests_[kReadFromFileToSurfaceTestName] = [this]() { TestReadFromFileIntoSurface(); };
+  tests_[kReadFromFileToTextureTestName] = [this]() { TestReadFromFileIntoTexture(); };
 }
 
 void DMACorruptionAroundSurfaceTests::Initialize() {
@@ -100,6 +120,49 @@ void DMACorruptionAroundSurfaceTests::Test() {
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDMAOverlapTestName);
 }
 
+static void ReadRawRGBAIntoBuffer(const char *filename, void *buffer, uint32_t length, uint32_t start_offset = 0) {
+  STRING path;
+  RtlInitAnsiString(&path, filename);
+
+  HANDLE handle;
+  OBJECT_ATTRIBUTES attributes;
+  InitializeObjectAttributes(&attributes, &path, OBJ_CASE_INSENSITIVE, ObDosDevicesDirectory(), nullptr);
+
+  IO_STATUS_BLOCK status_block = {{0}};
+  NTSTATUS status =
+      NtCreateFile(&handle,                                                                         // FileHandle
+                   GENERIC_READ | FILE_READ_ATTRIBUTES | SYNCHRONIZE,                               // DesiredAccess
+                   &attributes,                                                                     // ObjectAttributes
+                   &status_block,                                                                   // IoStatusBlock
+                   0,                                                                               // AllocationSize
+                   FILE_ATTRIBUTE_NORMAL,                                                           // FileAttributes
+                   FILE_SHARE_READ,                                                                 // ShareAccess
+                   FILE_OPEN,                                                                       // CreateDisposition
+                   FILE_NON_DIRECTORY_FILE | FILE_RANDOM_ACCESS | FILE_NO_INTERMEDIATE_BUFFERING);  // CreateOptions
+  ASSERT(status == 0);
+
+  LARGE_INTEGER byte_offset = {{0, 0}};
+  byte_offset.LowPart = start_offset;
+
+  status_block.Status = STATUS_PENDING;
+
+  status = NtReadFile(handle,
+                      nullptr,        // Event
+                      nullptr,        // ApcRoutine
+                      nullptr,        // ApcContext
+                      &status_block,  // IoStatusBlock
+                      buffer,         // Buffer
+                      length,         // Length
+                      &byte_offset);
+  ASSERT(status == STATUS_PENDING);
+
+  while (status_block.Status == STATUS_PENDING) {
+    Sleep(1);
+  }
+
+  NtClose(handle);
+}
+
 void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoSurface() {
   host_.PrepareDraw(0xFF444444);
 
@@ -138,49 +201,9 @@ void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoSurface() {
   }
 
   // Kick off an async DMA transfer into the buffer
-  {
-    STRING path;
-    static constexpr const char kTestFilename[] = "Z:\\opaque_white.raw";
-    RtlInitAnsiString(&path, kTestFilename);
-
-    HANDLE handle;
-    OBJECT_ATTRIBUTES attributes;
-    InitializeObjectAttributes(&attributes, &path, OBJ_CASE_INSENSITIVE, ObDosDevicesDirectory(), nullptr);
-
-    IO_STATUS_BLOCK status_block = {{0}};
-    NTSTATUS status =
-        NtCreateFile(&handle,                                            // FileHandle
-                     GENERIC_READ | FILE_READ_ATTRIBUTES | SYNCHRONIZE,  // DesiredAccess
-                     &attributes,                                        // ObjectAttributes
-                     &status_block,                                      // IoStatusBlock
-                     0,                                                  // AllocationSize
-                     FILE_ATTRIBUTE_NORMAL,                              // FileAttributes
-                     FILE_SHARE_READ,                                    // ShareAccess
-                     FILE_OPEN,                                          // CreateDisposition
-                     FILE_NON_DIRECTORY_FILE | FILE_RANDOM_ACCESS | FILE_NO_INTERMEDIATE_BUFFERING);  // CreateOptions
-    ASSERT(status == 0);
-
-    LARGE_INTEGER byte_offset = {{0, 0}};
-    status_block.Status = STATUS_PENDING;
-
-    status = NtReadFile(handle,
-                        nullptr,                                 // Event
-                        nullptr,                                 // ApcRoutine
-                        nullptr,                                 // ApcContext
-                        &status_block,                           // IoStatusBlock
-                        host_.GetTextureMemoryForStage(kStage),  // Buffer
-                        kTextureSize * kTextureSize * 4,         // Length
-                        &byte_offset);
-    ASSERT(status == STATUS_PENDING);
-
-    while (status_block.Status == STATUS_PENDING) {
-      Sleep(1);
-    }
-
-    NtClose(handle);
-
-    pb_printat(info_row++, 0, "Read 0x%X", reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(kStage))[0]);
-  }
+  ReadRawRGBAIntoBuffer("Z:\\opaque_white.raw", host_.GetTextureMemoryForStage(kStage),
+                        kTextureSize * kTextureSize * 4);
+  pb_printat(info_row++, 0, "Read 0x%X", reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(kStage))[0]);
 
   // Point the output surface back at the framebuffer.
   {
@@ -199,12 +222,72 @@ void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoSurface() {
   // Draw a quad with the texture.
   Draw(kStage);
 
-  pb_printat(0, 0, "%s\n", kReadFromFileTestName);
+  pb_printat(0, 0, "%s\n", kReadFromFileToSurfaceTestName);
   pb_print("Texture should be full white");
   pb_printat(info_row++, 0, "Surf flush 0x%X", reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(kStage))[0]);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kReadFromFileTestName);
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kReadFromFileToSurfaceTestName);
+}
+
+void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoTexture() {
+  host_.PrepareDraw(0xFF111111);
+
+  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
+
+  const uint32_t kStage = 0;
+  const auto kTextureMemoryAddr = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(kStage));
+
+  GenerateRGBATestPattern(host_.GetTextureMemoryForStage(0), kTextureSize, kTextureSize);
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+  texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+  texture_stage.SetEnabled();
+  host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  auto draw = [this](float left, float top) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.f, 0.f);
+    host_.SetVertex(left, top, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(kTextureSize, 0.f);
+    host_.SetVertex(left + kTextureSize, top, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(kTextureSize, kTextureSize);
+    host_.SetVertex(left + kTextureSize, top + kTextureSize, 0.1f, 1.0f);
+
+    host_.SetTexCoord0(0.f, kTextureSize);
+    host_.SetVertex(left, top + kTextureSize, 0.1f, 1.0f);
+    host_.End();
+    host_.PBKitBusyWait();
+  };
+
+  auto left_offset = floorf((host_.GetFramebufferWidthF() - (kTextureSize * 2.f)) / 3.f);
+  const auto top_offset = host_.CenterY(kTextureSize);
+  draw(left_offset, top_offset);
+
+  // Kick off an async DMA transfer into the buffer
+  ReadRawRGBAIntoBuffer("Z:\\opaque_white.raw", host_.GetTextureMemoryForStage(kStage),
+                        kTextureSize * kTextureSize * 4);
+
+  // Draw a second quad with the updated texture content
+  left_offset = left_offset * 2.f + kTextureSize;
+  draw(left_offset, top_offset);
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_printat(0, 0, "%s\n", kReadFromFileToTextureTestName);
+  pb_printat(5, 11, "Color pattern");
+  pb_printat(5, 40, "White");
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kReadFromFileToTextureTestName);
 }
 
 void DMACorruptionAroundSurfaceTests::Draw(uint32_t stage) const {
