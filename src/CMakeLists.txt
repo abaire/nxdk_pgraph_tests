@@ -116,6 +116,8 @@ add_library(
         STATIC
         debug_output.cpp
         debug_output.h
+        file_util.cpp
+        file_util.h
         ftp_logger.cpp
         ftp_logger.h
         image_resource.cpp

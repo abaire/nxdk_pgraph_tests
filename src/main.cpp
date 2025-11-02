@@ -18,6 +18,7 @@
 #pragma clang diagnostic pop
 #include <lwip/inet.h>
 #include <lwip/netif.h>
+#include <nxdk/format.h>
 #include <nxdk/net.h>
 
 #include <algorithm>
@@ -140,7 +141,7 @@ const UCHAR kSMCSlaveAddress = 0x20;
 const UCHAR kSMCRegisterPower = 0x02;
 const UCHAR kSMCPowerShutdown = 0x80;
 
-static bool EnsureDriveMounted(char drive_letter);
+static bool EnsureDriveMounted(char drive_letter, bool format = false);
 #ifdef DUMP_CONFIG_FILE
 static void DumpConfig(RuntimeConfig& config, std::vector<std::shared_ptr<TestSuite>>& test_suites);
 #else
@@ -210,6 +211,14 @@ int main() {
     pb_kill();
     return 1;
   };
+
+  if (!EnsureDriveMounted('Z', true)) {
+    debugPrint("Failed to mount cache dir.\n");
+    pb_show_debug_screen();
+    Sleep(kDelayOnFailureMilliseconds);
+    pb_kill();
+    return 1;
+  }
 
   TestHost::EnsureFolderExists(config.output_directory_path());
 
@@ -283,7 +292,7 @@ int main() {
   return 0;
 }
 
-static bool EnsureDriveMounted(char drive_letter) {
+static bool EnsureDriveMounted(char drive_letter, bool format) {
   if (nxIsDriveMounted(drive_letter)) {
     return true;
   }
@@ -299,6 +308,15 @@ static bool EnsureDriveMounted(char drive_letter) {
     return false;
   }
   device_path[28] = 0;
+
+  if (format) {
+    // Safety check - only allow formatting X,Y,Z
+    char last_char = device_path[27];
+    ASSERT((last_char == '3' || last_char == '4' || last_char == '5') && "Only X, Y, and Z drives may be formatted.");
+    if (!nxFormatVolume(device_path, 0)) {
+      return false;
+    }
+  }
 
   return nxMountDrive(drive_letter, device_path);
 }
