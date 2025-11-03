@@ -168,7 +168,7 @@ void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoSurface() {
 
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
-  const uint32_t kStage = 0;
+  static constexpr uint32_t kStage = 0;
   const auto kTextureMemoryAddr = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(kStage));
 
   // Initialize the texture memory to dark grey
@@ -233,11 +233,7 @@ void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoSurface() {
 void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoTexture() {
   host_.PrepareDraw(0xFF111111);
 
-  const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
-
-  const uint32_t kStage = 0;
-  const auto kTextureMemoryAddr = reinterpret_cast<uint32_t>(host_.GetTextureMemoryForStage(kStage));
-
+  static constexpr uint32_t kStage = 0;
   GenerateRGBATestPattern(host_.GetTextureMemoryForStage(0), kTextureSize, kTextureSize);
 
   auto &texture_stage = host_.GetTextureStage(0);
