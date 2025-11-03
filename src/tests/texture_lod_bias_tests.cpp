@@ -103,7 +103,8 @@ void TextureLodBiasTests::Test() {
 
   static constexpr float kSpacing = 32.f;
 #define FIXED_5_8(x) (static_cast<int32_t>((x) * (1 << 8)) & 0x1FFF)
-  static constexpr float kLODBias[] = {-4.f, -2.f, -1.f, 0.f, 1.f, 2.f, 3.f, 4.f, -0.8f, 1.2f, 1.8f, 2.5f, 3.5f};
+  static constexpr float kLODBias[] = {-15.f, -4.f, -2.f,  -1.f, 0.f,  1.f,  2.f, 3.f,
+                                       4.f,   15.f, -0.8f, 1.2f, 1.8f, 2.5f, 3.5f};
 
   float left = start_of_results;
   static constexpr float kLabelColumnStart = 20;
