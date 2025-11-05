@@ -222,6 +222,12 @@ void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestH
 
   host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, (rect.width << 16) + rect.x);
+  Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (rect.height << 16) + rect.y);
+  Pushbuffer::End();
+
   // Note: Clearing the depth stencil in B8 and G8B8 formats will result in a zeta limit exception.
   // host_.ClearDepthStencilRegion(0xFFFFFF, 0x0, rect.x, rect.y, rect.width, rect.height);
 
@@ -235,6 +241,10 @@ void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestH
 
   host_.SetSurfaceFormatImmediate(color_format, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, (rect.width << 16) + rect.x);
+  Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (rect.height << 16) + rect.y);
+  Pushbuffer::End();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
@@ -249,6 +259,10 @@ void SurfaceClipTests::TestXemuBug420() {
   const ClipRect rect = {0, 0, 512, 384};
   host_.SetSurfaceFormatImmediate(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, (rect.width << 16) + rect.x);
+  Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (rect.height << 16) + rect.y);
+  Pushbuffer::End();
 
   // This triggers an assertion failure:
   // `(pg->color_binding->width == pg->zeta_binding->width) && (pg->color_binding->height == pg->zeta_binding->height)'
@@ -312,6 +326,10 @@ void SurfaceClipTests::TestRenderTarget(const std::string &name, const ClipRect 
 
     host_.SetSurfaceFormat(TestHost::SCF_R5G6B5, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                            host_.GetFramebufferHeight(), false, rect.x, rect.y, rect.width, rect.height);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_HORIZONTAL, (rect.width << 16) + rect.x);
+    Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (rect.height << 16) + rect.y);
+    Pushbuffer::End();
   }
 
   host_.PrepareDraw();
