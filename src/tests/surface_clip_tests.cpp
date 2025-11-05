@@ -21,6 +21,8 @@ struct NamedSurfaceFormat {
 // clang-format off
 static constexpr SurfaceClipTests::ClipRect kTestRects[] = {
     {0, 0, 0, 0},
+    {0, 0, 512, 0},
+    {0, 0, 0, 384},
     // Using a zero sized clip that is offset leads to a buffer limit error while clearing on HW but is ignored on xemu.
     //{16, 8, 0, 0},
     {0, 0, 512, 384},
@@ -71,6 +73,16 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
  *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
  *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.
  *
+ * @tc rt_x0y0_w512h0
+ *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 512x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.
+ *
+ * @tc rt_x0y0_w0h384
+ *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 0x384, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.
+ *
  * @tc rt_x0y0_w512h384
  *  Configures a texture target as R5G6B5 and sets the clip region to 0,0 512x384, then clears the clipped region and
  *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
@@ -109,6 +121,20 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
  *
  * @tc x0y0_w0h0
  *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x0y0_w512h0
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 512x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary.
+ *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
+ *  pink.
+ *
+ * @tc x0y0_w0h384
+ *  Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 0x384, then clears the clipped region and
  *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
  *  green quads along the clip boundary.
  *  Because the format is 565, the colors are shifted from red -> green, light green -> light pink, and dark green ->
@@ -158,6 +184,16 @@ static std::string MakeTestName(bool render_target, const SurfaceClipTests::Clip
  *
  * @tc x0y0_w0h0_A8R8G8B8
  *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 0x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.
+ *
+ * @tc x0y0_w512h0_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 512x0, then clears the clipped region and
+ *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
+ *  green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.
+ *
+ * @tc x0y0_w0h384_A8R8G8B8
+ *  Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 0x384, then clears the clipped region and
  *  draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter
  *  green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.
  *
