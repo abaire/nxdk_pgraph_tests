@@ -547,6 +547,19 @@ static void CreateTrianglePair(TestHost &host, std::shared_ptr<VertexBuffer> &bl
     bleed_buffer->DefineTriangle(0, one_pos, two_pos, three_pos);
     auto vertex = bleed_buffer->Lock();
 
+    vertex[0].weight = 1.f;
+    vertex[0].fog_coord = 1.f;
+    vertex[0].point_size = 1.f;
+    vertex[0].SetNormal(1.0f, 1.0f, 1.0f);
+    vertex[0].SetDiffuse(1.0f, 1.0f, 1.0f, 1.0f);
+    vertex[0].SetSpecular(1.0f, 1.0f, 1.0f, 1.0f);
+    vertex[0].SetBackDiffuse(1.0f, 1.0f, 1.0f, 1.0f);
+    vertex[0].SetBackSpecular(1.0f, 1.0f, 1.0f, 1.0f);
+    vertex[0].SetTexCoord0(1.0f, 1.0f);
+    vertex[0].SetTexCoord1(1.0f, 1.0f);
+    vertex[0].SetTexCoord2(1.0f, 1.0f);
+    vertex[0].SetTexCoord3(1.0f, 1.0f);
+
     // Flag the vertex used in inline-element mode to all green (and a reddish weight).
     vertex[1].weight = 0.66f;
     vertex[1].fog_coord = 0.5f;
