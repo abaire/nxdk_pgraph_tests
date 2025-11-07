@@ -26,6 +26,7 @@ static const TestConfig testConfigs[]{
 };
 
 static const char kLargestValueTest[] = "LargestPointSize";
+static const char kVertexShaderPointSizeTest[] = "VSPointSize";
 
 /**
  * Initializes the test suite and creates test cases.
@@ -95,19 +96,23 @@ static const char kLargestValueTest[] = "LargestPointSize";
  *   by 16 per point starting at the upper left point.
  *
  * @tc LargestPointSize_FF
- * Using the fixed function pipeline:
- *   Top row renders a single point with a point size of 1 pixel (8), then a huge value with ~0x1FF set.
- *   Bottom row renders a single point with a point size of 511 (0x1FF), then a huge value with ~0x1FF set.
- *   64 pixel ruler quads are rendered near the huge value points.
- *   Demonstrates that values larger than 0x1FF are completely ignored rather than masked.
+ *   Using the fixed function pipeline:
+ *     Top row renders a single point with a point size of 1 pixel (8), then a huge value with ~0x1FF set.
+ *     Bottom row renders a single point with a point size of 511 (0x1FF), then a huge value with ~0x1FF set.
+ *     64 pixel ruler quads are rendered near the huge value points.
+ *     Demonstrates that values larger than 0x1FF are completely ignored rather than masked.
  *
  * @tc LargestPointSize_VS
- * Using the programmable pipeline:
- *   Top row renders a single point with a point size of 1 pixel (8), then a huge value with ~0x1FF set.
- *   Bottom row renders a single point with a point size of 511 (0x1FF), then a huge value with ~0x1FF set.
- *   64 pixel ruler quads are rendered near the huge value points.
- *   Demonstrates that values larger than 0x1FF are completely ignored rather than masked.
+ *   Using the programmable pipeline:
+ *     Top row renders a single point with a point size of 1 pixel (8), then a huge value with ~0x1FF set.
+ *     Bottom row renders a single point with a point size of 511 (0x1FF), then a huge value with ~0x1FF set.
+ *     64 pixel ruler quads are rendered near the huge value points.
+ *     Demonstrates that values larger than 0x1FF are completely ignored rather than masked.
  *
+ * @tc VSPointSize
+ *   Using the programmable pipeline, renders a point using immediate mode (SET_POINT_SIZE) followed by a DrawArrays
+ *   with a configured point size (v6) parameter. Demonstrates that point size is entirely governed by SET_POINT_SIZE
+ *   and that it is not possible for the vertex shader to influence point size.
  */
 PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Point size", config) {
@@ -122,6 +127,8 @@ PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Con
     name += use_shader ? "_VS" : "_FF";
     tests_[name] = [this, name, use_shader]() { TestLargestPointSize(name, use_shader); };
   }
+
+  tests_[kVertexShaderPointSizeTest] = [this]() { TestVertexShaderPointSize(); };
 }
 
 void PointSizeTests::Initialize() {
@@ -308,4 +315,60 @@ void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shad
 
   pb_draw_text_screen();
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void PointSizeTests::TestVertexShaderPointSize() {
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.PrepareDraw(0xFF444444);
+
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+    Pushbuffer::End();
+  }
+
+  auto draw = [this](float y, float immediate_size, float ia_size) {
+    {
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_POINT_SIZE, static_cast<uint32_t>(immediate_size * 8.f));
+      Pushbuffer::End();
+    }
+
+    host_.SetDiffuse(0xFFFF0000);
+    host_.Begin(TestHost::PRIMITIVE_POINTS);
+    vector_t screen_point{128.f, y, 1.f, 1.f};
+    host_.SetVertex(screen_point);
+    host_.End();
+
+    // Draw another point using inline arrays.
+    auto buffer = host_.AllocateVertexBuffer(1);
+    auto vertex = buffer->Lock();
+    vertex->SetDiffuse(1.f, 1.f, 0.f);
+    vertex->SetPointSize(ia_size);
+    vertex->SetPosition(400.f, y, 1.f);
+    buffer->Unlock();
+
+    host_.SetVertexBuffer(buffer);
+    host_.DrawArrays(host_.POSITION | host_.DIFFUSE | host_.POINT_SIZE, TestHost::PRIMITIVE_POINTS);
+  };
+
+  static constexpr auto kLeftX = 1;
+  static constexpr auto kRightX = 24;
+
+  pb_printat(7, kLeftX, "30 px");
+  pb_printat(7, kRightX, "2 px");
+  draw(210.f, 30.f, 2.f);
+
+  pb_printat(11, kLeftX, "10 px");
+  pb_printat(11, kRightX, "50 px");
+  draw(320.f, 10.f, 50.f);
+
+  pb_printat(0, 0, "%s\n", kVertexShaderPointSizeTest);
+  pb_printat(5, 6, "Immediate");
+  pb_printat(5, 32, "Inline Array");
+
+  pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kVertexShaderPointSizeTest);
 }

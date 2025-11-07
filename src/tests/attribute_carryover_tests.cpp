@@ -139,6 +139,7 @@ static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryov
  * @tc L-ps0.8_0.0_0.0_1.0-ib
  *  Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw
  *  mode inline buffers.
+ *  WARNING: This test is non-hermetic as SET_POINT_SIZE does not set the v6 input to the vertex shader!
  *
  * @tc L-s0.1_0.0_1.0_1.0-da
  *  Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode
@@ -331,6 +332,7 @@ static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryov
  * @tc T-ps0.8_0.0_0.0_1.0-ib
  *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw
  *  mode inline buffers.
+ *  WARNING: This test is non-hermetic as SET_POINT_SIZE does not set the v6 input to the vertex shader!
  *
  * @tc T-s0.1_0.0_1.0_1.0-da
  *  Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode
