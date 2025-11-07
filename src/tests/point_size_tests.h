@@ -24,6 +24,7 @@ class PointSizeTests : public TestSuite {
 
  private:
   void Test(const std::string &name, bool point_smooth_enabled, int point_size_increment, bool use_shader);
+  void TestLargestPointSize(const std::string &name, bool use_shader);
 };
 
 #endif  // POINTSIZETESTS_H
