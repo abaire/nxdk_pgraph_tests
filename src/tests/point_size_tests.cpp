@@ -20,7 +20,7 @@ static const TestConfig testConfigs[]{
     {"PointSmoothOn_08_FF", true, 8, false},  {"PointSmoothOff_08_FF", false, 8, false},
     {"PointSmoothOn_16_FF", true, 16, false}, {"PointSmoothOff_16_FF", false, 16, false},
     {"PointSmoothOn_01_VS", true, 1, true},   {"PointSmoothOff_01_VS", false, 1, true},
-    {"PointSmoothOn_04_VS", true, 4, true},   {"PointSmoothOff_01_VS", false, 4, true},
+    {"PointSmoothOn_04_VS", true, 4, true},   {"PointSmoothOff_04_VS", false, 4, true},
     {"PointSmoothOn_08_VS", true, 8, true},   {"PointSmoothOff_08_VS", false, 8, true},
     {"PointSmoothOn_16_VS", true, 16, true},  {"PointSmoothOff_16_VS", false, 16, true},
 };
