@@ -88,6 +88,7 @@ generate_nv2a_vshinc_files(
         shaders/fog_vec4_z.vsh
         shaders/fog_vec4_zw.vsh
         shaders/passthrough.vsh
+        shaders/passthrough_diffuse_from_point_size_mul_const.vsh
         shaders/passthrough_just_position_and_color.vsh
         shaders/passthrough_mul_color_by_constant.vsh
         shaders/passthrough_no_point_size.vsh

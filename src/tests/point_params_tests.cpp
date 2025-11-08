@@ -223,7 +223,8 @@ static void RenderPoints(RowStartCB&& on_row_start, RenderPointCB&& on_render_po
   }
 }
 
-static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t num_params, bool use_shader) {
+static void RenderLoop(TestHost& host, int point_size, const PointParams* param_sets, uint32_t num_params,
+                       bool use_shader) {
   // IMPORTANT: It appears that only stage 3 may be used for point sprites.
   // All other texture stages will not get the automatically expanded texture coordinates, leading to a single texel
   // being stretched across the expanded point.
@@ -242,12 +243,13 @@ static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t n
   int param_index;
   auto on_row_start = [&param_index]() { param_index = 0; };
 
-  auto on_render_point = [&host, use_shader, param_sets, num_params, &param_index](float x, float y, float z, float red,
-                                                                                   float green, float blue) {
+  auto on_render_point = [&host, point_size, use_shader, param_sets, num_params, &param_index](
+                             float x, float y, float z, float red, float green, float blue) {
     const auto& params = param_sets[param_index % num_params];
     ++param_index;
 
     Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SIZE, 8);
     Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, params.scaleFactorA);
     Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, params.scaleFactorB);
     Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, params.scaleFactorC);
@@ -258,21 +260,34 @@ static void RenderLoop(TestHost& host, const PointParams* param_sets, uint32_t n
     Pushbuffer::PushF(NV097_SET_POINT_PARAMS_MIN_SIZE, params.minSize);
     Pushbuffer::End();
 
-    host.Begin(TestHost::PRIMITIVE_POINTS);
+    if (use_shader) {
+      // Vertex shader iPts is not populated by NV097_SET_POINT_SIZE, so for the test to be hermetic, immediate mode
+      // cannot be used.
+      auto buffer = host.AllocateVertexBuffer(1);
+      auto vertex = buffer->Lock();
+      vertex->SetDiffuse(red, green, blue);
+      vertex->SetPointSize(static_cast<float>(point_size) / 8.f);
+      vertex->SetPosition(x, y, z, 1.f);
+      vertex->SetTexCoord3(0.f, 0.f, 0.f, 1.f);
+      buffer->Unlock();
 
-    host.SetDiffuse(red, green, blue);
-
-    vector_t screen_point{x, y, z, 1.f};
-    if (!use_shader) {
+      host.SetVertexBuffer(buffer);
+      host.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE | TestHost::DIFFUSE | TestHost::TEXCOORD3,
+                      TestHost::PRIMITIVE_POINTS);
+    } else {
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
+      Pushbuffer::End();
+      host.SetDiffuse(red, green, blue);
+      host.Begin(TestHost::PRIMITIVE_POINTS);
+      vector_t screen_point{x, y, z, 1.f};
       vector_t transformed;
       host.UnprojectPoint(transformed, screen_point, screen_point[2]);
       VectorCopyVector(screen_point, transformed);
+      host.SetTexCoord3(0.f, 0.f, 0.f, 1.f);
+      host.SetVertex(screen_point);
+      host.End();
     }
-    PrintMsg("Drawing point %f, %f, %f\n", screen_point[0], screen_point[1], screen_point[2]);
-    host.SetTexCoord3(0.f, 0.f, 0.f, 1.f);
-    host.SetVertex(screen_point);
-
-    host.End();
   };
 
   RenderPoints(on_row_start, on_render_point);
@@ -297,10 +312,9 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, point_params_enabled);
   Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, point_smooth_enabled);
-  Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
   Pushbuffer::End();
 
-  RenderLoop(host_, kBasicPointParams, kNumBasicPointParamsSets, use_shader);
+  RenderLoop(host_, point_size, kBasicPointParams, kNumBasicPointParamsSets, use_shader);
 
   {
     Pushbuffer::Begin();
@@ -329,10 +343,9 @@ void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, true);
   Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, true);
-  Pushbuffer::Push(NV097_SET_POINT_SIZE, 128);
   Pushbuffer::End();
 
-  RenderLoop(host_, kDetailedPointParams, kNumDetailedPointParamsSets, use_shader);
+  RenderLoop(host_, 128, kDetailedPointParams, kNumDetailedPointParamsSets, use_shader);
 
   {
     Pushbuffer::Begin();
@@ -385,20 +398,29 @@ void PointParamsTests::TestScaleParams(bool scale_a, bool scale_b, bool scale_c,
   float x = kInset;
   float y = kTop;
   for (uint32_t z = 0; z < 192; ++z) {
-    host_.SetPointSize(kPointSize);
+    if (use_shader) {
+      // Vertex shader iPts is not populated by NV097_SET_POINT_SIZE, so for the test to be hermetic, immediate mode
+      // cannot be used.
+      auto buffer = host_.AllocateVertexBuffer(1);
+      auto vertex = buffer->Lock();
+      vertex->SetDiffuse(0.93f, 0.33f, 0.33f);
+      vertex->SetPointSize(kPointSize);
+      vertex->SetPosition(x, y, static_cast<float>(z), 1.f);
+      buffer->Unlock();
 
-    host_.Begin(TestHost::PRIMITIVE_POINTS);
-
-    vector_t screen_point{x, y, static_cast<float>(z), 1.f};
-    if (!use_shader) {
+      host_.SetVertexBuffer(buffer);
+      host_.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE | TestHost::DIFFUSE, TestHost::PRIMITIVE_POINTS);
+    } else {
+      host_.SetPointSize(kPointSize);
+      host_.SetDiffuse(0xFF5555EE);
+      host_.Begin(TestHost::PRIMITIVE_POINTS);
+      vector_t screen_point{x, y, static_cast<float>(z), 1.f};
       vector_t transformed;
       host_.UnprojectPoint(transformed, screen_point, screen_point[2]);
       VectorCopyVector(screen_point, transformed);
+      host_.SetVertex(screen_point);
+      host_.End();
     }
-    host_.SetDiffuse(0xFF5555EE);
-    host_.SetVertex(screen_point);
-
-    host_.End();
 
     x += kSpacing;
     if (x >= host_.GetFramebufferWidthF() - kInset) {
