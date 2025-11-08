@@ -33,6 +33,7 @@ static const TestConfig testConfigs[]{
 };
 
 static const char kLargestValueTest[] = "LargestPointSize";
+static const char kSmallestValueTest[] = "SmallestPointSize";
 static const char kVertexShaderPointSizeTest[] = "VSPointSize";
 
 /**
@@ -116,6 +117,12 @@ static const char kVertexShaderPointSizeTest[] = "VSPointSize";
  *     64 pixel ruler quads are rendered near the huge value points.
  *     Demonstrates that values larger than 0x1FF are completely ignored rather than masked.
  *
+ * @tc SmallestPointSize_FF
+ *   Using the fixed function pipeline, render points sized 0 - 1 with point params and smoothing off.
+ *
+ * @tc SmallestPointSize_VS
+ *   Using the programmable pipeline, render points sized 0 - 1 with point params enabled and smoothing off.
+ *
  * @tc VSPointSize
  *   Using the programmable pipeline, renders two rows with a point using immediate mode (SET_POINT_SIZE) followed by a
  *   DrawArrays with a configured point size (v6) parameter. Then renders another two rows with point params enabled
@@ -136,6 +143,10 @@ PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Con
     std::string name = kLargestValueTest;
     name += use_shader ? "_VS" : "_FF";
     tests_[name] = [this, name, use_shader]() { TestLargestPointSize(name, use_shader); };
+
+    name = kSmallestValueTest;
+    name += use_shader ? "_VS" : "_FF";
+    tests_[name] = [this, name, use_shader]() { TestSmallestPointSize(name, use_shader); };
   }
 
   tests_[kVertexShaderPointSizeTest] = [this]() { TestVertexShaderPointSize(); };
@@ -321,6 +332,67 @@ void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shad
 
   pb_print("%s\n", name.c_str());
   pb_print("Point size 0x%08X\n", kLargePointSize);
+
+  pb_draw_text_screen();
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void PointSizeTests::TestSmallestPointSize(const std::string& name, bool use_shader) {
+  if (use_shader) {
+    auto shader = std::make_shared<PassthroughVertexShader>();
+    host_.SetVertexShaderProgram(shader);
+  } else {
+    host_.SetVertexShaderProgram(nullptr);
+  }
+
+  host_.PrepareDraw(0xFF444444);
+
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, use_shader);
+    Pushbuffer::End();
+  }
+
+  auto draw_point = [this, use_shader](float cx, float cy, uint32_t point_size) {
+    if (use_shader) {
+      auto buffer = host_.AllocateVertexBuffer(1);
+      auto vertex = buffer->Lock();
+      vertex->SetPointSize(static_cast<float>(point_size) / 8.f);
+      vertex->SetPosition(cx, cy, 1.f);
+      buffer->Unlock();
+
+      host_.SetVertexBuffer(buffer);
+      host_.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE, TestHost::PRIMITIVE_POINTS);
+      TestHost::PBKitBusyWait();
+    } else {
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
+      Pushbuffer::End();
+      host_.Begin(TestHost::PRIMITIVE_POINTS);
+      vector_t screen_point{cx, cy, 1.f, 1.f};
+      vector_t transformed;
+      host_.UnprojectPoint(transformed, screen_point);
+      VectorCopyVector(screen_point, transformed);
+      host_.SetVertex(screen_point);
+      host_.End();
+    }
+  };
+
+  host_.SetDiffuse(0xFFFFFFFF);
+
+  static constexpr float kMargin = 16.f;
+  static constexpr float kTop = 240.f;
+
+  float left = kMargin;
+  float increment = floorf((host_.GetFramebufferWidthF() - (kMargin * 2.f) - 8.f) / 7.f);
+
+  for (uint32_t i = 0; i <= 8; ++i) {
+    draw_point(left, kTop, i);
+    left += increment;
+  }
+
+  pb_print("%s\n", name.c_str());
+  pb_print("Fractional point sizes 0-8\n");
 
   pb_draw_text_screen();
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
