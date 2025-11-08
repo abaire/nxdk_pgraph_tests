@@ -9,11 +9,6 @@
 #include "shaders/passthrough_vertex_shader.h"
 #include "texture_generator.h"
 
-// clang-format off
-static constexpr uint32_t kPassthroughNoPointSizeShader[] = {
-#include "passthrough_no_point_size.vshinc"
-
-};
 // clang-format on
 struct TestConfig {
   const char* name;
@@ -301,7 +296,6 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
                             int point_size, bool use_shader) {
   if (use_shader) {
     auto shader = std::make_shared<PassthroughVertexShader>();
-    shader->SetShader(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);
@@ -332,7 +326,6 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
 void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
   if (use_shader) {
     auto shader = std::make_shared<PassthroughVertexShader>();
-    shader->SetShader(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);
@@ -363,7 +356,6 @@ void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
 void PointParamsTests::TestScaleParams(bool scale_a, bool scale_b, bool scale_c, bool use_shader) {
   if (use_shader) {
     auto shader = std::make_shared<PassthroughVertexShader>();
-    shader->SetShader(kPassthroughNoPointSizeShader, sizeof(kPassthroughNoPointSizeShader));
     host_.SetVertexShaderProgram(shader);
   } else {
     host_.SetVertexShaderProgram(nullptr);
