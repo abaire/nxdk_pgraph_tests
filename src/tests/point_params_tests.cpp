@@ -269,6 +269,7 @@ static void RenderLoop(TestHost& host, int point_size, const PointParams* param_
       host.SetVertexBuffer(buffer);
       host.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE | TestHost::DIFFUSE | TestHost::TEXCOORD3,
                       TestHost::PRIMITIVE_POINTS);
+      TestHost::PBKitBusyWait();
     } else {
       Pushbuffer::Begin();
       Pushbuffer::Push(NV097_SET_POINT_SIZE, point_size);
@@ -402,6 +403,7 @@ void PointParamsTests::TestScaleParams(bool scale_a, bool scale_b, bool scale_c,
 
       host_.SetVertexBuffer(buffer);
       host_.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE | TestHost::DIFFUSE, TestHost::PRIMITIVE_POINTS);
+      TestHost::PBKitBusyWait();
     } else {
       host_.SetPointSize(kPointSize);
       host_.SetDiffuse(0xFF5555EE);
