@@ -6,6 +6,13 @@
 #include <memory>
 
 #include "shaders/passthrough_vertex_shader.h"
+#include "texture_generator.h"
+
+// clang-format off
+static const uint32_t kPtsColorShader[] = {
+#include "passthrough_diffuse_from_point_size_mul_const.vshinc"
+};
+// clang-format on
 
 struct TestConfig {
   const char* name;
@@ -110,9 +117,12 @@ static const char kVertexShaderPointSizeTest[] = "VSPointSize";
  *     Demonstrates that values larger than 0x1FF are completely ignored rather than masked.
  *
  * @tc VSPointSize
- *   Using the programmable pipeline, renders a point using immediate mode (SET_POINT_SIZE) followed by a DrawArrays
- *   with a configured point size (v6) parameter. Demonstrates that point size is entirely governed by SET_POINT_SIZE
- *   and that it is not possible for the vertex shader to influence point size.
+ *   Using the programmable pipeline, renders two rows with a point using immediate mode (SET_POINT_SIZE) followed by a
+ *   DrawArrays with a configured point size (v6) parameter. Then renders another two rows with point params enabled
+ *   with a constant scale factor.
+ *   Demonstrates that point size is entirely governed by SET_POINT_SIZE when point params is disabled and that it is
+ *   not possible for the vertex shader to influence point size. Further demonstrates that point size is entirely
+ *   goverened by oPts if point params are enabled.
  */
 PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Point size", config) {
@@ -318,23 +328,23 @@ void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shad
 }
 
 void PointSizeTests::TestVertexShaderPointSize() {
+  auto passthroughShader = std::make_shared<PassthroughVertexShader>();
   auto shader = std::make_shared<PassthroughVertexShader>();
-  host_.SetVertexShaderProgram(shader);
+  shader->SetShader(kPtsColorShader, sizeof(kPtsColorShader));
+  static constexpr float kPointSizeToColor = 1.f / 64.f;
+  shader->SetUniformF(120 - PassthroughVertexShader::kShaderUserConstantOffset, kPointSizeToColor, kPointSizeToColor,
+                      kPointSizeToColor, 1);
 
   host_.PrepareDraw(0xFF444444);
 
-  {
-    Pushbuffer::Begin();
-    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
-    Pushbuffer::End();
-  }
-
-  auto draw = [this](float y, float immediate_size, float ia_size) {
+  auto draw = [this, &passthroughShader, &shader](float y, float immediate_size, float ia_size) {
     {
       Pushbuffer::Begin();
       Pushbuffer::Push(NV097_SET_POINT_SIZE, static_cast<uint32_t>(immediate_size * 8.f));
       Pushbuffer::End();
     }
+
+    host_.SetVertexShaderProgram(passthroughShader);
 
     host_.SetDiffuse(0xFFFF0000);
     host_.Begin(TestHost::PRIMITIVE_POINTS);
@@ -345,30 +355,88 @@ void PointSizeTests::TestVertexShaderPointSize() {
     // Draw another point using inline arrays.
     auto buffer = host_.AllocateVertexBuffer(1);
     auto vertex = buffer->Lock();
-    vertex->SetDiffuse(1.f, 1.f, 0.f);
     vertex->SetPointSize(ia_size);
     vertex->SetPosition(400.f, y, 1.f);
     buffer->Unlock();
 
+    host_.SetVertexShaderProgram(shader);
+
     host_.SetVertexBuffer(buffer);
-    host_.DrawArrays(host_.POSITION | host_.DIFFUSE | host_.POINT_SIZE, TestHost::PRIMITIVE_POINTS);
+    host_.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE, TestHost::PRIMITIVE_POINTS);
   };
 
   static constexpr auto kLeftX = 1;
   static constexpr auto kRightX = 24;
 
-  pb_printat(7, kLeftX, "30 px");
-  pb_printat(7, kRightX, "2 px");
-  draw(210.f, 30.f, 2.f);
+  auto text_row = 5;
+  auto draw_y = 150.f;
+  static constexpr int kIncRow = 2;
+  static constexpr float kIncY = 60.f;
 
-  pb_printat(11, kLeftX, "10 px");
-  pb_printat(11, kRightX, "50 px");
-  draw(320.f, 10.f, 50.f);
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+    Pushbuffer::End();
+
+    pb_printat(text_row, kLeftX, "30 px");
+    pb_printat(text_row, kRightX, "2 px");
+    draw(draw_y, 30.f, 2.f);
+    text_row += kIncRow;
+    draw_y += kIncY;
+
+    pb_printat(text_row, kLeftX, "10 px");
+    pb_printat(text_row, kRightX, "50 px");
+    draw(draw_y, 10.f, 50.f);
+  }
+
+  text_row += kIncRow;
+  pb_printat(text_row++, 0, "Scale 1x");
+  draw_y += kIncY + 16.f;
+
+  {
+    static constexpr float kSizeRange = 64.f;
+    static constexpr float kScaleBias = 0.f;
+    static constexpr float kMinSize = 1.f;
+
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, true);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, 1.f);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, 0.f);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, 0.f);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE, kSizeRange);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, kSizeRange);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, kSizeRange);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_BIAS, kScaleBias);
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_MIN_SIZE, kMinSize);
+    Pushbuffer::End();
+
+    pb_printat(text_row, kLeftX, "30 px");
+    pb_printat(text_row, kRightX, "2 px");
+    draw(draw_y, 30.f, 2.f);
+    text_row += kIncRow;
+    draw_y += kIncY;
+
+    Pushbuffer::Begin();
+    Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, 0.25f);
+    Pushbuffer::End();
+    pb_printat(text_row++, kLeftX, "Scale 2x");
+
+    pb_printat(text_row, kLeftX, "10 px");
+    pb_printat(text_row, kRightX, "25 px");
+    draw(draw_y, 10.f, 25.f);
+  }
 
   pb_printat(0, 0, "%s\n", kVertexShaderPointSizeTest);
-  pb_printat(5, 6, "Immediate");
-  pb_printat(5, 32, "Inline Array");
+  pb_printat(1, 26, "IA color = iPts / 64\n");
+  pb_printat(3, 6, "Immediate");
+  pb_printat(3, 32, "Inline Array");
 
   pb_draw_text_screen();
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kVertexShaderPointSizeTest);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+  Pushbuffer::End();
 }
