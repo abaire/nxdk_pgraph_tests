@@ -275,8 +275,6 @@ void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shad
     float left = cx - (kMaxPointSize * 0.5f);
     float top = cy - (kMaxPointSize * 0.5f);
 
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-
     if (!use_shader) {
       host_.DrawScreenQuad(left, top, left + kMaxPointSize, top + kMaxPointSize, 1.f);
       host_.DrawScreenQuad(left - (kRulerOffset + kRulerSize), top, left - kRulerOffset, top + kMaxPointSize, 1.f);
@@ -289,11 +287,12 @@ void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shad
         host_.SetVertex(left, bottom, 1.f);
       };
 
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
       draw_rect(left, top, left + kMaxPointSize, top + kMaxPointSize);
       draw_rect(left - (kRulerOffset + kRulerSize), top, left - kRulerOffset, top + kMaxPointSize);
       draw_rect(left, top - (kRulerOffset + kRulerSize), left + kMaxPointSize, top - kRulerOffset);
+      host_.End();
     }
-    host_.End();
 
     host_.SetDiffuse(0xFFFFFFFF);
 
