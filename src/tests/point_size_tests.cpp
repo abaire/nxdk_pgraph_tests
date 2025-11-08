@@ -363,6 +363,7 @@ void PointSizeTests::TestVertexShaderPointSize() {
 
     host_.SetVertexBuffer(buffer);
     host_.DrawArrays(TestHost::POSITION | TestHost::POINT_SIZE, TestHost::PRIMITIVE_POINTS);
+    TestHost::PBKitBusyWait();
   };
 
   static constexpr auto kLeftX = 1;
