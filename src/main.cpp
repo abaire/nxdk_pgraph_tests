@@ -80,6 +80,7 @@
 #include "tests/pixel_shader_tests.h"
 #include "tests/point_params_tests.h"
 #include "tests/point_size_tests.h"
+#include "tests/point_sprite_tests.h"
 #include "tests/pvideo_tests.h"
 #include "tests/set_vertex_data_tests.h"
 #include "tests/shade_model_tests.h"
@@ -466,6 +467,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(PixelShaderTests)
   REG_TEST(PointParamsTests)
   REG_TEST(PointSizeTests)
+  REG_TEST(PointSpriteTests)
   REG_TEST(PvideoTests)
   REG_TEST(SetVertexDataTests)
   REG_TEST(ShadeModelTests)
