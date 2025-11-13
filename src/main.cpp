@@ -161,133 +161,54 @@ int main() {
   debugPrint("Set video mode");
   XVideoSetMode(kFramebufferWidth, kFramebufferHeight, 32, REFRESH_DEFAULT);
 
-  // Reserve 4 times the size of the default framebuffers to allow for antialiasing.
-  pb_set_fb_size_multiplier(4);
-  int status = pb_init();
-  if (status) {
-    debugPrint("pb_init Error %d\n", status);
-    pb_show_debug_screen();
-    Sleep(kDelayOnFailureMilliseconds);
-    return 1;
+#define CONEXANT_ENCODER_ID 0x8A
+
+  XVideoSetFlickerFilter(0);
+  XVideoSetSoftenFilter(FALSE);
+  //  AvSendTVEncoderOption((PVOID)VIDEO_BASE,
+  //                        VIDEO_ENC_FLICKERFILTER,
+  //                        0,
+  //                        NULL);
+
+  // From the Conexant datasheet, set EN_REG_RD to enable register reads.
+  HalWriteSMBusValue(CONEXANT_ENCODER_ID, 0x6C, FALSE, 0x46);
+  Sleep(1);
+  HalWriteSMBusValue(CONEXANT_ENCODER_ID, 0x6C, FALSE, 0xC6);
+  Sleep(1);
+
+  // See how the TV encoder 0x06 register changes over time.
+  for (auto q = 0; q < 60; ++q) {
+#define READ_REG(reg)                                               \
+  do {                                                              \
+    ULONG c_value = 0xFFFFFFFF;                                     \
+    HalReadSMBusValue(CONEXANT_ENCODER_ID, (reg), FALSE, &c_value); \
+    PrintMsg("Frame %d: reg 0x%X Value 0x%X\n", q, (reg), c_value); \
+  } while (0)
+
+    READ_REG(0x00);
+    READ_REG(0x02);
+    READ_REG(0x04);
+    READ_REG(0x06);
+    READ_REG(0x6C);
+
+    //    pb_fill(0, 0, 640, 480, q & 0x01 ? 0xFF444444 : 0xFF333333);
+    //    pb_erase_depth_stencil_buffer(0, 0, 640, 480);
+    //    pb_erase_text_screen();
+    //    pb_print("%d\n", q);
+    //    pb_draw_text_screen();
+    //    while (pb_finished()) {
+    //      /* Not ready to swap yet */
+    //    }
+    //    pb_reset();
+
+    //    XVideoWaitForVBlank();
+    //    PrintMsg("\n\n\n\n");
+
+    // Sleep the encoder
+    // This causes the video to turn off and the xbox shuts down after some time.
+    //    PrintMsg("Sleeping encoder");
+    //    HalWriteSMBusValue(CONEXANT_ENCODER_ID, 0x30, FALSE, 0x80);
   }
-
-  if (SDL_Init(SDL_INIT_GAMECONTROLLER)) {
-    debugPrint("Failed to initialize SDL_GAMECONTROLLER.");
-    debugPrint("%s", SDL_GetError());
-    pb_show_debug_screen();
-    Sleep(kDelayOnFailureMilliseconds);
-    pb_kill();
-    return 1;
-  }
-
-  if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-    debugPrint("Failed to initialize SDL_image PNG mode.");
-    pb_show_debug_screen();
-    Sleep(kDelayOnFailureMilliseconds);
-    pb_kill();
-    return 1;
-  }
-
-  Pushbuffer::Initialize();
-
-  RuntimeConfig config;
-#ifndef DUMP_CONFIG_FILE
-  {
-    std::vector<std::string> errors;
-    if (!LoadConfig(config, errors)) {
-      debugPrint("Failed to load config, using default values.\n");
-      for (auto& err : errors) {
-        debugPrint("%s\n", err.c_str());
-      }
-      pb_show_debug_screen();
-    }
-  }
-#endif  // DUMP_CONFIG_FILE
-
-  if (!EnsureDriveMounted(config.output_directory_path().front())) {
-    debugPrint("Failed to mount %s, please make sure output directory is on a writable drive.\n",
-               config.output_directory_path().c_str());
-    pb_show_debug_screen();
-    Sleep(kDelayOnFailureMilliseconds);
-    pb_kill();
-    return 1;
-  };
-
-  if (!EnsureDriveMounted('Z', true)) {
-    debugPrint("Failed to mount cache dir.\n");
-    pb_show_debug_screen();
-    Sleep(kDelayOnFailureMilliseconds);
-    pb_kill();
-    return 1;
-  }
-
-  TestHost::EnsureFolderExists(config.output_directory_path());
-
-  std::vector<std::shared_ptr<TestSuite>> test_suites;
-  std::shared_ptr<FTPLogger> ftp_logger;
-#ifndef DUMP_CONFIG_FILE
-  auto network_config_mode = config.network_config_mode();
-  if (network_config_mode != RuntimeConfig::NetworkConfigMode::OFF) {
-    debugPrint("Initializing network...\n");
-    pb_show_debug_screen();
-
-    nx_net_mode_t network_mode = NX_NET_AUTO;
-    if (network_config_mode == RuntimeConfig::NetworkConfigMode::DHCP) {
-      network_mode = NX_NET_DHCP;
-    } else if (network_config_mode == RuntimeConfig::NetworkConfigMode::STATIC) {
-      network_mode = NX_NET_STATIC;
-    }
-
-    nx_net_parameters_t network_config{network_mode,
-                                       network_mode,
-                                       config.static_ip(),
-                                       config.static_gateway(),
-                                       config.static_netmask(),
-                                       config.static_dns_1(),
-                                       config.static_dns_2()};
-    int net_init_result = nxNetInit(&network_config);
-    if (net_init_result) {
-      debugPrint("nxNetInit failed: %d\n", net_init_result);
-      pb_show_debug_screen();
-      Sleep(kDelayOnFailureMilliseconds);
-      pb_kill();
-      return 1;
-    }
-
-    debugPrint("Network initialized: %s\n", ip4addr_ntoa(netif_ip4_addr(netif_default)));
-    pb_show_debug_screen();
-
-    if (config.ftp_server_ip()) {
-      ftp_logger = std::make_shared<FTPLogger>(config.ftp_server_ip(), config.ftp_server_port(), config.ftp_user(),
-                                               config.ftp_password(), config.ftp_timeout_milliseconds());
-    }
-  }
-#endif  // #ifndef DUMP_CONFIG_FILE
-
-  TestHost host(ftp_logger, kFramebufferWidth, kFramebufferHeight, kTextureWidth, kTextureHeight);
-  RegisterSuites(host, config, test_suites, config.output_directory_path(), ftp_logger);
-
-#ifdef DUMP_CONFIG_FILE
-  debugPrint("Dumping config file and exiting due to DUMP_CONFIG_FILE option.\n");
-  DumpConfig(config, test_suites);
-#else   // DUMP_CONFIG_FILE
-  {
-    std::vector<std::string> errors;
-    if (!config.ApplyConfig(test_suites, errors)) {
-      debugClearScreen();
-      debugPrint("Failed to apply runtime config:\n");
-      for (auto& err : errors) {
-        debugPrint("%s\n", err.c_str());
-      }
-      Sleep(kDelayOnFailureMilliseconds);
-      pb_kill();
-      return 1;
-    }
-  }
-
-  pb_show_front_screen();
-  RunTests(config, host, test_suites);
-#endif  // DUMP_CONFIG_FILE
 
   pb_kill();
   return 0;
