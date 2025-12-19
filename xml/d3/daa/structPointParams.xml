@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/daa/structPointParams" kind="struct" language="C++" prot="public">
+    <compoundname>PointParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d3/daa/structPointParams_1afad2c9cf81b1476dc7b84fedbfcbb9ee" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::scaleFactorA</definition>
+        <argsstring></argsstring>
+        <name>scaleFactorA</name>
+        <qualifiedname>PointParams::scaleFactorA</qualifiedname>
+        <briefdescription>
+<para>Constant component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="22" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a8598177e32aa897102371786a8f94abb" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::scaleFactorB</definition>
+        <argsstring></argsstring>
+        <name>scaleFactorB</name>
+        <qualifiedname>PointParams::scaleFactorB</qualifiedname>
+        <briefdescription>
+<para>Linear component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="23" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a53fe8dddbd57b1486c66bae293f30ff0" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::scaleFactorC</definition>
+        <argsstring></argsstring>
+        <name>scaleFactorC</name>
+        <qualifiedname>PointParams::scaleFactorC</qualifiedname>
+        <briefdescription>
+<para>Quadratic component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="24" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a09a0f3f246073b518bbaf15ac198ddaf" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::sizeRange</definition>
+        <argsstring></argsstring>
+        <name>sizeRange</name>
+        <qualifiedname>PointParams::sizeRange</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="25" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a24e1abf77e3c4d634e559b97cdb5b107" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::sizeRangeDup1</definition>
+        <argsstring></argsstring>
+        <name>sizeRangeDup1</name>
+        <qualifiedname>PointParams::sizeRangeDup1</qualifiedname>
+        <briefdescription>
+<para>Seems to be ignored, always set to sizeRange. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="26" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a688a3187a06ba5dcdae1cc023f7606d5" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::sizeRangeDup2</definition>
+        <argsstring></argsstring>
+        <name>sizeRangeDup2</name>
+        <qualifiedname>PointParams::sizeRangeDup2</qualifiedname>
+        <briefdescription>
+<para>Seems to be ignored, always set to sizeRange. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="27" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a09007abc29ee005ede1e76e93b44dfa9" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::scaleBias</definition>
+        <argsstring></argsstring>
+        <name>scaleBias</name>
+        <qualifiedname>PointParams::scaleBias</qualifiedname>
+        <briefdescription>
+<para>Modifies the attenuated distance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="28" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/daa/structPointParams_1a55bcd5ffadc53d8ca384e10d54044ad1" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float PointParams::minSize</definition>
+        <argsstring></argsstring>
+        <name>minSize</name>
+        <qualifiedname>PointParams::minSize</qualifiedname>
+        <briefdescription>
+<para>Minimum point size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="29" column="9" bodyfile="src/tests/point_params_tests.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/point_params_tests.cpp" line="21" column="1" bodyfile="src/tests/point_params_tests.cpp" bodystart="21" bodyend="30"/>
+    <listofallmembers>
+      <member refid="d3/daa/structPointParams_1a55bcd5ffadc53d8ca384e10d54044ad1" prot="public" virt="non-virtual"><scope>PointParams</scope><name>minSize</name></member>
+      <member refid="d3/daa/structPointParams_1a09007abc29ee005ede1e76e93b44dfa9" prot="public" virt="non-virtual"><scope>PointParams</scope><name>scaleBias</name></member>
+      <member refid="d3/daa/structPointParams_1afad2c9cf81b1476dc7b84fedbfcbb9ee" prot="public" virt="non-virtual"><scope>PointParams</scope><name>scaleFactorA</name></member>
+      <member refid="d3/daa/structPointParams_1a8598177e32aa897102371786a8f94abb" prot="public" virt="non-virtual"><scope>PointParams</scope><name>scaleFactorB</name></member>
+      <member refid="d3/daa/structPointParams_1a53fe8dddbd57b1486c66bae293f30ff0" prot="public" virt="non-virtual"><scope>PointParams</scope><name>scaleFactorC</name></member>
+      <member refid="d3/daa/structPointParams_1a09a0f3f246073b518bbaf15ac198ddaf" prot="public" virt="non-virtual"><scope>PointParams</scope><name>sizeRange</name></member>
+      <member refid="d3/daa/structPointParams_1a24e1abf77e3c4d634e559b97cdb5b107" prot="public" virt="non-virtual"><scope>PointParams</scope><name>sizeRangeDup1</name></member>
+      <member refid="d3/daa/structPointParams_1a688a3187a06ba5dcdae1cc023f7606d5" prot="public" virt="non-virtual"><scope>PointParams</scope><name>sizeRangeDup2</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

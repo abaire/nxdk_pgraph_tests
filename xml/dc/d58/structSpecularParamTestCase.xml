@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/d58/structSpecularParamTestCase" kind="struct" language="C++" prot="public">
+    <compoundname>SpecularParamTestCase</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dc/d58/structSpecularParamTestCase_1a74f9d5349fd46c798c09fd5d91a9b1ee" prot="public" static="no" mutable="no">
+        <type>const char</type>
+        <definition>const char SpecularParamTestCase::name</definition>
+        <argsstring>[32]</argsstring>
+        <name>name</name>
+        <qualifiedname>SpecularParamTestCase::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/specular_back_tests.cpp" line="54" column="14" bodyfile="src/tests/specular_back_tests.cpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d58/structSpecularParamTestCase_1a7ff5e70049340f0dbc5aa0cfb02d7094" prot="public" static="no" mutable="no">
+        <type>const float</type>
+        <definition>const float SpecularParamTestCase::params</definition>
+        <argsstring>[6]</argsstring>
+        <name>params</name>
+        <qualifiedname>SpecularParamTestCase::params</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/specular_back_tests.cpp" line="55" column="15" bodyfile="src/tests/specular_back_tests.cpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/specular_back_tests.cpp" line="53" column="1" bodyfile="src/tests/specular_back_tests.cpp" bodystart="53" bodyend="56"/>
+    <listofallmembers>
+      <member refid="dc/d58/structSpecularParamTestCase_1a74f9d5349fd46c798c09fd5d91a9b1ee" prot="public" virt="non-virtual"><scope>SpecularParamTestCase</scope><name>name</name></member>
+      <member refid="dc/d58/structSpecularParamTestCase_1a7ff5e70049340f0dbc5aa0cfb02d7094" prot="public" virt="non-virtual"><scope>SpecularParamTestCase</scope><name>params</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

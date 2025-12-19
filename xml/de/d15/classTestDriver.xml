@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d15/classTestDriver" kind="class" language="C++" prot="public">
+    <compoundname>TestDriver</compoundname>
+    <includes refid="dd/dab/test__driver_8h" local="no">test_driver.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="de/d15/classTestDriver_1ab3a733db5aa94b8362f7462af1c97629" prot="private" static="no" mutable="no">
+        <type>volatile bool</type>
+        <definition>volatile bool TestDriver::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>TestDriver::running_</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="58" column="17" bodyfile="src/test_driver.h" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d15/classTestDriver_1af45481fcfcdfd7d67ee19c076e0ddd3a" prot="private" static="no" mutable="no">
+        <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref> &gt; &gt; &amp;</type>
+        <definition>const std::vector&lt;std::shared_ptr&lt;TestSuite&gt; &gt;&amp; TestDriver::test_suites_</definition>
+        <argsstring></argsstring>
+        <name>test_suites_</name>
+        <qualifiedname>TestDriver::test_suites_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="60" column="21" bodyfile="src/test_driver.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d15/classTestDriver_1afd91fb20033e016a8a99afe9d910e807" prot="private" static="no" mutable="no">
+        <type>SDL_GameController *</type>
+        <definition>SDL_GameController* TestDriver::gamepads_[kMaxGamepads]</definition>
+        <argsstring>[kMaxGamepads]</argsstring>
+        <name>gamepads_</name>
+        <qualifiedname>TestDriver::gamepads_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="61" column="22" bodyfile="src/test_driver.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d15/classTestDriver_1ad588c7e5c601d002ec315769e1b9331b" prot="private" static="no" mutable="no">
+        <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+        <definition>TestHost&amp; TestDriver::test_host_</definition>
+        <argsstring></argsstring>
+        <name>test_host_</name>
+        <qualifiedname>TestDriver::test_host_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="63" column="12" bodyfile="src/test_driver.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d15/classTestDriver_1a4f9e680074101f30aefc9a0b1de279b8" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d7/d12/structMenuItem" kindref="compound">MenuItem</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MenuItem&gt; TestDriver::active_menu_</definition>
+        <argsstring></argsstring>
+        <name>active_menu_</name>
+        <qualifiedname>TestDriver::active_menu_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="64" column="19" bodyfile="src/test_driver.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d15/classTestDriver_1a9ced81f87f1602105e5887d021df1654" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d7/d12/structMenuItem" kindref="compound">MenuItem</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MenuItem&gt; TestDriver::root_menu_</definition>
+        <argsstring></argsstring>
+        <name>root_menu_</name>
+        <qualifiedname>TestDriver::root_menu_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="65" column="19" bodyfile="src/test_driver.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d15/classTestDriver_1a737eb1f98772557bd0f28bcb1b9e4766" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d7/d12/structMenuItem" kindref="compound">MenuItem</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MenuItem&gt; TestDriver::options_menu_</definition>
+        <argsstring></argsstring>
+        <name>options_menu_</name>
+        <qualifiedname>TestDriver::options_menu_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="66" column="19" bodyfile="src/test_driver.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/d15/classTestDriver_1a35a31f91b1993d0525fd3b648a372415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TestDriver::TestDriver</definition>
+        <argsstring>(TestHost &amp;host, const std::vector&lt; std::shared_ptr&lt; TestSuite &gt; &gt; &amp;test_suites, uint32_t framebuffer_width, uint32_t framebuffer_height, bool show_options_menu, bool disable_autorun, bool autorun_immediately)</argsstring>
+        <name>TestDriver</name>
+        <qualifiedname>TestDriver::TestDriver</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref> &gt; &gt; &amp;</type>
+          <declname>test_suites</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>show_options_menu</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>disable_autorun</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>autorun_immediately</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="26" column="3" bodyfile="src/test_driver.cpp" bodystart="19" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a1be16e8753bbf0da5a7f4bc1b4f8a527" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TestDriver::~TestDriver</definition>
+        <argsstring>()</argsstring>
+        <name>~TestDriver</name>
+        <qualifiedname>TestDriver::~TestDriver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="28" column="3" bodyfile="src/test_driver.cpp" bodystart="38" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1ad6ab07d409a35e75014b8559c8d76d34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::Run</definition>
+        <argsstring>()</argsstring>
+        <name>Run</name>
+        <qualifiedname>TestDriver::Run</qualifiedname>
+        <briefdescription>
+<para>Enters a loop that reacts to user input until the user requests an exit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="31" column="8" bodyfile="src/test_driver.cpp" bodystart="46" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a3b1624ebd57df5adc0e70a013053fee8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::RunAllTestsNonInteractive</definition>
+        <argsstring>()</argsstring>
+        <name>RunAllTestsNonInteractive</name>
+        <qualifiedname>TestDriver::RunAllTestsNonInteractive</qualifiedname>
+        <briefdescription>
+<para>Runs all tests automatically without reacting to any user input. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="34" column="8" bodyfile="src/test_driver.cpp" bodystart="98" bodyend="109"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="de/d15/classTestDriver_1a2498dd5eacb6362699437cf7bd37d110" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnControllerAdded</definition>
+        <argsstring>(const SDL_ControllerDeviceEvent &amp;event)</argsstring>
+        <name>OnControllerAdded</name>
+        <qualifiedname>TestDriver::OnControllerAdded</qualifiedname>
+        <param>
+          <type>const SDL_ControllerDeviceEvent &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="37" column="8" bodyfile="src/test_driver.cpp" bodystart="111" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a65b69d44c051e4148457d886b251d38d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnControllerRemoved</definition>
+        <argsstring>(const SDL_ControllerDeviceEvent &amp;event)</argsstring>
+        <name>OnControllerRemoved</name>
+        <qualifiedname>TestDriver::OnControllerRemoved</qualifiedname>
+        <param>
+          <type>const SDL_ControllerDeviceEvent &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="38" column="8" bodyfile="src/test_driver.cpp" bodystart="131" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a37b25261a1d34250e03d3e2006406437" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnControllerButtonEvent</definition>
+        <argsstring>(const SDL_ControllerButtonEvent &amp;event)</argsstring>
+        <name>OnControllerButtonEvent</name>
+        <qualifiedname>TestDriver::OnControllerButtonEvent</qualifiedname>
+        <param>
+          <type>const SDL_ControllerButtonEvent &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="39" column="8" bodyfile="src/test_driver.cpp" bodystart="152" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1af64491df77108eefdadad8355aaee970" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnButtonActivated</definition>
+        <argsstring>(SDL_GameControllerButton button, bool is_repeat)</argsstring>
+        <name>OnButtonActivated</name>
+        <qualifiedname>TestDriver::OnButtonActivated</qualifiedname>
+        <param>
+          <type>SDL_GameControllerButton</type>
+          <declname>button</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="40" column="8" bodyfile="src/test_driver.cpp" bodystart="160" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1ada324a59bbcf8b190292a684ee6e1edd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::ShowDebugMessageAndExit</definition>
+        <argsstring>()</argsstring>
+        <name>ShowDebugMessageAndExit</name>
+        <qualifiedname>TestDriver::ShowDebugMessageAndExit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="42" column="8" bodyfile="src/test_driver.cpp" bodystart="215" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a912292fea94207b2ee58f229164500ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnBack</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnBack</name>
+        <qualifiedname>TestDriver::OnBack</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="44" column="8" bodyfile="src/test_driver.cpp" bodystart="221" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a79843f494073f2b0bc81be0e708d6892" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnStart</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnStart</name>
+        <qualifiedname>TestDriver::OnStart</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="45" column="8" bodyfile="src/test_driver.cpp" bodystart="228" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1aa7b776628d5a036bc290c6999a98ee5e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnBlack</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnBlack</name>
+        <qualifiedname>TestDriver::OnBlack</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="46" column="8" bodyfile="src/test_driver.cpp" bodystart="235" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a64a192349c65a22e9c415abf42dd0388" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnWhite</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnWhite</name>
+        <qualifiedname>TestDriver::OnWhite</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="47" column="8" bodyfile="src/test_driver.cpp" bodystart="242" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a593b2bad1a0cfe36e91fea4de5219348" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnUp</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnUp</name>
+        <qualifiedname>TestDriver::OnUp</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="48" column="8" bodyfile="src/test_driver.cpp" bodystart="274" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1ae2aac20df8196aafda09d66a1a476e65" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnDown</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnDown</name>
+        <qualifiedname>TestDriver::OnDown</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="49" column="8" bodyfile="src/test_driver.cpp" bodystart="276" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1ac60543db783ab933d6037f5300bfbcc1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnLeft</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnLeft</name>
+        <qualifiedname>TestDriver::OnLeft</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="50" column="8" bodyfile="src/test_driver.cpp" bodystart="278" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a49bce18bc3a34e610351573bcbb68cc8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnRight</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnRight</name>
+        <qualifiedname>TestDriver::OnRight</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="51" column="8" bodyfile="src/test_driver.cpp" bodystart="280" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1adbeb4554ceace70a1fff867364da50b4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnA</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnA</name>
+        <qualifiedname>TestDriver::OnA</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="52" column="8" bodyfile="src/test_driver.cpp" bodystart="244" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a0eb444857cc4e7c7e7787a76f2e78e74" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnB</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnB</name>
+        <qualifiedname>TestDriver::OnB</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="53" column="8" bodyfile="src/test_driver.cpp" bodystart="251" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1a118c91cc650042c1e1204aca474ab159" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnX</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnX</name>
+        <qualifiedname>TestDriver::OnX</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="54" column="8" bodyfile="src/test_driver.cpp" bodystart="258" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d15/classTestDriver_1aa8a3a873ab01cb2c308468bc66370422" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestDriver::OnY</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>OnY</name>
+        <qualifiedname>TestDriver::OnY</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_driver.h" line="55" column="8" bodyfile="src/test_driver.cpp" bodystart="265" bodyend="272"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Handles input processing and test execution. </para>
+    </detaileddescription>
+    <location file="src/test_driver.h" line="24" column="1" bodyfile="src/test_driver.h" bodystart="24" bodyend="67"/>
+    <listofallmembers>
+      <member refid="de/d15/classTestDriver_1a4f9e680074101f30aefc9a0b1de279b8" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>active_menu_</name></member>
+      <member refid="de/d15/classTestDriver_1afd91fb20033e016a8a99afe9d910e807" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>gamepads_</name></member>
+      <member refid="de/d15/classTestDriver_1adbeb4554ceace70a1fff867364da50b4" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnA</name></member>
+      <member refid="de/d15/classTestDriver_1a0eb444857cc4e7c7e7787a76f2e78e74" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnB</name></member>
+      <member refid="de/d15/classTestDriver_1a912292fea94207b2ee58f229164500ab" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnBack</name></member>
+      <member refid="de/d15/classTestDriver_1aa7b776628d5a036bc290c6999a98ee5e" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnBlack</name></member>
+      <member refid="de/d15/classTestDriver_1af64491df77108eefdadad8355aaee970" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnButtonActivated</name></member>
+      <member refid="de/d15/classTestDriver_1a2498dd5eacb6362699437cf7bd37d110" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnControllerAdded</name></member>
+      <member refid="de/d15/classTestDriver_1a37b25261a1d34250e03d3e2006406437" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnControllerButtonEvent</name></member>
+      <member refid="de/d15/classTestDriver_1a65b69d44c051e4148457d886b251d38d" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnControllerRemoved</name></member>
+      <member refid="de/d15/classTestDriver_1ae2aac20df8196aafda09d66a1a476e65" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnDown</name></member>
+      <member refid="de/d15/classTestDriver_1ac60543db783ab933d6037f5300bfbcc1" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnLeft</name></member>
+      <member refid="de/d15/classTestDriver_1a49bce18bc3a34e610351573bcbb68cc8" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnRight</name></member>
+      <member refid="de/d15/classTestDriver_1a79843f494073f2b0bc81be0e708d6892" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnStart</name></member>
+      <member refid="de/d15/classTestDriver_1a593b2bad1a0cfe36e91fea4de5219348" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnUp</name></member>
+      <member refid="de/d15/classTestDriver_1a64a192349c65a22e9c415abf42dd0388" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnWhite</name></member>
+      <member refid="de/d15/classTestDriver_1a118c91cc650042c1e1204aca474ab159" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnX</name></member>
+      <member refid="de/d15/classTestDriver_1aa8a3a873ab01cb2c308468bc66370422" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>OnY</name></member>
+      <member refid="de/d15/classTestDriver_1a737eb1f98772557bd0f28bcb1b9e4766" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>options_menu_</name></member>
+      <member refid="de/d15/classTestDriver_1a9ced81f87f1602105e5887d021df1654" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>root_menu_</name></member>
+      <member refid="de/d15/classTestDriver_1ad6ab07d409a35e75014b8559c8d76d34" prot="public" virt="non-virtual"><scope>TestDriver</scope><name>Run</name></member>
+      <member refid="de/d15/classTestDriver_1a3b1624ebd57df5adc0e70a013053fee8" prot="public" virt="non-virtual"><scope>TestDriver</scope><name>RunAllTestsNonInteractive</name></member>
+      <member refid="de/d15/classTestDriver_1ab3a733db5aa94b8362f7462af1c97629" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>running_</name></member>
+      <member refid="de/d15/classTestDriver_1ada324a59bbcf8b190292a684ee6e1edd" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>ShowDebugMessageAndExit</name></member>
+      <member refid="de/d15/classTestDriver_1ad588c7e5c601d002ec315769e1b9331b" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>test_host_</name></member>
+      <member refid="de/d15/classTestDriver_1af45481fcfcdfd7d67ee19c076e0ddd3a" prot="private" virt="non-virtual"><scope>TestDriver</scope><name>test_suites_</name></member>
+      <member refid="de/d15/classTestDriver_1a35a31f91b1993d0525fd3b648a372415" prot="public" virt="non-virtual"><scope>TestDriver</scope><name>TestDriver</name></member>
+      <member refid="de/d15/classTestDriver_1a1be16e8753bbf0da5a7f4bc1b4f8a527" prot="public" virt="non-virtual"><scope>TestDriver</scope><name>~TestDriver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
