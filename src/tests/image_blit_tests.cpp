@@ -26,6 +26,7 @@ static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
 static constexpr char kDirtyOverlappedDestSurfaceTest[] = "DirtyOverlappedDestSurf";
 static constexpr char kBlitRenderBlitTest[] = "BlitRenderBlit";
+static constexpr char kOverwriteFIFOTest[] = "OverlapFIFO";
 
 #define SOURCE_X 8
 #define SOURCE_Y 8
@@ -132,6 +133,13 @@ static std::string MakeTestName(uint32_t clip_x, uint32_t clip_y, uint32_t clip_
  *
  * @tc ImgBlt_BLENDAND_XRGB_B00000000
  *   Demonstrates expected behavior of the contextual beta (class 0x12) during image blits.
+ *
+ * @tc OverlapFIFO
+ *   Demonstrates that image blits overlapping the pushbuffer are performed without issue on HW. A blit copying the test
+ *   image over the current pushbuffer write address is queued, followed by a blit copying the data from there to the
+ *   screen. This is flushed to the HW, along with a wait until the pushbuffer is fully consumed. Failure to wait
+ *   demonstrates a race between the blits and subsequent instructions, generally leading to some corruption near the
+ *   top of the image.
  */
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Image blit", config) {
@@ -147,6 +155,8 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
         TestWithClipRectangle(blit_setup, test.x, test.y, test.width, test.height);
       };
     }
+
+    tests_[kOverwriteFIFOTest] = [this, blit_setup] { TestBlitOverPushbuffer(kOverwriteFIFOTest, blit_setup); };
   }
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
@@ -164,6 +174,7 @@ void ImageBlitTests::Initialize() {
   SDL_FreeSurface(temp);
 
   image_pitch_ = test_image->pitch;
+  image_width_ = test_image->w;
   image_height_ = test_image->h;
   uint32_t image_bytes = image_pitch_ * image_height_;
 
@@ -205,15 +216,13 @@ void ImageBlitTests::Deinitialize() {
   }
   TestSuite::Deinitialize();
 }
-
-void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
-                               uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch,
-                               uint32_t source_offset, uint32_t source_x, uint32_t source_y,
-                               uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y,
-                               uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
-                               uint32_t clip_height) const {
-  PrintMsg("ImageBlit: %d beta: 0x%08X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
-  Pushbuffer::Begin();
+void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta, uint32_t source_channel,
+                                              uint32_t destination_channel, uint32_t surface_format,
+                                              uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
+                                              uint32_t source_x, uint32_t source_y, uint32_t destination_offset,
+                                              uint32_t destination_x, uint32_t destination_y, uint32_t width,
+                                              uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
+                                              uint32_t clip_height) const {
   Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
   Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
@@ -250,7 +259,20 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_POINT_IN, source_x | (source_y << 16));
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_POINT_OUT, destination_x | (destination_y << 16));
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SIZE, width | (height << 16));
+}
 
+void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
+                               uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch,
+                               uint32_t source_offset, uint32_t source_x, uint32_t source_y,
+                               uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y,
+                               uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
+                               uint32_t clip_height) const {
+  PrintMsg("ImageBlit: %d beta: 0x%08X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
+  Pushbuffer::Begin();
+
+  ImageBlitWithinPushBlock(operation, beta, source_channel, destination_channel, surface_format, source_pitch,
+                           destination_pitch, source_offset, source_x, source_y, destination_offset, destination_x,
+                           destination_y, width, height, clip_x, clip_y, clip_width, clip_height);
   Pushbuffer::End();
 }
 
@@ -302,6 +324,63 @@ void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test,
   if (test.blit_operation != NV09F_SET_OPERATION_SRCCOPY) {
     pb_print("Beta: %08X\n", test.beta);
   }
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void ImageBlitTests::TestBlitOverPushbuffer(const std::string& name, const BlitTest& test) {
+  host_.PrepareDraw(0xF0450015);
+
+  uint32_t image_bytes = image_pitch_ * image_height_;
+  pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
+
+  uint32_t clip_x = 0;
+  uint32_t clip_y = 0;
+  uint32_t clip_w = host_.GetFramebufferWidth();
+  uint32_t clip_h = host_.GetFramebufferHeight();
+
+  uint32_t* pushbuffer_address = pb_begin();
+  pb_end(pushbuffer_address);
+
+  static constexpr uint32_t rt_width = 256;
+  static constexpr uint32_t rt_height = 256;
+  static constexpr uint32_t rt_pitch = rt_width * 4;
+
+  pb_set_dma_address(&render_target_dma_ctx_, pushbuffer_address, MAXRAM);
+
+  Pushbuffer::Begin();
+
+  // 1) Blit an image over the pushbuffer
+  ImageBlitWithinPushBlock(test.blit_operation, test.beta, image_src_dma_ctx_.ChannelID,
+                           render_target_dma_ctx_.ChannelID, test.buffer_color_format, image_pitch_, rt_pitch,
+                           0,              // source_offset
+                           0,              // source_x
+                           0,              // source_y
+                           0,              // destination_offset
+                           0,              // destination_x
+                           0,              // destination_y
+                           image_width_,   // width
+                           image_height_,  // height
+                           0,              // clip_x
+                           0,              // clip_y
+                           rt_width,       // clip_width
+                           rt_height       // clip_height
+  );
+
+  // 2) Blit from the render target to the backbuffer.
+  ImageBlitWithinPushBlock(test.blit_operation, test.beta, render_target_dma_ctx_.ChannelID,
+                           DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+                           test.buffer_color_format, image_pitch_, 4 * host_.GetFramebufferWidth(), 0, 0, 0, 0,
+                           DESTINATION_X, DESTINATION_Y, SOURCE_WIDTH, SOURCE_HEIGHT, clip_x, clip_y, clip_w, clip_h);
+
+  // If this is not flushed, new entries added to the pushbuffer from the pb_print/etc... below will race the image blit
+  // and corrupt the top of the image.
+  Pushbuffer::End(true);
+
+  pb_print("%s\n", name.c_str());
+  pb_print("srccopy is queued to overlap the pushbuffer head\n");
+  pb_print("then srccopy from there to screen.\n");
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
