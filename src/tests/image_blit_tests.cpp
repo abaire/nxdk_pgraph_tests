@@ -223,9 +223,13 @@ void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta,
                                               uint32_t destination_x, uint32_t destination_y, uint32_t width,
                                               uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
                                               uint32_t clip_height) const {
-  Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
-  Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
-  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
+  if (clip_width || clip_height) {
+    Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
+    Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
+  } else {
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, null_ctx_.ChannelID);
+  }
 
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_OPERATION, operation);
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
