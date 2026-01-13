@@ -10,6 +10,8 @@
 #include "test_host.h"
 #include "vertex_buffer.h"
 
+// #define ENABLE_OVERLAP_FIFO_TEST
+
 // See pb_init in pbkit.c, where the channel contexts are set up.
 // SUBCH_3 == GR_CLASS_9F, which contains the IMAGE_BLIT commands.
 #define SUBCH_CLASS_9F SUBCH_3
@@ -27,7 +29,9 @@ static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 
 static constexpr char kDirtyOverlappedDestSurfaceTest[] = "DirtyOverlappedDestSurf";
 static constexpr char kBlitRenderBlitTest[] = "BlitRenderBlit";
-static constexpr char kOverwriteFIFOTest[] = "OverlapFIFO";
+#ifdef ENABLE_OVERLAP_FIFO_TEST
+static constexpr char kOverlapFIFOTest[] = "OverlapFIFO";
+#endif
 static constexpr char kBlitPastWidthTest[] = "BlitBeyondWidth";
 
 #define SOURCE_X 8
@@ -142,6 +146,13 @@ static std::string MakeTestName(uint32_t clip_x, uint32_t clip_y, uint32_t clip_
  *   screen. This is flushed to the HW, along with a wait until the pushbuffer is fully consumed. Failure to wait
  *   demonstrates a race between the blits and subsequent instructions, generally leading to some corruption near the
  *   top of the image.
+ *
+ * @tc BlitBeyondWidth
+ *   Demonstrates the interaction between 0x9F image blit operations and assigned GPU tiles. A blit operation is
+ *   configured with a target smaller than the source. The target address is set within an active GPU tile such that the
+ *   blit would extend beyond the end of the tile and a guard value is tested to prove that the blit is clipped to stay
+ *   within the tile. A similar blit is performed outside of the tile, demonstrating that unprotected blits may overdraw
+ *   the target region.
  */
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Image blit", config) {
@@ -158,7 +169,14 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
       };
     }
 
-    tests_[kOverwriteFIFOTest] = [this, blit_setup] { TestBlitOverPushbuffer(kOverwriteFIFOTest, blit_setup); };
+#ifdef ENABLE_OVERLAP_FIFO_TEST
+    // This is a contrived test that demonstrates the behavior of the PFIFO DMA -> CACHE1 submission process. It will
+    // exercise a problem in xemu 0.8.131 (and possibly forever into the future) due to fact that the FIFO emulation
+    // runs directly from the pushbuffer in system RAM. In practice this is unlikely to ever happen in a real title as
+    // it'd either be a programming error that has generated a race condition or overdraw that should be protected by
+    // clipping / GPU tiling.
+    tests_[kOverlapFIFOTest] = [this, blit_setup] { TestBlitOverPushbuffer(kOverlapFIFOTest, blit_setup); };
+#endif
   }
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
@@ -338,6 +356,7 @@ void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test,
 
 void ImageBlitTests::TestBlitOverPushbuffer(const std::string& name, const BlitTest& test) {
   host_.PrepareDraw(0xF0450015);
+#ifdef ENABLE_OVERLAP_FIFO_TEST
 
   uint32_t image_bytes = image_pitch_ * image_height_;
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
@@ -389,7 +408,10 @@ void ImageBlitTests::TestBlitOverPushbuffer(const std::string& name, const BlitT
   pb_print("srccopy is queued to overlap the pushbuffer head\n");
   pb_print("then srccopy from there to screen.\n");
   pb_draw_text_screen();
-
+#else   // ! #ifdef ENABLE_OVERLAP_FIFO_TEST
+  pb_print("%s\n", name.c_str());
+  pb_print("NOT IMPLEMENTED - define ENABLE_OVERLAP_FIFO_TEST\n");
+#endif  // #ifdef ENABLE_OVERLAP_FIFO_TEST
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
 }
 
