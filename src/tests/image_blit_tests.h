@@ -30,12 +30,13 @@ class ImageBlitTests : public TestSuite {
   void Test(const BlitTest& test);
   void TestWithClipRectangle(const BlitTest& test, uint32_t clip_x, uint32_t clip_y, uint32_t clip_w, uint32_t clip_h);
   void TestBlitOverPushbuffer(const std::string& name, const BlitTest& test);
+  void TestBlitPastWidth(const std::string& name);
 
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
                  uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
                  uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x,
-                 uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y,
-                 uint32_t clip_width, uint32_t clip_height) const;
+                 uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x = 0, uint32_t clip_y = 0,
+                 uint32_t clip_width = 0, uint32_t clip_height = 0) const;
 
   void ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta, uint32_t source_channel,
                                 uint32_t destination_channel, uint32_t surface_format, uint32_t source_pitch,
