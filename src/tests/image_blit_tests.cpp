@@ -2,6 +2,7 @@
 
 #include <SDL_image.h>
 #include <pbkit/pbkit.h>
+#include <texture_generator.h>
 
 #include "debug_output.h"
 #include "nxdk_ext.h"
@@ -27,6 +28,7 @@ static constexpr uint32_t SUBCH_CLASS_72 = SUBCH_CLASS_12 + 1;
 static constexpr char kDirtyOverlappedDestSurfaceTest[] = "DirtyOverlappedDestSurf";
 static constexpr char kBlitRenderBlitTest[] = "BlitRenderBlit";
 static constexpr char kOverwriteFIFOTest[] = "OverlapFIFO";
+static constexpr char kBlitPastWidthTest[] = "BlitBeyondWidth";
 
 #define SOURCE_X 8
 #define SOURCE_Y 8
@@ -161,6 +163,7 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
   tests_[kBlitRenderBlitTest] = [this]() { TestBlitRenderBlit(); };
+  tests_[kBlitPastWidthTest] = [this]() { TestBlitPastWidth(kBlitPastWidthTest); };
 }
 
 void ImageBlitTests::Initialize() {
@@ -216,6 +219,7 @@ void ImageBlitTests::Deinitialize() {
   }
   TestSuite::Deinitialize();
 }
+
 void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta, uint32_t source_channel,
                                               uint32_t destination_channel, uint32_t surface_format,
                                               uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
@@ -223,14 +227,6 @@ void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta,
                                               uint32_t destination_x, uint32_t destination_y, uint32_t width,
                                               uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
                                               uint32_t clip_height) const {
-  if (clip_width || clip_height) {
-    Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
-    Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
-    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
-  } else {
-    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, null_ctx_.ChannelID);
-  }
-
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_OPERATION, operation);
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
@@ -242,6 +238,13 @@ void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta,
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_DST, destination_offset);
 
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
+  if (clip_width || clip_height) {
+    Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
+    Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
+  } else {
+    Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, null_ctx_.ChannelID);
+  }
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
 
@@ -388,6 +391,115 @@ void ImageBlitTests::TestBlitOverPushbuffer(const std::string& name, const BlitT
   pb_draw_text_screen();
 
   host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+}
+
+void ImageBlitTests::TestBlitPastWidth(const std::string& name) {
+  host_.PrepareDraw(0xF0332211);
+
+  DWORD framebuffer_tile_base;
+  DWORD framebuffer_allocation_size;
+  DWORD framebuffer_tile_pitch;
+  pb_get_framebuffer_tile_info(&framebuffer_tile_base, &framebuffer_allocation_size, &framebuffer_tile_pitch);
+
+  auto source_image = host_.GetTextureMemoryForStage(0);
+  static constexpr auto kSourceWidth = 1024;
+  static constexpr auto kSourceHeight = 512;
+  static constexpr auto kSourcePitch = kSourceWidth * 4;
+  static constexpr auto kSourceSize = kSourcePitch * kSourceHeight;
+  GenerateRGBTestPattern(source_image, kSourceWidth, kSourceHeight, 0xFF);
+  pb_set_dma_address(&image_src_dma_ctx_, nullptr, MAXRAM);
+
+  static constexpr auto kBlitTargetWidth = 640;
+  static constexpr auto kBlitTargetHeight = 480;
+  static constexpr auto kBlitTargetPitch = kBlitTargetWidth * 4;
+  static constexpr auto kBlitTargetSize = kBlitTargetPitch * kBlitTargetHeight;
+  static constexpr auto kBlitTargetGuardSize = 4096;
+  static constexpr auto kBlitTargetTotalSize = kBlitTargetSize + kBlitTargetGuardSize;
+  static constexpr auto kBlitTargetAlignedSize = (kBlitTargetTotalSize + 0x3FFF) & 0xFFFFC000;
+
+  auto target_buffer =
+      static_cast<uint8_t*>(MmAllocateContiguousMemoryEx(kBlitTargetAlignedSize, 0, 0x03FFB000, 0x4000, 0x404));
+  assert(target_buffer);
+  pb_set_dma_address(&render_target_dma_ctx_, nullptr, MAXRAM);
+  pb_assign_tile(0, VRAM_ADDR(target_buffer), kBlitTargetSize, kBlitTargetPitch, 0, 0, 1);
+
+  auto guard_buffer = target_buffer + kBlitTargetSize;
+  memset(guard_buffer, 0xCC, kBlitTargetGuardSize);
+
+  auto set_crash_register = [](uint32_t reg, uint32_t value) -> uint32_t {
+    auto crash_register = reinterpret_cast<uint32_t*>(PGRAPH_REGISTER_BASE + reg);
+    auto ret = *crash_register;
+    *crash_register = value;
+    return ret;
+  };
+
+  // Disable interrupts for tile limit violations to allow blit attempts beyond the end of the tile.
+  // The value comes from observing Direct3D settings, the key values being bits 10 and 11, which disable the GPU error
+  // interrupt.
+  auto old_crash_register_value = set_crash_register(0x880, 0x28c3ff);
+
+  // 1) Blit beyond the end of the target buffer
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID, render_target_dma_ctx_.ChannelID,
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, kSourcePitch, 4 * host_.GetFramebufferWidth(),
+            reinterpret_cast<uintptr_t>(source_image) & 0x03FFFFFF, 0, 0,
+            reinterpret_cast<uintptr_t>(target_buffer) & 0x03FFFFFF, 0, 0, kSourceWidth, kSourceHeight);
+
+  // Verify that the guard values are still untouched.
+
+  // 2) Blit someplace completely unrelated to the tile.
+  static constexpr auto kUnmappedTargetWidth = 128;
+  static constexpr auto kUnmappedTargetHeight = 128;
+  static constexpr auto kUnmappedTargetPitch = kUnmappedTargetWidth * 4;
+  static constexpr auto kUnmappedTargetSize = kUnmappedTargetPitch * kUnmappedTargetHeight;
+  static constexpr auto kUnmappedTargetGuardSize = 128;
+  auto unmapped_target = source_image + kSourceSize;
+  auto unmapped_guard_buffer = unmapped_target + kUnmappedTargetSize;
+  memset(unmapped_guard_buffer, 0xCC, kUnmappedTargetGuardSize);
+
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID, render_target_dma_ctx_.ChannelID,
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, kSourcePitch, kUnmappedTargetPitch,
+            reinterpret_cast<uintptr_t>(source_image) & 0x03FFFFFF, 0, 0,
+            reinterpret_cast<uintptr_t>(unmapped_target) & 0x03FFFFFF, 0, 0, 256, 256);
+
+  // Verify that the guard value past the end of the 128x128 destination buffer is overwritten
+
+  // Restore the original tile. The flags are intentionally incorrect to match pbkit, keep in sync in case pbkit
+  // changes.
+  pb_assign_tile(0, framebuffer_tile_base & 0x03FFFFFF, framebuffer_allocation_size, framebuffer_tile_pitch, 0, 0, 0);
+
+  // Blit from the target_buffer + kBlitTargetGuardSize to the backbuffer so there's a result to be displayed.
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, render_target_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, kBlitTargetPitch, 4 * host_.GetFramebufferWidth(),
+            reinterpret_cast<uintptr_t>(target_buffer + kBlitTargetGuardSize) & 0x03FFFFFF, 0, 0, 0, 0, 0,
+            kBlitTargetWidth, kBlitTargetHeight);
+
+  pb_print("%s\n", name.c_str());
+  pb_print("srccopy with width & height > destination tile.\n");
+
+  DWORD tile_guard_content;
+  memcpy(&tile_guard_content, guard_buffer, 4);
+  DWORD unmapped_guard_content;
+  memcpy(&unmapped_guard_content, unmapped_guard_buffer, 4);
+
+  pb_print("Displayed image is a tile offset by %d bytes\n", kBlitTargetGuardSize);
+  pb_print("Image is tile-swizzled\n");
+  pb_print("Final pixels will be 0xCCCCCCCC from guard\n");
+  pb_print("Tile guard: 0x%08X (%s)\n", tile_guard_content, tile_guard_content == 0xCCCCCCCC ? "PASS" : "FAIL");
+  pb_print("\n");
+  pb_print("Non-tile blit was performed offscreen\n");
+  pb_print("without a tile, there is no overdraw protection\n");
+  pb_print("Unmapped guard: 0x%08X (%s)\n", unmapped_guard_content,
+           unmapped_guard_content == 0xFFC0003F ? "PASS" : "FAIL");
+
+  pb_draw_text_screen();
+
+  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+
+  host_.PBKitBusyWait();
+  set_crash_register(0x880, old_crash_register_value);
+
+  MmFreeContiguousMemory(target_buffer);
 }
 
 void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
