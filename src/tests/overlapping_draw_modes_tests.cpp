@@ -91,8 +91,7 @@ void OverlappingDrawModesTests::TestArrayElementDrawArrayArrayElement() {
 
   // Then the next 3 via DRAW_ARRAYS
   auto vertex_buffer = host_.GetVertexBuffer();
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 4));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 4));
 
   // And finally the last one via another ARRAY_ELEMENT command.
   {
@@ -176,12 +175,10 @@ void OverlappingDrawModesTests::TestDrawArrayDrawArray() {
 
   // Draw the first triangle
   auto vertex_buffer = host_.GetVertexBuffer();
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
 
   // Draw the third triangle
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
 
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
   Pushbuffer::End();
@@ -201,20 +198,17 @@ void OverlappingDrawModesTests::TestXemuSquashOptimization() {
 
   // Draw the first triangle as a Begin+DA+End triplet.
   Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
 
   // Draw the second triangle the same way.
   Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
 
   // Draw the third triangle via DRAW_ARRAYS and the fourth via ARRAY_ELEMENT.
   Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
 
   {
     const uint32_t indices[] = {9, 10, 11};
@@ -242,8 +236,7 @@ void OverlappingDrawModesTests::TestXemuSquashOptimizationSingleDrawArrays() {
 
   // Draw the third triangle via DRAW_ARRAYS and the fourth via ARRAY_ELEMENT.
   Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 6));
 
   {
     const uint32_t indices[] = {9, 10, 11};
@@ -251,12 +244,10 @@ void OverlappingDrawModesTests::TestXemuSquashOptimizationSingleDrawArrays() {
   }
 
   // Then draw the first triangle as another DrawArrays
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
 
   // Draw the second triangle the same way.
-  Pushbuffer::Push(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_DRAW_ARRAYS),
-                   MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
 
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
 
