@@ -347,6 +347,8 @@ add_executable(
         tests/texture_lod_bias_tests.h
         tests/texture_matrix_tests.cpp
         tests/texture_matrix_tests.h
+        tests/texture_palette_tests.cpp
+        tests/texture_palette_tests.h
         tests/texture_perspective_enable_tests.cpp
         tests/texture_perspective_enable_tests.h
         tests/texture_render_target_tests.cpp
