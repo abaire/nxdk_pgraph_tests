@@ -632,7 +632,7 @@ TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests_NonInt
 
   EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_between_tests\": false}}", errors));
   EXPECT_EQ(errors.size(), 1);
-  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_between_tests] must be a positive integer");
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_between_tests] must be a non-negative integer");
 }
 
 TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests_Negative) {
@@ -641,7 +641,7 @@ TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests_Negati
 
   EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_between_tests\": -1}}", errors));
   EXPECT_EQ(errors.size(), 1);
-  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_between_tests] must be a positive integer");
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_between_tests] must be a non-negative integer");
 }
 
 TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests) {
@@ -651,6 +651,33 @@ TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBetweenTests) {
   EXPECT_TRUE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_between_tests\": 100}}", errors));
   EXPECT_TRUE(errors.empty());
   EXPECT_EQ(config.delay_milliseconds_between_tests(), 100);
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBeforeExit_NonInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_before_exit\": false}}", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_before_exit] must be a non-negative integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBeforeExit_Negative) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_before_exit\": -1}}", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[delay_milliseconds_before_exit] must be a non-negative integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidDelayMillisecondsBeforeExitTests) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer("{\"settings\": {\"delay_milliseconds_before_exit\": 100}}", errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.delay_milliseconds_before_exit(), 100);
 }
 
 TEST(RuntimeConfig, LoadConfigBuffer_InvalidOutputDirectoryPath) {
