@@ -377,16 +377,24 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
     Logger::Log().close();
   }
 
+  auto exit_wait = config.delay_milliseconds_before_exit();
+  auto exit_wait_seconds = exit_wait / 1000;
+  auto exit_wait_remainder = exit_wait - (exit_wait_seconds * 1000);
+
   if (config.enable_shutdown_on_completion()) {
-    debugPrint("Results written to %s\n\nShutting down in 4 seconds...\n", config.output_directory_path().c_str());
-    pb_show_debug_screen();
-    Sleep(4000);
+    if (exit_wait) {
+      debugPrint("Results written to %s\n\nShutting down in %d.%03d seconds...\n",
+                 config.output_directory_path().c_str(), exit_wait_seconds, exit_wait_remainder);
+      pb_show_debug_screen();
+      Sleep(exit_wait);
+    }
 
     Shutdown();
-  } else {
-    debugPrint("Results written to %s\n\nRebooting in 4 seconds...\n", config.output_directory_path().c_str());
+  } else if (exit_wait) {
+    debugPrint("Results written to %s\n\nRebooting in %d.%03d seconds...\n", config.output_directory_path().c_str(),
+               exit_wait_seconds, exit_wait_remainder);
     pb_show_debug_screen();
-    Sleep(4000);
+    Sleep(exit_wait);
   }
 }
 #endif  // #ifdef DUMP_CONFIG_FILE

@@ -97,6 +97,16 @@ option(
         OFF
 )
 
+set(
+        DEFAULT_DELAY_MILLISECONDS_BEFORE_EXIT
+        "4000"
+        CACHE STRING
+        "Number of milliseconds to delay before rebooting/shutting down. May be 0 to avoid waiting."
+)
+if(NOT DEFAULT_DELAY_MILLISECONDS_BEFORE_EXIT MATCHES "^[0-9]+$")
+    message(FATAL_ERROR "DEFAULT_DELAY_MILLISECONDS_BEFORE_EXIT must be a non-negative integer.")
+endif()
+
 if (IS_TARGET_BUILD)
     add_subdirectory(src)
 else ()

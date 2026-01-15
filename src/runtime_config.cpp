@@ -176,7 +176,12 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
   }
 
   if (!LoadUint32(settings, "delay_milliseconds_between_tests", delay_milliseconds_between_tests_)) {
-    errors.emplace_back("settings[delay_milliseconds_between_tests] must be a positive integer");
+    errors.emplace_back("settings[delay_milliseconds_between_tests] must be a non-negative integer");
+    return false;
+  }
+
+  if (!LoadUint32(settings, "delay_milliseconds_before_exit", delay_milliseconds_before_exit_)) {
+    errors.emplace_back("settings[delay_milliseconds_before_exit] must be a non-negative integer");
     return false;
   }
 
