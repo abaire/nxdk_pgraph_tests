@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d9b/structSurfaceFormatTest" kind="struct" language="C++" prot="public">
+    <compoundname>SurfaceFormatTest</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="df/d9b/structSurfaceFormatTest_1a956de510db089f5304fca86dec4407f8" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* SurfaceFormatTest::test_name</definition>
+        <argsstring></argsstring>
+        <name>test_name</name>
+        <qualifiedname>SurfaceFormatTest::test_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.cpp" line="31" column="14" bodyfile="src/tests/clear_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/d9b/structSurfaceFormatTest_1ad382098678991ff06b46e5f5ef1f3b87" prot="public" static="no" mutable="no">
+        <type>TestHost::SurfaceColorFormat</type>
+        <definition>TestHost::SurfaceColorFormat SurfaceFormatTest::surface_format</definition>
+        <argsstring></argsstring>
+        <name>surface_format</name>
+        <qualifiedname>SurfaceFormatTest::surface_format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.cpp" line="32" column="32" bodyfile="src/tests/clear_tests.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/clear_tests.cpp" line="30" column="1" bodyfile="src/tests/clear_tests.cpp" bodystart="30" bodyend="33"/>
+    <listofallmembers>
+      <member refid="df/d9b/structSurfaceFormatTest_1ad382098678991ff06b46e5f5ef1f3b87" prot="public" virt="non-virtual"><scope>SurfaceFormatTest</scope><name>surface_format</name></member>
+      <member refid="df/d9b/structSurfaceFormatTest_1a956de510db089f5304fca86dec4407f8" prot="public" virt="non-virtual"><scope>SurfaceFormatTest</scope><name>test_name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

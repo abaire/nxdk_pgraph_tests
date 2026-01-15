@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/de5/structClipRegion" kind="struct" language="C++" prot="public">
+    <compoundname>ClipRegion</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="da/de5/structClipRegion_1a47f42fd510049883e707f96c00bd8f44" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ClipRegion::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>ClipRegion::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="101" column="12" bodyfile="src/tests/image_blit_tests.cpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/de5/structClipRegion_1a48ea17193ef3f49bc6704d9b8c9840f9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ClipRegion::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>ClipRegion::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="102" column="12" bodyfile="src/tests/image_blit_tests.cpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/de5/structClipRegion_1a2392c2abded0bdec5aba6c154212a5df" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ClipRegion::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>ClipRegion::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="103" column="12" bodyfile="src/tests/image_blit_tests.cpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/de5/structClipRegion_1a83c9517f8c2b0b7eb9efeb2e16fe2009" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ClipRegion::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>ClipRegion::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.cpp" line="104" column="12" bodyfile="src/tests/image_blit_tests.cpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/image_blit_tests.cpp" line="100" column="1" bodyfile="src/tests/image_blit_tests.cpp" bodystart="100" bodyend="105"/>
+    <listofallmembers>
+      <member refid="da/de5/structClipRegion_1a83c9517f8c2b0b7eb9efeb2e16fe2009" prot="public" virt="non-virtual"><scope>ClipRegion</scope><name>height</name></member>
+      <member refid="da/de5/structClipRegion_1a2392c2abded0bdec5aba6c154212a5df" prot="public" virt="non-virtual"><scope>ClipRegion</scope><name>width</name></member>
+      <member refid="da/de5/structClipRegion_1a47f42fd510049883e707f96c00bd8f44" prot="public" virt="non-virtual"><scope>ClipRegion</scope><name>x</name></member>
+      <member refid="da/de5/structClipRegion_1a48ea17193ef3f49bc6704d9b8c9840f9" prot="public" virt="non-virtual"><scope>ClipRegion</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
