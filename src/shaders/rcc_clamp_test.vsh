@@ -1,6 +1,6 @@
-; A vertex shader otherwise same as the passthrough shader except w-coordinate
-; is replaced by input z divided by input w where reciprocal of w is calculated
-; using the clamping RCC instruction.
+; A vertex shader otherwise same as the passthrough shader except z-coordinate
+; is replaced by the reciprocal of z calculated by the clamping RCC instruction
+; and xy are multiplied by that reciprocal.
 
 rcc r0.x, iPos.z
 mul oPos.xy, iPos.xy, r0.x

@@ -6,7 +6,6 @@
 #include "debug_output.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "texture_generator.h"
-#include "vertex_buffer.h"
 
 static constexpr char kTestDepthClamp[] = "depth_clamp";
 static constexpr char kTestEqualDepth[] = "depth_equal";

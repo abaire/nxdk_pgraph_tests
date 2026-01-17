@@ -15,7 +15,7 @@ static std::string MakeTestName(bool perspective_corrected, bool flat, float rot
   char vert[32] = {0};
   snprintf(vert, sizeof(vert), "_vert%d", vertex_cycle);
 
-  return std::string(kTestClippingPrecision) + "_nopers" + (perspective_corrected ? "0" : "1") + +"_flat" +
+  return std::string(kTestClippingPrecision) + "_nopers" + (perspective_corrected ? "0" : "1") + "_flat" +
          (flat ? "1" : "0") + rot + vert;
 }
 
