@@ -10,12 +10,14 @@
 static std::string WindingName(uint32_t winding);
 static std::string CullFaceName(uint32_t cull_face);
 
+// clang-format off
 static constexpr uint32_t kWindings[] = {
     NV097_SET_FRONT_FACE_V_CW,
     NV097_SET_FRONT_FACE_V_CCW,
     0,   // https://github.com/mborgerson/xemu/issues/321
     99,  // Random value to verify that HW behavior is to ignore unknowns and retain the last setting.
 };
+// clang-format on
 
 static constexpr uint32_t kCullFaces[] = {
     NV097_SET_CULL_FACE_V_FRONT,
