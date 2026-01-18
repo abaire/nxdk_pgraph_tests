@@ -96,5 +96,5 @@ void TextureAnisotropyTests::Test(uint32_t anisotropy_shift) {
   pb_print("%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }

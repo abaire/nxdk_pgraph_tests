@@ -98,5 +98,5 @@ void VertexShaderIndependenceTests::Test() {
   pb_print("Expect a light blue square");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName);
+  FinishDraw(kTestName);
 }

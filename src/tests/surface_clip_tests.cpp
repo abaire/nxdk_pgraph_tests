@@ -282,7 +282,7 @@ void SurfaceClipTests::Test(const std::string &name, const ClipRect &rect, TestH
   Pushbuffer::Push(NV097_SET_SURFACE_CLIP_VERTICAL, (rect.height << 16) + rect.y);
   Pushbuffer::End();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
 }
@@ -309,7 +309,7 @@ void SurfaceClipTests::TestXemuBug420() {
   pb_print("%s", kXemuBug420Test);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemuBug420Test);
+  FinishDraw(kXemuBug420Test);
 
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
@@ -329,7 +329,7 @@ void SurfaceClipTests::TestDebugTextIsClipped() {
   pb_printat(13, 0, "The text above midscreen should be clipped and invisible.");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestDebugTextIsClipped);
+  FinishDraw(kTestDebugTextIsClipped);
   host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                                   host_.GetFramebufferHeight());
 }
@@ -424,7 +424,7 @@ void SurfaceClipTests::TestRenderTarget(const std::string &name, const ClipRect 
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void SurfaceClipTests::DrawTestImage(const SurfaceClipTests::ClipRect &rect) {

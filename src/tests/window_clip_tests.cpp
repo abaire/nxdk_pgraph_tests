@@ -161,7 +161,7 @@ void WindowClipTests::Test(bool clip_exclusive, bool swap_order, const ClipRect 
   pb_printat(2, 25, (char *)"%d,%d - %d,%d", c2_left, c2_top, c2_right, c2_bottom);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, const ClipRect &c1, const ClipRect &c2) {
@@ -253,5 +253,5 @@ void WindowClipTests::TestRenderTarget(bool clip_exclusive, bool swap_order, con
   pb_print("%d,%d - %d,%d\n", c2_left, c2_top, c2_right, c2_bottom);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

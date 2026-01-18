@@ -117,7 +117,7 @@ void DMACorruptionAroundSurfaceTests::Test() {
   pb_print("%s\n", kDMAOverlapTestName);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDMAOverlapTestName);
+  FinishDraw(kDMAOverlapTestName);
 }
 
 static void ReadRawRGBAIntoBuffer(const char *filename, void *buffer, uint32_t length, uint32_t start_offset = 0) {
@@ -227,7 +227,7 @@ void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoSurface() {
   pb_printat(info_row++, 0, "Surf flush 0x%X", reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(kStage))[0]);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kReadFromFileToSurfaceTestName);
+  FinishDraw(kReadFromFileToSurfaceTestName);
 }
 
 void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoTexture() {
@@ -283,7 +283,7 @@ void DMACorruptionAroundSurfaceTests::TestReadFromFileIntoTexture() {
   pb_printat(5, 40, "White");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kReadFromFileToTextureTestName);
+  FinishDraw(kReadFromFileToTextureTestName);
 }
 
 void DMACorruptionAroundSurfaceTests::Draw(uint32_t stage) const {

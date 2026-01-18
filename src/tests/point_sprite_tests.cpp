@@ -138,5 +138,5 @@ void PointSpriteTests::TestAlphaTest() {
   pb_printat(7, 0, "Test 0x7f");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kAlphaTestTest);
+  FinishDraw(kAlphaTestTest);
 }

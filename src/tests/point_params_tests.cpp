@@ -321,7 +321,7 @@ void PointParamsTests::Test(const std::string& name, bool point_params_enabled, 
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
@@ -351,7 +351,7 @@ void PointParamsTests::TestDetailed(const std::string& name, bool use_shader) {
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void PointParamsTests::TestScaleParams(bool scale_a, bool scale_b, bool scale_c, bool use_shader) {
@@ -435,5 +435,5 @@ void PointParamsTests::TestScaleParams(bool scale_a, bool scale_b, bool scale_c,
   pb_print("%s\n", name.c_str());
   pb_print("sqrt(1/(%d + %d*D + %d*D^2))\n", scale_a ? 4 : 0, scale_b ? 1 : 0, scale_c ? 1 : 0);
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

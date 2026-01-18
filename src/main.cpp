@@ -43,7 +43,10 @@
 #include "tests/attribute_float_tests.h"
 #include "tests/blend_surface_tests.h"
 #include "tests/blend_tests.h"
+#include "tests/bump_env_lum_tests.h"
+#include "tests/bump_map_tests.h"
 #include "tests/clear_tests.h"
+#include "tests/clipping_precision_tests.h"
 #include "tests/color_key_tests.h"
 #include "tests/color_mask_blend_tests.h"
 #include "tests/color_zeta_disable_tests.h"
@@ -51,6 +54,7 @@
 #include "tests/combiner_tests.h"
 #include "tests/context_switch_tests.h"
 #include "tests/degenerate_begin_end_tests.h"
+#include "tests/depth_clamp_tests.h"
 #include "tests/depth_format_fixed_function_tests.h"
 #include "tests/depth_format_tests.h"
 #include "tests/depth_function_tests.h"
@@ -101,6 +105,7 @@
 #include "tests/texture_anisotropy_tests.h"
 #include "tests/texture_border_color_tests.h"
 #include "tests/texture_border_tests.h"
+#include "tests/texture_brdf_tests.h"
 #include "tests/texture_cpu_update_tests.h"
 #include "tests/texture_cubemap_tests.h"
 #include "tests/texture_format_dxt_tests.h"
@@ -110,6 +115,7 @@
 #include "tests/texture_matrix_tests.h"
 #include "tests/texture_palette_tests.h"
 #include "tests/texture_perspective_enable_tests.h"
+#include "tests/texture_perspective_tests.h"
 #include "tests/texture_render_target_tests.h"
 #include "tests/texture_render_update_in_place_tests.h"
 #include "tests/texture_shadow_comparator_tests.h"
@@ -122,6 +128,7 @@
 #include "tests/viewport_tests.h"
 #include "tests/volume_texture_tests.h"
 #include "tests/w_param_tests.h"
+#include "tests/wbuf_tests.h"
 #include "tests/weight_setter_tests.h"
 #include "tests/window_clip_tests.h"
 #include "tests/z_min_max_control_tests.h"
@@ -437,18 +444,22 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(AttributeFloatTests)
   REG_TEST(BlendSurfaceTests)
   REG_TEST(BlendTests)
+  REG_TEST(BumpEnvLumTests)
+  REG_TEST(BumpMapTests)
   REG_TEST(ClearTests)
+  REG_TEST(ClippingPrecisionTests)
   REG_TEST(ColorKeyTests)
   REG_TEST(ColorMaskBlendTests)
   REG_TEST(ColorZetaDisableTests)
   REG_TEST(ColorZetaOverlapTests)
   REG_TEST(CombinerTests)
   REG_TEST(ContextSwitchTests)
+  REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(DegenerateBeginEndTests)
+  REG_TEST(DepthClampTests)
   REG_TEST(DepthFormatFixedFunctionTests)
   REG_TEST(DepthFormatTests)
   REG_TEST(DepthFunctionTests)
-  REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(EdgeFlagTests)
   REG_TEST(FogCarryoverTests)
   REG_TEST(FogCustomShaderTests)
@@ -495,6 +506,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(Texture2DAsCubemapTests)
   REG_TEST(Texture3DAs2DTests)
   REG_TEST(TextureAnisotropyTests)
+  REG_TEST(TextureBRDFTests)
   REG_TEST(TextureBorderColorTests)
   REG_TEST(TextureBorderTests)
   REG_TEST(TextureCPUUpdateTests)
@@ -506,6 +518,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(TextureMatrixTests)
   REG_TEST(TexturePaletteTests)
   REG_TEST(TexturePerspectiveEnableTests)
+  REG_TEST(TexturePerspectiveTests)
   REG_TEST(TextureRenderTargetTests)
   REG_TEST(TextureRenderUpdateInPlaceTests)
   REG_TEST(TextureShadowComparatorTests)
@@ -517,12 +530,13 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(VertexShaderSwizzleTests)
   REG_TEST(ViewportTests)
   REG_TEST(VolumeTextureTests)
+  REG_TEST(WBufTests)
+  REG_TEST(WParamTests)
   REG_TEST(WeightSetterTests)
   REG_TEST(WindowClipTests)
-  REG_TEST(WParamTests)
-  REG_TEST(ZeroStrideTests)
   REG_TEST(ZMinMaxControlTests)
   REG_TEST(ZPassPixelCountTests)
+  REG_TEST(ZeroStrideTests)
   // -- End REG_TEST --
 
 #undef REG_TEST

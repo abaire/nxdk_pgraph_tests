@@ -187,7 +187,7 @@ void AttributeFloatTests::Test(const TestConfig &tConfig) {
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, tConfig.fileName);
+  FinishDraw(tConfig.fileName);
 }
 
 void AttributeFloatTests::TestColors(const std::string &test_name) {
@@ -285,5 +285,5 @@ void AttributeFloatTests::TestColors(const std::string &test_name) {
   pb_printat(0, 0, "%s\n", test_name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }

@@ -190,7 +190,7 @@ void CombinerTests::TestMux() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kMuxTestName);
+  FinishDraw(kMuxTestName);
 }
 
 void CombinerTests::TestCombinerIndependence() {
@@ -254,7 +254,7 @@ void CombinerTests::TestCombinerIndependence() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kIndependenceTestName);
+  FinishDraw(kIndependenceTestName);
 }
 
 void CombinerTests::TestCombinerColorAlphaIndependence() {
@@ -315,7 +315,7 @@ void CombinerTests::TestCombinerColorAlphaIndependence() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kColorAlphaIndependenceTestName);
+  FinishDraw(kColorAlphaIndependenceTestName);
 }
 
 void CombinerTests::TestFlags() {
@@ -400,7 +400,7 @@ void CombinerTests::TestFlags() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFlagsTestName);
+  FinishDraw(kFlagsTestName);
 }
 
 void CombinerTests::TestUnboundTextureSamplers() {
@@ -479,7 +479,7 @@ void CombinerTests::TestUnboundTextureSamplers() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kUnboundTextureSamplerTestName);
+  FinishDraw(kUnboundTextureSamplerTestName);
 }
 
 void CombinerTests::TestAlphaFromBlue() {
@@ -589,7 +589,7 @@ void CombinerTests::TestAlphaFromBlue() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kAlphaFromBlueTestName);
+  FinishDraw(kAlphaFromBlueTestName);
 }
 
 void CombinerTests::TestCombinerOps() {
@@ -693,7 +693,7 @@ void CombinerTests::TestCombinerOps() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kCombinerOpsTestName);
+  FinishDraw(kCombinerOpsTestName);
 }
 
 void CombinerTests::TestFinalCombinerSpecialInputs() {
@@ -814,5 +814,5 @@ void CombinerTests::TestFinalCombinerSpecialInputs() {
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kFinalCombinerSpecialInputsTestName);
+  FinishDraw(kFinalCombinerSpecialInputsTestName);
 }

@@ -94,6 +94,7 @@ generate_nv2a_vshinc_files(
         shaders/projection_vertex_shader_no_lighting.vsh
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
         shaders/projection_vertex_shader_no_lighting_rcp_fog.vsh
+        shaders/rcc_clamp_test.vsh
         shaders/weight_to_color.vsh
 )
 
@@ -215,8 +216,14 @@ add_executable(
         tests/blend_surface_tests.h
         tests/blend_tests.cpp
         tests/blend_tests.h
+        tests/bump_map_tests.cpp
+        tests/bump_map_tests.h
+        tests/bump_env_lum_tests.cpp
+        tests/bump_env_lum_tests.h
         tests/clear_tests.cpp
         tests/clear_tests.h
+        tests/clipping_precision_tests.cpp
+        tests/clipping_precision_tests.h
         tests/color_key_tests.cpp
         tests/color_key_tests.h
         tests/color_mask_blend_tests.cpp
@@ -231,6 +238,8 @@ add_executable(
         tests/context_switch_tests.h
         tests/degenerate_begin_end_tests.cpp
         tests/degenerate_begin_end_tests.h
+        tests/depth_clamp_tests.cpp
+        tests/depth_clamp_tests.h
         tests/depth_format_fixed_function_tests.cpp
         tests/depth_format_fixed_function_tests.h
         tests/depth_format_tests.cpp
@@ -333,6 +342,8 @@ add_executable(
         tests/texture_border_color_tests.h
         tests/texture_border_tests.cpp
         tests/texture_border_tests.h
+        tests/texture_brdf_tests.cpp
+        tests/texture_brdf_tests.h
         tests/texture_cpu_update_tests.cpp
         tests/texture_cpu_update_tests.h
         tests/texture_cubemap_tests.cpp
@@ -351,6 +362,8 @@ add_executable(
         tests/texture_palette_tests.h
         tests/texture_perspective_enable_tests.cpp
         tests/texture_perspective_enable_tests.h
+        tests/texture_perspective_tests.cpp
+        tests/texture_perspective_tests.h
         tests/texture_render_target_tests.cpp
         tests/texture_render_target_tests.h
         tests/texture_render_update_in_place_tests.cpp
@@ -373,6 +386,8 @@ add_executable(
         tests/viewport_tests.h
         tests/volume_texture_tests.cpp
         tests/volume_texture_tests.h
+        tests/wbuf_tests.cpp
+        tests/wbuf_tests.h
         tests/w_param_tests.cpp
         tests/w_param_tests.h
         tests/weight_setter_tests.cpp

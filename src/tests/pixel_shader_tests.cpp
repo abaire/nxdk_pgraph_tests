@@ -123,7 +123,7 @@ void PixelShaderTests::TestPassthrough() {
   pb_print("Tex coords are used as colors\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kPassthrough);
+  FinishDraw(kPassthrough);
 }
 
 void PixelShaderTests::TestClipPlane() {
@@ -230,7 +230,7 @@ void PixelShaderTests::TestClipPlane() {
   pb_printat(4, 0, "Blue ---1 1--- -1-- --1-\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kClipPlane);
+  FinishDraw(kClipPlane);
 }
 
 void PixelShaderTests::TestBumpEnvMap(bool luminance) {
@@ -358,7 +358,7 @@ void PixelShaderTests::TestBumpEnvMap(bool luminance) {
   pb_printat(0, 0, "%s\n", luminance ? kBumpEnvMapLuminance : kBumpEnvMap);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, luminance ? kBumpEnvMapLuminance : kBumpEnvMap);
+  FinishDraw(luminance ? kBumpEnvMapLuminance : kBumpEnvMap);
 }
 
 void PixelShaderTests::TestDotST() {
@@ -438,7 +438,7 @@ void PixelShaderTests::TestDotST() {
   pb_printat(0, 0, "%s\n", kDotST);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDotST);
+  FinishDraw(kDotST);
 }
 
 void PixelShaderTests::TestDotZW() {
@@ -529,7 +529,7 @@ void PixelShaderTests::TestDotZW() {
   pb_printat(2, 0, "Depth buffer as R5G6B5\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDotZW);
+  FinishDraw(kDotZW);
 }
 
 void PixelShaderTests::TestDependentColorChannel(bool use_blue_green) {
@@ -590,7 +590,7 @@ void PixelShaderTests::TestDependentColorChannel(bool use_blue_green) {
   pb_printat(0, 0, "%s\n", use_blue_green ? kStageDependentGB : kStageDependentAR);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, use_blue_green ? kStageDependentGB : kStageDependentAR);
+  FinishDraw(use_blue_green ? kStageDependentGB : kStageDependentAR);
 }
 
 void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &image, float quad_size,

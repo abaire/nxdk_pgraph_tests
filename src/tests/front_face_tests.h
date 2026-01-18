@@ -17,9 +17,9 @@ class FrontFaceTests : public TestSuite {
 
  private:
   void CreateGeometry();
-  void Test(uint32_t front_face, uint32_t cull_face);
+  void Test(uint32_t front_face, uint32_t cull_face, bool line_mode);
 
-  static std::string MakeTestName(uint32_t front_face, uint32_t cull_face);
+  static std::string MakeTestName(uint32_t front_face, uint32_t cull_face, bool line_mode);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FRONT_FACE_TESTS_H

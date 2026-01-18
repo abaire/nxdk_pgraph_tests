@@ -43,7 +43,7 @@ static constexpr const char kOutSizeTest[] = "Out size";
 static constexpr const char kRatioTest[] = "Ratio";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &config)
-    : TestSuite(host, std::move(output_dir), "PVIDEO", config) {
+    : TestSuite(host, std::move(output_dir), "PVIDEO", config, true) {
   tests_[kPALIntoNTSCTest] = [this]() { TestPALIntoNTSC(); };
   tests_[kStopBehaviorTest] = [this]() { TestStopBehavior(); };
   // This seems to permanently kill video output on 1.0 devkit.
@@ -249,7 +249,7 @@ void PvideoTests::TestStopBehavior() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehaviorTest);
+  FinishDrawNoSave(kStopBehaviorTest);
 }
 
 void PvideoTests::TestAlternateStopBehavior() {
@@ -290,7 +290,7 @@ void PvideoTests::TestAlternateStopBehavior() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kStopBehaviorTest);
+  FinishDrawNoSave(kStopBehaviorTest);
 
   Sleep(2000);
 
@@ -338,7 +338,7 @@ void PvideoTests::TestSizeInMaxUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxUnityTest);
+  FinishDrawNoSave(kSizeInMaxUnityTest);
 }
 
 void PvideoTests::TestSizeInMaxLargeDelta() {
@@ -381,7 +381,7 @@ void PvideoTests::TestSizeInMaxLargeDelta() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxLargeTest);
+  FinishDrawNoSave(kSizeInMaxLargeTest);
 }
 
 void PvideoTests::TestSizeInMaxSmallDelta() {
@@ -424,7 +424,7 @@ void PvideoTests::TestSizeInMaxSmallDelta() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxSmallTest);
+  FinishDrawNoSave(kSizeInMaxSmallTest);
 }
 
 void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
@@ -459,7 +459,7 @@ void PvideoTests::TestSizeMaxOutSmallUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallUnityTest);
+  FinishDrawNoSave(kSizeInMaxOutSmallUnityTest);
 }
 
 void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
@@ -494,7 +494,7 @@ void PvideoTests::TestSizeMaxOutSmallCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInMaxOutSmallCorrectTest);
+  FinishDrawNoSave(kSizeInMaxOutSmallCorrectTest);
 }
 
 void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
@@ -528,7 +528,7 @@ void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutUnityTest);
+  FinishDrawNoSave(kSizeInLargerThanSizeOutUnityTest);
 }
 
 void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
@@ -562,7 +562,7 @@ void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrectTest);
+  FinishDrawNoSave(kSizeInLargerThanSizeOutCorrectTest);
 }
 
 void PvideoTests::TestPALIntoNTSC() {
@@ -595,7 +595,7 @@ void PvideoTests::TestPALIntoNTSC() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInLargerThanSizeOutCorrectTest);
+  FinishDrawNoSave(kSizeInLargerThanSizeOutCorrectTest);
 }
 
 void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
@@ -629,7 +629,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutUnityTest);
+  FinishDrawNoSave(kSizeInSmallerThanSizeOutUnityTest);
 }
 
 void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
@@ -663,7 +663,7 @@ void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kSizeInSmallerThanSizeOutCorrectTest);
+  FinishDrawNoSave(kSizeInSmallerThanSizeOutCorrectTest);
 }
 
 void PvideoTests::TestPitchLessThanCompact() {
@@ -697,7 +697,7 @@ void PvideoTests::TestPitchLessThanCompact() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLessThanCompactTest);
+  FinishDrawNoSave(kPitchLessThanCompactTest);
 }
 
 void PvideoTests::TestPitchLargerThanCompact() {
@@ -729,7 +729,7 @@ void PvideoTests::TestPitchLargerThanCompact() {
   pb_print("DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kPitchLargerThanCompactTest);
+  FinishDrawNoSave(kPitchLargerThanCompactTest);
 }
 
 void PvideoTests::TestPitch() {
@@ -765,7 +765,7 @@ void PvideoTests::TestPitch() {
         "%d",
         kTestRegion);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kPitchTest);
+    FinishDrawNoSave(kPitchTest);
 
     SetPvideoStop();
     SetPvideoFormat(NV_PVIDEO_FORMAT_COLOR_LE_CR8YB8CB8YA8, pitch, true, 0);
@@ -782,7 +782,7 @@ void PvideoTests::TestPitch() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kPitchTest);
+  FinishDrawNoSave(kPitchTest);
 
   host_.SetBlend();
 }
@@ -881,7 +881,7 @@ void PvideoTests::TestColorKey() {
       pb_printat(2, 0, "Gradient overlay color key: 0x%X\n", color_key);
       pb_draw_text_screen();
 
-      host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
+      FinishDrawNoSave(kColorKeyTest);
 
       PvideoInit();
 
@@ -919,7 +919,7 @@ void PvideoTests::TestColorKey() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
+  FinishDrawNoSave(kColorKeyTest);
 
   host_.SetBlend();
 }
@@ -950,7 +950,7 @@ void PvideoTests::TestSimpleFullscreenOverlay0() {
   host_.PrepareDraw(kBackgroundColor);
   pb_erase_text_screen();
   pb_print("PVIDEO overlay 0\n160x160 checkerboard");
-  host_.FinishDraw(false, output_dir_, suite_name_, kOverlay0Test);
+  FinishDrawNoSave(kOverlay0Test);
 
   SetPvideoBuffer(true, false);
 
@@ -964,7 +964,7 @@ void PvideoTests::TestSimpleFullscreenOverlay0() {
   pb_printat(1, 0, "Video was displayed using overlay 0\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kOverlay0Test);
+  FinishDrawNoSave(kOverlay0Test);
 
   host_.SetBlend();
 }
@@ -981,7 +981,7 @@ void PvideoTests::TestOverlay1() {
   host_.PrepareDraw(kBackgroundColor);
   pb_erase_text_screen();
   pb_print("PVIDEO overlay 1\nGradient test pattern\n");
-  host_.FinishDraw(false, output_dir_, suite_name_, kOverlay1Test);
+  FinishDrawNoSave(kOverlay1Test);
 
   SetPvideoStop();
   SetPvideoColorKey(kBackgroundColor);
@@ -1008,7 +1008,7 @@ void PvideoTests::TestOverlay1() {
   pb_printat(1, 0, "Video was displayed using overlay 1\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kOverlay1Test);
+  FinishDrawNoSave(kOverlay1Test);
 
   host_.SetBlend();
 }
@@ -1057,7 +1057,7 @@ void PvideoTests::TestOverlappedOverlays() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kColorKeyTest);
+  FinishDrawNoSave(kColorKeyTest);
 }
 
 void PvideoTests::TestInPoint() {
@@ -1086,7 +1086,7 @@ void PvideoTests::TestInPoint() {
     pb_printat(0, 0, "S 8.4 - Texture moves 2 boxes from right to left");
     pb_printat(1, 0, "S: 0x%X (%d) - %d.%d", s, s, s >> 4, s & 0xF);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
     SetPvideoIn(s, 0, host_.GetFramebufferWidth() / 2, host_.GetFramebufferHeight(), 0);
@@ -1103,7 +1103,7 @@ void PvideoTests::TestInPoint() {
     pb_printat(0, 0, "T - Texture moves 2 boxes from bottom to top");
     pb_printat(1, 0, "T: 0x%X (%d) - %d.%d", t, t, t >> 3, t & 0x7);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
     SetPvideoIn(0, t, host_.GetFramebufferWidth() / 2, host_.GetFramebufferHeight(), 0);
@@ -1121,7 +1121,7 @@ void PvideoTests::TestInPoint() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+  FinishDrawNoSave(kInPointTest);
 
   host_.SetBlend();
 }
@@ -1178,7 +1178,7 @@ void PvideoTests::TestInSize() {
     pb_printat(0, 0, "W: %d texels (%d pixels)", w, w * 2);
     pb_printat(1, 0, "White squares are %d pixels via 3D for measurement", static_cast<uint32_t>(kMeasurementBoxSize));
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInSizeTest);
+    FinishDrawNoSave(kInSizeTest);
 
     SetPvideoStop();
     SetPvideoIn(0, 0, w, host_.GetFramebufferHeight(), 0);
@@ -1197,7 +1197,7 @@ void PvideoTests::TestInSize() {
     pb_printat(0, 0, "H: %d texels (%d pixels)", h, h);
     pb_printat(1, 0, "White squares are %d pixels via 3D for measurement", static_cast<uint32_t>(kMeasurementBoxSize));
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInSizeTest);
+    FinishDrawNoSave(kInSizeTest);
 
     SetPvideoStop();
     SetPvideoIn(0, 0, host_.GetFramebufferWidth() / 2, h, 0);
@@ -1216,7 +1216,7 @@ void PvideoTests::TestInSize() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kInSizeTest);
+  FinishDrawNoSave(kInSizeTest);
 
   host_.SetBlend();
 }
@@ -1270,7 +1270,7 @@ void PvideoTests::TestOutPoint() {
     pb_erase_text_screen();
     pb_printat(0, 0, "X: %d", kLeft + x);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
     SetPvideoOut(kLeft + x, kTop, kOutSize, kOutSize, 0);
@@ -1287,7 +1287,7 @@ void PvideoTests::TestOutPoint() {
     pb_erase_text_screen();
     pb_printat(0, 0, "Y: %d", kTop + y);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
     SetPvideoOut(kLeft, kTop + y, kOutSize, kOutSize, 0);
@@ -1305,7 +1305,7 @@ void PvideoTests::TestOutPoint() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+  FinishDrawNoSave(kInPointTest);
 
   host_.SetBlend();
 }
@@ -1358,7 +1358,7 @@ void PvideoTests::TestOutSize() {
     pb_erase_text_screen();
     pb_printat(0, 0, "Width: %d", w);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
     SetPvideoOut(kLeft, kTop, w, 256, 0);
@@ -1375,7 +1375,7 @@ void PvideoTests::TestOutSize() {
     pb_erase_text_screen();
     pb_printat(0, 0, "Height: %d", h);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
     SetPvideoOut(kLeft, kTop, 256, h, 0);
@@ -1393,7 +1393,7 @@ void PvideoTests::TestOutSize() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+  FinishDrawNoSave(kInPointTest);
 
   host_.SetBlend();
 }
@@ -1428,7 +1428,7 @@ void PvideoTests::TestRatios() {
     pb_erase_text_screen();
     pb_printat(0, 0, "DsDx: %d : 100", ratio_numerator);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
 
@@ -1446,7 +1446,7 @@ void PvideoTests::TestRatios() {
     pb_erase_text_screen();
     pb_printat(0, 0, "DtDy: %d : 100", ratio_numerator);
     pb_draw_text_screen();
-    host_.FinishDraw(false, output_dir_, suite_name_, kInPointTest);
+    FinishDrawNoSave(kInPointTest);
 
     SetPvideoStop();
 
@@ -1465,7 +1465,7 @@ void PvideoTests::TestRatios() {
   pb_printat(0, 0, "DONE\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, kPitchTest);
+  FinishDrawNoSave(kPitchTest);
 
   host_.SetBlend();
 }
