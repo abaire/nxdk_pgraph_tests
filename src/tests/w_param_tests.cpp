@@ -284,7 +284,7 @@ void WParamTests::TestWGaps(bool texture_perspective_enable) {
   pb_draw_text_screen();
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, AugmentTestName(kTestWGaps, texture_perspective_enable));
+  FinishDraw(AugmentTestName(kTestWGaps, texture_perspective_enable));
 }
 
 void WParamTests::CreateGeometryPositiveWTriangleStrip() {
@@ -328,8 +328,7 @@ void WParamTests::TestPositiveWTriangleStrip(bool texture_perspective_enable) {
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_,
-                   AugmentTestName(kTestWPositiveTriangleStrip, texture_perspective_enable));
+  FinishDraw(AugmentTestName(kTestWPositiveTriangleStrip, texture_perspective_enable));
 }
 
 void WParamTests::CreateGeometryNegativeWTriangleStrip() {
@@ -393,8 +392,7 @@ void WParamTests::TestNegativeWTriangleStrip(bool texture_perspective_enable) {
   Pushbuffer::End();
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_,
-                   AugmentTestName(kTestWNegativeTriangleStrip, texture_perspective_enable));
+  FinishDraw(AugmentTestName(kTestWNegativeTriangleStrip, texture_perspective_enable));
 }
 
 void WParamTests::TestFixedFunctionZeroW(bool draw_quad, bool texture_perspective_enable) {
@@ -471,7 +469,7 @@ void WParamTests::TestFixedFunctionZeroW(bool draw_quad, bool texture_perspectiv
   }
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeFFZeroWTestName(draw_quad, texture_perspective_enable));
+  FinishDraw(MakeFFZeroWTestName(draw_quad, texture_perspective_enable));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
@@ -595,7 +593,7 @@ void WParamTests::TestFixedFunctionZeroInfW(bool draw_quad, float w_multiplier) 
   pb_print("%e", bottom_right_w);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeFFZeroInfWTestName(draw_quad, w_multiplier));
+  FinishDraw(MakeFFZeroInfWTestName(draw_quad, w_multiplier));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
@@ -728,7 +726,7 @@ void WParamTests::TestProgZeroInfW(bool draw_quad, float w_multiplier) {
   pb_print("%e", bottom_right_w);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeProgZeroInfWTestName(draw_quad, w_multiplier));
+  FinishDraw(MakeProgZeroInfWTestName(draw_quad, w_multiplier));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
@@ -820,7 +818,7 @@ void WParamTests::TestRccZeroInfW(float w_multiplier) {
   pb_print("%e", bottom_right_z);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeRccZeroInfWTestName(w_multiplier));
+  FinishDraw(MakeRccZeroInfWTestName(w_multiplier));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);

@@ -412,7 +412,7 @@ void TextureCubemapTests::TestCubemap(float q_coord) {
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeCubemapTestName(q_coord));
+  FinishDraw(MakeCubemapTestName(q_coord));
 }
 
 void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping) {
@@ -495,7 +495,7 @@ void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, ReflectTest mode) {
@@ -591,7 +591,7 @@ void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_r
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping) {
@@ -692,7 +692,7 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void TextureCubemapTests::TestDotReflectSpec(const std::string &name, uint32_t dot_rgb_mapping, const vector_t &eye_vec,
@@ -770,7 +770,7 @@ void TextureCubemapTests::TestDotReflectSpec(const std::string &name, uint32_t d
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 static void GenerateCubemap(uint8_t *buffer, CubemapGeneratorMode mode) {

@@ -205,7 +205,7 @@ void SurfaceFormatTests::Test(const std::string &name, TestHost::SurfaceColorFor
   pb_printat(12, 0, "Opaque");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void SurfaceFormatTests::RenderToTextureStart(TestHost::SurfaceColorFormat color_format) const {

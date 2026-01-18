@@ -203,7 +203,7 @@ void Texture2DAsCubemapTests::TestCubemap() {
   pb_print("%s\n", kTestCubemap);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestCubemap);
+  FinishDraw(kTestCubemap);
 }
 
 void Texture2DAsCubemapTests::TestDotSTR3D(const std::string &name) {
@@ -266,7 +266,7 @@ void Texture2DAsCubemapTests::TestDotSTR3D(const std::string &name) {
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void Texture2DAsCubemapTests::TestDotReflect(const std::string &name, ReflectTest mode) {
@@ -341,7 +341,7 @@ void Texture2DAsCubemapTests::TestDotReflect(const std::string &name, ReflectTes
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void Texture2DAsCubemapTests::TestDotSTRCubemap(const std::string &name) {
@@ -415,5 +415,5 @@ void Texture2DAsCubemapTests::TestDotSTRCubemap(const std::string &name) {
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

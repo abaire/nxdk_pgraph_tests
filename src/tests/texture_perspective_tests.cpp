@@ -116,7 +116,7 @@ void TexturePerspectiveTests::TestTexturePerspective(bool draw_quad, bool perspe
     }
   }
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeTexPersTestName(draw_quad, perspective_corrected));
+  FinishDraw(MakeTexPersTestName(draw_quad, perspective_corrected));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
@@ -186,7 +186,7 @@ void TexturePerspectiveTests::TestDiffusePerspective(bool draw_quad, bool perspe
     }
   }
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeTexDiffTestName(draw_quad, perspective_corrected));
+  FinishDraw(MakeTexDiffTestName(draw_quad, perspective_corrected));
 
   auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);

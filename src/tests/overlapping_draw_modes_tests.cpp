@@ -102,7 +102,7 @@ void OverlappingDrawModesTests::TestArrayElementDrawArrayArrayElement() {
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
   Pushbuffer::End();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kArrElDrawArrArrElTest);
+  FinishDraw(kArrElDrawArrArrElTest);
 }
 
 void OverlappingDrawModesTests::CreateTriangles() {
@@ -183,7 +183,7 @@ void OverlappingDrawModesTests::TestDrawArrayDrawArray() {
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
   Pushbuffer::End();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDrawArrDrawArrTest);
+  FinishDraw(kDrawArrDrawArrTest);
 }
 
 void OverlappingDrawModesTests::TestXemuSquashOptimization() {
@@ -219,7 +219,7 @@ void OverlappingDrawModesTests::TestXemuSquashOptimization() {
 
   Pushbuffer::End();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemuSquashOptimizationTest);
+  FinishDraw(kXemuSquashOptimizationTest);
 }
 
 void OverlappingDrawModesTests::TestXemuSquashOptimizationSingleDrawArrays() {
@@ -253,5 +253,5 @@ void OverlappingDrawModesTests::TestXemuSquashOptimizationSingleDrawArrays() {
 
   Pushbuffer::End();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemuSquashOptimizationSingleDrawArraysTest);
+  FinishDraw(kXemuSquashOptimizationSingleDrawArraysTest);
 }

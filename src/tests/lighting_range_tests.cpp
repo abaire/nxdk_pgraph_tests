@@ -226,5 +226,5 @@ void LightingRangeTests::Test(const std::string& name, std::shared_ptr<Light> li
   pb_printat(12, 53, "z=2");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

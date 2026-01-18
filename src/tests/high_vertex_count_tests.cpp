@@ -191,7 +191,7 @@ void HighVertexCountTests::Test(const std::string& name, DrawMode draw_mode) {
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(false, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 std::string HighVertexCountTests::MakeTestName(DrawMode draw_mode) {

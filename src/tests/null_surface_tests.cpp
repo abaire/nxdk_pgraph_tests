@@ -33,14 +33,14 @@ void NullSurfaceTests::TestNullColor() {
   host_.PrepareDraw(0xFE131413);
   SetSurfaceDMAs();
   RestoreSurfaceDMAs();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kNullColorTest);
+  FinishDraw(kNullColorTest);
 }
 
 void NullSurfaceTests::TestNullZeta() {
   host_.PrepareDraw(0xFE131414);
   SetSurfaceDMAs();
   RestoreSurfaceDMAs();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kNullZetaTest);
+  FinishDraw(kNullZetaTest);
 }
 
 void NullSurfaceTests::TestXemuBug893() {
@@ -110,7 +110,7 @@ void NullSurfaceTests::TestXemuBug893() {
   pb_print("Test passed\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemuBug893Test);
+  FinishDraw(kXemuBug893Test);
 }
 
 void NullSurfaceTests::SetSurfaceDMAs() const {

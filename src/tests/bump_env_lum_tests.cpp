@@ -186,7 +186,7 @@ void BumpEnvLumTests::Test(const TextureFormatInfo &texture_format, bool cross_o
   pb_draw_text_screen();
 
   std::string test_name = MakeTestName(texture_format, cross_on_blue, rotate90);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }
 
 std::string BumpEnvLumTests::MakeTestName(const TextureFormatInfo &texture_format, bool cross_on_blue, bool rotate90) {

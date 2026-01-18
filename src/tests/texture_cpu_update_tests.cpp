@@ -73,7 +73,7 @@ void TextureCPUUpdateTests::TestRGBA() {
 
   host_.PrepareDraw(0xFE202020);
   Draw(host_);
-  host_.FinishDraw(false, output_dir_, suite_name_, kRGBATest);
+  FinishDrawNoSave(kRGBATest);
 
   // Set the texture to pure green.
   texels = host_.GetTextureMemoryForStage(0);
@@ -92,7 +92,7 @@ void TextureCPUUpdateTests::TestRGBA() {
   pb_printat(7, 12, (char *)"Expect a green screen");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kRGBATest);
+  FinishDraw(kRGBATest);
 }
 
 // This does not actually change the texture on HW
@@ -116,7 +116,7 @@ void TextureCPUUpdateTests::TestRGBA() {
 //  host_.PrepareDraw(0xFE212021);
 //
 //  Draw(host_);
-//  host_.FinishDraw(false, output_dir_, suite_name_, kPalettizedTest);
+//  FinishDrawNoSave(kPalettizedTest);
 //
 //  palette[1] = 0xFF007700;
 //  Draw(host_);
@@ -126,5 +126,5 @@ void TextureCPUUpdateTests::TestRGBA() {
 //  pb_printat(7, 12, (char *)"Expect a green screen");
 //  pb_draw_text_screen();
 //
-//  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kPalettizedTest);
+//  FinishDraw(kPalettizedTest);
 //}

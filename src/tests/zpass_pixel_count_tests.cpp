@@ -202,7 +202,7 @@ void ZPassPixelCountTests::Test() {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName, true);
+  FinishDraw(kTestName, true);
 }
 
 void ZPassPixelCountTests::TestPointSize(uint32_t point_size) {
@@ -300,7 +300,7 @@ void ZPassPixelCountTests::TestPointSize(uint32_t point_size) {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name, true);
+  FinishDraw(test_name, true);
 }
 
 void ZPassPixelCountTests::TestPointSizeProgrammable(uint32_t point_size) {
@@ -411,7 +411,7 @@ void ZPassPixelCountTests::TestPointSizeProgrammable(uint32_t point_size) {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name, true);
+  FinishDraw(test_name, true);
 
   host_.SetVertexShaderProgram(nullptr);
 }
@@ -514,5 +514,5 @@ void ZPassPixelCountTests::TestLineWidth(uint32_t line_width) {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name, true);
+  FinishDraw(test_name, true);
 }

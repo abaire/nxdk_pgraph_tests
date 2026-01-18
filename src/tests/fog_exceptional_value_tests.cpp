@@ -902,7 +902,7 @@ void FogExceptionalValueTests::Test(const std::string& name, uint32_t fog_mode, 
   pb_printat(0, 0, "%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void FogExceptionalValueTests::TestParams(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode,
@@ -1031,5 +1031,5 @@ void FogExceptionalValueTests::TestParams(const std::string& name, uint32_t fog_
   pb_printat(0, 0, "%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

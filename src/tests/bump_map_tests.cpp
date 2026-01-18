@@ -205,7 +205,7 @@ void BumpMapTests::DrawRectangles(const TextureFormatInfo &texture_format, char 
   pb_draw_text_screen();
 
   std::string test_name = MakeTestName(texture_format, cross_on_blue, rotate90);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }
 
 void BumpMapTests::Test16bit(const TextureFormatInfo &texture_format, bool cross_on_blue) {

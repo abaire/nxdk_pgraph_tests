@@ -106,7 +106,7 @@ void TwoDLineTests::Test(const TestCase& test) {
   pb_draw_text_screen();
   std::string name = MakeTestName(test, true);
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 std::string TwoDLineTests::MakeTestName(const TestCase& test, bool ReturnShortName) {

@@ -420,7 +420,7 @@ void StencilFuncTests::Test(const std::string &name, uint32_t stencil_func) {
   pb_printat(14, 37, (char *)"0xFF");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, true);
+  FinishDraw(name, true);
 
   // Restore pgraph register 0x880
   *crash_register = crash_register_pre_test;

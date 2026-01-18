@@ -129,7 +129,7 @@ void TextureFormatDXTTests::Test(const char *filename, CompressedTextureFormat t
   pb_print("%s\n", test_name.c_str());
   pb_print("FMT: %s\n", GetFormatName(texture_format).c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }
 
 void TextureFormatDXTTests::TestMipmap(const char *filename,
@@ -209,7 +209,7 @@ void TextureFormatDXTTests::TestMipmap(const char *filename,
   pb_print("%s\n", test_name.c_str());
   pb_print("FMT: %s\n", GetFormatName(texture_format).c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }
 
 static std::string GetFormatName(TextureFormatDXTTests::CompressedTextureFormat texture_format) {

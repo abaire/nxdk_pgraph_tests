@@ -235,5 +235,5 @@ void SmoothingTests::Test(const std::string& name, uint32_t smooth_control) {
   pb_printat(10, 32, (char*)"LSPS");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

@@ -148,5 +148,5 @@ void TextureLodBiasTests::Test() {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kLODBiasTest);
+  FinishDraw(kLODBiasTest);
 }

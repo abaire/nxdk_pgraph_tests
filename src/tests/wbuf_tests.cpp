@@ -570,5 +570,5 @@ void WBufTests::Test(int depthf, bool zbias, bool zslope, bool vsh, const char *
   pb_draw_text_screen();
 
   std::string name = MakeTestName(prim_name, depthf, zbias, zslope, vsh, clip_left, clip_top);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, true);
+  FinishDraw(name, true);
 }

@@ -232,7 +232,7 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
   pb_printat(16, 9, (char *)"Center alphas: G: 0x7F R: 0xFF B: 0x80 W: 0x00\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void BlendTests::DrawAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {

@@ -281,7 +281,7 @@ void FrontFaceTests::Test(uint32_t front_face, uint32_t cull_face, bool line_mod
   pb_draw_text_screen();
 
   std::string name = MakeTestName(front_face, cull_face, line_mode);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 std::string FrontFaceTests::MakeTestName(uint32_t front_face, uint32_t cull_face, bool line_mode) {
