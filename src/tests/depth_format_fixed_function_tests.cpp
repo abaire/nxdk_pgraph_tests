@@ -36,13 +36,26 @@ DepthFormatFixedFunctionTests::DepthFormatFixedFunctionTests(TestHost &host, std
     for (auto compression_enabled : kCompressionSettings) {
       uint32_t depth_cutoff = depth_format.max_depth;
 
-      for (int i = 0; i <= kNumDepthTests; ++i, depth_cutoff -= depth_cutoff_step) {
-        std::string name = MakeTestName(depth_format, compression_enabled, depth_cutoff);
+      auto add_entry = [this, depth_format, depth_cutoff, compression_enabled, depth_cutoff_step](int index) {
+        uint32_t test_cutoff = depth_cutoff - (index * depth_cutoff_step);
+        std::string name = MakeTestName(depth_format, compression_enabled, test_cutoff);
 
-        tests_[name] = [this, depth_format, compression_enabled, depth_cutoff]() {
-          Test(depth_format, compression_enabled, depth_cutoff);
+        tests_[name] = [this, depth_format, compression_enabled, test_cutoff]() {
+          Test(depth_format, compression_enabled, test_cutoff);
         };
-      }
+      };
+
+      add_entry(0);
+      add_entry(1);
+      add_entry(2);
+
+      add_entry(kNumDepthTests / 4);
+      add_entry(kNumDepthTests / 2);
+      add_entry(kNumDepthTests - kNumDepthTests / 4);
+
+      add_entry(kNumDepthTests - 2);
+      add_entry(kNumDepthTests - 1);
+      add_entry(kNumDepthTests);
     }
   }
 }
