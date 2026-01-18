@@ -7,8 +7,6 @@
 #include "texture_format.h"
 #include "xbox_math_vector.h"
 
-using namespace XboxMath;
-
 class TestHost;
 
 // Tests cubemap texture behavior.

@@ -64,7 +64,7 @@ class TestSuite {
 
   void RunAll();
 
-  bool IsInteractiveOnly() const { return interactive_only_; }
+  [[nodiscard]] bool IsInteractiveOnly() const { return interactive_only_; }
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
 
   //! Inserts a pattern of NV097_NO_OPERATION's into the pushbuffer to allow identification when viewing nv2a traces.
