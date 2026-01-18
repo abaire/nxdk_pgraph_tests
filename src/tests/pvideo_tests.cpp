@@ -43,7 +43,7 @@ static constexpr const char kOutSizeTest[] = "Out size";
 static constexpr const char kRatioTest[] = "Ratio";
 
 PvideoTests::PvideoTests(TestHost &host, std::string output_dir, const Config &config)
-    : TestSuite(host, std::move(output_dir), "PVIDEO", config) {
+    : TestSuite(host, std::move(output_dir), "PVIDEO", config, true) {
   tests_[kPALIntoNTSCTest] = [this]() { TestPALIntoNTSC(); };
   tests_[kStopBehaviorTest] = [this]() { TestStopBehavior(); };
   // This seems to permanently kill video output on 1.0 devkit.
