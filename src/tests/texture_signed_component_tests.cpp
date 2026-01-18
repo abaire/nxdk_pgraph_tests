@@ -101,7 +101,7 @@ void TextureSignedComponentTests::Test(const TextureFormatInfo &texture_format, 
            signed_green ? "G" : "", signed_blue ? "B" : "");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }
 
 void TextureSignedComponentTests::TestGradients(const std::string &name, const TextureFormatInfo &texture_format,
@@ -215,7 +215,7 @@ void TextureSignedComponentTests::TestGradients(const std::string &name, const T
   pb_print("          %s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 
   host_.SetBlend();
 }

@@ -259,7 +259,7 @@ void ClearTests::TestColorMask(uint32_t color_mask, bool depth_write_enable) {
   pb_draw_text_screen();
 
   std::string name = MakeMaskTestName(color_mask, depth_write_enable);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, true);
+  FinishDraw(name, true);
 }
 
 void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, const std::string& test_name) {
@@ -360,5 +360,5 @@ void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, con
   }
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }

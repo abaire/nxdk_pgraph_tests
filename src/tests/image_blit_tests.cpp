@@ -327,7 +327,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
   pb_draw_text_screen();
 
   std::string name = MakeTestName(test);
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test, uint32_t clip_x, uint32_t clip_y,
@@ -351,7 +351,7 @@ void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test,
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void ImageBlitTests::TestBlitOverPushbuffer(const std::string& name, const BlitTest& test) {
@@ -412,7 +412,7 @@ void ImageBlitTests::TestBlitOverPushbuffer(const std::string& name, const BlitT
   pb_print("%s\n", name.c_str());
   pb_print("NOT IMPLEMENTED - define ENABLE_OVERLAP_FIFO_TEST\n");
 #endif  // #ifdef ENABLE_OVERLAP_FIFO_TEST
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void ImageBlitTests::TestBlitPastWidth(const std::string& name) {
@@ -516,7 +516,7 @@ void ImageBlitTests::TestBlitPastWidth(const std::string& name) {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 
   host_.PBKitBusyWait();
   set_crash_register(0x880, old_crash_register_value);
@@ -589,7 +589,7 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
 
   host_.End();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kDirtyOverlappedDestSurfaceTest);
+  FinishDraw(kDirtyOverlappedDestSurfaceTest);
 }
 
 void ImageBlitTests::TestBlitRenderBlit() {
@@ -689,7 +689,7 @@ void ImageBlitTests::TestBlitRenderBlit() {
   pb_print("  Surface is blit via SRCCOPY to framebuffer\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kBlitRenderBlitTest);
+  FinishDraw(kBlitRenderBlitTest);
 }
 
 static std::string OperationName(uint32_t operation) {

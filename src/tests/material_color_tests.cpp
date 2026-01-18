@@ -272,5 +272,5 @@ void MaterialColorTests::Test(TestConfig config) {
   pb_printat(15, 17, (char*)"Towards light");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, config.name);
+  FinishDraw(config.name);
 }

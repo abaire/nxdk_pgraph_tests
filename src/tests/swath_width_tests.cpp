@@ -297,5 +297,5 @@ void SwathWidthTests::Test(const std::string &name, uint32_t swath_width) {
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

@@ -139,5 +139,5 @@ void TextureBorderColorTests::Test() {
   pb_printat(0, 0, "%s - Tex 0x%2X+ Border 0x%X", kTestName, kTextureByteValue, kTestBorderColor);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName);
+  FinishDraw(kTestName);
 }

@@ -188,7 +188,7 @@ void TextureBRDFTests::Test(bool stage0_blank, bool stage1_blank) {
   pb_print("light tex blank: %d\n", stage1_blank);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }
 
 static void GenerateSphericalCoordMap(uint8_t *buffer) {

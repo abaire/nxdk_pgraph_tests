@@ -148,7 +148,7 @@ void AlphaFuncTests::Test(const std::string& name, uint32_t alpha_func, bool ena
   pb_print("Green rect alpha 0.495 - 0.505\n");
   pb_print("White rect alpha 0x7F\n");
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void AlphaFuncTests::Draw(float red, float green, float blue, float left_alpha, float right_alpha, float top,

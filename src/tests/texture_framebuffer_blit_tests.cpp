@@ -323,5 +323,5 @@ void TextureFramebufferBlitTests::Test(uint32_t texture_destination, const char*
   pb_print("%s\n", test_name);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }

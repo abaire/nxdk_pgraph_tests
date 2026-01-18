@@ -581,7 +581,7 @@ void AttributeExplicitSetterTests::Test(const TestConfig& config) {
   pb_printat(0, 0, (char*)config.test_name);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, config.test_name);
+  FinishDraw(config.test_name);
 }
 
 void AttributeExplicitSetterTests::Draw(float x, float y, const std::function<void(int)>& attribute_setter,

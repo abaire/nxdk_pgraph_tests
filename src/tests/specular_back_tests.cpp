@@ -593,7 +593,7 @@ void SpecularBackTests::TestControlFlags(const std::string& name, bool use_fixed
   pb_printat(13, 0, "SPEC_EN=T");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void SpecularBackTests::CreateGeometry() {
@@ -738,5 +738,5 @@ void SpecularBackTests::TestSpecularParams(const std::string& name, const float*
     pb_print_with_floats("%f\n", specular_params[i]);
   }
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

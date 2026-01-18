@@ -77,7 +77,7 @@ void ColorZetaDisableTests::Test() {
   pb_draw_text_screen();
 
   std::string z_name = std::string(kTestName) + "_ZB";
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, z_name);
+  FinishDraw(z_name);
 
   *crash_register = crash_register_pre_test;
 }

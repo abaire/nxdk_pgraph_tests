@@ -187,5 +187,5 @@ void TextureMatrixTests::Test(const char *test_name, const matrix4_t &matrix) {
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, test_name);
+  FinishDraw(test_name);
 }

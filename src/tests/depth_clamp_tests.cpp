@@ -183,7 +183,7 @@ void DepthClampTests::Test(bool w_buffered, bool clamp, bool zbias, bool full_ra
   pb_print("VSH: %d\n", vsh);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeTestName(w_buffered, clamp, zbias, full_range, vsh));
+  FinishDraw(MakeTestName(w_buffered, clamp, zbias, full_range, vsh));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
@@ -301,5 +301,5 @@ void DepthClampTests::TestEqualDepth(bool w_buffered, float ofs) {
   pb_print("Ofs: %f\n", ofs);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeEqualDepthTestName(w_buffered, ofs));
+  FinishDraw(MakeEqualDepthTestName(w_buffered, ofs));
 }

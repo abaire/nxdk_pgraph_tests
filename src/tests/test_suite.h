@@ -2,6 +2,7 @@
 #define NXDK_PGRAPH_TESTS_TEST_SUITE_H
 
 #include <ftp_logger.h>
+#include <test_host.h>
 
 #include <chrono>
 #include <functional>
@@ -71,6 +72,16 @@ class TestSuite {
 
  protected:
   void SetDefaultTextureFormat() const;
+
+  //! Marks drawing as completed and presents the backbuffer, potentially causing artifacts (framebuffer,
+  //! z/stencil-buffer) to be saved to disk.
+  void FinishDraw(const std::string &name, bool save_zbuffer = false) {
+    host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, save_zbuffer);
+  }
+
+  void FinishDrawNoSave(const std::string &name, bool save_zbuffer = false) {
+    host_.FinishDraw(false, output_dir_, suite_name_, name, save_zbuffer);
+  }
 
  private:
   std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name);

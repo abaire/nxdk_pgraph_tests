@@ -151,7 +151,7 @@ void ClippingPrecisionTests::TestClippingPrecisionFrame(float ofs, bool perspect
   pb_draw_text_screen();
 
   std::string test_name = MakeTestName(perspective_corrected, flat, rotate_angle, vertex_cycle);
-  host_.FinishDraw(false, output_dir_, suite_name_, test_name);
+  FinishDrawNoSave(test_name);
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
