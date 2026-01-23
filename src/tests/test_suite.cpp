@@ -98,10 +98,12 @@ void TestSuite::Run(const std::string& test_name) {
   }
 }
 
-void TestSuite::RunAll() {
+void TestSuite::RunAll(bool include_interactive) {
   auto names = TestNames();
   for (const auto& test_name : names) {
-    Run(test_name);
+    if (include_interactive || interactive_only_tests_.find(test_name) == interactive_only_tests_.end()) {
+      Run(test_name);
+    }
   }
 }
 

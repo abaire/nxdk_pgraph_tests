@@ -102,7 +102,7 @@ void TestDriver::RunAllTestsNonInteractive() {
     }
 
     suite->Initialize();
-    suite->RunAll();
+    suite->RunAll(false);
     suite->Deinitialize();
   }
   running_ = false;

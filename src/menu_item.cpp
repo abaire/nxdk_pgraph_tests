@@ -256,7 +256,7 @@ MenuItemSuite::MenuItemSuite(const std::shared_ptr<TestSuite> &suite, uint32_t w
 void MenuItemSuite::ActivateCurrentSuite() {
   suite->Initialize();
   suite->SetSavingAllowed(true);
-  suite->RunAll();
+  suite->RunAll(false);
   suite->Deinitialize();
   MenuItem::Deactivate();
 }

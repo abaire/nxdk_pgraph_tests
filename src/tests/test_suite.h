@@ -62,7 +62,11 @@ class TestSuite {
 
   void Run(const std::string &test_name);
 
-  void RunAll();
+  /**
+   * Runs all registered tests in this suite.
+   * @param inclue_interactive Whether tests that do not save artifacts should be run as well.
+   */
+  void RunAll(bool inclue_interactive);
 
   [[nodiscard]] bool IsInteractiveOnly() const { return interactive_only_; }
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
@@ -100,6 +104,7 @@ class TestSuite {
 
   // Map of `test_name` to `void test()`
   std::map<std::string, std::function<void()>> tests_{};
+  std::set<std::string> interactive_only_tests_{};
 
   PGRAPHDiffToken pgraph_diff_;
 

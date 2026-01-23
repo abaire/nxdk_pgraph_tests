@@ -25,10 +25,11 @@ ClippingPrecisionTests::ClippingPrecisionTests(TestHost &host, std::string outpu
     for (auto flat : {false, true}) {
       for (auto rotate_angle : {0.0f, 90.0f, 180.0f, 270.0f}) {
         for (auto vertex_cycle : {0, 1, 2}) {
-          tests_[MakeTestName(perspective_corrected, flat, rotate_angle, vertex_cycle)] =
-              [this, perspective_corrected, flat, rotate_angle, vertex_cycle]() {
-                this->TestClippingPrecision(perspective_corrected, flat, rotate_angle, vertex_cycle);
-              };
+          auto test_name = MakeTestName(perspective_corrected, flat, rotate_angle, vertex_cycle);
+          tests_[test_name] = [this, perspective_corrected, flat, rotate_angle, vertex_cycle]() {
+            TestClippingPrecision(perspective_corrected, flat, rotate_angle, vertex_cycle);
+          };
+          interactive_only_tests_.insert(test_name);
         }
       }
     }
