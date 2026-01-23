@@ -243,8 +243,8 @@ void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta,
                                               uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
                                               uint32_t source_x, uint32_t source_y, uint32_t destination_offset,
                                               uint32_t destination_x, uint32_t destination_y, uint32_t width,
-                                              uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
-                                              uint32_t clip_height) const {
+                                              uint32_t height, uint32_t clip_x, uint32_t clip_y, int32_t clip_width,
+                                              int32_t clip_height) const {
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_OPERATION, operation);
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, source_channel);
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, destination_channel);
@@ -256,7 +256,7 @@ void ImageBlitTests::ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta,
   Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_DST, destination_offset);
 
   Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
-  if (clip_width || clip_height) {
+  if (clip_width >= 0 || clip_height >= 0) {
     Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT, clip_x | (clip_y << 16));
     Pushbuffer::PushTo(SUBCH_CLASS_19, NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE, clip_width | (clip_height << 16));
     Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, clip_rect_ctx_.ChannelID);
@@ -290,8 +290,8 @@ void ImageBlitTests::ImageBlit(uint32_t operation, uint32_t beta, uint32_t sourc
                                uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch,
                                uint32_t source_offset, uint32_t source_x, uint32_t source_y,
                                uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y,
-                               uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width,
-                               uint32_t clip_height) const {
+                               uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, int32_t clip_width,
+                               int32_t clip_height) const {
   PrintMsg("ImageBlit: %d beta: 0x%08X src: %d dest: %d\n", operation, beta, source_channel, destination_channel);
   Pushbuffer::Begin();
 
