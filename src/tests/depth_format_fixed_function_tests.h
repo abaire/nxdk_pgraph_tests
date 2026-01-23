@@ -12,8 +12,8 @@ class TestHost;
 class DepthFormatFixedFunctionTests : public TestSuite {
  public:
   struct DepthFormat {
-    uint32_t format;
-    uint32_t max_depth;
+    uint32_t format{0};
+    uint32_t max_depth{0};
     bool floating_point{false};
   };
 
