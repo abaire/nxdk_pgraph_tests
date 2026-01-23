@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d1d/alpha__func__tests_8cpp" kind="file" language="C++">
+    <compoundname>alpha_func_tests.cpp</compoundname>
+    <includes refid="da/da3/alpha__func__tests_8h" local="yes">alpha_func_tests.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/alpha_func_tests.cpp</label>
+        <link refid="d7/d1d/alpha__func__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>alpha_func_tests.h</label>
+        <link refid="da/da3/alpha__func__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="10">
+        <label>cstdint</label>
+      </node>
+      <node id="11">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="15">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="14">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="7">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="12">
+        <label>thread</label>
+      </node>
+      <node id="13">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="6">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d8/d00/structTestConfig" prot="public">TestConfig</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d7/d1d/alpha__func__tests_8cpp_1a6f817f8da781f2b6f351a49f71fe06fd" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref></type>
+        <definition>const TestConfig testConfigs[]</definition>
+        <argsstring>[]</argsstring>
+        <name>testConfigs</name>
+        <initializer>{
+    {&quot;AlphaFuncNever&quot;, NV097_SET_ALPHA_FUNC_V_NEVER},
+    {&quot;AlphaFuncLessThan&quot;, NV097_SET_ALPHA_FUNC_V_LESS},
+    {&quot;AlphaFuncEqual&quot;, NV097_SET_ALPHA_FUNC_V_EQUAL},
+    {&quot;AlphaFuncLessThanOrEqual&quot;, NV097_SET_ALPHA_FUNC_V_LEQUAL},
+    {&quot;AlphaFuncGreaterThan&quot;, NV097_SET_ALPHA_FUNC_V_GREATER},
+    {&quot;AlphaFuncNotEqual&quot;, NV097_SET_ALPHA_FUNC_V_NOTEQUAL},
+    {&quot;AlphaFuncGreaterThanOrEqual&quot;, NV097_SET_ALPHA_FUNC_V_GEQUAL},
+    {&quot;AlphaFuncAlways&quot;, NV097_SET_ALPHA_FUNC_V_ALWAYS},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/alpha_func_tests.cpp" line="12" column="25" bodyfile="src/tests/alpha_func_tests.cpp" bodystart="12" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;alpha_func_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="d8/d00/structTestConfig" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>name;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>uint32_t<sp/>alpha_func;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref><sp/>testConfigs[]{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncNever&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_NEVER},</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncLessThan&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_LESS},</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncEqual&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_EQUAL},</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncLessThanOrEqual&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_LEQUAL},</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncGreaterThan&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_GREATER},</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncNotEqual&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_NOTEQUAL},</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncGreaterThanOrEqual&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_GEQUAL},</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;AlphaFuncAlways&quot;</highlight><highlight class="normal">,<sp/>NV097_SET_ALPHA_FUNC_V_ALWAYS},</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><ref refid="d5/d33/classAlphaFuncTests_1ae2f31eb158176c81e6134bd28a6c78d8" kindref="member">AlphaFuncTests::AlphaFuncTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Alpha<sp/>func&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>testConfig<sp/>:<sp/>testConfigs)<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/>testConfig.name;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>test_name<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_Enabled&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[test_name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>testConfig,<sp/>test_name]()<sp/>{<sp/>Test(test_name,<sp/>testConfig.alpha_func,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/>testConfig.name;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>test_name<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_Disabled&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[test_name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>testConfig,<sp/>test_name]()<sp/>{<sp/>Test(test_name,<sp/>testConfig.alpha_func,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d5/d33/classAlphaFuncTests_1a767b59de3ce3b0448f49ef94b952a2bf" kindref="member">AlphaFuncTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_MASK,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_MASK,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AlphaFuncTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>uint32_t<sp/>alpha_func,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable)<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kFBHeight<sp/>=<sp/>host_.GetFramebufferHeightF();</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>(kFBHeight<sp/>-<sp/>256.f)<sp/>/<sp/>3.f<sp/>*<sp/>2.f;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF222322);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>host_.SetAlphaReference(0x7F);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>host_.SetAlphaFunc(enable,<sp/>alpha_func);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>kTop;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>64.f;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>Draw(1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>top,<sp/>bottom);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>top<sp/>=<sp/>bottom;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>64.f;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Draw(0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f,<sp/>0.0f,<sp/>top,<sp/>bottom);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>top<sp/>=<sp/>bottom;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>64.f;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>Draw(0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>0.495f,<sp/>0.505f,<sp/>top,<sp/>bottom);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>top<sp/>=<sp/>bottom;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>bottom<sp/>+=<sp/>32.f;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kFBWidth<sp/>=<sp/>host_.GetFramebufferWidthF();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(0x7FFFFFFF);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(0.f,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(kFBWidth,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(kFBWidth,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(0.f,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Needed?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>host_.WaitForGPU();</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>host_.SetAlphaFunc(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Alpha<sp/>ref<sp/>0x7F\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Blue<sp/>rect<sp/>alpha<sp/>1<sp/>-&gt;<sp/>0\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Red<sp/>rect<sp/>alpha<sp/>0<sp/>-&gt;<sp/>1\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Green<sp/>rect<sp/>alpha<sp/>0.495<sp/>-<sp/>0.505\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;White<sp/>rect<sp/>alpha<sp/>0x7F\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AlphaFuncTests::Draw(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>red,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>green,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>blue,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left_alpha,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right_alpha,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kFBWidth<sp/>=<sp/>host_.GetFramebufferWidthF();</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kLeft<sp/>=<sp/>(kFBWidth<sp/>-<sp/>512.f)<sp/>/<sp/>2.f;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>kLeft<sp/>+<sp/>512.f;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(red,<sp/>green,<sp/>blue,<sp/>left_alpha);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>host_.SetVertex(kLeft,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(red,<sp/>green,<sp/>blue,<sp/>right_alpha);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>host_.SetVertex(kRight,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(red,<sp/>green,<sp/>blue,<sp/>right_alpha);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>host_.SetVertex(kRight,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(red,<sp/>green,<sp/>blue,<sp/>left_alpha);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>host_.SetVertex(kLeft,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/alpha_func_tests.cpp"/>
+  </compounddef>
+</doxygen>

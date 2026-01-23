@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d28/classStencilFuncTests" kind="class" language="C++" prot="public">
+    <compoundname>StencilFuncTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d1/d21/stencil__func__tests_8h" local="no">stencil_func_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d2/d28/classStencilFuncTests_1a19be24b493684be704fac62f66fca9f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>StencilFuncTests::StencilFuncTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>StencilFuncTests</name>
+        <qualifiedname>StencilFuncTests::StencilFuncTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>Always Tests NV097_SET_STENCIL_FUNC_V_ALWAYS - the entire test region should be green.</para>
+</simplesect>
+<simplesect kind="remark"><para>Equal Tests NV097_SET_STENCIL_FUNC_V_EQUAL - only the 0x7F patch should be green.</para>
+</simplesect>
+<simplesect kind="remark"><para>Greater Tests NV097_SET_STENCIL_FUNC_V_GREATER - all patches less than 0x7F and the test area (stencil = 0) should be green.</para>
+</simplesect>
+<simplesect kind="remark"><para>GreaterThanOrEqual Tests NV097_SET_STENCIL_FUNC_V_GEQUAL - the test area (stencil = 0) and all patches less than 0x7F and the 0x7F patch should be green.</para>
+</simplesect>
+<simplesect kind="remark"><para>Less Tests NV097_SET_STENCIL_FUNC_V_LESS - all patches greater than 0x7F should be green.</para>
+</simplesect>
+<simplesect kind="remark"><para>LessThanOrEqual Tests NV097_SET_STENCIL_FUNC_V_LEQUAL - all patches greater than 0x7F and the 0x7F patch should be green.</para>
+</simplesect>
+<simplesect kind="remark"><para>Never Tests NV097_SET_STENCIL_FUNC_V_NEVER - all patches should be blue.</para>
+</simplesect>
+<simplesect kind="remark"><para>NotEqual Tests NV097_SET_STENCIL_FUNC_V_NOTEQUAL - the 0x7F patch should be blue, all other patches and the test area (stencil = 0) should be green. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_func_tests.h" line="23" column="3" bodyfile="src/tests/stencil_func_tests.cpp" bodystart="71" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d28/classStencilFuncTests_1ad5e9268b16a3cf3f0c1a7ea757710504" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void StencilFuncTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>StencilFuncTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_func_tests.h" line="25" column="8" bodyfile="src/tests/stencil_func_tests.cpp" bodystart="90" bodyend="118"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d2/d28/classStencilFuncTests_1a826e1dfb14a20e9ed4df4814a3caeaa6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void StencilFuncTests::Test</definition>
+        <argsstring>(const std::string &amp;name, uint32_t stencil_func)</argsstring>
+        <name>Test</name>
+        <qualifiedname>StencilFuncTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stencil_func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_func_tests.h" line="28" column="8" bodyfile="src/tests/stencil_func_tests.cpp" bodystart="120" bodyend="427"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior of NV097_SET_STENCIL_FUNC (0x00000364).</para>
+<para>Each test renders a series of red quads unconditionally, then renders an invisible quad on top to set the value of the stencil buffer to various test values. Finally, a green quad is rendered across all test patches using the selected stencil function, causing areas that pass the function to turn green, while failing pixels remain red. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>StencilFuncTests</label>
+        <link refid="d2/d28/classStencilFuncTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>StencilFuncTests</label>
+        <link refid="d2/d28/classStencilFuncTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/stencil_func_tests.h" line="21" column="1" bodyfile="src/tests/stencil_func_tests.h" bodystart="21" bodyend="29"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>StencilFuncTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>host_</name></member>
+      <member refid="d2/d28/classStencilFuncTests_1ad5e9268b16a3cf3f0c1a7ea757710504" prot="public" virt="virtual"><scope>StencilFuncTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>StencilFuncTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d28/classStencilFuncTests_1a19be24b493684be704fac62f66fca9f4" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>StencilFuncTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>StencilFuncTests</scope><name>TearDownTest</name></member>
+      <member refid="d2/d28/classStencilFuncTests_1a826e1dfb14a20e9ed4df4814a3caeaa6" prot="private" virt="non-virtual"><scope>StencilFuncTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>StencilFuncTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>StencilFuncTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>StencilFuncTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

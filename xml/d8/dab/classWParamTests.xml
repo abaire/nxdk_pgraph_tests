@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/dab/classWParamTests" kind="class" language="C++" prot="public">
+    <compoundname>WParamTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d8/dab/classWParamTests_1a35d8791dadaf2e80cfa56056c12ebcbf" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PBKitPlusPlus::VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;PBKitPlusPlus::VertexBuffer&gt; WParamTests::triangle_strip_</definition>
+        <argsstring></argsstring>
+        <name>triangle_strip_</name>
+        <qualifiedname>WParamTests::triangle_strip_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="34" column="19" bodyfile="src/tests/w_param_tests.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/dab/classWParamTests_1ac7791495a2841656582c9f489ab84434" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PBKitPlusPlus::VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;PBKitPlusPlus::VertexBuffer&gt; WParamTests::triangles_</definition>
+        <argsstring></argsstring>
+        <name>triangles_</name>
+        <qualifiedname>WParamTests::triangles_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="35" column="19" bodyfile="src/tests/w_param_tests.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/dab/classWParamTests_1ab3b34806ce99263559ed019f62cbece9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>WParamTests::WParamTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>WParamTests</name>
+        <qualifiedname>WParamTests::WParamTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="13" column="3" bodyfile="src/tests/w_param_tests.cpp" bodystart="81" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a1ae0f18391997e3058573b59f0029255" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void WParamTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>WParamTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="15" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="137" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1ab961aa33a1ccfd2892ea3b069c9af3af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void WParamTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>WParamTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="16" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="143" bodyend="147"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d8/dab/classWParamTests_1ac00e671be12e18d21e9cffa0aefcdbab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::CreateGeometryWGaps</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometryWGaps</name>
+        <qualifiedname>WParamTests::CreateGeometryWGaps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="19" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="149" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1aa657a3609e4a200e2dbdd9a28f76dc7f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestWGaps</definition>
+        <argsstring>(bool texture_perspective_enable)</argsstring>
+        <name>TestWGaps</name>
+        <qualifiedname>WParamTests::TestWGaps</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>texture_perspective_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="20" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="232" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a4900284bd540b1b59c95a8a623b0d2a4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::CreateGeometryPositiveWTriangleStrip</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometryPositiveWTriangleStrip</name>
+        <qualifiedname>WParamTests::CreateGeometryPositiveWTriangleStrip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="22" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="290" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a967277c3872941f8a1be493f8f6b7f73" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestPositiveWTriangleStrip</definition>
+        <argsstring>(bool texture_perspective_enable)</argsstring>
+        <name>TestPositiveWTriangleStrip</name>
+        <qualifiedname>WParamTests::TestPositiveWTriangleStrip</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>texture_perspective_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="23" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="320" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a6b206b56271dd65c042d440ac0f6bd94" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::CreateGeometryNegativeWTriangleStrip</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometryNegativeWTriangleStrip</name>
+        <qualifiedname>WParamTests::CreateGeometryNegativeWTriangleStrip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="25" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="334" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a8aca034744c5f6aa9cac8bf12503e1a2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestNegativeWTriangleStrip</definition>
+        <argsstring>(bool texture_perspective_enable)</argsstring>
+        <name>TestNegativeWTriangleStrip</name>
+        <qualifiedname>WParamTests::TestNegativeWTriangleStrip</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>texture_perspective_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="26" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="368" bodyend="396"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a565076edc44c30008f2447bd10d99877" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestFixedFunctionZeroW</definition>
+        <argsstring>(bool draw_quad, bool texture_perspective_enable)</argsstring>
+        <name>TestFixedFunctionZeroW</name>
+        <qualifiedname>WParamTests::TestFixedFunctionZeroW</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>draw_quad</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>texture_perspective_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="28" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="398" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a02921db1dc110159fb8aacfa3c13079b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestFixedFunctionZeroInfW</definition>
+        <argsstring>(bool draw_quad, float w_multiplier)</argsstring>
+        <name>TestFixedFunctionZeroInfW</name>
+        <qualifiedname>WParamTests::TestFixedFunctionZeroInfW</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>draw_quad</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w_multiplier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="29" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="485" bodyend="607"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a5c370a32c24ab792338ca694fa14ccdb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestProgZeroInfW</definition>
+        <argsstring>(bool draw_quad, float w_multiplier)</argsstring>
+        <name>TestProgZeroInfW</name>
+        <qualifiedname>WParamTests::TestProgZeroInfW</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>draw_quad</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>w_multiplier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="30" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="609" bodyend="740"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/dab/classWParamTests_1a89f0e6026bb0ddfef131590f6d64668b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void WParamTests::TestRccZeroInfW</definition>
+        <argsstring>(float w_multiplier)</argsstring>
+        <name>TestRccZeroInfW</name>
+        <qualifiedname>WParamTests::TestRccZeroInfW</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>w_multiplier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/w_param_tests.h" line="31" column="8" bodyfile="src/tests/w_param_tests.cpp" bodystart="742" bodyend="832"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>WParamTests</label>
+        <link refid="d8/dab/classWParamTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>WParamTests</label>
+        <link refid="d8/dab/classWParamTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/w_param_tests.h" line="11" column="1" bodyfile="src/tests/w_param_tests.h" bodystart="11" bodyend="36"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>allow_saving_</name></member>
+      <member refid="d8/dab/classWParamTests_1a6b206b56271dd65c042d440ac0f6bd94" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>CreateGeometryNegativeWTriangleStrip</name></member>
+      <member refid="d8/dab/classWParamTests_1a4900284bd540b1b59c95a8a623b0d2a4" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>CreateGeometryPositiveWTriangleStrip</name></member>
+      <member refid="d8/dab/classWParamTests_1ac00e671be12e18d21e9cffa0aefcdbab" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>CreateGeometryWGaps</name></member>
+      <member refid="d8/dab/classWParamTests_1ab961aa33a1ccfd2892ea3b069c9af3af" prot="public" virt="virtual"><scope>WParamTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>host_</name></member>
+      <member refid="d8/dab/classWParamTests_1a1ae0f18391997e3058573b59f0029255" prot="public" virt="virtual"><scope>WParamTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>WParamTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>WParamTests</scope><name>TearDownTest</name></member>
+      <member refid="d8/dab/classWParamTests_1a02921db1dc110159fb8aacfa3c13079b" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestFixedFunctionZeroInfW</name></member>
+      <member refid="d8/dab/classWParamTests_1a565076edc44c30008f2447bd10d99877" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestFixedFunctionZeroW</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>TestNames</name></member>
+      <member refid="d8/dab/classWParamTests_1a8aca034744c5f6aa9cac8bf12503e1a2" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestNegativeWTriangleStrip</name></member>
+      <member refid="d8/dab/classWParamTests_1a967277c3872941f8a1be493f8f6b7f73" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestPositiveWTriangleStrip</name></member>
+      <member refid="d8/dab/classWParamTests_1a5c370a32c24ab792338ca694fa14ccdb" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestProgZeroInfW</name></member>
+      <member refid="d8/dab/classWParamTests_1a89f0e6026bb0ddfef131590f6d64668b" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestRccZeroInfW</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>WParamTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>TestSuite</name></member>
+      <member refid="d8/dab/classWParamTests_1aa657a3609e4a200e2dbdd9a28f76dc7f" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>TestWGaps</name></member>
+      <member refid="d8/dab/classWParamTests_1a35d8791dadaf2e80cfa56056c12ebcbf" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>triangle_strip_</name></member>
+      <member refid="d8/dab/classWParamTests_1ac7791495a2841656582c9f489ab84434" prot="private" virt="non-virtual"><scope>WParamTests</scope><name>triangles_</name></member>
+      <member refid="d8/dab/classWParamTests_1ab3b34806ce99263559ed019f62cbece9" prot="public" virt="non-virtual"><scope>WParamTests</scope><name>WParamTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>WParamTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

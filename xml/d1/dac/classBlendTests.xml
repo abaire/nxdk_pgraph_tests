@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/dac/classBlendTests" kind="class" language="C++" prot="public">
+    <compoundname>BlendTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="de/d05/blend__tests_8h" local="no">blend_tests.h</includes>
+    <innerclass refid="d8/dc4/structBlendTests_1_1Instruction" prot="public">BlendTests::Instruction</innerclass>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d1/dac/classBlendTests_1aa9e1263fd4cf2a15dedd7743a3cb9d47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BlendTests::BlendTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>BlendTests</name>
+        <qualifiedname>BlendTests::BlendTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="67" column="3" bodyfile="src/tests/blend_tests.cpp" bodystart="75" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a99e61844b6ec5faabb9201090efa89b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void BlendTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>BlendTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="69" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="106" bodyend="119"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a6e74984a93e346c903698358f8243dc0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::TestDetailed</definition>
+        <argsstring>(const std::string &amp;name, uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor)</argsstring>
+        <name>TestDetailed</name>
+        <qualifiedname>BlendTests::TestDetailed</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blend_function</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_factor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>dst_factor</declname>
+        </param>
+        <briefdescription>
+<para>Tests interactions of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="73" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="229" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1af33fb6ed9ec0caa38391ee1ffd4cb0f7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::TestSpot</definition>
+        <argsstring>(const std::string &amp;name, uint32_t blend_function, uint32_t src_factor)</argsstring>
+        <name>TestSpot</name>
+        <qualifiedname>BlendTests::TestSpot</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>blend_function</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_factor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests interactions of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR. Unlike TestDetailed, this composits multiple subtests with every possible DFACTOR in one image. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="77" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="162" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a68c9437849fdb92a4fa43c48f022746a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::DrawAlphaStack</definition>
+        <argsstring>(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left=0.f, float top=0.f, float quad_size=256.f, float increment=24.f)</argsstring>
+        <name>DrawAlphaStack</name>
+        <qualifiedname>BlendTests::DrawAlphaStack</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>blend_function</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_factor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>dst_factor</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>quad_size</declname>
+          <defval>256.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>increment</declname>
+          <defval>24.f</defval>
+        </param>
+        <briefdescription>
+<para>Renders a series of concentric squares in green, red, blue, and white with their alpha channels blended. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="80" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="313" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a2c314b443e182d60ed11c978ab127b31" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::DrawColorStack</definition>
+        <argsstring>(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left=0.f, float top=0.f, float color_swatch_size=64.f)</argsstring>
+        <name>DrawColorStack</name>
+        <qualifiedname>BlendTests::DrawColorStack</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>blend_function</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_factor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>dst_factor</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>color_swatch_size</declname>
+          <defval>64.f</defval>
+        </param>
+        <briefdescription>
+<para>Renders a column of squares in green, red, blue, with their color channels blended. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="84" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="338" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a92d2079923b1ba524dc1d1e70af79d84" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::DrawColorAndAlphaStack</definition>
+        <argsstring>(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left=0.f, float top=0.f, float color_swatch_size=64.f)</argsstring>
+        <name>DrawColorAndAlphaStack</name>
+        <qualifiedname>BlendTests::DrawColorAndAlphaStack</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>blend_function</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_factor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>dst_factor</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>color_swatch_size</declname>
+          <defval>64.f</defval>
+        </param>
+        <briefdescription>
+<para>Renders a column of squares in green, red, blue, with their color and alpha channels blended. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="88" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="358" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a5e01db9a2f7b612e7cabde296a584a79" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::DrawCheckerboardBackground</definition>
+        <argsstring>(bool use_small_checkers=false) const</argsstring>
+        <name>DrawCheckerboardBackground</name>
+        <qualifiedname>BlendTests::DrawCheckerboardBackground</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>use_small_checkers</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="91" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="390" bodyend="421"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a69fcc7a011bd9814c891bc522f87b090" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::DrawQuad</definition>
+        <argsstring>(float left, float top, float right, float bottom, uint32_t color, uint32_t func, uint32_t sfactor, uint32_t dfactor, bool blend_rgb, bool blend_alpha) const</argsstring>
+        <name>DrawQuad</name>
+        <qualifiedname>BlendTests::DrawQuad</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>sfactor</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>dfactor</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>blend_rgb</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>blend_alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders a quad where either the alpha channel or color channels are modulated by the given blend settings depending on <computeroutput>blend_alpha</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="95" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="444" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1adaaa1a0864d830769ca5444433333d49" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::RenderToTextureStart</definition>
+        <argsstring>(uint32_t stage, uint32_t texture_pitch) const</argsstring>
+        <name>RenderToTextureStart</name>
+        <qualifiedname>BlendTests::RenderToTextureStart</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>stage</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>texture_pitch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="98" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="423" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/dac/classBlendTests_1a99a0976400930a242ce852b76221d6db" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void BlendTests::RenderToTextureEnd</definition>
+        <argsstring>() const</argsstring>
+        <name>RenderToTextureEnd</name>
+        <qualifiedname>BlendTests::RenderToTextureEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="99" column="8" bodyfile="src/tests/blend_tests.cpp" bodystart="434" bodyend="442"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the effects of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR on rendering unsigned textures.</para>
+<para>All test names are of the form &lt;sfactor&gt;-&lt;equation&gt;-&lt;dfactor&gt; where:</para>
+<para>sfactor/dfactor are one of: 0 - ZERO, 1 - ONE, srcRGB - SRC_COLOR, 1-srcRGB - ONE_MINUS_SRC_COLOR, srcA - SRC_ALPHA, 1-srcA - ONE_MINUS_SRC_ALPHA, dstA - DST_ALPHA, 1-dstA - ONE_MINUS_DST_ALPHA, dstRGB - DST_COLOR, 1-dstRGB - ONE_MINUS_DST_COLOR, srcAsat - SRC_ALPHA_SATURATE, cRGB - CONSTANT_COLOR, 1-cRGB - ONE_MINUS_CONSTANT_COLOR, cA - CONSTANT_ALPHA, 1-cA - ONE_MINUS_CONSTANT_ALPHA</para>
+<para>equation is one of: ADD - NV097_SET_BLEND_EQUATION_V_FUNC_ADD, SUB - NV097_SET_BLEND_EQUATION_V_FUNC_SUBTRACT, REVSUB - NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT, MIN - NV097_SET_BLEND_EQUATION_V_MIN, MAX - NV097_SET_BLEND_EQUATION_V_MAX, SADD - NV097_SET_BLEND_EQUATION_V_FUNC_ADD_SIGNED, SREVSUB - NV097_SET_BLEND_EQUATION_V_FUNC_REVERSE_SUBTRACT_SIGNED,</para>
+<para>The left, center, and right renders are all composited against a 16 pixel checkerboard pattern alternating between a background color and fully opaque black.</para>
+<para>On the left side of the screen, a column of squares is rendered with colors blended with the checkerboard and alpha always set to 0xDD.</para>
+<para>In the center of the screen, a stack of concentric squares is rendered with colors that are not blended and alpha values blended with the checkerboard (the first 16x16 will be blended with the BG color, the next with full opaque black, etc...). Each square is composited with the previous square from outside to inside, so the outermost is only blended with the checkerboard, the next is blended with both the checkerboard and the result of the outermost blend, etc...</para>
+<para>On the right side of the screen, a column of squares is rendered with both color and alpha values blended. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>BlendTests</label>
+        <link refid="d1/dac/classBlendTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>BlendTests</label>
+        <link refid="d1/dac/classBlendTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/blend_tests.h" line="57" column="1" bodyfile="src/tests/blend_tests.h" bodystart="57" bodyend="100"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>allow_saving_</name></member>
+      <member refid="d1/dac/classBlendTests_1aa9e1263fd4cf2a15dedd7743a3cb9d47" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>BlendTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>BlendTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>DisableTests</name></member>
+      <member refid="d1/dac/classBlendTests_1a68c9437849fdb92a4fa43c48f022746a" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>DrawAlphaStack</name></member>
+      <member refid="d1/dac/classBlendTests_1a5e01db9a2f7b612e7cabde296a584a79" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>DrawCheckerboardBackground</name></member>
+      <member refid="d1/dac/classBlendTests_1a92d2079923b1ba524dc1d1e70af79d84" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>DrawColorAndAlphaStack</name></member>
+      <member refid="d1/dac/classBlendTests_1a2c314b443e182d60ed11c978ab127b31" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>DrawColorStack</name></member>
+      <member refid="d1/dac/classBlendTests_1a69fcc7a011bd9814c891bc522f87b090" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>DrawQuad</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>host_</name></member>
+      <member refid="d1/dac/classBlendTests_1a99e61844b6ec5faabb9201090efa89b8" prot="public" virt="virtual"><scope>BlendTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d1/dac/classBlendTests_1a99a0976400930a242ce852b76221d6db" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>RenderToTextureEnd</name></member>
+      <member refid="d1/dac/classBlendTests_1adaaa1a0864d830769ca5444433333d49" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>RenderToTextureStart</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>BlendTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>BlendTests</scope><name>TearDownTest</name></member>
+      <member refid="d1/dac/classBlendTests_1a6e74984a93e346c903698358f8243dc0" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>TestDetailed</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>BlendTests</scope><name>tests_</name></member>
+      <member refid="d1/dac/classBlendTests_1af33fb6ed9ec0caa38391ee1ffd4cb0f7" prot="private" virt="non-virtual"><scope>BlendTests</scope><name>TestSpot</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>BlendTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>BlendTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

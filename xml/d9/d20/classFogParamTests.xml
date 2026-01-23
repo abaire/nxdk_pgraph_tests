@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/d20/classFogParamTests" kind="class" language="C++" prot="public">
+    <compoundname>FogParamTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d2/d2a/fog__param__tests_8h" local="no">fog_param_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/d20/classFogParamTests_1ac7de42ca203d472f1a90c986deb86ac5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FogParamTests::FogParamTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>FogParamTests</name>
+        <qualifiedname>FogParamTests::FogParamTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>FogZeroBias-exp2_abs Tests the bias parameter for NV097_SET_FOG_MODE_V_EXP2_ABS. Renders a series of quads and increments the bias fog param by 0.005 for each, starting at 1.0. The multiplier params are set to 0 so the fog coord (1.0) is irrelevant.</para>
+</simplesect>
+Indicates that the zero point is 1.5</para>
+<para><simplesect kind="remark"><para>FogZeroBias-exp2 Tests the bias parameter for NV097_SET_FOG_MODE_V_EXP2. Renders a series of quads and increments the bias fog param by 0.005 for each, starting at 1.0. The multiplier params are set to 0 so the fog coord (1.0) is irrelevant.</para>
+</simplesect>
+Indicates that the zero point is 1.5</para>
+<para><simplesect kind="remark"><para>FogZeroBias-exp_abs Tests the bias parameter for NV097_SET_FOG_MODE_V_EXP_ABS. Renders a series of quads and increments the bias fog param by 0.005 for each, starting at 1.0. The multiplier params are set to 0 so the fog coord (1.0) is irrelevant.</para>
+</simplesect>
+Indicates that the zero point is ~1.5075</para>
+<para><simplesect kind="remark"><para>FogZeroBias-exp Tests the bias parameter for NV097_SET_FOG_MODE_V_EXP. Renders a series of quads and increments the bias fog param by 0.005 for each, starting at 1.0. The multiplier params are set to 0 so the fog coord (1.0) is irrelevant.</para>
+</simplesect>
+Indicates that the zero point is 1.51</para>
+<para><simplesect kind="remark"><para>FogZeroBias-lin_abs Tests the bias parameter for NV097_SET_FOG_MODE_V_LINEAR_ABS. Renders a series of quads and increments the bias fog param by 0.005 for each, starting at 1.0. The multiplier params are set to 0 so the fog coord (1.0) is irrelevant.</para>
+</simplesect>
+Indicates that the zero point is 2.0</para>
+<para><simplesect kind="remark"><para>FogZeroBias-lin Tests the bias parameter for NV097_SET_FOG_MODE_V_LINEAR. Renders a series of quads and increments the bias fog param by 0.005 for each, starting at 1.0. The multiplier params are set to 0 so the fog coord (1.0) is irrelevant.</para>
+</simplesect>
+Indicates that the zero point is 2.0</para>
+<para><simplesect kind="remark"><para>FogParam-0.25-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to -0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.25-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to 0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.25-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to -0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.25-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to 0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.25-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to -0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.25-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to 0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.25-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to -0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.25-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to 0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.25-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to -0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.25-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to 0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.25-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to -0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.25-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to 0.25. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.50-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to -0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.50-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to XXXX. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.50-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to -0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.50-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to 0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.50-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to -0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.50-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to 0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.50-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to -0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.50-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to 0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.50-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to -0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.50-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to 0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-0.50-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to -0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam0.50-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to 0.50. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-1.00-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to -1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam1.00-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to 1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-1.00-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to -1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam1.00-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to 1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-1.00-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to -1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam1.00-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to 1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-1.00-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to -1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam1.00-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to 1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-1.00-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to -1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam1.00-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to 1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-1.00-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to -1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam1.00-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to 1.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-2.00-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to -2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam2.00-exp2_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP2_ABS with the bias param set to the zero point for the type and the multiplier set to 2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-2.00-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to -2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam2.00-exp2 Tests fog mode NV097_SET_FOG_MODE_V_EXP2 with the bias param set to the zero point for the type and the multiplier set to 2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-2.00-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to -2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam2.00-exp_abs Tests fog mode NV097_SET_FOG_MODE_V_EXP_ABS with the bias param set to the zero point for the type and the multiplier set to 2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-2.00-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to -2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam2.00-exp Tests fog mode NV097_SET_FOG_MODE_V_EXP with the bias param set to the zero point for the type and the multiplier set to 2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-2.00-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to -2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam2.00-lin_abs Tests fog mode NV097_SET_FOG_MODE_V_LINEAR_ABS with the bias param set to the zero point for the type and the multiplier set to 2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam-2.00-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to -2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad.</para>
+</simplesect>
+<simplesect kind="remark"><para>FogParam2.00-lin Tests fog mode NV097_SET_FOG_MODE_V_LINEAR with the bias param set to the zero point for the type and the multiplier set to 2.0. Quads are rendered with fog coordinates starting at -1.4 and increasing by 0.01 per quad. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_param_tests.h" line="19" column="3" bodyfile="src/tests/fog_param_tests.cpp" bodystart="307" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d20/classFogParamTests_1ad0641bd5442a4cde741b27add0a4d1b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void FogParamTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>FogParamTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_param_tests.h" line="21" column="8" bodyfile="src/tests/fog_param_tests.cpp" bodystart="325" bodyend="351"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d9/d20/classFogParamTests_1a91777b101270ca782a4b0ff6c6b98bcb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogParamTests::Test</definition>
+        <argsstring>(const std::string &amp;name, uint32_t fog_mode, float bias, float linear)</argsstring>
+        <name>Test</name>
+        <qualifiedname>FogParamTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bias</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>linear</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_param_tests.h" line="24" column="8" bodyfile="src/tests/fog_param_tests.cpp" bodystart="358" bodyend="446"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d20/classFogParamTests_1afe363cb95bece4c2dbd467c802038d02" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogParamTests::TestBiasZeroPoint</definition>
+        <argsstring>(const std::string &amp;name, uint32_t fog_mode)</argsstring>
+        <name>TestBiasZeroPoint</name>
+        <qualifiedname>FogParamTests::TestBiasZeroPoint</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <briefdescription>
+<para>Attempts to find the bias value at which the given fog_mode results in 0 fog. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_param_tests.h" line="27" column="8" bodyfile="src/tests/fog_param_tests.cpp" bodystart="448" bodyend="538"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the effects of NV097_SET_FOG_PARAMS.</para>
+<para>Note that the 3rd parameter to SET_FOG_PARAMS always appears to be set to 0.0 in practice and alternative values do not appear to have any effect. Non-zero values are omitted from these tests for brevity. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FogParamTests</label>
+        <link refid="d9/d20/classFogParamTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FogParamTests</label>
+        <link refid="d9/d20/classFogParamTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/fog_param_tests.h" line="17" column="1" bodyfile="src/tests/fog_param_tests.h" bodystart="17" bodyend="28"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>FogParamTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d9/d20/classFogParamTests_1ac7de42ca203d472f1a90c986deb86ac5" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>FogParamTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>host_</name></member>
+      <member refid="d9/d20/classFogParamTests_1ad0641bd5442a4cde741b27add0a4d1b1" prot="public" virt="virtual"><scope>FogParamTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>FogParamTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>FogParamTests</scope><name>TearDownTest</name></member>
+      <member refid="d9/d20/classFogParamTests_1a91777b101270ca782a4b0ff6c6b98bcb" prot="private" virt="non-virtual"><scope>FogParamTests</scope><name>Test</name></member>
+      <member refid="d9/d20/classFogParamTests_1afe363cb95bece4c2dbd467c802038d02" prot="private" virt="non-virtual"><scope>FogParamTests</scope><name>TestBiasZeroPoint</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>FogParamTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>FogParamTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>FogParamTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

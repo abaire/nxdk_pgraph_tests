@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_68267d1309a1af8e8297ef4c3efbcdba" kind="dir">
+    <compoundname>src</compoundname>
+    <innerdir refid="dir_bdeba5f06b852fec80257c0bf4c3c36e">src/models</innerdir>
+    <innerdir refid="dir_0a4b4be470ccb3aa51643a03ee90aa9a">src/shaders</innerdir>
+    <innerdir refid="dir_d93a1d4020dea85bb71b237545b5e722">src/tests</innerdir>
+    <innerfile refid="d9/d77/debug__output_8cpp">debug_output.cpp</innerfile>
+    <innerfile refid="d3/dc0/debug__output_8h">debug_output.h</innerfile>
+    <innerfile refid="d0/d92/file__util_8cpp">file_util.cpp</innerfile>
+    <innerfile refid="d0/dae/file__util_8h">file_util.h</innerfile>
+    <innerfile refid="d8/d37/ftp__logger_8cpp">ftp_logger.cpp</innerfile>
+    <innerfile refid="d0/dad/ftp__logger_8h">ftp_logger.h</innerfile>
+    <innerfile refid="d0/d01/image__resource_8cpp">image_resource.cpp</innerfile>
+    <innerfile refid="d4/ded/image__resource_8h">image_resource.h</innerfile>
+    <innerfile refid="d3/d30/logger_8cpp">logger.cpp</innerfile>
+    <innerfile refid="d1/d8c/logger_8h">logger.h</innerfile>
+    <innerfile refid="df/d0a/main_8cpp">main.cpp</innerfile>
+    <innerfile refid="d9/dcf/menu__item_8cpp">menu_item.cpp</innerfile>
+    <innerfile refid="d3/d5d/menu__item_8h">menu_item.h</innerfile>
+    <innerfile refid="df/d9a/pbkit__ext_8cpp">pbkit_ext.cpp</innerfile>
+    <innerfile refid="d7/d31/pbkit__ext_8h">pbkit_ext.h</innerfile>
+    <innerfile refid="dd/de0/pgraph__diff__token_8cpp">pgraph_diff_token.cpp</innerfile>
+    <innerfile refid="d3/d11/pgraph__diff__token_8h">pgraph_diff_token.h</innerfile>
+    <innerfile refid="dc/db5/pvideo__control_8cpp">pvideo_control.cpp</innerfile>
+    <innerfile refid="dc/d9f/pvideo__control_8h">pvideo_control.h</innerfile>
+    <innerfile refid="db/d3c/runtime__config_8cpp">runtime_config.cpp</innerfile>
+    <innerfile refid="d4/d3c/runtime__config_8h">runtime_config.h</innerfile>
+    <innerfile refid="d7/d0a/test__driver_8cpp">test_driver.cpp</innerfile>
+    <innerfile refid="dd/dab/test__driver_8h">test_driver.h</innerfile>
+    <innerfile refid="d2/d61/test__host_8cpp">test_host.cpp</innerfile>
+    <innerfile refid="df/d43/test__host_8h">test_host.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/"/>
+  </compounddef>
+</doxygen>

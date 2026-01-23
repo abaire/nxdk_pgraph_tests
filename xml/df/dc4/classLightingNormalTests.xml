@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/dc4/classLightingNormalTests" kind="class" language="C++" prot="public">
+    <compoundname>LightingNormalTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="dc/da8/lighting__normal__tests_8h" local="no">lighting_normal_tests.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DrawMode</name>
+        <qualifiedname>LightingNormalTests::DrawMode</qualifiedname>
+        <enumvalue id="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a138153b165eff7004425d60f6a81bcfb" prot="public">
+          <name>DRAW_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a788dc11929c4550d9881f6ed4ddc1e13" prot="public">
+          <name>DRAW_INLINE_BUFFERS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a25d95dd471e8ae85924734f1ffb32d92" prot="public">
+          <name>DRAW_INLINE_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a1ecdd697cc447f2aa447ca87f0e715f4" prot="public">
+          <name>DRAW_INLINE_ELEMENTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="23" column="3" bodyfile="src/tests/lighting_normal_tests.h" bodystart="23" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="df/dc4/classLightingNormalTests_1acaf2f0c245fa365bede5419a40dd48de" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingNormalTests::normal_bleed_buffer_</definition>
+        <argsstring></argsstring>
+        <name>normal_bleed_buffer_</name>
+        <qualifiedname>LightingNormalTests::normal_bleed_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="43" column="19" bodyfile="src/tests/lighting_normal_tests.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dc4/classLightingNormalTests_1ae376c06620d629674132abab4e14a9a1" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingNormalTests::lit_buffer_</definition>
+        <argsstring></argsstring>
+        <name>lit_buffer_</name>
+        <qualifiedname>LightingNormalTests::lit_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="44" column="19" bodyfile="src/tests/lighting_normal_tests.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/dc4/classLightingNormalTests_1a7146d88636bac11e835db0e4ffbcb639" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint32_t &gt;</type>
+        <definition>std::vector&lt;uint32_t&gt; LightingNormalTests::lit_index_buffer_</definition>
+        <argsstring></argsstring>
+        <name>lit_index_buffer_</name>
+        <qualifiedname>LightingNormalTests::lit_index_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="46" column="15" bodyfile="src/tests/lighting_normal_tests.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="df/dc4/classLightingNormalTests_1a75aa2ff0f818a3998ef0d4eb75244b9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LightingNormalTests::LightingNormalTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>LightingNormalTests</name>
+        <qualifiedname>LightingNormalTests::LightingNormalTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="31" column="3" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="33" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dc4/classLightingNormalTests_1acd135784259dcca401eda0cd13d7c56f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LightingNormalTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>LightingNormalTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="33" column="8" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="69" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dc4/classLightingNormalTests_1a10e8dcfd1358ee9e312cae2c0f1ba031" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LightingNormalTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>LightingNormalTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="34" column="8" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="88" bodyend="92"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="df/dc4/classLightingNormalTests_1a2800f45beca9b5bf21e3703f15af99c9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingNormalTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>LightingNormalTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="37" column="8" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="94" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="df/dc4/classLightingNormalTests_1a900866c1713b2e61d8cf4e38dda5637f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingNormalTests::Test</definition>
+        <argsstring>(bool set_normal, const float *normal, DrawMode draw_mode)</argsstring>
+        <name>Test</name>
+        <qualifiedname>LightingNormalTests::Test</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>set_normal</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal</declname>
+        </param>
+        <param>
+          <type>DrawMode</type>
+          <declname>draw_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="38" column="8" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="133" bodyend="207"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="df/dc4/classLightingNormalTests_1ad38da19d833c2b3014ac7fa2af546f00" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string LightingNormalTests::MakeTestName</definition>
+        <argsstring>(bool set_normal, const float *normal, DrawMode draw_mode)</argsstring>
+        <name>MakeTestName</name>
+        <qualifiedname>LightingNormalTests::MakeTestName</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>set_normal</declname>
+        </param>
+        <param>
+          <type>const float *</type>
+          <declname>normal</declname>
+        </param>
+        <param>
+          <type>DrawMode</type>
+          <declname>draw_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.h" line="40" column="22" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="209" bodyend="224"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior when lighting is enabled but a normal is not provided in the vertex data.</para>
+<para>The observed behavior on hardware is that the last set normal is reused for the unspecified vertices. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightingNormalTests</label>
+        <link refid="df/dc4/classLightingNormalTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightingNormalTests</label>
+        <link refid="df/dc4/classLightingNormalTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/lighting_normal_tests.h" line="21" column="1" bodyfile="src/tests/lighting_normal_tests.h" bodystart="21" bodyend="47"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>allow_saving_</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a2800f45beca9b5bf21e3703f15af99c9" prot="private" virt="non-virtual"><scope>LightingNormalTests</scope><name>CreateGeometry</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a10e8dcfd1358ee9e312cae2c0f1ba031" prot="public" virt="virtual"><scope>LightingNormalTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>DisableTests</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a138153b165eff7004425d60f6a81bcfb" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>DRAW_ARRAYS</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a25d95dd471e8ae85924734f1ffb32d92" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>DRAW_INLINE_ARRAYS</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a788dc11929c4550d9881f6ed4ddc1e13" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>DRAW_INLINE_BUFFERS</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43a1ecdd697cc447f2aa447ca87f0e715f4" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>DRAW_INLINE_ELEMENTS</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a3d47fd32cacccd3b783894e465551c43" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>DrawMode</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>host_</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1acd135784259dcca401eda0cd13d7c56f" prot="public" virt="virtual"><scope>LightingNormalTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a75aa2ff0f818a3998ef0d4eb75244b9d" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>LightingNormalTests</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1ae376c06620d629674132abab4e14a9a1" prot="private" virt="non-virtual"><scope>LightingNormalTests</scope><name>lit_buffer_</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a7146d88636bac11e835db0e4ffbcb639" prot="private" virt="non-virtual"><scope>LightingNormalTests</scope><name>lit_index_buffer_</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1ad38da19d833c2b3014ac7fa2af546f00" prot="private" virt="non-virtual"><scope>LightingNormalTests</scope><name>MakeTestName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>Name</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1acaf2f0c245fa365bede5419a40dd48de" prot="private" virt="non-virtual"><scope>LightingNormalTests</scope><name>normal_bleed_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>LightingNormalTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>LightingNormalTests</scope><name>TearDownTest</name></member>
+      <member refid="df/dc4/classLightingNormalTests_1a900866c1713b2e61d8cf4e38dda5637f" prot="private" virt="non-virtual"><scope>LightingNormalTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>LightingNormalTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>LightingNormalTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>LightingNormalTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

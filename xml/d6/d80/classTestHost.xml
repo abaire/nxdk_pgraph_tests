@@ -1,0 +1,448 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d80/classTestHost" kind="class" language="C++" prot="public">
+    <compoundname>TestHost</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">NV2AState</basecompoundref>
+    <includes refid="df/d43/test__host_8h" local="no">test_host.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d6/d80/classTestHost_1ac1164ad632c1c8a050f38d0defb72ba4" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestHost::save_results_</definition>
+        <argsstring></argsstring>
+        <name>save_results_</name>
+        <qualifiedname>TestHost::save_results_</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="89" column="8" bodyfile="src/test_host.h" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d80/classTestHost_1a599da50728e383d4132e2c9f9034c526" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d8/da5/classFTPLogger" kindref="compound">FTPLogger</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;FTPLogger&gt; TestHost::ftp_logger_</definition>
+        <argsstring></argsstring>
+        <name>ftp_logger_</name>
+        <qualifiedname>TestHost::ftp_logger_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="91" column="19" bodyfile="src/test_host.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/d80/classTestHost_1a05db9daa313cace6ff68274fece831d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TestHost::TestHost</definition>
+        <argsstring>(std::shared_ptr&lt; FTPLogger &gt; ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height, uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth=4)</argsstring>
+        <name>TestHost</name>
+        <qualifiedname>TestHost::TestHost</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="d8/da5/classFTPLogger" kindref="compound">FTPLogger</ref> &gt;</type>
+          <declname>ftp_logger</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>max_texture_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>max_texture_height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>max_texture_depth</declname>
+          <defval>4</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="35" column="3" bodyfile="src/test_host.cpp" bodystart="39" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestHost::FinishDraw</definition>
+        <argsstring>(bool allow_saving, const std::string &amp;output_directory, const std::string &amp;suite_name, const std::string &amp;name, bool save_zbuffer=false)</argsstring>
+        <name>FinishDraw</name>
+        <qualifiedname>TestHost::FinishDraw</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>allow_saving</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_directory</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>suite_name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>save_zbuffer</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Marks drawing as completed, potentially causing artifacts (framebuffer, z/stencil-buffer) to be saved to disk. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="39" column="8" bodyfile="src/test_host.cpp" bodystart="200" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a2413d6bea509877c02bf550a68dba3a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool TestHost::GetSaveResults</definition>
+        <argsstring>() const</argsstring>
+        <name>GetSaveResults</name>
+        <qualifiedname>TestHost::GetSaveResults</qualifiedname>
+        <briefdescription>
+<para>Returns the current override flag to allow/prevent artifact saving. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="43" column="9" bodyfile="src/test_host.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a93e74f05fb04b7222a5ccdd9967d25ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestHost::SetSaveResults</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>SetSaveResults</name>
+        <qualifiedname>TestHost::SetSaveResults</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Sets the override flag to prevent artifact saving during FinishDraw. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="45" column="8" bodyfile="src/test_host.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1aa7e08c847e0d3c13af4eb93d75bdfd7f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TestHost::SaveZBuffer</definition>
+        <argsstring>(const std::string &amp;output_directory, const std::string &amp;name) const</argsstring>
+        <name>SaveZBuffer</name>
+        <qualifiedname>TestHost::SaveZBuffer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_directory</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Saves the Z/Stencil buffer to the filesystem/. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="56" column="16" bodyfile="src/test_host.cpp" bodystart="137" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a6d7644613f0f313c03f990038d995d36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float TestHost::CenterX</definition>
+        <argsstring>(float item_width, bool pixel_align=true)</argsstring>
+        <name>CenterX</name>
+        <qualifiedname>TestHost::CenterX</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>item_width</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>pixel_align</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Returns an X coordinate sufficient to center a primitive with the given width within the framebuffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="62" column="16" bodyfile="src/test_host.h" bodystart="62" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a20f1c9bc7b1155623f1c0fc470de45a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float TestHost::CenterY</definition>
+        <argsstring>(float item_height, bool pixel_align=true)</argsstring>
+        <name>CenterY</name>
+        <qualifiedname>TestHost::CenterY</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>item_height</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>pixel_align</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Returns a Y coordinate sufficient to center a primitive with the given height within the framebuffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="72" column="16" bodyfile="src/test_host.h" bodystart="72" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d6/d80/classTestHost_1a370221520e6bc46aa13651d8e85d0a0f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TestHost::SaveTexture</definition>
+        <argsstring>(const std::string &amp;output_directory, const std::string &amp;name, const uint8_t *texture, uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel, SDL_PixelFormatEnum format)</argsstring>
+        <name>SaveTexture</name>
+        <qualifiedname>TestHost::SaveTexture</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_directory</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>texture</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>bits_per_pixel</declname>
+        </param>
+        <param>
+          <type>SDL_PixelFormatEnum</type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+<para>Saves the given texture to the filesystem as a PNG file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="48" column="22" bodyfile="src/test_host.cpp" bodystart="150" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a0f53fa9bc9c1d0b11b39b3fcbf12192f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TestHost::SaveRawTexture</definition>
+        <argsstring>(const std::string &amp;output_directory, const std::string &amp;name, const uint8_t *texture, uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel)</argsstring>
+        <name>SaveRawTexture</name>
+        <qualifiedname>TestHost::SaveRawTexture</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_directory</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>texture</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>bits_per_pixel</declname>
+        </param>
+        <briefdescription>
+<para>Saves the given region of memory as a flat binary file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="52" column="22" bodyfile="src/test_host.cpp" bodystart="174" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1a24b83c50f1d0b792c2089b41903d580e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestHost::EnsureFolderExists</definition>
+        <argsstring>(const std::string &amp;folder_path)</argsstring>
+        <name>EnsureFolderExists</name>
+        <qualifiedname>TestHost::EnsureFolderExists</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>folder_path</declname>
+        </param>
+        <briefdescription>
+<para>Creates the given directory if it does not already exist. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="59" column="15" bodyfile="src/test_host.cpp" bodystart="44" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1ae330e052ce7b0951577a643a2fb47c18" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TestHost::GetDrawPrimitiveName</definition>
+        <argsstring>(DrawPrimitive primitive)</argsstring>
+        <name>GetDrawPrimitiveName</name>
+        <qualifiedname>TestHost::GetDrawPrimitiveName</qualifiedname>
+        <param>
+          <type>DrawPrimitive</type>
+          <declname>primitive</declname>
+        </param>
+        <briefdescription>
+<para>Returns a string name for the given DrawPrimitive. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="81" column="22" bodyfile="src/test_host.cpp" bodystart="239" bodyend="262"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="d6/d80/classTestHost_1adcdccc3c8fb946b102c3e1b00077de18" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TestHost::PrepareSaveFile</definition>
+        <argsstring>(std::string output_directory, const std::string &amp;filename, const std::string &amp;ext=&quot;.png&quot;)</argsstring>
+        <name>PrepareSaveFile</name>
+        <qualifiedname>TestHost::PrepareSaveFile</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>output_directory</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>ext</declname>
+          <defval>&quot;.png&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="84" column="22" bodyfile="src/test_host.cpp" bodystart="71" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d80/classTestHost_1ae8182387a6417b238c984d28679e0473" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TestHost::SaveBackBuffer</definition>
+        <argsstring>(const std::string &amp;output_directory, const std::string &amp;name)</argsstring>
+        <name>SaveBackBuffer</name>
+        <qualifiedname>TestHost::SaveBackBuffer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_directory</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/test_host.h" line="86" column="22" bodyfile="src/test_host.cpp" bodystart="92" bodyend="135"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Provides utility methods for use by <ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref> subclasses. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>NV2AState</label>
+      </node>
+      <node id="1">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>NV2AState</label>
+      </node>
+      <node id="1">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/test_host.h" line="33" column="1" bodyfile="src/test_host.h" bodystart="33" bodyend="92"/>
+    <listofallmembers>
+      <member refid="d6/d80/classTestHost_1a6d7644613f0f313c03f990038d995d36" prot="public" virt="non-virtual"><scope>TestHost</scope><name>CenterX</name></member>
+      <member refid="d6/d80/classTestHost_1a20f1c9bc7b1155623f1c0fc470de45a9" prot="public" virt="non-virtual"><scope>TestHost</scope><name>CenterY</name></member>
+      <member refid="d6/d80/classTestHost_1a24b83c50f1d0b792c2089b41903d580e" prot="public" virt="non-virtual"><scope>TestHost</scope><name>EnsureFolderExists</name></member>
+      <member refid="d6/d80/classTestHost_1a8e1914535ca75d5b94cfb3cf28f52b17" prot="public" virt="non-virtual"><scope>TestHost</scope><name>FinishDraw</name></member>
+      <member refid="d6/d80/classTestHost_1a599da50728e383d4132e2c9f9034c526" prot="private" virt="non-virtual"><scope>TestHost</scope><name>ftp_logger_</name></member>
+      <member refid="d6/d80/classTestHost_1ae330e052ce7b0951577a643a2fb47c18" prot="public" virt="non-virtual"><scope>TestHost</scope><name>GetDrawPrimitiveName</name></member>
+      <member refid="d6/d80/classTestHost_1a2413d6bea509877c02bf550a68dba3a1" prot="public" virt="non-virtual"><scope>TestHost</scope><name>GetSaveResults</name></member>
+      <member refid="d6/d80/classTestHost_1adcdccc3c8fb946b102c3e1b00077de18" prot="private" virt="non-virtual"><scope>TestHost</scope><name>PrepareSaveFile</name></member>
+      <member refid="d6/d80/classTestHost_1ac1164ad632c1c8a050f38d0defb72ba4" prot="private" virt="non-virtual"><scope>TestHost</scope><name>save_results_</name></member>
+      <member refid="d6/d80/classTestHost_1ae8182387a6417b238c984d28679e0473" prot="private" virt="non-virtual"><scope>TestHost</scope><name>SaveBackBuffer</name></member>
+      <member refid="d6/d80/classTestHost_1a0f53fa9bc9c1d0b11b39b3fcbf12192f" prot="public" virt="non-virtual"><scope>TestHost</scope><name>SaveRawTexture</name></member>
+      <member refid="d6/d80/classTestHost_1a370221520e6bc46aa13651d8e85d0a0f" prot="public" virt="non-virtual"><scope>TestHost</scope><name>SaveTexture</name></member>
+      <member refid="d6/d80/classTestHost_1aa7e08c847e0d3c13af4eb93d75bdfd7f" prot="public" virt="non-virtual"><scope>TestHost</scope><name>SaveZBuffer</name></member>
+      <member refid="d6/d80/classTestHost_1a93e74f05fb04b7222a5ccdd9967d25ec" prot="public" virt="non-virtual"><scope>TestHost</scope><name>SetSaveResults</name></member>
+      <member refid="d6/d80/classTestHost_1a05db9daa313cace6ff68274fece831d1" prot="public" virt="non-virtual"><scope>TestHost</scope><name>TestHost</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

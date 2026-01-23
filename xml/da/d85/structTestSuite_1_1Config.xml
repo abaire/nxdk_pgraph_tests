@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d85/structTestSuite_1_1Config" kind="struct" language="C++" prot="public">
+    <compoundname>TestSuite::Config</compoundname>
+    <includes refid="d6/d7a/test__suite_8h" local="no">test_suite.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="da/d85/structTestSuite_1_1Config_1a0dd62f55f33b076a6ac1a4d566201554" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestSuite::Config::enable_progress_log</definition>
+        <argsstring></argsstring>
+        <name>enable_progress_log</name>
+        <qualifiedname>TestSuite::Config::enable_progress_log</qualifiedname>
+        <briefdescription>
+<para>Enable logging of test progress to file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="26" column="10" bodyfile="src/tests/test_suite.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d85/structTestSuite_1_1Config_1adc7a04966f124a1b03c4bad63b25df6b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestSuite::Config::enable_pgraph_region_diff</definition>
+        <argsstring></argsstring>
+        <name>enable_pgraph_region_diff</name>
+        <qualifiedname>TestSuite::Config::enable_pgraph_region_diff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="29" column="10" bodyfile="src/tests/test_suite.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d85/structTestSuite_1_1Config_1ae538988085eccb737129266de8069f6a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestSuite::Config::delay_milliseconds_between_tests</definition>
+        <argsstring></argsstring>
+        <name>delay_milliseconds_between_tests</name>
+        <qualifiedname>TestSuite::Config::delay_milliseconds_between_tests</qualifiedname>
+        <briefdescription>
+<para>Artificial delay before starting each test. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="32" column="14" bodyfile="src/tests/test_suite.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d85/structTestSuite_1_1Config_1ae9f9a22d1b0ccef2df96311aa93da7ad" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d8/da5/classFTPLogger" kindref="compound">FTPLogger</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;FTPLogger&gt; TestSuite::Config::ftp_logger</definition>
+        <argsstring></argsstring>
+        <name>ftp_logger</name>
+        <qualifiedname>TestSuite::Config::ftp_logger</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="35" column="21" bodyfile="src/tests/test_suite.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Runtime configuration for TestSuites. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/test_suite.h" line="24" column="3" bodyfile="src/tests/test_suite.h" bodystart="24" bodyend="36"/>
+    <listofallmembers>
+      <member refid="da/d85/structTestSuite_1_1Config_1ae538988085eccb737129266de8069f6a" prot="public" virt="non-virtual"><scope>TestSuite::Config</scope><name>delay_milliseconds_between_tests</name></member>
+      <member refid="da/d85/structTestSuite_1_1Config_1adc7a04966f124a1b03c4bad63b25df6b" prot="public" virt="non-virtual"><scope>TestSuite::Config</scope><name>enable_pgraph_region_diff</name></member>
+      <member refid="da/d85/structTestSuite_1_1Config_1a0dd62f55f33b076a6ac1a4d566201554" prot="public" virt="non-virtual"><scope>TestSuite::Config</scope><name>enable_progress_log</name></member>
+      <member refid="da/d85/structTestSuite_1_1Config_1ae9f9a22d1b0ccef2df96311aa93da7ad" prot="public" virt="non-virtual"><scope>TestSuite::Config</scope><name>ftp_logger</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
