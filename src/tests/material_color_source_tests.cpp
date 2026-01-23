@@ -573,7 +573,7 @@ void MaterialColorSourceTests::Test(const std::string& name, SourceMode source_m
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void MaterialColorSourceTests::TestEmissive(const std::string& name, const vector_t& material_emission) {
@@ -688,7 +688,7 @@ void MaterialColorSourceTests::TestEmissive(const std::string& name, const vecto
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 std::string MaterialColorSourceTests::MakeTestName(SourceMode source_mode) {

@@ -419,5 +419,5 @@ void LightingControlTests::Test(const std::string& name, uint32_t light_control,
   }
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

@@ -7,19 +7,75 @@
 #include "test_host.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
+#include "xbox_math_matrix.h"
 
 static constexpr char kTexturePerspectiveEnabledSuffix[] = "_tex_persp";
-static constexpr char kTestWGaps[] = "w_gaps";
-static constexpr char kTestWPositiveTriangleStrip[] = "w_pos_strip";
-static constexpr char kTestWNegativeTriangleStrip[] = "w_neg_strip";
-static constexpr char kTestFixedFunctionZeroW[] = "ff_w_zero_";
+static constexpr const char kTestWGaps[] = "w_gaps";
+static constexpr const char kTestWPositiveTriangleStrip[] = "w_pos_strip";
+static constexpr const char kTestWNegativeTriangleStrip[] = "w_neg_strip";
+static constexpr const char kTestFixedFunctionZeroW[] = "ff_w_zero_";
+static constexpr const char kTestFixedFunctionZeroInfW[] = "ff_w_zero_inf_";
+static constexpr const char kTestProgZeroInfW[] = "prog_w_zero_inf_";
+static constexpr const char kTestRccZeroInfW[] = "rcc_w_zero_inf_";
+static constexpr float kMinW = 5.421011e-20f;
+static constexpr float kMaxW = 1.8446744e19f;
+
+static const uint32_t kRccTestVsh[] = {
+#include "rcc_clamp_test.vshinc"
+};
 
 static std::string AugmentTestName(const std::string &test_name, bool texture_perspective_enable) {
   return test_name + (texture_perspective_enable ? kTexturePerspectiveEnabledSuffix : "");
+};
+
+static std::string format_float(float value) {
+  char buf[32] = {0};
+
+  if (*(uint32_t *)&value == 0x80000000) {
+    // snprintf doesn't handle sign of negative zero
+    snprintf(buf, sizeof(buf), "-0.00");
+  } else {
+    bool simple = (value == 0.0f || (abs(value) >= 0.01f && abs(value) <= 100.0f));
+    snprintf(buf, sizeof(buf), simple ? "%.02f" : "%.02e", value);
+
+    char *ptr = strchr(buf, '+');
+    if (ptr) {
+      memmove(ptr, ptr + 1, strlen(ptr));
+    }
+  }
+
+  return std::string(buf);
 }
+
 static std::string MakeFFZeroWTestName(bool draw_quad, bool texture_perspective_enable) {
   return std::string(kTestFixedFunctionZeroW) + (draw_quad ? "_quad" : "_bitri") +
          (texture_perspective_enable ? kTexturePerspectiveEnabledSuffix : "");
+}
+
+static std::string MakeFFZeroInfWTestName(bool draw_quad, float w_multiplier) {
+  return std::string(kTestFixedFunctionZeroInfW) + (draw_quad ? "_quad" : "_bitri") + "_w" + format_float(w_multiplier);
+}
+
+static std::string MakeProgZeroInfWTestName(bool draw_quad, float w_multiplier) {
+  return std::string(kTestProgZeroInfW) + (draw_quad ? "_quad" : "_bitri") + "_w" + format_float(w_multiplier);
+}
+
+static std::string MakeRccZeroInfWTestName(float w_multiplier) {
+  return std::string(kTestRccZeroInfW) + "_z" + format_float(w_multiplier);
+}
+
+static bool IsNegative(float value) { return *(int32_t *)&value < 0; }
+
+// pb_print doesn't print the sign for negative zero floats
+static void print_negzero_sign(float value) {
+  if (*(uint32_t *)&value == 0x80000000) {
+    pb_print("-");
+  }
+}
+
+static void print_precision_warning() {
+  pb_print("\n\nNOTE!\n");
+  pb_print("Numerical\ninstability\npossible with\nOpenGL/Vulkan.\n");
 }
 
 WParamTests::WParamTests(TestHost &host, std::string output_dir, const Config &config)
@@ -41,6 +97,39 @@ WParamTests::WParamTests(TestHost &host, std::string output_dir, const Config &c
       tests_[MakeFFZeroWTestName(quad, texture_perspective_enable)] = [this, quad, texture_perspective_enable]() {
         TestFixedFunctionZeroW(quad, texture_perspective_enable);
       };
+    }
+  }
+
+  for (auto quad : {false, true}) {
+    for (auto w_multiplier : {0.0f,
+                              0.25f,
+                              0.5f,
+                              1.0f,
+                              2.0f,
+                              4.0f,
+                              INFINITY,
+                              -INFINITY,
+                              -4.0f,
+                              -2.0f,
+                              -1.0f,
+                              -0.5f,
+                              -0.25f,
+                              -0.0f,
+                              -kMinW * (1048576.0f * kMinW),
+                              -kMinW * (32768.0f * kMinW),
+                              -kMinW * (512.0f * kMinW),
+                              -kMinW * (256.0f * kMinW),
+                              -kMinW * (128.0f * kMinW),
+                              -kMinW * (64.0f * kMinW)}) {
+      tests_[MakeFFZeroInfWTestName(quad, w_multiplier)] = [this, quad, w_multiplier]() {
+        this->TestFixedFunctionZeroInfW(quad, w_multiplier);
+      };
+      tests_[MakeProgZeroInfWTestName(quad, w_multiplier)] = [this, quad, w_multiplier]() {
+        this->TestProgZeroInfW(quad, w_multiplier);
+      };
+      if (!quad) {
+        tests_[MakeRccZeroInfWTestName(w_multiplier)] = [this, w_multiplier]() { this->TestRccZeroInfW(w_multiplier); };
+      }
     }
   }
 }
@@ -195,7 +284,7 @@ void WParamTests::TestWGaps(bool texture_perspective_enable) {
   pb_draw_text_screen();
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, AugmentTestName(kTestWGaps, texture_perspective_enable));
+  FinishDraw(AugmentTestName(kTestWGaps, texture_perspective_enable));
 }
 
 void WParamTests::CreateGeometryPositiveWTriangleStrip() {
@@ -239,8 +328,7 @@ void WParamTests::TestPositiveWTriangleStrip(bool texture_perspective_enable) {
   host_.DrawArrays(TestHost::POSITION | TestHost::DIFFUSE, TestHost::PRIMITIVE_TRIANGLE_STRIP);
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_,
-                   AugmentTestName(kTestWPositiveTriangleStrip, texture_perspective_enable));
+  FinishDraw(AugmentTestName(kTestWPositiveTriangleStrip, texture_perspective_enable));
 }
 
 void WParamTests::CreateGeometryNegativeWTriangleStrip() {
@@ -304,8 +392,7 @@ void WParamTests::TestNegativeWTriangleStrip(bool texture_perspective_enable) {
   Pushbuffer::End();
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_,
-                   AugmentTestName(kTestWNegativeTriangleStrip, texture_perspective_enable));
+  FinishDraw(AugmentTestName(kTestWNegativeTriangleStrip, texture_perspective_enable));
 }
 
 void WParamTests::TestFixedFunctionZeroW(bool draw_quad, bool texture_perspective_enable) {
@@ -382,7 +469,356 @@ void WParamTests::TestFixedFunctionZeroW(bool draw_quad, bool texture_perspectiv
   }
 
   host_.SetupControl0();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, MakeFFZeroWTestName(draw_quad, texture_perspective_enable));
+  FinishDraw(MakeFFZeroWTestName(draw_quad, texture_perspective_enable));
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+  host_.SetDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+}
+
+void WParamTests::TestFixedFunctionZeroInfW(bool draw_quad, float w_multiplier) {
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetWindowClip(host_.GetFramebufferWidth(), host_.GetFramebufferHeight());
+  host_.SetViewportOffset(320, 240, 0, 0);
+  host_.SetViewportScale(0, 0, 0, 0);
+
+  {
+    matrix4_t matrix;
+    MatrixSetIdentity(matrix);
+    host_.SetFixedFunctionModelViewMatrix(matrix);
+    host_.SetFixedFunctionProjectionMatrix(matrix);
+  }
+  host_.PrepareDraw(0xFE251135);
+
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTROL0, 0x100001);
+    Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CLAMP);
+    Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, false);
+    Pushbuffer::End();
+  }
+
+  // Generate a distinct texture.
+  constexpr uint32_t kTextureSize = 256;
+  {
+    memset(host_.GetTextureMemory(), 0, host_.GetTextureMemorySize());
+    GenerateRGBACheckerboard(host_.GetTextureMemory(), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, 0xFF00FFFF,
+                             0xFFFF0000);
+
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
+    texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+    host_.SetupTextureStages();
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+
+    host_.SetBlend(true, NV097_SET_BLEND_EQUATION_V_FUNC_ADD, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
+                   NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  }
+
+  const float top_left_w = kMinW / w_multiplier;
+  const float bottom_right_w = kMaxW * w_multiplier;
+
+  {
+    const float left = -80.0f;
+    const float top = -80.0f;
+    const float right = 80.0f;
+    const float bottom = 80.0f;
+    const auto depth = 0.0f;
+
+    if (draw_quad) {
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      host_.SetVertex(left * kMinW, top * kMinW, depth, top_left_w);
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
+
+      host_.SetTexCoord0(kTextureSize, kTextureSize);
+      host_.SetVertex(right * kMaxW, bottom * kMaxW, depth, bottom_right_w);
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+      host_.End();
+
+      pb_print("Quad ");
+    } else {
+      host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      host_.SetVertex(left * kMinW, top * kMinW, depth, top_left_w);
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+
+      host_.SetTexCoord0(kTextureSize, kTextureSize);
+      host_.SetVertex(right * kMaxW, bottom * kMaxW, depth, bottom_right_w);
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
+
+      host_.End();
+      pb_print("Bitri ");
+    }
+  }
+
+  pb_print("FixedF");
+  pb_printat(1, 0, "W=");
+  pb_print("%e / ", kMinW);
+  print_negzero_sign(w_multiplier);
+  pb_print("%f = ", w_multiplier);
+  print_negzero_sign(top_left_w);
+  pb_print("%e", top_left_w);
+  print_precision_warning();
+  pb_printat(15, 11, "W=");
+  pb_print("%e * ", kMaxW);
+  print_negzero_sign(w_multiplier);
+  pb_print("%f = ", w_multiplier);
+  print_negzero_sign(bottom_right_w);
+  pb_print("%e", bottom_right_w);
+  pb_draw_text_screen();
+
+  FinishDraw(MakeFFZeroInfWTestName(draw_quad, w_multiplier));
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+  host_.SetDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+}
+
+void WParamTests::TestProgZeroInfW(bool draw_quad, float w_multiplier) {
+  {
+    auto shader = std::make_shared<PassthroughVertexShader>();
+    host_.SetVertexShaderProgram(shader);
+  }
+  host_.PrepareDraw(0xFE251135);
+
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTROL0, 0x100001);
+    Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CLAMP);
+    Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, false);
+    Pushbuffer::End();
+  }
+
+  // Generate a distinct texture.
+  constexpr uint32_t kTextureSize = 256;
+  {
+    memset(host_.GetTextureMemory(), 0, host_.GetTextureMemorySize());
+    GenerateRGBACheckerboard(host_.GetTextureMemory(), 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, 0xFF00C0C0,
+                             0xFFC00000);
+
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
+    texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+    host_.SetupTextureStages();
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+
+    host_.SetBlend(true, NV097_SET_BLEND_EQUATION_V_FUNC_ADD, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
+                   NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  }
+
+  const float top_left_w = kMinW / w_multiplier;
+  const float bottom_right_w = kMaxW * w_multiplier;
+
+  {
+    const float left = 160.0f;
+    const float top = 70.0f;
+    const float right = 480.0f;
+    const float bottom = 390.0f;
+    const auto depth = 0.0f;
+
+    if (draw_quad) {
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      if (IsNegative(top_left_w)) {
+        host_.SetVertex(right, bottom, depth, top_left_w);
+      } else {
+        host_.SetVertex(left, top, depth, top_left_w);
+      }
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, 1.0f);
+
+      host_.SetTexCoord0(kTextureSize, kTextureSize);
+      if (IsNegative(bottom_right_w)) {
+        host_.SetVertex(left, top, depth, bottom_right_w);
+      } else {
+        host_.SetVertex(right, bottom, depth, bottom_right_w);
+      }
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, 1.0f);
+      host_.End();
+
+      pb_print("Quad ");
+    } else {
+      host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
+      host_.SetTexCoord0(0.0f, 0.0f);
+      if (IsNegative(top_left_w)) {
+        host_.SetVertex(right, bottom, depth, top_left_w);
+      } else {
+        host_.SetVertex(left, top, depth, top_left_w);
+      }
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, kMinW);
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, kMinW);
+
+      host_.SetTexCoord0(kTextureSize, kTextureSize);
+      if (IsNegative(bottom_right_w)) {
+        host_.SetVertex(left, top, depth, bottom_right_w);
+      } else {
+        host_.SetVertex(right, bottom, depth, bottom_right_w);
+      }
+
+      host_.SetTexCoord0(0.0f, kTextureSize);
+      host_.SetVertex(left, bottom, depth, kMaxW);
+
+      host_.SetTexCoord0(kTextureSize, 0.0f);
+      host_.SetVertex(right, top, depth, kMaxW);
+
+      host_.End();
+      pb_print("Bitri ");
+    }
+  }
+
+  pb_print("Prog");
+  pb_printat(1, 0, "W=");
+  pb_print("%e / ", kMinW);
+  print_negzero_sign(w_multiplier);
+  pb_print("%e = ", w_multiplier);
+  print_negzero_sign(top_left_w);
+  pb_print("%e", top_left_w);
+  print_precision_warning();
+  pb_printat(15, 11, "W=");
+  pb_print("%e * ", kMaxW);
+  print_negzero_sign(w_multiplier);
+  pb_print("%e = ", w_multiplier);
+  print_negzero_sign(bottom_right_w);
+  pb_print("%e", bottom_right_w);
+  pb_draw_text_screen();
+
+  FinishDraw(MakeProgZeroInfWTestName(draw_quad, w_multiplier));
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+  host_.SetDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+}
+
+void WParamTests::TestRccZeroInfW(float w_multiplier) {
+  {
+    auto shader = std::make_shared<VertexShaderProgram>();
+    shader->SetShader(kRccTestVsh, sizeof(kRccTestVsh));
+    host_.SetVertexShaderProgram(shader);
+  }
+  host_.PrepareDraw(0xFE251135);
+
+  {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_CONTROL0, 0x100001);
+    Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CLAMP);
+    Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, false);
+    Pushbuffer::End();
+
+    host_.SetTextureStageEnabled(0, false);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+    host_.SetBlend(true, NV097_SET_BLEND_EQUATION_V_FUNC_ADD, NV097_SET_BLEND_FUNC_SFACTOR_V_ONE,
+                   NV097_SET_BLEND_FUNC_DFACTOR_V_ONE);
+  }
+
+  const float top_left_z = kMinW / w_multiplier;
+  const float bottom_right_z = kMaxW * w_multiplier;
+
+  {
+    const float left = 160.0f;
+    const float top = 70.0f;
+    const float right = 480.0f;
+    const float bottom = 390.0f;
+
+    host_.Begin(TestHost::PRIMITIVE_TRIANGLES);
+
+    host_.SetDiffuse(1.0f, 0.0f, 0.0f);
+    if (IsNegative(top_left_z)) {
+      host_.SetVertex(-left * kMinW, -top * kMinW, top_left_z, 1.0f);
+    } else {
+      host_.SetVertex(left * kMinW, top * kMinW, top_left_z, 1.0f);
+    }
+
+    host_.SetDiffuse(1.0f, 1.0f, 0.0f);
+    host_.SetVertex(right * kMinW, top * kMinW, kMinW, 1.0f);
+
+    host_.SetDiffuse(0.0f, 1.0f, 1.0f);
+    host_.SetVertex(left * kMinW, bottom * kMinW, kMinW, 1.0f);
+
+    host_.SetDiffuse(0.0f, 1.0f, 0.0f);
+    if (IsNegative(bottom_right_z)) {
+      host_.SetVertex(-right * kMaxW, -bottom * kMaxW, bottom_right_z, 1.0f);
+    } else {
+      host_.SetVertex(right * kMaxW, bottom * kMaxW, bottom_right_z, 1.0f);
+    }
+
+    host_.SetDiffuse(0.0f, 1.0f, 1.0f);
+    host_.SetVertex(left * kMaxW, bottom * kMaxW, kMaxW, 1.0f);
+
+    host_.SetDiffuse(1.0f, 1.0f, 0.0f);
+    host_.SetVertex(right * kMaxW, top * kMaxW, kMaxW, 1.0f);
+
+    host_.End();
+  }
+
+  pb_print("RCC calculates 1/Z and multiplies");
+  pb_printat(1, 0, "Z=");
+  pb_print("%e / ", kMinW);
+  print_negzero_sign(w_multiplier);
+  pb_print("%e = ", w_multiplier);
+  print_negzero_sign(top_left_z);
+  pb_print("%e", top_left_z);
+  print_precision_warning();
+  pb_printat(15, 11, "Z=");
+  pb_print("%e * ", kMaxW);
+  print_negzero_sign(w_multiplier);
+  pb_print("%e = ", w_multiplier);
+  print_negzero_sign(bottom_right_z);
+  pb_print("%e", bottom_right_z);
+  pb_draw_text_screen();
+
+  FinishDraw(MakeRccZeroInfWTestName(w_multiplier));
 
   host_.SetTextureStageEnabled(0, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);

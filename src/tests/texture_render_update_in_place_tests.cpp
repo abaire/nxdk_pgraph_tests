@@ -166,5 +166,5 @@ void TextureRenderUpdateInPlaceTests::Test() {
   host_.PrepareDraw(0xFE252525);
   host_.DrawArrays();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName);
+  FinishDraw(kTestName);
 }

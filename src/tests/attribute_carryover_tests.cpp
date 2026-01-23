@@ -708,7 +708,7 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute 
   pb_print("%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,

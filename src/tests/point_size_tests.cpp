@@ -235,7 +235,7 @@ void PointSizeTests::Test(const std::string& name, bool point_smooth_enabled, in
 
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shader) {
@@ -334,7 +334,7 @@ void PointSizeTests::TestLargestPointSize(const std::string& name, bool use_shad
   pb_print("Point size 0x%08X\n", kLargePointSize);
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void PointSizeTests::TestSmallestPointSize(const std::string& name, bool use_shader) {
@@ -395,7 +395,7 @@ void PointSizeTests::TestSmallestPointSize(const std::string& name, bool use_sha
   pb_print("Fractional point sizes 0-8\n");
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void PointSizeTests::TestVertexShaderPointSize() {
@@ -505,7 +505,7 @@ void PointSizeTests::TestVertexShaderPointSize() {
   pb_printat(3, 32, "Inline Array");
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kVertexShaderPointSizeTest);
+  FinishDraw(kVertexShaderPointSizeTest);
 
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);

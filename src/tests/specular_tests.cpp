@@ -589,7 +589,7 @@ void SpecularTests::TestControlFlags(const std::string& name, bool use_fixed_fun
   pb_printat(13, 0, "SPEC_EN=T");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void SpecularTests::TestSpecularParams(const std::string& name, const float* specular_params) {
@@ -679,7 +679,7 @@ void SpecularTests::TestSpecularParams(const std::string& name, const float* spe
     pb_print_with_floats("%f\n", specular_params[i]);
   }
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void SpecularTests::TestNonUnitNormals(const std::string& name, float normal_length) {
@@ -779,5 +779,5 @@ void SpecularTests::TestNonUnitNormals(const std::string& name, float normal_len
   pb_print("%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

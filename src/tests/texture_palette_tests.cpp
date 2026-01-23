@@ -228,7 +228,7 @@ void TexturePaletteTests::TestPaletteSwapping() {
   pb_print("The same image is rendered with different palettes\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kPaletteSwappingTest);
+  FinishDraw(kPaletteSwappingTest);
 }
 
 void TexturePaletteTests::TestXemu2646() {
@@ -338,7 +338,7 @@ void TexturePaletteTests::TestXemu2646() {
   pb_print("Entries should be clearly different\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kXemu2646Test);
+  FinishDraw(kXemu2646Test);
 }
 
 namespace {

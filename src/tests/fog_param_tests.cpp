@@ -442,7 +442,7 @@ void FogParamTests::Test(const std::string& name, uint32_t fog_mode, float bias,
   pb_printat(15, 0, " 1.2");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void FogParamTests::TestBiasZeroPoint(const std::string& name, uint32_t fog_mode) {
@@ -534,5 +534,5 @@ void FogParamTests::TestBiasZeroPoint(const std::string& name, uint32_t fog_mode
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

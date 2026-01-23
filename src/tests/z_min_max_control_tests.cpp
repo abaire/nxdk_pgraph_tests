@@ -260,7 +260,7 @@ void ZMinMaxControlTests::Test(const std::string& name, uint32_t mode, bool w_bu
   pb_printat(12, 44, (char*)"W=10");
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void ZMinMaxControlTests::TestFixed(const std::string& name, uint32_t mode, bool w_buffered) {
@@ -338,7 +338,7 @@ void ZMinMaxControlTests::TestFixed(const std::string& name, uint32_t mode, bool
   pb_printat(12, 44, (char*)"W=10");
 
   pb_draw_text_screen();
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 static std::string MakeTestName(const char* prefix, uint32_t mode, bool w_buffered) {

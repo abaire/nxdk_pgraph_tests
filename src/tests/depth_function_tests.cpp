@@ -139,7 +139,7 @@ void DepthFunctionTests::Test() {
   pb_printat(14, 33, "above unsupported value");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName, true);
+  FinishDraw(kTestName, true);
 
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);

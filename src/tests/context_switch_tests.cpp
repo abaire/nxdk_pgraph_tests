@@ -94,5 +94,5 @@ void ContextSwitchTests::Test() {
   pb_print("Left triangle uses last color before ctx disable\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kGraphicsClassZeroTest);
+  FinishDraw(kGraphicsClassZeroTest);
 }

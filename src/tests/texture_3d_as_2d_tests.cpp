@@ -85,7 +85,7 @@ void Texture3DAs2DTests::TestCubemap() {
   pb_printat(6, 0, "Reference");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestCubemap);
+  FinishDraw(kTestCubemap);
 }
 
 void Texture3DAs2DTests::TestVolumetric() {
@@ -131,7 +131,7 @@ void Texture3DAs2DTests::TestVolumetric() {
   pb_printat(3, 0, "Reference");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestVolumetric);
+  FinishDraw(kTestVolumetric);
 }
 
 static void GenerateCubemap(uint8_t *buffer) {

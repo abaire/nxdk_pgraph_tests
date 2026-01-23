@@ -249,7 +249,7 @@ void FogCarryoverTests::Test() {
 
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName);
+  FinishDraw(kTestName);
 }
 
 static std::shared_ptr<VertexBuffer> CreateLines(TestHost &host_, std::vector<uint32_t> &index_buffer, float left,
@@ -692,5 +692,5 @@ void FogCarryoverTests::TestPrimitive(const std::string &name, TestHost::DrawPri
   pb_printat(0, 0, "%s", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

@@ -70,18 +70,26 @@ class BlendTests : public TestSuite {
 
  private:
   //! Tests interactions of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR.
-  void Test(const std::string &name, uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
+  void TestDetailed(const std::string &name, uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
+
+  //! Tests interactions of NV097_SET_BLEND_EQUATION, NV097_SET_BLEND_FUNC_SFACTOR, and NV097_SET_BLEND_FUNC_DFACTOR.
+  //! Unlike TestDetailed, this composits multiple subtests with every possible DFACTOR in one image.
+  void TestSpot(const std::string &name, uint32_t blend_function, uint32_t src_factor);
 
   //! Renders a series of concentric squares in green, red, blue, and white with their alpha channels blended.
-  void DrawAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
+  void DrawAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left = 0.f,
+                      float top = 0.f, float quad_size = 256.f, float increment = 24.f);
 
   //! Renders a column of squares in green, red, blue, with their color channels blended.
-  void DrawColorStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
+  void DrawColorStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left = 0.f,
+                      float top = 0.f, float color_swatch_size = 64.f);
 
   //! Renders a column of squares in green, red, blue, with their color and alpha channels blended.
-  void DrawColorAndAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor);
+  void DrawColorAndAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left = 0.f,
+                              float top = 0.f, float color_swatch_size = 64.f);
 
-  void DrawCheckerboardBackground() const;
+  void DrawCheckerboardBackground(bool use_small_checkers = false) const;
+
   //! Renders a quad where either the alpha channel or color channels are modulated by the given blend settings
   //! depending on `blend_alpha`.
   void DrawQuad(float left, float top, float right, float bottom, uint32_t color, uint32_t func, uint32_t sfactor,

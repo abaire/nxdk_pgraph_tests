@@ -2,6 +2,7 @@
 #define NXDK_PGRAPH_TESTS_TEST_SUITE_H
 
 #include <ftp_logger.h>
+#include <test_host.h>
 
 #include <chrono>
 #include <functional>
@@ -61,9 +62,13 @@ class TestSuite {
 
   void Run(const std::string &test_name);
 
-  void RunAll();
+  /**
+   * Runs all registered tests in this suite.
+   * @param inclue_interactive Whether tests that do not save artifacts should be run as well.
+   */
+  void RunAll(bool inclue_interactive);
 
-  bool IsInteractiveOnly() const { return interactive_only_; }
+  [[nodiscard]] bool IsInteractiveOnly() const { return interactive_only_; }
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
 
   //! Inserts a pattern of NV097_NO_OPERATION's into the pushbuffer to allow identification when viewing nv2a traces.
@@ -71,6 +76,16 @@ class TestSuite {
 
  protected:
   void SetDefaultTextureFormat() const;
+
+  //! Marks drawing as completed and presents the backbuffer, potentially causing artifacts (framebuffer,
+  //! z/stencil-buffer) to be saved to disk.
+  void FinishDraw(const std::string &name, bool save_zbuffer = false) {
+    host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name, save_zbuffer);
+  }
+
+  void FinishDrawNoSave(const std::string &name, bool save_zbuffer = false) {
+    host_.FinishDraw(false, output_dir_, suite_name_, name, save_zbuffer);
+  }
 
  private:
   std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name);
@@ -89,6 +104,7 @@ class TestSuite {
 
   // Map of `test_name` to `void test()`
   std::map<std::string, std::function<void()>> tests_{};
+  std::set<std::string> interactive_only_tests_{};
 
   PGRAPHDiffToken pgraph_diff_;
 

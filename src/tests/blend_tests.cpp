@@ -60,6 +60,8 @@ static constexpr struct BlendFunc kBlendFactors[] = {
     {"1-cA", NV097_SET_BLEND_FUNC_SFACTOR_V_ONE_MINUS_CONSTANT_ALPHA},
 };
 
+static constexpr auto kNumBlendFactors = sizeof(kBlendFactors) / sizeof(kBlendFactors[0]);
+
 static constexpr uint32_t kTextureSize = 256;
 static constexpr uint32_t kTexturePitch = kTextureSize * 4;
 
@@ -74,8 +76,9 @@ BlendTests::BlendTests(TestHost &host, std::string output_dir, const Config &con
     : TestSuite(host, std::move(output_dir), "Blend tests", config) {
   for (const auto &test_eqn : kBlendEqns) {
     for (const auto &test_sfactor : kBlendFactors) {
+      uint32_t sfactor = test_sfactor.value;
+
       for (const auto &test_dfactor : kBlendFactors) {
-        uint32_t sfactor = test_sfactor.value;
         uint32_t dfactor = test_dfactor.value;
         std::string name = test_sfactor.name;
         name += "_";
@@ -83,9 +86,19 @@ BlendTests::BlendTests(TestHost &host, std::string output_dir, const Config &con
         name += "_";
         name += test_dfactor.name;
         if (sfactor != NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO || dfactor != NV097_SET_BLEND_FUNC_SFACTOR_V_ZERO) {
-          tests_[name] = [this, name, &test_eqn, sfactor, dfactor]() { Test(name, test_eqn.value, sfactor, dfactor); };
+          tests_[name] = [this, name, &test_eqn, sfactor, dfactor]() {
+            TestDetailed(name, test_eqn.value, sfactor, dfactor);
+          };
+          interactive_only_tests_.insert(name);
         }
       }
+
+      std::string name = "#spot_";
+      name += test_sfactor.name;
+      name += "_";
+      name += test_eqn.name;
+
+      tests_[name] = [this, name, &test_eqn, sfactor] { TestSpot(name, test_eqn.value, sfactor); };
     }
   }
 }
@@ -105,50 +118,122 @@ void BlendTests::Initialize() {
   Pushbuffer::End();
 }
 
-void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {
+namespace {
+void RenderTexturedQuad(TestHost &host, float left, float top, uint32_t texture_width, uint32_t texture_height) {
+  constexpr uint32_t kStage = 1;
+  host.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+  host.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
+  host.SetTextureStageEnabled(kStage, true);
+  host.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+  auto &texture_stage = host.GetTextureStage(kStage);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+  texture_stage.SetTextureDimensions(texture_width, texture_height);
+  host.SetupTextureStages();
+
+  const float kRight = left + static_cast<float>(texture_width);
+  const float kBottom = top + static_cast<float>(texture_height);
+
+  host.SetBlend(true);
+
+  host.Begin(TestHost::PRIMITIVE_QUADS);
+  host.SetTexCoord1(0.0f, 0.0f);
+  host.SetVertex(left, top, 0.1f, 1.0f);
+  host.SetTexCoord1(1.0f, 0.0f);
+  host.SetVertex(kRight, top, 0.1f, 1.0f);
+  host.SetTexCoord1(1.0f, 1.0f);
+  host.SetVertex(kRight, kBottom, 0.1f, 1.0f);
+  host.SetTexCoord1(0.0f, 1.0f);
+  host.SetVertex(left, kBottom, 0.1f, 1.0f);
+  host.End();
+
+  host.SetTextureStageEnabled(kStage, false);
+  host.SetShaderStageProgram(TestHost::STAGE_NONE);
+}
+
+void PrepareBlendBackground(TestHost &host, uint32_t texture_width, uint32_t texture_height, uint32_t texture_pitch,
+                            uint32_t checkerboard_size = kBlendCheckerboardSize) {
+  auto texture_memory = host.GetTextureMemoryForStage(1);
+  GenerateSwizzledRGBACheckerboard(texture_memory, 0, 0, texture_width, texture_height, texture_pitch,
+                                   kColorSwatchBackground, kCheckerboardB, checkerboard_size);
+}
+
+}  // namespace
+
+void BlendTests::TestSpot(const std::string &name, uint32_t blend_function, uint32_t src_factor) {
+  host_.SetBlend(false);
+  host_.PrepareDraw(0xFE312F31);
+
+  DrawCheckerboardBackground(true);
+
+  host_.SetBlendColorConstant(kBlendColorConstant);
+
+  static constexpr auto kRenderTargetTextureSize = 512;
+  static constexpr auto kRenderTargetTexturePitch = kRenderTargetTextureSize * 4;
+
+  RenderToTextureStart(1, kRenderTargetTexturePitch);
+  PrepareBlendBackground(host_, kRenderTargetTextureSize, kRenderTargetTextureSize, kRenderTargetTexturePitch, 8);
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kRenderTargetTextureSize,
+                                  kRenderTargetTextureSize, true);
+
+  static constexpr float kTopMargin = 64.f;
+  float left = 0.f;
+  float top = 0.f;
+  static constexpr auto kTestsPerRow = 5;
+  static constexpr auto kNumRows = (kNumBlendFactors + (kTestsPerRow - 1)) / kTestsPerRow;
+
+  static constexpr auto kSpacing = 4.f;
+  static constexpr auto kRowSpace = kSpacing * (kTestsPerRow - 1);
+  float test_width = floorf((kRenderTargetTextureSize - kRowSpace) / kTestsPerRow);
+
+  static constexpr auto kColumnSpace = kSpacing * (kNumRows - 1);
+  float test_height = floorf((host_.GetFramebufferHeightF() - (kTopMargin + kColumnSpace)) / kNumRows);
+  float color_swatch_size = floorf(test_width / 4);
+  auto x_index = 0;
+
+  for (auto dst_factor : kBlendFactors) {
+    // Draw color swatches with fixed alpha.
+    {
+      host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+      host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+      DrawColorStack(blend_function, src_factor, dst_factor.value, left, top, color_swatch_size);
+      DrawColorAndAlphaStack(blend_function, src_factor, dst_factor.value, left + color_swatch_size, top,
+                             color_swatch_size);
+      DrawAlphaStack(blend_function, src_factor, dst_factor.value, left + color_swatch_size * 2, top,
+                     test_width - (color_swatch_size * 2), 4);
+    }
+
+    if (++x_index >= kTestsPerRow) {
+      left = 0.f;
+      top += test_height;
+      x_index = 0;
+    } else {
+      left += test_width + kSpacing;
+    }
+  }
+
+  host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                                  host_.GetFramebufferHeight());
+
+  RenderToTextureEnd();
+
+  RenderTexturedQuad(host_, host_.CenterX(kRenderTargetTextureSize), 64.f, kRenderTargetTextureSize,
+                     kRenderTargetTextureSize);
+
+  pb_printat(0, 0, (char *)"%s\n", name.c_str());
+  pb_draw_text_screen();
+
+  FinishDraw(name);
+}
+
+void BlendTests::TestDetailed(const std::string &name, uint32_t blend_function, uint32_t src_factor,
+                              uint32_t dst_factor) {
   host_.SetBlend(false);
   host_.PrepareDraw(0xFE312F31);
 
   DrawCheckerboardBackground();
 
   host_.SetBlendColorConstant(kBlendColorConstant);
-
-  auto render_textured_quad = [this](float left, float top, uint32_t texture_width, uint32_t texture_height) {
-    constexpr uint32_t kStage = 1;
-    host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
-    host_.SetFinalCombiner1Just(TestHost::SRC_TEX1, true);
-    host_.SetTextureStageEnabled(kStage, true);
-    host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
-    auto &texture_stage = host_.GetTextureStage(kStage);
-    texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
-    texture_stage.SetTextureDimensions(texture_width, texture_height);
-    host_.SetupTextureStages();
-
-    const float kRight = left + static_cast<float>(texture_width);
-    const float kBottom = top + static_cast<float>(texture_height);
-
-    host_.SetBlend(true);
-
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetTexCoord1(0.0f, 0.0f);
-    host_.SetVertex(left, top, 0.1f, 1.0f);
-    host_.SetTexCoord1(1.0f, 0.0f);
-    host_.SetVertex(kRight, top, 0.1f, 1.0f);
-    host_.SetTexCoord1(1.0f, 1.0f);
-    host_.SetVertex(kRight, kBottom, 0.1f, 1.0f);
-    host_.SetTexCoord1(0.0f, 1.0f);
-    host_.SetVertex(left, kBottom, 0.1f, 1.0f);
-    host_.End();
-
-    host_.SetTextureStageEnabled(kStage, false);
-    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
-  };
-
-  auto prepare_blend_background = [this](uint32_t texture_width, uint32_t texture_height, uint32_t texture_pitch) {
-    auto texture_memory = host_.GetTextureMemoryForStage(1);
-    GenerateSwizzledRGBACheckerboard(texture_memory, 0, 0, texture_width, texture_height, texture_pitch,
-                                     kColorSwatchBackground, kCheckerboardB, kBlendCheckerboardSize);
-  };
 
   {
     RenderToTextureStart(1, kTexturePitch);
@@ -157,7 +242,7 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
     host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kTextureSize, kTextureSize, true);
 
-    prepare_blend_background(kTextureSize, kTextureSize, kTexturePitch);
+    PrepareBlendBackground(host_, kTextureSize, kTextureSize, kTexturePitch);
 
     DrawAlphaStack(blend_function, src_factor, dst_factor);
 
@@ -168,11 +253,7 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
 
     const float kLeft = (host_.GetFramebufferWidthF() - kTextureSize) * 0.5f;
     const float kTop = (host_.GetFramebufferHeightF() - kTextureSize) * 0.5f;
-    render_textured_quad(kLeft, kTop, kTextureSize, kTextureSize);
-
-    while (pb_busy()) {
-      /* Wait for completion... */
-    }
+    RenderTexturedQuad(host_, kLeft, kTop, kTextureSize, kTextureSize);
   }
 
   // Draw color swatches with fixed alpha.
@@ -184,7 +265,7 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kColorSwatchSize,
                                     kColorSwatchTextureHeight, true);
 
-    prepare_blend_background(kColorSwatchSize, kColorSwatchTextureHeight, kColorSwatchTexturePitch);
+    PrepareBlendBackground(host_, kColorSwatchSize, kColorSwatchTextureHeight, kColorSwatchTexturePitch);
 
     DrawColorStack(blend_function, src_factor, dst_factor);
 
@@ -193,11 +274,8 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
 
     RenderToTextureEnd();
 
-    render_textured_quad(16.0f, (host_.GetFramebufferHeightF() - kColorSwatchTextureHeight) * 0.5f, kColorSwatchSize,
-                         kColorSwatchTextureHeight);
-    while (pb_busy()) {
-      /* Wait for completion... */
-    }
+    RenderTexturedQuad(host_, 16.0f, (host_.GetFramebufferHeightF() - kColorSwatchTextureHeight) * 0.5f,
+                       kColorSwatchSize, kColorSwatchTextureHeight);
   }
 
   // Draw fully blended swatches.
@@ -209,7 +287,7 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
     host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, kColorSwatchSize,
                                     kColorSwatchTextureHeight, true);
 
-    prepare_blend_background(kColorSwatchSize, kColorSwatchTextureHeight, kColorSwatchTexturePitch);
+    PrepareBlendBackground(host_, kColorSwatchSize, kColorSwatchTextureHeight, kColorSwatchTexturePitch);
 
     DrawColorAndAlphaStack(blend_function, src_factor, dst_factor);
 
@@ -218,12 +296,9 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
 
     RenderToTextureEnd();
 
-    render_textured_quad(host_.GetFramebufferWidthF() - (16.0f + kColorSwatchSize),
-                         (host_.GetFramebufferHeightF() - kColorSwatchTextureHeight) * 0.5f, kColorSwatchSize,
-                         kColorSwatchTextureHeight);
-    while (pb_busy()) {
-      /* Wait for completion... */
-    }
+    RenderTexturedQuad(host_, host_.GetFramebufferWidthF() - (16.0f + kColorSwatchSize),
+                       (host_.GetFramebufferHeightF() - kColorSwatchTextureHeight) * 0.5f, kColorSwatchSize,
+                       kColorSwatchTextureHeight);
   }
 
   pb_printat(0, 0, (char *)"%s\n", name.c_str());
@@ -232,62 +307,58 @@ void BlendTests::Test(const std::string &name, uint32_t blend_function, uint32_t
   pb_printat(16, 9, (char *)"Center alphas: G: 0x7F R: 0xFF B: 0x80 W: 0x00\n");
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
-void BlendTests::DrawAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {
-  static constexpr float inc = 24.0f;
-  float left = 0.0f;
-  float right = kTextureSize;
-  float top = 0.0f;
-  float bottom = kTextureSize;
+void BlendTests::DrawAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left,
+                                float top, float quad_size, float increment) {
+  float right = left + quad_size;
+  float bottom = top + quad_size;
   DrawQuad(left, top, right, bottom, 0x7F00CC00, blend_function, src_factor, dst_factor, false, true);
 
-  left += inc;
-  right -= inc;
-  top += inc;
-  bottom -= inc;
+  left += increment;
+  right -= increment;
+  top += increment;
+  bottom -= increment;
   DrawQuad(left, top, right, bottom, 0xFFCC0000, blend_function, src_factor, dst_factor, false, true);
 
-  left += inc;
-  right -= inc;
-  top += inc;
-  bottom -= inc;
+  left += increment;
+  right -= increment;
+  top += increment;
+  bottom -= increment;
   DrawQuad(left, top, right, bottom, 0x800000FF, blend_function, src_factor, dst_factor, false, true);
 
-  left += inc;
-  right -= inc;
-  top += inc;
-  bottom -= inc;
+  left += increment;
+  right -= increment;
+  top += increment;
+  bottom -= increment;
   DrawQuad(left, top, right, bottom, 0x00FFFFFF, blend_function, src_factor, dst_factor, false, true);
 }
 
-void BlendTests::DrawColorStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {
-  float left = 0.0f;
-  float right = kColorSwatchSize;
-  float top = 0.0f;
-  float bottom = kColorSwatchSize;
+void BlendTests::DrawColorStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left,
+                                float top, float color_swatch_size) {
+  float right = left + color_swatch_size;
+  float bottom = top + color_swatch_size;
 
   DrawQuad(left, top, right, bottom, 0xDD00DD00, blend_function, src_factor, dst_factor, true, false);
 
-  top += kColorSwatchSize;
-  bottom += kColorSwatchSize;
+  top += color_swatch_size;
+  bottom += color_swatch_size;
   DrawQuad(left, top, right, bottom, 0xDDDD0000, blend_function, src_factor, dst_factor, true, false);
 
-  top += kColorSwatchSize;
-  bottom += kColorSwatchSize;
+  top += color_swatch_size;
+  bottom += color_swatch_size;
   DrawQuad(left, top, right, bottom, 0xDD0000DD, blend_function, src_factor, dst_factor, true, false);
 
-  top += kColorSwatchSize;
-  bottom += kColorSwatchSize;
+  top += color_swatch_size;
+  bottom += color_swatch_size;
   DrawQuad(left, top, right, bottom, 0xDDFFFFFF, blend_function, src_factor, dst_factor, true, false);
 }
 
-void BlendTests::DrawColorAndAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor) {
-  float left = 0.0f;
-  float right = kColorSwatchSize;
-  float top = 0.0f;
-  float bottom = kColorSwatchSize;
+void BlendTests::DrawColorAndAlphaStack(uint32_t blend_function, uint32_t src_factor, uint32_t dst_factor, float left,
+                                        float top, float color_swatch_size) {
+  float right = left + color_swatch_size;
+  float bottom = top + color_swatch_size;
 
   auto draw_quad = [this](float left, float top, float right, float bottom, uint32_t color, uint32_t func,
                           uint32_t sfactor, uint32_t dfactor) {
@@ -303,26 +374,27 @@ void BlendTests::DrawColorAndAlphaStack(uint32_t blend_function, uint32_t src_fa
 
   draw_quad(left, top, right, bottom, 0xDDFFFFFF, blend_function, src_factor, dst_factor);
 
-  top += kColorSwatchSize;
-  bottom += kColorSwatchSize;
+  top += color_swatch_size;
+  bottom += color_swatch_size;
   draw_quad(left, top, right, bottom, 0xDD0000DD, blend_function, src_factor, dst_factor);
 
-  top += kColorSwatchSize;
-  bottom += kColorSwatchSize;
+  top += color_swatch_size;
+  bottom += color_swatch_size;
   draw_quad(left, top, right, bottom, 0xDDDD0000, blend_function, src_factor, dst_factor);
 
-  top += kColorSwatchSize;
-  bottom += kColorSwatchSize;
+  top += color_swatch_size;
+  bottom += color_swatch_size;
   draw_quad(left, top, right, bottom, 0xDD00DD00, blend_function, src_factor, dst_factor);
 }
 
-void BlendTests::DrawCheckerboardBackground() const {
+void BlendTests::DrawCheckerboardBackground(bool use_small_checkers) const {
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
   constexpr uint32_t kCheckerSize = 24;
+  constexpr uint32_t kSmallCheckerSize = 16;
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
@@ -331,7 +403,7 @@ void BlendTests::DrawCheckerboardBackground() const {
 
   auto texture_memory = host_.GetTextureMemoryForStage(0);
   GenerateSwizzledRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kCheckerboardA,
-                                   kCheckerboardB, kCheckerSize);
+                                   kCheckerboardB, use_small_checkers ? kSmallCheckerSize : kCheckerSize);
 
   host_.Begin(TestHost::PRIMITIVE_QUADS);
   host_.SetTexCoord0(0.0f, 0.0f);
@@ -385,10 +457,6 @@ void BlendTests::DrawQuad(float left, float top, float right, float bottom, uint
   host_.SetVertex(right, bottom, 0.1f, 1.0f);
   host_.SetVertex(left, bottom, 0.1f, 1.0f);
   host_.End();
-
-  while (pb_busy()) {
-    /* Wait for completion... */
-  }
 
   // Set the alpha following the given blend mode.
   host_.SetColorMask(NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);

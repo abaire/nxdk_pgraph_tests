@@ -486,7 +486,7 @@ void BlendSurfaceTests::Test(const std::string &name, TestHost::SurfaceColorForm
   pb_printat(0, 0, (char *)"%s\n", name.c_str());
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }
 
 void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceColorFormat surface_format,
@@ -579,5 +579,5 @@ void BlendSurfaceTests::TestDstAlpha(const std::string &name, TestHost::SurfaceC
   pb_printat(1, 0, "Blend 0x%08X ADD DstAlpha + 0", kSwatchColor);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, name);
+  FinishDraw(name);
 }

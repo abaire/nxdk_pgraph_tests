@@ -94,7 +94,7 @@ void InlineArraySizeMismatchTests::Test() {
   pb_print("%s\n\n", kTestName);
   pb_draw_text_screen();
 
-  host_.FinishDraw(allow_saving_, output_dir_, suite_name_, kTestName);
+  FinishDraw(kTestName);
 }
 
 static void SetVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride) {
