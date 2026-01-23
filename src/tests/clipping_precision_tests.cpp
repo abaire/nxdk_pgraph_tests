@@ -20,7 +20,7 @@ static std::string MakeTestName(bool perspective_corrected, bool flat, float rot
 }
 
 ClippingPrecisionTests::ClippingPrecisionTests(TestHost &host, std::string output_dir, const Config &config)
-    : TestSuite(host, std::move(output_dir), "Clipping precision", config) {
+    : TestSuite(host, std::move(output_dir), "Clipping precision", config, true) {
   for (auto perspective_corrected : {false, true}) {
     for (auto flat : {false, true}) {
       for (auto rotate_angle : {0.0f, 90.0f, 180.0f, 270.0f}) {
