@@ -45,7 +45,9 @@ Behavior can optionally be determined via a JSON configuration file loaded from 
     "enable_shutdown_on_completion": false,
     "enable_pgraph_region_diff": false,
     "output_directory_path": "e:/nxdk_pgraph_tests",
-    "skip_tests_by_default": false
+    "skip_tests_by_default": false,
+    "delay_milliseconds_before_exit": 4000,
+    "delay_milliseconds_between_tests": 0
   },
   "test_suites": {}
 }
