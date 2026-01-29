@@ -66,6 +66,7 @@ generate_nv2a_vshinc_files(
         GENERATION_TARGET_VARIABLE _VERTEX_SHADER_GEN_TARGET
         SOURCES
         shaders/attribute_carryover_tests.vsh
+        shaders/dp4_test.vsh
         shaders/fixed_function_approximation_shader.vsh
         shaders/fog_infinite_fogc_test.vsh
         shaders/fog_vec4_unset.vsh
@@ -216,10 +217,10 @@ add_executable(
         tests/blend_surface_tests.h
         tests/blend_tests.cpp
         tests/blend_tests.h
-        tests/bump_map_tests.cpp
-        tests/bump_map_tests.h
         tests/bump_env_lum_tests.cpp
         tests/bump_env_lum_tests.h
+        tests/bump_map_tests.cpp
+        tests/bump_map_tests.h
         tests/clear_tests.cpp
         tests/clear_tests.h
         tests/clipping_precision_tests.cpp
@@ -376,6 +377,8 @@ add_executable(
         tests/three_d_primitive_tests.h
         tests/two_d_line_tests.cpp
         tests/two_d_line_tests.h
+        tests/vertex_shader_edge_case_tests.cpp
+        tests/vertex_shader_edge_case_tests.h
         tests/vertex_shader_independence_tests.cpp
         tests/vertex_shader_independence_tests.h
         tests/vertex_shader_rounding_tests.cpp
@@ -386,10 +389,10 @@ add_executable(
         tests/viewport_tests.h
         tests/volume_texture_tests.cpp
         tests/volume_texture_tests.h
-        tests/wbuf_tests.cpp
-        tests/wbuf_tests.h
         tests/w_param_tests.cpp
         tests/w_param_tests.h
+        tests/wbuf_tests.cpp
+        tests/wbuf_tests.h
         tests/weight_setter_tests.cpp
         tests/weight_setter_tests.h
         tests/window_clip_tests.cpp

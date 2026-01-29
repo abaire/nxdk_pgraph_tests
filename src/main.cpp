@@ -122,6 +122,7 @@
 #include "tests/texture_signed_component_tests.h"
 #include "tests/three_d_primitive_tests.h"
 #include "tests/two_d_line_tests.h"
+#include "tests/vertex_shader_edge_case_tests.h"
 #include "tests/vertex_shader_independence_tests.h"
 #include "tests/vertex_shader_rounding_tests.h"
 #include "tests/vertex_shader_swizzle_tests.h"
@@ -454,12 +455,12 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(ColorZetaOverlapTests)
   REG_TEST(CombinerTests)
   REG_TEST(ContextSwitchTests)
-  REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(DegenerateBeginEndTests)
   REG_TEST(DepthClampTests)
   REG_TEST(DepthFormatFixedFunctionTests)
   REG_TEST(DepthFormatTests)
   REG_TEST(DepthFunctionTests)
+  REG_TEST(DMACorruptionAroundSurfaceTests)
   REG_TEST(EdgeFlagTests)
   REG_TEST(FogCarryoverTests)
   REG_TEST(FogCustomShaderTests)
@@ -506,9 +507,9 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(Texture2DAsCubemapTests)
   REG_TEST(Texture3DAs2DTests)
   REG_TEST(TextureAnisotropyTests)
-  REG_TEST(TextureBRDFTests)
   REG_TEST(TextureBorderColorTests)
   REG_TEST(TextureBorderTests)
+  REG_TEST(TextureBRDFTests)
   REG_TEST(TextureCPUUpdateTests)
   REG_TEST(TextureCubemapTests)
   REG_TEST(TextureFormatDXTTests)
@@ -525,18 +526,19 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(TextureSignedComponentTests)
   REG_TEST(ThreeDPrimitiveTests)
   REG_TEST(TwoDLineTests)
+  REG_TEST(VertexShaderEdgeCaseTests)
   REG_TEST(VertexShaderIndependenceTests)
   REG_TEST(VertexShaderRoundingTests)
   REG_TEST(VertexShaderSwizzleTests)
   REG_TEST(ViewportTests)
   REG_TEST(VolumeTextureTests)
   REG_TEST(WBufTests)
-  REG_TEST(WParamTests)
   REG_TEST(WeightSetterTests)
   REG_TEST(WindowClipTests)
+  REG_TEST(WParamTests)
+  REG_TEST(ZeroStrideTests)
   REG_TEST(ZMinMaxControlTests)
   REG_TEST(ZPassPixelCountTests)
-  REG_TEST(ZeroStrideTests)
   // -- End REG_TEST --
 
 #undef REG_TEST
