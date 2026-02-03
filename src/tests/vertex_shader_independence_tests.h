@@ -16,7 +16,8 @@ class VertexShaderIndependenceTests : public TestSuite {
  private:
   void CreateGeometry();
 
-  void Test();
+  void TestMACILUIndependence();
+  void TestMultiOutput();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_VERTEX_SHADER_INDEPENDENCE_TESTS_H
