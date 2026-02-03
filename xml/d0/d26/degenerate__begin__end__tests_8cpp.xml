@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d26/degenerate__begin__end__tests_8cpp" kind="file" language="C++">
+    <compoundname>degenerate_begin_end_tests.cpp</compoundname>
+    <includes refid="dc/dff/degenerate__begin__end__tests_8h" local="yes">degenerate_begin_end_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/degenerate_begin_end_tests.cpp</label>
+        <link refid="d0/d26/degenerate__begin__end__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>degenerate_begin_end_tests.h</label>
+        <link refid="dc/dff/degenerate__begin__end__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="12">
+        <label>cstdint</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="9">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="14">
+        <label>thread</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d0/d26/degenerate__begin__end__tests_8cpp_1a6c0111c0d88a88d575e6bf3210a4e362" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char kTestBeginWithoutEnd[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestBeginWithoutEnd</name>
+        <initializer>= &quot;BeginWithoutEnd&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/degenerate_begin_end_tests.cpp" line="9" column="19" bodyfile="src/tests/degenerate_begin_end_tests.cpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;degenerate_begin_end_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestBeginWithoutEnd[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;BeginWithoutEnd&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><ref refid="d3/d00/classDegenerateBeginEndTests_1ab51f767b9ccd1264886f4604927dff7e" kindref="member">DegenerateBeginEndTests::DegenerateBeginEndTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Degenerate<sp/>begin<sp/>end&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>tests_[kTestBeginWithoutEnd]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestBeginWithoutEnd();<sp/>};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d3/d00/classDegenerateBeginEndTests_1af6c488945bf0e1d7cb1f09f2722ca733" kindref="member">DegenerateBeginEndTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DegenerateBeginEndTests::TestBeginWithoutEnd()<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE242424);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kHeader<sp/>=<sp/>80.f;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x_offset<sp/>=<sp/>floorf(host_.GetFramebufferWidthF()<sp/>/<sp/>5.f);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>x_offset;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>height<sp/>=<sp/>floorf((host_.GetFramebufferHeightF()<sp/>-<sp/>kHeader)<sp/>/<sp/>10.f);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/>kHeader<sp/>+<sp/>height;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y_offset<sp/>=<sp/>height<sp/>*<sp/>2.f;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_triangle<sp/>=<sp/>[&amp;cx,<sp/>&amp;cy,<sp/>x_offset,<sp/>height]()<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(cx<sp/>-<sp/>width<sp/>/<sp/>2.f);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>floorf(left<sp/>+<sp/>width);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf(cy<sp/>-<sp/>(height<sp/>/<sp/>2.f));</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>floorf(cy<sp/>+<sp/>(height<sp/>/<sp/>2.f));</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>left,<sp/>bottom,<sp/>z);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>left,<sp/>top,<sp/>z);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>right,<sp/>top,<sp/>z);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>cx<sp/>+=<sp/>x_offset;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[&amp;cx,<sp/>&amp;cy,<sp/>x_offset,<sp/>height]()<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(cx<sp/>-<sp/>width<sp/>/<sp/>2.f);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>floorf(left<sp/>+<sp/>width);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf(cy<sp/>-<sp/>(height<sp/>/<sp/>2.f));</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>floorf(cy<sp/>+<sp/>(height<sp/>/<sp/>2.f));</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>right,<sp/>bottom,<sp/>z);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>left,<sp/>bottom,<sp/>z);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>left,<sp/>top,<sp/>z);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_VERTEX3F,<sp/>right,<sp/>top,<sp/>z);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>cx<sp/>+=<sp/>x_offset;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(1.0f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>second<sp/>triangle<sp/>with<sp/>a<sp/>begin<sp/>but<sp/>no<sp/>end.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.75f,<sp/>0.75f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>cx<sp/>=<sp/>x_offset;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>cy<sp/>+=<sp/>y_offset;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(1.0f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.75f,<sp/>0.75f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>cx<sp/>=<sp/>x_offset;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>cy<sp/>+=<sp/>y_offset;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(1.0f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.75f,<sp/>0.75f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>cx<sp/>=<sp/>x_offset;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>cy<sp/>+=<sp/>y_offset;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(1.0f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_POLYGON);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_POLYGON);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/>draw_triangle();</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0.75f,<sp/>0.75f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>draw_quad();</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>kTestBeginWithoutEnd);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Center<sp/>primitives<sp/>omit<sp/>NV097_SET_BEGIN_END_OP_END\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Tri:<sp/>LB,<sp/>LT,<sp/>RT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Quad:<sp/>RB,<sp/>LB,<sp/>LT,<sp/>RT\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>pb_printat(5,<sp/>9,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>pb_printat(5,<sp/>22,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>pb_printat(5,<sp/>35,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>pb_printat(5,<sp/>48,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>pb_printat(8,<sp/>9,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>pb_printat(8,<sp/>22,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/>pb_printat(8,<sp/>35,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>pb_printat(8,<sp/>48,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>pb_printat(11,<sp/>9,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>pb_printat(11,<sp/>22,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>pb_printat(11,<sp/>35,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/>pb_printat(11,<sp/>48,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>9,<sp/></highlight><highlight class="stringliteral">&quot;Poly<sp/>4&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>22,<sp/></highlight><highlight class="stringliteral">&quot;Poly<sp/>4&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>35,<sp/></highlight><highlight class="stringliteral">&quot;Tri&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/>pb_printat(15,<sp/>48,<sp/></highlight><highlight class="stringliteral">&quot;Quad&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kTestBeginWithoutEnd);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/degenerate_begin_end_tests.cpp"/>
+  </compounddef>
+</doxygen>

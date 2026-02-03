@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/d5d/classTextureShadowComparatorTests" kind="class" language="C++" prot="public">
+    <compoundname>TextureShadowComparatorTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <innerclass refid="db/ded/structTextureShadowComparatorTests_1_1texture__target__ctx__" prot="private">TextureShadowComparatorTests::texture_target_ctx_</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="dc/d5d/classTextureShadowComparatorTests_1ae5c75811d89e3cebe6cf65c435a5e91e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PassthroughVertexShader &gt;</type>
+        <definition>std::shared_ptr&lt;PassthroughVertexShader&gt; TextureShadowComparatorTests::raw_value_shader_</definition>
+        <argsstring></argsstring>
+        <name>raw_value_shader_</name>
+        <qualifiedname>TextureShadowComparatorTests::raw_value_shader_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="42" column="19" bodyfile="src/tests/texture_shadow_comparator_tests.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1a01f2640e4bd5dad84ee06861b10a916e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TextureShadowComparatorTests::TextureShadowComparatorTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TextureShadowComparatorTests</name>
+        <qualifiedname>TextureShadowComparatorTests::TextureShadowComparatorTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="19" column="3" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="151" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1a6bd3d65a6dac1adbb5720cd2fc06ef83" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureShadowComparatorTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TextureShadowComparatorTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="21" column="8" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="244" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1af6952912addf4a5467498505a4eb21cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureShadowComparatorTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>TextureShadowComparatorTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="22" column="8" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="260" bodyend="263"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1abf48495f82502b867db834e5685e1b6c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureShadowComparatorTests::TestRawValues</definition>
+        <argsstring>(uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function, uint32_t min_val, uint32_t max_val, uint32_t ref, const std::string &amp;name)</argsstring>
+        <name>TestRawValues</name>
+        <qualifiedname>TextureShadowComparatorTests::TestRawValues</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth_format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>texture_format</declname>
+        </param>
+        <param>
+          <type>TestHost::ShaderStageProgram</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shadow_comp_function</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>min_val</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>max_val</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>ref</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="25" column="8" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="363" bodyend="477"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1a7821e175bdb4f8fd71e60e5f37c5d722" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureShadowComparatorTests::TestFixedFunction</definition>
+        <argsstring>(uint32_t depth_format, bool float_depth, uint32_t texture_format, TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function, float min_val, float max_val, float ref_val, const std::string &amp;name)</argsstring>
+        <name>TestFixedFunction</name>
+        <qualifiedname>TextureShadowComparatorTests::TestFixedFunction</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth_format</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>float_depth</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>texture_format</declname>
+        </param>
+        <param>
+          <type>TestHost::ShaderStageProgram</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shadow_comp_function</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>min_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ref_val</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="28" column="8" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="479" bodyend="492"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1aeac459dc592f32167b8ad10efd97a3ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureShadowComparatorTests::TestProgrammable</definition>
+        <argsstring>(uint32_t depth_format, bool float_depth, uint32_t texture_format, TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function, float min_val, float max_val, float ref_val, const std::string &amp;name)</argsstring>
+        <name>TestProgrammable</name>
+        <qualifiedname>TextureShadowComparatorTests::TestProgrammable</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth_format</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>float_depth</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>texture_format</declname>
+        </param>
+        <param>
+          <type>TestHost::ShaderStageProgram</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shadow_comp_function</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>min_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ref_val</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="31" column="8" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="494" bodyend="518"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d5d/classTextureShadowComparatorTests_1a371f2df9607a70cddead3e5cea607321" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureShadowComparatorTests::TestProjected</definition>
+        <argsstring>(uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function, float min_val, float max_val, float ref_val, std::function&lt; void(vector_t &amp;, const vector_t &amp;)&gt; project_point, std::function&lt; void(vector_t &amp;, const vector_t &amp;, float)&gt; unproject_point, const std::string &amp;name)</argsstring>
+        <name>TestProjected</name>
+        <qualifiedname>TextureShadowComparatorTests::TestProjected</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth_format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>texture_format</declname>
+        </param>
+        <param>
+          <type>TestHost::ShaderStageProgram</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shadow_comp_function</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>min_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>max_val</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ref_val</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(vector_t &amp;, const vector_t &amp;)&gt;</type>
+          <declname>project_point</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(vector_t &amp;, const vector_t &amp;, float)&gt;</type>
+          <declname>unproject_point</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.h" line="35" column="8" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="520" bodyend="770"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TextureShadowComparatorTests</label>
+        <link refid="dc/d5d/classTextureShadowComparatorTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TextureShadowComparatorTests</label>
+        <link refid="dc/d5d/classTextureShadowComparatorTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_shadow_comparator_tests.h" line="17" column="1" bodyfile="src/tests/texture_shadow_comparator_tests.h" bodystart="17" bodyend="43"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>allow_saving_</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1af6952912addf4a5467498505a4eb21cb" prot="public" virt="virtual"><scope>TextureShadowComparatorTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>host_</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1a6bd3d65a6dac1adbb5720cd2fc06ef83" prot="public" virt="virtual"><scope>TextureShadowComparatorTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>pgraph_diff_</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1ae5c75811d89e3cebe6cf65c435a5e91e" prot="private" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>raw_value_shader_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TextureShadowComparatorTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TextureShadowComparatorTests</scope><name>TearDownTest</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1a7821e175bdb4f8fd71e60e5f37c5d722" prot="private" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestFixedFunction</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestNames</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1aeac459dc592f32167b8ad10efd97a3ab" prot="private" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestProgrammable</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1a371f2df9607a70cddead3e5cea607321" prot="private" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestProjected</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1abf48495f82502b867db834e5685e1b6c" prot="private" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestRawValues</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TestSuite</name></member>
+      <member refid="dc/d5d/classTextureShadowComparatorTests_1a01f2640e4bd5dad84ee06861b10a916e" prot="public" virt="non-virtual"><scope>TextureShadowComparatorTests</scope><name>TextureShadowComparatorTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TextureShadowComparatorTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/dbf/structImageBlitTests_1_1render__target__dma__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>ImageBlitTests::render_target_dma_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/image_blit_tests.h" line="64" column="3" bodyfile="src/tests/image_blit_tests.h" bodystart="64" bodyend="64"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,554 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d2c/classImageBlitTests" kind="class" language="C++" prot="public">
+    <compoundname>ImageBlitTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d5/d38/image__blit__tests_8h" local="no">image_blit_tests.h</includes>
+    <innerclass refid="db/d27/structImageBlitTests_1_1beta4__ctx__" prot="private">ImageBlitTests::beta4_ctx_</innerclass>
+    <innerclass refid="da/d92/structImageBlitTests_1_1beta__ctx__" prot="private">ImageBlitTests::beta_ctx_</innerclass>
+    <innerclass refid="da/d17/structImageBlitTests_1_1BlitTest" prot="public">ImageBlitTests::BlitTest</innerclass>
+    <innerclass refid="d4/df0/structImageBlitTests_1_1clip__rect__ctx__" prot="private">ImageBlitTests::clip_rect_ctx_</innerclass>
+    <innerclass refid="df/d9f/structImageBlitTests_1_1image__src__dma__ctx__" prot="private">ImageBlitTests::image_src_dma_ctx_</innerclass>
+    <innerclass refid="da/d67/structImageBlitTests_1_1null__ctx__" prot="private">ImageBlitTests::null_ctx_</innerclass>
+    <innerclass refid="d0/dbf/structImageBlitTests_1_1render__target__dma__ctx__" prot="private">ImageBlitTests::render_target_dma_ctx_</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d0/d2c/classImageBlitTests_1ad5cad500552036efb28ee7de891d98dc" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageBlitTests::image_pitch_</definition>
+        <argsstring></argsstring>
+        <name>image_pitch_</name>
+        <qualifiedname>ImageBlitTests::image_pitch_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="54" column="12" bodyfile="src/tests/image_blit_tests.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2c/classImageBlitTests_1a23be9b661d871a78e2d534ee81c32bc1" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageBlitTests::image_width_</definition>
+        <argsstring></argsstring>
+        <name>image_width_</name>
+        <qualifiedname>ImageBlitTests::image_width_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="55" column="12" bodyfile="src/tests/image_blit_tests.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2c/classImageBlitTests_1acb9b7fd12ea82442f2c169e888770b9c" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageBlitTests::image_height_</definition>
+        <argsstring></argsstring>
+        <name>image_height_</name>
+        <qualifiedname>ImageBlitTests::image_height_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="56" column="12" bodyfile="src/tests/image_blit_tests.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2c/classImageBlitTests_1abaa45fa89108d45b9037bd79e50e33d0" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* ImageBlitTests::source_image_</definition>
+        <argsstring></argsstring>
+        <name>source_image_</name>
+        <qualifiedname>ImageBlitTests::source_image_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="57" column="11" bodyfile="src/tests/image_blit_tests.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a04452d6848ba2e2d178c37fd99280c42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ImageBlitTests::ImageBlitTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ImageBlitTests</name>
+        <qualifiedname>ImageBlitTests::ImageBlitTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>DirtyOverlappedDestSurf Performs a 3d render into the backbuffer, then a 2D srccopy that completely overwrites it. Finally performs another 3d render, demonstrating incorrect behavior in various versions of xemu.</para>
+</simplesect>
+<simplesect kind="remark"><para>BlitRenderBlit Blits an image into a render surface, then performs a 3d render on top of the surface, then another blit on top of the composited two. Finally does a srccopy to blit the finished composition to the framebuffer. Demonstrates apparent incorrect ordering in various versions of xemu.</para>
+</simplesect>
+<simplesect kind="remark"><para>ImgBlt_Clip_0_0_640_480 Demonstrates expected behavior of the contextual clip rectangle (class 0x19) during image blits.</para>
+</simplesect>
+<simplesect kind="remark"><para>ImgBlt_BLENDAND_XRGB_B00000000 Demonstrates expected behavior of the contextual beta (class 0x12) during image blits.</para>
+</simplesect>
+<simplesect kind="remark"><para>OverlapFIFO Demonstrates that image blits overlapping the pushbuffer are performed without issue on HW. A blit copying the test image over the current pushbuffer write address is queued, followed by a blit copying the data from there to the screen. This is flushed to the HW, along with a wait until the pushbuffer is fully consumed. Failure to wait demonstrates a race between the blits and subsequent instructions, generally leading to some corruption near the top of the image.</para>
+</simplesect>
+<simplesect kind="remark"><para>BlitBeyondWidth Demonstrates the interaction between 0x9F image blit operations and assigned GPU tiles. A blit operation is configured with a target smaller than the source. The target address is set within an active GPU tile such that the blit would extend beyond the end of the tile and a guard value is tested to prove that the blit is clipped to stay within the tile. A similar blit is performed outside of the tile, demonstrating that unprotected blits may overdraw the target region. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="24" column="3" bodyfile="src/tests/image_blit_tests.cpp" bodystart="157" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a59a420a5b7d07b27a0dcaa693e89ec7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ImageBlitTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="26" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="187" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a6fa4a2f165de8707d76195433b31e20e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>ImageBlitTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="27" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="233" bodyend="239"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a19988cee47a8f5e987410038314215b1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::Test</definition>
+        <argsstring>(const BlitTest &amp;test)</argsstring>
+        <name>Test</name>
+        <qualifiedname>ImageBlitTests::Test</qualifiedname>
+        <param>
+          <type>const <ref refid="da/d17/structImageBlitTests_1_1BlitTest" kindref="compound">BlitTest</ref> &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="30" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="304" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a3f4c4c6faf345a379d3b08fb85b5c89a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::TestWithClipRectangle</definition>
+        <argsstring>(const BlitTest &amp;test, uint32_t clip_x, uint32_t clip_y, uint32_t clip_w, uint32_t clip_h)</argsstring>
+        <name>TestWithClipRectangle</name>
+        <qualifiedname>ImageBlitTests::TestWithClipRectangle</qualifiedname>
+        <param>
+          <type>const <ref refid="da/d17/structImageBlitTests_1_1BlitTest" kindref="compound">BlitTest</ref> &amp;</type>
+          <declname>test</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_w</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="31" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="333" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1ac937ae1a1f9a7ee7ceadea2ffcabf424" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::TestBlitOverPushbuffer</definition>
+        <argsstring>(const std::string &amp;name, const BlitTest &amp;test)</argsstring>
+        <name>TestBlitOverPushbuffer</name>
+        <qualifiedname>ImageBlitTests::TestBlitOverPushbuffer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d17/structImageBlitTests_1_1BlitTest" kindref="compound">BlitTest</ref> &amp;</type>
+          <declname>test</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="32" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="357" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a808ded04acf6afc68cd69688ed12eaef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::TestBlitPastWidth</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>TestBlitPastWidth</name>
+        <qualifiedname>ImageBlitTests::TestBlitPastWidth</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="33" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="418" bodyend="525"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a344f37b0d364907422095437338de4e6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::ImageBlit</definition>
+        <argsstring>(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel, uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset, uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x=0, uint32_t clip_y=0, int32_t clip_width=0, int32_t clip_height=-1) const</argsstring>
+        <name>ImageBlit</name>
+        <qualifiedname>ImageBlitTests::ImageBlit</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>operation</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>beta</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_channel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_channel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>surface_format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_x</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_y</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>clip_width</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>clip_height</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="35" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="289" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a163a43092a2798acd8c9c329f319fac6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::ImageBlitWithinPushBlock</definition>
+        <argsstring>(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel, uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset, uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, int32_t clip_width, int32_t clip_height) const</argsstring>
+        <name>ImageBlitWithinPushBlock</name>
+        <qualifiedname>ImageBlitTests::ImageBlitWithinPushBlock</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>operation</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>beta</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_channel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_channel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>surface_format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_y</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>clip_width</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>clip_height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="41" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="241" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1af04930adb78c33e39bc488768abdf304" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::TestDirtyOverlappedDestinationSurface</definition>
+        <argsstring>()</argsstring>
+        <name>TestDirtyOverlappedDestinationSurface</name>
+        <qualifiedname>ImageBlitTests::TestDirtyOverlappedDestinationSurface</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="48" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="527" bodyend="593"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2c/classImageBlitTests_1a7c987317c5ce282c6b4462c646a118a2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageBlitTests::TestBlitRenderBlit</definition>
+        <argsstring>()</argsstring>
+        <name>TestBlitRenderBlit</name>
+        <qualifiedname>ImageBlitTests::TestBlitRenderBlit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Reproduces an issue where blitting, rendering, then blitting again causes corruption. <ulink url="https://github.com/xemu-project/xemu/issues/2199">https://github.com/xemu-project/xemu/issues/2199</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="52" column="8" bodyfile="src/tests/image_blit_tests.cpp" bodystart="595" bodyend="693"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior of the 2D blitting commands.</para>
+<para>NV09F, NV012, NV019, NV072 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ImageBlitTests</label>
+        <link refid="d0/d2c/classImageBlitTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ImageBlitTests</label>
+        <link refid="d0/d2c/classImageBlitTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/image_blit_tests.h" line="15" column="1" bodyfile="src/tests/image_blit_tests.h" bodystart="15" bodyend="65"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>allow_saving_</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a6fa4a2f165de8707d76195433b31e20e" prot="public" virt="virtual"><scope>ImageBlitTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>host_</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1acb9b7fd12ea82442f2c169e888770b9c" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>image_height_</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1ad5cad500552036efb28ee7de891d98dc" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>image_pitch_</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a23be9b661d871a78e2d534ee81c32bc1" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>image_width_</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a344f37b0d364907422095437338de4e6" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>ImageBlit</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a04452d6848ba2e2d178c37fd99280c42" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>ImageBlitTests</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a163a43092a2798acd8c9c329f319fac6" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>ImageBlitWithinPushBlock</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a59a420a5b7d07b27a0dcaa693e89ec7f" prot="public" virt="virtual"><scope>ImageBlitTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ImageBlitTests</scope><name>SetupTest</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1abaa45fa89108d45b9037bd79e50e33d0" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>source_image_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>ImageBlitTests</scope><name>TearDownTest</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a19988cee47a8f5e987410038314215b1" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>Test</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1ac937ae1a1f9a7ee7ceadea2ffcabf424" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestBlitOverPushbuffer</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a808ded04acf6afc68cd69688ed12eaef" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestBlitPastWidth</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a7c987317c5ce282c6b4462c646a118a2" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestBlitRenderBlit</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1af04930adb78c33e39bc488768abdf304" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestDirtyOverlappedDestinationSurface</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ImageBlitTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestSuite</name></member>
+      <member refid="d0/d2c/classImageBlitTests_1a3f4c4c6faf345a379d3b08fb85b5c89a" prot="private" virt="non-virtual"><scope>ImageBlitTests</scope><name>TestWithClipRectangle</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ImageBlitTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

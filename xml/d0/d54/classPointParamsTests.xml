@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d54/classPointParamsTests" kind="class" language="C++" prot="public">
+    <compoundname>PointParamsTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d1/d5c/point__params__tests_8h" local="no">point_params_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/d54/classPointParamsTests_1a8e3fb53d8af742c4eaf9cca0fa0c6c95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PointParamsTests::PointParamsTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>PointParamsTests</name>
+        <qualifiedname>PointParamsTests::PointParamsTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>PointParamsOn_SmoothOn_001_FF Renders points using the fixed function pipeline with point size 1, point smoothing and point params enabled. Demonstrates that point size is ignored when point params are enabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>PointParamsOn_SmoothOn_128_FF Renders points using the fixed function pipeline with point size 128 (16px), point smoothing and point params enabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>PointParamsOn_SmoothOff_128_FF Renders points using the fixed function pipeline with point size 128 (16px), point smoothing disabled and point params enabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>PointParamsOn_SmoothOn_128_VS Renders points using a programmable shader with point size 128 (16px), point smoothing and point params enabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>PointParamsOn_SmoothOff_128_VS Renders points using a programmable shader with point size 128 (16px), point smoothing disabled and point params enabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>PointParamsOff_SmoothOff_128_VS Renders points using a programmable shader with point size 128 (16px), point smoothing and point params disabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>PointParamsOff_SmoothOff_128_FF Renders points using the fixed function pipeline with point size 128 (16px), point smoothing and point params disabled.</para>
+</simplesect>
+<simplesect kind="remark"><para>Detailed_FF Renders points using the fixed function pipeline with more complex point params.</para>
+</simplesect>
+<simplesect kind="remark"><para>Detailed_VS Renders points using a programmable shader with more complex point params.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_0_0_0_FF Renders points using the fixed function pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 0.0, 0.0, 0.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_4_0_0_FF Renders points using the fixed function pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 4.0, 0.0, 0.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_0_1_0_FF Renders points using the fixed function pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 0.0, 1.0, 0.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_0_0_1_FF Renders points using the fixed function pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 0.0, 0.0, 1.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_0_0_0_VS Renders points using the programmable pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 0.0, 0.0, 0.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_4_0_0_VS Renders points using the programmable pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 4.0, 0.0, 0.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_0_1_0_VS Renders points using the programmable pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 0.0, 1.0, 0.0. Minimum size is set to 0.5.</para>
+</simplesect>
+<simplesect kind="remark"><para>Scale_0_0_1_VS Renders points using the programmable pipeline at varying distances from the eye point with point size 130 (16.25px) and point scale params 0.0, 0.0, 1.0. Minimum size is set to 0.5. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.h" line="68" column="3" bodyfile="src/tests/point_params_tests.cpp" bodystart="153" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d54/classPointParamsTests_1a27bdc51782b517d14131733de7170495" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void PointParamsTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>PointParamsTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.h" line="70" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="187" bodyend="202"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d0/d54/classPointParamsTests_1ac7d97f2dc04c012152288d9554a18f7b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PointParamsTests::Test</definition>
+        <argsstring>(const std::string &amp;name, bool point_params_enabled, bool point_smooth_enabled, int point_size, bool use_shader)</argsstring>
+        <name>Test</name>
+        <qualifiedname>PointParamsTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>point_params_enabled</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>point_smooth_enabled</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>point_size</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_shader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.h" line="73" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="296" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d54/classPointParamsTests_1ad6d2d67279667a271be0b072328cacbc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PointParamsTests::TestDetailed</definition>
+        <argsstring>(const std::string &amp;name, bool use_shader)</argsstring>
+        <name>TestDetailed</name>
+        <qualifiedname>PointParamsTests::TestDetailed</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_shader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.h" line="76" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="327" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d54/classPointParamsTests_1a33c69cfd436499611d7f63b34c2d7232" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PointParamsTests::TestScaleParams</definition>
+        <argsstring>(bool scale_a, bool scale_b, bool scale_c, bool use_shader)</argsstring>
+        <name>TestScaleParams</name>
+        <qualifiedname>PointParamsTests::TestScaleParams</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>scale_a</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>scale_b</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>scale_c</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_shader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.h" line="78" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="357" bodyend="439"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior of NV097_SET_POINT_PARAMS_ENABLE (0x00000318) and NV097_SET_POINT_PARAMS (0x00000A30).</para>
+<para>The scale factors are used to calculate a multiplier for the point size using the formula SFactor = sqrt(1/(A + B * Deye + C * Deye ^ 2)).</para>
+<para>See <ulink url="https://learn.microsoft.com/en-us/windows/win32/direct3d9/point-sprites">https://learn.microsoft.com/en-us/windows/win32/direct3d9/point-sprites</ulink></para>
+<para>PointParamsX_SmoothX_PtSize_(FF | VS) Each test renders a grid of points. Point size is set to a test value for all points.</para>
+<para>As points go from top to bottom: Z starts at -5 (eye at -7) and increases by 25 per row (max depth = 193).</para>
+<para>In each row, as points go from left to right, point params are set from the following:</para>
+<para><orderedlist>
+<listitem><para>No scale factors, min size 0, size range 0. Should be 1 pixel.</para>
+</listitem><listitem><para>No scale factors, min size 16, size range 0. Should be 16 pixels square.</para>
+</listitem><listitem><para>Negligible constant scale, size range 16, min size 0. Should be 16 pixels.</para>
+</listitem><listitem><para>Negligible constant scale, size range 16, min size 8. Should be 24 pixels.</para>
+</listitem><listitem><para>4 constant scale, size range 14, min size 16. Should be ~23 pixels.</para>
+</listitem><listitem><para>4 constant scale, size range 36, min size 4. Should be ~21 pixels.</para>
+</listitem><listitem><para>256 constant scale, size range 36, min size 4. Should be ~7 pixels.</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min 1.</para>
+</listitem><listitem><para>0.05 quadratic scale, size range 39, min 1.</para>
+</listitem><listitem><para>4 constant scale, size range 14, min size 16, bias -0.5.</para>
+</listitem><listitem><para>4 constant scale, size range 14, min size 16, bias 0.5.</para>
+</listitem><listitem><para>No scale factors, size range 15, min size 1, bias -100.</para>
+</listitem><listitem><para>No scale factors, size range 15, min size 1, bias 100.</para>
+</listitem></orderedlist>
+<itemizedlist>
+<listitem><para>Detailed_(FF | VS) Each test renders a grid of points. Point size is set to 128 (16 pixels) for all points.</para>
+</listitem></itemizedlist>
+</para>
+<para>As points go from top to bottom: Z starts at -5 (eye at -7) and increases by 25 per row (max depth = 193).</para>
+<para>In each row, as points go from left to right, point params are set from the following:</para>
+<para><orderedlist>
+<listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -1.0</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -0.5</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -0.25</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -0.01</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias 0</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -0.01</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -0.25</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -0.5</para>
+</listitem><listitem><para>0.25 linear scale, size range 39, min size 1, scale bias -1.0</para>
+</listitem><listitem><para>4 constant scale, size range 36, min size 4, scale bias -0.4</para>
+</listitem><listitem><para>4 constant scale, size range 36, min size 4, scale bias -0.25</para>
+</listitem><listitem><para>4 constant scale, size range 36, min size 4, scale bias 0.25</para>
+</listitem><listitem><para>4 constant scale, size range 36, min size 4, scale bias 0.4 </para>
+</listitem></orderedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PointParamsTests</label>
+        <link refid="d0/d54/classPointParamsTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>PointParamsTests</label>
+        <link refid="d0/d54/classPointParamsTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/point_params_tests.h" line="66" column="1" bodyfile="src/tests/point_params_tests.h" bodystart="66" bodyend="79"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>PointParamsTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>host_</name></member>
+      <member refid="d0/d54/classPointParamsTests_1a27bdc51782b517d14131733de7170495" prot="public" virt="virtual"><scope>PointParamsTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d0/d54/classPointParamsTests_1a8e3fb53d8af742c4eaf9cca0fa0c6c95" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>PointParamsTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>PointParamsTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>PointParamsTests</scope><name>TearDownTest</name></member>
+      <member refid="d0/d54/classPointParamsTests_1ac7d97f2dc04c012152288d9554a18f7b" prot="private" virt="non-virtual"><scope>PointParamsTests</scope><name>Test</name></member>
+      <member refid="d0/d54/classPointParamsTests_1ad6d2d67279667a271be0b072328cacbc" prot="private" virt="non-virtual"><scope>PointParamsTests</scope><name>TestDetailed</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>PointParamsTests</scope><name>tests_</name></member>
+      <member refid="d0/d54/classPointParamsTests_1a33c69cfd436499611d7f63b34c2d7232" prot="private" virt="non-virtual"><scope>PointParamsTests</scope><name>TestScaleParams</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>PointParamsTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>PointParamsTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

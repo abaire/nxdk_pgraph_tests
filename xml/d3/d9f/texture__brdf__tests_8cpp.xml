@@ -1,0 +1,781 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/d9f/texture__brdf__tests_8cpp" kind="file" language="C++">
+    <compoundname>texture_brdf_tests.cpp</compoundname>
+    <includes refid="d1/dcd/texture__brdf__tests_8h" local="yes">texture_brdf_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">shaders/perspective_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">texture_format.h</includes>
+    <includes local="yes">xbox-swizzle/swizzle.h</includes>
+    <includes local="yes">xbox_math_matrix.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <incdepgraph>
+      <node id="12">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texture_brdf_tests.cpp</label>
+        <link refid="d3/d9f/texture__brdf__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texture_brdf_tests.h</label>
+        <link refid="d1/dcd/texture__brdf__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="7">
+        <label>cstdint</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="14">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="31">
+        <label>shaders/perspective_vertex_shader.h</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="9">
+        <label>thread</label>
+      </node>
+      <node id="30">
+        <label>utility</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="13">
+        <label>windows.h</label>
+      </node>
+      <node id="32">
+        <label>xbox-swizzle/swizzle.h</label>
+      </node>
+      <node id="33">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a155d9a9f086ee40cf36ce36bc227f419" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kSize</definition>
+        <argsstring></argsstring>
+        <name>kSize</name>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="18" column="24" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a242e8ccf91d01821bc5f6a7fc41dedf3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kRightSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kRightSide</name>
+        <initializer>= {3, 7, 6, 2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="20" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a4817ce2851fa5a5ce8d0091f0c93c7f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kLeftSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kLeftSide</name>
+        <initializer>= {1, 5, 4, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="21" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a5cad43c5bdd645630758ab384ccb8289" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTopSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTopSide</name>
+        <initializer>= {4, 5, 6, 7}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="22" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a1aa7b0a5978c77c53176b96e69522445" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kBottomSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kBottomSide</name>
+        <initializer>= {1, 0, 3, 2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="23" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a83c57ec659d9fb4e6bdae085671e94ab" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kBackSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kBackSide</name>
+        <initializer>= {2, 6, 5, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="24" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1afee799b8e5858c1088aaa272185f4f86" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFrontSide[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFrontSide</name>
+        <initializer>= {0, 4, 7, 3}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="25" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a74c4cd8b1144099d379cf63679fe867c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const uint32_t *</type>
+        <definition>constexpr const uint32_t* kCubeFaces[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kCubeFaces</name>
+        <initializer>= {
+  kRightSide,
+  kLeftSide,
+  kTopSide,
+  kBottomSide,
+  kBackSide,
+  kFrontSide,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="28" column="33" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="28" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a56568dfea77492f348745fa0fd97374b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kCubePoints[][3]</definition>
+        <argsstring>[][3]</argsstring>
+        <name>kCubePoints</name>
+        <initializer>= {
+  {-kSize, -kSize, -kSize},
+  {-kSize, -kSize, kSize},
+  {kSize, -kSize, kSize},
+  {kSize, -kSize, -kSize},
+  {-kSize, kSize, -kSize},
+  {-kSize, kSize, kSize},
+  {kSize, kSize, kSize},
+  {kSize, kSize, -kSize},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="37" column="24" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="37" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a5e471bd5d80fd56a984140f70622e4c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureWidth</definition>
+        <argsstring></argsstring>
+        <name>kTextureWidth</name>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="50" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a52fb40082c56b7c36db1d3e7700cf853" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTexturePitch</definition>
+        <argsstring></argsstring>
+        <name>kTexturePitch</name>
+        <initializer>= kTextureWidth * 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="51" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1aa68568112c7c845891ebf9821978aa81" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureHeight</definition>
+        <argsstring></argsstring>
+        <name>kTextureHeight</name>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="52" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d9f/texture__brdf__tests_8cpp_1a30f00d58f7e21bf11c050adb72193111" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureDepth</definition>
+        <argsstring></argsstring>
+        <name>kTextureDepth</name>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="53" column="27" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d3/d9f/texture__brdf__tests_8cpp_1a18fb36a743ba72b06f0cccaba63a16b4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GenerateSphericalCoordMap</definition>
+        <argsstring>(uint8_t *buffer)</argsstring>
+        <name>GenerateSphericalCoordMap</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="194" column="13" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="194" bodyend="266" declfile="src/tests/texture_brdf_tests.cpp" declline="55" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d9f/texture__brdf__tests_8cpp_1a6834e031faaddcf25ce9e872067e6803" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void GenerateBRDFFunc</definition>
+        <argsstring>(uint8_t *buffer)</argsstring>
+        <name>GenerateBRDFFunc</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="268" column="13" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="268" bodyend="286" declfile="src/tests/texture_brdf_tests.cpp" declline="56" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d9f/texture__brdf__tests_8cpp_1abf720911a5d9db9dca1a2b48a029cd10" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeTestName</definition>
+        <argsstring>(bool stage0_blank, bool stage1_blank)</argsstring>
+        <name>MakeTestName</name>
+        <param>
+          <type>bool</type>
+          <declname>stage0_blank</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>stage1_blank</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_brdf_tests.cpp" line="288" column="20" bodyfile="src/tests/texture_brdf_tests.cpp" bodystart="288" bodyend="293" declfile="src/tests/texture_brdf_tests.cpp" declline="57" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texture_brdf_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/perspective_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_format.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox-swizzle/swizzle.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_matrix.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kSize<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kRightSide[]<sp/>=<sp/>{3,<sp/>7,<sp/>6,<sp/>2};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kLeftSide[]<sp/>=<sp/>{1,<sp/>5,<sp/>4,<sp/>0};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTopSide[]<sp/>=<sp/>{4,<sp/>5,<sp/>6,<sp/>7};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBottomSide[]<sp/>=<sp/>{1,<sp/>0,<sp/>3,<sp/>2};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackSide[]<sp/>=<sp/>{2,<sp/>6,<sp/>5,<sp/>1};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFrontSide[]<sp/>=<sp/>{0,<sp/>4,<sp/>7,<sp/>3};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*kCubeFaces[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>kRightSide,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>kLeftSide,</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>kTopSide,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>kBottomSide,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>kBackSide,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>kFrontSide,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kCubePoints[][3]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>-kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>-kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>{kSize,<sp/>-kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>{kSize,<sp/>-kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>{-kSize,<sp/>kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>{kSize,<sp/>kSize,<sp/>kSize},</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>{kSize,<sp/>kSize,<sp/>-kSize},</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureWidth<sp/>=<sp/>64;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTexturePitch<sp/>=<sp/>kTextureWidth<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureHeight<sp/>=<sp/>64;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureDepth<sp/>=<sp/>64;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateSphericalCoordMap(uint8_t<sp/>*buffer);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateBRDFFunc(uint8_t<sp/>*buffer);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeTestName(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stage0_blank,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stage1_blank);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal">TextureBRDFTests::TextureBRDFTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>BRDF&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>tests_[MakeTestName(</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test(</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>tests_[MakeTestName(</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test(</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>tests_[MakeTestName(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dc/ddf/classTextureBRDFTests_1aebd4f95a4d5cb5e009e2aa44835c82d7" kindref="member">TextureBRDFTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>depth_buffer_max_value<sp/>=<sp/>host_.GetMaxDepthBufferValue();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PerspectiveVertexShader&gt;(host_.GetFramebufferWidth(),<sp/>host_.GetFramebufferHeight(),</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>0.0f,<sp/>depth_buffer_max_value,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>1.0f,<sp/>200.0f);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;SetUseD3DStyleViewport();</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>camera_position<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>-7.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>camera_look_at<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;LookAt(camera_position,<sp/>camera_look_at);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>load<sp/>the<sp/>BRDF<sp/>function<sp/>volume<sp/>texture<sp/>into<sp/>stage2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>GenerateBRDFFunc(host_.GetTextureMemoryForStage(2));</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8),<sp/>2);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;stage<sp/>=<sp/>host_.GetTextureStage(2);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetTextureDimensions(kTextureWidth,<sp/>kTextureHeight,<sp/>kTextureDepth);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetImageDimensions(kTextureWidth,<sp/>kTextureHeight,<sp/>kTextureDepth);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetPWrap(TextureStage::WRAP_REPEAT,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>p<sp/>=<sp/>pb_begin();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>p<sp/>=<sp/>pb_push1(p,<sp/>NV097_SET_CONTROL0,<sp/>0x100001);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>pb_end(p);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX2);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX2,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureBRDFTests::Test(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stage0_blank,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stage1_blank)<sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>spherical<sp/>coordinate<sp/>transform<sp/>cube<sp/>map<sp/>into<sp/>stage0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stage0_blank)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>memset(host_.GetTextureMemoryForStage(0),<sp/>0,<sp/>kTexturePitch<sp/>*<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>GenerateSphericalCoordMap(host_.GetTextureMemoryForStage(0));</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R16B16),<sp/>0);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetTextureDimensions(kTextureWidth,<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetCubemapEnable();</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>spherical<sp/>coordinate<sp/>transform<sp/>cube<sp/>map<sp/>into<sp/>stage1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stage1_blank)<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>memset(host_.GetTextureMemoryForStage(1),<sp/>0,<sp/>kTexturePitch<sp/>*<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>GenerateSphericalCoordMap(host_.GetTextureMemoryForStage(1));</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R16B16),<sp/>1);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;stage<sp/>=<sp/>host_.GetTextureStage(1);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetTextureDimensions(kTextureWidth,<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>stage.SetCubemapEnable();</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(1,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(2,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_CUBE_MAP,<sp/>TestHost::STAGE_CUBE_MAP,<sp/>TestHost::STAGE_BRDF);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE121212);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::static_pointer_cast&lt;PerspectiveVertexShader&gt;(host_.GetShaderProgram());</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;shader](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r_z)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix4_t<sp/>matrix;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>eye{0.0f,<sp/>0.0f,<sp/>-7.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>at{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>up{0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>TestHost::BuildD3DModelViewMatrix(matrix,<sp/>eye,<sp/>at,<sp/>up);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;model_matrix<sp/>=<sp/>shader-&gt;GetModelMatrix();</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixSetIdentity(model_matrix);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>rotation<sp/>=<sp/>{r_x,<sp/>r_y,<sp/>r_z};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixRotate(model_matrix,<sp/>rotation);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>translation<sp/>=<sp/>{x,<sp/>y,<sp/>z};</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixTranslate(model_matrix,<sp/>translation);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix4_t<sp/>mv_matrix;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>MatrixMultMatrix(matrix,<sp/>shader-&gt;GetModelMatrix(),<sp/>mv_matrix);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFixedFunctionModelViewMatrix(mv_matrix);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>face<sp/>:<sp/>kCubeFaces)<sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>4;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>index<sp/>=<sp/>face[i];</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>lightz<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vindex<sp/>:<sp/>kFrontSide)<sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(index<sp/>==<sp/>vindex)<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lightz<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*vertex<sp/>=<sp/>kCubePoints[index];</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(vertex[0],<sp/>vertex[1],<sp/>vertex[2],<sp/>1.0f);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord1(0.1f,<sp/>0.05f,<sp/>lightz,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(vertex[0],<sp/>vertex[1],<sp/>vertex[2],<sp/>1.0f);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>2.0f;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>draw(-1.5f,<sp/>0.0f,<sp/>z,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>draw(1.5f,<sp/>0.0f,<sp/>z,<sp/>M_PI<sp/>*<sp/>1.25f,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/>MakeTestName(stage0_blank,<sp/>stage1_blank);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;BRDF&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;eye<sp/>tex<sp/>blank:<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>stage0_blank);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;light<sp/>tex<sp/>blank:<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>stage1_blank);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(test_name);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateSphericalCoordMap(uint8_t<sp/>*buffer)<sp/>{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kSliceSize<sp/>=<sp/>kTexturePitch<sp/>*<sp/>kTextureHeight;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/>2.0f<sp/>/<sp/>kTextureWidth;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/>2.0f<sp/>/<sp/>kTextureHeight;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/>uint8_t<sp/>*temp_buffer<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>uint8_t[kSliceSize];</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>face<sp/>=<sp/>0;<sp/>face<sp/>&lt;<sp/>6;<sp/>face++)<sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>uint8_t<sp/>*dest<sp/>=<sp/>temp_buffer;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>kTextureHeight;<sp/>j++)<sp/>{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>(0.5f<sp/>+<sp/>j)<sp/>*<sp/>dy<sp/>-<sp/>1.0f;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>kTextureWidth;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>(0.5f<sp/>+<sp/>i)<sp/>*<sp/>dx<sp/>-<sp/>1.0f;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>vx,<sp/>vy,<sp/>vz;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(face)<sp/>{</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>0:<sp/><sp/></highlight><highlight class="comment">//<sp/>+X</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vx<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vy<sp/>=<sp/>-y;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vz<sp/>=<sp/>-x;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>1:<sp/><sp/></highlight><highlight class="comment">//<sp/>-X</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vx<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vy<sp/>=<sp/>-y;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vz<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>2:<sp/><sp/></highlight><highlight class="comment">//<sp/>+Y</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vx<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vy<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vz<sp/>=<sp/>y;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>3:<sp/><sp/></highlight><highlight class="comment">//<sp/>-Y</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vx<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vy<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vz<sp/>=<sp/>-y;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>4:<sp/><sp/></highlight><highlight class="comment">//<sp/>+Z</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vx<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vy<sp/>=<sp/>-y;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vz<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>5:<sp/><sp/></highlight><highlight class="comment">//<sp/>-Z</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vx<sp/>=<sp/>-x;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vy<sp/>=<sp/>-y;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vz<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>theta<sp/>=<sp/>acosf(vz<sp/>/<sp/>sqrtf(vx<sp/>*<sp/>vx<sp/>+<sp/>vy<sp/>*<sp/>vy<sp/>+<sp/>vz<sp/>*<sp/>vz));</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>phi<sp/>=<sp/>atan2f(vy,<sp/>vx);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(phi<sp/>&lt;<sp/>0.0f)<sp/>{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>result<sp/>range<sp/>of<sp/>atan2f<sp/>is<sp/>[-pi,<sp/>pi]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>phi<sp/>+=<sp/>2.0f<sp/>*<sp/>M_PI;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>itheta<sp/>=<sp/>(theta<sp/>/<sp/>M_PI)<sp/>*<sp/>65535.0f<sp/>+<sp/>0.5f;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>iphi<sp/>=<sp/>phi<sp/>/<sp/>(2.0f<sp/>*<sp/>M_PI)<sp/>*<sp/>65535.0f<sp/>+<sp/>0.5f;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>iphi<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>iphi<sp/>&gt;&gt;<sp/>8;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>itheta<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>itheta<sp/>&gt;&gt;<sp/>8;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>swizzle_rect(temp_buffer,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>buffer,<sp/>kTexturePitch,<sp/>4);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer<sp/>+=<sp/>kSliceSize;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">[]<sp/>temp_buffer;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateBRDFFunc(uint8_t<sp/>*buffer)<sp/>{</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>uint8_t<sp/>*temp_buffer<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>uint8_t[kTexturePitch<sp/>*<sp/>kTextureHeight<sp/>*<sp/>kTextureDepth];</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>uint8_t<sp/>*dest<sp/>=<sp/>temp_buffer;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>0;<sp/>z<sp/>&lt;<sp/>kTextureDepth;<sp/>z++)<sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>0;<sp/>y<sp/>&lt;<sp/>kTextureHeight;<sp/>y++)<sp/>{</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>0;<sp/>x<sp/>&lt;<sp/>kTextureWidth;<sp/>x++)<sp/>{</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>z<sp/>*<sp/>255<sp/>/<sp/>(kTextureDepth<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>y<sp/>*<sp/>255<sp/>/<sp/>(kTextureHeight<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>x<sp/>*<sp/>255<sp/>/<sp/>(kTextureWidth<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*dest++<sp/>=<sp/>255;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/>swizzle_box(temp_buffer,<sp/>kTextureWidth,<sp/>kTextureHeight,<sp/>kTextureDepth,<sp/>buffer,<sp/>kTexturePitch,</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kTexturePitch<sp/>*<sp/>kTextureHeight,<sp/>4);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">[]<sp/>temp_buffer;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeTestName(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stage0_blank,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stage1_blank)<sp/>{</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;BRDF&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/>test_name<sp/>+=<sp/>stage0_blank<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;_e1&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;_e0&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/>test_name<sp/>+=<sp/>stage1_blank<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;_l1&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;_l0&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>test_name;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texture_brdf_tests.cpp"/>
+  </compounddef>
+</doxygen>

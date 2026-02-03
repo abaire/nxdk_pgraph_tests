@@ -1,0 +1,777 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d42/attribute__float__tests_8cpp" kind="file" language="C++">
+    <compoundname>attribute_float_tests.cpp</compoundname>
+    <includes refid="d6/dad/attribute__float__tests_8h" local="yes">attribute_float_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">vector</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes local="yes">passthrough_mul_color_by_constant.vshinc</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/attribute_float_tests.cpp</label>
+        <link refid="d8/d42/attribute__float__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>attribute_float_tests.h</label>
+        <link refid="d6/dad/attribute__float__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="10">
+        <label>cstdint</label>
+      </node>
+      <node id="11">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="15">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="31">
+        <label>passthrough_mul_color_by_constant.vshinc</label>
+      </node>
+      <node id="14">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="7">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="12">
+        <label>thread</label>
+      </node>
+      <node id="13">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="5">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d8/d00/structTestConfig" prot="public">TestConfig</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a6c5d3221248dce39b9449999649c26ee" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPassthroughMulColorsShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPassthroughMulColorsShader</name>
+        <initializer>= {
+
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="11" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="11" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a4d2110260ab92cb502bd7cf1776ba606" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posInf</definition>
+        <argsstring></argsstring>
+        <name>posInf</name>
+        <initializer>= 0x7F800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="18" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a9b4a387c9c4cea138dd26867e3223324" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negInf</definition>
+        <argsstring></argsstring>
+        <name>negInf</name>
+        <initializer>= 0xFF800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="19" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a167b24d78361b0778931d7c6d784f279" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posNanQ</definition>
+        <argsstring></argsstring>
+        <name>posNanQ</name>
+        <initializer>= 0x7FC00000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="21" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a7fc93054d47a415b6865dac5db8e0eae" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negNanQ</definition>
+        <argsstring></argsstring>
+        <name>negNanQ</name>
+        <initializer>= 0xFFC00000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="22" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a9882e4c98293e3ccd48cd2ff76d51129" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posNanS</definition>
+        <argsstring></argsstring>
+        <name>posNanS</name>
+        <initializer>= 0x7F800001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="24" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a2ae453b4b173b3e185b2127b35ebe1ae" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negNanS</definition>
+        <argsstring></argsstring>
+        <name>negNanS</name>
+        <initializer>= 0xFF800001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="25" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1ad804a1e30d7af262d50978b256daaf48" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posMax</definition>
+        <argsstring></argsstring>
+        <name>posMax</name>
+        <initializer>= 0x7F7FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="27" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a2d8e9ed8178b19d60781c5366f5e2c4f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negMax</definition>
+        <argsstring></argsstring>
+        <name>negMax</name>
+        <initializer>= 0xFF7FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="28" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a56b12504a99da15acfd06be97aa14cfe" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posMinNorm</definition>
+        <argsstring></argsstring>
+        <name>posMinNorm</name>
+        <initializer>= 0x00800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="30" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a2a5ab2d02b6be57e7a03e0c33c043d2e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negMinNorm</definition>
+        <argsstring></argsstring>
+        <name>negMinNorm</name>
+        <initializer>= 0x80800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="31" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a54c0c139cf4126322d2a5c132ee5cda5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posMaxSubNorm</definition>
+        <argsstring></argsstring>
+        <name>posMaxSubNorm</name>
+        <initializer>= 0x007FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="33" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1af66dec0008ea2e63889a221640ada9b9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negMaxSubNorm</definition>
+        <argsstring></argsstring>
+        <name>negMaxSubNorm</name>
+        <initializer>= 0x807FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="34" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1acb3e142c877e2dda867fd57dd1fbc8a0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t posMinSubNorm</definition>
+        <argsstring></argsstring>
+        <name>posMinSubNorm</name>
+        <initializer>= 0x00000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="36" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a517f106798ab9abf47ac870f32643688" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t negMinSubNorm</definition>
+        <argsstring></argsstring>
+        <name>negMinSubNorm</name>
+        <initializer>= 0x80000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="37" column="27" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a1b01bba25a222db6f8bd31dc509880a2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kColorTestName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kColorTestName</name>
+        <initializer>= &quot;Colors&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="41" column="23" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d42/attribute__float__tests_8cpp_1a6f817f8da781f2b6f351a49f71fe06fd" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref></type>
+        <definition>const TestConfig testConfigs[]</definition>
+        <argsstring>[]</argsstring>
+        <name>testConfigs</name>
+        <initializer>{
+    {&quot;0_1&quot;, &quot;0 to 1&quot;, {0.f, 1.f}},
+    {&quot;-1_1&quot;, &quot;-1 to 1&quot;, {-1.f, 1.f}},
+    {&quot;-8_1&quot;, &quot;-8 to 1&quot;, {-8.f, 1.f}},
+    {&quot;0_8&quot;, &quot;0 to 8&quot;, {0.f, 8.f}},
+    {&quot;-NaNq_NaNq&quot;, &quot;-NaN to +NaN (quiet)&quot;, {f(negNanQ), f(posNanQ)}},
+    
+    
+    
+    {&quot;-NaNs_NaNs&quot;, &quot;-NaN to +NaN (signalling)&quot;, {f(negNanS), f(posNanS)}},
+    {&quot;-INF_INF&quot;, &quot;-INF to +INF&quot;, {f(negInf), f(posInf)}},
+    {&quot;-Max_Max&quot;, &quot;-Max (normal) to +Max (normal)&quot;, {f(negMax), f(posMax)}},
+    {&quot;-MinN_MinN&quot;, &quot;-Min (normal) to +Min (normal)&quot;, {f(negMinNorm), f(posMinNorm)}},
+    {&quot;-MaxSN_MaxSN&quot;, &quot;-Max (subnormal) to +Max (subnormal)&quot;, {f(negMaxSubNorm), f(posMaxSubNorm)}},
+    {&quot;-Min_Min&quot;, &quot;-Min (subnormal) to +Min (subnormal)&quot;, {f(negMinSubNorm), f(posMinSubNorm)}},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="49" column="25" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="49" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d8/d42/attribute__float__tests_8cpp_1a7650a69a0a46ae615c7bdfe5d4af8495" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float f</definition>
+        <argsstring>(uint32_t v)</argsstring>
+        <name>f</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="39" column="14" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d42/attribute__float__tests_8cpp_1af892def873af0c7da8e31da430b8c607" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void CreateGeometry</definition>
+        <argsstring>(float x, float y, float width, float height, float from, float to, std::vector&lt; float &gt; &amp;vb)</argsstring>
+        <name>CreateGeometry</name>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt; &amp;</type>
+          <declname>vb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="114" column="13" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="114" bodyend="127"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;attribute_float_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPassthroughMulColorsShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;passthrough_mul_color_by_constant.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Infinities</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posInf<sp/>=<sp/>0x7F800000;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negInf<sp/>=<sp/>0xFF800000;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Quiet<sp/>NaN<sp/>on<sp/>x86</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posNanQ<sp/>=<sp/>0x7FC00000;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negNanQ<sp/>=<sp/>0xFFC00000;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Signalling<sp/>NaN<sp/>on<sp/>x86</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posNanS<sp/>=<sp/>0x7F800001;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negNanS<sp/>=<sp/>0xFF800001;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Max<sp/>normal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posMax<sp/>=<sp/>0x7F7FFFFF;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negMax<sp/>=<sp/>0xFF7FFFFF;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Min<sp/>normal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posMinNorm<sp/>=<sp/>0x00800000;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negMinNorm<sp/>=<sp/>0x80800000;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Max<sp/>subnormal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posMaxSubNorm<sp/>=<sp/>0x007FFFFF;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negMaxSubNorm<sp/>=<sp/>0x807FFFFF;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Min<sp/>subnormal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>posMinSubNorm<sp/>=<sp/>0x00000001;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>negMinSubNorm<sp/>=<sp/>0x80000001;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>f(uint32_t<sp/>v)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*)&amp;v);<sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kColorTestName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Colors&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*fileName;<sp/><sp/></highlight><highlight class="comment">//<sp/>must<sp/>be<sp/>valid<sp/>for<sp/>a<sp/>filename</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*description;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attribute_value[2];</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref><sp/>testConfigs[]{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;0_1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;0<sp/>to<sp/>1&quot;</highlight><highlight class="normal">,<sp/>{0.f,<sp/>1.f}},</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-1_1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-1<sp/>to<sp/>1&quot;</highlight><highlight class="normal">,<sp/>{-1.f,<sp/>1.f}},</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-8_1&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-8<sp/>to<sp/>1&quot;</highlight><highlight class="normal">,<sp/>{-8.f,<sp/>1.f}},</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;0_8&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;0<sp/>to<sp/>8&quot;</highlight><highlight class="normal">,<sp/>{0.f,<sp/>8.f}},</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-NaNq_NaNq&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-NaN<sp/>to<sp/>+NaN<sp/>(quiet)&quot;</highlight><highlight class="normal">,<sp/>{f(negNanQ),<sp/>f(posNanQ)}},</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>It<sp/>appears<sp/>that<sp/>the<sp/>handling<sp/>of<sp/>the<sp/>signaling<sp/>NaN<sp/>is<sp/>nondeterministic.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Sometimes<sp/>it<sp/>is<sp/>converted<sp/>to<sp/>quiet<sp/>NaN.<sp/>As<sp/>pgraph<sp/>operates<sp/>on<sp/>integers<sp/>and<sp/>does<sp/>a<sp/>conversion<sp/>from<sp/>float<sp/>back<sp/>to</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>int,<sp/>it<sp/>may<sp/>be<sp/>better<sp/>to<sp/>fall<sp/>back<sp/>into<sp/>setting<sp/>raw<sp/>values<sp/>without<sp/>doing<sp/>the<sp/>float<sp/>conversions.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-NaNs_NaNs&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-NaN<sp/>to<sp/>+NaN<sp/>(signalling)&quot;</highlight><highlight class="normal">,<sp/>{f(negNanS),<sp/>f(posNanS)}},</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-INF_INF&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-INF<sp/>to<sp/>+INF&quot;</highlight><highlight class="normal">,<sp/>{f(negInf),<sp/>f(posInf)}},</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-Max_Max&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-Max<sp/>(normal)<sp/>to<sp/>+Max<sp/>(normal)&quot;</highlight><highlight class="normal">,<sp/>{f(negMax),<sp/>f(posMax)}},</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-MinN_MinN&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-Min<sp/>(normal)<sp/>to<sp/>+Min<sp/>(normal)&quot;</highlight><highlight class="normal">,<sp/>{f(negMinNorm),<sp/>f(posMinNorm)}},</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-MaxSN_MaxSN&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-Max<sp/>(subnormal)<sp/>to<sp/>+Max<sp/>(subnormal)&quot;</highlight><highlight class="normal">,<sp/>{f(negMaxSubNorm),<sp/>f(posMaxSubNorm)}},</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-Min_Min&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;-Min<sp/>(subnormal)<sp/>to<sp/>+Min<sp/>(subnormal)&quot;</highlight><highlight class="normal">,<sp/>{f(negMinSubNorm),<sp/>f(posMinSubNorm)}},</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><ref refid="df/dab/classAttributeFloatTests_1a7a47a30a36945cef6f4f3dea01cdca93" kindref="member">AttributeFloatTests::AttributeFloatTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Attrib<sp/>float&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>testConfig<sp/>:<sp/>testConfigs)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[testConfig.description]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>testConfig]()<sp/>{<sp/>Test(testConfig);<sp/>};</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>tests_[kColorTestName]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestColors(kColorTestName);<sp/>};</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>CreateGeometry(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>from,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>to,<sp/>std::vector&lt;float&gt;<sp/>&amp;vb)<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>x<sp/>+<sp/>width;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>y<sp/>+<sp/>height;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Define<sp/>a<sp/>quad<sp/>with<sp/>a<sp/>colour<sp/>gradient</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{x,<sp/>y,<sp/>1,<sp/>1});</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{from,<sp/>from,<sp/>from,<sp/>1});</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{right,<sp/>y,<sp/>1,<sp/>1});</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{from,<sp/>from,<sp/>from,<sp/>1});</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{right,<sp/>bottom,<sp/>1,<sp/>1});</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{to,<sp/>to,<sp/>to,<sp/>1});</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{x,<sp/>bottom,<sp/>1,<sp/>1});</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>vb.insert(vb.end(),<sp/>{to,<sp/>to,<sp/>to,<sp/>1});</highlight></codeline>
+<codeline lineno="127"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AttributeFloatTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d8/d00/structTestConfig" kindref="compound">TestConfig</ref><sp/>&amp;tConfig)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>vb;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetFramebufferWidth());</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF6495ED;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Multipliers<sp/>for<sp/>mul<sp/>shader...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;std::pair&lt;const<sp/>char<sp/>*,<sp/>float&gt;&gt;<sp/>mulVals<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1.0&quot;</highlight><highlight class="normal">,<sp/>1.f},<sp/>{</highlight><highlight class="stringliteral">&quot;0.0&quot;</highlight><highlight class="normal">,<sp/>0.f},<sp/>{</highlight><highlight class="stringliteral">&quot;-INF&quot;</highlight><highlight class="normal">,<sp/>f(negInf)},<sp/>{</highlight><highlight class="stringliteral">&quot;INF&quot;</highlight><highlight class="normal">,<sp/>f(posInf)},<sp/>{</highlight><highlight class="stringliteral">&quot;-NaNq&quot;</highlight><highlight class="normal">,<sp/>f(negNanQ)},<sp/>{</highlight><highlight class="stringliteral">&quot;NaNq&quot;</highlight><highlight class="normal">,<sp/>f(posNanQ)}};</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>std::vector&lt;std::shared_ptr&lt;VertexShaderProgram&gt;&gt;<sp/>vss;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>inset<sp/>=<sp/>0.2f;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>totalWidth<sp/>=<sp/>(1.f<sp/>-<sp/>2<sp/>*<sp/>inset);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>colWidth<sp/>=<sp/>totalWidth<sp/>/<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(mulVals.size());</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>1<sp/>+<sp/>mulVals.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>vb.clear();</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>inset<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i)<sp/>*<sp/>colWidth;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Create<sp/>geometry</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>CreateGeometry(left<sp/>*<sp/>fb_width,<sp/>(inset<sp/>+<sp/>0.1f)<sp/>*<sp/>fb_height,<sp/>(colWidth<sp/>*<sp/>0.8f)<sp/>*<sp/>fb_width,</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(1<sp/>-<sp/>2<sp/>*<sp/>inset)<sp/>*<sp/>fb_height,<sp/>tConfig.attribute_value[0],<sp/>tConfig.attribute_value[1],<sp/>vb);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>VS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>First<sp/>use<sp/>a<sp/>passthrough<sp/>shader</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Then<sp/>use<sp/>a<sp/>shader<sp/>that<sp/>multiplies<sp/>the<sp/>colour</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vs<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>mulShader<sp/>=<sp/>i<sp/>!=<sp/>0;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(mulShader)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vs-&gt;SetShader(kPassthroughMulColorsShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kPassthroughMulColorsShader));</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mul<sp/>=<sp/>mulVals[i<sp/>-<sp/>1].second;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vs-&gt;SetUniformF(120<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>1);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vs-&gt;SetUniformF(121<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>1);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vs-&gt;SetUniformF(122<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>1);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vs-&gt;SetUniformF(123<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>1);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>vs-&gt;Activate();</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>vs-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>geometry</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>v<sp/>=<sp/>0;<sp/>v<sp/>&lt;<sp/>vb.size();<sp/>v<sp/>+=<sp/>8)<sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetDiffuse(vb[v<sp/>+<sp/>4],<sp/>vb[v<sp/>+<sp/>5],<sp/>vb[v<sp/>+<sp/>6],<sp/>vb[v<sp/>+<sp/>7]);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(&amp;vb[v]);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>descriptive<sp/>text</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n%s\n0x%08x<sp/>to<sp/>0x%08x\n&quot;</highlight><highlight class="normal">,<sp/>tConfig.fileName,<sp/>tConfig.description,</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*(uint32_t<sp/>*)&amp;tConfig.attribute_value[0],<sp/>*(uint32_t<sp/>*)&amp;tConfig.attribute_value[1]);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Multiplier:<sp/>n/a&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;m<sp/>:<sp/>mulVals)<sp/>{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;<sp/>|<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>m.first);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(tConfig.fileName);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>AttributeFloatTests::TestColors(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;test_name)<sp/>{</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>std::vector&lt;float&gt;<sp/>vb;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadSize<sp/>=<sp/>128;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadPaddingV<sp/>=<sp/>16.f;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kNumQuads<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadPaddingH<sp/>=<sp/>floor((host_.GetFramebufferWidthF()<sp/>-<sp/>(kQuadSize<sp/>*<sp/>kNumQuads))<sp/>/<sp/>(kNumQuads<sp/>+<sp/>1.f));</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF333333;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/>host_.DrawCheckerboardUnproject(0xFF333333,<sp/>0xFF444444);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vs<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>vs-&gt;SetShader(kPassthroughMulColorsShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kPassthroughMulColorsShader));</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(vs);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kDiffuse{1.f,<sp/>0.f,<sp/>0.5f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kSpecular{0.f,<sp/>1.f,<sp/>0.5f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kBackDiffuse{1.f,<sp/>0.5f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kBackSpecular{0.5f,<sp/>1.f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(kDiffuse);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>host_.SetSpecular(kSpecular);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>host_.SetBackDiffuse(kBackDiffuse);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/>host_.SetBackSpecular(kBackSpecular);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left<sp/>+<sp/>kQuadSize,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left<sp/>+<sp/>kQuadSize,<sp/>top<sp/>+<sp/>kQuadSize<sp/>*<sp/>0.5f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top<sp/>+<sp/>kQuadSize<sp/>*<sp/>0.5f,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Renders<sp/>a<sp/>row<sp/>of<sp/>quads<sp/>using<sp/>various<sp/>color<sp/>channels.<sp/>Each<sp/>quad<sp/>is<sp/>split<sp/>into<sp/>a<sp/>top<sp/>and<sp/>bottom<sp/>half,<sp/>with<sp/>the<sp/>top</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>alpha<sp/>from<sp/>the<sp/>color<sp/>channel<sp/>and<sp/>the<sp/>bottom<sp/>forced<sp/>opaque.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_row<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;draw_quad,<sp/>&amp;kQuadPaddingH](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_half_row<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;draw_quad,<sp/>&amp;kQuadPaddingH](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!use_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>kQuadPaddingH;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(use_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kQuadPaddingH;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_SPECULAR);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(use_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_SPECULAR,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_half_row(top,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_half_row(top<sp/>+<sp/>kQuadSize<sp/>*<sp/>0.5f,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>mul<sp/>=<sp/>f(posNanQ);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(120<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(121<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(122<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(123<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/>vs-&gt;Activate();</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/>vs-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>draw_row(kTop);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>pb_printat(4,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;NaN&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>mul<sp/>=<sp/>f(negNanQ);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(120<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(121<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(122<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>vs-&gt;SetUniformF(123<sp/>-<sp/>PassthroughVertexShader::kShaderUserConstantOffset,<sp/>mul,<sp/>mul,<sp/>mul,<sp/>mul);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>vs-&gt;Activate();</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/>vs-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/>draw_row(kTop<sp/>+<sp/>kQuadSize<sp/>+<sp/>kQuadPaddingV);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/>pb_printat(9,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;-NaN&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>test_name.c_str());</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(test_name);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/attribute_float_tests.cpp"/>
+  </compounddef>
+</doxygen>

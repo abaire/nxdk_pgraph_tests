@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat" kind="struct" language="C++" prot="public">
+    <compoundname>DepthFormatFixedFunctionTests::DepthFormat</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat_1ab1d93cfd7ce743f99e4184b7bbc4903a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DepthFormatFixedFunctionTests::DepthFormat::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>DepthFormatFixedFunctionTests::DepthFormat::format</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_fixed_function_tests.h" line="15" column="14" bodyfile="src/tests/depth_format_fixed_function_tests.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat_1a54efe46c00881701aeb95fbe03bc271a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DepthFormatFixedFunctionTests::DepthFormat::max_depth</definition>
+        <argsstring></argsstring>
+        <name>max_depth</name>
+        <qualifiedname>DepthFormatFixedFunctionTests::DepthFormat::max_depth</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_fixed_function_tests.h" line="16" column="14" bodyfile="src/tests/depth_format_fixed_function_tests.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat_1a2698ee2169293bf716052df3615d1a2f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool DepthFormatFixedFunctionTests::DepthFormat::floating_point</definition>
+        <argsstring></argsstring>
+        <name>floating_point</name>
+        <qualifiedname>DepthFormatFixedFunctionTests::DepthFormat::floating_point</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_fixed_function_tests.h" line="17" column="10" bodyfile="src/tests/depth_format_fixed_function_tests.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/depth_format_fixed_function_tests.h" line="14" column="3" bodyfile="src/tests/depth_format_fixed_function_tests.h" bodystart="14" bodyend="18"/>
+    <listofallmembers>
+      <member refid="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat_1a2698ee2169293bf716052df3615d1a2f" prot="public" virt="non-virtual"><scope>DepthFormatFixedFunctionTests::DepthFormat</scope><name>floating_point</name></member>
+      <member refid="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat_1ab1d93cfd7ce743f99e4184b7bbc4903a" prot="public" virt="non-virtual"><scope>DepthFormatFixedFunctionTests::DepthFormat</scope><name>format</name></member>
+      <member refid="d3/db7/structDepthFormatFixedFunctionTests_1_1DepthFormat_1a54efe46c00881701aeb95fbe03bc271a" prot="public" virt="non-virtual"><scope>DepthFormatFixedFunctionTests::DepthFormat</scope><name>max_depth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

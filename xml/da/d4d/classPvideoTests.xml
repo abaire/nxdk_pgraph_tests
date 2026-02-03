@@ -1,0 +1,562 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d4d/classPvideoTests" kind="class" language="C++" prot="public">
+    <compoundname>PvideoTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="da/db8/pvideo__tests_8h" local="no">pvideo_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="da/d4d/classPvideoTests_1ad5dc73bad8d2157fcb5a6d9e838f5698" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* PvideoTests::video_</definition>
+        <argsstring></argsstring>
+        <name>video_</name>
+        <qualifiedname>PvideoTests::video_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="54" column="11" bodyfile="src/tests/pvideo_tests.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d4d/classPvideoTests_1a7c827229359049282d86e2ca942641ff" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* PvideoTests::video2_</definition>
+        <argsstring></argsstring>
+        <name>video2_</name>
+        <qualifiedname>PvideoTests::video2_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="55" column="11" bodyfile="src/tests/pvideo_tests.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a3197ee9a67759cc70e5028f7254578c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PvideoTests::PvideoTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>PvideoTests</name>
+        <qualifiedname>PvideoTests::PvideoTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="14" column="3" bodyfile="src/tests/pvideo_tests.cpp" bodystart="45" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a32786f982aa8f8ee6efadf57602aa163" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void PvideoTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>PvideoTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="15" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="81" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a6f3c1a985d068f196bc7b106e588ee8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void PvideoTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>PvideoTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="16" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="97" bodyend="107"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a7d85df9f9bc7a250116974c21f02d3ca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestStopBehavior</definition>
+        <argsstring>()</argsstring>
+        <name>TestStopBehavior</name>
+        <qualifiedname>PvideoTests::TestStopBehavior</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="19" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="221" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1ab9b3891d55674e304f73a8b6fbcb4536" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestAlternateStopBehavior</definition>
+        <argsstring>()</argsstring>
+        <name>TestAlternateStopBehavior</name>
+        <qualifiedname>PvideoTests::TestAlternateStopBehavior</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="20" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="255" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1aaca01fef986a972c090955ce9563cff5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInMaxUnityDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInMaxUnityDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeInMaxUnityDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="22" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="300" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1ab64559acd51057904eb46ce297d10b61" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInMaxLargeDelta</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInMaxLargeDelta</name>
+        <qualifiedname>PvideoTests::TestSizeInMaxLargeDelta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="23" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="344" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1af1a1ed8162b55d2a35f4e6ce07b947cb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInMaxSmallDelta</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInMaxSmallDelta</name>
+        <qualifiedname>PvideoTests::TestSizeInMaxSmallDelta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="24" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="387" bodyend="428"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a074c6531719134db38690db549836b59" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeMaxOutSmallUnityDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeMaxOutSmallUnityDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeMaxOutSmallUnityDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="25" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="430" bodyend="463"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a65b56f9eb379f397a66f7bca696b9dd4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeMaxOutSmallCorrectDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeMaxOutSmallCorrectDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeMaxOutSmallCorrectDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="26" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="465" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a6c20b945e76ee6fdf977510582494aab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestPALIntoNTSC</definition>
+        <argsstring>()</argsstring>
+        <name>TestPALIntoNTSC</name>
+        <qualifiedname>PvideoTests::TestPALIntoNTSC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="28" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="568" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1ac91cadd3b2baed8351f31c87a520e8f1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInLargerThanSizeOutUnityDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeInLargerThanSizeOutUnityDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="29" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="500" bodyend="532"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a714b139879d6e722abf18f5b0796cf85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInLargerThanSizeOutCorrectDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeInLargerThanSizeOutCorrectDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="30" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="534" bodyend="566"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a6d93929151b52211c0acf565cb95c500" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInSmallerThanSizeOutUnityDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeInSmallerThanSizeOutUnityDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="32" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="601" bodyend="633"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1af1d6d7e05a11ab0a51d059761c9d4b77" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas</definition>
+        <argsstring>()</argsstring>
+        <name>TestSizeInSmallerThanSizeOutCorrectDeltas</name>
+        <qualifiedname>PvideoTests::TestSizeInSmallerThanSizeOutCorrectDeltas</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="33" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="635" bodyend="667"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a1545dd5481afcaccf820d3c9434c50ca" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestPitchLessThanCompact</definition>
+        <argsstring>()</argsstring>
+        <name>TestPitchLessThanCompact</name>
+        <qualifiedname>PvideoTests::TestPitchLessThanCompact</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="35" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="669" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a7971da5074f909a299f08c59c6c944bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestPitchLargerThanCompact</definition>
+        <argsstring>()</argsstring>
+        <name>TestPitchLargerThanCompact</name>
+        <qualifiedname>PvideoTests::TestPitchLargerThanCompact</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="36" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="703" bodyend="733"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a23c3e1312b8e07b5d6740a5a58eaa4ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestPitch</definition>
+        <argsstring>()</argsstring>
+        <name>TestPitch</name>
+        <qualifiedname>PvideoTests::TestPitch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="37" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="735" bodyend="788"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a58f92037bac145411efa8178942dd415" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestColorKey</definition>
+        <argsstring>()</argsstring>
+        <name>TestColorKey</name>
+        <qualifiedname>PvideoTests::TestColorKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="39" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="839" bodyend="925"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a2a81ce5231d249a349793d58d0548b20" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestSimpleFullscreenOverlay0</definition>
+        <argsstring>()</argsstring>
+        <name>TestSimpleFullscreenOverlay0</name>
+        <qualifiedname>PvideoTests::TestSimpleFullscreenOverlay0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="41" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="931" bodyend="970"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1aee6e44aaa9282e007b43c06f09c0fb83" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestOverlay1</definition>
+        <argsstring>()</argsstring>
+        <name>TestOverlay1</name>
+        <qualifiedname>PvideoTests::TestOverlay1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="42" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="972" bodyend="1014"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a45eaa28c022d2c7666d3ddbd5c0add24" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestOverlappedOverlays</definition>
+        <argsstring>()</argsstring>
+        <name>TestOverlappedOverlays</name>
+        <qualifiedname>PvideoTests::TestOverlappedOverlays</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="43" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1016" bodyend="1061"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1ae0b8383502d91eb35d19a2f46c46b0e8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestInPoint</definition>
+        <argsstring>()</argsstring>
+        <name>TestInPoint</name>
+        <qualifiedname>PvideoTests::TestInPoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="45" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1063" bodyend="1127"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1af9e359a159a428315b1be20a26c7c8b6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestInSize</definition>
+        <argsstring>()</argsstring>
+        <name>TestInSize</name>
+        <qualifiedname>PvideoTests::TestInSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="46" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1129" bodyend="1222"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a6f02bc9b0f02677c63e2b460653f080d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestOutPoint</definition>
+        <argsstring>()</argsstring>
+        <name>TestOutPoint</name>
+        <qualifiedname>PvideoTests::TestOutPoint</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="47" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1224" bodyend="1311"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1aa520b44d5c81174fdb415406d9794e04" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestOutSize</definition>
+        <argsstring>()</argsstring>
+        <name>TestOutSize</name>
+        <qualifiedname>PvideoTests::TestOutSize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="48" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1313" bodyend="1399"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1ae6046db7e59cea0b580c93d55d4974dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::TestRatios</definition>
+        <argsstring>()</argsstring>
+        <name>TestRatios</name>
+        <qualifiedname>PvideoTests::TestRatios</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="49" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1401" bodyend="1471"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d4d/classPvideoTests_1a91cbbbc87cdd1b1bd64397e69da9fed1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PvideoTests::DrawFullscreenOverlay</definition>
+        <argsstring>()</argsstring>
+        <name>DrawFullscreenOverlay</name>
+        <qualifiedname>PvideoTests::DrawFullscreenOverlay</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pvideo_tests.h" line="51" column="8" bodyfile="src/tests/pvideo_tests.cpp" bodystart="1473" bodyend="1490"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the PVIDEO subsystem. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PvideoTests</label>
+        <link refid="da/d4d/classPvideoTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>PvideoTests</label>
+        <link refid="da/d4d/classPvideoTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/pvideo_tests.h" line="12" column="1" bodyfile="src/tests/pvideo_tests.h" bodystart="12" bodyend="56"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>allow_saving_</name></member>
+      <member refid="da/d4d/classPvideoTests_1a6f3c1a985d068f196bc7b106e588ee8b" prot="public" virt="virtual"><scope>PvideoTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>DisableTests</name></member>
+      <member refid="da/d4d/classPvideoTests_1a91cbbbc87cdd1b1bd64397e69da9fed1" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>DrawFullscreenOverlay</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>host_</name></member>
+      <member refid="da/d4d/classPvideoTests_1a32786f982aa8f8ee6efadf57602aa163" prot="public" virt="virtual"><scope>PvideoTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>pgraph_diff_</name></member>
+      <member refid="da/d4d/classPvideoTests_1a3197ee9a67759cc70e5028f7254578c8" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>PvideoTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>PvideoTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>PvideoTests</scope><name>TearDownTest</name></member>
+      <member refid="da/d4d/classPvideoTests_1ab9b3891d55674e304f73a8b6fbcb4536" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestAlternateStopBehavior</name></member>
+      <member refid="da/d4d/classPvideoTests_1a58f92037bac145411efa8178942dd415" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestColorKey</name></member>
+      <member refid="da/d4d/classPvideoTests_1ae0b8383502d91eb35d19a2f46c46b0e8" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestInPoint</name></member>
+      <member refid="da/d4d/classPvideoTests_1af9e359a159a428315b1be20a26c7c8b6" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestInSize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>TestNames</name></member>
+      <member refid="da/d4d/classPvideoTests_1a6f02bc9b0f02677c63e2b460653f080d" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestOutPoint</name></member>
+      <member refid="da/d4d/classPvideoTests_1aa520b44d5c81174fdb415406d9794e04" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestOutSize</name></member>
+      <member refid="da/d4d/classPvideoTests_1a45eaa28c022d2c7666d3ddbd5c0add24" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestOverlappedOverlays</name></member>
+      <member refid="da/d4d/classPvideoTests_1aee6e44aaa9282e007b43c06f09c0fb83" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestOverlay1</name></member>
+      <member refid="da/d4d/classPvideoTests_1a6c20b945e76ee6fdf977510582494aab" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestPALIntoNTSC</name></member>
+      <member refid="da/d4d/classPvideoTests_1a23c3e1312b8e07b5d6740a5a58eaa4ae" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestPitch</name></member>
+      <member refid="da/d4d/classPvideoTests_1a7971da5074f909a299f08c59c6c944bb" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestPitchLargerThanCompact</name></member>
+      <member refid="da/d4d/classPvideoTests_1a1545dd5481afcaccf820d3c9434c50ca" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestPitchLessThanCompact</name></member>
+      <member refid="da/d4d/classPvideoTests_1ae6046db7e59cea0b580c93d55d4974dd" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestRatios</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>PvideoTests</scope><name>tests_</name></member>
+      <member refid="da/d4d/classPvideoTests_1a2a81ce5231d249a349793d58d0548b20" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSimpleFullscreenOverlay0</name></member>
+      <member refid="da/d4d/classPvideoTests_1a714b139879d6e722abf18f5b0796cf85" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInLargerThanSizeOutCorrectDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1ac91cadd3b2baed8351f31c87a520e8f1" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInLargerThanSizeOutUnityDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1ab64559acd51057904eb46ce297d10b61" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInMaxLargeDelta</name></member>
+      <member refid="da/d4d/classPvideoTests_1af1a1ed8162b55d2a35f4e6ce07b947cb" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInMaxSmallDelta</name></member>
+      <member refid="da/d4d/classPvideoTests_1aaca01fef986a972c090955ce9563cff5" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInMaxUnityDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1af1d6d7e05a11ab0a51d059761c9d4b77" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInSmallerThanSizeOutCorrectDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1a6d93929151b52211c0acf565cb95c500" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeInSmallerThanSizeOutUnityDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1a65b56f9eb379f397a66f7bca696b9dd4" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeMaxOutSmallCorrectDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1a074c6531719134db38690db549836b59" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestSizeMaxOutSmallUnityDeltas</name></member>
+      <member refid="da/d4d/classPvideoTests_1a7d85df9f9bc7a250116974c21f02d3ca" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>TestStopBehavior</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>PvideoTests</scope><name>TestSuite</name></member>
+      <member refid="da/d4d/classPvideoTests_1a7c827229359049282d86e2ca942641ff" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>video2_</name></member>
+      <member refid="da/d4d/classPvideoTests_1ad5dc73bad8d2157fcb5a6d9e838f5698" prot="private" virt="non-virtual"><scope>PvideoTests</scope><name>video_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>PvideoTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

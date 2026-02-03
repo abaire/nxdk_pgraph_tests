@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/ded/image__resource_8h" kind="file" language="C++">
+    <compoundname>image_resource.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">memory</includes>
+    <includedby refid="d0/d01/image__resource_8cpp" local="yes">src/image_resource.cpp</includedby>
+    <includedby refid="d3/d6a/pixel__shader__tests_8h" local="yes">src/tests/pixel_shader_tests.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/image_resource.h</label>
+        <link refid="d4/ded/image__resource_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/image_resource.h</label>
+        <link refid="d4/ded/image__resource_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/tests/pixel_shader_tests.h</label>
+        <link refid="d3/d6a/pixel__shader__tests_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="d7/d68/structImageResource" prot="public">ImageResource</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SRC_IMAGERESOURCE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SRC_IMAGERESOURCE_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="d7/d68/structImageResource" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d7/d68/structImageResource" kindref="compound">ImageResource</ref><sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/>uint8_t<sp/>*data{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/>uint32_t<sp/>width{0};</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/>uint32_t<sp/>height{0};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/>uint32_t<sp/>pitch{0};</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/>uint32_t<sp/>bytes_per_pixel{0};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><ref refid="d7/d68/structImageResource" kindref="compound">ImageResource</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource" kindref="compound">ImageResource</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;source_path)<sp/>{<sp/><ref refid="d7/d68/structImageResource_1ae6dc6240dc7e4937edb188db8e9435d7" kindref="member">LoadPNG</ref>(source_path);<sp/>}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource" kindref="compound">~ImageResource</ref>();</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource_1ae6dc6240dc7e4937edb188db8e9435d7" kindref="member">LoadPNG</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;source_path);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource_1a6689ac92fba85f1380d9d2b2a059800b" kindref="member">CopyTo</ref>(uint8_t<sp/>*target)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource_1a922b69e3e48bbc8fa03ab3cfae3a60d6" kindref="member">SwizzleTo</ref>(uint8_t<sp/>*target)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SRC_IMAGERESOURCE_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/image_resource.h"/>
+  </compounddef>
+</doxygen>

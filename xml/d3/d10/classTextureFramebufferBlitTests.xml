@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/d10/classTextureFramebufferBlitTests" kind="class" language="C++" prot="public">
+    <compoundname>TextureFramebufferBlitTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <innerclass refid="d1/d2d/structTextureFramebufferBlitTests_1_1beta4__ctx__" prot="private">TextureFramebufferBlitTests::beta4_ctx_</innerclass>
+    <innerclass refid="d0/d71/structTextureFramebufferBlitTests_1_1beta__ctx__" prot="private">TextureFramebufferBlitTests::beta_ctx_</innerclass>
+    <innerclass refid="d0/d91/structTextureFramebufferBlitTests_1_1clip__rect__ctx__" prot="private">TextureFramebufferBlitTests::clip_rect_ctx_</innerclass>
+    <innerclass refid="d2/d61/structTextureFramebufferBlitTests_1_1null__ctx__" prot="private">TextureFramebufferBlitTests::null_ctx_</innerclass>
+    <innerclass refid="da/d7d/structTextureFramebufferBlitTests_1_1texture__target__ctx__" prot="private">TextureFramebufferBlitTests::texture_target_ctx_</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d3/d10/classTextureFramebufferBlitTests_1a14eb1132cdecebb972280f9b8178056a" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; TextureFramebufferBlitTests::texture_source_vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>texture_source_vertex_buffer_</name>
+        <qualifiedname>TextureFramebufferBlitTests::texture_source_vertex_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="29" column="19" bodyfile="src/tests/texture_framebuffer_blit_tests.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/d10/classTextureFramebufferBlitTests_1aa7b95c71024e01240b28c52462ffc639" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; TextureFramebufferBlitTests::target_vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>target_vertex_buffer_</name>
+        <qualifiedname>TextureFramebufferBlitTests::target_vertex_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="32" column="19" bodyfile="src/tests/texture_framebuffer_blit_tests.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1a335da9d78b3175597be4ed0ae13c65ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TextureFramebufferBlitTests::TextureFramebufferBlitTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TextureFramebufferBlitTests</name>
+        <qualifiedname>TextureFramebufferBlitTests::TextureFramebufferBlitTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="13" column="3" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="44" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1a4477f41f5f52f36bd9cf095b980c468a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureFramebufferBlitTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TextureFramebufferBlitTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="15" column="8" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="57" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1a0d39b279799759bfa0f60acc76f3e327" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureFramebufferBlitTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>TextureFramebufferBlitTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="16" column="8" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="95" bodyend="111"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1ac2da6b243d4bf018c6e4eefb6e874e00" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFramebufferBlitTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>TextureFramebufferBlitTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="19" column="8" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="161" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1a5ef275be8cf3ca2f55541c99c8cf8383" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFramebufferBlitTests::TestRenderTarget</definition>
+        <argsstring>(const char *test_name)</argsstring>
+        <name>TestRenderTarget</name>
+        <qualifiedname>TextureFramebufferBlitTests::TestRenderTarget</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>test_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="20" column="8" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="226" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1a791324581e7f2f524567a0de4b477ae6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFramebufferBlitTests::Test</definition>
+        <argsstring>(uint32_t texture_destination, const char *test_name)</argsstring>
+        <name>Test</name>
+        <qualifiedname>TextureFramebufferBlitTests::Test</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>texture_destination</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>test_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="21" column="8" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="262" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/d10/classTextureFramebufferBlitTests_1a770f8d8761a58227b078c13544758736" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFramebufferBlitTests::ImageBlit</definition>
+        <argsstring>(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel, uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset, uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x, uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x, uint32_t clip_y, uint32_t clip_width, uint32_t clip_height) const</argsstring>
+        <name>ImageBlit</name>
+        <qualifiedname>TextureFramebufferBlitTests::ImageBlit</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>operation</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>beta</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_channel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_channel</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>surface_format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_pitch</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>source_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_offset</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>destination_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>clip_height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.h" line="22" column="8" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="113" bodyend="159"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TextureFramebufferBlitTests</label>
+        <link refid="d3/d10/classTextureFramebufferBlitTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TextureFramebufferBlitTests</label>
+        <link refid="d3/d10/classTextureFramebufferBlitTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_framebuffer_blit_tests.h" line="11" column="1" bodyfile="src/tests/texture_framebuffer_blit_tests.h" bodystart="11" bodyend="39"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>allow_saving_</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1ac2da6b243d4bf018c6e4eefb6e874e00" prot="private" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>CreateGeometry</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a0d39b279799759bfa0f60acc76f3e327" prot="public" virt="virtual"><scope>TextureFramebufferBlitTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>host_</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a770f8d8761a58227b078c13544758736" prot="private" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>ImageBlit</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a4477f41f5f52f36bd9cf095b980c468a" prot="public" virt="virtual"><scope>TextureFramebufferBlitTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TextureFramebufferBlitTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1aa7b95c71024e01240b28c52462ffc639" prot="private" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>target_vertex_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TextureFramebufferBlitTests</scope><name>TearDownTest</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a791324581e7f2f524567a0de4b477ae6" prot="private" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>TestNames</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a5ef275be8cf3ca2f55541c99c8cf8383" prot="private" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>TestRenderTarget</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>TestSuite</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a14eb1132cdecebb972280f9b8178056a" prot="private" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>texture_source_vertex_buffer_</name></member>
+      <member refid="d3/d10/classTextureFramebufferBlitTests_1a335da9d78b3175597be4ed0ae13c65ad" prot="public" virt="non-virtual"><scope>TextureFramebufferBlitTests</scope><name>TextureFramebufferBlitTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TextureFramebufferBlitTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

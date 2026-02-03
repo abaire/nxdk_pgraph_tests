@@ -1,0 +1,401 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d30/stencil__tests_8cpp" kind="file" language="C++">
+    <compoundname>stencil_tests.cpp</compoundname>
+    <includes refid="d7/d2c/stencil__tests_8h" local="yes">stencil_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">nxdk_ext.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="13">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/stencil_tests.cpp</label>
+        <link refid="de/d30/stencil__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stencil_tests.h</label>
+        <link refid="d7/d2c/stencil__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="16">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="15">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="10">
+        <label>thread</label>
+      </node>
+      <node id="11">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="14">
+        <label>windows.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="de/d30/stencil__tests_8cpp_1a1ea7906ea1c54ef1f542d47a4b262279" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d7/d14/structStencilTests_1_1StencilParams" kindref="compound">StencilTests::StencilParams</ref></type>
+        <definition>constexpr StencilTests::StencilParams kStencilParams[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kStencilParams</name>
+        <initializer>= {
+    
+    {NV097_SET_STENCIL_OP_V_ZERO, &quot;ZERO&quot;, true, false, 0xFF, 0},
+    {NV097_SET_STENCIL_OP_V_REPLACE, &quot;REPLACE&quot;, true, false, 0x00, 1},
+    
+    {NV097_SET_STENCIL_OP_V_ZERO, &quot;ZERO&quot;, false, true, 0xFF, 0},
+    {NV097_SET_STENCIL_OP_V_REPLACE, &quot;REPLACE&quot;, false, true, 0x00, 1},
+    
+    {NV097_SET_STENCIL_OP_V_ZERO, &quot;ZERO&quot;, true, true, 0xFF, 0},
+    {NV097_SET_STENCIL_OP_V_REPLACE, &quot;REPLACE&quot;, true, true, 0x00, 1},
+    
+    {NV097_SET_STENCIL_OP_V_ZERO, &quot;ZERO&quot;, false, false, 0xFF, 0},
+    {NV097_SET_STENCIL_OP_V_REPLACE, &quot;REPLACE&quot;, false, false, 0x00, 1}}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.cpp" line="12" column="39" bodyfile="src/tests/stencil_tests.cpp" bodystart="12" bodyend="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;stencil_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d7/d14/structStencilTests_1_1StencilParams" kindref="compound">StencilTests::StencilParams</ref><sp/>kStencilParams[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Stencil<sp/>enable,<sp/>depth<sp/>disable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_ZERO,<sp/></highlight><highlight class="stringliteral">&quot;ZERO&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>0xFF,<sp/>0},</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_REPLACE,<sp/></highlight><highlight class="stringliteral">&quot;REPLACE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>0x00,<sp/>1},</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Stencil<sp/>disable,<sp/>depth<sp/>enable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_ZERO,<sp/></highlight><highlight class="stringliteral">&quot;ZERO&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>0xFF,<sp/>0},</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_REPLACE,<sp/></highlight><highlight class="stringliteral">&quot;REPLACE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>0x00,<sp/>1},</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Stencil<sp/>enable,<sp/>depth<sp/>enable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_ZERO,<sp/></highlight><highlight class="stringliteral">&quot;ZERO&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>0xFF,<sp/>0},</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_REPLACE,<sp/></highlight><highlight class="stringliteral">&quot;REPLACE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>0x00,<sp/>1},</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Stencil<sp/>disable,<sp/>depth<sp/>disable</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_ZERO,<sp/></highlight><highlight class="stringliteral">&quot;ZERO&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>0xFF,<sp/>0},</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_STENCIL_OP_V_REPLACE,<sp/></highlight><highlight class="stringliteral">&quot;REPLACE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>0x00,<sp/>1}};</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal">StencilTests::StencilTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Stencil&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>param<sp/>:<sp/>kStencilParams)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>AddTestEntry(param);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d2/d2e/classStencilTests_1aafe39a1250b4dc86d9011d41ab4f382a" kindref="member">StencilTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>SetDefaultTextureFormat();</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>StencilTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StencilParams<sp/>&amp;params)<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadSize<sp/>=<sp/>200.f;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>host_.SetupControl0(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>host_.SetSurfaceFormat(host_.GetColorBufferFormat(),</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">TestHost::SurfaceZetaFormat</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(NV097_SET_SURFACE_FORMAT_ZETA_Z24S8),</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.GetFramebufferWidth(),<sp/>host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF000000,<sp/>0x0000FFFF,<sp/>params.stencil_clear_value);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Disable<sp/>color/zeta<sp/>limit<sp/>errors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>crash_register<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(PGRAPH_REGISTER_BASE<sp/>+<sp/>0x880);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>crash_register_pre_test<sp/>=<sp/>*crash_register;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>*crash_register<sp/>=<sp/>crash_register_pre_test<sp/>&amp;<sp/>(~0x800);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>color,<sp/>disable<sp/>depth/stencil,<sp/>set<sp/>depth/stencil<sp/>test<sp/>params</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_COLOR_MASK,<sp/>0x01010101);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_MASK,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_MASK,<sp/>0xFF);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_FUNC,<sp/>NV097_SET_STENCIL_FUNC_V_ALWAYS);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_FUNC_REF,<sp/>params.stencil_ref_value);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_FUNC_MASK,<sp/>0xFF);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_OP_FAIL,<sp/>NV097_SET_STENCIL_OP_V_KEEP);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_OP_ZFAIL,<sp/>NV097_SET_STENCIL_OP_V_KEEP);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS,<sp/>params.stencil_op_zpass);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>a<sp/>red<sp/>quad<sp/>in<sp/>the<sp/>center<sp/>of<sp/>the<sp/>screen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>CreateGeometry(kQuadSize,<sp/>1,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>host_.DrawArrays();</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Disable<sp/>all<sp/>masks<sp/>except<sp/>stencil,<sp/>setup<sp/>stencil<sp/>test</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_COLOR_MASK,<sp/>0);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE,<sp/>params.stencil_test_enabled);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_MASK,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE,<sp/>params.depth_test_enabled);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_FUNC,<sp/>NV097_SET_DEPTH_FUNC_V_ALWAYS);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>a<sp/>smaller<sp/>quad<sp/>to<sp/>the<sp/>zeta<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>CreateGeometry(kQuadSize<sp/>/<sp/>2.0f,<sp/>0,<sp/>0,<sp/>1);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>host_.DrawArrays();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Reenable<sp/>masks,<sp/>stencil<sp/>test</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_COLOR_MASK,<sp/>0x01010101);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_MASK,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_FUNC,<sp/>NV097_SET_STENCIL_FUNC_V_EQUAL);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_OP_ZPASS,<sp/>NV097_SET_STENCIL_OP_V_KEEP);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>first<sp/>quad<sp/>again,<sp/>with<sp/>a<sp/>different<sp/>color</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>CreateGeometry(kQuadSize,<sp/>0,<sp/>1,<sp/>0);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>host_.DrawArrays();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Stencil<sp/>Op:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>params.stencil_op_zpass_str);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Stencil<sp/>test:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>params.stencil_test_enabled<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;Enabled&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;Disabled&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Depth<sp/>test:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>params.depth_test_enabled<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;Enabled&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;Disabled&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(params);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Restore<sp/>pgraph<sp/>register<sp/>0x880</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>*crash_register<sp/>=<sp/>crash_register_pre_test;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>StencilTests::CreateGeometry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>side_length,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/>host_.GetFramebufferWidthF();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/>host_.GetFramebufferHeightF();</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>centerX<sp/>=<sp/>floorf(fb_width<sp/>/<sp/>2.0f);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>centerY<sp/>=<sp/>floorf(fb_height<sp/>/<sp/>2.0f);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>halfLength<sp/>=<sp/>floorf(side_length<sp/>/<sp/>2.0f);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(6);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>Color<sp/>ul{};</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>Color<sp/>ll{};</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>Color<sp/>lr{};</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>Color<sp/>ur{};</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>ul.SetRGB(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>ll.SetRGB(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>ur.SetRGB(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>lr.SetRGB(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineBiTri(0,<sp/>centerX<sp/>-<sp/>halfLength,<sp/>centerY<sp/>-<sp/>halfLength,<sp/>centerX<sp/>+<sp/>halfLength,<sp/>centerY<sp/>+<sp/>halfLength,<sp/>z,<sp/>z,</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>z,<sp/>z,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal">std::string<sp/>StencilTests::MakeTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>StencilParams<sp/>&amp;params)<sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[128]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>127,<sp/></highlight><highlight class="stringliteral">&quot;Stencil_%s%s%s&quot;</highlight><highlight class="normal">,<sp/>params.stencil_op_zpass_str,<sp/>params.stencil_test_enabled<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;_ST&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>params.depth_test_enabled<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;_DT&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>StencilTests::AddTestEntry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d7/d14/structStencilTests_1_1StencilParams" kindref="compound">StencilTests::StencilParams</ref><sp/>&amp;format)<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(format);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>format]()<sp/>{<sp/>Test(format);<sp/>};</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>tests_[name]<sp/>=<sp/>test;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/stencil_tests.cpp"/>
+  </compounddef>
+</doxygen>
