@@ -217,10 +217,10 @@ add_executable(
         tests/blend_surface_tests.h
         tests/blend_tests.cpp
         tests/blend_tests.h
-        tests/bump_map_tests.cpp
-        tests/bump_map_tests.h
         tests/bump_env_lum_tests.cpp
         tests/bump_env_lum_tests.h
+        tests/bump_map_tests.cpp
+        tests/bump_map_tests.h
         tests/clear_tests.cpp
         tests/clear_tests.h
         tests/clipping_precision_tests.cpp
@@ -373,6 +373,8 @@ add_executable(
         tests/texture_shadow_comparator_tests.h
         tests/texture_signed_component_tests.cpp
         tests/texture_signed_component_tests.h
+        tests/texture_wrap_mode_tests.cpp
+        tests/texture_wrap_mode_tests.h
         tests/three_d_primitive_tests.cpp
         tests/three_d_primitive_tests.h
         tests/two_d_line_tests.cpp
@@ -387,10 +389,10 @@ add_executable(
         tests/viewport_tests.h
         tests/volume_texture_tests.cpp
         tests/volume_texture_tests.h
-        tests/wbuf_tests.cpp
-        tests/wbuf_tests.h
         tests/w_param_tests.cpp
         tests/w_param_tests.h
+        tests/wbuf_tests.cpp
+        tests/wbuf_tests.h
         tests/weight_setter_tests.cpp
         tests/weight_setter_tests.h
         tests/window_clip_tests.cpp

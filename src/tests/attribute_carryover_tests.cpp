@@ -491,9 +491,9 @@ static void CreateLinePair(TestHost &host, std::shared_ptr<VertexBuffer> &bleed_
     vertex->SetPosition(left, top, z);
 
     // Flag the vertex used in inline-element mode to all green (and a reddish weight/fog/pts).
-    vertex->weight = 0.66f;
-    vertex->fog_coord = 0.5f;
-    vertex->point_size = 0.7f;
+    vertex->SetWeight(0.66f);
+    vertex->SetFogCoord(0.5f);
+    vertex->SetPointSize(0.7f);
     vertex->SetNormal(0.0f, 1.0f, 0.0f);
     vertex->SetDiffuse(0.0f, 1.0f, 0.0f, 1.0f);
     vertex->SetSpecular(0.0f, 1.0f, 0.0f, 1.0f);
@@ -549,9 +549,9 @@ static void CreateTrianglePair(TestHost &host, std::shared_ptr<VertexBuffer> &bl
     bleed_buffer->DefineTriangle(0, one_pos, two_pos, three_pos);
     auto vertex = bleed_buffer->Lock();
 
-    vertex[0].weight = 1.f;
-    vertex[0].fog_coord = 1.f;
-    vertex[0].point_size = 1.f;
+    vertex[0].SetWeight(1.f);
+    vertex[0].SetFogCoord(1.f);
+    vertex[0].SetPointSize(1.f);
     vertex[0].SetNormal(1.0f, 1.0f, 1.0f);
     vertex[0].SetDiffuse(1.0f, 1.0f, 1.0f, 1.0f);
     vertex[0].SetSpecular(1.0f, 1.0f, 1.0f, 1.0f);
@@ -563,9 +563,9 @@ static void CreateTrianglePair(TestHost &host, std::shared_ptr<VertexBuffer> &bl
     vertex[0].SetTexCoord3(1.0f, 1.0f);
 
     // Flag the vertex used in inline-element mode to all green (and a reddish weight).
-    vertex[1].weight = 0.66f;
-    vertex[1].fog_coord = 0.5f;
-    vertex[1].point_size = 0.7f;
+    vertex[1].SetWeight(0.66f);
+    vertex[1].SetFogCoord(0.5f);
+    vertex[1].SetPointSize(0.7f);
     vertex[1].SetNormal(0.0f, 1.0f, 0.0f);
     vertex[1].SetDiffuse(0.0f, 1.0f, 0.0f, 1.0f);
     vertex[1].SetSpecular(0.0f, 1.0f, 0.0f, 1.0f);
