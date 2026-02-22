@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/de2/classTexture2DAsCubemapTests" kind="class" language="C++" prot="public">
+    <compoundname>Texture2DAsCubemapTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d8/d75/texture__2d__as__cubemap__tests_8h" local="no">texture_2d_as_cubemap_tests.h</includes>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="d8/de2/classTexture2DAsCubemapTests_1ac93eb1ac7f8c6cc95b1dd07013f51694" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>ReflectTest</name>
+        <qualifiedname>Texture2DAsCubemapTests::ReflectTest</qualifiedname>
+        <enumvalue id="d8/de2/classTexture2DAsCubemapTests_1ac93eb1ac7f8c6cc95b1dd07013f51694aa549bb453ae96644695c24f12de2e673" prot="private">
+          <name>kSpecular</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/de2/classTexture2DAsCubemapTests_1ac93eb1ac7f8c6cc95b1dd07013f51694a1ee3bd7f48cae632b3f6774dead90362" prot="private">
+          <name>kDiffuse</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/de2/classTexture2DAsCubemapTests_1ac93eb1ac7f8c6cc95b1dd07013f51694a48e31b987b8ab51b6c8dce812c06e7f6" prot="private">
+          <name>kSpecularConst</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="23" column="3" bodyfile="src/tests/texture_2d_as_cubemap_tests.h" bodystart="23" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1ab8f576c391c4c71f53eda0c93c677dd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Texture2DAsCubemapTests::Texture2DAsCubemapTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>Texture2DAsCubemapTests</name>
+        <qualifiedname>Texture2DAsCubemapTests::Texture2DAsCubemapTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>Cubemap_Bad2D Renders two angles of a cube utilizing a cubemap texture.</para>
+</simplesect>
+<simplesect kind="remark"><para>DotReflectDiffuse_Bad2D Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode but passing a 2d texture instead of a cubemap for the final lookup.</para>
+</simplesect>
+<simplesect kind="remark"><para>DotReflectSpec_Bad2D Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC pixel shading mode but passing a 2d texture instead of a cubemap for the final lookup.</para>
+</simplesect>
+<simplesect kind="remark"><para>DotReflectSpecConst_Bad2D Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST but passing a 2d texture instead of a cubemap for the final lookup.</para>
+</simplesect>
+<simplesect kind="remark"><para>DotSTR3D_Bad2D Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_3D pixel shading mode but passing a 2d texture instead of a cubemap for the final lookup.</para>
+</simplesect>
+<simplesect kind="remark"><para>DotSTRCube_Bad2D Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_STR_CUBE pixel shading mode but passing a 2d texture instead of a cubemap for the final lookup. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="17" column="3" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="79" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1a229eef0209958bf81dadd3c4484c8c8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Texture2DAsCubemapTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>Texture2DAsCubemapTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="19" column="8" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="89" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1a66ae898e1aec6c9cebabc94d31cca4d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Texture2DAsCubemapTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>Texture2DAsCubemapTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="20" column="8" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="144" bodyend="150"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1a07b499e764f3833fe58e8f4f700cba95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Texture2DAsCubemapTests::TestCubemap</definition>
+        <argsstring>()</argsstring>
+        <name>TestCubemap</name>
+        <qualifiedname>Texture2DAsCubemapTests::TestCubemap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="30" column="8" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="152" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1a2651019cbe25854d13e9123c4f2d56fe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Texture2DAsCubemapTests::TestDotSTR3D</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>TestDotSTR3D</name>
+        <qualifiedname>Texture2DAsCubemapTests::TestDotSTR3D</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="31" column="8" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="209" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1af2ef3300c2f6e6519290c69ae91fae85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Texture2DAsCubemapTests::TestDotSTRCubemap</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>TestDotSTRCubemap</name>
+        <qualifiedname>Texture2DAsCubemapTests::TestDotSTRCubemap</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="32" column="8" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="347" bodyend="419"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/de2/classTexture2DAsCubemapTests_1a503c3245d1e0e3ab90c2ec046df68f40" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Texture2DAsCubemapTests::TestDotReflect</definition>
+        <argsstring>(const std::string &amp;name, ReflectTest mode)</argsstring>
+        <name>TestDotReflect</name>
+        <qualifiedname>Texture2DAsCubemapTests::TestDotReflect</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>ReflectTest</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_2d_as_cubemap_tests.h" line="33" column="8" bodyfile="src/tests/texture_2d_as_cubemap_tests.cpp" bodystart="272" bodyend="345"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior of various texture stage modes that require cubemap/volumetric textures but are given textures registered as 2d.</para>
+<para>NOTE: This suite tests behavior of incorrectly configured textures. Please see <ref refid="d1/df8/classTextureCubemapTests" kindref="compound">TextureCubemapTests</ref> for examples of how these modes should actually be used. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>Texture2DAsCubemapTests</label>
+        <link refid="d8/de2/classTexture2DAsCubemapTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>Texture2DAsCubemapTests</label>
+        <link refid="d8/de2/classTexture2DAsCubemapTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_2d_as_cubemap_tests.h" line="15" column="1" bodyfile="src/tests/texture_2d_as_cubemap_tests.h" bodystart="15" bodyend="34"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>allow_saving_</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1a66ae898e1aec6c9cebabc94d31cca4d0" prot="public" virt="virtual"><scope>Texture2DAsCubemapTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>host_</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1a229eef0209958bf81dadd3c4484c8c8b" prot="public" virt="virtual"><scope>Texture2DAsCubemapTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1ac93eb1ac7f8c6cc95b1dd07013f51694" prot="private" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>ReflectTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>Texture2DAsCubemapTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>Texture2DAsCubemapTests</scope><name>TearDownTest</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1a07b499e764f3833fe58e8f4f700cba95" prot="private" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestCubemap</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1a503c3245d1e0e3ab90c2ec046df68f40" prot="private" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestDotReflect</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1a2651019cbe25854d13e9123c4f2d56fe" prot="private" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestDotSTR3D</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1af2ef3300c2f6e6519290c69ae91fae85" prot="private" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestDotSTRCubemap</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>TestSuite</name></member>
+      <member refid="d8/de2/classTexture2DAsCubemapTests_1ab8f576c391c4c71f53eda0c93c677dd9" prot="public" virt="non-virtual"><scope>Texture2DAsCubemapTests</scope><name>Texture2DAsCubemapTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>Texture2DAsCubemapTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

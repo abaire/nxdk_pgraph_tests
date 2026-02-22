@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kind="struct" language="C++" prot="public">
+    <compoundname>LightingSpotlightTests::Spotlight</compoundname>
+    <includes refid="d4/d14/lighting__spotlight__tests_8h" local="no">lighting_spotlight_tests.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1ad3f196b42d15c211b539c97bb0ac3c5d" prot="public" static="no" mutable="no">
+        <type>XboxMath::vector_t</type>
+        <definition>XboxMath::vector_t LightingSpotlightTests::Spotlight::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="50" column="24" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1ad5f825704e3dbb5416707a2e4d04d1f2" prot="public" static="no" mutable="no">
+        <type>XboxMath::vector_t</type>
+        <definition>XboxMath::vector_t LightingSpotlightTests::Spotlight::direction</definition>
+        <argsstring></argsstring>
+        <name>direction</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::direction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="52" column="24" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a559d1ba1f6569e6c0287f87e518086c4" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float LightingSpotlightTests::Spotlight::phi</definition>
+        <argsstring></argsstring>
+        <name>phi</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::phi</qualifiedname>
+        <briefdescription>
+<para>penumbra (outer cone) angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="55" column="11" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a38ad334677c54e4c1b69fb4e6aa36cb4" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float LightingSpotlightTests::Spotlight::theta</definition>
+        <argsstring></argsstring>
+        <name>theta</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::theta</qualifiedname>
+        <briefdescription>
+<para>umbra (inner cone) angle in degrees. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="58" column="11" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a5f5f642d578287c454c8c822f8c2c89e" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float LightingSpotlightTests::Spotlight::attenuation[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>attenuation</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::attenuation</qualifiedname>
+        <briefdescription>
+<para>Attenuation: {constant, linear (distance), quadratic (distance^2)}. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="61" column="11" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1aa3098643e47135185a1a695f6c62d0cd" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float LightingSpotlightTests::Spotlight::falloff[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>falloff</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::falloff</qualifiedname>
+        <briefdescription>
+<para>Raw nv2a falloff coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="64" column="11" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a305d11bbb94218a01b5626d315566d35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LightingSpotlightTests::Spotlight::Spotlight</definition>
+        <argsstring>(const XboxMath::vector_t &amp;position, const XboxMath::vector_t &amp;direction, float phi, float theta, float attenuation_1, float attenuation_2, float attenuation_3, float falloff_1, float falloff_2, float falloff_3)</argsstring>
+        <name>Spotlight</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::Spotlight</qualifiedname>
+        <param>
+          <type>const XboxMath::vector_t &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const XboxMath::vector_t &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>phi</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>theta</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>attenuation_1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>attenuation_2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>attenuation_3</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>falloff_1</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>falloff_2</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>falloff_3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="45" column="5" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="197" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1ad898cf2d341f1f269e6421c83a0e9151" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingSpotlightTests::Spotlight::Commit</definition>
+        <argsstring>(uint32_t light_index, const XboxMath::matrix4_t &amp;view_matrix) const</argsstring>
+        <name>Commit</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight::Commit</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>light_index</declname>
+        </param>
+        <param>
+          <type>const XboxMath::matrix4_t &amp;</type>
+          <declname>view_matrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="48" column="10" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="211" bodyend="242"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Describes a spotlight. See <ulink url="https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor">https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor</ulink> </para>
+    </detaileddescription>
+    <location file="src/tests/lighting_spotlight_tests.h" line="44" column="3" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="44" bodyend="65"/>
+    <listofallmembers>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a5f5f642d578287c454c8c822f8c2c89e" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>attenuation</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1ad898cf2d341f1f269e6421c83a0e9151" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>Commit</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1ad5f825704e3dbb5416707a2e4d04d1f2" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>direction</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1aa3098643e47135185a1a695f6c62d0cd" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>falloff</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a559d1ba1f6569e6c0287f87e518086c4" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>phi</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1ad3f196b42d15c211b539c97bb0ac3c5d" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>position</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a305d11bbb94218a01b5626d315566d35" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>Spotlight</name></member>
+      <member refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a38ad334677c54e4c1b69fb4e6aa36cb4" prot="public" virt="non-virtual"><scope>LightingSpotlightTests::Spotlight</scope><name>theta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

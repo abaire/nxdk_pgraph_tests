@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d50/classColorKeyTests" kind="class" language="C++" prot="public">
+    <compoundname>ColorKeyTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="dc/d0f/color__key__tests_8h" local="no">color_key_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a1508839b36a031077a829cac121f3a42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ColorKeyTests::ColorKeyTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ColorKeyTests</name>
+        <qualifiedname>ColorKeyTests::ColorKeyTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>FixedTex_Alpha With the fixed function pipeline, zero out just the alpha channel for all places where the colorkey matches the value of a texel. RGB channels are unaffected. This should omit all texels that match the color key.</para>
+</simplesect>
+<simplesect kind="remark"><para>FixedTex_AlphaColor With the fixed function pipeline, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. See IgnAlphaCh_FixedTex_AlphaColor. This should omit all texels that match the color key.</para>
+</simplesect>
+<simplesect kind="remark"><para>FixedTex_Color With the fixed function pipeline, zero out the color and alpha channels for all places where the color key matches the value of a texel. Note that the Alpha channel is also set to zero. This should omit all texels that match the color key.</para>
+</simplesect>
+<simplesect kind="remark"><para>FixedTex_Disabled With the fixed function pipeline, make no changes to any texel whose value matches the color key. This should render all texels as fully opaque with their original colors.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_FixedTex_Alpha With the fixed function pipeline, set the color key mode to clear just the alpha channel for matching texels. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render all texels fully opaque with their original colors, since the texel alpha is ignored during texturing.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_FixedTex_AlphaColor With the fixed function pipeline, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This omits killed texels even though the combiner sets them to fully opaque during texturing.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_FixedTex_Color With the fixed function pipeline, zero out the color and alpha channels for all places where the color key matches the value of a texel. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render matching texels as fully black, since their RGB values were zeroed out and the zeroed alpha channel is ignored.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_FixedTex_Disabled With the fixed function pipeline, make no changes to any texel whose value matches the color key. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This should render all texels as fully opaque with their original colors.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_ProgTex_Alpha With a programmable shader, set the color key mode to clear just the alpha channel for matching texels. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render all texels fully opaque with their original colors, since the texel alpha is ignored during texturing.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_ProgTex_AlphaColor With a programmable shader, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This omits killed texels even though the combiner sets them to fully opaque during texturing.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_ProgTex_Color With a programmable shader, zero out the color and alpha channels for all places where the color key matches the value of a texel. When rendering, set the final combiner to use an alpha value of 0xFF for all texels, forcing pixels to be rendered opaque despite matching the color key. This should render matching texels as fully black, since their RGB values were zeroed out and the zeroed alpha channel is ignored.</para>
+</simplesect>
+<simplesect kind="remark"><para>IgnAlphaCh_ProgTex_Disabled With a programmable shader, make no changes to any texel whose value matches the color key. When rendering, set the final combiner to use an alpha value of 0xFF for all texels. This should render all texels as fully opaque with their original colors.</para>
+</simplesect>
+<simplesect kind="remark"><para>ProgTex_Alpha With a programmable shader, zero out just the alpha channel for all places where the colorkey matches the value of a texel. RGB channels are unaffected. This should omit all texels that match the color key.</para>
+</simplesect>
+<simplesect kind="remark"><para>ProgTex_AlphaColor With a programmable shader, kill the texel completely for wherever the color key matches the value of a texel. This completely masks the texel rather than simply zero-ing out values. See IgnAlphaCh_FixedTex_AlphaColor. This should omit all texels that match the color key.</para>
+</simplesect>
+<simplesect kind="remark"><para>ProgTex_Color With a programmable shader, zero out the color and alpha channels for all places where the color key matches the value of a texel. Note that the Alpha channel is also set to zero. This should omit all texels that match the color key.</para>
+</simplesect>
+<simplesect kind="remark"><para>ProgTex_Disabled With a programmable shader, make no changes to any texel whose value matches the color key. This should render all texels as fully opaque with their original colors.</para>
+</simplesect>
+<simplesect kind="remark"><para>UnsampledTex Demonstrates that the color keys are independent of whether the associated texture stage is used in the final composition or not. With a programable shader, draw two quads with the color key mode set to kill matching texels. In both cases, the final color combiner only samples from texture 0. The left quad renders with the blue color key as key 0. The right quad enables the second texture stage, keeps key 0, and adds the magenta color key with an alpha value forced to 0xFF as key 1. The left image should have the blue color in the NW checkerboard killed. The right image should have the blue color in the NW checkerboard killed, but also the secondary blue color in the SW checkerboard killed. This is because the unsampled magenta texture&apos;s SW secondary color matches the magenta + 0xFF alpha enabled as a color key in the second operation.</para>
+</simplesect>
+<simplesect kind="remark"><para>XAlphaFormat Demonstrates that the alpha component of textures using an &quot;X&quot; alpha mode (e.g., NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8) are matched against color keys without respect to their alpha value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="35" column="3" bodyfile="src/tests/color_key_tests.cpp" bodystart="148" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a3c9f461e6167eb2f70a5ed2ae266d8b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ColorKeyTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="37" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="210" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1ac1e30b83b5757a4b3c794787048eaafd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::TearDownTest</definition>
+        <argsstring>() override</argsstring>
+        <name>TearDownTest</name>
+        <qualifiedname>ColorKeyTests::TearDownTest</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3">TearDownTest</reimplements>
+        <briefdescription>
+<para>Called after running an individual test within this suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="38" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="219" bodyend="225"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a6313bbc8ab4efeb64156ce6caf724d25" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::TestFixedFunction</definition>
+        <argsstring>(const std::string &amp;name, uint32_t mode, bool alpha_from_texture)</argsstring>
+        <name>TestFixedFunction</name>
+        <qualifiedname>ColorKeyTests::TestFixedFunction</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>alpha_from_texture</declname>
+        </param>
+        <briefdescription>
+<para>Tests color key behavior using the fixed function rendering pipeline. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="42" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="344" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a22e90185c75d232831ffd9bf7f30b209" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::Test</definition>
+        <argsstring>(const std::string &amp;name, uint32_t mode, bool alpha_from_texture)</argsstring>
+        <name>Test</name>
+        <qualifiedname>ColorKeyTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>alpha_from_texture</declname>
+        </param>
+        <briefdescription>
+<para>Tests color key behavior using a custom shader. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="45" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="380" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1afccfc31ba71edae966ba7da43bb646bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::TestUnsampled</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>TestUnsampled</name>
+        <qualifiedname>ColorKeyTests::TestUnsampled</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Demonstrate the fact that unsampled texels will kill pixels entirely. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="48" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="396" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a41ccfe2a8290c5f1c35dc50c173eb14c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::TestXAlphaFormatTexture</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>TestXAlphaFormatTexture</name>
+        <qualifiedname>ColorKeyTests::TestXAlphaFormatTexture</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="51" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="437" bodyend="476"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a76c2f719872003548e1f41b2e1a34080" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::SetupTextureStage</definition>
+        <argsstring>(uint32_t stage, uint32_t mode) const</argsstring>
+        <name>SetupTextureStage</name>
+        <qualifiedname>ColorKeyTests::SetupTextureStage</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>stage</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="53" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="478" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a883dcdd5df18928d8e3e6295fa27d556" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::SetupAllTextureStages</definition>
+        <argsstring>(uint32_t mode) const</argsstring>
+        <name>SetupAllTextureStages</name>
+        <qualifiedname>ColorKeyTests::SetupAllTextureStages</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="54" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="486" bodyend="493"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d50/classColorKeyTests_1a63a263b16ac1e36c09ba1f4c5368eeaf" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorKeyTests::DisableAllTextureStages</definition>
+        <argsstring>() const</argsstring>
+        <name>DisableAllTextureStages</name>
+        <qualifiedname>ColorKeyTests::DisableAllTextureStages</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_key_tests.h" line="55" column="8" bodyfile="src/tests/color_key_tests.cpp" bodystart="495" bodyend="503"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests NV097_SET_COLOR_KEY_COLOR (0x0AE0) and the NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE color key functions.</para>
+<para>NV097_SET_TEXTURE_CONTROL0_COLOR_KEY_MODE is used to instruct the hardware what to do when a texel&apos;s value matches a color key. See ColorKeyMode for the supported modes.</para>
+<para>NV097_SET_COLOR_KEY_COLOR is used to instruct the hardware which texels should have the color key mode applied.</para>
+<para>Each test renders a series of quads, with each quad being divided into four subcomponents (NW = northwest/top left, etc...):</para>
+<para>NW: Checkerboard alternating a color-keyed color and a light grey. NE: Checkerboard alternating a dark grey and an alpha-keyed color. SW: Checkerboard alternating the color-keyed color with alpha from the alpha key and the color keyed color with 0xFF alpha that matches none of the keys. SE: Checkerboard alternating a non-keyed color with alpha from the color key and a non-keyed color with alpha from the alpha key. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ColorKeyTests</label>
+        <link refid="d1/d50/classColorKeyTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ColorKeyTests</label>
+        <link refid="d1/d50/classColorKeyTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/color_key_tests.h" line="33" column="1" bodyfile="src/tests/color_key_tests.h" bodystart="33" bodyend="56"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>allow_saving_</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a1508839b36a031077a829cac121f3a42" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>ColorKeyTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>ColorKeyTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a63a263b16ac1e36c09ba1f4c5368eeaf" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>DisableAllTextureStages</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>host_</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a3c9f461e6167eb2f70a5ed2ae266d8b4" prot="public" virt="virtual"><scope>ColorKeyTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a883dcdd5df18928d8e3e6295fa27d556" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>SetupAllTextureStages</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ColorKeyTests</scope><name>SetupTest</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a76c2f719872003548e1f41b2e1a34080" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>SetupTextureStage</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d1/d50/classColorKeyTests_1ac1e30b83b5757a4b3c794787048eaafd" prot="public" virt="virtual"><scope>ColorKeyTests</scope><name>TearDownTest</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a22e90185c75d232831ffd9bf7f30b209" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>Test</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a6313bbc8ab4efeb64156ce6caf724d25" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>TestFixedFunction</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ColorKeyTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ColorKeyTests</scope><name>TestSuite</name></member>
+      <member refid="d1/d50/classColorKeyTests_1afccfc31ba71edae966ba7da43bb646bb" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>TestUnsampled</name></member>
+      <member refid="d1/d50/classColorKeyTests_1a41ccfe2a8290c5f1c35dc50c173eb14c" prot="private" virt="non-virtual"><scope>ColorKeyTests</scope><name>TestXAlphaFormatTexture</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ColorKeyTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

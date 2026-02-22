@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d67/classSetVertexDataTests" kind="class" language="C++" prot="public">
+    <compoundname>SetVertexDataTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20" prot="public" static="no" strong="no">
+        <type></type>
+        <name>SetFunction</name>
+        <qualifiedname>SetVertexDataTests::SetFunction</qualifiedname>
+        <enumvalue id="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20a7d074870e62d5f9ad0ae12129d172efa" prot="public">
+          <name>FUNC_2F_M</name>
+          <initializer>= NV097_SET_VERTEX_DATA2F_M</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20a41be6acbe36ccf4d476116593f1261ad" prot="public">
+          <name>FUNC_4F_M</name>
+          <initializer>= NV097_SET_VERTEX_DATA4F_M</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20af2c37becd02b3a31f08fda2a0fdb0d66" prot="public">
+          <name>FUNC_2S</name>
+          <initializer>= NV097_SET_VERTEX_DATA2S</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20a056c8909caac5127da47398e45eff6ec" prot="public">
+          <name>FUNC_4UB</name>
+          <initializer>= NV097_SET_VERTEX_DATA4UB</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20abd0212529ab673ebb02f386db0f85dfb" prot="public">
+          <name>FUNC_4S_M</name>
+          <initializer>= NV097_SET_VERTEX_DATA4S_M</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="23" column="3" bodyfile="src/tests/set_vertex_data_tests.h" bodystart="23" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="da/d67/classSetVertexDataTests_1ac2928a174c5d67fa63c2be1f3e655afb" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; SetVertexDataTests::diffuse_buffer_</definition>
+        <argsstring></argsstring>
+        <name>diffuse_buffer_</name>
+        <qualifiedname>SetVertexDataTests::diffuse_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="42" column="19" bodyfile="src/tests/set_vertex_data_tests.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d67/classSetVertexDataTests_1aca2fe35f4048d40587000740962fd2c7" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; SetVertexDataTests::lit_buffer_</definition>
+        <argsstring></argsstring>
+        <name>lit_buffer_</name>
+        <qualifiedname>SetVertexDataTests::lit_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="43" column="19" bodyfile="src/tests/set_vertex_data_tests.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d67/classSetVertexDataTests_1afdfea9a17b4c48092d98d9a8bb45252e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; SetVertexDataTests::lit_buffer_negative_</definition>
+        <argsstring></argsstring>
+        <name>lit_buffer_negative_</name>
+        <qualifiedname>SetVertexDataTests::lit_buffer_negative_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="44" column="19" bodyfile="src/tests/set_vertex_data_tests.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="da/d67/classSetVertexDataTests_1a8cca50401980f75e91b26a1e8f5a8f4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SetVertexDataTests::SetVertexDataTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>SetVertexDataTests</name>
+        <qualifiedname>SetVertexDataTests::SetVertexDataTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="32" column="3" bodyfile="src/tests/set_vertex_data_tests.cpp" bodystart="16" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d67/classSetVertexDataTests_1ada9beafd8338acb0502f8669bb0d906c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SetVertexDataTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SetVertexDataTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="34" column="8" bodyfile="src/tests/set_vertex_data_tests.cpp" bodystart="27" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="da/d67/classSetVertexDataTests_1a26f61e79d68901d9d257fa8bc575eee4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SetVertexDataTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>SetVertexDataTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="37" column="8" bodyfile="src/tests/set_vertex_data_tests.cpp" bodystart="35" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d67/classSetVertexDataTests_1ac5a31860cb1661a8f2d85413623f3880" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SetVertexDataTests::Test</definition>
+        <argsstring>(SetFunction func, const Color &amp;diffuse, bool saturate_signed)</argsstring>
+        <name>Test</name>
+        <qualifiedname>SetVertexDataTests::Test</qualifiedname>
+        <param>
+          <type>SetFunction</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>const Color &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>saturate_signed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="38" column="8" bodyfile="src/tests/set_vertex_data_tests.cpp" bodystart="104" bodyend="223"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="da/d67/classSetVertexDataTests_1a5109082ba3769465d30a8faaea9ec157" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string SetVertexDataTests::MakeTestName</definition>
+        <argsstring>(SetFunction func, bool saturate_signed)</argsstring>
+        <name>MakeTestName</name>
+        <qualifiedname>SetVertexDataTests::MakeTestName</qualifiedname>
+        <param>
+          <type>SetFunction</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>saturate_signed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/set_vertex_data_tests.h" line="40" column="22" bodyfile="src/tests/set_vertex_data_tests.cpp" bodystart="225" bodyend="248"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SetVertexDataTests</label>
+        <link refid="da/d67/classSetVertexDataTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>SetVertexDataTests</label>
+        <link refid="da/d67/classSetVertexDataTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/set_vertex_data_tests.h" line="21" column="1" bodyfile="src/tests/set_vertex_data_tests.h" bodystart="21" bodyend="45"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>allow_saving_</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a26f61e79d68901d9d257fa8bc575eee4" prot="private" virt="non-virtual"><scope>SetVertexDataTests</scope><name>CreateGeometry</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>SetVertexDataTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1ac2928a174c5d67fa63c2be1f3e655afb" prot="private" virt="non-virtual"><scope>SetVertexDataTests</scope><name>diffuse_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>ftp_logger_</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20a7d074870e62d5f9ad0ae12129d172efa" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FUNC_2F_M</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20af2c37becd02b3a31f08fda2a0fdb0d66" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FUNC_2S</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20a41be6acbe36ccf4d476116593f1261ad" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FUNC_4F_M</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20abd0212529ab673ebb02f386db0f85dfb" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FUNC_4S_M</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20a056c8909caac5127da47398e45eff6ec" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>FUNC_4UB</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>host_</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1ada9beafd8338acb0502f8669bb0d906c" prot="public" virt="virtual"><scope>SetVertexDataTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1aca2fe35f4048d40587000740962fd2c7" prot="private" virt="non-virtual"><scope>SetVertexDataTests</scope><name>lit_buffer_</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1afdfea9a17b4c48092d98d9a8bb45252e" prot="private" virt="non-virtual"><scope>SetVertexDataTests</scope><name>lit_buffer_negative_</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a5109082ba3769465d30a8faaea9ec157" prot="private" virt="non-virtual"><scope>SetVertexDataTests</scope><name>MakeTestName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a00594e9eb61e1a34a759657537196b20" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>SetFunction</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>SetVertexDataTests</scope><name>SetupTest</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1a8cca50401980f75e91b26a1e8f5a8f4b" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>SetVertexDataTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>SetVertexDataTests</scope><name>TearDownTest</name></member>
+      <member refid="da/d67/classSetVertexDataTests_1ac5a31860cb1661a8f2d85413623f3880" prot="private" virt="non-virtual"><scope>SetVertexDataTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>SetVertexDataTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>SetVertexDataTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>SetVertexDataTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

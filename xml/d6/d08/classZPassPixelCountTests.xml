@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d08/classZPassPixelCountTests" kind="class" language="C++" prot="public">
+    <compoundname>ZPassPixelCountTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d7/d7d/zpass__pixel__count__tests_8h" local="no">zpass_pixel_count_tests.h</includes>
+    <innerclass refid="d8/d39/structZPassPixelCountTests_1_1report__dma__ctx__" prot="private">ZPassPixelCountTests::report_dma_ctx_</innerclass>
+    <innerclass refid="d2/d73/structZPassPixelCountTests_1_1semaphore__dma__ctx__" prot="private">ZPassPixelCountTests::semaphore_dma_ctx_</innerclass>
+    <innerclass refid="dd/d03/structZPassPixelCountTests_1_1ZPassReport" prot="private">ZPassPixelCountTests::ZPassReport</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d6/d08/classZPassPixelCountTests_1a14a02207fc60167c35c5e26d37b1cc1e" prot="private" static="no" mutable="no">
+        <type>uint32_t *</type>
+        <definition>uint32_t* ZPassPixelCountTests::semaphore_context_object_</definition>
+        <argsstring></argsstring>
+        <name>semaphore_context_object_</name>
+        <qualifiedname>ZPassPixelCountTests::semaphore_context_object_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="44" column="12" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d08/classZPassPixelCountTests_1a26b551158d2cebd1c77b390494eb08a5" prot="private" static="no" mutable="no">
+        <type>ZPassReport *</type>
+        <definition>ZPassReport* ZPassPixelCountTests::report_context_object_</definition>
+        <argsstring></argsstring>
+        <name>report_context_object_</name>
+        <qualifiedname>ZPassPixelCountTests::report_context_object_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="45" column="15" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="45" bodyend="45"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1aad2710de06d0f22c8b02389d70a1a949" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ZPassPixelCountTests::ZPassPixelCountTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ZPassPixelCountTests</name>
+        <qualifiedname>ZPassPixelCountTests::ZPassPixelCountTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>ZPass Tests the basic behavior of ZPASS_PIXEL_COUNT reports. The counter is cleared via NV097_CLEAR_REPORT_VALUE and then four quads are rendered with depth testing enabled. The second quad is completely obscured by the first. The final quad is halfway offscreen. The expected pixel count is then compared to the report value. Next, without clearing the report, one final quad is rendered partially on top of the fourth quad and the report is fetched again, confirming that it now contains the result of the entire draw. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="27" column="3" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="49" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1a782c0c93d2c64c5c4c205e0c7837ee6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ZPassPixelCountTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ZPassPixelCountTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="29" column="8" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="65" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1a7fcf0954b48e8f04850e78ef2cb97e2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ZPassPixelCountTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>ZPassPixelCountTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="30" column="8" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="88" bodyend="100"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1a26cfa7ee52d592d15369ae1baf183dde" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZPassPixelCountTests::Test</definition>
+        <argsstring>()</argsstring>
+        <name>Test</name>
+        <qualifiedname>ZPassPixelCountTests::Test</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="33" column="8" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="102" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1ab7e390d923bf136251a80c459f9ce3b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZPassPixelCountTests::TestPointSize</definition>
+        <argsstring>(uint32_t point_size)</argsstring>
+        <name>TestPointSize</name>
+        <qualifiedname>ZPassPixelCountTests::TestPointSize</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>point_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="35" column="8" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="208" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1a7f50060e1560c7ffd31d31c540c671b6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZPassPixelCountTests::TestPointSizeProgrammable</definition>
+        <argsstring>(uint32_t point_size)</argsstring>
+        <name>TestPointSizeProgrammable</name>
+        <qualifiedname>ZPassPixelCountTests::TestPointSizeProgrammable</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>point_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="36" column="8" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="306" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d08/classZPassPixelCountTests_1a3b4292a4f5a01e27e8e61bb626144a0c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZPassPixelCountTests::TestLineWidth</definition>
+        <argsstring>(uint32_t line_width)</argsstring>
+        <name>TestLineWidth</name>
+        <qualifiedname>ZPassPixelCountTests::TestLineWidth</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>line_width</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="38" column="8" bodyfile="src/tests/zpass_pixel_count_tests.cpp" bodystart="419" bodyend="518"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior of NV097_GET_REPORT. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>ZPassPixelCountTests</label>
+        <link refid="d6/d08/classZPassPixelCountTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ZPassPixelCountTests</label>
+        <link refid="d6/d08/classZPassPixelCountTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/zpass_pixel_count_tests.h" line="17" column="1" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="17" bodyend="46"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>allow_saving_</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a7fcf0954b48e8f04850e78ef2cb97e2b" prot="public" virt="virtual"><scope>ZPassPixelCountTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>host_</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a782c0c93d2c64c5c4c205e0c7837ee6d" prot="public" virt="virtual"><scope>ZPassPixelCountTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a26b551158d2cebd1c77b390494eb08a5" prot="private" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>report_context_object_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>RunAll</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a14a02207fc60167c35c5e26d37b1cc1e" prot="private" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>semaphore_context_object_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ZPassPixelCountTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>ZPassPixelCountTests</scope><name>TearDownTest</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a26cfa7ee52d592d15369ae1baf183dde" prot="private" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>Test</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a3b4292a4f5a01e27e8e61bb626144a0c" prot="private" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TestLineWidth</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TestNames</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1ab7e390d923bf136251a80c459f9ce3b0" prot="private" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TestPointSize</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1a7f50060e1560c7ffd31d31c540c671b6" prot="private" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TestPointSizeProgrammable</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>TestSuite</name></member>
+      <member refid="d6/d08/classZPassPixelCountTests_1aad2710de06d0f22c8b02389d70a1a949" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests</scope><name>ZPassPixelCountTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ZPassPixelCountTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

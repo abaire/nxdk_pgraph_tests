@@ -1,0 +1,962 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/dc0/debug__output_8h" kind="file" language="C++">
+    <compoundname>debug_output.h</compoundname>
+    <includes local="no">windows.h</includes>
+    <includes local="no">string</includes>
+    <includes local="yes">printf/printf.h</includes>
+    <includedby refid="d9/d77/debug__output_8cpp" local="yes">src/debug_output.cpp</includedby>
+    <includedby refid="d0/d92/file__util_8cpp" local="yes">src/file_util.cpp</includedby>
+    <includedby refid="d0/d01/image__resource_8cpp" local="yes">src/image_resource.cpp</includedby>
+    <includedby refid="d3/d30/logger_8cpp" local="yes">src/logger.cpp</includedby>
+    <includedby refid="df/d0a/main_8cpp" local="yes">src/main.cpp</includedby>
+    <includedby refid="d9/dcf/menu__item_8cpp" local="yes">src/menu_item.cpp</includedby>
+    <includedby refid="de/d7e/flat__mesh__grid__model_8cpp" local="yes">src/models/flat_mesh_grid_model.cpp</includedby>
+    <includedby refid="d4/da8/light__control__test__mesh__cone__model_8cpp" local="yes">src/models/light_control_test_mesh_cone_model.cpp</includedby>
+    <includedby refid="da/d48/light__control__test__mesh__cylinder__model_8cpp" local="yes">src/models/light_control_test_mesh_cylinder_model.cpp</includedby>
+    <includedby refid="da/dda/light__control__test__mesh__sphere__model_8cpp" local="yes">src/models/light_control_test_mesh_sphere_model.cpp</includedby>
+    <includedby refid="dc/d46/light__control__test__mesh__suzanne__model_8cpp" local="yes">src/models/light_control_test_mesh_suzanne_model.cpp</includedby>
+    <includedby refid="d2/dd1/light__control__test__mesh__torus__model_8cpp" local="yes">src/models/light_control_test_mesh_torus_model.cpp</includedby>
+    <includedby refid="df/d9a/pbkit__ext_8cpp" local="yes">src/pbkit_ext.cpp</includedby>
+    <includedby refid="dd/de0/pgraph__diff__token_8cpp" local="yes">src/pgraph_diff_token.cpp</includedby>
+    <includedby refid="dc/db5/pvideo__control_8cpp" local="yes">src/pvideo_control.cpp</includedby>
+    <includedby refid="d2/d61/test__host_8cpp" local="yes">src/test_host.cpp</includedby>
+    <includedby refid="df/d43/test__host_8h" local="no">src/test_host.h</includedby>
+    <includedby refid="de/def/attribute__carryover__tests_8cpp" local="yes">src/tests/attribute_carryover_tests.cpp</includedby>
+    <includedby refid="d0/de5/attribute__explicit__setter__tests_8cpp" local="yes">src/tests/attribute_explicit_setter_tests.cpp</includedby>
+    <includedby refid="d7/dba/bump__env__lum__tests_8cpp" local="yes">src/tests/bump_env_lum_tests.cpp</includedby>
+    <includedby refid="d1/d0d/bump__map__tests_8cpp" local="yes">src/tests/bump_map_tests.cpp</includedby>
+    <includedby refid="df/d05/clear__tests_8cpp" local="yes">src/tests/clear_tests.cpp</includedby>
+    <includedby refid="dc/dab/clipping__precision__tests_8cpp" local="yes">src/tests/clipping_precision_tests.cpp</includedby>
+    <includedby refid="d4/d9a/color__key__tests_8cpp" local="yes">src/tests/color_key_tests.cpp</includedby>
+    <includedby refid="d4/dfb/color__mask__blend__tests_8cpp" local="yes">src/tests/color_mask_blend_tests.cpp</includedby>
+    <includedby refid="d4/d81/color__zeta__overlap__tests_8cpp" local="yes">src/tests/color_zeta_overlap_tests.cpp</includedby>
+    <includedby refid="d5/d66/depth__clamp__tests_8cpp" local="yes">src/tests/depth_clamp_tests.cpp</includedby>
+    <includedby refid="d8/da7/depth__format__fixed__function__tests_8cpp" local="yes">src/tests/depth_format_fixed_function_tests.cpp</includedby>
+    <includedby refid="d6/dd3/depth__format__tests_8cpp" local="yes">src/tests/depth_format_tests.cpp</includedby>
+    <includedby refid="d0/d4a/depth__function__tests_8cpp" local="yes">src/tests/depth_function_tests.cpp</includedby>
+    <includedby refid="dc/d66/dma__corruption__around__surface__tests_8cpp" local="yes">src/tests/dma_corruption_around_surface_tests.cpp</includedby>
+    <includedby refid="d4/d88/edge__flag__tests_8cpp" local="yes">src/tests/edge_flag_tests.cpp</includedby>
+    <includedby refid="de/d43/fog__carryover__tests_8cpp" local="yes">src/tests/fog_carryover_tests.cpp</includedby>
+    <includedby refid="d4/d99/fog__exceptional__value__tests_8cpp" local="yes">src/tests/fog_exceptional_value_tests.cpp</includedby>
+    <includedby refid="d6/dab/fog__gen__tests_8cpp" local="yes">src/tests/fog_gen_tests.cpp</includedby>
+    <includedby refid="db/d36/fog__param__tests_8cpp" local="yes">src/tests/fog_param_tests.cpp</includedby>
+    <includedby refid="d7/d81/front__face__tests_8cpp" local="yes">src/tests/front_face_tests.cpp</includedby>
+    <includedby refid="d3/d4c/high__vertex__count__tests_8cpp" local="yes">src/tests/high_vertex_count_tests.cpp</includedby>
+    <includedby refid="d4/df4/image__blit__tests_8cpp" local="yes">src/tests/image_blit_tests.cpp</includedby>
+    <includedby refid="de/d64/lighting__accumulation__tests_8cpp" local="yes">src/tests/lighting_accumulation_tests.cpp</includedby>
+    <includedby refid="de/dac/lighting__control__tests_8cpp" local="yes">src/tests/lighting_control_tests.cpp</includedby>
+    <includedby refid="db/d72/lighting__normal__tests_8cpp" local="yes">src/tests/lighting_normal_tests.cpp</includedby>
+    <includedby refid="d2/d8d/lighting__range__tests_8cpp" local="yes">src/tests/lighting_range_tests.cpp</includedby>
+    <includedby refid="d0/d2d/lighting__spotlight__tests_8cpp" local="yes">src/tests/lighting_spotlight_tests.cpp</includedby>
+    <includedby refid="de/dd3/lighting__two__sided__tests_8cpp" local="yes">src/tests/lighting_two_sided_tests.cpp</includedby>
+    <includedby refid="d8/d29/line__width__tests_8cpp" local="yes">src/tests/line_width_tests.cpp</includedby>
+    <includedby refid="de/d8f/material__alpha__tests_8cpp" local="yes">src/tests/material_alpha_tests.cpp</includedby>
+    <includedby refid="db/dcb/material__color__source__tests_8cpp" local="no">src/tests/material_color_source_tests.cpp</includedby>
+    <includedby refid="d3/d33/material__color__tests_8cpp" local="yes">src/tests/material_color_tests.cpp</includedby>
+    <includedby refid="da/dbd/point__params__tests_8cpp" local="no">src/tests/point_params_tests.cpp</includedby>
+    <includedby refid="d1/d80/pvideo__tests_8cpp" local="yes">src/tests/pvideo_tests.cpp</includedby>
+    <includedby refid="d5/d25/set__vertex__data__tests_8cpp" local="yes">src/tests/set_vertex_data_tests.cpp</includedby>
+    <includedby refid="d1/d76/shade__model__tests_8cpp" local="yes">src/tests/shade_model_tests.cpp</includedby>
+    <includedby refid="dd/d82/specular__back__tests_8cpp" local="yes">src/tests/specular_back_tests.cpp</includedby>
+    <includedby refid="da/d0c/specular__tests_8cpp" local="yes">src/tests/specular_tests.cpp</includedby>
+    <includedby refid="d9/d6a/stencil__func__tests_8cpp" local="yes">src/tests/stencil_func_tests.cpp</includedby>
+    <includedby refid="de/d30/stencil__tests_8cpp" local="yes">src/tests/stencil_tests.cpp</includedby>
+    <includedby refid="de/dde/stipple__tests_8cpp" local="yes">src/tests/stipple_tests.cpp</includedby>
+    <includedby refid="dc/d6c/test__suite_8cpp" local="yes">src/tests/test_suite.cpp</includedby>
+    <includedby refid="df/d62/texgen__matrix__tests_8cpp" local="yes">src/tests/texgen_matrix_tests.cpp</includedby>
+    <includedby refid="d5/d38/texgen__tests_8cpp" local="yes">src/tests/texgen_tests.cpp</includedby>
+    <includedby refid="de/d3e/texture__2d__as__cubemap__tests_8cpp" local="yes">src/tests/texture_2d_as_cubemap_tests.cpp</includedby>
+    <includedby refid="df/d45/texture__3d__as__2d__tests_8cpp" local="yes">src/tests/texture_3d_as_2d_tests.cpp</includedby>
+    <includedby refid="d5/d6d/texture__border__tests_8cpp" local="yes">src/tests/texture_border_tests.cpp</includedby>
+    <includedby refid="d3/d9f/texture__brdf__tests_8cpp" local="yes">src/tests/texture_brdf_tests.cpp</includedby>
+    <includedby refid="dc/d48/texture__cpu__update__tests_8cpp" local="yes">src/tests/texture_cpu_update_tests.cpp</includedby>
+    <includedby refid="d6/d8f/texture__cubemap__tests_8cpp" local="yes">src/tests/texture_cubemap_tests.cpp</includedby>
+    <includedby refid="d9/d13/texture__format__dxt__tests_8cpp" local="yes">src/tests/texture_format_dxt_tests.cpp</includedby>
+    <includedby refid="df/ddd/texture__format__tests_8cpp" local="yes">src/tests/texture_format_tests.cpp</includedby>
+    <includedby refid="de/d25/texture__framebuffer__blit__tests_8cpp" local="yes">src/tests/texture_framebuffer_blit_tests.cpp</includedby>
+    <includedby refid="d9/da7/texture__matrix__tests_8cpp" local="yes">src/tests/texture_matrix_tests.cpp</includedby>
+    <includedby refid="db/d8b/texture__perspective__enable__tests_8cpp" local="yes">src/tests/texture_perspective_enable_tests.cpp</includedby>
+    <includedby refid="dd/dca/texture__perspective__tests_8cpp" local="yes">src/tests/texture_perspective_tests.cpp</includedby>
+    <includedby refid="d6/d40/texture__render__target__tests_8cpp" local="yes">src/tests/texture_render_target_tests.cpp</includedby>
+    <includedby refid="d1/dbf/texture__render__update__in__place__tests_8cpp" local="yes">src/tests/texture_render_update_in_place_tests.cpp</includedby>
+    <includedby refid="d1/d5e/texture__shadow__comparator__tests_8cpp" local="yes">src/tests/texture_shadow_comparator_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <includedby refid="df/d5a/vertex__shader__rounding__tests_8cpp" local="yes">src/tests/vertex_shader_rounding_tests.cpp</includedby>
+    <includedby refid="d3/db7/viewport__tests_8cpp" local="yes">src/tests/viewport_tests.cpp</includedby>
+    <includedby refid="d0/d31/volume__texture__tests_8cpp" local="yes">src/tests/volume_texture_tests.cpp</includedby>
+    <includedby refid="d5/dc7/w__param__tests_8cpp" local="yes">src/tests/w_param_tests.cpp</includedby>
+    <includedby refid="d5/d0a/wbuf__tests_8cpp" local="yes">src/tests/wbuf_tests.cpp</includedby>
+    <includedby refid="df/d75/weight__setter__tests_8cpp" local="yes">src/tests/weight_setter_tests.cpp</includedby>
+    <includedby refid="d4/d70/window__clip__tests_8cpp" local="yes">src/tests/window_clip_tests.cpp</includedby>
+    <includedby refid="d2/dc9/z__min__max__control__tests_8cpp" local="yes">src/tests/z_min_max_control_tests.cpp</includedby>
+    <includedby refid="dd/dc3/zpass__pixel__count__tests_8cpp" local="yes">src/tests/zpass_pixel_count_tests.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>windows.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>src/runtime_config.h</label>
+        <link refid="d4/d3c/runtime__config_8h_source"/>
+      </node>
+      <node id="3">
+        <label>src/test_driver.h</label>
+        <link refid="dd/dab/test__driver_8h_source"/>
+      </node>
+      <node id="2">
+        <label>src/test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/tests/alpha_func_tests.h</label>
+        <link refid="da/da3/alpha__func__tests_8h_source"/>
+      </node>
+      <node id="5">
+        <label>src/tests/antialiasing_tests.h</label>
+        <link refid="d4/d10/antialiasing__tests_8h_source"/>
+      </node>
+      <node id="6">
+        <label>src/tests/attribute_carryover_tests.h</label>
+        <link refid="dc/db4/attribute__carryover__tests_8h_source"/>
+      </node>
+      <node id="7">
+        <label>src/tests/attribute_explicit_setter_tests.h</label>
+        <link refid="d2/dd9/attribute__explicit__setter__tests_8h_source"/>
+      </node>
+      <node id="8">
+        <label>src/tests/attribute_float_tests.h</label>
+        <link refid="d6/dad/attribute__float__tests_8h_source"/>
+      </node>
+      <node id="9">
+        <label>src/tests/blend_surface_tests.h</label>
+        <link refid="d6/d66/blend__surface__tests_8h_source"/>
+      </node>
+      <node id="10">
+        <label>src/tests/blend_tests.h</label>
+        <link refid="de/d05/blend__tests_8h_source"/>
+      </node>
+      <node id="11">
+        <label>src/tests/bump_env_lum_tests.h</label>
+        <link refid="d8/d19/bump__env__lum__tests_8h_source"/>
+      </node>
+      <node id="12">
+        <label>src/tests/bump_map_tests.h</label>
+        <link refid="d3/d56/bump__map__tests_8h_source"/>
+      </node>
+      <node id="13">
+        <label>src/tests/clear_tests.h</label>
+        <link refid="d6/d93/clear__tests_8h_source"/>
+      </node>
+      <node id="41">
+        <label>src/tests/clipping_precision_tests.h</label>
+        <link refid="dc/d65/clipping__precision__tests_8h_source"/>
+      </node>
+      <node id="14">
+        <label>src/tests/color_key_tests.h</label>
+        <link refid="dc/d0f/color__key__tests_8h_source"/>
+      </node>
+      <node id="42">
+        <label>src/tests/color_mask_blend_tests.h</label>
+        <link refid="d7/d01/color__mask__blend__tests_8h_source"/>
+      </node>
+      <node id="15">
+        <label>src/tests/color_zeta_disable_tests.h</label>
+        <link refid="d0/d2e/color__zeta__disable__tests_8h_source"/>
+      </node>
+      <node id="16">
+        <label>src/tests/color_zeta_overlap_tests.h</label>
+        <link refid="da/dad/color__zeta__overlap__tests_8h_source"/>
+      </node>
+      <node id="17">
+        <label>src/tests/combiner_tests.h</label>
+        <link refid="df/d03/combiner__tests_8h_source"/>
+      </node>
+      <node id="18">
+        <label>src/tests/context_switch_tests.h</label>
+        <link refid="df/d8e/context__switch__tests_8h_source"/>
+      </node>
+      <node id="19">
+        <label>src/tests/degenerate_begin_end_tests.h</label>
+        <link refid="dc/dff/degenerate__begin__end__tests_8h_source"/>
+      </node>
+      <node id="43">
+        <label>src/tests/depth_clamp_tests.h</label>
+        <link refid="d1/df7/depth__clamp__tests_8h_source"/>
+      </node>
+      <node id="44">
+        <label>src/tests/depth_format_fixed_function_tests.h</label>
+        <link refid="d2/d0d/depth__format__fixed__function__tests_8h_source"/>
+      </node>
+      <node id="45">
+        <label>src/tests/depth_format_tests.h</label>
+        <link refid="dc/de6/depth__format__tests_8h_source"/>
+      </node>
+      <node id="46">
+        <label>src/tests/depth_function_tests.h</label>
+        <link refid="de/dcd/depth__function__tests_8h_source"/>
+      </node>
+      <node id="20">
+        <label>src/tests/dma_corruption_around_surface_tests.h</label>
+        <link refid="d7/d89/dma__corruption__around__surface__tests_8h_source"/>
+      </node>
+      <node id="21">
+        <label>src/tests/edge_flag_tests.h</label>
+        <link refid="da/d59/edge__flag__tests_8h_source"/>
+      </node>
+      <node id="22">
+        <label>src/tests/fog_carryover_tests.h</label>
+        <link refid="d2/d3f/fog__carryover__tests_8h_source"/>
+      </node>
+      <node id="47">
+        <label>src/tests/fog_exceptional_value_tests.h</label>
+        <link refid="db/dc9/fog__exceptional__value__tests_8h_source"/>
+      </node>
+      <node id="48">
+        <label>src/tests/fog_gen_tests.h</label>
+        <link refid="d4/d01/fog__gen__tests_8h_source"/>
+      </node>
+      <node id="49">
+        <label>src/tests/fog_param_tests.h</label>
+        <link refid="d2/d2a/fog__param__tests_8h_source"/>
+      </node>
+      <node id="23">
+        <label>src/tests/fog_tests.h</label>
+        <link refid="dd/ded/fog__tests_8h_source"/>
+      </node>
+      <node id="50">
+        <label>src/tests/front_face_tests.h</label>
+        <link refid="df/d31/front__face__tests_8h_source"/>
+      </node>
+      <node id="24">
+        <label>src/tests/high_vertex_count_tests.h</label>
+        <link refid="d8/d40/high__vertex__count__tests_8h_source"/>
+      </node>
+      <node id="51">
+        <label>src/tests/image_blit_tests.h</label>
+        <link refid="d5/d38/image__blit__tests_8h_source"/>
+      </node>
+      <node id="25">
+        <label>src/tests/inline_array_size_mismatch.h</label>
+        <link refid="dc/d05/inline__array__size__mismatch_8h_source"/>
+      </node>
+      <node id="52">
+        <label>src/tests/lighting_accumulation_tests.h</label>
+        <link refid="d9/d57/lighting__accumulation__tests_8h_source"/>
+      </node>
+      <node id="53">
+        <label>src/tests/lighting_control_tests.h</label>
+        <link refid="d7/ddd/lighting__control__tests_8h_source"/>
+      </node>
+      <node id="54">
+        <label>src/tests/lighting_normal_tests.h</label>
+        <link refid="dc/da8/lighting__normal__tests_8h_source"/>
+      </node>
+      <node id="55">
+        <label>src/tests/lighting_range_tests.h</label>
+        <link refid="d7/d0f/lighting__range__tests_8h_source"/>
+      </node>
+      <node id="56">
+        <label>src/tests/lighting_spotlight_tests.h</label>
+        <link refid="d4/d14/lighting__spotlight__tests_8h_source"/>
+      </node>
+      <node id="57">
+        <label>src/tests/lighting_two_sided_tests.h</label>
+        <link refid="df/dc1/lighting__two__sided__tests_8h_source"/>
+      </node>
+      <node id="26">
+        <label>src/tests/line_width_tests.h</label>
+        <link refid="de/d36/line__width__tests_8h_source"/>
+      </node>
+      <node id="58">
+        <label>src/tests/material_alpha_tests.h</label>
+        <link refid="d1/d39/material__alpha__tests_8h_source"/>
+      </node>
+      <node id="59">
+        <label>src/tests/material_color_source_tests.h</label>
+        <link refid="da/d32/material__color__source__tests_8h_source"/>
+      </node>
+      <node id="60">
+        <label>src/tests/material_color_tests.h</label>
+        <link refid="db/d75/material__color__tests_8h_source"/>
+      </node>
+      <node id="27">
+        <label>src/tests/null_surface_tests.h</label>
+        <link refid="db/d18/null__surface__tests_8h_source"/>
+      </node>
+      <node id="28">
+        <label>src/tests/overlapping_draw_modes_tests.h</label>
+        <link refid="d8/d68/overlapping__draw__modes__tests_8h_source"/>
+      </node>
+      <node id="61">
+        <label>src/tests/pixel_shader_tests.h</label>
+        <link refid="d3/d6a/pixel__shader__tests_8h_source"/>
+      </node>
+      <node id="29">
+        <label>src/tests/point_params_tests.h</label>
+        <link refid="d1/d5c/point__params__tests_8h_source"/>
+      </node>
+      <node id="30">
+        <label>src/tests/point_size_tests.h</label>
+        <link refid="d7/d75/point__size__tests_8h_source"/>
+      </node>
+      <node id="62">
+        <label>src/tests/point_sprite_tests.h</label>
+        <link refid="de/d56/point__sprite__tests_8h_source"/>
+      </node>
+      <node id="31">
+        <label>src/tests/pvideo_tests.h</label>
+        <link refid="da/db8/pvideo__tests_8h_source"/>
+      </node>
+      <node id="63">
+        <label>src/tests/set_vertex_data_tests.h</label>
+        <link refid="d9/dff/set__vertex__data__tests_8h_source"/>
+      </node>
+      <node id="32">
+        <label>src/tests/shade_model_tests.h</label>
+        <link refid="d0/dbf/shade__model__tests_8h_source"/>
+      </node>
+      <node id="33">
+        <label>src/tests/smoothing_tests.h</label>
+        <link refid="d8/daa/smoothing__tests_8h_source"/>
+      </node>
+      <node id="64">
+        <label>src/tests/specular_back_tests.h</label>
+        <link refid="dd/d8d/specular__back__tests_8h_source"/>
+      </node>
+      <node id="65">
+        <label>src/tests/specular_tests.h</label>
+        <link refid="d6/db2/specular__tests_8h_source"/>
+      </node>
+      <node id="66">
+        <label>src/tests/stencil_func_tests.h</label>
+        <link refid="d1/d21/stencil__func__tests_8h_source"/>
+      </node>
+      <node id="67">
+        <label>src/tests/stencil_tests.h</label>
+        <link refid="d7/d2c/stencil__tests_8h_source"/>
+      </node>
+      <node id="34">
+        <label>src/tests/stipple_tests.h</label>
+        <link refid="d0/daa/stipple__tests_8h_source"/>
+      </node>
+      <node id="35">
+        <label>src/tests/surface_clip_tests.h</label>
+        <link refid="da/d0b/surface__clip__tests_8h_source"/>
+      </node>
+      <node id="36">
+        <label>src/tests/surface_format_tests.h</label>
+        <link refid="dd/dfe/surface__format__tests_8h_source"/>
+      </node>
+      <node id="37">
+        <label>src/tests/surface_pitch_tests.h</label>
+        <link refid="da/d8d/surface__pitch__tests_8h_source"/>
+      </node>
+      <node id="38">
+        <label>src/tests/swath_width_tests.h</label>
+        <link refid="df/db5/swath__width__tests_8h_source"/>
+      </node>
+      <node id="39">
+        <label>src/tests/test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+        <childnode refid="104" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>src/tests/texgen_matrix_tests.h</label>
+        <link refid="d0/d6f/texgen__matrix__tests_8h_source"/>
+      </node>
+      <node id="69">
+        <label>src/tests/texgen_tests.h</label>
+        <link refid="d6/d93/texgen__tests_8h_source"/>
+      </node>
+      <node id="70">
+        <label>src/tests/texture_2d_as_cubemap_tests.h</label>
+        <link refid="d8/d75/texture__2d__as__cubemap__tests_8h_source"/>
+      </node>
+      <node id="71">
+        <label>src/tests/texture_3d_as_2d_tests.h</label>
+        <link refid="de/d23/texture__3d__as__2d__tests_8h_source"/>
+      </node>
+      <node id="72">
+        <label>src/tests/texture_anisotropy_tests.h</label>
+        <link refid="d2/dcc/texture__anisotropy__tests_8h_source"/>
+      </node>
+      <node id="73">
+        <label>src/tests/texture_border_color_tests.h</label>
+        <link refid="d5/d61/texture__border__color__tests_8h_source"/>
+      </node>
+      <node id="74">
+        <label>src/tests/texture_border_tests.h</label>
+        <link refid="d0/de9/texture__border__tests_8h_source"/>
+      </node>
+      <node id="75">
+        <label>src/tests/texture_brdf_tests.h</label>
+        <link refid="d1/dcd/texture__brdf__tests_8h_source"/>
+      </node>
+      <node id="76">
+        <label>src/tests/texture_cpu_update_tests.h</label>
+        <link refid="de/dca/texture__cpu__update__tests_8h_source"/>
+      </node>
+      <node id="77">
+        <label>src/tests/texture_cubemap_tests.h</label>
+        <link refid="d8/d42/texture__cubemap__tests_8h_source"/>
+      </node>
+      <node id="78">
+        <label>src/tests/texture_format_dxt_tests.h</label>
+        <link refid="dd/d61/texture__format__dxt__tests_8h_source"/>
+      </node>
+      <node id="79">
+        <label>src/tests/texture_format_tests.h</label>
+        <link refid="d1/d54/texture__format__tests_8h_source"/>
+      </node>
+      <node id="80">
+        <label>src/tests/texture_framebuffer_blit_tests.h</label>
+        <link refid="dd/d75/texture__framebuffer__blit__tests_8h_source"/>
+      </node>
+      <node id="81">
+        <label>src/tests/texture_lod_bias_tests.h</label>
+        <link refid="d7/d0c/texture__lod__bias__tests_8h_source"/>
+      </node>
+      <node id="82">
+        <label>src/tests/texture_matrix_tests.h</label>
+        <link refid="dd/dbe/texture__matrix__tests_8h_source"/>
+      </node>
+      <node id="83">
+        <label>src/tests/texture_palette_tests.h</label>
+        <link refid="df/da0/texture__palette__tests_8h_source"/>
+      </node>
+      <node id="84">
+        <label>src/tests/texture_perspective_enable_tests.h</label>
+        <link refid="dc/d3d/texture__perspective__enable__tests_8h_source"/>
+      </node>
+      <node id="85">
+        <label>src/tests/texture_perspective_tests.h</label>
+        <link refid="d7/dbd/texture__perspective__tests_8h_source"/>
+      </node>
+      <node id="86">
+        <label>src/tests/texture_render_target_tests.h</label>
+        <link refid="df/d0d/texture__render__target__tests_8h_source"/>
+      </node>
+      <node id="87">
+        <label>src/tests/texture_render_update_in_place_tests.h</label>
+        <link refid="d2/d1d/texture__render__update__in__place__tests_8h_source"/>
+      </node>
+      <node id="88">
+        <label>src/tests/texture_shadow_comparator_tests.h</label>
+        <link refid="d5/dc7/texture__shadow__comparator__tests_8h_source"/>
+      </node>
+      <node id="89">
+        <label>src/tests/texture_signed_component_tests.h</label>
+        <link refid="df/d39/texture__signed__component__tests_8h_source"/>
+      </node>
+      <node id="90">
+        <label>src/tests/texture_wrap_mode_tests.h</label>
+        <link refid="dc/d61/texture__wrap__mode__tests_8h_source"/>
+      </node>
+      <node id="91">
+        <label>src/tests/three_d_primitive_tests.h</label>
+        <link refid="de/dc5/three__d__primitive__tests_8h_source"/>
+      </node>
+      <node id="92">
+        <label>src/tests/two_d_line_tests.h</label>
+        <link refid="dd/d12/two__d__line__tests_8h_source"/>
+      </node>
+      <node id="93">
+        <label>src/tests/vertex_shader_independence_tests.h</label>
+        <link refid="d0/d3a/vertex__shader__independence__tests_8h_source"/>
+      </node>
+      <node id="94">
+        <label>src/tests/vertex_shader_rounding_tests.h</label>
+        <link refid="d7/d8b/vertex__shader__rounding__tests_8h_source"/>
+      </node>
+      <node id="95">
+        <label>src/tests/vertex_shader_swizzle_tests.h</label>
+        <link refid="dd/d20/vertex__shader__swizzle__tests_8h_source"/>
+      </node>
+      <node id="96">
+        <label>src/tests/viewport_tests.h</label>
+        <link refid="da/d83/viewport__tests_8h_source"/>
+      </node>
+      <node id="97">
+        <label>src/tests/volume_texture_tests.h</label>
+        <link refid="d9/d00/volume__texture__tests_8h_source"/>
+      </node>
+      <node id="98">
+        <label>src/tests/w_param_tests.h</label>
+        <link refid="db/ddf/w__param__tests_8h_source"/>
+      </node>
+      <node id="99">
+        <label>src/tests/wbuf_tests.h</label>
+        <link refid="df/d8f/wbuf__tests_8h_source"/>
+      </node>
+      <node id="100">
+        <label>src/tests/weight_setter_tests.h</label>
+        <link refid="d4/d52/weight__setter__tests_8h_source"/>
+      </node>
+      <node id="101">
+        <label>src/tests/window_clip_tests.h</label>
+        <link refid="d5/ddb/window__clip__tests_8h_source"/>
+      </node>
+      <node id="102">
+        <label>src/tests/z_min_max_control_tests.h</label>
+        <link refid="da/d1c/z__min__max__control__tests_8h_source"/>
+      </node>
+      <node id="103">
+        <label>src/tests/zero_stride_tests.h</label>
+        <link refid="d4/d46/zero__stride__tests_8h_source"/>
+      </node>
+      <node id="104">
+        <label>src/tests/zpass_pixel_count_tests.h</label>
+        <link refid="d7/d7d/zpass__pixel__count__tests_8h_source"/>
+      </node>
+    </invincdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="d3/dc0/debug__output_8h_1aad4e5b6078e35a063d909d9a2db2e5e0" prot="public" static="no">
+        <name>ASSERT</name>
+        <param><defname>c</defname></param>
+        <initializer>  if (!(c)) {                                          \
+    PrintAssertAndWaitForever(#c, __FILE__, __LINE__); \
+  }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/debug_output.h" line="13" column="9" bodyfile="src/debug_output.h" bodystart="13" bodyend="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d3/dc0/debug__output_8h_1a9af2aef5c8565e5aabd16d354459237e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>VarArgs</declname>
+            <defname>VarArgs</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PrintMsg</definition>
+        <argsstring>(const char *fmt, VarArgs &amp;&amp;...args)</argsstring>
+        <name>PrintMsg</name>
+        <param>
+          <type>const char *</type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>VarArgs &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/debug_output.h" line="19" column="13" bodyfile="src/debug_output.h" bodystart="19" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/dc0/debug__output_8h_1a93aa8310c8b2db6063c6cd3b4a495615" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PrintAssertAndWaitForever</definition>
+        <argsstring>(const char *assert_code, const char *filename, uint32_t line)</argsstring>
+        <name>PrintAssertAndWaitForever</name>
+        <param>
+          <type>const char *</type>
+          <declname>assert_code</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/debug_output.h" line="28" column="7" bodyfile="src/debug_output.cpp" bodystart="21" bodyend="29" declfile="src/debug_output.h" declline="28" declcolumn="7"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>clang<sp/>diagnostic<sp/>push</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>clang<sp/>diagnostic<sp/>ignored<sp/>&quot;-Wmacro-redefined&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;windows.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>clang<sp/>diagnostic<sp/>pop</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;printf/printf.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ASSERT(c)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="14"><highlight class="preprocessor"><sp/><sp/>if<sp/>(!(c))<sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="15"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>PrintAssertAndWaitForever(#c,<sp/>__FILE__,<sp/>__LINE__);<sp/>\</highlight></codeline>
+<codeline lineno="16"><highlight class="preprocessor"><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>VarArgs&gt;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PrintMsg(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*fmt,<sp/>VarArgs<sp/>&amp;&amp;...args)<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>string_length<sp/>=<sp/>snprintf_(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/>0,<sp/>fmt,<sp/>args...);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>std::string<sp/>buf;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>buf.resize(string_length);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>snprintf_(&amp;buf[0],<sp/>string_length<sp/>+<sp/>1,<sp/>fmt,<sp/>args...);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>DbgPrint(</highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>buf.c_str());</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal">[[noreturn]]<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PrintAssertAndWaitForever(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*assert_code,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename,<sp/>uint32_t<sp/>line);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_DEBUG_OUTPUT_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/debug_output.h"/>
+  </compounddef>
+</doxygen>

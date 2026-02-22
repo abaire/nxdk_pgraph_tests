@@ -1,0 +1,934 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d98/classRuntimeConfig" kind="class" language="C++" prot="public">
+    <compoundname>RuntimeConfig</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="d0/d98/classRuntimeConfig_1a53d0ad09bd863533db55bc1918436821" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>SkipConfiguration</name>
+        <qualifiedname>RuntimeConfig::SkipConfiguration</qualifiedname>
+        <enumvalue id="d0/d98/classRuntimeConfig_1a53d0ad09bd863533db55bc1918436821a5b39c8b553c821e7cddc6da64b5bd2ee" prot="public">
+          <name>DEFAULT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d98/classRuntimeConfig_1a53d0ad09bd863533db55bc1918436821a203ec08f57cb105eeb2b121ba6503b52" prot="public">
+          <name>SKIPPED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d98/classRuntimeConfig_1a53d0ad09bd863533db55bc1918436821a2b373f495b7ff443d0244c6a5e436023" prot="public">
+          <name>UNSKIPPED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="12" column="3" bodyfile="src/runtime_config.h" bodystart="12" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="enum" id="d0/d98/classRuntimeConfig_1adb786fb538c9159a9682bc6d642ccd28" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>NetworkConfigMode</name>
+        <qualifiedname>RuntimeConfig::NetworkConfigMode</qualifiedname>
+        <enumvalue id="d0/d98/classRuntimeConfig_1adb786fb538c9159a9682bc6d642ccd28a88559a0cfd8250c9d65970cc145c92d4" prot="public">
+          <name>OFF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d98/classRuntimeConfig_1adb786fb538c9159a9682bc6d642ccd28a008f6cdd0c190839e9885cf9f9e2a652" prot="public">
+          <name>AUTOMATIC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d98/classRuntimeConfig_1adb786fb538c9159a9682bc6d642ccd28a54201c55d2bdc7a9e19d9e032d8c0ede" prot="public">
+          <name>DHCP</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d98/classRuntimeConfig_1adb786fb538c9159a9682bc6d642ccd28afe6f99ef1ec99efbdc19a9786cf1facc" prot="public">
+          <name>STATIC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="18" column="3" bodyfile="src/runtime_config.h" bodystart="18" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a0a4ced1f0f8000bb55e0007fdf341f21" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_progress_log_</definition>
+        <argsstring></argsstring>
+        <name>enable_progress_log_</name>
+        <qualifiedname>RuntimeConfig::enable_progress_log_</qualifiedname>
+        <initializer>= DEFAULT_ENABLE_PROGRESS_LOG</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="100" column="8" bodyfile="src/runtime_config.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a3d6f3e5aab9104d24b6afd55b33546aa" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::delay_milliseconds_between_tests_</definition>
+        <argsstring></argsstring>
+        <name>delay_milliseconds_between_tests_</name>
+        <qualifiedname>RuntimeConfig::delay_milliseconds_between_tests_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Add a delay before running each test. This may be useful in conjunction with the progress log if specific tests crash an emulator; giving more time for the log to be flushed to the filesystem. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="103" column="12" bodyfile="src/runtime_config.h" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a2a5689f477b3ef9692e20a84eb76cbeb" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::delay_milliseconds_before_exit_</definition>
+        <argsstring></argsstring>
+        <name>delay_milliseconds_before_exit_</name>
+        <qualifiedname>RuntimeConfig::delay_milliseconds_before_exit_</qualifiedname>
+        <initializer>{DEFAULT_DELAY_MILLISECONDS_BEFORE_EXIT}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="104" column="12" bodyfile="src/runtime_config.h" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a82dbd30ac65d1e180a436f620a9a3253" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::disable_autorun_</definition>
+        <argsstring></argsstring>
+        <name>disable_autorun_</name>
+        <qualifiedname>RuntimeConfig::disable_autorun_</qualifiedname>
+        <initializer>= DEFAULT_DISABLE_AUTORUN</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="105" column="8" bodyfile="src/runtime_config.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a86bf2d2cdd9ad0200158b461b64acb04" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_autorun_immediately_</definition>
+        <argsstring></argsstring>
+        <name>enable_autorun_immediately_</name>
+        <qualifiedname>RuntimeConfig::enable_autorun_immediately_</qualifiedname>
+        <initializer>= DEFAULT_AUTORUN_IMMEDIATELY</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="106" column="8" bodyfile="src/runtime_config.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a839dd4750252137dc5d0fbc54f34956e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_shutdown_on_completion_</definition>
+        <argsstring></argsstring>
+        <name>enable_shutdown_on_completion_</name>
+        <qualifiedname>RuntimeConfig::enable_shutdown_on_completion_</qualifiedname>
+        <initializer>= DEFAULT_ENABLE_SHUTDOWN</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="107" column="8" bodyfile="src/runtime_config.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1ada858a6a953ae8706fa0d002d7f303bd" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_pgraph_region_diff_</definition>
+        <argsstring></argsstring>
+        <name>enable_pgraph_region_diff_</name>
+        <qualifiedname>RuntimeConfig::enable_pgraph_region_diff_</qualifiedname>
+        <initializer>= DEFAULT_ENABLE_PGRAPH_REGION_DIFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="108" column="8" bodyfile="src/runtime_config.h" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a78613c6ad8ea5c5d9add504ef45ea724" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::skip_tests_by_default_</definition>
+        <argsstring></argsstring>
+        <name>skip_tests_by_default_</name>
+        <qualifiedname>RuntimeConfig::skip_tests_by_default_</qualifiedname>
+        <initializer>= DEFAULT_SKIP_TESTS_BY_DEFAULT</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="109" column="8" bodyfile="src/runtime_config.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1abeafd6b5d17e17db8f5e3a219ba70d74" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::ftp_server_ip_</definition>
+        <argsstring></argsstring>
+        <name>ftp_server_ip_</name>
+        <qualifiedname>RuntimeConfig::ftp_server_ip_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="111" column="12" bodyfile="src/runtime_config.h" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a094c6da88c2f4b1ad0ecfe322ec3bcb6" prot="private" static="no" mutable="no">
+        <type>uint16_t</type>
+        <definition>uint16_t RuntimeConfig::ftp_server_port_</definition>
+        <argsstring></argsstring>
+        <name>ftp_server_port_</name>
+        <qualifiedname>RuntimeConfig::ftp_server_port_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="112" column="12" bodyfile="src/runtime_config.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a6fcc82dcba1941b57550b5ea555fb690" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string RuntimeConfig::ftp_user_</definition>
+        <argsstring></argsstring>
+        <name>ftp_user_</name>
+        <qualifiedname>RuntimeConfig::ftp_user_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="113" column="15" bodyfile="src/runtime_config.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a4aa3c0a65ba5eb4a78cc7ef89a86e796" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string RuntimeConfig::ftp_password_</definition>
+        <argsstring></argsstring>
+        <name>ftp_password_</name>
+        <qualifiedname>RuntimeConfig::ftp_password_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="114" column="15" bodyfile="src/runtime_config.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1ab3ef83f1ac235e9b5c6ffd50f3580595" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::ftp_timeout_milliseconds_</definition>
+        <argsstring></argsstring>
+        <name>ftp_timeout_milliseconds_</name>
+        <qualifiedname>RuntimeConfig::ftp_timeout_milliseconds_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="115" column="12" bodyfile="src/runtime_config.h" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a16f7679c8255f086a07f4822ad56fdcf" prot="private" static="no" mutable="no">
+        <type>NetworkConfigMode</type>
+        <definition>NetworkConfigMode RuntimeConfig::network_config_mode_</definition>
+        <argsstring></argsstring>
+        <name>network_config_mode_</name>
+        <qualifiedname>RuntimeConfig::network_config_mode_</qualifiedname>
+        <initializer>= NetworkConfigMode::OFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="117" column="21" bodyfile="src/runtime_config.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1ae0a70be6c5d117cc3bff21350512ab64" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_ip_</definition>
+        <argsstring></argsstring>
+        <name>static_ip_</name>
+        <qualifiedname>RuntimeConfig::static_ip_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="118" column="12" bodyfile="src/runtime_config.h" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a7bf37c6ec9fa6afc7060e60139c9f28d" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_gateway_</definition>
+        <argsstring></argsstring>
+        <name>static_gateway_</name>
+        <qualifiedname>RuntimeConfig::static_gateway_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="119" column="12" bodyfile="src/runtime_config.h" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1aa22e42f26fcda7b3a793653d24b49526" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_netmask_</definition>
+        <argsstring></argsstring>
+        <name>static_netmask_</name>
+        <qualifiedname>RuntimeConfig::static_netmask_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="120" column="12" bodyfile="src/runtime_config.h" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a43d23789611b28f520d1aa83390a2ca8" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_dns_1_</definition>
+        <argsstring></argsstring>
+        <name>static_dns_1_</name>
+        <qualifiedname>RuntimeConfig::static_dns_1_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="121" column="12" bodyfile="src/runtime_config.h" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a2eddb4fda7b7ae3552f386806ebc1e27" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_dns_2_</definition>
+        <argsstring></argsstring>
+        <name>static_dns_2_</name>
+        <qualifiedname>RuntimeConfig::static_dns_2_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="122" column="12" bodyfile="src/runtime_config.h" bodystart="122" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a909ad1d37589976ec8df8dd848e7abbd" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string RuntimeConfig::output_directory_path_</definition>
+        <argsstring></argsstring>
+        <name>output_directory_path_</name>
+        <qualifiedname>RuntimeConfig::output_directory_path_</qualifiedname>
+        <initializer>= SanitizePath(DEFAULT_OUTPUT_DIRECTORY_PATH)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="124" column="15" bodyfile="src/runtime_config.h" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a5e69eff9458234b7cd10f8283b7ae8a7" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, SkipConfiguration &gt;</type>
+        <definition>std::map&lt;std::string, SkipConfiguration&gt; RuntimeConfig::configured_test_suites_</definition>
+        <argsstring></argsstring>
+        <name>configured_test_suites_</name>
+        <qualifiedname>RuntimeConfig::configured_test_suites_</qualifiedname>
+        <briefdescription>
+<para>Map of test suite name to skip config. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="127" column="12" bodyfile="src/runtime_config.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d98/classRuntimeConfig_1a93266abd31cd76445e637c54c9ac0ace" prot="private" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::map&lt; std::string, SkipConfiguration &gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::map&lt;std::string, SkipConfiguration&gt; &gt; RuntimeConfig::configured_test_cases_</definition>
+        <argsstring></argsstring>
+        <name>configured_test_cases_</name>
+        <qualifiedname>RuntimeConfig::configured_test_cases_</qualifiedname>
+        <briefdescription>
+<para>Map of test suite name to a map of test case to skip config. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="129" column="12" bodyfile="src/runtime_config.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a5bb5fdf8d9ba569c2ab2a5b549d987d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RuntimeConfig::RuntimeConfig</definition>
+        <argsstring>()=default</argsstring>
+        <name>RuntimeConfig</name>
+        <qualifiedname>RuntimeConfig::RuntimeConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="26" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a357e29abface33d5bc0b18d9445327f7" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RuntimeConfig::RuntimeConfig</definition>
+        <argsstring>(const RuntimeConfig &amp;)=delete</argsstring>
+        <name>RuntimeConfig</name>
+        <qualifiedname>RuntimeConfig::RuntimeConfig</qualifiedname>
+        <param>
+          <type>const <ref refid="d0/d98/classRuntimeConfig" kindref="compound">RuntimeConfig</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="27" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a14a49d34275e82a2b06bd365d1216c51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::LoadConfig</definition>
+        <argsstring>(const char *config_file_path, std::vector&lt; std::string &gt; &amp;errors)</argsstring>
+        <name>LoadConfig</name>
+        <qualifiedname>RuntimeConfig::LoadConfig</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>config_file_path</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>errors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Loads the JSON config file from the given path. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config_file_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- The path to the file containing the JSON config. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>errors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Vector of strings into which any error messages will be placed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success, false on failure </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="35" column="8" bodyfile="src/runtime_config.cpp" bodystart="50" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a01982f42fa9b49444100ab893e9d4e2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::LoadConfigBuffer</definition>
+        <argsstring>(const std::string &amp;config_content, std::vector&lt; std::string &gt; &amp;errors)</argsstring>
+        <name>LoadConfigBuffer</name>
+        <qualifiedname>RuntimeConfig::LoadConfigBuffer</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>config_content</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>errors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Loads the JSON config file from the given string buffer. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config_content</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- String containing the JSON config. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>errors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>- Vector of strings into which any error messages will be placed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success, false on failure </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="43" column="8" bodyfile="src/runtime_config.cpp" bodystart="127" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ab234dceaf1d88e90e733321869a025d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::ApplyConfig</definition>
+        <argsstring>(std::vector&lt; std::shared_ptr&lt; TestSuite &gt; &gt; &amp;test_suites, std::vector&lt; std::string &gt; &amp;errors)</argsstring>
+        <name>ApplyConfig</name>
+        <qualifiedname>RuntimeConfig::ApplyConfig</qualifiedname>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref> &gt; &gt; &amp;</type>
+          <declname>test_suites</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>errors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Processes the JSON config file at the given path and adjusts the given set of test suites. Returns false if parsing fails for any reason. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="49" column="8" bodyfile="src/runtime_config.cpp" bodystart="406" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a51911eb0b101836f553b0561c76e61be" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_progress_log</definition>
+        <argsstring>() const</argsstring>
+        <name>enable_progress_log</name>
+        <qualifiedname>RuntimeConfig::enable_progress_log</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="62" column="9" bodyfile="src/runtime_config.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a9a8c5be5090df2ecc1e79265a285be93" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::disable_autorun</definition>
+        <argsstring>() const</argsstring>
+        <name>disable_autorun</name>
+        <qualifiedname>RuntimeConfig::disable_autorun</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="63" column="9" bodyfile="src/runtime_config.h" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a1a8773d0ba2f6d1ffcd0eb1c4d6c3590" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_autorun_immediately</definition>
+        <argsstring>() const</argsstring>
+        <name>enable_autorun_immediately</name>
+        <qualifiedname>RuntimeConfig::enable_autorun_immediately</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="64" column="9" bodyfile="src/runtime_config.h" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a053e22e1fdaa8f0cfab669d86bdc747f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_shutdown_on_completion</definition>
+        <argsstring>() const</argsstring>
+        <name>enable_shutdown_on_completion</name>
+        <qualifiedname>RuntimeConfig::enable_shutdown_on_completion</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="65" column="9" bodyfile="src/runtime_config.h" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a9d885ddece02113c2b77f48651ea33ee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::enable_pgraph_region_diff</definition>
+        <argsstring>() const</argsstring>
+        <name>enable_pgraph_region_diff</name>
+        <qualifiedname>RuntimeConfig::enable_pgraph_region_diff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="66" column="9" bodyfile="src/runtime_config.h" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a917790f13b1e41f33450c5601d33922b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::skip_tests_by_default</definition>
+        <argsstring>() const</argsstring>
+        <name>skip_tests_by_default</name>
+        <qualifiedname>RuntimeConfig::skip_tests_by_default</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="67" column="9" bodyfile="src/runtime_config.h" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a13ff1b2569fc3497dcf5ed44f3e1f8ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::delay_milliseconds_between_tests</definition>
+        <argsstring>() const</argsstring>
+        <name>delay_milliseconds_between_tests</name>
+        <qualifiedname>RuntimeConfig::delay_milliseconds_between_tests</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="68" column="13" bodyfile="src/runtime_config.h" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a03b8e9489cc631ca1977af506eb0888b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::delay_milliseconds_before_exit</definition>
+        <argsstring>() const</argsstring>
+        <name>delay_milliseconds_before_exit</name>
+        <qualifiedname>RuntimeConfig::delay_milliseconds_before_exit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="69" column="13" bodyfile="src/runtime_config.h" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a5e94a20608b6684c508eb950da16a6e2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::ftp_server_ip</definition>
+        <argsstring>() const</argsstring>
+        <name>ftp_server_ip</name>
+        <qualifiedname>RuntimeConfig::ftp_server_ip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="71" column="13" bodyfile="src/runtime_config.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a1504c381a8535e1ad3bbe5a9b8f881da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t RuntimeConfig::ftp_server_port</definition>
+        <argsstring>() const</argsstring>
+        <name>ftp_server_port</name>
+        <qualifiedname>RuntimeConfig::ftp_server_port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="72" column="13" bodyfile="src/runtime_config.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1aa542a990740b56e2fb5819a325bdc4e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; RuntimeConfig::ftp_user</definition>
+        <argsstring>() const</argsstring>
+        <name>ftp_user</name>
+        <qualifiedname>RuntimeConfig::ftp_user</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="73" column="22" bodyfile="src/runtime_config.h" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a77c0d2a91b82f71c66c785d50419b755" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; RuntimeConfig::ftp_password</definition>
+        <argsstring>() const</argsstring>
+        <name>ftp_password</name>
+        <qualifiedname>RuntimeConfig::ftp_password</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="74" column="22" bodyfile="src/runtime_config.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ae4c3922cd45c3d62cc6aa406fae0e62d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::ftp_timeout_milliseconds</definition>
+        <argsstring>() const</argsstring>
+        <name>ftp_timeout_milliseconds</name>
+        <qualifiedname>RuntimeConfig::ftp_timeout_milliseconds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="75" column="13" bodyfile="src/runtime_config.h" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ae671743b3122e3447f31ae5cc23b3de9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NetworkConfigMode</type>
+        <definition>NetworkConfigMode RuntimeConfig::network_config_mode</definition>
+        <argsstring>() const</argsstring>
+        <name>network_config_mode</name>
+        <qualifiedname>RuntimeConfig::network_config_mode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="77" column="22" bodyfile="src/runtime_config.h" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a4d231ca5f708c1b89135ad1e12ab5bd0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_ip</definition>
+        <argsstring>() const</argsstring>
+        <name>static_ip</name>
+        <qualifiedname>RuntimeConfig::static_ip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="78" column="13" bodyfile="src/runtime_config.h" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ab5fca7605fe8cd579fac033e59e14838" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_gateway</definition>
+        <argsstring>() const</argsstring>
+        <name>static_gateway</name>
+        <qualifiedname>RuntimeConfig::static_gateway</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="79" column="13" bodyfile="src/runtime_config.h" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ad7443dd958cddfd4d6108637f2f34426" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_netmask</definition>
+        <argsstring>() const</argsstring>
+        <name>static_netmask</name>
+        <qualifiedname>RuntimeConfig::static_netmask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="80" column="13" bodyfile="src/runtime_config.h" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ac458cfd3300355605780eeda1aa27015" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_dns_1</definition>
+        <argsstring>() const</argsstring>
+        <name>static_dns_1</name>
+        <qualifiedname>RuntimeConfig::static_dns_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="81" column="13" bodyfile="src/runtime_config.h" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ad33da7c8e987fce34e63055e407ab698" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t RuntimeConfig::static_dns_2</definition>
+        <argsstring>() const</argsstring>
+        <name>static_dns_2</name>
+        <qualifiedname>RuntimeConfig::static_dns_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="82" column="13" bodyfile="src/runtime_config.h" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a648142e0700bcf91e6d8743fc2cd8e68" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; RuntimeConfig::output_directory_path</definition>
+        <argsstring>() const</argsstring>
+        <name>output_directory_path</name>
+        <qualifiedname>RuntimeConfig::output_directory_path</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="84" column="22" bodyfile="src/runtime_config.h" bodystart="84" bodyend="84"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1ad0597a9477a5dbcb7227e8685e9d3468" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string RuntimeConfig::SanitizePath</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>SanitizePath</name>
+        <qualifiedname>RuntimeConfig::SanitizePath</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="86" column="22" bodyfile="src/runtime_config.cpp" bodystart="616" bodyend="620"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d0/d98/classRuntimeConfig_1a248a957e59b13483d8afb01d6f26761c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool RuntimeConfig::ProcessNetworkSettings</definition>
+        <argsstring>(const void *parent, std::vector&lt; std::string &gt; &amp;errors)</argsstring>
+        <name>ProcessNetworkSettings</name>
+        <qualifiedname>RuntimeConfig::ProcessNetworkSettings</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>errors</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/runtime_config.h" line="97" column="8" bodyfile="src/runtime_config.cpp" bodystart="211" bodyend="307"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/runtime_config.h" line="10" column="1" bodyfile="src/runtime_config.h" bodystart="10" bodyend="130"/>
+    <listofallmembers>
+      <member refid="d0/d98/classRuntimeConfig_1ab234dceaf1d88e90e733321869a025d5" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>ApplyConfig</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a93266abd31cd76445e637c54c9ac0ace" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>configured_test_cases_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a5e69eff9458234b7cd10f8283b7ae8a7" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>configured_test_suites_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a03b8e9489cc631ca1977af506eb0888b" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>delay_milliseconds_before_exit</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a2a5689f477b3ef9692e20a84eb76cbeb" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>delay_milliseconds_before_exit_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a13ff1b2569fc3497dcf5ed44f3e1f8ac" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>delay_milliseconds_between_tests</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a3d6f3e5aab9104d24b6afd55b33546aa" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a9a8c5be5090df2ecc1e79265a285be93" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>disable_autorun</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a82dbd30ac65d1e180a436f620a9a3253" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>disable_autorun_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a1a8773d0ba2f6d1ffcd0eb1c4d6c3590" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_autorun_immediately</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a86bf2d2cdd9ad0200158b461b64acb04" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_autorun_immediately_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a9d885ddece02113c2b77f48651ea33ee" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_pgraph_region_diff</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ada858a6a953ae8706fa0d002d7f303bd" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a51911eb0b101836f553b0561c76e61be" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_progress_log</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a0a4ced1f0f8000bb55e0007fdf341f21" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_progress_log_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a053e22e1fdaa8f0cfab669d86bdc747f" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_shutdown_on_completion</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a839dd4750252137dc5d0fbc54f34956e" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>enable_shutdown_on_completion_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a77c0d2a91b82f71c66c785d50419b755" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_password</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a4aa3c0a65ba5eb4a78cc7ef89a86e796" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_password_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a5e94a20608b6684c508eb950da16a6e2" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_server_ip</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1abeafd6b5d17e17db8f5e3a219ba70d74" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_server_ip_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a1504c381a8535e1ad3bbe5a9b8f881da" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_server_port</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a094c6da88c2f4b1ad0ecfe322ec3bcb6" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_server_port_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ae4c3922cd45c3d62cc6aa406fae0e62d" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_timeout_milliseconds</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ab3ef83f1ac235e9b5c6ffd50f3580595" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_timeout_milliseconds_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1aa542a990740b56e2fb5819a325bdc4e8" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_user</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a6fcc82dcba1941b57550b5ea555fb690" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>ftp_user_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a14a49d34275e82a2b06bd365d1216c51" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>LoadConfig</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a01982f42fa9b49444100ab893e9d4e2b" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>LoadConfigBuffer</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ae671743b3122e3447f31ae5cc23b3de9" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>network_config_mode</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a16f7679c8255f086a07f4822ad56fdcf" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>network_config_mode_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1adb786fb538c9159a9682bc6d642ccd28" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>NetworkConfigMode</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a648142e0700bcf91e6d8743fc2cd8e68" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>output_directory_path</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a909ad1d37589976ec8df8dd848e7abbd" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>output_directory_path_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a248a957e59b13483d8afb01d6f26761c" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>ProcessNetworkSettings</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a5bb5fdf8d9ba569c2ab2a5b549d987d0" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>RuntimeConfig</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a357e29abface33d5bc0b18d9445327f7" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>RuntimeConfig</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ad0597a9477a5dbcb7227e8685e9d3468" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>SanitizePath</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a917790f13b1e41f33450c5601d33922b" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>skip_tests_by_default</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a78613c6ad8ea5c5d9add504ef45ea724" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>skip_tests_by_default_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a53d0ad09bd863533db55bc1918436821" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>SkipConfiguration</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ac458cfd3300355605780eeda1aa27015" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_dns_1</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a43d23789611b28f520d1aa83390a2ca8" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_dns_1_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ad33da7c8e987fce34e63055e407ab698" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_dns_2</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a2eddb4fda7b7ae3552f386806ebc1e27" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_dns_2_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ab5fca7605fe8cd579fac033e59e14838" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_gateway</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a7bf37c6ec9fa6afc7060e60139c9f28d" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_gateway_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1a4d231ca5f708c1b89135ad1e12ab5bd0" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_ip</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ae0a70be6c5d117cc3bff21350512ab64" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_ip_</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1ad7443dd958cddfd4d6108637f2f34426" prot="public" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_netmask</name></member>
+      <member refid="d0/d98/classRuntimeConfig_1aa22e42f26fcda7b3a793653d24b49526" prot="private" virt="non-virtual"><scope>RuntimeConfig</scope><name>static_netmask_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

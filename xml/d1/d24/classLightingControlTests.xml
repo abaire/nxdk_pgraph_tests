@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d24/classLightingControlTests" kind="class" language="C++" prot="public">
+    <compoundname>LightingControlTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d7/ddd/lighting__control__tests_8h" local="no">lighting_control_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d1/d24/classLightingControlTests_1ab4114dec007c5502a34d2df9e8cf5059" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingControlTests::vertex_buffer_cone_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_cone_</name>
+        <qualifiedname>LightingControlTests::vertex_buffer_cone_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="72" column="19" bodyfile="src/tests/lighting_control_tests.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d24/classLightingControlTests_1ae9eacd42f8371472f6748e8431727410" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingControlTests::vertex_buffer_cylinder_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_cylinder_</name>
+        <qualifiedname>LightingControlTests::vertex_buffer_cylinder_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="73" column="19" bodyfile="src/tests/lighting_control_tests.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d24/classLightingControlTests_1a578388bfc8c1590b2ab31b44d00e6904" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingControlTests::vertex_buffer_sphere_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_sphere_</name>
+        <qualifiedname>LightingControlTests::vertex_buffer_sphere_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="74" column="19" bodyfile="src/tests/lighting_control_tests.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d24/classLightingControlTests_1a60295c4a8870b1d9290decdd129eb9a1" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingControlTests::vertex_buffer_suzanne_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_suzanne_</name>
+        <qualifiedname>LightingControlTests::vertex_buffer_suzanne_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="75" column="19" bodyfile="src/tests/lighting_control_tests.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/d24/classLightingControlTests_1a7f837286148f008ef8052ffc2666867b" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingControlTests::vertex_buffer_torus_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_torus_</name>
+        <qualifiedname>LightingControlTests::vertex_buffer_torus_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="76" column="19" bodyfile="src/tests/lighting_control_tests.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d1/d24/classLightingControlTests_1a599d3df2e1ff6cb942c9d30880b2df34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LightingControlTests::LightingControlTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>LightingControlTests</name>
+        <qualifiedname>LightingControlTests::LightingControlTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>FF_0x000000 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is forced to opaque.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x000000NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off. Visually equivalent to FF_0x000001.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x000001 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is forced to opaque.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x000001NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x010000 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is forced to opaque.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x010000NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x010001 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is forced to opaque.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x010001NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x020000 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x020000NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x020001 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x020001NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is off, using a simplified model for specular highlighting, causing artifacts for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x030000 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is off, causing the green of the mesh specular to be retained. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x030000NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x030001 Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED on. Separate specular is on, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is set to compute the alpha from the specular and light effects, so the model is transluscent.</para>
+</simplesect>
+<simplesect kind="remark"><para>FF_0x030001NoSpec Tests behavior using the fixed function pipeline with SET_SPECULAR_ENABLED off. Separate specular is ignored because SPECULAR_ENABLED is off, so the green of the mesh specular is not seen. Localeye is on, using a slower model for specular highlighting that results in more realistic behavior for the point light on the cylinder mesh. Light control alpha is ignored and the mesh is forced to opaque because SPECULAR_ENABLED is off. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="60" column="3" bodyfile="src/tests/lighting_control_tests.cpp" bodystart="159" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d24/classLightingControlTests_1a03c6a75794f646d8d5fa3405689468ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LightingControlTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>LightingControlTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="62" column="8" bodyfile="src/tests/lighting_control_tests.cpp" bodystart="184" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d24/classLightingControlTests_1a660ca07007d34f41d78b69f4c8d4d487" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LightingControlTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>LightingControlTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="63" column="8" bodyfile="src/tests/lighting_control_tests.cpp" bodystart="228" bodyend="231"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d1/d24/classLightingControlTests_1a2fa773b40d5674d9e7f1aa5d2966a3e6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingControlTests::Test</definition>
+        <argsstring>(const std::string &amp;name, uint32_t light_control, bool specular_enabled, bool is_fixed_function)</argsstring>
+        <name>Test</name>
+        <qualifiedname>LightingControlTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>light_control</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>specular_enabled</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_fixed_function</declname>
+        </param>
+        <briefdescription>
+<para>Tests the behavior of SET_LIGHT_CONTROL. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="67" column="8" bodyfile="src/tests/lighting_control_tests.cpp" bodystart="374" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d24/classLightingControlTests_1a3e2a64cfc18d9c2f6fbb623ed1a74b42" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingControlTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>LightingControlTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_control_tests.h" line="69" column="8" bodyfile="src/tests/lighting_control_tests.cpp" bodystart="192" bodyend="226"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the effects of NV097_SET_LIGHT_CONTROL (0x294) in conjunction with NV097_SET_SPECULAR_ENABLE.</para>
+<para>A number of test meshes are rendered and lit with two lights:</para>
+<para>1) A directional light coming from the left and pointing into the screen (direction is {1, 0, 1}).</para>
+<para>2) An attenuated point light on the right at {1.5f, 1.f, -2.5f} with a max rannge of 4. and attenuation of {0.025f, 0.15f, 0.02f}.</para>
+<para>Both lights have ambient {0.f, 0.f, 0.05f}, diffuse {0.25f, 0.f, 0.f}, specular {0.f, 0.2f, 0.4f}.</para>
+<para>Meshes have the specular color of each vertex at {0.f, 0.4, 0.f, 0.25f}.</para>
+<para>All colors are taken from the material (i.e., contributed by the lights). NV097_SET_MATERIAL_ALPHA is set to 0.4 and the scene ambient is a very dark grey at 0.031373.</para>
+<para>See also: the OpenGL 2.1 specification lighting model <ulink url="https://registry.khronos.org/OpenGL/specs/gl/glspec21.pdf">https://registry.khronos.org/OpenGL/specs/gl/glspec21.pdf</ulink></para>
+<para>Notes on use with the programmable pipeline:</para>
+<para>While it is possible to enable lights when using a vertex shader, it appears that parts of the pipeline are not fully initialized, leading to non-deterministic color effects that change with each draw and often differ across cold boots of the hardware.</para>
+<para>Leaving lighting enabled without enabling any lights via NV097_SET_LIGHT_ENABLE_MASK will cause all vertices to be black in color, but alpha will still come from the material when allowed by the light control and specular enable settings.</para>
+<para>Disabling specular with lighting enabled will still disable the alpha application.</para>
+<para>Enabling specular with lighting disabled will apply the material alpha and use the vertex shader output colors. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightingControlTests</label>
+        <link refid="d1/d24/classLightingControlTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightingControlTests</label>
+        <link refid="d1/d24/classLightingControlTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/lighting_control_tests.h" line="58" column="1" bodyfile="src/tests/lighting_control_tests.h" bodystart="58" bodyend="77"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>allow_saving_</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a3e2a64cfc18d9c2f6fbb623ed1a74b42" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>CreateGeometry</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a03c6a75794f646d8d5fa3405689468ed" prot="public" virt="virtual"><scope>LightingControlTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>host_</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a660ca07007d34f41d78b69f4c8d4d487" prot="public" virt="virtual"><scope>LightingControlTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a599d3df2e1ff6cb942c9d30880b2df34" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>LightingControlTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>LightingControlTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>LightingControlTests</scope><name>TearDownTest</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a2fa773b40d5674d9e7f1aa5d2966a3e6" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>LightingControlTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>LightingControlTests</scope><name>TestSuite</name></member>
+      <member refid="d1/d24/classLightingControlTests_1ab4114dec007c5502a34d2df9e8cf5059" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>vertex_buffer_cone_</name></member>
+      <member refid="d1/d24/classLightingControlTests_1ae9eacd42f8371472f6748e8431727410" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>vertex_buffer_cylinder_</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a578388bfc8c1590b2ab31b44d00e6904" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>vertex_buffer_sphere_</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a60295c4a8870b1d9290decdd129eb9a1" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>vertex_buffer_suzanne_</name></member>
+      <member refid="d1/d24/classLightingControlTests_1a7f837286148f008ef8052ffc2666867b" prot="private" virt="non-virtual"><scope>LightingControlTests</scope><name>vertex_buffer_torus_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>LightingControlTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

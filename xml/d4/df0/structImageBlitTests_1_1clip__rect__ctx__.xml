@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/df0/structImageBlitTests_1_1clip__rect__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>ImageBlitTests::clip_rect_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/image_blit_tests.h" line="61" column="3" bodyfile="src/tests/image_blit_tests.h" bodystart="61" bodyend="61"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,369 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/dbc/classPixelShaderTests" kind="class" language="C++" prot="public">
+    <compoundname>PixelShaderTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d3/d6a/pixel__shader__tests_8h" local="no">pixel_shader_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d2/dbc/classPixelShaderTests_1a187911c4b8f50f5365d73cfe106c0e88" prot="private" static="no" mutable="no">
+        <type><ref refid="d7/d68/structImageResource" kindref="compound">ImageResource</ref></type>
+        <definition>ImageResource PixelShaderTests::water_bump_map_</definition>
+        <argsstring></argsstring>
+        <name>water_bump_map_</name>
+        <qualifiedname>PixelShaderTests::water_bump_map_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="60" column="17" bodyfile="src/tests/pixel_shader_tests.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/dbc/classPixelShaderTests_1ac0e9efedeb7531ab36ab0afc691d35c8" prot="private" static="no" mutable="no">
+        <type><ref refid="d7/d68/structImageResource" kindref="compound">ImageResource</ref></type>
+        <definition>ImageResource PixelShaderTests::bump_map_test_image_</definition>
+        <argsstring></argsstring>
+        <name>bump_map_test_image_</name>
+        <qualifiedname>PixelShaderTests::bump_map_test_image_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="61" column="17" bodyfile="src/tests/pixel_shader_tests.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a109023d23060a63d4cf54b16716dc859" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PixelShaderTests::PixelShaderTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>PixelShaderTests</name>
+        <qualifiedname>PixelShaderTests::PixelShaderTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>Passthru Demonstrates behavior of PS_TEXTUREMODES_PASSTHRU, which simply utilizes texture coordinates as colors.</para>
+</simplesect>
+<simplesect kind="remark"><para>ClipPlane Demonstrates behavior of PS_TEXTUREMODES_CLIPPLANE. Various mock values for clipping planes are assigned to texture coordinates for stages 0 (red), 1 (green), and 2 (blue). The values of the coordinates are summarized in the image, with &quot;1&quot; used to indicate a positive value and &quot;-&quot; to indicate a negative one. The comparator function is set for each quad in the image with a similar shorthand indicating whether results &lt; 0 are clipped (&quot;-&quot;) or &gt;= 0 (&quot;0&quot;).</para>
+</simplesect>
+<simplesect kind="remark"><para>BumpEnvMap Demonstrates behavior of PS_TEXTUREMODES_BUMPENVMAP with various values for the NV097_SET_TEXTURE_SET_BUMP_ENV_MAT matrix. Values are {-1.f, 0.f, 1.f, 0.f}, {1.f, 1.f, 1.f, 1.f}, {0.f, 0.2f, 0.f, 0.75f}, {0.5f, -0.5f, 0.5f, -0.5f}, {0.3f, 0.5f, 0.7f, 1.f}, {0.f, 1.f, -1.f, 0.f}, {0.f, 0.f, 1.f, 1.f}, {0.5f, 0.8f, 0.f, 0.f},</para>
+</simplesect>
+<simplesect kind="remark"><para>BumpEnvMapLuminance Demonstrates behavior of PS_TEXTUREMODES_BUMPENVMAP_LUM with various values for NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE and NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET. Outputs are grouped by the env bump matrix (the value of each element is identical and printed in row 1). Columns are divided up by the scale factor, whose value is printed in row 2. Rows are defined by the offset value: {0, 0.25, 0.75, 1.0}.</para>
+</simplesect>
+<simplesect kind="remark"><para>DotST Renders a quad using PS_TEXTUREMODES_DOT_ST. Texture stage 0 is set to a bump map, stage 2 to an image with diagonal lines. Texture coordinates 1 are set to a normalized vector from the eye coordinate to each vertex (technically to a virtual position rather than the actual vertex position) and coordinate 2 is set to a normalized vector from the vertex to a virtual light. See <ulink url="https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2tex&amp;mdash;ps">https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2tex&amp;mdash;ps</ulink></para>
+</simplesect>
+<simplesect kind="remark"><para>DotZW Renders a quad using PS_TEXTUREMODES_DOT_ZW. Texture stage 0 is set to a bump map. Tex coords for stages 1 and 2 define a 3x2 matrix multiplied against the texture 0 sampler to determine the Z and W components of the fragment&apos;s depth (z = tex1.uvw * tex0.rgb, w = tex2.uvw * tex0.rgb, final depth = z/w). See <ulink url="https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2depth&amp;mdash;ps">https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x2depth&amp;mdash;ps</ulink></para>
+</simplesect>
+<simplesect kind="remark"><para>StageDependentAlphaRed Renders a quad using PS_TEXTUREMODES_DPNDNT_AR. Texture stage 0 is set to a gradient textured. The sampled alpha and red channels from this texture are used as UV coordinates into the texture at stage 2.</para>
+</simplesect>
+<simplesect kind="remark"><para>StageDependentGreenBlue Renders a quad using PS_TEXTUREMODES_DPNDNT_GB. Texture stage 0 is set to a gradient textured. The sampled green and blue channels from this texture are used as UV coordinates into the texture at stage 2. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="16" column="3" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="63" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a395df6ac789f72711a7e255af02d21c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>PixelShaderTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="18" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="77" bodyend="87"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1aba0e280dace2084d16fd1db14b1dd40a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::TestPassthrough</definition>
+        <argsstring>()</argsstring>
+        <name>TestPassthrough</name>
+        <qualifiedname>PixelShaderTests::TestPassthrough</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests PS_TEXTUREMODES_PASSTHRU Demonstrates that the 4d texture coordinate may be used directly as a color. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="23" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="89" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a8c133ba2c68cea5f2626748e73486da3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::TestClipPlane</definition>
+        <argsstring>()</argsstring>
+        <name>TestClipPlane</name>
+        <qualifiedname>PixelShaderTests::TestClipPlane</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests PS_TEXTUREMODES_CLIPPLANE Demonstrates the use of clip planes specified via texcoords in combination with <computeroutput>NV097_SET_SHADER_CLIP_PLANE_MODE</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="28" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="129" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a1d98dbbbf23cc3530f2f16d18ec95a71" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::TestBumpEnvMap</definition>
+        <argsstring>(bool luminance=false)</argsstring>
+        <name>TestBumpEnvMap</name>
+        <qualifiedname>PixelShaderTests::TestBumpEnvMap</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>luminance</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests PS_TEXTUREMODES_BUMPENVMAP and PS_TEXTUREMODES_BUMPENVMAP_LUM Demonstrates the use of NV097_SET_TEXTURE_SET_BUMP_ENV_MAT to modify texture UV coordinates with a normal map.</para>
+<para>In luminance mode, demonstrates use of NV097_SET_TEXTURE_SET_BUMP_ENV_SCALE and NV097_SET_TEXTURE_SET_BUMP_ENV_OFFSET to calculate final RGB color from the normal map&apos;s blue channel via <computeroutput>out_color = out_color * (lum_scale * nm.b + lum_bias)</computeroutput>.</para>
+<para>u&apos; = u + BUMPENVMAT00 * normalmap.r + BUMPENVMAT10 * normalmap.g v&apos; = v + BUMPENVMAT01 * normalmap.r + BUMPENVMAT11 * normalmap.g </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="39" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="236" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1aa95158ca907496fd91ef9fb5d7bdfa96" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::TestDotST</definition>
+        <argsstring>()</argsstring>
+        <name>TestDotST</name>
+        <qualifiedname>PixelShaderTests::TestDotST</qualifiedname>
+        <briefdescription>
+<para>Tests PS_TEXTUREMODES_DOT_ST. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="45" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="364" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a464b1b552e5c1c59f84cca41f536914e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::TestDotZW</definition>
+        <argsstring>()</argsstring>
+        <name>TestDotZW</name>
+        <qualifiedname>PixelShaderTests::TestDotZW</qualifiedname>
+        <briefdescription>
+<para>Tests PS_TEXTUREMODES_DOT_ZW. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="48" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="444" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a8dd2412f8b2aa5bba35ca01a0153bb1a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::TestDependentColorChannel</definition>
+        <argsstring>(bool use_green_blue=false)</argsstring>
+        <name>TestDependentColorChannel</name>
+        <qualifiedname>PixelShaderTests::TestDependentColorChannel</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>use_green_blue</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Tests PS_TEXTUREMODES_DPNDNT_AR and PS_TEXTUREMODES_DPNDNT_GB. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="51" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="535" bodyend="594"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1a3474a7234003f86a2eedd3cc1de21734" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::DrawPlainImage</definition>
+        <argsstring>(float x, float y, const ImageResource &amp;image, float quad_size, bool border=true) const</argsstring>
+        <name>DrawPlainImage</name>
+        <qualifiedname>PixelShaderTests::DrawPlainImage</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d7/d68/structImageResource" kindref="compound">ImageResource</ref> &amp;</type>
+          <declname>image</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>quad_size</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>border</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Draws a basic 2d sampled quad at the given coordinates.</para>
+<para>Note: This modifies texture stage settings, shader stage programs, and combiner settings. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="56" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="596" bodyend="647"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/dbc/classPixelShaderTests_1ae8e63da65b51a11bf40012a18caf5088" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PixelShaderTests::DrawZBuffer</definition>
+        <argsstring>(float left, float top, uint32_t src_x, uint32_t src_y, uint32_t quad_size) const</argsstring>
+        <name>DrawZBuffer</name>
+        <qualifiedname>PixelShaderTests::DrawZBuffer</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src_y</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>quad_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/pixel_shader_tests.h" line="57" column="8" bodyfile="src/tests/pixel_shader_tests.cpp" bodystart="649" bodyend="711"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests various D3D PixelShader / NV097_SET_SHADER_STAGE_PROGRAM operations.</para>
+<para>See <ulink url="https://xboxdevwiki.net/NV2A/Pixel_Combiner">https://xboxdevwiki.net/NV2A/Pixel_Combiner</ulink> See <ulink url="https://web.archive.org/web/20240607015835/https://developer.download.nvidia.com/assets/gamedev/docs/GDC2K1_DX8_Pixel_Shaders.pdf">https://web.archive.org/web/20240607015835/https://developer.download.nvidia.com/assets/gamedev/docs/GDC2K1_DX8_Pixel_Shaders.pdf</ulink> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PixelShaderTests</label>
+        <link refid="d2/dbc/classPixelShaderTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>PixelShaderTests</label>
+        <link refid="d2/dbc/classPixelShaderTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/pixel_shader_tests.h" line="14" column="1" bodyfile="src/tests/pixel_shader_tests.h" bodystart="14" bodyend="62"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1ac0e9efedeb7531ab36ab0afc691d35c8" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>bump_map_test_image_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>PixelShaderTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>DisableTests</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a3474a7234003f86a2eedd3cc1de21734" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>DrawPlainImage</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1ae8e63da65b51a11bf40012a18caf5088" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>DrawZBuffer</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>host_</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a395df6ac789f72711a7e255af02d21c4" prot="public" virt="virtual"><scope>PixelShaderTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a109023d23060a63d4cf54b16716dc859" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>PixelShaderTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>PixelShaderTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>PixelShaderTests</scope><name>TearDownTest</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a1d98dbbbf23cc3530f2f16d18ec95a71" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestBumpEnvMap</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a8c133ba2c68cea5f2626748e73486da3" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestClipPlane</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a8dd2412f8b2aa5bba35ca01a0153bb1a" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestDependentColorChannel</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1aa95158ca907496fd91ef9fb5d7bdfa96" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestDotST</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a464b1b552e5c1c59f84cca41f536914e" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestDotZW</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestNames</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1aba0e280dace2084d16fd1db14b1dd40a" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestPassthrough</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>PixelShaderTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>PixelShaderTests</scope><name>TestSuite</name></member>
+      <member refid="d2/dbc/classPixelShaderTests_1a187911c4b8f50f5365d73cfe106c0e88" prot="private" virt="non-virtual"><scope>PixelShaderTests</scope><name>water_bump_map_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>PixelShaderTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

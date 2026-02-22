@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d21/classPerspectiveVertexShaderNoLighting" kind="class" language="C++" prot="public">
+    <compoundname>PerspectiveVertexShaderNoLighting</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::PerspectiveVertexShader</basecompoundref>
+    <includes refid="d7/d3a/perspective__vertex__shader__no__lighting_8h" local="no">perspective_vertex_shader_no_lighting.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/d21/classPerspectiveVertexShaderNoLighting_1a4888f97c0dceff741aba5b0685e9e337" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PerspectiveVertexShaderNoLighting::PerspectiveVertexShaderNoLighting</definition>
+        <argsstring>(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min=0, float z_max=0x7FFF, float fov_y=M_PI *0.25f, float near=1.0f, float far=10.0f)</argsstring>
+        <name>PerspectiveVertexShaderNoLighting</name>
+        <qualifiedname>PerspectiveVertexShaderNoLighting::PerspectiveVertexShaderNoLighting</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_min</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_max</declname>
+          <defval>0x7FFF</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>fov_y</declname>
+          <defval>M_PI *0.25f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>near</declname>
+          <defval>1.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>far</declname>
+          <defval>10.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/perspective_vertex_shader_no_lighting.h" line="9" column="3" bodyfile="src/shaders/perspective_vertex_shader_no_lighting.cpp" bodystart="9" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Simple perspective projection shader with no support for lighting calculations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>PBKitPlusPlus::PerspectiveVertexShader</label>
+      </node>
+      <node id="1">
+        <label>PerspectiveVertexShaderNoLighting</label>
+        <link refid="d8/d21/classPerspectiveVertexShaderNoLighting"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>PBKitPlusPlus::PerspectiveVertexShader</label>
+      </node>
+      <node id="1">
+        <label>PerspectiveVertexShaderNoLighting</label>
+        <link refid="d8/d21/classPerspectiveVertexShaderNoLighting"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/shaders/perspective_vertex_shader_no_lighting.h" line="7" column="1" bodyfile="src/shaders/perspective_vertex_shader_no_lighting.h" bodystart="7" bodyend="12"/>
+    <listofallmembers>
+      <member refid="d8/d21/classPerspectiveVertexShaderNoLighting_1a4888f97c0dceff741aba5b0685e9e337" prot="public" virt="non-virtual"><scope>PerspectiveVertexShaderNoLighting</scope><name>PerspectiveVertexShaderNoLighting</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

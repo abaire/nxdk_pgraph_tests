@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d7d/pixel__shader__program_8h" kind="file" language="C++">
+    <compoundname>pixel_shader_program.h</compoundname>
+    <includedby refid="dd/db9/pixel__shader__program_8cpp" local="yes">src/shaders/pixel_shader_program.cpp</includedby>
+    <includedby refid="dc/d6c/test__suite_8cpp" local="yes">src/tests/test_suite.cpp</includedby>
+    <includedby refid="df/ddd/texture__format__tests_8cpp" local="yes">src/tests/texture_format_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <innerclass refid="d1/dc0/classPixelShaderProgram" prot="public">PixelShaderProgram</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_PIXEL_SHADER_PROGRAM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_PIXEL_SHADER_PROGRAM_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="d1/dc0/classPixelShaderProgram" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d1/dc0/classPixelShaderProgram" kindref="compound">PixelShaderProgram</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LoadTexturedPixelShader();</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LoadUntexturedPixelShader();</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DisablePixelShader();</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_PIXEL_SHADER_PROGRAM_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/pixel_shader_program.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,348 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/d1f/classAntialiasingTests" kind="class" language="C++" prot="public">
+    <compoundname>AntialiasingTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d4/d10/antialiasing__tests_8h" local="no">antialiasing_tests.h</includes>
+    <innerclass refid="dd/daf/structAntialiasingTests_1_1Instruction" prot="public">AntialiasingTests::Instruction</innerclass>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1ab93eff61422c1af9ecd29d86a8f408e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AntialiasingTests::AntialiasingTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>AntialiasingTests</name>
+        <qualifiedname>AntialiasingTests::AntialiasingTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>AAOnThenOffCPUWrite Configure the framebuffer surface with some antialiasing mode, clear, change the mode, modify the framebuffer by writing directly to VRAM, then render. Used to reproduce xemu-project/xemu#652.</para>
+</simplesect>
+<simplesect kind="remark"><para>CPUWriteIgnoresSurfaceConfig This test verifies that direct writes to VRAM bypass any surface configuration. It sets up a texture surface with antialiasing enabled, then writes directly to texture memory and renders the texture to the screen. It is expected that antialiasing has no effect.</para>
+</simplesect>
+<simplesect kind="remark"><para>CreateSurfaceWithCenter1 Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_1</para>
+</simplesect>
+<simplesect kind="remark"><para>CreateSurfaceWithCenterCorner2 Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_CENTER_CORNER_2</para>
+</simplesect>
+<simplesect kind="remark"><para>CreateSurfaceWithSquareOffset4 Tests rendering with NV097_SET_SURFACE_FORMAT_ANTI_ALIASING_SQUARE_OFFSET_4</para>
+</simplesect>
+<simplesect kind="remark"><para>FBSurfaceWithCenter1</para>
+</simplesect>
+<simplesect kind="remark"><para>FBSurfaceWithCenterCorner2</para>
+</simplesect>
+<simplesect kind="remark"><para>FramebufferNotModifiedBySurfaceState</para>
+</simplesect>
+<simplesect kind="remark"><para>GPUAAWriteAfterCPUWrite</para>
+</simplesect>
+<simplesect kind="remark"><para>NonAACPURoundTrip</para>
+</simplesect>
+<simplesect kind="remark"><para>SurfaceStatesAreIndependent </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="32" column="3" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="78" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1ac6c440d8b3c18bfc7a865f0c2454eaf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>AntialiasingTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="34" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="101" bodyend="113"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1adeafa74cfa676161dcbd49e4c8edfc1c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::Test</definition>
+        <argsstring>(const char *name, TestHost::AntiAliasingSetting aa)</argsstring>
+        <name>Test</name>
+        <qualifiedname>AntialiasingTests::Test</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>TestHost::AntiAliasingSetting</type>
+          <declname>aa</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Point the color surface at texture memory, configure the surface with some antialiasing mode, clear, then point the surface back to the framebuffer and render the texture memory. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="37" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="119" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1aef380637b9b34af6673ccf298adfc554" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestAARenderToFramebufferSurface</definition>
+        <argsstring>(const char *name, TestHost::AntiAliasingSetting aa)</argsstring>
+        <name>TestAARenderToFramebufferSurface</name>
+        <qualifiedname>AntialiasingTests::TestAARenderToFramebufferSurface</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>TestHost::AntiAliasingSetting</type>
+          <declname>aa</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="38" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="174" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a0ae383c30105453ada02bc1c4e03d1bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestAAOnThenOffThenCPUWrite</definition>
+        <argsstring>()</argsstring>
+        <name>TestAAOnThenOffThenCPUWrite</name>
+        <qualifiedname>AntialiasingTests::TestAAOnThenOffThenCPUWrite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Configure the framebuffer surface with some antialiasing mode, clear, change the mode, modify the framebuffer by writing directly to VRAM, then render. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="39" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="251" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a969b61f89172e7e0e154aef5ff475c20" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestModifyNonFramebufferSurface</definition>
+        <argsstring>()</argsstring>
+        <name>TestModifyNonFramebufferSurface</name>
+        <qualifiedname>AntialiasingTests::TestModifyNonFramebufferSurface</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="40" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="294" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a8b362bfea71ead113ddcc185a610f67f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestFramebufferIsIndependentOfSurface</definition>
+        <argsstring>()</argsstring>
+        <name>TestFramebufferIsIndependentOfSurface</name>
+        <qualifiedname>AntialiasingTests::TestFramebufferIsIndependentOfSurface</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="41" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="351" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a3687a696f9dec3ece3898605e98716ff" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig</definition>
+        <argsstring>()</argsstring>
+        <name>TestCPUWriteIgnoresSurfaceConfig</name>
+        <qualifiedname>AntialiasingTests::TestCPUWriteIgnoresSurfaceConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>This test verifies that direct writes to VRAM bypass any surface configuration and must not be interpreted using the current xemu SurfaceBinding. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="42" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="400" bodyend="451"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a0519b32af1faa6a562faf3cfbff3ac60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestGPUAAWriteAfterCPUWrite</definition>
+        <argsstring>()</argsstring>
+        <name>TestGPUAAWriteAfterCPUWrite</name>
+        <qualifiedname>AntialiasingTests::TestGPUAAWriteAfterCPUWrite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="43" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="453" bodyend="520"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1af23ec06291704146f3227f1a871b5417" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::TestNonAACPURoundTrip</definition>
+        <argsstring>()</argsstring>
+        <name>TestNonAACPURoundTrip</name>
+        <qualifiedname>AntialiasingTests::TestNonAACPURoundTrip</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>This test verifies that nop draws to a CPU blitted surface are truly nops. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="44" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="525" bodyend="575"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1ad5d171711b607757d51d4490d0da3229" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::Draw</definition>
+        <argsstring>() const</argsstring>
+        <name>Draw</name>
+        <qualifiedname>AntialiasingTests::Draw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="51" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="626" bodyend="661"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a595c3385d6cddb6479c3e62fc417e7f2" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::NoOpDraw</definition>
+        <argsstring>() const</argsstring>
+        <name>NoOpDraw</name>
+        <qualifiedname>AntialiasingTests::NoOpDraw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="52" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="663" bodyend="669"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/d1f/classAntialiasingTests_1a5d9343dd13d52439bed4bfcccd6df778" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AntialiasingTests::WaitForGPU</definition>
+        <argsstring>() const</argsstring>
+        <name>WaitForGPU</name>
+        <qualifiedname>AntialiasingTests::WaitForGPU</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/antialiasing_tests.h" line="53" column="8" bodyfile="src/tests/antialiasing_tests.cpp" bodystart="671" bodyend="676"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the effects of NV097_SET_SURFACE_FORMAT_ANTI_ALIASING in various scenarios.</para>
+<para>Many of these tests were created to demonstrate specific bugs in xemu and are not of practical value in typical hardware use cases. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AntialiasingTests</label>
+        <link refid="d5/d1f/classAntialiasingTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AntialiasingTests</label>
+        <link refid="d5/d1f/classAntialiasingTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/antialiasing_tests.h" line="22" column="1" bodyfile="src/tests/antialiasing_tests.h" bodystart="22" bodyend="54"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>allow_saving_</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1ab93eff61422c1af9ecd29d86a8f408e0" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>AntialiasingTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>AntialiasingTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>DisableTests</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1ad5d171711b607757d51d4490d0da3229" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>Draw</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>host_</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1ac6c440d8b3c18bfc7a865f0c2454eaf5" prot="public" virt="virtual"><scope>AntialiasingTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>Name</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a595c3385d6cddb6479c3e62fc417e7f2" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>NoOpDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>AntialiasingTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>AntialiasingTests</scope><name>TearDownTest</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1adeafa74cfa676161dcbd49e4c8edfc1c" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>Test</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a0ae383c30105453ada02bc1c4e03d1bb" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestAAOnThenOffThenCPUWrite</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1aef380637b9b34af6673ccf298adfc554" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestAARenderToFramebufferSurface</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a3687a696f9dec3ece3898605e98716ff" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestCPUWriteIgnoresSurfaceConfig</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a8b362bfea71ead113ddcc185a610f67f" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestFramebufferIsIndependentOfSurface</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a0519b32af1faa6a562faf3cfbff3ac60" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestGPUAAWriteAfterCPUWrite</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a969b61f89172e7e0e154aef5ff475c20" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestModifyNonFramebufferSurface</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestNames</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1af23ec06291704146f3227f1a871b5417" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestNonAACPURoundTrip</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>AntialiasingTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>AntialiasingTests</scope><name>TestSuite</name></member>
+      <member refid="d5/d1f/classAntialiasingTests_1a5d9343dd13d52439bed4bfcccd6df778" prot="private" virt="non-virtual"><scope>AntialiasingTests</scope><name>WaitForGPU</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>AntialiasingTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

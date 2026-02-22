@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/d0a/structNamedSurfaceFormat" kind="struct" language="C++" prot="public">
+    <compoundname>NamedSurfaceFormat</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d5/d0a/structNamedSurfaceFormat_1a36a600ee3c2b9c7eebcdf1c9b19ae10f" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* NamedSurfaceFormat::suffix</definition>
+        <argsstring></argsstring>
+        <name>suffix</name>
+        <qualifiedname>NamedSurfaceFormat::suffix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.cpp" line="17" column="14" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d0a/structNamedSurfaceFormat_1a41bef7d5e729c855e923b9b843755fa0" prot="public" static="no" mutable="no">
+        <type>TestHost::SurfaceColorFormat</type>
+        <definition>TestHost::SurfaceColorFormat NamedSurfaceFormat::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>NamedSurfaceFormat::format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.cpp" line="18" column="32" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d0a/structNamedSurfaceFormat_1a9dd5b19a49c641f5496e86591f8d2770" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* NamedSurfaceFormat::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>NamedSurfaceFormat::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.cpp" line="22" column="14" bodyfile="src/tests/surface_format_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/surface_clip_tests.cpp" line="16" column="1" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="16" bodyend="19"/>
+    <listofallmembers>
+      <member refid="d5/d0a/structNamedSurfaceFormat_1a41bef7d5e729c855e923b9b843755fa0" prot="public" virt="non-virtual"><scope>NamedSurfaceFormat</scope><name>format</name></member>
+      <member refid="d5/d0a/structNamedSurfaceFormat_1a9dd5b19a49c641f5496e86591f8d2770" prot="public" virt="non-virtual"><scope>NamedSurfaceFormat</scope><name>name</name></member>
+      <member refid="d5/d0a/structNamedSurfaceFormat_1a36a600ee3c2b9c7eebcdf1c9b19ae10f" prot="public" virt="non-virtual"><scope>NamedSurfaceFormat</scope><name>suffix</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d05/structTwoDLineTests_1_1TestCase" kind="struct" language="C++" prot="public">
+    <compoundname>TwoDLineTests::TestCase</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="de/d05/structTwoDLineTests_1_1TestCase_1a00d355ef64ba944b3eec6fe924be9194" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TwoDLineTests::TestCase::object_color</definition>
+        <argsstring></argsstring>
+        <name>object_color</name>
+        <qualifiedname>TwoDLineTests::TestCase::object_color</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.h" line="17" column="14" bodyfile="src/tests/two_d_line_tests.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d05/structTwoDLineTests_1_1TestCase_1a1288c2da573bad8f42fc87d1e1b95db5" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TwoDLineTests::TestCase::color_format</definition>
+        <argsstring></argsstring>
+        <name>color_format</name>
+        <qualifiedname>TwoDLineTests::TestCase::color_format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.h" line="18" column="14" bodyfile="src/tests/two_d_line_tests.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d05/structTwoDLineTests_1_1TestCase_1a181b3ffe8fcdce57abe971883a7d5b54" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TwoDLineTests::TestCase::start_x</definition>
+        <argsstring></argsstring>
+        <name>start_x</name>
+        <qualifiedname>TwoDLineTests::TestCase::start_x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.h" line="19" column="14" bodyfile="src/tests/two_d_line_tests.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d05/structTwoDLineTests_1_1TestCase_1a99a9b60ab683c23ec130a89f854eea27" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TwoDLineTests::TestCase::start_y</definition>
+        <argsstring></argsstring>
+        <name>start_y</name>
+        <qualifiedname>TwoDLineTests::TestCase::start_y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.h" line="20" column="14" bodyfile="src/tests/two_d_line_tests.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d05/structTwoDLineTests_1_1TestCase_1af16a008ebb5463beb924d6ad3ed701f2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TwoDLineTests::TestCase::end_x</definition>
+        <argsstring></argsstring>
+        <name>end_x</name>
+        <qualifiedname>TwoDLineTests::TestCase::end_x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.h" line="21" column="14" bodyfile="src/tests/two_d_line_tests.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d05/structTwoDLineTests_1_1TestCase_1a068479ef38ebef265681df5deb6d256d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TwoDLineTests::TestCase::end_y</definition>
+        <argsstring></argsstring>
+        <name>end_y</name>
+        <qualifiedname>TwoDLineTests::TestCase::end_y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.h" line="22" column="14" bodyfile="src/tests/two_d_line_tests.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/two_d_line_tests.h" line="16" column="3" bodyfile="src/tests/two_d_line_tests.h" bodystart="16" bodyend="23"/>
+    <listofallmembers>
+      <member refid="de/d05/structTwoDLineTests_1_1TestCase_1a1288c2da573bad8f42fc87d1e1b95db5" prot="public" virt="non-virtual"><scope>TwoDLineTests::TestCase</scope><name>color_format</name></member>
+      <member refid="de/d05/structTwoDLineTests_1_1TestCase_1af16a008ebb5463beb924d6ad3ed701f2" prot="public" virt="non-virtual"><scope>TwoDLineTests::TestCase</scope><name>end_x</name></member>
+      <member refid="de/d05/structTwoDLineTests_1_1TestCase_1a068479ef38ebef265681df5deb6d256d" prot="public" virt="non-virtual"><scope>TwoDLineTests::TestCase</scope><name>end_y</name></member>
+      <member refid="de/d05/structTwoDLineTests_1_1TestCase_1a00d355ef64ba944b3eec6fe924be9194" prot="public" virt="non-virtual"><scope>TwoDLineTests::TestCase</scope><name>object_color</name></member>
+      <member refid="de/d05/structTwoDLineTests_1_1TestCase_1a181b3ffe8fcdce57abe971883a7d5b54" prot="public" virt="non-virtual"><scope>TwoDLineTests::TestCase</scope><name>start_x</name></member>
+      <member refid="de/d05/structTwoDLineTests_1_1TestCase_1a99a9b60ab683c23ec130a89f854eea27" prot="public" virt="non-virtual"><scope>TwoDLineTests::TestCase</scope><name>start_y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

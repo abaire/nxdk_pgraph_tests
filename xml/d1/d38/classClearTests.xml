@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/d38/classClearTests" kind="class" language="C++" prot="public">
+    <compoundname>ClearTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d6/d93/clear__tests_8h" local="no">clear_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d1/d38/classClearTests_1a5bf78a9fd9100e27dfdd4373061b2979" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ClearTests::ClearTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ClearTests</name>
+        <qualifiedname>ClearTests::ClearTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>C00000000_Depth_n Framebuffer result after disabling writing to all color channels and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000000_Depth_n_ZB Z-buffer result after disabling writing to all color channels and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000000_Depth_y Framebuffer result after disabling writing to all color channels and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000000_Depth_y_ZB Z-buffer result after disabling writing to all color channels and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000001_Depth_n Framebuffer result after disabling writing to all color channels except blue and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000001_Depth_n_ZB Z-buffer result after disabling writing to all color channels except blue and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000001_Depth_y Framebuffer result after disabling writing to all color channels except blue enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000001_Depth_y_ZB Z-buffer result after disabling writing to all color channels except blue enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000100_Depth_n Framebuffer result after disabling writing to all color channels except green and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000100_Depth_n_ZB Z-buffer result after disabling writing to all color channels except green and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000100_Depth_y Framebuffer result after disabling writing to all color channels except green and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00000100_Depth_y_ZB Z-buffer result after disabling writing to all color channels except green and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00010000_Depth_n Framebuffer result after disabling writing to all color channels except red and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00010000_Depth_n_ZB Z-buffer result after disabling writing to all color channels except red and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00010000_Depth_y Framebuffer result after disabling writing to all color channels except red and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C00010000_Depth_y_ZB Z-buffer result after disabling writing to all color channels except red and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01000000_Depth_n Framebuffer result after disabling writing to all color channels except alpha and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01000000_Depth_n_ZB Z-buffer result after disabling writing to all color channels except alpha and to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01000000_Depth_y Framebuffer result after disabling writing to all color channels except alpha and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01000000_Depth_y_ZB Z-buffer result after disabling writing to all color channels except alpha and enabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01010101_Depth_n Framebuffer result after enabling writing to all color channels but disabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01010101_Depth_n_ZB Z-buffer result after enabling writing to all color channels but disabling writes to the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01010101_Depth_y Framebuffer result after enabling writing to all color channels and the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>C01010101_Depth_y_ZB Z-buffer result after enabling writing to all color channels and the depth/stencil buffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>SFC_A8R8G8B8 Tests the effect of clear color on LE_A8R8G8B8 surface format.</para>
+</simplesect>
+<simplesect kind="remark"><para>SFC_X1R5G5B5_Z1R5G5B5 Tests the effect of clear color on LE_X1R5G5B5_Z1R5G5B5 surface format. The cleared surface will have its most significant bit set to 0. (Note that the surface is rendered as an ARGB8 texture)</para>
+</simplesect>
+<simplesect kind="remark"><para>SFC_X1R5G5B5_O1R5G5B5 Tests the effect of clear color on LE_X1R5G5B5_O1R5G5B5 surface format. The cleared surface will have its most significant bit set to 1. (Note that the surface is rendered as an ARGB8 texture)</para>
+</simplesect>
+<simplesect kind="remark"><para>SCF_R5G6B5 Tests the effect of clear color on LE_R5G6B5 surface format. (Note that the surface is rendered as an ARGB8 texture)</para>
+</simplesect>
+<simplesect kind="remark"><para>SCF_X8R8G8B8_Z8R8G8B8 Tests the effect of clear color on LE_X8R8G8B8_Z8R8G8B8 surface format. The cleared surface will have its most significant byte set to 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>SCF_X8R8G8B8_O8R8G8B8 Tests the effect of clear color on LE_X8R8G8B8_O8R8G8B8 surface format. The cleared surface will have its most significant byte set to 1.</para>
+</simplesect>
+<simplesect kind="remark"><para>SCF_X1A7R8G8B8_Z1A7R8G8B8 Tests the effect of clear color on LE_X1A7R8G8B8_Z1A7R8G8B8 surface format. The cleared surface will have its most significant bit set to 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>SCF_X1A7R8G8B8_O1A7R8G8B8 Tests the effect of clear color on LE_X1A7R8G8B8_O1A7R8G8B8 surface format. The cleared surface will have its most significant bit set to 1. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.h" line="25" column="3" bodyfile="src/tests/clear_tests.cpp" bodystart="177" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d38/classClearTests_1a97231ecc3c596c113892882776a8198b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ClearTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ClearTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.h" line="27" column="8" bodyfile="src/tests/clear_tests.cpp" bodystart="193" bodyend="204"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d1/d38/classClearTests_1a33ef52dd37d177085b4ea2e14ede9815" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ClearTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>ClearTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.h" line="30" column="8" bodyfile="src/tests/clear_tests.cpp" bodystart="206" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d38/classClearTests_1af3950b2057bb518f4cc5f5e3c5e60ec8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ClearTests::TestColorMask</definition>
+        <argsstring>(uint32_t color_mask, bool depth_write_enable)</argsstring>
+        <name>TestColorMask</name>
+        <qualifiedname>ClearTests::TestColorMask</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>color_mask</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>depth_write_enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.h" line="32" column="8" bodyfile="src/tests/clear_tests.cpp" bodystart="232" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d38/classClearTests_1a21801e0a85d1b175f28344c9134caaa9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ClearTests::TestSurfaceFmt</definition>
+        <argsstring>(TestHost::SurfaceColorFormat surface_format, const std::string &amp;name)</argsstring>
+        <name>TestSurfaceFmt</name>
+        <qualifiedname>ClearTests::TestSurfaceFmt</qualifiedname>
+        <param>
+          <type>TestHost::SurfaceColorFormat</type>
+          <declname>surface_format</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/clear_tests.h" line="33" column="8" bodyfile="src/tests/clear_tests.cpp" bodystart="265" bodyend="364"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior of various write masks on NV097_CLEAR_SURFACE.</para>
+<para>Color mask (C*) tests: Each test draws some geometry, then modifies the NV097_SET_COLOR_MASK, NV097_SET_DEPTH_MASK, and NV097_SET_STENCIL_MASK settings, then invokes NV097_CLEAR_SURFACE.</para>
+<para>In all cases, the clear color is set to 0x7F7F7F7F and the depth value is set to 0xFFFFFFFF.</para>
+<para>Surface format color (SFC*) tests: Each test clears a render target surface and then renders it as a texture with alpha blending disabled in order to test the interaction of surface format with NV097_CLEAR_SURFACE_COLOR. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ClearTests</label>
+        <link refid="d1/d38/classClearTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ClearTests</label>
+        <link refid="d1/d38/classClearTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/clear_tests.h" line="23" column="1" bodyfile="src/tests/clear_tests.h" bodystart="23" bodyend="34"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>allow_saving_</name></member>
+      <member refid="d1/d38/classClearTests_1a5bf78a9fd9100e27dfdd4373061b2979" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>ClearTests</name></member>
+      <member refid="d1/d38/classClearTests_1a33ef52dd37d177085b4ea2e14ede9815" prot="private" virt="non-virtual"><scope>ClearTests</scope><name>CreateGeometry</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>ClearTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>host_</name></member>
+      <member refid="d1/d38/classClearTests_1a97231ecc3c596c113892882776a8198b" prot="public" virt="virtual"><scope>ClearTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ClearTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>ClearTests</scope><name>TearDownTest</name></member>
+      <member refid="d1/d38/classClearTests_1af3950b2057bb518f4cc5f5e3c5e60ec8" prot="private" virt="non-virtual"><scope>ClearTests</scope><name>TestColorMask</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ClearTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ClearTests</scope><name>TestSuite</name></member>
+      <member refid="d1/d38/classClearTests_1a21801e0a85d1b175f28344c9134caaa9" prot="private" virt="non-virtual"><scope>ClearTests</scope><name>TestSurfaceFmt</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ClearTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

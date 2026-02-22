@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d14/structStencilTests_1_1StencilParams" kind="struct" language="C++" prot="public">
+    <compoundname>StencilTests::StencilParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d7/d14/structStencilTests_1_1StencilParams_1a6c1e190908d63b6351bb2087203e8803" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t StencilTests::StencilParams::stencil_op_zpass</definition>
+        <argsstring></argsstring>
+        <name>stencil_op_zpass</name>
+        <qualifiedname>StencilTests::StencilParams::stencil_op_zpass</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.h" line="23" column="14" bodyfile="src/tests/stencil_tests.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d14/structStencilTests_1_1StencilParams_1ae3a8710293a59ed16437686d5f2d879e" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* StencilTests::StencilParams::stencil_op_zpass_str</definition>
+        <argsstring></argsstring>
+        <name>stencil_op_zpass_str</name>
+        <qualifiedname>StencilTests::StencilParams::stencil_op_zpass_str</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.h" line="24" column="16" bodyfile="src/tests/stencil_tests.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d14/structStencilTests_1_1StencilParams_1a9264f727baef199e2f574e057b2df3d3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool StencilTests::StencilParams::stencil_test_enabled</definition>
+        <argsstring></argsstring>
+        <name>stencil_test_enabled</name>
+        <qualifiedname>StencilTests::StencilParams::stencil_test_enabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.h" line="25" column="10" bodyfile="src/tests/stencil_tests.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d14/structStencilTests_1_1StencilParams_1a6fae879bf07287cca691eb975668d6cf" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool StencilTests::StencilParams::depth_test_enabled</definition>
+        <argsstring></argsstring>
+        <name>depth_test_enabled</name>
+        <qualifiedname>StencilTests::StencilParams::depth_test_enabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.h" line="26" column="10" bodyfile="src/tests/stencil_tests.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d14/structStencilTests_1_1StencilParams_1a92ec26904af0f7e6e54072eb5c69b249" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t StencilTests::StencilParams::stencil_clear_value</definition>
+        <argsstring></argsstring>
+        <name>stencil_clear_value</name>
+        <qualifiedname>StencilTests::StencilParams::stencil_clear_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.h" line="27" column="14" bodyfile="src/tests/stencil_tests.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d14/structStencilTests_1_1StencilParams_1ae84f0cffa5f5a17bb1ae078dfd05bd90" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t StencilTests::StencilParams::stencil_ref_value</definition>
+        <argsstring></argsstring>
+        <name>stencil_ref_value</name>
+        <qualifiedname>StencilTests::StencilParams::stencil_ref_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/stencil_tests.h" line="28" column="14" bodyfile="src/tests/stencil_tests.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/stencil_tests.h" line="22" column="3" bodyfile="src/tests/stencil_tests.h" bodystart="22" bodyend="29"/>
+    <listofallmembers>
+      <member refid="d7/d14/structStencilTests_1_1StencilParams_1a6fae879bf07287cca691eb975668d6cf" prot="public" virt="non-virtual"><scope>StencilTests::StencilParams</scope><name>depth_test_enabled</name></member>
+      <member refid="d7/d14/structStencilTests_1_1StencilParams_1a92ec26904af0f7e6e54072eb5c69b249" prot="public" virt="non-virtual"><scope>StencilTests::StencilParams</scope><name>stencil_clear_value</name></member>
+      <member refid="d7/d14/structStencilTests_1_1StencilParams_1a6c1e190908d63b6351bb2087203e8803" prot="public" virt="non-virtual"><scope>StencilTests::StencilParams</scope><name>stencil_op_zpass</name></member>
+      <member refid="d7/d14/structStencilTests_1_1StencilParams_1ae3a8710293a59ed16437686d5f2d879e" prot="public" virt="non-virtual"><scope>StencilTests::StencilParams</scope><name>stencil_op_zpass_str</name></member>
+      <member refid="d7/d14/structStencilTests_1_1StencilParams_1ae84f0cffa5f5a17bb1ae078dfd05bd90" prot="public" virt="non-virtual"><scope>StencilTests::StencilParams</scope><name>stencil_ref_value</name></member>
+      <member refid="d7/d14/structStencilTests_1_1StencilParams_1a9264f727baef199e2f574e057b2df3d3" prot="public" virt="non-virtual"><scope>StencilTests::StencilParams</scope><name>stencil_test_enabled</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/de3/classSurfaceFormatTests" kind="class" language="C++" prot="public">
+    <compoundname>SurfaceFormatTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="dd/dfe/surface__format__tests_8h" local="no">surface_format_tests.h</includes>
+    <innerclass refid="d5/da3/structSurfaceFormatTests_1_1ClipRect" prot="public">SurfaceFormatTests::ClipRect</innerclass>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d5/de3/classSurfaceFormatTests_1abbc4001f219a5ca1fe699039563115e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SurfaceFormatTests::SurfaceFormatTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>SurfaceFormatTests</name>
+        <qualifiedname>SurfaceFormatTests::SurfaceFormatTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>Fmt_A8R8G8B8 Tests the A8R8G8B8 surface format. Quads appear the same as if they were rendered directly into the framebuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_B8 Tests the B8 surface format. Quads appear as alpha+luma ramps and are distorted and repeated due to the difference in bytes per pixel.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_G8B8 Tests the G8B8 surface format. Quads set the red channel equal to the blue channel and alpha equal to the green channel. Quads are once again repeated due to the difference in bytes per pixel.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_R5G6B5 Tests the R5G6B5 surface format.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_X1A7R8G8B8_O1A7R8G8B8 Tests the X1A7R8G8B8_O1A7R8G8B8 surface format. Quads appear similar to A8R8G8B8, but the high bit of the alpha is set to 1, causing all quads to be less translucent.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_X1A7R8G8B8_Z1A7R8G8B8 Tests the X1A7R8G8B8_Z1A7R8G8B8 surface format. Quads appear similar to A8R8G8B8, but the high bit of the alpha is set to 0, causing all quads to be translucent.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_X1R5G5B5_O1R5G5B5 Tests the X1R5G5B5_O1R5G5B5 surface format.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_X1R5G5B5_Z1R5G5B5 Tests the X1R5G5B5_Z1R5G5B5 surface format.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_X8R8G8B8_O8R8G8B8 Tests the X8R8G8B8_O8R8G8B8 surface format. Quads appear similar to A8R8G8B8, but the alpha is set to fully opaque.</para>
+</simplesect>
+<simplesect kind="remark"><para>Fmt_X8R8G8B8_Z8R8G8B8 Tests the X8R8G8B8_Z8R8G8B8 surface format. Quads appear similar to A8R8G8B8, but the alpha is set to fully transparent (no quads should appear in the top half of the image). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="29" column="3" bodyfile="src/tests/surface_format_tests.cpp" bodystart="83" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/de3/classSurfaceFormatTests_1a5eff30f167b17277c5c68f3af5cb89ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SurfaceFormatTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SurfaceFormatTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="30" column="8" bodyfile="src/tests/surface_format_tests.cpp" bodystart="91" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d5/de3/classSurfaceFormatTests_1ac38f4719d32eda14e790aa1934864509" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceFormatTests::Test</definition>
+        <argsstring>(const std::string &amp;name, TestHost::SurfaceColorFormat color_format)</argsstring>
+        <name>Test</name>
+        <qualifiedname>SurfaceFormatTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>TestHost::SurfaceColorFormat</type>
+          <declname>color_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="33" column="8" bodyfile="src/tests/surface_format_tests.cpp" bodystart="141" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/de3/classSurfaceFormatTests_1aa2b5d9353baecc2d01769f6244b925ef" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceFormatTests::RenderToTextureStart</definition>
+        <argsstring>(TestHost::SurfaceColorFormat color_format) const</argsstring>
+        <name>RenderToTextureStart</name>
+        <qualifiedname>SurfaceFormatTests::RenderToTextureStart</qualifiedname>
+        <param>
+          <type>TestHost::SurfaceColorFormat</type>
+          <declname>color_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="35" column="8" bodyfile="src/tests/surface_format_tests.cpp" bodystart="211" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/de3/classSurfaceFormatTests_1ac918872101478e760ac799efb29e0a6e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceFormatTests::RenderToTextureEnd</definition>
+        <argsstring>() const</argsstring>
+        <name>RenderToTextureEnd</name>
+        <qualifiedname>SurfaceFormatTests::RenderToTextureEnd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="36" column="8" bodyfile="src/tests/surface_format_tests.cpp" bodystart="235" bodyend="249"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior of NV097_SET_SURFACE_FORMAT_COLOR. Tests render two quads into a render target with the surface color format under test. The left quad consists of 4 color gradient patches (red, yellow, cyan, blue) with alpha forced to fully opaque. The second quad uses the same color gradients but has alpha set in a radial pattern such that it is 0 at the corners and fully opaque in the center.</para>
+<para>The resultant surface is then rendered to an RGBA framebuffer twice, once at the top of the screen with the alpha channel preserved, and again at the bottom of the screen with alpha forced to fully opaque. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SurfaceFormatTests</label>
+        <link refid="d5/de3/classSurfaceFormatTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>SurfaceFormatTests</label>
+        <link refid="d5/de3/classSurfaceFormatTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/surface_format_tests.h" line="19" column="1" bodyfile="src/tests/surface_format_tests.h" bodystart="19" bodyend="37"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>SurfaceFormatTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>host_</name></member>
+      <member refid="d5/de3/classSurfaceFormatTests_1a5eff30f167b17277c5c68f3af5cb89ae" prot="public" virt="virtual"><scope>SurfaceFormatTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d5/de3/classSurfaceFormatTests_1ac918872101478e760ac799efb29e0a6e" prot="private" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>RenderToTextureEnd</name></member>
+      <member refid="d5/de3/classSurfaceFormatTests_1aa2b5d9353baecc2d01769f6244b925ef" prot="private" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>RenderToTextureStart</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>SurfaceFormatTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>suite_name_</name></member>
+      <member refid="d5/de3/classSurfaceFormatTests_1abbc4001f219a5ca1fe699039563115e0" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>SurfaceFormatTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>SurfaceFormatTests</scope><name>TearDownTest</name></member>
+      <member refid="d5/de3/classSurfaceFormatTests_1ac38f4719d32eda14e790aa1934864509" prot="private" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>SurfaceFormatTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>SurfaceFormatTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

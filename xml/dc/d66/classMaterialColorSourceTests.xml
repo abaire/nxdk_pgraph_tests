@@ -1,0 +1,306 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/d66/classMaterialColorSourceTests" kind="class" language="C++" prot="public">
+    <compoundname>MaterialColorSourceTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="da/d32/material__color__source__tests_8h" local="no">material_color_source_tests.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9" prot="public" static="no" strong="no">
+        <type></type>
+        <name>SourceMode</name>
+        <qualifiedname>MaterialColorSourceTests::SourceMode</qualifiedname>
+        <enumvalue id="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9adb072565c2e5ddbeb098ad782ae7289d" prot="public">
+          <name>SOURCE_MATERIAL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9a51a90288e5cbc17b076d68b4d551910b" prot="public">
+          <name>SOURCE_DIFFUSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9adbac947892ef50ffbd1b80b2e145bb22" prot="public">
+          <name>SOURCE_SPECULAR</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.h" line="25" column="3" bodyfile="src/tests/material_color_source_tests.h" bodystart="25" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dc/d66/classMaterialColorSourceTests_1ab8c7f9636d6c8c3aa4a44366d19ac5c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaterialColorSourceTests::MaterialColorSourceTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>MaterialColorSourceTests</name>
+        <qualifiedname>MaterialColorSourceTests::MaterialColorSourceTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>FromMaterial Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0.</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_me0_15 Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_me0_15 Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_me0_15 Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_me0_5 Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_me0_5 Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_me0_5 Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_me1_0 Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both. NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_me1_0 Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_me1_0 Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_2light Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_2light Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_2light Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_me0_15_2light Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_me0_15_2light Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_me0_15_2light Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.15, 0.15, 0.15). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_me0_5_2light Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_me0_5_2light Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_me0_5_2light Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0.5, 0.5, 0.5). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromMaterial_me1_0_2light Draws 9 quads with all colors taken from the material settings. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. Each quad is broken into thirds: the top is just diffuse, the center is just specular, the bottom is both. NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexDiffuse_me1_0_2light Draws 9 quads with some colors taken from the vertex diffuse color {0.f, 0.25f, 0.5f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>FromVertexSpecular_me1_0_2light Draws 9 quads with some colors taken from the vertex specular color {0.5f, 0.25f, 0.f, 0.25f}. Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (1, 1, 1). There are two lights with all colors set to (0.25, 0.25, 0.25).</para>
+</simplesect>
+<simplesect kind="remark"><para>Emissive_me0 Draws 9 quads with combinations of emissive and ambient color taken from vertex diffuse and specular. The combinations in (emissive_src, ambient_src) format are: (D, D), (S, D), (D, S), (S, S), (M, S), (S, M), (M, D), (D, M), (M, M). Each quad is divided into rows: the top is just diffuse, the center is just specular, the bottom is both. It is also divided into columns: the left column retains material alpha, the right forces alpha to 1.0. NV097_SET_MATERIAL_EMISSION is set to (0, 0, 0). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.h" line="32" column="3" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="221" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d66/classMaterialColorSourceTests_1a18611f4186df2574a09df5e4d1dc123e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MaterialColorSourceTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>MaterialColorSourceTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.h" line="34" column="8" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="36" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="dc/d66/classMaterialColorSourceTests_1a8b576470f664b7d85fdc90d77bc69f8c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MaterialColorSourceTests::Test</definition>
+        <argsstring>(const std::string &amp;name, SourceMode source_mode, const XboxMath::vector_t &amp;material_emission, uint32_t num_lights=1)</argsstring>
+        <name>Test</name>
+        <qualifiedname>MaterialColorSourceTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>SourceMode</type>
+          <declname>source_mode</declname>
+        </param>
+        <param>
+          <type>const XboxMath::vector_t &amp;</type>
+          <declname>material_emission</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_lights</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.h" line="37" column="8" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="503" bodyend="577"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d66/classMaterialColorSourceTests_1a44242d984f1ad8b41b81ade9f012946c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MaterialColorSourceTests::TestEmissive</definition>
+        <argsstring>(const std::string &amp;name, const XboxMath::vector_t &amp;material_emission)</argsstring>
+        <name>TestEmissive</name>
+        <qualifiedname>MaterialColorSourceTests::TestEmissive</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const XboxMath::vector_t &amp;</type>
+          <declname>material_emission</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.h" line="40" column="8" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="579" bodyend="692"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="dc/d66/classMaterialColorSourceTests_1ab56cbb17ccbecfa238ae5f0f75dd5bb7" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string MaterialColorSourceTests::MakeTestName</definition>
+        <argsstring>(SourceMode source_mode)</argsstring>
+        <name>MakeTestName</name>
+        <qualifiedname>MaterialColorSourceTests::MakeTestName</qualifiedname>
+        <param>
+          <type>SourceMode</type>
+          <declname>source_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_source_tests.h" line="42" column="22" bodyfile="src/tests/material_color_source_tests.cpp" bodystart="694" bodyend="707"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior when lighting is enabled and color components are requested from various sources. Also tests the behavior of non-zero NV097_SET_MATERIAL_EMISSION values.</para>
+<para>A color legend is rendered along the left hand side: vD = vertex diffuse. vS = vertex specular. sA = scene ambient. mD = material diffuse. mS = material specular. mE = material emissive. mA = material ambient. A single directional light is used with ambient, diffuse, and specular multipliers all set to 1.0.</para>
+<para>NV097_SET_SCENE_AMBIENT_COLOR is set to scene ambient + material emissive. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MaterialColorSourceTests</label>
+        <link refid="dc/d66/classMaterialColorSourceTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MaterialColorSourceTests</label>
+        <link refid="dc/d66/classMaterialColorSourceTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/material_color_source_tests.h" line="23" column="1" bodyfile="src/tests/material_color_source_tests.h" bodystart="23" bodyend="43"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>MaterialColorSourceTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>host_</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a18611f4186df2574a09df5e4d1dc123e" prot="public" virt="virtual"><scope>MaterialColorSourceTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1ab56cbb17ccbecfa238ae5f0f75dd5bb7" prot="private" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>MakeTestName</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1ab8c7f9636d6c8c3aa4a44366d19ac5c1" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>MaterialColorSourceTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>MaterialColorSourceTests</scope><name>SetupTest</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9a51a90288e5cbc17b076d68b4d551910b" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>SOURCE_DIFFUSE</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9adb072565c2e5ddbeb098ad782ae7289d" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>SOURCE_MATERIAL</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9adbac947892ef50ffbd1b80b2e145bb22" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>SOURCE_SPECULAR</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a3dc450e57e2bb8e5ab062f4d5ba3d8f9" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>SourceMode</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>MaterialColorSourceTests</scope><name>TearDownTest</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a8b576470f664b7d85fdc90d77bc69f8c" prot="private" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>Test</name></member>
+      <member refid="dc/d66/classMaterialColorSourceTests_1a44242d984f1ad8b41b81ade9f012946c" prot="private" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>TestEmissive</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>MaterialColorSourceTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>MaterialColorSourceTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d11/structColorZetaDisableTests_1_1Instruction" kind="struct" language="C++" prot="public">
+    <compoundname>ColorZetaDisableTests::Instruction</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d7/d11/structColorZetaDisableTests_1_1Instruction_1abc1acb71d7c3a77bb1f79e14d1aa4e8e" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ColorZetaDisableTests::Instruction::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>ColorZetaDisableTests::Instruction::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_disable_tests.h" line="13" column="16" bodyfile="src/tests/color_zeta_disable_tests.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d11/structColorZetaDisableTests_1_1Instruction_1a7539009647cb3f045d49611f7715664f" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ColorZetaDisableTests::Instruction::mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <qualifiedname>ColorZetaDisableTests::Instruction::mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_disable_tests.h" line="14" column="16" bodyfile="src/tests/color_zeta_disable_tests.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d11/structColorZetaDisableTests_1_1Instruction_1a48ce6b0f8ab8d5930b8b7f2d7ab101d0" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* ColorZetaDisableTests::Instruction::swizzle</definition>
+        <argsstring></argsstring>
+        <name>swizzle</name>
+        <qualifiedname>ColorZetaDisableTests::Instruction::swizzle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_disable_tests.h" line="15" column="16" bodyfile="src/tests/color_zeta_disable_tests.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d11/structColorZetaDisableTests_1_1Instruction_1aefbf9c534dbdbaeaa63ea81084e93c8d" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t ColorZetaDisableTests::Instruction::instruction[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>instruction</name>
+        <qualifiedname>ColorZetaDisableTests::Instruction::instruction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_disable_tests.h" line="16" column="20" bodyfile="src/tests/color_zeta_disable_tests.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/color_zeta_disable_tests.h" line="12" column="3" bodyfile="src/tests/color_zeta_disable_tests.h" bodystart="12" bodyend="17"/>
+    <listofallmembers>
+      <member refid="d7/d11/structColorZetaDisableTests_1_1Instruction_1aefbf9c534dbdbaeaa63ea81084e93c8d" prot="public" virt="non-virtual"><scope>ColorZetaDisableTests::Instruction</scope><name>instruction</name></member>
+      <member refid="d7/d11/structColorZetaDisableTests_1_1Instruction_1a7539009647cb3f045d49611f7715664f" prot="public" virt="non-virtual"><scope>ColorZetaDisableTests::Instruction</scope><name>mask</name></member>
+      <member refid="d7/d11/structColorZetaDisableTests_1_1Instruction_1abc1acb71d7c3a77bb1f79e14d1aa4e8e" prot="public" virt="non-virtual"><scope>ColorZetaDisableTests::Instruction</scope><name>name</name></member>
+      <member refid="d7/d11/structColorZetaDisableTests_1_1Instruction_1a48ce6b0f8ab8d5930b8b7f2d7ab101d0" prot="public" virt="non-virtual"><scope>ColorZetaDisableTests::Instruction</scope><name>swizzle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/dae/file__util_8h" kind="file" language="C++">
+    <compoundname>file_util.h</compoundname>
+    <includes local="no">windows.h</includes>
+    <includedby refid="d0/d92/file__util_8cpp" local="yes">src/file_util.cpp</includedby>
+    <includedby refid="dc/d66/dma__corruption__around__surface__tests_8cpp" local="yes">src/tests/dma_corruption_around_surface_tests.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/file_util.h</label>
+        <link refid="d0/dae/file__util_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>windows.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d0/dae/file__util_8h_1a08f55fa2ce94b7eca813916430d35097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>BOOL</type>
+        <definition>BOOL InstallCacheFile</definition>
+        <argsstring>(LPCSTR lpExistingFileName, LPCSTR lpNewFileName, BOOL bFailIfExists)</argsstring>
+        <name>InstallCacheFile</name>
+        <param>
+          <type>LPCSTR</type>
+          <declname>lpExistingFileName</declname>
+        </param>
+        <param>
+          <type>LPCSTR</type>
+          <declname>lpNewFileName</declname>
+        </param>
+        <param>
+          <type>BOOL</type>
+          <declname>bFailIfExists</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copies a file to a new location, discarding original file metadata.</para>
+<para>This is primarily useful when working around issues copying from a DVD-ROM to the cache drive. The nxdk implementation of CopyFileA seems to fail in that case. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/file_util.h" line="16" column="6" bodyfile="src/file_util.cpp" bodystart="14" bodyend="105" declfile="src/file_util.h" declline="16" declcolumn="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SRC_FILE_UTIL_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SRC_FILE_UTIL_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>clang<sp/>diagnostic<sp/>push</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>clang<sp/>diagnostic<sp/>ignored<sp/>&quot;-Wmacro-redefined&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;windows.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>clang<sp/>diagnostic<sp/>pop</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">BOOL<sp/>InstallCacheFile(LPCSTR<sp/>lpExistingFileName,<sp/>LPCSTR<sp/>lpNewFileName,<sp/>BOOL<sp/>bFailIfExists);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SRC_FILE_UTIL_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/file_util.h"/>
+  </compounddef>
+</doxygen>

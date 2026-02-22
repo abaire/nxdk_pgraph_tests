@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>AttributeExplicitSetterTests::TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig_1ad7e2cba701c1cca212404bdbc123feba" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* AttributeExplicitSetterTests::TestConfig::test_name</definition>
+        <argsstring></argsstring>
+        <name>test_name</name>
+        <qualifiedname>AttributeExplicitSetterTests::TestConfig::test_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="30" column="16" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig_1afedf7253b572ca08087d18afdccab14a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool AttributeExplicitSetterTests::TestConfig::force_blend_alpha</definition>
+        <argsstring></argsstring>
+        <name>force_blend_alpha</name>
+        <qualifiedname>AttributeExplicitSetterTests::TestConfig::force_blend_alpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="31" column="10" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/attribute_explicit_setter_tests.h" line="29" column="3" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="29" bodyend="32"/>
+    <listofallmembers>
+      <member refid="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig_1afedf7253b572ca08087d18afdccab14a" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests::TestConfig</scope><name>force_blend_alpha</name></member>
+      <member refid="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig_1ad7e2cba701c1cca212404bdbc123feba" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests::TestConfig</scope><name>test_name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/df1/classTextureBorderTests" kind="class" language="C++" prot="public">
+    <compoundname>TextureBorderTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d3/df1/classTextureBorderTests_1ac59a949aa696512451d57bd004a60770" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; TextureBorderTests::vertex_buffers_[6]</definition>
+        <argsstring>[6]</argsstring>
+        <name>vertex_buffers_</name>
+        <qualifiedname>TextureBorderTests::vertex_buffers_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="37" column="19" bodyfile="src/tests/texture_border_tests.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a1a1c25d30c5b32a74dc68740b7b164fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TextureBorderTests::TextureBorderTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TextureBorderTests</name>
+        <qualifiedname>TextureBorderTests::TextureBorderTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="17" column="3" bodyfile="src/tests/texture_border_tests.cpp" bodystart="87" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1ad501ee376698cd1ace1cb31cbffd972f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TextureBorderTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="19" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="107" bodyend="127"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a67686f6a62196d6b552e76d4dfbb959c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>TextureBorderTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="22" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="129" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a3e912000f13f46c55cf6fe0e3208480e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::Test2D</definition>
+        <argsstring>()</argsstring>
+        <name>Test2D</name>
+        <qualifiedname>TextureBorderTests::Test2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="24" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="222" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a189b43f0930e6b22e35a447e4f71b51d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::TestXemu1034</definition>
+        <argsstring>()</argsstring>
+        <name>TestXemu1034</name>
+        <qualifiedname>TextureBorderTests::TestXemu1034</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="25" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="323" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a4bf6bf0ea0c5c8061812eeea5ac8e3b7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::Test2DBorderedSwizzled</definition>
+        <argsstring>()</argsstring>
+        <name>Test2DBorderedSwizzled</name>
+        <qualifiedname>TextureBorderTests::Test2DBorderedSwizzled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="26" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="423" bodyend="550"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a3118ede000c36f15c53dd5201997e7d8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::Test3DBorderedSwizzled</definition>
+        <argsstring>(const std::string &amp;name, uint32_t width, uint32_t height)</argsstring>
+        <name>Test3DBorderedSwizzled</name>
+        <qualifiedname>TextureBorderTests::Test3DBorderedSwizzled</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="29" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="552" bodyend="684"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a55c3483c461ee65f0afba72f3dbf3de1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::TestCubemapBorderedSwizzled</definition>
+        <argsstring>(const std::string &amp;name, uint32_t width, uint32_t height)</argsstring>
+        <name>TestCubemapBorderedSwizzled</name>
+        <qualifiedname>TextureBorderTests::TestCubemapBorderedSwizzled</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="30" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="686" bodyend="782"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a9ed54992e84f778041af7734ef601326" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::GenerateBordered3DSurface</definition>
+        <argsstring>(uint8_t *texture_memory, uint32_t width, uint32_t height, uint32_t depth, bool swizzle) const</argsstring>
+        <name>GenerateBordered3DSurface</name>
+        <qualifiedname>TextureBorderTests::GenerateBordered3DSurface</qualifiedname>
+        <param>
+          <type>uint8_t *</type>
+          <declname>texture_memory</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>depth</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>swizzle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="32" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="809" bodyend="856"/>
+      </memberdef>
+      <memberdef kind="function" id="d3/df1/classTextureBorderTests_1a579aa66fe4a4a23440b66bb346bf3494" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureBorderTests::GenerateBorderedCubemapSurface</definition>
+        <argsstring>(uint8_t *texture_memory, uint32_t width, uint32_t height, bool swizzle) const</argsstring>
+        <name>GenerateBorderedCubemapSurface</name>
+        <qualifiedname>TextureBorderTests::GenerateBorderedCubemapSurface</qualifiedname>
+        <param>
+          <type>uint8_t *</type>
+          <declname>texture_memory</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>swizzle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_tests.h" line="34" column="8" bodyfile="src/tests/texture_border_tests.cpp" bodystart="858" bodyend="893"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TextureBorderTests</label>
+        <link refid="d3/df1/classTextureBorderTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TextureBorderTests</label>
+        <link refid="d3/df1/classTextureBorderTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_border_tests.h" line="15" column="1" bodyfile="src/tests/texture_border_tests.h" bodystart="15" bodyend="38"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>allow_saving_</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a67686f6a62196d6b552e76d4dfbb959c" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>CreateGeometry</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>TextureBorderTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>ftp_logger_</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a9ed54992e84f778041af7734ef601326" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>GenerateBordered3DSurface</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a579aa66fe4a4a23440b66bb346bf3494" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>GenerateBorderedCubemapSurface</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>host_</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1ad501ee376698cd1ace1cb31cbffd972f" prot="public" virt="virtual"><scope>TextureBorderTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TextureBorderTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TextureBorderTests</scope><name>TearDownTest</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a3e912000f13f46c55cf6fe0e3208480e" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>Test2D</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a4bf6bf0ea0c5c8061812eeea5ac8e3b7" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>Test2DBorderedSwizzled</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a3118ede000c36f15c53dd5201997e7d8" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>Test3DBorderedSwizzled</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a55c3483c461ee65f0afba72f3dbf3de1" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>TestCubemapBorderedSwizzled</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TextureBorderTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>TestSuite</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a189b43f0930e6b22e35a447e4f71b51d" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>TestXemu1034</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1a1a1c25d30c5b32a74dc68740b7b164fe" prot="public" virt="non-virtual"><scope>TextureBorderTests</scope><name>TextureBorderTests</name></member>
+      <member refid="d3/df1/classTextureBorderTests_1ac59a949aa696512451d57bd004a60770" prot="private" virt="non-virtual"><scope>TextureBorderTests</scope><name>vertex_buffers_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TextureBorderTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

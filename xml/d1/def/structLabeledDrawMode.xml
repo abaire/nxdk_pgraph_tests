@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/def/structLabeledDrawMode" kind="struct" language="C++" prot="public">
+    <compoundname>LabeledDrawMode</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d1/def/structLabeledDrawMode_1a302b2657f68f4ff8d05b9e4a914a0adb" prot="public" static="no" mutable="no">
+        <type>FogCarryoverTestsDrawMode</type>
+        <definition>FogCarryoverTestsDrawMode LabeledDrawMode::mode</definition>
+        <argsstring></argsstring>
+        <name>mode</name>
+        <qualifiedname>LabeledDrawMode::mode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="32" column="29" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/def/structLabeledDrawMode_1a4722cabb7c5d5d7955b5a114f1305516" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* LabeledDrawMode::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>LabeledDrawMode::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="33" column="14" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/fog_carryover_tests.cpp" line="31" column="1" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="31" bodyend="34"/>
+    <listofallmembers>
+      <member refid="d1/def/structLabeledDrawMode_1a302b2657f68f4ff8d05b9e4a914a0adb" prot="public" virt="non-virtual"><scope>LabeledDrawMode</scope><name>mode</name></member>
+      <member refid="d1/def/structLabeledDrawMode_1a4722cabb7c5d5d7955b5a114f1305516" prot="public" virt="non-virtual"><scope>LabeledDrawMode</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

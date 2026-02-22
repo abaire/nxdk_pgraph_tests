@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/dc4/structBlendTests_1_1Instruction" kind="struct" language="C++" prot="public">
+    <compoundname>BlendTests::Instruction</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d8/dc4/structBlendTests_1_1Instruction_1a54fb04e1174ff4388caff73220dc7a1b" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* BlendTests::Instruction::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>BlendTests::Instruction::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="60" column="16" bodyfile="src/tests/blend_tests.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/dc4/structBlendTests_1_1Instruction_1a7cf39e84a7e4be22f8fca395f6239a70" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* BlendTests::Instruction::mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <qualifiedname>BlendTests::Instruction::mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="61" column="16" bodyfile="src/tests/blend_tests.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/dc4/structBlendTests_1_1Instruction_1a4811866336ce36f55bf2cf4c843af706" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* BlendTests::Instruction::swizzle</definition>
+        <argsstring></argsstring>
+        <name>swizzle</name>
+        <qualifiedname>BlendTests::Instruction::swizzle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="62" column="16" bodyfile="src/tests/blend_tests.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/dc4/structBlendTests_1_1Instruction_1a15317fb2db30c06bc21feedb88c3c1d7" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t BlendTests::Instruction::instruction[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>instruction</name>
+        <qualifiedname>BlendTests::Instruction::instruction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_tests.h" line="63" column="20" bodyfile="src/tests/blend_tests.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/blend_tests.h" line="59" column="3" bodyfile="src/tests/blend_tests.h" bodystart="59" bodyend="64"/>
+    <listofallmembers>
+      <member refid="d8/dc4/structBlendTests_1_1Instruction_1a15317fb2db30c06bc21feedb88c3c1d7" prot="public" virt="non-virtual"><scope>BlendTests::Instruction</scope><name>instruction</name></member>
+      <member refid="d8/dc4/structBlendTests_1_1Instruction_1a7cf39e84a7e4be22f8fca395f6239a70" prot="public" virt="non-virtual"><scope>BlendTests::Instruction</scope><name>mask</name></member>
+      <member refid="d8/dc4/structBlendTests_1_1Instruction_1a54fb04e1174ff4388caff73220dc7a1b" prot="public" virt="non-virtual"><scope>BlendTests::Instruction</scope><name>name</name></member>
+      <member refid="d8/dc4/structBlendTests_1_1Instruction_1a4811866336ce36f55bf2cf4c843af706" prot="public" virt="non-virtual"><scope>BlendTests::Instruction</scope><name>swizzle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

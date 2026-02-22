@@ -1,0 +1,1003 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d2d/lighting__spotlight__tests_8cpp" kind="file" language="C++">
+    <compoundname>lighting_spotlight_tests.cpp</compoundname>
+    <includes refid="d4/d14/lighting__spotlight__tests_8h" local="yes">lighting_spotlight_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="d8/d7c/flat__mesh__grid__model_8h" local="yes">models/flat_mesh_grid_model.h</includes>
+    <includes refid="df/d44/light__control__test__mesh__cylinder__model_8h" local="yes">models/light_control_test_mesh_cylinder_model.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">texture_generator.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <includes local="yes">xbox_math_matrix.h</includes>
+    <incdepgraph>
+      <node id="13">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>models/flat_mesh_grid_model.h</label>
+        <link refid="d8/d7c/flat__mesh__grid__model_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>models/light_control_test_mesh_cylinder_model.h</label>
+        <link refid="df/d44/light__control__test__mesh__cylinder__model_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/lighting_spotlight_tests.cpp</label>
+        <link refid="d0/d2d/lighting__spotlight__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lighting_spotlight_tests.h</label>
+        <link refid="d4/d14/lighting__spotlight__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="31">
+        <label>models/model_builder.h</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="16">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="15">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="33">
+        <label>texture_generator.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="11">
+        <label>thread</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="14">
+        <label>windows.h</label>
+      </node>
+      <node id="34">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="d0/d2d/lighting__spotlight__tests_8cpp_1af0239e64aafec16a0577e832631d1757" prot="public" static="no">
+        <name>DEG2RAD</name>
+        <param><defname>c</defname></param>
+        <initializer>((float)(c) * PI_OVER_180)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="18" column="9" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d0/d2d/lighting__spotlight__tests_8cpp_1a5b464eced82c3b6dae2e24aa9b8d7380" prot="public" static="no">
+        <name>FALLOFF_ENTRY</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <param><defname>c</defname></param>
+        <initializer>  <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref>(kSpotlightPosition, kSpotlightDirection, kFalloffPenumbraDegrees,                  \
+                                    kFalloffUmbraDegrees, kAttenuation[0], kAttenuation[1], kAttenuation[2], (a), (b), \
+                                    (c))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="34" column="9" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="34" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="define" id="d0/d2d/lighting__spotlight__tests_8cpp_1a922ccfdc1d47b3d9c01869a0983c3183" prot="public" static="no">
+        <name>PHI_THETA</name>
+        <param><defname>phi</defname></param>
+        <param><defname>theta</defname></param>
+        <initializer>  <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref>(kSpotlightPosition, kSpotlightDirection, phi, theta, kAttenuation[0], \
+                                    kAttenuation[1], kAttenuation[2], kFalloff[0], kFalloff[1], kFalloff[2])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="53" column="9" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="53" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="define" id="d0/d2d/lighting__spotlight__tests_8cpp_1a8aff1f0b8167c5d8b7cbebc6757bd156" prot="public" static="no">
+        <name>ATTENUATION_ENTRY</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <param><defname>c</defname></param>
+        <initializer>  <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref>(kSpotlightPosition, kSpotlightDirection, kFalloffPenumbraDegrees, \
+                                    kFalloffUmbraDegrees, (a), (b), (c), kFalloff[0], kFalloff[1], kFalloff[2])</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="66" column="9" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="66" bodyend="68"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a60badbdfa91cdbe66ac4dbee73c3faf9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCheckerboardA</definition>
+        <argsstring></argsstring>
+        <name>kCheckerboardA</name>
+        <initializer>= 0xFF111111</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="14" column="27" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a7fb3ba846c131e16db4e0f482cf869c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCheckerboardB</definition>
+        <argsstring></argsstring>
+        <name>kCheckerboardB</name>
+        <initializer>= 0xFF000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="15" column="27" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a370bd21d4305db789e9ed70aca6679ab" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float PI_OVER_180</definition>
+        <argsstring></argsstring>
+        <name>PI_OVER_180</name>
+        <initializer>= (float)M_PI / 180.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="17" column="24" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a78a00c69d84119e4878d6f4057d26c1f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kFalloffFixedName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFalloffFixedName</name>
+        <initializer>= &quot;FoFixed&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="21" column="23" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a7f7c005f34410f65bd5aab5d78c7d242" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kPhiThetaFixedName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPhiThetaFixedName</name>
+        <initializer>= &quot;PTFixed&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="23" column="23" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a783b37717c0ac2c1ddc3069db5124dc7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kAttenuationFixedName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAttenuationFixedName</name>
+        <initializer>= &quot;AtFixed&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="25" column="23" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1afeab4a3be20ced30f9a8e1eb9fe34e1e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kLightRange</definition>
+        <argsstring></argsstring>
+        <name>kLightRange</name>
+        <initializer>= 15.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="27" column="24" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1ae9edc2d8f44528496f8ffd367ae4360f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr XboxMath::vector_t</type>
+        <definition>constexpr XboxMath::vector_t kSpotlightPosition</definition>
+        <argsstring></argsstring>
+        <name>kSpotlightPosition</name>
+        <initializer>{0.f, 0.f, -7.f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="28" column="37" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a61fafcebff9c792ae86b0fc65fd90621" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr XboxMath::vector_t</type>
+        <definition>constexpr XboxMath::vector_t kSpotlightDirection</definition>
+        <argsstring></argsstring>
+        <name>kSpotlightDirection</name>
+        <initializer>{0.f, 0.f, 1.f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="29" column="37" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a6d83c5f7d9411c295f8971343257e0fe" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kFalloffPenumbraDegrees</definition>
+        <argsstring></argsstring>
+        <name>kFalloffPenumbraDegrees</name>
+        <initializer>= 30.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="30" column="24" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a610e80c88717b973537a5f9f940ba54b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kFalloffUmbraDegrees</definition>
+        <argsstring></argsstring>
+        <name>kFalloffUmbraDegrees</name>
+        <initializer>= 10.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="31" column="24" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a1f75c2d53a27ecd359b019158221172e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kAttenuation[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAttenuation</name>
+        <initializer>= {1.f, 0.f, 0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="32" column="24" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1ae2ae82ba055e290e4f93e39ecac67c99" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref></type>
+        <definition>const LightingSpotlightTests::Spotlight kFalloffTests[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFalloffTests</name>
+        <initializer>= {
+    FALLOFF_ENTRY(0.f, -0.494592f, 1.494592f),         
+    FALLOFF_ENTRY(-0.f, 1.f, 0.f),                     
+    FALLOFF_ENTRY(-0.000244f, 0.500122f, 0.499634f),   
+    FALLOFF_ENTRY(-0.170208f, -0.855843f, 1.685635f),  
+    FALLOFF_ENTRY(-0.706496f, -2.507095f, 2.800600f),  
+    FALLOFF_ENTRY(-0.932112f, -3.097628f, 3.165516f),  
+    FALLOFF_ENTRY(-0.986137f, -3.165117f, 3.178980f),  
+    FALLOFF_ENTRY(-0.993286f, -2.953324f, 2.960038f),  
+    FALLOFF_ENTRY(-0.996561f, -3.084043f, 3.087482f),  
+    FALLOFF_ENTRY(0.f, 0.f, 0.f)}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="40" column="48" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="40" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1aa1b9236252692901222141fc19caf5e2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kFalloff[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFalloff</name>
+        <initializer>= {-0.170208f, -0.855843f, 1.685635f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="52" column="24" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a3a081338c0f9d8800d2f084edae1e765" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref></type>
+        <definition>const LightingSpotlightTests::Spotlight kPhiThetaTests[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPhiThetaTests</name>
+        <initializer>= {
+    PHI_THETA(25.f, 5.f),     
+    PHI_THETA(25.f, 0.f),     
+    PHI_THETA(10.f, 25.f),    
+    PHI_THETA(10.f, 10.f),    
+    PHI_THETA(0.f, 0.f),      
+    PHI_THETA(-10.f, -10.f),  
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="57" column="48" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="57" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d2d/lighting__spotlight__tests_8cpp_1a70f200274bf782bc8b52d52350592529" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref></type>
+        <definition>const LightingSpotlightTests::Spotlight kAttenuationTests[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAttenuationTests</name>
+        <initializer>= {
+    ATTENUATION_ENTRY(0.f, 0.f, 0.f),     ATTENUATION_ENTRY(0.5f, 0.f, 0.f),      ATTENUATION_ENTRY(1.f, 0.f, 0.f),
+    ATTENUATION_ENTRY(2.f, 0.f, 0.f),     ATTENUATION_ENTRY(10.f, 0.f, 0.f),      ATTENUATION_ENTRY(0.05f, 0.25f, 0.f),
+    ATTENUATION_ENTRY(0.05f, 0.f, 0.25f), ATTENUATION_ENTRY(0.05f, 0.05f, 0.05f),
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="70" column="48" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="70" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d0/d2d/lighting__spotlight__tests_8cpp_1a7ddb3f7178edec7e5395eeada5069478" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeFalloffTestName</definition>
+        <argsstring>(const char *prefix, const LightingSpotlightTests::Spotlight &amp;light)</argsstring>
+        <name>MakeFalloffTestName</name>
+        <param>
+          <type>const char *</type>
+          <declname>prefix</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref> &amp;</type>
+          <declname>light</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="76" column="20" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="76" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2d/lighting__spotlight__tests_8cpp_1adc75006564c4517a282734d36a884663" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakePhiThetaTestName</definition>
+        <argsstring>(const char *prefix, const LightingSpotlightTests::Spotlight &amp;light)</argsstring>
+        <name>MakePhiThetaTestName</name>
+        <param>
+          <type>const char *</type>
+          <declname>prefix</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref> &amp;</type>
+          <declname>light</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="82" column="20" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="82" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2d/lighting__spotlight__tests_8cpp_1a7e3475de6cb315dbc51ea58f5c6b7c41" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeAttenuationTestName</definition>
+        <argsstring>(const char *prefix, const LightingSpotlightTests::Spotlight &amp;light)</argsstring>
+        <name>MakeAttenuationTestName</name>
+        <param>
+          <type>const char *</type>
+          <declname>prefix</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref> &amp;</type>
+          <declname>light</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="88" column="20" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="88" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2d/lighting__spotlight__tests_8cpp_1aea64b2ea2dda760a7afc479531a73019" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DrawCheckerboardBackground</definition>
+        <argsstring>(TestHost &amp;host)</argsstring>
+        <name>DrawCheckerboardBackground</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="244" column="13" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="244" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d2d/lighting__spotlight__tests_8cpp_1a4f856dfe8969450256443512cfb3aef8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetupLighting</definition>
+        <argsstring>(TestHost &amp;host, uint32_t light_mode_bitvector)</argsstring>
+        <name>SetupLighting</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>light_mode_bitvector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.cpp" line="295" column="13" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="295" bodyend="317"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;lighting_spotlight_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;models/flat_mesh_grid_model.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;models/light_control_test_mesh_cylinder_model.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texture_generator.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_matrix.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerboardA<sp/>=<sp/>0xFF111111;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerboardB<sp/>=<sp/>0xFF000000;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>PI_OVER_180<sp/>=<sp/>(float)M_PI<sp/>/<sp/>180.0f;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DEG2RAD(c)<sp/>((float)(c)<sp/>*<sp/>PI_OVER_180)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>static<sp/>constexpr<sp/>char<sp/>kFalloffName[]<sp/>=<sp/>&quot;Fo&quot;;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kFalloffFixedName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FoFixed&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>static<sp/>constexpr<sp/>char<sp/>kPhiThetaName[]<sp/>=<sp/>&quot;PT&quot;;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kPhiThetaFixedName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PTFixed&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>static<sp/>constexpr<sp/>char<sp/>kAttenuationName[]<sp/>=<sp/>&quot;At&quot;;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kAttenuationFixedName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;AtFixed&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kLightRange<sp/>=<sp/>15.f;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>XboxMath::vector_t<sp/>kSpotlightPosition{0.f,<sp/>0.f,<sp/>-7.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>XboxMath::vector_t<sp/>kSpotlightDirection{0.f,<sp/>0.f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFalloffPenumbraDegrees<sp/>=<sp/>30.f;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFalloffUmbraDegrees<sp/>=<sp/>10.f;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kAttenuation[]<sp/>=<sp/>{1.f,<sp/>0.f,<sp/>0.f};</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FALLOFF_ENTRY(a,<sp/>b,<sp/>c)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"><sp/><sp/>LightingSpotlightTests::Spotlight(kSpotlightPosition,<sp/>kSpotlightDirection,<sp/>kFalloffPenumbraDegrees,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="36"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kFalloffUmbraDegrees,<sp/>kAttenuation[0],<sp/>kAttenuation[1],<sp/>kAttenuation[2],<sp/>(a),<sp/>(b),<sp/>\</highlight></codeline>
+<codeline lineno="37"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(c))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Values<sp/>observed<sp/>by<sp/>modifying<sp/>falloff<sp/>factor<sp/>in<sp/>D3DLIGHT8<sp/>struct.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref><sp/>kFalloffTests[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(0.f,<sp/>-0.494592f,<sp/>1.494592f),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>falloff<sp/>=<sp/>1.f<sp/>(default)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.f,<sp/>1.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>falloff<sp/>=<sp/>0.f</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.000244f,<sp/>0.500122f,<sp/>0.499634f),<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=0.5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.170208f,<sp/>-0.855843f,<sp/>1.685635f),<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.706496f,<sp/>-2.507095f,<sp/>2.800600f),<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=10.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.932112f,<sp/>-3.097628f,<sp/>3.165516f),<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=50.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.986137f,<sp/>-3.165117f,<sp/>3.178980f),<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=250.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.993286f,<sp/>-2.953324f,<sp/>2.960038f),<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=500.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(-0.996561f,<sp/>-3.084043f,<sp/>3.087482f),<sp/><sp/></highlight><highlight class="comment">//<sp/>falloff=1000.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>FALLOFF_ENTRY(0.f,<sp/>0.f,<sp/>0.f)};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFalloff[]<sp/>=<sp/>{-0.170208f,<sp/>-0.855843f,<sp/>1.685635f};<sp/><sp/></highlight><highlight class="comment">//<sp/>2.0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PHI_THETA(phi,<sp/>theta)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="54"><highlight class="preprocessor"><sp/><sp/>LightingSpotlightTests::Spotlight(kSpotlightPosition,<sp/>kSpotlightDirection,<sp/>phi,<sp/>theta,<sp/>kAttenuation[0],<sp/>\</highlight></codeline>
+<codeline lineno="55"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kAttenuation[1],<sp/>kAttenuation[2],<sp/>kFalloff[0],<sp/>kFalloff[1],<sp/>kFalloff[2])</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref><sp/>kPhiThetaTests[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>PHI_THETA(25.f,<sp/>5.f),<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Typical<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>PHI_THETA(25.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>0<sp/>theta</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>PHI_THETA(10.f,<sp/>25.f),<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Inverted<sp/>phi<sp/>and<sp/>theta</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>PHI_THETA(10.f,<sp/>10.f),<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>phi<sp/>==<sp/>theta</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>PHI_THETA(0.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>No<sp/>application<sp/>at<sp/>all.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>PHI_THETA(-10.f,<sp/>-10.f),<sp/><sp/></highlight><highlight class="comment">//<sp/>negative<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ATTENUATION_ENTRY(a,<sp/>b,<sp/>c)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>\</highlight></codeline>
+<codeline lineno="67"><highlight class="preprocessor"><sp/><sp/>LightingSpotlightTests::Spotlight(kSpotlightPosition,<sp/>kSpotlightDirection,<sp/>kFalloffPenumbraDegrees,<sp/>\</highlight></codeline>
+<codeline lineno="68"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kFalloffUmbraDegrees,<sp/>(a),<sp/>(b),<sp/>(c),<sp/>kFalloff[0],<sp/>kFalloff[1],<sp/>kFalloff[2])</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref><sp/>kAttenuationTests[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(0.f,<sp/>0.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(0.5f,<sp/>0.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(1.f,<sp/>0.f,<sp/>0.f),</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(2.f,<sp/>0.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(10.f,<sp/>0.f,<sp/>0.f),<sp/><sp/><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(0.05f,<sp/>0.25f,<sp/>0.f),</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>ATTENUATION_ENTRY(0.05f,<sp/>0.f,<sp/>0.25f),<sp/>ATTENUATION_ENTRY(0.05f,<sp/>0.05f,<sp/>0.05f),</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeFalloffTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>prefix,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref>&amp;<sp/>light)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[64];</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buf),<sp/></highlight><highlight class="stringliteral">&quot;%s_%f_%f_%f&quot;</highlight><highlight class="normal">,<sp/>prefix,<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1aa3098643e47135185a1a695f6c62d0cd" kindref="member">falloff</ref>[0],<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1aa3098643e47135185a1a695f6c62d0cd" kindref="member">falloff</ref>[1],<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1aa3098643e47135185a1a695f6c62d0cd" kindref="member">falloff</ref>[2]);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakePhiThetaTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>prefix,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref>&amp;<sp/>light)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[64];</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buf),<sp/></highlight><highlight class="stringliteral">&quot;%s_%f_%f&quot;</highlight><highlight class="normal">,<sp/>prefix,<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a559d1ba1f6569e6c0287f87e518086c4" kindref="member">phi</ref>,<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a38ad334677c54e4c1b69fb4e6aa36cb4" kindref="member">theta</ref>);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeAttenuationTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>prefix,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref>&amp;<sp/>light)<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[64];</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buf),<sp/></highlight><highlight class="stringliteral">&quot;%s_%f_%f_%f&quot;</highlight><highlight class="normal">,<sp/>prefix,<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a5f5f642d578287c454c8c822f8c2c89e" kindref="member">attenuation</ref>[0],<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a5f5f642d578287c454c8c822f8c2c89e" kindref="member">attenuation</ref>[1],<sp/>light.<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a5f5f642d578287c454c8c822f8c2c89e" kindref="member">attenuation</ref>[2]);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal">LightingSpotlightTests::LightingSpotlightTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Lighting<sp/>spotlight&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>light<sp/>:<sp/>kFalloffTests)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>name<sp/>=<sp/>MakeFalloffTestName(kFalloffName,<sp/>light);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[this,<sp/>name,<sp/>light]()<sp/>{<sp/>Test(name,<sp/>light);<sp/>};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name<sp/>=<sp/>MakeFalloffTestName(kFalloffFixedName,<sp/>light);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>light]()<sp/>{<sp/>TestFixed(name,<sp/>light);<sp/>};</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>light<sp/>:<sp/>kPhiThetaTests)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>name<sp/>=<sp/>MakePhiThetaTestName(kPhiThetaName,<sp/>light);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[this,<sp/>name,<sp/>light]()<sp/>{<sp/>Test(name,<sp/>light);<sp/>};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name<sp/>=<sp/>MakePhiThetaTestName(kPhiThetaFixedName,<sp/>light);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>light]()<sp/>{<sp/>TestFixed(name,<sp/>light);<sp/>};</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>light<sp/>:<sp/>kAttenuationTests)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>auto<sp/>name<sp/>=<sp/>MakeAttenuationTestName(kAttenuationFixedName,<sp/>light);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[this,<sp/>name,<sp/>light]()<sp/>{<sp/>Test(name,<sp/>light);<sp/>};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>name<sp/>=<sp/>MakeAttenuationTestName(kAttenuationFixedName,<sp/>light);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>light]()<sp/>{<sp/>TestFixed(name,<sp/>light);<sp/>};</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d9/d39/classLightingSpotlightTests_1aebe71e115995941fcadbeb75f00f0b3e" kindref="member">LightingSpotlightTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_CONTROL,<sp/>NV097_SET_LIGHT_CONTROL_V_ALPHA_FROM_MATERIAL_SPECULAR<sp/>|</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NV097_SET_LIGHT_CONTROL_V_LOCALEYE<sp/>|</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>(4<sp/>*<sp/>NV2A_VERTEX_ATTR_SPECULAR),<sp/>0);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>(4<sp/>*<sp/>NV2A_VERTEX_ATTR_BACK_DIFFUSE),<sp/>0);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>(4<sp/>*<sp/>NV2A_VERTEX_ATTR_BACK_SPECULAR),<sp/>0);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>CreateGeometry();</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Values<sp/>taken<sp/>from<sp/>MechAssault</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>0x00,<sp/>0xBF56C33A);<sp/><sp/></highlight><highlight class="comment">//<sp/>-0.838916</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>0x04,<sp/>0xC038C729);<sp/><sp/></highlight><highlight class="comment">//<sp/>-2.887156</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>0x08,<sp/>0x4043165A);<sp/><sp/></highlight><highlight class="comment">//<sp/>3.048239</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>0x0c,<sp/>0xBF34DCE5);<sp/><sp/></highlight><highlight class="comment">//<sp/>-0.706496</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>0x10,<sp/>0xC020743F);<sp/><sp/></highlight><highlight class="comment">//<sp/>-2.507095</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>0x14,<sp/>0x40333D06);<sp/><sp/></highlight><highlight class="comment">//<sp/>2.800600</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_COLOR_MATERIAL,<sp/>NV097_SET_COLOR_MATERIAL_ALL_FROM_MATERIAL);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV097_SET_SCENE_AMBIENT_COLOR,<sp/>0.01f,<sp/>0.01f,<sp/>0.01f);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION,<sp/>0x0,<sp/>0x0,<sp/>0x0);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV097_SET_MATERIAL_ALPHA,<sp/>0.40f);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="165"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d9/d39/classLightingSpotlightTests_1ad3e75ab08b9ea4e3a59be461f886fdab" kindref="member">LightingSpotlightTests::Deinitialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>vertex_buffer_plane_.reset();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>vertex_buffer_cylinder_.reset();</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" kindref="member">TestSuite::Deinitialize</ref>();</highlight></codeline>
+<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LightingSpotlightTests::CreateGeometry()<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>SET_COLOR_MATERIAL<sp/>below<sp/>causes<sp/>per-vertex<sp/>diffuse<sp/>color<sp/>to<sp/>be<sp/>ignored<sp/>entirely.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>vector_t<sp/>diffuse{1.f,<sp/>0.f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>However:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>1)<sp/>the<sp/>alpha<sp/>from<sp/>the<sp/>specular<sp/>value<sp/>is<sp/>added<sp/>to<sp/>the<sp/>material<sp/>alpha.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>2)<sp/>the<sp/>color<sp/>is<sp/>added<sp/>to<sp/>the<sp/>computed<sp/>vertex<sp/>color<sp/>if<sp/>SEPARATE_SPECULAR<sp/>is<sp/>OFF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>vector_t<sp/>specular{0.f,<sp/>0.4,<sp/>0.f,<sp/>0.25f};</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>construct_model<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](ModelBuilder&amp;<sp/>model,<sp/>std::shared_ptr&lt;VertexBuffer&gt;&amp;<sp/>vertex_buffer)<sp/>{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex_buffer<sp/>=<sp/>host_.AllocateVertexBuffer(model.GetVertexCount());</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>model.PopulateVertexBuffer(vertex_buffer);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>model<sp/>=<sp/><ref refid="d7/d37/classFlatMeshGridModel" kindref="compound">FlatMeshGridModel</ref>(diffuse,<sp/>specular);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>construct_model(model,<sp/>vertex_buffer_plane_);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>model<sp/>=<sp/><ref refid="d4/d27/classLightControlTestMeshCylinderModel" kindref="compound">LightControlTestMeshCylinderModel</ref>(diffuse,<sp/>specular);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>construct_model(model,<sp/>vertex_buffer_cylinder_);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal">LightingSpotlightTests::Spotlight::Spotlight(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::vector_t&amp;<sp/>direction,</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>phi,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>theta,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_2,</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>attenuation_3,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>falloff_1,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>falloff_2,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>falloff_3)</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>phi(phi),<sp/>theta(theta)<sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>memcpy(this-&gt;position,<sp/>position,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(position));</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>memcpy(this-&gt;direction,<sp/>direction,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(direction));</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/>attenuation[0]<sp/>=<sp/>attenuation_1;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/>attenuation[1]<sp/>=<sp/>attenuation_2;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/>attenuation[2]<sp/>=<sp/>attenuation_3;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>falloff[0]<sp/>=<sp/>falloff_1;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>falloff[1]<sp/>=<sp/>falloff_2;</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/>falloff[2]<sp/>=<sp/>falloff_3;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LightingSpotlightTests::Spotlight::Commit(uint32_t<sp/>light_index,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>XboxMath::matrix4_t&amp;<sp/>view_matrix)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>vector_t<sp/>transformed_position;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>VectorMultMatrix(position,<sp/>view_matrix,<sp/>transformed_position);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>transformed_position[3]<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>vector_t<sp/>normalized_direction{0.f,<sp/>0.f,<sp/>0.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>VectorNormalize(direction,<sp/>normalized_direction);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>See<sp/>spotlight<sp/>handling<sp/>code<sp/>here:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>https://github.com/xemu-project/xemu/blob/15bf68594f186c3df876fa7856b0d7a13e80f0e1/hw/xbox/nv2a/shaders.c#L653</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>and<sp/>directx<sp/>description<sp/>here:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cos_half_theta<sp/>=<sp/>cosf(0.5f<sp/>*<sp/>DEG2RAD(<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a38ad334677c54e4c1b69fb4e6aa36cb4" kindref="member">theta</ref>));</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>cos_half_phi<sp/>=<sp/>cosf(0.5f<sp/>*<sp/>DEG2RAD(<ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a559d1ba1f6569e6c0287f87e518086c4" kindref="member">phi</ref>));</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>inv_scale<sp/>=<sp/>-1.f<sp/>/<sp/>(cos_half_theta<sp/>-<sp/>cos_half_phi);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>ScalarMultVector(normalized_direction,<sp/>inv_scale);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>normalized_direction[3]<sp/>=<sp/>cos_half_phi<sp/>*<sp/>inv_scale;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_AMBIENT_COLOR),<sp/>0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_DIFFUSE_COLOR),<sp/>1.f,<sp/>0.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_SPECULAR_COLOR),<sp/>0.f,<sp/>0.f,<sp/>0.5f);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_LOCAL_RANGE),<sp/>kLightRange);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/>Pushbuffer::Push3F(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_LOCAL_POSITION),<sp/>transformed_position);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>Pushbuffer::Push3F(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_LOCAL_ATTENUATION),<sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1a5f5f642d578287c454c8c822f8c2c89e" kindref="member">attenuation</ref>);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/>Pushbuffer::Push3F(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_SPOT_FALLOFF),<sp/><ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight_1aa3098643e47135185a1a695f6c62d0cd" kindref="member">falloff</ref>);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>Pushbuffer::Push4F(SET_LIGHT(light_index,<sp/>NV097_SET_LIGHT_SPOT_DIRECTION),<sp/>normalized_direction);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="242"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawCheckerboardBackground(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host)<sp/>{</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>host.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/>host.SetFinalCombiner1Just(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>host.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>host.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureSize<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCheckerSize<sp/>=<sp/>16;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>texture_stage<sp/>=<sp/>host.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/>texture_stage.SetTextureDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/>host.SetupTextureStages();</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>texture_memory<sp/>=<sp/>host.GetTextureMemoryForStage(0);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/>GenerateSwizzledRGBACheckerboard(texture_memory,<sp/>0,<sp/>0,<sp/>kTextureSize,<sp/>kTextureSize,<sp/>kTextureSize<sp/>*<sp/>4,<sp/>kCheckerboardA,</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kCheckerboardB,<sp/>kCheckerSize);</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/>host.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/>host.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>vector_t<sp/>world_point;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>vector_t<sp/>screen_point<sp/>=<sp/>{0.f,<sp/>0.f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/>host.UnprojectPoint(world_point,<sp/>screen_point,<sp/>1.f);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>host.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/>host.SetTexCoord0(1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/>screen_point[0]<sp/>=<sp/>host.GetFramebufferWidthF();</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>host.UnprojectPoint(world_point,<sp/>screen_point,<sp/>1.f);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>host.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/>host.SetTexCoord0(1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/>screen_point[1]<sp/>=<sp/>host.GetFramebufferHeightF();</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/>host.UnprojectPoint(world_point,<sp/>screen_point,<sp/>1.f);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/>host.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/>host.SetTexCoord0(0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/>screen_point[0]<sp/>=<sp/>0.f;</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/>host.UnprojectPoint(world_point,<sp/>screen_point,<sp/>1.f);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/>host.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>host.End();</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/>host.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/>host.SetShaderStageProgram(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetupLighting(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>uint32_t<sp/>light_mode_bitvector)<sp/>{</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/>host.SetCombinerControl(1);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/>host.SetInputColorCombiner(0,<sp/>TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_IDENTITY,<sp/>TestHost::SRC_ZERO,</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_INVERT,<sp/>TestHost::SRC_SPECULAR,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::MAP_UNSIGNED_IDENTITY,<sp/>TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_INVERT);</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/>host.SetInputAlphaCombiner(0,<sp/>TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_IDENTITY,<sp/>TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::MAP_UNSIGNED_INVERT,<sp/>TestHost::SRC_SPECULAR,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::MAP_UNSIGNED_IDENTITY,<sp/>TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_INVERT);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/>host.SetOutputColorCombiner(0,<sp/>TestHost::DST_DISCARD,<sp/>TestHost::DST_DISCARD,<sp/>TestHost::DST_R0);</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/>host.SetOutputAlphaCombiner(0,<sp/>TestHost::DST_DISCARD,<sp/>TestHost::DST_DISCARD,<sp/>TestHost::DST_R0);</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/>host.SetFinalCombiner0Just(TestHost::SRC_R0);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/>host.SetFinalCombiner1(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_R0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">/*specular_add_invert_r0*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">/*<sp/>specular_add_invert_v1*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>specular_clamp<sp/>*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK,<sp/>light_mode_bitvector);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="317"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LightingSpotlightTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Spotlight&amp;<sp/>light)<sp/>{}</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>LightingSpotlightTests::TestFixed(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Spotlight&amp;<sp/>light)<sp/>{</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF232623;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/>DrawCheckerboardBackground(host_);</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/>uint32_t<sp/>light_mode_bitvector<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/>light.Commit(0,<sp/>host_.GetFixedFunctionModelViewMatrix());</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/>light_mode_bitvector<sp/>|=<sp/>LIGHT_MODE(0,<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_SPOT);</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/>SetupLighting(host_,<sp/>light_mode_bitvector);</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>vb<sp/>:<sp/>{</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vertex_buffer_plane_,</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vertex_buffer_cylinder_,</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>})<sp/>{</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(vb);</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.DrawArrays(host_.POSITION<sp/>|<sp/>host_.NORMAL<sp/>|<sp/>host_.DIFFUSE<sp/>|<sp/>host_.SPECULAR);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="345"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/lighting_spotlight_tests.cpp"/>
+  </compounddef>
+</doxygen>
