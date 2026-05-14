@@ -448,8 +448,10 @@ void ImageBlitTests::TestBlitPastWidth(const std::string& name) {
   auto guard_buffer = target_buffer + kBlitTargetSize;
   memset(guard_buffer, 0xCC, kBlitTargetGuardSize);
 
+  host_.PBKitBusyWait();
+
   auto set_crash_register = [](uint32_t reg, uint32_t value) -> uint32_t {
-    auto crash_register = reinterpret_cast<uint32_t*>(PGRAPH_REGISTER_BASE + reg);
+    auto crash_register = reinterpret_cast<volatile uint32_t*>(PGRAPH_REGISTER_BASE + reg);
     auto ret = *crash_register;
     *crash_register = value;
     return ret;
