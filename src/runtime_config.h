@@ -68,6 +68,9 @@ class RuntimeConfig {
   [[nodiscard]] uint32_t delay_milliseconds_between_tests() const { return delay_milliseconds_between_tests_; }
   [[nodiscard]] uint32_t delay_milliseconds_before_exit() const { return delay_milliseconds_before_exit_; }
 
+  [[nodiscard]] uint32_t shard_index() const { return shard_index_; }
+  [[nodiscard]] uint32_t shard_count() const { return shard_count_; }
+
   [[nodiscard]] uint32_t ftp_server_ip() const { return ftp_server_ip_; }
   [[nodiscard]] uint16_t ftp_server_port() const { return ftp_server_port_; }
   [[nodiscard]] const std::string& ftp_user() const { return ftp_user_; }
@@ -95,6 +98,7 @@ class RuntimeConfig {
 #endif  // DUMP_CONFIG_FILE
 
   bool ProcessNetworkSettings(const void* parent, std::vector<std::string>& errors);
+  bool ProcessShardingSettings(const void* parent, std::vector<std::string>& errors);
 
  private:
   bool enable_progress_log_ = DEFAULT_ENABLE_PROGRESS_LOG;
@@ -107,6 +111,9 @@ class RuntimeConfig {
   bool enable_shutdown_on_completion_ = DEFAULT_ENABLE_SHUTDOWN;
   bool enable_pgraph_region_diff_ = DEFAULT_ENABLE_PGRAPH_REGION_DIFF;
   bool skip_tests_by_default_ = DEFAULT_SKIP_TESTS_BY_DEFAULT;
+
+  uint32_t shard_index_{0};
+  uint32_t shard_count_{0};
 
   uint32_t ftp_server_ip_{0};
   uint16_t ftp_server_port_{0};

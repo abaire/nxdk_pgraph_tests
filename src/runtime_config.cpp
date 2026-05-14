@@ -195,6 +195,10 @@ bool RuntimeConfig::LoadConfigBuffer(const std::string& config_content, std::vec
     return false;
   }
 
+  if (!ProcessShardingSettings(settings, errors)) {
+    return false;
+  }
+
   auto test_suites = json_getProperty(root, "test_suites");
   if (!test_suites) {
     return true;
@@ -301,6 +305,36 @@ bool RuntimeConfig::ProcessNetworkSettings(const void* parent, std::vector<std::
       errors.emplace_back("settings[network][ftp][ftp_timeout_milliseconds] must be a positive integer");
       return false;
     }
+  }
+
+  return true;
+}
+
+bool RuntimeConfig::ProcessShardingSettings(const void* parent, std::vector<std::string>& errors) {
+  auto settings = static_cast<json_t const*>(parent);
+  auto sharding = json_getProperty(settings, "sharding");
+  if (!sharding) {
+    return true;
+  }
+
+  if (json_getType(sharding) != JSON_OBJ) {
+    errors.emplace_back("settings[sharding] must be an object");
+    return false;
+  }
+
+  if (!LoadUint32(sharding, "index", shard_index_)) {
+    errors.emplace_back("settings[sharding][index] must be a non-negative integer");
+    return false;
+  }
+
+  if (!LoadUint32(sharding, "count", shard_count_)) {
+    errors.emplace_back("settings[sharding][count] must be a non-negative integer");
+    return false;
+  }
+
+  if (shard_count_ > 0 && shard_index_ >= shard_count_) {
+    errors.emplace_back("settings[sharding][index] must be less than settings[sharding][count]");
+    return false;
   }
 
   return true;
@@ -517,6 +551,14 @@ void RuntimeConfig::WriteSettings(std::ostream& output) const {
 #undef BOOL_OPT
 
   output << R"(    "delay_milliseconds_between_tests": )" << delay_milliseconds_between_tests_ << "," << std::endl;
+  output << R"(    "delay_milliseconds_before_exit": )" << delay_milliseconds_before_exit_ << "," << std::endl;
+
+  if (shard_count_ > 0) {
+    output << R"(    "sharding": {)" << std::endl;
+    output << R"(      "index": )" << shard_index_ << "," << std::endl;
+    output << R"(      "count": )" << shard_count_ << std::endl;
+    output << R"(    },)" << std::endl;
+  }
 
   output << R"(    "network": {)" << std::endl;
   output << R"(      "enable": )" << bool_str(network_config_mode_ != NetworkConfigMode::OFF) << "," << std::endl;

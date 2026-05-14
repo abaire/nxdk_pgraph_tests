@@ -37,6 +37,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_DefaultSettings) {
     "enable_pgraph_region_diff": false,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 0,
+    "delay_milliseconds_before_exit": 4000,
     "network": {
       "enable": false,
       "config_automatic": false,
@@ -131,6 +132,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_ModifiedSettings) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "delay_milliseconds_before_exit": 4000,
     "network": {
       "enable": true,
       "config_automatic": true,
@@ -224,6 +226,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_NetworkMode_Static) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "delay_milliseconds_before_exit": 4000,
     "network": {
       "enable": true,
       "config_automatic": false,
@@ -309,6 +312,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_NetworkMode_DHCP) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "delay_milliseconds_before_exit": 4000,
     "network": {
       "enable": true,
       "config_automatic": false,
@@ -384,6 +388,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultEnabled) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": true,
     "delay_milliseconds_between_tests": 10,
+    "delay_milliseconds_before_exit": 4000,
     "network": {
       "enable": false,
       "config_automatic": false,
@@ -472,6 +477,7 @@ TEST(RuntimeConfig, DumpConfigBuffer_FilteredTests_SkipByDefaultDisabled) {
     "enable_pgraph_region_diff": true,
     "skip_tests_by_default": false,
     "delay_milliseconds_between_tests": 10,
+    "delay_milliseconds_before_exit": 4000,
     "network": {
       "enable": false,
       "config_automatic": false,
@@ -1094,6 +1100,90 @@ TEST(RuntimeConfig, ApplyConfig_TestCaseExplicitDisableWithinEnabledSuite_Defaul
   EXPECT_TRUE(config.ApplyConfig(suites, errors));
   EXPECT_TRUE(errors.empty());
   ASSERT_THAT(FlattenEnabledTests(suites), ElementsAre("Suite_2::Test_2", "Suite_2::Test_3"));
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidShardingNotObject) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"sharding": 123}})", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[sharding] must be an object");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidShardIndex_NonInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"sharding": {"index": false}}})", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[sharding][index] must be a non-negative integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidShardIndex_Negative) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"sharding": {"index": -1}}})", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[sharding][index] must be a non-negative integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidShardCount_NonInteger) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"sharding": {"count": false}}})", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[sharding][count] must be a non-negative integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_InvalidShardCount_Negative) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"sharding": {"count": -1}}})", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[sharding][count] must be a non-negative integer");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_ShardIndexExceedsCount) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_FALSE(config.LoadConfigBuffer(R"({"settings": {"sharding": {"index": 3, "count": 3}}})", errors));
+  EXPECT_EQ(errors.size(), 1);
+  EXPECT_STREQ(errors.at(0).c_str(), "settings[sharding][index] must be less than settings[sharding][count]");
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_NoSharding) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer(R"({"settings": {}})", errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.shard_index(), 0);
+  EXPECT_EQ(config.shard_count(), 0);
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_EmptyShardingObject) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer(R"({"settings": {"sharding": {}}})", errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.shard_index(), 0);
+  EXPECT_EQ(config.shard_count(), 0);
+}
+
+TEST(RuntimeConfig, LoadConfigBuffer_ValidShardConfig) {
+  RuntimeConfig config;
+  std::vector<std::string> errors;
+
+  EXPECT_TRUE(config.LoadConfigBuffer(R"({"settings": {"sharding": {"index": 1, "count": 3}}})", errors));
+  EXPECT_TRUE(errors.empty());
+  EXPECT_EQ(config.shard_index(), 1);
+  EXPECT_EQ(config.shard_count(), 3);
 }
 
 static std::vector<std::string> FlattenEnabledTests(std::vector<std::shared_ptr<TestSuite> >& suites) {
