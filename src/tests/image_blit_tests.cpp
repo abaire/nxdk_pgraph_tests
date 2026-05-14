@@ -100,8 +100,8 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
 struct ClipRegion {
   uint32_t x;
   uint32_t y;
-  uint32_t width;
-  uint32_t height;
+  int32_t width;
+  int32_t height;
 };
 
 static constexpr ClipRegion kClipRegionTests[] = {
@@ -153,6 +153,38 @@ static std::string MakeTestName(uint32_t clip_x, uint32_t clip_y, uint32_t clip_
  *   blit would extend beyond the end of the tile and a guard value is tested to prove that the blit is clipped to stay
  *   within the tile. A similar blit is performed outside of the tile, demonstrating that unprotected blits may overdraw
  *   the target region.
+ *
+ * @tc Overlap_TL_Outside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit just outside the
+ *   top-left corner of a 3D render surface.
+ *
+ * @tc Overlap_TL_Inside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit exactly inside the
+ *   top-left corner of a 3D render surface.
+ *
+ * @tc Overlap_TR_Outside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit just outside the
+ *   top-right corner of a 3D render surface.
+ *
+ * @tc Overlap_TR_Inside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit exactly inside the
+ *   top-right corner of a 3D render surface.
+ *
+ * @tc Overlap_BL_Outside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit just outside the
+ *   bottom-left corner of a 3D render surface.
+ *
+ * @tc Overlap_BL_Inside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit exactly inside the
+ *   bottom-left corner of a 3D render surface.
+ *
+ * @tc Overlap_BR_Outside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit just outside the
+ *   bottom-right corner of a 3D render surface.
+ *
+ * @tc Overlap_BR_Inside
+ *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit exactly inside the
+ *   bottom-right corner of a 3D render surface.
  */
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Image blit", config) {
@@ -178,6 +210,31 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
     tests_[kOverlapFIFOTest] = [this, blit_setup] { TestBlitOverPushbuffer(kOverlapFIFOTest, blit_setup); };
 #endif
   }
+
+  tests_["Overlap_TL_Outside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_TL_Outside", OverlapCorner::TopLeft, false);
+  };
+  tests_["Overlap_TL_Inside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_TL_Inside", OverlapCorner::TopLeft, true);
+  };
+  tests_["Overlap_TR_Outside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_TR_Outside", OverlapCorner::TopRight, false);
+  };
+  tests_["Overlap_TR_Inside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_TR_Inside", OverlapCorner::TopRight, true);
+  };
+  tests_["Overlap_BL_Outside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_BL_Outside", OverlapCorner::BottomLeft, false);
+  };
+  tests_["Overlap_BL_Inside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_BL_Inside", OverlapCorner::BottomLeft, true);
+  };
+  tests_["Overlap_BR_Outside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_BR_Outside", OverlapCorner::BottomRight, false);
+  };
+  tests_["Overlap_BR_Inside"] = [this]() {
+    TestOverlapBarelyInclusive("Overlap_BR_Inside", OverlapCorner::BottomRight, true);
+  };
 
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
   tests_[kBlitRenderBlitTest] = [this]() { TestBlitRenderBlit(); };
@@ -309,8 +366,8 @@ void ImageBlitTests::Test(const BlitTest& test) {
 
   uint32_t clip_x = 0;
   uint32_t clip_y = 0;
-  uint32_t clip_w = host_.GetFramebufferWidth();
-  uint32_t clip_h = host_.GetFramebufferHeight();
+  int32_t clip_w = host_.GetFramebufferWidth();
+  int32_t clip_h = host_.GetFramebufferHeight();
 
   ImageBlit(test.blit_operation, test.beta, image_src_dma_ctx_.ChannelID,
             DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
@@ -331,7 +388,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
 }
 
 void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test, uint32_t clip_x, uint32_t clip_y,
-                                           uint32_t clip_w, uint32_t clip_h) {
+                                           int32_t clip_w, int32_t clip_h) {
   host_.PrepareDraw(0xF0440011);
 
   uint32_t image_bytes = image_pitch_ * image_height_;
@@ -448,8 +505,10 @@ void ImageBlitTests::TestBlitPastWidth(const std::string& name) {
   auto guard_buffer = target_buffer + kBlitTargetSize;
   memset(guard_buffer, 0xCC, kBlitTargetGuardSize);
 
+  host_.PBKitBusyWait();
+
   auto set_crash_register = [](uint32_t reg, uint32_t value) -> uint32_t {
-    auto crash_register = reinterpret_cast<uint32_t*>(PGRAPH_REGISTER_BASE + reg);
+    auto crash_register = reinterpret_cast<volatile uint32_t*>(PGRAPH_REGISTER_BASE + reg);
     auto ret = *crash_register;
     *crash_register = value;
     return ret;
@@ -548,7 +607,7 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   host_.SetDiffuse(0.f, 0.f, 1.f);
   host_.SetScreenVertex(128.f, 128.f, 0.f);
 
-  host_.SetDiffuse(0.75, 0.65f, 0.55f);
+  host_.SetDiffuse(0.75f, 0.65f, 0.55f);
   host_.SetScreenVertex(0.f, 128.f, 0.f);
 
   host_.End();
@@ -592,6 +651,92 @@ void ImageBlitTests::TestDirtyOverlappedDestinationSurface() {
   FinishDraw(kDirtyOverlappedDestSurfaceTest);
 }
 
+void ImageBlitTests::TestOverlapBarelyInclusive(const std::string& name, OverlapCorner corner, bool overlap) {
+  host_.PrepareDraw(0xFF111111);
+
+  uint32_t image_bytes = image_pitch_ * image_height_;
+  pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  constexpr uint32_t kSurfW = 128;
+  constexpr uint32_t kSurfH = 128;
+  constexpr uint32_t kSurfX = 64;
+  constexpr uint32_t kSurfY = 64;
+  const uint32_t kBackbufferPitch = host_.GetFramebufferWidth() * 4;
+
+  auto subtexture = reinterpret_cast<uint8_t*>(pb_back_buffer()) + kSurfY * kBackbufferPitch + kSurfX * 4;
+
+  host_.RenderToSurfaceStart(subtexture, TestHost::SCF_A8R8G8B8, host_.GetFramebufferWidth(), kSurfH);
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+
+  host_.SetDiffuse(1.f, 0.f, 0.f);
+  host_.SetScreenVertex(0.f, 0.f, 0.f);
+  host_.SetDiffuse(0.f, 1.f, 0.f);
+  host_.SetScreenVertex(128.f, 0.f, 0.f);
+  host_.SetDiffuse(0.f, 0.f, 1.f);
+  host_.SetScreenVertex(128.f, 128.f, 0.f);
+  host_.SetDiffuse(0.75f, 0.65f, 0.55f);
+  host_.SetScreenVertex(0.f, 128.f, 0.f);
+
+  host_.End();
+  host_.RenderToSurfaceEnd();
+
+  uint32_t blit_x = kSurfX;
+  uint32_t blit_y = kSurfY;
+
+  switch (corner) {
+    case OverlapCorner::TopLeft:
+      blit_x = kSurfX - (overlap ? 0 : 1);
+      blit_y = kSurfY;
+      break;
+    case OverlapCorner::TopRight:
+      blit_x = kSurfX + kSurfW - 1 + (overlap ? 0 : 1);
+      blit_y = kSurfY;
+      break;
+    case OverlapCorner::BottomLeft:
+      blit_x = kSurfX - (overlap ? 0 : 1);
+      blit_y = kSurfY + kSurfH - 1;
+      break;
+    case OverlapCorner::BottomRight:
+      blit_x = kSurfX + kSurfW - 1 + (overlap ? 0 : 1);
+      blit_y = kSurfY + kSurfH - 1;
+      break;
+  }
+
+  ImageBlit(NV09F_SET_OPERATION_SRCCOPY, 0, image_src_dma_ctx_.ChannelID,
+            DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
+            NV04_SURFACE_2D_FORMAT_A8R8G8B8, image_pitch_, kBackbufferPitch,
+            0,                            // source_offset
+            0,                            // source_x
+            0,                            // source_y
+            0,                            // destination_offset
+            blit_x,                       // destination_x
+            blit_y,                       // destination_y
+            1,                            // width
+            1,                            // height
+            0,                            // clip_x
+            0,                            // clip_y
+            host_.GetFramebufferWidth(),  // clip_width
+            host_.GetFramebufferHeight()  // clip_height
+  );
+
+  // 3) Draw an unrelated quad to force the 3D hardware to wait on the 2D blit completion.
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(1.f, 0.f, 0.f);
+  host_.SetScreenVertex(320.f, 240.f, 0.f);
+  host_.SetDiffuse(0.f, 1.f, 0.f);
+  host_.SetScreenVertex(324.f, 240.f, 0.f);
+  host_.SetDiffuse(0.f, 0.f, 1.f);
+  host_.SetScreenVertex(324.f, 244.f, 0.f);
+  host_.SetDiffuse(0.75f, 0.65f, 0.55f);
+  host_.SetScreenVertex(320.f, 244.f, 0.f);
+  host_.End();
+
+  FinishDraw(name);
+}
+
 void ImageBlitTests::TestBlitRenderBlit() {
   host_.PrepareDraw(0xFF112233);
 
@@ -599,8 +744,8 @@ void ImageBlitTests::TestBlitRenderBlit() {
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
 
   // Allocate a render target in texture memory.
-  uint32_t rt_width = 256;
-  uint32_t rt_height = 256;
+  int32_t rt_width = 256;
+  int32_t rt_height = 256;
   uint32_t rt_pitch = rt_width * 4;
   uint32_t rt_size = rt_pitch * rt_height;
   auto render_target = host_.GetTextureMemoryForStage(0);
@@ -640,7 +785,7 @@ void ImageBlitTests::TestBlitRenderBlit() {
   host_.SetDiffuse(0.f, 0.f, 1.f);
   host_.SetScreenVertex(192.f, 192.f, 0.f);
 
-  host_.SetDiffuse(0.75, 0.65f, 0.55f);
+  host_.SetDiffuse(0.75f, 0.65f, 0.55f);
   host_.SetScreenVertex(64.f, 192.f, 0.f);
 
   host_.End();

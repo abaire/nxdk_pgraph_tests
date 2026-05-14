@@ -45,7 +45,7 @@ void ColorZetaDisableTests::Test() {
 
   // This seems to clear the check that triggers a color/zeta limit error.
   // Spongebob sets this register early on in the game launch.
-  auto crash_register = reinterpret_cast<uint32_t *>(PGRAPH_REGISTER_BASE + 0x880);
+  auto crash_register = reinterpret_cast<volatile uint32_t *>(PGRAPH_REGISTER_BASE + 0x880);
   auto crash_register_pre_test = *crash_register;
   *crash_register = crash_register_pre_test & (~0x800);
 

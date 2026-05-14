@@ -28,15 +28,17 @@ class ImageBlitTests : public TestSuite {
 
  private:
   void Test(const BlitTest& test);
-  void TestWithClipRectangle(const BlitTest& test, uint32_t clip_x, uint32_t clip_y, uint32_t clip_w, uint32_t clip_h);
+  void TestWithClipRectangle(const BlitTest& test, uint32_t clip_x, uint32_t clip_y, int32_t clip_w, int32_t clip_h);
   void TestBlitOverPushbuffer(const std::string& name, const BlitTest& test);
   void TestBlitPastWidth(const std::string& name);
+  enum class OverlapCorner { TopLeft, TopRight, BottomLeft, BottomRight };
+  void TestOverlapBarelyInclusive(const std::string& name, OverlapCorner corner, bool overlap);
 
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
                  uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
                  uint32_t source_x, uint32_t source_y, uint32_t destination_offset, uint32_t destination_x,
                  uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x = 0, uint32_t clip_y = 0,
-                 int32_t clip_width = 0, int32_t clip_height = -1) const;
+                 int32_t clip_width = -1, int32_t clip_height = -1) const;
 
   void ImageBlitWithinPushBlock(uint32_t operation, uint32_t beta, uint32_t source_channel,
                                 uint32_t destination_channel, uint32_t surface_format, uint32_t source_pitch,
