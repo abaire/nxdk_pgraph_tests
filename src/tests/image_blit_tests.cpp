@@ -100,8 +100,8 @@ static constexpr ImageBlitTests::BlitTest kTests[] = {
 struct ClipRegion {
   uint32_t x;
   uint32_t y;
-  uint32_t width;
-  uint32_t height;
+  int32_t width;
+  int32_t height;
 };
 
 static constexpr ClipRegion kClipRegionTests[] = {
@@ -366,8 +366,8 @@ void ImageBlitTests::Test(const BlitTest& test) {
 
   uint32_t clip_x = 0;
   uint32_t clip_y = 0;
-  uint32_t clip_w = host_.GetFramebufferWidth();
-  uint32_t clip_h = host_.GetFramebufferHeight();
+  int32_t clip_w = host_.GetFramebufferWidth();
+  int32_t clip_h = host_.GetFramebufferHeight();
 
   ImageBlit(test.blit_operation, test.beta, image_src_dma_ctx_.ChannelID,
             DMA_CHANNEL_BITBLT_IMAGES,  // DMA channel 11 - 0x1117
@@ -388,7 +388,7 @@ void ImageBlitTests::Test(const BlitTest& test) {
 }
 
 void ImageBlitTests::TestWithClipRectangle(const ImageBlitTests::BlitTest& test, uint32_t clip_x, uint32_t clip_y,
-                                           uint32_t clip_w, uint32_t clip_h) {
+                                           int32_t clip_w, int32_t clip_h) {
   host_.PrepareDraw(0xF0440011);
 
   uint32_t image_bytes = image_pitch_ * image_height_;
@@ -744,8 +744,8 @@ void ImageBlitTests::TestBlitRenderBlit() {
   pb_set_dma_address(&image_src_dma_ctx_, source_image_, image_bytes - 1);
 
   // Allocate a render target in texture memory.
-  uint32_t rt_width = 256;
-  uint32_t rt_height = 256;
+  int32_t rt_width = 256;
+  int32_t rt_height = 256;
   uint32_t rt_pitch = rt_width * 4;
   uint32_t rt_size = rt_pitch * rt_height;
   auto render_target = host_.GetTextureMemoryForStage(0);
