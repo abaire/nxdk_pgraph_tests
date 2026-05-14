@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d17/structBoxLayoutInfo" kind="struct" language="C++" prot="public">
+    <compoundname>BoxLayoutInfo</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d7/d17/structBoxLayoutInfo_1aea06aaea09f0f0a322651f77d5e5fb6a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BoxLayoutInfo::box_width</definition>
+        <argsstring></argsstring>
+        <name>box_width</name>
+        <qualifiedname>BoxLayoutInfo::box_width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.cpp" line="43" column="12" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d17/structBoxLayoutInfo_1af3237472ccb77c80eacb78f9ad9a3e8d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BoxLayoutInfo::box_height</definition>
+        <argsstring></argsstring>
+        <name>box_height</name>
+        <qualifiedname>BoxLayoutInfo::box_height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.cpp" line="44" column="12" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d17/structBoxLayoutInfo_1a2138962b5e87ac2ee0c9a737403147c4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BoxLayoutInfo::spacing</definition>
+        <argsstring></argsstring>
+        <name>spacing</name>
+        <qualifiedname>BoxLayoutInfo::spacing</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.cpp" line="45" column="12" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d17/structBoxLayoutInfo_1a2be1daa9aa8e83ed393739eaca8d58bf" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BoxLayoutInfo::first_box_left</definition>
+        <argsstring></argsstring>
+        <name>first_box_left</name>
+        <qualifiedname>BoxLayoutInfo::first_box_left</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.cpp" line="46" column="12" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d17/structBoxLayoutInfo_1aeca809ded7c16d5010ad195939b54e55" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BoxLayoutInfo::top</definition>
+        <argsstring></argsstring>
+        <name>top</name>
+        <qualifiedname>BoxLayoutInfo::top</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_shadow_comparator_tests.cpp" line="47" column="12" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_shadow_comparator_tests.cpp" line="42" column="1" bodyfile="src/tests/texture_shadow_comparator_tests.cpp" bodystart="42" bodyend="48"/>
+    <listofallmembers>
+      <member refid="d7/d17/structBoxLayoutInfo_1af3237472ccb77c80eacb78f9ad9a3e8d" prot="public" virt="non-virtual"><scope>BoxLayoutInfo</scope><name>box_height</name></member>
+      <member refid="d7/d17/structBoxLayoutInfo_1aea06aaea09f0f0a322651f77d5e5fb6a" prot="public" virt="non-virtual"><scope>BoxLayoutInfo</scope><name>box_width</name></member>
+      <member refid="d7/d17/structBoxLayoutInfo_1a2be1daa9aa8e83ed393739eaca8d58bf" prot="public" virt="non-virtual"><scope>BoxLayoutInfo</scope><name>first_box_left</name></member>
+      <member refid="d7/d17/structBoxLayoutInfo_1a2138962b5e87ac2ee0c9a737403147c4" prot="public" virt="non-virtual"><scope>BoxLayoutInfo</scope><name>spacing</name></member>
+      <member refid="d7/d17/structBoxLayoutInfo_1aeca809ded7c16d5010ad195939b54e55" prot="public" virt="non-virtual"><scope>BoxLayoutInfo</scope><name>top</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

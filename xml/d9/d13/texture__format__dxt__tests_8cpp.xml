@@ -1,0 +1,651 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/d13/texture__format__dxt__tests_8cpp" kind="file" language="C++">
+    <compoundname>texture_format_dxt_tests.cpp</compoundname>
+    <includes refid="dd/d61/texture__format__dxt__tests_8h" local="yes">texture_format_dxt_tests.h</includes>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes local="yes">dds_image.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texture_format_dxt_tests.cpp</label>
+        <link refid="d9/d13/texture__format__dxt__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texture_format_dxt_tests.h</label>
+        <link refid="dd/d61/texture__format__dxt__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>SDL.h</label>
+      </node>
+      <node id="9">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="10">
+        <label>cstdint</label>
+      </node>
+      <node id="32">
+        <label>dds_image.h</label>
+      </node>
+      <node id="11">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="15">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="14">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="7">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="33">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="12">
+        <label>thread</label>
+      </node>
+      <node id="31">
+        <label>utility</label>
+      </node>
+      <node id="13">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="6">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d3/dee/structTestCase" prot="public">TestCase</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1aa8293a4ab012ba9d71c797aa8509a7ed" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kAlphaDXT1[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAlphaDXT1</name>
+        <initializer>= &quot;D:\\dxt_images\\plasma_alpha_dxt1.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="14" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a6225534dca01ddda7ba71d195ed4dd20" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kAlphaDXT3[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAlphaDXT3</name>
+        <initializer>= &quot;D:\\dxt_images\\plasma_alpha_dxt3.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="15" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a091de0d4b83a4b96e40f36bfa35a5cab" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kAlphaDXT5[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAlphaDXT5</name>
+        <initializer>= &quot;D:\\dxt_images\\plasma_alpha_dxt5.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="16" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1aec90f19dcfb1d7ae03ea2266ea70f51d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kOpaqueDXT1[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOpaqueDXT1</name>
+        <initializer>= &quot;D:\\dxt_images\\plasma_dxt1.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="17" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a8046db86c1e133ca0a2e9ec0404ac702" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kOpaqueDXT3[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOpaqueDXT3</name>
+        <initializer>= &quot;D:\\dxt_images\\plasma_dxt3.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="18" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1aae3dc48ae961bd7d572493fd0120429f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kOpaqueDXT5[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOpaqueDXT5</name>
+        <initializer>= &quot;D:\\dxt_images\\plasma_dxt5.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="19" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a0eadde431141ee1566d96aa0c86e58ee" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kOpaqueDXT1NonSquare[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOpaqueDXT1NonSquare</name>
+        <initializer>= &quot;D:\\dxt_images\\64x256_bands_dxt1.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="21" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a634c1568d82b7922b270876c249ae243" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kOpaqueDXT3NonSquare[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOpaqueDXT3NonSquare</name>
+        <initializer>= &quot;D:\\dxt_images\\64x256_bands_dxt3.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="22" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a6a9b3b93b6e50fb645480656be0e5c0d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kOpaqueDXT5NonSquare[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOpaqueDXT5NonSquare</name>
+        <initializer>= &quot;D:\\dxt_images\\64x256_bands_dxt5.dds&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="23" column="29" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1a18e97cdbbbfdec7a91e5bfe0b355d190" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref></type>
+        <definition>constexpr TestCase kTestCases[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestCases</name>
+        <initializer>= {
+    {kAlphaDXT1, TextureFormatDXTTests::CompressedTextureFormat::DXT1},
+    {kAlphaDXT3, TextureFormatDXTTests::CompressedTextureFormat::DXT3},
+    {kAlphaDXT5, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
+    {kOpaqueDXT1, TextureFormatDXTTests::CompressedTextureFormat::DXT1},
+    {kOpaqueDXT3, TextureFormatDXTTests::CompressedTextureFormat::DXT3},
+    {kOpaqueDXT5, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="30" column="27" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="30" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d13/texture__format__dxt__tests_8cpp_1ae3c5dbcbb38a5accba672bfbfe663d76" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref></type>
+        <definition>constexpr TestCase kNonSquareTestCases[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kNonSquareTestCases</name>
+        <initializer>= {
+    {kOpaqueDXT1NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT1},
+    {kOpaqueDXT3NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT3},
+    {kOpaqueDXT5NonSquare, TextureFormatDXTTests::CompressedTextureFormat::DXT5},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="39" column="27" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="39" bodyend="43"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d9/d13/texture__format__dxt__tests_8cpp_1ad225bd08248a6de3bb7a7343a2c3f80e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string GetFormatName</definition>
+        <argsstring>(TextureFormatDXTTests::CompressedTextureFormat texture_format)</argsstring>
+        <name>GetFormatName</name>
+        <param>
+          <type>TextureFormatDXTTests::CompressedTextureFormat</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="215" column="20" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="215" bodyend="226" declfile="src/tests/texture_format_dxt_tests.cpp" declline="45" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texture_format_dxt_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;dds_image.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kAlphaDXT1[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\plasma_alpha_dxt1.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kAlphaDXT3[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\plasma_alpha_dxt3.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kAlphaDXT5[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\plasma_alpha_dxt5.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kOpaqueDXT1[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\plasma_dxt1.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kOpaqueDXT3[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\plasma_dxt3.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kOpaqueDXT5[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\plasma_dxt5.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kOpaqueDXT1NonSquare[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\64x256_bands_dxt1.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kOpaqueDXT3NonSquare[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\64x256_bands_dxt3.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kOpaqueDXT5NonSquare[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;D:\\dxt_images\\64x256_bands_dxt5.dds&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>TextureFormatDXTTests::CompressedTextureFormat<sp/>format;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref><sp/>kTestCases[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>{kAlphaDXT1,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT1},</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{kAlphaDXT3,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT3},</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>{kAlphaDXT5,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT5},</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>{kOpaqueDXT1,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT1},</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{kOpaqueDXT3,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT3},</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>{kOpaqueDXT5,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT5},</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref><sp/>kNonSquareTestCases[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{kOpaqueDXT1NonSquare,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT1},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{kOpaqueDXT3NonSquare,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT3},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>{kOpaqueDXT5NonSquare,<sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT5},</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>GetFormatName(TextureFormatDXTTests::CompressedTextureFormat<sp/>texture_format);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal">TextureFormatDXTTests::TextureFormatDXTTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>DXT&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;test<sp/>:<sp/>kTestCases)<sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[MakeTestName(test.filename,<sp/>test.format)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;test]()<sp/>{<sp/>Test(test.filename,<sp/>test.format);<sp/>};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[MakeTestName(test.filename,<sp/>test.format,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;test]()<sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestMipmap(test.filename,<sp/>test.format);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;test<sp/>:<sp/>kNonSquareTestCases)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[MakeTestName(test.filename,<sp/>test.format,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;test]()<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestMipmap(test.filename,<sp/>test.format);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/df8/classTextureFormatDXTTests_1a1410591d4b144038b441e70cf57d3e47" kindref="member">TextureFormatDXTTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureFormatDXTTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename,<sp/>CompressedTextureFormat<sp/>texture_format)<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE101010);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>DDSImage<sp/>img;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>loaded<sp/>=<sp/>img.LoadFile(filename);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>ASSERT(loaded<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>load<sp/>test<sp/>image<sp/>from<sp/>file.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>data<sp/>=<sp/>img.GetPrimaryImage();</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>uint32_t<sp/>nv2a_format<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(data-&gt;format)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DDSImage::SubImage::Format::DXT1:</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nv2a_format<sp/>=<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DDSImage::SubImage::Format::DXT3:</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nv2a_format<sp/>=<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT23_A8R8G8B8;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DDSImage::SubImage::Format::DXT5:</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nv2a_format<sp/>=<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT45_A8R8G8B8;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unimplemented<sp/>subimage<sp/>format.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>texture_stage.SetTextureDimensions(data-&gt;width,<sp/>data-&gt;height);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>host_.SetRawTexture(data-&gt;data.data(),<sp/>data-&gt;compressed_width,<sp/>data-&gt;compressed_height,<sp/>data-&gt;depth,<sp/>data-&gt;pitch,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data-&gt;bytes_per_pixel,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kOutputSize<sp/>=<sp/>256.0f;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf((host_.GetFramebufferWidthF()<sp/>-<sp/>kOutputSize)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>kOutputSize;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf((host_.GetFramebufferHeightF()<sp/>-<sp/>kOutputSize)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>kOutputSize;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(right,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(right,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/>MakeTestName(filename,<sp/>texture_format);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>test_name.c_str());</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;FMT:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>GetFormatName(texture_format).c_str());</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(test_name);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureFormatDXTTests::TestMipmap(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*filename,</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TextureFormatDXTTests::CompressedTextureFormat<sp/>texture_format)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE101010);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>DDSImage<sp/>img;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>loaded<sp/>=<sp/>img.LoadFile(filename,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>ASSERT(loaded<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>load<sp/>test<sp/>image<sp/>from<sp/>file.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>primary_image<sp/>=<sp/>img.GetPrimaryImage();</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>uint32_t<sp/>nv2a_format<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(primary_image-&gt;format)<sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DDSImage::SubImage::Format::DXT1:</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nv2a_format<sp/>=<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT1_A1R5G5B5;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DDSImage::SubImage::Format::DXT3:</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nv2a_format<sp/>=<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT23_A8R8G8B8;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DDSImage::SubImage::Format::DXT5:</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nv2a_format<sp/>=<sp/>NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT45_A8R8G8B8;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unimplemented<sp/>subimage<sp/>format.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(nv2a_format));</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>texture_stage.SetTextureDimensions(primary_image-&gt;width,<sp/>primary_image-&gt;height);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>texture_stage.SetFilter(0,<sp/>TextureStage::K_QUINCUNX,<sp/>TextureStage::MIN_TENT_TENT_LOD);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>texture_stage.SetMipMapLevels(img.NumLevels());</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>uint8_t<sp/>*texture_ram<sp/>=<sp/>host_.GetTextureMemoryForStage(0);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;subimage<sp/>:<sp/>img.GetSubImages())<sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>size<sp/>=<sp/>subimage-&gt;pitch<sp/>*<sp/>subimage-&gt;compressed_height<sp/>*<sp/>subimage-&gt;depth;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>memcpy(texture_ram,<sp/>subimage-&gt;data.data(),<sp/>size);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_ram<sp/>+=<sp/>size;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>size)<sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>size;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>size;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(right,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(right,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>bottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>draw(5.0f,<sp/>80.0f,<sp/>256.0f);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>draw(270.0f,<sp/>80.0f,<sp/>128.0f);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>draw(410.0f,<sp/>80.0f,<sp/>64.0f);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/>draw(480.0f,<sp/>80.0f,<sp/>32.0f);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>draw(520.0f,<sp/>80.0f,<sp/>16.0f);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>draw(270.0f,<sp/>220.0f,<sp/>8.0f);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>draw(280.0f,<sp/>220.0f,<sp/>4.0f);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/>draw(290.0f,<sp/>220.0f,<sp/>2.0f);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/>draw(300.0f,<sp/>220.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>texture_stage.SetMipMapLevels(1);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/>MakeTestName(filename,<sp/>texture_format,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>test_name.c_str());</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;FMT:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>GetFormatName(texture_format).c_str());</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(test_name);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>GetFormatName(TextureFormatDXTTests::CompressedTextureFormat<sp/>texture_format)<sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(texture_format)<sp/>{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT1:</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;DXT1&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT3:</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;DXT3&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TextureFormatDXTTests::CompressedTextureFormat::DXT5:</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;DXT5&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="226"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal">std::string<sp/>TextureFormatDXTTests::MakeTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;filename,<sp/>CompressedTextureFormat<sp/>texture_format,</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>mipmap)<sp/>{</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/>std::string<sp/>test_name<sp/>=<sp/>mipmap<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;MIP&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>test_name<sp/>+=<sp/>GetFormatName(texture_format);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>begin<sp/>=<sp/>filename.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>end<sp/>=<sp/>filename.rfind(</highlight><highlight class="charliteral">&apos;.&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>ASSERT(begin<sp/>!=<sp/>filename.npos<sp/>&amp;&amp;<sp/>end<sp/>!=<sp/>filename.npos<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Invalid<sp/>filename&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/>test_name<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal"><sp/>+<sp/>filename.substr(begin<sp/>+<sp/>1,<sp/>end<sp/>-<sp/>begin<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::move(test_name);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texture_format_dxt_tests.cpp"/>
+  </compounddef>
+</doxygen>

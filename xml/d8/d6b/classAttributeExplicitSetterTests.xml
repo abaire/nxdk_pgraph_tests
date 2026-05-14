@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d6b/classAttributeExplicitSetterTests" kind="class" language="C++" prot="public">
+    <compoundname>AttributeExplicitSetterTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <innerclass refid="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig" prot="public">AttributeExplicitSetterTests::TestConfig</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Attribute</name>
+        <qualifiedname>AttributeExplicitSetterTests::Attribute</qualifiedname>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a3b86a87573a7d37b405ec5ff083694d8" prot="public">
+          <name>ATTR_WEIGHT</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a4d245800a682b195a17d8b3b07bfbf16" prot="public">
+          <name>ATTR_NORMAL</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30ab4aafec86a8dacf5c2753b575cf5b9a1" prot="public">
+          <name>ATTR_DIFFUSE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a84dc180e25b3f4e9f029e98c94fc2d0b" prot="public">
+          <name>ATTR_SPECULAR</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30ad011d6d7b1940dc79f69a33f4a2a6830" prot="public">
+          <name>ATTR_FOG_COORD</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a9bc898c7cd1782a8b4dafdee70c55462" prot="public">
+          <name>ATTR_POINT_SIZE</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a753654047a573251357ef28b8527f4dd" prot="public">
+          <name>ATTR_BACK_DIFFUSE</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a1d6665e70bc680b92465353859337db1" prot="public">
+          <name>ATTR_BACK_SPECULAR</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a0b610730dae8186e4dab500a87fcd3be" prot="public">
+          <name>ATTR_TEX0</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30af6df5163485fa20b1363972ca87ebd2c" prot="public">
+          <name>ATTR_TEX1</name>
+          <initializer>= 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a441f633d577dd1c33ed54bea36d310e8" prot="public">
+          <name>ATTR_TEX2</name>
+          <initializer>= 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30ad76a760e0fad6c411673bd552be35db9" prot="public">
+          <name>ATTR_TEX3</name>
+          <initializer>= 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="14" column="3" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="14" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d8/d6b/classAttributeExplicitSetterTests_1ae71adc7cc4a1b995db9eb30752b4462f" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AttributeExplicitSetterTests::test_triangle_width</definition>
+        <argsstring></argsstring>
+        <name>test_triangle_width</name>
+        <qualifiedname>AttributeExplicitSetterTests::test_triangle_width</qualifiedname>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="46" column="9" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d6b/classAttributeExplicitSetterTests_1aa8c4f2e23b2956f73135fd33364f777d" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AttributeExplicitSetterTests::test_triangle_height</definition>
+        <argsstring></argsstring>
+        <name>test_triangle_height</name>
+        <qualifiedname>AttributeExplicitSetterTests::test_triangle_height</qualifiedname>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="47" column="9" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/d6b/classAttributeExplicitSetterTests_1a4d11565414d09b79e87a29e252e54b23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AttributeExplicitSetterTests::AttributeExplicitSetterTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>AttributeExplicitSetterTests</name>
+        <qualifiedname>AttributeExplicitSetterTests::AttributeExplicitSetterTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="35" column="3" bodyfile="src/tests/attribute_explicit_setter_tests.cpp" bodystart="24" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d6b/classAttributeExplicitSetterTests_1a4127f37947fa6522e69f93aa66204650" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AttributeExplicitSetterTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>AttributeExplicitSetterTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="37" column="8" bodyfile="src/tests/attribute_explicit_setter_tests.cpp" bodystart="31" bodyend="48"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d8/d6b/classAttributeExplicitSetterTests_1addc61244d3e9076001464fa4a456befe" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AttributeExplicitSetterTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>AttributeExplicitSetterTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="40" column="8" bodyfile="src/tests/attribute_explicit_setter_tests.cpp" bodystart="50" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d6b/classAttributeExplicitSetterTests_1a993dd0fa6df187238c1b3557116c8cba" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AttributeExplicitSetterTests::Test</definition>
+        <argsstring>(const TestConfig &amp;config)</argsstring>
+        <name>Test</name>
+        <qualifiedname>AttributeExplicitSetterTests::Test</qualifiedname>
+        <param>
+          <type>const <ref refid="df/d1d/structAttributeExplicitSetterTests_1_1TestConfig" kindref="compound">TestConfig</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="41" column="8" bodyfile="src/tests/attribute_explicit_setter_tests.cpp" bodystart="64" bodyend="585"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d6b/classAttributeExplicitSetterTests_1af9bc8b644066b0a6586510ff8a3daf4e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AttributeExplicitSetterTests::Draw</definition>
+        <argsstring>(float x, float y, const std::function&lt; void(int)&gt; &amp;attribute_setter, Attribute test_attribute, int mask=0xF, float bias=0.0f, float multiplier=1.0f)</argsstring>
+        <name>Draw</name>
+        <qualifiedname>AttributeExplicitSetterTests::Draw</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const std::function&lt; void(int)&gt; &amp;</type>
+          <declname>attribute_setter</declname>
+        </param>
+        <param>
+          <type>Attribute</type>
+          <declname>test_attribute</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mask</declname>
+          <defval>0xF</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bias</declname>
+          <defval>0.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>multiplier</declname>
+          <defval>1.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_explicit_setter_tests.h" line="42" column="8" bodyfile="src/tests/attribute_explicit_setter_tests.cpp" bodystart="587" bodyend="617"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AttributeExplicitSetterTests</label>
+        <link refid="d8/d6b/classAttributeExplicitSetterTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AttributeExplicitSetterTests</label>
+        <link refid="d8/d6b/classAttributeExplicitSetterTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/attribute_explicit_setter_tests.h" line="11" column="1" bodyfile="src/tests/attribute_explicit_setter_tests.h" bodystart="11" bodyend="48"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>allow_saving_</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a753654047a573251357ef28b8527f4dd" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_BACK_DIFFUSE</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a1d6665e70bc680b92465353859337db1" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_BACK_SPECULAR</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30ab4aafec86a8dacf5c2753b575cf5b9a1" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_DIFFUSE</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30ad011d6d7b1940dc79f69a33f4a2a6830" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_FOG_COORD</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a4d245800a682b195a17d8b3b07bfbf16" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_NORMAL</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a9bc898c7cd1782a8b4dafdee70c55462" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_POINT_SIZE</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a84dc180e25b3f4e9f029e98c94fc2d0b" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_SPECULAR</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a0b610730dae8186e4dab500a87fcd3be" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_TEX0</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30af6df5163485fa20b1363972ca87ebd2c" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_TEX1</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a441f633d577dd1c33ed54bea36d310e8" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_TEX2</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30ad76a760e0fad6c411673bd552be35db9" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_TEX3</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30a3b86a87573a7d37b405ec5ff083694d8" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ATTR_WEIGHT</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a1edd5d0668a5365e72311fe272bc3b30" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>Attribute</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a4d11565414d09b79e87a29e252e54b23" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>AttributeExplicitSetterTests</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1addc61244d3e9076001464fa4a456befe" prot="private" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>CreateGeometry</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>AttributeExplicitSetterTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>DisableTests</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1af9bc8b644066b0a6586510ff8a3daf4e" prot="private" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>Draw</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>host_</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a4127f37947fa6522e69f93aa66204650" prot="public" virt="virtual"><scope>AttributeExplicitSetterTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>AttributeExplicitSetterTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>AttributeExplicitSetterTests</scope><name>TearDownTest</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1a993dd0fa6df187238c1b3557116c8cba" prot="private" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>Test</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1aa8c4f2e23b2956f73135fd33364f777d" prot="private" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>test_triangle_height</name></member>
+      <member refid="d8/d6b/classAttributeExplicitSetterTests_1ae71adc7cc4a1b995db9eb30752b4462f" prot="private" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>test_triangle_width</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>AttributeExplicitSetterTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>AttributeExplicitSetterTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

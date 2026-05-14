@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/d32/classLightControlTestMeshSuzanneModel" kind="class" language="C++" prot="public">
+    <compoundname>LightControlTestMeshSuzanneModel</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="dc/d32/classLightControlTestMeshSuzanneModel_1a55b38a622d31d6b44bd76f824ae19452" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshSuzanneModel::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::vertices_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="39" column="9" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d32/classLightControlTestMeshSuzanneModel_1ac04748577c61917ab1a120643b73f31b" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshSuzanneModel::normals_</definition>
+        <argsstring></argsstring>
+        <name>normals_</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::normals_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="40" column="9" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d32/classLightControlTestMeshSuzanneModel_1a7a0469c5f35dccd5f9795db63fabe699" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshSuzanneModel::texcoords_</definition>
+        <argsstring></argsstring>
+        <name>texcoords_</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::texcoords_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="41" column="9" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1a840975fc2d4f3f34b35ed4577a8fe96f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshSuzanneModel::LightControlTestMeshSuzanneModel</definition>
+        <argsstring>()</argsstring>
+        <name>LightControlTestMeshSuzanneModel</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::LightControlTestMeshSuzanneModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="12" column="3" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1a72261555de2411fe5c0c28b5f212c084" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshSuzanneModel::LightControlTestMeshSuzanneModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>LightControlTestMeshSuzanneModel</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::LightControlTestMeshSuzanneModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="13" column="3" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1a6ffa7ba59ea40a547964839bbb6030c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshSuzanneModel::LightControlTestMeshSuzanneModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular, const vector_t &amp;back_diffuse, const vector_t &amp;back_specular)</argsstring>
+        <name>LightControlTestMeshSuzanneModel</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::LightControlTestMeshSuzanneModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="15" column="3" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1a29e77972a4dc52b93f2183a9240ce6d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t LightControlTestMeshSuzanneModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::GetVertexCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="19" column="13" bodyfile="src/models/light_control_test_mesh_suzanne_model.cpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1a8205ba6613d3bcbbf1950b74dfd748d3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshSuzanneModel::GetVertexPositions</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::GetVertexPositions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="22" column="16" bodyfile="src/models/light_control_test_mesh_suzanne_model.cpp" bodystart="33" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1aac776ffb55281ce44f2ff967f6bca11a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshSuzanneModel::GetVertexNormals</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::GetVertexNormals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="23" column="16" bodyfile="src/models/light_control_test_mesh_suzanne_model.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d32/classLightControlTestMeshSuzanneModel_1a683cb103dbeba0dd7d0e0e8c9b406733" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightControlTestMeshSuzanneModel::ReleaseData</definition>
+        <argsstring>() override</argsstring>
+        <name>ReleaseData</name>
+        <qualifiedname>LightControlTestMeshSuzanneModel::ReleaseData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_suzanne_model.h" line="24" column="8" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="24" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightControlTestMeshSuzanneModel</label>
+        <link refid="dc/d32/classLightControlTestMeshSuzanneModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightControlTestMeshSuzanneModel</label>
+        <link refid="dc/d32/classLightControlTestMeshSuzanneModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/light_control_test_mesh_suzanne_model.h" line="10" column="1" bodyfile="src/models/light_control_test_mesh_suzanne_model.h" bodystart="10" bodyend="42"/>
+    <listofallmembers>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a29e77972a4dc52b93f2183a9240ce6d9" prot="public" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>GetVertexCount</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1aac776ffb55281ce44f2ff967f6bca11a" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>GetVertexNormals</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a8205ba6613d3bcbbf1950b74dfd748d3" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>GetVertexPositions</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a840975fc2d4f3f34b35ed4577a8fe96f" prot="public" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>LightControlTestMeshSuzanneModel</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a72261555de2411fe5c0c28b5f212c084" prot="public" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>LightControlTestMeshSuzanneModel</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a6ffa7ba59ea40a547964839bbb6030c2" prot="public" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>LightControlTestMeshSuzanneModel</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1ac04748577c61917ab1a120643b73f31b" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>normals_</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a683cb103dbeba0dd7d0e0e8c9b406733" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>ReleaseData</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a7a0469c5f35dccd5f9795db63fabe699" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>texcoords_</name></member>
+      <member refid="dc/d32/classLightControlTestMeshSuzanneModel_1a55b38a622d31d6b44bd76f824ae19452" prot="protected" virt="non-virtual"><scope>LightControlTestMeshSuzanneModel</scope><name>vertices_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

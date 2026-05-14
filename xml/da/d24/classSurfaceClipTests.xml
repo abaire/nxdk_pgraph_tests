@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d24/classSurfaceClipTests" kind="class" language="C++" prot="public">
+    <compoundname>SurfaceClipTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="da/d0b/surface__clip__tests_8h" local="no">surface_clip_tests.h</includes>
+    <innerclass refid="d4/d57/structSurfaceClipTests_1_1ClipRect" prot="public">SurfaceClipTests::ClipRect</innerclass>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1ae6cf8931f785845ab71841fb27dfdab6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SurfaceClipTests::SurfaceClipTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>SurfaceClipTests</name>
+        <qualifiedname>SurfaceClipTests::SurfaceClipTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>DebugTextShouldClip Sets a tiny clip area and renders debug text. No text should be visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>XemuBug420 Reproduction case for xemu#420. A 32-bit surface is created, then immediately changed to a 16-bit one, followed by a region clear. This caused an assertion in versions before xemu#919</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x0y0_w0h0 Configures a texture target as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x0y0_w512h0 Configures a texture target as R5G6B5 and sets the clip region to 0,0 512x0, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x0y0_w0h384 Configures a texture target as R5G6B5 and sets the clip region to 0,0 0x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x0y0_w512h384 Configures a texture target as R5G6B5 and sets the clip region to 0,0 512x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x0y0_w640h480 Configures a texture target as R5G6B5 and sets the clip region to 0,0 640x480, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary.The texture is then rendered into an 8888 backbuffer. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x16y8_w512h384 Configures a texture target as R5G6B5 and sets the clip region to 16,8 512x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x8y16_w632h464 Configures a texture target as R5G6B5 and sets the clip region to 8,16 632x464, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x0y240_w640h240 Configures a texture target as R5G6B5 and sets the clip region to 0,240 640x240, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>rt_x320y240_w320h240 Configures a texture target as R5G6B5 and sets the clip region to 320,240 320x240, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. The texture is then rendered into an 8888 backbuffer. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w0h0 Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 0x0, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w512h0 Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 512x0, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w0h384 Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 0x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w512h384 Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 512x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w640h480 Configures the backbuffer as R5G6B5 and sets the clip region to 0,0 640x480, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x16y8_w512h384 Configures the backbuffer as R5G6B5 and sets the clip region to 16,8 512x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x8y16_w632h464 Configures the backbuffer as R5G6B5 and sets the clip region to 8,16 632x464, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y240_w640h240 Configures the backbuffer as R5G6B5 and sets the clip region to 0,240 640x240, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x320y240_w320h240 Configures the backbuffer as R5G6B5 and sets the clip region to 320,240 320x240, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. Because the format is 565, the colors are shifted from red -&gt; green, light green -&gt; light pink, and dark green -&gt; pink.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w0h0_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 0x0, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w512h0_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 512x0, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w0h384_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 0x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No geometry should be seen, since width and height of the clip region are 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w512h384_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 512x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y0_w640h480_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,0 640x480, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>x16y8_w512h384_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 16,8 512x384, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>x8y16_w632h464_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 8,16 632x464, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>x0y240_w640h240_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 0,240 640x240, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible.</para>
+</simplesect>
+<simplesect kind="remark"><para>x320y240_w320h240_A8R8G8B8 Configures the backbuffer as A8R8G8B8 and sets the clip region to 320,240 320x240, then clears the clipped region and draws 4 red quads just outside the clip region, a dark green quad 1 pixel within the clip region, and 4 lighter green quads along the clip boundary. No red should be seen, and the light green quads should be fully visible. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="24" column="3" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="230" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1a0b98e88ff7bebf1cc274569f5326e563" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SurfaceClipTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SurfaceClipTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="25" column="8" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="247" bodyend="254"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1aba1558446fd05b5b32ae3edd5f3aee33" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceClipTests::Test</definition>
+        <argsstring>(const std::string &amp;name, const ClipRect &amp;rect, TestHost::SurfaceColorFormat color_format)</argsstring>
+        <name>Test</name>
+        <qualifiedname>SurfaceClipTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d57/structSurfaceClipTests_1_1ClipRect" kindref="compound">ClipRect</ref> &amp;</type>
+          <declname>rect</declname>
+        </param>
+        <param>
+          <type>TestHost::SurfaceColorFormat</type>
+          <declname>color_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="28" column="8" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="256" bodyend="288"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1a18360268f1f9c0b79eafcd793015582c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceClipTests::TestRenderTarget</definition>
+        <argsstring>(const std::string &amp;name, const ClipRect &amp;rect)</argsstring>
+        <name>TestRenderTarget</name>
+        <qualifiedname>SurfaceClipTests::TestRenderTarget</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d57/structSurfaceClipTests_1_1ClipRect" kindref="compound">ClipRect</ref> &amp;</type>
+          <declname>rect</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="29" column="8" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="337" bodyend="428"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1a554c3fcb99c14fd489b8eb1f8f227783" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceClipTests::TestXemuBug420</definition>
+        <argsstring>()</argsstring>
+        <name>TestXemuBug420</name>
+        <qualifiedname>SurfaceClipTests::TestXemuBug420</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="31" column="8" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="290" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1ad387f1003130b91e40aa8349e9f91a3f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceClipTests::TestDebugTextIsClipped</definition>
+        <argsstring>()</argsstring>
+        <name>TestDebugTextIsClipped</name>
+        <qualifiedname>SurfaceClipTests::TestDebugTextIsClipped</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="33" column="8" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="318" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d24/classSurfaceClipTests_1aa19de15e46c33a72a254c0085426b9c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceClipTests::DrawTestImage</definition>
+        <argsstring>(const ClipRect &amp;rect)</argsstring>
+        <name>DrawTestImage</name>
+        <qualifiedname>SurfaceClipTests::DrawTestImage</qualifiedname>
+        <param>
+          <type>const <ref refid="d4/d57/structSurfaceClipTests_1_1ClipRect" kindref="compound">ClipRect</ref> &amp;</type>
+          <declname>rect</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_clip_tests.h" line="35" column="8" bodyfile="src/tests/surface_clip_tests.cpp" bodystart="430" bodyend="516"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior of NV097_SET_SURFACE_CLIP_HORIZONTAL and NV097_SET_SURFACE_CLIP_VERTICAL. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SurfaceClipTests</label>
+        <link refid="da/d24/classSurfaceClipTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>SurfaceClipTests</label>
+        <link refid="da/d24/classSurfaceClipTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/surface_clip_tests.h" line="14" column="1" bodyfile="src/tests/surface_clip_tests.h" bodystart="14" bodyend="36"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>SurfaceClipTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>DisableTests</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1aa19de15e46c33a72a254c0085426b9c0" prot="private" virt="non-virtual"><scope>SurfaceClipTests</scope><name>DrawTestImage</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>host_</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1a0b98e88ff7bebf1cc274569f5326e563" prot="public" virt="virtual"><scope>SurfaceClipTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>SurfaceClipTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>suite_name_</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1ae6cf8931f785845ab71841fb27dfdab6" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>SurfaceClipTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>SurfaceClipTests</scope><name>TearDownTest</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1aba1558446fd05b5b32ae3edd5f3aee33" prot="private" virt="non-virtual"><scope>SurfaceClipTests</scope><name>Test</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1ad387f1003130b91e40aa8349e9f91a3f" prot="private" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TestDebugTextIsClipped</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TestNames</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1a18360268f1f9c0b79eafcd793015582c" prot="private" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TestRenderTarget</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>SurfaceClipTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TestSuite</name></member>
+      <member refid="da/d24/classSurfaceClipTests_1a554c3fcb99c14fd489b8eb1f8f227783" prot="private" virt="non-virtual"><scope>SurfaceClipTests</scope><name>TestXemuBug420</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>SurfaceClipTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

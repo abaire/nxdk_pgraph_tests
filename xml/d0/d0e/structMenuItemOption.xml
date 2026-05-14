@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d0e/structMenuItemOption" kind="struct" language="C++" prot="public">
+    <compoundname>MenuItemOption</compoundname>
+    <basecompoundref refid="d7/d12/structMenuItem" prot="public" virt="non-virtual">MenuItem</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d0/d0e/structMenuItemOption_1a2648fa914ea5088bc6bd9a0c2f93e8e6" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string MenuItemOption::label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <qualifiedname>MenuItemOption::label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="365" column="15" bodyfile="src/menu_item.cpp" bodystart="365" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d0e/structMenuItemOption_1a926098e9defef6ae43b50593d4c1ac03" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; MenuItemOption::values</definition>
+        <argsstring></argsstring>
+        <name>values</name>
+        <qualifiedname>MenuItemOption::values</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="366" column="15" bodyfile="src/menu_item.cpp" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d0e/structMenuItemOption_1a7329b974a2c5a5989e03e703e4f88781" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MenuItemOption::current_option</definition>
+        <argsstring></argsstring>
+        <name>current_option</name>
+        <qualifiedname>MenuItemOption::current_option</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="367" column="12" bodyfile="src/menu_item.cpp" bodystart="367" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d0e/structMenuItemOption_1a9c9fb32291a8b784ddec5a1b819b6974" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(const <ref refid="d0/d0e/structMenuItemOption" kindref="compound">MenuItemOption</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(const MenuItemOption &amp;)&gt; MenuItemOption::on_apply</definition>
+        <argsstring></argsstring>
+        <name>on_apply</name>
+        <qualifiedname>MenuItemOption::on_apply</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="369" column="17" bodyfile="src/menu_item.cpp" bodystart="369" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/d0e/structMenuItemOption_1ab55aa5c9e47d6c0b8da2987fa8f57b30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MenuItemOption::MenuItemOption</definition>
+        <argsstring>(const std::string &amp;name, std::function&lt; void(const MenuItemOption &amp;)&gt; on_apply)</argsstring>
+        <name>MenuItemOption</name>
+        <qualifiedname>MenuItemOption::MenuItemOption</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(const <ref refid="d0/d0e/structMenuItemOption" kindref="compound">MenuItemOption</ref> &amp;)&gt;</type>
+          <declname>on_apply</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="355" column="3" bodyfile="src/menu_item.cpp" bodystart="372" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d0e/structMenuItemOption_1aac6c59fec058fb4c1f7285c1d789a03b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MenuItemOption::MenuItemOption</definition>
+        <argsstring>(const std::string &amp;label, const std::vector&lt; std::string &gt; &amp;values, std::function&lt; void(const MenuItemOption &amp;)&gt; on_apply)</argsstring>
+        <name>MenuItemOption</name>
+        <qualifiedname>MenuItemOption::MenuItemOption</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(const <ref refid="d0/d0e/structMenuItemOption" kindref="compound">MenuItemOption</ref> &amp;)&gt;</type>
+          <declname>on_apply</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="356" column="3" bodyfile="src/menu_item.cpp" bodystart="375" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d0e/structMenuItemOption_1ac76b99f36e5e3da355fc125b3dc66331" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MenuItemOption::UpdateName</definition>
+        <argsstring>()</argsstring>
+        <name>UpdateName</name>
+        <qualifiedname>MenuItemOption::UpdateName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="359" column="15" bodyfile="src/menu_item.cpp" bodystart="359" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d0e/structMenuItemOption_1a932425a0391f3828300622f228d9e5f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItemOption::Activate</definition>
+        <argsstring>() override</argsstring>
+        <name>Activate</name>
+        <qualifiedname>MenuItemOption::Activate</qualifiedname>
+        <reimplements refid="d7/d12/structMenuItem_1a669389f33ac051bc9e40d4bc77b7f9bd">Activate</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="361" column="8" bodyfile="src/menu_item.cpp" bodystart="382" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d0e/structMenuItemOption_1aa4bf2a18b4e4fb0a0dd7bdb8a4c210c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItemOption::CursorLeft</definition>
+        <argsstring>(bool is_repeat) override</argsstring>
+        <name>CursorLeft</name>
+        <qualifiedname>MenuItemOption::CursorLeft</qualifiedname>
+        <reimplements refid="d7/d12/structMenuItem_1aa7d56249433e4afeba04d11d0489b995">CursorLeft</reimplements>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="362" column="8" bodyfile="src/menu_item.cpp" bodystart="387" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d0e/structMenuItemOption_1a15cd7848ceaf928412777fb345764f1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItemOption::CursorRight</definition>
+        <argsstring>(bool is_repeat) override</argsstring>
+        <name>CursorRight</name>
+        <qualifiedname>MenuItemOption::CursorRight</qualifiedname>
+        <reimplements refid="d7/d12/structMenuItem_1a38b421507ab8ad89270258a75158b070">CursorRight</reimplements>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.cpp" line="363" column="8" bodyfile="src/menu_item.cpp" bodystart="392" bodyend="392"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>MenuItem</label>
+        <link refid="d7/d12/structMenuItem"/>
+      </node>
+      <node id="1">
+        <label>MenuItemOption</label>
+        <link refid="d0/d0e/structMenuItemOption"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>MenuItem</label>
+        <link refid="d7/d12/structMenuItem"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>parent</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>MenuItemOption</label>
+        <link refid="d0/d0e/structMenuItemOption"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/menu_item.cpp" line="354" column="1" bodyfile="src/menu_item.cpp" bodystart="354" bodyend="370"/>
+    <listofallmembers>
+      <member refid="d0/d0e/structMenuItemOption_1a932425a0391f3828300622f228d9e5f2" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>Activate</name></member>
+      <member refid="d7/d12/structMenuItem_1a33cb0911168774cdb71453743184be22" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>ActivateCurrentSuite</name></member>
+      <member refid="d7/d12/structMenuItem_1a3d57d9e9b6fc38b4f8eb9240392ebf48" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>active_submenu</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1a7329b974a2c5a5989e03e703e4f88781" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>current_option</name></member>
+      <member refid="d7/d12/structMenuItem_1a9636ec4c0e64d70d0aaf7618dd1c9050" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>cursor_position</name></member>
+      <member refid="d7/d12/structMenuItem_1a992b1237ace72dc386a5305fd348a8f7" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>CursorDown</name></member>
+      <member refid="d7/d12/structMenuItem_1adae7ed1dfe85080eeb1be24b93348f6c" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>CursorDownAndActivate</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1aa4bf2a18b4e4fb0a0dd7bdb8a4c210c8" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>CursorLeft</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1a15cd7848ceaf928412777fb345764f1d" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>CursorRight</name></member>
+      <member refid="d7/d12/structMenuItem_1a526e3928d3afe426dad05f3f66c0dbc6" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>CursorUp</name></member>
+      <member refid="d7/d12/structMenuItem_1aba17e419992b01aac5a69da5ac316afb" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>CursorUpAndActivate</name></member>
+      <member refid="d7/d12/structMenuItem_1af8658a68106074fd149199db606feec1" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>Deactivate</name></member>
+      <member refid="d7/d12/structMenuItem_1a2aa4e882bfe3f59f56dda1447e6d64ff" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>Draw</name></member>
+      <member refid="d7/d12/structMenuItem_1a9a57af2165f97959149adee20a4eb86d" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>height</name></member>
+      <member refid="d7/d12/structMenuItem_1a0d50ee8b9d0f414ab623db5d92dea184" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>IsEnterable</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1a2648fa914ea5088bc6bd9a0c2f93e8e6" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>label</name></member>
+      <member refid="d7/d12/structMenuItem_1a1896433a20c1f876bbb9078d3f083566" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>menu_background_color_</name></member>
+      <member refid="d7/d12/structMenuItem_1a77bd4e666f8432542cde7113ad486366" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>MenuItem</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1ab55aa5c9e47d6c0b8da2987fa8f57b30" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>MenuItemOption</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1aac6c59fec058fb4c1f7285c1d789a03b" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>MenuItemOption</name></member>
+      <member refid="d7/d12/structMenuItem_1a0e46de23f339da33aebb4b14ada546a7" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>name</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1a9c9fb32291a8b784ddec5a1b819b6974" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>on_apply</name></member>
+      <member refid="d7/d12/structMenuItem_1a1926f4d5fb710557daf011158ad6a116" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>OnEnter</name></member>
+      <member refid="d7/d12/structMenuItem_1a7514ab030c91963292036dda32d0b0cc" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>parent</name></member>
+      <member refid="d7/d12/structMenuItem_1aec8652d5bc122cf7de1a4b3bfdabe453" prot="protected" virt="non-virtual"><scope>MenuItemOption</scope><name>PrepareDraw</name></member>
+      <member refid="d7/d12/structMenuItem_1a5db1f67f8202519bd9a2164e500f5a6a" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>SetBackgroundColor</name></member>
+      <member refid="d7/d12/structMenuItem_1abb595a376ca6b4d42fb79f0158d3a81a" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>submenu</name></member>
+      <member refid="d7/d12/structMenuItem_1a6e267a86c0948a9f5df7cfa4f076cc48" prot="protected" virt="non-virtual"><scope>MenuItemOption</scope><name>Swap</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1ac76b99f36e5e3da355fc125b3dc66331" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>UpdateName</name></member>
+      <member refid="d0/d0e/structMenuItemOption_1a926098e9defef6ae43b50593d4c1ac03" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>values</name></member>
+      <member refid="d7/d12/structMenuItem_1a5223156aba1b53704f58586fb950836e" prot="public" virt="non-virtual"><scope>MenuItemOption</scope><name>width</name></member>
+      <member refid="d7/d12/structMenuItem_1a28f03d665c7424c9083adc20a4b59c3c" prot="public" virt="virtual"><scope>MenuItemOption</scope><name>~MenuItem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

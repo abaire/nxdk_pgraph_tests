@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/d22/classZMinMaxControlTests" kind="class" language="C++" prot="public">
+    <compoundname>ZMinMaxControlTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32" prot="public" static="no" strong="no">
+        <type></type>
+        <name>ZMinMaxDrawMode</name>
+        <qualifiedname>ZMinMaxControlTests::ZMinMaxDrawMode</qualifiedname>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32ab579725001413a8990e5cc30d6012b75" prot="public">
+          <name>M_Z_INC_W_ONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32a0955f6308c88f242f1a01f01e759702b" prot="public">
+          <name>M_Z_INC_W_INC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32aaff749a670d899be42ddd96b07618093" prot="public">
+          <name>M_Z_NF_W_INC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32ab5194c7b0372cea13bcc5d9b0d142267" prot="public">
+          <name>M_Z_NF_W_NF</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32a26c4cc7b2b6ee852ffd89454e0e27d03" prot="public">
+          <name>M_Z_INC_W_TEN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32ae2e0b8b431d2181c9b168f4482ceba1a" prot="public">
+          <name>M_Z_INC_W_FRAC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32a2cbf5307fb42bdda562ef58f8eebffc9" prot="public">
+          <name>M_Z_INC_W_INV_Z</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="16" column="3" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="16" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="typedef" id="dd/d22/classZMinMaxControlTests_1ac59ede3bf9995a75372ba32768a4cc23" prot="public" static="no">
+        <type>enum ZMinMaxControlTests::ZMinMaxDrawMode</type>
+        <definition>typedef enum ZMinMaxControlTests::ZMinMaxDrawMode ZMinMaxControlTests::ZMinMaxDrawMode</definition>
+        <argsstring></argsstring>
+        <name>ZMinMaxDrawMode</name>
+        <qualifiedname>ZMinMaxControlTests::ZMinMaxDrawMode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="24" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1ab32bde90232061c24d17c0c289214bda" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::kLeft</definition>
+        <argsstring></argsstring>
+        <name>kLeft</name>
+        <qualifiedname>ZMinMaxControlTests::kLeft</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="39" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a722f8b67e1117376e9ae97672bec82b0" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::kRight</definition>
+        <argsstring></argsstring>
+        <name>kRight</name>
+        <qualifiedname>ZMinMaxControlTests::kRight</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="40" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a9606a8781f86ff35fab78bbc1284b5e3" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::kTop</definition>
+        <argsstring></argsstring>
+        <name>kTop</name>
+        <qualifiedname>ZMinMaxControlTests::kTop</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="41" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1af5432d90e2ca4c22a79f101b11b5357b" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::kBottom</definition>
+        <argsstring></argsstring>
+        <name>kBottom</name>
+        <qualifiedname>ZMinMaxControlTests::kBottom</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="42" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a727b1192075e8681fdf5e885dd420d9d" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::kRegionWidth</definition>
+        <argsstring></argsstring>
+        <name>kRegionWidth</name>
+        <qualifiedname>ZMinMaxControlTests::kRegionWidth</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="43" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a0f3301bb092b738ab41c847780104479" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::kRegionHeight</definition>
+        <argsstring></argsstring>
+        <name>kRegionHeight</name>
+        <qualifiedname>ZMinMaxControlTests::kRegionHeight</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="44" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a406e23c6a6550603dbb180f84a719788" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ZMinMaxControlTests::quads_per_row_</definition>
+        <argsstring></argsstring>
+        <name>quads_per_row_</name>
+        <qualifiedname>ZMinMaxControlTests::quads_per_row_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="46" column="12" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a430e85030f161f5c248de1720133b59f" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ZMinMaxControlTests::quads_per_col_</definition>
+        <argsstring></argsstring>
+        <name>quads_per_col_</name>
+        <qualifiedname>ZMinMaxControlTests::quads_per_col_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="47" column="12" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1ae6ba4aedbdcab99e5542d56741deb5f3" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float ZMinMaxControlTests::col_size_</definition>
+        <argsstring></argsstring>
+        <name>col_size_</name>
+        <qualifiedname>ZMinMaxControlTests::col_size_</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="48" column="9" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d22/classZMinMaxControlTests_1a000ae8db2860e89c52b24cab1b9dfc8a" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ZMinMaxControlTests::num_quads_</definition>
+        <argsstring></argsstring>
+        <name>num_quads_</name>
+        <qualifiedname>ZMinMaxControlTests::num_quads_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="49" column="12" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dd/d22/classZMinMaxControlTests_1a9ddede7546a5302cf7bcc9e3e6dd735c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ZMinMaxControlTests::ZMinMaxControlTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ZMinMaxControlTests</name>
+        <qualifiedname>ZMinMaxControlTests::ZMinMaxControlTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="27" column="3" bodyfile="src/tests/z_min_max_control_tests.cpp" bodystart="27" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d22/classZMinMaxControlTests_1a24a7230855aa55f77b5c10af998f8322" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ZMinMaxControlTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ZMinMaxControlTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="29" column="8" bodyfile="src/tests/z_min_max_control_tests.cpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d22/classZMinMaxControlTests_1ab80162ee4914ab1e1724de00e10489a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ZMinMaxControlTests::TearDownTest</definition>
+        <argsstring>() override</argsstring>
+        <name>TearDownTest</name>
+        <qualifiedname>ZMinMaxControlTests::TearDownTest</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3">TearDownTest</reimplements>
+        <briefdescription>
+<para>Called after running an individual test within this suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="30" column="8" bodyfile="src/tests/z_min_max_control_tests.cpp" bodystart="68" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="dd/d22/classZMinMaxControlTests_1af1d1529b0d4f833c17e3497255c51c53" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZMinMaxControlTests::Test</definition>
+        <argsstring>(const std::string &amp;name, uint32_t mode, bool w_buffered)</argsstring>
+        <name>Test</name>
+        <qualifiedname>ZMinMaxControlTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>w_buffered</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="33" column="8" bodyfile="src/tests/z_min_max_control_tests.cpp" bodystart="207" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d22/classZMinMaxControlTests_1a4fbb2e7c339094e06523253ab79084a5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZMinMaxControlTests::TestFixed</definition>
+        <argsstring>(const std::string &amp;name, uint32_t mode, bool w_buffered)</argsstring>
+        <name>TestFixed</name>
+        <qualifiedname>ZMinMaxControlTests::TestFixed</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>w_buffered</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="34" column="8" bodyfile="src/tests/z_min_max_control_tests.cpp" bodystart="266" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d22/classZMinMaxControlTests_1a59788e7060ea2728124c31da79d070c6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZMinMaxControlTests::DrawBlock</definition>
+        <argsstring>(float x_offset, float y_offset, ZMinMaxDrawMode zw_mode, bool projected=false) const</argsstring>
+        <name>DrawBlock</name>
+        <qualifiedname>ZMinMaxControlTests::DrawBlock</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>x_offset</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>y_offset</declname>
+        </param>
+        <param>
+          <type>ZMinMaxDrawMode</type>
+          <declname>zw_mode</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>projected</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/z_min_max_control_tests.h" line="36" column="8" bodyfile="src/tests/z_min_max_control_tests.cpp" bodystart="85" bodyend="205"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>ZMinMaxControlTests</label>
+        <link refid="dd/d22/classZMinMaxControlTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ZMinMaxControlTests</label>
+        <link refid="dd/d22/classZMinMaxControlTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/z_min_max_control_tests.h" line="14" column="1" bodyfile="src/tests/z_min_max_control_tests.h" bodystart="14" bodyend="50"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>allow_saving_</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1ae6ba4aedbdcab99e5542d56741deb5f3" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>col_size_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>ZMinMaxControlTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>DisableTests</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a59788e7060ea2728124c31da79d070c6" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>DrawBlock</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>host_</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a24a7230855aa55f77b5c10af998f8322" prot="public" virt="virtual"><scope>ZMinMaxControlTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1af5432d90e2ca4c22a79f101b11b5357b" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>kBottom</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1ab32bde90232061c24d17c0c289214bda" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>kLeft</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a0f3301bb092b738ab41c847780104479" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>kRegionHeight</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a727b1192075e8681fdf5e885dd420d9d" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>kRegionWidth</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a722f8b67e1117376e9ae97672bec82b0" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>kRight</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a9606a8781f86ff35fab78bbc1284b5e3" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>kTop</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32ae2e0b8b431d2181c9b168f4482ceba1a" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_INC_W_FRAC</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32a0955f6308c88f242f1a01f01e759702b" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_INC_W_INC</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32a2cbf5307fb42bdda562ef58f8eebffc9" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_INC_W_INV_Z</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32ab579725001413a8990e5cc30d6012b75" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_INC_W_ONE</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32a26c4cc7b2b6ee852ffd89454e0e27d03" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_INC_W_TEN</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32aaff749a670d899be42ddd96b07618093" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_NF_W_INC</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32ab5194c7b0372cea13bcc5d9b0d142267" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>M_Z_NF_W_NF</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>Name</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a000ae8db2860e89c52b24cab1b9dfc8a" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>num_quads_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>pgraph_diff_</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a430e85030f161f5c248de1720133b59f" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>quads_per_col_</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a406e23c6a6550603dbb180f84a719788" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>quads_per_row_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ZMinMaxControlTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1ab80162ee4914ab1e1724de00e10489a6" prot="public" virt="virtual"><scope>ZMinMaxControlTests</scope><name>TearDownTest</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1af1d1529b0d4f833c17e3497255c51c53" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>Test</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a4fbb2e7c339094e06523253ab79084a5" prot="private" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>TestFixed</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>TestSuite</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a9ddede7546a5302cf7bcc9e3e6dd735c" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>ZMinMaxControlTests</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1a8ba043f5ae9de8dedf6cf5ae69ac2a32" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>ZMinMaxDrawMode</name></member>
+      <member refid="dd/d22/classZMinMaxControlTests_1ac59ede3bf9995a75372ba32768a4cc23" prot="public" virt="non-virtual"><scope>ZMinMaxControlTests</scope><name>ZMinMaxDrawMode</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ZMinMaxControlTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d84/classZeroStrideTests" kind="class" language="C++" prot="public">
+    <compoundname>ZeroStrideTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4b" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DrawMode</name>
+        <qualifiedname>ZeroStrideTests::DrawMode</qualifiedname>
+        <enumvalue id="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4ba4cc81db85edb17b8ecbb96e5c6190494" prot="public">
+          <name>DRAW_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4ba747fdf6d00f98a8929eb7a411ba4f5ca" prot="public">
+          <name>DRAW_INLINE_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4ba612fce4974db2be1219a33af59f0498e" prot="public">
+          <name>DRAW_INLINE_ELEMENTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="17" column="3" bodyfile="src/tests/zero_stride_tests.h" bodystart="17" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="df/d84/classZeroStrideTests_1ae2b507455a67355981ef9ab92b8e4429" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint32_t &gt;</type>
+        <definition>std::vector&lt;uint32_t&gt; ZeroStrideTests::index_buffer_</definition>
+        <argsstring></argsstring>
+        <name>index_buffer_</name>
+        <qualifiedname>ZeroStrideTests::index_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="33" column="15" bodyfile="src/tests/zero_stride_tests.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="df/d84/classZeroStrideTests_1a1b6ba2dbedb0cf1c3a0502d888fdd0d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ZeroStrideTests::ZeroStrideTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ZeroStrideTests</name>
+        <qualifiedname>ZeroStrideTests::ZeroStrideTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="24" column="3" bodyfile="src/tests/zero_stride_tests.cpp" bodystart="23" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d84/classZeroStrideTests_1ad3775e65ae1b9167a626cf769303be18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ZeroStrideTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ZeroStrideTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="25" column="8" bodyfile="src/tests/zero_stride_tests.cpp" bodystart="32" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="df/d84/classZeroStrideTests_1ae63372070c1b26bebee9015a0d68fed5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeroStrideTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>ZeroStrideTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="28" column="8" bodyfile="src/tests/zero_stride_tests.cpp" bodystart="41" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d84/classZeroStrideTests_1ac575624fbceb9ca1626709d37e5037d5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeroStrideTests::Test</definition>
+        <argsstring>(DrawMode draw_mode)</argsstring>
+        <name>Test</name>
+        <qualifiedname>ZeroStrideTests::Test</qualifiedname>
+        <param>
+          <type>DrawMode</type>
+          <declname>draw_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="29" column="8" bodyfile="src/tests/zero_stride_tests.cpp" bodystart="86" bodyend="115"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="df/d84/classZeroStrideTests_1a9e5f164f0c70f13d1ea4f103436a0b0d" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ZeroStrideTests::MakeTestName</definition>
+        <argsstring>(DrawMode draw_mode)</argsstring>
+        <name>MakeTestName</name>
+        <qualifiedname>ZeroStrideTests::MakeTestName</qualifiedname>
+        <param>
+          <type>DrawMode</type>
+          <declname>draw_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zero_stride_tests.h" line="30" column="22" bodyfile="src/tests/zero_stride_tests.cpp" bodystart="117" bodyend="126"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>ZeroStrideTests</label>
+        <link refid="df/d84/classZeroStrideTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ZeroStrideTests</label>
+        <link refid="df/d84/classZeroStrideTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/zero_stride_tests.h" line="15" column="1" bodyfile="src/tests/zero_stride_tests.h" bodystart="15" bodyend="34"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>allow_saving_</name></member>
+      <member refid="df/d84/classZeroStrideTests_1ae63372070c1b26bebee9015a0d68fed5" prot="private" virt="non-virtual"><scope>ZeroStrideTests</scope><name>CreateGeometry</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>ZeroStrideTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>DisableTests</name></member>
+      <member refid="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4ba4cc81db85edb17b8ecbb96e5c6190494" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>DRAW_ARRAYS</name></member>
+      <member refid="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4ba747fdf6d00f98a8929eb7a411ba4f5ca" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>DRAW_INLINE_ARRAYS</name></member>
+      <member refid="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4ba612fce4974db2be1219a33af59f0498e" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>DRAW_INLINE_ELEMENTS</name></member>
+      <member refid="df/d84/classZeroStrideTests_1a0dc446eae87df9e9409a2585ee397b4b" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>DrawMode</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>host_</name></member>
+      <member refid="df/d84/classZeroStrideTests_1ae2b507455a67355981ef9ab92b8e4429" prot="private" virt="non-virtual"><scope>ZeroStrideTests</scope><name>index_buffer_</name></member>
+      <member refid="df/d84/classZeroStrideTests_1ad3775e65ae1b9167a626cf769303be18" prot="public" virt="virtual"><scope>ZeroStrideTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="df/d84/classZeroStrideTests_1a9e5f164f0c70f13d1ea4f103436a0b0d" prot="private" virt="non-virtual"><scope>ZeroStrideTests</scope><name>MakeTestName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ZeroStrideTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>ZeroStrideTests</scope><name>TearDownTest</name></member>
+      <member refid="df/d84/classZeroStrideTests_1ac575624fbceb9ca1626709d37e5037d5" prot="private" virt="non-virtual"><scope>ZeroStrideTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ZeroStrideTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>TestSuite</name></member>
+      <member refid="df/d84/classZeroStrideTests_1a1b6ba2dbedb0cf1c3a0502d888fdd0d3" prot="public" virt="non-virtual"><scope>ZeroStrideTests</scope><name>ZeroStrideTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ZeroStrideTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

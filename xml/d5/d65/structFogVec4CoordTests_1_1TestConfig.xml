@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/d65/structFogVec4CoordTests_1_1TestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>FogVec4CoordTests::TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d5/d65/structFogVec4CoordTests_1_1TestConfig_1acf2ac16a46ee2268bed9e89fa18a9390" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* FogVec4CoordTests::TestConfig::prefix</definition>
+        <argsstring></argsstring>
+        <name>prefix</name>
+        <qualifiedname>FogVec4CoordTests::TestConfig::prefix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_tests.h" line="69" column="16" bodyfile="src/tests/fog_tests.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d65/structFogVec4CoordTests_1_1TestConfig_1af3dbfbddbb0995caf39d7bf7dedbf634" prot="public" static="no" mutable="no">
+        <type>const uint32_t *</type>
+        <definition>const uint32_t* FogVec4CoordTests::TestConfig::shader</definition>
+        <argsstring></argsstring>
+        <name>shader</name>
+        <qualifiedname>FogVec4CoordTests::TestConfig::shader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_tests.h" line="70" column="20" bodyfile="src/tests/fog_tests.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d65/structFogVec4CoordTests_1_1TestConfig_1adb5ce0c4c04c80f00555c126f1248996" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t FogVec4CoordTests::TestConfig::shader_size</definition>
+        <argsstring></argsstring>
+        <name>shader_size</name>
+        <qualifiedname>FogVec4CoordTests::TestConfig::shader_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_tests.h" line="71" column="20" bodyfile="src/tests/fog_tests.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d65/structFogVec4CoordTests_1_1TestConfig_1ac1d1ca014462ff875c5970f67bf4f600" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float FogVec4CoordTests::TestConfig::fog[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>fog</name>
+        <qualifiedname>FogVec4CoordTests::TestConfig::fog</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_tests.h" line="72" column="11" bodyfile="src/tests/fog_tests.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/fog_tests.h" line="68" column="3" bodyfile="src/tests/fog_tests.h" bodystart="68" bodyend="73"/>
+    <listofallmembers>
+      <member refid="d5/d65/structFogVec4CoordTests_1_1TestConfig_1ac1d1ca014462ff875c5970f67bf4f600" prot="public" virt="non-virtual"><scope>FogVec4CoordTests::TestConfig</scope><name>fog</name></member>
+      <member refid="d5/d65/structFogVec4CoordTests_1_1TestConfig_1acf2ac16a46ee2268bed9e89fa18a9390" prot="public" virt="non-virtual"><scope>FogVec4CoordTests::TestConfig</scope><name>prefix</name></member>
+      <member refid="d5/d65/structFogVec4CoordTests_1_1TestConfig_1af3dbfbddbb0995caf39d7bf7dedbf634" prot="public" virt="non-virtual"><scope>FogVec4CoordTests::TestConfig</scope><name>shader</name></member>
+      <member refid="d5/d65/structFogVec4CoordTests_1_1TestConfig_1adb5ce0c4c04c80f00555c126f1248996" prot="public" virt="non-virtual"><scope>FogVec4CoordTests::TestConfig</scope><name>shader_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

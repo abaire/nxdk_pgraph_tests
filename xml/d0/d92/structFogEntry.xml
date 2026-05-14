@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d92/structFogEntry" kind="struct" language="C++" prot="public">
+    <compoundname>FogEntry</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d0/d92/structFogEntry_1ad5c79c34cf8c30bcfa805966720e9deb" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string FogEntry::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>FogEntry::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="62" column="15" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d0/d92/structFogEntry_1acb7f536de91c0f9a3aada48fd96fc1be" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t FogEntry::int_value</definition>
+        <argsstring></argsstring>
+        <name>int_value</name>
+        <qualifiedname>FogEntry::int_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="63" column="12" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/fog_exceptional_value_tests.cpp" line="61" column="1" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="61" bodyend="64"/>
+    <listofallmembers>
+      <member refid="d0/d92/structFogEntry_1acb7f536de91c0f9a3aada48fd96fc1be" prot="public" virt="non-virtual"><scope>FogEntry</scope><name>int_value</name></member>
+      <member refid="d0/d92/structFogEntry_1ad5c79c34cf8c30bcfa805966720e9deb" prot="public" virt="non-virtual"><scope>FogEntry</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

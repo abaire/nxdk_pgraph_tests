@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/de9/perspective__vertex__shader__no__lighting_8cpp" kind="file" language="C++">
+    <compoundname>perspective_vertex_shader_no_lighting.cpp</compoundname>
+    <includes refid="d7/d3a/perspective__vertex__shader__no__lighting_8h" local="yes">perspective_vertex_shader_no_lighting.h</includes>
+    <includes local="yes">projection_vertex_shader_no_lighting.vshinc</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/shaders/perspective_vertex_shader_no_lighting.cpp</label>
+        <link refid="df/de9/perspective__vertex__shader__no__lighting_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>perspective_vertex_shader_no_lighting.h</label>
+        <link refid="d7/d3a/perspective__vertex__shader__no__lighting_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>projection_vertex_shader_no_lighting.vshinc</label>
+      </node>
+      <node id="3">
+        <label>shaders/perspective_vertex_shader.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="df/de9/perspective__vertex__shader__no__lighting_8cpp_1a35f1123ec6c1d9f984797871f6f6314e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kShader</name>
+        <initializer>= {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/perspective_vertex_shader_no_lighting.cpp" line="4" column="27" bodyfile="src/shaders/perspective_vertex_shader_no_lighting.cpp" bodystart="4" bodyend="6"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;perspective_vertex_shader_no_lighting.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;projection_vertex_shader_no_lighting.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal">PerspectiveVertexShaderNoLighting::PerspectiveVertexShaderNoLighting(uint32_t<sp/>framebuffer_width,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>framebuffer_height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_min,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_max,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fov_y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>near,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>far)</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>PBKitPlusPlus::PerspectiveVertexShader(framebuffer_width,<sp/>framebuffer_height,<sp/>z_min,<sp/>z_max,<sp/>fov_y,<sp/>near,<sp/>far)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>SetShader(kShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kShader));</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>SetTransposeOnUpload(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/perspective_vertex_shader_no_lighting.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1487 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d3e/classTestSuite" kind="class" language="C++" prot="public">
+    <compoundname>TestSuite</compoundname>
+    <derivedcompoundref refid="d5/d33/classAlphaFuncTests" prot="public" virt="non-virtual">AlphaFuncTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/d1f/classAntialiasingTests" prot="public" virt="non-virtual">AntialiasingTests</derivedcompoundref>
+    <derivedcompoundref refid="d6/d49/classAttributeCarryoverTests" prot="public" virt="non-virtual">AttributeCarryoverTests</derivedcompoundref>
+    <derivedcompoundref refid="d8/d6b/classAttributeExplicitSetterTests" prot="public" virt="non-virtual">AttributeExplicitSetterTests</derivedcompoundref>
+    <derivedcompoundref refid="df/dab/classAttributeFloatTests" prot="public" virt="non-virtual">AttributeFloatTests</derivedcompoundref>
+    <derivedcompoundref refid="df/df4/classBlendSurfaceTests" prot="public" virt="non-virtual">BlendSurfaceTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/dac/classBlendTests" prot="public" virt="non-virtual">BlendTests</derivedcompoundref>
+    <derivedcompoundref refid="d4/dcd/classBumpEnvLumTests" prot="public" virt="non-virtual">BumpEnvLumTests</derivedcompoundref>
+    <derivedcompoundref refid="df/dcb/classBumpMapTests" prot="public" virt="non-virtual">BumpMapTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/d38/classClearTests" prot="public" virt="non-virtual">ClearTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/db3/classClippingPrecisionTests" prot="public" virt="non-virtual">ClippingPrecisionTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/d50/classColorKeyTests" prot="public" virt="non-virtual">ColorKeyTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d16/classColorMaskBlendTests" prot="public" virt="non-virtual">ColorMaskBlendTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d91/classColorZetaDisableTests" prot="public" virt="non-virtual">ColorZetaDisableTests</derivedcompoundref>
+    <derivedcompoundref refid="db/d92/classColorZetaOverlapTests" prot="public" virt="non-virtual">ColorZetaOverlapTests</derivedcompoundref>
+    <derivedcompoundref refid="dd/d5f/classCombinerTests" prot="public" virt="non-virtual">CombinerTests</derivedcompoundref>
+    <derivedcompoundref refid="d6/d2e/classContextSwitchTests" prot="public" virt="non-virtual">ContextSwitchTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/d34/classDMACorruptionAroundSurfaceTests" prot="public" virt="non-virtual">DMACorruptionAroundSurfaceTests</derivedcompoundref>
+    <derivedcompoundref refid="d3/d00/classDegenerateBeginEndTests" prot="public" virt="non-virtual">DegenerateBeginEndTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d9d/classDepthClampTests" prot="public" virt="non-virtual">DepthClampTests</derivedcompoundref>
+    <derivedcompoundref refid="dc/de3/classDepthFormatFixedFunctionTests" prot="public" virt="non-virtual">DepthFormatFixedFunctionTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/d96/classDepthFormatTests" prot="public" virt="non-virtual">DepthFormatTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d7b/classDepthFunctionTests" prot="public" virt="non-virtual">DepthFunctionTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/d65/classEdgeFlagTests" prot="public" virt="non-virtual">EdgeFlagTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/d48/classFogCarryoverTests" prot="public" virt="non-virtual">FogCarryoverTests</derivedcompoundref>
+    <derivedcompoundref refid="da/db7/classFogExceptionalValueTests" prot="public" virt="non-virtual">FogExceptionalValueTests</derivedcompoundref>
+    <derivedcompoundref refid="db/de4/classFogGenTests" prot="public" virt="non-virtual">FogGenTests</derivedcompoundref>
+    <derivedcompoundref refid="d9/d20/classFogParamTests" prot="public" virt="non-virtual">FogParamTests</derivedcompoundref>
+    <derivedcompoundref refid="d6/de7/classFogTests" prot="public" virt="non-virtual">FogTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d9a/classFrontFaceTests" prot="public" virt="non-virtual">FrontFaceTests</derivedcompoundref>
+    <derivedcompoundref refid="d3/d92/classHighVertexCountTests" prot="public" virt="non-virtual">HighVertexCountTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d2c/classImageBlitTests" prot="public" virt="non-virtual">ImageBlitTests</derivedcompoundref>
+    <derivedcompoundref refid="d8/de6/classInlineArraySizeMismatchTests" prot="public" virt="non-virtual">InlineArraySizeMismatchTests</derivedcompoundref>
+    <derivedcompoundref refid="de/db7/classLightingAccumulationTests" prot="public" virt="non-virtual">LightingAccumulationTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/d24/classLightingControlTests" prot="public" virt="non-virtual">LightingControlTests</derivedcompoundref>
+    <derivedcompoundref refid="df/dc4/classLightingNormalTests" prot="public" virt="non-virtual">LightingNormalTests</derivedcompoundref>
+    <derivedcompoundref refid="d7/d91/classLightingRangeTests" prot="public" virt="non-virtual">LightingRangeTests</derivedcompoundref>
+    <derivedcompoundref refid="d9/d39/classLightingSpotlightTests" prot="public" virt="non-virtual">LightingSpotlightTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/d54/classLightingTwoSidedTests" prot="public" virt="non-virtual">LightingTwoSidedTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d9d/classLineWidthTests" prot="public" virt="non-virtual">LineWidthTests</derivedcompoundref>
+    <derivedcompoundref refid="dc/d3e/classMaterialAlphaTests" prot="public" virt="non-virtual">MaterialAlphaTests</derivedcompoundref>
+    <derivedcompoundref refid="dc/d66/classMaterialColorSourceTests" prot="public" virt="non-virtual">MaterialColorSourceTests</derivedcompoundref>
+    <derivedcompoundref refid="de/d67/classMaterialColorTests" prot="public" virt="non-virtual">MaterialColorTests</derivedcompoundref>
+    <derivedcompoundref refid="d6/df9/classNullSurfaceTests" prot="public" virt="non-virtual">NullSurfaceTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/db0/classOverlappingDrawModesTests" prot="public" virt="non-virtual">OverlappingDrawModesTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/dbc/classPixelShaderTests" prot="public" virt="non-virtual">PixelShaderTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d54/classPointParamsTests" prot="public" virt="non-virtual">PointParamsTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/dd4/classPointSizeTests" prot="public" virt="non-virtual">PointSizeTests</derivedcompoundref>
+    <derivedcompoundref refid="d6/dec/classPointSpriteTests" prot="public" virt="non-virtual">PointSpriteTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d4d/classPvideoTests" prot="public" virt="non-virtual">PvideoTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d67/classSetVertexDataTests" prot="public" virt="non-virtual">SetVertexDataTests</derivedcompoundref>
+    <derivedcompoundref refid="db/dff/classShadeModelTests" prot="public" virt="non-virtual">ShadeModelTests</derivedcompoundref>
+    <derivedcompoundref refid="d9/d95/classSmoothingTests" prot="public" virt="non-virtual">SmoothingTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d00/classSpecularBackTests" prot="public" virt="non-virtual">SpecularBackTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d44/classSpecularTests" prot="public" virt="non-virtual">SpecularTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/d28/classStencilFuncTests" prot="public" virt="non-virtual">StencilFuncTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/d2e/classStencilTests" prot="public" virt="non-virtual">StencilTests</derivedcompoundref>
+    <derivedcompoundref refid="d9/d5b/classStippleTests" prot="public" virt="non-virtual">StippleTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d24/classSurfaceClipTests" prot="public" virt="non-virtual">SurfaceClipTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/de3/classSurfaceFormatTests" prot="public" virt="non-virtual">SurfaceFormatTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d85/classSurfacePitchTests" prot="public" virt="non-virtual">SurfacePitchTests</derivedcompoundref>
+    <derivedcompoundref refid="de/d3c/classSwathWidthTests" prot="public" virt="non-virtual">SwathWidthTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d51/classTexgenMatrixTests" prot="public" virt="non-virtual">TexgenMatrixTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/ddb/classTexgenTests" prot="public" virt="non-virtual">TexgenTests</derivedcompoundref>
+    <derivedcompoundref refid="d8/de2/classTexture2DAsCubemapTests" prot="public" virt="non-virtual">Texture2DAsCubemapTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/d6c/classTexture3DAs2DTests" prot="public" virt="non-virtual">Texture3DAs2DTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/dbc/classTextureAnisotropyTests" prot="public" virt="non-virtual">TextureAnisotropyTests</derivedcompoundref>
+    <derivedcompoundref refid="dc/ddf/classTextureBRDFTests" prot="public" virt="non-virtual">TextureBRDFTests</derivedcompoundref>
+    <derivedcompoundref refid="da/d85/classTextureBorderColorTests" prot="public" virt="non-virtual">TextureBorderColorTests</derivedcompoundref>
+    <derivedcompoundref refid="d3/df1/classTextureBorderTests" prot="public" virt="non-virtual">TextureBorderTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/dcf/classTextureCPUUpdateTests" prot="public" virt="non-virtual">TextureCPUUpdateTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/df8/classTextureCubemapTests" prot="public" virt="non-virtual">TextureCubemapTests</derivedcompoundref>
+    <derivedcompoundref refid="da/df8/classTextureFormatDXTTests" prot="public" virt="non-virtual">TextureFormatDXTTests</derivedcompoundref>
+    <derivedcompoundref refid="dc/df4/classTextureFormatTests" prot="public" virt="non-virtual">TextureFormatTests</derivedcompoundref>
+    <derivedcompoundref refid="d3/d10/classTextureFramebufferBlitTests" prot="public" virt="non-virtual">TextureFramebufferBlitTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d43/classTextureLodBiasTests" prot="public" virt="non-virtual">TextureLodBiasTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d18/classTextureMatrixTests" prot="public" virt="non-virtual">TextureMatrixTests</derivedcompoundref>
+    <derivedcompoundref refid="df/df3/classTexturePaletteTests" prot="public" virt="non-virtual">TexturePaletteTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/d5c/classTexturePerspectiveEnableTests" prot="public" virt="non-virtual">TexturePerspectiveEnableTests</derivedcompoundref>
+    <derivedcompoundref refid="d8/de2/classTexturePerspectiveTests" prot="public" virt="non-virtual">TexturePerspectiveTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/da7/classTextureRenderTargetTests" prot="public" virt="non-virtual">TextureRenderTargetTests</derivedcompoundref>
+    <derivedcompoundref refid="dd/de1/classTextureRenderUpdateInPlaceTests" prot="public" virt="non-virtual">TextureRenderUpdateInPlaceTests</derivedcompoundref>
+    <derivedcompoundref refid="dc/d5d/classTextureShadowComparatorTests" prot="public" virt="non-virtual">TextureShadowComparatorTests</derivedcompoundref>
+    <derivedcompoundref refid="d2/d66/classTextureSignedComponentTests" prot="public" virt="non-virtual">TextureSignedComponentTests</derivedcompoundref>
+    <derivedcompoundref refid="d5/d03/classTextureWrapModeTests" prot="public" virt="non-virtual">TextureWrapModeTests</derivedcompoundref>
+    <derivedcompoundref refid="db/d65/classThreeDPrimitiveTests" prot="public" virt="non-virtual">ThreeDPrimitiveTests</derivedcompoundref>
+    <derivedcompoundref refid="db/df8/classTwoDLineTests" prot="public" virt="non-virtual">TwoDLineTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d1d/classVertexShaderIndependenceTests" prot="public" virt="non-virtual">VertexShaderIndependenceTests</derivedcompoundref>
+    <derivedcompoundref refid="d9/df9/classVertexShaderRoundingTests" prot="public" virt="non-virtual">VertexShaderRoundingTests</derivedcompoundref>
+    <derivedcompoundref refid="d7/de4/classVertexShaderSwizzleTests" prot="public" virt="non-virtual">VertexShaderSwizzleTests</derivedcompoundref>
+    <derivedcompoundref refid="df/daa/classViewportTests" prot="public" virt="non-virtual">ViewportTests</derivedcompoundref>
+    <derivedcompoundref refid="d7/d06/classVolumeTextureTests" prot="public" virt="non-virtual">VolumeTextureTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/dcb/classWBufTests" prot="public" virt="non-virtual">WBufTests</derivedcompoundref>
+    <derivedcompoundref refid="d8/dab/classWParamTests" prot="public" virt="non-virtual">WParamTests</derivedcompoundref>
+    <derivedcompoundref refid="d0/d2f/classWeightSetterTests" prot="public" virt="non-virtual">WeightSetterTests</derivedcompoundref>
+    <derivedcompoundref refid="d1/d55/classWindowClipTests" prot="public" virt="non-virtual">WindowClipTests</derivedcompoundref>
+    <derivedcompoundref refid="dd/d22/classZMinMaxControlTests" prot="public" virt="non-virtual">ZMinMaxControlTests</derivedcompoundref>
+    <derivedcompoundref refid="d6/d08/classZPassPixelCountTests" prot="public" virt="non-virtual">ZPassPixelCountTests</derivedcompoundref>
+    <derivedcompoundref refid="df/d84/classZeroStrideTests" prot="public" virt="non-virtual">ZeroStrideTests</derivedcompoundref>
+    <includes refid="d6/d7a/test__suite_8h" local="no">test_suite.h</includes>
+    <innerclass refid="da/d85/structTestSuite_1_1Config" prot="public">TestSuite::Config</innerclass>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" static="no" mutable="no">
+        <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+        <definition>TestHost&amp; TestSuite::host_</definition>
+        <argsstring></argsstring>
+        <name>host_</name>
+        <qualifiedname>TestSuite::host_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="95" column="12" bodyfile="src/tests/test_suite.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string TestSuite::output_dir_</definition>
+        <argsstring></argsstring>
+        <name>output_dir_</name>
+        <qualifiedname>TestSuite::output_dir_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="96" column="15" bodyfile="src/tests/test_suite.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string TestSuite::suite_name_</definition>
+        <argsstring></argsstring>
+        <name>suite_name_</name>
+        <qualifiedname>TestSuite::suite_name_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="97" column="15" bodyfile="src/tests/test_suite.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestSuite::interactive_only_</definition>
+        <argsstring></argsstring>
+        <name>interactive_only_</name>
+        <qualifiedname>TestSuite::interactive_only_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="100" column="8" bodyfile="src/tests/test_suite.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestSuite::allow_saving_</definition>
+        <argsstring></argsstring>
+        <name>allow_saving_</name>
+        <qualifiedname>TestSuite::allow_saving_</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="103" column="8" bodyfile="src/tests/test_suite.h" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" static="no" mutable="no">
+        <type>std::map&lt; std::string, std::function&lt; void()&gt; &gt;</type>
+        <definition>std::map&lt;std::string, std::function&lt;void()&gt; &gt; TestSuite::tests_</definition>
+        <argsstring></argsstring>
+        <name>tests_</name>
+        <qualifiedname>TestSuite::tests_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="106" column="12" bodyfile="src/tests/test_suite.h" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" static="no" mutable="no">
+        <type>std::set&lt; std::string &gt;</type>
+        <definition>std::set&lt;std::string&gt; TestSuite::interactive_only_tests_</definition>
+        <argsstring></argsstring>
+        <name>interactive_only_tests_</name>
+        <qualifiedname>TestSuite::interactive_only_tests_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="107" column="12" bodyfile="src/tests/test_suite.h" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" static="no" mutable="no">
+        <type><ref refid="dd/df8/structPGRAPHDiffToken" kindref="compound">PGRAPHDiffToken</ref></type>
+        <definition>PGRAPHDiffToken TestSuite::pgraph_diff_</definition>
+        <argsstring></argsstring>
+        <name>pgraph_diff_</name>
+        <qualifiedname>TestSuite::pgraph_diff_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="109" column="19" bodyfile="src/tests/test_suite.h" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestSuite::enable_progress_log_</definition>
+        <argsstring></argsstring>
+        <name>enable_progress_log_</name>
+        <qualifiedname>TestSuite::enable_progress_log_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="111" column="8" bodyfile="src/tests/test_suite.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestSuite::enable_pgraph_region_diff_</definition>
+        <argsstring></argsstring>
+        <name>enable_pgraph_region_diff_</name>
+        <qualifiedname>TestSuite::enable_pgraph_region_diff_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="112" column="8" bodyfile="src/tests/test_suite.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestSuite::delay_milliseconds_between_tests_</definition>
+        <argsstring></argsstring>
+        <name>delay_milliseconds_between_tests_</name>
+        <qualifiedname>TestSuite::delay_milliseconds_between_tests_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="113" column="12" bodyfile="src/tests/test_suite.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d8/da5/classFTPLogger" kindref="compound">FTPLogger</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;FTPLogger&gt; TestSuite::ftp_logger_</definition>
+        <argsstring></argsstring>
+        <name>ftp_logger_</name>
+        <qualifiedname>TestSuite::ftp_logger_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="115" column="19" bodyfile="src/tests/test_suite.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TestSuite::TestSuite</definition>
+        <argsstring>()=delete</argsstring>
+        <name>TestSuite</name>
+        <qualifiedname>TestSuite::TestSuite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="39" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TestSuite::TestSuite</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, std::string suite_name, const Config &amp;config, bool interactive_only=false)</argsstring>
+        <name>TestSuite</name>
+        <qualifiedname>TestSuite::TestSuite</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>suite_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>interactive_only</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="40" column="3" bodyfile="src/tests/test_suite.cpp" bodystart="25" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual TestSuite::~TestSuite</definition>
+        <argsstring>()=default</argsstring>
+        <name>~TestSuite</name>
+        <qualifiedname>TestSuite::~TestSuite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="42" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; TestSuite::Name</definition>
+        <argsstring>() const</argsstring>
+        <name>Name</name>
+        <qualifiedname>TestSuite::Name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="44" column="22" bodyfile="src/tests/test_suite.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TestSuite::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TestSuite::Initialize</qualifiedname>
+        <reimplementedby refid="d5/d33/classAlphaFuncTests_1a767b59de3ce3b0448f49ef94b952a2bf">Initialize</reimplementedby>
+        <reimplementedby refid="d5/d1f/classAntialiasingTests_1ac6c440d8b3c18bfc7a865f0c2454eaf5">Initialize</reimplementedby>
+        <reimplementedby refid="d6/d49/classAttributeCarryoverTests_1a6031c3c83f0af300b235df5cfe916180">Initialize</reimplementedby>
+        <reimplementedby refid="d8/d6b/classAttributeExplicitSetterTests_1a4127f37947fa6522e69f93aa66204650">Initialize</reimplementedby>
+        <reimplementedby refid="df/df4/classBlendSurfaceTests_1a6abbfb3c376df6f126aa24f3cbc42a68">Initialize</reimplementedby>
+        <reimplementedby refid="d1/dac/classBlendTests_1a99e61844b6ec5faabb9201090efa89b8">Initialize</reimplementedby>
+        <reimplementedby refid="d4/dcd/classBumpEnvLumTests_1add888554b2d77923a32683a5474c2257">Initialize</reimplementedby>
+        <reimplementedby refid="df/dcb/classBumpMapTests_1acaecb5f9ff3d39bccf48217b6c89d335">Initialize</reimplementedby>
+        <reimplementedby refid="d1/d38/classClearTests_1a97231ecc3c596c113892882776a8198b">Initialize</reimplementedby>
+        <reimplementedby refid="d0/db3/classClippingPrecisionTests_1a94f0455c1af9c9ac64a0aec33f9d0d09">Initialize</reimplementedby>
+        <reimplementedby refid="d1/d50/classColorKeyTests_1a3c9f461e6167eb2f70a5ed2ae266d8b4">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d16/classColorMaskBlendTests_1ab5124a51944ff617a4f419681f3574f4">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d91/classColorZetaDisableTests_1a2051863e34212e8ed33f842b383ac886">Initialize</reimplementedby>
+        <reimplementedby refid="db/d92/classColorZetaOverlapTests_1a417a0248391ca2c83219efd82cf52156">Initialize</reimplementedby>
+        <reimplementedby refid="dd/d5f/classCombinerTests_1a2de3abfaade6867f4c479256ddab858b">Initialize</reimplementedby>
+        <reimplementedby refid="d6/d2e/classContextSwitchTests_1a39e311ceeb8f739c9f09eea4ab2a27ea">Initialize</reimplementedby>
+        <reimplementedby refid="d3/d00/classDegenerateBeginEndTests_1af6c488945bf0e1d7cb1f09f2722ca733">Initialize</reimplementedby>
+        <reimplementedby refid="df/d9d/classDepthClampTests_1a5a04e85c12b486ccfdef739e4afd34b6">Initialize</reimplementedby>
+        <reimplementedby refid="dc/de3/classDepthFormatFixedFunctionTests_1acac8073d0f09359d23dcdc37700e4fe3">Initialize</reimplementedby>
+        <reimplementedby refid="d5/d96/classDepthFormatTests_1aace9a524ac8ddb4c0f8cf0a173bcf647">Initialize</reimplementedby>
+        <reimplementedby refid="df/d7b/classDepthFunctionTests_1a4c5666e923427b857d7a766b5ba74cdb">Initialize</reimplementedby>
+        <reimplementedby refid="d5/d34/classDMACorruptionAroundSurfaceTests_1a1f90076dfb7f1df72027d3dac86c3f35">Initialize</reimplementedby>
+        <reimplementedby refid="d2/d65/classEdgeFlagTests_1a7b42a3a28990f331d62a2a730fe57e42">Initialize</reimplementedby>
+        <reimplementedby refid="d1/d48/classFogCarryoverTests_1a7c5c387322f3838a6732b20b0fbacacb">Initialize</reimplementedby>
+        <reimplementedby refid="da/db7/classFogExceptionalValueTests_1a6abafea82451fa58bcbd9653e72e6b13">Initialize</reimplementedby>
+        <reimplementedby refid="db/de4/classFogGenTests_1a757e9bf9440cd1f6d4115f6e88cbd78a">Initialize</reimplementedby>
+        <reimplementedby refid="d9/d20/classFogParamTests_1ad0641bd5442a4cde741b27add0a4d1b1">Initialize</reimplementedby>
+        <reimplementedby refid="d6/de7/classFogTests_1a4f390d26c30a3144534cb013c4dce93e">Initialize</reimplementedby>
+        <reimplementedby refid="dc/d25/classFogCustomShaderTests_1a1a5a33c00a39c9310552d8371b2bd6cd">Initialize</reimplementedby>
+        <reimplementedby refid="df/d53/classFogInfiniteFogCoordinateTests_1af8a953821c67a553e6d799afe254611c">Initialize</reimplementedby>
+        <reimplementedby refid="d4/d92/classFogVec4CoordTests_1a61a17bb013effdf18dfb91c0e0f9fcd5">Initialize</reimplementedby>
+        <reimplementedby refid="da/d9a/classFrontFaceTests_1aa0e62504c326e340bea21de969f478d9">Initialize</reimplementedby>
+        <reimplementedby refid="d3/d92/classHighVertexCountTests_1a06c25f50a98dbbb691f788a63210cc5f">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d2c/classImageBlitTests_1a59a420a5b7d07b27a0dcaa693e89ec7f">Initialize</reimplementedby>
+        <reimplementedby refid="d8/de6/classInlineArraySizeMismatchTests_1ab62211ab0d21203a32f62be2a51fa76c">Initialize</reimplementedby>
+        <reimplementedby refid="de/db7/classLightingAccumulationTests_1a0c575a2be0be34b4bc37015e16b1b82e">Initialize</reimplementedby>
+        <reimplementedby refid="d1/d24/classLightingControlTests_1a660ca07007d34f41d78b69f4c8d4d487">Initialize</reimplementedby>
+        <reimplementedby refid="df/dc4/classLightingNormalTests_1acd135784259dcca401eda0cd13d7c56f">Initialize</reimplementedby>
+        <reimplementedby refid="d7/d91/classLightingRangeTests_1ae3a0cf2126fa467d3002af1ad7e62993">Initialize</reimplementedby>
+        <reimplementedby refid="d9/d39/classLightingSpotlightTests_1aebe71e115995941fcadbeb75f00f0b3e">Initialize</reimplementedby>
+        <reimplementedby refid="d2/d54/classLightingTwoSidedTests_1a99e3a93c96ceab7ac952cc157f97a7c2">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d9d/classLineWidthTests_1a0c880ca761fdd3872dab6bca912a32f4">Initialize</reimplementedby>
+        <reimplementedby refid="dc/d3e/classMaterialAlphaTests_1a440036cf14e86b139e5feafbcb1e7bff">Initialize</reimplementedby>
+        <reimplementedby refid="dc/d66/classMaterialColorSourceTests_1a18611f4186df2574a09df5e4d1dc123e">Initialize</reimplementedby>
+        <reimplementedby refid="de/d67/classMaterialColorTests_1a1c81fc4e00b2391f8dd998c21cd9f608">Initialize</reimplementedby>
+        <reimplementedby refid="d6/df9/classNullSurfaceTests_1a01b05eccdff216606e9d401ea7fffc00">Initialize</reimplementedby>
+        <reimplementedby refid="d0/db0/classOverlappingDrawModesTests_1a06750783c5d0fddcd03284994eb8d366">Initialize</reimplementedby>
+        <reimplementedby refid="d2/dbc/classPixelShaderTests_1a395df6ac789f72711a7e255af02d21c4">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d54/classPointParamsTests_1a27bdc51782b517d14131733de7170495">Initialize</reimplementedby>
+        <reimplementedby refid="d0/dd4/classPointSizeTests_1a4ef198ac9486e8a53e7bc099d0e3cb22">Initialize</reimplementedby>
+        <reimplementedby refid="d6/dec/classPointSpriteTests_1a6ca46cc4074d5b718d723c32641b3027">Initialize</reimplementedby>
+        <reimplementedby refid="da/d4d/classPvideoTests_1a32786f982aa8f8ee6efadf57602aa163">Initialize</reimplementedby>
+        <reimplementedby refid="da/d67/classSetVertexDataTests_1ada9beafd8338acb0502f8669bb0d906c">Initialize</reimplementedby>
+        <reimplementedby refid="db/dff/classShadeModelTests_1ad03d1094e691ec1a95a6a93b68e8ce34">Initialize</reimplementedby>
+        <reimplementedby refid="d9/d95/classSmoothingTests_1ad9f2ebf2ba232c342575d2227b5a85e3">Initialize</reimplementedby>
+        <reimplementedby refid="da/d00/classSpecularBackTests_1a093172ca1f888bf1aed44efd7d444524">Initialize</reimplementedby>
+        <reimplementedby refid="df/d44/classSpecularTests_1a1de89ecce2a197255cd5e86aaa0a6760">Initialize</reimplementedby>
+        <reimplementedby refid="d2/d28/classStencilFuncTests_1ad5e9268b16a3cf3f0c1a7ea757710504">Initialize</reimplementedby>
+        <reimplementedby refid="d2/d2e/classStencilTests_1aafe39a1250b4dc86d9011d41ab4f382a">Initialize</reimplementedby>
+        <reimplementedby refid="d9/d5b/classStippleTests_1a43933fd903df5a8ea00b5654f0603125">Initialize</reimplementedby>
+        <reimplementedby refid="da/d24/classSurfaceClipTests_1a0b98e88ff7bebf1cc274569f5326e563">Initialize</reimplementedby>
+        <reimplementedby refid="d5/de3/classSurfaceFormatTests_1a5eff30f167b17277c5c68f3af5cb89ae">Initialize</reimplementedby>
+        <reimplementedby refid="df/d85/classSurfacePitchTests_1a7dca5ea573217896ccfead5de6a95267">Initialize</reimplementedby>
+        <reimplementedby refid="de/d3c/classSwathWidthTests_1ae7f218b6938e52f20a870ffeda939583">Initialize</reimplementedby>
+        <reimplementedby refid="da/d51/classTexgenMatrixTests_1a77774d504327555645bfb63c7569be44">Initialize</reimplementedby>
+        <reimplementedby refid="d2/ddb/classTexgenTests_1ac2321a44f986b804dc063e0658a07c88">Initialize</reimplementedby>
+        <reimplementedby refid="d8/de2/classTexture2DAsCubemapTests_1a229eef0209958bf81dadd3c4484c8c8b">Initialize</reimplementedby>
+        <reimplementedby refid="d5/d6c/classTexture3DAs2DTests_1a34bd89219bf323515031e7bfafc943f1">Initialize</reimplementedby>
+        <reimplementedby refid="d5/dbc/classTextureAnisotropyTests_1a6ba1c154049e50c67d0293858589ae09">Initialize</reimplementedby>
+        <reimplementedby refid="da/d85/classTextureBorderColorTests_1ad2be5065ddee73b95d57ef35ce3da765">Initialize</reimplementedby>
+        <reimplementedby refid="d3/df1/classTextureBorderTests_1ad501ee376698cd1ace1cb31cbffd972f">Initialize</reimplementedby>
+        <reimplementedby refid="dc/ddf/classTextureBRDFTests_1aebd4f95a4d5cb5e009e2aa44835c82d7">Initialize</reimplementedby>
+        <reimplementedby refid="d1/dcf/classTextureCPUUpdateTests_1a3521ffa601f2325f19922d16c46dd72f">Initialize</reimplementedby>
+        <reimplementedby refid="d1/df8/classTextureCubemapTests_1a961540b3b8234dd697ef48c0e4c5d19c">Initialize</reimplementedby>
+        <reimplementedby refid="da/df8/classTextureFormatDXTTests_1a1410591d4b144038b441e70cf57d3e47">Initialize</reimplementedby>
+        <reimplementedby refid="dc/df4/classTextureFormatTests_1a24c06582a61c0714455cd9c1ba2c6417">Initialize</reimplementedby>
+        <reimplementedby refid="d3/d10/classTextureFramebufferBlitTests_1a4477f41f5f52f36bd9cf095b980c468a">Initialize</reimplementedby>
+        <reimplementedby refid="df/d43/classTextureLodBiasTests_1af1dd8eb3e32c4da39e48b7b5d3e8c04b">Initialize</reimplementedby>
+        <reimplementedby refid="df/d18/classTextureMatrixTests_1ae92ac1374bd184bdf6f93dbfc50ed42a">Initialize</reimplementedby>
+        <reimplementedby refid="df/df3/classTexturePaletteTests_1a6f0e8872d73308332644cb984a95dc51">Initialize</reimplementedby>
+        <reimplementedby refid="d1/d5c/classTexturePerspectiveEnableTests_1addf7bad7e3e392086a86cf2bf39f019e">Initialize</reimplementedby>
+        <reimplementedby refid="d8/de2/classTexturePerspectiveTests_1aea60b06547bdc36e42997d4dbcfdb0b6">Initialize</reimplementedby>
+        <reimplementedby refid="d1/da7/classTextureRenderTargetTests_1a024cdef0e379eeaca4f8da1d1e0a40b5">Initialize</reimplementedby>
+        <reimplementedby refid="dd/de1/classTextureRenderUpdateInPlaceTests_1a699d1813955ff7a7c50bfbb2b15c6e86">Initialize</reimplementedby>
+        <reimplementedby refid="dc/d5d/classTextureShadowComparatorTests_1a6bd3d65a6dac1adbb5720cd2fc06ef83">Initialize</reimplementedby>
+        <reimplementedby refid="d2/d66/classTextureSignedComponentTests_1ad2048576dcf1e7744397b8669980c97d">Initialize</reimplementedby>
+        <reimplementedby refid="d5/d03/classTextureWrapModeTests_1a461f2a072acfc181004da2b4c63a9a90">Initialize</reimplementedby>
+        <reimplementedby refid="db/d65/classThreeDPrimitiveTests_1a1442dbabed3a98dcdae41898620923c2">Initialize</reimplementedby>
+        <reimplementedby refid="db/df8/classTwoDLineTests_1a1f25277068d5cbd2490e0ea8d88aa2c6">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d1d/classVertexShaderIndependenceTests_1aee2832f9b630eb0fc4cd57a681c725b1">Initialize</reimplementedby>
+        <reimplementedby refid="d9/df9/classVertexShaderRoundingTests_1a5bc49a5b7f67b5caf42d136736094607">Initialize</reimplementedby>
+        <reimplementedby refid="d7/de4/classVertexShaderSwizzleTests_1a6a4680d4c4bef9daa6bf82009300db98">Initialize</reimplementedby>
+        <reimplementedby refid="d7/d06/classVolumeTextureTests_1a53cb1591dd71916e568b7f7fb2e2bb21">Initialize</reimplementedby>
+        <reimplementedby refid="d8/dab/classWParamTests_1a1ae0f18391997e3058573b59f0029255">Initialize</reimplementedby>
+        <reimplementedby refid="d0/dcb/classWBufTests_1a92de3ed5855879e41373b2e6cac29f87">Initialize</reimplementedby>
+        <reimplementedby refid="d0/d2f/classWeightSetterTests_1aad0e9c8187cf87121f8dcb575aa9c1fc">Initialize</reimplementedby>
+        <reimplementedby refid="d1/d55/classWindowClipTests_1af82c5e2afa48f1fe8d4efc15c176f188">Initialize</reimplementedby>
+        <reimplementedby refid="dd/d22/classZMinMaxControlTests_1a24a7230855aa55f77b5c10af998f8322">Initialize</reimplementedby>
+        <reimplementedby refid="df/d84/classZeroStrideTests_1ad3775e65ae1b9167a626cf769303be18">Initialize</reimplementedby>
+        <reimplementedby refid="d6/d08/classZPassPixelCountTests_1a782c0c93d2c64c5c4c205e0c7837ee6d">Initialize</reimplementedby>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="47" column="16" bodyfile="src/tests/test_suite.cpp" bodystart="122" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TestSuite::Deinitialize</definition>
+        <argsstring>()</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>TestSuite::Deinitialize</qualifiedname>
+        <reimplementedby refid="d6/d49/classAttributeCarryoverTests_1ac9cd675617f98192f72153fca261ae18">Deinitialize</reimplementedby>
+        <reimplementedby refid="d0/db3/classClippingPrecisionTests_1a94796895569daa7e3b2c0462cf55b90e">Deinitialize</reimplementedby>
+        <reimplementedby refid="dd/d5f/classCombinerTests_1a5363aa981ea95859bd58708b75ffb585">Deinitialize</reimplementedby>
+        <reimplementedby refid="df/d9d/classDepthClampTests_1a38625b3a3f5d416b408f3a38013376da">Deinitialize</reimplementedby>
+        <reimplementedby refid="d2/d65/classEdgeFlagTests_1a270308aab346f0f8d6adf74ceafc6f32">Deinitialize</reimplementedby>
+        <reimplementedby refid="d6/de7/classFogTests_1ab99e22734a0abdfd5e2549ec7089ab59">Deinitialize</reimplementedby>
+        <reimplementedby refid="d3/d92/classHighVertexCountTests_1a44dacf4aefa7e12420825dfa3672f756">Deinitialize</reimplementedby>
+        <reimplementedby refid="d0/d2c/classImageBlitTests_1a6fa4a2f165de8707d76195433b31e20e">Deinitialize</reimplementedby>
+        <reimplementedby refid="de/db7/classLightingAccumulationTests_1aa244ce9638b9b655030f19a237463112">Deinitialize</reimplementedby>
+        <reimplementedby refid="d1/d24/classLightingControlTests_1a03c6a75794f646d8d5fa3405689468ed">Deinitialize</reimplementedby>
+        <reimplementedby refid="df/dc4/classLightingNormalTests_1a10e8dcfd1358ee9e312cae2c0f1ba031">Deinitialize</reimplementedby>
+        <reimplementedby refid="d7/d91/classLightingRangeTests_1a72517038cd67809d59512256ccf204cc">Deinitialize</reimplementedby>
+        <reimplementedby refid="d9/d39/classLightingSpotlightTests_1ad3e75ab08b9ea4e3a59be461f886fdab">Deinitialize</reimplementedby>
+        <reimplementedby refid="d2/d54/classLightingTwoSidedTests_1add833a785d8596c69eb4e8b7c6148f0a">Deinitialize</reimplementedby>
+        <reimplementedby refid="dc/d3e/classMaterialAlphaTests_1a0ed76294c22f3852b07cf7742e48c8b2">Deinitialize</reimplementedby>
+        <reimplementedby refid="da/d4d/classPvideoTests_1a6f3c1a985d068f196bc7b106e588ee8b">Deinitialize</reimplementedby>
+        <reimplementedby refid="da/d00/classSpecularBackTests_1a6cbbd78586eacc5da3c2e65101380e04">Deinitialize</reimplementedby>
+        <reimplementedby refid="df/d44/classSpecularTests_1a867d4faebdab47233c804f44e00794cd">Deinitialize</reimplementedby>
+        <reimplementedby refid="d8/de2/classTexture2DAsCubemapTests_1a66ae898e1aec6c9cebabc94d31cca4d0">Deinitialize</reimplementedby>
+        <reimplementedby refid="d3/d10/classTextureFramebufferBlitTests_1a0d39b279799759bfa0f60acc76f3e327">Deinitialize</reimplementedby>
+        <reimplementedby refid="d8/de2/classTexturePerspectiveTests_1af214e1899eb1046c77a01e63f2058da2">Deinitialize</reimplementedby>
+        <reimplementedby refid="d1/da7/classTextureRenderTargetTests_1a1f84998b520c74c7f9d5613686b7a51c">Deinitialize</reimplementedby>
+        <reimplementedby refid="dd/de1/classTextureRenderUpdateInPlaceTests_1ae83eb0ebc2c5b9bf6697b506c77164c2">Deinitialize</reimplementedby>
+        <reimplementedby refid="dc/d5d/classTextureShadowComparatorTests_1af6952912addf4a5467498505a4eb21cb">Deinitialize</reimplementedby>
+        <reimplementedby refid="d9/df9/classVertexShaderRoundingTests_1add51c7b37e4fe70113d5902789634cbd">Deinitialize</reimplementedby>
+        <reimplementedby refid="d7/de4/classVertexShaderSwizzleTests_1a435a9fe55e3e9bc762db2ef289587c08">Deinitialize</reimplementedby>
+        <reimplementedby refid="d8/dab/classWParamTests_1ab961aa33a1ccfd2892ea3b069c9af3af">Deinitialize</reimplementedby>
+        <reimplementedby refid="d0/dcb/classWBufTests_1a752431f4cc28552667e758aabc88a1b6">Deinitialize</reimplementedby>
+        <reimplementedby refid="d6/d08/classZPassPixelCountTests_1a7fcf0954b48e8f04850e78ef2cb97e2b">Deinitialize</reimplementedby>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="50" column="16" bodyfile="src/tests/test_suite.cpp" bodystart="344" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TestSuite::SetupTest</definition>
+        <argsstring>()</argsstring>
+        <name>SetupTest</name>
+        <qualifiedname>TestSuite::SetupTest</qualifiedname>
+        <briefdescription>
+<para>Called before running an individual test within this suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="53" column="16" bodyfile="src/tests/test_suite.cpp" bodystart="350" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TestSuite::TearDownTest</definition>
+        <argsstring>()</argsstring>
+        <name>TearDownTest</name>
+        <qualifiedname>TestSuite::TearDownTest</qualifiedname>
+        <reimplementedby refid="d1/d50/classColorKeyTests_1ac1e30b83b5757a4b3c794787048eaafd">TearDownTest</reimplementedby>
+        <reimplementedby refid="d0/d9d/classLineWidthTests_1ad667b4d45d7692d2eea33b47ac0aca75">TearDownTest</reimplementedby>
+        <reimplementedby refid="d9/d5b/classStippleTests_1a3edc61ab7aa756a927358c33311ee806">TearDownTest</reimplementedby>
+        <reimplementedby refid="dd/d22/classZMinMaxControlTests_1ab80162ee4914ab1e1724de00e10489a6">TearDownTest</reimplementedby>
+        <briefdescription>
+<para>Called after running an individual test within this suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="56" column="16" bodyfile="src/tests/test_suite.cpp" bodystart="352" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::DisableTests</definition>
+        <argsstring>(const std::set&lt; std::string &gt; &amp;tests_to_skip)</argsstring>
+        <name>DisableTests</name>
+        <qualifiedname>TestSuite::DisableTests</qualifiedname>
+        <param>
+          <type>const std::set&lt; std::string &gt; &amp;</type>
+          <declname>tests_to_skip</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="58" column="8" bodyfile="src/tests/test_suite.cpp" bodystart="51" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; TestSuite::TestNames</definition>
+        <argsstring>() const</argsstring>
+        <name>TestNames</name>
+        <qualifiedname>TestSuite::TestNames</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="60" column="16" bodyfile="src/tests/test_suite.cpp" bodystart="41" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool TestSuite::HasEnabledTests</definition>
+        <argsstring>() const</argsstring>
+        <name>HasEnabledTests</name>
+        <qualifiedname>TestSuite::HasEnabledTests</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="61" column="9" bodyfile="src/tests/test_suite.h" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::Run</definition>
+        <argsstring>(const std::string &amp;test_name)</argsstring>
+        <name>Run</name>
+        <qualifiedname>TestSuite::Run</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="63" column="8" bodyfile="src/tests/test_suite.cpp" bodystart="57" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::RunAll</definition>
+        <argsstring>(bool inclue_interactive)</argsstring>
+        <name>RunAll</name>
+        <qualifiedname>TestSuite::RunAll</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>inclue_interactive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Runs all registered tests in this suite. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inclue_interactive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether tests that do not save artifacts should be run as well. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="69" column="8" bodyfile="src/tests/test_suite.cpp" bodystart="101" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool TestSuite::IsInteractiveOnly</definition>
+        <argsstring>() const</argsstring>
+        <name>IsInteractiveOnly</name>
+        <qualifiedname>TestSuite::IsInteractiveOnly</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="71" column="9" bodyfile="src/tests/test_suite.h" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::SetSavingAllowed</definition>
+        <argsstring>(bool enable=true)</argsstring>
+        <name>SetSavingAllowed</name>
+        <qualifiedname>TestSuite::SetSavingAllowed</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>enable</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="72" column="8" bodyfile="src/tests/test_suite.h" bodystart="72" bodyend="72"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::TagNV2ATrace</definition>
+        <argsstring>(uint32_t num_nops)</argsstring>
+        <name>TagNV2ATrace</name>
+        <qualifiedname>TestSuite::TagNV2ATrace</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_nops</declname>
+        </param>
+        <briefdescription>
+<para>Inserts a pattern of NV097_NO_OPERATION&apos;s into the pushbuffer to allow identification when viewing nv2a traces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="75" column="15" bodyfile="src/tests/test_suite.cpp" bodystart="335" bodyend="342"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::SetDefaultTextureFormat</definition>
+        <argsstring>() const</argsstring>
+        <name>SetDefaultTextureFormat</name>
+        <qualifiedname>TestSuite::SetDefaultTextureFormat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="78" column="8" bodyfile="src/tests/test_suite.cpp" bodystart="110" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::FinishDraw</definition>
+        <argsstring>(const std::string &amp;name, bool save_zbuffer=false)</argsstring>
+        <name>FinishDraw</name>
+        <qualifiedname>TestSuite::FinishDraw</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>save_zbuffer</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Marks drawing as completed and presents the backbuffer, potentially causing artifacts (framebuffer, z/stencil-buffer) to be saved to disk. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="82" column="8" bodyfile="src/tests/test_suite.h" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TestSuite::FinishDrawNoSave</definition>
+        <argsstring>(const std::string &amp;name, bool save_zbuffer=false)</argsstring>
+        <name>FinishDrawNoSave</name>
+        <qualifiedname>TestSuite::FinishDrawNoSave</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>save_zbuffer</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="86" column="8" bodyfile="src/tests/test_suite.h" bodystart="86" bodyend="88"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a788127facf189ceed7d5339abbb50cfb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point TestSuite::LogTestStart</definition>
+        <argsstring>(const std::string &amp;test_name)</argsstring>
+        <name>LogTestStart</name>
+        <qualifiedname>TestSuite::LogTestStart</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="91" column="41" bodyfile="src/tests/test_suite.cpp" bodystart="354" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="function" id="d2/d3e/classTestSuite_1a73fccd2949591b8a22f0b77bbc3c6213" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>long</type>
+        <definition>long TestSuite::LogTestEnd</definition>
+        <argsstring>(const std::string &amp;test_name, const std::chrono::steady_clock::time_point &amp;start_time) const</argsstring>
+        <name>LogTestEnd</name>
+        <qualifiedname>TestSuite::LogTestEnd</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test_name</declname>
+        </param>
+        <param>
+          <type>const std::chrono::steady_clock::time_point &amp;</type>
+          <declname>start_time</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/test_suite.h" line="92" column="8" bodyfile="src/tests/test_suite.cpp" bodystart="383" bodyend="396"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Base class for all test suites. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>AlphaFuncTests</label>
+        <link refid="d5/d33/classAlphaFuncTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>AntialiasingTests</label>
+        <link refid="d5/d1f/classAntialiasingTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>AttributeCarryoverTests</label>
+        <link refid="d6/d49/classAttributeCarryoverTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>AttributeExplicitSetterTests</label>
+        <link refid="d8/d6b/classAttributeExplicitSetterTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>AttributeFloatTests</label>
+        <link refid="df/dab/classAttributeFloatTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>BlendSurfaceTests</label>
+        <link refid="df/df4/classBlendSurfaceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>BlendTests</label>
+        <link refid="d1/dac/classBlendTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>BumpEnvLumTests</label>
+        <link refid="d4/dcd/classBumpEnvLumTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>BumpMapTests</label>
+        <link refid="df/dcb/classBumpMapTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>ClearTests</label>
+        <link refid="d1/d38/classClearTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>ClippingPrecisionTests</label>
+        <link refid="d0/db3/classClippingPrecisionTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>ColorKeyTests</label>
+        <link refid="d1/d50/classColorKeyTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>ColorMaskBlendTests</label>
+        <link refid="d0/d16/classColorMaskBlendTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>ColorZetaDisableTests</label>
+        <link refid="d0/d91/classColorZetaDisableTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>ColorZetaOverlapTests</label>
+        <link refid="db/d92/classColorZetaOverlapTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>CombinerTests</label>
+        <link refid="dd/d5f/classCombinerTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>ContextSwitchTests</label>
+        <link refid="d6/d2e/classContextSwitchTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>DMACorruptionAroundSurfaceTests</label>
+        <link refid="d5/d34/classDMACorruptionAroundSurfaceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>DegenerateBeginEndTests</label>
+        <link refid="d3/d00/classDegenerateBeginEndTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>DepthClampTests</label>
+        <link refid="df/d9d/classDepthClampTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>DepthFormatFixedFunctionTests</label>
+        <link refid="dc/de3/classDepthFormatFixedFunctionTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>DepthFormatTests</label>
+        <link refid="d5/d96/classDepthFormatTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>DepthFunctionTests</label>
+        <link refid="df/d7b/classDepthFunctionTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>EdgeFlagTests</label>
+        <link refid="d2/d65/classEdgeFlagTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>FogCarryoverTests</label>
+        <link refid="d1/d48/classFogCarryoverTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>FogCustomShaderTests</label>
+        <link refid="dc/d25/classFogCustomShaderTests"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>FogExceptionalValueTests</label>
+        <link refid="da/db7/classFogExceptionalValueTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>FogGenTests</label>
+        <link refid="db/de4/classFogGenTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>FogInfiniteFogCoordinateTests</label>
+        <link refid="df/d53/classFogInfiniteFogCoordinateTests"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>FogParamTests</label>
+        <link refid="d9/d20/classFogParamTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>FogTests</label>
+        <link refid="d6/de7/classFogTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>FogVec4CoordTests</label>
+        <link refid="d4/d92/classFogVec4CoordTests"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>FrontFaceTests</label>
+        <link refid="da/d9a/classFrontFaceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>HighVertexCountTests</label>
+        <link refid="d3/d92/classHighVertexCountTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>ImageBlitTests</label>
+        <link refid="d0/d2c/classImageBlitTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>InlineArraySizeMismatchTests</label>
+        <link refid="d8/de6/classInlineArraySizeMismatchTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>LightingAccumulationTests</label>
+        <link refid="de/db7/classLightingAccumulationTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>LightingControlTests</label>
+        <link refid="d1/d24/classLightingControlTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>LightingNormalTests</label>
+        <link refid="df/dc4/classLightingNormalTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>LightingRangeTests</label>
+        <link refid="d7/d91/classLightingRangeTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>LightingSpotlightTests</label>
+        <link refid="d9/d39/classLightingSpotlightTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>LightingTwoSidedTests</label>
+        <link refid="d2/d54/classLightingTwoSidedTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>LineWidthTests</label>
+        <link refid="d0/d9d/classLineWidthTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>MaterialAlphaTests</label>
+        <link refid="dc/d3e/classMaterialAlphaTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>MaterialColorSourceTests</label>
+        <link refid="dc/d66/classMaterialColorSourceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>MaterialColorTests</label>
+        <link refid="de/d67/classMaterialColorTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>NullSurfaceTests</label>
+        <link refid="d6/df9/classNullSurfaceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>OverlappingDrawModesTests</label>
+        <link refid="d0/db0/classOverlappingDrawModesTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>PixelShaderTests</label>
+        <link refid="d2/dbc/classPixelShaderTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>PointParamsTests</label>
+        <link refid="d0/d54/classPointParamsTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>PointSizeTests</label>
+        <link refid="d0/dd4/classPointSizeTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>PointSpriteTests</label>
+        <link refid="d6/dec/classPointSpriteTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>PvideoTests</label>
+        <link refid="da/d4d/classPvideoTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>SetVertexDataTests</label>
+        <link refid="da/d67/classSetVertexDataTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>ShadeModelTests</label>
+        <link refid="db/dff/classShadeModelTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>SmoothingTests</label>
+        <link refid="d9/d95/classSmoothingTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>SpecularBackTests</label>
+        <link refid="da/d00/classSpecularBackTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>SpecularTests</label>
+        <link refid="df/d44/classSpecularTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="60">
+        <label>StencilFuncTests</label>
+        <link refid="d2/d28/classStencilFuncTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="61">
+        <label>StencilTests</label>
+        <link refid="d2/d2e/classStencilTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>StippleTests</label>
+        <link refid="d9/d5b/classStippleTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>SurfaceClipTests</label>
+        <link refid="da/d24/classSurfaceClipTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="64">
+        <label>SurfaceFormatTests</label>
+        <link refid="d5/de3/classSurfaceFormatTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>SurfacePitchTests</label>
+        <link refid="df/d85/classSurfacePitchTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>SwathWidthTests</label>
+        <link refid="de/d3c/classSwathWidthTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="67">
+        <label>TexgenMatrixTests</label>
+        <link refid="da/d51/classTexgenMatrixTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>TexgenTests</label>
+        <link refid="d2/ddb/classTexgenTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>Texture2DAsCubemapTests</label>
+        <link refid="d8/de2/classTexture2DAsCubemapTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>Texture3DAs2DTests</label>
+        <link refid="d5/d6c/classTexture3DAs2DTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>TextureAnisotropyTests</label>
+        <link refid="d5/dbc/classTextureAnisotropyTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>TextureBRDFTests</label>
+        <link refid="dc/ddf/classTextureBRDFTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>TextureBorderColorTests</label>
+        <link refid="da/d85/classTextureBorderColorTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>TextureBorderTests</label>
+        <link refid="d3/df1/classTextureBorderTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>TextureCPUUpdateTests</label>
+        <link refid="d1/dcf/classTextureCPUUpdateTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>TextureCubemapTests</label>
+        <link refid="d1/df8/classTextureCubemapTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>TextureFormatDXTTests</label>
+        <link refid="da/df8/classTextureFormatDXTTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>TextureFormatTests</label>
+        <link refid="dc/df4/classTextureFormatTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>TextureFramebufferBlitTests</label>
+        <link refid="d3/d10/classTextureFramebufferBlitTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>TextureLodBiasTests</label>
+        <link refid="df/d43/classTextureLodBiasTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>TextureMatrixTests</label>
+        <link refid="df/d18/classTextureMatrixTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>TexturePaletteTests</label>
+        <link refid="df/df3/classTexturePaletteTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>TexturePerspectiveEnableTests</label>
+        <link refid="d1/d5c/classTexturePerspectiveEnableTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>TexturePerspectiveTests</label>
+        <link refid="d8/de2/classTexturePerspectiveTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>TextureRenderTargetTests</label>
+        <link refid="d1/da7/classTextureRenderTargetTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>TextureRenderUpdateInPlaceTests</label>
+        <link refid="dd/de1/classTextureRenderUpdateInPlaceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>TextureShadowComparatorTests</label>
+        <link refid="dc/d5d/classTextureShadowComparatorTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>TextureSignedComponentTests</label>
+        <link refid="d2/d66/classTextureSignedComponentTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>TextureWrapModeTests</label>
+        <link refid="d5/d03/classTextureWrapModeTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>ThreeDPrimitiveTests</label>
+        <link refid="db/d65/classThreeDPrimitiveTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>TwoDLineTests</label>
+        <link refid="db/df8/classTwoDLineTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="92">
+        <label>VertexShaderIndependenceTests</label>
+        <link refid="d0/d1d/classVertexShaderIndependenceTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>VertexShaderRoundingTests</label>
+        <link refid="d9/df9/classVertexShaderRoundingTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>VertexShaderSwizzleTests</label>
+        <link refid="d7/de4/classVertexShaderSwizzleTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>ViewportTests</label>
+        <link refid="df/daa/classViewportTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>VolumeTextureTests</label>
+        <link refid="d7/d06/classVolumeTextureTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>WBufTests</label>
+        <link refid="d0/dcb/classWBufTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>WParamTests</label>
+        <link refid="d8/dab/classWParamTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>WeightSetterTests</label>
+        <link refid="d0/d2f/classWeightSetterTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>WindowClipTests</label>
+        <link refid="d1/d55/classWindowClipTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>ZMinMaxControlTests</label>
+        <link refid="dd/d22/classZMinMaxControlTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>ZPassPixelCountTests</label>
+        <link refid="d6/d08/classZPassPixelCountTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>ZeroStrideTests</label>
+        <link refid="df/d84/classZeroStrideTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>NV2AState</label>
+      </node>
+      <node id="4">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="2">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/test_suite.h" line="21" column="1" bodyfile="src/tests/test_suite.h" bodystart="21" bodyend="116"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>TestSuite</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>host_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" prot="public" virt="virtual"><scope>TestSuite</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a73fccd2949591b8a22f0b77bbc3c6213" prot="private" virt="non-virtual"><scope>TestSuite</scope><name>LogTestEnd</name></member>
+      <member refid="d2/d3e/classTestSuite_1a788127facf189ceed7d5339abbb50cfb" prot="private" virt="non-virtual"><scope>TestSuite</scope><name>LogTestStart</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TestSuite</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TestSuite</scope><name>TearDownTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TestSuite</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TestSuite</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TestSuite</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

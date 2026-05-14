@@ -1,0 +1,662 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d49/classAttributeCarryoverTests" kind="class" language="C++" prot="public">
+    <compoundname>AttributeCarryoverTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="dc/db4/attribute__carryover__tests_8h" local="no">attribute_carryover_tests.h</includes>
+    <innerclass refid="db/d29/structAttributeCarryoverTests_1_1TestConfig" prot="public">AttributeCarryoverTests::TestConfig</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5" prot="public" static="no" strong="no">
+        <type></type>
+        <name>DrawMode</name>
+        <qualifiedname>AttributeCarryoverTests::DrawMode</qualifiedname>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5a7b10e961dd1566649b491f80bc9ea6d2" prot="public">
+          <name>DRAW_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5afb34b11a4a4889aa13f31f17a667cc8c" prot="public">
+          <name>DRAW_INLINE_BUFFERS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5abdb13ce7e3dcd8147d2431be2701f4ed" prot="public">
+          <name>DRAW_INLINE_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5ad34ceef080069270c743e89095cef84b" prot="public">
+          <name>DRAW_INLINE_ELEMENTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="37" column="3" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="37" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="enum" id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Attribute</name>
+        <qualifiedname>AttributeCarryoverTests::Attribute</qualifiedname>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598aa5ad96c2236396e4988e962faea10c3e" prot="public">
+          <name>ATTR_WEIGHT</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a5a407e3445b7ea90e78cb528ac053f17" prot="public">
+          <name>ATTR_NORMAL</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a1d99a9cfd4d7e87db191d863570b2739" prot="public">
+          <name>ATTR_DIFFUSE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a3d16bb0b280bcf8c9e4649a1e0d01f00" prot="public">
+          <name>ATTR_SPECULAR</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a53dcb35b0157fa08255b9f4cd641d827" prot="public">
+          <name>ATTR_FOG_COORD</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598aad923329cf8dcc7cce39f38cf69c7dd5" prot="public">
+          <name>ATTR_POINT_SIZE</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598ab0c1f7422405c677da02f509b6cf8419" prot="public">
+          <name>ATTR_BACK_DIFFUSE</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a12f93fe965310467624c6ec73b026c10" prot="public">
+          <name>ATTR_BACK_SPECULAR</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a13664e584f52359b76cb57f8dd321819" prot="public">
+          <name>ATTR_TEX0</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598ae355bfec89a7695acbd274b3df65b5f7" prot="public">
+          <name>ATTR_TEX1</name>
+          <initializer>= 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598ab341b9977538749d2bb7bdb930267ef2" prot="public">
+          <name>ATTR_TEX2</name>
+          <initializer>= 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a6b8c50c599f818e54b064bb573ae527b" prot="public">
+          <name>ATTR_TEX3</name>
+          <initializer>= 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="44" column="3" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="44" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d6/d49/classAttributeCarryoverTests_1a7c3f45ee45d76a32a57050845fac9682" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; AttributeCarryoverTests::bleed_buffer_</definition>
+        <argsstring></argsstring>
+        <name>bleed_buffer_</name>
+        <qualifiedname>AttributeCarryoverTests::bleed_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="81" column="19" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d49/classAttributeCarryoverTests_1af2ee8b00927ce874c3bd6229ea979d91" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; AttributeCarryoverTests::test_buffer_</definition>
+        <argsstring></argsstring>
+        <name>test_buffer_</name>
+        <qualifiedname>AttributeCarryoverTests::test_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="83" column="19" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d49/classAttributeCarryoverTests_1a9668461b8f8d1ddc3c4f29002613e45b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; uint32_t &gt;</type>
+        <definition>std::vector&lt;uint32_t&gt; AttributeCarryoverTests::index_buffer_</definition>
+        <argsstring></argsstring>
+        <name>index_buffer_</name>
+        <qualifiedname>AttributeCarryoverTests::index_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="85" column="15" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1a76d0347af64906f4552043ae9e868cbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AttributeCarryoverTests::AttributeCarryoverTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>AttributeCarryoverTests</name>
+        <qualifiedname>AttributeCarryoverTests::AttributeCarryoverTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>L-bd0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bd0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bd0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bd0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bs0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bs0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bs0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-bs0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from back specular using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-d0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-d0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-d0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-d0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from diffuse using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-fc0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-fc0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-fc0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-fc0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from fog using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-n0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-n0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-n0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-n0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from normal using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-ps0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-ps0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-ps0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-ps0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from point size using draw mode inline buffers. WARNING: This test is non-hermetic as SET_POINT_SIZE does not set the v6 input to the vertex shader!</para>
+</simplesect>
+<simplesect kind="remark"><para>L-s0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-s0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-s0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-s0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from specular using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t00.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t00.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t00.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t00.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from tex0 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t10.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t10.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t10.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t10.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from tex1 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t20.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t20.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t20.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t20.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from tex2 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t30.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t30.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t30.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-t30.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from tex3 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-w0.1_0.0_1.0_1.0-da Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-w0.2_0.0_0.6_1.0-ie Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-w0.5_0.0_0.0_1.0-ia Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>L-w0.8_0.0_0.0_1.0-ib Renders a fully specified line, then renders a test line that takes its diffuse color from weight using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bd0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bd0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bd0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bd0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from back diffuse using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bs0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bs0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bs0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-bs0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from back specular using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-d0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-d0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-d0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-d0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from diffuse using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-fc0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-fc0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-fc0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-fc0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from fog using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-n0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-n0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-n0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-n0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from normal using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-ps0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-ps0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-ps0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-ps0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from point size using draw mode inline buffers. WARNING: This test is non-hermetic as SET_POINT_SIZE does not set the v6 input to the vertex shader!</para>
+</simplesect>
+<simplesect kind="remark"><para>T-s0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-s0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-s0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-s0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from specular using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t00.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t00.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t00.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t00.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex0 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t10.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t10.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t10.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t10.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex1 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t20.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t20.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t20.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t20.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex2 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t30.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t30.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t30.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-t30.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from tex3 using draw mode inline buffers.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-w0.1_0.0_1.0_1.0-da Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode draw arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-w0.2_0.0_0.6_1.0-ie Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode inline elements.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-w0.5_0.0_0.0_1.0-ia Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode inline arrays.</para>
+</simplesect>
+<simplesect kind="remark"><para>T-w0.8_0.0_0.0_1.0-ib Renders a fully specified tri, then renders a test tri that takes its diffuse color from weight using draw mode inline buffers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="65" column="3" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="434" bodyend="444"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1a6031c3c83f0af300b235df5cfe916180" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AttributeCarryoverTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>AttributeCarryoverTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="67" column="8" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="446" bodyend="468"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1ac9cd675617f98192f72153fca261ae18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void AttributeCarryoverTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>AttributeCarryoverTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="68" column="8" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="470" bodyend="474"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1ac43e9e99f30f95b5b1d61d03a6ce2fb9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AttributeCarryoverTests::CreateGeometry</definition>
+        <argsstring>(TestHost::DrawPrimitive primitive)</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>AttributeCarryoverTests::CreateGeometry</qualifiedname>
+        <param>
+          <type>TestHost::DrawPrimitive</type>
+          <declname>primitive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="71" column="8" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="599" bodyend="608"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1a852af3cfed8352df93fef077c388f003" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AttributeCarryoverTests::Test</definition>
+        <argsstring>(TestHost::DrawPrimitive primitive, Attribute test_attribute, const TestConfig &amp;config)</argsstring>
+        <name>Test</name>
+        <qualifiedname>AttributeCarryoverTests::Test</qualifiedname>
+        <param>
+          <type>TestHost::DrawPrimitive</type>
+          <declname>primitive</declname>
+        </param>
+        <param>
+          <type>Attribute</type>
+          <declname>test_attribute</declname>
+        </param>
+        <param>
+          <type>const <ref refid="db/d29/structAttributeCarryoverTests_1_1TestConfig" kindref="compound">TestConfig</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="72" column="8" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="610" bodyend="712"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1a8af989ec7c71fe2a5075a77f9f53501a" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AttributeCarryoverTests::MakeTestName</definition>
+        <argsstring>(TestHost::DrawPrimitive primitive, Attribute test_attribute, const TestConfig &amp;config)</argsstring>
+        <name>MakeTestName</name>
+        <qualifiedname>AttributeCarryoverTests::MakeTestName</qualifiedname>
+        <param>
+          <type>TestHost::DrawPrimitive</type>
+          <declname>primitive</declname>
+        </param>
+        <param>
+          <type>Attribute</type>
+          <declname>test_attribute</declname>
+        </param>
+        <param>
+          <type>const <ref refid="db/d29/structAttributeCarryoverTests_1_1TestConfig" kindref="compound">TestConfig</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="74" column="22" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="714" bodyend="779"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d49/classAttributeCarryoverTests_1a530b4c21e59781ff6708e43369921ec9" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string AttributeCarryoverTests::DrawModeLabel</definition>
+        <argsstring>(DrawMode mode)</argsstring>
+        <name>DrawModeLabel</name>
+        <qualifiedname>AttributeCarryoverTests::DrawModeLabel</qualifiedname>
+        <param>
+          <type>DrawMode</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="77" column="22" bodyfile="src/tests/attribute_carryover_tests.cpp" bodystart="781" bodyend="792"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior when vertex attributes are not provided but are used by shaders.</para>
+<para><parblock><para>For various types of geometry, a fully specified primitive is rendered, followed by an identical (but position-transformed) primitive where only the vertex positions are provided and all other attributes bleed over from the fully specified primitive.</para>
+<para>Each test picks a separate vertex attribute (e.g., weight, normal, ...) and sets it to a test value. The shader code will convert the attribute under test into a color.</para>
+<para>Attributes with three parameters (iNormal) will have their alpha forced to 1.f.</para>
+<para>Attributes with one parameter (e.g., iWeight) will be repeated into the red and green channels with their blue and alpha forced to 1.f. </para>
+</parblock></para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>AttributeCarryoverTests</label>
+        <link refid="d6/d49/classAttributeCarryoverTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>AttributeCarryoverTests</label>
+        <link refid="d6/d49/classAttributeCarryoverTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/attribute_carryover_tests.h" line="35" column="1" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="35" bodyend="86"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>allow_saving_</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598ab0c1f7422405c677da02f509b6cf8419" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_BACK_DIFFUSE</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a12f93fe965310467624c6ec73b026c10" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_BACK_SPECULAR</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a1d99a9cfd4d7e87db191d863570b2739" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_DIFFUSE</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a53dcb35b0157fa08255b9f4cd641d827" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_FOG_COORD</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a5a407e3445b7ea90e78cb528ac053f17" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_NORMAL</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598aad923329cf8dcc7cce39f38cf69c7dd5" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_POINT_SIZE</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a3d16bb0b280bcf8c9e4649a1e0d01f00" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_SPECULAR</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a13664e584f52359b76cb57f8dd321819" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_TEX0</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598ae355bfec89a7695acbd274b3df65b5f7" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_TEX1</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598ab341b9977538749d2bb7bdb930267ef2" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_TEX2</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598a6b8c50c599f818e54b064bb573ae527b" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_TEX3</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598aa5ad96c2236396e4988e962faea10c3e" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ATTR_WEIGHT</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ab0f16a20a1810a7ebd81713dd8409598" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>Attribute</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a76d0347af64906f4552043ae9e868cbd" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>AttributeCarryoverTests</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a7c3f45ee45d76a32a57050845fac9682" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>bleed_buffer_</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ac43e9e99f30f95b5b1d61d03a6ce2fb9" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>CreateGeometry</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1ac9cd675617f98192f72153fca261ae18" prot="public" virt="virtual"><scope>AttributeCarryoverTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DisableTests</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5a7b10e961dd1566649b491f80bc9ea6d2" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DRAW_ARRAYS</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5abdb13ce7e3dcd8147d2431be2701f4ed" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DRAW_INLINE_ARRAYS</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5afb34b11a4a4889aa13f31f17a667cc8c" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DRAW_INLINE_BUFFERS</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5ad34ceef080069270c743e89095cef84b" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DRAW_INLINE_ELEMENTS</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a4bf6b8eb42d69e5902806d51e92634a5" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DrawMode</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a530b4c21e59781ff6708e43369921ec9" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>DrawModeLabel</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>host_</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a9668461b8f8d1ddc3c4f29002613e45b" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>index_buffer_</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a6031c3c83f0af300b235df5cfe916180" prot="public" virt="virtual"><scope>AttributeCarryoverTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a8af989ec7c71fe2a5075a77f9f53501a" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>MakeTestName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>AttributeCarryoverTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>AttributeCarryoverTests</scope><name>TearDownTest</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1a852af3cfed8352df93fef077c388f003" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>Test</name></member>
+      <member refid="d6/d49/classAttributeCarryoverTests_1af2ee8b00927ce874c3bd6229ea979d91" prot="private" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>test_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>AttributeCarryoverTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

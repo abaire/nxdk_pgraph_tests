@@ -1,0 +1,705 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d25/texture__framebuffer__blit__tests_8cpp" kind="file" language="C++">
+    <compoundname>texture_framebuffer_blit_tests.cpp</compoundname>
+    <includes refid="dd/d75/texture__framebuffer__blit__tests_8h" local="yes">texture_framebuffer_blit_tests.h</includes>
+    <includes local="no">SDL_image.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">nxdk_ext.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texture_framebuffer_blit_tests.cpp</label>
+        <link refid="de/d25/texture__framebuffer__blit__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texture_framebuffer_blit_tests.h</label>
+        <link refid="dd/d75/texture__framebuffer__blit__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>SDL_image.h</label>
+      </node>
+      <node id="10">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="15">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="3">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="8">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="13">
+        <label>thread</label>
+      </node>
+      <node id="14">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="6">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="de/d25/texture__framebuffer__blit__tests_8cpp_1ae1de504b43f0d2fb4384f0bcd6318813" prot="public" static="no">
+        <name>SET_MASK</name>
+        <param><defname>mask</defname></param>
+        <param><defname>val</defname></param>
+        <initializer>(((val) &lt;&lt; (__builtin_ffs(mask) - 1)) &amp; (mask))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="12" column="9" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a71f766c629bd3683e45fee43153c0f44" prot="public" static="no">
+        <name>SUBCH_CLASS_9F</name>
+        <initializer>SUBCH_3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="16" column="9" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a16b272dce0a9b1b72b59bd955c659df7" prot="public" static="no">
+        <name>SUBCH_CLASS_62</name>
+        <initializer>SUBCH_4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="18" column="9" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a728809d342fe1015b88305205604a9f9" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t kDefaultDMAColorChannel</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAColorChannel</name>
+        <initializer>= 9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="22" column="16" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a5d800f1f8611399dd43998ed24800a76" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t kDefaultDMAZetaChannel</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAZetaChannel</name>
+        <initializer>= 10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="25" column="16" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1aaeb64f7d9167066f5badb8eec2d185c4" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t kDefaultDMAChannelA</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAChannelA</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="29" column="16" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a68b1179ad534f91fc0d0e6414cfda2f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_19</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_19</name>
+        <initializer>= kNextSubchannel</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="32" column="27" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1aba4d8b3f2965313b48d88df105dc505c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_12</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_12</name>
+        <initializer>= SUBCH_CLASS_19 + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="35" column="27" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a4e1038c7d0a5b6606e1be65cfd843fd8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_72</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_72</name>
+        <initializer>= SUBCH_CLASS_12 + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="38" column="27" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a95ead76af7bfb51a7a67af8bf490ed20" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTextureTarget[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTextureTarget</name>
+        <initializer>= &quot;FBToTexture&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="40" column="23" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1a0166d5be53a533103426fc1dace9c2f6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kZetaTarget[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kZetaTarget</name>
+        <initializer>= &quot;FBToZetaAsTex&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="41" column="23" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d25/texture__framebuffer__blit__tests_8cpp_1adf77bb6478a272758874a37cc5a0d534" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kRenderTextureTarget[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kRenderTextureTarget</name>
+        <initializer>= &quot;FBToOldRenderTarget&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_framebuffer_blit_tests.cpp" line="42" column="23" bodyfile="src/tests/texture_framebuffer_blit_tests.cpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texture_framebuffer_blit_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL_image.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SET_MASK(mask,<sp/>val)<sp/>(((val)<sp/>&lt;&lt;<sp/>(__builtin_ffs(mask)<sp/>-<sp/>1))<sp/>&amp;<sp/>(mask))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>pb_init<sp/>in<sp/>pbkit.c,<sp/>where<sp/>the<sp/>channel<sp/>contexts<sp/>are<sp/>set<sp/>up.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SUBCH_3<sp/>==<sp/>GR_CLASS_9F,<sp/>which<sp/>contains<sp/>the<sp/>IMAGE_BLIT<sp/>commands.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SUBCH_CLASS_9F<sp/>SUBCH_3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SUBCH_4<sp/>==<sp/>GR_CLASS_62,<sp/>which<sp/>contains<sp/>the<sp/>NV10<sp/>2D<sp/>surface<sp/>commands.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SUBCH_CLASS_62<sp/>SUBCH_4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_COLOR<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>9<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_COLOR<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAColorChannel<sp/>=<sp/>9;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_ZETA<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>10<sp/>by<sp/>default.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAZetaChannel<sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_A<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>3<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_A<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAChannelA<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Subchannel<sp/>reserved<sp/>for<sp/>interaction<sp/>with<sp/>the<sp/>class<sp/>19<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_19<sp/>=<sp/>kNextSubchannel;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Subchannel<sp/>reserved<sp/>for<sp/>interaction<sp/>with<sp/>the<sp/>class<sp/>12<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_12<sp/>=<sp/>SUBCH_CLASS_19<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Subchannel<sp/>reserved<sp/>for<sp/>interaction<sp/>with<sp/>the<sp/>class<sp/>72<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_72<sp/>=<sp/>SUBCH_CLASS_12<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTextureTarget[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FBToTexture&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kZetaTarget[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FBToZetaAsTex&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kRenderTextureTarget[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FBToOldRenderTarget&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal">TextureFramebufferBlitTests::TextureFramebufferBlitTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>Framebuffer<sp/>Blit&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>tests_[kTextureTarget]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetTextureMemory());</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>Test(offset,<sp/>kTextureTarget);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>tests_[kZetaTarget]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(pb_depth_stencil_buffer());</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>Test(offset,<sp/>kZetaTarget);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>tests_[kRenderTextureTarget]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestRenderTarget(kRenderTextureTarget);<sp/>};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d3/d10/classTextureFramebufferBlitTests_1a4477f41f5f52f36bd9cf095b980c468a" kindref="member">TextureFramebufferBlitTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>SetDefaultTextureFormat();</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>CreateGeometry();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Provide<sp/>a<sp/>mechanism<sp/>to<sp/>find<sp/>the<sp/>next<sp/>unused<sp/>channel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>channel<sp/>=<sp/>kNextContextChannel;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>pb_create_dma_ctx(channel++,<sp/>DMA_CLASS_3D,<sp/>0,<sp/>MAXRAM,<sp/>&amp;texture_target_ctx_);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;texture_target_ctx_);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_30,<sp/>&amp;null_ctx_);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;null_ctx_);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_19,<sp/>&amp;clip_rect_ctx_);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;clip_rect_ctx_);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Provide<sp/>a<sp/>mechanism<sp/>to<sp/>find<sp/>the<sp/>next<sp/>unused<sp/>subchannel.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_19,<sp/>&amp;clip_rect_ctx_);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_12,<sp/>&amp;beta_ctx_);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;beta_ctx_);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_12,<sp/>&amp;beta_ctx_);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>GR_CLASS_72,<sp/>&amp;beta4_ctx_);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;beta4_ctx_);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_72,<sp/>&amp;beta4_ctx_);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>host_.SetSurfaceFormat(host_.GetColorBufferFormat(),<sp/>TestHost::SZF_Z24S8,<sp/>host_.GetFramebufferWidth(),</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>texture<sp/>DMA<sp/>channel<sp/>is<sp/>overridden<sp/>to<sp/>use<sp/>a<sp/>context<sp/>that<sp/>can<sp/>address<sp/>arbitrary<sp/>RAM.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>(pbkit<sp/>sets<sp/>up<sp/>a<sp/>channel<sp/>that<sp/>can<sp/>only<sp/>address<sp/>a<sp/>subset<sp/>of<sp/>video<sp/>RAM)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_A,<sp/>texture_target_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d3/d10/classTextureFramebufferBlitTests_1a0d39b279799759bfa0f60acc76f3e327" kindref="member">TextureFramebufferBlitTests::Deinitialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" kindref="member">TestSuite::Deinitialize</ref>();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAColorChannel);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA,<sp/>kDefaultDMAZetaChannel);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET,<sp/>0);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET,<sp/>0);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>Leaving<sp/>arbitrary<sp/>offsets<sp/>for<sp/>these<sp/>values<sp/>will<sp/>lead<sp/>to<sp/>a<sp/>color<sp/>buffer<sp/>limit<sp/>error<sp/>in<sp/>the<sp/>two_d_line_tests.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV062_SET_OFFSET_SOURCE,<sp/>0);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV062_SET_OFFSET_DESTIN,<sp/>0);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_A,<sp/>kDefaultDMAChannelA);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_NO_OPERATION,<sp/>0);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_WAIT_FOR_IDLE,<sp/>0);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_NO_OPERATION,<sp/>0);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_WAIT_FOR_IDLE,<sp/>0);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureFramebufferBlitTests::ImageBlit(uint32_t<sp/>operation,<sp/>uint32_t<sp/>beta,<sp/>uint32_t<sp/>source_channel,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>destination_channel,<sp/>uint32_t<sp/>surface_format,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>source_pitch,<sp/>uint32_t<sp/>destination_pitch,<sp/>uint32_t<sp/>source_offset,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>source_x,<sp/>uint32_t<sp/>source_y,<sp/>uint32_t<sp/>destination_offset,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>destination_x,<sp/>uint32_t<sp/>destination_y,<sp/>uint32_t<sp/>width,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>height,<sp/>uint32_t<sp/>clip_x,<sp/>uint32_t<sp/>clip_y,<sp/>uint32_t<sp/>clip_width,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>clip_height)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_19,<sp/>NV01_CONTEXT_CLIP_RECTANGLE_SET_POINT,<sp/>clip_x<sp/>|<sp/>(clip_y<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_19,<sp/>NV01_CONTEXT_CLIP_RECTANGLE_SET_SIZE,<sp/>clip_width<sp/>|<sp/>(clip_height<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_CLIP_RECTANGLE,<sp/>clip_rect_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_OPERATION,<sp/>operation);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0,<sp/>source_channel);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1,<sp/>destination_channel);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV10_CONTEXT_SURFACES_2D_FORMAT,<sp/>surface_format);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV062_SET_PITCH,<sp/>source_pitch<sp/>|<sp/>(destination_pitch<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV062_SET_OFFSET_SOURCE,<sp/>source_offset);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_62,<sp/>NV062_SET_OFFSET_DESTIN,<sp/>destination_offset);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_COLOR_KEY,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_PATTERN,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_ROP5,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>!=<sp/>NV09F_SET_OPERATION_BLEND_AND)<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_SET_BETA,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_12,<sp/>NV012_SET_BETA,<sp/>beta);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_SET_BETA,<sp/>beta_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(operation<sp/>!=<sp/>NV09F_SET_OPERATION_SRCCOPY_PREMULT<sp/>&amp;&amp;<sp/>operation<sp/>!=<sp/>NV09F_SET_OPERATION_BLEND_AND_PREMULT)<sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_SET_BETA4,<sp/>null_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>beta<sp/>is<sp/>ARGB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_72,<sp/>NV072_SET_BETA,<sp/>beta);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV_IMAGE_BLIT_SET_BETA4,<sp/>beta4_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV09F_CONTROL_POINT_IN,<sp/>source_x<sp/>|<sp/>(source_y<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV09F_CONTROL_POINT_OUT,<sp/>destination_x<sp/>|<sp/>(destination_y<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_9F,<sp/>NV09F_SIZE,<sp/>width<sp/>|<sp/>(height<sp/>&lt;&lt;<sp/>16));</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="159"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureFramebufferBlitTests::CreateGeometry()<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kLeft<sp/>=<sp/>-2.75f;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>2.75f;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>1.75f;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kBottom<sp/>=<sp/>-1.75f;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumTriangles<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_source_vertex_buffer_<sp/>=<sp/>host_.AllocateVertexBuffer(kNumTriangles<sp/>*<sp/>3);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>Color<sp/>color_one,<sp/>color_two,<sp/>color_three;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_one.SetGrey(0.25f);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_two.SetGrey(0.55f);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_three.SetGrey(0.75f);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kLeft,<sp/>kTop,<sp/>z};</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{0.0f,<sp/>kTop,<sp/>z};</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{kLeft,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>texture_source_vertex_buffer_-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_one.SetRGB(0.8f,<sp/>0.25f,<sp/>0.10f);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_two.SetRGB(0.1f,<sp/>0.85f,<sp/>0.10f);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_three.SetRGB(0.1f,<sp/>0.25f,<sp/>0.90f);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kRight,<sp/>kTop,<sp/>z};</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{kRight,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>texture_source_vertex_buffer_-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_one.SetRGB(0.8f,<sp/>0.25f,<sp/>0.90f);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_two.SetRGB(0.1f,<sp/>0.85f,<sp/>0.90f);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_three.SetRGB(0.85f,<sp/>0.95f,<sp/>0.10f);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kRight,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{0.0f,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{kRight,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>texture_source_vertex_buffer_-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_one.SetRGB(0.2f,<sp/>0.4f,<sp/>0.8f);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_two.SetRGB(0.3f,<sp/>0.5f,<sp/>0.9f);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>color_three.SetRGB(0.4f,<sp/>0.3f,<sp/>0.7f);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kLeft,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{0.0f,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>texture_source_vertex_buffer_-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>target_vertex_buffer_<sp/>=<sp/>host_.AllocateVertexBuffer(6);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>target_vertex_buffer_-&gt;DefineBiTri(0,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kBottom,<sp/>0.1);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/>target_vertex_buffer_-&gt;Linearize(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetFramebufferWidth()),</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetFramebufferHeight()));</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureFramebufferBlitTests::TestRenderTarget(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>test_name)<sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pitch<sp/>=<sp/>host_.GetFramebufferWidth()<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>texture_size<sp/>=<sp/>pitch<sp/>*<sp/>host_.GetFramebufferHeight();</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>target<sp/>=</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>(uint8_t*)MmAllocateContiguousMemoryEx(texture_size,<sp/>0,<sp/>MAXRAM,<sp/>0x1000,<sp/>PAGE_WRITECOMBINE<sp/>|<sp/>PAGE_READWRITE);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>ASSERT(target<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Failed<sp/>to<sp/>allocate<sp/>target<sp/>surface.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_PITCH,</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>pitch)<sp/>|<sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>pitch));</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR,<sp/>texture_target_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET,<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(target)<sp/>&amp;<sp/>0x03FFFFFF);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Investigate<sp/>if<sp/>this<sp/>is<sp/>actually<sp/>necessary.<sp/>Morrowind<sp/>does<sp/>this<sp/>after<sp/>changing<sp/>offsets.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_NO_OPERATION,<sp/>0);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_WAIT_FOR_IDLE,<sp/>0);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Render<sp/>something<sp/>into<sp/>the<sp/>texture.<sp/>The<sp/>expectation<sp/>is<sp/>that<sp/>this<sp/>will<sp/>not<sp/>actually<sp/>be<sp/>displayed<sp/>since<sp/>the<sp/>test<sp/>will</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>completely<sp/>blit<sp/>over<sp/>it.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xF0AA00AA);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_PITCH,</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>pitch)<sp/>|<sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>pitch));</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAColorChannel);</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET,<sp/>0);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Investigate<sp/>if<sp/>this<sp/>is<sp/>actually<sp/>necessary.<sp/>Morrowind<sp/>does<sp/>this<sp/>after<sp/>changing<sp/>offsets.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_NO_OPERATION,<sp/>0);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_WAIT_FOR_IDLE,<sp/>0);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/>Test(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(target),<sp/>test_name);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>MmFreeContiguousMemory(target);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureFramebufferBlitTests::Test(uint32_t<sp/>texture_destination,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>test_name)<sp/>{</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xF0441111);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/>texture_destination<sp/>&amp;=<sp/>0x03FFFFFF;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_DEPTH_MASK,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Trigger<sp/>https://github.com/mborgerson/xemu/issues/788<sp/>by<sp/>forcing<sp/>xemu<sp/>to<sp/>consider<sp/>the<sp/>zeta<sp/>buffer<sp/>as<sp/>dirty.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_ZETA,<sp/>kDefaultDMAZetaChannel);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Render<sp/>test<sp/>content<sp/>to<sp/>the<sp/>framebuffer,<sp/>then<sp/>blit<sp/>it<sp/>into<sp/>texture<sp/>memory.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(texture_source_vertex_buffer_);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.DrawArrays(TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>clip_x<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>clip_y<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>clip_w<sp/>=<sp/>host_.GetFramebufferWidth();</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>clip_h<sp/>=<sp/>host_.GetFramebufferHeight();</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>fb_pitch<sp/>=<sp/>clip_w<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/>ImageBlit(NV09F_SET_OPERATION_SRCCOPY,<sp/>0,<sp/>DMA_CHANNEL_3D_3,<sp/>texture_target_ctx_.ChannelID,</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NV04_SURFACE_2D_FORMAT_A8R8G8B8,<sp/>fb_pitch,<sp/>fb_pitch,</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(pb_back_buffer())<sp/>&amp;<sp/>0x03FFFFFF,<sp/>0,<sp/>0,<sp/>texture_destination,<sp/>0,<sp/>0,<sp/>clip_w,</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clip_h,<sp/>clip_x,<sp/>clip_y,<sp/>clip_w,<sp/>clip_h);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Render<sp/>a<sp/>quad<sp/>with<sp/>the<sp/>generated<sp/>texture.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/>stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/>stage.SetTextureDimensions(1,<sp/>1,<sp/>1);</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/>stage.SetBorderColor(0xFF7F007F);</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/>stage.SetImageDimensions(host_.GetFramebufferWidth(),<sp/>host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>texture<sp/>stage<sp/>utilities<sp/>always<sp/>operate<sp/>off<sp/>of<sp/>the<sp/>texture<sp/>memory<sp/>managed<sp/>by<sp/>the<sp/>test_host.<sp/>Because<sp/>this<sp/>test</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>needs<sp/>to<sp/>reference<sp/>arbitrary<sp/>texture<sp/>destinations,<sp/>the<sp/>offset<sp/>must<sp/>be<sp/>applied<sp/>manually<sp/>after<sp/>the<sp/>rest<sp/>of<sp/>the<sp/>params</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>are<sp/>committed.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET,<sp/>texture_destination);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/>host_.SetVertexBuffer(target_vertex_buffer_);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/>host_.DrawArrays();</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>test_name);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(test_name);</highlight></codeline>
+<codeline lineno="327"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texture_framebuffer_blit_tests.cpp"/>
+  </compounddef>
+</doxygen>

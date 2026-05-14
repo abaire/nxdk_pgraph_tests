@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_0a4b4be470ccb3aa51643a03ee90aa9a" kind="dir">
+    <compoundname>src/shaders</compoundname>
+    <innerfile refid="df/d16/fixed__function__approximation__shader_8cpp">fixed_function_approximation_shader.cpp</innerfile>
+    <innerfile refid="d8/dc4/fixed__function__approximation__shader_8h">fixed_function_approximation_shader.h</innerfile>
+    <innerfile refid="df/de9/perspective__vertex__shader__no__lighting_8cpp">perspective_vertex_shader_no_lighting.cpp</innerfile>
+    <innerfile refid="d7/d3a/perspective__vertex__shader__no__lighting_8h">perspective_vertex_shader_no_lighting.h</innerfile>
+    <innerfile refid="dd/db9/pixel__shader__program_8cpp">pixel_shader_program.cpp</innerfile>
+    <innerfile refid="d1/d7d/pixel__shader__program_8h">pixel_shader_program.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/shaders/"/>
+  </compounddef>
+</doxygen>

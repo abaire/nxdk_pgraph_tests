@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/d39/classLightingSpotlightTests" kind="class" language="C++" prot="public">
+    <compoundname>LightingSpotlightTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d4/d14/lighting__spotlight__tests_8h" local="no">lighting_spotlight_tests.h</includes>
+    <innerclass refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" prot="public">LightingSpotlightTests::Spotlight</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="d9/d39/classLightingSpotlightTests_1a4f714f5858b52b79c46423fac0d724ab" prot="public" static="no">
+        <type>struct <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">LightingSpotlightTests::Spotlight</ref></type>
+        <definition>typedef struct LightingSpotlightTests::Spotlight LightingSpotlightTests::Spotlight</definition>
+        <argsstring></argsstring>
+        <name>Spotlight</name>
+        <qualifiedname>LightingSpotlightTests::Spotlight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Describes a spotlight. See <ulink url="https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor">https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="65" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d9/d39/classLightingSpotlightTests_1a6f7e50f202424041db94802e9e891433" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingSpotlightTests::vertex_buffer_plane_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_plane_</name>
+        <qualifiedname>LightingSpotlightTests::vertex_buffer_plane_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="80" column="19" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/d39/classLightingSpotlightTests_1a14d77c71dc8141f3f69abeed5f44c862" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; LightingSpotlightTests::vertex_buffer_cylinder_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_cylinder_</name>
+        <qualifiedname>LightingSpotlightTests::vertex_buffer_cylinder_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="81" column="19" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/d39/classLightingSpotlightTests_1acafc935b0c2104f53599621ca492beff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LightingSpotlightTests::LightingSpotlightTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>LightingSpotlightTests</name>
+        <qualifiedname>LightingSpotlightTests::LightingSpotlightTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="68" column="3" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="94" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d39/classLightingSpotlightTests_1aebe71e115995941fcadbeb75f00f0b3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LightingSpotlightTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>LightingSpotlightTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="70" column="8" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="130" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d39/classLightingSpotlightTests_1ad3e75ab08b9ea4e3a59be461f886fdab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void LightingSpotlightTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>LightingSpotlightTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="71" column="8" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="167" bodyend="171"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d9/d39/classLightingSpotlightTests_1a55bbeb7ee85e5f005edb98c73bc3e2a1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingSpotlightTests::Test</definition>
+        <argsstring>(const std::string &amp;name, const Spotlight &amp;light)</argsstring>
+        <name>Test</name>
+        <qualifiedname>LightingSpotlightTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">Spotlight</ref> &amp;</type>
+          <declname>light</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="74" column="8" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="319" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d39/classLightingSpotlightTests_1a95c556587418637f6eed19e187c8641f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingSpotlightTests::TestFixed</definition>
+        <argsstring>(const std::string &amp;name, const Spotlight &amp;light)</argsstring>
+        <name>TestFixed</name>
+        <qualifiedname>LightingSpotlightTests::TestFixed</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d4/d2a/structLightingSpotlightTests_1_1Spotlight" kindref="compound">Spotlight</ref> &amp;</type>
+          <declname>light</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="75" column="8" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="321" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d39/classLightingSpotlightTests_1a08d98e671e66300d7418ccc44f67982d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightingSpotlightTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>LightingSpotlightTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_spotlight_tests.h" line="77" column="8" bodyfile="src/tests/lighting_spotlight_tests.cpp" bodystart="173" bodyend="195"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior of spotlight falloff and attenuation settings.</para>
+<para>The spotlight is placed at {0, 0, -7} (the camera position) pointing directly into the screen, with a maximum range of 15.f. A plane is rendered at {0, 0, 0}, and a cylinder at ~ {1, 1, 0}.</para>
+<para>For the &quot;At&quot; prefixed tests, the attenuation factor of the light is adjusted. This factor should decrease the light intensity relative to the distance between the vertex and the light.</para>
+<para>For the &quot;Fo&quot; prefixed tests, the falloff factor of the light is adjusted. This factor modifies how the intensity falls off in the zone between the penumbra (the outermost illuminated region) and the umbra (the region within which the light&apos;s full intensity is applied). Note that all pixels are still modified by attenuation, which is set to a constant value.</para>
+<para>For the &quot;PT&quot; prefixed tests, the phi (penumbra) and theta (umbra) angles are set to various values, including some that would be prevented by DirectX.</para>
+<para>See <ulink url="https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor">https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/attenuation-and-spotlight-factor</ulink> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightingSpotlightTests</label>
+        <link refid="d9/d39/classLightingSpotlightTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightingSpotlightTests</label>
+        <link refid="d9/d39/classLightingSpotlightTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/lighting_spotlight_tests.h" line="40" column="1" bodyfile="src/tests/lighting_spotlight_tests.h" bodystart="40" bodyend="82"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>allow_saving_</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1a08d98e671e66300d7418ccc44f67982d" prot="private" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>CreateGeometry</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1ad3e75ab08b9ea4e3a59be461f886fdab" prot="public" virt="virtual"><scope>LightingSpotlightTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>host_</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1aebe71e115995941fcadbeb75f00f0b3e" prot="public" virt="virtual"><scope>LightingSpotlightTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1acafc935b0c2104f53599621ca492beff" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>LightingSpotlightTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>LightingSpotlightTests</scope><name>SetupTest</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1a4f714f5858b52b79c46423fac0d724ab" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>Spotlight</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>LightingSpotlightTests</scope><name>TearDownTest</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1a55bbeb7ee85e5f005edb98c73bc3e2a1" prot="private" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>Test</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1a95c556587418637f6eed19e187c8641f" prot="private" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>TestFixed</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>TestSuite</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1a14d77c71dc8141f3f69abeed5f44c862" prot="private" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>vertex_buffer_cylinder_</name></member>
+      <member refid="d9/d39/classLightingSpotlightTests_1a6f7e50f202424041db94802e9e891433" prot="private" virt="non-virtual"><scope>LightingSpotlightTests</scope><name>vertex_buffer_plane_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>LightingSpotlightTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

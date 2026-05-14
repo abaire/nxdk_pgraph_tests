@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d26/structBlendOp" kind="struct" language="C++" prot="public">
+    <compoundname>BlendOp</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="df/d26/structBlendOp_1ad16d2142a42585497735cfcb703c5fa4" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* BlendOp::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>BlendOp::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_signed_component_tests.cpp" line="21" column="14" bodyfile="src/tests/texture_signed_component_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/d26/structBlendOp_1a42c5445bb3f1f11e7a7a5d4fca8e9f7d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t BlendOp::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>BlendOp::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_signed_component_tests.cpp" line="22" column="12" bodyfile="src/tests/texture_signed_component_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_signed_component_tests.cpp" line="20" column="1" bodyfile="src/tests/texture_signed_component_tests.cpp" bodystart="20" bodyend="23"/>
+    <listofallmembers>
+      <member refid="df/d26/structBlendOp_1ad16d2142a42585497735cfcb703c5fa4" prot="public" virt="non-virtual"><scope>BlendOp</scope><name>name</name></member>
+      <member refid="df/d26/structBlendOp_1a42c5445bb3f1f11e7a7a5d4fca8e9f7d" prot="public" virt="non-virtual"><scope>BlendOp</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

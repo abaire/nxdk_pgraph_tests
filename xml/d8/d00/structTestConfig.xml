@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d00/structTestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a01c995a0f2a9db99595f720e4ae4cfdb" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char * TestConfig::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>TestConfig::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/alpha_func_tests.cpp" line="8" column="14" bodyfile="src/tests/alpha_func_tests.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1ab5f1c42f8e750086e3ba7fe5ae13bcc9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestConfig::alpha_func</definition>
+        <argsstring></argsstring>
+        <name>alpha_func</name>
+        <qualifiedname>TestConfig::alpha_func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/alpha_func_tests.cpp" line="9" column="12" bodyfile="src/tests/alpha_func_tests.cpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1ada0b9c7adfe129993f361ad10665e1e7" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TestConfig::fileName</definition>
+        <argsstring></argsstring>
+        <name>fileName</name>
+        <qualifiedname>TestConfig::fileName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="44" column="14" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a3f3b8d675a38d6f5cb25adbaca85836c" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TestConfig::description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <qualifiedname>TestConfig::description</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="45" column="14" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1ae55d25ff4beb55c8e39bab17c071adaa" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TestConfig::attribute_value[2]</definition>
+        <argsstring>[2]</argsstring>
+        <name>attribute_value</name>
+        <qualifiedname>TestConfig::attribute_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_float_tests.cpp" line="46" column="9" bodyfile="src/tests/attribute_float_tests.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1af011bebd82cd27470ed5786eeb430146" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestConfig::point_params_enabled</definition>
+        <argsstring></argsstring>
+        <name>point_params_enabled</name>
+        <qualifiedname>TestConfig::point_params_enabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="15" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a11dce50052d01c51f52111b8205c74f2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestConfig::point_smooth_enabled</definition>
+        <argsstring></argsstring>
+        <name>point_smooth_enabled</name>
+        <qualifiedname>TestConfig::point_smooth_enabled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="16" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a41c7304c401b7346ee20c60c283a0240" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int TestConfig::point_size</definition>
+        <argsstring></argsstring>
+        <name>point_size</name>
+        <qualifiedname>TestConfig::point_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="17" column="7" bodyfile="src/tests/point_params_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a117ff952e32e1c7207ec2f79fec90c4c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TestConfig::use_shader</definition>
+        <argsstring></argsstring>
+        <name>use_shader</name>
+        <qualifiedname>TestConfig::use_shader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_params_tests.cpp" line="18" column="8" bodyfile="src/tests/point_params_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a7b2a1882380d5de48a30334e464bc26f" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int TestConfig::point_size_increment</definition>
+        <argsstring></argsstring>
+        <name>point_size_increment</name>
+        <qualifiedname>TestConfig::point_size_increment</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/point_size_tests.cpp" line="20" column="7" bodyfile="src/tests/point_size_tests.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d00/structTestConfig_1a5e77dfed72f4f521ff0ea89d8bb34094" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestConfig::swath_width</definition>
+        <argsstring></argsstring>
+        <name>swath_width</name>
+        <qualifiedname>TestConfig::swath_width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/swath_width_tests.cpp" line="25" column="12" bodyfile="src/tests/swath_width_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/alpha_func_tests.cpp" line="7" column="1" bodyfile="src/tests/alpha_func_tests.cpp" bodystart="7" bodyend="10"/>
+    <listofallmembers>
+      <member refid="d8/d00/structTestConfig_1ab5f1c42f8e750086e3ba7fe5ae13bcc9" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>alpha_func</name></member>
+      <member refid="d8/d00/structTestConfig_1ae55d25ff4beb55c8e39bab17c071adaa" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>attribute_value</name></member>
+      <member refid="d8/d00/structTestConfig_1a3f3b8d675a38d6f5cb25adbaca85836c" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>description</name></member>
+      <member refid="d8/d00/structTestConfig_1ada0b9c7adfe129993f361ad10665e1e7" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>fileName</name></member>
+      <member refid="d8/d00/structTestConfig_1a01c995a0f2a9db99595f720e4ae4cfdb" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>name</name></member>
+      <member refid="d8/d00/structTestConfig_1af011bebd82cd27470ed5786eeb430146" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>point_params_enabled</name></member>
+      <member refid="d8/d00/structTestConfig_1a41c7304c401b7346ee20c60c283a0240" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>point_size</name></member>
+      <member refid="d8/d00/structTestConfig_1a7b2a1882380d5de48a30334e464bc26f" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>point_size_increment</name></member>
+      <member refid="d8/d00/structTestConfig_1a11dce50052d01c51f52111b8205c74f2" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>point_smooth_enabled</name></member>
+      <member refid="d8/d00/structTestConfig_1a5e77dfed72f4f521ff0ea89d8bb34094" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>swath_width</name></member>
+      <member refid="d8/d00/structTestConfig_1a117ff952e32e1c7207ec2f79fec90c4c" prot="public" virt="non-virtual"><scope>TestConfig</scope><name>use_shader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

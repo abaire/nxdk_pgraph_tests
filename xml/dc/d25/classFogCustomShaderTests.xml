@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/d25/classFogCustomShaderTests" kind="class" language="C++" prot="public">
+    <compoundname>FogCustomShaderTests</compoundname>
+    <basecompoundref refid="d6/de7/classFogTests" prot="public" virt="non-virtual">FogTests</basecompoundref>
+    <derivedcompoundref refid="df/d53/classFogInfiniteFogCoordinateTests" prot="public" virt="non-virtual">FogInfiniteFogCoordinateTests</derivedcompoundref>
+    <derivedcompoundref refid="d4/d92/classFogVec4CoordTests" prot="public" virt="non-virtual">FogVec4CoordTests</derivedcompoundref>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dc/d25/classFogCustomShaderTests_1ab53e564f421d862a56bdb6e75687efa2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FogCustomShaderTests::FogCustomShaderTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config, std::string suite_name=&quot;Fog vsh&quot;)</argsstring>
+        <name>FogCustomShaderTests</name>
+        <qualifiedname>FogCustomShaderTests::FogCustomShaderTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>suite_name</declname>
+          <defval>&quot;Fog vsh&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_tests.h" line="55" column="3" bodyfile="src/tests/fog_tests.cpp" bodystart="217" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/d25/classFogCustomShaderTests_1a1a5a33c00a39c9310552d8371b2bd6cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void FogCustomShaderTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>FogCustomShaderTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <reimplementedby refid="df/d53/classFogInfiniteFogCoordinateTests_1af8a953821c67a553e6d799afe254611c">Initialize</reimplementedby>
+        <reimplementedby refid="d4/d92/classFogVec4CoordTests_1a61a17bb013effdf18dfb91c0e0f9fcd5">Initialize</reimplementedby>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_tests.h" line="57" column="8" bodyfile="src/tests/fog_tests.cpp" bodystart="221" bodyend="234"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FogCustomShaderTests</label>
+        <link refid="dc/d25/classFogCustomShaderTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>FogInfiniteFogCoordinateTests</label>
+        <link refid="df/d53/classFogInfiniteFogCoordinateTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>FogTests</label>
+        <link refid="d6/de7/classFogTests"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>FogVec4CoordTests</label>
+        <link refid="d4/d92/classFogVec4CoordTests"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FogCustomShaderTests</label>
+        <link refid="dc/d25/classFogCustomShaderTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>FogTests</label>
+        <link refid="d6/de7/classFogTests"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NV2AState</label>
+      </node>
+      <node id="6">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="4">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/fog_tests.h" line="53" column="1" bodyfile="src/tests/fog_tests.h" bodystart="53" bodyend="58"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>allow_saving_</name></member>
+      <member refid="d6/de7/classFogTests_1a441ffe8aa8f11999fd2a1ed29b722461" prot="protected" virt="virtual"><scope>FogCustomShaderTests</scope><name>CreateGeometry</name></member>
+      <member refid="d6/de7/classFogTests_1ab99e22734a0abdfd5e2549ec7089ab59" prot="public" virt="virtual"><scope>FogCustomShaderTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7aa269735ab5a407079449547096d885019" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_EXP</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7aa50373ce775d19a0563ff58921e502da7" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_EXP2</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7aab5bbee337fe0368bc0317be3da3eef18" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_EXP2_ABS</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7aaadd46f5a83954c0ef1583465b7988bca" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_EXP_ABS</name></member>
+      <member refid="d6/de7/classFogTests_1a51d1c507ab1c443b9c4c0d85b68d0504a6a787923233e9b3f6674a31e66cdac54" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_GEN_ABS_PLANAR</name></member>
+      <member refid="d6/de7/classFogTests_1a51d1c507ab1c443b9c4c0d85b68d0504a9c4783d8288b9a70b653f5bbfeb1b8e3" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_GEN_FOG_X</name></member>
+      <member refid="d6/de7/classFogTests_1a51d1c507ab1c443b9c4c0d85b68d0504a7309ea4c0c2b8a879d807b923f9d195e" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_GEN_PLANAR</name></member>
+      <member refid="d6/de7/classFogTests_1a51d1c507ab1c443b9c4c0d85b68d0504a7b0f99585bf61e1d91892d619d8a0b65" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_GEN_RADIAL</name></member>
+      <member refid="d6/de7/classFogTests_1a51d1c507ab1c443b9c4c0d85b68d0504ad286899e999b930f4f76a108f6aeba05" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_GEN_SPEC_ALPHA</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7aa55f8fb797f5bb944fdc56ec0b4d4561b" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_LINEAR</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7aad8f161d4734d3ad37901423808b8db05" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FOG_LINEAR_ABS</name></member>
+      <member refid="dc/d25/classFogCustomShaderTests_1ab53e564f421d862a56bdb6e75687efa2" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FogCustomShaderTests</name></member>
+      <member refid="d6/de7/classFogTests_1a51d1c507ab1c443b9c4c0d85b68d0504" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FogGenMode</name></member>
+      <member refid="d6/de7/classFogTests_1a664ec1b39babc045e37d1eb69e3c0a7a" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FogMode</name></member>
+      <member refid="d6/de7/classFogTests_1af24b0cc9959cba58c6ddcaa96561fa97" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>FogTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>host_</name></member>
+      <member refid="dc/d25/classFogCustomShaderTests_1a1a5a33c00a39c9310552d8371b2bd6cd" prot="public" virt="virtual"><scope>FogCustomShaderTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d6/de7/classFogTests_1a8c27960be4f11623d080cd07f916a6c5" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>MakeTestName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>FogCustomShaderTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>FogCustomShaderTests</scope><name>TearDownTest</name></member>
+      <member refid="d6/de7/classFogTests_1a56426412314ca7ac6d21d89b961314e4" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>TestSuite</name></member>
+      <member refid="d6/de7/classFogTests_1a00559527eb7f8aefa248ea2b14845744" prot="protected" virt="non-virtual"><scope>FogCustomShaderTests</scope><name>vertex_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>FogCustomShaderTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

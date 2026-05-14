@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/d5f/classCombinerTests" kind="class" language="C++" prot="public">
+    <compoundname>CombinerTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="df/d03/combiner__tests_8h" local="no">combiner_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="dd/d5f/classCombinerTests_1a809aa59c5cf94ed3080370277dfa4d1f" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; CombinerTests::vertex_buffers_[6]</definition>
+        <argsstring>[6]</argsstring>
+        <name>vertex_buffers_</name>
+        <qualifiedname>CombinerTests::vertex_buffers_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="37" column="19" bodyfile="src/tests/combiner_tests.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a22e1b490ddafbcb985d1aae44ccf9017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>CombinerTests::CombinerTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>CombinerTests</name>
+        <qualifiedname>CombinerTests::CombinerTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>ColorAlphaIndependence Demonstrates that setting color on a combiner register does not affect alpha.</para>
+</simplesect>
+<simplesect kind="remark"><para>Flags Tests behavior of specular_add_invert_r0, specular_add_invert_v1, and specular_clamp on final combiners.</para>
+</simplesect>
+<simplesect kind="remark"><para>Independence Demonstrates that setting a register&apos;s value in a combiner stage does not mutate the value until after it is assigned as an output. The test performs several draws where R0 is initialized to some color then both mutated and copied into R1, demonstrating that the original value of R0 is copied into R1 before being replaced with the new value.</para>
+</simplesect>
+<simplesect kind="remark"><para>Mux Tests behavior of the &quot;MUX&quot; combiner mode, in which R0.a is used to select between the AB and CD outputs.</para>
+</simplesect>
+<simplesect kind="remark"><para>UnboundTex Demonstrates that the alpha channel for unbound textures is set to 1.0.</para>
+</simplesect>
+<simplesect kind="remark"><para>AlphaFromBlue Demonstrates behavior of the &quot;blue to alpha&quot; flags.</para>
+</simplesect>
+<simplesect kind="remark"><para>CombinerOps Tests the various output operations.</para>
+</simplesect>
+<simplesect kind="remark"><para>SpecialInputs Tests the special input registers in the final combiner. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="19" column="3" bodyfile="src/tests/combiner_tests.cpp" bodystart="55" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a2de3abfaade6867f4c479256ddab858b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void CombinerTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>CombinerTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="20" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="67" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a5363aa981ea95859bd58708b75ffb585" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void CombinerTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>CombinerTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="21" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="76" bodyend="81"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a3ef2e6116c2b83fe4f427241976a62b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>CombinerTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="24" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="83" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a45d8acc9d8fd3de4b9b33b9ecaab3520" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestMux</definition>
+        <argsstring>()</argsstring>
+        <name>TestMux</name>
+        <qualifiedname>CombinerTests::TestMux</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="25" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="116" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a866efbfa119c53491269d9d2e57722f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestCombinerIndependence</definition>
+        <argsstring>()</argsstring>
+        <name>TestCombinerIndependence</name>
+        <qualifiedname>CombinerTests::TestCombinerIndependence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="26" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="196" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a0a0c2cc9d5279c662cf9c3a5673590af" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestCombinerColorAlphaIndependence</definition>
+        <argsstring>()</argsstring>
+        <name>TestCombinerColorAlphaIndependence</name>
+        <qualifiedname>CombinerTests::TestCombinerColorAlphaIndependence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="27" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="260" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1aed97f70b5906fd8c7bfefe18e8f3957e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestFlags</definition>
+        <argsstring>()</argsstring>
+        <name>TestFlags</name>
+        <qualifiedname>CombinerTests::TestFlags</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="28" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="321" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1af9fdf9f549591cdee186e1d09402baf1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestUnboundTexture</definition>
+        <argsstring>()</argsstring>
+        <name>TestUnboundTexture</name>
+        <qualifiedname>CombinerTests::TestUnboundTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="29" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a38884cbb9a270b1bf0db968f24c9c9f0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestUnboundTextureSamplers</definition>
+        <argsstring>()</argsstring>
+        <name>TestUnboundTextureSamplers</name>
+        <qualifiedname>CombinerTests::TestUnboundTextureSamplers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="30" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="406" bodyend="483"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1ae7a631721be2db68d5907568f5379e03" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestAlphaFromBlue</definition>
+        <argsstring>()</argsstring>
+        <name>TestAlphaFromBlue</name>
+        <qualifiedname>CombinerTests::TestAlphaFromBlue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="32" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="485" bodyend="593"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1ab316b0ddccf1679ef87b86e29949e444" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestCombinerOps</definition>
+        <argsstring>()</argsstring>
+        <name>TestCombinerOps</name>
+        <qualifiedname>CombinerTests::TestCombinerOps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="33" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="595" bodyend="697"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/d5f/classCombinerTests_1a943e7de2b9f2ea0da3efd25d98425657" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CombinerTests::TestFinalCombinerSpecialInputs</definition>
+        <argsstring>()</argsstring>
+        <name>TestFinalCombinerSpecialInputs</name>
+        <qualifiedname>CombinerTests::TestFinalCombinerSpecialInputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/combiner_tests.h" line="34" column="8" bodyfile="src/tests/combiner_tests.cpp" bodystart="699" bodyend="818"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior of NV097_SET_COMBINER_* and NV097_SET_SPECULAR_* final combiner operations. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>CombinerTests</label>
+        <link refid="dd/d5f/classCombinerTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>CombinerTests</label>
+        <link refid="dd/d5f/classCombinerTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/combiner_tests.h" line="17" column="1" bodyfile="src/tests/combiner_tests.h" bodystart="17" bodyend="38"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>allow_saving_</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a22e1b490ddafbcb985d1aae44ccf9017" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>CombinerTests</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a3ef2e6116c2b83fe4f427241976a62b9" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>CreateGeometry</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a5363aa981ea95859bd58708b75ffb585" prot="public" virt="virtual"><scope>CombinerTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>host_</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a2de3abfaade6867f4c479256ddab858b" prot="public" virt="virtual"><scope>CombinerTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a40546218e5f7324690e0455706694763" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a38b931cc507a7ca4c96d09b906f64bf3" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>CombinerTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>CombinerTests</scope><name>TearDownTest</name></member>
+      <member refid="dd/d5f/classCombinerTests_1ae7a631721be2db68d5907568f5379e03" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestAlphaFromBlue</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a0a0c2cc9d5279c662cf9c3a5673590af" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestCombinerColorAlphaIndependence</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a866efbfa119c53491269d9d2e57722f2" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestCombinerIndependence</name></member>
+      <member refid="dd/d5f/classCombinerTests_1ab316b0ddccf1679ef87b86e29949e444" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestCombinerOps</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a943e7de2b9f2ea0da3efd25d98425657" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestFinalCombinerSpecialInputs</name></member>
+      <member refid="dd/d5f/classCombinerTests_1aed97f70b5906fd8c7bfefe18e8f3957e" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestFlags</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a45d8acc9d8fd3de4b9b33b9ecaab3520" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestMux</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>CombinerTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>CombinerTests</scope><name>TestSuite</name></member>
+      <member refid="dd/d5f/classCombinerTests_1af9fdf9f549591cdee186e1d09402baf1" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestUnboundTexture</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a38884cbb9a270b1bf0db968f24c9c9f0" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>TestUnboundTextureSamplers</name></member>
+      <member refid="dd/d5f/classCombinerTests_1a809aa59c5cf94ed3080370277dfa4d1f" prot="private" virt="non-virtual"><scope>CombinerTests</scope><name>vertex_buffers_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>CombinerTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

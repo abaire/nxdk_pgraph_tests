@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d67/classLogger" kind="class" language="C++" prot="public">
+    <compoundname>Logger</compoundname>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="db/d67/classLogger_1a2781cec627b2aacc1c7754e6a4b99f20" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Logger::log_path_</definition>
+        <argsstring></argsstring>
+        <name>log_path_</name>
+        <qualifiedname>Logger::log_path_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/logger.h" line="16" column="15" bodyfile="src/logger.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="db/d67/classLogger_1ad78d095540ab03207306101cc04eb6d5" prot="private" static="yes" mutable="no">
+        <type><ref refid="db/d67/classLogger" kindref="compound">Logger</ref> *</type>
+        <definition>Logger * Logger::singleton_</definition>
+        <argsstring></argsstring>
+        <name>singleton_</name>
+        <qualifiedname>Logger::singleton_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/logger.h" line="18" column="17" bodyfile="src/logger.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="db/d67/classLogger_1a2713330e1365a031b17a1b88e67c88ec" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Logger::Initialize</definition>
+        <argsstring>(const std::string &amp;log_path, bool truncate_log)</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>Logger::Initialize</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>log_path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>truncate_log</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/logger.h" line="9" column="15" bodyfile="src/logger.cpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d67/classLogger_1a6b8ef01cad46c6883e6794f51e4ed5cd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ofstream</type>
+        <definition>std::ofstream Logger::Log</definition>
+        <argsstring>()</argsstring>
+        <name>Log</name>
+        <qualifiedname>Logger::Log</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/logger.h" line="11" column="24" bodyfile="src/logger.cpp" bodystart="23" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="db/d67/classLogger_1acc2101a1ed61b773eae89043a1ede341" prot="private" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Logger::Logger</definition>
+        <argsstring>(const std::string &amp;path, bool truncate_log=false)</argsstring>
+        <name>Logger</name>
+        <qualifiedname>Logger::Logger</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>truncate_log</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/logger.h" line="14" column="12" bodyfile="src/logger.cpp" bodystart="7" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/logger.h" line="7" column="1" bodyfile="src/logger.h" bodystart="7" bodyend="19"/>
+    <listofallmembers>
+      <member refid="db/d67/classLogger_1a2713330e1365a031b17a1b88e67c88ec" prot="public" virt="non-virtual"><scope>Logger</scope><name>Initialize</name></member>
+      <member refid="db/d67/classLogger_1a6b8ef01cad46c6883e6794f51e4ed5cd" prot="public" virt="non-virtual"><scope>Logger</scope><name>Log</name></member>
+      <member refid="db/d67/classLogger_1a2781cec627b2aacc1c7754e6a4b99f20" prot="private" virt="non-virtual"><scope>Logger</scope><name>log_path_</name></member>
+      <member refid="db/d67/classLogger_1acc2101a1ed61b773eae89043a1ede341" prot="private" virt="non-virtual"><scope>Logger</scope><name>Logger</name></member>
+      <member refid="db/d67/classLogger_1ad78d095540ab03207306101cc04eb6d5" prot="private" virt="non-virtual"><scope>Logger</scope><name>singleton_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

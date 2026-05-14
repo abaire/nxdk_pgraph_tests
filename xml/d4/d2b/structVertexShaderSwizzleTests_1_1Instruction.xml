@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction" kind="struct" language="C++" prot="public">
+    <compoundname>VertexShaderSwizzleTests::Instruction</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1a64c61283412d5fb8b0f7d3e75a6c2141" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderSwizzleTests::Instruction::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>VertexShaderSwizzleTests::Instruction::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_swizzle_tests.h" line="13" column="16" bodyfile="src/tests/vertex_shader_swizzle_tests.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1af1b699d95612bc609a1a060b5747096d" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderSwizzleTests::Instruction::mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <qualifiedname>VertexShaderSwizzleTests::Instruction::mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_swizzle_tests.h" line="14" column="16" bodyfile="src/tests/vertex_shader_swizzle_tests.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1ab81b61811ea0e3e73b34a35ffa8e08aa" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderSwizzleTests::Instruction::swizzle</definition>
+        <argsstring></argsstring>
+        <name>swizzle</name>
+        <qualifiedname>VertexShaderSwizzleTests::Instruction::swizzle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_swizzle_tests.h" line="15" column="16" bodyfile="src/tests/vertex_shader_swizzle_tests.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1a40c20db41d3a8d8d54ba2f47dc824280" prot="public" static="no" mutable="no">
+        <type>const uint32_t</type>
+        <definition>const uint32_t VertexShaderSwizzleTests::Instruction::instruction[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>instruction</name>
+        <qualifiedname>VertexShaderSwizzleTests::Instruction::instruction</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_swizzle_tests.h" line="16" column="20" bodyfile="src/tests/vertex_shader_swizzle_tests.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/vertex_shader_swizzle_tests.h" line="12" column="3" bodyfile="src/tests/vertex_shader_swizzle_tests.h" bodystart="12" bodyend="17"/>
+    <listofallmembers>
+      <member refid="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1a40c20db41d3a8d8d54ba2f47dc824280" prot="public" virt="non-virtual"><scope>VertexShaderSwizzleTests::Instruction</scope><name>instruction</name></member>
+      <member refid="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1af1b699d95612bc609a1a060b5747096d" prot="public" virt="non-virtual"><scope>VertexShaderSwizzleTests::Instruction</scope><name>mask</name></member>
+      <member refid="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1a64c61283412d5fb8b0f7d3e75a6c2141" prot="public" virt="non-virtual"><scope>VertexShaderSwizzleTests::Instruction</scope><name>name</name></member>
+      <member refid="d4/d2b/structVertexShaderSwizzleTests_1_1Instruction_1ab81b61811ea0e3e73b34a35ffa8e08aa" prot="public" virt="non-virtual"><scope>VertexShaderSwizzleTests::Instruction</scope><name>swizzle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

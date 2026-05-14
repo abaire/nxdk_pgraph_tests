@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/d03/structZPassPixelCountTests_1_1ZPassReport" kind="struct" language="C++" prot="private">
+    <compoundname>ZPassPixelCountTests::ZPassReport</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dd/d03/structZPassPixelCountTests_1_1ZPassReport_1a03488017b6fce280e77aa929a6b6e111" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t ZPassPixelCountTests::ZPassReport::timestamp</definition>
+        <argsstring></argsstring>
+        <name>timestamp</name>
+        <qualifiedname>ZPassPixelCountTests::ZPassReport::timestamp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="21" column="14" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d03/structZPassPixelCountTests_1_1ZPassReport_1a2803b5aae67416ba1951288a6093a17e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ZPassPixelCountTests::ZPassReport::report</definition>
+        <argsstring></argsstring>
+        <name>report</name>
+        <qualifiedname>ZPassPixelCountTests::ZPassReport::report</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="22" column="14" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/d03/structZPassPixelCountTests_1_1ZPassReport_1a12640712c974774b455b5017244764b8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ZPassPixelCountTests::ZPassReport::reserved</definition>
+        <argsstring></argsstring>
+        <name>reserved</name>
+        <qualifiedname>ZPassPixelCountTests::ZPassReport::reserved</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/zpass_pixel_count_tests.h" line="23" column="14" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/zpass_pixel_count_tests.h" line="20" column="3" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="20" bodyend="24"/>
+    <listofallmembers>
+      <member refid="dd/d03/structZPassPixelCountTests_1_1ZPassReport_1a2803b5aae67416ba1951288a6093a17e" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests::ZPassReport</scope><name>report</name></member>
+      <member refid="dd/d03/structZPassPixelCountTests_1_1ZPassReport_1a12640712c974774b455b5017244764b8" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests::ZPassReport</scope><name>reserved</name></member>
+      <member refid="dd/d03/structZPassPixelCountTests_1_1ZPassReport_1a03488017b6fce280e77aa929a6b6e111" prot="public" virt="non-virtual"><scope>ZPassPixelCountTests::ZPassReport</scope><name>timestamp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
