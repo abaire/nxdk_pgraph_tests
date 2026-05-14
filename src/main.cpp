@@ -276,6 +276,16 @@ int main() {
   TestHost host(ftp_logger, kFramebufferWidth, kFramebufferHeight, kTextureWidth, kTextureHeight);
   RegisterSuites(host, config, test_suites, config.output_directory_path(), ftp_logger);
 
+  if (config.shard_count() > 0) {
+    std::vector<std::shared_ptr<TestSuite>> sharded_suites;
+    for (uint32_t i = 0; i < test_suites.size(); ++i) {
+      if (i % config.shard_count() == config.shard_index()) {
+        sharded_suites.push_back(test_suites[i]);
+      }
+    }
+    test_suites = sharded_suites;
+  }
+
 #ifdef DUMP_CONFIG_FILE
   debugPrint("Dumping config file and exiting due to DUMP_CONFIG_FILE option.\n");
   DumpConfig(config, test_suites);
