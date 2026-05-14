@@ -31,6 +31,8 @@ class ImageBlitTests : public TestSuite {
   void TestWithClipRectangle(const BlitTest& test, uint32_t clip_x, uint32_t clip_y, uint32_t clip_w, uint32_t clip_h);
   void TestBlitOverPushbuffer(const std::string& name, const BlitTest& test);
   void TestBlitPastWidth(const std::string& name);
+  enum class OverlapCorner { TopLeft, TopRight, BottomLeft, BottomRight };
+  void TestOverlapBarelyInclusive(const std::string& name, OverlapCorner corner, bool overlap);
 
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
                  uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,
