@@ -52,6 +52,7 @@ class ImageBlitTests : public TestSuite {
   //! Reproduces an issue where blitting, rendering, then blitting again causes corruption.
   //! https://github.com/xemu-project/xemu/issues/2199
   void TestBlitRenderBlit();
+  void TestXemuScaledSurfaceUploadFilter();
 
   uint32_t image_pitch_{0};
   uint32_t image_width_{0};

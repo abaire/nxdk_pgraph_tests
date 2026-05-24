@@ -33,6 +33,7 @@ static constexpr char kBlitRenderBlitTest[] = "BlitRenderBlit";
 static constexpr char kOverlapFIFOTest[] = "OverlapFIFO";
 #endif
 static constexpr char kBlitPastWidthTest[] = "BlitBeyondWidth";
+static constexpr char kXemuScaledSurfaceUploadFilterTest[] = "XemuScaledSurfaceUploadFilter";
 
 #define SOURCE_X 8
 #define SOURCE_Y 8
@@ -185,6 +186,13 @@ static std::string MakeTestName(uint32_t clip_x, uint32_t clip_y, uint32_t clip_
  * @tc Overlap_BR_Inside
  *   Tests the boundary condition of xemu's 2D blit overlap detection by performing a 1x1 pixel blit exactly inside the
  *   bottom-right corner of a 3D render surface.
+ *
+ * @tc XemuScaledSurfaceUploadFilter
+ *   Writes 1-pixel-wide alternating R/B vertical stripes to the framebuffer via CPU, then issues a GPU draw to
+ *   trigger xemu's internal surface upload (pgraph_vk_upload_surface_data). After GPU completion the framebuffer
+ *   is read back via CPU, which triggers xemu's download path. At scale > 1x the NEAREST+NEAREST round-trip
+ *   preserves exact R/B values, while any other filtering produces blended intermediate values that fail the
+ *   channel-purity check. At scale == 1x no upscale occurs and the test passes trivially.
  */
 ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Image blit", config) {
@@ -239,6 +247,7 @@ ImageBlitTests::ImageBlitTests(TestHost& host, std::string output_dir, const Con
   tests_[kDirtyOverlappedDestSurfaceTest] = [this]() { TestDirtyOverlappedDestinationSurface(); };
   tests_[kBlitRenderBlitTest] = [this]() { TestBlitRenderBlit(); };
   tests_[kBlitPastWidthTest] = [this]() { TestBlitPastWidth(kBlitPastWidthTest); };
+  tests_[kXemuScaledSurfaceUploadFilterTest] = [this]() { TestXemuScaledSurfaceUploadFilter(); };
 }
 
 void ImageBlitTests::Initialize() {
@@ -835,6 +844,79 @@ void ImageBlitTests::TestBlitRenderBlit() {
   pb_draw_text_screen();
 
   FinishDraw(kBlitRenderBlitTest);
+}
+
+void ImageBlitTests::TestXemuScaledSurfaceUploadFilter() {
+  static constexpr uint32_t kTestW = 128;
+  static constexpr uint32_t kTestH = 128;
+  static constexpr uint32_t kColorA = 0x00FF0000;  // red
+  static constexpr uint32_t kColorB = 0x000000FF;  // blue
+
+  host_.PrepareDraw(0xFF111111);
+
+  auto* fb = static_cast<uint32_t*>(pb_agp_access(pb_back_buffer()));
+  const uint32_t pitch_pixels = pb_back_buffer_pitch() / 4;
+  const uint32_t start_x = (host_.GetFramebufferWidth() - kTestW) / 2;
+  const uint32_t start_y = (host_.GetFramebufferHeight() - kTestH) / 2;
+
+  uint32_t row_offset = start_y * pitch_pixels + start_x;
+  for (uint32_t y = 0; y < kTestH; ++y, row_offset += pitch_pixels) {
+    for (uint32_t x = 0; x < kTestW; ++x) {
+      fb[row_offset + x] = (x % 2 == 0) ? kColorA : kColorB;
+    }
+  }
+
+  // Minimal GPU draw to trigger the surface upload and set draw_dirty.
+  // Placed in the bottom-right corner to avoid the test region.
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.SetDiffuse(0.f, 0.f, 0.f, 0.f);
+  host_.SetScreenVertex(630.f, 460.f, 0.f);
+  host_.SetScreenVertex(634.f, 460.f, 0.f);
+  host_.SetScreenVertex(634.f, 464.f, 0.f);
+  host_.SetScreenVertex(630.f, 464.f, 0.f);
+  host_.End();
+
+  host_.PBKitBusyWait();
+
+  bool pass = true;
+  uint32_t fail_count = 0;
+  uint32_t first_actual = 0;
+  uint32_t first_expected = 0;
+  static constexpr uint32_t kMaxLoggedFailures = 16;
+
+  row_offset = start_y * pitch_pixels + start_x;
+  for (uint32_t y = 0; y < kTestH; ++y, row_offset += pitch_pixels) {
+    for (uint32_t x = 0; x < kTestW; ++x) {
+      const uint32_t actual = fb[row_offset + x];
+      const bool expect_red = (x % 2 == 0);
+      const uint32_t expected = (expect_red ? kColorA : kColorB) & 0xFFFFFF;
+      const bool pixel_pass = (actual & 0xFFFFFF) == expected;
+
+      if (!pixel_pass) {
+        if (fail_count < kMaxLoggedFailures) {
+          PrintMsg("FAIL [%u,%u]: expected %s, got 0x%06X\n", x, y, expect_red ? "RED" : "BLUE", actual & 0xFFFFFF);
+        }
+        if (fail_count == 0) {
+          first_actual = actual & 0xFFFFFF;
+          first_expected = expected;
+        }
+        pass = false;
+        ++fail_count;
+      }
+    }
+  }
+
+  pb_print("%s\n", kXemuScaledSurfaceUploadFilterTest);
+  pb_print("1px R/B stripes: CPU write -> GPU draw -> readback\n");
+  pb_print("Result: %s\n", pass ? "PASS" : "FAIL");
+  if (!pass) {
+    pb_print("%u failures, first: exp 0x%06X got 0x%06X\n", fail_count, first_expected, first_actual);
+  }
+  pb_draw_text_screen();
+
+  FinishDraw(kXemuScaledSurfaceUploadFilterTest);
 }
 
 static std::string OperationName(uint32_t operation) {
