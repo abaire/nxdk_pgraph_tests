@@ -23,10 +23,11 @@ class TextureRenderUpdateInPlaceTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  // Tests rendering to a surface that is also used as an input texture for the render.
   void Test();
 
  private:
-  struct s_CtxDma texture_target_ctx_{};
+  struct s_CtxDma texture_target_ctx_ {};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;

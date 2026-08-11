@@ -14,6 +14,8 @@
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
+static constexpr char kRenderTextureLoopTest[] = "RenderTextureLoop";
+
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
 const uint32_t kDefaultDMAColorChannel = 9;
@@ -64,6 +66,8 @@ TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string o
     std::string name = MakePalettizedTestName(size);
     tests_[name] = [this, size]() { TestPalettized(size); };
   }
+
+  tests_[kRenderTextureLoopTest] = [this] { TestRenderTextureLoop(); };
 }
 
 void TextureRenderTargetTests::Initialize() {
@@ -270,6 +274,74 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
   pb_draw_text_screen();
 
   FinishDraw(test_name);
+}
+
+void TextureRenderTargetTests::TestRenderTextureLoop() {
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  host_.PrepareDraw(0xFF505050);
+
+  static constexpr uint32_t kTextureSize = 32;
+  static constexpr auto kSurfaceFormat = TestHost::SCF_A8R8G8B8;
+
+  auto update_texture = [this](uint32_t color) {
+    // The surface size is intentionally mismatched wrt. its use as a texture to bypass optimizations in xemu that do
+    // not exhibit xemu#2902.
+    host_.RenderToSurfaceStart(host_.GetTextureMemoryForStage(0), kSurfaceFormat, kTextureSize, kTextureSize * 2);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+    host_.SetDiffuse(color);
+    host_.DrawScreenQuad(0.0, 0.0, kTextureSize, kTextureSize * 2, 1.f);
+
+    host_.RenderToSurfaceEnd();
+  };
+
+  static constexpr float kSpacing = 16.f;
+  static constexpr float kLeft = 32.f;
+  static constexpr float kTop = 64.f;
+  static constexpr float kTextColumn = 6;
+
+  auto y = kTop;
+  auto text_row = 2;
+  static constexpr auto kTextRowInc = 2;
+
+  static constexpr struct {
+    uint32_t color;
+    const char *name;
+  } kTestCases[] = {
+      {0xFFFF0000, "Blue"},
+      {0xFF00FF00, "Green"},
+      {0xFF0000FF, "Red"},
+  };
+  for (const auto &test_case : kTestCases) {
+    update_texture(test_case.color);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+    auto &texture_stage = host_.GetTextureStage(0);
+    texture_stage.SetEnabled();
+    texture_stage.SetFormat(GetTextureFormatInfo(TextureFormatForSurfaceFormat(kSurfaceFormat, true)));
+    texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+    host_.SetupTextureStages();
+
+    host_.DrawTexturedScreenQuad(kLeft, y, kLeft + kTextureSize, y + kTextureSize, 0.f, kTextureSize, kTextureSize);
+
+    texture_stage.SetEnabled(false);
+    host_.SetupTextureStages();
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+    pb_printat(text_row, kTextColumn, "%s\n", test_case.name);
+    y += kTextureSize + kSpacing;
+    text_row += kTextRowInc;
+  }
+
+  pb_printat(0, 0, "%s\n", kRenderTextureLoopTest);
+  pb_draw_text_screen();
+
+  FinishDraw(kRenderTextureLoopTest);
 }
 
 std::string TextureRenderTargetTests::MakeTestName(const TextureFormatInfo &texture_format) {

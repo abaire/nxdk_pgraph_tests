@@ -17,6 +17,16 @@ class TextureCPUUpdateTests : public TestSuite {
 
   void TestRGBA();
   void TestPalettized();
+
+  //! Tests reuse of a texture across multiple draws in a single frame with CPU modification performed between each
+  //! draw.
+  void TestMultipleSwatches();
+
+ private:
+  struct s_CtxDma semaphore_dma_ctx_ {};
+  struct s_CtxDma monochrome_ctx_ {};
+
+  uint32_t* semaphore_context_object_{nullptr};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_CPU_UPDATE_TESTS_H
