@@ -27,13 +27,17 @@ class TextureRenderTargetTests : public TestSuite {
   void Test(const TextureFormatInfo &texture_format);
   void TestPalettized(TestHost::PaletteSize size);
 
+  //! Tests behavior when rendering to a surface, using it to texture geometry, then updating the same surface and
+  //! texturing different geometry.
+  void TestRenderTextureLoop();
+
   void ResetAndDrawFromRenderTarget() const;
 
   static std::string MakeTestName(const TextureFormatInfo &texture_format);
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
 
  private:
-  struct s_CtxDma texture_target_ctx_{};
+  struct s_CtxDma texture_target_ctx_ {};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;
