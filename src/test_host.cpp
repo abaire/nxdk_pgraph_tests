@@ -39,24 +39,29 @@ using namespace XboxMath;
 namespace {
 
 void AssertCreateDirectoryLastError() {
-  switch (GetLastError()) {
+  auto err = GetLastError();
+  switch (err) {
     case ERROR_ALREADY_EXISTS:
       break;
 
     case ERROR_PATH_NOT_FOUND:
-      ASSERT(!"Failed to create output directory: ERROR_PATH_NOT_FOUND");
+      ASSERT(!"Failed to create directory: ERROR_PATH_NOT_FOUND");
       break;
 
     case ERROR_ACCESS_DENIED:
-      ASSERT(!"Failed to create output directory: ERROR_ACCESS_DENIED");
+      ASSERT(!"Failed to create directory: ERROR_ACCESS_DENIED");
       break;
 
     case ERROR_FILENAME_EXCED_RANGE:
-      ASSERT(!"Failed to create output directory: ERROR_FILENAME_EXCED_RANGE");
+      ASSERT(!"Failed to create directory: ERROR_FILENAME_EXCED_RANGE");
+      break;
+
+    case ERROR_DISK_FULL:
+      ASSERT(!"Failed to create directory: ERROR_DISK_FULL");
       break;
 
     default:
-      ASSERT(!"Failed to create output directory.");
+      ASSERT(!"Failed to create directory");
   }
 }
 
