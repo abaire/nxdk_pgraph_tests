@@ -16,6 +16,7 @@ class AlphaFuncTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests the specified alpha test comparison function with alpha testing enabled or disabled.
   void Test(const std::string &name, uint32_t alpha_func, bool enable);
 
   void Draw(float red, float green, float blue, float left_alpha, float right_alpha, float top, float bottom) const;

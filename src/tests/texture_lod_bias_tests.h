@@ -13,6 +13,7 @@ class TextureLodBiasTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests texture mipmap level-of-detail (LOD) bias filtering values.
   void Test();
 };
 

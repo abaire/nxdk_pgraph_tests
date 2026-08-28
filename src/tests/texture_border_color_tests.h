@@ -15,6 +15,7 @@ class TextureBorderColorTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests texture border color rendering across various texture formats.
   void Test();
 };
 

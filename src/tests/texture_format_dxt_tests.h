@@ -6,6 +6,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests DXT1, DXT3, and DXT5 compressed texture decompression and mipmapping.
+ */
 class TextureFormatDXTTests : public TestSuite {
  public:
   enum class CompressedTextureFormat {
@@ -19,7 +22,10 @@ class TextureFormatDXTTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests decoding and rendering a DXT-compressed texture file.
   void Test(const char *filename, CompressedTextureFormat texture_format);
+
+  //! Tests mipmapped DXT-compressed texture decoding across LOD levels.
   void TestMipmap(const char *filename, CompressedTextureFormat texture_format);
   static std::string MakeTestName(const std::string &filename, CompressedTextureFormat texture_format,
                                   bool mipmap = false);

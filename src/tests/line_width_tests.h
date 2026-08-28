@@ -7,7 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-// Tests behavior of 0x380 - glLineWidth
+/**
+ * Tests line width rasterization settings (NV097_SET_LINE_WIDTH / 0x380).
+ */
 class LineWidthTests : public TestSuite {
  public:
   LineWidthTests(TestHost& host, std::string output_dir, const Config& config);
@@ -19,6 +21,7 @@ class LineWidthTests : public TestSuite {
   typedef uint32_t fixed_t;
 
  private:
+  //! Tests line rasterization with specified line width and filled polygon outline mode.
   void Test(const std::string& name, bool fill, fixed_t line_width);
 };
 

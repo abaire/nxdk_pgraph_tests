@@ -30,11 +30,16 @@ class ZPassPixelCountTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests basic occlusion query ZPASS pixel counting via NV097_GET_REPORT.
   void Test();
 
+  //! Tests ZPASS pixel counting for fixed-function point primitives of varying sizes.
   void TestPointSize(uint32_t point_size);
+
+  //! Tests ZPASS pixel counting for programmable shader point primitives of varying sizes.
   void TestPointSizeProgrammable(uint32_t point_size);
 
+  //! Tests ZPASS pixel counting for line primitives of varying widths.
   void TestLineWidth(uint32_t line_width);
 
  private:

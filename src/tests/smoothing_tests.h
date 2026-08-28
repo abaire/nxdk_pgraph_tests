@@ -8,7 +8,9 @@
 #include "test_suite.h"
 #include "vertex_buffer.h"
 
-// Tests behavior when lighting is enabled and color components are requested from various sources.
+/**
+ * Tests line smoothing and antialiasing control registers (NV097_SET_SMOOTH_CONTROL).
+ */
 class SmoothingTests : public TestSuite {
  public:
   enum DrawMode {
@@ -23,5 +25,6 @@ class SmoothingTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests primitive smoothing and antialiasing with the given smooth control flags.
   void Test(const std::string& name, uint32_t smooth_control);
 };

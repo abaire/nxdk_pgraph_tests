@@ -35,6 +35,8 @@ class StencilTests : public TestSuite {
 
  private:
   void CreateGeometry(const float side_length, const float r, const float g, const float b);
+
+  //! Tests stencil buffer operations (ZPASS, ZFAIL, FAIL) and reference value interactions.
   void Test(const StencilParams &params);
 
   void AddTestEntry(const StencilParams &params);

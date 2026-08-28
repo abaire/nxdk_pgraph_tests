@@ -7,6 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests vertex shader execution independence between MAC and ILU calculation pipelines.
+ */
 class VertexShaderIndependenceTests : public TestSuite {
  public:
   VertexShaderIndependenceTests(TestHost& host, std::string output_dir, const Config& config);
@@ -16,7 +19,10 @@ class VertexShaderIndependenceTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  //! Tests parallel execution and data hazard independence between MAC and ILU pipelines.
   void TestMACILUIndependence();
+
+  //! Tests vertex shader instructions generating multiple simultaneous output register writes.
   void TestMultiOutput();
 };
 

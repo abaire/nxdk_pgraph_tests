@@ -12,6 +12,7 @@ class BlendSurfaceTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests alpha blending with the given blend function and factors against the specified surface color format.
   void Test(const std::string &name, TestHost::SurfaceColorFormat surface_format, uint32_t blend_func, uint32_t sfactor,
             uint32_t dfactor);
 

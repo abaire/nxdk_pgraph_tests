@@ -14,7 +14,9 @@ class VertexBuffer;
 
 using namespace PBKitPlusPlus;
 
-// Tests two-sided lighting.
+/**
+ * Tests two-sided lighting behavior and back-facing polygon material color lighting calculations.
+ */
 class LightingTwoSidedTests : public TestSuite {
  public:
   LightingTwoSidedTests(TestHost& host, std::string output_dir, const Config& config);
@@ -23,6 +25,7 @@ class LightingTwoSidedTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests two-sided lighting evaluation on front-facing and back-facing polygon geometry.
   void Test();
 
  private:

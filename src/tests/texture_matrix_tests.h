@@ -7,6 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests texture transformation matrix operations (NV097_SET_TEXTURE_MATRIX).
+ */
 class TextureMatrixTests : public TestSuite {
  public:
   TextureMatrixTests(TestHost &host, std::string output_dir, const Config &config);
@@ -15,6 +18,8 @@ class TextureMatrixTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests texture coordinate transformations with the given 4x4 matrix.
   void Test(const char *test_name, const matrix4_t &matrix);
 };
 

@@ -7,6 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests texture coordinate generation with transformation matrices.
+ */
 class TexgenMatrixTests : public TestSuite {
  public:
   TexgenMatrixTests(TestHost &host, std::string output_dir, const Config &config);
@@ -16,6 +19,7 @@ class TexgenMatrixTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  //! Tests texture coordinate generation using the given transformation matrix and generation mode.
   void Test(const std::string &test_name, const matrix4_t &matrix, TextureStage::TexGen gen_mode);
 };
 

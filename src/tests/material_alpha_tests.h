@@ -5,6 +5,9 @@
 
 class TestHost;
 
+/**
+ * Tests material alpha source and modulation settings in the fixed-function lighting pipeline.
+ */
 class MaterialAlphaTests : public TestSuite {
  public:
   MaterialAlphaTests(TestHost& host, std::string output_dir, const Config& config);
@@ -14,6 +17,8 @@ class MaterialAlphaTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests material alpha calculations with the specified diffuse color source and material alpha value.
   void Test(uint32_t diffuse_source, float material_alpha);
 
   static std::string MakeTestName(uint32_t diffuse_source, float material_alpha);

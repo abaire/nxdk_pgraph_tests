@@ -17,6 +17,7 @@ class DegenerateBeginEndTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests issuing a Begin command without a corresponding End command before state changes.
   void TestBeginWithoutEnd();
 };
 

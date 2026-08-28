@@ -34,9 +34,12 @@ class MaterialColorSourceTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests material color source selection (material, diffuse, specular) and emissive color contributions with
+  //! lighting.
   void Test(const std::string& name, SourceMode source_mode, const XboxMath::vector_t& material_emission,
             uint32_t num_lights = 1);
 
+  //! Tests material emission color contributions to scene lighting.
   void TestEmissive(const std::string& name, const XboxMath::vector_t& material_emission);
 
   static std::string MakeTestName(SourceMode source_mode);

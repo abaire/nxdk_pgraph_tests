@@ -22,5 +22,6 @@ class ViewportTests : public TestSuite {
   ViewportTests(TestHost &host, std::string output_dir, const Config &config);
 
  private:
+  //! Tests viewport offset and scale transformations across fixed-function and programmable pipelines.
   void Test(const Viewport &vp);
 };

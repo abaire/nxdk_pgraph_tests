@@ -69,6 +69,8 @@ class AttributeCarryoverTests : public TestSuite {
 
  private:
   void CreateGeometry(TestHost::DrawPrimitive primitive);
+
+  //! Tests vertex attribute carryover for the specified attribute, primitive type, and draw configuration.
   void Test(TestHost::DrawPrimitive primitive, Attribute test_attribute, const TestConfig &config);
 
   static std::string MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,

@@ -35,6 +35,8 @@ class LightingNormalTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests lighting evaluation when normals are explicitly set vs carried over across vertices.
   void Test(bool set_normal, const float* normal, DrawMode draw_mode);
 
   static std::string MakeTestName(bool set_normal, const float* normal, DrawMode draw_mode);

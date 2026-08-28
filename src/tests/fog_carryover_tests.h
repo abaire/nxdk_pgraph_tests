@@ -21,7 +21,10 @@ class FogCarryoverTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests fog coordinate carryover across consecutive draw calls.
   void Test();
+
+  //! Tests fog coordinate carryover for a specific primitive type.
   void TestPrimitive(const std::string& name, TestHost::DrawPrimitive primitive);
 };
 

@@ -18,6 +18,7 @@ class InlineArraySizeMismatchTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests NV097_INLINE_ARRAY submission when trailing data contains an incomplete vertex definition.
   void Test();
 };
 

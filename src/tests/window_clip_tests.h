@@ -11,6 +11,9 @@ namespace PBKitPlusPlus {
 class VertexBuffer;
 }
 
+/**
+ * Tests hardware window clip regions (inclusive and exclusive multi-region clipping).
+ */
 class WindowClipTests : public TestSuite {
  public:
   struct ClipRect {
@@ -25,7 +28,10 @@ class WindowClipTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests window clipping with inclusive/exclusive regions and evaluation order.
   void Test(bool clip_exclusive, bool swap_order, const ClipRect &clip1, const ClipRect &clip2);
+
+  //! Tests window clipping regions applied to offscreen render targets.
   void TestRenderTarget(bool clip_exclusive, bool swap_order, const ClipRect &clip1, const ClipRect &clip2);
 
   void Draw(bool clip_exclusive, bool swap_order, uint32_t c1_left, uint32_t c1_top, uint32_t c1_right,

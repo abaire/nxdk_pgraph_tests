@@ -13,6 +13,7 @@ class PointSpriteTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests point sprite smoothing in combination with hardware alpha testing.
   void TestAlphaTest();
 };
 

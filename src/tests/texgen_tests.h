@@ -7,6 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests texture coordinate generation modes (EYE_LINEAR, OBJECT_LINEAR, NORMAL_MAP, REFLECTION_MAP, etc.).
+ */
 class TexgenTests : public TestSuite {
  public:
   TexgenTests(TestHost& host, std::string output_dir, const Config& config);
@@ -16,6 +19,7 @@ class TexgenTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  //! Tests texture coordinate generation with the specified TexGen mode.
   void Test(TextureStage::TexGen gen_mode);
 
   static std::string MakeTestName(TextureStage::TexGen mode);

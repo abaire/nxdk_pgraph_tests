@@ -11,6 +11,7 @@ class TextureWrapModeTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests texture coordinate wrapping modes on cylinder geometry.
   void TestCylinderWrapping();
 };
 

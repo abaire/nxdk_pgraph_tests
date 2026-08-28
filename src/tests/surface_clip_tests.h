@@ -25,11 +25,16 @@ class SurfaceClipTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests surface clipping rectangles with the specified surface color format.
   void Test(const std::string &name, const ClipRect &rect, TestHost::SurfaceColorFormat color_format);
+
+  //! Tests surface clipping rectangles on non-framebuffer render target surfaces.
   void TestRenderTarget(const std::string &name, const ClipRect &rect);
 
+  //! Tests surface clip boundary calculations and offset handling.
   void TestXemuBug420();
 
+  //! Tests that debug text rendering respects active surface clipping boundaries.
   void TestDebugTextIsClipped();
 
   void DrawTestImage(const ClipRect &rect);

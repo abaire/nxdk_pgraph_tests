@@ -71,7 +71,10 @@ class LightingSpotlightTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests spotlight attenuation, falloff, and cone angles using a programmable shader.
   void Test(const std::string& name, const Spotlight& light);
+
+  //! Tests spotlight attenuation, falloff, and cone angles using the fixed-function pipeline.
   void TestFixed(const std::string& name, const Spotlight& light);
 
   void CreateGeometry();

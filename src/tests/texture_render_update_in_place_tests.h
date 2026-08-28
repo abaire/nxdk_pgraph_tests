@@ -13,6 +13,9 @@ class VertexBuffer;
 
 using namespace PBKitPlusPlus;
 
+/**
+ * Tests rendering updates to an active render target surface that is simultaneously bound as a texture.
+ */
 class TextureRenderUpdateInPlaceTests : public TestSuite {
  public:
   TextureRenderUpdateInPlaceTests(TestHost &host, std::string output_dir, const Config &config);
@@ -23,11 +26,11 @@ class TextureRenderUpdateInPlaceTests : public TestSuite {
  private:
   void CreateGeometry();
 
-  // Tests rendering to a surface that is also used as an input texture for the render.
+  //! Tests in-place rendering updates to a surface while sampling from it as a texture.
   void Test();
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;

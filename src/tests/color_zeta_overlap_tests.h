@@ -20,12 +20,19 @@ class ColorZetaOverlapTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests rendering where the color buffer is placed in the depth buffer's memory region.
   void TestColorIntoDepth();
+
+  //! Tests rendering where the depth buffer is placed in the color buffer's memory region.
   void TestDepthIntoColor();
+
+  //! Tests swapping color and depth surface base addresses in VRAM.
   void TestSwap();
 
-  // Tests the behavior identified in xemu #405
+  //! Tests rendering to adjacent surfaces with clip offset configurations.
   void TestXemuAdjacentSurfaceWithClipOffset(bool swizzle);
+
+  //! Tests rendering to adjacent surfaces with antialiasing enabled.
   void TestXemuAdjacentSurfaceWithAA();
 
   void SetSurfaceDMAs() const;

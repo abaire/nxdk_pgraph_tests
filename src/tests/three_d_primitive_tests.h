@@ -35,6 +35,7 @@ class ThreeDPrimitiveTests : public TestSuite {
 
   void CreatePolygon();
 
+  //! Tests rasterization of 3D primitives across draw modes and smoothing settings.
   void Test(TestHost::DrawPrimitive primitive, DrawMode draw_mode, bool line_smooth, bool poly_smooth);
 
   static std::string MakeTestName(TestHost::DrawPrimitive primitive, DrawMode draw_mode, bool line_smooth,

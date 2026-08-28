@@ -30,6 +30,7 @@ class SurfaceFormatTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests rendering color gradients to a render target of the specified surface color format and displaying results.
   void Test(const std::string &name, TestHost::SurfaceColorFormat color_format);
 
   void RenderToTextureStart(TestHost::SurfaceColorFormat color_format) const;

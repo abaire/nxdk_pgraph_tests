@@ -8,7 +8,9 @@
 
 class TestHost;
 
-// Tests texture BRDF mode behavior.
+/**
+ * Tests BRDF pixel shader texture modes (NV097_SET_SHADER_STAGE_PROGRAM BRDF).
+ */
 class TextureBRDFTests : public TestSuite {
  public:
   TextureBRDFTests(TestHost &host, std::string output_dir, const Config &config);
@@ -16,6 +18,7 @@ class TextureBRDFTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests BRDF shader stage program lookups with combinations of blank/active stages.
   void Test(bool stage0_blank, bool stage1_blank);
 };
 

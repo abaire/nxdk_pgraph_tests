@@ -8,6 +8,9 @@
 
 class TestHost;
 
+/**
+ * Tests 2D engine blitting from framebuffer/render target surfaces directly into textures.
+ */
 class TextureFramebufferBlitTests : public TestSuite {
  public:
   TextureFramebufferBlitTests(TestHost& host, std::string output_dir, const Config& config);
@@ -17,7 +20,11 @@ class TextureFramebufferBlitTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests blitting active render target content into texture memory.
   void TestRenderTarget(const char* test_name);
+
+  //! Tests blitting framebuffer content to a specific texture memory destination.
   void Test(uint32_t texture_destination, const char* test_name);
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
                  uint32_t surface_format, uint32_t source_pitch, uint32_t destination_pitch, uint32_t source_offset,

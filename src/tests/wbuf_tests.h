@@ -5,6 +5,9 @@
 
 class TestHost;
 
+/**
+ * Tests W-buffering depth mode (NV097_SET_COMPRESS_ZETA_EN / W-buffer enable) and Z-bias/slope scaling.
+ */
 class WBufTests : public TestSuite {
  public:
   WBufTests(TestHost &host, std::string output_dir, const Config &config);
@@ -13,6 +16,7 @@ class WBufTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests W-buffer depth testing with specified depth format, Z-bias, slope scale, and vertex shader mode.
   template <typename Func>
   void Test(int depthf, bool zbias, bool zslope, bool vsh, const char *prim_name, Func draw_prim,
             uint32_t clip_left = 150, uint32_t clip_top = 0);

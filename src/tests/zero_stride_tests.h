@@ -11,7 +11,9 @@
 class TestHost;
 class VertexBuffer;
 
-// Tests behavior when vertex attributes have a 0 stride.
+/**
+ * Tests vertex buffer streams configured with zero stride (attribute constant across vertices).
+ */
 class ZeroStrideTests : public TestSuite {
  public:
   enum DrawMode {
@@ -26,6 +28,8 @@ class ZeroStrideTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests drawing geometry with zero-stride vertex attribute arrays across draw modes.
   void Test(DrawMode draw_mode);
   static std::string MakeTestName(DrawMode draw_mode);
 

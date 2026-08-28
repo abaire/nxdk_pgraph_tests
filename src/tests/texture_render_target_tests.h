@@ -14,6 +14,9 @@ class VertexBuffer;
 
 using namespace PBKitPlusPlus;
 
+/**
+ * Tests rendering geometry to an offscreen render target and subsequently sampling it as a texture.
+ */
 class TextureRenderTargetTests : public TestSuite {
  public:
   TextureRenderTargetTests(TestHost &host, std::string output_dir, const Config &config);
@@ -24,7 +27,10 @@ class TextureRenderTargetTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  //! Tests rendering to and sampling from a texture render target with the specified format.
   void Test(const TextureFormatInfo &texture_format);
+
+  //! Tests rendering to and sampling from palettized texture render targets.
   void TestPalettized(TestHost::PaletteSize size);
 
   //! Tests behavior when rendering to a surface, using it to texture geometry, then updating the same surface and
@@ -37,7 +43,7 @@ class TextureRenderTargetTests : public TestSuite {
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;

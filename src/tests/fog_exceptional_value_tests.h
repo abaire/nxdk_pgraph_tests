@@ -22,7 +22,10 @@ class FogExceptionalValueTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests exceptional fog coordinate inputs (inf, NaN, extreme floats) with or without reciprocal calculation.
   void Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode, bool use_rcp);
+
+  //! Tests exceptional fog coordinate values with specific fog parameters.
   void TestParams(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode, uint32_t fog_test_value);
 };
 

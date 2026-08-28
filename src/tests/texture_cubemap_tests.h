@@ -9,7 +9,9 @@
 
 class TestHost;
 
-// Tests cubemap texture behavior.
+/**
+ * Tests cubemap texture addressing, projective coordinates, and dot product reflection modes.
+ */
 class TextureCubemapTests : public TestSuite {
  public:
   TextureCubemapTests(TestHost &host, std::string output_dir, const Config &config);
@@ -24,10 +26,19 @@ class TextureCubemapTests : public TestSuite {
   };
 
  private:
+  //! Tests basic cubemap sampling with varying projective Q coordinates.
   void TestCubemap(float q_coord);
+
+  //! Tests DOT_STR_3D dot product lookups with specified RGB mapping mode.
   void TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping);
+
+  //! Tests DOT_STR_CUBE dot product lookups on cubemap textures.
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
+
+  //! Tests DOT_REFLECT diffuse and specular reflection vector calculations.
   void TestDotReflect(const std::string &name, uint32_t dot_rgb_mapping, ReflectTest mode);
+
+  //! Tests DOT_REFLECT_SPECULAR reflection lookups with varying eye vectors.
   void TestDotReflectSpec(const std::string &name, uint32_t dot_rgb_mapping, const vector_t &eye_vec, bool const_eye);
 };
 

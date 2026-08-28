@@ -25,6 +25,7 @@ class StencilFuncTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests the specified stencil test comparison function against reference values.
   void Test(const std::string &name, uint32_t stencil_func);
 };
 

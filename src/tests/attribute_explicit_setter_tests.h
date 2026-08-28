@@ -7,7 +7,10 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-// Tests behavior when vertex attributes are not provided but are used by shaders.
+/**
+ * Tests setting vertex attributes via explicit setter methods (NV097_SET_VERTEX_DATA* /
+ * NV097_SET_VERTEX_DATA_ARRAY_FORMAT).
+ */
 class AttributeExplicitSetterTests : public TestSuite {
  public:
   // Keep in sync with attribute_carryover_test.vs.cg
@@ -38,6 +41,8 @@ class AttributeExplicitSetterTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests setting vertex attributes via explicit register writes with the given configuration.
   void Test(const TestConfig& config);
   void Draw(float x, float y, const std::function<void(int)>& attribute_setter, Attribute test_attribute,
             int mask = 0xF, float bias = 0.0f, float multiplier = 1.0f);

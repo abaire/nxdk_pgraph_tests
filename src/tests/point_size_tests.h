@@ -23,9 +23,16 @@ class PointSizeTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests point size increments and point smoothing across fixed-function and programmable pipelines.
   void Test(const std::string &name, bool point_smooth_enabled, int point_size_increment, bool use_shader);
+
+  //! Tests maximum allowable hardware point sizes.
   void TestLargestPointSize(const std::string &name, bool use_shader);
+
+  //! Tests minimum and sub-pixel point sizes.
   void TestSmallestPointSize(const std::string &name, bool use_shader);
+
+  //! Tests per-vertex point size outputs from programmable vertex shaders (oPts).
   void TestVertexShaderPointSize();
 };
 

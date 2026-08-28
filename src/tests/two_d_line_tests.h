@@ -28,6 +28,7 @@ class TwoDLineTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests rendering accelerated 2D solid lines across color formats and line coordinates.
   void Test(const TestCase& test);
 
   static std::string MakeTestName(const TestCase& test, bool ReturnShortName);

@@ -10,7 +10,9 @@
 class TestHost;
 class VertexBuffer;
 
-// Tests 0x1D78 NV097_SET_ZMIN_MAX_CONTROL functions.
+/**
+ * Tests depth clamping and Z-min/max control modes (NV097_SET_ZMIN_MAX_CONTROL / 0x1D78) with Z and W buffering.
+ */
 class ZMinMaxControlTests : public TestSuite {
  public:
   typedef enum ZMinMaxDrawMode {
@@ -30,7 +32,10 @@ class ZMinMaxControlTests : public TestSuite {
   void TearDownTest() override;
 
  private:
+  //! Tests Z-min/max clamping modes using programmable vertex shaders with Z or W buffering.
   void Test(const std::string& name, uint32_t mode, bool w_buffered);
+
+  //! Tests Z-min/max clamping modes in the fixed-function pipeline with Z or W buffering.
   void TestFixed(const std::string& name, uint32_t mode, bool w_buffered);
 
   void DrawBlock(float x_offset, float y_offset, ZMinMaxDrawMode zw_mode, bool projected = false) const;

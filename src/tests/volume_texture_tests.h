@@ -14,7 +14,9 @@ struct TextureFormatInfo;
 
 using namespace PBKitPlusPlus;
 
-// Tests 3d texture behavior.
+/**
+ * Tests 3D volumetric texture formats, filtering, and slice interpolation.
+ */
 class VolumeTextureTests : public TestSuite {
  public:
   VolumeTextureTests(TestHost &host, std::string output_dir, const Config &config);
@@ -24,7 +26,10 @@ class VolumeTextureTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  //! Tests sampling a 3D volume texture of the specified format across depth slices.
   void Test(const TextureFormatInfo &texture_format);
+
+  //! Tests 3D volume texture sampling with palettized color formats.
   void TestPalettized();
 };
 

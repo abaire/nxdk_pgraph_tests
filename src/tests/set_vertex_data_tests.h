@@ -17,7 +17,9 @@ class TestHost;
 
 using namespace PBKitPlusPlus;
 
-// Tests behavior of various SET_VERTEX_DATAX methods.
+/**
+ * Tests direct inline vertex data methods (NV097_SET_VERTEX_DATA*).
+ */
 class SetVertexDataTests : public TestSuite {
  public:
   enum SetFunction {
@@ -35,6 +37,8 @@ class SetVertexDataTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests setting vertex attributes via the specified SET_VERTEX_DATA variant and signed saturation mode.
   void Test(SetFunction func, const Color& diffuse, bool saturate_signed);
 
   static std::string MakeTestName(SetFunction func, bool saturate_signed);

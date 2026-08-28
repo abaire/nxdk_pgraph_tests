@@ -7,12 +7,16 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests surface pitch constraints and interactions with swizzled render targets.
+ */
 class SurfacePitchTests : public TestSuite {
  public:
   SurfacePitchTests(TestHost &host, std::string output_dir, const Config &config);
   void Initialize() override;
 
  private:
+  //! Tests rendering to swizzled surface targets with non-standard pitch configurations.
   void TestSwizzle();
 
   void DrawResults(const uint32_t *result_textures, const uint32_t demo_memory) const;

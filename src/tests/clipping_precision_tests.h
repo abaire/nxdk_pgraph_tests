@@ -5,6 +5,9 @@
 
 class TestHost;
 
+/**
+ * Tests clipping precision for guard band and screen-edge polygon clipping.
+ */
 class ClippingPrecisionTests : public TestSuite {
  public:
   ClippingPrecisionTests(TestHost &host, std::string output_dir, const Config &config);
@@ -13,8 +16,11 @@ class ClippingPrecisionTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Renders a single test frame evaluating triangle clipping precision against the viewport boundary.
   void TestClippingPrecisionFrame(float ofs, bool perspective_corrected, bool flat, float rotate_angle,
                                   int vertex_cycle, bool done);
+
+  //! Tests clipping precision across offset ranges with specified interpolation, shading, and rotation parameters.
   void TestClippingPrecision(bool perspective_corrected, bool flat, float rotate_angle, int vertex_cycle);
 };
 

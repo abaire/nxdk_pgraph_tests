@@ -27,11 +27,21 @@ class ImageBlitTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests standard 2D image blit operations with the specified blit operation and color format.
   void Test(const BlitTest& test);
+
+  //! Tests 2D image blitting with active clipping rectangle constraints.
   void TestWithClipRectangle(const BlitTest& test, uint32_t clip_x, uint32_t clip_y, int32_t clip_w, int32_t clip_h);
+
+  //! Tests image blits executing within active pushbuffer DMA blocks.
   void TestBlitOverPushbuffer(const std::string& name, const BlitTest& test);
+
+  //! Tests image blits extending beyond the surface pitch width boundaries.
   void TestBlitPastWidth(const std::string& name);
+
   enum class OverlapCorner { TopLeft, TopRight, BottomLeft, BottomRight };
+
+  //! Tests source and destination surface blits with boundary corner overlaps.
   void TestOverlapBarelyInclusive(const std::string& name, OverlapCorner corner, bool overlap);
 
   void ImageBlit(uint32_t operation, uint32_t beta, uint32_t source_channel, uint32_t destination_channel,
@@ -47,6 +57,7 @@ class ImageBlitTests : public TestSuite {
                                 uint32_t destination_y, uint32_t width, uint32_t height, uint32_t clip_x,
                                 uint32_t clip_y, int32_t clip_width, int32_t clip_height) const;
 
+  //! Tests dirty memory tracking when blitting to overlapping destination surfaces.
   void TestDirtyOverlappedDestinationSurface();
 
   //! Reproduces an issue where blitting, rendering, then blitting again causes corruption.

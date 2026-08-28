@@ -20,8 +20,10 @@ class AttributeFloatTests : public TestSuite {
   AttributeFloatTests(TestHost &host, std::string output_dir, const Config &config);
 
  private:
+  //! Tests shader evaluation of exceptional and edge-case floating-point vertex attributes.
   void Test(const TestConfig &testConfig);
 
+  //! Tests shader evaluation of floating-point color attributes.
   void TestColors(const std::string &test_name);
 };
 

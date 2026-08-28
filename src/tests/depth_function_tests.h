@@ -9,6 +9,9 @@
 
 class TestHost;
 
+/**
+ * Tests depth comparison functions (NV097_SET_DEPTH_FUNC) including standard and invalid values.
+ */
 class DepthFunctionTests : public TestSuite {
  public:
   DepthFunctionTests(TestHost &host, std::string output_dir, const Config &config);
@@ -16,6 +19,7 @@ class DepthFunctionTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests behavior of all NV097_SET_DEPTH_FUNC comparison functions and invalid values.
   void Test();
 };
 

@@ -18,6 +18,7 @@ class WeightSetterTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests setting vertex skinning weights via NV097_SET_WEIGHT* methods.
   void Test();
 };
 

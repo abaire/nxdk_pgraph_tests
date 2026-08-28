@@ -14,7 +14,9 @@ class VertexBuffer;
 
 using namespace PBKitPlusPlus;
 
-// Tests behavior when lighting is enabled and color components are requested from various sources.
+/**
+ * Tests material color components (ambient, diffuse, specular, emissive) and power in fixed-function lighting.
+ */
 class MaterialColorTests : public TestSuite {
  public:
   struct TestConfig {
@@ -40,6 +42,8 @@ class MaterialColorTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests lighting evaluation with the specified material and light color configuration.
   void Test(TestConfig config);
 };
 

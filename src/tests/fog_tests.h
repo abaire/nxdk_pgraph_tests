@@ -15,7 +15,9 @@ class VertexBuffer;
 
 using namespace PBKitPlusPlus;
 
-// Tests behavior of the Fog code.
+/**
+ * Tests fixed-function and programmable fog modes, generation equations, and alpha blending.
+ */
 class FogTests : public TestSuite {
  public:
   enum FogMode {
@@ -42,6 +44,8 @@ class FogTests : public TestSuite {
 
  protected:
   virtual void CreateGeometry();
+
+  //! Tests fog rendering with the specified fog mode, generation mode, and specular fog alpha component.
   void Test(FogMode fog_mode, FogGenMode gen_mode, uint32_t fog_alpha);
 
   static std::string MakeTestName(FogMode fog_mode, FogGenMode gen_mode, uint32_t fog_alpha);
@@ -50,6 +54,9 @@ class FogTests : public TestSuite {
   std::shared_ptr<VertexBuffer> vertex_buffer_;
 };
 
+/**
+ * Tests fog calculation with custom programmable vertex shaders.
+ */
 class FogCustomShaderTests : public FogTests {
  public:
   FogCustomShaderTests(TestHost& host, std::string output_dir, const Config& config,
@@ -57,12 +64,18 @@ class FogCustomShaderTests : public FogTests {
   void Initialize() override;
 };
 
+/**
+ * Tests programmable shader fog handling when coordinates evaluate to infinity.
+ */
 class FogInfiniteFogCoordinateTests : public FogCustomShaderTests {
  public:
   FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 };
 
+/**
+ * Tests setting individual components of the vertex shader oFog output register.
+ */
 class FogVec4CoordTests : public FogCustomShaderTests {
  public:
   struct TestConfig {
@@ -77,12 +90,12 @@ class FogVec4CoordTests : public FogCustomShaderTests {
   void Initialize() override;
 
  private:
-  // Verifies the behavior of setting individual components of the oFog register, showing that the last set value is
-  // taken as the value regardless of the destination mask.
-  // E.g., `mov oFog.w, 0.5` will effectively set oFog.x to 0.5, obliterating any previous value.
+  //! Verifies the behavior of setting individual components of the oFog register, showing that the last set value is
+  //! taken as the value regardless of the destination mask.
+  //! E.g., `mov oFog.w, 0.5` will effectively set oFog.x to 0.5, obliterating any previous value.
   void Test(const TestConfig& config);
 
-  // Tests behavior when the fog register is used without being set.
+  //! Tests behavior when the fog register is used without being set by the shader.
   void TestUnset();
 
   void SetShader(const TestConfig& config) const;

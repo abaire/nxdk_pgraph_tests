@@ -7,7 +7,10 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-// Tests behavior when vertex attributes are not provided but are used by shaders.
+/**
+ * Tests interleaved and consecutive draw calls using different primitive draw modes (e.g. DrawArrays and
+ * ArrayElements).
+ */
 class OverlappingDrawModesTests : public TestSuite {
  public:
   OverlappingDrawModesTests(TestHost& host, std::string output_dir, const Config& config);
@@ -18,9 +21,16 @@ class OverlappingDrawModesTests : public TestSuite {
   void CreateTriangles();
   void CreateTriangleStrip();
 
+  //! Tests interleaving ArrayElement and DrawArrays calls within the same draw sequence.
   void TestArrayElementDrawArrayArrayElement();
+
+  //! Tests consecutive DrawArrays calls modifying vertex attributes.
   void TestDrawArrayDrawArray();
+
+  //! Tests consecutive draw call squashing optimizations across distinct primitive types.
   void TestXemuSquashOptimization();
+
+  //! Tests draw call optimization handling for single DrawArrays invocations.
   void TestXemuSquashOptimizationSingleDrawArrays();
 
  private:

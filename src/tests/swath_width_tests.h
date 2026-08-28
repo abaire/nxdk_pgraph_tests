@@ -16,6 +16,7 @@ class SwathWidthTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests rasterizer swath width configurations (NV097_SET_SWATH_WIDTH).
   void Test(const std::string &name, uint32_t alpha_func);
 };
 

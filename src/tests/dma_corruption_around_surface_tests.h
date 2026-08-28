@@ -19,6 +19,7 @@ class DMACorruptionAroundSurfaceTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests DMA transfer interactions with GPU render targets.
   void Test();
 
   //! Tests the behavior of a read from the HDD into the current render target surface.

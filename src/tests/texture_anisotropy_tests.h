@@ -14,6 +14,7 @@ class TextureAnisotropyTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests texture sampling with the specified anisotropic filter level.
   void Test(uint32_t anisotropy_shift);
 };
 

@@ -29,7 +29,10 @@ class ClearTests : public TestSuite {
  private:
   void CreateGeometry();
 
+  //! Tests NV097_CLEAR_SURFACE with the specified color write mask and depth write setting.
   void TestColorMask(uint32_t color_mask, bool depth_write_enable);
+
+  //! Tests NV097_CLEAR_SURFACE_COLOR behavior across different surface color formats.
   void TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, const std::string& name);
 };
 #endif  // NXDK_PGRAPH_TESTS_CLEAR_TESTS_H

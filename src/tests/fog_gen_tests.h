@@ -26,6 +26,7 @@ class FogGenTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests fog generation modes across fixed-function and programmable shader pipelines.
   void Test(const std::string& name, uint32_t fog_mode, uint32_t fog_gen_mode, bool use_fixed_function);
 };
 

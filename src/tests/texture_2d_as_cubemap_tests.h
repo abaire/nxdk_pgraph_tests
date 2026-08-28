@@ -27,9 +27,16 @@ class Texture2DAsCubemapTests : public TestSuite {
   };
 
  private:
+  //! Tests cubemap sampling operations when bound to a 2D texture stage.
   void TestCubemap();
+
+  //! Tests DOT_STR_3D pixel shader texture mode with a 2D texture.
   void TestDotSTR3D(const std::string &name);
+
+  //! Tests DOT_STR_CUBE pixel shader texture mode with a 2D texture.
   void TestDotSTRCubemap(const std::string &name);
+
+  //! Tests DOT_REFLECT pixel shader texture modes with a 2D texture.
   void TestDotReflect(const std::string &name, ReflectTest mode);
 };
 

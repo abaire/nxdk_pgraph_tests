@@ -7,6 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests rendering behavior when color and zeta writes are disabled.
+ */
 class ColorZetaDisableTests : public TestSuite {
  public:
   struct Instruction {
@@ -22,6 +25,7 @@ class ColorZetaDisableTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests rendering with color write mask disabled and depth/stencil tests disabled.
   void Test();
 
   void DrawCheckerboardBackground() const;

@@ -15,6 +15,7 @@ class TexturePerspectiveEnableTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests texture perspective correction enable/disable control bit (NV097_SET_CONTROL0 bit 20).
   void Test(const std::string& name, bool texture_enabled);
 };
 

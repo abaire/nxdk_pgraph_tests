@@ -21,6 +21,7 @@ class FogParamTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests fog parameter calculations with specified bias and linear coefficients for the given fog mode.
   void Test(const std::string& name, uint32_t fog_mode, float bias, float linear);
 
   //! Attempts to find the bias value at which the given fog_mode results in 0 fog.

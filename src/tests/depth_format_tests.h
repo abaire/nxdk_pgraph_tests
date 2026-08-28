@@ -9,6 +9,9 @@
 
 class TestHost;
 
+/**
+ * Tests depth buffer formats, floating-point depth modes, compression, and clear depth cutoff interactions.
+ */
 class DepthFormatTests : public TestSuite {
  public:
   struct DepthFormat {
@@ -26,6 +29,8 @@ class DepthFormatTests : public TestSuite {
 
  private:
   void CreateGeometry(const DepthFormat &format);
+
+  //! Tests depth buffer rendering with the given format, compression, and clear depth cutoff.
   void Test(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);
 
   void AddTestEntry(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);

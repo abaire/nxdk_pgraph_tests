@@ -18,7 +18,10 @@ class Texture3DAs2DTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests sampling a cubemap texture through a 2D sampling shader program.
   void TestCubemap();
+
+  //! Tests sampling a 3D volumetric texture through a 2D sampling shader program.
   void TestVolumetric();
 };
 

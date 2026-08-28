@@ -16,6 +16,7 @@ class ContextSwitchTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests PGRAPH graphics channel context switching and state restoration across pushbuffer channels.
   void Test();
 };
 

@@ -70,11 +70,14 @@ class PointParamsTests : public TestSuite {
   void Initialize() override;
 
  private:
+  //! Tests point size attenuation parameters and point smoothing across fixed-function and programmable shaders.
   void Test(const std::string &name, bool point_params_enabled, bool point_smooth_enabled, int point_size,
             bool use_shader);
 
+  //! Tests fine-grained point attenuation bias and scale values.
   void TestDetailed(const std::string &name, bool use_shader);
 
+  //! Tests individual constant, linear, and quadratic point size attenuation scale terms.
   void TestScaleParams(bool scale_a, bool scale_b, bool scale_c, bool use_shader);
 };
 #endif  // POINTPARAMSTESTS_H

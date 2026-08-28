@@ -7,6 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
+/**
+ * Tests vertex shader instruction source swizzling and destination writemask combinations.
+ */
 class VertexShaderSwizzleTests : public TestSuite {
  public:
   struct Instruction {
@@ -23,6 +26,7 @@ class VertexShaderSwizzleTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests executing vertex shader programs with various component swizzle and writemask permutations.
   void Test(const std::string &name, const Instruction *instructions, uint32_t count, bool full_opacity = false);
 
   void DrawCheckerboardBackground() const;

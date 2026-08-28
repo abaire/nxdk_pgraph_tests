@@ -17,6 +17,9 @@ class FrontFaceTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests face culling behavior with the given front-face winding order and cull face mode in solid or line
+  //! rasterization.
   void Test(uint32_t front_face, uint32_t cull_face, bool line_mode);
 
   static std::string MakeTestName(uint32_t front_face, uint32_t cull_face, bool line_mode);

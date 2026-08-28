@@ -14,6 +14,9 @@ class PassthroughVertexShader;
 
 using namespace PBKitPlusPlus;
 
+/**
+ * Tests hardware shadow map comparison operations across depth buffer formats and compare functions.
+ */
 class TextureShadowComparatorTests : public TestSuite {
  public:
   TextureShadowComparatorTests(TestHost &host, std::string output_dir, const Config &config);
@@ -22,16 +25,22 @@ class TextureShadowComparatorTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests shadow map comparison against discrete integer depth buffer values.
   void TestRawValues(uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode,
                      uint32_t shadow_comp_function, uint32_t min_val, uint32_t max_val, uint32_t ref,
                      const std::string &name);
+
+  //! Tests shadow map comparison in the fixed-function pipeline.
   void TestFixedFunction(uint32_t depth_format, bool float_depth, uint32_t texture_format,
                          TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function, float min_val, float max_val,
                          float ref_val, const std::string &name);
+
+  //! Tests shadow map comparison in the programmable shader pipeline.
   void TestProgrammable(uint32_t depth_format, bool float_depth, uint32_t texture_format,
                         TestHost::ShaderStageProgram mode, uint32_t shadow_comp_function, float min_val, float max_val,
                         float ref_val, const std::string &name);
 
+  //! Tests shadow map comparison with projective texture coordinate transformations.
   void TestProjected(uint32_t depth_format, uint32_t texture_format, TestHost::ShaderStageProgram mode,
                      uint32_t shadow_comp_function, float min_val, float max_val, float ref_val,
                      std::function<void(vector_t &, const vector_t &)> project_point,

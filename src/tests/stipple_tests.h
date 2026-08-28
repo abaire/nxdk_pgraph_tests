@@ -7,7 +7,9 @@
 #include "test_host.h"
 #include "test_suite.h"
 
-// Tests behavior of 0x147C - 3D_POLYGON_STIPPLE_ENABLE
+/**
+ * Tests polygon stipple pattern masks and enable registers (NV097_SET_POLYGON_STIPPLE_ENABLE / 0x147C).
+ */
 class StippleTests : public TestSuite {
  public:
   StippleTests(TestHost& host, std::string output_dir, const Config& config);
@@ -16,6 +18,7 @@ class StippleTests : public TestSuite {
   void TearDownTest() override;
 
  private:
+  //! Tests polygon stipple rasterization with the specified 32x32 stipple pattern mask.
   void Test(const std::string& name, bool stipple_enable, const std::vector<DWORD>& stipple_pattern);
 };
 

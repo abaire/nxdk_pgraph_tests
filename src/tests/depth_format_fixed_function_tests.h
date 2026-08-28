@@ -9,6 +9,9 @@
 
 class TestHost;
 
+/**
+ * Tests fixed-function pipeline rendering across various depth buffer formats and compression settings.
+ */
 class DepthFormatFixedFunctionTests : public TestSuite {
  public:
   struct DepthFormat {
@@ -24,6 +27,8 @@ class DepthFormatFixedFunctionTests : public TestSuite {
 
  private:
   void CreateGeometry();
+
+  //! Tests fixed-function depth buffer rendering with the given format, compression, and clear depth cutoff.
   void Test(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);
 
   static std::string MakeTestName(const DepthFormat &format, bool compress_z, uint32_t depth_cutoff);

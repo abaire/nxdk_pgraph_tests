@@ -33,6 +33,7 @@ class HighVertexCountTests : public TestSuite {
   void Deinitialize() override;
 
  private:
+  //! Tests processing large vertex streams across various draw modes without intermediate Begin/End calls.
   void Test(const std::string &name, DrawMode mode);
 
   static std::string MakeTestName(DrawMode);
