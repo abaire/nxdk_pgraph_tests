@@ -36,6 +36,32 @@ using namespace XboxMath;
 #define MAX_FILE_PATH_SIZE 248
 #define MAX_FILENAME_SIZE 42
 
+namespace {
+
+void AssertCreateDirectoryLastError() {
+  switch (GetLastError()) {
+    case ERROR_ALREADY_EXISTS:
+      break;
+
+    case ERROR_PATH_NOT_FOUND:
+      ASSERT(!"Failed to create output directory: ERROR_PATH_NOT_FOUND");
+      break;
+
+    case ERROR_ACCESS_DENIED:
+      ASSERT(!"Failed to create output directory: ERROR_ACCESS_DENIED");
+      break;
+
+    case ERROR_FILENAME_EXCED_RANGE:
+      ASSERT(!"Failed to create output directory: ERROR_FILENAME_EXCED_RANGE");
+      break;
+
+    default:
+      ASSERT(!"Failed to create output directory.");
+  }
+}
+
+}  // namespace
+
 TestHost::TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
                    uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth)
     : NV2AState(framebuffer_width, framebuffer_height, max_texture_width, max_texture_height, max_texture_depth),
@@ -53,16 +79,16 @@ void TestHost::EnsureFolderExists(const std::string &folder_path) {
 
   while (slash) {
     strncpy(buffer, path_start, slash - path_start);
-    if (!CreateDirectory(buffer, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
-      ASSERT(!"Failed to create output directory.");
+    if (!CreateDirectory(buffer, nullptr)) {
+      AssertCreateDirectoryLastError();
     }
 
     slash = strchr(slash + 1, '\\');
   }
 
   // Handle case where there was no trailing slash.
-  if (!CreateDirectory(path_start, nullptr) && GetLastError() != ERROR_ALREADY_EXISTS) {
-    ASSERT(!"Failed to create output directory.");
+  if (!CreateDirectory(path_start, nullptr)) {
+    AssertCreateDirectoryLastError();
   }
 }
 
