@@ -12,7 +12,11 @@
 #include <windows.h>
 #pragma clang diagnostic pop
 
+#include <sstream>
+
+#include "ftp_logger.h"
 #include "menu_item.h"
+#include "tests/test_suite.h"
 
 static constexpr auto kButtonRepeatMilliseconds = 150;
 
@@ -96,15 +100,54 @@ void TestDriver::Run() {
 }
 
 void TestDriver::RunAllTestsNonInteractive() {
+  auto ftp_logger = test_host_.GetFTPLogger();
+
+  uint32_t total_suites = 0;
+  for (auto &suite : test_suites_) {
+    if (!suite->IsInteractiveOnly()) {
+      total_suites++;
+    }
+  }
+
+  if (ftp_logger) {
+    std::stringstream msg;
+    msg << "DEBUG: [TestDriver] Starting " << total_suites << " test suite(s)\n";
+    ftp_logger->LogProgress(msg.str());
+  }
+
+  uint32_t suite_index = 1;
   for (auto &suite : test_suites_) {
     if (suite->IsInteractiveOnly()) {
       continue;
     }
 
+    if (ftp_logger) {
+      std::stringstream msg;
+      msg << "DEBUG: [TestDriver] Starting suite " << suite_index << " / " << total_suites << " - '" << suite->Name()
+          << "'\n";
+      ftp_logger->LogProgress(msg.str());
+    }
+
     suite->Initialize();
     suite->RunAll(false);
     suite->Deinitialize();
+
+    if (ftp_logger) {
+      std::stringstream msg;
+      msg << "DEBUG: [TestDriver] Completed suite " << suite_index << " / " << total_suites << " - '" << suite->Name()
+          << "'\n";
+      ftp_logger->LogProgress(msg.str());
+    }
+
+    suite_index++;
   }
+
+  if (ftp_logger) {
+    std::stringstream msg;
+    msg << "DEBUG: [TestDriver] All " << total_suites << " test suites completed\n";
+    ftp_logger->LogProgress(msg.str());
+  }
+
   running_ = false;
 }
 

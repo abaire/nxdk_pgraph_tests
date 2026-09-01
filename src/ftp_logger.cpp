@@ -101,7 +101,9 @@ bool FTPLogger::WriteFile(const std::string& filename, const std::string& conten
 }
 
 bool FTPLogger::AppendFile(const std::string& filename, const std::string& content) {
-  if (!IsConnected()) return false;
+  if (!IsConnected() && !Connect()) {
+    return false;
+  }
 
   bool file_sent = false;
   if (!FTPClientCopyAndAppendBuffer(ftp_client_, filename.c_str(), content.c_str(), content.size(), OnCompleted,
@@ -126,6 +128,22 @@ bool FTPLogger::AppendFile(const std::string& filename, const std::string& conte
     LogError("CopyAndSendBuffer - send failed");
   }
   return file_sent;
+}
+
+bool FTPLogger::LogProgress(const std::string& message) {
+  if (message.empty()) return true;
+  std::string formatted = message;
+  if (formatted.back() != '\n') {
+    formatted += '\n';
+  }
+  return AppendFile(kProgressLogFilename, formatted);
+}
+
+bool FTPLogger::LogDebug(const std::string& message) {
+  if (message.rfind("DEBUG:", 0) == 0) {
+    return LogProgress(message);
+  }
+  return LogProgress("DEBUG: " + message);
 }
 
 bool FTPLogger::PutFile(const std::string& local_filename, const std::string& remote_filename) {

@@ -44,6 +44,8 @@ class TestHost : public NV2AState {
   //! Sets the override flag to prevent artifact saving during FinishDraw.
   void SetSaveResults(bool enable = true) { save_results_ = enable; }
 
+  [[nodiscard]] std::shared_ptr<FTPLogger> GetFTPLogger() const { return ftp_logger_; }
+
   //! Saves the given texture to the filesystem as a PNG file.
   static std::string SaveTexture(const std::string &output_directory, const std::string &name, const uint8_t *texture,
                                  uint32_t width, uint32_t height, uint32_t pitch, uint32_t bits_per_pixel,

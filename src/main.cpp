@@ -25,6 +25,7 @@
 #include <fstream>
 #include <map>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -377,6 +378,18 @@ static bool LoadConfig(RuntimeConfig& config, std::vector<std::string>& errors) 
 }
 
 static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::shared_ptr<TestSuite>>& test_suites) {
+  auto ftp_logger = host.GetFTPLogger();
+  if (ftp_logger) {
+    std::stringstream msg;
+    msg << "DEBUG: [main] Shard " << config.shard_index() << " / " << config.shard_count() << " running "
+        << test_suites.size() << " test suite(s)\n";
+    for (size_t i = 0; i < test_suites.size(); ++i) {
+      msg << "DEBUG: [main] Shard suite " << (i + 1) << " / " << test_suites.size() << ": '" << test_suites[i]->Name()
+          << "' (" << test_suites[i]->TestNames().size() << " tests)\n";
+    }
+    ftp_logger->LogProgress(msg.str());
+  }
+
   if (config.enable_progress_log()) {
     std::string log_file = config.output_directory_path() + "\\" + kLogFileName;
 
@@ -390,6 +403,13 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
   driver.Run();
 
   PrintMsg("Test loop completed normally\n");
+  if (ftp_logger) {
+    std::stringstream msg;
+    msg << "DEBUG: [main] Test loop completed normally. enable_shutdown=" << config.enable_shutdown_on_completion()
+        << ", delay=" << config.delay_milliseconds_before_exit() << " ms\n";
+    ftp_logger->LogProgress(msg.str());
+  }
+
   if (config.enable_progress_log() && Logger::Log().is_open()) {
     Logger::Log() << "Testing completed normally, closing log." << std::endl;
     Logger::Log().close();
@@ -407,6 +427,9 @@ static void RunTests(RuntimeConfig& config, TestHost& host, std::vector<std::sha
       Sleep(exit_wait);
     }
 
+    if (ftp_logger) {
+      ftp_logger->LogProgress("DEBUG: [main] Initiating SMC shutdown\n");
+    }
     Shutdown();
   } else if (exit_wait) {
     debugPrint("Results written to %s\n\nRebooting in %d.%03d seconds...\n", config.output_directory_path().c_str(),

@@ -60,13 +60,13 @@ class TestSuite {
   [[nodiscard]] std::vector<std::string> TestNames() const;
   [[nodiscard]] bool HasEnabledTests() const { return !tests_.empty(); };
 
-  void Run(const std::string &test_name);
+  void Run(const std::string &test_name, uint32_t test_index = 0, uint32_t total_tests = 0);
 
   /**
    * Runs all registered tests in this suite.
-   * @param inclue_interactive Whether tests that do not save artifacts should be run as well.
+   * @param include_interactive Whether tests that do not save artifacts should be run as well.
    */
-  void RunAll(bool inclue_interactive);
+  void RunAll(bool include_interactive);
 
   [[nodiscard]] bool IsInteractiveOnly() const { return interactive_only_; }
   void SetSavingAllowed(bool enable = true) { allow_saving_ = enable; }
@@ -88,8 +88,10 @@ class TestSuite {
   }
 
  private:
-  std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name);
-  long LogTestEnd(const std::string &test_name, const std::chrono::steady_clock::time_point &start_time) const;
+  std::chrono::steady_clock::time_point LogTestStart(const std::string &test_name, uint32_t test_index = 0,
+                                                     uint32_t total_tests = 0);
+  long LogTestEnd(const std::string &test_name, const std::chrono::steady_clock::time_point &start_time,
+                  uint32_t test_index = 0, uint32_t total_tests = 0) const;
 
  protected:
   TestHost &host_;

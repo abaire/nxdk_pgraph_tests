@@ -54,16 +54,16 @@ void TestSuite::DisableTests(const std::set<std::string>& tests_to_skip) {
   }
 }
 
-void TestSuite::Run(const std::string& test_name) {
+void TestSuite::Run(const std::string& test_name, uint32_t test_index, uint32_t total_tests) {
   auto it = tests_.find(test_name);
   if (it == tests_.end()) {
     ASSERT(!"Invalid test name");
   }
 
   SetupTest();
-  auto start_time = LogTestStart(test_name);
+  auto start_time = LogTestStart(test_name, test_index, total_tests);
   it->second();
-  auto duration = LogTestEnd(test_name, start_time);
+  auto duration = LogTestEnd(test_name, start_time, test_index, total_tests);
   TearDownTest();
 
   if (ftp_logger_) {
@@ -81,7 +81,7 @@ void TestSuite::Run(const std::string& test_name) {
             message << "- OUTPUT: \"" << put_operation.second << "\"\n";
           }
 
-          if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
+          if (!ftp_logger_->AppendFile(FTPLogger::kProgressLogFilename, message.str())) {
             PrintMsg("Failed to store progress log to FTP server with artifact info!\n");
           }
           message.clear();
@@ -89,9 +89,16 @@ void TestSuite::Run(const std::string& test_name) {
       }
       ftp_logger_->ClearSendQueue();
 
+      if (test_index > 0 && total_tests > 0) {
+        std::stringstream dbg_msg;
+        dbg_msg << "DEBUG: Completed " << test_index << " / " << total_tests << " - " << suite_name_
+                << "::" << test_name << " in " << duration << " MS\n";
+        ftp_logger_->LogProgress(dbg_msg.str());
+      }
+
       std::stringstream message;
       message << "END: \"" << suite_name_ << "::" << test_name << "\" IN " << duration << " MS\n";
-      if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
+      if (!ftp_logger_->AppendFile(FTPLogger::kProgressLogFilename, message.str())) {
         PrintMsg("Failed to store progress log to FTP server!\n");
       }
     }
@@ -100,10 +107,17 @@ void TestSuite::Run(const std::string& test_name) {
 
 void TestSuite::RunAll(bool include_interactive) {
   auto names = TestNames();
+  std::vector<std::string> active_tests;
   for (const auto& test_name : names) {
     if (include_interactive || interactive_only_tests_.find(test_name) == interactive_only_tests_.end()) {
-      Run(test_name);
+      active_tests.push_back(test_name);
     }
+  }
+
+  uint32_t total = static_cast<uint32_t>(active_tests.size());
+  uint32_t index = 1;
+  for (const auto& test_name : active_tests) {
+    Run(test_name, index++, total);
   }
 }
 
@@ -120,6 +134,12 @@ void TestSuite::SetDefaultTextureFormat() const {
 }
 
 void TestSuite::Initialize() {
+  if (ftp_logger_) {
+    std::stringstream message;
+    message << "DEBUG: Initializing suite '" << suite_name_ << "' (" << tests_.size() << " tests registered)\n";
+    ftp_logger_->LogProgress(message.str());
+  }
+
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z16, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
@@ -342,6 +362,12 @@ void TestSuite::TagNV2ATrace(uint32_t num_nops) {
 }
 
 void TestSuite::Deinitialize() {
+  if (ftp_logger_) {
+    std::stringstream message;
+    message << "DEBUG: Deinitializing suite '" << suite_name_ << "'\n";
+    ftp_logger_->LogProgress(message.str());
+  }
+
   if (enable_pgraph_region_diff_) {
     pgraph_diff_.DumpDiff();
   }
@@ -351,12 +377,22 @@ void TestSuite::SetupTest() {}
 
 void TestSuite::TearDownTest() {}
 
-std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name) {
-  PrintMsg("Starting %s::%s\n", suite_name_.c_str(), test_name.c_str());
+std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string& test_name, uint32_t test_index,
+                                                              uint32_t total_tests) {
+  if (test_index > 0 && total_tests > 0) {
+    PrintMsg("Starting [%u/%u] %s::%s\n", test_index, total_tests, suite_name_.c_str(), test_name.c_str());
+  } else {
+    PrintMsg("Starting %s::%s\n", suite_name_.c_str(), test_name.c_str());
+  }
 
   if (allow_saving_) {
     if (enable_progress_log_) {
-      Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
+      if (test_index > 0 && total_tests > 0) {
+        Logger::Log() << "Starting [" << test_index << "/" << total_tests << "] " << suite_name_ << "::" << test_name
+                      << std::endl;
+      } else {
+        Logger::Log() << "Starting " << suite_name_ << "::" << test_name << std::endl;
+      }
     }
   }
 
@@ -365,9 +401,16 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
       PrintMsg("FTP connect failed, aborting\n");
     } else {
       PrintMsg("Saving start message to FTP server...\n");
+      if (test_index > 0 && total_tests > 0) {
+        std::stringstream dbg_msg;
+        dbg_msg << "DEBUG: Starting " << test_index << " / " << total_tests << " - " << suite_name_ << "::" << test_name
+                << "\n";
+        ftp_logger_->LogProgress(dbg_msg.str());
+      }
+
       std::stringstream message;
       message << "START: \"" << suite_name_ << "::" << test_name << "\"\n";
-      if (!ftp_logger_->AppendFile(kFTPLogProgressFilename, message.str())) {
+      if (!ftp_logger_->AppendFile(FTPLogger::kProgressLogFilename, message.str())) {
         PrintMsg("Failed to store progress log to FTP server!\n");
       }
     }
@@ -380,16 +423,25 @@ std::chrono::steady_clock::time_point TestSuite::LogTestStart(const std::string&
   return std::chrono::steady_clock::now();
 }
 
-long TestSuite::LogTestEnd(const std::string& test_name,
-                           const std::chrono::steady_clock::time_point& start_time) const {
+long TestSuite::LogTestEnd(const std::string& test_name, const std::chrono::steady_clock::time_point& start_time,
+                           uint32_t test_index, uint32_t total_tests) const {
   auto now = std::chrono::steady_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - start_time);
   auto elapsed = static_cast<long>((duration.count() & 0xFFFFFFFF));
 
-  PrintMsg("  Completed '%s' in %lums\n", test_name.c_str(), elapsed);
+  if (test_index > 0 && total_tests > 0) {
+    PrintMsg("  Completed [%u/%u] '%s' in %lums\n", test_index, total_tests, test_name.c_str(), elapsed);
+  } else {
+    PrintMsg("  Completed '%s' in %lums\n", test_name.c_str(), elapsed);
+  }
 
   if (enable_progress_log_ && allow_saving_) {
-    Logger::Log() << "  Completed '" << test_name << "' in " << elapsed << "ms" << std::endl;
+    if (test_index > 0 && total_tests > 0) {
+      Logger::Log() << "  Completed [" << test_index << "/" << total_tests << "] '" << test_name << "' in " << elapsed
+                    << "ms" << std::endl;
+    } else {
+      Logger::Log() << "  Completed '" << test_name << "' in " << elapsed << "ms" << std::endl;
+    }
   }
 
   return elapsed;
