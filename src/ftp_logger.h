@@ -39,10 +39,17 @@ class FTPLogger {
 
   bool IsConnected() const;
 
+  static constexpr char kProgressLogFilename[] = "nxdk_pgraph_tests_progress.log";
+
   //! Truncate the remote file with the given name and set its content.
   bool WriteFile(const std::string& filename, const std::string& content);
   //! Append the given content to the remote file with the given name.
   bool AppendFile(const std::string& filename, const std::string& content);
+
+  //! Append a line to the standard progress log file.
+  bool LogProgress(const std::string& message);
+  //! Append a debug-prefixed line to the standard progress log file.
+  bool LogDebug(const std::string& message);
 
   bool PutFile(const std::string& local_filename, const std::string& remote_filename = "");
 

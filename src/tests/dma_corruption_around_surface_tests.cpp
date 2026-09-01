@@ -66,8 +66,17 @@ void DMACorruptionAroundSurfaceTests::Initialize() {
   host_.SetVertexShaderProgram(shader);
 
   // Copy the test file to the z partition.
+  if (ftp_logger_) {
+    ftp_logger_->LogProgress("DEBUG: [DMACorruptionAroundSurfaceTests] Copying opaque_white.raw to Z:\\\n");
+  }
   if (!InstallCacheFile("D:\\dma_surface_tests\\opaque_white.raw", "Z:\\opaque_white.raw", FALSE)) {
+    if (ftp_logger_) {
+      ftp_logger_->LogProgress("DEBUG: [DMACorruptionAroundSurfaceTests] Failed to copy opaque_white.raw to Z:\\\n");
+    }
     ASSERT(!"Failed to copy opaque_white.raw to the cache drive.")
+  }
+  if (ftp_logger_) {
+    ftp_logger_->LogProgress("DEBUG: [DMACorruptionAroundSurfaceTests] Successfully copied opaque_white.raw\n");
   }
 }
 
@@ -154,7 +163,7 @@ static void ReadRawRGBAIntoBuffer(const char *filename, void *buffer, uint32_t l
                       buffer,         // Buffer
                       length,         // Length
                       &byte_offset);
-  ASSERT(status == STATUS_PENDING);
+  ASSERT(status == STATUS_PENDING || status == STATUS_SUCCESS);
 
   while (status_block.Status == STATUS_PENDING) {
     Sleep(1);
