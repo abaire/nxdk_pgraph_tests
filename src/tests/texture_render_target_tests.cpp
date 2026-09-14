@@ -83,13 +83,6 @@ void TextureRenderTargetTests::Initialize() {
       (uint8_t *)MmAllocateContiguousMemoryEx(texture_size, 0, MAXRAM, 0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE);
   ASSERT(render_target_ && "Failed to allocate target surface.");
   pb_set_dma_address(&texture_target_ctx_, render_target_, texture_size - 1);
-
-  host_.SetCombinerControl(1, true, true);
-  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
-
-  host_.SetTextureStageEnabled(0, true);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 }
 
 void TextureRenderTargetTests::Deinitialize() {
@@ -156,6 +149,13 @@ void TextureRenderTargetTests::ResetAndDrawFromRenderTarget() const {
 }
 
 void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
   host_.SetTextureFormat(texture_format);
@@ -163,6 +163,7 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetTextureDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
+  texture_stage.SetImageDimensions(host_.GetMaxTextureWidth(), host_.GetMaxTextureHeight());
 
   SDL_Surface *gradient_surface;
   int update_texture_result =
@@ -217,6 +218,13 @@ void TextureRenderTargetTests::Test(const TextureFormatInfo &texture_format) {
 }
 
 void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
   const uint32_t kFramebufferPitch = host_.GetFramebufferWidth() * 4;
 
   auto &texture_format = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
@@ -278,6 +286,13 @@ void TextureRenderTargetTests::TestPalettized(TestHost::PaletteSize size) {
 
 void TextureRenderTargetTests::TestRenderTextureLoop() {
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
   host_.PrepareDraw(0xFF505050);
 
