@@ -23,6 +23,7 @@
 #include "pbkit_ext.h"
 #include "pushbuffer.h"
 #include "shaders/vertex_shader_program.h"
+#include "third_party/gpu_m2m.h"
 #include "vertex_buffer.h"
 #include "xbox_math_d3d.h"
 #include "xbox_math_matrix.h"
@@ -69,7 +70,7 @@ void AssertCreateDirectoryLastError() {
 
 TestHost::TestHost(std::shared_ptr<FTPLogger> ftp_logger, uint32_t framebuffer_width, uint32_t framebuffer_height,
                    uint32_t max_texture_width, uint32_t max_texture_height, uint32_t max_texture_depth)
-    : NV2AState(framebuffer_width, framebuffer_height, max_texture_width, max_texture_height, max_texture_depth),
+    : NV2AState(framebuffer_width, framebuffer_height, max_texture_width, max_texture_height, max_texture_depth, true),
       ftp_logger_{std::move(ftp_logger)} {}
 
 void TestHost::EnsureFolderExists(const std::string &folder_path) {
@@ -123,7 +124,6 @@ std::string TestHost::PrepareSaveFile(std::string output_directory, const std::s
 std::string TestHost::SaveBackBuffer(const std::string &output_directory, const std::string &name) {
   auto target_file = PrepareSaveFile(output_directory, name);
 
-  auto buffer = pb_agp_access(pb_back_buffer());
   auto width = static_cast<int>(pb_back_buffer_width());
   auto height = static_cast<int>(pb_back_buffer_height());
   auto pitch = static_cast<int>(pb_back_buffer_pitch());
@@ -131,12 +131,17 @@ std::string TestHost::SaveBackBuffer(const std::string &output_directory, const 
   // FIXME: Support 16bpp surfaces
   ASSERT((pitch == width * 4) && "Expected packed 32bpp surface");
 
-  // Swizzle color channels ARGB -> ABGR
   unsigned int num_pixels = width * height;
-  uint32_t *pre_enc_buf = (uint32_t *)malloc(num_pixels * 4);
-  ASSERT(pre_enc_buf && "Failed to allocate pre-encode buffer");
+  size_t buffer_size = num_pixels * 4;
+  uint32_t *pre_enc_buf =
+      static_cast<uint32_t *>(MmAllocateContiguousMemoryEx(buffer_size, 0, MAXRAM, 0, PAGE_READWRITE));
+  ASSERT(pre_enc_buf && "Failed to allocate contiguous pre-encode buffer");
+
+  ASSERT(gpum_copy(pre_enc_buf, pb_back_buffer(), buffer_size) && "Failed to copy back buffer with M2M");
+
+  // Swizzle color channels ARGB -> ABGR
   for (unsigned int i = 0; i < num_pixels; i++) {
-    uint32_t c = static_cast<uint32_t *>(buffer)[i];
+    uint32_t c = pre_enc_buf[i];
     pre_enc_buf[i] = (c & 0xff00ff00) | ((c >> 16) & 0xff) | ((c & 0xff) << 16);
   }
 
@@ -144,7 +149,7 @@ std::string TestHost::SaveBackBuffer(const std::string &output_directory, const 
   if (!fpng::fpng_encode_image_to_memory((void *)pre_enc_buf, width, height, 4, out_buf)) {
     ASSERT(!"Failed to encode PNG image");
   }
-  free(pre_enc_buf);
+  MmFreeContiguousMemory(pre_enc_buf);
 
   FILE *pFile = fopen(target_file.c_str(), "wb");
   ASSERT(pFile && "Failed to open output PNG image");
@@ -183,13 +188,16 @@ std::string TestHost::SaveTexture(const std::string &output_directory, const std
                                   SDL_PixelFormatEnum format) {
   auto target_file = PrepareSaveFile(output_directory, name);
 
-  auto buffer = pb_agp_access(const_cast<void *>(static_cast<const void *>(texture)));
   auto size = pitch * height;
 
   PrintMsg("Saving to %s. Size: %lu. Pitch %lu.\n", target_file.c_str(), size, pitch);
 
+  void *cached_buf = MmAllocateContiguousMemoryEx(size, 0, MAXRAM, 0, PAGE_READWRITE);
+  ASSERT(cached_buf && "Failed to allocate contiguous buffer for texture copy");
+  ASSERT(gpum_copy(cached_buf, texture, size) && "Failed to copy texture with M2M");
+
   SDL_Surface *surface =
-      SDL_CreateRGBSurfaceWithFormatFrom((void *)buffer, static_cast<int>(width), static_cast<int>(height),
+      SDL_CreateRGBSurfaceWithFormatFrom(cached_buf, static_cast<int>(width), static_cast<int>(height),
                                          static_cast<int>(bits_per_pixel), static_cast<int>(pitch), format);
 
   if (IMG_SavePNG(surface, target_file.c_str())) {
@@ -198,6 +206,7 @@ std::string TestHost::SaveTexture(const std::string &output_directory, const std
   }
 
   SDL_FreeSurface(surface);
+  MmFreeContiguousMemory(cached_buf);
 
   return target_file;
 }
@@ -207,7 +216,12 @@ std::string TestHost::SaveRawTexture(const std::string &output_directory, const 
                                      uint32_t bits_per_pixel) {
   auto target_file = PrepareSaveFile(output_directory, name, ".raw");
 
-  auto buffer = static_cast<uint8_t *>(pb_agp_access(const_cast<void *>(static_cast<const void *>(texture))));
+  const auto total_size = pitch * height;
+  void *cached_buf = MmAllocateContiguousMemoryEx(total_size, 0, MAXRAM, 0, PAGE_READWRITE);
+  ASSERT(cached_buf && "Failed to allocate contiguous buffer for raw texture copy");
+  ASSERT(gpum_copy(cached_buf, texture, total_size) && "Failed to copy raw texture with M2M");
+
+  const auto *buffer = static_cast<const uint8_t *>(cached_buf);
   const uint32_t bytes_per_pixel = (bits_per_pixel >> 3);
   const uint32_t populated_pitch = width * bytes_per_pixel;
   const auto size = populated_pitch * height;
@@ -224,6 +238,7 @@ std::string TestHost::SaveRawTexture(const std::string &output_directory, const 
   }
 
   fclose(f);
+  MmFreeContiguousMemory(cached_buf);
 
   return target_file;
 }

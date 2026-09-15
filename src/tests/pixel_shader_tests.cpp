@@ -1,7 +1,16 @@
 #include "pixel_shader_tests.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
+#include <windows.h>
+#pragma clang diagnostic pop
+
+#include <xboxkrnl/xboxkrnl.h>
+
+#include "debug_output.h"
 #include "test_host.h"
 #include "texture_generator.h"
+#include "third_party/gpu_m2m.h"
 #include "xbox_math_matrix.h"
 
 static constexpr char kPassthrough[] = "Passthru";
@@ -647,27 +656,32 @@ void PixelShaderTests::DrawPlainImage(float x, float y, const ImageResource &ima
 }
 
 void PixelShaderTests::DrawZBuffer(float left, float top, uint32_t src_x, uint32_t src_y, uint32_t quad_size) const {
+  const auto z_buffer_pitch = pb_depth_stencil_pitch();
+  const auto byte_length = static_cast<uint32_t>(quad_size * 2);
+  const auto depth_slice_size = (quad_size - 1) * z_buffer_pitch + byte_length;
+
+  auto cached_buf =
+      static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(depth_slice_size, 0, MAXRAM, 0, PAGE_READWRITE));
+  ASSERT(cached_buf && "Failed to allocate contiguous buffer for Z-buffer readback");
+
+  const auto *src = pb_depth_stencil_buffer() + src_x * 2 + src_y * z_buffer_pitch;
+  ASSERT(gpum_copy(cached_buf, src, depth_slice_size) && "Failed to copy Z-buffer with M2M");
+
+  auto texture = host_.GetTextureMemoryForStage(0);
+  const auto *cached_ptr = cached_buf;
+  for (auto y = 0; y < static_cast<uint32_t>(quad_size); ++y) {
+    memcpy(texture, cached_ptr, byte_length);
+    cached_ptr += z_buffer_pitch;
+    texture += byte_length;
+  }
+  MmFreeContiguousMemory(cached_buf);
+
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
   host_.SetTextureStageEnabled(0, true);
   host_.SetTextureStageEnabled(1, false);
   host_.SetTextureStageEnabled(2, false);
   host_.SetTextureStageEnabled(3, false);
 
-  const auto *z_buffer = reinterpret_cast<const uint8_t *>(
-      pb_agp_access(const_cast<void *>(static_cast<const void *>(pb_depth_stencil_buffer()))));
-  const auto z_buffer_pitch = pb_depth_stencil_pitch();
-
-  z_buffer += src_x * 2 + src_y * z_buffer_pitch;
-  const auto byte_length = static_cast<uint32_t>(quad_size * 2);
-
-  auto texture = host_.GetTextureMemoryForStage(0);
-  for (auto y = 0; y < static_cast<uint32_t>(quad_size); ++y) {
-    memcpy(texture, z_buffer, byte_length);
-    z_buffer += z_buffer_pitch;
-    texture += byte_length;
-  }
-
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R5G6B5));
   texture_stage.SetImageDimensions(quad_size, quad_size);

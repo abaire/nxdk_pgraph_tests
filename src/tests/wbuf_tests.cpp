@@ -2,11 +2,19 @@
 
 #include <pbkit/pbkit.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmacro-redefined"
+#include <windows.h>
+#pragma clang diagnostic pop
+
+#include <xboxkrnl/xboxkrnl.h>
+
 #include "../test_host.h"
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader.h"
 #include "texture_generator.h"
+#include "third_party/gpu_m2m.h"
 
 static constexpr const char kTestWBuf[] = "WBuf";
 static constexpr const char kTestZBuf[] = "ZBuf";
@@ -494,8 +502,9 @@ void WBufTests::Test(int depthf, bool zbias, bool zslope, bool vsh, const char *
   {
     unsigned int depth_pitch = pb_depth_stencil_pitch();
     unsigned int depth_size = depth_pitch * host_.GetFramebufferHeight();
-    auto depth_buf = std::make_unique<uint8_t[]>(depth_size);
-    memcpy(depth_buf.get(), pb_agp_access(pb_depth_stencil_buffer()), depth_size);
+    auto depth_buf = static_cast<uint8_t *>(MmAllocateContiguousMemoryEx(depth_size, 0, MAXRAM, 0, PAGE_READWRITE));
+    ASSERT(depth_buf && "Failed to allocate contiguous buffer for depth readback");
+    ASSERT(gpum_copy(depth_buf, pb_depth_stencil_buffer(), depth_size) && "Failed to copy depth buffer with M2M");
 
     auto shader = std::make_shared<PassthroughVertexShader>();
     host_.SetVertexShaderProgram(shader);
@@ -524,10 +533,10 @@ void WBufTests::Test(int depthf, bool zbias, bool zslope, bool vsh, const char *
       int y2 = sample_coords[2 * n + 1];
 
       if (bpp == 2) {
-        uint16_t val = *(uint16_t *)&depth_buf.get()[y2 * depth_pitch + x2 * bpp];
+        uint16_t val = *(uint16_t *)&depth_buf[y2 * depth_pitch + x2 * bpp];
         pb_print("Z=0x%04x\n", val);
       } else {
-        uint32_t val = *(uint32_t *)&depth_buf.get()[y2 * depth_pitch + x2 * bpp];
+        uint32_t val = *(uint32_t *)&depth_buf[y2 * depth_pitch + x2 * bpp];
         pb_print("Z=0x%06x\n", val >> 8);
       }
       host_.Begin(TestHost::PRIMITIVE_LINES);
@@ -557,6 +566,8 @@ void WBufTests::Test(int depthf, bool zbias, bool zslope, bool vsh, const char *
       host_.SetVertex(clip_left, host_.GetFramebufferHeight(), 0.0f, 1.0f);
       host_.End();
     }
+
+    MmFreeContiguousMemory(depth_buf);
   }
 
   pb_printat(10, 20, "Depth value test");
