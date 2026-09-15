@@ -1,0 +1,1256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/d99/fog__exceptional__value__tests_8cpp" kind="file" language="C++">
+    <compoundname>fog_exceptional_value_tests.cpp</compoundname>
+    <includes refid="db/dc9/fog__exceptional__value__tests_8h" local="yes">fog_exceptional_value_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">light.h</includes>
+    <includes refid="d8/d7c/flat__mesh__grid__model_8h" local="yes">models/flat_mesh_grid_model.h</includes>
+    <includes local="yes">shaders/perspective_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">projection_vertex_shader_no_lighting_explicit_fog.vshinc</includes>
+    <includes local="yes">projection_vertex_shader_no_lighting_rcp_fog.vshinc</includes>
+    <incdepgraph>
+      <node id="13">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>models/flat_mesh_grid_model.h</label>
+        <link refid="d8/d7c/flat__mesh__grid__model_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/fog_exceptional_value_tests.cpp</label>
+        <link refid="d4/d99/fog__exceptional__value__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fog_exceptional_value_tests.h</label>
+        <link refid="db/dc9/fog__exceptional__value__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="8">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>functional</label>
+      </node>
+      <node id="30">
+        <label>light.h</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="32">
+        <label>models/model_builder.h</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="16">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="15">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="34">
+        <label>projection_vertex_shader_no_lighting_explicit_fog.vshinc</label>
+      </node>
+      <node id="35">
+        <label>projection_vertex_shader_no_lighting_rcp_fog.vshinc</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="33">
+        <label>shaders/perspective_vertex_shader.h</label>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="11">
+        <label>thread</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="14">
+        <label>windows.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d0/d92/structFogEntry" prot="public">FogEntry</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1aadd30fd38fc45aff1e1fb801c99e873d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kVertexShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kVertexShader</name>
+        <initializer>= {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="12" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="12" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1aeb0ec647305e61d69823d49fa1ded3d0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kRCPFogVertexShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kRCPFogVertexShader</name>
+        <initializer>= {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="18" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="18" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a74bceaf497df30e956e14eea47c5c303" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kFogStart</definition>
+        <argsstring></argsstring>
+        <name>kFogStart</name>
+        <initializer>= 1.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="23" column="24" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1ada872ed23770ec2c8a4e6336a6405fea" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kFogEnd</definition>
+        <argsstring></argsstring>
+        <name>kFogEnd</name>
+        <initializer>= 200.0f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="24" column="24" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a3f170bdb3b20e56376fd23dcd4535b8f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFogColor</definition>
+        <argsstring></argsstring>
+        <name>kFogColor</name>
+        <initializer>= 0xDD0000FF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="26" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a776ece7aaa994e76dac8ef3ae3f721fa" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kDiffuseUL</definition>
+        <argsstring></argsstring>
+        <name>kDiffuseUL</name>
+        <initializer>{0.25f, 0.5f, 0.5f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="28" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1ab91482751798aa0d96976727f7ff9116" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kDiffuseUR</definition>
+        <argsstring></argsstring>
+        <name>kDiffuseUR</name>
+        <initializer>{0.25f, 0.25f, 0.75f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="29" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a9f88b18fed15d4d8d746b540c03a3b8c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kDiffuseLR</definition>
+        <argsstring></argsstring>
+        <name>kDiffuseLR</name>
+        <initializer>{0.25f, 0.f, 1.f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="30" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a8ab81fd5cbfbe8d7a4bc9b56693870c4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kDiffuseLL</definition>
+        <argsstring></argsstring>
+        <name>kDiffuseLL</name>
+        <initializer>{0.25f, 0.75f, 0.25f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="31" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a410c7db9cb910797985fa8736fb9ba8d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kSpecularUL</definition>
+        <argsstring></argsstring>
+        <name>kSpecularUL</name>
+        <initializer>{0.f, 0.f, 0.f, 0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="34" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1afc2a8d6700adf7e70e5f9849e83d98b2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kSpecularUR</definition>
+        <argsstring></argsstring>
+        <name>kSpecularUR</name>
+        <initializer>{0.f, 0.f, 0.f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="35" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a7dd01f7b92669792dbadc15052bd2a20" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kSpecularLR</definition>
+        <argsstring></argsstring>
+        <name>kSpecularLR</name>
+        <initializer>{0.f, 0.f, 0.f, 0.75f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="36" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a42a03bc68c62ac76222382b8523ae234" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kSpecularLL</definition>
+        <argsstring></argsstring>
+        <name>kSpecularLL</name>
+        <initializer>{0.f, 0.f, 0.f, 0.25f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="37" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a35ae34720da97833113647b10220e68e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveInfinity</definition>
+        <argsstring></argsstring>
+        <name>kPositiveInfinity</name>
+        <initializer>= 0x7F800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="40" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a56d71b56c5390b8681d9ec9832014325" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeInfinity</definition>
+        <argsstring></argsstring>
+        <name>kNegativeInfinity</name>
+        <initializer>= 0xFF800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="41" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1aa06c175165f5f124816f490f97592641" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveNaNQuiet</definition>
+        <argsstring></argsstring>
+        <name>kPositiveNaNQuiet</name>
+        <initializer>= 0x7FC00000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="43" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a1b507349726c89ce0e4bbb6b8a4791f6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeNaNQuiet</definition>
+        <argsstring></argsstring>
+        <name>kNegativeNaNQuiet</name>
+        <initializer>= 0xFFC00000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="44" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a3c6692c5fa051533305b42902cf5d132" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveNaNSignaling</definition>
+        <argsstring></argsstring>
+        <name>kPositiveNaNSignaling</name>
+        <initializer>= 0x7F800001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="46" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1ab067ccf08741afdfefebc94e1b8121cf" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeNaNSignaling</definition>
+        <argsstring></argsstring>
+        <name>kNegativeNaNSignaling</name>
+        <initializer>= 0xFF800001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="47" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1ade24e66174c5f11e9350e35d9f94924a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveMax</definition>
+        <argsstring></argsstring>
+        <name>kPositiveMax</name>
+        <initializer>= 0x7F7FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="49" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1ab134eac70fe045e16ff9625f291f3f34" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeMax</definition>
+        <argsstring></argsstring>
+        <name>kNegativeMax</name>
+        <initializer>= 0xFF7FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="50" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1abbb3b13b7a00ec0975616c0e18e2d9bd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveMinNorm</definition>
+        <argsstring></argsstring>
+        <name>kPositiveMinNorm</name>
+        <initializer>= 0x00800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="52" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a54568e7f5bfd56fb8e2f071e464d83d5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeMinNorm</definition>
+        <argsstring></argsstring>
+        <name>kNegativeMinNorm</name>
+        <initializer>= 0x80800000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="53" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a625b9335da553eb264aa9d4b3566f956" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveMaxSubnorm</definition>
+        <argsstring></argsstring>
+        <name>kPositiveMaxSubnorm</name>
+        <initializer>= 0x007FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="55" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1afa29e355772bf7e4e4c3bdc350207fcf" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeMaxSubnorm</definition>
+        <argsstring></argsstring>
+        <name>kNegativeMaxSubnorm</name>
+        <initializer>= 0x807FFFFF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="56" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1ad4cbf1962ed6cefb1cd2ba855267457e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kPositiveMinSubnorm</definition>
+        <argsstring></argsstring>
+        <name>kPositiveMinSubnorm</name>
+        <initializer>= 0x00000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="58" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a948cb3366d1fd1d57f85c0cc5bd020fc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kNegativeMinSubnorm</definition>
+        <argsstring></argsstring>
+        <name>kNegativeMinSubnorm</name>
+        <initializer>= 0x80000001</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="59" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a74927218a7af397d439b0e55b93217a7" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="d0/d92/structFogEntry" kindref="compound">FogEntry</ref></type>
+        <definition>const FogEntry kFogValues[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFogValues</name>
+        <initializer>= {
+    {&quot;0&quot;, 0},
+    {&quot;1&quot;, 0x3f800000},
+    {&quot;10&quot;, 0x41200000},
+    {&quot;100&quot;, 0x42c80000},
+    {&quot;1000&quot;, 0x447a0000},
+    {&quot;-1.24&quot;, 0xbf9eb852},
+    {&quot;-10.75&quot;, 0xc12c0000},
+    {&quot;Inf&quot;, kPositiveInfinity},
+    {&quot;-Inf&quot;, kNegativeInfinity},
+    {&quot;NanQ&quot;, kPositiveNaNQuiet},
+    {&quot;-NanQ&quot;, kNegativeNaNQuiet},
+    {&quot;NanS&quot;, kPositiveNaNSignaling},
+    {&quot;-NanS&quot;, kNegativeNaNSignaling},
+    {&quot;Max&quot;, kPositiveMax},
+    {&quot;-Max&quot;, kNegativeMax},
+    {&quot;MinNorm&quot;, kPositiveMinNorm},
+    {&quot;-MinNorm&quot;, kNegativeMinNorm},
+    {&quot;MaxSubn&quot;, kPositiveMaxSubnorm},
+    {&quot;-MaxSubn&quot;, kNegativeMaxSubnorm},
+    {&quot;MinSubn&quot;, kPositiveMinSubnorm},
+    {&quot;-MinSubn&quot;, kNegativeMinSubnorm},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="66" column="23" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="66" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1acfb118ec29782ebfc841b1ac73ef32a8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFogModes[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFogModes</name>
+        <initializer>= {
+    NV097_SET_FOG_MODE_V_LINEAR,  NV097_SET_FOG_MODE_V_EXP,      NV097_SET_FOG_MODE_V_EXP2,
+    NV097_SET_FOG_MODE_V_EXP_ABS, NV097_SET_FOG_MODE_V_EXP2_ABS, NV097_SET_FOG_MODE_V_LINEAR_ABS,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="90" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d99/fog__exceptional__value__tests_8cpp_1a25142942e837f51c591b53e3b75aea05" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFogGenModes[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFogGenModes</name>
+        <initializer>= {
+    NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA,
+    
+    
+    NV097_SET_FOG_GEN_MODE_V_PLANAR,
+    NV097_SET_FOG_GEN_MODE_V_ABS_PLANAR,
+    NV097_SET_FOG_GEN_MODE_V_FOG_X,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="95" column="27" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="95" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d4/d99/fog__exceptional__value__tests_8cpp_1a3696311b700c211df9e2d6a77a1cf9f2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeTestName</definition>
+        <argsstring>(uint32_t fog_mode, uint32_t gen_mode)</argsstring>
+        <name>MakeTestName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>gen_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="104" column="20" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="104" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d99/fog__exceptional__value__tests_8cpp_1a0e3cb19bbb6c49aa7c721872d4300900" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; PerspectiveVertexShader &gt;</type>
+        <definition>static std::shared_ptr&lt; PerspectiveVertexShader &gt; SetupVertexShader</definition>
+        <argsstring>(TestHost &amp;host, bool use_rcp_shader=false)</argsstring>
+        <name>SetupVertexShader</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_rcp_shader</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="747" column="24" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="747" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d99/fog__exceptional__value__tests_8cpp_1a759cfd4c199baffcfe5c4c5306d17e3a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetupFogParams</definition>
+        <argsstring>(uint32_t fog_mode, uint32_t fog_gen_mode)</argsstring>
+        <name>SetupFogParams</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_gen_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_exceptional_value_tests.cpp" line="769" column="13" bodyfile="src/tests/fog_exceptional_value_tests.cpp" bodystart="769" bodyend="816"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;fog_exceptional_value_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;light.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;models/flat_mesh_grid_model.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/perspective_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kVertexShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;projection_vertex_shader_no_lighting_explicit_fog.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kRCPFogVertexShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;projection_vertex_shader_no_lighting_rcp_fog.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFogStart<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFogEnd<sp/>=<sp/>200.0f;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFogColor<sp/>=<sp/>0xDD0000FF;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kDiffuseUL{0.25f,<sp/>0.5f,<sp/>0.5f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kDiffuseUR{0.25f,<sp/>0.25f,<sp/>0.75f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kDiffuseLR{0.25f,<sp/>0.f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kDiffuseLL{0.25f,<sp/>0.75f,<sp/>0.25f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Specular<sp/>alpha<sp/>is<sp/>used<sp/>for<sp/>NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kSpecularUL{0.f,<sp/>0.f,<sp/>0.f,<sp/>0.f};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kSpecularUR{0.f,<sp/>0.f,<sp/>0.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kSpecularLR{0.f,<sp/>0.f,<sp/>0.f,<sp/>0.75f};</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kSpecularLL{0.f,<sp/>0.f,<sp/>0.f,<sp/>0.25f};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Infinities</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveInfinity<sp/>=<sp/>0x7F800000;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeInfinity<sp/>=<sp/>0xFF800000;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Quiet<sp/>NaN<sp/>on<sp/>x86</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveNaNQuiet<sp/>=<sp/>0x7FC00000;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeNaNQuiet<sp/>=<sp/>0xFFC00000;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Signalling<sp/>NaN<sp/>on<sp/>x86</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveNaNSignaling<sp/>=<sp/>0x7F800001;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeNaNSignaling<sp/>=<sp/>0xFF800001;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Max<sp/>normal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveMax<sp/>=<sp/>0x7F7FFFFF;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeMax<sp/>=<sp/>0xFF7FFFFF;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Min<sp/>normal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveMinNorm<sp/>=<sp/>0x00800000;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeMinNorm<sp/>=<sp/>0x80800000;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Max<sp/>subnormal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveMaxSubnorm<sp/>=<sp/>0x007FFFFF;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeMaxSubnorm<sp/>=<sp/>0x807FFFFF;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Min<sp/>subnormal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositiveMinSubnorm<sp/>=<sp/>0x00000001;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNegativeMinSubnorm<sp/>=<sp/>0x80000001;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="d0/d92/structFogEntry" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d0/d92/structFogEntry" kindref="compound">FogEntry</ref><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>std::string<sp/>name;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>uint32_t<sp/>int_value;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d0/d92/structFogEntry" kindref="compound">FogEntry</ref><sp/>kFogValues[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;0&quot;</highlight><highlight class="normal">,<sp/>0},</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1&quot;</highlight><highlight class="normal">,<sp/>0x3f800000},</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;10&quot;</highlight><highlight class="normal">,<sp/>0x41200000},</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;100&quot;</highlight><highlight class="normal">,<sp/>0x42c80000},</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1000&quot;</highlight><highlight class="normal">,<sp/>0x447a0000},</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-1.24&quot;</highlight><highlight class="normal">,<sp/>0xbf9eb852},</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-10.75&quot;</highlight><highlight class="normal">,<sp/>0xc12c0000},</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Inf&quot;</highlight><highlight class="normal">,<sp/>kPositiveInfinity},</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-Inf&quot;</highlight><highlight class="normal">,<sp/>kNegativeInfinity},</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;NanQ&quot;</highlight><highlight class="normal">,<sp/>kPositiveNaNQuiet},</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-NanQ&quot;</highlight><highlight class="normal">,<sp/>kNegativeNaNQuiet},</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;NanS&quot;</highlight><highlight class="normal">,<sp/>kPositiveNaNSignaling},</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-NanS&quot;</highlight><highlight class="normal">,<sp/>kNegativeNaNSignaling},</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Max&quot;</highlight><highlight class="normal">,<sp/>kPositiveMax},</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-Max&quot;</highlight><highlight class="normal">,<sp/>kNegativeMax},</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;MinNorm&quot;</highlight><highlight class="normal">,<sp/>kPositiveMinNorm},</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-MinNorm&quot;</highlight><highlight class="normal">,<sp/>kNegativeMinNorm},</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;MaxSubn&quot;</highlight><highlight class="normal">,<sp/>kPositiveMaxSubnorm},</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-MaxSubn&quot;</highlight><highlight class="normal">,<sp/>kNegativeMaxSubnorm},</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;MinSubn&quot;</highlight><highlight class="normal">,<sp/>kPositiveMinSubnorm},</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-MinSubn&quot;</highlight><highlight class="normal">,<sp/>kNegativeMinSubnorm},</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFogModes[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_MODE_V_LINEAR,<sp/><sp/>NV097_SET_FOG_MODE_V_EXP,<sp/><sp/><sp/><sp/><sp/><sp/>NV097_SET_FOG_MODE_V_EXP2,</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_MODE_V_EXP_ABS,<sp/>NV097_SET_FOG_MODE_V_EXP2_ABS,<sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFogGenModes[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO(214):<sp/>Radial<sp/>cases<sp/>are<sp/>non-deterministic</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NV097_SET_FOG_GEN_MODE_V_RADIAL,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_GEN_MODE_V_PLANAR,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_GEN_MODE_V_ABS_PLANAR,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_GEN_MODE_V_FOG_X,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeTestName(uint32_t<sp/>fog_mode,<sp/>uint32_t<sp/>gen_mode)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>std::string<sp/>ret<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FogExc&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR:</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-linear&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP:</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-exp&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2:</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-exp2&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP_ABS:</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-exp_abs&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2_ABS:</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-exp2_abs&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS:</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-linear_abs&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unhandled<sp/>fog<sp/>mode&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(gen_mode)<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA:</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-spec_alpha&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_GEN_MODE_V_RADIAL:</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-radial&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_GEN_MODE_V_PLANAR:</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-planar&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_GEN_MODE_V_ABS_PLANAR:</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-abs_planar&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_GEN_MODE_V_FOG_X:</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;-fog_x&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unhandled<sp/>fog<sp/>gen<sp/>mode&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::move(ret);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="695"><highlight class="normal"><ref refid="da/db7/classFogExceptionalValueTests_1a46b78a38ba31f6c4deba7adb36c82da1" kindref="member">FogExceptionalValueTests::FogExceptionalValueTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="696"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Fog<sp/>exceptional<sp/>value&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="697"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fog_gen_mode<sp/>:<sp/>kFogGenModes)<sp/>{</highlight></codeline>
+<codeline lineno="698"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fog_mode<sp/>:<sp/>kFogModes)<sp/>{</highlight></codeline>
+<codeline lineno="699"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(fog_mode,<sp/>fog_gen_mode);</highlight></codeline>
+<codeline lineno="700"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>fog_mode,<sp/>fog_gen_mode]()<sp/>{<sp/>Test(name,<sp/>fog_mode,<sp/>fog_gen_mode,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="701"><highlight class="normal"></highlight></codeline>
+<codeline lineno="702"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>rcp_name<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RCP-&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>rcp_name<sp/>+=<sp/>name;</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[rcp_name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>rcp_name,<sp/>fog_mode,<sp/>fog_gen_mode]()<sp/>{<sp/>Test(rcp_name,<sp/>fog_mode,<sp/>fog_gen_mode,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/>};</highlight></codeline>
+<codeline lineno="705"><highlight class="normal"></highlight></codeline>
+<codeline lineno="706"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>inf_name<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;INF-&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="707"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>inf_name<sp/>+=<sp/>name;</highlight></codeline>
+<codeline lineno="708"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[inf_name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>inf_name,<sp/>fog_mode,<sp/>fog_gen_mode]()<sp/>{</highlight></codeline>
+<codeline lineno="709"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestParams(inf_name,<sp/>fog_mode,<sp/>fog_gen_mode,<sp/>kPositiveInfinity);</highlight></codeline>
+<codeline lineno="710"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="711"><highlight class="normal"></highlight></codeline>
+<codeline lineno="712"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>nan_name<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;NaN-&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="713"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>nan_name<sp/>+=<sp/>name;</highlight></codeline>
+<codeline lineno="714"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[nan_name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>nan_name,<sp/>fog_mode,<sp/>fog_gen_mode]()<sp/>{</highlight></codeline>
+<codeline lineno="715"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestParams(nan_name,<sp/>fog_mode,<sp/>fog_gen_mode,<sp/>kPositiveNaNQuiet);</highlight></codeline>
+<codeline lineno="716"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="717"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="718"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="719"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="720"><highlight class="normal"></highlight></codeline>
+<codeline lineno="721"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/db7/classFogExceptionalValueTests_1a6abafea82451fa58bcbd9653e72e6b13" kindref="member">FogExceptionalValueTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="722"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="723"><highlight class="normal"></highlight></codeline>
+<codeline lineno="724"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="725"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="726"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="727"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="728"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_CONTROL,<sp/>NV097_SET_LIGHT_CONTROL_V_SEPARATE_SPECULAR);</highlight></codeline>
+<codeline lineno="729"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="730"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="731"><highlight class="normal"></highlight></codeline>
+<codeline lineno="732"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Just<sp/>pass<sp/>through<sp/>the<sp/>diffuse<sp/>color.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="733"><highlight class="normal"><sp/><sp/>host_.SetCombinerControl(1);</highlight></codeline>
+<codeline lineno="734"><highlight class="normal"><sp/><sp/>host_.SetInputColorCombiner(0,<sp/>TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_IDENTITY,<sp/>TestHost::SRC_ZERO,</highlight></codeline>
+<codeline lineno="735"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_INVERT);</highlight></codeline>
+<codeline lineno="736"><highlight class="normal"><sp/><sp/>host_.SetInputAlphaCombiner(0,<sp/>TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_IDENTITY,<sp/>TestHost::SRC_ZERO,</highlight></codeline>
+<codeline lineno="737"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::MAP_UNSIGNED_INVERT);</highlight></codeline>
+<codeline lineno="738"><highlight class="normal"></highlight></codeline>
+<codeline lineno="739"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Mix<sp/>between<sp/>the<sp/>output<sp/>pixel<sp/>color<sp/>and<sp/>the<sp/>fog<sp/>color<sp/>using<sp/>the<sp/>fog<sp/>alpha<sp/>value.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="740"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0(TestHost::SRC_FOG,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_FOG,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="741"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="742"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_DIFFUSE,</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">/*specular_add_invert_r0*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">/*<sp/>specular_add_invert_v1*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="744"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>specular_clamp<sp/>*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="745"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="746"><highlight class="normal"></highlight></codeline>
+<codeline lineno="747"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;PerspectiveVertexShader&gt;<sp/>SetupVertexShader(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_rcp_shader<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="748"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>This<sp/>could<sp/>just<sp/>as<sp/>easily<sp/>use<sp/>the<sp/>PassthroughVertexShader<sp/>and<sp/>specify<sp/>all<sp/>values<sp/>via<sp/>vertex<sp/>vals,<sp/>but<sp/>a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="749"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>transforming<sp/>shader<sp/>is<sp/>used<sp/>to<sp/>better<sp/>reproduce<sp/>observed<sp/>issues<sp/>with<sp/>Otogi:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="750"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>https://github.com/xemu-project/xemu/issues/365</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="751"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>depth_buffer_max_value<sp/>=<sp/>host.GetMaxDepthBufferValue();</highlight></codeline>
+<codeline lineno="752"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PerspectiveVertexShader&gt;(host.GetFramebufferWidth(),<sp/>host.GetFramebufferHeight(),<sp/>0.0f,</highlight></codeline>
+<codeline lineno="753"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>depth_buffer_max_value,<sp/>M_PI<sp/>*<sp/>0.25f,<sp/>1.0f,<sp/>200.0f);</highlight></codeline>
+<codeline lineno="754"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(use_rcp_shader)<sp/>{</highlight></codeline>
+<codeline lineno="755"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;SetShader(kRCPFogVertexShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kRCPFogVertexShader));</highlight></codeline>
+<codeline lineno="756"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="757"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;SetShader(kVertexShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kVertexShader));</highlight></codeline>
+<codeline lineno="758"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="759"><highlight class="normal"><sp/><sp/>shader-&gt;SetTransposeOnUpload();</highlight></codeline>
+<codeline lineno="760"><highlight class="normal"><sp/><sp/>vector_t<sp/>camera_position<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>-7.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="761"><highlight class="normal"><sp/><sp/>vector_t<sp/>camera_look_at<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="762"><highlight class="normal"><sp/><sp/>shader-&gt;LookAt(camera_position,<sp/>camera_look_at);</highlight></codeline>
+<codeline lineno="763"><highlight class="normal"></highlight></codeline>
+<codeline lineno="764"><highlight class="normal"><sp/><sp/>host.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="765"><highlight class="normal"></highlight></codeline>
+<codeline lineno="766"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>shader;</highlight></codeline>
+<codeline lineno="767"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="768"><highlight class="normal"></highlight></codeline>
+<codeline lineno="769"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetupFogParams(uint32_t<sp/>fog_mode,<sp/>uint32_t<sp/>fog_gen_mode)<sp/>{</highlight></codeline>
+<codeline lineno="770"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="771"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>Fog<sp/>color<sp/>is<sp/>ABGR<sp/>and<sp/>not<sp/>ARGB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="772"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_COLOR,<sp/>kFogColor);</highlight></codeline>
+<codeline lineno="773"><highlight class="normal"></highlight></codeline>
+<codeline lineno="774"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_GEN_MODE,<sp/>fog_gen_mode);</highlight></codeline>
+<codeline lineno="775"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_MODE,<sp/>fog_mode);</highlight></codeline>
+<codeline lineno="776"><highlight class="normal"></highlight></codeline>
+<codeline lineno="777"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Linear<sp/>parameters.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="778"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Parameterize.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="779"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Right<sp/>now<sp/>these<sp/>are<sp/>just<sp/>the<sp/>near<sp/>and<sp/>far<sp/>planes.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="780"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Exponential<sp/>parameters.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="781"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fog_density<sp/>=<sp/>0.025f;</highlight></codeline>
+<codeline lineno="782"><highlight class="normal"></highlight></codeline>
+<codeline lineno="783"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>LN_256<sp/>=<sp/>5.5452f;</highlight></codeline>
+<codeline lineno="784"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>SQRT_LN_256<sp/>=<sp/>2.3548f;</highlight></codeline>
+<codeline lineno="785"><highlight class="normal"></highlight></codeline>
+<codeline lineno="786"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bias_param<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="787"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>multiplier_param<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="788"><highlight class="normal"></highlight></codeline>
+<codeline lineno="789"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="790"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR:</highlight></codeline>
+<codeline lineno="791"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS:</highlight></codeline>
+<codeline lineno="792"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>multiplier_param<sp/>=<sp/>-1.0f<sp/>/<sp/>(kFogEnd<sp/>-<sp/>kFogStart);</highlight></codeline>
+<codeline lineno="793"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>bias_param<sp/>=<sp/>1.0f<sp/>+<sp/>-kFogEnd<sp/>*<sp/>multiplier_param;</highlight></codeline>
+<codeline lineno="794"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="795"><highlight class="normal"></highlight></codeline>
+<codeline lineno="796"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP:</highlight></codeline>
+<codeline lineno="797"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP_ABS:</highlight></codeline>
+<codeline lineno="798"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>bias_param<sp/>=<sp/>1.5f;</highlight></codeline>
+<codeline lineno="799"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>multiplier_param<sp/>=<sp/>-fog_density<sp/>/<sp/>(2.0f<sp/>*<sp/>LN_256);</highlight></codeline>
+<codeline lineno="800"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="801"><highlight class="normal"></highlight></codeline>
+<codeline lineno="802"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2:</highlight></codeline>
+<codeline lineno="803"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2_ABS:</highlight></codeline>
+<codeline lineno="804"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>bias_param<sp/>=<sp/>1.5f;</highlight></codeline>
+<codeline lineno="805"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>multiplier_param<sp/>=<sp/>-fog_density<sp/>/<sp/>(2.0f<sp/>*<sp/>SQRT_LN_256);</highlight></codeline>
+<codeline lineno="806"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="807"><highlight class="normal"></highlight></codeline>
+<codeline lineno="808"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="809"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="810"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="811"><highlight class="normal"></highlight></codeline>
+<codeline lineno="812"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Figure<sp/>out<sp/>what<sp/>the<sp/>third<sp/>parameter<sp/>is.<sp/>In<sp/>all<sp/>examples<sp/>I&apos;ve<sp/>seen<sp/>it&apos;s<sp/>always<sp/>been<sp/>0.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="813"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV097_SET_FOG_PARAMS,<sp/>bias_param,<sp/>multiplier_param,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="814"><highlight class="normal"></highlight></codeline>
+<codeline lineno="815"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="816"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="817"><highlight class="normal"></highlight></codeline>
+<codeline lineno="818"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FogExceptionalValueTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>uint32_t<sp/>fog_mode,<sp/>uint32_t<sp/>fog_gen_mode,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_rcp)<sp/>{</highlight></codeline>
+<codeline lineno="819"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="820"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>SetupVertexShader(host_,<sp/>use_rcp);</highlight></codeline>
+<codeline lineno="821"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kFogValueIndex<sp/>=<sp/>120<sp/>-<sp/>PerspectiveVertexShader::kShaderUserConstantOffset;</highlight></codeline>
+<codeline lineno="822"><highlight class="normal"></highlight></codeline>
+<codeline lineno="823"><highlight class="normal"><sp/><sp/>SetupFogParams(fog_mode,<sp/>fog_gen_mode);</highlight></codeline>
+<codeline lineno="824"><highlight class="normal"></highlight></codeline>
+<codeline lineno="825"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF232623;</highlight></codeline>
+<codeline lineno="826"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="827"><highlight class="normal"></highlight></codeline>
+<codeline lineno="828"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadWidth<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="829"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadHeight<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="830"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadZ<sp/>=<sp/>0.f;</highlight></codeline>
+<codeline lineno="831"><highlight class="normal"></highlight></codeline>
+<codeline lineno="832"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>unproject<sp/>=<sp/>[shader](vector_t&amp;<sp/>world_point,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="833"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>screen_point{x,<sp/>y,<sp/>z,<sp/>1.f};</highlight></codeline>
+<codeline lineno="834"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;UnprojectPoint(world_point,<sp/>screen_point,<sp/>z);</highlight></codeline>
+<codeline lineno="835"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="836"><highlight class="normal"></highlight></codeline>
+<codeline lineno="837"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>unproject](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="838"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>kQuadWidth;</highlight></codeline>
+<codeline lineno="839"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>kQuadHeight;</highlight></codeline>
+<codeline lineno="840"><highlight class="normal"></highlight></codeline>
+<codeline lineno="841"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="842"><highlight class="normal"></highlight></codeline>
+<codeline lineno="843"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>world_point{0.f,<sp/>0.f,<sp/>0.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="844"><highlight class="normal"></highlight></codeline>
+<codeline lineno="845"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseUL);</highlight></codeline>
+<codeline lineno="846"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularUL);</highlight></codeline>
+<codeline lineno="847"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(-0.099014754297667f,<sp/>-0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="848"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>left,<sp/>top,<sp/>kQuadZ);</highlight></codeline>
+<codeline lineno="849"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="850"><highlight class="normal"></highlight></codeline>
+<codeline lineno="851"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseUR);</highlight></codeline>
+<codeline lineno="852"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularUR);</highlight></codeline>
+<codeline lineno="853"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(0.099014754297667f,<sp/>-0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="854"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>right,<sp/>top,<sp/>kQuadZ<sp/>+<sp/>2.f);</highlight></codeline>
+<codeline lineno="855"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="856"><highlight class="normal"></highlight></codeline>
+<codeline lineno="857"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseLR);</highlight></codeline>
+<codeline lineno="858"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularLR);</highlight></codeline>
+<codeline lineno="859"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(0.099014754297667f,<sp/>0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="860"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>right,<sp/>bottom,<sp/>kQuadZ<sp/>+<sp/>2.f);</highlight></codeline>
+<codeline lineno="861"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="862"><highlight class="normal"></highlight></codeline>
+<codeline lineno="863"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseLL);</highlight></codeline>
+<codeline lineno="864"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularLL);</highlight></codeline>
+<codeline lineno="865"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(-0.099014754297667f,<sp/>0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="866"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>left,<sp/>bottom,<sp/>kQuadZ);</highlight></codeline>
+<codeline lineno="867"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="868"><highlight class="normal"></highlight></codeline>
+<codeline lineno="869"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="870"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="871"><highlight class="normal"></highlight></codeline>
+<codeline lineno="872"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTopPadding<sp/>=<sp/>70.f;</highlight></codeline>
+<codeline lineno="873"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kSidePadding<sp/>=<sp/>48.f;</highlight></codeline>
+<codeline lineno="874"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadSpacingH<sp/>=<sp/>24.f;</highlight></codeline>
+<codeline lineno="875"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadSpacingV<sp/>=<sp/>38.f;</highlight></codeline>
+<codeline lineno="876"><highlight class="normal"></highlight></codeline>
+<codeline lineno="877"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>host_.GetFramebufferWidthF()<sp/>-<sp/>(kSidePadding<sp/>+<sp/>kQuadWidth);</highlight></codeline>
+<codeline lineno="878"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>kSidePadding;</highlight></codeline>
+<codeline lineno="879"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>kTopPadding;</highlight></codeline>
+<codeline lineno="880"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="881"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_col<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="882"><highlight class="normal"></highlight></codeline>
+<codeline lineno="883"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>fog_entry<sp/>:<sp/>kFogValues)<sp/>{</highlight></codeline>
+<codeline lineno="884"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>#fog_value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="885"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;SetUniformF(kFogValueIndex,<sp/>*(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*)(&amp;fog_entry.int_value),<sp/>0.f,<sp/>0.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="886"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="887"><highlight class="normal"></highlight></codeline>
+<codeline lineno="888"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="889"><highlight class="normal"></highlight></codeline>
+<codeline lineno="890"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>text_col,<sp/></highlight><highlight class="stringliteral">&quot;%s%s&quot;</highlight><highlight class="normal">,<sp/>use_rcp<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;1/&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,<sp/>fog_entry.name.c_str());</highlight></codeline>
+<codeline lineno="891"><highlight class="normal"></highlight></codeline>
+<codeline lineno="892"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadWidth<sp/>+<sp/>kQuadSpacingH;</highlight></codeline>
+<codeline lineno="893"><highlight class="normal"><sp/><sp/><sp/><sp/>text_col<sp/>+=<sp/>9;</highlight></codeline>
+<codeline lineno="894"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(left<sp/>&gt;=<sp/>right)<sp/>{</highlight></codeline>
+<codeline lineno="895"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>left<sp/>=<sp/>kSidePadding;</highlight></codeline>
+<codeline lineno="896"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kQuadHeight<sp/>+<sp/>kQuadSpacingV;</highlight></codeline>
+<codeline lineno="897"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>4;</highlight></codeline>
+<codeline lineno="898"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>text_col<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="899"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="900"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="901"><highlight class="normal"></highlight></codeline>
+<codeline lineno="902"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="903"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="904"><highlight class="normal"></highlight></codeline>
+<codeline lineno="905"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="906"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="907"><highlight class="normal"></highlight></codeline>
+<codeline lineno="908"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FogExceptionalValueTests::TestParams(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>name,<sp/>uint32_t<sp/>fog_mode,<sp/>uint32_t<sp/>fog_gen_mode,</highlight></codeline>
+<codeline lineno="909"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>fog_test_value)<sp/>{</highlight></codeline>
+<codeline lineno="910"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="911"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>SetupVertexShader(host_,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="912"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kFogValueIndex<sp/>=<sp/>120<sp/>-<sp/>PerspectiveVertexShader::kShaderUserConstantOffset;</highlight></codeline>
+<codeline lineno="913"><highlight class="normal"><sp/><sp/>shader-&gt;SetUniformF(kFogValueIndex,<sp/>*(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*)(&amp;fog_test_value),<sp/>0.f,<sp/>0.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="914"><highlight class="normal"><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="915"><highlight class="normal"></highlight></codeline>
+<codeline lineno="916"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF232623;</highlight></codeline>
+<codeline lineno="917"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="918"><highlight class="normal"></highlight></codeline>
+<codeline lineno="919"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadWidth<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="920"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadHeight<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="921"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadZ<sp/>=<sp/>0.f;</highlight></codeline>
+<codeline lineno="922"><highlight class="normal"></highlight></codeline>
+<codeline lineno="923"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>unproject<sp/>=<sp/>[shader](vector_t&amp;<sp/>world_point,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="924"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>screen_point{x,<sp/>y,<sp/>z,<sp/>1.f};</highlight></codeline>
+<codeline lineno="925"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;UnprojectPoint(world_point,<sp/>screen_point,<sp/>z);</highlight></codeline>
+<codeline lineno="926"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="927"><highlight class="normal"></highlight></codeline>
+<codeline lineno="928"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>unproject](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="929"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>kQuadWidth;</highlight></codeline>
+<codeline lineno="930"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>kQuadHeight;</highlight></codeline>
+<codeline lineno="931"><highlight class="normal"></highlight></codeline>
+<codeline lineno="932"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="933"><highlight class="normal"></highlight></codeline>
+<codeline lineno="934"><highlight class="normal"><sp/><sp/><sp/><sp/>vector_t<sp/>world_point{0.f,<sp/>0.f,<sp/>0.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="935"><highlight class="normal"></highlight></codeline>
+<codeline lineno="936"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseUL);</highlight></codeline>
+<codeline lineno="937"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularUL);</highlight></codeline>
+<codeline lineno="938"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(-0.099014754297667f,<sp/>-0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="939"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>left,<sp/>top,<sp/>kQuadZ);</highlight></codeline>
+<codeline lineno="940"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="941"><highlight class="normal"></highlight></codeline>
+<codeline lineno="942"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseUR);</highlight></codeline>
+<codeline lineno="943"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularUR);</highlight></codeline>
+<codeline lineno="944"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(0.099014754297667f,<sp/>-0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="945"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>right,<sp/>top,<sp/>kQuadZ<sp/>+<sp/>2.f);</highlight></codeline>
+<codeline lineno="946"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="947"><highlight class="normal"></highlight></codeline>
+<codeline lineno="948"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseLR);</highlight></codeline>
+<codeline lineno="949"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularLR);</highlight></codeline>
+<codeline lineno="950"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(0.099014754297667f,<sp/>0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="951"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>right,<sp/>bottom,<sp/>kQuadZ<sp/>+<sp/>2.f);</highlight></codeline>
+<codeline lineno="952"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="953"><highlight class="normal"></highlight></codeline>
+<codeline lineno="954"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuseLL);</highlight></codeline>
+<codeline lineno="955"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSpecular(kSpecularLL);</highlight></codeline>
+<codeline lineno="956"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetNormal(-0.099014754297667f,<sp/>0.099014754297667,<sp/>-0.990147542976674f);</highlight></codeline>
+<codeline lineno="957"><highlight class="normal"><sp/><sp/><sp/><sp/>unproject(world_point,<sp/>left,<sp/>bottom,<sp/>kQuadZ);</highlight></codeline>
+<codeline lineno="958"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(world_point);</highlight></codeline>
+<codeline lineno="959"><highlight class="normal"></highlight></codeline>
+<codeline lineno="960"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="961"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="962"><highlight class="normal"></highlight></codeline>
+<codeline lineno="963"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="964"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>Fog<sp/>color<sp/>is<sp/>ABGR<sp/>and<sp/>not<sp/>ARGB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="965"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_COLOR,<sp/>kFogColor);</highlight></codeline>
+<codeline lineno="966"><highlight class="normal"></highlight></codeline>
+<codeline lineno="967"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_GEN_MODE,<sp/>fog_gen_mode);</highlight></codeline>
+<codeline lineno="968"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_MODE,<sp/>fog_mode);</highlight></codeline>
+<codeline lineno="969"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="970"><highlight class="normal"></highlight></codeline>
+<codeline lineno="971"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTopPadding<sp/>=<sp/>70.f;</highlight></codeline>
+<codeline lineno="972"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kSidePadding<sp/>=<sp/>48.f;</highlight></codeline>
+<codeline lineno="973"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadSpacingH<sp/>=<sp/>24.f;</highlight></codeline>
+<codeline lineno="974"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadSpacingV<sp/>=<sp/>38.f;</highlight></codeline>
+<codeline lineno="975"><highlight class="normal"></highlight></codeline>
+<codeline lineno="976"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>host_.GetFramebufferWidthF()<sp/>-<sp/>(kSidePadding<sp/>+<sp/>kQuadWidth);</highlight></codeline>
+<codeline lineno="977"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>kSidePadding;</highlight></codeline>
+<codeline lineno="978"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>kTopPadding;</highlight></codeline>
+<codeline lineno="979"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextColStart<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="980"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextColAdvance<sp/>=<sp/>9;</highlight></codeline>
+<codeline lineno="981"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextRowStart<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="982"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextRowAdvance<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="983"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>kTextRowStart;</highlight></codeline>
+<codeline lineno="984"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_col<sp/>=<sp/>kTextColStart;</highlight></codeline>
+<codeline lineno="985"><highlight class="normal"></highlight></codeline>
+<codeline lineno="986"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFogDensity<sp/>=<sp/>0.025f;</highlight></codeline>
+<codeline lineno="987"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>LN_256<sp/>=<sp/>5.5452f;</highlight></codeline>
+<codeline lineno="988"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>SQRT_LN_256<sp/>=<sp/>2.3548f;</highlight></codeline>
+<codeline lineno="989"><highlight class="normal"></highlight></codeline>
+<codeline lineno="990"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NamedValue<sp/>{</highlight></codeline>
+<codeline lineno="991"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>name;</highlight></codeline>
+<codeline lineno="992"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>value;</highlight></codeline>
+<codeline lineno="993"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="994"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>NamedValue<sp/>kBiasValues[]<sp/>=<sp/>{{</highlight><highlight class="stringliteral">&quot;-1&quot;</highlight><highlight class="normal">,<sp/>-1.f},<sp/>{</highlight><highlight class="stringliteral">&quot;1&quot;</highlight><highlight class="normal">,<sp/>1.f},<sp/>{</highlight><highlight class="stringliteral">&quot;1.5&quot;</highlight><highlight class="normal">,<sp/>1.5f},<sp/>{</highlight><highlight class="stringliteral">&quot;1k&quot;</highlight><highlight class="normal">,<sp/>1000.f}};</highlight></codeline>
+<codeline lineno="995"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>NamedValue<sp/>kMultiplierValues[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="996"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Lin&quot;</highlight><highlight class="normal">,<sp/>-1.0f<sp/>/<sp/>(kFogEnd<sp/>-<sp/>kFogStart)},</highlight></codeline>
+<codeline lineno="997"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Exp&quot;</highlight><highlight class="normal">,<sp/>-kFogDensity<sp/>/<sp/>(2.0f<sp/>*<sp/>LN_256)},</highlight></codeline>
+<codeline lineno="998"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;Exp2&quot;</highlight><highlight class="normal">,<sp/>-kFogDensity<sp/>/<sp/>(2.0f<sp/>*<sp/>SQRT_LN_256)},</highlight></codeline>
+<codeline lineno="999"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;1&quot;</highlight><highlight class="normal">,<sp/>1.f},</highlight></codeline>
+<codeline lineno="1000"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;0&quot;</highlight><highlight class="normal">,<sp/>0.f},</highlight></codeline>
+<codeline lineno="1001"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="stringliteral">&quot;-1k&quot;</highlight><highlight class="normal">,<sp/>-1000.f},</highlight></codeline>
+<codeline lineno="1002"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="1003"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1004"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>bias_param<sp/>:<sp/>kBiasValues)<sp/>{</highlight></codeline>
+<codeline lineno="1005"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>multiplier_param<sp/>:<sp/>kMultiplierValues)<sp/>{</highlight></codeline>
+<codeline lineno="1006"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="1007"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_FOG_PARAMS,<sp/>bias_param.value,<sp/>multiplier_param.value,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="1008"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="1009"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1010"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="1011"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1012"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>text_col,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>multiplier_param.name);</highlight></codeline>
+<codeline lineno="1013"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1014"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadWidth<sp/>+<sp/>kQuadSpacingH;</highlight></codeline>
+<codeline lineno="1015"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>text_col<sp/>+=<sp/>kTextColAdvance;</highlight></codeline>
+<codeline lineno="1016"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(left<sp/>&gt;=<sp/>right)<sp/>{</highlight></codeline>
+<codeline lineno="1017"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>left<sp/>=<sp/>kSidePadding;</highlight></codeline>
+<codeline lineno="1018"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kQuadHeight<sp/>+<sp/>kQuadSpacingV;</highlight></codeline>
+<codeline lineno="1019"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>kTextRowAdvance;</highlight></codeline>
+<codeline lineno="1020"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>text_col<sp/>=<sp/>kTextColStart;</highlight></codeline>
+<codeline lineno="1021"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1022"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1023"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1024"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1025"><highlight class="normal"><sp/><sp/>text_row<sp/>=<sp/>kTextRowStart<sp/>+<sp/>2;</highlight></codeline>
+<codeline lineno="1026"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>bias_param<sp/>:<sp/>kBiasValues)<sp/>{</highlight></codeline>
+<codeline lineno="1027"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>54,<sp/></highlight><highlight class="stringliteral">&quot;B<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>bias_param.name);</highlight></codeline>
+<codeline lineno="1028"><highlight class="normal"><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>kTextRowAdvance;</highlight></codeline>
+<codeline lineno="1029"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="1030"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1031"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="1032"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="1033"><highlight class="normal"></highlight></codeline>
+<codeline lineno="1034"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="1035"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/fog_exceptional_value_tests.cpp"/>
+  </compounddef>
+</doxygen>

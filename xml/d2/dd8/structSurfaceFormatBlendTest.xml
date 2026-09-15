@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/dd8/structSurfaceFormatBlendTest" kind="struct" language="C++" prot="public">
+    <compoundname>SurfaceFormatBlendTest</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d2/dd8/structSurfaceFormatBlendTest_1aab43f01fbd1a2f42f1e482f5ad3a16c9" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* SurfaceFormatBlendTest::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>SurfaceFormatBlendTest::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_surface_tests.cpp" line="6" column="14" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/dd8/structSurfaceFormatBlendTest_1afb5b382f49ecd5a60a7a30926be5dc09" prot="public" static="no" mutable="no">
+        <type>TestHost::SurfaceColorFormat</type>
+        <definition>TestHost::SurfaceColorFormat SurfaceFormatBlendTest::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>SurfaceFormatBlendTest::format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/blend_surface_tests.cpp" line="7" column="32" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="7" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/blend_surface_tests.cpp" line="5" column="1" bodyfile="src/tests/blend_surface_tests.cpp" bodystart="5" bodyend="8"/>
+    <listofallmembers>
+      <member refid="d2/dd8/structSurfaceFormatBlendTest_1afb5b382f49ecd5a60a7a30926be5dc09" prot="public" virt="non-virtual"><scope>SurfaceFormatBlendTest</scope><name>format</name></member>
+      <member refid="d2/dd8/structSurfaceFormatBlendTest_1aab43f01fbd1a2f42f1e482f5ad3a16c9" prot="public" virt="non-virtual"><scope>SurfaceFormatBlendTest</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

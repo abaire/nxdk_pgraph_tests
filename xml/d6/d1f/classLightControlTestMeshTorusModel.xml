@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/d1f/classLightControlTestMeshTorusModel" kind="class" language="C++" prot="public">
+    <compoundname>LightControlTestMeshTorusModel</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d6/d1f/classLightControlTestMeshTorusModel_1aa12ba067cde7300c497becadba87efca" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshTorusModel::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>LightControlTestMeshTorusModel::vertices_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="39" column="9" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d1f/classLightControlTestMeshTorusModel_1a4b3206b35dfbbc8eaf7cdf1bc4654395" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshTorusModel::normals_</definition>
+        <argsstring></argsstring>
+        <name>normals_</name>
+        <qualifiedname>LightControlTestMeshTorusModel::normals_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="40" column="9" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="d6/d1f/classLightControlTestMeshTorusModel_1a3271d2c81425909e46298b4d1826e5b5" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshTorusModel::texcoords_</definition>
+        <argsstring></argsstring>
+        <name>texcoords_</name>
+        <qualifiedname>LightControlTestMeshTorusModel::texcoords_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="41" column="9" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1af28707d13a502bc067dd4d8aa79ffe86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshTorusModel::LightControlTestMeshTorusModel</definition>
+        <argsstring>()</argsstring>
+        <name>LightControlTestMeshTorusModel</name>
+        <qualifiedname>LightControlTestMeshTorusModel::LightControlTestMeshTorusModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="12" column="3" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1a66b7c0612ee2845b43589fceabb9e945" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshTorusModel::LightControlTestMeshTorusModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>LightControlTestMeshTorusModel</name>
+        <qualifiedname>LightControlTestMeshTorusModel::LightControlTestMeshTorusModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="13" column="3" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1a04443cc0f465cdd6d7ee8cc8d994956c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshTorusModel::LightControlTestMeshTorusModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular, const vector_t &amp;back_diffuse, const vector_t &amp;back_specular)</argsstring>
+        <name>LightControlTestMeshTorusModel</name>
+        <qualifiedname>LightControlTestMeshTorusModel::LightControlTestMeshTorusModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="15" column="3" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1a832ab71fc5805b7ab7708ecdfce32729" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t LightControlTestMeshTorusModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>LightControlTestMeshTorusModel::GetVertexCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="19" column="13" bodyfile="src/models/light_control_test_mesh_torus_model.cpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1ad38dcf64078eb964c29d1a42dd8d3703" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshTorusModel::GetVertexPositions</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>LightControlTestMeshTorusModel::GetVertexPositions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="22" column="16" bodyfile="src/models/light_control_test_mesh_torus_model.cpp" bodystart="33" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1abe914576bed15e0149b139bfef7339c4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshTorusModel::GetVertexNormals</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>LightControlTestMeshTorusModel::GetVertexNormals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="23" column="16" bodyfile="src/models/light_control_test_mesh_torus_model.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d1f/classLightControlTestMeshTorusModel_1aab07ea009f38b507d5e48fffbb2147cb" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightControlTestMeshTorusModel::ReleaseData</definition>
+        <argsstring>() override</argsstring>
+        <name>ReleaseData</name>
+        <qualifiedname>LightControlTestMeshTorusModel::ReleaseData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_torus_model.h" line="24" column="8" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="24" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightControlTestMeshTorusModel</label>
+        <link refid="d6/d1f/classLightControlTestMeshTorusModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightControlTestMeshTorusModel</label>
+        <link refid="d6/d1f/classLightControlTestMeshTorusModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/light_control_test_mesh_torus_model.h" line="10" column="1" bodyfile="src/models/light_control_test_mesh_torus_model.h" bodystart="10" bodyend="42"/>
+    <listofallmembers>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1a832ab71fc5805b7ab7708ecdfce32729" prot="public" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>GetVertexCount</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1abe914576bed15e0149b139bfef7339c4" prot="protected" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>GetVertexNormals</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1ad38dcf64078eb964c29d1a42dd8d3703" prot="protected" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>GetVertexPositions</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1af28707d13a502bc067dd4d8aa79ffe86" prot="public" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>LightControlTestMeshTorusModel</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1a66b7c0612ee2845b43589fceabb9e945" prot="public" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>LightControlTestMeshTorusModel</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1a04443cc0f465cdd6d7ee8cc8d994956c" prot="public" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>LightControlTestMeshTorusModel</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1a4b3206b35dfbbc8eaf7cdf1bc4654395" prot="protected" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>normals_</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1aab07ea009f38b507d5e48fffbb2147cb" prot="protected" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>ReleaseData</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1a3271d2c81425909e46298b4d1826e5b5" prot="protected" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>texcoords_</name></member>
+      <member refid="d6/d1f/classLightControlTestMeshTorusModel_1aa12ba067cde7300c497becadba87efca" prot="protected" virt="non-virtual"><scope>LightControlTestMeshTorusModel</scope><name>vertices_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

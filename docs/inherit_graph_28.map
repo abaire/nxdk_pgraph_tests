@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,151,191,191"/>
+<area shape="rect" id="Node000001" href="$d7/d37/classFlatMeshGridModel.html" title=" " alt="" coords="273,5,422,31"/>
+<area shape="poly" id="edge11_Node000000_Node000001" title=" " alt="" coords="123,139,172,88,203,63,237,41,272,28,274,32,240,46,207,67,176,92,126,142"/>
+<area shape="rect" id="Node000002" href="$d6/df1/classLightControlTestMeshConeModel.html" title=" " alt="" coords="250,55,445,95"/>
+<area shape="poly" id="edge12_Node000000_Node000002" title=" " alt="" coords="150,143,238,105,273,93,274,98,240,110,152,148"/>
+<area shape="rect" id="Node000003" href="$d4/d27/classLightControlTestMeshCylinderModel.html" title=" " alt="" coords="239,119,455,159"/>
+<area shape="poly" id="edge13_Node000000_Node000003" title=" " alt="" coords="204,155,239,151,240,156,205,160"/>
+<area shape="rect" id="Node000004" href="$d1/de6/classLightControlTestMeshSphereModel.html" title=" " alt="" coords="244,183,451,223"/>
+<area shape="poly" id="edge14_Node000000_Node000004" title=" " alt="" coords="205,182,244,187,244,193,204,188"/>
+<area shape="rect" id="Node000005" href="$dc/d32/classLightControlTestMeshSuzanneModel.html" title=" " alt="" coords="239,247,456,287"/>
+<area shape="poly" id="edge15_Node000000_Node000005" title=" " alt="" coords="152,195,240,233,274,245,273,250,238,238,150,200"/>
+<area shape="rect" id="Node000006" href="$d6/d1f/classLightControlTestMeshTorusModel.html" title=" " alt="" coords="249,311,445,351"/>
+<area shape="poly" id="edge16_Node000000_Node000006" title=" " alt="" coords="127,200,177,250,207,275,240,297,265,309,263,314,237,302,204,280,173,254,123,204"/>
+</map>

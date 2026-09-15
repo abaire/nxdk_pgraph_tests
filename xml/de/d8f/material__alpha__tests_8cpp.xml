@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d8f/material__alpha__tests_8cpp" kind="file" language="C++">
+    <compoundname>material_alpha_tests.cpp</compoundname>
+    <includes refid="d1/d39/material__alpha__tests_8h" local="yes">material_alpha_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <includes local="yes">xbox_math_matrix.h</includes>
+    <includes local="yes">xbox_math_types.h</includes>
+    <incdepgraph>
+      <node id="12">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/material_alpha_tests.cpp</label>
+        <link refid="de/d8f/material__alpha__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>material_alpha_tests.h</label>
+        <link refid="d1/d39/material__alpha__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="14">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="9">
+        <label>thread</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="13">
+        <label>windows.h</label>
+      </node>
+      <node id="31">
+        <label>xbox_math_matrix.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="de/d8f/material__alpha__tests_8cpp_1a92b3b183ccff06d467692f099a58dd31" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDiffuseSource[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kDiffuseSource</name>
+        <initializer>= {
+    NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_MATERIAL,
+    NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE,
+    NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_alpha_tests.cpp" line="15" column="27" bodyfile="src/tests/material_alpha_tests.cpp" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d8f/material__alpha__tests_8cpp_1a17217c9c0236c6350c53c9b0761f46e7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kAlphaValues[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kAlphaValues</name>
+        <initializer>= {
+    -1.0f, 0.0f, 0.05f, 0.25f, 0.5f, 0.75f, 1.0f, 2.0f,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_alpha_tests.cpp" line="21" column="24" bodyfile="src/tests/material_alpha_tests.cpp" bodystart="21" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="de/d8f/material__alpha__tests_8cpp_1ae39103cbf34f21faf6bf996279a8b9d3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string DiffuseSourceName</definition>
+        <argsstring>(uint32_t diffuse_source)</argsstring>
+        <name>DiffuseSourceName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>diffuse_source</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_alpha_tests.cpp" line="184" column="20" bodyfile="src/tests/material_alpha_tests.cpp" bodystart="184" bodyend="197" declfile="src/tests/material_alpha_tests.cpp" declline="25" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;material_alpha_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_matrix.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox_math_types.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">XboxMath;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDiffuseSource[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_MATERIAL,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kAlphaValues[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>-1.0f,<sp/>0.0f,<sp/>0.05f,<sp/>0.25f,<sp/>0.5f,<sp/>0.75f,<sp/>1.0f,<sp/>2.0f,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>DiffuseSourceName(uint32_t<sp/>diffuse_source);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">MaterialAlphaTests::MaterialAlphaTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Material<sp/>alpha&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>source<sp/>:<sp/>kDiffuseSource)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>alpha<sp/>:<sp/>kAlphaValues)<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(source,<sp/>alpha);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>source,<sp/>alpha]()<sp/>{<sp/>Test(source,<sp/>alpha);<sp/>};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>test;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dc/d3e/classMaterialAlphaTests_1a440036cf14e86b139e5feafbcb1e7bff" kindref="member">MaterialAlphaTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>CreateGeometry();</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>matrix4_t<sp/>matrix;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>MatrixSetIdentity(matrix);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>host_.SetFixedFunctionModelViewMatrix(matrix);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>host_.SetFixedFunctionProjectionMatrix(matrix);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="dc/d3e/classMaterialAlphaTests_1a0ed76294c22f3852b07cf7742e48c8b2" kindref="member">MaterialAlphaTests::Deinitialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE,<sp/>0);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE,<sp/>0);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" kindref="member">TestSuite::Deinitialize</ref>();</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>MaterialAlphaTests::CreateGeometry()<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetFramebufferWidth());</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>-1.0f<sp/>*<sp/>floorf(fb_width<sp/>/<sp/>4.0f);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>floorf(fb_width<sp/>/<sp/>4.0f);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>-1.0f<sp/>*<sp/>floorf(fb_height<sp/>/<sp/>3.0f);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>floorf(fb_height<sp/>/<sp/>3.0f);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_width<sp/>=<sp/>left<sp/>+<sp/>(right<sp/>-<sp/>left)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>uint32_t<sp/>num_quads<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(6<sp/>*<sp/>num_quads);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>Color<sp/>ul{0.4f,<sp/>0.1f,<sp/>0.1f,<sp/>0.25f};</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>Color<sp/>ll{0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>Color<sp/>lr{0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>Color<sp/>ur{0.5f,<sp/>0.5f,<sp/>0.5f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>Color<sp/>ul_s{0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>0.5f};</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>Color<sp/>ll_s{1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>0.1f};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>Color<sp/>lr_s{1.0f,<sp/>1.0f,<sp/>0.0f,<sp/>0.5f};</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>Color<sp/>ur_s{0.0f,<sp/>1.0f,<sp/>1.0f,<sp/>0.75f};</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>10.0f;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineBiTri(0,<sp/>left<sp/>+<sp/>10,<sp/>top<sp/>+<sp/>4,<sp/>mid_width<sp/>+<sp/>10,<sp/>bottom<sp/>-<sp/>10,<sp/>z,<sp/>z,<sp/>z,<sp/>z,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur,<sp/>ul_s,<sp/>ll_s,<sp/>lr_s,</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ur_s);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Point<sp/>normals<sp/>for<sp/>half<sp/>the<sp/>quad<sp/>away<sp/>from<sp/>the<sp/>camera.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>Vertex*<sp/>v<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>v[0].normal[2]<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>v[1].normal[2]<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>v[2].normal[2]<sp/>=<sp/>-1.0f;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>ul.SetRGBA(1.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>ul_s.SetRGBA(1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>0.25f);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>ll.SetGreyA(0.5,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>ll_s.SetRGBA(0.3f,<sp/>0.3f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>ur.SetRGBA(0.0f,<sp/>0.3f,<sp/>0.8f,<sp/>0.15f);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>ur_s.SetRGBA(0.9f,<sp/>0.9f,<sp/>0.4f,<sp/>0.33);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>lr.SetRGBA(1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>0.75f);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>lr_s.SetRGBA(0.95f,<sp/>0.5f,<sp/>0.8f,<sp/>0.05);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>z<sp/>=<sp/>9.75f;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineBiTri(1,<sp/>mid_width<sp/>-<sp/>10,<sp/>top<sp/>+<sp/>4,<sp/>right<sp/>-<sp/>10,<sp/>bottom<sp/>-<sp/>10,<sp/>z,<sp/>z,<sp/>z,<sp/>z,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur,<sp/>ul_s,<sp/>ll_s,<sp/>lr_s,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ur_s);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>MaterialAlphaTests::Test(uint32_t<sp/>diffuse_source,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>material_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF303030;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>up<sp/>a<sp/>directional<sp/>light.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_ENABLE_MASK,<sp/>NV097_SET_LIGHT_ENABLE_MASK_LIGHT0_INFINITE);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Ambient<sp/>color<sp/>comes<sp/>from<sp/>the<sp/>material&apos;s<sp/>diffuse<sp/>color.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_AMBIENT_COLOR,<sp/>0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_DIFFUSE_COLOR,<sp/>0x3F6EEEEF,<sp/>0x3F3BBBBC,<sp/>0x3F2AAAAB);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_SPECULAR_COLOR,<sp/>0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_LOCAL_RANGE,<sp/>0x7149f2ca);<sp/><sp/></highlight><highlight class="comment">//<sp/>1e+30</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR,<sp/>0,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_INFINITE_HALF_VECTOR<sp/>+<sp/>0x0C,<sp/>0,<sp/>0,<sp/>0x3F800000);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTROL0,<sp/>0x100001);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>0x0C,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>0x10,<sp/>0);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>0x1C,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA4UB<sp/>+<sp/>0x20,<sp/>0);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV10_TCL_PRIMITIVE_3D_POINT_PARAMETERS_ENABLE,<sp/>0x0);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS,<sp/>0xBF7730E0);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>4,<sp/>0xC0497B30);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>8,<sp/>0x404BAEF8);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>12,<sp/>0xBF6E9EE4);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>16,<sp/>0xC0463F88);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_PARAMS<sp/>+<sp/>20,<sp/>0x404A97CF);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHT_CONTROL,<sp/>0x10001);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_LIGHTING_ENABLE,<sp/>0x1);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE,<sp/>0x1);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_COLOR_MATERIAL,<sp/>diffuse_source);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_SCENE_AMBIENT_COLOR,<sp/>0x0,<sp/>0x3C6DDACA,<sp/>0x0);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION,<sp/>0x0);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION<sp/>+<sp/>4,<sp/>0x0);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_MATERIAL_EMISSION<sp/>+<sp/>8,<sp/>0x0);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Material&apos;s<sp/>diffuse<sp/>alpha<sp/>float</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><ref refid="dd/df8/structPGRAPHDiffToken" kindref="compound">PGRAPHDiffToken</ref><sp/>diff_token(</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>uint32_t<sp/>alpha_int<sp/>=<sp/>*(uint32_t*)&amp;material_alpha;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_MATERIAL_ALPHA,<sp/>alpha_int);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>diff_token.DumpDiff();</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>host_.DrawArrays(host_.POSITION<sp/>|<sp/>host_.NORMAL<sp/>|<sp/>host_.DIFFUSE<sp/>|<sp/>host_.SPECULAR);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/>std::string<sp/>source<sp/>=<sp/>DiffuseSourceName(diffuse_source);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Src:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>source.c_str());</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Alpha:<sp/>%g\n&quot;</highlight><highlight class="normal">,<sp/>material_alpha);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(diffuse_source,<sp/>material_alpha);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal">std::string<sp/>MaterialAlphaTests::MakeTestName(uint32_t<sp/>diffuse_source,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>material_alpha)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>std::string<sp/>ret<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;MatA_S&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/>DiffuseSourceName(diffuse_source);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_A&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;%X&quot;</highlight><highlight class="normal">,<sp/>*(uint32_t*)&amp;material_alpha);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/>buf;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::move(ret);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>DiffuseSourceName(uint32_t<sp/>diffuse_source)<sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(diffuse_source<sp/>&amp;<sp/>0x30)<sp/>{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_MATERIAL:</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;Mat&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_DIFFUSE:</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;VDiffuse&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_COLOR_MATERIAL_DIFFUSE_FROM_VERTEX_SPECULAR:</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;VSpec&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;%X&quot;</highlight><highlight class="normal">,<sp/>diffuse_source);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/material_alpha_tests.cpp"/>
+  </compounddef>
+</doxygen>
