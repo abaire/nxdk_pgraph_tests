@@ -5,11 +5,15 @@
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
+#include "texture_generator.h"
 #include "vertex_buffer.h"
 
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
 const uint32_t kDefaultDMAColorChannel = 9;
+
+static constexpr uint32_t kCheckerboardA = 0xFF202020;
+static constexpr uint32_t kCheckerboardB = 0xFF707070;
 
 static constexpr uint32_t kColorMasks[] = {
     0x00000000,
@@ -215,16 +219,16 @@ void ClearTests::CreateGeometry() {
   auto fb_width = host_.GetFramebufferWidthF();
   auto fb_height = host_.GetFramebufferHeightF();
 
-  float width = floorf(fb_width / (1.0f + 2.0f * static_cast<float>(num_quads)));
-  float height = floorf(fb_height / 4.0f);
+  float width = floorf(fb_width / (1.f + 2.f * static_cast<float>(num_quads)));
+  float height = floorf(fb_height / 4.f);
 
   float x = width;
   float y = floorf(fb_height * 0.5f) - (height * 0.5f);
-  float z = 10.0f;
+  float z = 10.f;
 
   for (auto i = 0; i < num_quads; ++i) {
     buffer->DefineBiTri(i, x, y, x + width, y + height, z, z, z, z, ul, ll, lr, ur);
-    x += width * 2.0f;
+    x += width * 2.f;
     z -= 0.5f;
   }
 }
@@ -262,8 +266,50 @@ void ClearTests::TestColorMask(uint32_t color_mask, bool depth_write_enable) {
   FinishDraw(name, true);
 }
 
+static void DrawCheckerboardBackground(TestHost& host) {
+  static constexpr auto kTextureSize = 256;
+  auto texture_memory = host.GetTextureMemoryForStage(1);
+  GenerateRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kCheckerboardA,
+                           kCheckerboardB);
+  host.SetBlend(false);
+  host.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+  host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  host.SetTextureStageEnabled(1, true);
+  host.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+
+  auto& texture_stage = host.GetTextureStage(1);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8B8G8R8));
+  texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+  host.SetupTextureStages();
+
+  const float right = host.GetFramebufferWidth();
+  const float bottom = host.GetFramebufferHeight();
+  static constexpr float kZ = 0.f;
+
+  host.Begin(TestHost::PRIMITIVE_QUADS);
+  host.SetTexCoord1(0.f, 0.f);
+  host.SetVertex(0.f, 0.f, kZ);
+
+  host.SetTexCoord1(kTextureSize, 0.f);
+  host.SetVertex(right, 0.f, kZ);
+
+  host.SetTexCoord1(kTextureSize, kTextureSize);
+  host.SetVertex(right, bottom, kZ);
+
+  host.SetTexCoord1(0.f, kTextureSize);
+  host.SetVertex(0.f, bottom, kZ);
+  host.End();
+
+  host.PBKitBusyWait();
+
+  host.SetTextureStageEnabled(1, false);
+  host.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host.SetBlend(true);
+}
+
 void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, const std::string& test_name) {
   static constexpr uint32_t kTextureSize = 128;
+  static constexpr uint32_t kHalfTextureSize = kTextureSize >> 1;
   static constexpr auto kBlackCenterMarkSize = 2.f;
 
   uint32_t quad_height = kTextureSize;
@@ -299,7 +345,6 @@ void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, con
   };
 
   auto draw_quad = [this, quad_height](float left, float top) {
-    host_.SetBlend(false);
     host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
     host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
     host_.SetTextureStageEnabled(0, true);
@@ -311,26 +356,46 @@ void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, con
     host_.SetupTextureStages();
 
     const float right = left + kTextureSize;
+    const float center = left + kHalfTextureSize;
     const float bottom = top + static_cast<float>(quad_height);
     static constexpr float kZ = 0.f;
 
-    host_.Begin(TestHost::PRIMITIVE_QUADS);
-    host_.SetTexCoord0(0.0f, 0.0f);
-    host_.SetVertex(left, top, kZ);
+    host_.SetBlend(false);
+    {
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(0.f, 0.f);
+      host_.SetVertex(left, top, kZ);
 
-    host_.SetTexCoord0(kTextureSize, 0.0f);
-    host_.SetVertex(right, top, kZ);
+      host_.SetTexCoord0(kHalfTextureSize, 0.f);
+      host_.SetVertex(center, top, kZ);
 
-    host_.SetTexCoord0(kTextureSize, static_cast<float>(quad_height));
-    host_.SetVertex(right, bottom, kZ);
+      host_.SetTexCoord0(kHalfTextureSize, static_cast<float>(quad_height));
+      host_.SetVertex(center, bottom, kZ);
 
-    host_.SetTexCoord0(0.0f, static_cast<float>(quad_height));
-    host_.SetVertex(left, bottom, kZ);
-    host_.End();
+      host_.SetTexCoord0(0.f, static_cast<float>(quad_height));
+      host_.SetVertex(left, bottom, kZ);
+      host_.End();
+    }
+
+    host_.SetBlend(true);
+    {
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(kHalfTextureSize, 0.f);
+      host_.SetVertex(center, top, kZ);
+
+      host_.SetTexCoord0(kTextureSize, 0.f);
+      host_.SetVertex(right, top, kZ);
+
+      host_.SetTexCoord0(kTextureSize, static_cast<float>(quad_height));
+      host_.SetVertex(right, bottom, kZ);
+
+      host_.SetTexCoord0(kHalfTextureSize, static_cast<float>(quad_height));
+      host_.SetVertex(center, bottom, kZ);
+      host_.End();
+    }
 
     host_.SetTextureStageEnabled(0, false);
     host_.SetShaderStageProgram(TestHost::STAGE_NONE);
-    host_.SetBlend(true);
   };
 
   static constexpr uint32_t kClearColors[] = {
@@ -338,6 +403,7 @@ void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, con
   };
 
   host_.PrepareDraw(0xFF220022);
+  DrawCheckerboardBackground(host_);
 
   static constexpr float kLeftStart = 48.f;
   static constexpr float kQuadSpacing = 16.f;
@@ -346,8 +412,16 @@ void ClearTests::TestSurfaceFmt(TestHost::SurfaceColorFormat surface_format, con
 
   pb_print("%s\n", test_name.c_str());
 
+  static constexpr auto kStartColumn = 4;
+  auto text_row = 3;
+  auto text_col = kStartColumn;
   for (auto clear_color : kClearColors) {
-    pb_print("0x%08X, ", clear_color);
+    pb_printat(text_row, text_col, "0x%08X", clear_color);
+    text_col += 15;
+    if (text_col > 50) {
+      text_row = 15;
+      text_col = kStartColumn;
+    }
     clear_texture(clear_color);
     draw_quad(left, top);
 
