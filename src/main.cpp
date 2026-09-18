@@ -95,6 +95,7 @@
 #include "tests/stencil_func_tests.h"
 #include "tests/stencil_tests.h"
 #include "tests/stipple_tests.h"
+#include "tests/surface_as_vertex_array_tests.h"
 #include "tests/surface_clip_tests.h"
 #include "tests/surface_format_tests.h"
 #include "tests/surface_pitch_tests.h"
@@ -531,6 +532,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(StencilFuncTests)
   REG_TEST(StencilTests)
   REG_TEST(StippleTests)
+  REG_TEST(SurfaceAsVertexArrayTests)
   REG_TEST(SurfaceClipTests)
   REG_TEST(SurfaceFormatTests)
   REG_TEST(SurfacePitchTests)

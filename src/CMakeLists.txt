@@ -95,6 +95,7 @@ generate_nv2a_vshinc_files(
         shaders/projection_vertex_shader_no_lighting_explicit_fog.vsh
         shaders/projection_vertex_shader_no_lighting_rcp_fog.vsh
         shaders/rcc_clamp_test.vsh
+        shaders/surface_displacement.vsh
         shaders/vertex_shader_mac_independence_tests.vsh
         shaders/weight_to_color.vsh
 )
@@ -319,6 +320,8 @@ add_executable(
         tests/stencil_tests.h
         tests/stipple_tests.cpp
         tests/stipple_tests.h
+        tests/surface_as_vertex_array_tests.cpp
+        tests/surface_as_vertex_array_tests.h
         tests/surface_clip_tests.cpp
         tests/surface_clip_tests.h
         tests/surface_format_tests.cpp
