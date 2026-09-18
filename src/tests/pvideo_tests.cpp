@@ -856,11 +856,9 @@ void PvideoTests::TestColorKey() {
       //      {"Fmt_X1R5G5B5_O1R5G5B5", TestHost::SCF_X1R5G5B5_O1R5G5B5},
       //      {"Fmt_R5G6B5", TestHost::SCF_R5G6B5},
       {"Fmt_X8R8G8B8_Z8R8G8B8", TestHost::SCF_X8R8G8B8_Z8R8G8B8},
-      // TODO: Reenable when xemu#2427 is fixed.
-      //      {"Fmt_X8R8G8B8_O8R8G8B8", TestHost::SCF_X8R8G8B8_O8R8G8B8},
-      // TODO: Reenable when xemu#2426 is fixed.
-      //      {"Fmt_X1A7R8G8B8_Z1A7R8G8B8", TestHost::SCF_X1A7R8G8B8_Z1A7R8G8B8},
-      //      {"Fmt_X1A7R8G8B8_O1A7R8G8B8", TestHost::SCF_X1A7R8G8B8_O1A7R8G8B8},
+      {"Fmt_X8R8G8B8_O8R8G8B8", TestHost::SCF_X8R8G8B8_O8R8G8B8},
+      {"Fmt_X1A7R8G8B8_Z1A7R8G8B8", TestHost::SCF_X1A7R8G8B8_Z1A7R8G8B8},
+      {"Fmt_X1A7R8G8B8_O1A7R8G8B8", TestHost::SCF_X1A7R8G8B8_O1A7R8G8B8},
       {"Fmt_A8R8G8B8", TestHost::SCF_A8R8G8B8},
   };
 
