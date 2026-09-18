@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_bdeba5f06b852fec80257c0bf4c3c36e" kind="dir">
+    <compoundname>src/models</compoundname>
+    <innerfile refid="de/d7e/flat__mesh__grid__model_8cpp">flat_mesh_grid_model.cpp</innerfile>
+    <innerfile refid="d8/d7c/flat__mesh__grid__model_8h">flat_mesh_grid_model.h</innerfile>
+    <innerfile refid="d4/da8/light__control__test__mesh__cone__model_8cpp">light_control_test_mesh_cone_model.cpp</innerfile>
+    <innerfile refid="db/d93/light__control__test__mesh__cone__model_8h">light_control_test_mesh_cone_model.h</innerfile>
+    <innerfile refid="da/d48/light__control__test__mesh__cylinder__model_8cpp">light_control_test_mesh_cylinder_model.cpp</innerfile>
+    <innerfile refid="df/d44/light__control__test__mesh__cylinder__model_8h">light_control_test_mesh_cylinder_model.h</innerfile>
+    <innerfile refid="da/dda/light__control__test__mesh__sphere__model_8cpp">light_control_test_mesh_sphere_model.cpp</innerfile>
+    <innerfile refid="df/dfa/light__control__test__mesh__sphere__model_8h">light_control_test_mesh_sphere_model.h</innerfile>
+    <innerfile refid="dc/d46/light__control__test__mesh__suzanne__model_8cpp">light_control_test_mesh_suzanne_model.cpp</innerfile>
+    <innerfile refid="d7/dcf/light__control__test__mesh__suzanne__model_8h">light_control_test_mesh_suzanne_model.h</innerfile>
+    <innerfile refid="d2/dd1/light__control__test__mesh__torus__model_8cpp">light_control_test_mesh_torus_model.cpp</innerfile>
+    <innerfile refid="d5/d6d/light__control__test__mesh__torus__model_8h">light_control_test_mesh_torus_model.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/models/"/>
+  </compounddef>
+</doxygen>

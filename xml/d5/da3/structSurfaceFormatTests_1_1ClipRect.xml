@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/da3/structSurfaceFormatTests_1_1ClipRect" kind="struct" language="C++" prot="public">
+    <compoundname>SurfaceFormatTests::ClipRect</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d5/da3/structSurfaceFormatTests_1_1ClipRect_1a6a88ca572d19364988732b4dca191cb9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SurfaceFormatTests::ClipRect::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>SurfaceFormatTests::ClipRect::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="22" column="14" bodyfile="src/tests/surface_format_tests.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/da3/structSurfaceFormatTests_1_1ClipRect_1a040c01ac2ec7e2b435f7c7d6f36f08ff" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SurfaceFormatTests::ClipRect::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>SurfaceFormatTests::ClipRect::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="23" column="14" bodyfile="src/tests/surface_format_tests.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/da3/structSurfaceFormatTests_1_1ClipRect_1ab646e240971262b5dd12390d5e1cdc4f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SurfaceFormatTests::ClipRect::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>SurfaceFormatTests::ClipRect::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="24" column="14" bodyfile="src/tests/surface_format_tests.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/da3/structSurfaceFormatTests_1_1ClipRect_1a0d82a9f17bb6abb5cfcd9aa2547be61b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t SurfaceFormatTests::ClipRect::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>SurfaceFormatTests::ClipRect::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_format_tests.h" line="25" column="14" bodyfile="src/tests/surface_format_tests.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/surface_format_tests.h" line="21" column="3" bodyfile="src/tests/surface_format_tests.h" bodystart="21" bodyend="26"/>
+    <listofallmembers>
+      <member refid="d5/da3/structSurfaceFormatTests_1_1ClipRect_1a0d82a9f17bb6abb5cfcd9aa2547be61b" prot="public" virt="non-virtual"><scope>SurfaceFormatTests::ClipRect</scope><name>height</name></member>
+      <member refid="d5/da3/structSurfaceFormatTests_1_1ClipRect_1ab646e240971262b5dd12390d5e1cdc4f" prot="public" virt="non-virtual"><scope>SurfaceFormatTests::ClipRect</scope><name>width</name></member>
+      <member refid="d5/da3/structSurfaceFormatTests_1_1ClipRect_1a6a88ca572d19364988732b4dca191cb9" prot="public" virt="non-virtual"><scope>SurfaceFormatTests::ClipRect</scope><name>x</name></member>
+      <member refid="d5/da3/structSurfaceFormatTests_1_1ClipRect_1a040c01ac2ec7e2b435f7c7d6f36f08ff" prot="public" virt="non-virtual"><scope>SurfaceFormatTests::ClipRect</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

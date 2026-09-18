@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/d27/classLightControlTestMeshCylinderModel" kind="class" language="C++" prot="public">
+    <compoundname>LightControlTestMeshCylinderModel</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d4/d27/classLightControlTestMeshCylinderModel_1ac345834efc7489559171b6303eef59b6" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshCylinderModel::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::vertices_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="39" column="9" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d27/classLightControlTestMeshCylinderModel_1a949b3ccc7c4551bad53a8e5cd1549091" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshCylinderModel::normals_</definition>
+        <argsstring></argsstring>
+        <name>normals_</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::normals_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="40" column="9" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d27/classLightControlTestMeshCylinderModel_1a5cf7d45a5d657a73880e4dabb97a6ab1" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* LightControlTestMeshCylinderModel::texcoords_</definition>
+        <argsstring></argsstring>
+        <name>texcoords_</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::texcoords_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="41" column="9" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1a4f467a4f33aac0596997ecefd89520ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshCylinderModel::LightControlTestMeshCylinderModel</definition>
+        <argsstring>()</argsstring>
+        <name>LightControlTestMeshCylinderModel</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::LightControlTestMeshCylinderModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="12" column="3" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1a60804f651f394e18b881664837f75801" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshCylinderModel::LightControlTestMeshCylinderModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>LightControlTestMeshCylinderModel</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::LightControlTestMeshCylinderModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="13" column="3" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="13" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1a3e8756d3e70e11f71f37c123c8bddf49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LightControlTestMeshCylinderModel::LightControlTestMeshCylinderModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular, const vector_t &amp;back_diffuse, const vector_t &amp;back_specular)</argsstring>
+        <name>LightControlTestMeshCylinderModel</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::LightControlTestMeshCylinderModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>back_specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="15" column="3" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1a911a8f2d34e963d9e4eb0b693d566955" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t LightControlTestMeshCylinderModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::GetVertexCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="19" column="13" bodyfile="src/models/light_control_test_mesh_cylinder_model.cpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1abcb64c45f800c13403e39f09ff0b79e7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshCylinderModel::GetVertexPositions</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::GetVertexPositions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="22" column="16" bodyfile="src/models/light_control_test_mesh_cylinder_model.cpp" bodystart="33" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1a1f2cd177900d798cec2d45b6ffc19edb" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * LightControlTestMeshCylinderModel::GetVertexNormals</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::GetVertexNormals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="23" column="16" bodyfile="src/models/light_control_test_mesh_cylinder_model.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d27/classLightControlTestMeshCylinderModel_1a5e12978b7d82799e382cfa744e24be8e" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void LightControlTestMeshCylinderModel::ReleaseData</definition>
+        <argsstring>() override</argsstring>
+        <name>ReleaseData</name>
+        <qualifiedname>LightControlTestMeshCylinderModel::ReleaseData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/light_control_test_mesh_cylinder_model.h" line="24" column="8" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="24" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>LightControlTestMeshCylinderModel</label>
+        <link refid="d4/d27/classLightControlTestMeshCylinderModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>LightControlTestMeshCylinderModel</label>
+        <link refid="d4/d27/classLightControlTestMeshCylinderModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/light_control_test_mesh_cylinder_model.h" line="10" column="1" bodyfile="src/models/light_control_test_mesh_cylinder_model.h" bodystart="10" bodyend="42"/>
+    <listofallmembers>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a911a8f2d34e963d9e4eb0b693d566955" prot="public" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>GetVertexCount</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a1f2cd177900d798cec2d45b6ffc19edb" prot="protected" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>GetVertexNormals</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1abcb64c45f800c13403e39f09ff0b79e7" prot="protected" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>GetVertexPositions</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a4f467a4f33aac0596997ecefd89520ab" prot="public" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>LightControlTestMeshCylinderModel</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a60804f651f394e18b881664837f75801" prot="public" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>LightControlTestMeshCylinderModel</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a3e8756d3e70e11f71f37c123c8bddf49" prot="public" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>LightControlTestMeshCylinderModel</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a949b3ccc7c4551bad53a8e5cd1549091" prot="protected" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>normals_</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a5e12978b7d82799e382cfa744e24be8e" prot="protected" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>ReleaseData</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1a5cf7d45a5d657a73880e4dabb97a6ab1" prot="protected" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>texcoords_</name></member>
+      <member refid="d4/d27/classLightControlTestMeshCylinderModel_1ac345834efc7489559171b6303eef59b6" prot="protected" virt="non-virtual"><scope>LightControlTestMeshCylinderModel</scope><name>vertices_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

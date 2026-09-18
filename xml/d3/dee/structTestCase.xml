@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d3/dee/structTestCase" kind="struct" language="C++" prot="public">
+    <compoundname>TestCase</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d3/dee/structTestCase_1ac24ffac3ef39d6b0b3024dc82f54cfb1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestCase::color_mask</definition>
+        <argsstring></argsstring>
+        <name>color_mask</name>
+        <qualifiedname>TestCase::color_mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_mask_blend_tests.cpp" line="11" column="12" bodyfile="src/tests/color_mask_blend_tests.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1a031ec22352674c5d995e874905568b5e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestCase::blend_op</definition>
+        <argsstring></argsstring>
+        <name>blend_op</name>
+        <qualifiedname>TestCase::blend_op</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_mask_blend_tests.cpp" line="12" column="12" bodyfile="src/tests/color_mask_blend_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1a88e2c709169e3bd2e93bbe025bb315bc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestCase::sfactor</definition>
+        <argsstring></argsstring>
+        <name>sfactor</name>
+        <qualifiedname>TestCase::sfactor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_mask_blend_tests.cpp" line="13" column="12" bodyfile="src/tests/color_mask_blend_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1a917b7eedcd903a054e4bcc34d4e11f8b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TestCase::dfactor</definition>
+        <argsstring></argsstring>
+        <name>dfactor</name>
+        <qualifiedname>TestCase::dfactor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_mask_blend_tests.cpp" line="14" column="12" bodyfile="src/tests/color_mask_blend_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1a360ffca7ee712394933d36ca4651e6fc" prot="public" static="no" mutable="no">
+        <type>const char</type>
+        <definition>const char TestCase::name[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>name</name>
+        <qualifiedname>TestCase::name</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.cpp" line="28" column="14" bodyfile="src/tests/material_color_tests.cpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1ad7bb7aa702340866d8d9a405de012124" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TestCase::specular_power</definition>
+        <argsstring></argsstring>
+        <name>specular_power</name>
+        <qualifiedname>TestCase::specular_power</qualifiedname>
+        <initializer>{100.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.cpp" line="29" column="9" bodyfile="src/tests/material_color_tests.cpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1ac89783705509b19314b27e0792f6cd5c" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TestCase::filename</definition>
+        <argsstring></argsstring>
+        <name>filename</name>
+        <qualifiedname>TestCase::filename</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="26" column="14" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d3/dee/structTestCase_1a0d0b1b45db2342f8d4b3fec885f8179e" prot="public" static="no" mutable="no">
+        <type>TextureFormatDXTTests::CompressedTextureFormat</type>
+        <definition>TextureFormatDXTTests::CompressedTextureFormat TestCase::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>TestCase::format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_dxt_tests.cpp" line="27" column="50" bodyfile="src/tests/texture_format_dxt_tests.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d3/dee/structTestCase_1aedd9ca8fe32515772073f2576703a4bc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void TestCase::SetColor</definition>
+        <argsstring>(char color_code, Color &amp;color)</argsstring>
+        <name>SetColor</name>
+        <qualifiedname>TestCase::SetColor</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>color_code</declname>
+        </param>
+        <param>
+          <type>Color &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.cpp" line="31" column="15" bodyfile="src/tests/material_color_tests.cpp" bodystart="31" bodyend="89"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d3/dee/structTestCase_1a86ae76f6ef7e3f5979140786d0638df7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="d2/d33/structMaterialColorTests_1_1TestConfig" kindref="compound">MaterialColorTests::TestConfig</ref></type>
+        <definition>MaterialColorTests::TestConfig TestCase::BuildConfig</definition>
+        <argsstring>() const</argsstring>
+        <name>BuildConfig</name>
+        <qualifiedname>TestCase::BuildConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.cpp" line="91" column="34" bodyfile="src/tests/material_color_tests.cpp" bodystart="91" bodyend="110"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/color_mask_blend_tests.cpp" line="10" column="1" bodyfile="src/tests/color_mask_blend_tests.cpp" bodystart="10" bodyend="15"/>
+    <listofallmembers>
+      <member refid="d3/dee/structTestCase_1a031ec22352674c5d995e874905568b5e" prot="public" virt="non-virtual"><scope>TestCase</scope><name>blend_op</name></member>
+      <member refid="d3/dee/structTestCase_1a86ae76f6ef7e3f5979140786d0638df7" prot="public" virt="non-virtual"><scope>TestCase</scope><name>BuildConfig</name></member>
+      <member refid="d3/dee/structTestCase_1ac24ffac3ef39d6b0b3024dc82f54cfb1" prot="public" virt="non-virtual"><scope>TestCase</scope><name>color_mask</name></member>
+      <member refid="d3/dee/structTestCase_1a917b7eedcd903a054e4bcc34d4e11f8b" prot="public" virt="non-virtual"><scope>TestCase</scope><name>dfactor</name></member>
+      <member refid="d3/dee/structTestCase_1ac89783705509b19314b27e0792f6cd5c" prot="public" virt="non-virtual"><scope>TestCase</scope><name>filename</name></member>
+      <member refid="d3/dee/structTestCase_1a0d0b1b45db2342f8d4b3fec885f8179e" prot="public" virt="non-virtual"><scope>TestCase</scope><name>format</name></member>
+      <member refid="d3/dee/structTestCase_1a360ffca7ee712394933d36ca4651e6fc" prot="public" virt="non-virtual"><scope>TestCase</scope><name>name</name></member>
+      <member refid="d3/dee/structTestCase_1aedd9ca8fe32515772073f2576703a4bc" prot="public" virt="non-virtual"><scope>TestCase</scope><name>SetColor</name></member>
+      <member refid="d3/dee/structTestCase_1a88e2c709169e3bd2e93bbe025bb315bc" prot="public" virt="non-virtual"><scope>TestCase</scope><name>sfactor</name></member>
+      <member refid="d3/dee/structTestCase_1ad7bb7aa702340866d8d9a405de012124" prot="public" virt="non-virtual"><scope>TestCase</scope><name>specular_power</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
