@@ -14,10 +14,6 @@
 // clang-format off
 static constexpr uint32_t kDisplacementShader[] = {
 #include "surface_displacement.vshinc"
-
-
-
-
 };
 // clang-format on
 
@@ -260,6 +256,21 @@ void SurfaceAsVertexArrayTests::Deinitialize() {
   FreeTestSurfaces();
 }
 
+void SurfaceAsVertexArrayTests::TearDownTest() {
+  TestSuite::TearDownTest();
+
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_ALPHA_TEST_ENABLE, false);
+  Pushbuffer::End();
+}
+
 void SurfaceAsVertexArrayTests::DrawQuads(const void *diffuse_surface) {
   auto shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(shader);
@@ -386,6 +397,13 @@ void SurfaceAsVertexArrayTests::TestMultiStream() {
   SetVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4, 4, surface_b_);
 
   DrawArrays(TestHost::PRIMITIVE_QUADS, 8);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+  Pushbuffer::End();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
 
   ClearVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
   ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
@@ -541,7 +559,10 @@ void SurfaceAsVertexArrayTests::TestRenderScalePattern() {
   }
 
   Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
   Pushbuffer::End();
+
+  host_.SetVertexShaderProgram(nullptr);
 
   ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
   ClearVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR);

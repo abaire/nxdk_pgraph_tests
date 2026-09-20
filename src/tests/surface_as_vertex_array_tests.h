@@ -26,6 +26,7 @@ class SurfaceAsVertexArrayTests : public TestSuite {
 
   void Initialize() override;
   void Deinitialize() override;
+  void TearDownTest() override;
 
  private:
   void AllocateTestSurfaces(bool need_surface_b = false);
