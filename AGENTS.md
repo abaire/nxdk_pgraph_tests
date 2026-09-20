@@ -6,6 +6,10 @@
 - Install `nv2a-vsh` from Pypi (`pip install nv2a-vsh`)
 - Install llvm, lld, bison, flex, clang-format
 
+## Building
+
+- Always build via cmake (e.g. `cmake --build cmake-build-debug`)
+
 ## Testing
 
 - Testing this repository requires access to a physical Microsoft Xbox. This will not be available to agents. Ensure
@@ -15,3 +19,4 @@
 
 - Assume readers are expert C/C++ programmers and avoid unnecessary/obvious comments.
 - Run `git clang-format` before any submission
+- Add doccomments for all tests, including `@tc <test_name>` tags describing each test case and its expected output.
