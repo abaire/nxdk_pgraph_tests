@@ -10,13 +10,13 @@
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader_no_lighting.h"
-#include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
 #include "vertex_buffer.h"
 #include "xbox-swizzle/swizzle.h"
 
+static void DrawCheckerboardBackground(TestHost &host);
 static int GenerateGradientSurface(SDL_Surface **gradient_surface, int width, int height);
 static int GeneratePalettizedGradientSurface(uint8_t **gradient_surface, int width, int height,
                                              TestHost::PaletteSize size);
@@ -82,8 +82,11 @@ void TextureFormatTests::Initialize() {
 
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-  PixelShaderProgram::LoadTexturedPixelShader();
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 }
+
+void TextureFormatTests::Deinitialize() { host_.ClearVertexBuffer(); }
 
 void TextureFormatTests::CreateGeometry() {
   std::shared_ptr<VertexBuffer> buffer = host_.AllocateVertexBuffer(6);
@@ -108,6 +111,7 @@ void TextureFormatTests::Test(const TextureFormatInfo &texture_format) {
   SDL_FreeSurface(gradient_surface);
   ASSERT(!update_texture_result && "Failed to set texture");
 
+  host_.SetupTextureStages();
   host_.PrepareDraw(0xFE202020);
   host_.DrawArrays();
 
@@ -161,147 +165,6 @@ void TextureFormatTests::TestPalettized(TestHost::PaletteSize size) {
   pb_draw_text_screen();
 
   FinishDraw(test_name);
-}
-
-// TODO: Implement mipmap generation and fully populate the texture.
-// void TextureFormatTests::TestMipMap(const TextureFormatInfo &texture_format) {
-//  auto shader = std::make_shared<PassthroughVertexShader>();
-//  host_.SetVertexShaderProgram(shader);
-//
-//  host_.SetTextureFormat(texture_format);
-//  std::string test_name = MakeTestName(texture_format, true);
-//
-//  SDL_Surface *gradient_surface;
-//  int update_texture_result =
-//      GenerateGradientSurface(&gradient_surface, (int)host_.GetMaxTextureWidth(), (int)host_.GetMaxTextureHeight());
-//  ASSERT(!update_texture_result && "Failed to generate SDL surface");
-//
-//  update_texture_result = host_.SetTexture(gradient_surface);
-//  SDL_FreeSurface(gradient_surface);
-//  ASSERT(!update_texture_result && "Failed to set texture");
-//
-//  auto &texture_stage = host_.GetTextureStage(0);
-//  texture_stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_TENT_TENT_LOD);
-//  host_.SetupTextureStages();
-//
-//  host_.PrepareDraw(0xFE202020);
-//
-//  auto draw = [this](float left, float top, float size) {
-//    float right = left + size;
-//    float bottom = top + size;
-//
-//    host_.Begin(TestHost::PRIMITIVE_QUADS);
-//    host_.SetTexCoord0(0.f, 0.f);
-//    host_.SetVertex(left, top, 0.1f, 1.f);
-//
-//    host_.SetTexCoord0(1.f, 0.f);
-//    host_.SetVertex(right, top, 0.1f, 1.f);
-//
-//    host_.SetTexCoord0(1.f, 1.f);
-//    host_.SetVertex(right, bottom, 0.1f, 1.f);
-//
-//    host_.SetTexCoord0(0.f, 1.f);
-//    host_.SetVertex(left, bottom, 0.1f, 1.f);
-//    host_.End();
-//  };
-//
-//  draw(5.f, 80.f, 256.f);
-//  draw(270.f, 80.f, 128.f);
-//  draw(410.f, 80.f, 64.f);
-//  draw(480.f, 80.f, 32.f);
-//  draw(520.f, 80.f, 16.f);
-//  draw(270.f, 220.f, 8.f);
-//  draw(280.f, 220.f, 4.f);
-//  draw(290.f, 220.f, 2.f);
-//  draw(300.f, 220.f, 1.f);
-//
-//  texture_stage.SetMipMapLevels(1);
-//
-//  pb_print("N: %s\n", test_name.c_str());
-//  pb_print("F: 0x%x\n", texture_format.xbox_format);
-//  pb_print("SZ: %d\n", texture_format.xbox_swizzled);
-//  pb_print("C: %d\n", texture_format.require_conversion);
-//  pb_print("W: %d\n", host_.GetMaxTextureWidth());
-//  pb_print("H: %d\n", host_.GetMaxTextureHeight());
-//  pb_print("P: %d\n", texture_format.xbox_bpp * host_.GetMaxTextureWidth() / 8);
-//  pb_draw_text_screen();
-//
-//  FinishDraw(test_name);
-//}
-
-std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format, bool mipmap) {
-  std::string test_name = mipmap ? "Mip_" : "TexFmt_";
-
-  test_name += texture_format.name;
-  if (texture_format.xbox_linear) {
-    test_name += "_L";
-  }
-  return std::move(test_name);
-}
-
-std::string TextureFormatTests::MakePalettizedTestName(TestHost::PaletteSize size) {
-  std::string test_name = "TexFmt_";
-  auto &fmt = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
-  test_name += fmt.name;
-
-  char buf[32] = {0};
-  snprintf(buf, 31, "_p%d", size);
-  test_name += buf;
-
-  return std::move(test_name);
-}
-
-static constexpr uint32_t kCheckerboardA = 0xFF202020;
-static constexpr uint32_t kCheckerboardB = 0xFF707070;
-
-static void DrawCheckerboardBackground(TestHost &host) {
-  static constexpr auto kTextureSize = 256;
-  auto texture_memory = host.GetTextureMemoryForStage(1);
-  GenerateRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kCheckerboardA,
-                           kCheckerboardB);
-  host.SetBlend(false);
-  host.SetFinalCombiner0Just(TestHost::SRC_TEX1);
-  host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
-  host.SetTextureStageEnabled(1, true);
-  host.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
-
-  auto &texture_stage = host.GetTextureStage(1);
-  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8B8G8R8));
-  texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
-  host.SetupTextureStages();
-
-  const float right = host.GetFramebufferWidth();
-  const float bottom = host.GetFramebufferHeight();
-  static constexpr float kZ = 0.f;
-
-  host.Begin(TestHost::PRIMITIVE_QUADS);
-  host.SetTexCoord1(0.f, 0.f);
-  host.SetVertex(0.f, 0.f, kZ);
-
-  host.SetTexCoord1(kTextureSize, 0.f);
-  host.SetVertex(right, 0.f, kZ);
-
-  host.SetTexCoord1(kTextureSize, kTextureSize);
-  host.SetVertex(right, bottom, kZ);
-
-  host.SetTexCoord1(0.f, kTextureSize);
-  host.SetVertex(0.f, bottom, kZ);
-  host.End();
-
-  host.PBKitBusyWait();
-
-  host.SetTextureStageEnabled(1, false);
-  host.SetShaderStageProgram(TestHost::STAGE_NONE);
-  host.SetBlend(true);
-}
-
-std::string TextureFormatTests::MakeXAlphaTestName(const TextureFormatInfo &texture_format) {
-  std::string test_name = "TexFmt_XAlpha_";
-  test_name += texture_format.name;
-  if (texture_format.xbox_linear) {
-    test_name += "_L";
-  }
-  return test_name;
 }
 
 void TextureFormatTests::TestXAlpha(const TextureFormatInfo &texture_format) {
@@ -393,8 +256,6 @@ void TextureFormatTests::TestXAlpha(const TextureFormatInfo &texture_format) {
 
     // Row 1: Left half unblended Tex0.rgb
     host_.SetBlend(false);
-    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
-    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetTexCoord0(0.f, 0.f);
@@ -421,10 +282,11 @@ void TextureFormatTests::TestXAlpha(const TextureFormatInfo &texture_format) {
     host_.SetVertex(center_x, bottom1, kZ);
     host_.End();
 
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0, true);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
     // Row 2: Full quad unblended Tex0.aaa (replicate alpha to RGB)
     host_.SetBlend(false);
-    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0, true);
-    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 
     host_.Begin(TestHost::PRIMITIVE_QUADS);
     host_.SetTexCoord0(0.f, 0.f);
@@ -436,6 +298,9 @@ void TextureFormatTests::TestXAlpha(const TextureFormatInfo &texture_format) {
     host_.SetTexCoord0(0.f, v_max);
     host_.SetVertex(left, bottom2, kZ);
     host_.End();
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
   }
 
   std::string test_name = MakeXAlphaTestName(texture_format);
@@ -463,16 +328,89 @@ void TextureFormatTests::TestXAlpha(const TextureFormatInfo &texture_format) {
   pb_draw_text_screen();
   FinishDraw(test_name);
 
-  // Restore state
-  host_.SetBlend(false);
-  host_.SetTextureStageEnabled(0, true);
-  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
-  PixelShaderProgram::LoadTexturedPixelShader();
+  host_.SetBlend();
+  host_.SetDefaultTextureParams(0);
+  host_.SetDefaultTextureParams(1);
+  host_.SetupTextureStages();
 
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, texture_dma_addr);
-  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
   Pushbuffer::End();
+}
+
+std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
+  std::string test_name = "TexFmt_";
+
+  test_name += texture_format.name;
+  if (texture_format.xbox_linear) {
+    test_name += "_L";
+  }
+  return std::move(test_name);
+}
+
+std::string TextureFormatTests::MakePalettizedTestName(TestHost::PaletteSize size) {
+  std::string test_name = "TexFmt_";
+  auto &fmt = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8);
+  test_name += fmt.name;
+
+  char buf[32] = {0};
+  snprintf(buf, 31, "_p%d", size);
+  test_name += buf;
+
+  return std::move(test_name);
+}
+
+static constexpr uint32_t kCheckerboardA = 0xFF202020;
+static constexpr uint32_t kCheckerboardB = 0xFF707070;
+
+static void DrawCheckerboardBackground(TestHost &host) {
+  static constexpr auto kTextureSize = 256;
+  auto texture_memory = host.GetTextureMemoryForStage(1);
+  GenerateRGBACheckerboard(texture_memory, 0, 0, kTextureSize, kTextureSize, kTextureSize * 4, kCheckerboardA,
+                           kCheckerboardB);
+  host.SetBlend(false);
+  host.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+  host.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  host.SetTextureStageEnabled(1, true);
+  host.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+
+  auto &texture_stage = host.GetTextureStage(1);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8B8G8R8));
+  texture_stage.SetImageDimensions(kTextureSize, kTextureSize);
+  host.SetupTextureStages();
+
+  const float right = host.GetFramebufferWidth();
+  const float bottom = host.GetFramebufferHeight();
+  static constexpr float kZ = 0.f;
+
+  host.Begin(TestHost::PRIMITIVE_QUADS);
+  host.SetTexCoord1(0.f, 0.f);
+  host.SetVertex(0.f, 0.f, kZ);
+
+  host.SetTexCoord1(kTextureSize, 0.f);
+  host.SetVertex(right, 0.f, kZ);
+
+  host.SetTexCoord1(kTextureSize, kTextureSize);
+  host.SetVertex(right, bottom, kZ);
+
+  host.SetTexCoord1(0.f, kTextureSize);
+  host.SetVertex(0.f, bottom, kZ);
+  host.End();
+
+  host.PBKitBusyWait();
+
+  host.SetTextureStageEnabled(1, false);
+  host.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host.SetBlend(true);
+}
+
+std::string TextureFormatTests::MakeXAlphaTestName(const TextureFormatInfo &texture_format) {
+  std::string test_name = "XAlpha_";
+  test_name += texture_format.name;
+  if (texture_format.xbox_linear) {
+    test_name += "_L";
+  }
+  return test_name;
 }
 
 static int GenerateGradientSurface(SDL_Surface **gradient_surface, int width, int height) {

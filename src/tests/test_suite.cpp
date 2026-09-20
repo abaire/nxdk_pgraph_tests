@@ -10,15 +10,12 @@
 #include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "pushbuffer.h"
-#include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "xbox_math_matrix.h"
 #include "xbox_math_types.h"
 
 using namespace XboxMath;
-
-static constexpr char kFTPLogProgressFilename[] = "nxdk_pgraph_tests_progress.log";
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -208,9 +205,7 @@ void TestSuite::Initialize() {
                           false, /*specular_add_invert_r0*/ false, /* specular_add_invert_v1*/ false,
                           /* specular_clamp */ true);
 
-  while (pb_busy()) {
-    /* Wait for completion... */
-  }
+  host_.PBKitBusyWait();
 
   matrix4_t identity_matrix;
   MatrixSetIdentity(identity_matrix);
@@ -331,9 +326,6 @@ void TestSuite::Initialize() {
   host_.SetTextureStageEnabled(3, false);
   host_.SetShaderStageProgram(TestHost::STAGE_NONE);
   host_.SetShaderStageInput(0, 0);
-
-  PixelShaderProgram::LoadUntexturedPixelShader();
-  PixelShaderProgram::DisablePixelShader();
 
   host_.ClearAllVertexAttributeStrideOverrides();
 

@@ -9,7 +9,6 @@
 #include "debug_output.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader_no_lighting.h"
-#include "shaders/pixel_shader_program.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
@@ -59,7 +58,15 @@ void TextureSignedComponentTests::Initialize() {
   host_.SetTextureStageEnabled(0, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
 
-  PixelShaderProgram::LoadTexturedPixelShader();
+  host_.SetCombinerControl(1);
+  host_.SetInputColorCombiner(0, TestHost::SRC_TEX0, false, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_DIFFUSE,
+                              false, TestHost::MAP_UNSIGNED_IDENTITY);
+  host_.SetInputAlphaCombiner(0, TestHost::SRC_TEX0, true, TestHost::MAP_UNSIGNED_IDENTITY, TestHost::SRC_DIFFUSE, true,
+                              TestHost::MAP_UNSIGNED_IDENTITY);
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_R0, true);
 }
 
 void TextureSignedComponentTests::CreateGeometry() {

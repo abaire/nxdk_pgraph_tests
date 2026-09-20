@@ -19,6 +19,7 @@ class TextureFormatTests : public TestSuite {
   TextureFormatTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
+  void Deinitialize() override;
 
  private:
   void CreateGeometry();
@@ -32,7 +33,7 @@ class TextureFormatTests : public TestSuite {
   //! Tests alpha channel sampling and blending behavior for texture formats with dummy/unused "X" alpha components.
   void TestXAlpha(const TextureFormatInfo &texture_format);
 
-  static std::string MakeTestName(const TextureFormatInfo &texture_format, bool mipmap = false);
+  static std::string MakeTestName(const TextureFormatInfo &texture_format);
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
   static std::string MakeXAlphaTestName(const TextureFormatInfo &texture_format);
 };

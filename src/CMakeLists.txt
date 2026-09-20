@@ -100,13 +100,6 @@ generate_nv2a_vshinc_files(
         shaders/weight_to_color.vsh
 )
 
-generate_pixelshader_inl_files(
-        generated_fp20_pixel_shaders
-        SOURCES
-        shaders/textured_pixelshader.ps.cg
-        shaders/untextured_pixelshader.ps.cg
-)
-
 generate_vertexshader_inl_files(
         generated_vp20_vertex_shaders
         SOURCES
@@ -154,8 +147,6 @@ add_library(
         shaders/fixed_function_approximation_shader.h
         shaders/perspective_vertex_shader_no_lighting.cpp
         shaders/perspective_vertex_shader_no_lighting.h
-        shaders/pixel_shader_program.cpp
-        shaders/pixel_shader_program.h
         test_driver.cpp
         test_driver.h
         test_host.cpp
@@ -182,7 +173,6 @@ target_include_directories(
 target_link_libraries(
         optimized_sources
         PUBLIC
-        generated_fp20_pixel_shaders
         generated_vp20_vertex_shaders
         generated_nv2a_vertex_shaders
         nxdk_ftp_client_lib::client
