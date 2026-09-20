@@ -502,6 +502,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(FogGenTests)
   REG_TEST(FogInfiniteFogCoordinateTests)
   REG_TEST(FogParamTests)
+  REG_TEST(FogPlanarVertexShaderTests)
   REG_TEST(FogTests)
   REG_TEST(FogVec4CoordTests)
   REG_TEST(FrontFaceTests)

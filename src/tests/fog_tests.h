@@ -15,7 +15,9 @@ class VertexBuffer;
 
 using namespace PBKitPlusPlus;
 
-// Tests behavior of the Fog code.
+/**
+ * Tests behavior of NV2A fixed-function fog modes and generation modes.
+ */
 class FogTests : public TestSuite {
  public:
   enum FogMode {
@@ -50,6 +52,9 @@ class FogTests : public TestSuite {
   std::shared_ptr<VertexBuffer> vertex_buffer_;
 };
 
+/**
+ * Tests fog evaluation when using a programmable vertex shader that outputs oFog.
+ */
 class FogCustomShaderTests : public FogTests {
  public:
   FogCustomShaderTests(TestHost& host, std::string output_dir, const Config& config,
@@ -57,12 +62,19 @@ class FogCustomShaderTests : public FogTests {
   void Initialize() override;
 };
 
+/**
+ * Tests fog evaluation with infinite fog coordinate values (oFog = +inf) produced by a vertex shader.
+ */
 class FogInfiniteFogCoordinateTests : public FogCustomShaderTests {
  public:
   FogInfiniteFogCoordinateTests(TestHost& host, std::string output_dir, const Config& config);
   void Initialize() override;
 };
 
+/**
+ * Tests vector components of the oFog vertex shader output register, verifying that NV2A takes the
+ * last-written component value regardless of the destination mask.
+ */
 class FogVec4CoordTests : public FogCustomShaderTests {
  public:
   struct TestConfig {
@@ -87,6 +99,26 @@ class FogVec4CoordTests : public FogCustomShaderTests {
 
   void SetShader(const TestConfig& config) const;
   static std::string MakeTestName(const TestConfig& config);
+};
+
+/**
+ * Tests planar fog coordinate generation and evaluation when using a programmable vertex shader.
+ *
+ * Reproduces the planar fog configuration used in Tron 2.0 loading screen / glow blur passes,
+ * verifying whether NV2A hardware clamps Fog.a to [0, 1] when linear fog parameters yield a factor > 1.0,
+ * whether FOG_GEN_MODE_V_PLANAR vs V_FOG_X alters vertex shader fog coordinate evaluation, and how
+ * oFog values map to Fog.a under linear fogging.
+ */
+class FogPlanarVertexShaderTests : public FogCustomShaderTests {
+ public:
+  FogPlanarVertexShaderTests(TestHost& host, std::string output_dir, const Config& config);
+
+ protected:
+  void CreateGeometry() override;
+
+ private:
+  void TestPlanarZeroPlane(const std::string& name, bool rcp, float fog_value, uint32_t gen_mode);
+  void TestFogFactorSweep(const std::string& name, uint32_t gen_mode);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_TESTS_H
