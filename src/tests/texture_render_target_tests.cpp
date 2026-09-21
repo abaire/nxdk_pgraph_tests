@@ -11,10 +11,12 @@
 #include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
+#include "texture_generator.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
 static constexpr char kRenderTextureLoopTest[] = "RenderTextureLoop";
+static constexpr char kRenderTextureClearLoopTest[] = "RenderTextureClearLoop";
 
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
@@ -51,6 +53,110 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
   }
 }
 
+/**
+ * Constructs the test suite and creates test cases.
+ *
+ * @tc TexFmt_A8B8G8R8
+ *  Renders a gradient pattern to a surface with A8B8G8R8 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_R8G8B8A8
+ *  Renders a gradient pattern to a surface with R8G8B8A8 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A8R8G8B8
+ *  Renders a gradient pattern to a surface with A8R8G8B8 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_X8R8G8B8
+ *  Renders a gradient pattern to a surface with X8R8G8B8 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_B8G8R8A8
+ *  Renders a gradient pattern to a surface with B8G8R8A8 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_R5G6B5
+ *  Renders a gradient pattern to a surface with R5G6B5 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A1R5G5B5
+ *  Renders a gradient pattern to a surface with A1R5G5B5 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_X1R5G5B5
+ *  Renders a gradient pattern to a surface with X1R5G5B5 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A4R4G4B4
+ *  Renders a gradient pattern to a surface with A4R4G4B4 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_R16B16
+ *  Renders a gradient pattern to a surface with R16B16 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_Y16
+ *  Renders a gradient pattern to a surface with Y16 swizzled texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A8B8G8R8_L
+ *  Renders a gradient pattern to a surface with A8B8G8R8 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_R8G8B8A8_L
+ *  Renders a gradient pattern to a surface with R8G8B8A8 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A8R8G8B8_L
+ *  Renders a gradient pattern to a surface with A8R8G8B8 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_X8R8G8B8_L
+ *  Renders a gradient pattern to a surface with X8R8G8B8 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_B8G8R8A8_L
+ *  Renders a gradient pattern to a surface with B8G8R8A8 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_R5G6B5_L
+ *  Renders a gradient pattern to a surface with R5G6B5 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A1R5G5B5_L
+ *  Renders a gradient pattern to a surface with A1R5G5B5 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_X1R5G5B5_L
+ *  Renders a gradient pattern to a surface with X1R5G5B5 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_A4R4G4B4_L
+ *  Renders a gradient pattern to a surface with A4R4G4B4 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_G8B8_L
+ *  Renders a gradient pattern to a surface with G8B8 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_R16B16_L
+ *  Renders a gradient pattern to a surface with R16B16 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_Y16_L
+ *  Renders a gradient pattern to a surface with Y16 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_YUY2_L
+ *  Renders a gradient pattern to a surface with YUY2 linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_UYVY_L
+ *  Renders a gradient pattern to a surface with UYVY linear texture format and samples it onto a screen quad.
+ *
+ * @tc TexFmt_I8_A8R8G8B8_p32
+ *  Renders a 32-entry palettized gradient to a surface and samples it onto a screen quad.
+ *
+ * @tc TexFmt_I8_A8R8G8B8_p64
+ *  Renders a 64-entry palettized gradient to a surface and samples it onto a screen quad.
+ *
+ * @tc TexFmt_I8_A8R8G8B8_p128
+ *  Renders a 128-entry palettized gradient to a surface and samples it onto a screen quad.
+ *
+ * @tc TexFmt_I8_A8R8G8B8_p256
+ *  Renders a 256-entry palettized gradient to a surface and samples it onto a screen quad.
+ *
+ * @tc RenderTextureLoop
+ *  Renders Blue, Green, and Red into a surface sequentially, texturing separate screen quads to verify
+ *  render-to-texture loop updates.
+ *
+ * @tc RenderTextureClearLoop
+ *  Exercises the xemu texture cache invalidation defect (xemu #2036) triggered by rendering into a swizzled surface,
+ *  sampling it as a texture (which causes xemu to blit the GPU surface into the GL texture via surf_to_tex while
+ *  retaining the pre-render RAM hash in binding->data_hash), then clearing that surface as a linear surface back to
+ *  black.
+ *  Displays three quads side-by-side:
+ *    1. Initial sample of linear-cleared surface as swizzled texture (expected black).
+ *    2. Sample after GPU renders red into swizzled surface (expected red).
+ *    3. Sample after linear surface clear to black (expected black).
+ */
 TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Texture render target", config) {
   for (auto i = 0; i < kNumFormats; ++i) {
@@ -68,6 +174,7 @@ TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string o
   }
 
   tests_[kRenderTextureLoopTest] = [this] { TestRenderTextureLoop(); };
+  tests_[kRenderTextureClearLoopTest] = [this] { TestXemu2036RenderTextureClearLoop(); };
 }
 
 void TextureRenderTargetTests::Initialize() {
@@ -357,6 +464,141 @@ void TextureRenderTargetTests::TestRenderTextureLoop() {
   pb_draw_text_screen();
 
   FinishDraw(kRenderTextureLoopTest);
+}
+
+void TextureRenderTargetTests::TestXemu2036RenderTextureClearLoop() {
+  static constexpr uint32_t kSmallTextureSz = 256;
+  static constexpr auto kSurfaceFormat = TestHost::SCF_X8R8G8B8_Z8R8G8B8;
+  static constexpr auto kTextureFormat = NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8;
+
+  static constexpr float kQuadTop = 124.f;
+  static constexpr float kQuadBottom = 250.f;
+  static constexpr float kQuadWidth = 160.f;
+  static constexpr float kQuad1Left = 40.f;
+  static constexpr float kQuad1Right = kQuad1Left + kQuadWidth;
+  static constexpr float kQuad2Left = 240.f;
+  static constexpr float kQuad2Right = kQuad2Left + kQuadWidth;
+  static constexpr float kQuad3Left = 440.f;
+  static constexpr float kQuad3Right = kQuad3Left + kQuadWidth;
+
+  auto *tex_mem = host_.GetTextureMemoryForStage(0);
+  auto &texture_stage = host_.GetTextureStage(0);
+
+  {
+    host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+    host_.SetVertexShaderProgram(nullptr);
+
+    host_.SetCombinerControl(1, true, true);
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+    host_.SetTextureStageEnabled(0, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+    texture_stage.SetFormat(GetTextureFormatInfo(kTextureFormat));
+    texture_stage.SetTextureDimensions(kSmallTextureSz, kSmallTextureSz);
+    texture_stage.SetImageDimensions(kSmallTextureSz, kSmallTextureSz);
+
+    host_.PrepareDraw(0xFF505050);
+  }
+
+  // Linear clear of the surface at tex_mem to black (0x00000000).
+  // In xemu, creates a linear SurfaceBinding at tex_mem.
+  {
+    host_.RenderToSurfaceStart(tex_mem, kSurfaceFormat, pb_depth_stencil_buffer(), TestHost::SZF_Z24S8, kSmallTextureSz,
+                               kSmallTextureSz, false);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_CLEAR_VALUE, 0x00000000);
+    Pushbuffer::Push(NV097_CLEAR_SURFACE, NV097_CLEAR_SURFACE_COLOR);
+    Pushbuffer::End(true);
+    host_.RenderToSurfaceEnd();
+  }
+
+  // Sample the linear-cleared surface as a swizzled texture
+  // Surface is linear; texture is swizzled -> surf_to_tex is false.
+  // xemu downloads the linear cleared surface to guest RAM (writing 0xff000000) and creates
+  // an LRU TextureBinding with binding->data_hash = Hash(black_RAM).
+  {
+    texture_stage.SetEnabled(true);
+    host_.SetupTextureStages();
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.DrawSwizzledTexturedScreenQuad(kQuad1Left, kQuadTop, kQuad1Right, kQuadBottom, 0.f);
+  }
+
+  // Render red into tex_mem as a swizzled render target.
+  // xemu migrates the SurfaceBinding from linear to swizzled and updates it with red pixels.
+  {
+    host_.RenderToSurfaceStart(tex_mem, kSurfaceFormat, pb_depth_stencil_buffer(), TestHost::SZF_Z24S8, kSmallTextureSz,
+                               kSmallTextureSz, true);
+    host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+    host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+    host_.SetDiffuse(0xFF0000FF);
+    host_.DrawScreenQuad(0.0f, 0.0f, static_cast<float>(kSmallTextureSz), static_cast<float>(kSmallTextureSz), 1.0f);
+    host_.RenderToSurfaceEnd();
+  }
+
+  // Render the updated surface as a swizzled texture.
+  // surf_to_tex is true (both surface and texture are swizzled).
+  // xemu blits the GPU surface contents into the GL texture via pgraph_gl_render_surface_to_texture.
+  // binding->data_hash is NOT recalculated, remaining Hash(black_RAM) from Step 2.
+  {
+    texture_stage.SetEnabled(true);
+    host_.SetupTextureStages();
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.DrawSwizzledTexturedScreenQuad(kQuad2Left, kQuadTop, kQuad2Right, kQuadBottom, 0.f);
+  }
+
+  // Linear clear of the surface back to black (matching Tron 2.0).
+  // The surface is switched to linear and cleared to 0x00000000, then format is set back to swizzled.
+  {
+    host_.RenderToSurfaceStart(tex_mem, kSurfaceFormat, pb_depth_stencil_buffer(), TestHost::SZF_Z24S8, kSmallTextureSz,
+                               kSmallTextureSz, false);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_CLEAR_VALUE, 0x00000000);
+    Pushbuffer::Push(NV097_CLEAR_SURFACE, NV097_CLEAR_SURFACE_COLOR);
+    Pushbuffer::End(true);
+    host_.SetSurfaceFormatImmediate(kSurfaceFormat, TestHost::SZF_Z24S8, kSmallTextureSz, kSmallTextureSz, true);
+    host_.RenderToSurfaceEnd();
+  }
+
+  // Render the updated surface as a swizzled texture again.
+  // This should render to black, reflecting the clear that was just completed.
+  //
+  // In xemu:
+  // - The surface at tex_mem remained linear (swizzle = 0) in r->surfaces.
+  // - Texture format is swizzled -> surf_to_tex is false.
+  // - Because !surf_to_tex, writeback runs: surface_download writes cleared data to RAM (0xff000000)
+  //   and dirties NV2A_TEX.
+  // - check_texture_dirty returns true -> possibly_dirty = true.
+  // - tex_data_hash = fast_hash(RAM) = Hash(black_RAM).
+  // - must_destroy checks (binding->data_hash != tex_data_hash). Because binding->data_hash from Step 2
+  //   equals tex_data_hash, must_destroy evaluates to false!
+  // - Buggy xemu reuses the stale GL texture containing red from Step 4 -> Quad 3 draws STALE RED.
+  {
+    texture_stage.SetEnabled(true);
+    host_.SetupTextureStages();
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.DrawSwizzledTexturedScreenQuad(kQuad3Left, kQuadTop, kQuad3Right, kQuadBottom, 0.f);
+  }
+
+  pb_printat(0, 1, "%s\n", kRenderTextureClearLoopTest);
+  pb_printat(2, 6, "Initial");
+  pb_printat(3, 6, " Black");
+
+  pb_printat(2, 25, "Rendered");
+  pb_printat(3, 25, "  Red");
+
+  pb_printat(2, 45, "After clear");
+  pb_printat(3, 45, "  Black");
+  pb_draw_text_screen();
+
+  FinishDraw(kRenderTextureClearLoopTest);
 }
 
 std::string TextureRenderTargetTests::MakeTestName(const TextureFormatInfo &texture_format) {
