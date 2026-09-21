@@ -31,6 +31,10 @@ class TextureRenderTargetTests : public TestSuite {
   //! texturing different geometry.
   void TestRenderTextureLoop();
 
+  //! Tests emulator texture cache invalidation and coherency when a texture surface is rendered via GPU, then cleared
+  //! back to an earlier color state using a linear clear, or updated via CPU.
+  void TestXemu2036RenderTextureClearLoop();
+
   void ResetAndDrawFromRenderTarget() const;
 
   static std::string MakeTestName(const TextureFormatInfo &texture_format);
