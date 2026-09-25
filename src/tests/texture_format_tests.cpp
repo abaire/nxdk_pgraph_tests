@@ -49,6 +49,146 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
   }
 }
 
+/**
+ * @brief Constructs the TextureFormatTests test suite and creates test cases.
+ *
+ * @tc TexFmt_A1R5G5B5
+ *  Samples a 2D color gradient texture in A1R5G5B5 swizzled format.
+ *
+ * @tc TexFmt_A1R5G5B5_L
+ *  Samples a 2D color gradient texture in A1R5G5B5 linear format.
+ *
+ * @tc TexFmt_A4R4G4B4
+ *  Samples a 2D color gradient texture in A4R4G4B4 swizzled format.
+ *
+ * @tc TexFmt_A4R4G4B4_L
+ *  Samples a 2D color gradient texture in A4R4G4B4 linear format.
+ *
+ * @tc TexFmt_A8
+ *  Samples a 2D color gradient texture in A8 swizzled format.
+ *
+ * @tc TexFmt_A8_L
+ *  Samples a 2D color gradient texture in A8 linear format.
+ *
+ * @tc TexFmt_A8B8G8R8
+ *  Samples a 2D color gradient texture in A8B8G8R8 swizzled format.
+ *
+ * @tc TexFmt_A8B8G8R8_L
+ *  Samples a 2D color gradient texture in A8B8G8R8 linear format.
+ *
+ * @tc TexFmt_A8R8G8B8
+ *  Samples a 2D color gradient texture in A8R8G8B8 swizzled format.
+ *
+ * @tc TexFmt_A8R8G8B8_L
+ *  Samples a 2D color gradient texture in A8R8G8B8 linear format.
+ *
+ * @tc TexFmt_A8Y8
+ *  Samples a 2D color gradient texture in A8Y8 swizzled format.
+ *
+ * @tc TexFmt_AY8
+ *  Samples a 2D color gradient texture in AY8 swizzled format.
+ *
+ * @tc TexFmt_AY8_L
+ *  Samples a 2D color gradient texture in AY8 linear format.
+ *
+ * @tc TexFmt_B8G8R8A8
+ *  Samples a 2D color gradient texture in B8G8R8A8 swizzled format.
+ *
+ * @tc TexFmt_B8G8R8A8_L
+ *  Samples a 2D color gradient texture in B8G8R8A8 linear format.
+ *
+ * @tc TexFmt_DXT1
+ *  Samples a 2D color gradient texture in DXT1 compressed format.
+ *
+ * @tc TexFmt_G8B8
+ *  Samples a 2D color gradient texture in G8B8 swizzled format.
+ *
+ * @tc TexFmt_G8B8_L
+ *  Samples a 2D color gradient texture in G8B8 linear format.
+ *
+ * @tc TexFmt_R16B16
+ *  Samples a 2D color gradient texture in R16B16 swizzled format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16).
+ *
+ * @tc TexFmt_R16B16_L
+ *  Samples a 2D color gradient texture in R16B16 linear format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_YB16YA16).
+ *
+ * @tc TexFmt_R5G6B5
+ *  Samples a 2D color gradient texture in R5G6B5 swizzled format.
+ *
+ * @tc TexFmt_R5G6B5_L
+ *  Samples a 2D color gradient texture in R5G6B5 linear format.
+ *
+ * @tc TexFmt_R6G5B5
+ *  Samples a 2D color gradient texture in R6G5B5 swizzled format.
+ *
+ * @tc TexFmt_R8B8
+ *  Samples a 2D color gradient texture in R8B8 swizzled format.
+ *
+ * @tc TexFmt_R8G8B8A8
+ *  Samples a 2D color gradient texture in R8G8B8A8 swizzled format.
+ *
+ * @tc TexFmt_R8G8B8A8_L
+ *  Samples a 2D color gradient texture in R8G8B8A8 linear format.
+ *
+ * @tc TexFmt_SZ_Index8_p32
+ *  Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 32-entry color palette.
+ *
+ * @tc TexFmt_SZ_Index8_p64
+ *  Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 64-entry color palette.
+ *
+ * @tc TexFmt_SZ_Index8_p128
+ *  Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 128-entry color palette.
+ *
+ * @tc TexFmt_SZ_Index8_p256
+ *  Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 256-entry color palette.
+ *
+ * @tc TexFmt_UYVY_L
+ *  Samples a 2D color gradient texture in UYVY (LC_IMAGE_YB8CR8YA8CB8) linear YUV format.
+ *
+ * @tc TexFmt_X1R5G5B5
+ *  Samples a 2D color gradient texture in X1R5G5B5 swizzled format.
+ *
+ * @tc TexFmt_X1R5G5B5_L
+ *  Samples a 2D color gradient texture in X1R5G5B5 linear format.
+ *
+ * @tc TexFmt_X8R8G8B8
+ *  Samples a 2D color gradient texture in X8R8G8B8 swizzled format.
+ *
+ * @tc TexFmt_X8R8G8B8_L
+ *  Samples a 2D color gradient texture in X8R8G8B8 linear format.
+ *
+ * @tc TexFmt_Y16
+ *  Samples a 2D color gradient texture in Y16 swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_Y16, format 0x32).
+ *
+ * @tc TexFmt_Y16_L
+ *  Samples a 2D color gradient texture in Y16 linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y16, format 0x35).
+ *
+ * @tc TexFmt_Y8
+ *  Samples a 2D color gradient texture in Y8 swizzled format.
+ *
+ * @tc TexFmt_Y8_L
+ *  Samples a 2D color gradient texture in Y8 linear format.
+ *
+ * @tc TexFmt_YUY2_L
+ *  Samples a 2D color gradient texture in YUY2 (LC_IMAGE_CR8YB8CB8YA8) linear YUV format.
+ *
+ * @tc XAlpha_A8R8G8B8_L
+ *  Baseline test verifying alpha channel sampling and blending behavior with an actual alpha channel (A8R8G8B8 linear).
+ *
+ * @tc XAlpha_X1R5G5B5
+ *  Tests that the unused X bit in X1R5G5B5 swizzled textures is treated as 1.0 (opaque) during sampling and blending.
+ *
+ * @tc XAlpha_X1R5G5B5_L
+ *  Tests that the unused X bit in X1R5G5B5 linear textures is treated as 1.0 (opaque) during sampling and blending.
+ *
+ * @tc XAlpha_X8R8G8B8
+ *  Tests that the unused X byte in X8R8G8B8 swizzled textures is treated as 0xFF (opaque) during sampling and blending.
+ *
+ * @tc XAlpha_X8R8G8B8_L
+ *  Tests that the unused X byte in X8R8G8B8 linear textures is treated as 0xFF (opaque) during sampling and blending.
+ */
 TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Texture format", config) {
   for (auto i = 0; i < kNumFormats; ++i) {

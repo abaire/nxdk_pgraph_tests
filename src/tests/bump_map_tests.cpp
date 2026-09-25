@@ -21,7 +21,8 @@ static bool SkipGenericTest(const TextureFormatInfo &format) {
   switch (format.xbox_format) {
     case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8:
     case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_G8B8:
-    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R16B16:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_YB16YA16:
     case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED:
     case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT:
     case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED:
@@ -34,6 +35,131 @@ static bool SkipGenericTest(const TextureFormatInfo &format) {
   }
 }
 
+/**
+ * @brief Constructs the BumpMapTests test suite and creates test cases.
+ *
+ * @tc BumpMap_A1R5G5B5
+ *  Exercises 8-bit du/dv bump mapping with an A1R5G5B5 swizzled bump map texture.
+ *
+ * @tc BumpMap_A1R5G5B5_L
+ *  Exercises 8-bit du/dv bump mapping with an A1R5G5B5 linear bump map texture.
+ *
+ * @tc BumpMap_A4R4G4B4
+ *  Exercises 8-bit du/dv bump mapping with an A4R4G4B4 swizzled bump map texture.
+ *
+ * @tc BumpMap_A4R4G4B4_L
+ *  Exercises 8-bit du/dv bump mapping with an A4R4G4B4 linear bump map texture.
+ *
+ * @tc BumpMap_A8
+ *  Exercises 8-bit du/dv bump mapping with an A8 swizzled bump map texture.
+ *
+ * @tc BumpMap_A8_L
+ *  Exercises 8-bit du/dv bump mapping with an A8 linear bump map texture.
+ *
+ * @tc BumpMap_A8B8G8R8
+ *  Exercises 8-bit du/dv bump mapping with an A8B8G8R8 swizzled bump map texture.
+ *
+ * @tc BumpMap_A8B8G8R8_L
+ *  Exercises 8-bit du/dv bump mapping with an A8B8G8R8 linear bump map texture.
+ *
+ * @tc BumpMap_A8R8G8B8
+ *  Exercises 8-bit du/dv bump mapping with an A8R8G8B8 swizzled bump map texture.
+ *
+ * @tc BumpMap_A8R8G8B8_L
+ *  Exercises 8-bit du/dv bump mapping with an A8R8G8B8 linear bump map texture.
+ *
+ * @tc BumpMap_A8Y8
+ *  Exercises 8-bit du/dv bump mapping with an A8Y8 swizzled bump map texture.
+ *
+ * @tc BumpMap_AY8
+ *  Exercises 8-bit du/dv bump mapping with an AY8 swizzled bump map texture.
+ *
+ * @tc BumpMap_AY8_L
+ *  Exercises 8-bit du/dv bump mapping with an AY8 linear bump map texture.
+ *
+ * @tc BumpMap_B8G8R8A8
+ *  Exercises 8-bit du/dv bump mapping with a B8G8R8A8 swizzled bump map texture.
+ *
+ * @tc BumpMap_B8G8R8A8_L
+ *  Exercises 8-bit du/dv bump mapping with a B8G8R8A8 linear bump map texture.
+ *
+ * @tc BumpMap_DXT1
+ *  Exercises 8-bit du/dv bump mapping with a DXT1 compressed bump map texture.
+ *
+ * @tc BumpMap_G8B8
+ *  Exercises 8-bit du/dv bump mapping with a G8B8 swizzled bump map texture.
+ *
+ * @tc BumpMap_G8B8_B
+ *  Exercises 8-bit du/dv bump mapping with a G8B8 swizzled texture using alternate blue color channel mapping.
+ *
+ * @tc BumpMap_G8B8_B_R90
+ *  Exercises 8-bit du/dv bump mapping with a G8B8 swizzled texture rotated 90 degrees with alternate blue mapping.
+ *
+ * @tc BumpMap_G8B8_R90
+ *  Exercises 8-bit du/dv bump mapping with a G8B8 swizzled texture rotated 90 degrees.
+ *
+ * @tc BumpMap_R16B16
+ *  Exercises 16-bit HILO bump mapping with a YB_16_YA_16 swizzled bump map texture
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16).
+ *
+ * @tc BumpMap_R16B16_B
+ *  Exercises 16-bit HILO bump mapping with a YB_16_YA_16 swizzled texture using alternate blue color channel mapping.
+ *
+ * @tc BumpMap_R16B16_L
+ *  Exercises 16-bit HILO bump mapping with a YB16YA16 linear bump map texture
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_YB16YA16).
+ *
+ * @tc BumpMap_R16B16_L_B
+ *  Exercises 16-bit HILO bump mapping with a YB16YA16 linear texture using alternate blue color channel mapping.
+ *
+ * @tc BumpMap_R5G6B5
+ *  Exercises 8-bit du/dv bump mapping with an R5G6B5 swizzled bump map texture.
+ *
+ * @tc BumpMap_R5G6B5_L
+ *  Exercises 8-bit du/dv bump mapping with an R5G6B5 linear bump map texture.
+ *
+ * @tc BumpMap_R6G5B5
+ *  Exercises 8-bit du/dv bump mapping with an R6G5B5 swizzled bump map texture.
+ *
+ * @tc BumpMap_R8B8
+ *  Exercises 8-bit du/dv bump mapping with an R8B8 swizzled bump map texture.
+ *
+ * @tc BumpMap_R8G8B8A8
+ *  Exercises 8-bit du/dv bump mapping with an R8G8B8A8 swizzled bump map texture.
+ *
+ * @tc BumpMap_R8G8B8A8_L
+ *  Exercises 8-bit du/dv bump mapping with an R8G8B8A8 linear bump map texture.
+ *
+ * @tc BumpMap_UYVY_L
+ *  Exercises 8-bit du/dv bump mapping with an UYVY linear bump map texture.
+ *
+ * @tc BumpMap_X1R5G5B5
+ *  Exercises 8-bit du/dv bump mapping with an X1R5G5B5 swizzled bump map texture.
+ *
+ * @tc BumpMap_X1R5G5B5_L
+ *  Exercises 8-bit du/dv bump mapping with an X1R5G5B5 linear bump map texture.
+ *
+ * @tc BumpMap_X8R8G8B8
+ *  Exercises 8-bit du/dv bump mapping with an X8R8G8B8 swizzled bump map texture.
+ *
+ * @tc BumpMap_X8R8G8B8_L
+ *  Exercises 8-bit du/dv bump mapping with an X8R8G8B8 linear bump map texture.
+ *
+ * @tc BumpMap_Y16
+ *  Exercises 8-bit du/dv bump mapping with a Y16 swizzled bump map texture (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_Y16).
+ *
+ * @tc BumpMap_Y16_L
+ *  Exercises 8-bit du/dv bump mapping with a Y16 linear bump map texture (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y16).
+ *
+ * @tc BumpMap_Y8
+ *  Exercises 8-bit du/dv bump mapping with a Y8 swizzled bump map texture.
+ *
+ * @tc BumpMap_Y8_L
+ *  Exercises 8-bit du/dv bump mapping with a Y8 linear bump map texture.
+ *
+ * @tc BumpMap_YUY2_L
+ *  Exercises 8-bit du/dv bump mapping with a YUY2 linear bump map texture.
+ */
 BumpMapTests::BumpMapTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Bump map", config) {
   for (auto i = 0; i < kNumFormats; ++i) {
@@ -53,11 +179,14 @@ BumpMapTests::BumpMapTests(TestHost &host, std::string output_dir, const Config 
     }
   }
 
-  auto &format16 = GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R16B16);
+  for (auto format_id :
+       {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_YB16YA16}) {
+    auto &format16 = GetTextureFormatInfo(format_id);
 
-  for (auto cross_on_blue : {false, true}) {
-    std::string name = MakeTestName(format16, cross_on_blue, false);
-    tests_[name] = [this, format16, cross_on_blue]() { Test16bit(format16, cross_on_blue); };
+    for (auto cross_on_blue : {false, true}) {
+      std::string name = MakeTestName(format16, cross_on_blue, false);
+      tests_[name] = [this, format16, cross_on_blue]() { Test16bit(format16, cross_on_blue); };
+    }
   }
 }
 
