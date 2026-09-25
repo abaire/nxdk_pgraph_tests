@@ -106,7 +106,7 @@ void TextureBRDFTests::Test(bool stage0_blank, bool stage1_blank) {
     } else {
       GenerateSphericalCoordMap(host_.GetTextureMemoryForStage(0));
     }
-    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R16B16), 0);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16), 0);
     auto &stage = host_.GetTextureStage(0);
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
     stage.SetCubemapEnable();
@@ -119,7 +119,7 @@ void TextureBRDFTests::Test(bool stage0_blank, bool stage1_blank) {
     } else {
       GenerateSphericalCoordMap(host_.GetTextureMemoryForStage(1));
     }
-    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R16B16), 1);
+    host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16), 1);
     auto &stage = host_.GetTextureStage(1);
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
     stage.SetCubemapEnable();

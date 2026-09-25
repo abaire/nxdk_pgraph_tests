@@ -12,7 +12,13 @@ struct TextureFormatInfo;
 using namespace PBKitPlusPlus;
 
 /**
- * Tests sampling of NV2A texture formats, verifying color conversion, swizzling, and alpha channel handling.
+ * @brief Tests sampling of NV2A texture formats, verifying color conversion, swizzling, and alpha channel handling.
+ *
+ * Exercises rendering a textured quad using various NV2A hardware texture formats. A color gradient is
+ * generated and converted to the target format (applying swizzling if swizzled), then sampled via
+ * the projective 2D shader stage with the final combiner set to output the sampled texture color.
+ * Also tests 8-bit palettized textures across various palette sizes and verifies alpha channel behavior
+ * for formats containing dummy "X" alpha components.
  */
 class TextureFormatTests : public TestSuite {
  public:

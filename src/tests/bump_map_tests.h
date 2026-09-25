@@ -10,6 +10,14 @@ namespace PBKitPlusPlus {
 struct TextureFormatInfo;
 }
 
+/**
+ * @brief Tests NV2A bump mapping using various texture formats, orientations, and signed/unsigned component filtering.
+ *
+ * Exercises bump mapping via projective 2D and dot product / bumpenvmap shader stages. Tests standard
+ * 8-bit du/dv bump mapping with G8B8, R6G5B5, and other formats across combinations of signed and unsigned
+ * coordinates, 90-degree rotations, and cross-channel mappings. Also exercises 16-bit HILO bump mapping
+ * using NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16 and NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_YB16YA16.
+ */
 class BumpMapTests : public TestSuite {
  public:
   BumpMapTests(TestHost &host, std::string output_dir, const Config &config);
