@@ -39,9 +39,13 @@ class TextureFormatTests : public TestSuite {
   //! Tests alpha channel sampling and blending behavior for texture formats with dummy/unused "X" alpha components.
   void TestXAlpha(const TextureFormatInfo &texture_format);
 
+  //! Tests sampling of depth texture formats, verifying depth buffer modification and backbuffer results.
+  void TestDepth(const TextureFormatInfo &texture_format);
+
   static std::string MakeTestName(const TextureFormatInfo &texture_format);
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
   static std::string MakeXAlphaTestName(const TextureFormatInfo &texture_format);
+  static std::string MakeDepthTestName(const TextureFormatInfo &texture_format);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXTURE_FORMAT_TESTS_H

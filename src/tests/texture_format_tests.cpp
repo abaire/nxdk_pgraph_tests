@@ -34,12 +34,23 @@ static constexpr uint32_t kXAlphaFormats[] = {
     NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X1R5G5B5,
     NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8};
 
+static constexpr uint32_t kDepthFormats[] = {
+    NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FIXED,       NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FLOAT,
+    NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FIXED,          NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FLOAT,
+    NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED, NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED,
+    NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT,
+};
+
 static bool RequiresSpecialTest(const TextureFormatInfo &format) {
   switch (format.xbox_format) {
     case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FIXED:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FLOAT:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FIXED:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FLOAT:
+    case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED:
     case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED:
     case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT:
-    case NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED:
     case NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT23_A8R8G8B8:
     case NV097_SET_TEXTURE_FORMAT_COLOR_L_DXT45_A8R8G8B8:
       return true;
@@ -64,6 +75,9 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
  * @tc TexFmt_A4R4G4B4_L
  *  Samples a 2D color gradient texture in A4R4G4B4 linear format.
  *
+ * @tc TexFmt_A4V6YB6A4U6YA6_L
+ *  Samples a 2D color gradient texture in A4V6YB6A4U6YA6 (LC_IMAGE_A4V6YB6A4U6YA6) linear YUV format with alpha.
+ *
  * @tc TexFmt_A8
  *  Samples a 2D color gradient texture in A8 swizzled format.
  *
@@ -85,6 +99,9 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
  * @tc TexFmt_A8Y8
  *  Samples a 2D color gradient texture in A8Y8 swizzled format.
  *
+ * @tc TexFmt_A8Y8_L
+ *  Samples a 2D color gradient texture in A8Y8 linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8Y8).
+ *
  * @tc TexFmt_AY8
  *  Samples a 2D color gradient texture in AY8 swizzled format.
  *
@@ -96,6 +113,41 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
  *
  * @tc TexFmt_B8G8R8A8_L
  *  Samples a 2D color gradient texture in B8G8R8A8 linear format.
+ *
+ * @tc DepthFmt_D_X8Y24_FIXED
+ *  Samples a 2D depth texture in 24-bit fixed-point depth swizzled format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FIXED) using 3D projective shadow comparison against a constant
+ *  reference depth across 6 shadow compare functions, saving the backbuffer.
+ *
+ * @tc DepthFmt_D_X8Y24_FIXED_L
+ *  Samples a 2D depth texture in 24-bit fixed-point depth linear format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED) using 3D projective shadow comparison against a
+ *  constant reference depth across 6 shadow compare functions, saving the backbuffer.
+ *
+ * @tc DepthFmt_D_X8Y24_FLOAT
+ *  Samples a 2D depth texture in 24-bit floating-point depth swizzled format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FLOAT) using 3D projective shadow comparison against a constant
+ *  reference depth across 6 shadow compare functions, saving the backbuffer.
+ *
+ * @tc DepthFmt_D_Y16_FIXED
+ *  Samples a 2D depth texture in 16-bit fixed-point depth swizzled format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FIXED) using 3D projective shadow comparison against a constant
+ *  reference depth across 6 shadow compare functions, saving the backbuffer.
+ *
+ * @tc DepthFmt_D_Y16_FIXED_L
+ *  Samples a 2D depth texture in 16-bit fixed-point depth linear format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED) using 3D projective shadow comparison against a
+ *  constant reference depth across 6 shadow compare functions, saving the backbuffer.
+ *
+ * @tc DepthFmt_D_Y16_FLOAT
+ *  Samples a 2D depth texture in 16-bit floating-point depth swizzled format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FLOAT) using 3D projective shadow comparison against a constant
+ *  reference depth across 6 shadow compare functions, saving the backbuffer.
+ *
+ * @tc DepthFmt_D_Y16_FLOAT_L
+ *  Samples a 2D depth texture in 16-bit floating-point depth linear format
+ *  (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT) using 3D projective shadow comparison against a
+ *  constant reference depth across 6 shadow compare functions, saving the backbuffer.
  *
  * @tc TexFmt_DXT1
  *  Samples a 2D color gradient texture in DXT1 compressed format.
@@ -213,6 +265,12 @@ TextureFormatTests::TextureFormatTests(TestHost &host, std::string output_dir, c
     auto &format = GetTextureFormatInfo(format_id);
     std::string name = MakeXAlphaTestName(format);
     tests_[name] = [this, format]() { TestXAlpha(format); };
+  }
+
+  for (auto format_id : kDepthFormats) {
+    auto &format = GetTextureFormatInfo(format_id);
+    std::string name = MakeDepthTestName(format);
+    tests_[name] = [this, format]() { TestDepth(format); };
   }
 }
 
@@ -478,6 +536,162 @@ void TextureFormatTests::TestXAlpha(const TextureFormatInfo &texture_format) {
   Pushbuffer::End();
 }
 
+void TextureFormatTests::TestDepth(const TextureFormatInfo &texture_format) {
+  const bool is_16_bit = (texture_format.xbox_bpp == 16);
+  const bool is_float = (texture_format.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FLOAT ||
+                         texture_format.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FLOAT ||
+                         texture_format.xbox_format == NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT);
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_3D_PROJECTIVE);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  host_.SetTextureFormat(texture_format);
+  std::string test_name = MakeDepthTestName(texture_format);
+
+  const uint32_t tex_width = host_.GetMaxTextureWidth();
+  const uint32_t tex_height = host_.GetMaxTextureHeight();
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetImageDimensions(tex_width, tex_height);
+  texture_stage.SetTextureDimensions(tex_width, tex_height);
+
+  uint8_t *texture_memory = host_.GetTextureMemoryForStage(0);
+  if (texture_format.xbox_swizzled) {
+    GenerateSwizzledRadialDepthPattern(texture_memory, tex_width, tex_height, is_16_bit, is_float);
+  } else {
+    GenerateRadialDepthPattern(texture_memory, tex_width, tex_height, is_16_bit, is_float);
+  }
+
+  float r_ref;
+  if (is_16_bit) {
+    uint16_t match_val;
+    if (is_float) {
+      r_ref = 255.96875f;
+      double z_scaled = 255.96875;
+      uint32_t bits_h = *(reinterpret_cast<uint32_t *>(&z_scaled) + 1);
+      match_val = ((bits_h >> 8) - 0x3F8000) & 0xFFFF;
+    } else {
+      r_ref = 32768.0f;
+      match_val = 32768;
+    }
+    auto *buf = reinterpret_cast<uint16_t *>(texture_memory);
+    const uint32_t patch_size = std::min(256u, tex_width * tex_height / 4);
+    const uint32_t patch_start = (tex_width * tex_height) / 4;
+    for (uint32_t i = 0; i < patch_size; ++i) {
+      buf[patch_start + i] = match_val;
+    }
+  } else {
+    uint32_t match_val;
+    if (is_float) {
+      r_ref = 0.5e30f;
+      double z_scaled = 0.5e30;
+      uint32_t bits_h = *(reinterpret_cast<uint32_t *>(&z_scaled) + 1);
+      match_val = ((bits_h - 0x38000000) << 4) & 0xFFFFFF00;
+    } else {
+      r_ref = 8388608.0f;
+      match_val = 8388608 << 8;
+    }
+    auto *buf = reinterpret_cast<uint32_t *>(texture_memory);
+    const uint32_t patch_size = std::min(256u, tex_width * tex_height / 4);
+    const uint32_t patch_start = (tex_width * tex_height) / 4;
+    for (uint32_t i = 0; i < patch_size; ++i) {
+      buf[patch_start + i] = match_val;
+    }
+  }
+
+  host_.SetupTextureStages();
+  host_.PrepareDraw(0xFF334455);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK,
+                   NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE | NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE |
+                       NV097_SET_COLOR_MASK_RED_WRITE_ENABLE | NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
+
+  struct CompareFuncInfo {
+    uint32_t func;
+    const char *name;
+  };
+
+  static constexpr CompareFuncInfo kRow0Funcs[] = {
+      {NV097_SET_SHADOW_COMPARE_FUNC_LESS, "LESS"},
+      {NV097_SET_SHADOW_COMPARE_FUNC_LEQUAL, "LEQUAL"},
+      {NV097_SET_SHADOW_COMPARE_FUNC_GEQUAL, "GEQUAL"},
+      {NV097_SET_SHADOW_COMPARE_FUNC_GREATER, "GREATER"},
+  };
+
+  static constexpr CompareFuncInfo kRow1Funcs[] = {
+      {NV097_SET_SHADOW_COMPARE_FUNC_EQUAL, "EQUAL"},
+      {NV097_SET_SHADOW_COMPARE_FUNC_NOTEQUAL, "NOTEQUAL"},
+  };
+
+  static constexpr const CompareFuncInfo *kCompareFuncs[] = {kRow0Funcs, kRow1Funcs};
+  static constexpr uint32_t kRowLengths[] = {4, 2};
+
+  static constexpr float kQuadWidth = 110.f;
+  static constexpr float kQuadHeight = 110.f;
+  static constexpr float kQuadSpacingX = 30.f;
+  static constexpr float kLeftStart = 55.f;
+  static constexpr float kRow1Top = 110.f;
+  static constexpr float kRow2Top = 275.f;
+  static constexpr float kZ = 0.0f;
+
+  const float u_max = texture_format.xbox_linear ? static_cast<float>(tex_width) : 1.f;
+  const float v_max = texture_format.xbox_linear ? static_cast<float>(tex_height) : 1.f;
+
+  static constexpr auto kTextStart = 4;
+  static constexpr auto kTextInc = 15;
+
+  for (uint32_t row = 0; row < 2; ++row) {
+    const float top = (row == 0) ? kRow1Top : kRow2Top;
+    const float bottom = top + kQuadHeight;
+
+    int text_x = kTextStart;
+
+    for (uint32_t col = 0; col < kRowLengths[row]; ++col, text_x += kTextInc) {
+      const float left = kLeftStart + static_cast<float>(col) * (kQuadWidth + kQuadSpacingX);
+      const float right = left + kQuadWidth;
+      const auto &info = kCompareFuncs[row][col];
+
+      Pushbuffer::Begin();
+      Pushbuffer::Push(NV097_SET_SHADOW_COMPARE_FUNC, info.func);
+      Pushbuffer::End();
+
+      host_.Begin(TestHost::PRIMITIVE_QUADS);
+      host_.SetTexCoord0(0.f, 0.f, r_ref, 1.0f);
+      host_.SetVertex(left, top, kZ);
+      host_.SetTexCoord0(u_max, 0.f, r_ref, 1.0f);
+      host_.SetVertex(right, top, kZ);
+      host_.SetTexCoord0(u_max, v_max, r_ref, 1.0f);
+      host_.SetVertex(right, bottom, kZ);
+      host_.SetTexCoord0(0.f, v_max, r_ref, 1.0f);
+      host_.SetVertex(left, bottom, kZ);
+      host_.End();
+
+      pb_printat(row == 0 ? 8 : 15, text_x, (char *)"%s", info.name);
+    }
+  }
+
+  pb_printat(0, 0, (char *)"%s (%s)", test_name.c_str(), texture_format.name);
+  pb_printat(1, 0, (char *)"Fmt: 0x%X Bpp: %d %s FloatZ: %s", texture_format.xbox_format, texture_format.xbox_bpp,
+             texture_format.xbox_linear ? "Linear" : "Swizzled", is_float ? "y" : "n");
+  pb_printat(2, 0, (char *)"Ref depth: 0.5 (flat)");
+  pb_draw_text_screen();
+
+  FinishDraw(test_name, /*save_zbuffer=*/false);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SHADOW_COMPARE_FUNC, NV097_SET_SHADOW_COMPARE_FUNC_NEVER);
+  Pushbuffer::End();
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  SetDefaultTextureFormat();
+}
+
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
   std::string test_name = "TexFmt_";
 
@@ -546,6 +760,15 @@ static void DrawCheckerboardBackground(TestHost &host) {
 
 std::string TextureFormatTests::MakeXAlphaTestName(const TextureFormatInfo &texture_format) {
   std::string test_name = "XAlpha_";
+  test_name += texture_format.name;
+  if (texture_format.xbox_linear) {
+    test_name += "_L";
+  }
+  return test_name;
+}
+
+std::string TextureFormatTests::MakeDepthTestName(const TextureFormatInfo &texture_format) {
+  std::string test_name = "DepthFmt_";
   test_name += texture_format.name;
   if (texture_format.xbox_linear) {
     test_name += "_L";
