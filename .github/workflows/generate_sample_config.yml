@@ -1,0 +1,220 @@
+name: Generate Sample Config
+
+on:
+  workflow_run:
+    workflows: ["Build"]
+    branches: ["main"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      deploy_pages:
+        description: "Deploy generated sample-config.json to GitHub Pages"
+        type: boolean
+        default: false
+
+concurrency:
+  group: generate-sample-config-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate-sample-config:
+    name: Generate Sample Config
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Build and Runtime Dependencies
+        run: |
+          sudo apt-get update -qy
+          sudo apt-get install -y --no-install-recommends \
+            cmake \
+            llvm \
+            lld \
+            libsdl2-dev \
+            libsdl2-image-dev \
+            ninja-build \
+            xvfb libgl1-mesa-dri libgl1 libglx-mesa0 libegl1 \
+            libsdl2-2.0-0 libepoxy0 libpixman-1-0 libslirp0 libsamplerate0 \
+            libpipewire-0.3-0 libvulkan1 libpcap0.8 libusb-1.0-0 libcurl4 \
+            qemu-utils
+          sudo apt-get install -y --no-install-recommends libfuse2t64 || sudo apt-get install -y --no-install-recommends libfuse2 || true
+          pip install -r requirements.txt pyfatx git+https://github.com/abaire/xemu-pgraph-ci-tools.git
+
+      - name: Prewarm nxdk
+        run: |
+          export CMAKE_POLICY_VERSION_MINIMUM=3.5
+          bash ${GITHUB_WORKSPACE}/prewarm-nxdk.sh
+
+      - name: Compile ISO in Dump Config Mode
+        run: |
+          export NXDK_DIR="${GITHUB_WORKSPACE}/third_party/nxdk"
+          cmake -B build \
+                -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
+                -DDUMP_CONFIG_FILE=ON
+          cmake --build build --target nxdk_pgraph_tests_xiso -- -j$(nproc)
+
+      - name: Prepare xemu, Roswell BIOS, and HDD Image
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p assets
+          python3 -c "
+          import os, sys
+          from xemu_pgraph_ci_tools.github import download_xemu, download_xemu_hdd
+          xemu_path = download_xemu('assets', 'latest')
+          if not xemu_path or not os.path.exists(xemu_path):
+              sys.exit('Failed to download official xemu release')
+          os.chmod(xemu_path, 0o755)
+          target_path = 'assets/xemu'
+          if xemu_path != target_path:
+              os.rename(xemu_path, target_path)
+
+          hdd_path = download_xemu_hdd('assets')
+          if not hdd_path or not os.path.exists(hdd_path):
+              sys.exit('Failed to download xemu hard disk image')
+          target_hdd = 'assets/xbox_hdd.qcow2'
+          if hdd_path != target_hdd:
+              os.rename(hdd_path, target_hdd)
+          print('Successfully prepared xemu and HDD image')
+          "
+
+          gh release download \
+            --repo mborgerson/roswell \
+            --pattern "*flash.bin" \
+            --output assets/roswell.bin
+
+      - name: Configure xemu
+        run: |
+          cat <<EOF > assets/xemu.toml
+          [general]
+          show_welcome = false
+          skip_boot_anim = true
+
+          [general.updates]
+          check = false
+
+          [net]
+          enable = false
+
+          [sys]
+          mem_limit = '64'
+
+          [sys.files]
+          bootrom_path = ''
+          flashrom_path = '${GITHUB_WORKSPACE}/assets/roswell.bin'
+          hdd_path = '${GITHUB_WORKSPACE}/assets/xbox_hdd.qcow2'
+          EOF
+
+      - name: Run xemu in Dump Config Mode
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          MESA_LOADER_DRIVER_OVERRIDE: "llvmpipe"
+          SDL_AUDIO_DRIVER: "dummy"
+          APPIMAGE_EXTRACT_AND_RUN: "1"
+        run: |
+          chmod +x assets/xemu
+          ISO_PATH="${GITHUB_WORKSPACE}/build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso"
+          if [ ! -f "$ISO_PATH" ]; then
+            echo "Error: ISO not found at $ISO_PATH"
+            exit 1
+          fi
+
+          echo "Running xemu with Roswell BIOS to dump sample-config.json..."
+          timeout 120s xvfb-run -s "-screen 0 1280x720x24" ./assets/xemu \
+            -config_path "${GITHUB_WORKSPACE}/assets/xemu.toml" \
+            -dvd_path "$ISO_PATH" || {
+              EXIT_CODE=$?
+              if [ $EXIT_CODE -eq 124 ]; then
+                echo "Error: xemu execution timed out after 120 seconds"
+              else
+                echo "Error: xemu failed with exit code $EXIT_CODE"
+              fi
+              exit $EXIT_CODE
+            }
+
+      - name: Extract sample-config.json from HDD
+        run: |
+          mkdir -p extracted
+          echo "Converting qcow2 HDD image to raw..."
+          qemu-img convert -f qcow2 -O raw assets/xbox_hdd.qcow2 assets/xbox_hdd.raw
+
+          echo "Extracting partition E contents with pyfatx..."
+          cd extracted
+          python3 -m pyfatx -d e -x ../assets/xbox_hdd.raw
+          cd ..
+
+          SAMPLE_CONFIG=$(find extracted -name "sample-config.json" -type f | head -n 1)
+          if [ -z "$SAMPLE_CONFIG" ] || [ ! -s "$SAMPLE_CONFIG" ]; then
+            echo "Error: sample-config.json was not found or is empty!"
+            find extracted -ls || true
+            exit 1
+          fi
+
+          python3 -m json.tool "$SAMPLE_CONFIG" > /dev/null
+          echo "Successfully validated sample-config.json:"
+          ls -lh "$SAMPLE_CONFIG"
+          cp "$SAMPLE_CONFIG" sample-config.json
+
+      - name: Upload sample-config.json Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: sample-config.json
+          path: sample-config.json
+
+      - name: Deploy sample-config.json to GitHub Pages
+        if: ${{ github.event_name == 'workflow_run' || (github.ref == 'refs/heads/main' && github.event.inputs.deploy_pages == true) }}
+        run: |
+          cp sample-config.json /tmp/sample-config.json
+          git config --local user.email "$GITHUB_ACTOR+github-actions@users.noreply.github.com"
+          git config --local user.name "$GITHUB_ACTOR via action"
+
+          git fetch origin pages_doxygen || true
+          if git rev-parse --verify origin/pages_doxygen >/dev/null 2>&1; then
+            git checkout -B pages_doxygen origin/pages_doxygen
+          else
+            git checkout -b pages_doxygen
+          fi
+
+          mkdir -p docs
+          cp /tmp/sample-config.json docs/sample-config.json
+          cp /tmp/sample-config.json sample-config.json
+
+          git add docs/sample-config.json sample-config.json
+          git commit -m "Update sample-config.json [skip ci]" || echo "No changes to commit"
+          git push origin pages_doxygen
+
+      - name: Attach sample-config.json to Release
+        if: ${{ github.event_name == 'workflow_run' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch --tags origin || true
+          RELEASE_TAG=""
+          if [ -n "${{ github.event.workflow_run.head_sha }}" ]; then
+            RELEASE_TAG=$(git tag --points-at "${{ github.event.workflow_run.head_sha }}" | head -n 1)
+          fi
+
+          if [ -z "$RELEASE_TAG" ]; then
+            RELEASE_TAG=$(gh release view --json tagName -q .tagName 2>/dev/null || echo "")
+          fi
+
+          if [ -n "$RELEASE_TAG" ]; then
+            echo "Uploading sample-config.json to release $RELEASE_TAG"
+            gh release upload "$RELEASE_TAG" sample-config.json --clobber
+          else
+            echo "No matching release tag found to attach sample-config.json"
+          fi
