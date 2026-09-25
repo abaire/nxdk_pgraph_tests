@@ -57,7 +57,10 @@ In the default release build, the program will look for this file in the `output
 `e:/nxdk_pgraph_tests/nxdk_pgraph_tests_config.json`) and `d:\nxdk_pgraph_tests_config.json`, taking whichever is found
 first.
 
-When building from source, the `sample-config.json` file in the `resources` directory can be copied to
+An automatically generated sample configuration file enumerating every test suite and test case is hosted on GitHub Pages:
+[sample-config.json](https://abaire.github.io/nxdk_pgraph_tests/sample-config.json).
+
+When building from source, the hosted `sample-config.json` file can be downloaded and saved to
 `resources/nxdk_pgraph_tests_config.json` and modified in order to change the default behavior of the final xiso.
 
 #### Filtering test suites/cases
@@ -169,10 +172,13 @@ of the sample projects, triggering the creation of the `nxdk` libraries needed f
 
 ### Generating the default JSON config
 
+This process is automated via the [Generate Sample Config](.github/workflows/generate_sample_config.yml) workflow upon release, which updates the [hosted sample configuration](https://abaire.github.io/nxdk_pgraph_tests/sample-config.json).
+
+To generate the configuration manually:
+
 1. Configure CMake with the `DUMP_CONFIG_FILE` option set to ON.
 2. Build and run the xiso.
-3. Copy the new `sample-config.json` file from the output directory on the XBOX/emulator into the `resources` directory
-   in this repo.
+3. Retrieve the generated `sample-config.json` file from the output directory on the XBOX/emulator.
 
 Note that, when running in `DUMP_CONFIG_FILE` mode, any existing `pgraph_test_config.json` file will be ignored.
 
