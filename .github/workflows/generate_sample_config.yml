@@ -1,11 +1,12 @@
 name: Generate Sample Config
 
 on:
-  workflow_run:
-    workflows: ["Build"]
-    branches: ["main"]
-    types:
-      - completed
+  # TODO: Reenable when roswell can run the iso in sample generation mode.
+  #workflow_run:
+  #  workflows: ["Build"]
+  #  branches: ["main"]
+  #  types:
+  #    - completed
   workflow_dispatch:
     inputs:
       deploy_pages:
