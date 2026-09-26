@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d39/structZPassPixelCountTests_1_1report__dma__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>ZPassPixelCountTests::report_dma_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/zpass_pixel_count_tests.h" line="42" column="3" bodyfile="src/tests/zpass_pixel_count_tests.h" bodystart="42" bodyend="42"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

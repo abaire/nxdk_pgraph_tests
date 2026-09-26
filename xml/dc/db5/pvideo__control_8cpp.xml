@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/db5/pvideo__control_8cpp" kind="file" language="C++">
+    <compoundname>pvideo_control.cpp</compoundname>
+    <includes refid="dc/d9f/pvideo__control_8h" local="yes">pvideo_control.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">nxdk_ext.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/pvideo_control.cpp</label>
+        <link refid="dc/db5/pvideo__control_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>pvideo_control.h</label>
+        <link refid="dc/d9f/pvideo__control_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="9">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="4">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="8">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>windows.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="d4/d25/namespacePvideoControl">PvideoControl</innernamespace>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="dc/db5/pvideo__control_8cpp_1ae1de504b43f0d2fb4384f0bcd6318813" prot="public" static="no">
+        <name>SET_MASK</name>
+        <param><defname>mask</defname></param>
+        <param><defname>val</defname></param>
+        <initializer>(((val) &lt;&lt; (__builtin_ffs(mask) - 1)) &amp; (mask))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pvideo_control.cpp" line="8" column="9" bodyfile="src/pvideo_control.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;pvideo_control.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SET_MASK(mask,<sp/>val)<sp/>(((val)<sp/>&lt;&lt;<sp/>(__builtin_ffs(mask)<sp/>-<sp/>1))<sp/>&amp;<sp/>(mask))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">PvideoControl<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNumPvideoOverlays<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ClearPvideoInterrupts()<sp/>{<sp/>VIDEOREG(NV_PVIDEO_INTR)<sp/>=<sp/>NV_PVIDEO_INTR_BUFFER_0<sp/>|<sp/>NV_PVIDEO_INTR_BUFFER_1;<sp/>}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoInterruptEnabled(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_zero,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_one)<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>uint32_t<sp/>val<sp/>=<sp/>SET_MASK(NV_PVIDEO_INTR_EN_BUFFER_0,<sp/>enable_zero)<sp/>|<sp/>SET_MASK(NV_PVIDEO_INTR_EN_BUFFER_1,<sp/>enable_one);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_INTR_EN)<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoBuffer(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_zero,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_one)<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>uint32_t<sp/>val<sp/>=<sp/>SET_MASK(NV_PVIDEO_BUFFER_0_USE,<sp/>enable_zero)<sp/>|<sp/>SET_MASK(NV_PVIDEO_BUFFER_1_USE,<sp/>enable_one);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_BUFFER)<sp/>=<sp/>val;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoStop(uint32_t<sp/>value)<sp/>{<sp/>VIDEOREG(NV_PVIDEO_STOP)<sp/>=<sp/>value;<sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoBase(uint32_t<sp/>addr,<sp/>uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>ASSERT(buffer<sp/>&lt;<sp/>kNumPvideoOverlays);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_BASE<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>addr;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoLimit(uint32_t<sp/>limit,<sp/>uint32_t<sp/>buffer)<sp/>{<sp/>VIDEOREG(NV_PVIDEO_LIMIT<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>limit;<sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoOffset(uint32_t<sp/>offset,<sp/>uint32_t<sp/>buffer)<sp/>{<sp/>VIDEOREG(NV_PVIDEO_OFFSET<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>offset;<sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoIn(uint32_t<sp/>x,<sp/>uint32_t<sp/>y,<sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height,<sp/>uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_POINT_IN<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>SET_MASK(NV_PVIDEO_POINT_IN_S,<sp/>x)<sp/>|<sp/>SET_MASK(NV_PVIDEO_POINT_IN_T,<sp/>y);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_SIZE_IN<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV_PVIDEO_SIZE_IN_WIDTH,<sp/>width)<sp/>|<sp/>SET_MASK(NV_PVIDEO_SIZE_IN_HEIGHT,<sp/>height);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoOut(uint32_t<sp/>x,<sp/>uint32_t<sp/>y,<sp/>uint32_t<sp/>width,<sp/>uint32_t<sp/>height,<sp/>uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_POINT_OUT<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV_PVIDEO_POINT_OUT_X,<sp/>x)<sp/>|<sp/>SET_MASK(NV_PVIDEO_POINT_OUT_Y,<sp/>y);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_SIZE_OUT<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV_PVIDEO_SIZE_OUT_WIDTH,<sp/>width)<sp/>|<sp/>SET_MASK(NV_PVIDEO_SIZE_OUT_HEIGHT,<sp/>height);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoFormat(uint32_t<sp/>format,<sp/>uint32_t<sp/>pitch,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>color_keyed,<sp/>uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_FORMAT<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>SET_MASK(NV_PVIDEO_FORMAT_PITCH,<sp/>pitch)<sp/>|</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV_PVIDEO_FORMAT_COLOR,<sp/>format)<sp/>|</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV_PVIDEO_FORMAT_DISPLAY,<sp/>color_keyed);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoColorKey(uint8_t<sp/>r,<sp/>uint8_t<sp/>g,<sp/>uint8_t<sp/>b,<sp/>uint8_t<sp/>a)<sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_COLOR_KEY)<sp/>=<sp/>SET_MASK(NV_PVIDEO_COLOR_KEY_RED,<sp/>r)<sp/>|<sp/>SET_MASK(NV_PVIDEO_COLOR_KEY_GREEN,<sp/>g)<sp/>|</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV_PVIDEO_COLOR_KEY_BLUE,<sp/>b)<sp/>|<sp/>SET_MASK(NV_PVIDEO_COLOR_KEY_ALPHA,<sp/>a);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetPvideoLuminanceChrominance(uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_LUMINANCE<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>0x00001000;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_CHROMINANCE<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>0x00001000;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PvideoInit()<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Reset<sp/>behavior<sp/>based<sp/>on<sp/>observations<sp/>of<sp/>Dragon<sp/>Ball<sp/>Z<sp/>Sagas<sp/>FMV.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>ClearPvideoInterrupts();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>SetPvideoOffset(0);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_SIZE_IN)<sp/>=<sp/>0xFFFFFFFF;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_POINT_IN)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_SIZE_IN<sp/>+<sp/>4)<sp/>=<sp/>0xFFFFFFFF;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_POINT_IN<sp/>+<sp/>4)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>SetPvideoBase(0);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>SetPvideoLuminanceChrominance();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PvideoTeardown()<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>SetPvideoInterruptEnabled(</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>ClearPvideoInterrupts();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>SetPvideoStop(1);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>SetPvideoBuffer(</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_OFFSET)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_SIZE_IN)<sp/>=<sp/>0xFFFFFFFF;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_POINT_IN)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_BASE)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_LUMINANCE)<sp/>=<sp/>0x1000;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_CHROMINANCE)<sp/>=<sp/>0x1000;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_OFFSET<sp/>+<sp/>4)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_SIZE_IN<sp/>+<sp/>4)<sp/>=<sp/>0xFFFFFFFF;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_POINT_IN<sp/>+<sp/>4)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_BASE<sp/>+<sp/>4)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_LUMINANCE<sp/>+<sp/>4)<sp/>=<sp/>0x1000;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_CHROMINANCE<sp/>+<sp/>4)<sp/>=<sp/>0x1000;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>uint32_t<sp/>CalculateDelta(uint32_t<sp/>in_size,<sp/>uint32_t<sp/>out_size)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>ASSERT(in_size<sp/>&gt;<sp/>1);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>ASSERT(out_size<sp/>&gt;<sp/>1);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>((in_size<sp/>-<sp/>1)<sp/>&lt;&lt;<sp/>20)<sp/>/<sp/>(out_size<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDsDx(uint32_t<sp/>in_width,<sp/>uint32_t<sp/>out_width,<sp/>uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_DS_DX<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>CalculateDelta(in_width,<sp/>out_width);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetDtDy(uint32_t<sp/>in_height,<sp/>uint32_t<sp/>out_height,<sp/>uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>VIDEOREG(NV_PVIDEO_DT_DY<sp/>+<sp/>buffer<sp/>*<sp/>0x04)<sp/>=<sp/>CalculateDelta(in_height,<sp/>out_height);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetSquareDsDxDtDy(uint32_t<sp/>buffer)<sp/>{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>SetDsDx(2,<sp/>2,<sp/>buffer);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>SetDtDy(2,<sp/>2,<sp/>buffer);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>PvideoControl</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/pvideo_control.cpp"/>
+  </compounddef>
+</doxygen>

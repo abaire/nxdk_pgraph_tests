@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d3a/perspective__vertex__shader__no__lighting_8h" kind="file" language="C++">
+    <compoundname>perspective_vertex_shader_no_lighting.h</compoundname>
+    <includes local="yes">shaders/perspective_vertex_shader.h</includes>
+    <includedby refid="df/de9/perspective__vertex__shader__no__lighting_8cpp" local="yes">src/shaders/perspective_vertex_shader_no_lighting.cpp</includedby>
+    <includedby refid="d4/d9a/color__key__tests_8cpp" local="yes">src/tests/color_key_tests.cpp</includedby>
+    <includedby refid="d6/dab/fog__gen__tests_8cpp" local="yes">src/tests/fog_gen_tests.cpp</includedby>
+    <includedby refid="d7/d99/fog__tests_8cpp" local="yes">src/tests/fog_tests.cpp</includedby>
+    <includedby refid="d1/d76/shade__model__tests_8cpp" local="yes">src/tests/shade_model_tests.cpp</includedby>
+    <includedby refid="dd/d82/specular__back__tests_8cpp" local="yes">src/tests/specular_back_tests.cpp</includedby>
+    <includedby refid="da/d0c/specular__tests_8cpp" local="yes">src/tests/specular_tests.cpp</includedby>
+    <includedby refid="de/d3e/texture__2d__as__cubemap__tests_8cpp" local="yes">src/tests/texture_2d_as_cubemap_tests.cpp</includedby>
+    <includedby refid="df/d45/texture__3d__as__2d__tests_8cpp" local="yes">src/tests/texture_3d_as_2d_tests.cpp</includedby>
+    <includedby refid="d5/d6d/texture__border__tests_8cpp" local="yes">src/tests/texture_border_tests.cpp</includedby>
+    <includedby refid="d6/d8f/texture__cubemap__tests_8cpp" local="yes">src/tests/texture_cubemap_tests.cpp</includedby>
+    <includedby refid="df/ddd/texture__format__tests_8cpp" local="yes">src/tests/texture_format_tests.cpp</includedby>
+    <includedby refid="d1/d5e/texture__shadow__comparator__tests_8cpp" local="yes">src/tests/texture_shadow_comparator_tests.cpp</includedby>
+    <includedby refid="d4/d46/texture__signed__component__tests_8cpp" local="yes">src/tests/texture_signed_component_tests.cpp</includedby>
+    <includedby refid="df/d5a/vertex__shader__rounding__tests_8cpp" local="yes">src/tests/vertex_shader_rounding_tests.cpp</includedby>
+    <includedby refid="d3/db7/viewport__tests_8cpp" local="yes">src/tests/viewport_tests.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/shaders/perspective_vertex_shader_no_lighting.h</label>
+        <link refid="d7/d3a/perspective__vertex__shader__no__lighting_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>shaders/perspective_vertex_shader.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d8/d21/classPerspectiveVertexShaderNoLighting" prot="public">PerspectiveVertexShaderNoLighting</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_SRC_SHADERS_PERSPECTIVE_VERTEX_SHADER_NO_LIGHTING_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_SRC_SHADERS_PERSPECTIVE_VERTEX_SHADER_NO_LIGHTING_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/perspective_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="d8/d21/classPerspectiveVertexShaderNoLighting" refkind="compound"><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d8/d21/classPerspectiveVertexShaderNoLighting" kindref="compound">PerspectiveVertexShaderNoLighting</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>PBKitPlusPlus::PerspectiveVertexShader<sp/>{</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><ref refid="d8/d21/classPerspectiveVertexShaderNoLighting" kindref="compound">PerspectiveVertexShaderNoLighting</ref>(uint32_t<sp/>framebuffer_width,<sp/>uint32_t<sp/>framebuffer_height,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_min<sp/>=<sp/>0,</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z_max<sp/>=<sp/>0x7FFF,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fov_y<sp/>=<sp/>M_PI<sp/>*<sp/>0.25f,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>near<sp/>=<sp/>1.0f,</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>far<sp/>=<sp/>10.0f);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_SRC_SHADERS_PERSPECTIVE_VERTEX_SHADER_NO_LIGHTING_H_</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/shaders/perspective_vertex_shader_no_lighting.h"/>
+  </compounddef>
+</doxygen>

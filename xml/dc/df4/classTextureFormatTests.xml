@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dc/df4/classTextureFormatTests" kind="class" language="C++" prot="public">
+    <compoundname>TextureFormatTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d1/d54/texture__format__tests_8h" local="no">texture_format_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a1d8914b5ccea0dc0f0ce6037cc4e944a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TextureFormatTests::TextureFormatTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TextureFormatTests</name>
+        <qualifiedname>TextureFormatTests::TextureFormatTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+<para>Constructs the <ref refid="dc/df4/classTextureFormatTests" kindref="compound">TextureFormatTests</ref> test suite and creates test cases. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>TexFmt_A1R5G5B5 Samples a 2D color gradient texture in A1R5G5B5 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A1R5G5B5_L Samples a 2D color gradient texture in A1R5G5B5 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A4R4G4B4 Samples a 2D color gradient texture in A4R4G4B4 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A4R4G4B4_L Samples a 2D color gradient texture in A4R4G4B4 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A4V6YB6A4U6YA6_L Samples a 2D color gradient texture in A4V6YB6A4U6YA6 (LC_IMAGE_A4V6YB6A4U6YA6) linear YUV format with alpha.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8 Samples a 2D color gradient texture in A8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8_L Samples a 2D color gradient texture in A8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8B8G8R8 Samples a 2D color gradient texture in A8B8G8R8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8B8G8R8_L Samples a 2D color gradient texture in A8B8G8R8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8R8G8B8 Samples a 2D color gradient texture in A8R8G8B8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8R8G8B8_L Samples a 2D color gradient texture in A8R8G8B8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8Y8 Samples a 2D color gradient texture in A8Y8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_A8Y8_L Samples a 2D color gradient texture in A8Y8 linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8Y8).</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_AY8 Samples a 2D color gradient texture in AY8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_AY8_L Samples a 2D color gradient texture in AY8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_B8G8R8A8 Samples a 2D color gradient texture in B8G8R8A8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_B8G8R8A8_L Samples a 2D color gradient texture in B8G8R8A8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_X8Y24_FIXED Samples a 2D depth texture in 24-bit fixed-point depth swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FIXED) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_X8Y24_FIXED_L Samples a 2D depth texture in 24-bit fixed-point depth linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_X8_Y24_FIXED) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_X8Y24_FLOAT Samples a 2D depth texture in 24-bit floating-point depth swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_X8_Y24_FLOAT) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_Y16_FIXED Samples a 2D depth texture in 16-bit fixed-point depth swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FIXED) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_Y16_FIXED_L Samples a 2D depth texture in 16-bit fixed-point depth linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FIXED) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_Y16_FLOAT Samples a 2D depth texture in 16-bit floating-point depth swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_DEPTH_Y16_FLOAT) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>DepthFmt_D_Y16_FLOAT_L Samples a 2D depth texture in 16-bit floating-point depth linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_DEPTH_Y16_FLOAT) using 3D projective shadow comparison against a constant reference depth across 6 shadow compare functions, saving the backbuffer.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_DXT1 Samples a 2D color gradient texture in DXT1 compressed format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_G8B8 Samples a 2D color gradient texture in G8B8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_G8B8_L Samples a 2D color gradient texture in G8B8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R16B16 Samples a 2D color gradient texture in R16B16 swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_YB_16_YA_16).</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R16B16_L Samples a 2D color gradient texture in R16B16 linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_YB16YA16).</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R5G6B5 Samples a 2D color gradient texture in R5G6B5 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R5G6B5_L Samples a 2D color gradient texture in R5G6B5 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R6G5B5 Samples a 2D color gradient texture in R6G5B5 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R8B8 Samples a 2D color gradient texture in R8B8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R8G8B8A8 Samples a 2D color gradient texture in R8G8B8A8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_R8G8B8A8_L Samples a 2D color gradient texture in R8G8B8A8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_SZ_Index8_p32 Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 32-entry color palette.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_SZ_Index8_p64 Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 64-entry color palette.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_SZ_Index8_p128 Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 128-entry color palette.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_SZ_Index8_p256 Samples an 8-bit palettized texture (SZ_I8_A8R8G8B8) configured with a 256-entry color palette.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_UYVY_L Samples a 2D color gradient texture in UYVY (LC_IMAGE_YB8CR8YA8CB8) linear YUV format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_X1R5G5B5 Samples a 2D color gradient texture in X1R5G5B5 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_X1R5G5B5_L Samples a 2D color gradient texture in X1R5G5B5 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_X8R8G8B8 Samples a 2D color gradient texture in X8R8G8B8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_X8R8G8B8_L Samples a 2D color gradient texture in X8R8G8B8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_Y16 Samples a 2D color gradient texture in Y16 swizzled format (NV097_SET_TEXTURE_FORMAT_COLOR_SZ_Y16, format 0x32).</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_Y16_L Samples a 2D color gradient texture in Y16 linear format (NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_Y16, format 0x35).</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_Y8 Samples a 2D color gradient texture in Y8 swizzled format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_Y8_L Samples a 2D color gradient texture in Y8 linear format.</para>
+</simplesect>
+<simplesect kind="remark"><para>TexFmt_YUY2_L Samples a 2D color gradient texture in YUY2 (LC_IMAGE_CR8YB8CB8YA8) linear YUV format.</para>
+</simplesect>
+<simplesect kind="remark"><para>XAlpha_A8R8G8B8_L Baseline test verifying alpha channel sampling and blending behavior with an actual alpha channel (A8R8G8B8 linear).</para>
+</simplesect>
+<simplesect kind="remark"><para>XAlpha_X1R5G5B5 Tests that the unused X bit in X1R5G5B5 swizzled textures is treated as 1.0 (opaque) during sampling and blending.</para>
+</simplesect>
+<simplesect kind="remark"><para>XAlpha_X1R5G5B5_L Tests that the unused X bit in X1R5G5B5 linear textures is treated as 1.0 (opaque) during sampling and blending.</para>
+</simplesect>
+<simplesect kind="remark"><para>XAlpha_X8R8G8B8 Tests that the unused X byte in X8R8G8B8 swizzled textures is treated as 0xFF (opaque) during sampling and blending.</para>
+</simplesect>
+<simplesect kind="remark"><para>XAlpha_X8R8G8B8_L Tests that the unused X byte in X8R8G8B8 linear textures is treated as 0xFF (opaque) during sampling and blending. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="25" column="3" bodyfile="src/tests/texture_format_tests.cpp" bodystart="244" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a24c06582a61c0714455cd9c1ba2c6417" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TextureFormatTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="27" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="277" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a3055bc8196e856ecca6559f718524a09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>TextureFormatTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="28" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="287" bodyend="287"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a5d1133b9ee93ea6151081b0e6d1b753e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>TextureFormatTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="31" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="289" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a1c77a570b89402a35781839d055f185d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::Test</definition>
+        <argsstring>(const TextureFormatInfo &amp;texture_format)</argsstring>
+        <name>Test</name>
+        <qualifiedname>TextureFormatTests::Test</qualifiedname>
+        <param>
+          <type>const TextureFormatInfo &amp;</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+<para>Tests sampling of the given texture format using a generated RGBA color gradient. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="34" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="295" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a90b83247895c82c5b0171f5868f64d51" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::TestPalettized</definition>
+        <argsstring>(TestHost::PaletteSize size)</argsstring>
+        <name>TestPalettized</name>
+        <qualifiedname>TextureFormatTests::TestPalettized</qualifiedname>
+        <param>
+          <type>TestHost::PaletteSize</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Tests sampling of 8-bit palettized textures (SZ_I8_A8R8G8B8) with the given palette size. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="37" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="328" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a17a498c143462716037a22cc583ab238" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::TestXAlpha</definition>
+        <argsstring>(const TextureFormatInfo &amp;texture_format)</argsstring>
+        <name>TestXAlpha</name>
+        <qualifiedname>TextureFormatTests::TestXAlpha</qualifiedname>
+        <param>
+          <type>const TextureFormatInfo &amp;</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+<para>Tests alpha channel sampling and blending behavior for texture formats with dummy/unused &quot;X&quot; alpha components. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="40" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="368" bodyend="537"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a788823b57fd9ed7f6ba0430525c3c81f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureFormatTests::TestDepth</definition>
+        <argsstring>(const TextureFormatInfo &amp;texture_format)</argsstring>
+        <name>TestDepth</name>
+        <qualifiedname>TextureFormatTests::TestDepth</qualifiedname>
+        <param>
+          <type>const TextureFormatInfo &amp;</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+<para>Tests sampling of depth texture formats, verifying depth buffer modification and backbuffer results. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="43" column="8" bodyfile="src/tests/texture_format_tests.cpp" bodystart="539" bodyend="693"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1adbdd30c0cd890991e9a7b8d980d3efb9" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TextureFormatTests::MakeTestName</definition>
+        <argsstring>(const TextureFormatInfo &amp;texture_format)</argsstring>
+        <name>MakeTestName</name>
+        <qualifiedname>TextureFormatTests::MakeTestName</qualifiedname>
+        <param>
+          <type>const TextureFormatInfo &amp;</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="45" column="22" bodyfile="src/tests/texture_format_tests.cpp" bodystart="695" bodyend="703"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1a7de32e9d9ec28b2b2630acf018a961a0" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TextureFormatTests::MakePalettizedTestName</definition>
+        <argsstring>(TestHost::PaletteSize size)</argsstring>
+        <name>MakePalettizedTestName</name>
+        <qualifiedname>TextureFormatTests::MakePalettizedTestName</qualifiedname>
+        <param>
+          <type>TestHost::PaletteSize</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="46" column="22" bodyfile="src/tests/texture_format_tests.cpp" bodystart="705" bodyend="715"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1abab06abdc77960640c9dd69f4f99c6a2" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TextureFormatTests::MakeXAlphaTestName</definition>
+        <argsstring>(const TextureFormatInfo &amp;texture_format)</argsstring>
+        <name>MakeXAlphaTestName</name>
+        <qualifiedname>TextureFormatTests::MakeXAlphaTestName</qualifiedname>
+        <param>
+          <type>const TextureFormatInfo &amp;</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="47" column="22" bodyfile="src/tests/texture_format_tests.cpp" bodystart="761" bodyend="768"/>
+      </memberdef>
+      <memberdef kind="function" id="dc/df4/classTextureFormatTests_1addcdfeff64a23c10090f6b68913ad44e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string TextureFormatTests::MakeDepthTestName</definition>
+        <argsstring>(const TextureFormatInfo &amp;texture_format)</argsstring>
+        <name>MakeDepthTestName</name>
+        <qualifiedname>TextureFormatTests::MakeDepthTestName</qualifiedname>
+        <param>
+          <type>const TextureFormatInfo &amp;</type>
+          <declname>texture_format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_format_tests.h" line="48" column="22" bodyfile="src/tests/texture_format_tests.cpp" bodystart="770" bodyend="777"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Tests sampling of NV2A texture formats, verifying color conversion, swizzling, and alpha channel handling. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Exercises rendering a textured quad using various NV2A hardware texture formats. A color gradient is generated and converted to the target format (applying swizzling if swizzled), then sampled via the projective 2D shader stage with the final combiner set to output the sampled texture color. Also tests 8-bit palettized textures across various palette sizes and verifies alpha channel behavior for formats containing dummy &quot;X&quot; alpha components. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TextureFormatTests</label>
+        <link refid="dc/df4/classTextureFormatTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TextureFormatTests</label>
+        <link refid="dc/df4/classTextureFormatTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_format_tests.h" line="23" column="1" bodyfile="src/tests/texture_format_tests.h" bodystart="23" bodyend="49"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>allow_saving_</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a5d1133b9ee93ea6151081b0e6d1b753e" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>CreateGeometry</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a3055bc8196e856ecca6559f718524a09" prot="public" virt="virtual"><scope>TextureFormatTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>host_</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a24c06582a61c0714455cd9c1ba2c6417" prot="public" virt="virtual"><scope>TextureFormatTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1addcdfeff64a23c10090f6b68913ad44e" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>MakeDepthTestName</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a7de32e9d9ec28b2b2630acf018a961a0" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>MakePalettizedTestName</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1adbdd30c0cd890991e9a7b8d980d3efb9" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>MakeTestName</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1abab06abdc77960640c9dd69f4f99c6a2" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>MakeXAlphaTestName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TextureFormatTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TextureFormatTests</scope><name>TearDownTest</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a1c77a570b89402a35781839d055f185d" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>Test</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a788823b57fd9ed7f6ba0430525c3c81f" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>TestDepth</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>TestNames</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a90b83247895c82c5b0171f5868f64d51" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>TestPalettized</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TextureFormatTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>TestSuite</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a17a498c143462716037a22cc583ab238" prot="private" virt="non-virtual"><scope>TextureFormatTests</scope><name>TestXAlpha</name></member>
+      <member refid="dc/df4/classTextureFormatTests_1a1d8914b5ccea0dc0f0ce6037cc4e944a" prot="public" virt="non-virtual"><scope>TextureFormatTests</scope><name>TextureFormatTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TextureFormatTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

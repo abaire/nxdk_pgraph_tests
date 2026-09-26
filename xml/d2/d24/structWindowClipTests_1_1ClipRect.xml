@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d24/structWindowClipTests_1_1ClipRect" kind="struct" language="C++" prot="public">
+    <compoundname>WindowClipTests::ClipRect</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d2/d24/structWindowClipTests_1_1ClipRect_1a841e470ce4669e340fdb1a204e9b6e03" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t WindowClipTests::ClipRect::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>WindowClipTests::ClipRect::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.h" line="17" column="14" bodyfile="src/tests/window_clip_tests.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d24/structWindowClipTests_1_1ClipRect_1a22a8e844de4458b4ec9278f72a3540c8" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t WindowClipTests::ClipRect::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>WindowClipTests::ClipRect::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.h" line="18" column="14" bodyfile="src/tests/window_clip_tests.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d24/structWindowClipTests_1_1ClipRect_1ace77b2e813168b047573e4a0f2e49998" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t WindowClipTests::ClipRect::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>WindowClipTests::ClipRect::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.h" line="19" column="14" bodyfile="src/tests/window_clip_tests.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d24/structWindowClipTests_1_1ClipRect_1af561b7c3cc8fadaebbe4cf2f67deba30" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t WindowClipTests::ClipRect::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>WindowClipTests::ClipRect::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.h" line="20" column="14" bodyfile="src/tests/window_clip_tests.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/window_clip_tests.h" line="16" column="3" bodyfile="src/tests/window_clip_tests.h" bodystart="16" bodyend="21"/>
+    <listofallmembers>
+      <member refid="d2/d24/structWindowClipTests_1_1ClipRect_1af561b7c3cc8fadaebbe4cf2f67deba30" prot="public" virt="non-virtual"><scope>WindowClipTests::ClipRect</scope><name>height</name></member>
+      <member refid="d2/d24/structWindowClipTests_1_1ClipRect_1ace77b2e813168b047573e4a0f2e49998" prot="public" virt="non-virtual"><scope>WindowClipTests::ClipRect</scope><name>width</name></member>
+      <member refid="d2/d24/structWindowClipTests_1_1ClipRect_1a841e470ce4669e340fdb1a204e9b6e03" prot="public" virt="non-virtual"><scope>WindowClipTests::ClipRect</scope><name>x</name></member>
+      <member refid="d2/d24/structWindowClipTests_1_1ClipRect_1a22a8e844de4458b4ec9278f72a3540c8" prot="public" virt="non-virtual"><scope>WindowClipTests::ClipRect</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
