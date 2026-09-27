@@ -5,7 +5,7 @@
 
 /**
  * Tests various enhancements (changes that intentionally depart from hardware) specific to the xemu emulator
- * (https://semu.app).
+ * (https://xemu.app).
  */
 class XemuEnhancementTests : public TestSuite {
  public:
