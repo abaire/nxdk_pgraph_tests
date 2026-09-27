@@ -214,6 +214,9 @@ int main() {
       pb_show_debug_screen();
     }
   }
+#else
+  debugPrint("Preparing to dump sample config file.\n");
+  pb_show_debug_screen();
 #endif  // DUMP_CONFIG_FILE
 
   if (!EnsureDriveMounted(config.output_directory_path().front())) {
