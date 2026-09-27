@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           submodules: recursive
 
@@ -53,7 +53,21 @@ jobs:
           sudo apt-get install -y --no-install-recommends libfuse2t64 || sudo apt-get install -y --no-install-recommends libfuse2 || true
           pip install -r requirements.txt pyfatx git+https://github.com/abaire/xemu-pgraph-ci-tools.git
 
+      - name: Get NXDK submodule commit
+        id: nxdk-ref
+        run: echo "sha=$(git rev-parse HEAD:third_party/nxdk)" >> $GITHUB_OUTPUT
+
+      - name: Cache prewarmed NXDK
+        id: cache-nxdk
+        uses: actions/cache@v4
+        with:
+          path: |
+            third_party/nxdk/lib
+            third_party/nxdk/tools
+          key: ${{ runner.os }}-nxdk-${{ steps.nxdk-ref.outputs.sha }}-${{ hashFiles('prewarm-nxdk.sh') }}
+
       - name: Prewarm nxdk
+        if: steps.cache-nxdk.outputs.cache-hit != 'true'
         run: |
           export CMAKE_POLICY_VERSION_MINIMUM=3.5
           bash ${GITHUB_WORKSPACE}/prewarm-nxdk.sh

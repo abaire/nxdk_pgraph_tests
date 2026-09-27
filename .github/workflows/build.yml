@@ -47,7 +47,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          path: nxdk_pgraph_tests
 
       - name: Install dependencies
         run: |
@@ -61,26 +60,38 @@ jobs:
             ninja-build
           pip3 install nv2a-vsh
 
+      - name: Get NXDK submodule commit
+        id: nxdk-ref
+        run: echo "sha=$(git rev-parse HEAD:third_party/nxdk)" >> $GITHUB_OUTPUT
+
+      - name: Cache prewarmed NXDK
+        id: cache-nxdk
+        uses: actions/cache@v4
+        with:
+          path: |
+            third_party/nxdk/lib
+            third_party/nxdk/tools
+          key: ${{ runner.os }}-nxdk-${{ steps.nxdk-ref.outputs.sha }}-${{ hashFiles('prewarm-nxdk.sh') }}
+
       - name: Prewarm nxdk
-        working-directory: nxdk_pgraph_tests
+        if: steps.cache-nxdk.outputs.cache-hit != 'true'
         run: |
           export CMAKE_POLICY_VERSION_MINIMUM=3.5
-          ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh
+          bash ${GITHUB_WORKSPACE}/prewarm-nxdk.sh
 
       - name: Compile
         run: |
-          cd nxdk_pgraph_tests
-          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
+          export NXDK_DIR="${GITHUB_WORKSPACE}/third_party/nxdk"
           cmake -B build \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake"
-          cmake --build build -- -j$(grep -c processor /proc/cpuinfo)
+          cmake --build build -- -j$(nproc)
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: nxdk_pgraph_tests_xiso.iso
-          path: nxdk_pgraph_tests/build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
+          path: build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
 
   CreateRelease:
     needs: [ BuildISO ]
