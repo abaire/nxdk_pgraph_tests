@@ -867,12 +867,12 @@ void ImageBlitTests::TestXemuScaledSurfaceUploadFilter() {
   }
 
   // Minimal GPU draw to trigger the surface upload and set draw_dirty.
-  // Placed in the bottom-right corner to avoid the test region.
+  // Placed just outside the right edge of the framebuffer.
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   host_.Begin(TestHost::PRIMITIVE_POINTS);
   host_.SetDiffuse(0.f, 0.f, 0.f, 0.f);
-  host_.SetScreenVertex(630.f, 460.f, 0.f);
+  host_.SetScreenVertex(641.f, 0.f, 0.f);
   host_.End();
 
   host_.PBKitBusyWait();
