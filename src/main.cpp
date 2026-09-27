@@ -134,6 +134,7 @@
 #include "tests/wbuf_tests.h"
 #include "tests/weight_setter_tests.h"
 #include "tests/window_clip_tests.h"
+#include "tests/xemu_enhancement_tests.h"
 #include "tests/z_min_max_control_tests.h"
 #include "tests/zero_stride_tests.h"
 #include "tests/zpass_pixel_count_tests.h"
@@ -572,6 +573,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(WeightSetterTests)
   REG_TEST(WindowClipTests)
   REG_TEST(WParamTests)
+  REG_TEST(XemuEnhancementTests)
   REG_TEST(ZeroStrideTests)
   REG_TEST(ZMinMaxControlTests)
   REG_TEST(ZPassPixelCountTests)

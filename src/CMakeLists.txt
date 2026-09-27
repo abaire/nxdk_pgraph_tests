@@ -390,6 +390,8 @@ add_executable(
         tests/weight_setter_tests.h
         tests/window_clip_tests.cpp
         tests/window_clip_tests.h
+        tests/xemu_enhancement_tests.cpp
+        tests/xemu_enhancement_tests.h
         tests/z_min_max_control_tests.cpp
         tests/z_min_max_control_tests.h
         tests/zero_stride_tests.cpp
