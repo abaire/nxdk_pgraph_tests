@@ -847,22 +847,22 @@ void ImageBlitTests::TestBlitRenderBlit() {
 }
 
 void ImageBlitTests::TestXemuScaledSurfaceUploadFilter() {
-  static constexpr uint32_t kTestW = 128;
-  static constexpr uint32_t kTestH = 128;
-  static constexpr uint32_t kColorA = 0x00FF0000;  // red
-  static constexpr uint32_t kColorB = 0x000000FF;  // blue
+  static constexpr uint32_t kTestWidth = 128;
+  static constexpr uint32_t kTestHeight = 128;
+  static constexpr uint32_t kColorRed = 0x00FF0000;
+  static constexpr uint32_t kColorBlue = 0x000000FF;
 
   host_.PrepareDraw(0xFF111111);
 
   auto* fb = static_cast<uint32_t*>(pb_agp_access(pb_back_buffer()));
   const uint32_t pitch_pixels = pb_back_buffer_pitch() / 4;
-  const uint32_t start_x = (host_.GetFramebufferWidth() - kTestW) / 2;
-  const uint32_t start_y = (host_.GetFramebufferHeight() - kTestH) / 2;
+  const uint32_t start_x = (host_.GetFramebufferWidth() - kTestWidth) / 2;
+  const uint32_t start_y = (host_.GetFramebufferHeight() - kTestHeight) / 2;
 
   uint32_t row_offset = start_y * pitch_pixels + start_x;
-  for (uint32_t y = 0; y < kTestH; ++y, row_offset += pitch_pixels) {
-    for (uint32_t x = 0; x < kTestW; ++x) {
-      fb[row_offset + x] = (x % 2 == 0) ? kColorA : kColorB;
+  for (uint32_t y = 0; y < kTestHeight; ++y, row_offset += pitch_pixels) {
+    for (uint32_t x = 0; x < kTestWidth; ++x) {
+      fb[row_offset + x] = 0xFF000000 | ((x % 2 == 0) ? kColorRed : kColorBlue);
     }
   }
 
@@ -870,39 +870,33 @@ void ImageBlitTests::TestXemuScaledSurfaceUploadFilter() {
   // Placed in the bottom-right corner to avoid the test region.
   host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
-  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
   host_.SetDiffuse(0.f, 0.f, 0.f, 0.f);
   host_.SetScreenVertex(630.f, 460.f, 0.f);
-  host_.SetScreenVertex(634.f, 460.f, 0.f);
-  host_.SetScreenVertex(634.f, 464.f, 0.f);
-  host_.SetScreenVertex(630.f, 464.f, 0.f);
   host_.End();
 
   host_.PBKitBusyWait();
 
-  bool pass = true;
   uint32_t fail_count = 0;
   uint32_t first_actual = 0;
   uint32_t first_expected = 0;
   static constexpr uint32_t kMaxLoggedFailures = 16;
 
   row_offset = start_y * pitch_pixels + start_x;
-  for (uint32_t y = 0; y < kTestH; ++y, row_offset += pitch_pixels) {
-    for (uint32_t x = 0; x < kTestW; ++x) {
-      const uint32_t actual = fb[row_offset + x];
+  for (uint32_t y = 0; y < kTestHeight; ++y, row_offset += pitch_pixels) {
+    for (uint32_t x = 0; x < kTestWidth; ++x) {
+      const uint32_t actual = fb[row_offset + x] & 0x00FFFFFF;
       const bool expect_red = (x % 2 == 0);
-      const uint32_t expected = (expect_red ? kColorA : kColorB) & 0xFFFFFF;
-      const bool pixel_pass = (actual & 0xFFFFFF) == expected;
+      const uint32_t expected = expect_red ? kColorRed : kColorBlue;
 
-      if (!pixel_pass) {
+      if (actual != expected) {
         if (fail_count < kMaxLoggedFailures) {
-          PrintMsg("FAIL [%u,%u]: expected %s, got 0x%06X\n", x, y, expect_red ? "RED" : "BLUE", actual & 0xFFFFFF);
+          PrintMsg("FAIL [%u,%u]: expected %s, got 0x%06X\n", x, y, expect_red ? "RED" : "BLUE", actual);
         }
         if (fail_count == 0) {
-          first_actual = actual & 0xFFFFFF;
+          first_actual = actual;
           first_expected = expected;
         }
-        pass = false;
         ++fail_count;
       }
     }
@@ -910,8 +904,8 @@ void ImageBlitTests::TestXemuScaledSurfaceUploadFilter() {
 
   pb_print("%s\n", kXemuScaledSurfaceUploadFilterTest);
   pb_print("1px R/B stripes: CPU write -> GPU draw -> readback\n");
-  pb_print("Result: %s\n", pass ? "PASS" : "FAIL");
-  if (!pass) {
+  pb_print("Result: %s\n", fail_count ? "FAIL" : "PASS");
+  if (fail_count) {
     pb_print("%u failures, first: exp 0x%06X got 0x%06X\n", fail_count, first_expected, first_actual);
   }
   pb_draw_text_screen();
