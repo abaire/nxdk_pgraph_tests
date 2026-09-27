@@ -172,7 +172,7 @@ of the sample projects, triggering the creation of the `nxdk` libraries needed f
 
 ### Generating the default JSON config
 
-This process is automated via the [Generate Sample Config](.github/workflows/generate_sample_config.yml) workflow upon release, which updates the [hosted sample configuration](https://abaire.github.io/nxdk_pgraph_tests/sample-config.json).
+This process is automated via the [Generate Sample Config](.github/workflows/generate_sample_config.yml) workflow upon release, which updates the [hosted sample configuration](https://raw.githubusercontent.com/abaire/nxdk_pgraph_tests/refs/heads/pages_doxygen/sample-config.json).
 
 To generate the configuration manually:
 
