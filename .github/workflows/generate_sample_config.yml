@@ -1,12 +1,11 @@
 name: Generate Sample Config
 
 on:
-  # TODO: Reenable when roswell can run the iso in sample generation mode.
-  #workflow_run:
-  #  workflows: ["Build"]
-  #  branches: ["main"]
-  #  types:
-  #    - completed
+  workflow_run:
+    workflows: ["Build"]
+    branches: ["main"]
+    types:
+      - completed
   workflow_dispatch:
     inputs:
       deploy_pages:
@@ -109,15 +108,17 @@ jobs:
           check = false
 
           [net]
-          enable = false
+          enable = true
 
           [sys]
-          mem_limit = '64'
+          mem_limit = '128'
 
           [sys.files]
           bootrom_path = ''
           flashrom_path = '${GITHUB_WORKSPACE}/assets/roswell.bin'
+          eeprom_path = ''
           hdd_path = '${GITHUB_WORKSPACE}/assets/xbox_hdd.qcow2'
+          dvd_path = '${GITHUB_WORKSPACE}/build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso'
           EOF
 
       - name: Run xemu in Dump Config Mode
@@ -138,10 +139,6 @@ jobs:
           python3 -c "
           import os, sys, time, threading, subprocess
 
-          iso_path = os.environ.get('ISO_PATH')
-          if not iso_path or not os.path.isfile(iso_path):
-              sys.exit(f'Error: ISO not found at {iso_path}')
-
           workspace = os.environ.get('GITHUB_WORKSPACE', os.getcwd())
           config_path = os.path.join(workspace, 'assets/xemu.toml')
 
@@ -150,12 +147,9 @@ jobs:
               '-s', '-screen 0 1280x720x24',
               './assets/xemu',
               '-config_path', config_path,
-              '-dvd_path', iso_path,
-              '-device', 'lpc47m157',
-              '-serial', 'stdio',
           ]
 
-          print('Launching xemu with serial logging and monitoring...')
+          print('Launching xemu with config:', config_path)
           proc = subprocess.Popen(
               cmd,
               stdout=subprocess.PIPE,
@@ -164,42 +158,25 @@ jobs:
               bufsize=1,
           )
 
-          success = False
-          failed = False
-
           def stream_output():
-              global success, failed
               for line in iter(proc.stdout.readline, ''):
                   sys.stdout.write(line)
                   sys.stdout.flush()
-                  if 'Config written to' in line:
-                      success = True
-                  elif 'Failed to dump config file' in line:
-                      failed = True
 
           reader = threading.Thread(target=stream_output, daemon=True)
           reader.start()
 
           start_time = time.time()
-          timeout = 120
+          timeout = 240
 
           while time.time() - start_time < timeout:
-              if success:
-                  print('\n[CI Monitor] Detected config written to disk! Waiting 5s for sync...')
-                  time.sleep(5)
+              ret = proc.poll()
+              if ret is not None:
+                  print(f'\n[CI Monitor] xemu process completed with exit code {ret}')
                   break
-              if failed:
-                  print('\n[CI Monitor] Detected dump failure!')
-                  break
-              if proc.poll() is not None:
-                  print(f'\n[CI Monitor] xemu exited early with code {proc.poll()}')
-                  break
-              time.sleep(0.5)
+              time.sleep(1)
           else:
               print(f'\n[CI Monitor] Timed out waiting for xemu after {timeout} seconds')
-
-          if proc.poll() is None:
-              print('[CI Monitor] Terminating xemu process...')
               proc.terminate()
               try:
                   proc.wait(timeout=5)
@@ -210,11 +187,12 @@ jobs:
 
           reader.join(timeout=2)
 
-          if success:
-              print('[CI Monitor] Successfully dumped sample-config.json!')
+          if proc.returncode == 0:
+              print('[CI Monitor] xemu completed and shut down cleanly!')
               sys.exit(0)
           else:
-              sys.exit(1 if proc.returncode in (None, 0) else proc.returncode)
+              print(f'[CI Monitor] xemu failed with exit code {proc.returncode}')
+              sys.exit(proc.returncode if proc.returncode is not None else 1)
           "
 
       - name: Extract sample-config.json from HDD
