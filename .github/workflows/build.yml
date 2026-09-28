@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install -y \
             llvm-19
       - name: Clone tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Run clang-format
         run: |
           clang-format --version
@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
@@ -66,7 +66,7 @@ jobs:
 
       - name: Cache prewarmed NXDK
         id: cache-nxdk
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             third_party/nxdk/lib
@@ -88,7 +88,7 @@ jobs:
           cmake --build build -- -j$(nproc)
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nxdk_pgraph_tests_xiso.iso
           path: build/src/xiso/nxdk_pgraph_tests_xiso/nxdk_pgraph_tests_xiso.iso
@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: nxdk_pgraph_tests
 
@@ -115,13 +115,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.calculate-version.outputs.version }}
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           name: nxdk_pgraph_tests_xiso.iso
           path: .
 
       - name: Create release
-        uses: softprops/action-gh-release@v2.2.1
+        uses: softprops/action-gh-release@v3.0.3
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: "NV2A PGRAPH tests ${{ steps.tag_version.outputs.new_version }}"
@@ -135,7 +135,7 @@ jobs:
     needs: [BuildISO]
     steps:
       - name: Clone tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
       - name: Install Doxygen and Graphviz
@@ -168,10 +168,9 @@ jobs:
 
     steps:
       - name: Clone tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
-          path: nxdk_pgraph_tests
 
       - name: Install dependencies
         run: |
@@ -182,25 +181,38 @@ jobs:
             llvm@19 \
             lld@19
           export PIP_BREAK_SYSTEM_PACKAGES=1
-          pip3 install -r nxdk_pgraph_tests/requirements.txt
+          pip3 install -r requirements.txt
+
+      - name: Get NXDK submodule commit
+        id: nxdk-ref
+        run: echo "sha=$(git rev-parse HEAD:third_party/nxdk)" >> $GITHUB_OUTPUT
+
+      - name: Cache prewarmed NXDK
+        id: cache-nxdk
+        uses: actions/cache@v5
+        with:
+          path: |
+            third_party/nxdk/lib
+            third_party/nxdk/tools
+          key: ${{ runner.os }}-nxdk-${{ steps.nxdk-ref.outputs.sha }}-${{ hashFiles('prewarm-nxdk.sh') }}
 
       - name: Prewarm nxdk
-        working-directory: nxdk_pgraph_tests
+        if: steps.cache-nxdk.outputs.cache-hit != 'true'
         run: |
           export PATH="$(brew --prefix llvm@19)/bin:$(brew --prefix lld@19)/bin:$PATH"
           export LDFLAGS="-L/opt/homebrew/opt/llvm@19/lib/c++ -L/opt/homebrew/opt/llvm@19/lib -L/opt/homebrew/opt/lld@19/lib"
           export CPPFLAGS="-I/opt/homebrew/opt/lld@19/include"
           clang --version
-          bash ${GITHUB_WORKSPACE}/nxdk_pgraph_tests/prewarm-nxdk.sh --clean
+          export CMAKE_POLICY_VERSION_MINIMUM=3.5
+          bash ${GITHUB_WORKSPACE}/prewarm-nxdk.sh
 
       - name: Compile in dump mode
         run: |
-          cd nxdk_pgraph_tests
           # The default clang install will result in linker failures on macOS.
           export PATH="$(brew --prefix llvm@19)/bin:$(brew --prefix lld@19)/bin:$PATH"
           export LDFLAGS="-L/opt/homebrew/opt/llvm@19/lib/c++ -L/opt/homebrew/opt/llvm@19/lib -L/opt/homebrew/opt/lld@19/lib"
           export CPPFLAGS="-I/opt/homebrew/opt/lld@19/include"
-          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
+          export NXDK_DIR="${GITHUB_WORKSPACE}/third_party/nxdk"
           cmake -B build \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
@@ -209,12 +221,11 @@ jobs:
 
       - name: Compile in run mode
         run: |
-          cd nxdk_pgraph_tests
           # The default clang install will result in linker failures on macOS.
           export PATH="$(brew --prefix llvm@19)/bin:$(brew --prefix lld@19)/bin:$PATH"
           export LDFLAGS="-L/opt/homebrew/opt/llvm@19/lib/c++ -L/opt/homebrew/opt/llvm@19/lib -L/opt/homebrew/opt/lld@19/lib"
           export CPPFLAGS="-I/opt/homebrew/opt/lld@19/include"
-          export NXDK_DIR="${GITHUB_WORKSPACE}/nxdk_pgraph_tests/third_party/nxdk"
+          export NXDK_DIR="${GITHUB_WORKSPACE}/third_party/nxdk"
           cmake -B build \
                 -DCMAKE_BUILD_TYPE=Release \
                 -DCMAKE_TOOLCHAIN_FILE="${NXDK_DIR}/share/toolchain-nxdk.cmake" \
@@ -229,7 +240,7 @@ jobs:
 
     steps:
       - name: Clone tree
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
