@@ -1,0 +1,32 @@
+{
+  "settings": {
+    "enable_progress_log": false,
+    "disable_autorun": false,
+    "enable_autorun_immediately": false,
+    "enable_shutdown_on_completion": false,
+    "enable_pgraph_region_diff": false,
+    "skip_tests_by_default": false,
+    "delay_milliseconds_between_tests": 0,
+    "delay_milliseconds_before_exit": 4000,
+    "network": {
+      "enable": false,
+      "config_automatic": false,
+      "config_dhcp": false,
+      "static_ip": "",
+      "static_netmask": "",
+      "static_gateway": "",
+      "static_dns_1": "",
+      "static_dns_2": "",
+      "ftp": {
+        "ftp_ip": "",
+        "ftp_port": 0,
+        "ftp_user": "",
+        "ftp_password": "",
+        "ftp_timeout_milliseconds": 0
+      }
+    },
+    "output_directory_path": "e:/nxdk_pgraph_tests"
+  },
+  "test_suites": {
+  }
+}
