@@ -115,7 +115,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.calculate-version.outputs.version }}
 
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: nxdk_pgraph_tests_xiso.iso
           path: .
