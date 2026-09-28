@@ -59,7 +59,7 @@ jobs:
 
       - name: Cache prewarmed NXDK
         id: cache-nxdk
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             third_party/nxdk/lib
