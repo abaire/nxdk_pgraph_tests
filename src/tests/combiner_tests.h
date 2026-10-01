@@ -32,6 +32,9 @@ class CombinerTests : public TestSuite {
   void TestAlphaFromBlue();
   void TestCombinerOps();
   void TestFinalCombinerSpecialInputs();
+  void TestSignedCombinerOps();
+  void TestSignedPassThroughPipeline();
+  void TestSignedToUnsignedMapping();
 
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];

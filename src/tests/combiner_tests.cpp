@@ -16,6 +16,9 @@ static constexpr const char* kUnboundTextureSamplerTestName = "UnboundTexSampler
 static constexpr const char* kAlphaFromBlueTestName = "AlphaFromBlue";
 static constexpr const char* kCombinerOpsTestName = "CombinerOps";
 static constexpr const char* kFinalCombinerSpecialInputsTestName = "SpecialInputs";
+static constexpr const char* kSignedCombinerOpsTestName = "SignedCombinerOps";
+static constexpr const char* kSignedPassThroughPipelineTestName = "SignedPassThroughPipeline";
+static constexpr const char* kSignedToUnsignedMappingTestName = "SignedToUnsignedMapping";
 
 static constexpr vector_t kDiffuseUL{1.f, 0.f, 0.f, 1.f};
 static constexpr vector_t kDiffuseUR{0.f, 1.f, 0.f, 1.f};
@@ -51,6 +54,23 @@ static constexpr vector_t kDiffuseLL{0.5f, 0.5f, 0.5f, 1.f};
  *
  * @tc SpecialInputs
  *   Tests the special input registers in the final combiner.
+ *
+ * @tc SignedCombinerOps
+ *   Tests behavior of combiner output operations (OP_IDENTITY, OP_SHIFT_LEFT_1, OP_SHIFT_LEFT_2, OP_SHIFT_RIGHT_1,
+ *   OP_BIAS) in conjunction with signed (negative) values. Verifies that negative values are properly scaled and
+ *   clamped when added to a positive base value in subsequent stages.
+ *
+ * @tc SignedPassThroughPipeline
+ *   Tests a 5-stage register combiner pipeline with OP_SHIFT_LEFT_2 where Tex3 operates in STAGE_PASS_THROUGH mode
+ *   with negative values. Verifies blue-to-alpha routing (R1.a = Tex3.b), multiplication by Tex2, scaling by 4.0
+ *   (OP_SHIFT_LEFT_2), and combination with the base diffuse color (R0 + R1) across positive, zero, and negative
+ *   Tex3.b inputs.
+ *
+ * @tc SignedToUnsignedMapping
+ *   Validates behavior when known signed (negative) values are mapped as MAP_UNSIGNED_IDENTITY versus
+ *   MAP_SIGNED_IDENTITY across intermediate registers, pass-through texture coordinates, and a multi-stage pipeline.
+ *   Verifies that MAP_UNSIGNED_IDENTITY properly clamps negative values to 0.0 (preserving base colors), while
+ *   MAP_SIGNED_IDENTITY preserves negative values (allowing subtraction).
  */
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Combiner", config) {
@@ -62,6 +82,9 @@ CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Confi
   tests_[kAlphaFromBlueTestName] = [this]() { TestAlphaFromBlue(); };
   tests_[kCombinerOpsTestName] = [this]() { TestCombinerOps(); };
   tests_[kFinalCombinerSpecialInputsTestName] = [this]() { TestFinalCombinerSpecialInputs(); };
+  tests_[kSignedCombinerOpsTestName] = [this]() { TestSignedCombinerOps(); };
+  tests_[kSignedPassThroughPipelineTestName] = [this]() { TestSignedPassThroughPipeline(); };
+  tests_[kSignedToUnsignedMappingTestName] = [this]() { TestSignedToUnsignedMapping(); };
 }
 
 void CombinerTests::Initialize() {
@@ -815,4 +838,494 @@ void CombinerTests::TestFinalCombinerSpecialInputs() {
 
   host_.SetCombinerControl();
   FinishDraw(kFinalCombinerSpecialInputsTestName);
+}
+
+void CombinerTests::TestSignedCombinerOps() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  static constexpr auto kQuadSize = 36.f;
+  auto draw_quad = [this](float left, float top) {
+    auto right = left + kQuadSize;
+    const auto bottom = top + kQuadSize;
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0, false);
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0, true);
+    left = right + 4.f;
+    right = left + (kQuadSize * 0.5f);
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+  };
+
+  host_.SetCombinerControl(2);
+
+  // Stage 0: R1 = op(-C0)
+  // Input: A = C0 (MAP_SIGNED_NEGATE), B = 1.0 (MAP_UNSIGNED_IDENTITY) -> AB = -C0
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_SIGNED_NEGATE),
+                              TestHost::OneInput());
+  host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_C0, TestHost::MAP_SIGNED_NEGATE),
+                              TestHost::OneInput());
+
+  // Stage 1: R0 = C1 + R1
+  // Input: A = C1, B = 1.0, C = R1 (MAP_SIGNED_IDENTITY), D = 1.0 -> AB + CD = C1 + R1
+  host_.SetCombinerFactorC1(1, 0.75f, 0.75f, 0.75f, 0.75f);
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetInputAlphaCombiner(1, TestHost::AlphaInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::AlphaInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+  host_.SetOutputAlphaCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  auto set_op = [this](TestHost::CombinerOutOp op) {
+    host_.SetOutputColorCombiner(0, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                                 TestHost::SM_SUM, op);
+    host_.SetOutputAlphaCombiner(0, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                                 TestHost::SM_SUM, op);
+  };
+
+  static constexpr auto kQuadSpacingY = 60.f;
+  static constexpr auto kTop = 80.f;
+  static constexpr auto kLeftCol = 230.f;
+  static constexpr auto kRightCol = 540.f;
+
+  float top = kTop;
+  host_.SetCombinerFactorC0(0, 0.125f, 0.125f, 0.125f, 0.125f);
+
+  set_op(TestHost::OP_IDENTITY);
+  draw_quad(kLeftCol, top);
+  pb_printat(3, 0, "Identity (0.625)");
+  top += kQuadSpacingY;
+
+  set_op(TestHost::OP_SHIFT_LEFT_1);
+  draw_quad(kLeftCol, top);
+  pb_printat(6, 0, "Shift Left 1 (0.500)");
+  top += kQuadSpacingY;
+
+  set_op(TestHost::OP_SHIFT_LEFT_2);
+  draw_quad(kLeftCol, top);
+  pb_printat(9, 0, "Shift Left 2 (0.250)");
+
+  top = kTop;
+  set_op(TestHost::OP_SHIFT_RIGHT_1);
+  draw_quad(kRightCol, top);
+  pb_printat(3, 31, "Shift Right 1 (0.688)");
+  top += kQuadSpacingY;
+
+  set_op(TestHost::OP_BIAS);
+  draw_quad(kRightCol, top);
+  pb_printat(6, 31, "Bias (0.125)");
+  top += kQuadSpacingY;
+
+  // Saturating test: -0.375 * 4 = -1.5 -> clamped to -1.0. 0.75 + (-1.0) = -0.25 -> clamped to 0.0
+  host_.SetCombinerFactorC0(0, 0.375f, 0.375f, 0.375f, 0.375f);
+  set_op(TestHost::OP_SHIFT_LEFT_2);
+  draw_quad(kRightCol, top);
+  pb_printat(9, 31, "Shift Left 2 Sat (0.0)");
+
+  pb_printat(0, 0, "%s", kSignedCombinerOpsTestName);
+  pb_printat(1, 0, "Stage 0: R1 = op(-C0). Stage 1: R0 = 0.75 + R1");
+  pb_printat(12, 0, "Each quad: Left = RGB result, Right = Alpha result");
+  pb_printat(13, 0, "Shift Left 2 Sat: Input -0.375 * 4 = -1.5 -> clamp -1.0");
+  pb_printat(14, 0, "Expected: darker = more negative subtraction from 0.75");
+  pb_draw_text_screen();
+
+  host_.SetCombinerControl();
+  FinishDraw(kSignedCombinerOpsTestName);
+}
+
+void CombinerTests::TestSignedPassThroughPipeline() {
+  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF222222, 0xFF333333);
+
+  // Setup texture stages:
+  // Stages 0, 2, and 3 use STAGE_PASS_THROUGH so vertex texcoords act directly as color/inputs.
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetTextureStageEnabled(3, true);
+  host_.SetupTextureStages();
+
+  host_.SetShaderStageProgram(TestHost::STAGE_PASS_THROUGH, TestHost::STAGE_NONE, TestHost::STAGE_PASS_THROUGH,
+                              TestHost::STAGE_PASS_THROUGH);
+
+  // Configure 5 general combiner stages
+  host_.SetCombinerControl(5);
+
+  // Stage 0:
+  // R0Temp.rgb = SIGNED_IDENTITY(Tex0.rgb) * SIGNED_IDENTITY(V0_Diffuse.rgb)
+  // R0Temp.a   = SIGNED_IDENTITY(Tex0.a) * (1.a)
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_DIFFUSE, TestHost::MAP_SIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+  host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Stage 1:
+  // R1Temp.rgb = SIGNED_IDENTITY(Tex3.rgb) * (1.rgb)
+  // R1Temp.a   = R1Temp.b (via alpha_from_ab_blue)
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX3, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY, /*alpha_from_ab_blue=*/true, false);
+  host_.SetOutputAlphaCombiner(1, TestHost::DST_DISCARD);
+
+  // Stage 2:
+  // R1Temp.rgb = SIGNED_IDENTITY(Tex2.rgb) * SIGNED_IDENTITY(R1Temp.a) + (0.rgb) * (0.rgb)
+  // R1Temp.a   = SIGNED_IDENTITY(R0Temp.a) * (1.a)
+  host_.SetInputColorCombiner(2, TestHost::ColorInput(TestHost::SRC_TEX2, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::AlphaInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(2, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+  host_.SetInputAlphaCombiner(2, TestHost::AlphaInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputAlphaCombiner(2, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Stage 3:
+  // R1Temp.rgb = (SIGNED_IDENTITY(R1Temp.rgb) * SIGNED_IDENTITY(R0Temp.rgb)) * 4.0
+  // R1Temp.a   = SIGNED_IDENTITY(R0Temp.a) * (1.a)
+  host_.SetInputColorCombiner(3, TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(3, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_SHIFT_LEFT_2);
+  host_.SetInputAlphaCombiner(3, TestHost::AlphaInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputAlphaCombiner(3, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Stage 4:
+  // R0Temp.rgb = SIGNED_IDENTITY(R0Temp.rgb) * (1.rgb) + SIGNED_IDENTITY(R1Temp.rgb) * (1.rgb)
+  // R0Temp.a   = SIGNED_IDENTITY(R0Temp.a) * (1.a)
+  host_.SetInputColorCombiner(
+      4, TestHost::ColorInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY), TestHost::OneInput(),
+      TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY), TestHost::OneInput());
+  host_.SetOutputColorCombiner(4, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+  host_.SetInputAlphaCombiner(4, TestHost::AlphaInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputAlphaCombiner(4, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Final combiner:
+  // out.rgb = mix(Fog.rgb, R0Temp.rgb, Fog.a)
+  // out.a   = R0Temp.a
+  host_.SetFinalCombiner0(TestHost::SRC_FOG, true, false, TestHost::SRC_FOG, false, false, TestHost::SRC_R0, false,
+                          false, TestHost::SRC_ZERO, false, false);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, true, TestHost::SRC_ZERO, false, true, TestHost::SRC_R0, true,
+                          false);
+
+  static constexpr auto kQuadSize = 36.f;
+  auto draw_quad = [this](float left, float top, float tex3_b) {
+    auto right = left + kQuadSize;
+    const auto bottom = top + kQuadSize;
+
+    // Left quad: Final Combiner RGB
+    host_.SetFinalCombiner0(TestHost::SRC_FOG, true, false, TestHost::SRC_FOG, false, false, TestHost::SRC_R0, false,
+                            false, TestHost::SRC_ZERO, false, false);
+    host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, true, TestHost::SRC_ZERO, false, true, TestHost::SRC_R0, true,
+                            false);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(1.f, 1.f, 1.f, 1.f);
+    host_.SetTexCoord0(0.80f, 0.80f, 0.80f, 1.f);
+    host_.SetTexCoord2(0.50f, 0.50f, 0.50f, 1.f);
+    host_.SetTexCoord3(0.f, 0.f, tex3_b, 1.f);
+
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+
+    // Right quad: R0 Alpha shown as RGB
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0, true, false);
+    left = right + 4.f;
+    right = left + (kQuadSize * 0.5f);
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(1.f, 1.f, 1.f, 1.f);
+    host_.SetTexCoord0(0.80f, 0.80f, 0.80f, 1.f);
+    host_.SetTexCoord2(0.50f, 0.50f, 0.50f, 1.f);
+    host_.SetTexCoord3(0.f, 0.f, tex3_b, 1.f);
+
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+  };
+
+  static constexpr auto kQuadSpacingY = 60.f;
+  static constexpr auto kTop = 80.f;
+  static constexpr auto kLeftCol = 220.f;
+  static constexpr auto kRightCol = 520.f;
+
+  float top = kTop;
+  draw_quad(kLeftCol, top, 0.10f);
+  pb_printat(3, 0, "Tex3.b=+0.10: 0.96");
+  top += kQuadSpacingY;
+
+  draw_quad(kLeftCol, top, 0.00f);
+  pb_printat(6, 0, "Tex3.b= 0.00: 0.80");
+  top += kQuadSpacingY;
+
+  draw_quad(kLeftCol, top, -0.10f);
+  pb_printat(9, 0, "Tex3.b=-0.10: 0.64");
+
+  top = kTop;
+  draw_quad(kRightCol, top, -0.25f);
+  pb_printat(3, 30, "Tex3.b=-0.25: 0.40");
+  top += kQuadSpacingY;
+
+  draw_quad(kRightCol, top, -0.50f);
+  pb_printat(6, 30, "Tex3.b=-0.50: 0.00");
+  top += kQuadSpacingY;
+
+  draw_quad(kRightCol, top, -0.80f);
+  pb_printat(9, 30, "Tex3.b=-0.80: 0.00");
+
+  pb_printat(0, 0, "%s", kSignedPassThroughPipelineTestName);
+  pb_printat(1, 0, "R0 = Tex0*Diff + 4*(Tex2*Tex3.b*R0). R0 base = 0.80");
+  pb_printat(12, 0, "Tex3 in STAGE_PASS_THROUGH mode (SetTexCoord3 p=Tex3.b)");
+  pb_printat(13, 0, "Tex0, Tex2 in STAGE_PASS_THROUGH mode. Diffuse = 1.0");
+  pb_printat(14, 0, "Each quad: Left = Final RGB, Right = Final Alpha");
+  pb_draw_text_screen();
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host_.SetCombinerControl();
+  FinishDraw(kSignedPassThroughPipelineTestName);
+}
+
+void CombinerTests::TestSignedToUnsignedMapping() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF333333, 0xFF444444);
+
+  static constexpr auto kQuadWidth = 40.f;
+  static constexpr auto kQuadHeight = 20.f;
+
+  auto draw_quad = [this](float left, float top) {
+    auto right = left + kQuadWidth;
+    const auto bottom = top + kQuadHeight;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+  };
+
+  auto draw_tex_quad = [this](float left, float top, float tex_val) {
+    auto right = left + kQuadWidth;
+    const auto bottom = top + kQuadHeight;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(tex_val, tex_val, tex_val, 1.f);
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+  };
+
+  auto draw_pipe_quad = [this](float left, float top, float tex3_b) {
+    auto right = left + kQuadWidth;
+    const auto bottom = top + kQuadHeight;
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(1.f, 1.f, 1.f, 1.f);
+    host_.SetTexCoord0(0.80f, 0.80f, 0.80f, 1.f);
+    host_.SetTexCoord2(0.50f, 0.50f, 0.50f, 1.f);
+    host_.SetTexCoord3(0.f, 0.f, tex3_b, 1.f);
+    host_.SetScreenVertex(left, top);
+    host_.SetScreenVertex(right, top);
+    host_.SetScreenVertex(right, bottom);
+    host_.SetScreenVertex(left, bottom);
+    host_.End();
+  };
+
+  static constexpr auto kLeftCol = 340.f;
+  static constexpr auto kRightCol = 410.f;
+
+  // Case 1: Register source with negative value (-0.30)
+  // Stage 0: R1 = -0.30
+  // Stage 1: R0 = 0.75 + R1
+  // Signed mapping: R0 = 0.75 + (-0.30) = 0.45.
+  // Unsigned mapping: max(0, -0.30) = 0.0 -> R0 = 0.75 + 0.0 = 0.75.
+  host_.SetCombinerControl(2);
+  host_.SetCombinerFactorC0(0, 0.30f, 0.30f, 0.30f, 0.30f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_SIGNED_NEGATE),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R1);
+
+  host_.SetCombinerFactorC1(1, 0.75f, 0.75f, 0.75f, 0.75f);
+  host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+  // Signed
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_quad(kLeftCol, 98.f);
+
+  // Unsigned
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_quad(kRightCol, 98.f);
+
+  // Case 2: Register source with positive value (+0.20)
+  // Stage 0: R1 = +0.20
+  // Stage 1: R0 = 0.75 + R1 = 0.95 for both signed and unsigned.
+  host_.SetCombinerFactorC0(0, 0.20f, 0.20f, 0.20f, 0.20f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R1);
+
+  // Signed
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_quad(kLeftCol, 148.f);
+
+  // Unsigned
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_quad(kRightCol, 148.f);
+
+  // Case 3 & 4: Pass-through texture coordinates
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetupTextureStages();
+  host_.SetShaderStageProgram(TestHost::STAGE_PASS_THROUGH);
+  host_.SetCombinerControl(1);
+  host_.SetCombinerFactorC1(0, 0.75f, 0.75f, 0.75f, 0.75f);
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Case 3: Tex negative (-0.30)
+  // Signed
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_tex_quad(kLeftCol, 198.f, -0.30f);
+
+  // Unsigned
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_tex_quad(kRightCol, 198.f, -0.30f);
+
+  // Case 4: Tex positive (+0.20)
+  // Signed
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_tex_quad(kLeftCol, 248.f, 0.20f);
+
+  // Unsigned
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  draw_tex_quad(kRightCol, 248.f, 0.20f);
+
+  // Case 5: 5-Stage Pipeline with Tex3.b = -0.25
+  // When Stage 1 maps Tex3 with MAP_SIGNED_IDENTITY: R0 = 0.40 (subtraction).
+  // When Stage 1 maps Tex3 with MAP_UNSIGNED_IDENTITY: max(0, -0.25) = 0.0 -> R0 = 0.80 (no subtraction).
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetTextureStageEnabled(3, true);
+  host_.SetupTextureStages();
+  host_.SetShaderStageProgram(TestHost::STAGE_PASS_THROUGH, TestHost::STAGE_NONE, TestHost::STAGE_PASS_THROUGH,
+                              TestHost::STAGE_PASS_THROUGH);
+  host_.SetCombinerControl(5);
+
+  // Stage 0:
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_DIFFUSE, TestHost::MAP_SIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Stage 2:
+  host_.SetInputColorCombiner(2, TestHost::ColorInput(TestHost::SRC_TEX2, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::AlphaInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(2, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Stage 3:
+  host_.SetInputColorCombiner(3, TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(3, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_SHIFT_LEFT_2);
+
+  // Stage 4:
+  host_.SetInputColorCombiner(
+      4, TestHost::ColorInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY), TestHost::OneInput(),
+      TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_IDENTITY), TestHost::OneInput());
+  host_.SetOutputColorCombiner(4, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+  // Final combiner:
+  host_.SetFinalCombiner0(TestHost::SRC_FOG, true, false, TestHost::SRC_FOG, false, false, TestHost::SRC_R0, false,
+                          false, TestHost::SRC_ZERO, false, false);
+
+  // Pipeline Signed Tex3 mapping
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX3, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY, /*alpha_from_ab_blue=*/true, false);
+  draw_pipe_quad(kLeftCol, 298.f, -0.25f);
+
+  // Pipeline Unsigned Tex3 mapping
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX3, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_R1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                               TestHost::SM_SUM, TestHost::OP_IDENTITY, /*alpha_from_ab_blue=*/true, false);
+  draw_pipe_quad(kRightCol, 298.f, -0.25f);
+
+  pb_printat(0, 0, "%s", kSignedToUnsignedMappingTestName);
+  pb_printat(1, 0, "Comparing SIGNED_IDENTITY (left) vs UNSIGNED_IDENTITY (right)");
+  pb_printat(2, 34, "SIGNED  UNSIGNED");
+  pb_printat(3, 0, "Reg -0.30 (0.45 vs 0.75)");
+  pb_printat(5, 0, "Reg +0.20 (0.95 vs 0.95)");
+  pb_printat(7, 0, "Tex -0.30 (0.45 vs 0.75)");
+  pb_printat(9, 0, "Tex +0.20 (0.95 vs 0.95)");
+  pb_printat(11, 0, "Pipe Tex3 -0.25 (0.40 vs 0.80)");
+  pb_printat(13, 0, "UNSIGNED_IDENTITY clamps negative values to 0.0");
+  pb_printat(14, 0, "Right quads should show unclamped base (0.75 or 0.80)");
+  pb_draw_text_screen();
+
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, false);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host_.SetCombinerControl();
+  FinishDraw(kSignedToUnsignedMappingTestName);
 }
