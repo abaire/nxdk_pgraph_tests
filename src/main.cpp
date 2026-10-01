@@ -118,6 +118,7 @@
 #include "tests/texture_palette_tests.h"
 #include "tests/texture_perspective_enable_tests.h"
 #include "tests/texture_perspective_tests.h"
+#include "tests/texture_projective_2d_tests.h"
 #include "tests/texture_render_target_tests.h"
 #include "tests/texture_render_update_in_place_tests.h"
 #include "tests/texture_shadow_comparator_tests.h"
@@ -560,6 +561,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(TexturePaletteTests)
   REG_TEST(TexturePerspectiveEnableTests)
   REG_TEST(TexturePerspectiveTests)
+  REG_TEST(TextureProjective2DTests)
   REG_TEST(TextureRenderTargetTests)
   REG_TEST(TextureRenderUpdateInPlaceTests)
   REG_TEST(TextureShadowComparatorTests)
