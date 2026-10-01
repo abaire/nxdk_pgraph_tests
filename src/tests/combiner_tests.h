@@ -26,12 +26,13 @@ class CombinerTests : public TestSuite {
   void TestCombinerIndependence();
   void TestCombinerColorAlphaIndependence();
   void TestFlags();
-  void TestUnboundTexture();
   void TestUnboundTextureSamplers();
 
   void TestAlphaFromBlue();
   void TestCombinerOps();
   void TestFinalCombinerSpecialInputs();
+  void TestSignedCombinerOps();
+  void TestSignedToUnsignedMapping();
 
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];
