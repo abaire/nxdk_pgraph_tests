@@ -358,6 +358,8 @@ add_executable(
         tests/texture_perspective_enable_tests.h
         tests/texture_perspective_tests.cpp
         tests/texture_perspective_tests.h
+        tests/texture_projective_2d_tests.cpp
+        tests/texture_projective_2d_tests.h
         tests/texture_render_target_tests.cpp
         tests/texture_render_target_tests.h
         tests/texture_render_update_in_place_tests.cpp
