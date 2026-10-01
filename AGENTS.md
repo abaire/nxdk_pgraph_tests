@@ -31,3 +31,9 @@
 - Exceeding column 59 or writing a newline (`\n`) advances `pb_next_row`. When `pb_next_row >= 16`, `pb_scrollup()` is called, which **discards row 0 and scrolls the entire screen up**.
 - Do not append trailing `\n` to `pb_printat` calls. Always ensure string length fits within available columns (`col + len <= 60`).
 - Plan screen geometry coordinates (640x480 framebuffer) around text row/column spans to prevent primitives from overlapping text.
+
+## Texture Generation
+
+- Always prefer direct texture generation functions (e.g., `GenerateRGBACheckerboard`, `GenerateSwizzledRGBACheckerboard`, `GenerateRGBATestPattern`, `GenerateSwizzledRGBATestPattern`, etc.) that write directly into texture memory (`host_.GetTextureMemory()`, `host_.GetTextureMemoryForStage(...)`).
+- Do not use SDL surface versions of texture generator functions (e.g., `GenerateCheckerboardSurface`, `GenerateSurface`, `GenerateColoredCheckerboardSurface`) unless explicitly required.
+
