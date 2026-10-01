@@ -688,8 +688,12 @@ void TextureFormatTests::TestDepth(const TextureFormatInfo &texture_format) {
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_SHADOW_COMPARE_FUNC, NV097_SET_SHADOW_COMPARE_FUNC_NEVER);
   Pushbuffer::End();
-  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
   SetDefaultTextureFormat();
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
 }
 
 std::string TextureFormatTests::MakeTestName(const TextureFormatInfo &texture_format) {
