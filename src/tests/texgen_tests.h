@@ -16,9 +16,9 @@ class TexgenTests : public TestSuite {
  private:
   void CreateGeometry();
 
-  void Test(TextureStage::TexGen gen_mode);
+  void Test(TextureStage::TexGen gen_mode, uint32_t view_model, const std::string& test_name);
 
-  static std::string MakeTestName(TextureStage::TexGen mode);
+  static std::string MakeTestName(TextureStage::TexGen mode, const std::string& view_model_name);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_TEXGEN_TESTS_H
