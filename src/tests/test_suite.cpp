@@ -272,6 +272,8 @@ void TestSuite::Initialize() {
 
     Pushbuffer::Push(NV097_SET_TEXTURE_MATRIX_ENABLE, 0, 0, 0, 0);
 
+    Pushbuffer::Push(NV097_SET_TEXGEN_VIEW_MODEL, NV097_SET_TEXGEN_VIEW_MODEL_LOCAL_VIEWER);
+
     Pushbuffer::Push(NV097_SET_FRONT_FACE, NV097_SET_FRONT_FACE_V_CW);
     Pushbuffer::Push(NV097_SET_CULL_FACE, NV097_SET_CULL_FACE_V_BACK);
     Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE, true);
