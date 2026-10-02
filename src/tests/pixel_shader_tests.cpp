@@ -14,6 +14,7 @@
 #include "xbox_math_matrix.h"
 
 static constexpr char kPassthrough[] = "Passthru";
+static constexpr char kPassthroughClamping[] = "PassthruClamping";
 static constexpr char kClipPlane[] = "ClipPlane";
 static constexpr char kBumpEnvMap[] = "BumpEnvMap";
 static constexpr char kBumpEnvMapLuminance[] = "BumpEnvMapLuminance";
@@ -28,6 +29,13 @@ static constexpr char kStageDependentGB[] = "StageDependentGreenBlue";
  *
  * @tc Passthru
  *  Demonstrates behavior of PS_TEXTUREMODES_PASSTHRU, which simply utilizes texture coordinates as colors.
+ *
+ * @tc PassthruClamping
+ *  Validates that PS_TEXTUREMODES_PASSTHRU clamps texture coordinates to [0, 1] before passing them to the register
+ *  combiners. Multi-stage color combiners apply multiplication, addition, and subtraction against known constants.
+ *  Top row uses a 3-stage combiner (Mul -> Add -> Sub); bottom row uses a 2-stage combiner (Sub -> Mul + Add).
+ *  Four quads per row test [0, 1], negative [-1, 0], above one [1, 2], and mixed [-0.5, 1.5] coordinates.
+ *  Out-of-range regions appear as solid clamped plateaus on hardware, whereas unclamped coordinates produce gradients.
  *
  * @tc ClipPlane
  *   Demonstrates behavior of PS_TEXTUREMODES_CLIPPLANE. Various mock values for clipping planes are assigned to texture
@@ -72,6 +80,7 @@ static constexpr char kStageDependentGB[] = "StageDependentGreenBlue";
 PixelShaderTests::PixelShaderTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Pixel shader", config) {
   tests_[kPassthrough] = [this]() { TestPassthrough(); };
+  tests_[kPassthroughClamping] = [this]() { TestPassthroughClamping(); };
   tests_[kClipPlane] = [this]() { TestClipPlane(); };
   tests_[kBumpEnvMap] = [this]() { TestBumpEnvMap(); };
   tests_[kBumpEnvMapLuminance] = [this]() { TestBumpEnvMap(true); };
@@ -133,6 +142,130 @@ void PixelShaderTests::TestPassthrough() {
   pb_draw_text_screen();
 
   FinishDraw(kPassthrough);
+}
+
+void PixelShaderTests::TestPassthroughClamping() {
+  host_.PrepareDraw(0xFF222222);
+
+  // The stage must be enabled. If it is not, SRC_TEX0 will be (0, 0, 0, 1) and the per-vertex coords will be ignored.
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetupTextureStages();
+
+  host_.SetShaderStageProgram(TestHost::STAGE_PASS_THROUGH);
+
+  struct QuadCoords {
+    float s_min;
+    float s_max;
+    float t_min;
+    float t_max;
+  };
+
+  static constexpr QuadCoords kQuadRanges[] = {
+      {0.0f, 1.0f, 0.0f, 1.0f},    // In-range [0.0, 1.0]
+      {-1.0f, 0.0f, -1.0f, 0.0f},  // Negative [-1.0, 0.0]
+      {1.0f, 2.0f, 1.0f, 2.0f},    // Above 1 [1.0, 2.0]
+      {-0.5f, 1.5f, -0.5f, 1.5f},  // Mixed [-0.5, 1.5]
+  };
+
+  static constexpr float kQuadWidth = 110.0f;
+  static constexpr float kQuadHeight = 100.0f;
+  static constexpr float kQuadLefts[] = {35.0f, 185.0f, 335.0f, 485.0f};
+
+  auto draw_quad = [this](float left, float top, const QuadCoords &coords) {
+    host_.SetDiffuse(0xFFFFFFFF);
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(coords.s_min, coords.t_min, 0.5f, 1.0f);
+    host_.SetScreenVertex(left, top);
+
+    host_.SetTexCoord0(coords.s_max, coords.t_min, 0.5f, 1.0f);
+    host_.SetScreenVertex(left + kQuadWidth, top);
+
+    host_.SetTexCoord0(coords.s_max, coords.t_max, 0.5f, 1.0f);
+    host_.SetScreenVertex(left + kQuadWidth, top + kQuadHeight);
+
+    host_.SetTexCoord0(coords.s_min, coords.t_max, 0.5f, 1.0f);
+    host_.SetScreenVertex(left, top + kQuadHeight);
+    host_.End();
+  };
+
+  // Top Row: 3-stage combiner (Mul -> Add -> Sub)
+  // Stage 0: R0 = Tex0 * C0 (C0 = 0.5)
+  // Stage 1: R1 = R0 + C0   (C0 = 0.2)
+  // Stage 2: R0 = C0 - R1   (C0 = 0.8) -> R0 = 0.6 - (Tex0 * 0.5)
+  host_.SetCombinerControl(3);
+
+  host_.SetCombinerFactorC0(0, 0.5f, 0.5f, 0.5f, 0.5f);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_IDENTITY));
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetInputAlphaCombiner(0, TestHost::ZeroInput(), TestHost::ZeroInput());
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD);
+
+  host_.SetCombinerFactorC0(1, 0.2f, 0.2f, 0.2f, 0.2f);
+  host_.SetInputColorCombiner(
+      1, TestHost::ColorInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY), TestHost::OneInput(),
+      TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_IDENTITY), TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R1);
+  host_.SetInputAlphaCombiner(1, TestHost::ZeroInput(), TestHost::ZeroInput());
+  host_.SetOutputAlphaCombiner(1, TestHost::DST_DISCARD);
+
+  host_.SetCombinerFactorC0(2, 0.8f, 0.8f, 0.8f, 0.8f);
+  host_.SetInputColorCombiner(2, TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput(), TestHost::ColorInput(TestHost::SRC_R1, TestHost::MAP_SIGNED_NEGATE),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(2, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetInputAlphaCombiner(2, TestHost::ZeroInput(), TestHost::ZeroInput());
+  host_.SetOutputAlphaCombiner(2, TestHost::DST_DISCARD);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  static constexpr float kTopRowY = 125.0f;
+  for (size_t i = 0; i < 4; ++i) {
+    draw_quad(kQuadLefts[i], kTopRowY, kQuadRanges[i]);
+  }
+
+  // Bottom Row: 2-stage combiner (Sub -> Mul + Add)
+  // Stage 0: R0 = C0 - Tex0 (C0 = 0.5)
+  // Stage 1: R0 = (R0 * C0) + C1 (C0 = 0.5, C1 = 0.25) -> R0 = 0.5 - (Tex0 * 0.5)
+  host_.SetCombinerControl(2);
+
+  host_.SetCombinerFactorC0(0, 0.5f, 0.5f, 0.5f, 0.5f);
+  host_.SetInputColorCombiner(
+      0, TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_IDENTITY), TestHost::OneInput(),
+      TestHost::ColorInput(TestHost::SRC_TEX0, TestHost::MAP_SIGNED_NEGATE), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetInputAlphaCombiner(0, TestHost::ZeroInput(), TestHost::ZeroInput());
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD);
+
+  host_.SetCombinerFactorC0(1, 0.5f, 0.5f, 0.5f, 0.5f);
+  host_.SetCombinerFactorC1(1, 0.25f, 0.25f, 0.25f, 0.25f);
+  host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_R0, TestHost::MAP_SIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::ColorInput(TestHost::SRC_C1, TestHost::MAP_UNSIGNED_IDENTITY),
+                              TestHost::OneInput());
+  host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetInputAlphaCombiner(1, TestHost::ZeroInput(), TestHost::ZeroInput());
+  host_.SetOutputAlphaCombiner(1, TestHost::DST_DISCARD);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  static constexpr float kBottomRowY = 275.0f;
+  for (size_t i = 0; i < 4; ++i) {
+    draw_quad(kQuadLefts[i], kBottomRowY, kQuadRanges[i]);
+  }
+
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_printat(0, 2, (char *)"Pixel shader: PassthruClamping");
+  pb_printat(1, 2, (char *)"Validates [0, 1] clamping of passthrough coordinates");
+  pb_printat(2, 2, (char *)"Top: Mul->Add->Sub | Bottom: Sub->Mul+Add");
+  pb_printat(3, 2, (char *)"[0.0, 1.0]     [-1.0, 0.0]     [1.0, 2.0]     [-0.5, 1.5]");
+  pb_printat(15, 2, (char *)"Expected: Out-of-bounds regions show solid clamped color");
+  pb_draw_text_screen();
+
+  FinishDraw(kPassthroughClamping);
 }
 
 void PixelShaderTests::TestClipPlane() {
