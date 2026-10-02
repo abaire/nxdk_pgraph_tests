@@ -101,6 +101,7 @@
 #include "tests/surface_pitch_tests.h"
 #include "tests/swath_width_tests.h"
 #include "tests/texgen_matrix_tests.h"
+#include "tests/texgen_normal_map_tests.h"
 #include "tests/texgen_tests.h"
 #include "tests/texture_2d_as_cubemap_tests.h"
 #include "tests/texture_3d_as_2d_tests.h"
@@ -544,6 +545,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SurfacePitchTests)
   REG_TEST(SwathWidthTests)
   REG_TEST(TexgenMatrixTests)
+  REG_TEST(TexgenNormalMapTests)
   REG_TEST(TexgenTests)
   REG_TEST(Texture2DAsCubemapTests)
   REG_TEST(Texture3DAs2DTests)

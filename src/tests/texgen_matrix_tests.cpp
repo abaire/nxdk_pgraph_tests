@@ -25,8 +25,8 @@ static constexpr int kTextureHeight = 128;
 static std::string TestNameForTexGenMode(TextureStage::TexGen mode);
 
 static TextureStage::TexGen kTestModes[] = {
-    TextureStage::TG_DISABLE,    TextureStage::TG_EYE_LINEAR, TextureStage::TG_OBJECT_LINEAR,
-    TextureStage::TG_SPHERE_MAP, TextureStage::TG_NORMAL_MAP, TextureStage::TG_REFLECTION_MAP,
+    TextureStage::TG_DISABLE,    TextureStage::TG_EYE_LINEAR,     TextureStage::TG_OBJECT_LINEAR,
+    TextureStage::TG_SPHERE_MAP, TextureStage::TG_REFLECTION_MAP,
 };
 
 struct MatrixConfig {
@@ -226,33 +226,6 @@ static const MatrixConfig kMatrixConfigs[] = {
  * @tc SphereMap_Arbitrary
  *  Tests SphereMap TexGen with arbitrary 4x4 texture matrix under STAGE_2D_PROJECTIVE.
  *
- * @tc NormalMap_MatrixOff
- *  Tests NormalMap TexGen with texture matrix disabled under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_Identity
- *  Tests NormalMap TexGen with identity texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_Double
- *  Tests NormalMap TexGen with 2x scaling texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_Half
- *  Tests NormalMap TexGen with 0.5x scaling texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_ShiftHPlus
- *  Tests NormalMap TexGen with +0.5 horizontal translation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_ShiftHMinus
- *  Tests NormalMap TexGen with -0.5 horizontal translation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_ShiftVPlus
- *  Tests NormalMap TexGen with +0.5 vertical translation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_ShiftVMinus
- *  Tests NormalMap TexGen with -0.5 vertical translation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_RotateX
- *  Tests NormalMap TexGen with 90 deg X-rotation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_RotateY
- *  Tests NormalMap TexGen with 90 deg Y-rotation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_RotateZ
- *  Tests NormalMap TexGen with 90 deg Z-rotation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_Negate
- *  Tests NormalMap TexGen with -1.0 negation texture matrix under STAGE_2D_PROJECTIVE.
- * @tc NormalMap_Arbitrary
- *  Tests NormalMap TexGen with arbitrary 4x4 texture matrix under STAGE_2D_PROJECTIVE.
- *
  * @tc ReflectionMap_MatrixOff
  *  Tests ReflectionMap TexGen with texture matrix disabled under STAGE_2D_PROJECTIVE.
  * @tc ReflectionMap_Identity
@@ -416,41 +389,6 @@ static const MatrixConfig kMatrixConfigs[] = {
  *  evaluating whether all-negative coordinates clamp to zero or darken below the positive texture.
  * @tc PassThrough_SphereMap_Arbitrary
  *  Tests SphereMap TexGen with arbitrary 4x4 texture matrix under STAGE_PASS_THROUGH summed with a positive texture.
- *
- * @tc PassThrough_NormalMap_MatrixOff
- *  Tests NormalMap TexGen with texture matrix disabled under STAGE_PASS_THROUGH summed with a positive texture.
- * @tc PassThrough_NormalMap_Identity
- *  Tests NormalMap TexGen with identity texture matrix under STAGE_PASS_THROUGH summed with a positive texture.
- * @tc PassThrough_NormalMap_Double
- *  Tests NormalMap TexGen with 2x scaling texture matrix under STAGE_PASS_THROUGH summed with a positive texture.
- * @tc PassThrough_NormalMap_Half
- *  Tests NormalMap TexGen with 0.5x scaling texture matrix under STAGE_PASS_THROUGH summed with a positive texture.
- * @tc PassThrough_NormalMap_ShiftHPlus
- *  Tests NormalMap TexGen with +0.5 horizontal translation texture matrix under STAGE_PASS_THROUGH summed with a
- * positive texture.
- * @tc PassThrough_NormalMap_ShiftHMinus
- *  Tests NormalMap TexGen with -0.5 horizontal translation texture matrix under STAGE_PASS_THROUGH summed with a
- * positive texture, evaluating whether negative coordinates clamp to zero or darken below the positive texture.
- * @tc PassThrough_NormalMap_ShiftVPlus
- *  Tests NormalMap TexGen with +0.5 vertical translation texture matrix under STAGE_PASS_THROUGH summed with a positive
- * texture.
- * @tc PassThrough_NormalMap_ShiftVMinus
- *  Tests NormalMap TexGen with -0.5 vertical translation texture matrix under STAGE_PASS_THROUGH summed with a positive
- * texture, evaluating whether negative coordinates clamp to zero or darken below the positive texture.
- * @tc PassThrough_NormalMap_RotateX
- *  Tests NormalMap TexGen with 90 deg X-rotation texture matrix under STAGE_PASS_THROUGH summed with a positive
- * texture.
- * @tc PassThrough_NormalMap_RotateY
- *  Tests NormalMap TexGen with 90 deg Y-rotation texture matrix under STAGE_PASS_THROUGH summed with a positive
- * texture.
- * @tc PassThrough_NormalMap_RotateZ
- *  Tests NormalMap TexGen with 90 deg Z-rotation texture matrix under STAGE_PASS_THROUGH summed with a positive
- * texture.
- * @tc PassThrough_NormalMap_Negate
- *  Tests NormalMap TexGen with -1.0 negation texture matrix under STAGE_PASS_THROUGH summed with a positive texture,
- *  evaluating whether all-negative coordinates clamp to zero or darken below the positive texture.
- * @tc PassThrough_NormalMap_Arbitrary
- *  Tests NormalMap TexGen with arbitrary 4x4 texture matrix under STAGE_PASS_THROUGH summed with a positive texture.
  *
  * @tc PassThrough_ReflectionMap_MatrixOff
  *  Tests ReflectionMap TexGen with texture matrix disabled under STAGE_PASS_THROUGH summed with a positive texture.
@@ -650,10 +588,10 @@ static std::string TestNameForTexGenMode(TextureStage::TexGen mode) {
     case TextureStage::TG_SPHERE_MAP:
       return "SphereMap";
 
-    case TextureStage::TG_NORMAL_MAP:
-      return "NormalMap";
-
     case TextureStage::TG_REFLECTION_MAP:
       return "ReflectionMap";
+
+    default:
+      return "Unsupported mode";
   }
 }

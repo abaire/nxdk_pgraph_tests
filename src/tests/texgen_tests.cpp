@@ -17,8 +17,8 @@ static constexpr int kTextureWidth = 256;
 static constexpr int kTextureHeight = 128;
 
 static TextureStage::TexGen kTestModes[] = {
-    TextureStage::TG_DISABLE,    TextureStage::TG_EYE_LINEAR, TextureStage::TG_OBJECT_LINEAR,
-    TextureStage::TG_SPHERE_MAP, TextureStage::TG_NORMAL_MAP, TextureStage::TG_REFLECTION_MAP,
+    TextureStage::TG_DISABLE,    TextureStage::TG_EYE_LINEAR,     TextureStage::TG_OBJECT_LINEAR,
+    TextureStage::TG_SPHERE_MAP, TextureStage::TG_REFLECTION_MAP,
 };
 
 struct ViewModelConfig {
@@ -55,14 +55,6 @@ static constexpr ViewModelConfig kViewModels[] = {
  *  Tests ObjectLinear TexGen with NV097_SET_TEXGEN_VIEW_MODEL_INFINITE_VIEWER. Coordinates are generated from
  *  object-space vertex positions using object plane equations; the viewer model should not affect coordinate
  *  generation.
- *
- * @tc NormalMap
- *  Tests NormalMap TexGen with NV097_SET_TEXGEN_VIEW_MODEL_LOCAL_VIEWER. Coordinates are generated directly from
- *  eye-space vertex normals.
- *
- * @tc NormalMap_InfiniteViewer
- *  Tests NormalMap TexGen with NV097_SET_TEXGEN_VIEW_MODEL_INFINITE_VIEWER. Coordinates are generated directly from
- *  eye-space vertex normals; the viewer model should not affect coordinate generation.
  *
  * @tc ReflectionMap
  *  Tests ReflectionMap TexGen with NV097_SET_TEXGEN_VIEW_MODEL_LOCAL_VIEWER. Reflection vectors are computed using a
@@ -171,12 +163,12 @@ std::string TexgenTests::MakeTestName(TextureStage::TexGen mode, const std::stri
       mode_name = "SphereMap";
       break;
 
-    case TextureStage::TG_NORMAL_MAP:
-      mode_name = "NormalMap";
-      break;
-
     case TextureStage::TG_REFLECTION_MAP:
       mode_name = "ReflectionMap";
+      break;
+
+    default:
+      mode_name = "UNSUPPORTED_MODE";
       break;
   }
   return view_model_name.empty() ? mode_name : mode_name + "_" + view_model_name;

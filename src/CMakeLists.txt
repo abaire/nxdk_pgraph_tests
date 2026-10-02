@@ -324,6 +324,8 @@ add_executable(
         tests/test_suite.h
         tests/texgen_matrix_tests.cpp
         tests/texgen_matrix_tests.h
+        tests/texgen_normal_map_tests.cpp
+        tests/texgen_normal_map_tests.h
         tests/texgen_tests.cpp
         tests/texgen_tests.h
         tests/texture_2d_as_cubemap_tests.cpp
