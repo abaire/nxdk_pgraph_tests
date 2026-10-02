@@ -22,6 +22,10 @@ class PixelShaderTests : public TestSuite {
   //! Demonstrates that the 4d texture coordinate may be used directly as a color.
   void TestPassthrough();
 
+  //! Tests PS_TEXTUREMODES_PASSTHRU coordinate clamping.
+  //! Validates that out-of-range coordinates are clamped to [0, 1] using multi-stage color combiners.
+  void TestPassthroughClamping();
+
   //! Tests PS_TEXTUREMODES_CLIPPLANE
   //! Demonstrates the use of clip planes specified via texcoords in combination with
   //! `NV097_SET_SHADER_CLIP_PLANE_MODE`.
