@@ -137,7 +137,11 @@ void TexgenTests::Test(TextureStage::TexGen mode, uint32_t view_model, const std
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetTexgenS(mode);
   texture_stage.SetTexgenT(mode);
-  texture_stage.SetTexgenR(mode);
+  if (mode == TextureStage::TG_SPHERE_MAP) {
+    texture_stage.SetTexgenR(TextureStage::TG_DISABLE);
+  } else {
+    texture_stage.SetTexgenR(mode);
+  }
 
   host_.SetupTextureStages();
   host_.DrawArrays();

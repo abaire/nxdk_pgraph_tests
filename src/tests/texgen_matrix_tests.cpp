@@ -606,7 +606,11 @@ void TexgenMatrixTests::Test(const std::string &test_name, const matrix4_t &matr
   auto &texture_stage = host_.GetTextureStage(0);
   texture_stage.SetTexgenS(gen_mode);
   texture_stage.SetTexgenT(gen_mode);
-  texture_stage.SetTexgenR(gen_mode);
+  if (gen_mode == TextureStage::TG_SPHERE_MAP) {
+    texture_stage.SetTexgenR(TextureStage::TG_DISABLE);
+  } else {
+    texture_stage.SetTexgenR(gen_mode);
+  }
   texture_stage.SetTextureMatrixEnable(matrix_enable);
   MatrixCopyMatrix(texture_stage.GetTextureMatrix(), matrix);
   if (!matrix_enable) {
