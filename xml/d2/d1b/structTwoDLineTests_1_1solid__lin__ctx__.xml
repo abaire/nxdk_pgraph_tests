@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d1b/structTwoDLineTests_1_1solid__lin__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>TwoDLineTests::solid_lin_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/two_d_line_tests.h" line="35" column="3" bodyfile="src/tests/two_d_line_tests.h" bodystart="35" bodyend="35"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d01/image__resource_8cpp" kind="file" language="C++">
+    <compoundname>image_resource.cpp</compoundname>
+    <includes refid="d4/ded/image__resource_8h" local="yes">image_resource.h</includes>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">SDL_image.h</includes>
+    <includes local="no">pbkit/pbkit_dma.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">xbox-swizzle/swizzle.h</includes>
+    <incdepgraph>
+      <node id="8">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/image_resource.cpp</label>
+        <link refid="d0/d01/image__resource_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>image_resource.h</label>
+        <link refid="d4/ded/image__resource_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>SDL.h</label>
+      </node>
+      <node id="6">
+        <label>SDL_image.h</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+      <node id="7">
+        <label>pbkit/pbkit_dma.h</label>
+      </node>
+      <node id="11">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+      <node id="9">
+        <label>windows.h</label>
+      </node>
+      <node id="12">
+        <label>xbox-swizzle/swizzle.h</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;image_resource.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL_image.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit_dma.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox-swizzle/swizzle.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">ImageResource::~ImageResource()<sp/>{</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(data)<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>MmFreeContiguousMemory(data);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource_1ae6dc6240dc7e4937edb188db8e9435d7" kindref="member">ImageResource::LoadPNG</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>source_path)<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/>SDL_Surface*<sp/>temp<sp/>=<sp/>IMG_Load(source_path.c_str());</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>ASSERT(temp<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;IMG_Load<sp/>failed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>SDL_Surface*<sp/>test_image<sp/>=<sp/>SDL_ConvertSurfaceFormat(temp,<sp/>SDL_PIXELFORMAT_BGRA32,<sp/>0);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>SDL_FreeSurface(temp);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>pitch<sp/>=<sp/>test_image-&gt;pitch;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>height<sp/>=<sp/>test_image-&gt;h;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/>width<sp/>=<sp/>test_image-&gt;w;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>bytes_per_pixel<sp/>=<sp/>test_image-&gt;format-&gt;BytesPerPixel;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>uint32_t<sp/>size<sp/>=<sp/>pitch<sp/>*<sp/>height;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>data<sp/>=</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(MmAllocateContiguousMemoryEx(size,<sp/>0,<sp/>MAXRAM,<sp/>0x1000,<sp/>PAGE_WRITECOMBINE<sp/>|<sp/>PAGE_READWRITE));</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>memcpy(data,<sp/>test_image-&gt;pixels,<sp/>size);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>SDL_FreeSurface(test_image);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource_1a6689ac92fba85f1380d9d2b2a059800b" kindref="member">ImageResource::CopyTo</ref>(uint8_t*<sp/>target)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/>memcpy(target,<sp/>data,<sp/>pitch<sp/>*<sp/>height);<sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d7/d68/structImageResource_1a922b69e3e48bbc8fa03ab3cfae3a60d6" kindref="member">ImageResource::SwizzleTo</ref>(uint8_t*<sp/>target)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>swizzle_rect(data,<sp/>width,<sp/>height,<sp/>target,<sp/>pitch,<sp/>bytes_per_pixel);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/image_resource.cpp"/>
+  </compounddef>
+</doxygen>

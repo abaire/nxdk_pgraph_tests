@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/df4/classTexgenNormalMapTests" kind="class" language="C++" prot="public">
+    <compoundname>TexgenNormalMapTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="dc/d34/texgen__normal__map__tests_8h" local="no">texgen_normal_map_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="de/df4/classTexgenNormalMapTests_1a4cdc0430725b8c975180e46030d378ab" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PBKitPlusPlus::VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;PBKitPlusPlus::VertexBuffer&gt; TexgenNormalMapTests::vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_</name>
+        <qualifiedname>TexgenNormalMapTests::vertex_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_normal_map_tests.h" line="29" column="19" bodyfile="src/tests/texgen_normal_map_tests.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/df4/classTexgenNormalMapTests_1a240a847f13faf9f5943b980ed9154f7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TexgenNormalMapTests::TexgenNormalMapTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TexgenNormalMapTests</name>
+        <qualifiedname>TexgenNormalMapTests::TexgenNormalMapTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Tests NormalMap TexGen with non-flat geometry. Coordinates are generated from eye-space vertex normals, producing smooth variation across the surface.</para>
+<para><simplesect kind="remark"><para>Basic_InfiniteViewer Tests NormalMap TexGen with infinite viewer model and identity texture matrix under STAGE_2D_PROJECTIVE. Normal vectors are viewer-independent, producing the same output as Identity.</para>
+</simplesect>
+<simplesect kind="remark"><para>MatrixOff Tests NormalMap TexGen with texture matrix disabled under STAGE_2D_PROJECTIVE on a non-flat mesh. Untransformed [-1, 1] normals lack [0, 1] remap bias, sampling the texture boundary color. </para>
+</simplesect>
+<simplesect kind="remark"><para>Identity Tests NormalMap TexGen with identity texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>Double Tests NormalMap TexGen with 2x scaling texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>Half Tests NormalMap TexGen with 0.5x scaling texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>ShiftHPlus Tests NormalMap TexGen with +0.5 horizontal translation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>ShiftHMinus Tests NormalMap TexGen with -0.5 horizontal translation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>ShiftVPlus Tests NormalMap TexGen with +0.5 vertical translation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>ShiftVMinus Tests NormalMap TexGen with -0.5 vertical translation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>RotateX Tests NormalMap TexGen with 90 deg X-rotation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>RotateY Tests NormalMap TexGen with 90 deg Y-rotation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>RotateZ Tests NormalMap TexGen with 90 deg Z-rotation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>Negate Tests NormalMap TexGen with -1.0 negation texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>Arbitrary Tests NormalMap TexGen with arbitrary 4x4 texture matrix under STAGE_2D_PROJECTIVE on a non-flat mesh.</para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_MatrixOff Tests NormalMap TexGen with texture matrix disabled under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_Identity Tests NormalMap TexGen with identity texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_Double Tests NormalMap TexGen with 2x scaling texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_Half Tests NormalMap TexGen with 0.5x scaling texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_ShiftHPlus Tests NormalMap TexGen with +0.5 horizontal translation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_ShiftHMinus Tests NormalMap TexGen with -0.5 horizontal translation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh, evaluating coordinate clamping across curved surface normals. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_ShiftVPlus Tests NormalMap TexGen with +0.5 vertical translation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_ShiftVMinus Tests NormalMap TexGen with -0.5 vertical translation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh, evaluating coordinate clamping across curved surface normals. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_RotateX Tests NormalMap TexGen with 90 deg X-rotation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_RotateY Tests NormalMap TexGen with 90 deg Y-rotation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_RotateZ Tests NormalMap TexGen with 90 deg Z-rotation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_Negate Tests NormalMap TexGen with -1.0 negation texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh, evaluating whether negative coordinates clamp to zero or darken below the positive texture. </para>
+</simplesect>
+<simplesect kind="remark"><para>PassThrough_Arbitrary Tests NormalMap TexGen with arbitrary 4x4 texture matrix under STAGE_PASS_THROUGH summed with a positive texture on a non-flat mesh. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_normal_map_tests.h" line="20" column="3" bodyfile="src/tests/texgen_normal_map_tests.cpp" bodystart="200" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="de/df4/classTexgenNormalMapTests_1aa02f859ee2ff5a5f32b3d670d2201151" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TexgenNormalMapTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TexgenNormalMapTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_normal_map_tests.h" line="22" column="8" bodyfile="src/tests/texgen_normal_map_tests.cpp" bodystart="233" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="de/df4/classTexgenNormalMapTests_1adaf52ed337476988bc1959c9f8020b3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TexgenNormalMapTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>TexgenNormalMapTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_normal_map_tests.h" line="23" column="8" bodyfile="src/tests/texgen_normal_map_tests.cpp" bodystart="277" bodyend="299"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="de/df4/classTexgenNormalMapTests_1a98bb17ad24a77c019fd81c01cc74b85c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TexgenNormalMapTests::Test</definition>
+        <argsstring>(const std::string &amp;test_name, const XboxMath::matrix4_t &amp;matrix, bool matrix_enable, TestHost::ShaderStageProgram stage_program, uint32_t view_model)</argsstring>
+        <name>Test</name>
+        <qualifiedname>TexgenNormalMapTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>test_name</declname>
+        </param>
+        <param>
+          <type>const XboxMath::matrix4_t &amp;</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>matrix_enable</declname>
+        </param>
+        <param>
+          <type>TestHost::ShaderStageProgram</type>
+          <declname>stage_program</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>view_model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_normal_map_tests.h" line="26" column="8" bodyfile="src/tests/texgen_normal_map_tests.cpp" bodystart="301" bodyend="366"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests texture coordinate generation using normal mapping NV097_SET_TEXGEN_S_V_NORMAL_MAP with non-flat geometry. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TexgenNormalMapTests</label>
+        <link refid="de/df4/classTexgenNormalMapTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TexgenNormalMapTests</label>
+        <link refid="de/df4/classTexgenNormalMapTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texgen_normal_map_tests.h" line="18" column="1" bodyfile="src/tests/texgen_normal_map_tests.h" bodystart="18" bodyend="30"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>allow_saving_</name></member>
+      <member refid="de/df4/classTexgenNormalMapTests_1adaf52ed337476988bc1959c9f8020b3d" prot="public" virt="virtual"><scope>TexgenNormalMapTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>host_</name></member>
+      <member refid="de/df4/classTexgenNormalMapTests_1aa02f859ee2ff5a5f32b3d670d2201151" prot="public" virt="virtual"><scope>TexgenNormalMapTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TexgenNormalMapTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TexgenNormalMapTests</scope><name>TearDownTest</name></member>
+      <member refid="de/df4/classTexgenNormalMapTests_1a98bb17ad24a77c019fd81c01cc74b85c" prot="private" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>TestSuite</name></member>
+      <member refid="de/df4/classTexgenNormalMapTests_1a240a847f13faf9f5943b980ed9154f7e" prot="public" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>TexgenNormalMapTests</name></member>
+      <member refid="de/df4/classTexgenNormalMapTests_1a4cdc0430725b8c975180e46030d378ab" prot="private" virt="non-virtual"><scope>TexgenNormalMapTests</scope><name>vertex_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TexgenNormalMapTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
