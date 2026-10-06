@@ -18,6 +18,7 @@ static constexpr const char* kCombinerOpsTestName = "CombinerOps";
 static constexpr const char* kFinalCombinerSpecialInputsTestName = "SpecialInputs";
 static constexpr const char* kSignedCombinerOpsTestName = "SignedCombinerOps";
 static constexpr const char* kSignedToUnsignedMappingTestName = "SignedToUnsignedMapping";
+static constexpr const char* kTextureDestinationTestName = "TextureDestination";
 
 static constexpr vector_t kDiffuseUL{1.f, 0.f, 0.f, 1.f};
 static constexpr vector_t kDiffuseUR{0.f, 1.f, 0.f, 1.f};
@@ -64,6 +65,11 @@ static constexpr vector_t kDiffuseLL{0.5f, 0.5f, 0.5f, 1.f};
  *   MAP_SIGNED_IDENTITY across intermediate registers, pass-through texture coordinates, and a multi-stage pipeline.
  *   Verifies that MAP_UNSIGNED_IDENTITY properly clamps negative values to 0.0 (preserving base colors), while
  *   MAP_SIGNED_IDENTITY preserves negative values (allowing subtraction).
+ *
+ * @tc TextureDestination
+ *   Demonstrates and validates behavior when general combiner stages write to texture registers (DST_TEX0, DST_TEX1).
+ *   Tests cross-stage register forwarding, in-place read-modify-write, multi-stage pipeline flow, direct Final Combiner
+ *   register reads, alpha channel destination writes, and unbound texture registers as general scratch registers.
  */
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Combiner", config) {
@@ -77,6 +83,7 @@ CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Confi
   tests_[kFinalCombinerSpecialInputsTestName] = [this]() { TestFinalCombinerSpecialInputs(); };
   tests_[kSignedCombinerOpsTestName] = [this]() { TestSignedCombinerOps(); };
   tests_[kSignedToUnsignedMappingTestName] = [this]() { TestSignedToUnsignedMapping(); };
+  tests_[kTextureDestinationTestName] = [this]() { TestTextureDestination(); };
 }
 
 void CombinerTests::Initialize() {
@@ -1164,6 +1171,205 @@ void CombinerTests::TestSignedToUnsignedMapping() {
   FinishDraw(kSignedToUnsignedMappingTestName);
 
   // The filter needs to be reset for modified stages but
+  for (auto i = 0; i < 4; ++i) {
+    auto& stage = host_.GetTextureStage(i);
+    stage.SetEnabled(true);
+    stage.SetFilter();
+  }
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host_.SetupTextureStages();
+
+  for (auto i = 0; i < 4; ++i) {
+    auto& stage = host_.GetTextureStage(i);
+    stage.SetEnabled(false);
+  }
+}
+
+void CombinerTests::TestTextureDestination() {
+  static constexpr uint32_t kBackgroundColor = 0xFF6A6A6A;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.DrawCheckerboardUnproject(0xFF001100, 0xFF001111);
+  host_.PBKitBusyWait();  // Wait for background to render before modifying texture data.
+
+  static constexpr uint32_t kTextureSize = 64;
+  static constexpr uint32_t kCheckerSize = 8;
+  static constexpr uint32_t kTexColorA = 0xFFFF0000;
+  static constexpr uint32_t kTexColorB = 0xFF000011;
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+  auto& stage0 = host_.GetTextureStage(0);
+  stage0.SetTextureDimensions(kTextureSize, kTextureSize);
+  stage0.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+  stage0.SetFilter();
+  host_.SetupTextureStages();
+
+  GenerateSwizzledRGBACheckerboard(host_.GetTextureMemoryForStage(0), 0, 0, kTextureSize, kTextureSize,
+                                   kTextureSize * 4, kTexColorA, kTexColorB, kCheckerSize);
+
+  static constexpr auto kQuadWidth = 50.f;
+  static constexpr auto kQuadHeight = 22.f;
+  static constexpr auto kLeftCol = 350.f;
+  static constexpr auto kRightCol = 440.f;
+
+  auto draw_quad = [this](float left, float top) {
+    const auto right = left + kQuadWidth;
+    const auto bottom = top + kQuadHeight;
+    host_.SetDiffuse(1.f, 1.f, 1.f, 1.f);
+    host_.DrawSwizzledTexturedScreenQuad(left, top, right, bottom, 1.f);
+  };
+
+  // 1. Direct Stage Write (S0 writes to Tex0, S1 reads Tex0)
+  // Left: S0 writes C0 (Green) to DST_TEX0 -> S1 reads Tex0 -> Green.
+  // Right: S0 writes to DST_DISCARD -> S1 reads Tex0 -> Red/Black checkerboard.
+  {
+    host_.SetCombinerControl(2);
+
+    host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 0.0f, 1.0f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(0, TestHost::DST_TEX0);
+
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_R0);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+    draw_quad(kLeftCol, 98.f);
+
+    host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD);
+    draw_quad(kRightCol, 98.f);
+  }
+
+  // In-place Blend (S0 blends Tex0 and C0 into DST_TEX0, S1 reads Tex0)
+  // Left: S0 computes 0.5 * Tex0 + 0.5 * Green -> writes DST_TEX0 -> S1 reads Tex0 -> Olive/Dark-Green checkerboard.
+  // Right: S0 writes DST_DISCARD -> S1 reads Tex0 -> Red/Black checkerboard.
+  {
+    host_.SetCombinerControl(2);
+
+    host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 0.0f, 0.5f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::AlphaInput(TestHost::SRC_C0),
+                                TestHost::ColorInput(TestHost::SRC_C0), TestHost::AlphaInput(TestHost::SRC_C0));
+    host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_TEX0);
+
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_R0);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+    draw_quad(kLeftCol, 148.f);
+
+    host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_DISCARD);
+    draw_quad(kRightCol, 148.f);
+  }
+
+  // 3-Stage Pipeline (Similar to final Wreckless compositor in https://github.com/xemu-project/xemu/issues/2445)
+  // S0: R0 = C0 (Green).
+  // S1: Tex0 = 0.5 * Tex0 + 0.5 * R0.
+  // S2: R0 = C0 (Blue 0.5) + Tex0.
+  // Left: S1 writes DST_TEX0 -> S2 adds Blue to blended Tex0 -> Grey & Teal checkerboard.
+  // Right: S1 writes DST_DISCARD -> S2 adds Blue to unmodified Tex0 -> Magenta & Dark Blue checkerboard.
+  {
+    host_.SetCombinerControl(3);
+
+    // S0: R0 = Green
+    host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 0.0f, 1.0f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+
+    // S1: Tex0 = 0.5 * Tex0 + 0.5 * R0
+    host_.SetCombinerFactorC0(1, 0.0f, 0.0f, 0.0f, 0.5f);
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX0), TestHost::AlphaInput(TestHost::SRC_C0),
+                                TestHost::ColorInput(TestHost::SRC_R0),
+                                TestHost::AlphaInput(TestHost::SRC_C0, TestHost::MAP_UNSIGNED_INVERT));
+
+    // S2: R0 = Blue(0.5) + Tex0
+    host_.SetCombinerFactorC0(2, 0.0f, 0.0f, 0.5f, 0.0f);
+    host_.SetInputColorCombiner(2, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(), TestHost::OneInput(),
+                                TestHost::ColorInput(TestHost::SRC_TEX0));
+    host_.SetOutputColorCombiner(2, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+    host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_TEX0);
+    draw_quad(kLeftCol, 198.f);
+
+    host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_DISCARD);
+    draw_quad(kRightCol, 198.f);
+  }
+
+  // Final Combiner Direct Read of Modified Tex0
+  // Left: S0 writes C0 (Green) to DST_TEX0 -> FC reads SRC_TEX0 directly.
+  // Right: S0 writes to DST_DISCARD -> FC reads SRC_TEX0 -> Red/Black checkerboard.
+  {
+    host_.SetCombinerControl(1);
+
+    host_.SetCombinerFactorC0(0, 0.0f, 1.0f, 0.0f, 1.0f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+
+    host_.SetOutputColorCombiner(0, TestHost::DST_TEX0);
+    draw_quad(kLeftCol, 248.f);
+
+    host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD);
+    draw_quad(kRightCol, 248.f);
+  }
+
+  // Alpha Destination Write (DST_TEX0.a)
+  // Left: S0 sets Tex0.a = 0.25 -> S1 reads Tex0.a into R0 color -> 25% grey (0.25).
+  // Right: S0 writes alpha to DST_DISCARD -> S1 reads unmodified Tex0.a (1.0) -> White (1.0).
+  {
+    host_.SetCombinerControl(2);
+
+    host_.SetCombinerFactorC0(0, 0.0f, 0.0f, 0.0f, 0.25f);
+    host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_C0), TestHost::OneInput());
+
+    // S1 reads Tex0.a into color
+    host_.SetInputColorCombiner(1, TestHost::AlphaInput(TestHost::SRC_TEX0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_R0);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+    host_.SetOutputAlphaCombiner(0, TestHost::DST_TEX0);
+    draw_quad(kLeftCol, 298.f);
+
+    host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD);
+    draw_quad(kRightCol, 298.f);
+  }
+
+  // Unbound Texture Register Write (DST_TEX1 as Scratch)
+  // Left: S0 writes C0 (Yellow) to DST_TEX1 -> S1 reads SRC_TEX1 -> Yellow.
+  // Right: S0 writes DST_DISCARD -> S1 reads SRC_TEX1 (unbound default = Black) -> Black.
+  {
+    host_.SetCombinerControl(2);
+
+    host_.SetCombinerFactorC0(0, 1.0f, 1.0f, 0.0f, 1.0f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_TEX1), TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_R0);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+    host_.SetOutputColorCombiner(0, TestHost::DST_TEX1);
+    draw_quad(kLeftCol, 348.f);
+
+    host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD);
+    draw_quad(kRightCol, 348.f);
+  }
+
+  pb_printat(0, 0, "%s", kTextureDestinationTestName);
+  pb_printat(1, 0, "Combiner writes to Tex0/Tex1");
+  pb_printat(2, 31, "MODIFIED   CONTROL");
+  pb_printat(3, 0, "Direct (S0->S1)");
+  pb_printat(5, 0, "In-place blend");
+  pb_printat(7, 0, "3-Stage pipeline");
+  pb_printat(9, 0, "Final comb direct");
+  pb_printat(11, 0, "Alpha Tex0.a");
+  pb_printat(13, 0, "Tex1 scratch");
+  pb_draw_text_screen();
+
+  host_.SetCombinerControl();
+  FinishDraw(kTextureDestinationTestName);
+
   for (auto i = 0; i < 4; ++i) {
     auto& stage = host_.GetTextureStage(i);
     stage.SetEnabled(true);

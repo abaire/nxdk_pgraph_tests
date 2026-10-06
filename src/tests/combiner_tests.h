@@ -33,6 +33,7 @@ class CombinerTests : public TestSuite {
   void TestFinalCombinerSpecialInputs();
   void TestSignedCombinerOps();
   void TestSignedToUnsignedMapping();
+  void TestTextureDestination();
 
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];
