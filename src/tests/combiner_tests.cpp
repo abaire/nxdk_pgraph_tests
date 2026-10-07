@@ -2,6 +2,10 @@
 
 #include <pbkit/pbkit.h>
 
+#include <algorithm>
+#include <cmath>
+#include <vector>
+
 #include "pbkit_ext.h"
 #include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
@@ -11,7 +15,8 @@
 static constexpr const char* kMuxTestName = "Mux";
 static constexpr const char* kIndependenceTestName = "Independence";
 static constexpr const char* kColorAlphaIndependenceTestName = "ColorAlphaIndependence";
-static constexpr const char* kFlagsTestName = "Flags";
+static constexpr const char* kFlagsTestName = "SpecularR0SumFlags";
+static constexpr const char* kInputMappingsTestName = "InputMappings";
 static constexpr const char* kUnboundTextureSamplerTestName = "UnboundTexSampler";
 static constexpr const char* kAlphaFromBlueTestName = "AlphaFromBlue";
 static constexpr const char* kCombinerOpsTestName = "CombinerOps";
@@ -19,6 +24,8 @@ static constexpr const char* kFinalCombinerSpecialInputsTestName = "SpecialInput
 static constexpr const char* kSignedCombinerOpsTestName = "SignedCombinerOps";
 static constexpr const char* kSignedToUnsignedMappingTestName = "SignedToUnsignedMapping";
 static constexpr const char* kTextureDestinationTestName = "TextureDestination";
+static constexpr const char* kShiftClampingTestName = "ShiftClamping";
+static constexpr const char* kSpecularR0SumTestName = "SpecularR0Sum";
 
 static constexpr vector_t kDiffuseUL{1.f, 0.f, 0.f, 1.f};
 static constexpr vector_t kDiffuseUR{0.f, 1.f, 0.f, 1.f};
@@ -31,8 +38,17 @@ static constexpr vector_t kDiffuseLL{0.5f, 0.5f, 0.5f, 1.f};
  * @tc ColorAlphaIndependence
  *   Demonstrates that setting color on a combiner register does not affect alpha.
  *
- * @tc Flags
- *   Tests behavior of specular_add_invert_r0, specular_add_invert_v1, and specular_clamp on final combiners.
+ * @tc SpecularR0SumFlags
+ *   Tests behavior of specular_add_invert_r0, specular_add_invert_v1, and specular_clamp on final combiner sum
+ *   (SRC_SPEC_R0_SUM). Each quad is split into tested (left) and expected reference (right) halves.
+ *   Validates positive overflow clamping on sums exceeding 1.0, individual and simultaneous operand inversion
+ *   (1 - R0, 1 - V1), and clamping behavior with negative/underflowing input registers.
+ *
+ * @tc InputMappings
+ *   Tests behavior of each CombinerMapping input modifier (UNSIGNED_IDENTITY, UNSIGNED_INVERT, EXPAND_NORMAL,
+ *   EXPAND_NEGATE, HALFBIAS_NORMAL, HALFBIAS_NEGATE, SIGNED_IDENTITY, SIGNED_NEGATE) across positive (+0.70)
+ *   and negative (-0.40) input registers. Output is scaled and biased (0.5 * mapping(x) + 0.5) to keep all
+ *   results within [0.0, 1.0]. Each quad is split into actual (left) and expected reference (right) halves.
  *
  * @tc Independence
  *   Demonstrates that setting a register's value in a combiner stage does not mutate the value until after it is
@@ -70,13 +86,28 @@ static constexpr vector_t kDiffuseLL{0.5f, 0.5f, 0.5f, 1.f};
  *   Demonstrates and validates behavior when general combiner stages write to texture registers (DST_TEX0, DST_TEX1).
  *   Tests cross-stage register forwarding, in-place read-modify-write, multi-stage pipeline flow, direct Final Combiner
  *   register reads, alpha channel destination writes, and unbound texture registers as general scratch registers.
+ *
+ * @tc ShiftClamping
+ *   Validates clamping behavior combined with combiner output shift and bias operations (OP_IDENTITY,
+ *   OP_SHIFT_RIGHT_1, OP_BIAS, OP_SHIFT_LEFT_1, OP_SHIFT_LEFT_1_BIAS, OP_SHIFT_LEFT_2).
+ *   Each rectangular quad is split in half: the left half displays the actual tested combiner result, while the
+ *   right half displays the forced exact expected reference value.
+ *   Demonstrates post-shift/bias clamping on sums exceeding 1.0 (internal accumulator headroom is preserved before
+ *   scale/bias) and verifies positive saturation.
+ *
+ * @tc SpecularR0Sum
+ *   Validates final combiner SRC_SPEC_R0_SUM (R0 + Specular) across general combiner output operations (IDENTITY,
+ *   OP_SHIFT_LEFT_1, OP_SHIFT_LEFT_2, OP_SHIFT_RIGHT_1, OP_BIAS, OP_SHIFT_LEFT_1_BIAS) with specular zeroed.
+ *   Each quad is split into tested (left) and expected reference (right) halves, comparing direct SRC_R0 against
+ *   SRC_SPEC_R0_SUM to isolate emulator discrepancies under bias operations.
  */
 CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Combiner", config) {
   tests_[kMuxTestName] = [this]() { TestMux(); };
   tests_[kIndependenceTestName] = [this]() { TestCombinerIndependence(); };
   tests_[kColorAlphaIndependenceTestName] = [this]() { TestCombinerColorAlphaIndependence(); };
-  tests_[kFlagsTestName] = [this]() { TestFlags(); };
+  tests_[kFlagsTestName] = [this]() { TestSpecularR0SumFlags(); };
+  tests_[kInputMappingsTestName] = [this]() { TestInputMappings(); };
   tests_[kUnboundTextureSamplerTestName] = [this]() { TestUnboundTextureSamplers(); };
   tests_[kAlphaFromBlueTestName] = [this]() { TestAlphaFromBlue(); };
   tests_[kCombinerOpsTestName] = [this]() { TestCombinerOps(); };
@@ -84,6 +115,8 @@ CombinerTests::CombinerTests(TestHost& host, std::string output_dir, const Confi
   tests_[kSignedCombinerOpsTestName] = [this]() { TestSignedCombinerOps(); };
   tests_[kSignedToUnsignedMappingTestName] = [this]() { TestSignedToUnsignedMapping(); };
   tests_[kTextureDestinationTestName] = [this]() { TestTextureDestination(); };
+  tests_[kShiftClampingTestName] = [this]() { TestShiftClamping(); };
+  tests_[kSpecularR0SumTestName] = [this]() { TestSpecularR0Sum(); };
 }
 
 void CombinerTests::Initialize() {
@@ -340,89 +373,227 @@ void CombinerTests::TestCombinerColorAlphaIndependence() {
   FinishDraw(kColorAlphaIndependenceTestName);
 }
 
-void CombinerTests::TestFlags() {
-  static constexpr uint32_t kBackgroundColor = 0xFF303030;
+void CombinerTests::TestSpecularR0SumFlags() {
+  static constexpr uint32_t kBackgroundColor = 0xFF331133;
   host_.PrepareDraw(kBackgroundColor);
 
-  uint32_t vertex_elements = host_.POSITION | host_.DIFFUSE | host_.SPECULAR;
+  static constexpr auto kQuadWidth = 46.f;
+  static constexpr auto kHalfWidth = 23.f;
+  static constexpr auto kQuadHeight = 16.f;
+  static constexpr float kColX[] = {260.f, 400.f};
 
+  struct ExpectedQuad {
+    float x;
+    uint32_t row;
+    float expected_val;
+  };
+  std::vector<ExpectedQuad> expected_quads;
+
+  auto draw_split_quad = [this, &expected_quads](float x, uint32_t row, float expected_val) {
+    const float y = 25.f + 25.f * static_cast<float>(row);
+    host_.DrawScreenQuad(x, y, x + kHalfWidth, y + kQuadHeight, 1.f);
+    expected_quads.push_back({x, row, expected_val});
+  };
+
+  auto test_case = [this, &draw_split_quad](float r0, float v1, TestHost::CombinerMapping r0_map, bool inv_r0,
+                                            bool inv_v1, float a_val, float d_val, float exp_unclamped,
+                                            float exp_clamped, uint32_t row) {
+    auto run_pass = [&](bool clamp, float x, float exp_val) {
+      host_.SetCombinerControl(1);
+
+      host_.SetCombinerFactorC0(0, r0, r0, r0, 1.0f);
+      host_.SetCombinerFactorC1(0, v1, v1, v1, 1.0f);
+      host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0, r0_map), TestHost::OneInput(),
+                                  TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+      host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR);
+
+      host_.SetFinalCombinerFactorC0(a_val, a_val, a_val, 1.0f);
+      host_.SetFinalCombinerFactorC1(d_val, d_val, d_val, 1.0f);
+      host_.SetFinalCombiner0(TestHost::SRC_C0, false, false, TestHost::SRC_SPEC_R0_SUM, false, false,
+                              TestHost::SRC_ZERO, false, false, TestHost::SRC_C1, false, false);
+
+      host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO,
+                              true, true, inv_r0, inv_v1, clamp);
+
+      draw_split_quad(x, row, exp_val);
+    };
+
+    run_pass(false, kColX[0], exp_unclamped);
+    run_pass(true, kColX[1], exp_clamped);
+  };
+
+  // Group 1: Positive Overflow (0.5 * Sum)
+  test_case(1.00f, 1.00f, TestHost::MAP_UNSIGNED_IDENTITY, false, false, 0.5f, 0.0f, 1.00f, 0.50f, 2);
+  test_case(0.75f, 0.75f, TestHost::MAP_UNSIGNED_IDENTITY, false, false, 0.5f, 0.0f, 0.75f, 0.50f, 3);
+
+  // Group 2: Invert Flags (0.5 * Sum)
+  test_case(0.75f, 0.25f, TestHost::MAP_UNSIGNED_IDENTITY, true, false, 0.5f, 0.0f, 0.25f, 0.25f, 6);
+  test_case(0.25f, 0.75f, TestHost::MAP_UNSIGNED_IDENTITY, false, true, 0.5f, 0.0f, 0.25f, 0.25f, 7);
+  test_case(0.75f, 0.75f, TestHost::MAP_UNSIGNED_IDENTITY, true, true, 0.5f, 0.0f, 0.25f, 0.25f, 8);
+  test_case(0.25f, 0.25f, TestHost::MAP_UNSIGNED_IDENTITY, true, true, 0.5f, 0.0f, 0.75f, 0.50f, 9);
+
+  // Group 3: Negative / Underflow R0
+  test_case(0.30f, 0.50f, TestHost::MAP_SIGNED_NEGATE, false, false, 1.0f, 0.0f, 0.50f, 0.50f, 12);
+  test_case(0.50f, 0.20f, TestHost::MAP_SIGNED_NEGATE, false, false, 1.0f, 0.5f, 0.70f, 0.70f, 13);
+  test_case(0.50f, 0.00f, TestHost::MAP_SIGNED_NEGATE, false, false, 1.0f, 0.5f, 0.50f, 0.50f, 14);
+  test_case(0.30f, 0.00f, TestHost::MAP_SIGNED_NEGATE, true, false, 0.5f, 0.0f, 0.50f, 0.50f, 15);
+
+  // Draw expected values for right half of quads
   host_.SetCombinerControl(1);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
 
-  // Set V1 and R0 to 1.0
-  host_.SetInputColorCombiner(0, TestHost::OneInput(), TestHost::OneInput(), TestHost::OneInput(),
-                              TestHost::OneInput());
-  host_.SetOutputColorCombiner(0, TestHost::DST_SPECULAR, TestHost::DST_R0);
+  for (const auto& eq : expected_quads) {
+    const float y = 25.f + 25.f * static_cast<float>(eq.row);
+    host_.SetCombinerFactorC0(0, eq.expected_val, eq.expected_val, eq.expected_val, 1.0f);
+    host_.DrawScreenQuad(eq.x + kHalfWidth, y, eq.x + kQuadWidth, y + kQuadHeight, 1.f);
+  }
 
-  // Set the final output to (D=0) + (A=0.5) * (B=V1+R0) + (1 - A=0.5) * (C=0)
-  // Set alpha (G) to 1.0
-  host_.SetFinalCombinerFactorC0(0.5f, 0.5f, 0.5f, 0.5f);
-  host_.SetFinalCombiner0(TestHost::SRC_C0, false, false, TestHost::SRC_SPEC_R0_SUM, false, false);
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
-                          true);
+  pb_printat(0, 0, "%s", kFlagsTestName);
+  pb_printat(0, 24, "Unclamped     Clamped");
 
-  // The expected output is full brightness white.
-  pb_printat(2, 10, (char*)"Uncapped");
-  host_.SetVertexBuffer(vertex_buffers_[0]);
-  host_.DrawArrays(vertex_elements);
+  pb_printat(1, 0, "0.5*(R0+V1) Overflow:");
+  pb_printat(2, 0, "R0=1.0, V1=1.0 (2.0)");
+  pb_printat(3, 0, "R0=.75, V1=.75 (1.5)");
 
-  // Do the same thing, but clamp the V1+R0 sum
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
-                          true, false, false, true);
-  pb_printat(2, 22, (char*)"Capped");
-  host_.SetVertexBuffer(vertex_buffers_[1]);
-  host_.DrawArrays(vertex_elements);
+  pb_printat(5, 0, "0.5*(R0+V1) Invert:");
+  pb_printat(6, 0, "InvR0 (R0=.75, V1=.25)");
+  pb_printat(7, 0, "InvV1 (R0=.25, V1=.75)");
+  pb_printat(8, 0, "InvBoth(R0=.75,V1=.75)");
+  pb_printat(9, 0, "InvBoth(R0=.25,V1=.25)");
 
-  // Set v1 to 0, r0 to 0.75.
-  host_.SetCombinerFactorC0(0, 0.75f, 0.75f, 0.75f, 0.75f);
-  host_.SetInputColorCombiner(0, TestHost::ZeroInput(), TestHost::ZeroInput(), TestHost::ColorInput(TestHost::SRC_C0),
-                              TestHost::OneInput());
-  host_.SetOutputColorCombiner(0, TestHost::DST_SPECULAR, TestHost::DST_R0);
-
-  // Set A to 1.0 so the final output is just B(the V1 + R0 sum).
-  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, true, TestHost::SRC_SPEC_R0_SUM, false, false);
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
-                          true);
-
-  pb_printat(2, 31, (char*)"Normal R0");
-  host_.SetVertexBuffer(vertex_buffers_[2]);
-  host_.DrawArrays(vertex_elements);
-
-  // Now invert R0.
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
-                          true, true, false, false);
-
-  pb_printat(2, 42, (char*)"1 - R0");
-  host_.SetVertexBuffer(vertex_buffers_[3]);
-  host_.DrawArrays(vertex_elements);
-
-  // Essentially the same test, but using v1 instead of r0
-  // Set r0 to 0, v1 to 0.75.
-  host_.SetInputColorCombiner(0, TestHost::ZeroInput(), TestHost::ZeroInput(), TestHost::ColorInput(TestHost::SRC_C0),
-                              TestHost::OneInput());
-  host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_SPECULAR);
-
-  // Set A to 1.0 so the final output is just B(the V1 + R0 sum).
-  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, true, TestHost::SRC_SPEC_R0_SUM, false, false);
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
-                          true);
-
-  pb_printat(7, 14, (char*)"V1");
-  host_.SetVertexBuffer(vertex_buffers_[4]);
-  host_.DrawArrays(vertex_elements);
-
-  // Now invert V1.
-  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, true,
-                          true, false, true, false);
-
-  pb_printat(7, 23, (char*)"1 - V1");
-  host_.SetVertexBuffer(vertex_buffers_[5]);
-  host_.DrawArrays(vertex_elements);
-
-  pb_printat(0, 0, (char*)"%s\n", kFlagsTestName);
+  pb_printat(11, 0, "Negative R0:");
+  pb_printat(12, 0, "R0=-.30, V1=.50 (Sum)");
+  pb_printat(13, 0, "R0=-.50, V1=.20 (+0.5)");
+  pb_printat(14, 0, "R0=-.50, V1=.00 (+0.5)");
+  pb_printat(15, 0, "InvR0=-.30 (0.5*Sum)");
   pb_draw_text_screen();
 
   host_.SetCombinerControl();
   FinishDraw(kFlagsTestName);
+}
+
+void CombinerTests::TestInputMappings() {
+  static constexpr uint32_t kBackgroundColor = 0xFF113333;
+  host_.PrepareDraw(kBackgroundColor);
+
+  static constexpr auto kQuadWidth = 46.f;
+  static constexpr auto kHalfWidth = 23.f;
+  static constexpr auto kQuadHeight = 16.f;
+  static constexpr float kColX[] = {240.f, 400.f};
+
+  struct ExpectedQuad {
+    float x;
+    uint32_t row;
+    float expected_val;
+  };
+  std::vector<ExpectedQuad> expected_quads;
+
+  auto expected_val_for = [](TestHost::CombinerMapping mapping, float x) -> float {
+    float u_x = std::max(0.0f, x);
+    float raw = 0.0f;
+    switch (mapping) {
+      case TestHost::MAP_UNSIGNED_IDENTITY:
+        raw = u_x;
+        break;
+      case TestHost::MAP_UNSIGNED_INVERT:
+        raw = 1.0f - u_x;
+        break;
+      case TestHost::MAP_EXPAND_NORMAL:
+        raw = 2.0f * u_x - 1.0f;
+        break;
+      case TestHost::MAP_EXPAND_NEGATE:
+        raw = 1.0f - 2.0f * u_x;
+        break;
+      case TestHost::MAP_HALFBIAS_NORMAL:
+        raw = u_x - 0.5f;
+        break;
+      case TestHost::MAP_HALFBIAS_NEGATE:
+        raw = 0.5f - u_x;
+        break;
+      case TestHost::MAP_SIGNED_IDENTITY:
+        raw = x;
+        break;
+      case TestHost::MAP_SIGNED_NEGATE:
+        raw = -x;
+        break;
+    }
+    return raw * 0.5f + 0.5f;
+  };
+
+  auto run_test = [&](TestHost::CombinerMapping mapping, float x, float screen_x, uint32_t row) {
+    host_.SetCombinerControl(2);
+
+    host_.SetCombinerFactorC0(0, std::abs(x), std::abs(x), std::abs(x), 1.0f);
+    host_.SetInputColorCombiner(0,
+                                TestHost::ColorInput(TestHost::SRC_C0, x < 0.0f ? TestHost::MAP_SIGNED_NEGATE
+                                                                                : TestHost::MAP_UNSIGNED_IDENTITY),
+                                TestHost::OneInput());
+    host_.SetOutputColorCombiner(0, TestHost::DST_R1);
+
+    host_.SetCombinerFactorC0(1, 0.5f, 0.5f, 0.5f, 1.0f);
+    host_.SetCombinerFactorC1(1, 0.5f, 0.5f, 0.5f, 1.0f);
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_R1, mapping),
+                                TestHost::ColorInput(TestHost::SRC_C0), TestHost::ColorInput(TestHost::SRC_C1),
+                                TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                                 TestHost::SM_SUM, TestHost::OP_IDENTITY);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+    host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+    const float y = 25.f + 25.f * static_cast<float>(row);
+    host_.DrawScreenQuad(screen_x, y, screen_x + kHalfWidth, y + kQuadHeight, 1.f);
+
+    expected_quads.push_back({screen_x, row, expected_val_for(mapping, x)});
+  };
+
+  auto test_case = [&](TestHost::CombinerMapping mapping, uint32_t row) {
+    run_test(mapping, +0.70f, kColX[0], row);
+    run_test(mapping, -0.40f, kColX[1], row);
+  };
+
+  test_case(TestHost::MAP_UNSIGNED_IDENTITY, 3);
+  test_case(TestHost::MAP_UNSIGNED_INVERT, 4);
+  test_case(TestHost::MAP_EXPAND_NORMAL, 5);
+  test_case(TestHost::MAP_EXPAND_NEGATE, 6);
+  test_case(TestHost::MAP_HALFBIAS_NORMAL, 7);
+  test_case(TestHost::MAP_HALFBIAS_NEGATE, 8);
+  test_case(TestHost::MAP_SIGNED_IDENTITY, 9);
+  test_case(TestHost::MAP_SIGNED_NEGATE, 10);
+
+  // Draw expected values for right half of quads
+  host_.SetCombinerControl(1);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  for (const auto& eq : expected_quads) {
+    const float y = 25.f + 25.f * static_cast<float>(eq.row);
+    host_.SetCombinerFactorC0(0, eq.expected_val, eq.expected_val, eq.expected_val, 1.0f);
+    host_.DrawScreenQuad(eq.x + kHalfWidth, y, eq.x + kQuadWidth, y + kQuadHeight, 1.f);
+  }
+
+  pb_printat(0, 0, "%s", kInputMappingsTestName);
+  pb_printat(1, 0, "0.5 * mapping(x) + 0.5");
+  pb_printat(2, 22, "Pos (x=+0.70)");
+  pb_printat(2, 38, "Neg (x=-0.40)");
+
+  pb_printat(3, 0, "UNSIGNED_IDENTITY");
+  pb_printat(4, 0, "UNSIGNED_INVERT");
+  pb_printat(5, 0, "EXPAND_NORMAL");
+  pb_printat(6, 0, "EXPAND_NEGATE");
+  pb_printat(7, 0, "HALFBIAS_NORMAL");
+  pb_printat(8, 0, "HALFBIAS_NEGATE");
+  pb_printat(9, 0, "SIGNED_IDENTITY");
+  pb_printat(10, 0, "SIGNED_NEGATE");
+  pb_draw_text_screen();
+
+  host_.SetCombinerControl();
+  FinishDraw(kInputMappingsTestName);
 }
 
 void CombinerTests::TestUnboundTextureSamplers() {
@@ -1382,4 +1553,235 @@ void CombinerTests::TestTextureDestination() {
     auto& stage = host_.GetTextureStage(i);
     stage.SetEnabled(false);
   }
+}
+
+void CombinerTests::TestShiftClamping() {
+  static constexpr uint32_t kBackgroundColor = 0xFF222222;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  static constexpr auto kQuadWidth = 46.f;
+  static constexpr auto kHalfWidth = 23.f;
+  static constexpr auto kQuadHeight = 16.f;
+  static constexpr float kColX[] = {260.f, 330.f, 400.f, 470.f, 540.f};
+
+  struct ExpectedQuad {
+    float x;
+    uint32_t row;
+    float expected_val;
+  };
+  std::vector<ExpectedQuad> expected_quads;
+
+  auto draw_split_quad = [this, &expected_quads](float x, uint32_t row, float expected_val) {
+    const float y = 25.f + 25.f * static_cast<float>(row);
+    host_.DrawScreenQuad(x, y, x + kHalfWidth, y + kQuadHeight, 1.f);
+    expected_quads.push_back({x, row, expected_val});
+  };
+
+  // Pre-op vs Post-op Clamping on Sums exceeding [0, 1]
+  {
+    auto test_overflow_op = [this, &draw_split_quad](float c0_val, float c1_val, TestHost::CombinerOutOp op, float x,
+                                                     uint32_t row, float expected_val) {
+      host_.SetCombinerControl(1);
+      host_.SetCombinerFactorC0(0, c0_val, c0_val, c0_val, 1.0f);
+      host_.SetCombinerFactorC1(0, c1_val, c1_val, c1_val, 1.0f);
+      host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput(),
+                                  TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+      host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0, false, false,
+                                   TestHost::SM_SUM, op);
+      host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+      draw_split_quad(x, row, expected_val);
+    };
+
+    // Sum = 1.50 (0.75 + 0.75) across shift and bias ops
+    test_overflow_op(0.75f, 0.75f, TestHost::OP_IDENTITY, kColX[0], 2, 1.0f);
+    test_overflow_op(0.75f, 0.75f, TestHost::OP_SHIFT_RIGHT_1, kColX[1], 2, 0.75f);
+    test_overflow_op(0.75f, 0.75f, TestHost::OP_BIAS, kColX[2], 2, 1.0f);
+    test_overflow_op(0.75f, 0.75f, TestHost::OP_SHIFT_LEFT_1, kColX[3], 2, 1.0f);
+    test_overflow_op(0.75f, 0.75f, TestHost::OP_SHIFT_LEFT_2, kColX[4], 2, 1.0f);
+
+    // Bias and Shift-Left-1-Bias variations
+    test_overflow_op(0.625f, 0.625f, TestHost::OP_BIAS, kColX[0], 4, 0.75f);
+    test_overflow_op(0.625f, 0.625f, TestHost::OP_SHIFT_LEFT_1_BIAS, kColX[1], 4, 1.0f);
+    test_overflow_op(0.375f, 0.375f, TestHost::OP_SHIFT_LEFT_1_BIAS, kColX[2], 4, 0.50f);
+    test_overflow_op(0.25f, 0.25f, TestHost::OP_SHIFT_LEFT_1_BIAS, kColX[3], 4, 0.0f);
+    test_overflow_op(0.125f, 0.125f, TestHost::OP_SHIFT_LEFT_1_BIAS, kColX[4], 4, 0.0f);
+  }
+
+  // Left Shift Positive Saturation
+  {
+    auto test_sat = [this, &draw_split_quad](float in_val, TestHost::CombinerOutOp op, float x, uint32_t row) {
+      host_.SetCombinerControl(1);
+      host_.SetCombinerFactorC0(0, in_val, in_val, in_val, 1.0f);
+      host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+      host_.SetOutputColorCombiner(0, TestHost::DST_R0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, false, false,
+                                   TestHost::SM_SUM, op);
+      host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+      draw_split_quad(x, row, 1.0f);
+    };
+
+    test_sat(0.60f, TestHost::OP_SHIFT_LEFT_1, kColX[0], 7);
+    test_sat(0.80f, TestHost::OP_SHIFT_LEFT_1, kColX[1], 7);
+    test_sat(0.30f, TestHost::OP_SHIFT_LEFT_2, kColX[2], 7);
+    test_sat(0.60f, TestHost::OP_SHIFT_LEFT_2, kColX[3], 7);
+  }
+
+  // Draw expected values for right half of quads
+  host_.SetCombinerControl(1);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+  for (const auto& eq : expected_quads) {
+    const float y = 25.f + 25.f * static_cast<float>(eq.row);
+    host_.SetCombinerFactorC0(0, eq.expected_val, eq.expected_val, eq.expected_val, 1.0f);
+    host_.DrawScreenQuad(eq.x + kHalfWidth, y, eq.x + kQuadWidth, y + kQuadHeight, 1.f);
+  }
+
+  pb_printat(0, 0, "%s", kShiftClampingTestName);
+  pb_printat(1, 0, "Pre/Post Clamp:");
+  pb_printat(1, 24, "IDENT  SHR1   BIAS   SHL1   SHL2");
+  pb_printat(2, 0, "Sum=1.5 (0.75+0.75)");
+
+  pb_printat(3, 0, "Bias & SHL1_BIAS:");
+  pb_printat(3, 24, "B1.25  SB1.25 SB0.75 SB0.50 SB0.25");
+  pb_printat(4, 0, "Bias operations");
+
+  pb_printat(6, 0, "Positive Saturation:");
+  pb_printat(6, 24, "SHL1.6 SHL1.8 SHL2.3 SHL2.6");
+  pb_printat(7, 0, "Clamp to 1.0 (no wrap)");
+  pb_draw_text_screen();
+
+  host_.SetCombinerControl();
+  FinishDraw(kShiftClampingTestName);
+}
+
+void CombinerTests::TestSpecularR0Sum() {
+  static constexpr uint32_t kBackgroundColor = 0xFF333322;
+  host_.PrepareDraw(kBackgroundColor);
+
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  static constexpr auto kQuadWidth = 46.f;
+  static constexpr auto kHalfWidth = 23.f;
+  static constexpr auto kQuadHeight = 16.f;
+  static constexpr float kColX[] = {260.f, 380.f};
+
+  struct ExpectedQuad {
+    float x;
+    uint32_t row;
+    float r;
+    float g;
+    float b;
+  };
+  std::vector<ExpectedQuad> expected_quads;
+
+  auto draw_split_quad = [this, &expected_quads](float x, uint32_t row, float r, float g, float b) {
+    const float y = 25.f + 25.f * static_cast<float>(row);
+    host_.DrawScreenQuad(x, y, x + kHalfWidth, y + kQuadHeight, 1.f);
+    expected_quads.push_back({x, row, r, g, b});
+  };
+
+  auto apply_op = [](float val, TestHost::CombinerOutOp op) {
+    float v = val;
+    switch (op) {
+      case TestHost::OP_SHIFT_LEFT_1:
+        v *= 2.0f;
+        break;
+      case TestHost::OP_SHIFT_LEFT_2:
+        v *= 4.0f;
+        break;
+      case TestHost::OP_SHIFT_RIGHT_1:
+        v *= 0.5f;
+        break;
+      case TestHost::OP_BIAS:
+        v -= 0.5f;
+        break;
+      case TestHost::OP_SHIFT_LEFT_1_BIAS:
+        v = (v - 0.5f) * 2.0f;
+        break;
+      default:
+        break;
+    }
+    return std::min(1.0f, std::max(0.0f, v));
+  };
+
+  auto test_specular_sum = [this, &draw_split_quad, &apply_op](float in_val, TestHost::CombinerOutOp op, float ref_val,
+                                                               float spec_r, float spec_g, float spec_b, uint32_t row) {
+    host_.SetCombinerControl(2);
+
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+    Pushbuffer::End();
+
+    host_.SetCombinerFactorC0(0, in_val, in_val, in_val, 1.0f);
+    host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+    host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+
+    host_.SetCombinerFactorC1(1, spec_r, spec_g, spec_b, 1.0f);
+    host_.SetInputColorCombiner(1, TestHost::ColorInput(TestHost::SRC_R0), TestHost::OneInput(),
+                                TestHost::ColorInput(TestHost::SRC_C1), TestHost::OneInput());
+    host_.SetOutputColorCombiner(1, TestHost::DST_R0, TestHost::DST_SPECULAR, TestHost::DST_DISCARD, false, false,
+                                 TestHost::SM_SUM, op);
+
+    // R0
+    host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+    draw_split_quad(kColX[0], row, ref_val, ref_val, ref_val);
+
+    // R0 + Specular via Specular_R0_Sum
+    host_.SetFinalCombiner0Just(TestHost::SRC_SPEC_R0_SUM);
+    float exp_r = std::min(1.0f, ref_val + apply_op(spec_r, op));
+    float exp_g = std::min(1.0f, ref_val + apply_op(spec_g, op));
+    float exp_b = std::min(1.0f, ref_val + apply_op(spec_b, op));
+    draw_split_quad(kColX[1], row, exp_r, exp_g, exp_b);
+  };
+
+  // Group 1: Specular = 0
+  test_specular_sum(0.25f, TestHost::OP_SHIFT_LEFT_1, 0.50f, 0.f, 0.f, 0.f, 2);
+  test_specular_sum(0.25f, TestHost::OP_SHIFT_LEFT_2, 1.00f, 0.f, 0.f, 0.f, 3);
+  test_specular_sum(0.50f, TestHost::OP_SHIFT_RIGHT_1, 0.25f, 0.f, 0.f, 0.f, 4);
+  test_specular_sum(0.75f, TestHost::OP_BIAS, 0.25f, 0.f, 0.f, 0.f, 5);
+  test_specular_sum(0.75f, TestHost::OP_SHIFT_LEFT_1_BIAS, 0.50f, 0.f, 0.f, 0.f, 6);
+
+  // Group 2: Specular RGB (0.10, 0.50, 0.80)
+  test_specular_sum(0.25f, TestHost::OP_SHIFT_LEFT_1, 0.50f, 0.10f, 0.50f, 0.80f, 9);
+  test_specular_sum(0.25f, TestHost::OP_SHIFT_LEFT_2, 1.00f, 0.10f, 0.50f, 0.80f, 10);
+  test_specular_sum(0.50f, TestHost::OP_SHIFT_RIGHT_1, 0.25f, 0.10f, 0.50f, 0.80f, 11);
+  test_specular_sum(0.75f, TestHost::OP_BIAS, 0.25f, 0.10f, 0.50f, 0.80f, 12);
+  test_specular_sum(0.75f, TestHost::OP_SHIFT_LEFT_1_BIAS, 0.50f, 0.10f, 0.50f, 0.80f, 13);
+
+  // Draw expected values for right half of quads
+  host_.SetCombinerControl(1);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_C0), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+
+  for (const auto& eq : expected_quads) {
+    const float y = 25.f + 25.f * static_cast<float>(eq.row);
+    host_.SetCombinerFactorC0(0, eq.r, eq.g, eq.b, 1.0f);
+    host_.DrawScreenQuad(eq.x + kHalfWidth, y, eq.x + kQuadWidth, y + kQuadHeight, 1.f);
+  }
+
+  pb_printat(0, 0, "%s", kSpecularR0SumTestName);
+  pb_printat(1, 0, "Group 1: Specular = 0");
+  pb_printat(1, 24, "R0          R0 + Specular(0)");
+  pb_printat(2, 0, "SHL1 (0.25*2 = 0.50)");
+  pb_printat(3, 0, "SHL2 (0.25*4 = 1.00)");
+  pb_printat(4, 0, "SHR1 (0.50*0.5=0.25)");
+  pb_printat(5, 0, "BIAS (0.75-0.5=0.25)");
+  pb_printat(6, 0, "SHLB (.75-.5)*2=0.5");
+
+  pb_printat(8, 0, "Group 2: Specular RGB");
+  pb_printat(8, 24, "R0          R0 + Specular");
+  pb_printat(9, 0, "SHL1 (0.25*2 = 0.50)");
+  pb_printat(10, 0, "SHL2 (0.25*4 = 1.00)");
+  pb_printat(11, 0, "SHR1 (0.50*0.5=0.25)");
+  pb_printat(12, 0, "BIAS (0.75-0.5=0.25)");
+  pb_printat(13, 0, "SHLB (.75-.5)*2=0.5");
+  pb_printat(15, 0, "Specular color: R=0.10, G=0.50, B=0.80");
+  pb_draw_text_screen();
+
+  host_.SetCombinerControl();
+  FinishDraw(kSpecularR0SumTestName);
 }
