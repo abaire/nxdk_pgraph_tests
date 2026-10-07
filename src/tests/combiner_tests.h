@@ -25,7 +25,8 @@ class CombinerTests : public TestSuite {
   void TestMux();
   void TestCombinerIndependence();
   void TestCombinerColorAlphaIndependence();
-  void TestFlags();
+  void TestSpecularR0SumFlags();
+  void TestInputMappings();
   void TestUnboundTextureSamplers();
 
   void TestAlphaFromBlue();
@@ -34,6 +35,8 @@ class CombinerTests : public TestSuite {
   void TestSignedCombinerOps();
   void TestSignedToUnsignedMapping();
   void TestTextureDestination();
+  void TestShiftClamping();
+  void TestSpecularR0Sum();
 
  private:
   std::shared_ptr<VertexBuffer> vertex_buffers_[6];
