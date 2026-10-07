@@ -14,6 +14,7 @@ class PointSpriteTests : public TestSuite {
 
  private:
   void TestAlphaTest();
+  void TestAlphaMasking(bool use_shader);
 };
 
 #endif  // NXDK_PGRAPH_TESTS_POINT_SPRITE_TESTS_H
