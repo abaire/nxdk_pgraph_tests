@@ -10,13 +10,14 @@
 #include "shaders/passthrough_vertex_shader.h"
 #include "test_host.h"
 #include "texture_format.h"
+#include "texture_generator.h"
 #include "vertex_buffer.h"
 
 static constexpr float kTextureSize = 256.0f;
 
 static constexpr char kRGBATest[] = "RGBA";
 static constexpr char kMultipleSwatchTest[] = "MultipleSwatches";
-// static constexpr char kPalettizedTest[] = "PaletteCycle";
+static constexpr char kPalettizedTest[] = "Palettized";
 
 // PBKit initializes channel 8 as the DMA_SEMAPHORE context object.
 // https://github.com/XboxDev/nxdk/blob/4171d5bfe5260c0dd2d42f4efeb9ec1d44788867/lib/pbkit/pbkit.c#L2827
@@ -26,7 +27,7 @@ TextureCPUUpdateTests::TextureCPUUpdateTests(TestHost &host, std::string output_
     : TestSuite(host, std::move(output_dir), "Texture CPU Update", config) {
   tests_[kRGBATest] = [this]() { TestRGBA(); };
   tests_[kMultipleSwatchTest] = [this]() { TestMultipleSwatches(); };
-  //  tests_[kPalettizedTest] = [this]() { TestPalettized(); };
+  tests_[kPalettizedTest] = [this]() { TestPalettized(); };
 }
 
 void TextureCPUUpdateTests::Initialize() {
@@ -108,39 +109,110 @@ void TextureCPUUpdateTests::TestRGBA() {
   FinishDraw(kRGBATest);
 }
 
-// This does not actually change the texture on HW
-// void TextureCPUUpdateTests::TestPalettized() {
-//  host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8));
-//
-//  // Set the texture to use palette index 1 for everything.
-//  auto texels = host_.GetTextureMemoryForStage(0);
-//  memset(texels, 0x01, kTextureSize * kTextureSize);
-//
-//  auto palette = host_.GetPaletteMemoryForStage(0);
-//  host_.SetPaletteSize(TestHost::PALETTE_32, 0);
-//  palette[1] = 0xFF770000;
-//
-//  auto &stage = host_.GetTextureStage(0);
-//  stage.SetTextureDimensions(kTextureSize, kTextureSize);
-//  host_.SetupTextureStages();
-//
-//  pb_erase_text_screen();
-//
-//  host_.PrepareDraw(0xFE212021);
-//
-//  Draw(host_);
-//  FinishDrawNoSave(kPalettizedTest);
-//
-//  palette[1] = 0xFF007700;
-//  Draw(host_);
-//
-//  pb_erase_text_screen();
-//  pb_print("%s\n", kPalettizedTest);
-//  pb_printat(7, 12, (char *)"Expect a green screen");
-//  pb_draw_text_screen();
-//
-//  FinishDraw(kPalettizedTest);
-//}
+void TextureCPUUpdateTests::TestPalettized() {
+  host_.PrepareDraw(0xFF333333);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_SEMAPHORE, semaphore_dma_ctx_.ChannelID);
+  Pushbuffer::End();
+
+  auto semaphore_release_value = 0x1234;
+  auto set_fence_and_wait = [this, &semaphore_release_value]() {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_BACK_END_WRITE_SEMAPHORE_RELEASE, semaphore_release_value);
+    Pushbuffer::Push(NV097_SET_COLOR_CLEAR_VALUE, 0);
+    Pushbuffer::Push(NV097_SET_COLOR_CLEAR_VALUE, 0);
+    Pushbuffer::End(true);
+
+    for (auto i = 0; i < 32 && *semaphore_context_object_ != semaphore_release_value; ++i) {
+      Sleep(1);
+    }
+    semaphore_release_value += 2;
+  };
+
+  static constexpr uint32_t kSize = 128;
+  auto draw_quad = [this](float left, float top) {
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord0(0.f, 0.f);
+    host_.SetVertex(left, top, 1.f);
+    host_.SetTexCoord0(1.f, 0.f);
+    host_.SetVertex(left + kSize, top, 1.f);
+    host_.SetTexCoord0(1.f, 1.f);
+    host_.SetVertex(left + kSize, top + kSize, 1.f);
+    host_.SetTexCoord0(0.f, 1.f);
+    host_.SetVertex(left, top + kSize, 1.f);
+    host_.End();
+  };
+
+  auto palette = reinterpret_cast<uint32_t *>(host_.GetTextureMemoryForStage(1));
+  palette[0] = 0xFF000000;  // Black
+  palette[1] = 0xFFFF0000;  // Red
+  palette[2] = 0xFF00FF00;  // Green
+  palette[3] = 0xFF0000FF;  // Blue
+  for (int i = 4; i < 256; ++i) {
+    uint32_t val = (i - 4) * 255 / 251;
+    palette[i] = 0xFF000000 | (val << 16) | (val << 8) | val;  // Grayscale ramp
+  }
+
+  host_.SetPaletteSize(NV2AState::PALETTE_256);
+  host_.SetPalette(palette, NV2AState::PALETTE_256);
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetEnabled();
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8));
+  texture_stage.SetTextureDimensions(kSize, kSize);
+  host_.SetupTextureStages();
+
+  auto texels = host_.GetTextureMemoryForStage(0);
+  const float spacing = 16.f;
+  float top = 72.f;
+  float left = spacing;
+
+  // Top row: complete replacements
+  GenerateSwizzledPalettizedCheckerboard(texels, kSize, kSize, 252);
+  draw_quad(left, top);
+  set_fence_and_wait();
+  left += kSize + spacing;
+
+  GenerateSwizzledPalettizedRadial(texels, kSize, kSize, 252);
+  draw_quad(left, top);
+  set_fence_and_wait();
+  left += kSize + spacing;
+
+  GenerateSwizzledPalettizedGradient(texels, kSize, kSize, 252);
+  draw_quad(left, top);
+  set_fence_and_wait();
+
+  // Bottom row: single pixel update (last pixel at width*height-1)
+  top += kSize + spacing + 32.f;
+  left = spacing;
+
+  // Use busywaits instead of the semaphore to rule out any difference in behavior.
+  memset(texels, 0, kSize * kSize);  // All Black
+  texels[kSize * kSize - 1] = 1;     // Red
+  draw_quad(left, top);
+  host_.PBKitBusyWait();
+  left += kSize + spacing;
+
+  texels[kSize * kSize - 1] = 2;  // Green
+  draw_quad(left, top);
+  host_.PBKitBusyWait();
+  left += kSize + spacing;
+
+  texels[kSize * kSize - 1] = 3;  // Blue
+  draw_quad(left, top);
+
+  pb_printat(0, 0, (char *)"%s", kPalettizedTest);
+  pb_printat(1, 1, (char *)"Top: Full texture update (checker, radial, gradient)");
+  pb_printat(8, 1, (char *)"Bottom: Only last pixel updated (red, green, blue)");
+  pb_draw_text_screen();
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_CONTEXT_DMA_SEMAPHORE, kDefaultSemaphoreContextChannel);
+  Pushbuffer::End(true);
+
+  FinishDraw(kPalettizedTest);
+}
 
 void TextureCPUUpdateTests::TestMultipleSwatches() {
   host_.PrepareDraw(0xFF505050);
