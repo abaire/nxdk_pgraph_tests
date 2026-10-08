@@ -8,6 +8,7 @@
 
 static constexpr char kAlphaTestTest[] = "AlphaTest";
 static constexpr char kAlphaMaskTest[] = "AlphaMask";
+static constexpr char kPolygonModePointTest[] = "PolygonMode_Point";
 
 PointSpriteTests::PointSpriteTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Point sprite", config) {
@@ -17,6 +18,7 @@ PointSpriteTests::PointSpriteTests(TestHost &host, std::string output_dir, const
     name += use_shader ? "_VS" : "_FF";
     tests_[name] = [this, use_shader]() { TestAlphaMasking(use_shader); };
   }
+  tests_[kPolygonModePointTest] = [this]() { TestPolygonModePoint(); };
 }
 
 /**
@@ -37,6 +39,10 @@ PointSpriteTests::PointSpriteTests(TestHost &host, std::string output_dir, const
  *   hardware usage where diffuse RGB (black) is passed through, diffuse alpha is modulated with texture alpha on
  *   stage 3, and alpha testing (GREATER than 1) is applied with SRC_ALPHA / ONE_MINUS_SRC_ALPHA blending and point
  *   smoothing/scaling.
+ *
+ * @tc PolygonMode_Point
+ *   Demonstrates that setting NV097_SET_FRONT_POLYGON_MODE to NV097_SET_FRONT_POLYGON_MODE_V_POINT produces textured
+ *   point sprites honoring point smoothing when rendering non-point geometry (e.g. quads/triangles) except for lines.
  */
 void PointSpriteTests::Initialize() {
   TestSuite::Initialize();
@@ -162,12 +168,11 @@ void PointSpriteTests::TestAlphaTest() {
 
 static std::shared_ptr<PerspectiveVertexShader> SetupVertexShader(TestHost &host) {
   float depth_buffer_max_value = host.GetMaxDepthBufferValue();
-  auto shader =
-      std::make_shared<PerspectiveVertexShaderNoLighting>(host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.0f,
-                                                          depth_buffer_max_value, M_PI * 0.25f, 1.0f, 200.0f);
+  auto shader = std::make_shared<PerspectiveVertexShaderNoLighting>(
+      host.GetFramebufferWidth(), host.GetFramebufferHeight(), 0.f, depth_buffer_max_value, M_PI * 0.25f, 1.f, 200.f);
   shader->SetUseD3DStyleViewport();
-  vector_t camera_position = {0.0f, 0.0f, -7.0f, 1.0f};
-  vector_t camera_look_at = {0.0f, 0.0f, 0.0f, 1.0f};
+  vector_t camera_position = {0.f, 0.f, -7.f, 1.f};
+  vector_t camera_look_at = {0.f, 0.f, 0.f, 1.f};
   shader->LookAt(camera_position, camera_look_at);
 
   return shader;
@@ -210,10 +215,10 @@ void PointSpriteTests::TestAlphaMasking(bool use_shader) {
   texture_stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
   texture_stage.SetPWrap(TextureStage::WRAP_REPEAT, false);
   texture_stage.SetFilter(0x1012000);  // Quincunx, BoxLOD0 min/mag
-  host_.SetupTextureStages();
 
   host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
                               TestHost::STAGE_2D_PROJECTIVE);
+  host_.SetupTextureStages();
 
   host_.ClearInputColorCombiners();
   host_.ClearInputAlphaCombiners();
@@ -246,17 +251,17 @@ void PointSpriteTests::TestAlphaMasking(bool use_shader) {
   Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, true);
   Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, true);
   Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, 0.0204081628f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, 0.0f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, 0.0f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE, 64.0f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, 64.0f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, 64.0f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_BIAS, -0.0f);
-  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_MIN_SIZE, 0.0f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, 0.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, 0.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE, 64.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, 64.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, 64.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_BIAS, -0.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_MIN_SIZE, 0.f);
   Pushbuffer::End();
 
   // Diffuse: RGB = 0, Alpha = 1.0 (0xFF)
-  host_.SetDiffuse(0.0f, 0.0f, 0.0f, 1.0f);
+  host_.SetDiffuse(0.f, 0.f, 0.f, 1.f);
 
   auto unproject = [this, shader, use_shader](vector_t &world_point, float x, float y, float z) {
     vector_t screen_point{x, y, z, 1.f};
@@ -276,7 +281,7 @@ void PointSpriteTests::TestAlphaMasking(bool use_shader) {
       // Vertex attribute v6 must be supplied via a vertex array.
       auto buffer = host_.AllocateVertexBuffer(1);
       auto vertex = buffer->Lock();
-      vertex->SetDiffuse(0.0f, 0.0f, 0.0f, 1.0f);
+      vertex->SetDiffuse(0.f, 0.f, 0.f, 1.f);
       vertex->SetPointSize(point_size);
       vertex->SetPosition(world_point[0], world_point[1], world_point[2], 1.f);
       vertex->SetTexCoord3(0.f, 0.f, 0.f, 1.f);
@@ -363,4 +368,150 @@ void PointSpriteTests::TestAlphaMasking(bool use_shader) {
   pb_draw_text_screen();
 
   FinishDraw(test_name);
+}
+
+void PointSpriteTests::TestPolygonModePoint() {
+  static constexpr uint32_t kTextureSize = 8;
+
+  uint32_t texture_pixels[kTextureSize * kTextureSize];
+  for (uint32_t y = 0; y < kTextureSize; ++y) {
+    for (uint32_t x = 0; x < kTextureSize; ++x) {
+      uint32_t color = 0xFF000000;
+      if (y < kTextureSize / 2) {
+        if (x < kTextureSize / 2) {
+          color |= 0x00FF0000;
+        } else {
+          color |= 0x0000FF00;
+        }
+      } else {
+        if (x < kTextureSize / 2) {
+          color |= 0x00660066;
+        } else {
+          color |= 0x00666600;
+        }
+      }
+      texture_pixels[y * kTextureSize + x] = color;
+    }
+  }
+
+  swizzle_rect(reinterpret_cast<const uint8_t *>(texture_pixels), kTextureSize, kTextureSize,
+               host_.GetTextureMemoryForStage(3), kTextureSize * 4, 4);
+
+  host_.PrepareDraw(0xFF333333);
+
+  auto &texture_stage = host_.GetTextureStage(3);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+  texture_stage.SetEnabled(true);
+  texture_stage.SetTextureDimensions(kTextureSize, kTextureSize);
+  host_.SetupTextureStages();
+
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
+                              TestHost::STAGE_2D_PROJECTIVE);
+
+  host_.SetPointSize(8.f);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_POINT);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_POINT);
+  Pushbuffer::End();
+
+  static const struct {
+    TestHost::DrawPrimitive type;
+    const char *name;
+  } kPrimitives[] = {{TestHost::PRIMITIVE_LINES, "Lines"},
+                     {TestHost::PRIMITIVE_LINE_STRIP, "LineStrip"},
+                     {TestHost::PRIMITIVE_LINE_LOOP, "LineLoop"},
+                     {TestHost::PRIMITIVE_TRIANGLES, "Triangles"},
+                     {TestHost::PRIMITIVE_TRIANGLE_STRIP, "TriStrip"},
+                     {TestHost::PRIMITIVE_TRIANGLE_FAN, "TriFan"},
+                     {TestHost::PRIMITIVE_QUADS, "Quads"},
+                     {TestHost::PRIMITIVE_QUAD_STRIP, "QuadStrip"}};
+
+  static constexpr float kColX[2] = {200.f, 400.f};
+
+  auto draw_primitive = [this](auto type, float left, float top) {
+    host_.Begin(type);
+
+    auto push_vertex = [this](float x, float y, float u, float v) {
+      vector_t screen_point{x, y, 1.f, 1.f};
+      vector_t transformed;
+      host_.SetTexCoord3(u, v);
+      host_.UnprojectPoint(transformed, screen_point);
+      host_.SetVertex(transformed);
+    };
+
+    if (type == TestHost::PRIMITIVE_LINES) {
+      push_vertex(left, top, 0.f, 0.f);
+      push_vertex(left + 20.f, top + 10.f, 1.f, 1.f);
+      push_vertex(left + 40.f, top + 10.f, 0.f, 0.5f);
+      push_vertex(left + 60.f, top + 10.f, 1.f, 0.5f);
+    } else if (type == TestHost::PRIMITIVE_LINE_STRIP || type == TestHost::PRIMITIVE_LINE_LOOP ||
+               type == TestHost::PRIMITIVE_TRIANGLES || type == TestHost::PRIMITIVE_TRIANGLE_STRIP) {
+      // Zigzag horizontally
+      push_vertex(left, top + 20.f, 0.f, 1.f);
+      push_vertex(left + 20.f, top, 0.f, 0.f);
+      push_vertex(left + 40.f, top + 20.f, 1.f, 1.f);
+      push_vertex(left + 60.f, top, 1.f, 0.f);
+    } else if (type == TestHost::PRIMITIVE_TRIANGLE_FAN) {
+      push_vertex(left + 30.f, top + 20.f, 0.5f, 1.f);
+      push_vertex(left, top, 0.f, 0.f);
+      push_vertex(left + 30.f, top, 0.5f, 0.f);
+      push_vertex(left + 60.f, top, 1.f, 0.f);
+    } else if (type == TestHost::PRIMITIVE_QUAD_STRIP) {
+      static constexpr auto kHalfWidth = 30.f;
+      const float bottom = top + 20.f;
+      push_vertex(left, bottom, 0.f, 1.f);
+      push_vertex(left, top, 0.f, 0.f);
+      push_vertex(left + kHalfWidth, bottom, 0.5f, 1.f);
+      push_vertex(left + kHalfWidth, top, 0.5f, 0.f);
+      push_vertex(left + kHalfWidth * 2.f, bottom, 1.f, 1.f);
+      push_vertex(left + kHalfWidth * 2.f, top, 1.f, 0.f);
+    } else {
+      // Quads
+      push_vertex(left, top, 0.f, 0.f);
+      push_vertex(left + 40.f, top, 1.f, 0.f);
+      push_vertex(left + 40.f, top + 20.f, 1.f, 1.f);
+      push_vertex(left, top + 20.f, 0.f, 1.f);
+    }
+
+    host_.End();
+  };
+
+  for (int col = 0; col < 2; ++col) {
+    bool smooth = (col == 1);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, smooth);
+    Pushbuffer::End();
+
+    for (auto i = 0; i < std::size(kPrimitives); ++i) {
+      int row = 2 + i * 2;
+      float top = 25.f + static_cast<float>(row) * 25.f;
+      float left_shift = 40.f * (i & 0x01 ? 1.f : -1.f);
+      draw_primitive(kPrimitives[i].type, kColX[col] + left_shift, top);
+    }
+  }
+
+  // Cleanup
+  host_.SetPointSize(1.f);
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE, NV097_SET_FRONT_POLYGON_MODE_V_FILL);
+  Pushbuffer::End();
+
+  pb_printat(0, 0, "%s", kPolygonModePointTest);
+  pb_printat(1, 18, "Smooth OFF");
+  pb_printat(1, 38, "Smooth ON");
+
+  for (auto i = 0; i < std::size(kPrimitives); ++i) {
+    int row = (i == 7) ? 15 : (2 + i * 2);
+    pb_printat(row, (i & 0x01 ? 2 : 0), "%s", kPrimitives[i].name);
+  }
+
+  pb_draw_text_screen();
+
+  FinishDraw(kPolygonModePointTest);
 }
