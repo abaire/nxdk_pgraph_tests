@@ -17,6 +17,7 @@
 
 static constexpr char kRenderTextureLoopTest[] = "RenderTextureLoop";
 static constexpr char kRenderTextureClearLoopTest[] = "RenderTextureClearLoop";
+static constexpr char kA8R8G8B8ToR5G6B5LoopTest[] = "A8R8G8B8_R5G6B5_Loop";
 
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
 // NV097_SET_CONTEXT_DMA_COLOR == NV20_TCL_PRIMITIVE_3D_SET_OBJECT3
@@ -164,6 +165,10 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
  *    1. Initial sample of linear-cleared surface as swizzled texture (expected black).
  *    2. Sample after GPU renders red into swizzled surface (expected red).
  *    3. Sample after linear surface clear to black (expected black).
+ *
+ * @tc A8R8G8B8_R5G6B5_Loop
+ *  Exercises rendering an SZ_A8R8G8B8 texture into a swizzled LE_R5G6B5 surface, then using that surface as an
+ *  SZ_R5G6B5 texture to render into the LE_A8R8G8B8 framebuffer (xemu #2387).
  */
 TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Texture render target", config) {
@@ -183,6 +188,7 @@ TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string o
 
   tests_[kRenderTextureLoopTest] = [this] { TestRenderTextureLoop(); };
   tests_[kRenderTextureClearLoopTest] = [this] { TestXemu2036RenderTextureClearLoop(); };
+  tests_[kA8R8G8B8ToR5G6B5LoopTest] = [this] { TestA8R8G8B8ToLE_R5G6B5Loop(); };
 }
 
 void TextureRenderTargetTests::Initialize() {
@@ -607,6 +613,85 @@ void TextureRenderTargetTests::TestXemu2036RenderTextureClearLoop() {
   pb_draw_text_screen();
 
   FinishDraw(kRenderTextureClearLoopTest);
+}
+
+void TextureRenderTargetTests::TestA8R8G8B8ToLE_R5G6B5Loop() {
+  static constexpr uint32_t kTextureSize = 256;
+  static constexpr uint32_t kSrcTextureSize = 64;
+
+  auto *tex_mem_stage0 = host_.GetTextureMemoryForStage(0);
+  auto *tex_mem_stage1 = host_.GetTextureMemoryForStage(1);
+
+  // Initialize the source texture (Stage 1) with an SZ_A8R8G8B8 test pattern.
+  GenerateSwizzledRGBATestPattern(tex_mem_stage0, kSrcTextureSize, kSrcTextureSize);
+
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetVertexShaderProgram(nullptr);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+
+  host_.PrepareDraw(0xFF202020);
+
+  // Configured to match observed behavior of Drihoo in https://github.com/xemu-project/xemu/issues/2387
+  {
+    host_.RenderToSurfaceStart(tex_mem_stage1, TestHost::SCF_R5G6B5, kTextureSize, kTextureSize, true);
+
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+
+    auto &stage = host_.GetTextureStage(0);
+    stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8));
+    stage.SetTextureDimensions(kSrcTextureSize, kSrcTextureSize);
+    stage.SetUWrap(TextureStage::WRAP_REPEAT);
+    stage.SetVWrap(TextureStage::WRAP_REPEAT);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_TENT_LOD, TextureStage::MAG_BOX_LOD0);
+    stage.SetEnabled(true);
+    host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+    host_.SetupTextureStages();
+
+    host_.DrawSwizzledTexturedScreenQuad(0.0f, 0.0f, static_cast<float>(kTextureSize), static_cast<float>(kTextureSize),
+                                         1.0f);
+
+    stage.SetEnabled(false);
+    host_.SetupTextureStages();
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+    host_.RenderToSurfaceEnd();
+  }
+
+  {
+    host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);
+
+    auto &stage = host_.GetTextureStage(1);
+    stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R5G6B5));
+    stage.SetTextureDimensions(kTextureSize, kTextureSize);
+    stage.SetUWrap(TextureStage::WRAP_BORDER);
+    stage.SetVWrap(TextureStage::WRAP_BORDER);
+    stage.SetFilter(0, TextureStage::K_QUINCUNX, TextureStage::MIN_BOX_NEARESTLOD, TextureStage::MAG_BOX_LOD0);
+    stage.SetEnabled(true);
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_2D_PROJECTIVE);
+    host_.SetupTextureStages();
+
+    // Draw the sampled R5G6B5 texture on screen.
+    static constexpr float kQuadLeft = 192.0f;
+    static constexpr float kQuadTop = 132.0f;
+    static constexpr float kQuadRight = kQuadLeft + static_cast<float>(kTextureSize);
+    static constexpr float kQuadBottom = kQuadTop + static_cast<float>(kTextureSize);
+    host_.DrawSwizzledTexturedScreenQuad(kQuadLeft, kQuadTop, kQuadRight, kQuadBottom, 0.0f);
+
+    stage.SetEnabled(false);
+    host_.SetupTextureStages();
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  }
+
+  pb_printat(0, 1, "%s", kA8R8G8B8ToR5G6B5LoopTest);
+  pb_printat(2, 1, "Rendered SZ_A8R8G8B8 to LE_R5G6B5");
+  pb_printat(3, 1, "Sampled as SZ_R5G6B5 to LE_A8R8G8B8 FB");
+  pb_draw_text_screen();
+
+  FinishDraw(kA8R8G8B8ToR5G6B5LoopTest);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetDefaultTextureParams();
+  host_.SetupTextureStages();
 }
 
 std::string TextureRenderTargetTests::MakeTestName(const TextureFormatInfo &texture_format) {

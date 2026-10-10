@@ -35,13 +35,17 @@ class TextureRenderTargetTests : public TestSuite {
   //! back to an earlier color state using a linear clear, or updated via CPU.
   void TestXemu2036RenderTextureClearLoop();
 
+  //! Tests rendering an SZ_A8R8G8B8 texture into a swizzled LE_R5G6B5 render target surface, then sampling that surface
+  //! as an SZ_R5G6B5 texture onto an LE_A8R8G8B8 framebuffer (xemu #2387).
+  void TestA8R8G8B8ToLE_R5G6B5Loop();
+
   void ResetAndDrawFromRenderTarget() const;
 
   static std::string MakeTestName(const TextureFormatInfo &texture_format);
   static std::string MakePalettizedTestName(TestHost::PaletteSize size);
 
  private:
-  struct s_CtxDma texture_target_ctx_ {};
+  struct s_CtxDma texture_target_ctx_{};
   uint8_t *render_target_{nullptr};
 
   std::shared_ptr<VertexBuffer> render_target_vertex_buffer_;
