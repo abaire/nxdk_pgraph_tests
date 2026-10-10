@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d37/classFlatMeshGridModel" kind="class" language="C++" prot="public">
+    <compoundname>FlatMeshGridModel</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::SolidColorModelBuilder</basecompoundref>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="d7/d37/classFlatMeshGridModel_1aa9e4f295642c6dcb170e2d9127e29b48" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* FlatMeshGridModel::vertices_</definition>
+        <argsstring></argsstring>
+        <name>vertices_</name>
+        <qualifiedname>FlatMeshGridModel::vertices_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="35" column="9" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d37/classFlatMeshGridModel_1adbe3e67cbac6911027df708c98e0e69f" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* FlatMeshGridModel::normals_</definition>
+        <argsstring></argsstring>
+        <name>normals_</name>
+        <qualifiedname>FlatMeshGridModel::normals_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="36" column="9" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d37/classFlatMeshGridModel_1ae04d93ea960c7c9b8ebd801c82b38e90" prot="protected" static="no" mutable="no">
+        <type>float *</type>
+        <definition>float* FlatMeshGridModel::texcoords_</definition>
+        <argsstring></argsstring>
+        <name>texcoords_</name>
+        <qualifiedname>FlatMeshGridModel::texcoords_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="37" column="9" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d7/d37/classFlatMeshGridModel_1a5c823958244c985ebda828d2be86a7b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FlatMeshGridModel::FlatMeshGridModel</definition>
+        <argsstring>()</argsstring>
+        <name>FlatMeshGridModel</name>
+        <qualifiedname>FlatMeshGridModel::FlatMeshGridModel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="12" column="3" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d37/classFlatMeshGridModel_1a968db4d240de57b9c6e74255d24b8764" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FlatMeshGridModel::FlatMeshGridModel</definition>
+        <argsstring>(const vector_t &amp;diffuse, const vector_t &amp;specular)</argsstring>
+        <name>FlatMeshGridModel</name>
+        <qualifiedname>FlatMeshGridModel::FlatMeshGridModel</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>diffuse</declname>
+        </param>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>specular</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="13" column="3" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d37/classFlatMeshGridModel_1a9c9ef77f313ba61ef32c1602f8cabbff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>uint32_t FlatMeshGridModel::GetVertexCount</definition>
+        <argsstring>() const override</argsstring>
+        <name>GetVertexCount</name>
+        <qualifiedname>FlatMeshGridModel::GetVertexCount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="15" column="13" bodyfile="src/models/flat_mesh_grid_model.cpp" bodystart="24" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d7/d37/classFlatMeshGridModel_1aa93e05db1719c0f138a1f49f0613958a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * FlatMeshGridModel::GetVertexPositions</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexPositions</name>
+        <qualifiedname>FlatMeshGridModel::GetVertexPositions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="18" column="16" bodyfile="src/models/flat_mesh_grid_model.cpp" bodystart="33" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d37/classFlatMeshGridModel_1a3ce3c2630be676e882b645dfead268e7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const float *</type>
+        <definition>const float * FlatMeshGridModel::GetVertexNormals</definition>
+        <argsstring>() override</argsstring>
+        <name>GetVertexNormals</name>
+        <qualifiedname>FlatMeshGridModel::GetVertexNormals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="19" column="16" bodyfile="src/models/flat_mesh_grid_model.cpp" bodystart="48" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d37/classFlatMeshGridModel_1a462a299da98b4011d08850da5735b992" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FlatMeshGridModel::ReleaseData</definition>
+        <argsstring>() override</argsstring>
+        <name>ReleaseData</name>
+        <qualifiedname>FlatMeshGridModel::ReleaseData</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/models/flat_mesh_grid_model.h" line="20" column="8" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="20" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FlatMeshGridModel</label>
+        <link refid="d7/d37/classFlatMeshGridModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FlatMeshGridModel</label>
+        <link refid="d7/d37/classFlatMeshGridModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::SolidColorModelBuilder</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/models/flat_mesh_grid_model.h" line="10" column="1" bodyfile="src/models/flat_mesh_grid_model.h" bodystart="10" bodyend="38"/>
+    <listofallmembers>
+      <member refid="d7/d37/classFlatMeshGridModel_1a5c823958244c985ebda828d2be86a7b5" prot="public" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>FlatMeshGridModel</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1a968db4d240de57b9c6e74255d24b8764" prot="public" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>FlatMeshGridModel</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1a9c9ef77f313ba61ef32c1602f8cabbff" prot="public" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>GetVertexCount</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1a3ce3c2630be676e882b645dfead268e7" prot="protected" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>GetVertexNormals</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1aa93e05db1719c0f138a1f49f0613958a" prot="protected" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>GetVertexPositions</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1adbe3e67cbac6911027df708c98e0e69f" prot="protected" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>normals_</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1a462a299da98b4011d08850da5735b992" prot="protected" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>ReleaseData</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1ae04d93ea960c7c9b8ebd801c82b38e90" prot="protected" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>texcoords_</name></member>
+      <member refid="d7/d37/classFlatMeshGridModel_1aa9e4f295642c6dcb170e2d9127e29b48" prot="protected" virt="non-virtual"><scope>FlatMeshGridModel</scope><name>vertices_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

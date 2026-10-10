@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/dba/two__d__line__tests_8cpp" kind="file" language="C++">
+    <compoundname>two_d_line_tests.cpp</compoundname>
+    <includes refid="dd/d12/two__d__line__tests_8h" local="yes">two_d_line_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="yes">nxdk_ext.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <incdepgraph>
+      <node id="13">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/two_d_line_tests.cpp</label>
+        <link refid="d4/dba/two__d__line__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>two_d_line_tests.h</label>
+        <link refid="dd/d12/two__d__line__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="7">
+        <label>cstdint</label>
+      </node>
+      <node id="8">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="3">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="15">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="9">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="10">
+        <label>thread</label>
+      </node>
+      <node id="11">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="14">
+        <label>windows.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/dba/two__d__line__tests_8cpp_1acdd8f2d777ced8d02dadd22ddd5b7612" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_5C</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_5C</name>
+        <initializer>= kNextSubchannel</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.cpp" line="10" column="27" bodyfile="src/tests/two_d_line_tests.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/dba/two__d__line__tests_8cpp_1afdc5a22a6314f2eb0f140291d642c351" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t SUBCH_CLASS_42</definition>
+        <argsstring></argsstring>
+        <name>SUBCH_CLASS_42</name>
+        <initializer>= SUBCH_CLASS_5C + 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.cpp" line="12" column="27" bodyfile="src/tests/two_d_line_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/dba/two__d__line__tests_8cpp_1ac959d7ac06d434206b57f50ab7a6bf3f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="de/d05/structTwoDLineTests_1_1TestCase" kindref="compound">TwoDLineTests::TestCase</ref></type>
+        <definition>constexpr TwoDLineTests::TestCase kTests[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTests</name>
+        <initializer>= {
+    
+    {0xFFFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 100, 100, 100, 400},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 222, 222, 222, 222},
+    {0x000000, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 200, 400, 400},
+    {0xFF0000, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 200, 400, 400},
+    {0x00FF00, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 200, 400, 400},
+    {0x0007E0, NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5, 400, 200, 400, 400},
+    {0x0003E0, NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5, 400, 200, 400, 400},
+    {0x00FF00, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 444, 222, 444, 444},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 0, 0, 639, 479},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 639, 479, 0, 0},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 0, 400, 479},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 300, 401, 300},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 400, 300, 400, 301},
+    {0xFFFFFF, NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8, 639, 479, 0, 0},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.cpp" line="17" column="42" bodyfile="src/tests/two_d_line_tests.cpp" bodystart="17" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d4/dba/two__d__line__tests_8cpp_1ad126c8488ef1697bfa033082ef2c3722" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string ColorFormatName</definition>
+        <argsstring>(uint32_t format, bool ReturnShortName)</argsstring>
+        <name>ColorFormatName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>ReturnShortName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/two_d_line_tests.cpp" line="119" column="20" bodyfile="src/tests/two_d_line_tests.cpp" bodystart="119" bodyend="137" declfile="src/tests/two_d_line_tests.cpp" declline="14" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;two_d_line_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;nxdk_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/>5C<sp/>is<sp/>the<sp/>class<sp/>for<sp/>NV04_RENDER_SOLID_LIN<sp/>(nv32.h)<sp/>/<sp/>NV04_SOLID_LINE<sp/>(nv_objects.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_5C<sp/>=<sp/>kNextSubchannel;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>42<sp/>is<sp/>the<sp/>class<sp/>for<sp/>NV04_CONTEXT_SURFACES_2D<sp/>(nv32.h)<sp/>&amp;<sp/>(nv_objects.h)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>SUBCH_CLASS_42<sp/>=<sp/>SUBCH_CLASS_5C<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>ColorFormatName(uint32_t<sp/>format,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ReturnShortName);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="de/d05/structTwoDLineTests_1_1TestCase" kindref="compound">TwoDLineTests::TestCase</ref><sp/>kTests[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>values<sp/>outside<sp/>of<sp/>target<sp/>buffer<sp/>bounds<sp/>will<sp/>result<sp/>in<sp/>crash</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>100,<sp/>100,<sp/>100,<sp/>400},</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>222,<sp/>222,<sp/>222,<sp/>222},</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>{0x000000,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>400,<sp/>200,<sp/>400,<sp/>400},</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFF0000,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>400,<sp/>200,<sp/>400,<sp/>400},</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>{0x00FF00,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>400,<sp/>200,<sp/>400,<sp/>400},</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>{0x0007E0,<sp/>NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5,<sp/>400,<sp/>200,<sp/>400,<sp/>400},</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>{0x0003E0,<sp/>NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5,<sp/>400,<sp/>200,<sp/>400,<sp/>400},</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>{0x00FF00,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>444,<sp/>222,<sp/>444,<sp/>444},</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>0,<sp/>0,<sp/>639,<sp/>479},</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>639,<sp/>479,<sp/>0,<sp/>0},</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>400,<sp/>0,<sp/>400,<sp/>479},</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>400,<sp/>300,<sp/>401,<sp/>300},</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>400,<sp/>300,<sp/>400,<sp/>301},</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{0xFFFFFF,<sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8,<sp/>639,<sp/>479,<sp/>0,<sp/>0},</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><ref refid="db/df8/classTwoDLineTests_1ad52dbe62d54b54caa594095f67dd5779" kindref="member">TwoDLineTests::TwoDLineTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/>kSuiteName,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test<sp/>:<sp/>kTests)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(test,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test_method<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>test]()<sp/>{<sp/>Test(test);<sp/>};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>test_method;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="db/df8/classTwoDLineTests_1a1f25277068d5cbd2490e0ea8d88aa2c6" kindref="member">TwoDLineTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>SetDefaultTextureFormat();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>channel<sp/>=<sp/>kNextContextChannel;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>NV04_SOLID_LINE,<sp/>&amp;solid_lin_ctx_);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;solid_lin_ctx_);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_5C,<sp/>&amp;solid_lin_ctx_);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>pb_create_gr_ctx(channel++,<sp/>NV04_CONTEXT_SURFACES_2D,<sp/>&amp;surface_destination_ctx_);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>pb_bind_channel(&amp;surface_destination_ctx_);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>pb_bind_subchannel(SUBCH_CLASS_42,<sp/>&amp;surface_destination_ctx_);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TwoDLineTests::Test(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref>&amp;<sp/>test)<sp/>{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF440011);<sp/><sp/></highlight><highlight class="comment">//<sp/>alpha<sp/>+<sp/>RRGGBB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_42,<sp/>NV04_CONTEXT_SURFACES_2D_SET_DMA_IMAGE_DST,<sp/>DMA_CHANNEL_PIXEL_RENDERER);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_42,<sp/>NV042_SET_PITCH,<sp/>(pb_back_buffer_pitch()<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>pb_back_buffer_pitch());</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_42,<sp/>NV042_SET_COLOR_FORMAT,<sp/>NV042_SET_COLOR_FORMAT_LE_A8R8G8B8);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_5C,<sp/>NV04_SOLID_LINE_OPERATION,<sp/>NV09F_SET_OPERATION_SRCCOPY);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_5C,<sp/>NV04_SOLID_LINE_COLOR_VALUE,<sp/>test.object_color);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_5C,<sp/>NV04_SOLID_LINE_SURFACE,<sp/>surface_destination_ctx_.ChannelID);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_5C,<sp/>NV04_SOLID_LINE_COLOR_FORMAT,<sp/>test.color_format);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_5C,<sp/>NV04_SOLID_LINE_START,<sp/>(test.start_y<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>test.start_x);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>Pushbuffer::PushTo(SUBCH_CLASS_5C,<sp/>NV04_SOLID_LINE_END,<sp/>(test.end_y<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>test.end_x);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;2D<sp/>Line:<sp/>(%lu,<sp/>%lu)<sp/>-<sp/>(%lu,<sp/>%lu)\n&quot;</highlight><highlight class="normal">,<sp/>test.start_x,<sp/>test.start_y,<sp/>test.end_x,<sp/>test.end_y);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>std::string<sp/>color_format_name<sp/>=<sp/>ColorFormatName(test.color_format,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Color:<sp/>%s<sp/>-<sp/>%08X\n&quot;</highlight><highlight class="normal">,<sp/>color_format_name.c_str(),<sp/>test.object_color);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(test,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">std::string<sp/>TwoDLineTests::MakeTestName(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d3/dee/structTestCase" kindref="compound">TestCase</ref>&amp;<sp/>test,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ReturnShortName)<sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[256]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>255,<sp/></highlight><highlight class="stringliteral">&quot;2DLine-%s-C%08X-%lu_%lu-%lu_%lu&quot;</highlight><highlight class="normal">,<sp/>ColorFormatName(test.color_format,<sp/>ReturnShortName).c_str(),</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>test.object_color,<sp/>test.start_x,<sp/>test.start_y,<sp/>test.end_x,<sp/>test.end_y);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>ColorFormatName(uint32_t<sp/>format,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ReturnShortName)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(format)<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV05C_SET_COLOR_FORMAT_LE_X16R5G6B5:</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ReturnShortName)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;16&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;R5G6B5&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV05C_SET_COLOR_FORMAT_LE_X17R5G5B5:</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ReturnShortName)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;15&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;R5G5B5&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV05C_SET_COLOR_FORMAT_LE_X8R8G8B8:</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ReturnShortName)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;24&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;R8G8B8&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;%X&quot;</highlight><highlight class="normal">,<sp/>format);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/two_d_line_tests.cpp"/>
+  </compounddef>
+</doxygen>

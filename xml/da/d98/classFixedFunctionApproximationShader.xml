@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d98/classFixedFunctionApproximationShader" kind="class" language="C++" prot="public">
+    <compoundname>FixedFunctionApproximationShader</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::PerspectiveVertexShader</basecompoundref>
+    <includes refid="d8/dc4/fixed__function__approximation__shader_8h" local="no">fixed_function_approximation_shader.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="da/d98/classFixedFunctionApproximationShader_1aea8b198755fb483dc5c1cddc2ea39f7b" prot="private" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t FixedFunctionApproximationShader::light_direction_</definition>
+        <argsstring></argsstring>
+        <name>light_direction_</name>
+        <qualifiedname>FixedFunctionApproximationShader::light_direction_</qualifiedname>
+        <initializer>= {0, 0, 1, 1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/fixed_function_approximation_shader.h" line="26" column="12" bodyfile="src/shaders/fixed_function_approximation_shader.h" bodystart="26" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="da/d98/classFixedFunctionApproximationShader_1ada7017cc75c8bbbaf31f5af486148813" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FixedFunctionApproximationShader::FixedFunctionApproximationShader</definition>
+        <argsstring>(uint32_t framebuffer_width, uint32_t framebuffer_height, float z_min=0, float z_max=0x7FFF, float fov_y=M_PI *0.25f, float near=1.0f, float far=10.0f)</argsstring>
+        <name>FixedFunctionApproximationShader</name>
+        <qualifiedname>FixedFunctionApproximationShader::FixedFunctionApproximationShader</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_min</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>z_max</declname>
+          <defval>0x7FFF</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>fov_y</declname>
+          <defval>M_PI *0.25f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>near</declname>
+          <defval>1.0f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>far</declname>
+          <defval>10.0f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/fixed_function_approximation_shader.h" line="12" column="3" bodyfile="src/shaders/fixed_function_approximation_shader.cpp" bodystart="9" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d98/classFixedFunctionApproximationShader_1aba6d2d6edb84251af7e1a76e4630a656" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FixedFunctionApproximationShader::SetDirectionalLightDirection</definition>
+        <argsstring>(const vector_t &amp;direction)</argsstring>
+        <name>SetDirectionalLightDirection</name>
+        <qualifiedname>FixedFunctionApproximationShader::SetDirectionalLightDirection</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+<para>Sets the direction from the origin towards the directional light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/fixed_function_approximation_shader.h" line="17" column="8" bodyfile="src/shaders/fixed_function_approximation_shader.cpp" bodystart="17" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="da/d98/classFixedFunctionApproximationShader_1a6605ba1de43a690a1b342c57bddb1425" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FixedFunctionApproximationShader::SetDirectionalLightCastDirection</definition>
+        <argsstring>(const vector_t &amp;direction)</argsstring>
+        <name>SetDirectionalLightCastDirection</name>
+        <qualifiedname>FixedFunctionApproximationShader::SetDirectionalLightCastDirection</qualifiedname>
+        <param>
+          <type>const vector_t &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+<para>Sets the direction in which the directional light is casting light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/fixed_function_approximation_shader.h" line="20" column="8" bodyfile="src/shaders/fixed_function_approximation_shader.cpp" bodystart="21" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="da/d98/classFixedFunctionApproximationShader_1aa7e3a68e94ea89e00b2a09c307f9edfc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int FixedFunctionApproximationShader::OnLoadConstants</definition>
+        <argsstring>() override</argsstring>
+        <name>OnLoadConstants</name>
+        <qualifiedname>FixedFunctionApproximationShader::OnLoadConstants</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/shaders/fixed_function_approximation_shader.h" line="23" column="7" bodyfile="src/shaders/fixed_function_approximation_shader.cpp" bodystart="25" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Programmable vertex shader that mimicks the behavior of the fixed function pipeline. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FixedFunctionApproximationShader</label>
+        <link refid="da/d98/classFixedFunctionApproximationShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::PerspectiveVertexShader</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FixedFunctionApproximationShader</label>
+        <link refid="da/d98/classFixedFunctionApproximationShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::PerspectiveVertexShader</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/shaders/fixed_function_approximation_shader.h" line="10" column="1" bodyfile="src/shaders/fixed_function_approximation_shader.h" bodystart="10" bodyend="27"/>
+    <listofallmembers>
+      <member refid="da/d98/classFixedFunctionApproximationShader_1ada7017cc75c8bbbaf31f5af486148813" prot="public" virt="non-virtual"><scope>FixedFunctionApproximationShader</scope><name>FixedFunctionApproximationShader</name></member>
+      <member refid="da/d98/classFixedFunctionApproximationShader_1aea8b198755fb483dc5c1cddc2ea39f7b" prot="private" virt="non-virtual"><scope>FixedFunctionApproximationShader</scope><name>light_direction_</name></member>
+      <member refid="da/d98/classFixedFunctionApproximationShader_1aa7e3a68e94ea89e00b2a09c307f9edfc" prot="protected" virt="non-virtual"><scope>FixedFunctionApproximationShader</scope><name>OnLoadConstants</name></member>
+      <member refid="da/d98/classFixedFunctionApproximationShader_1a6605ba1de43a690a1b342c57bddb1425" prot="public" virt="non-virtual"><scope>FixedFunctionApproximationShader</scope><name>SetDirectionalLightCastDirection</name></member>
+      <member refid="da/d98/classFixedFunctionApproximationShader_1aba6d2d6edb84251af7e1a76e4630a656" prot="public" virt="non-virtual"><scope>FixedFunctionApproximationShader</scope><name>SetDirectionalLightDirection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

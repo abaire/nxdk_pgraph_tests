@@ -1,0 +1,453 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/de0/texture__border__color__tests_8cpp" kind="file" language="C++">
+    <compoundname>texture_border_color_tests.cpp</compoundname>
+    <includes refid="d5/d61/texture__border__color__tests_8h" local="yes">texture_border_color_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texture_border_color_tests.cpp</label>
+        <link refid="d4/de0/texture__border__color__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texture_border_color_tests.h</label>
+        <link refid="d5/d61/texture__border__color__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="8">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="7">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="13">
+        <label>thread</label>
+      </node>
+      <node id="14">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="6">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d7/d48/structTextureFormat" prot="public">TextureFormat</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/de0/texture__border__color__tests_8cpp_1a6f59d92554b9289ef4ddb680610be904" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char *</type>
+        <definition>constexpr const char* kTestName</definition>
+        <argsstring></argsstring>
+        <name>kTestName</name>
+        <initializer>= &quot;TextureBorderColor&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="8" column="29" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/de0/texture__border__color__tests_8cpp_1ab06b0d3d79f15cf9b06b9ad35a53aa41" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTextureSize</definition>
+        <argsstring></argsstring>
+        <name>kTextureSize</name>
+        <initializer>= 8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="10" column="27" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/de0/texture__border__color__tests_8cpp_1a95d93bdf8ac9143ecdcf465c246448f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kTestBorderColor</definition>
+        <argsstring></argsstring>
+        <name>kTestBorderColor</name>
+        <initializer>= 0x33FF22CC</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="11" column="27" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/de0/texture__border__color__tests_8cpp_1a39119177269287c8ddd76212fd5d8ba1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto kQuadSize</definition>
+        <argsstring></argsstring>
+        <name>kQuadSize</name>
+        <initializer>= 64.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="12" column="23" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/de0/texture__border__color__tests_8cpp_1a368578e31a52b678d367142187a2310f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto kTextureByteValue</definition>
+        <argsstring></argsstring>
+        <name>kTextureByteValue</name>
+        <initializer>= 0x80</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="13" column="23" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/de0/texture__border__color__tests_8cpp_1a4873b8b46c5cae8f28ced44fe9d88953" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d7/d48/structTextureFormat" kindref="compound">TextureFormat</ref></type>
+        <definition>constexpr TextureFormat kTestFormats[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestFormats</name>
+        <initializer>= {
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8, &quot;SZ_A8&quot;, true},
+
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R5G6B5, &quot;SZ_RG6B&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8B8, &quot;SZ_RB&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_G8B8, &quot;SZ_GB&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R6G5B5, &quot;SZ_R6GB&quot;, true},
+
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8, &quot;SZ_ARGB&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8, &quot;SZ_XRGB&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8, &quot;SZ_ABGR&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_B8G8R8A8, &quot;SZ_BGRA&quot;, true},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8G8B8A8, &quot;SZ_RGBA&quot;, true},
+
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8, &quot;LU_A8&quot;, false},
+
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R5G6B5, &quot;LU_RG6B&quot;, false},
+    
+    
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8, &quot;LU_GB&quot;, false},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X1R5G5B5, &quot;LU_XRGB5&quot;, false},
+
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8, &quot;LU_ARGB&quot;, false},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8, &quot;LU_XRGB&quot;, false},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8B8G8R8, &quot;LU_ABGR&quot;, false},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_B8G8R8A8, &quot;LU_BGRA&quot;, false},
+    {NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8G8B8A8, &quot;LU_RGBA&quot;, false},
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="21" column="32" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="21" bodyend="49"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texture_border_color_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>kTestName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;TextureBorderColor&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTextureSize<sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTestBorderColor<sp/>=<sp/>0x33FF22CC;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadSize<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTextureByteValue<sp/>=<sp/>0x80;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="d7/d48/structTextureFormat" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d7/d48/structTextureFormat" kindref="compound">TextureFormat</ref><sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>uint32_t<sp/>format;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>name;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_swizzled;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d7/d48/structTextureFormat" kindref="compound">TextureFormat</ref><sp/>kTestFormats[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_A8&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R5G6B5,<sp/></highlight><highlight class="stringliteral">&quot;SZ_RG6B&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8B8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_RB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_G8B8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_GB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R6G5B5,<sp/></highlight><highlight class="stringliteral">&quot;SZ_R6GB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8R8G8B8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_ARGB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_XRGB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_ABGR&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_B8G8R8A8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_BGRA&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_SZ_R8G8B8A8,<sp/></highlight><highlight class="stringliteral">&quot;SZ_RGBA&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8,<sp/></highlight><highlight class="stringliteral">&quot;LU_A8&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R5G6B5,<sp/></highlight><highlight class="stringliteral">&quot;LU_RG6B&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Implement<sp/>in<sp/>xemu</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8B8,<sp/>&quot;LU_RB&quot;,<sp/>false},</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_G8B8,<sp/></highlight><highlight class="stringliteral">&quot;LU_GB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X1R5G5B5,<sp/></highlight><highlight class="stringliteral">&quot;LU_XRGB5&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8,<sp/></highlight><highlight class="stringliteral">&quot;LU_ARGB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_X8R8G8B8,<sp/></highlight><highlight class="stringliteral">&quot;LU_XRGB&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8B8G8R8,<sp/></highlight><highlight class="stringliteral">&quot;LU_ABGR&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_B8G8R8A8,<sp/></highlight><highlight class="stringliteral">&quot;LU_BGRA&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>{NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_R8G8B8A8,<sp/></highlight><highlight class="stringliteral">&quot;LU_RGBA&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><ref refid="da/d85/classTextureBorderColorTests_1a31ae9561d69ad434205a7e1520d4c4ae" kindref="member">TextureBorderColorTests::TextureBorderColorTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>border<sp/>color&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>tests_[kTestName]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test();<sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/d85/classTextureBorderColorTests_1ad2be5065ddee73b95d57ef35ce3da765" kindref="member">TextureBorderColorTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TextureBorderColorTests::Test()<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBackgroundColor<sp/>=<sp/>0xFF101010;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(kBackgroundColor);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>host_.DrawCheckerboardUnproject(0xFF000000,<sp/>0xFF444444);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>memset(host_.GetTextureMemoryForStage(0),<sp/>kTextureByteValue,<sp/>kTextureSize<sp/>*<sp/>kTextureSize<sp/>*<sp/>4);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>stage.SetBorderColor(kTestBorderColor);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>stage.SetTextureDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>stage.SetImageDimensions(kTextureSize,<sp/>kTextureSize);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>stage.SetBorderFromColor(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>stage.SetUWrap(TextureStage::WRAP_BORDER,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>stage.SetVWrap(TextureStage::WRAP_BORDER,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>swizzled)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tex_min<sp/>=<sp/>swizzled<sp/>?<sp/>-0.5f<sp/>:<sp/>kTextureSize<sp/>*<sp/>-0.5f;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tex_max<sp/>=<sp/>swizzled<sp/>?<sp/>1.5f<sp/>:<sp/>kTextureSize<sp/>-<sp/>tex_min;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(tex_min,<sp/>tex_min);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>top);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(tex_max,<sp/>tex_min);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left<sp/>+<sp/>kQuadSize,<sp/>top);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(tex_max,<sp/>tex_max);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left<sp/>+<sp/>kQuadSize,<sp/>top<sp/>+<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(tex_min,<sp/>tex_max);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>top<sp/>+<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadSpacing<sp/>=<sp/>floor(kQuadSize<sp/>+<sp/>kQuadSize<sp/>*<sp/>0.5f)<sp/>+<sp/>3.f;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>host_.GetFramebufferWidthF()<sp/>-<sp/>kQuadSpacing;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>kQuadSize;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>96.f;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_x<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_y<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>format<sp/>:<sp/>kTestFormats)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(format.format),<sp/>0);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top,<sp/>format.is_swizzled);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_y,<sp/>text_x,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>format.name);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSpacing;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>text_x<sp/>+=<sp/>10;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(left<sp/>&gt;<sp/>kRight)<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>left<sp/>=<sp/>kQuadSize;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kQuadSpacing;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>text_x<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>text_y<sp/>+=<sp/>4;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s<sp/>-<sp/>Tex<sp/>0x%2X+<sp/>Border<sp/>0x%X&quot;</highlight><highlight class="normal">,<sp/>kTestName,<sp/>kTextureByteValue,<sp/>kTestBorderColor);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kTestName);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texture_border_color_tests.cpp"/>
+  </compounddef>
+</doxygen>

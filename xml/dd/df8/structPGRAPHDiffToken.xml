@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/df8/structPGRAPHDiffToken" kind="struct" language="C++" prot="public">
+    <compoundname>PGRAPHDiffToken</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dd/df8/structPGRAPHDiffToken_1a1d281e2b6c8f6d9c71e64f7d05aa4261" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t PGRAPHDiffToken::registers[PGRAPH_REGISTER_ARRAY_SIZE]</definition>
+        <argsstring>[PGRAPH_REGISTER_ARRAY_SIZE]</argsstring>
+        <name>registers</name>
+        <qualifiedname>PGRAPHDiffToken::registers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pgraph_diff_token.h" line="7" column="11" bodyfile="src/pgraph_diff_token.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/df8/structPGRAPHDiffToken_1a19db6f9970845464a55d56064fe9898f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool PGRAPHDiffToken::enable_progress_log</definition>
+        <argsstring></argsstring>
+        <name>enable_progress_log</name>
+        <qualifiedname>PGRAPHDiffToken::enable_progress_log</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pgraph_diff_token.h" line="8" column="8" bodyfile="src/pgraph_diff_token.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="dd/df8/structPGRAPHDiffToken_1a0cd23f1d99ef076c751bfbd501c3759a" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>PGRAPHDiffToken::PGRAPHDiffToken</definition>
+        <argsstring>(bool initialize=true, bool enable_progress_log=false)</argsstring>
+        <name>PGRAPHDiffToken</name>
+        <qualifiedname>PGRAPHDiffToken::PGRAPHDiffToken</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>initialize</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>enable_progress_log</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pgraph_diff_token.h" line="10" column="12" bodyfile="src/pgraph_diff_token.cpp" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/df8/structPGRAPHDiffToken_1a71db284745bce3a8dde8a49beef08927" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PGRAPHDiffToken::Capture</definition>
+        <argsstring>()</argsstring>
+        <name>Capture</name>
+        <qualifiedname>PGRAPHDiffToken::Capture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pgraph_diff_token.h" line="11" column="8" bodyfile="src/pgraph_diff_token.cpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="dd/df8/structPGRAPHDiffToken_1a8611625407d767a5b97e4d118c8600d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void PGRAPHDiffToken::DumpDiff</definition>
+        <argsstring>() const</argsstring>
+        <name>DumpDiff</name>
+        <qualifiedname>PGRAPHDiffToken::DumpDiff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pgraph_diff_token.h" line="12" column="8" bodyfile="src/pgraph_diff_token.cpp" bodystart="36" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/pgraph_diff_token.h" line="6" column="1" bodyfile="src/pgraph_diff_token.h" bodystart="6" bodyend="13"/>
+    <listofallmembers>
+      <member refid="dd/df8/structPGRAPHDiffToken_1a71db284745bce3a8dde8a49beef08927" prot="public" virt="non-virtual"><scope>PGRAPHDiffToken</scope><name>Capture</name></member>
+      <member refid="dd/df8/structPGRAPHDiffToken_1a8611625407d767a5b97e4d118c8600d3" prot="public" virt="non-virtual"><scope>PGRAPHDiffToken</scope><name>DumpDiff</name></member>
+      <member refid="dd/df8/structPGRAPHDiffToken_1a19db6f9970845464a55d56064fe9898f" prot="public" virt="non-virtual"><scope>PGRAPHDiffToken</scope><name>enable_progress_log</name></member>
+      <member refid="dd/df8/structPGRAPHDiffToken_1a0cd23f1d99ef076c751bfbd501c3759a" prot="public" virt="non-virtual"><scope>PGRAPHDiffToken</scope><name>PGRAPHDiffToken</name></member>
+      <member refid="dd/df8/structPGRAPHDiffToken_1a1d281e2b6c8f6d9c71e64f7d05aa4261" prot="public" virt="non-virtual"><scope>PGRAPHDiffToken</scope><name>registers</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

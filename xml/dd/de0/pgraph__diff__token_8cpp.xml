@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/de0/pgraph__diff__token_8cpp" kind="file" language="C++">
+    <compoundname>pgraph_diff_token.cpp</compoundname>
+    <includes refid="d3/d11/pgraph__diff__token_8h" local="yes">pgraph_diff_token.h</includes>
+    <includes local="no">set</includes>
+    <includes local="no">vector</includes>
+    <includes local="yes">configure.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="d1/d8c/logger_8h" local="yes">logger.h</includes>
+    <incdepgraph>
+      <node id="9">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>logger.h</label>
+        <link refid="d1/d8c/logger_8h_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/pgraph_diff_token.cpp</label>
+        <link refid="dd/de0/pgraph__diff__token_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>configure.h</label>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="14">
+        <label>fstream</label>
+      </node>
+      <node id="5">
+        <label>list</label>
+      </node>
+      <node id="12">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="6">
+        <label>set</label>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="10">
+        <label>windows.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="dd/de0/pgraph__diff__token_8cpp_1a26462ed60e3349b6bf2089e947d8463e" prot="public" static="yes" mutable="no">
+        <type>std::set&lt; uint32_t &gt;</type>
+        <definition>std::set&lt;uint32_t&gt; kDiffBlacklist</definition>
+        <argsstring></argsstring>
+        <name>kDiffBlacklist</name>
+        <initializer>{
+    0xFD40000C, 0xFD40010C, 0xFD400704, 0xFD400708, 0xFD40070C, 0xFD40072C, 0xFD400740, 0xFD400744,
+    0xFD400748, 0xFD40074C,
+    0xFD400750,  
+    0xFD400760, 0xFD400764, 0xFD400768, 0xFD40076C, 0xFD400788, 0xFD4007A0, 0xFD4007A4, 0xFD4007A8,
+    0xFD4007AC, 0xFD4007B0, 0xFD4007B4, 0xFD4007B8, 0xFD4007BC, 0xFD4007E0, 0xFD4007E4, 0xFD4007E8,
+    0xFD4007EC, 0xFD4007F0, 0xFD4007F4, 0xFD4007F8, 0xFD4007FC, 0xFD40110C, 0xFD401704, 0xFD401708,
+    0xFD40170C, 0xFD40172C, 0xFD401740, 0xFD401744, 0xFD401748, 0xFD40174C,
+    0xFD401750,  
+    0xFD401760, 0xFD401764, 0xFD401768, 0xFD40176C, 0xFD401788, 0xFD4017A0, 0xFD4017A4, 0xFD4017A8,
+    0xFD4017AC, 0xFD4017B0, 0xFD4017B4, 0xFD4017B8, 0xFD4017BC, 0xFD4017E0, 0xFD4017E4, 0xFD4017E8,
+    0xFD4017EC, 0xFD4017F0, 0xFD4017F4, 0xFD4017F8, 0xFD4017FC,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/pgraph_diff_token.cpp" line="13" column="17" bodyfile="src/pgraph_diff_token.cpp" bodystart="13" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;pgraph_diff_token.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;set&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;configure.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;logger.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>list<sp/>was<sp/>compiled<sp/>by<sp/>comparing<sp/>the<sp/>raw<sp/>diff<sp/>across<sp/>a<sp/>NV097_SET_SHADOW_COMPARE_FUNC<sp/>to<sp/>a<sp/>diff<sp/>across<sp/>a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_MATERIAL_ALPHA.<sp/>Addresses<sp/>that<sp/>were<sp/>modified<sp/>in<sp/>both<sp/>are<sp/>assumed<sp/>to<sp/>be<sp/>utility<sp/>registers<sp/>without<sp/>any</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//<sp/>particularly<sp/>interesting<sp/>meaning.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::set&lt;uint32_t&gt;<sp/>kDiffBlacklist{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD40000C,<sp/>0xFD40010C,<sp/>0xFD400704,<sp/>0xFD400708,<sp/>0xFD40070C,<sp/>0xFD40072C,<sp/>0xFD400740,<sp/>0xFD400744,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD400748,<sp/>0xFD40074C,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD400750,<sp/><sp/></highlight><highlight class="comment">//<sp/>Value<sp/>changes<sp/>even<sp/>when<sp/>no<sp/>pgraph<sp/>commands<sp/>are<sp/>set</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD400760,<sp/>0xFD400764,<sp/>0xFD400768,<sp/>0xFD40076C,<sp/>0xFD400788,<sp/>0xFD4007A0,<sp/>0xFD4007A4,<sp/>0xFD4007A8,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD4007AC,<sp/>0xFD4007B0,<sp/>0xFD4007B4,<sp/>0xFD4007B8,<sp/>0xFD4007BC,<sp/>0xFD4007E0,<sp/>0xFD4007E4,<sp/>0xFD4007E8,</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD4007EC,<sp/>0xFD4007F0,<sp/>0xFD4007F4,<sp/>0xFD4007F8,<sp/>0xFD4007FC,<sp/>0xFD40110C,<sp/>0xFD401704,<sp/>0xFD401708,</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD40170C,<sp/>0xFD40172C,<sp/>0xFD401740,<sp/>0xFD401744,<sp/>0xFD401748,<sp/>0xFD40174C,</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD401750,<sp/><sp/></highlight><highlight class="comment">//<sp/>Value<sp/>changes<sp/>even<sp/>when<sp/>no<sp/>pgraph<sp/>commands<sp/>are<sp/>set</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD401760,<sp/>0xFD401764,<sp/>0xFD401768,<sp/>0xFD40176C,<sp/>0xFD401788,<sp/>0xFD4017A0,<sp/>0xFD4017A4,<sp/>0xFD4017A8,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD4017AC,<sp/>0xFD4017B0,<sp/>0xFD4017B4,<sp/>0xFD4017B8,<sp/>0xFD4017BC,<sp/>0xFD4017E0,<sp/>0xFD4017E4,<sp/>0xFD4017E8,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>0xFD4017EC,<sp/>0xFD4017F0,<sp/>0xFD4017F4,<sp/>0xFD4017F8,<sp/>0xFD4017FC,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">PGRAPHDiffToken::PGRAPHDiffToken(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>initialize,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_progress_log)</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/>registers{0},<sp/>enable_progress_log{enable_progress_log}<sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(initialize)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>Capture();</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PGRAPHDiffToken::Capture()<sp/>{<sp/>pb_fetch_pgraph_registers(registers);<sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PGRAPHDiffToken::DumpDiff()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>std::vector&lt;uint8_t&gt;<sp/>new_registers;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>new_registers.resize(PGRAPH_REGISTER_ARRAY_SIZE);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>pb_fetch_pgraph_registers(new_registers.data());</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>std::list&lt;uint32_t&gt;<sp/>modified_registers;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>pb_diff_registers(registers,<sp/>new_registers.data(),<sp/>modified_registers);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_vals<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">uint32_t*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(registers);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>new_vals<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">uint32_t*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(new_registers.data());</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>addr<sp/>:<sp/>modified_registers)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>if<sp/>(kDiffBlacklist.find(addr)<sp/>!=<sp/>kDiffBlacklist.end())<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>continue;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>offset<sp/>=<sp/>(addr<sp/>-<sp/>PGRAPH_REGISTER_BASE)<sp/>/<sp/>4;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>PrintMsg(</highlight><highlight class="stringliteral">&quot;0x%08X:<sp/>0x%08X<sp/>=&gt;<sp/>0x%08X\n&quot;</highlight><highlight class="normal">,<sp/>addr,<sp/>old_vals[offset],<sp/>new_vals[offset]);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(enable_progress_log)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Logger::Log()<sp/>&lt;&lt;<sp/>std::setw(8)<sp/>&lt;&lt;<sp/>std::hex<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;0x&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>addr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;:<sp/>0x&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>old_vals[offset]<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>=&gt;<sp/>0x&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>new_vals[offset]<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/pgraph_diff_token.cpp"/>
+  </compounddef>
+</doxygen>

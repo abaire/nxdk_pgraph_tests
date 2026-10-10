@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d48/structTextureFormat" kind="struct" language="C++" prot="public">
+    <compoundname>TextureFormat</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d7/d48/structTextureFormat_1ade72ca4b98c545b203dd610d4b65e9f9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t TextureFormat::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>TextureFormat::format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="16" column="12" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d48/structTextureFormat_1a810270e7a3fdbb7e72a6a9a5e957bb77" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TextureFormat::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>TextureFormat::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="17" column="14" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d48/structTextureFormat_1a76e6374451300ca0624c38d47381d826" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TextureFormat::is_swizzled</definition>
+        <argsstring></argsstring>
+        <name>is_swizzled</name>
+        <qualifiedname>TextureFormat::is_swizzled</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_border_color_tests.cpp" line="18" column="8" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_border_color_tests.cpp" line="15" column="1" bodyfile="src/tests/texture_border_color_tests.cpp" bodystart="15" bodyend="19"/>
+    <listofallmembers>
+      <member refid="d7/d48/structTextureFormat_1ade72ca4b98c545b203dd610d4b65e9f9" prot="public" virt="non-virtual"><scope>TextureFormat</scope><name>format</name></member>
+      <member refid="d7/d48/structTextureFormat_1a76e6374451300ca0624c38d47381d826" prot="public" virt="non-virtual"><scope>TextureFormat</scope><name>is_swizzled</name></member>
+      <member refid="d7/d48/structTextureFormat_1a810270e7a3fdbb7e72a6a9a5e957bb77" prot="public" virt="non-virtual"><scope>TextureFormat</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

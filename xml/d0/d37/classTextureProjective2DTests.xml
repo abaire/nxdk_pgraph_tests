@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d0/d37/classTextureProjective2DTests" kind="class" language="C++" prot="public">
+    <compoundname>TextureProjective2DTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="dc/d16/texture__projective__2d__tests_8h" local="no">texture_projective_2d_tests.h</includes>
+    <innerclass refid="da/dd3/structTextureProjective2DTests_1_1TestConfig" prot="public">TextureProjective2DTests::TestConfig</innerclass>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="d0/d37/classTextureProjective2DTests_1a5abb8c05c21b12212816ce4b7f900890" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t TextureProjective2DTests::kTextureSize</definition>
+        <argsstring></argsstring>
+        <name>kTextureSize</name>
+        <qualifiedname>TextureProjective2DTests::kTextureSize</qualifiedname>
+        <initializer>= 128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="39" column="29" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/d37/classTextureProjective2DTests_1a437a126288e7b7fb39a83b052a3dc67f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TextureProjective2DTests::TextureProjective2DTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TextureProjective2DTests</name>
+        <qualifiedname>TextureProjective2DTests::TextureProjective2DTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>ExplicitQ_MixedCorners_Quad Evaluates projective coordinate division on a quad with mixed corner Q values:<itemizedlist>
+<listitem><para>TL: s=-1, t=0, q=-1 -&gt; s/q = 1.0, t/q = 0.0</para>
+</listitem><listitem><para>TR: s=1, t=0, q=1 -&gt; s/q = 1.0, t/q = 0.0</para>
+</listitem><listitem><para>BR: s=1, t=1, q=-0.25 -&gt; s/q = -4.0, t/q = -4.0</para>
+</listitem><listitem><para>BL: s=-1, t=1, q=0 -&gt; s/q = -inf, t/q = inf Tests hardware division across negative, positive, fractional, and zero Q values.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_MixedCorners_Bitri Evaluates the mixed corner Q configuration triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_HorizontalCross_Quad Evaluates projective coordinate division across a horizontal zero-crossing on a quad:<itemizedlist>
+<listitem><para>Left: q = +1.0, Right: q = -1.0.</para>
+</listitem><listitem><para>Coordinates: TL(0,0,q=1), TR(-1,0,q=-1), BR(-1,-1,q=-1), BL(0,1,q=1). Tests continuous interpolation and sign preservation across the q = 0 singularity.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_HorizontalCross_Bitri Evaluates the horizontal zero-crossing test triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_VerticalCross_Quad Evaluates projective coordinate division across a vertical zero-crossing on a quad:<itemizedlist>
+<listitem><para>Top: q = +1.0, Bottom: q = -1.0.</para>
+</listitem><listitem><para>Coordinates: TL(0,0,q=1), TR(1,0,q=1), BR(-1,-1,q=-1), BL(0,-1,q=-1). Tests vertical interpolation across the q = 0 singularity.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_VerticalCross_Bitri Evaluates the vertical zero-crossing test triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_OpposingCorners_Quad Evaluates projective coordinate division on a saddle-shaped Q surface:<itemizedlist>
+<listitem><para>TL(0,0,q=1), TR(-1,0,q=-1), BR(1,1,q=1), BL(0,-1,q=-1). Tests zero-crossings along both diagonals of the quad.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_OpposingCorners_Bitri Evaluates the saddle-shaped Q surface triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_PositiveGradient_Quad Evaluates projective division with all-positive Q gradient (q in [0.25, 2.0]):<itemizedlist>
+<listitem><para>TL(0,0,q=0.25), TR(2,0,q=2.0), BR(2,2,q=2.0), BL(0,0.25,q=0.25). Tests non-linear perspective warping purely in the positive Q domain.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_PositiveGradient_Bitri Evaluates the all-positive Q gradient triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_NegativeGradient_Quad Evaluates projective division with all-negative Q gradient (q in [-0.25, -2.0]):<itemizedlist>
+<listitem><para>TL(0,0,q=-0.25), TR(-2,0,q=-2.0), BR(-2,-2,q=-2.0), BL(0,-0.25,q=-0.25). Tests projective interpolation purely in the negative Q domain.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_NegativeGradient_Bitri Evaluates the all-negative Q gradient triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_ZeroCorner_Quad Evaluates projective division with three corners at q = 1.0 and BL corner at q = 0.0:<itemizedlist>
+<listitem><para>TL(0,0,q=1), TR(1,0,q=1), BR(1,1,q=1), BL(0,1,q=0). Tests interpolation behavior when a single corner is at the singularity.</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_ZeroCorner_Bitri Evaluates the single zero corner configuration triangulated as two triangles.</para>
+</simplesect>
+<simplesect kind="remark"><para>ExplicitQ_UniformSigns Evaluates constant Q values across 5 quads per wrap mode:<itemizedlist>
+<listitem><para>q = +1.0, q = -1.0, q = +0.5, q = -0.5, q = 0.0. Compares algebraic sign preservation (-s/-q == s/q) and zero divisor handling. </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="28" column="3" bodyfile="src/tests/texture_projective_2d_tests.cpp" bodystart="271" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d37/classTextureProjective2DTests_1a193dece6805823fcefe4375feffa2474" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TextureProjective2DTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TextureProjective2DTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="30" column="8" bodyfile="src/tests/texture_projective_2d_tests.cpp" bodystart="279" bodyend="282"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d0/d37/classTextureProjective2DTests_1a4eba6acb7c60149568e80b7e4093fa14" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureProjective2DTests::TestExplicitQ</definition>
+        <argsstring>(const TestConfig &amp;config)</argsstring>
+        <name>TestExplicitQ</name>
+        <qualifiedname>TextureProjective2DTests::TestExplicitQ</qualifiedname>
+        <param>
+          <type>const <ref refid="da/dd3/structTextureProjective2DTests_1_1TestConfig" kindref="compound">TestConfig</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="33" column="8" bodyfile="src/tests/texture_projective_2d_tests.cpp" bodystart="311" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d37/classTextureProjective2DTests_1a85614f678e01daa4faa96a8c7343ddc8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureProjective2DTests::TestUniformSigns</definition>
+        <argsstring>()</argsstring>
+        <name>TestUniformSigns</name>
+        <qualifiedname>TextureProjective2DTests::TestUniformSigns</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="34" column="8" bodyfile="src/tests/texture_projective_2d_tests.cpp" bodystart="413" bodyend="508"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d37/classTextureProjective2DTests_1ad5e4d3667f6d92fcd5002dee640853aa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TextureProjective2DTests::GenerateTestTexture</definition>
+        <argsstring>()</argsstring>
+        <name>GenerateTestTexture</name>
+        <qualifiedname>TextureProjective2DTests::GenerateTestTexture</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="36" column="8" bodyfile="src/tests/texture_projective_2d_tests.cpp" bodystart="284" bodyend="309"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests 2D projective texturing (STAGE_2D_PROJECTIVE / PS_TEXTUREMODES_PROJECTIVE2D) with explicit Q coordinate interpolation across quads and triangles. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TextureProjective2DTests</label>
+        <link refid="d0/d37/classTextureProjective2DTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TextureProjective2DTests</label>
+        <link refid="d0/d37/classTextureProjective2DTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_projective_2d_tests.h" line="18" column="1" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="18" bodyend="40"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>TextureProjective2DTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>ftp_logger_</name></member>
+      <member refid="d0/d37/classTextureProjective2DTests_1ad5e4d3667f6d92fcd5002dee640853aa" prot="private" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>GenerateTestTexture</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>host_</name></member>
+      <member refid="d0/d37/classTextureProjective2DTests_1a193dece6805823fcefe4375feffa2474" prot="public" virt="virtual"><scope>TextureProjective2DTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d0/d37/classTextureProjective2DTests_1a5abb8c05c21b12212816ce4b7f900890" prot="private" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>kTextureSize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TextureProjective2DTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>TextureProjective2DTests</scope><name>TearDownTest</name></member>
+      <member refid="d0/d37/classTextureProjective2DTests_1a4eba6acb7c60149568e80b7e4093fa14" prot="private" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TestExplicitQ</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TestSuite</name></member>
+      <member refid="d0/d37/classTextureProjective2DTests_1a85614f678e01daa4faa96a8c7343ddc8" prot="private" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TestUniformSigns</name></member>
+      <member refid="d0/d37/classTextureProjective2DTests_1a437a126288e7b7fb39a83b052a3dc67f" prot="public" virt="non-virtual"><scope>TextureProjective2DTests</scope><name>TextureProjective2DTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TextureProjective2DTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

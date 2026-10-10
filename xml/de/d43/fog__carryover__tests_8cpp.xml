@@ -1,0 +1,1318 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d43/fog__carryover__tests_8cpp" kind="file" language="C++">
+    <compoundname>fog_carryover_tests.cpp</compoundname>
+    <includes refid="d2/d3f/fog__carryover__tests_8h" local="yes">fog_carryover_tests.h</includes>
+    <includes local="no">light.h</includes>
+    <includes refid="d8/d7c/flat__mesh__grid__model_8h" local="no">models/flat_mesh_grid_model.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">passthrough_just_position_and_color.vshinc</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>models/flat_mesh_grid_model.h</label>
+        <link refid="d8/d7c/flat__mesh__grid__model_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/fog_carryover_tests.cpp</label>
+        <link refid="de/d43/fog__carryover__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fog_carryover_tests.h</label>
+        <link refid="d2/d3f/fog__carryover__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="12">
+        <label>cstdint</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="30">
+        <label>light.h</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="32">
+        <label>models/model_builder.h</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="34">
+        <label>passthrough_just_position_and_color.vshinc</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="9">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="33">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="14">
+        <label>thread</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d1/def/structLabeledDrawMode" prot="public">LabeledDrawMode</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="de/d43/fog__carryover__tests_8cpp_1a2bf585153030aeb752cafe4323a5c820" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>FogCarryoverTestsDrawMode</name>
+        <enumvalue id="de/d43/fog__carryover__tests_8cpp_1a2bf585153030aeb752cafe4323a5c820ab04568ac318195cbd402c4bfbcc5a834" prot="public">
+          <name>DRAW_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="de/d43/fog__carryover__tests_8cpp_1a2bf585153030aeb752cafe4323a5c820a0843f7a43918ae5bda6160195bdde8a5" prot="public">
+          <name>DRAW_INLINE_BUFFERS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="de/d43/fog__carryover__tests_8cpp_1a2bf585153030aeb752cafe4323a5c820ab67bc5e1b697b99d381001313321fe2f" prot="public">
+          <name>DRAW_INLINE_ELEMENTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="de/d43/fog__carryover__tests_8cpp_1a2bf585153030aeb752cafe4323a5c820a671d51935069f8ae8eb51aa9f51b4b6f" prot="public">
+          <name>DRAW_INLINE_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="29" column="1" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="de/d43/fog__carryover__tests_8cpp_1a35f1123ec6c1d9f984797871f6f6314e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kShader</name>
+        <initializer>= {
+
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="12" column="27" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="12" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d43/fog__carryover__tests_8cpp_1a3f170bdb3b20e56376fd23dcd4535b8f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFogColor</definition>
+        <argsstring></argsstring>
+        <name>kFogColor</name>
+        <initializer>= 0xFF0000FF</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="19" column="27" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d43/fog__carryover__tests_8cpp_1a9748afb1f9fc31d71c665afa5c9d65ee" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kTestName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestName</name>
+        <initializer>= &quot;FogCarryover&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="21" column="23" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d43/fog__carryover__tests_8cpp_1a596f26e2936460bda1d025190e7569eb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr vector_t</type>
+        <definition>constexpr vector_t kDiffuse</definition>
+        <argsstring></argsstring>
+        <name>kDiffuse</name>
+        <initializer>{0.f, 0.f, 1.f, 1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="22" column="27" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d43/fog__carryover__tests_8cpp_1acfb118ec29782ebfc841b1ac73ef32a8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kFogModes[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kFogModes</name>
+        <initializer>= {
+    NV097_SET_FOG_MODE_V_LINEAR,  NV097_SET_FOG_MODE_V_EXP,      NV097_SET_FOG_MODE_V_EXP2,
+    NV097_SET_FOG_MODE_V_EXP_ABS, NV097_SET_FOG_MODE_V_EXP2_ABS, NV097_SET_FOG_MODE_V_LINEAR_ABS,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="24" column="27" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="24" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d43/fog__carryover__tests_8cpp_1a61bc3eab8d3c57820f34154831a9c767" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d1/def/structLabeledDrawMode" kindref="compound">LabeledDrawMode</ref></type>
+        <definition>constexpr LabeledDrawMode kDrawModes[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kDrawModes</name>
+        <initializer>= {
+    {FogCarryoverTestsDrawMode::DRAW_INLINE_BUFFERS, &quot;IB&quot;},
+    {FogCarryoverTestsDrawMode::DRAW_INLINE_ELEMENTS, &quot;IE&quot;},
+    {FogCarryoverTestsDrawMode::DRAW_INLINE_ARRAYS, &quot;IA&quot;},
+    {FogCarryoverTestsDrawMode::DRAW_ARRAYS, &quot;DA&quot;},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="36" column="34" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="36" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1a88cd1afa41692dda138e14da7c69a0bf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string FogModeName</definition>
+        <argsstring>(uint32_t fog_mode)</argsstring>
+        <name>FogModeName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="43" column="20" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="43" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1aaa4bf6847c2a9fe023959279dbbfff42" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>static float ZeroBias</definition>
+        <argsstring>(uint32_t fog_mode)</argsstring>
+        <name>ZeroBias</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <briefdescription>
+<para>Returns the bias parameter needed to remove all fog. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="63" column="14" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="63" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1aabb2a1a4658295aafe8d249b3d641514" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateLines</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer, float left, float top, float right, float bottom)</argsstring>
+        <name>CreateLines</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="255" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="255" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1a458b3a799a69fbf5433142b0ddf54e19" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateTriangles</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer_, float left, float top, float right, float bottom)</argsstring>
+        <name>CreateTriangles</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer_</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="296" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="296" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1af3831fd257833aef58c6d49b2651ab2f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateTriangleStrip</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer_, float left, float top, float right, float bottom)</argsstring>
+        <name>CreateTriangleStrip</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer_</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="337" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="337" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1a682055a92e053ef665ddb9e40a3a110b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateTriangleFan</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer_, float left, float top, float right, float bottom)</argsstring>
+        <name>CreateTriangleFan</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer_</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="378" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="378" bodyend="413"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1a18eefd8b499ef69afad43ff2b09ec87c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateQuads</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer_, float left, float top, float right, float bottom)</argsstring>
+        <name>CreateQuads</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer_</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="415" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="415" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1a659eb338432f822f34b5da064cfe7335" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateQuadStrip</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer_, float left, float top, float right, float bottom)</argsstring>
+        <name>CreateQuadStrip</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer_</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="459" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="459" bodyend="491"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d43/fog__carryover__tests_8cpp_1a2a66fdb1d857656b07b877a3a98fdcb1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreatePolygon</definition>
+        <argsstring>(TestHost &amp;host_, std::vector&lt; uint32_t &gt; &amp;index_buffer_, float left, float top, float right, float bottom)</argsstring>
+        <name>CreatePolygon</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host_</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>index_buffer_</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>right</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>bottom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.cpp" line="493" column="24" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="493" bodyend="526"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;fog_carryover_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;light.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;models/flat_mesh_grid_model.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;shaders/passthrough_vertex_shader.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;passthrough_just_position_and_color.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>In<sp/>ABGR<sp/>format.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFogColor<sp/>=<sp/>0xFF0000FF;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FogCarryover&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>vector_t<sp/>kDiffuse{0.f,<sp/>0.f,<sp/>1.f,<sp/>1.f};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFogModes[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_MODE_V_LINEAR,<sp/><sp/>NV097_SET_FOG_MODE_V_EXP,<sp/><sp/><sp/><sp/><sp/><sp/>NV097_SET_FOG_MODE_V_EXP2,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FOG_MODE_V_EXP_ABS,<sp/>NV097_SET_FOG_MODE_V_EXP2_ABS,<sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>FogCarryoverTestsDrawMode<sp/>{<sp/>DRAW_ARRAYS,<sp/>DRAW_INLINE_BUFFERS,<sp/>DRAW_INLINE_ELEMENTS,<sp/>DRAW_INLINE_ARRAYS<sp/>};</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="d1/def/structLabeledDrawMode" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d1/def/structLabeledDrawMode" kindref="compound">LabeledDrawMode</ref><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>FogCarryoverTestsDrawMode<sp/>mode;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d1/def/structLabeledDrawMode" kindref="compound">LabeledDrawMode</ref><sp/>kDrawModes[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>{FogCarryoverTestsDrawMode::DRAW_INLINE_BUFFERS,<sp/></highlight><highlight class="stringliteral">&quot;IB&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{FogCarryoverTestsDrawMode::DRAW_INLINE_ELEMENTS,<sp/></highlight><highlight class="stringliteral">&quot;IE&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>{FogCarryoverTestsDrawMode::DRAW_INLINE_ARRAYS,<sp/></highlight><highlight class="stringliteral">&quot;IA&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{FogCarryoverTestsDrawMode::DRAW_ARRAYS,<sp/></highlight><highlight class="stringliteral">&quot;DA&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>FogModeName(uint32_t<sp/>fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;lin&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;exp&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2:</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;exp2&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP_ABS:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;exp_abs&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2_ABS:</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;exp2_abs&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;lin_abs&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unhandled<sp/>fog<sp/>mode&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ZeroBias(uint32_t<sp/>fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR:</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>2.f;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP:</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP_ABS:</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1.51f;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2:</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2_ABS:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1.5f;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ASSERT(!</highlight><highlight class="stringliteral">&quot;Unhandled<sp/>fog<sp/>mode&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><ref refid="d1/d48/classFogCarryoverTests_1a3ffed5068a7e012b6afb91a4862d877e" kindref="member">FogCarryoverTests::FogCarryoverTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Fog<sp/>carryover&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>tests_[kTestName]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test();<sp/>};</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>TestHost::DrawPrimitive<sp/>kAllPrimitives[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_POINTS,<sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_LINES,<sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_LINE_LOOP,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_LINE_STRIP,<sp/><sp/><sp/>TestHost::PRIMITIVE_TRIANGLES,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP,</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_TRIANGLE_FAN,<sp/>TestHost::PRIMITIVE_QUADS,<sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_QUAD_STRIP,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::PRIMITIVE_POLYGON,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>primitive<sp/>:<sp/>kAllPrimitives)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Carryover&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="d6/d80/classTestHost_1ae330e052ce7b0951577a643a2fb47c18" kindref="member">TestHost::GetDrawPrimitiveName</ref>(primitive);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>primitive,<sp/>name]()<sp/>{<sp/>TestPrimitive(name,<sp/>primitive);<sp/>};</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d1/d48/classFogCarryoverTests_1a7c5c387322f3838a6732b20b0fbacacb" kindref="member">FogCarryoverTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>Fog<sp/>color<sp/>is<sp/>ABGR<sp/>and<sp/>not<sp/>ARGB</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_COLOR,<sp/>kFogColor);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fog<sp/>gen<sp/>mode<sp/>is<sp/>set<sp/>to<sp/>just<sp/>use<sp/>the<sp/>fog<sp/>coordinate<sp/>from<sp/>the<sp/>shader.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_GEN_MODE,<sp/>NV097_SET_FOG_GEN_MODE_V_SPEC_ALPHA);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_FOG_PLANE,<sp/>0.f,<sp/>0.f,<sp/>2.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Just<sp/>pass<sp/>through<sp/>the<sp/>diffuse<sp/>color.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>host_.SetCombinerControl(1);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Mix<sp/>between<sp/>the<sp/>output<sp/>pixel<sp/>color<sp/>and<sp/>the<sp/>fog<sp/>color<sp/>using<sp/>the<sp/>fog<sp/>alpha<sp/>value.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0(TestHost::SRC_FOG,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_FOG,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>TestHost::SRC_DIFFUSE,</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">/*specular_add_invert_r0*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="comment">/*<sp/>specular_add_invert_v1*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>specular_clamp<sp/>*/</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FogCarryoverTests::Test()<sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF201F20);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTriWidth<sp/>=<sp/>96.f;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTriHeight<sp/>=<sp/>42.f;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTriVSpacing<sp/>=<sp/>8.f;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTriZ<sp/>=<sp/>0.f;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>start_x<sp/>=<sp/>(host_.GetFramebufferWidthF()<sp/>-<sp/>(kTriWidth<sp/>*<sp/>2.f))<sp/>/<sp/>3.f;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y_inc<sp/>=<sp/>kTriHeight<sp/>+<sp/>kTriVSpacing;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>62.f;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextRowInc<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fog_mode<sp/>:<sp/>kFogModes)<sp/>{</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_tri<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>fog_mode](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>kTriWidth;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>kTriHeight;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetDiffuse(kDiffuse);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetSpecular(kDiffuse);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fog_coord<sp/>=<sp/>1.f;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(fog_mode)<sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR:</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_LINEAR_ABS:</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fog_coord<sp/>=<sp/>0.6f;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP:</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP_ABS:</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fog_coord<sp/>=<sp/>0.1f;</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2:</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>NV097_SET_FOG_MODE_V_EXP2_ABS:</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fog_coord<sp/>=<sp/>0.2f;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetFogCoord(fog_coord);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top,<sp/>kTriZ);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(right,<sp/>top,<sp/>kTriZ);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertex(left<sp/>+<sp/>(right<sp/>-<sp/>left)<sp/>*<sp/>0.5f,<sp/>bottom,<sp/>kTriZ);</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_MODE,<sp/>fog_mode);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>last<sp/>parameter<sp/>never<sp/>seems<sp/>to<sp/>have<sp/>an<sp/>effect.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::PushF(NV097_SET_FOG_PARAMS,<sp/>ZeroBias(fog_mode),<sp/>-1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>with<sp/>the<sp/>fog<sp/>coordinates<sp/>explicitly<sp/>set<sp/>to<sp/>put<sp/>the<sp/>hardware<sp/>into<sp/>a<sp/>consistent<sp/>state.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>This<sp/>is<sp/>done<sp/>repeatedly<sp/>to<sp/>fix<sp/>an<sp/>apparent<sp/>issue<sp/>with<sp/>parallelism,<sp/>drawing<sp/>only<sp/>once<sp/>can<sp/>lead<sp/>to<sp/>a<sp/>situation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>where<sp/>one<sp/>or<sp/>more<sp/>of<sp/>the<sp/>vertices<sp/>in<sp/>the<sp/>&quot;unset&quot;<sp/>draw<sp/>case<sp/>below<sp/>still<sp/>have<sp/>arbitrary<sp/>values<sp/>from<sp/>previous</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>operations<sp/>and<sp/>are<sp/>non-hermetic,<sp/>leading<sp/>to<sp/>test<sp/>results<sp/>that<sp/>are<sp/>dependent<sp/>on<sp/>previous<sp/>draws.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>2;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_tri(start_x,<sp/>top);</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;SetShader(kShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kShader));</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>shader-&gt;Activate();</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_tri(start_x<sp/>*<sp/>2.f,<sp/>top);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>4,<sp/></highlight><highlight class="stringliteral">&quot;%8s&quot;</highlight><highlight class="normal">,<sp/>FogModeName(fog_mode).c_str());</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>kTextRowInc;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>y_inc;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>kTestName);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kTestName);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateLines(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_height<sp/>=<sp/>floorf((bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_width<sp/>=<sp/>floorf(half_width<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_height<sp/>=<sp/>floorf(half_height<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/>top<sp/>+<sp/>half_height;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumLines<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumLines<sp/>*<sp/>2);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/>index_buffer.clear();</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index_buffer,<sp/>&amp;index](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>1.f,<sp/>0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer.push_back(index++);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>0.f);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>top<sp/>+<sp/>quarter_height,<sp/>0.f);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/>add_vertex(cx<sp/>+<sp/>quarter_width,<sp/>top,<sp/>1.f);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>cy,<sp/>1.f);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>bottom,<sp/>3.f);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>bottom<sp/>-<sp/>4.f,<sp/>3.f);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>cy,<sp/>10.f);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>bottom,<sp/>10.f);</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateTriangles(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer_,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumTriangles<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumTriangles<sp/>*<sp/>3);</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_width<sp/>=<sp/>floorf(half_width<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/>Color<sp/>color(0.f,<sp/>1.f,<sp/>0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{left,<sp/>top,<sp/>0.f};</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{cx<sp/>-<sp/>quarter_width,<sp/>top,<sp/>0.f};</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{left,<sp/>bottom,<sp/>0.f};</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color,<sp/>color,<sp/>color);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{left<sp/>+<sp/>quarter_width,<sp/>bottom,<sp/>0.1f};</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{cx,<sp/>top,<sp/>0.1f};</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{right<sp/>-<sp/>quarter_width,<sp/>bottom,<sp/>0.1f};</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color,<sp/>color,<sp/>color);</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{right,<sp/>top,<sp/>1.f};</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{right,<sp/>bottom,<sp/>0.1f};</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{cx<sp/>+<sp/>quarter_width,<sp/>top,<sp/>0.f};</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color,<sp/>color,<sp/>color);</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>buffer-&gt;GetNumVertices();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(i);</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="335"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateTriangleStrip(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer_,</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumTriangles<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(3<sp/>+<sp/>(kNumTriangles<sp/>-<sp/>1));</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_width<sp/>=<sp/>floorf(half_width<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_height<sp/>=<sp/>floorf((bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_height<sp/>=<sp/>floorf(half_height<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/>top<sp/>+<sp/>half_height;</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index,<sp/>&amp;index_buffer_](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(index++);</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>bottom,<sp/>0.f);</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>0.f);</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>cy,<sp/>0.f);</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>top,<sp/>1.15f);</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"></highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/>add_vertex(right<sp/>-<sp/>quarter_width,<sp/>cy<sp/>-<sp/>quarter_height,<sp/>1.3f);</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"></highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/>add_vertex(right<sp/>-<sp/>quarter_width,<sp/>top,<sp/>1.7f);</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>cy<sp/>+<sp/>quarter_height,<sp/>0.1f);</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"></highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="376"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"></highlight></codeline>
+<codeline lineno="378"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateTriangleFan(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer_,</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumTriangles<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(3<sp/>+<sp/>(kNumTriangles<sp/>-<sp/>1));</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_width<sp/>=<sp/>floorf(half_width<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_height<sp/>=<sp/>floorf((bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_height<sp/>=<sp/>floorf(half_height<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"></highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/>top<sp/>+<sp/>half_height;</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"></highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index,<sp/>&amp;index_buffer_](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(index++);</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"></highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>cy,<sp/>0.f);</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>cy<sp/>+<sp/>quarter_height,<sp/>1.f);</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"><sp/><sp/>add_vertex(left<sp/>+<sp/>quarter_width,<sp/>top,<sp/>2.f);</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"></highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/>add_vertex(cx<sp/>+<sp/>quarter_width,<sp/>cy<sp/>-<sp/>quarter_height,<sp/>4.f);</highlight></codeline>
+<codeline lineno="407"><highlight class="normal"></highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>bottom,<sp/>3.f);</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"></highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"></highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="413"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"></highlight></codeline>
+<codeline lineno="415"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateQuads(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer_,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_width<sp/>=<sp/>floorf(half_width<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_height<sp/>=<sp/>floorf((bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_height<sp/>=<sp/>floorf(half_height<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="421"><highlight class="normal"></highlight></codeline>
+<codeline lineno="422"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/>top<sp/>+<sp/>half_height;</highlight></codeline>
+<codeline lineno="424"><highlight class="normal"></highlight></codeline>
+<codeline lineno="425"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumQuads<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumQuads<sp/>*<sp/>4);</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="428"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"></highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index,<sp/>&amp;index_buffer_](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="434"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(index++);</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="437"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="438"><highlight class="normal"></highlight></codeline>
+<codeline lineno="439"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>0.f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="440"><highlight class="normal"><sp/><sp/>add_vertex(cx<sp/>-<sp/>quarter_width,<sp/>top,<sp/>1.7f,<sp/>0.5f,<sp/>0.5f,<sp/>0.6f);</highlight></codeline>
+<codeline lineno="441"><highlight class="normal"><sp/><sp/>add_vertex(cx<sp/>-<sp/>quarter_width,<sp/>cy,<sp/>1.7f,<sp/>0.7f,<sp/>0.7f,<sp/>0.7f);</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>cy,<sp/>1.7f,<sp/>0.33f,<sp/>0.33f,<sp/>0.33f);</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"></highlight></codeline>
+<codeline lineno="444"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>top,<sp/>0.f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>top,<sp/>0.f,<sp/>0.1f,<sp/>0.3f,<sp/>0.6f);</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>cy,<sp/>0.f,<sp/>1.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="447"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>cy,<sp/>0.f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"></highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>cy<sp/>+<sp/>quarter_height,<sp/>0.1f,<sp/>0.25f,<sp/>0.25f,<sp/>0.25f);</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>cy<sp/>+<sp/>quarter_height,<sp/>0.1f,<sp/>0.1f,<sp/>0.3f,<sp/>0.1f);</highlight></codeline>
+<codeline lineno="451"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>bottom,<sp/>0.1f,<sp/>0.65f,<sp/>0.65f,<sp/>0.65f);</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>bottom,<sp/>0.1f,<sp/>0.45f,<sp/>0.45f,<sp/>0.45f);</highlight></codeline>
+<codeline lineno="453"><highlight class="normal"></highlight></codeline>
+<codeline lineno="454"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"></highlight></codeline>
+<codeline lineno="456"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="457"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"></highlight></codeline>
+<codeline lineno="459"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateQuadStrip(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer_,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,</highlight></codeline>
+<codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_height<sp/>=<sp/>floorf((bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_height<sp/>=<sp/>floorf(half_height<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"></highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumQuads<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(4<sp/>+<sp/>(kNumQuads<sp/>-<sp/>1)<sp/>*<sp/>2);</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"></highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="471"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"></highlight></codeline>
+<codeline lineno="473"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index,<sp/>&amp;index_buffer_](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z)<sp/>{</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(index++);</highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="478"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight></codeline>
+<codeline lineno="480"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>bottom,<sp/>10.f);</highlight></codeline>
+<codeline lineno="481"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>0.f);</highlight></codeline>
+<codeline lineno="482"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>bottom<sp/>-<sp/>quarter_height,<sp/>20.f);</highlight></codeline>
+<codeline lineno="483"><highlight class="normal"><sp/><sp/>add_vertex(cx,<sp/>top<sp/>+<sp/>quarter_height,<sp/>20.f);</highlight></codeline>
+<codeline lineno="484"><highlight class="normal"></highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>bottom,<sp/>0.5f);</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>top,<sp/>5.f);</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"></highlight></codeline>
+<codeline lineno="488"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="489"><highlight class="normal"></highlight></codeline>
+<codeline lineno="490"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="491"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="492"><highlight class="normal"></highlight></codeline>
+<codeline lineno="493"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreatePolygon(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_,<sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;index_buffer_,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom)<sp/>{</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_width<sp/>=<sp/>floorf((right<sp/>-<sp/>left)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_width<sp/>=<sp/>floorf(half_width<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>half_height<sp/>=<sp/>floorf((bottom<sp/>-<sp/>top)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>quarter_height<sp/>=<sp/>floorf(half_height<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"></highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/>left<sp/>+<sp/>half_width;</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/>top<sp/>+<sp/>half_height;</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"></highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumVertices<sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumVertices);</highlight></codeline>
+<codeline lineno="505"><highlight class="normal"></highlight></codeline>
+<codeline lineno="506"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="509"><highlight class="normal"></highlight></codeline>
+<codeline lineno="510"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index,<sp/>&amp;index_buffer_](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="511"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="512"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="513"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(index++);</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"></highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/>add_vertex(cx<sp/>-<sp/>quarter_width,<sp/>bottom,<sp/>0.f,<sp/>0.33f,<sp/>0.7f,<sp/>0.33f);</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>cy,<sp/>0.f,<sp/>0.7f,<sp/>0.1f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"><sp/><sp/>add_vertex(left,<sp/>top,<sp/>0.f,<sp/>0.1f,<sp/>0.7f,<sp/>0.5f);</highlight></codeline>
+<codeline lineno="520"><highlight class="normal"><sp/><sp/>add_vertex(right,<sp/>top<sp/>+<sp/>quarter_height,<sp/>0.f,<sp/>0.0f,<sp/>0.9f,<sp/>0.6f);</highlight></codeline>
+<codeline lineno="521"><highlight class="normal"><sp/><sp/>add_vertex(right<sp/>-<sp/>quarter_width,<sp/>bottom<sp/>-<sp/>quarter_height,<sp/>0.f,<sp/>0.4f,<sp/>0.25f,<sp/>0.9f);</highlight></codeline>
+<codeline lineno="522"><highlight class="normal"></highlight></codeline>
+<codeline lineno="523"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="524"><highlight class="normal"></highlight></codeline>
+<codeline lineno="525"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="526"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"></highlight></codeline>
+<codeline lineno="528"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FogCarryoverTests::TestPrimitive(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/>TestHost::DrawPrimitive<sp/>primitive)<sp/>{</highlight></codeline>
+<codeline lineno="529"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="530"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(draw_shader);</highlight></codeline>
+<codeline lineno="531"><highlight class="normal"><sp/><sp/>draw_shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"></highlight></codeline>
+<codeline lineno="533"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>carryover_shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="534"><highlight class="normal"><sp/><sp/>carryover_shader-&gt;SetShader(kShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kShader));</highlight></codeline>
+<codeline lineno="535"><highlight class="normal"><sp/><sp/>carryover_shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="536"><highlight class="normal"></highlight></codeline>
+<codeline lineno="537"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFFAAAAAA);</highlight></codeline>
+<codeline lineno="538"><highlight class="normal"></highlight></codeline>
+<codeline lineno="539"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFogCoord<sp/>=<sp/>0.6f;</highlight></codeline>
+<codeline lineno="540"><highlight class="normal"></highlight></codeline>
+<codeline lineno="541"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTestSize<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="542"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kLeft<sp/>=<sp/>8.f;</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="544"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kCenterX<sp/>=<sp/>floorf(host_.GetFramebufferWidthF()<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="545"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>kCenterX<sp/>-<sp/>kLeft;</highlight></codeline>
+<codeline lineno="546"><highlight class="normal"></highlight></codeline>
+<codeline lineno="547"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Build<sp/>up<sp/>a<sp/>vertex<sp/>buffer<sp/>that<sp/>will<sp/>render<sp/>a<sp/>test<sp/>quad</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="548"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>quad_buffer<sp/>=<sp/>host_.AllocateVertexBuffer(4);</highlight></codeline>
+<codeline lineno="549"><highlight class="normal"><sp/><sp/>std::vector&lt;uint32_t&gt;<sp/>quad_indices;</highlight></codeline>
+<codeline lineno="550"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="551"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>quad_buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="553"><highlight class="normal"></highlight></codeline>
+<codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(kCenterX<sp/>+<sp/>(kCenterX<sp/>-<sp/>kTestSize)<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"></highlight></codeline>
+<codeline lineno="556"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(left,<sp/>kTop,<sp/>0.f);</highlight></codeline>
+<codeline lineno="557"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="558"><highlight class="normal"><sp/><sp/><sp/><sp/>quad_indices.push_back(index++);</highlight></codeline>
+<codeline lineno="559"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="560"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(left<sp/>+<sp/>kTestSize,<sp/>kTop,<sp/>0.f);</highlight></codeline>
+<codeline lineno="561"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="562"><highlight class="normal"><sp/><sp/><sp/><sp/>quad_indices.push_back(index++);</highlight></codeline>
+<codeline lineno="563"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="564"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(left<sp/>+<sp/>kTestSize,<sp/>kTop<sp/>+<sp/>kTestSize,<sp/>0.f);</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="566"><highlight class="normal"><sp/><sp/><sp/><sp/>quad_indices.push_back(index++);</highlight></codeline>
+<codeline lineno="567"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="568"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(left,<sp/>kTop<sp/>+<sp/>kTestSize,<sp/>0.f);</highlight></codeline>
+<codeline lineno="569"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(0.f,<sp/>0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="570"><highlight class="normal"><sp/><sp/><sp/><sp/>quad_indices.push_back(index);</highlight></codeline>
+<codeline lineno="571"><highlight class="normal"></highlight></codeline>
+<codeline lineno="572"><highlight class="normal"><sp/><sp/><sp/><sp/>quad_buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="573"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="574"><highlight class="normal"></highlight></codeline>
+<codeline lineno="575"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>draw_buffer;</highlight></codeline>
+<codeline lineno="576"><highlight class="normal"><sp/><sp/>std::vector&lt;uint32_t&gt;<sp/>index_buffer;</highlight></codeline>
+<codeline lineno="577"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(primitive)<sp/>{</highlight></codeline>
+<codeline lineno="578"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_POINTS:</highlight></codeline>
+<codeline lineno="579"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_LINES:</highlight></codeline>
+<codeline lineno="580"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_LINE_LOOP:</highlight></codeline>
+<codeline lineno="581"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_LINE_STRIP:</highlight></codeline>
+<codeline lineno="582"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreateLines(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="584"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_TRIANGLES:</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreateTriangles(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="586"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="587"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP:</highlight></codeline>
+<codeline lineno="588"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreateTriangleStrip(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="589"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="590"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_TRIANGLE_FAN:</highlight></codeline>
+<codeline lineno="591"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreateTriangleFan(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="592"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="593"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_QUADS:</highlight></codeline>
+<codeline lineno="594"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreateQuads(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="595"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="596"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_QUAD_STRIP:</highlight></codeline>
+<codeline lineno="597"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreateQuadStrip(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="598"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="599"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>TestHost::PRIMITIVE_POLYGON:</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_buffer<sp/>=<sp/>CreatePolygon(host_,<sp/>index_buffer,<sp/>kLeft,<sp/>kTop,<sp/>kRight,<sp/>kTop<sp/>+<sp/>kTestSize);</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="602"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="603"><highlight class="normal"></highlight></codeline>
+<codeline lineno="604"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Set<sp/>the<sp/>fog<sp/>coord<sp/>on<sp/>the<sp/>buffer.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="605"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>draw_buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>draw_buffer-&gt;GetNumVertices();<sp/>++idx,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;SetFogCoord(kFogCoord);</highlight></codeline>
+<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="611"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"></highlight></codeline>
+<codeline lineno="613"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="614"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FOG_MODE,<sp/>NV097_SET_FOG_MODE_V_EXP);</highlight></codeline>
+<codeline lineno="615"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>last<sp/>parameter<sp/>never<sp/>seems<sp/>to<sp/>have<sp/>an<sp/>effect.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="616"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV097_SET_FOG_PARAMS,<sp/>ZeroBias(NV097_SET_FOG_MODE_V_EXP),<sp/>-1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="617"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="618"><highlight class="normal"></highlight></codeline>
+<codeline lineno="619"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>activate_carryover_shader<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>&amp;draw_shader,<sp/>&amp;carryover_shader](</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>activate)<sp/>{</highlight></codeline>
+<codeline lineno="620"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(activate)<sp/>{</highlight></codeline>
+<codeline lineno="621"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertexShaderProgram(carryover_shader);</highlight></codeline>
+<codeline lineno="622"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>carryover_shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="623"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>carryover_shader-&gt;Activate();</highlight></codeline>
+<codeline lineno="624"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="625"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertexShaderProgram(draw_shader);</highlight></codeline>
+<codeline lineno="626"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="627"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>draw_shader-&gt;Activate();</highlight></codeline>
+<codeline lineno="628"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="629"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="630"><highlight class="normal"></highlight></codeline>
+<codeline lineno="631"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>primitive,<sp/>&amp;draw_buffer,<sp/>&amp;index_buffer,<sp/>&amp;quad_buffer,<sp/>&amp;quad_indices,</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;activate_carryover_shader](FogCarryoverTestsDrawMode<sp/>draw_mode)<sp/>{</highlight></codeline>
+<codeline lineno="633"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kQuadAttributes<sp/>=<sp/>TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE;</highlight></codeline>
+<codeline lineno="634"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kAttributes<sp/>=<sp/>kQuadAttributes<sp/>|<sp/>TestHost::FOG_COORD;</highlight></codeline>
+<codeline lineno="635"><highlight class="normal"><sp/><sp/><sp/><sp/>activate_carryover_shader(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="636"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(draw_buffer);</highlight></codeline>
+<codeline lineno="637"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(draw_mode)<sp/>{</highlight></codeline>
+<codeline lineno="638"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>FogCarryoverTestsDrawMode::DRAW_ARRAYS:</highlight></codeline>
+<codeline lineno="639"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawArrays(kAttributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="640"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>activate_carryover_shader(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="641"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(quad_buffer);</highlight></codeline>
+<codeline lineno="642"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawArrays(kQuadAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="644"><highlight class="normal"></highlight></codeline>
+<codeline lineno="645"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>FogCarryoverTestsDrawMode::DRAW_INLINE_BUFFERS:</highlight></codeline>
+<codeline lineno="646"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawInlineBuffer(kAttributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="647"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>activate_carryover_shader(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="648"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(quad_buffer);</highlight></codeline>
+<codeline lineno="649"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawInlineBuffer(kQuadAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="650"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="651"><highlight class="normal"></highlight></codeline>
+<codeline lineno="652"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>FogCarryoverTestsDrawMode::DRAW_INLINE_ELEMENTS:</highlight></codeline>
+<codeline lineno="653"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawInlineElements16(index_buffer,<sp/>kAttributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>activate_carryover_shader(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(quad_buffer);</highlight></codeline>
+<codeline lineno="656"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawInlineElements16(quad_indices,<sp/>kQuadAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="657"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="658"><highlight class="normal"></highlight></codeline>
+<codeline lineno="659"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>FogCarryoverTestsDrawMode::DRAW_INLINE_ARRAYS:</highlight></codeline>
+<codeline lineno="660"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawInlineArray(kAttributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="661"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>activate_carryover_shader(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="662"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetVertexBuffer(quad_buffer);</highlight></codeline>
+<codeline lineno="663"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.DrawInlineArray(kQuadAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="664"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="665"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="666"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="667"><highlight class="normal"></highlight></codeline>
+<codeline lineno="668"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTestVerticalSpacing<sp/>=<sp/>kTestSize<sp/>+<sp/>40.f;</highlight></codeline>
+<codeline lineno="669"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextColumn<sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="670"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="671"><highlight class="normal"></highlight></codeline>
+<codeline lineno="672"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shift_geometry_vertically<sp/>=<sp/>[](std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;buffer,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>delta_y)<sp/>{</highlight></codeline>
+<codeline lineno="673"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="674"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>idx<sp/>=<sp/>0;<sp/>idx<sp/>&lt;<sp/>buffer-&gt;GetNumVertices();<sp/>++idx,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="675"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;pos[1]<sp/>+=<sp/>delta_y;</highlight></codeline>
+<codeline lineno="676"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="677"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="678"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="679"><highlight class="normal"></highlight></codeline>
+<codeline lineno="680"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;mode<sp/>:<sp/>kDrawModes)<sp/>{</highlight></codeline>
+<codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/>draw(mode.mode);</highlight></codeline>
+<codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>kTextColumn,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>mode.name);</highlight></codeline>
+<codeline lineno="683"><highlight class="normal"></highlight></codeline>
+<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Allow<sp/>the<sp/>draw<sp/>to<sp/>fully<sp/>complete<sp/>before<sp/>modifying<sp/>the<sp/>buffers,<sp/>since<sp/>DMA<sp/>may<sp/>still<sp/>be<sp/>reading<sp/>from<sp/>them.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="685"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="686"><highlight class="normal"></highlight></codeline>
+<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/>shift_geometry_vertically(draw_buffer,<sp/>kTestVerticalSpacing);</highlight></codeline>
+<codeline lineno="688"><highlight class="normal"><sp/><sp/><sp/><sp/>shift_geometry_vertically(quad_buffer,<sp/>kTestVerticalSpacing);</highlight></codeline>
+<codeline lineno="689"><highlight class="normal"><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>4;</highlight></codeline>
+<codeline lineno="690"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="691"><highlight class="normal"></highlight></codeline>
+<codeline lineno="692"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="693"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="694"><highlight class="normal"></highlight></codeline>
+<codeline lineno="695"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="696"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/fog_carryover_tests.cpp"/>
+  </compounddef>
+</doxygen>

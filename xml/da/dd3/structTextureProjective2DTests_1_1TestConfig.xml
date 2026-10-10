@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/dd3/structTextureProjective2DTests_1_1TestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>TextureProjective2DTests::TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a65d2985b426088247a4b413c50262939" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TextureProjective2DTests::TestConfig::test_name</definition>
+        <argsstring></argsstring>
+        <name>test_name</name>
+        <qualifiedname>TextureProjective2DTests::TestConfig::test_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="21" column="16" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/dd3/structTextureProjective2DTests_1_1TestConfig_1aec56a80d750796d05e0e14433f0a871b" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TextureProjective2DTests::TestConfig::description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <qualifiedname>TextureProjective2DTests::TestConfig::description</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="22" column="16" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a3ad035028ac5ff12fa09b31ce5d722e2" prot="public" static="no" mutable="no">
+        <type><ref refid="d1/dff/structTexCoord4" kindref="compound">TexCoord4</ref></type>
+        <definition>TexCoord4 TextureProjective2DTests::TestConfig::corners[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>corners</name>
+        <qualifiedname>TextureProjective2DTests::TestConfig::corners</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="23" column="15" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a4036b8ae1b2dba0cc30c23a853887c4a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool TextureProjective2DTests::TestConfig::draw_quad</definition>
+        <argsstring></argsstring>
+        <name>draw_quad</name>
+        <qualifiedname>TextureProjective2DTests::TestConfig::draw_quad</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="24" column="10" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a6dbe5c95d0414c2d2530a96bdc228802" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* TextureProjective2DTests::TestConfig::notes_line1</definition>
+        <argsstring></argsstring>
+        <name>notes_line1</name>
+        <qualifiedname>TextureProjective2DTests::TestConfig::notes_line1</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="25" column="16" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="25" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>TexCoord4</label>
+        <link refid="d1/dff/structTexCoord4"/>
+      </node>
+      <node id="1">
+        <label>TextureProjective2DTests::TestConfig</label>
+        <link refid="da/dd3/structTextureProjective2DTests_1_1TestConfig"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>corners</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texture_projective_2d_tests.h" line="20" column="3" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="20" bodyend="26"/>
+    <listofallmembers>
+      <member refid="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a3ad035028ac5ff12fa09b31ce5d722e2" prot="public" virt="non-virtual"><scope>TextureProjective2DTests::TestConfig</scope><name>corners</name></member>
+      <member refid="da/dd3/structTextureProjective2DTests_1_1TestConfig_1aec56a80d750796d05e0e14433f0a871b" prot="public" virt="non-virtual"><scope>TextureProjective2DTests::TestConfig</scope><name>description</name></member>
+      <member refid="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a4036b8ae1b2dba0cc30c23a853887c4a" prot="public" virt="non-virtual"><scope>TextureProjective2DTests::TestConfig</scope><name>draw_quad</name></member>
+      <member refid="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a6dbe5c95d0414c2d2530a96bdc228802" prot="public" virt="non-virtual"><scope>TextureProjective2DTests::TestConfig</scope><name>notes_line1</name></member>
+      <member refid="da/dd3/structTextureProjective2DTests_1_1TestConfig_1a65d2985b426088247a4b413c50262939" prot="public" virt="non-virtual"><scope>TextureProjective2DTests::TestConfig</scope><name>test_name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
