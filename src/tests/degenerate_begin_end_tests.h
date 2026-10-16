@@ -19,6 +19,7 @@ class DegenerateBeginEndTests : public TestSuite {
  private:
   void TestBeginWithoutEnd();
   void TestEmptyBeginEnd();
+  void TestEndWithoutBegin();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_DEGENERATE_BEGIN_END_TESTS_H
