@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d59/structTextureCPUUpdateTests_1_1semaphore__dma__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>TextureCPUUpdateTests::semaphore_dma_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_cpu_update_tests.h" line="26" column="3" bodyfile="src/tests/texture_cpu_update_tests.h" bodystart="26" bodyend="26"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

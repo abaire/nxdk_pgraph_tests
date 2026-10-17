@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d95/structMatrixConfig" kind="struct" language="C++" prot="public">
+    <compoundname>MatrixConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d8/d95/structMatrixConfig_1a4759ef2c150f627edfd0c4011e838caf" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char * MatrixConfig::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>MatrixConfig::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_matrix_tests.cpp" line="33" column="14" bodyfile="src/tests/texgen_matrix_tests.cpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d95/structMatrixConfig_1ad7e70b049b25c491a4ab72bc2d53a3d3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MatrixConfig::matrix_enable</definition>
+        <argsstring></argsstring>
+        <name>matrix_enable</name>
+        <qualifiedname>MatrixConfig::matrix_enable</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_matrix_tests.cpp" line="34" column="8" bodyfile="src/tests/texgen_matrix_tests.cpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d95/structMatrixConfig_1acb5feb0fbb9d1e4b58839c3453df0aca" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(matrix4_t &amp;)&gt;</type>
+        <definition>std::function&lt; void(matrix4_t &amp;)&gt; MatrixConfig::setup</definition>
+        <argsstring></argsstring>
+        <name>setup</name>
+        <qualifiedname>MatrixConfig::setup</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texgen_matrix_tests.cpp" line="35" column="17" bodyfile="src/tests/texgen_matrix_tests.cpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texgen_matrix_tests.cpp" line="32" column="1" bodyfile="src/tests/texgen_matrix_tests.cpp" bodystart="32" bodyend="36"/>
+    <listofallmembers>
+      <member refid="d8/d95/structMatrixConfig_1ad7e70b049b25c491a4ab72bc2d53a3d3" prot="public" virt="non-virtual"><scope>MatrixConfig</scope><name>matrix_enable</name></member>
+      <member refid="d8/d95/structMatrixConfig_1a4759ef2c150f627edfd0c4011e838caf" prot="public" virt="non-virtual"><scope>MatrixConfig</scope><name>name</name></member>
+      <member refid="d8/d95/structMatrixConfig_1acb5feb0fbb9d1e4b58839c3453df0aca" prot="public" virt="non-virtual"><scope>MatrixConfig</scope><name>setup</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

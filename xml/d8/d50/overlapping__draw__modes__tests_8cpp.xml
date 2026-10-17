@@ -1,0 +1,594 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/d50/overlapping__draw__modes__tests_8cpp" kind="file" language="C++">
+    <compoundname>overlapping_draw_modes_tests.cpp</compoundname>
+    <includes refid="d8/d68/overlapping__draw__modes__tests_8h" local="yes">overlapping_draw_modes_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/overlapping_draw_modes_tests.cpp</label>
+        <link refid="d8/d50/overlapping__draw__modes__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>overlapping_draw_modes_tests.h</label>
+        <link refid="d8/d68/overlapping__draw__modes__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="12">
+        <label>cstdint</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="9">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="14">
+        <label>thread</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1a20c84864b11334c57b3ea4293f253ca4" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char kArrElDrawArrArrElTest[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kArrElDrawArrArrElTest</name>
+        <initializer>= &quot;ArrElm_DrwArr_ArrElm&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="8" column="19" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1ab429886a91bfa6721be8850028d232b3" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char kDrawArrDrawArrTest[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kDrawArrDrawArrTest</name>
+        <initializer>= &quot;DrwArr_DrwArr&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="9" column="19" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1a2c3cbff8fc6ec8f41d9f2102dd4158ba" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char kXemuSquashOptimizationTest[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kXemuSquashOptimizationTest</name>
+        <initializer>= &quot;SquashOpt&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="10" column="19" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1a6120569b21059a72e288b5dd8d477456" prot="public" static="yes" mutable="no">
+        <type>const char</type>
+        <definition>const char kXemuSquashOptimizationSingleDrawArraysTest[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kXemuSquashOptimizationSingleDrawArraysTest</name>
+        <initializer>= &quot;SquashOptSingleArray&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="11" column="19" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1a2834ed480a253f86d753de0e2a6f5b9c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kLeft</definition>
+        <argsstring></argsstring>
+        <name>kLeft</name>
+        <initializer>= -2.75f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="13" column="24" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1afeae9e530dd58946aa85573d30568106" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kRight</definition>
+        <argsstring></argsstring>
+        <name>kRight</name>
+        <initializer>= 2.75f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="14" column="24" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1a27e9dd9aa7305c5a29239a28fd6d30ce" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kTop</definition>
+        <argsstring></argsstring>
+        <name>kTop</name>
+        <initializer>= 1.75f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="15" column="24" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d50/overlapping__draw__modes__tests_8cpp_1ad68582093cb08505ce80e7f96c5825ce" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kBottom</definition>
+        <argsstring></argsstring>
+        <name>kBottom</name>
+        <initializer>= -1.75f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="16" column="24" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d8/d50/overlapping__draw__modes__tests_8cpp_1ab160963ed7758dcd7daec08fc7e7ca9f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetArrayElements</definition>
+        <argsstring>(const uint32_t *next_index, uint32_t count)</argsstring>
+        <name>SetArrayElements</name>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>next_index</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/overlapping_draw_modes_tests.cpp" line="64" column="13" bodyfile="src/tests/overlapping_draw_modes_tests.cpp" bodystart="64" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;overlapping_draw_modes_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kArrElDrawArrArrElTest[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ArrElm_DrwArr_ArrElm&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kDrawArrDrawArrTest[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;DrwArr_DrwArr&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kXemuSquashOptimizationTest[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SquashOpt&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kXemuSquashOptimizationSingleDrawArraysTest[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;SquashOptSingleArray&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kLeft<sp/>=<sp/>-2.75f;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>2.75f;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>1.75f;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kBottom<sp/>=<sp/>-1.75f;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">OverlappingDrawModesTests::OverlappingDrawModesTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Overlapping<sp/>draw<sp/>modes&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>tests_[kArrElDrawArrArrElTest]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestArrayElementDrawArrayArrayElement();<sp/>};</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/>tests_[kDrawArrDrawArrTest]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestDrawArrayDrawArray();<sp/>};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/>tests_[kXemuSquashOptimizationTest]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestXemuSquashOptimization();<sp/>};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>tests_[kXemuSquashOptimizationSingleDrawArraysTest]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestXemuSquashOptimizationSingleDrawArrays();<sp/>};</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d0/db0/classOverlappingDrawModesTests_1a06750783c5d0fddcd03284994eb8d366" kindref="member">OverlappingDrawModesTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OverlappingDrawModesTests::CreateTriangleStrip()<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumTriangles<sp/>=<sp/>6;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(3<sp/>+<sp/>(kNumTriangles<sp/>-<sp/>1));</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>add_vertex<sp/>=<sp/>[&amp;vertex,<sp/>&amp;index,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>r,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>g,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>b)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(x,<sp/>y,<sp/>z);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(r,<sp/>g,<sp/>b);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(index++);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>++vertex;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>add_vertex(kLeft,<sp/>0.0f,<sp/>z,<sp/>1.0f,<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>1.0f,<sp/>kTop,<sp/>z,<sp/>0.0f,<sp/>1.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>0.5f,<sp/>kBottom,<sp/>z,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>1.5f,<sp/>kTop<sp/>-<sp/>0.5f,<sp/>z,<sp/>0.25f,<sp/>0.0f,<sp/>0.8f);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>2.0f,<sp/>kBottom<sp/>+<sp/>0.5f,<sp/>z,<sp/>0.75f,<sp/>0.0f,<sp/>0.25f);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>2.5f,<sp/>kTop<sp/>-<sp/>1.0f,<sp/>z,<sp/>0.33f,<sp/>0.33f,<sp/>0.33f);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>3.0f,<sp/>kBottom<sp/>+<sp/>1.0f,<sp/>z,<sp/>0.7f,<sp/>0.7f,<sp/>0.7f);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>add_vertex(kLeft<sp/>+<sp/>3.5f,<sp/>kTop,<sp/>z,<sp/>0.5f,<sp/>0.5f,<sp/>0.6f);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetArrayElements(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*next_index,<sp/>uint32_t<sp/>count)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(count<sp/>&gt;=<sp/>2)<sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>index_pair<sp/>=<sp/>*next_index++<sp/>&amp;<sp/>0xFFFF;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>index_pair<sp/>+=<sp/>*next_index++<sp/>&lt;&lt;<sp/>16;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_ARRAY_ELEMENT16,<sp/>index_pair);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>count<sp/>-=<sp/>2;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(count)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_ARRAY_ELEMENT32,<sp/>*next_index);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OverlappingDrawModesTests::TestArrayElementDrawArrayArrayElement()<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>CreateTriangleStrip();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE242424);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>host_.SetVertexBufferAttributes(host_.POSITION<sp/>|<sp/>host_.DIFFUSE);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLE_STRIP);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Specify<sp/>the<sp/>first<sp/>four<sp/>indices<sp/>via<sp/>ARRAY_ELEMENT<sp/>invocations.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>indices[]<sp/>=<sp/>{0,<sp/>1,<sp/>2,<sp/>3};</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>SetArrayElements(indices,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices)<sp/>/<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices[0]));</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Then<sp/>the<sp/>next<sp/>3<sp/>via<sp/>DRAW_ARRAYS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_buffer<sp/>=<sp/>host_.GetVertexBuffer();</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>4));</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>And<sp/>finally<sp/>the<sp/>last<sp/>one<sp/>via<sp/>another<sp/>ARRAY_ELEMENT<sp/>command.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>indices[]<sp/>=<sp/>{7};</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>SetArrayElements(indices,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices)<sp/>/<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices[0]));</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kArrElDrawArrArrElTest);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OverlappingDrawModesTests::CreateTriangles()<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kNumTriangles<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumTriangles<sp/>*<sp/>3);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>index<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>Color<sp/>color_one,<sp/>color_two,<sp/>color_three;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>color_one.SetGrey(0.25f);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>color_two.SetGrey(0.55f);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>color_three.SetGrey(0.75f);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kLeft,<sp/>kTop,<sp/>z};</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{0.0f,<sp/>kTop,<sp/>z};</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{kLeft,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>color_one.SetRGB(0.8f,<sp/>0.25f,<sp/>0.10f);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>color_two.SetRGB(0.1f,<sp/>0.85f,<sp/>0.10f);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>color_three.SetRGB(0.1f,<sp/>0.25f,<sp/>0.90f);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kRight,<sp/>kTop,<sp/>z};</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{0.10f,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{0.25f,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>color_one.SetRGB(0.8f,<sp/>0.25f,<sp/>0.90f);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>color_two.SetRGB(0.1f,<sp/>0.85f,<sp/>0.90f);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>color_three.SetRGB(0.85f,<sp/>0.95f,<sp/>0.10f);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{-0.4f,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{-1.4f,<sp/>-1.4,<sp/>z};</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>color_one.SetRGB(0.2f,<sp/>0.4f,<sp/>0.8f);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>color_two.SetRGB(0.3f,<sp/>0.5f,<sp/>0.9f);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>color_three.SetRGB(0.4f,<sp/>0.3f,<sp/>0.7f);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>one[]<sp/>=<sp/>{kLeft,<sp/>kBottom,<sp/>z};</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>two[]<sp/>=<sp/>{kLeft,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>three[]<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>z};</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer-&gt;DefineTriangle(index++,<sp/>one,<sp/>two,<sp/>three,<sp/>color_one,<sp/>color_two,<sp/>color_three);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>index_buffer_.clear();</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>buffer-&gt;GetNumVertices();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>index_buffer_.push_back(i);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OverlappingDrawModesTests::TestDrawArrayDrawArray()<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/>CreateTriangles();</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE242424);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>host_.SetVertexBufferAttributes(host_.POSITION<sp/>|<sp/>host_.DIFFUSE);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>first<sp/>triangle</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_buffer<sp/>=<sp/>host_.GetVertexBuffer();</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>0));</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>third<sp/>triangle</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>6));</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kDrawArrDrawArrTest);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OverlappingDrawModesTests::TestXemuSquashOptimization()<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>CreateTriangles();</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE242424);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>host_.SetVertexBufferAttributes(host_.POSITION<sp/>|<sp/>host_.DIFFUSE);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_buffer<sp/>=<sp/>host_.GetVertexBuffer();</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>first<sp/>triangle<sp/>as<sp/>a<sp/>Begin+DA+End<sp/>triplet.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>0));</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>second<sp/>triangle<sp/>the<sp/>same<sp/>way.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>3));</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>third<sp/>triangle<sp/>via<sp/>DRAW_ARRAYS<sp/>and<sp/>the<sp/>fourth<sp/>via<sp/>ARRAY_ELEMENT.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>6));</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>indices[]<sp/>=<sp/>{9,<sp/>10,<sp/>11};</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>SetArrayElements(indices,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices)<sp/>/<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices[0]));</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kXemuSquashOptimizationTest);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>OverlappingDrawModesTests::TestXemuSquashOptimizationSingleDrawArrays()<sp/>{</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Tests<sp/>an<sp/>edge<sp/>case<sp/>in<sp/>xemu<sp/>where<sp/>a<sp/>single<sp/>DrawArrays<sp/>followed<sp/>by<sp/>ARRAY_ELEMENTS<sp/>combines<sp/>the<sp/>draws<sp/>but<sp/>fails</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>to<sp/>clear<sp/>the<sp/>DrawArrays<sp/>count,<sp/>leading<sp/>to<sp/>an<sp/>assert.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>CreateTriangles();</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE242424);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/>host_.SetVertexBufferAttributes(host_.POSITION<sp/>|<sp/>host_.DIFFUSE);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex_buffer<sp/>=<sp/>host_.GetVertexBuffer();</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>third<sp/>triangle<sp/>via<sp/>DRAW_ARRAYS<sp/>and<sp/>the<sp/>fourth<sp/>via<sp/>ARRAY_ELEMENT.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>6));</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>indices[]<sp/>=<sp/>{9,<sp/>10,<sp/>11};</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/>SetArrayElements(indices,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices)<sp/>/<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(indices[0]));</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Then<sp/>draw<sp/>the<sp/>first<sp/>triangle<sp/>as<sp/>another<sp/>DrawArrays</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>0));</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>second<sp/>triangle<sp/>the<sp/>same<sp/>way.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_DRAW_ARRAYS,<sp/>MASK(NV097_DRAW_ARRAYS_COUNT,<sp/>2)<sp/>|<sp/>MASK(NV097_DRAW_ARRAYS_START_INDEX,<sp/>3));</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kXemuSquashOptimizationSingleDrawArraysTest);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/overlapping_draw_modes_tests.cpp"/>
+  </compounddef>
+</doxygen>

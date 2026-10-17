@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d8/dd5/structMaterialParams" kind="struct" language="C++" prot="public">
+    <compoundname>MaterialParams</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d8/dd5/structMaterialParams_1ac919f5b71729ef1bffee55a2662b8fc8" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MaterialParams::set_normal</definition>
+        <argsstring></argsstring>
+        <name>set_normal</name>
+        <qualifiedname>MaterialParams::set_normal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.cpp" line="12" column="8" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/dd5/structMaterialParams_1a2c6f3854630f76744b24319f3bdf9601" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float MaterialParams::normal[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>normal</name>
+        <qualifiedname>MaterialParams::normal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/lighting_normal_tests.cpp" line="13" column="9" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/lighting_normal_tests.cpp" line="11" column="1" bodyfile="src/tests/lighting_normal_tests.cpp" bodystart="11" bodyend="14"/>
+    <listofallmembers>
+      <member refid="d8/dd5/structMaterialParams_1a2c6f3854630f76744b24319f3bdf9601" prot="public" virt="non-virtual"><scope>MaterialParams</scope><name>normal</name></member>
+      <member refid="d8/dd5/structMaterialParams_1ac919f5b71729ef1bffee55a2662b8fc8" prot="public" virt="non-virtual"><scope>MaterialParams</scope><name>set_normal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

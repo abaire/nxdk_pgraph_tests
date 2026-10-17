@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d72/classDisplacementVertexShader" kind="class" language="C++" prot="public">
+    <compoundname>DisplacementVertexShader</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">PBKitPlusPlus::PerspectiveVertexShader</basecompoundref>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="de/d72/classDisplacementVertexShader_1a64526c2fd39969282ce9bf4ce2d1e4dd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t DisplacementVertexShader::kGridDim</definition>
+        <argsstring></argsstring>
+        <name>kGridDim</name>
+        <qualifiedname>DisplacementVertexShader::kGridDim</qualifiedname>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="22" column="29" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d72/classDisplacementVertexShader_1a5c5dd2e646c98f71cc76a0e119f22439" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t DisplacementVertexShader::kPaletteSize</definition>
+        <argsstring></argsstring>
+        <name>kPaletteSize</name>
+        <qualifiedname>DisplacementVertexShader::kPaletteSize</qualifiedname>
+        <initializer>= kGridDim * kGridDim</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="23" column="29" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d72/classDisplacementVertexShader_1a867df23218a1b4dcab9e4a237f805d52" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t DisplacementVertexShader::kIndexScaleSlot</definition>
+        <argsstring></argsstring>
+        <name>kIndexScaleSlot</name>
+        <qualifiedname>DisplacementVertexShader::kIndexScaleSlot</qualifiedname>
+        <initializer>= 14</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="24" column="29" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="de/d72/classDisplacementVertexShader_1a1acfd7196f9c0e069ad86e74dd4bc51d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t DisplacementVertexShader::kPaletteBaseSlot</definition>
+        <argsstring></argsstring>
+        <name>kPaletteBaseSlot</name>
+        <qualifiedname>DisplacementVertexShader::kPaletteBaseSlot</qualifiedname>
+        <initializer>= 16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="25" column="29" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="de/d72/classDisplacementVertexShader_1aae617db66d103c729393c70a4a4f958c" prot="private" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t DisplacementVertexShader::palette_[kPaletteSize]</definition>
+        <argsstring>[kPaletteSize]</argsstring>
+        <name>palette_</name>
+        <qualifiedname>DisplacementVertexShader::palette_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="58" column="12" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/d72/classDisplacementVertexShader_1a9059dc67f5d2539f9ac25755355aa622" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DisplacementVertexShader::DisplacementVertexShader</definition>
+        <argsstring>(uint32_t framebuffer_width, uint32_t framebuffer_height)</argsstring>
+        <name>DisplacementVertexShader</name>
+        <qualifiedname>DisplacementVertexShader::DisplacementVertexShader</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>framebuffer_height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="27" column="3" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="27" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="de/d72/classDisplacementVertexShader_1a8e6ff3e39ef4c677dbed07ace5ccca2d" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int DisplacementVertexShader::OnLoadConstants</definition>
+        <argsstring>() override</argsstring>
+        <name>OnLoadConstants</name>
+        <qualifiedname>DisplacementVertexShader::OnLoadConstants</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.cpp" line="47" column="7" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="47" bodyend="55"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>DisplacementVertexShader</label>
+        <link refid="de/d72/classDisplacementVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::PerspectiveVertexShader</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>DisplacementVertexShader</label>
+        <link refid="de/d72/classDisplacementVertexShader"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>PBKitPlusPlus::PerspectiveVertexShader</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/surface_as_vertex_array_tests.cpp" line="20" column="1" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="20" bodyend="59"/>
+    <listofallmembers>
+      <member refid="de/d72/classDisplacementVertexShader_1a9059dc67f5d2539f9ac25755355aa622" prot="public" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>DisplacementVertexShader</name></member>
+      <member refid="de/d72/classDisplacementVertexShader_1a64526c2fd39969282ce9bf4ce2d1e4dd" prot="public" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>kGridDim</name></member>
+      <member refid="de/d72/classDisplacementVertexShader_1a867df23218a1b4dcab9e4a237f805d52" prot="public" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>kIndexScaleSlot</name></member>
+      <member refid="de/d72/classDisplacementVertexShader_1a1acfd7196f9c0e069ad86e74dd4bc51d" prot="public" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>kPaletteBaseSlot</name></member>
+      <member refid="de/d72/classDisplacementVertexShader_1a5c5dd2e646c98f71cc76a0e119f22439" prot="public" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>kPaletteSize</name></member>
+      <member refid="de/d72/classDisplacementVertexShader_1a8e6ff3e39ef4c677dbed07ace5ccca2d" prot="protected" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>OnLoadConstants</name></member>
+      <member refid="de/d72/classDisplacementVertexShader_1aae617db66d103c729393c70a4a4f958c" prot="private" virt="non-virtual"><scope>DisplacementVertexShader</scope><name>palette_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

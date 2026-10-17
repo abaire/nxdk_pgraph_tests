@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d6/dfd/structTextureCPUUpdateTests_1_1monochrome__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>TextureCPUUpdateTests::monochrome_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_cpu_update_tests.h" line="27" column="3" bodyfile="src/tests/texture_cpu_update_tests.h" bodystart="27" bodyend="27"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

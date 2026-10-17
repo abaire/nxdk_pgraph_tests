@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/ded/structTextureShadowComparatorTests_1_1texture__target__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>TextureShadowComparatorTests::texture_target_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_shadow_comparator_tests.h" line="41" column="3" bodyfile="src/tests/texture_shadow_comparator_tests.h" bodystart="41" bodyend="41"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

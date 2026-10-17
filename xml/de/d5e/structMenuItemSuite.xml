@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="de/d5e/structMenuItemSuite" kind="struct" language="C++" prot="public">
+    <compoundname>MenuItemSuite</compoundname>
+    <basecompoundref refid="d7/d12/structMenuItem" prot="public" virt="non-virtual">MenuItem</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="de/d5e/structMenuItemSuite_1a91d74d5b7ab08f6d7408b2851b2762d5" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;TestSuite&gt; MenuItemSuite::suite</definition>
+        <argsstring></argsstring>
+        <name>suite</name>
+        <qualifiedname>MenuItemSuite::suite</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="97" column="19" bodyfile="src/menu_item.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="de/d5e/structMenuItemSuite_1a27024c6a4c56aa4590994b06c4477258" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MenuItemSuite::MenuItemSuite</definition>
+        <argsstring>(const std::shared_ptr&lt; TestSuite &gt; &amp;suite, uint32_t width, uint32_t height)</argsstring>
+        <name>MenuItemSuite</name>
+        <qualifiedname>MenuItemSuite::MenuItemSuite</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref> &gt; &amp;</type>
+          <declname>suite</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="94" column="12" bodyfile="src/menu_item.cpp" bodystart="244" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="de/d5e/structMenuItemSuite_1ac1d4ddb0b3a5d74c72e0ce95008258a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItemSuite::ActivateCurrentSuite</definition>
+        <argsstring>() override</argsstring>
+        <name>ActivateCurrentSuite</name>
+        <qualifiedname>MenuItemSuite::ActivateCurrentSuite</qualifiedname>
+        <reimplements refid="d7/d12/structMenuItem_1a33cb0911168774cdb71453743184be22">ActivateCurrentSuite</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="96" column="8" bodyfile="src/menu_item.cpp" bodystart="256" bodyend="262"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>MenuItem</label>
+        <link refid="d7/d12/structMenuItem"/>
+      </node>
+      <node id="1">
+        <label>MenuItemSuite</label>
+        <link refid="de/d5e/structMenuItemSuite"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>MenuItem</label>
+        <link refid="d7/d12/structMenuItem"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>parent</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>MenuItemSuite</label>
+        <link refid="de/d5e/structMenuItemSuite"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/menu_item.h" line="93" column="1" bodyfile="src/menu_item.h" bodystart="93" bodyend="98"/>
+    <listofallmembers>
+      <member refid="d7/d12/structMenuItem_1a669389f33ac051bc9e40d4bc77b7f9bd" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>Activate</name></member>
+      <member refid="de/d5e/structMenuItemSuite_1ac1d4ddb0b3a5d74c72e0ce95008258a4" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>ActivateCurrentSuite</name></member>
+      <member refid="d7/d12/structMenuItem_1a3d57d9e9b6fc38b4f8eb9240392ebf48" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>active_submenu</name></member>
+      <member refid="d7/d12/structMenuItem_1a9636ec4c0e64d70d0aaf7618dd1c9050" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>cursor_position</name></member>
+      <member refid="d7/d12/structMenuItem_1a992b1237ace72dc386a5305fd348a8f7" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>CursorDown</name></member>
+      <member refid="d7/d12/structMenuItem_1adae7ed1dfe85080eeb1be24b93348f6c" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>CursorDownAndActivate</name></member>
+      <member refid="d7/d12/structMenuItem_1aa7d56249433e4afeba04d11d0489b995" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>CursorLeft</name></member>
+      <member refid="d7/d12/structMenuItem_1a38b421507ab8ad89270258a75158b070" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>CursorRight</name></member>
+      <member refid="d7/d12/structMenuItem_1a526e3928d3afe426dad05f3f66c0dbc6" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>CursorUp</name></member>
+      <member refid="d7/d12/structMenuItem_1aba17e419992b01aac5a69da5ac316afb" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>CursorUpAndActivate</name></member>
+      <member refid="d7/d12/structMenuItem_1af8658a68106074fd149199db606feec1" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>Deactivate</name></member>
+      <member refid="d7/d12/structMenuItem_1a2aa4e882bfe3f59f56dda1447e6d64ff" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>Draw</name></member>
+      <member refid="d7/d12/structMenuItem_1a9a57af2165f97959149adee20a4eb86d" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>height</name></member>
+      <member refid="d7/d12/structMenuItem_1a0d50ee8b9d0f414ab623db5d92dea184" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>IsEnterable</name></member>
+      <member refid="d7/d12/structMenuItem_1a1896433a20c1f876bbb9078d3f083566" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>menu_background_color_</name></member>
+      <member refid="d7/d12/structMenuItem_1a77bd4e666f8432542cde7113ad486366" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>MenuItem</name></member>
+      <member refid="de/d5e/structMenuItemSuite_1a27024c6a4c56aa4590994b06c4477258" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>MenuItemSuite</name></member>
+      <member refid="d7/d12/structMenuItem_1a0e46de23f339da33aebb4b14ada546a7" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>name</name></member>
+      <member refid="d7/d12/structMenuItem_1a1926f4d5fb710557daf011158ad6a116" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>OnEnter</name></member>
+      <member refid="d7/d12/structMenuItem_1a7514ab030c91963292036dda32d0b0cc" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>parent</name></member>
+      <member refid="d7/d12/structMenuItem_1aec8652d5bc122cf7de1a4b3bfdabe453" prot="protected" virt="non-virtual"><scope>MenuItemSuite</scope><name>PrepareDraw</name></member>
+      <member refid="d7/d12/structMenuItem_1a5db1f67f8202519bd9a2164e500f5a6a" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>SetBackgroundColor</name></member>
+      <member refid="d7/d12/structMenuItem_1abb595a376ca6b4d42fb79f0158d3a81a" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>submenu</name></member>
+      <member refid="de/d5e/structMenuItemSuite_1a91d74d5b7ab08f6d7408b2851b2762d5" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>suite</name></member>
+      <member refid="d7/d12/structMenuItem_1a6e267a86c0948a9f5df7cfa4f076cc48" prot="protected" virt="non-virtual"><scope>MenuItemSuite</scope><name>Swap</name></member>
+      <member refid="d7/d12/structMenuItem_1a5223156aba1b53704f58586fb950836e" prot="public" virt="non-virtual"><scope>MenuItemSuite</scope><name>width</name></member>
+      <member refid="d7/d12/structMenuItem_1a28f03d665c7424c9083adc20a4b59c3c" prot="public" virt="virtual"><scope>MenuItemSuite</scope><name>~MenuItem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

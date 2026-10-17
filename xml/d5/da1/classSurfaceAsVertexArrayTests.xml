@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/da1/classSurfaceAsVertexArrayTests" kind="class" language="C++" prot="public">
+    <compoundname>SurfaceAsVertexArrayTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d0/d20/surface__as__vertex__array__tests_8h" local="no">surface_as_vertex_array_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d5/da1/classSurfaceAsVertexArrayTests_1a38409bcd7bcb49cf8d691abdc23f7e80" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* SurfaceAsVertexArrayTests::surface_a_</definition>
+        <argsstring></argsstring>
+        <name>surface_a_</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::surface_a_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="56" column="11" bodyfile="src/tests/surface_as_vertex_array_tests.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/da1/classSurfaceAsVertexArrayTests_1a990851158e1004b0c655dc91daef0e71" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* SurfaceAsVertexArrayTests::surface_b_</definition>
+        <argsstring></argsstring>
+        <name>surface_b_</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::surface_b_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="57" column="11" bodyfile="src/tests/surface_as_vertex_array_tests.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/da1/classSurfaceAsVertexArrayTests_1a1d21034c5d80e235b962f6f616fcc600" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; SurfaceAsVertexArrayTests::vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>vertex_buffer_</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::vertex_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="58" column="19" bodyfile="src/tests/surface_as_vertex_array_tests.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a7e9c8c970626faa63198b40b311739a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SurfaceAsVertexArrayTests::SurfaceAsVertexArrayTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>SurfaceAsVertexArrayTests</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::SurfaceAsVertexArrayTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>LinearDiffuseArray Renders four solid color strips (Red, Green, Blue, Yellow) into the first row of a linear A8R8G8B8 surface. The surface memory is then bound as NV2A_VERTEX_ATTR_DIFFUSE with TYPE_UB_D3D format and drawn via DRAW_ARRAYS. Expect to see four quads on a dark background: top-left Red, top-right Green, bottom-left Blue, bottom-right Yellow.</para>
+</simplesect>
+<simplesect kind="remark"><para>SwizzledDiffuseArray Renders four 2x2 color blocks into a swizzled A8R8G8B8 surface (paired with matching 32-bit depth buffer). Due to Morton order swizzling, the 2x2 blocks occupy contiguous 4-pixel chunks in memory. The surface is then bound as NV2A_VERTEX_ATTR_DIFFUSE. Expect to see four quads on a dark background: top-left Red, top-right Green, bottom-left Blue, bottom-right Yellow.</para>
+</simplesect>
+<simplesect kind="remark"><para>MultiStream Tests multiple simultaneous surface vertex streams. Surface A is rendered with Cyan and Black pixels and bound to NV2A_VERTEX_ATTR_DIFFUSE; Surface B is rendered with Black and Magenta pixels and bound to NV2A_VERTEX_ATTR_SPECULAR. A register combiner adds Diffuse and Specular colors. Expect to see two wide quads on a dark background: left Cyan (Cyan + Black) and right Magenta (Black + Magenta).</para>
+</simplesect>
+<simplesect kind="remark"><para>DynamicUpdateLoop Sequentially renders a single color into a surface and immediately draws the corresponding quad in four successive passes within a single frame to verify surface update synchronization between draw passes. Expect to see four quads on a dark background: top-left Red, top-right Green, bottom-left Blue, bottom-right Yellow.</para>
+</simplesect>
+<simplesect kind="remark"><para>RenderScalePattern Renders carrier triangle vertex indices and barycentric weights across swizzled surfaces A and B. The surfaces are bound as Diffuse and Specular vertex streams with a vertex shader that blends three carrier positions via address-register palette lookups (arl a0.x / c[A0+112]) to reconstruct a 3D mesh. Expect to see a clean, contiguous 3D mesh at 1x render scale. When emulator render scale &gt; 1.0 downsamples/filters the surface with interpolation errors across diagonal seams, shifts in index values cause address-register lookups to select incorrect palette slots, visibly tearing the mesh into spikes (reproducing the behavior in the XDK DisplacementMap sample and xemu PR #2984). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="25" column="3" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="147" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1aa6c09dd20dad82a61469cba9f2fb926e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="27" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="198" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a623ce3d54cf6a3b370e69068816b3645" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="28" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="252" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1ab420f779f0c4cdc32edd367e35ea434e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::TearDownTest</definition>
+        <argsstring>() override</argsstring>
+        <name>TearDownTest</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::TearDownTest</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3">TearDownTest</reimplements>
+        <briefdescription>
+<para>Called after running an individual test within this suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="29" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="259" bodyend="272"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a5fd1de587c662f6f28e29ecb5cd17279" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::AllocateTestSurfaces</definition>
+        <argsstring>(bool need_surface_b=false)</argsstring>
+        <name>AllocateTestSurfaces</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::AllocateTestSurfaces</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>need_surface_b</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="32" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="156" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a73f75698efe901afeb3c6f10cbcee562" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::FreeTestSurfaces</definition>
+        <argsstring>()</argsstring>
+        <name>FreeTestSurfaces</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::FreeTestSurfaces</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="33" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="183" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a06f247a84c90823aef38b87c30081f88" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::DrawQuads</definition>
+        <argsstring>(const void *diffuse_surface)</argsstring>
+        <name>DrawQuads</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::DrawQuads</qualifiedname>
+        <param>
+          <type>const void *</type>
+          <declname>diffuse_surface</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="35" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="274" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a42c3e0194869b5e6ef3c4bb0369c5791" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::TestLinearDiffuseArray</definition>
+        <argsstring>()</argsstring>
+        <name>TestLinearDiffuseArray</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::TestLinearDiffuseArray</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders color strips into a linear render target, then binds the surface as a diffuse vertex array to draw 4 quads. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="39" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="291" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a739f09ec8715cab0f497d050f8af5c1d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::TestSwizzledDiffuseArray</definition>
+        <argsstring>()</argsstring>
+        <name>TestSwizzledDiffuseArray</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::TestSwizzledDiffuseArray</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders color blocks into a swizzled render target, then binds the surface as a diffuse vertex array to draw 4 quads. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="43" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="321" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a0f197f6a3a08d6d03e946390b84ac044" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::TestMultiStream</definition>
+        <argsstring>()</argsstring>
+        <name>TestMultiStream</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::TestMultiStream</qualifiedname>
+        <briefdescription>
+<para>Renders separate colors to two surfaces, binding one as diffuse and the other as specular across multiple streams. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="46" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="351" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1a7d9020df8dcf727678ebda07e6966177" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::TestDynamicUpdateLoop</definition>
+        <argsstring>()</argsstring>
+        <name>TestDynamicUpdateLoop</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::TestDynamicUpdateLoop</qualifiedname>
+        <briefdescription>
+<para>Alternates rendering into a surface and drawing individual quads within a single frame update loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="49" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="418" bodyend="461"/>
+      </memberdef>
+      <memberdef kind="function" id="d5/da1/classSurfaceAsVertexArrayTests_1ac0b9ecc342fbc0d850115beccee1c404" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void SurfaceAsVertexArrayTests::TestRenderScalePattern</definition>
+        <argsstring>()</argsstring>
+        <name>TestRenderScalePattern</name>
+        <qualifiedname>SurfaceAsVertexArrayTests::TestRenderScalePattern</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders carrier triangle vertex indices and barycentric weights into swizzled surfaces A and B, then binds them as Diffuse and Specular vertex streams with a vertex shader performing palette lookups to reconstruct a 3D mesh. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/surface_as_vertex_array_tests.h" line="53" column="8" bodyfile="src/tests/surface_as_vertex_array_tests.cpp" bodystart="463" bodyend="574"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests rendering to GPU surfaces (render targets) and subsequently binding the rendered surface memory as a vertex attribute array (vertex stream).</para>
+<para>This pattern takes advantage of Xbox UMA (Unified Memory Architecture) to perform GPU-driven vertex generation or displacement mapping without hardware vertex texture fetch. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>SurfaceAsVertexArrayTests</label>
+        <link refid="d5/da1/classSurfaceAsVertexArrayTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="1">
+        <label>SurfaceAsVertexArrayTests</label>
+        <link refid="d5/da1/classSurfaceAsVertexArrayTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/surface_as_vertex_array_tests.h" line="23" column="1" bodyfile="src/tests/surface_as_vertex_array_tests.h" bodystart="23" bodyend="59"/>
+    <listofallmembers>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a5fd1de587c662f6f28e29ecb5cd17279" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>AllocateTestSurfaces</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>allow_saving_</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a623ce3d54cf6a3b370e69068816b3645" prot="public" virt="virtual"><scope>SurfaceAsVertexArrayTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>DisableTests</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a06f247a84c90823aef38b87c30081f88" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>DrawQuads</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a73f75698efe901afeb3c6f10cbcee562" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>FreeTestSurfaces</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>host_</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1aa6c09dd20dad82a61469cba9f2fb926e" prot="public" virt="virtual"><scope>SurfaceAsVertexArrayTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>SurfaceAsVertexArrayTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>suite_name_</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a38409bcd7bcb49cf8d691abdc23f7e80" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>surface_a_</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a990851158e1004b0c655dc91daef0e71" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>surface_b_</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a7e9c8c970626faa63198b40b311739a5" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>SurfaceAsVertexArrayTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1ab420f779f0c4cdc32edd367e35ea434e" prot="public" virt="virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TearDownTest</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a7d9020df8dcf727678ebda07e6966177" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestDynamicUpdateLoop</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a42c3e0194869b5e6ef3c4bb0369c5791" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestLinearDiffuseArray</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a0f197f6a3a08d6d03e946390b84ac044" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestMultiStream</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestNames</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1ac0b9ecc342fbc0d850115beccee1c404" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestRenderScalePattern</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestSuite</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a739f09ec8715cab0f497d050f8af5c1d" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>TestSwizzledDiffuseArray</name></member>
+      <member refid="d5/da1/classSurfaceAsVertexArrayTests_1a1d21034c5d80e235b962f6f616fcc600" prot="private" virt="non-virtual"><scope>SurfaceAsVertexArrayTests</scope><name>vertex_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>SurfaceAsVertexArrayTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="df/d14/inline__array__size__mismatch_8cpp" kind="file" language="C++">
+    <compoundname>inline_array_size_mismatch.cpp</compoundname>
+    <includes refid="dc/d05/inline__array__size__mismatch_8h" local="yes">inline_array_size_mismatch.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/inline_array_size_mismatch.cpp</label>
+        <link refid="df/d14/inline__array__size__mismatch_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>inline_array_size_mismatch.h</label>
+        <link refid="dc/d05/inline__array__size__mismatch_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="8">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="31">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="13">
+        <label>thread</label>
+      </node>
+      <node id="30">
+        <label>utility</label>
+      </node>
+      <node id="14">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="df/d14/inline__array__size__mismatch_8cpp_1a69b3c2627e0652c633a2cfa06a3ae9c0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr const char</type>
+        <definition>constexpr const char kTestName[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kTestName</name>
+        <initializer>= &quot;ExtraElements&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/inline_array_size_mismatch.cpp" line="11" column="29" bodyfile="src/tests/inline_array_size_mismatch.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="df/d14/inline__array__size__mismatch_8cpp_1af012c5f78d3cb64462fd4d3c28c152cd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void SetVertexAttribute</definition>
+        <argsstring>(uint32_t index, uint32_t format, uint32_t size, uint32_t stride)</argsstring>
+        <name>SetVertexAttribute</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stride</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/inline_array_size_mismatch.cpp" line="100" column="13" bodyfile="src/tests/inline_array_size_mismatch.cpp" bodystart="100" bodyend="107" declfile="src/tests/inline_array_size_mismatch.cpp" declline="13" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="df/d14/inline__array__size__mismatch_8cpp_1a47739525b505b53a7cc7b2a87d949eda" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void ClearVertexAttribute</definition>
+        <argsstring>(uint32_t index)</argsstring>
+        <name>ClearVertexAttribute</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/inline_array_size_mismatch.cpp" line="109" column="13" bodyfile="src/tests/inline_array_size_mismatch.cpp" bodystart="109" bodyend="112" declfile="src/tests/inline_array_size_mismatch.cpp" declline="14" declcolumn="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;inline_array_size_mismatch.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kTestName[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ExtraElements&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetVertexAttribute(uint32_t<sp/>index,<sp/>uint32_t<sp/>format,<sp/>uint32_t<sp/>size,<sp/>uint32_t<sp/>stride);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ClearVertexAttribute(uint32_t<sp/>index);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">InlineArraySizeMismatchTests::InlineArraySizeMismatchTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Inline<sp/>array<sp/>size<sp/>mismatch&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/>tests_[kTestName]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>Test();<sp/>};</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/de6/classInlineArraySizeMismatchTests_1ab62211ab0d21203a32f62be2a51fa76c" kindref="member">InlineArraySizeMismatchTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>host_.SetCombinerControl(1);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>InlineArraySizeMismatchTests::Test()<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE312F31);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>SetVertexAttribute(NV2A_VERTEX_ATTR_POSITION,<sp/>NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,<sp/>3,<sp/>0);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_WEIGHT);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_NORMAL);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>SetVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE,<sp/>NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,<sp/>4,<sp/>0);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_FOG_COORD);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_POINT_SIZE);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_DIFFUSE);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_BACK_SPECULAR);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>SetVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE0,<sp/>NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,<sp/>2,<sp/>0);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE1);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE2);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_TEXTURE3);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_13);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_14);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>ClearVertexAttribute(NV2A_VERTEX_ATTR_15);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left_middle<sp/>=<sp/>host_.GetFramebufferWidthF()<sp/>*<sp/>0.25f;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>triangle_width<sp/>=<sp/>host_.GetFramebufferHeightF()<sp/>*<sp/>0.20f;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left_left<sp/>=<sp/>left_middle<sp/>-<sp/>triangle_width;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left_right<sp/>=<sp/>left_middle<sp/>+<sp/>triangle_width;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right_middle<sp/>=<sp/>host_.GetFramebufferWidthF()<sp/>-<sp/>left_middle;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right_left<sp/>=<sp/>right_middle<sp/>-<sp/>triangle_width;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>const<sp/>float<sp/>right_right<sp/>=<sp/>right_middle<sp/>+<sp/>triangle_width;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>host_.GetFramebufferHeightF()<sp/>*<sp/>0.25f;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>host_.GetFramebufferHeightF()<sp/>-<sp/>top;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>TestHost::PRIMITIVE_TRIANGLES);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>left_left,<sp/>bottom,<sp/>z);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>left_middle,<sp/>top,<sp/>z);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>1.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>left_right,<sp/>bottom,<sp/>z);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>1.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>right_left,<sp/>bottom,<sp/>z);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>Pushbuffer::PushF(NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>right_middle,<sp/>top,<sp/>z);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>Pushbuffer::PushF(<sp/>NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>Pushbuffer::PushF(<sp/>NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>Pushbuffer::PushF(<sp/>NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>right_right,<sp/>bottom,<sp/>z);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>Pushbuffer::PushF(<sp/>NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>Pushbuffer::PushF(<sp/>NV2A_SUPPRESS_COMMAND_INCREMENT(NV097_INLINE_ARRAY),<sp/>0.0f,<sp/>0.0f);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_BEGIN_END,<sp/>NV097_SET_BEGIN_END_OP_END);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n\n&quot;</highlight><highlight class="normal">,<sp/>kTestName);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kTestName);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetVertexAttribute(uint32_t<sp/>index,<sp/>uint32_t<sp/>format,<sp/>uint32_t<sp/>size,<sp/>uint32_t<sp/>stride)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_FORMAT<sp/>+<sp/>index<sp/>*<sp/>4,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE,<sp/>format)<sp/>|</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE,<sp/>size)<sp/>|</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE,<sp/>stride));</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ClearVertexAttribute(uint32_t<sp/>index)<sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note:<sp/>xemu<sp/>has<sp/>asserts<sp/>on<sp/>the<sp/>count<sp/>for<sp/>several<sp/>formats,<sp/>so<sp/>any<sp/>format<sp/>without<sp/>that<sp/>ASSERT<sp/>must<sp/>be<sp/>used.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>SetVertexAttribute(index,<sp/>NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F,<sp/>0,<sp/>0);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/inline_array_size_mismatch.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d68/structImageResource" kind="struct" language="C++" prot="public">
+    <compoundname>ImageResource</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d7/d68/structImageResource_1ac28bf57ece399774f3ba53e72e8ab888" prot="public" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* ImageResource::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>ImageResource::data</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="8" column="11" bodyfile="src/image_resource.h" bodystart="8" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d68/structImageResource_1a309941d109596a77464b3a1e1d64718a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageResource::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>ImageResource::width</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="9" column="12" bodyfile="src/image_resource.h" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d68/structImageResource_1a1459873bfe5b7c13b2cda93f09fdbfd2" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageResource::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>ImageResource::height</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="10" column="12" bodyfile="src/image_resource.h" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d68/structImageResource_1a0dbec4888fdf8dec330cc1a7cb145782" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageResource::pitch</definition>
+        <argsstring></argsstring>
+        <name>pitch</name>
+        <qualifiedname>ImageResource::pitch</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="11" column="12" bodyfile="src/image_resource.h" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d68/structImageResource_1a95ce2792c8624b7e3e01913a0468fb52" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageResource::bytes_per_pixel</definition>
+        <argsstring></argsstring>
+        <name>bytes_per_pixel</name>
+        <qualifiedname>ImageResource::bytes_per_pixel</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="12" column="12" bodyfile="src/image_resource.h" bodystart="12" bodyend="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d7/d68/structImageResource_1aef05395f094dd2ddf956ea08f8b6ba87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ImageResource::ImageResource</definition>
+        <argsstring>()=default</argsstring>
+        <name>ImageResource</name>
+        <qualifiedname>ImageResource::ImageResource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="14" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d68/structImageResource_1a7b87adc6da29dfa441916de5d170079d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ImageResource::ImageResource</definition>
+        <argsstring>(const std::string &amp;source_path)</argsstring>
+        <name>ImageResource</name>
+        <qualifiedname>ImageResource::ImageResource</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source_path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="16" column="12" bodyfile="src/image_resource.h" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d68/structImageResource_1a1ab6cd93b3a81ad3daf3f5baf8c40751" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>ImageResource::~ImageResource</definition>
+        <argsstring>()</argsstring>
+        <name>~ImageResource</name>
+        <qualifiedname>ImageResource::~ImageResource</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="18" column="11" bodyfile="src/image_resource.cpp" bodystart="10" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d68/structImageResource_1ae6dc6240dc7e4937edb188db8e9435d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageResource::LoadPNG</definition>
+        <argsstring>(const std::string &amp;source_path)</argsstring>
+        <name>LoadPNG</name>
+        <qualifiedname>ImageResource::LoadPNG</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>source_path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Loads a PNG file from the filesystem.</para>
+<para>source_path - Windows style path to the PNG file to load (e.g., &quot;D:\\image_blit\\TestImage.png&quot;) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="23" column="8" bodyfile="src/image_resource.cpp" bodystart="16" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d68/structImageResource_1a6689ac92fba85f1380d9d2b2a059800b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageResource::CopyTo</definition>
+        <argsstring>(uint8_t *target) const</argsstring>
+        <name>CopyTo</name>
+        <qualifiedname>ImageResource::CopyTo</qualifiedname>
+        <param>
+          <type>uint8_t *</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+<para>Copies the image data to the given target, which must be allocated and sufficiently large. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="26" column="8" bodyfile="src/image_resource.cpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d68/structImageResource_1a922b69e3e48bbc8fa03ab3cfae3a60d6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ImageResource::SwizzleTo</definition>
+        <argsstring>(uint8_t *target) const</argsstring>
+        <name>SwizzleTo</name>
+        <qualifiedname>ImageResource::SwizzleTo</qualifiedname>
+        <param>
+          <type>uint8_t *</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copies the image data to the given target, which must be allocated and sufficiently large, and performs texture swizzling. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/image_resource.h" line="30" column="8" bodyfile="src/image_resource.cpp" bodystart="37" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/image_resource.h" line="7" column="1" bodyfile="src/image_resource.h" bodystart="7" bodyend="31"/>
+    <listofallmembers>
+      <member refid="d7/d68/structImageResource_1a95ce2792c8624b7e3e01913a0468fb52" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>bytes_per_pixel</name></member>
+      <member refid="d7/d68/structImageResource_1a6689ac92fba85f1380d9d2b2a059800b" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>CopyTo</name></member>
+      <member refid="d7/d68/structImageResource_1ac28bf57ece399774f3ba53e72e8ab888" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>data</name></member>
+      <member refid="d7/d68/structImageResource_1a1459873bfe5b7c13b2cda93f09fdbfd2" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>height</name></member>
+      <member refid="d7/d68/structImageResource_1aef05395f094dd2ddf956ea08f8b6ba87" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>ImageResource</name></member>
+      <member refid="d7/d68/structImageResource_1a7b87adc6da29dfa441916de5d170079d" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>ImageResource</name></member>
+      <member refid="d7/d68/structImageResource_1ae6dc6240dc7e4937edb188db8e9435d7" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>LoadPNG</name></member>
+      <member refid="d7/d68/structImageResource_1a0dbec4888fdf8dec330cc1a7cb145782" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>pitch</name></member>
+      <member refid="d7/d68/structImageResource_1a922b69e3e48bbc8fa03ab3cfae3a60d6" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>SwizzleTo</name></member>
+      <member refid="d7/d68/structImageResource_1a309941d109596a77464b3a1e1d64718a" prot="public" virt="non-virtual"><scope>ImageResource</scope><name>width</name></member>
+      <member refid="d7/d68/structImageResource_1a1ab6cd93b3a81ad3daf3f5baf8c40751" prot="public" virt="virtual"><scope>ImageResource</scope><name>~ImageResource</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

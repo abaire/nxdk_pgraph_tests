@@ -1,0 +1,741 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d4/d70/window__clip__tests_8cpp" kind="file" language="C++">
+    <compoundname>window_clip_tests.cpp</compoundname>
+    <includes refid="d5/ddb/window__clip__tests_8h" local="yes">window_clip_tests.h</includes>
+    <includes local="no">SDL.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">utility</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="d7/d31/pbkit__ext_8h" local="yes">pbkit_ext.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/window_clip_tests.cpp</label>
+        <link refid="d4/d70/window__clip__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>window_clip_tests.h</label>
+        <link refid="d5/ddb/window__clip__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>SDL.h</label>
+      </node>
+      <node id="10">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="11">
+        <label>cstdint</label>
+      </node>
+      <node id="12">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="8">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="32">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="13">
+        <label>thread</label>
+      </node>
+      <node id="31">
+        <label>utility</label>
+      </node>
+      <node id="14">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="d4/d70/window__clip__tests_8cpp_1ae1de504b43f0d2fb4384f0bcd6318813" prot="public" static="no">
+        <name>SET_MASK</name>
+        <param><defname>mask</defname></param>
+        <param><defname>val</defname></param>
+        <initializer>(((val) &lt;&lt; (__builtin_ffs(mask) - 1)) &amp; (mask))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="14" column="9" bodyfile="src/tests/window_clip_tests.cpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d70/window__clip__tests_8cpp_1af5395d70a206569fcd15fc88bdad1b43" prot="public" static="no">
+        <name>NV2A_MMIO_BASE</name>
+        <initializer>0xFD000000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="16" column="9" bodyfile="src/tests/window_clip_tests.cpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d70/window__clip__tests_8cpp_1ac4066fc8b5dcdd9c00fc9e3cfa5bdf15" prot="public" static="no">
+        <name>BLOCKPGRAPH_ADDR</name>
+        <initializer>0x400000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="17" column="9" bodyfile="src/tests/window_clip_tests.cpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d70/window__clip__tests_8cpp_1a52fdb28fd2222e1cd6296da52bac2785" prot="public" static="no">
+        <name>PGRAPH_ADDR</name>
+        <param><defname>a</defname></param>
+        <initializer>(NV2A_MMIO_BASE + BLOCKPGRAPH_ADDR + (a))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="18" column="9" bodyfile="src/tests/window_clip_tests.cpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d70/window__clip__tests_8cpp_1a38d6e2d36930c0d4d06638bf69496efa" prot="public" static="no">
+        <name>NVPGRAPH_ADDR_WINDOWCLIPX0</name>
+        <initializer>0x00001A44</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="20" column="9" bodyfile="src/tests/window_clip_tests.cpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="d4/d70/window__clip__tests_8cpp_1afc55f5ddb12201340919db80ce1e9447" prot="public" static="no">
+        <name>NVPGRAPH_ADDR_WINDOWCLIPY0</name>
+        <initializer>0x00001A64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="21" column="9" bodyfile="src/tests/window_clip_tests.cpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1ac86d2ca2c760c5e6591685b0578f192e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDefaultDMAChannelA</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAChannelA</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="25" column="27" bodyfile="src/tests/window_clip_tests.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1a2c67f47e94230b17b3734961625b995d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kDefaultDMAColorChannel</definition>
+        <argsstring></argsstring>
+        <name>kDefaultDMAColorChannel</name>
+        <initializer>= 9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="28" column="27" bodyfile="src/tests/window_clip_tests.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1a6b3274c19e6f1ea71538a6ccf4dd23a8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kImageWidth</definition>
+        <argsstring></argsstring>
+        <name>kImageWidth</name>
+        <initializer>= 256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="30" column="27" bodyfile="src/tests/window_clip_tests.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1a03def3af9000d82e8cfb68b1c3c1fa39" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kImageHeight</definition>
+        <argsstring></argsstring>
+        <name>kImageHeight</name>
+        <initializer>= 256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="31" column="27" bodyfile="src/tests/window_clip_tests.cpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1a2834ed480a253f86d753de0e2a6f5b9c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kLeft</definition>
+        <argsstring></argsstring>
+        <name>kLeft</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="32" column="24" bodyfile="src/tests/window_clip_tests.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1a27e9dd9aa7305c5a29239a28fd6d30ce" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr float</type>
+        <definition>constexpr float kTop</definition>
+        <argsstring></argsstring>
+        <name>kTop</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="33" column="24" bodyfile="src/tests/window_clip_tests.cpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1af6c156dc152c063701d2b543cbe34661" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref></type>
+        <definition>constexpr WindowClipTests::ClipRect kClipOne[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kClipOne</name>
+        <initializer>= {
+    {0, 0, 0, 0},
+    {0, 0, kImageWidth, kImageHeight},
+    {8, 16, 0xF00, 0xF00},  
+    {0, 0, kImageWidth - 1, kImageHeight - 1},
+    {1, 1, kImageWidth - 2, kImageHeight - 2},
+    {1, 1, kImageWidth - 3, kImageHeight - 3},
+    {0, 0, kImageWidth &gt;&gt; 1, kImageHeight &gt;&gt; 1},
+    {0, 0, 1, 1},
+    {kImageWidth - 1, kImageHeight - 1, 1, 1},
+    {kImageWidth, kImageHeight, 1, 1},
+    {(kImageWidth - 64) &gt;&gt; 1, (kImageHeight - 64) &gt;&gt; 1, 64, 64},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="35" column="44" bodyfile="src/tests/window_clip_tests.cpp" bodystart="35" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="d4/d70/window__clip__tests_8cpp_1a012d482598abc4af694e0e1db691ebeb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr <ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref></type>
+        <definition>constexpr WindowClipTests::ClipRect kClipTwo[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kClipTwo</name>
+        <initializer>= {
+    {0, 0, 0, 0},
+    {16, 16, 8, 8},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="49" column="44" bodyfile="src/tests/window_clip_tests.cpp" bodystart="49" bodyend="52"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d4/d70/window__clip__tests_8cpp_1a6422c413257b49cf641c2d3c3a145613" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeTestName</definition>
+        <argsstring>(bool clip_exclusive, bool swap_order, const WindowClipTests::ClipRect &amp;c1, const WindowClipTests::ClipRect &amp;c2)</argsstring>
+        <name>MakeTestName</name>
+        <param>
+          <type>bool</type>
+          <declname>clip_exclusive</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>swap_order</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref> &amp;</type>
+          <declname>c1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref> &amp;</type>
+          <declname>c2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="54" column="20" bodyfile="src/tests/window_clip_tests.cpp" bodystart="54" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d70/window__clip__tests_8cpp_1a5adfa1b9eea2b60662fa7061e048955c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string MakeRenderTargetTestName</definition>
+        <argsstring>(bool clip_exclusive, bool swap_order, const WindowClipTests::ClipRect &amp;c1, const WindowClipTests::ClipRect &amp;c2)</argsstring>
+        <name>MakeRenderTargetTestName</name>
+        <param>
+          <type>bool</type>
+          <declname>clip_exclusive</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>swap_order</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref> &amp;</type>
+          <declname>c1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref> &amp;</type>
+          <declname>c2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/window_clip_tests.cpp" line="62" column="20" bodyfile="src/tests/window_clip_tests.cpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;window_clip_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;SDL.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pbkit_ext.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SET_MASK(mask,<sp/>val)<sp/>(((val)<sp/>&lt;&lt;<sp/>(__builtin_ffs(mask)<sp/>-<sp/>1))<sp/>&amp;<sp/>(mask))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NV2A_MMIO_BASE<sp/>0xFD000000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BLOCKPGRAPH_ADDR<sp/>0x400000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PGRAPH_ADDR(a)<sp/>(NV2A_MMIO_BASE<sp/>+<sp/>BLOCKPGRAPH_ADDR<sp/>+<sp/>(a))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NVPGRAPH_ADDR_WINDOWCLIPX0<sp/>0x00001A44</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NVPGRAPH_ADDR_WINDOWCLIPY0<sp/>0x00001A64</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_A<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>3<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NV097_SET_CONTEXT_DMA_A<sp/>==<sp/>NV20_TCL_PRIMITIVE_3D_SET_OBJECT1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAChannelA<sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="comment">//<sp/>From<sp/>pbkit.c,<sp/>DMA_COLOR<sp/>is<sp/>set<sp/>to<sp/>channel<sp/>9<sp/>by<sp/>default</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kDefaultDMAColorChannel<sp/>=<sp/>9;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kImageWidth<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kImageHeight<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kLeft<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kTop<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref><sp/>kClipOne[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>{0,<sp/>0,<sp/>0,<sp/>0},</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>{0,<sp/>0,<sp/>kImageWidth,<sp/>kImageHeight},</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>{8,<sp/>16,<sp/>0xF00,<sp/>0xF00},<sp/><sp/></highlight><highlight class="comment">//<sp/>According<sp/>to<sp/>xemu<sp/>the<sp/>max<sp/>value<sp/>is<sp/>0xFFF.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>{0,<sp/>0,<sp/>kImageWidth<sp/>-<sp/>1,<sp/>kImageHeight<sp/>-<sp/>1},</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{1,<sp/>1,<sp/>kImageWidth<sp/>-<sp/>2,<sp/>kImageHeight<sp/>-<sp/>2},</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{1,<sp/>1,<sp/>kImageWidth<sp/>-<sp/>3,<sp/>kImageHeight<sp/>-<sp/>3},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>{0,<sp/>0,<sp/>kImageWidth<sp/>&gt;&gt;<sp/>1,<sp/>kImageHeight<sp/>&gt;&gt;<sp/>1},</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>{0,<sp/>0,<sp/>1,<sp/>1},</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>{kImageWidth<sp/>-<sp/>1,<sp/>kImageHeight<sp/>-<sp/>1,<sp/>1,<sp/>1},</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>{kImageWidth,<sp/>kImageHeight,<sp/>1,<sp/>1},</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>{(kImageWidth<sp/>-<sp/>64)<sp/>&gt;&gt;<sp/>1,<sp/>(kImageHeight<sp/>-<sp/>64)<sp/>&gt;&gt;<sp/>1,<sp/>64,<sp/>64},</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref><sp/>kClipTwo[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>{0,<sp/>0,<sp/>0,<sp/>0},</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>{16,<sp/>16,<sp/>8,<sp/>8},</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeTestName(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>clip_exclusive,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>swap_order,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref><sp/>&amp;c1,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref><sp/>&amp;c2)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buffer[32];</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>snprintf(buffer,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(buffer),<sp/></highlight><highlight class="stringliteral">&quot;%s%c_x%dy%d_w%dh%d-x%dy%d_w%dh%d&quot;</highlight><highlight class="normal">,<sp/>swap_order<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clip_exclusive<sp/>?<sp/></highlight><highlight class="stringliteral">&apos;E&apos;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&apos;I&apos;</highlight><highlight class="normal">,<sp/>c1.x,<sp/>c1.y,<sp/>c1.width,<sp/>c1.height,<sp/>c2.x,<sp/>c2.y,<sp/>c2.width,<sp/>c2.height);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>MakeRenderTargetTestName(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>clip_exclusive,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>swap_order,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref><sp/>&amp;c1,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d2/d24/structWindowClipTests_1_1ClipRect" kindref="compound">WindowClipTests::ClipRect</ref><sp/>&amp;c2)<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::string(</highlight><highlight class="stringliteral">&quot;r&quot;</highlight><highlight class="normal">)<sp/>+<sp/>MakeTestName(clip_exclusive,<sp/>swap_order,<sp/>c1,<sp/>c2);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal">WindowClipTests::WindowClipTests(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Window<sp/>clip&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>exclusive<sp/>:<sp/>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">})<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;c2<sp/>:<sp/>kClipTwo)<sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;c1<sp/>:<sp/>kClipOne)<sp/>{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tests_[MakeTestName(exclusive,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>c1,<sp/>c2)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>exclusive,<sp/>&amp;c1,<sp/>&amp;c2]()<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Test(exclusive,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>c1,<sp/>c2);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tests_[MakeRenderTargetTestName(exclusive,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>c1,<sp/>c2)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>exclusive,<sp/>&amp;c1,<sp/>&amp;c2]()<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestRenderTarget(exclusive,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>c1,<sp/>c2);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>ClipRect<sp/>c1{60,<sp/>60,<sp/>64,<sp/>64};</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>ClipRect<sp/>c2{0,<sp/>0,<sp/>64,<sp/>64};</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[MakeTestName(exclusive,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>c1,<sp/>c2)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>exclusive,<sp/>c1,<sp/>c2]()<sp/>{<sp/>Test(exclusive,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>c1,<sp/>c2);<sp/>};</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[MakeRenderTargetTestName(exclusive,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>c1,<sp/>c2)]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>exclusive,<sp/>c1,<sp/>c2]()<sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TestRenderTarget(exclusive,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/>c1,<sp/>c2);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d1/d55/classWindowClipTests_1af82c5e2afa48f1fe8d4efc15c176f188" kindref="member">WindowClipTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WindowClipTests::Draw(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>clip_exclusive,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>swap_order,<sp/>uint32_t<sp/>c1_left,<sp/>uint32_t<sp/>c1_top,<sp/>uint32_t<sp/>c1_right,</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>c1_bottom,<sp/>uint32_t<sp/>c2_left,<sp/>uint32_t<sp/>c2_top,<sp/>uint32_t<sp/>c2_right,</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>c2_bottom)<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>host_.SetWindowClipExclusive(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/>host_.SetWindowClip(host_.GetFramebufferWidth(),<sp/>host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kImageWidthF<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kImageWidth);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kImageHeightF<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kImageHeight);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kRight<sp/>=<sp/>kLeft<sp/>+<sp/>kImageWidthF;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kBottom<sp/>=<sp/>kTop<sp/>+<sp/>kImageHeightF;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0xFF887733);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>host_.SetVertex(kLeft,<sp/>kTop,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>host_.SetVertex(kRight,<sp/>kTop,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>host_.SetVertex(kRight,<sp/>kBottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>host_.SetVertex(kLeft,<sp/>kBottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/>host_.SetWindowClipExclusive(clip_exclusive);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!swap_order)<sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetWindowClip(c1_right,<sp/>c1_bottom,<sp/>c1_left,<sp/>c1_top,<sp/>0);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetWindowClip(c2_right,<sp/>c2_bottom,<sp/>c2_left,<sp/>c2_top,<sp/>1);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>PrintMsg(</highlight><highlight class="stringliteral">&quot;Setting<sp/>clip<sp/>region<sp/>1<sp/>then<sp/>region<sp/>0.\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetWindowClip(c2_right,<sp/>c2_bottom,<sp/>c2_left,<sp/>c2_top,<sp/>1);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetWindowClip(c1_right,<sp/>c1_bottom,<sp/>c1_left,<sp/>c1_top,<sp/>0);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>8;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>wcx<sp/>=<sp/>*</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(PGRAPH_ADDR(NVPGRAPH_ADDR_WINDOWCLIPX0<sp/>+<sp/>4<sp/>*<sp/>i));</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>wcy<sp/>=<sp/>*</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(PGRAPH_ADDR(NVPGRAPH_ADDR_WINDOWCLIPY0<sp/>+<sp/>4<sp/>*<sp/>i));</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>PrintMsg(</highlight><highlight class="stringliteral">&quot;UPDATED[%d]:<sp/>X:<sp/>0x%X<sp/>Y:<sp/>0x%X\n&quot;</highlight><highlight class="normal">,<sp/>i,<sp/>wcx,<sp/>wcy);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>host_.SetDiffuse(0xFF3377FF);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>host_.SetVertex(kLeft,<sp/>kTop,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>host_.SetVertex(kRight,<sp/>kTop,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/>host_.SetVertex(kRight,<sp/>kBottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>host_.SetVertex(kLeft,<sp/>kBottom,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/>host_.SetWindowClipExclusive(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>host_.SetWindowClip(host_.GetFramebufferWidth(),<sp/>host_.GetFramebufferHeight());</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WindowClipTests::Test(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>clip_exclusive,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>swap_order,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ClipRect<sp/>&amp;c1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ClipRect<sp/>&amp;c2)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(clip_exclusive,<sp/>swap_order,<sp/>c1,<sp/>c2);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_left<sp/>=<sp/>c1.x<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kLeft);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_top<sp/>=<sp/>c1.y<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kTop);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_right<sp/>=<sp/>c1_left<sp/>+<sp/>c1.width;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_bottom<sp/>=<sp/>c1_top<sp/>+<sp/>c1.height;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_left<sp/>=<sp/>c2.x<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kLeft);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_top<sp/>=<sp/>c2.y<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kTop);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_right<sp/>=<sp/>c2_left<sp/>+<sp/>c2.width;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_bottom<sp/>=<sp/>c2_top<sp/>+<sp/>c2.height;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE111213);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>Draw(clip_exclusive,<sp/>swap_order,<sp/>c1_left,<sp/>c1_top,<sp/>c1_right,<sp/>c1_bottom,<sp/>c2_left,<sp/>c2_top,<sp/>c2_right,<sp/>c2_bottom);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>25,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>25,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;%d,%d<sp/>-<sp/>%d,%d&quot;</highlight><highlight class="normal">,<sp/>c1_left,<sp/>c1_top,<sp/>c1_right,<sp/>c1_bottom);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/>pb_printat(2,<sp/>25,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)</highlight><highlight class="stringliteral">&quot;%d,%d<sp/>-<sp/>%d,%d&quot;</highlight><highlight class="normal">,<sp/>c2_left,<sp/>c2_top,<sp/>c2_right,<sp/>c2_bottom);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>WindowClipTests::TestRenderTarget(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>clip_exclusive,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>swap_order,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ClipRect<sp/>&amp;c1,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ClipRect<sp/>&amp;c2)<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>kFramebufferPitch<sp/>=<sp/>host_.GetFramebufferWidth()<sp/>*<sp/>4;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeRenderTargetTestName(clip_exclusive,<sp/>swap_order,<sp/>c1,<sp/>c2);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_left<sp/>=<sp/>c1.x<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kLeft);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_top<sp/>=<sp/>c1.y<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kTop);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_right<sp/>=<sp/>c1_left<sp/>+<sp/>c1.width;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c1_bottom<sp/>=<sp/>c1_top<sp/>+<sp/>c1.height;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_left<sp/>=<sp/>c2.x<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kLeft);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_top<sp/>=<sp/>c2.y<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kTop);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_right<sp/>=<sp/>c2_left<sp/>+<sp/>c2.width;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c2_bottom<sp/>=<sp/>c2_top<sp/>+<sp/>c2.height;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFE131314);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Point<sp/>the<sp/>color<sp/>buffer<sp/>at<sp/>the<sp/>texture<sp/>memory.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAChannelA);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET,<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetTextureMemory())<sp/>&amp;<sp/>0x03FFFFFF);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_PITCH,<sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>kImageWidth<sp/>*<sp/>4)<sp/>|</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>kFramebufferPitch));</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Investigate<sp/>if<sp/>this<sp/>is<sp/>actually<sp/>necessary.<sp/>Morrowind<sp/>does<sp/>this<sp/>after<sp/>changing<sp/>offsets.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_NO_OPERATION,<sp/>0);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_WAIT_FOR_IDLE,<sp/>0);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>kImageWidth,<sp/>kImageHeight,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>Draw(clip_exclusive,<sp/>swap_order,<sp/>c1_left,<sp/>c1_top,<sp/>c1_right,<sp/>c1_bottom,<sp/>c2_left,<sp/>c2_top,<sp/>c2_right,<sp/>c2_bottom);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Restore<sp/>the<sp/>color<sp/>buffer<sp/>and<sp/>render<sp/>the<sp/>texture<sp/>to<sp/>a<sp/>quad.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_PITCH,<sp/>SET_MASK(NV097_SET_SURFACE_PITCH_COLOR,<sp/>kFramebufferPitch)<sp/>|</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SET_MASK(NV097_SET_SURFACE_PITCH_ZETA,<sp/>kFramebufferPitch));</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_CONTEXT_DMA_COLOR,<sp/>kDefaultDMAColorChannel);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET,<sp/>0);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetSurfaceFormatImmediate(TestHost::SCF_A8R8G8B8,<sp/>TestHost::SZF_Z24S8,<sp/>host_.GetFramebufferWidth(),</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_.GetFramebufferHeight(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>host_.Clear(0xFE332233);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>host_.SetTextureFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>texture_stage.SetTextureDimensions(kImageWidth,<sp/>kImageHeight);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>texture_stage.SetImageDimensions(kImageWidth,<sp/>kImageHeight);</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>(host_.GetFramebufferWidthF()<sp/>-<sp/>kImageWidth)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>(host_.GetFramebufferHeightF()<sp/>-<sp/>kImageHeight)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_ZERO,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kImageWidth,<sp/>0.0f);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left<sp/>+<sp/>kImageWidth,<sp/>top,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(kImageWidth,<sp/>kImageHeight);</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left<sp/>+<sp/>kImageWidth,<sp/>top<sp/>+<sp/>kImageHeight,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.0f,<sp/>kImageHeight);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetVertex(left,<sp/>top<sp/>+<sp/>kImageHeight,<sp/>0.1f,<sp/>1.0f);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_NONE);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%d,%d<sp/>-<sp/>%d,%d\n&quot;</highlight><highlight class="normal">,<sp/>c1_left,<sp/>c1_top,<sp/>c1_right,<sp/>c1_bottom);</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%d,%d<sp/>-<sp/>%d,%d\n&quot;</highlight><highlight class="normal">,<sp/>c2_left,<sp/>c2_top,<sp/>c2_right,<sp/>c2_bottom);</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/window_clip_tests.cpp"/>
+  </compounddef>
+</doxygen>
