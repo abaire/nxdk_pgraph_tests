@@ -35,6 +35,10 @@ class TextureRenderTargetTests : public TestSuite {
   //! back to an earlier color state using a linear clear, or updated via CPU.
   void TestXemu2036RenderTextureClearLoop();
 
+  //! Tests emulator texture cache coherency when a swizzled texture is sampled, the same memory is cleared as a linear
+  //! render target, and the texture is sampled again without any intervening texture register writes.
+  void TestXemuUnchangedTexRegsAfterAliasedLinearClear();
+
   //! Tests rendering an SZ_A8R8G8B8 texture into a swizzled LE_R5G6B5 render target surface, then sampling that surface
   //! as an SZ_R5G6B5 texture onto an LE_A8R8G8B8 framebuffer (xemu #2387).
   void TestA8R8G8B8ToLE_R5G6B5Loop();

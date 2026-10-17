@@ -17,6 +17,7 @@
 
 static constexpr char kRenderTextureLoopTest[] = "RenderTextureLoop";
 static constexpr char kRenderTextureClearLoopTest[] = "RenderTextureClearLoop";
+static constexpr char kXemuUnchangedTexRegsAfterAliasedLinearClearTest[] = "RenderTextureClearLoop_UnchangedRegs";
 static constexpr char kA8R8G8B8ToR5G6B5LoopTest[] = "A8R8G8B8_R5G6B5_Loop";
 
 // From pbkit.c, DMA_COLOR is set to channel 9 by default
@@ -166,6 +167,16 @@ static bool RequiresSpecialTest(const TextureFormatInfo &format) {
  *    2. Sample after GPU renders red into swizzled surface (expected red).
  *    3. Sample after linear surface clear to black (expected black).
  *
+ * @tc XemuUnchangedTexRegsAfterAliasedLinearClear
+ *  Exercises an xemu texture cache edge case where a swizzled texture is uploaded from RAM and sampled, the same memory
+ *  is then cleared on the GPU as a linear render target, and the texture is sampled again without any texture register
+ *  writes in between. Because no texture methods are sent, xemu may take its texture reuse fast path and skip writing
+ *  back the cleared surface.
+ *  Displays three quads side-by-side:
+ *    1. Initial sample of CPU-written texture (expected green).
+ *    2. Sample after linear clear to blue with no texture register writes (expected blue).
+ *    3. Sample after recommitting identical texture registers (expected blue).
+ *
  * @tc A8R8G8B8_R5G6B5_Loop
  *  Exercises rendering an SZ_A8R8G8B8 texture into a swizzled LE_R5G6B5 surface, then using that surface as an
  *  SZ_R5G6B5 texture to render into the LE_A8R8G8B8 framebuffer (xemu #2387).
@@ -188,6 +199,9 @@ TextureRenderTargetTests::TextureRenderTargetTests(TestHost &host, std::string o
 
   tests_[kRenderTextureLoopTest] = [this] { TestRenderTextureLoop(); };
   tests_[kRenderTextureClearLoopTest] = [this] { TestXemu2036RenderTextureClearLoop(); };
+  tests_[kXemuUnchangedTexRegsAfterAliasedLinearClearTest] = [this] {
+    TestXemuUnchangedTexRegsAfterAliasedLinearClear();
+  };
   tests_[kA8R8G8B8ToR5G6B5LoopTest] = [this] { TestA8R8G8B8ToLE_R5G6B5Loop(); };
 }
 
@@ -613,6 +627,94 @@ void TextureRenderTargetTests::TestXemu2036RenderTextureClearLoop() {
   pb_draw_text_screen();
 
   FinishDraw(kRenderTextureClearLoopTest);
+}
+
+void TextureRenderTargetTests::TestXemuUnchangedTexRegsAfterAliasedLinearClear() {
+  static constexpr uint32_t kSmallTextureSz = 256;
+  static constexpr auto kSurfaceFormat = TestHost::SCF_X8R8G8B8_Z8R8G8B8;
+  static constexpr auto kTextureFormat = NV097_SET_TEXTURE_FORMAT_COLOR_SZ_X8R8G8B8;
+  static constexpr uint32_t kInitialColor = 0xFF00FF00;
+  static constexpr uint32_t kClearColor = 0xFF0000FF;
+
+  static constexpr float kQuadTop = 124.f;
+  static constexpr float kQuadBottom = 250.f;
+  static constexpr float kQuadWidth = 160.f;
+  static constexpr float kQuad1Left = 40.f;
+  static constexpr float kQuad1Right = kQuad1Left + kQuadWidth;
+  static constexpr float kQuad2Left = 240.f;
+  static constexpr float kQuad2Right = kQuad2Left + kQuadWidth;
+  static constexpr float kQuad3Left = 440.f;
+  static constexpr float kQuad3Right = kQuad3Left + kQuadWidth;
+
+  auto *tex_mem = host_.GetTextureMemoryForStage(0);
+  auto &texture_stage = host_.GetTextureStage(0);
+
+  auto clear_as_linear_surface = [this, tex_mem](uint32_t color) {
+    host_.RenderToSurfaceStart(tex_mem, kSurfaceFormat, pb_depth_stencil_buffer(), TestHost::SZF_Z24S8, kSmallTextureSz,
+                               kSmallTextureSz, false);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_COLOR_CLEAR_VALUE, color);
+    Pushbuffer::Push(NV097_CLEAR_SURFACE, NV097_CLEAR_SURFACE_COLOR);
+    Pushbuffer::End(true);
+    host_.RenderToSurfaceEnd();
+  };
+
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetVertexShaderProgram(nullptr);
+
+  host_.SetCombinerControl(1, true, true);
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  texture_stage.SetFormat(GetTextureFormatInfo(kTextureFormat));
+  texture_stage.SetTextureDimensions(kSmallTextureSz, kSmallTextureSz);
+  texture_stage.SetImageDimensions(kSmallTextureSz, kSmallTextureSz);
+
+  host_.PrepareDraw(0xFF505050);
+
+  // Ensure that xemu tracks a linear SurfaceBinding at tex_mem rather than any swizzled surface left over from a
+  // previous test.
+  clear_as_linear_surface(0x00000000);
+
+  // Overwrite the surface contents via the CPU so that xemu uploads the texture from RAM rather than copying it from
+  // the surface.
+  auto *pixels = reinterpret_cast<uint32_t *>(tex_mem);
+  for (uint32_t i = 0; i < kSmallTextureSz * kSmallTextureSz; ++i) {
+    pixels[i] = kInitialColor;
+  }
+
+  // This is the last time that any texture registers are written until the control quad.
+  texture_stage.SetEnabled(true);
+  host_.SetupTextureStages();
+  host_.DrawSwizzledTexturedScreenQuad(kQuad1Left, kQuadTop, kQuad1Right, kQuadBottom, 0.f);
+
+  // Only surface methods are sent, so the texture stage is not marked dirty. The cleared pixels reside only in the GPU
+  // surface until they are written back.
+  clear_as_linear_surface(kClearColor);
+
+  host_.DrawSwizzledTexturedScreenQuad(kQuad2Left, kQuadTop, kQuad2Right, kQuadBottom, 0.f);
+
+  // Recommit identical texture state to force the texture stage to be considered dirty.
+  host_.SetupTextureStages();
+  host_.DrawSwizzledTexturedScreenQuad(kQuad3Left, kQuadTop, kQuad3Right, kQuadBottom, 0.f);
+
+  texture_stage.SetEnabled(false);
+  host_.SetupTextureStages();
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  pb_printat(0, 1, "%s", kXemuUnchangedTexRegsAfterAliasedLinearClearTest);
+  pb_printat(2, 6, "Initial");
+  pb_printat(3, 6, " Green");
+
+  pb_printat(2, 25, "No tex regs");
+  pb_printat(3, 25, "   Blue");
+
+  pb_printat(2, 45, "Tex regs");
+  pb_printat(3, 45, "  Blue");
+  pb_draw_text_screen();
+
+  FinishDraw(kXemuUnchangedTexRegsAfterAliasedLinearClearTest);
 }
 
 void TextureRenderTargetTests::TestA8R8G8B8ToLE_R5G6B5Loop() {
