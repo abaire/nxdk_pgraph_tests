@@ -19,6 +19,8 @@ static constexpr uint32_t kShader[] = {
 static constexpr uint32_t kFogColor = 0xFF0000FF;
 
 static constexpr char kTestName[] = "FogCarryover";
+static constexpr char kNopDrawTestName[] = "CarryoverNopDraw";
+static constexpr char kVertexSlotsTestName[] = "CarryoverVertexSlots";
 static constexpr vector_t kDiffuse{0.f, 0.f, 1.f, 1.f};
 
 static constexpr uint32_t kFogModes[] = {
@@ -121,6 +123,34 @@ static float ZeroBias(uint32_t fog_mode) {
  *   Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad
  *   using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.
  *
+ * @tc CarryoverNopDraw
+ *   For each draw mode, renders a row of three quads. The left quad is a reference drawn with the nop draw's fog
+ *   coordinate (red). The middle quad is drawn normally with a fog coordinate that produces no fog (blue). The middle
+ *   quad is then drawn again with the nop draw's fog coordinate while color writes, depth writes, depth test, and
+ *   stencil test are all disabled, so the draw produces no visible output. Finally a quad on the right is drawn without
+ *   specifying a fog coordinate. If the right quad matches the middle quad, the nop draw did not update the carried
+ *   fog; if it matches the left quad, the nop draw updated it. The color/zeta limit error check is disabled around
+ *   the nop draw, with waits for the pushbuffer to become idle on either side.
+ *
+ *   On HW, the right quad is red in every row, so the nop draw updates the carried fog even though it cannot write
+ *   anything.
+ *
+ *   Carried fog is tracked per vertex (see CarryoverVertexSlots), so every primitive has the same number of vertices
+ *   as the right quad. When the nop draw was a 3-vertex triangle, the right quad on HW was red with a blue gradient
+ *   from its first vertex, i.e., one of its vertices inherited from the visible draw instead of the nop draw. Because
+ *   of the idle waits, the results do not follow the six vertex pattern seen in CarryoverVertexSlots.
+ *
+ * @tc CarryoverVertexSlots
+ *   Probes how carried fog values are associated with vertices. Each row draws a single priming batch of points, all
+ *   stacked at the leftmost position: 8 + k blue (unfogged) points followed by one red (fogged) marker point, where k
+ *   is the row label. Sixteen points are then drawn in a separate batch to the right without specifying a fog
+ *   coordinate, so each shows the fog value it inherited. Points are used so that every inherited value is visible
+ *   without interpolation.
+ *
+ *   On HW, points 5 and 11 (counting from 0) are red in every row and the rest are blue. The result does not depend
+ *   on k, so the association continues across draws rather than restarting with each one. This is consistent with six
+ *   carried values used round robin.
+ *
  */
 FogCarryoverTests::FogCarryoverTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Fog carryover", config) {
@@ -136,6 +166,9 @@ FogCarryoverTests::FogCarryoverTests(TestHost &host, std::string output_dir, con
     std::string name = "Carryover" + TestHost::GetDrawPrimitiveName(primitive);
     tests_[name] = [this, primitive, name]() { TestPrimitive(name, primitive); };
   }
+
+  tests_[kNopDrawTestName] = [this]() { TestNopDraw(); };
+  tests_[kVertexSlotsTestName] = [this]() { TestVertexSlots(); };
 }
 
 void FogCarryoverTests::Initialize() {
@@ -525,6 +558,33 @@ static std::shared_ptr<VertexBuffer> CreatePolygon(TestHost &host_, std::vector<
   return buffer;
 }
 
+static void DrawBuffer(TestHost &host, FogCarryoverTestsDrawMode draw_mode, const std::shared_ptr<VertexBuffer> &buffer,
+                       const std::vector<uint32_t> &indices, uint32_t attributes, TestHost::DrawPrimitive primitive) {
+  host.SetVertexBuffer(buffer);
+  switch (draw_mode) {
+    case FogCarryoverTestsDrawMode::DRAW_ARRAYS:
+      host.DrawArrays(attributes, primitive);
+      break;
+    case FogCarryoverTestsDrawMode::DRAW_INLINE_BUFFERS:
+      host.DrawInlineBuffer(attributes, primitive);
+      break;
+    case FogCarryoverTestsDrawMode::DRAW_INLINE_ELEMENTS:
+      host.DrawInlineElements16(indices, attributes, primitive);
+      break;
+    case FogCarryoverTestsDrawMode::DRAW_INLINE_ARRAYS:
+      host.DrawInlineArray(attributes, primitive);
+      break;
+  }
+}
+
+static void ShiftGeometryVertically(const std::shared_ptr<VertexBuffer> &buffer, float delta_y) {
+  auto vertex = buffer->Lock();
+  for (auto idx = 0; idx < buffer->GetNumVertices(); ++idx, ++vertex) {
+    vertex->pos[1] += delta_y;
+  }
+  buffer->Unlock();
+}
+
 void FogCarryoverTests::TestPrimitive(const std::string &name, TestHost::DrawPrimitive primitive) {
   auto draw_shader = std::make_shared<PassthroughVertexShader>();
   host_.SetVertexShaderProgram(draw_shader);
@@ -633,49 +693,14 @@ void FogCarryoverTests::TestPrimitive(const std::string &name, TestHost::DrawPri
     static constexpr uint32_t kQuadAttributes = TestHost::POSITION | TestHost::DIFFUSE;
     static constexpr uint32_t kAttributes = kQuadAttributes | TestHost::FOG_COORD;
     activate_carryover_shader(false);
-    host_.SetVertexBuffer(draw_buffer);
-    switch (draw_mode) {
-      case FogCarryoverTestsDrawMode::DRAW_ARRAYS:
-        host_.DrawArrays(kAttributes, primitive);
-        activate_carryover_shader(true);
-        host_.SetVertexBuffer(quad_buffer);
-        host_.DrawArrays(kQuadAttributes, TestHost::PRIMITIVE_QUADS);
-        break;
-
-      case FogCarryoverTestsDrawMode::DRAW_INLINE_BUFFERS:
-        host_.DrawInlineBuffer(kAttributes, primitive);
-        activate_carryover_shader(true);
-        host_.SetVertexBuffer(quad_buffer);
-        host_.DrawInlineBuffer(kQuadAttributes, TestHost::PRIMITIVE_QUADS);
-        break;
-
-      case FogCarryoverTestsDrawMode::DRAW_INLINE_ELEMENTS:
-        host_.DrawInlineElements16(index_buffer, kAttributes, primitive);
-        activate_carryover_shader(true);
-        host_.SetVertexBuffer(quad_buffer);
-        host_.DrawInlineElements16(quad_indices, kQuadAttributes, TestHost::PRIMITIVE_QUADS);
-        break;
-
-      case FogCarryoverTestsDrawMode::DRAW_INLINE_ARRAYS:
-        host_.DrawInlineArray(kAttributes, primitive);
-        activate_carryover_shader(true);
-        host_.SetVertexBuffer(quad_buffer);
-        host_.DrawInlineArray(kQuadAttributes, TestHost::PRIMITIVE_QUADS);
-        break;
-    }
+    DrawBuffer(host_, draw_mode, draw_buffer, index_buffer, kAttributes, primitive);
+    activate_carryover_shader(true);
+    DrawBuffer(host_, draw_mode, quad_buffer, quad_indices, kQuadAttributes, TestHost::PRIMITIVE_QUADS);
   };
 
   static constexpr float kTestVerticalSpacing = kTestSize + 40.f;
   static constexpr int kTextColumn = 30;
   int text_row = 1;
-
-  auto shift_geometry_vertically = [](std::shared_ptr<VertexBuffer> &buffer, float delta_y) {
-    auto vertex = buffer->Lock();
-    for (auto idx = 0; idx < buffer->GetNumVertices(); ++idx, ++vertex) {
-      vertex->pos[1] += delta_y;
-    }
-    buffer->Unlock();
-  };
 
   for (auto &mode : kDrawModes) {
     draw(mode.mode);
@@ -684,8 +709,8 @@ void FogCarryoverTests::TestPrimitive(const std::string &name, TestHost::DrawPri
     // Allow the draw to fully complete before modifying the buffers, since DMA may still be reading from them.
     host_.PBKitBusyWait();
 
-    shift_geometry_vertically(draw_buffer, kTestVerticalSpacing);
-    shift_geometry_vertically(quad_buffer, kTestVerticalSpacing);
+    ShiftGeometryVertically(draw_buffer, kTestVerticalSpacing);
+    ShiftGeometryVertically(quad_buffer, kTestVerticalSpacing);
     text_row += 4;
   }
 
@@ -693,4 +718,196 @@ void FogCarryoverTests::TestPrimitive(const std::string &name, TestHost::DrawPri
   pb_draw_text_screen();
 
   FinishDraw(name);
+}
+
+void FogCarryoverTests::TestNopDraw() {
+  std::shared_ptr<VertexShaderProgram> draw_shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(draw_shader);
+  draw_shader->PrepareDraw();
+
+  auto carryover_shader = std::make_shared<VertexShaderProgram>(kShader, sizeof(kShader));
+  carryover_shader->PrepareDraw();
+
+  host_.PrepareDraw(0xFFAAAAAA);
+
+  // Fog coordinate set by the visible draw that precedes the nop draw.
+  static constexpr float kVisibleFogCoord = 0.0f;
+  // Fog coordinate set by the nop draw and the reference draw.
+  static constexpr float kNopFogCoord = 0.6f;
+
+  static constexpr float kTestSize = 64.f;
+  static constexpr float kTop = 64.f;
+  const auto column_width = floorf(host_.GetFramebufferWidthF() / 4.f);
+
+  // Fog carryover is tracked per vertex, so every draw uses a 4-vertex quad. With a 3-vertex nop draw, one vertex of
+  // the carryover quad inherits from the visible draw on HW.
+  auto make_quad = [this, column_width](float column, float fog_coord) {
+    auto buffer = host_.AllocateVertexBuffer(4);
+    const auto left = floorf(column_width * column + (column_width - kTestSize) * 0.5f);
+    const float positions[][2] = {
+        {left, kTop},
+        {left + kTestSize, kTop},
+        {left + kTestSize, kTop + kTestSize},
+        {left, kTop + kTestSize},
+    };
+    auto vertex = buffer->Lock();
+    for (auto idx = 0; idx < 4; ++idx, ++vertex) {
+      vertex->SetPosition(positions[idx][0], positions[idx][1], 0.f);
+      vertex->SetDiffuse(0.f, 0.f, 1.f);
+      vertex->SetFogCoord(fog_coord);
+    }
+    buffer->Unlock();
+    return buffer;
+  };
+
+  auto reference_buffer = make_quad(0.5f, kNopFogCoord);
+  auto visible_buffer = make_quad(1.5f, kVisibleFogCoord);
+  auto nop_buffer = make_quad(1.5f, kNopFogCoord);
+  // The fog coordinate is not sent for the carryover quad.
+  auto quad_buffer = make_quad(2.5f, 0.f);
+
+  const std::vector<uint32_t> quad_indices{0, 1, 2, 3};
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FOG_MODE, NV097_SET_FOG_MODE_V_EXP);
+  // The last parameter never seems to have an effect.
+  Pushbuffer::PushF(NV097_SET_FOG_PARAMS, ZeroBias(NV097_SET_FOG_MODE_V_EXP), -1.f, 0.f);
+  Pushbuffer::End();
+
+  auto activate_shader = [this](std::shared_ptr<VertexShaderProgram> &shader) {
+    host_.SetVertexShaderProgram(shader);
+    shader->PrepareDraw();
+    shader->Activate();
+  };
+
+  static constexpr uint32_t kQuadAttributes = TestHost::POSITION | TestHost::DIFFUSE;
+  static constexpr uint32_t kAttributes = kQuadAttributes | TestHost::FOG_COORD;
+
+  static constexpr float kTestVerticalSpacing = kTestSize + 40.f;
+  static constexpr int kTextColumn = 2;
+  int text_row = 1;
+
+  for (auto &mode : kDrawModes) {
+    activate_shader(draw_shader);
+    DrawBuffer(host_, mode.mode, reference_buffer, quad_indices, kAttributes, TestHost::PRIMITIVE_QUADS);
+    DrawBuffer(host_, mode.mode, visible_buffer, quad_indices, kAttributes, TestHost::PRIMITIVE_QUADS);
+
+    // Nop draw: nothing can be written to the color or zeta buffers.
+    // HW raises a color/zeta limit error for such a draw unless the check is disabled. The register is written
+    // immediately, so the pushbuffer must be idle to avoid affecting the checks on surrounding draws.
+    host_.PBKitBusyWait();
+    auto crash_register = reinterpret_cast<volatile uint32_t *>(PGRAPH_REGISTER_BASE + 0x880);
+    const auto crash_register_pre_test = *crash_register;
+    *crash_register = crash_register_pre_test & (~0x800);
+
+    host_.SetColorMask(0);
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+    Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+    Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+    Pushbuffer::End();
+    DrawBuffer(host_, mode.mode, nop_buffer, quad_indices, kAttributes, TestHost::PRIMITIVE_QUADS);
+    host_.SetColorMask();
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+    Pushbuffer::End();
+
+    host_.PBKitBusyWait();
+    *crash_register = crash_register_pre_test;
+
+    activate_shader(carryover_shader);
+    DrawBuffer(host_, mode.mode, quad_buffer, quad_indices, kQuadAttributes, TestHost::PRIMITIVE_QUADS);
+
+    pb_printat(text_row, kTextColumn, "%s", mode.name);
+
+    // Allow the draw to fully complete before modifying the buffers, since DMA may still be reading from them.
+    host_.PBKitBusyWait();
+
+    ShiftGeometryVertically(reference_buffer, kTestVerticalSpacing);
+    ShiftGeometryVertically(visible_buffer, kTestVerticalSpacing);
+    ShiftGeometryVertically(nop_buffer, kTestVerticalSpacing);
+    ShiftGeometryVertically(quad_buffer, kTestVerticalSpacing);
+    text_row += 4;
+  }
+
+  pb_printat(0, 0, "%s", kNopDrawTestName);
+  pb_draw_text_screen();
+
+  FinishDraw(kNopDrawTestName);
+}
+
+void FogCarryoverTests::TestVertexSlots() {
+  auto draw_shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(draw_shader);
+  draw_shader->PrepareDraw();
+
+  auto carryover_shader = std::make_shared<VertexShaderProgram>(kShader, sizeof(kShader));
+  carryover_shader->PrepareDraw();
+
+  host_.PrepareDraw(0xFFAAAAAA);
+
+  static constexpr float kUnfoggedFogCoord = 0.0f;
+  static constexpr float kFoggedFogCoord = 0.6f;
+
+  static constexpr uint32_t kNumFillerPoints = 8;
+  static constexpr uint32_t kMaxExtraPoints = 8;
+  static constexpr uint32_t kNumCarryoverPoints = 16;
+
+  static constexpr float kPointSize = 16.f;
+  static constexpr float kPrimingX = 100.f;
+  static constexpr float kCarryoverLeft = 180.f;
+  static constexpr float kCarryoverSpacing = 24.f;
+  static constexpr int kTextColumn = 1;
+  static constexpr int kTextRowSpacing = 2;
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FOG_MODE, NV097_SET_FOG_MODE_V_EXP);
+  // The last parameter never seems to have an effect.
+  Pushbuffer::PushF(NV097_SET_FOG_PARAMS, ZeroBias(NV097_SET_FOG_MODE_V_EXP), -1.f, 0.f);
+  // Point size is in 1/8th pixel units.
+  Pushbuffer::Push(NV097_SET_POINT_SIZE, static_cast<uint32_t>(kPointSize * 8.f));
+  Pushbuffer::End();
+
+  for (uint32_t extra = 0; extra < kMaxExtraPoints; ++extra) {
+    const int text_row = 1 + static_cast<int>(extra) * kTextRowSpacing;
+    // Align the point centers with the row label; text rows start at Y = 25 + 25 * row and are 16 pixels tall.
+    const float cy = 25.f + 25.f * static_cast<float>(text_row) + 8.f;
+
+    host_.SetVertexShaderProgram(draw_shader);
+    draw_shader->PrepareDraw();
+    draw_shader->Activate();
+
+    host_.Begin(TestHost::PRIMITIVE_POINTS);
+    host_.SetDiffuse(kDiffuse);
+    host_.SetSpecular(kDiffuse);
+    for (uint32_t i = 0; i < kNumFillerPoints + extra; ++i) {
+      host_.SetFogCoord(kUnfoggedFogCoord);
+      host_.SetVertex(kPrimingX, cy, 0.f);
+    }
+    host_.SetFogCoord(kFoggedFogCoord);
+    host_.SetVertex(kPrimingX, cy, 0.f);
+    host_.End();
+
+    host_.SetVertexShaderProgram(carryover_shader);
+    carryover_shader->PrepareDraw();
+    carryover_shader->Activate();
+
+    host_.Begin(TestHost::PRIMITIVE_POINTS);
+    host_.SetDiffuse(kDiffuse);
+    for (uint32_t i = 0; i < kNumCarryoverPoints; ++i) {
+      host_.SetVertex(kCarryoverLeft + kCarryoverSpacing * static_cast<float>(i), cy, 0.f);
+    }
+    host_.End();
+
+    pb_printat(text_row, kTextColumn, "k=%u", extra);
+  }
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_SIZE, 8);
+  Pushbuffer::End();
+
+  pb_printat(0, 0, "%s", kVertexSlotsTestName);
+  pb_draw_text_screen();
+
+  FinishDraw(kVertexSlotsTestName);
 }
