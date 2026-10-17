@@ -71,6 +71,7 @@ class AttributeCarryoverTests : public TestSuite {
   void CreateGeometry(TestHost::DrawPrimitive primitive);
   void Test(TestHost::DrawPrimitive primitive, Attribute test_attribute, const TestConfig &config);
   void TestD3DColor(bool zero_stride);
+  void TestSquashedDrawArrays();
 
   static std::string MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
                                   const TestConfig &config);

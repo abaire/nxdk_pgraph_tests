@@ -50,6 +50,8 @@ static constexpr uint32_t kD3DTestColor = 0xFFE08020;
 static constexpr uint32_t kD3DLeadingColor = 0xFF00FF00;
 static constexpr uint32_t kD3DColorCount = 3;
 
+static constexpr char kSquashedDrawArraysTest[] = "SquashedDrawArrays";
+
 static void SetRawVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
   Pushbuffer::Begin();
   Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
@@ -88,6 +90,13 @@ static void DrawRawArrays(TestHost::DrawPrimitive primitive, uint32_t count) {
  * @tc D3DColor-stride0
  *  As D3DColor-da, but the UB_D3D diffuse array has a stride of 0 so element 0 (0xFFE08020) is used for every vertex.
  *  Both triangles should be solid orange; any green indicates the stride was not treated as 0.
+ *
+ * @tc SquashedDrawArrays
+ *  Renders two triangles from a single vertex buffer using back-to-back BEGIN/DRAW_ARRAYS/END sequences with no other
+ *  methods between them. The first draw (left) uses vertices 3-5 and ends on a red vertex, the second (middle) uses
+ *  vertices 0-2 and ends on a blue vertex. A test triangle (right) that only provides positions is then rendered with
+ *  its diffuse color carried over. It should be solid blue, the last vertex submitted; red indicates that the highest
+ *  vertex index was carried instead.
  *
  * @tc L-bd0.1_0.0_1.0_1.0-da
  *  Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw
@@ -489,6 +498,7 @@ AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string out
 
   tests_[kD3DColorTest] = [this]() { TestD3DColor(false); };
   tests_[kD3DColorStrideZeroTest] = [this]() { TestD3DColor(true); };
+  tests_[kSquashedDrawArraysTest] = [this]() { TestSquashedDrawArrays(); };
 }
 
 void AttributeCarryoverTests::Initialize() {
@@ -820,6 +830,99 @@ void AttributeCarryoverTests::TestD3DColor(bool zero_stride) {
   pb_draw_text_screen();
 
   FinishDraw(name);
+}
+
+void AttributeCarryoverTests::TestSquashedDrawArrays() {
+  auto shader = host_.GetShaderProgram();
+
+  static constexpr uint32_t kBackgroundColor = 0xFF444444;
+
+  const auto fb_width = static_cast<float>(host_.GetFramebufferWidth());
+  const auto fb_height = static_cast<float>(host_.GetFramebufferHeight());
+  const float column_width = floorf(fb_width / 4.0f);
+  const float top = floorf(fb_height / 6.0f);
+  const float bottom = fb_height - top;
+  const float z = 3.0f;
+
+  auto make_triangle = [=](float left, float *one, float *two, float *three) {
+    const float right = left + column_width * 0.9f;
+    one[0] = left;
+    one[1] = top;
+    one[2] = z;
+    two[0] = right;
+    two[1] = top;
+    two[2] = z;
+    three[0] = left + (right - left) * 0.5f;
+    three[1] = bottom;
+    three[2] = z;
+  };
+
+  const Color kLeadingColor{0.0f, 1.0f, 0.0f, 1.0f};
+  const Color kExpectedColor{0.0f, 0.4f, 1.0f, 1.0f};
+  const Color kHighestIndexColor{1.0f, 0.2f, 0.0f, 1.0f};
+
+  // Vertices 0-2 are drawn second (middle), vertices 3-5 are drawn first (left).
+  bleed_buffer_ = host_.AllocateVertexBuffer(6);
+  {
+    float one[3], two[3], three[3];
+    make_triangle(column_width * 1.5f, one, two, three);
+    bleed_buffer_->DefineTriangle(0, one, two, three, kLeadingColor, kLeadingColor, kExpectedColor);
+    make_triangle(column_width * 0.5f, one, two, three);
+    bleed_buffer_->DefineTriangle(1, one, two, three, kLeadingColor, kLeadingColor, kHighestIndexColor);
+  }
+
+  test_buffer_ = host_.AllocateVertexBuffer(3);
+  {
+    float one[3], two[3], three[3];
+    make_triangle(column_width * 2.5f, one, two, three);
+    test_buffer_->DefineTriangle(0, one, two, three);
+  }
+
+  // Both draws render iDiffuse. This is set before PrepareDraw because the raw draws below do not upload shader
+  // constants.
+  shader->SetUniformF(0, ATTR_DIFFUSE);
+  host_.PrepareDraw(kBackgroundColor);
+
+  for (uint32_t i = 0; i < 16; ++i) {
+    ClearRawVertexAttribute(i);
+  }
+
+  {
+    auto vertex = bleed_buffer_->Lock();
+    SetRawVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                          vertex[0].pos);
+    SetRawVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+                          vertex[0].diffuse);
+    bleed_buffer_->Unlock();
+  }
+
+  // The two draws must be adjacent in the pushbuffer with no intervening methods.
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 3));
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, TestHost::PRIMITIVE_TRIANGLES);
+  Pushbuffer::Push(NV097_DRAW_ARRAYS, MASK(NV097_DRAW_ARRAYS_COUNT, 2) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
+
+  // Test triangle: diffuse is disabled so the shader reads the carried value.
+  ClearRawVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
+  {
+    auto vertex = test_buffer_->Lock();
+    SetRawVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                          vertex[0].pos);
+    test_buffer_->Unlock();
+  }
+  DrawRawArrays(TestHost::PRIMITIVE_TRIANGLES, 3);
+
+  ClearRawVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
+
+  pb_print("%s", kSquashedDrawArraysTest);
+  pb_draw_text_screen();
+
+  FinishDraw(kSquashedDrawArraysTest);
 }
 
 std::string AttributeCarryoverTests::MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
