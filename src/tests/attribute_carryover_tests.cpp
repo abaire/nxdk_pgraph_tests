@@ -41,8 +41,53 @@ static const AttributeCarryoverTests::TestConfig kTestConfigs[] = {
 
 static TestHost::VertexAttribute TestAttributeToVertexAttribute(AttributeCarryoverTests::Attribute attribute);
 
+static constexpr char kD3DColorTest[] = "D3DColor-da";
+static constexpr char kD3DColorStrideZeroTest[] = "D3DColor-stride0";
+
+// A8R8G8B8 with distinct R and B so that a channel swap is visible.
+static constexpr uint32_t kD3DTestColor = 0xFFE08020;
+// Color of the leading bleed vertices, never expected in the test primitive.
+static constexpr uint32_t kD3DLeadingColor = 0xFF00FF00;
+static constexpr uint32_t kD3DColorCount = 3;
+
+static void SetRawVertexAttribute(uint32_t index, uint32_t format, uint32_t size, uint32_t stride, const void *data) {
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_FORMAT + index * 4,
+                   MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE, format) |
+                       MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_SIZE, size) |
+                       MASK(NV097_SET_VERTEX_DATA_ARRAY_FORMAT_STRIDE, stride));
+  if (size && data) {
+    Pushbuffer::Push(NV097_SET_VERTEX_DATA_ARRAY_OFFSET + index * 4, reinterpret_cast<uintptr_t>(data) & 0x03ffffff);
+  }
+  Pushbuffer::End();
+}
+
+static void ClearRawVertexAttribute(uint32_t index) {
+  SetRawVertexAttribute(index, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 0, 0, nullptr);
+}
+
+static void DrawRawArrays(TestHost::DrawPrimitive primitive, uint32_t count) {
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_BREAK_VERTEX_BUFFER_CACHE, 0);
+  Pushbuffer::Push(NV097_SET_BEGIN_END, primitive);
+  Pushbuffer::Push(NV097_DRAW_ARRAYS,
+                   MASK(NV097_DRAW_ARRAYS_COUNT, count - 1) | MASK(NV097_DRAW_ARRAYS_START_INDEX, 0));
+  Pushbuffer::Push(NV097_SET_BEGIN_END, NV097_SET_BEGIN_END_OP_END);
+  Pushbuffer::End();
+}
+
 /**
  * Initializes the test suite and creates test cases.
+ *
+ * @tc D3DColor-da
+ *  Renders a triangle whose diffuse color comes from a UB_D3D vertex array (green for the first two vertices,
+ *  0xFFE08020 for the last), then renders a test triangle on the right that only provides positions. The left triangle
+ *  should be a green to orange gradient. The test triangle should be solid orange (the carried value retains the
+ *  shader-visible BGRA order); blue indicates the raw memory byte order was carried instead.
+ *
+ * @tc D3DColor-stride0
+ *  As D3DColor-da, but the UB_D3D diffuse array has a stride of 0 so element 0 (0xFFE08020) is used for every vertex.
+ *  Both triangles should be solid orange; any green indicates the stride was not treated as 0.
  *
  * @tc L-bd0.1_0.0_1.0_1.0-da
  *  Renders a fully specified line, then renders a test line that takes its diffuse color from back diffuse using draw
@@ -441,6 +486,9 @@ AttributeCarryoverTests::AttributeCarryoverTests(TestHost &host, std::string out
       }
     }
   }
+
+  tests_[kD3DColorTest] = [this]() { TestD3DColor(false); };
+  tests_[kD3DColorStrideZeroTest] = [this]() { TestD3DColor(true); };
 }
 
 void AttributeCarryoverTests::Initialize() {
@@ -465,11 +513,18 @@ void AttributeCarryoverTests::Initialize() {
   shader->SetUniformF(index++, 8.f, 9.f, 10.f, 11.f);
 
   host_.SetVertexShaderProgram(shader);
+
+  d3d_colors_ = static_cast<uint32_t *>(MmAllocateContiguousMemoryEx(kD3DColorCount * sizeof(uint32_t), 0, MAXRAM,
+                                                                     0x1000, PAGE_WRITECOMBINE | PAGE_READWRITE));
 }
 
 void AttributeCarryoverTests::Deinitialize() {
   bleed_buffer_.reset();
   test_buffer_.reset();
+  if (d3d_colors_) {
+    MmFreeContiguousMemory(d3d_colors_);
+    d3d_colors_ = nullptr;
+  }
   TestSuite::Deinitialize();
 }
 
@@ -706,6 +761,62 @@ void AttributeCarryoverTests::Test(TestHost::DrawPrimitive primitive, Attribute 
 
   std::string name = MakeTestName(primitive, test_attribute, config);
   pb_print("%s", name.c_str());
+  pb_draw_text_screen();
+
+  FinishDraw(name);
+}
+
+void AttributeCarryoverTests::TestD3DColor(bool zero_stride) {
+  auto shader = host_.GetShaderProgram();
+
+  static constexpr uint32_t kBackgroundColor = 0xFF444444;
+  CreateGeometry(TestHost::PRIMITIVE_TRIANGLES);
+
+  // Both draws render iDiffuse. This is set before PrepareDraw because the raw draws below do not upload shader
+  // constants.
+  shader->SetUniformF(0, ATTR_DIFFUSE);
+  host_.PrepareDraw(kBackgroundColor);
+
+  if (zero_stride) {
+    d3d_colors_[0] = kD3DTestColor;
+    d3d_colors_[1] = kD3DLeadingColor;
+    d3d_colors_[2] = kD3DLeadingColor;
+  } else {
+    d3d_colors_[0] = kD3DLeadingColor;
+    d3d_colors_[1] = kD3DLeadingColor;
+    d3d_colors_[2] = kD3DTestColor;
+  }
+
+  // Start from a known state where only position and diffuse are bound.
+  for (uint32_t i = 0; i < 16; ++i) {
+    ClearRawVertexAttribute(i);
+  }
+
+  // Bleed triangle: position from the float vertex buffer, diffuse from the UB_D3D array.
+  {
+    auto vertex = bleed_buffer_->Lock();
+    SetRawVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                          vertex[0].pos);
+    bleed_buffer_->Unlock();
+  }
+  SetRawVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4,
+                        zero_stride ? 0 : sizeof(uint32_t), d3d_colors_);
+  DrawRawArrays(TestHost::PRIMITIVE_TRIANGLES, 3);
+
+  // Test triangle: diffuse is disabled so the shader reads the carried value.
+  ClearRawVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
+  {
+    auto vertex = test_buffer_->Lock();
+    SetRawVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 3, sizeof(Vertex),
+                          vertex[0].pos);
+    test_buffer_->Unlock();
+  }
+  DrawRawArrays(TestHost::PRIMITIVE_TRIANGLES, 3);
+
+  ClearRawVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
+
+  const char *name = zero_stride ? kD3DColorStrideZeroTest : kD3DColorTest;
+  pb_print("%s", name);
   pb_draw_text_screen();
 
   FinishDraw(name);

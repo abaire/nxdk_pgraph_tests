@@ -70,6 +70,7 @@ class AttributeCarryoverTests : public TestSuite {
  private:
   void CreateGeometry(TestHost::DrawPrimitive primitive);
   void Test(TestHost::DrawPrimitive primitive, Attribute test_attribute, const TestConfig &config);
+  void TestD3DColor(bool zero_stride);
 
   static std::string MakeTestName(TestHost::DrawPrimitive primitive, Attribute test_attribute,
                                   const TestConfig &config);
@@ -83,6 +84,9 @@ class AttributeCarryoverTests : public TestSuite {
   std::shared_ptr<VertexBuffer> test_buffer_;
 
   std::vector<uint32_t> index_buffer_;
+
+  // Contiguous memory holding one D3DCOLOR per bleed vertex.
+  uint32_t *d3d_colors_{nullptr};
 };
 
 #endif  // NXDK_PGRAPH_TESTS_ATTRIBUTE_CARRYOVER_TESTS_H
