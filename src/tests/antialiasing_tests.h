@@ -42,6 +42,7 @@ class AntialiasingTests : public TestSuite {
   void TestCPUWriteIgnoresSurfaceConfig();
   void TestGPUAAWriteAfterCPUWrite();
   void TestNonAACPURoundTrip();
+  void TestComposite(const char *name, TestHost::AntiAliasingSetting aa, bool blur);
 
 #ifdef ENABLE_MULTIFRAME_CPU_BLIT_TEST
   // This test is only useful when viewing live and should generally be disabled.
