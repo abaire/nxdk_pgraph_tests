@@ -7,9 +7,16 @@
 #include <cmath>
 
 #include "debug_output.h"
+#include "nxdk_ext.h"
 #include "pbkit_ext.h"
 #include "test_host.h"
 #include "vertex_buffer.h"
+
+// See pb_init in pbkit.c, where the channel contexts are set up.
+// SUBCH_3 == GR_CLASS_9F, which contains the IMAGE_BLIT commands.
+#define SUBCH_CLASS_9F SUBCH_3
+// SUBCH_4 == GR_CLASS_62, which contains the NV10 2D surface commands.
+#define SUBCH_CLASS_62 SUBCH_4
 
 // clang-format off
 static constexpr uint32_t kDisplacementShader[] = {
@@ -65,6 +72,9 @@ static constexpr char kSwizzledDiffuseTest[] = "SwizzledDiffuseArray";
 static constexpr char kMultiStreamTest[] = "MultiStream";
 static constexpr char kDynamicUpdateLoopTest[] = "DynamicUpdateLoop";
 static constexpr char kRenderScalePatternTest[] = "RenderScalePattern";
+static constexpr char kDownloadByCPUReadTest[] = "DownloadByCPURead";
+static constexpr char kDownloadByTextureReadTest[] = "DownloadByTextureRead";
+static constexpr char kImageBlitOverVertexArrayTest[] = "ImageBlitOverVertexArray";
 
 static constexpr uint32_t kSurfaceWidth = 64;
 static constexpr uint32_t kSurfaceHeight = 64;
@@ -143,6 +153,30 @@ static void DrawArrays(TestHost::DrawPrimitive primitive, uint32_t count, uint32
  *  When emulator render scale > 1.0 downsamples/filters the surface with interpolation errors across diagonal seams,
  *  shifts in index values cause address-register lookups to select incorrect palette slots, visibly tearing the mesh
  *  into spikes (reproducing the behavior in the XDK DisplacementMap sample and xemu PR #2984).
+ *
+ * @tc DownloadByCPURead
+ *  Writes red into the first row of a linear surface with the CPU and draws the top two quads using it as the diffuse
+ *  stream. Green is then rendered over the same memory, the GPU is idled, and the CPU reads a pixel from the surface
+ *  (displayed at the top of the screen; expect 0xFF00FF00). The bottom two quads are then drawn from the same diffuse
+ *  stream.
+ *  Expect to see two red quads on top and two green quads on the bottom.
+ *  Reproduces xemu #859: on xemu, the CPU read triggers a surface download that does not mark the renderer's copy of
+ *  VRAM as dirty, so the bottom quads are drawn with the stale red vertex colors.
+ *
+ * @tc DownloadByTextureRead
+ *  As DownloadByCPURead, but instead of a CPU read the rendered surface memory is sampled as a 16x2 linear A8R8G8B8
+ *  texture (only the first row is displayed) whose dimensions do not match the surface, drawn as a strip between the
+ * quad rows. Expect to see two red quads on top, a green strip in the middle, and two green quads on the bottom.
+ *  Reproduces xemu #859: on xemu, the incompatible texture triggers a surface download that does not mark the
+ *  renderer's copy of VRAM as dirty, so the strip is green but the bottom quads are drawn with stale red vertex colors.
+ *
+ * @tc ImageBlitOverVertexArray
+ *  Writes red into the first row of a buffer with the CPU and draws the top two quads using it as the diffuse stream.
+ *  Green pixels written by the CPU into a second buffer are then copied over the first using an NV09F image blit
+ *  (SRCCOPY), and the bottom two quads are drawn from the same diffuse stream.
+ *  Expect to see two red quads on top and two green quads on the bottom.
+ *  On xemu, the blit does not mark the renderer's copy of VRAM as dirty (the same issue as xemu #859, but not
+ *  addressed by xemu PR #2800), so the bottom quads are drawn with the stale red vertex colors.
  */
 SurfaceAsVertexArrayTests::SurfaceAsVertexArrayTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Surface as vertex array", config) {
@@ -151,6 +185,9 @@ SurfaceAsVertexArrayTests::SurfaceAsVertexArrayTests(TestHost &host, std::string
   tests_[kMultiStreamTest] = [this]() { TestMultiStream(); };
   tests_[kDynamicUpdateLoopTest] = [this]() { TestDynamicUpdateLoop(); };
   tests_[kRenderScalePatternTest] = [this]() { TestRenderScalePattern(); };
+  tests_[kDownloadByCPUReadTest] = [this]() { TestDownloadByCPURead(); };
+  tests_[kDownloadByTextureReadTest] = [this]() { TestDownloadByTextureRead(); };
+  tests_[kImageBlitOverVertexArrayTest] = [this]() { TestImageBlitOverVertexArray(); };
 }
 
 void SurfaceAsVertexArrayTests::AllocateTestSurfaces(bool need_surface_b) {
@@ -236,6 +273,12 @@ void SurfaceAsVertexArrayTests::Initialize() {
   for (uint32_t i = 0; i < 16; ++i) {
     ClearVertexAttribute(i);
   }
+
+  auto channel = kNextContextChannel;
+  pb_create_dma_ctx(channel++, DMA_CLASS_3D, 0, MAXRAM, &blit_dma_ctx_);
+  pb_bind_channel(&blit_dma_ctx_);
+  pb_create_gr_ctx(channel++, GR_CLASS_30, &null_ctx_);
+  pb_bind_channel(&null_ctx_);
 
   host_.SetBlend(false);
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -571,4 +614,150 @@ void SurfaceAsVertexArrayTests::TestRenderScalePattern() {
   pb_draw_text_screen();
 
   FinishDraw(kRenderScalePatternTest);
+}
+
+void SurfaceAsVertexArrayTests::DrawSurfaceDiffuseQuads(uint32_t start_index) {
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+
+  auto v = vertex_buffer_->Lock();
+  SetVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex), v[0].pos);
+  vertex_buffer_->Unlock();
+
+  SetVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4, 4, surface_a_);
+
+  DrawArrays(TestHost::PRIMITIVE_QUADS, 8, start_index);
+
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
+}
+
+void SurfaceAsVertexArrayTests::RenderOverConsumedVertexArray() {
+  AllocateTestSurfaces(false);
+  memset(surface_a_, 0, kSurfaceSize);
+
+  auto diffuse = reinterpret_cast<uint32_t *>(surface_a_);
+  for (uint32_t i = 0; i < 16; ++i) {
+    diffuse[i] = 0xFFFF0000;
+  }
+
+  host_.PrepareDraw(0xFF202020);
+
+  // Consume the CPU-written stream so that an emulator's copy of the vertex memory is synchronized and considered
+  // clean.
+  DrawSurfaceDiffuseQuads(0);
+
+  host_.SetVertexShaderProgram(nullptr);
+  host_.RenderToSurfaceStart(surface_a_, TestHost::SCF_A8R8G8B8, pb_depth_stencil_buffer(), TestHost::SZF_Z24S8,
+                             kSurfaceWidth, kSurfaceHeight, false);
+  host_.SetDiffuse(0.f, 1.f, 0.f, 1.f);
+  host_.DrawScreenQuad(0.f, 0.f, 16.f, 1.f, 0.5f);
+  host_.RenderToSurfaceEnd();
+}
+
+void SurfaceAsVertexArrayTests::TestDownloadByCPURead() {
+  RenderOverConsumedVertexArray();
+
+  host_.WaitForGPU();
+  host_.PBKitBusyWait();
+  uint32_t cpu_read = reinterpret_cast<volatile uint32_t *>(surface_a_)[8];
+
+  DrawSurfaceDiffuseQuads(8);
+
+  pb_printat(0, 0, "%s", kDownloadByCPUReadTest);
+  pb_printat(0, 30, "CPU read: 0x%08X", cpu_read);
+  pb_printat(8, 0, "Bottom row: Green");
+  pb_draw_text_screen();
+
+  FinishDraw(kDownloadByCPUReadTest);
+}
+
+void SurfaceAsVertexArrayTests::TestDownloadByTextureRead() {
+  static constexpr uint32_t kTextureWidth = 16;
+
+  RenderOverConsumedVertexArray();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX0, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  auto &texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetEnabled();
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+  // A height of 1 would be treated as a 1D texture; only the first row is sampled.
+  texture_stage.SetImageDimensions(kTextureWidth, 2);
+  host_.SetupTextureStages();
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_TEXTURE_OFFSET, VRAM_ADDR(surface_a_));
+  Pushbuffer::End();
+
+  host_.DrawTexturedScreenQuad(60.f, 220.f, 580.f, 250.f, 0.1f, kTextureWidth, 1);
+
+  texture_stage.SetEnabled(false);
+  host_.SetupTextureStages();
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+  DrawSurfaceDiffuseQuads(8);
+
+  pb_printat(0, 0, "%s", kDownloadByTextureReadTest);
+  pb_printat(8, 14, "Bottom row: Green");
+  pb_draw_text_screen();
+
+  FinishDraw(kDownloadByTextureReadTest);
+}
+
+void SurfaceAsVertexArrayTests::TestImageBlitOverVertexArray() {
+  AllocateTestSurfaces(true);
+  memset(surface_a_, 0, kSurfaceSize);
+  memset(surface_b_, 0, kSurfaceSize);
+
+  auto diffuse = reinterpret_cast<uint32_t *>(surface_a_);
+  auto blit_source = reinterpret_cast<uint32_t *>(surface_b_);
+  for (uint32_t i = 0; i < 16; ++i) {
+    diffuse[i] = 0xFFFF0000;
+    blit_source[i] = 0xFF00FF00;
+  }
+
+  host_.PrepareDraw(0xFF202020);
+
+  // Consume the CPU-written stream so that an emulator's copy of the vertex memory is synchronized and considered
+  // clean.
+  DrawSurfaceDiffuseQuads(0);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_OPERATION, NV09F_SET_OPERATION_SRCCOPY);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY0, blit_dma_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_SET_DMA_IN_MEMORY1, blit_dma_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_FORMAT, NV04_SURFACE_2D_FORMAT_A8R8G8B8);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_PITCH, kSurfacePitch | (kSurfacePitch << 16));
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_SRC, VRAM_ADDR(surface_b_));
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_DST, VRAM_ADDR(surface_a_));
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_COLOR_KEY, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_CLIP_RECTANGLE, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_PATTERN, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_ROP5, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SET_BETA4, null_ctx_.ChannelID);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_POINT_IN, 0);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_POINT_OUT, 0);
+  Pushbuffer::PushTo(SUBCH_CLASS_9F, NV_IMAGE_BLIT_SIZE, 16 | (1 << 16));
+  Pushbuffer::Push(NV097_NO_OPERATION, 0);
+  Pushbuffer::Push(NV097_WAIT_FOR_IDLE, 0);
+  // Leaving arbitrary offsets will lead to a color buffer limit error in other tests.
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_SRC, 0);
+  Pushbuffer::PushTo(SUBCH_CLASS_62, NV10_CONTEXT_SURFACES_2D_OFFSET_DST, 0);
+  Pushbuffer::End();
+
+  DrawSurfaceDiffuseQuads(8);
+
+  pb_printat(0, 0, "%s", kImageBlitOverVertexArrayTest);
+  pb_printat(8, 0, "Bottom row: Green");
+  pb_draw_text_screen();
+
+  FinishDraw(kImageBlitOverVertexArrayTest);
 }
