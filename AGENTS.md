@@ -32,6 +32,17 @@
 - Do not append trailing `\n` to `pb_printat` calls. Always ensure string length fits within available columns (`col + len <= 60`).
 - Plan screen geometry coordinates (640x480 framebuffer) around text row/column spans to prevent primitives from overlapping text.
 
+## Render-to-Texture Surfaces
+
+- `TestSuite::Initialize` configures the framebuffer zeta format as **Z16**. The `RenderToSurfaceStart` overload that
+  does not take a zeta address keeps the current zeta format, so rendering to a swizzled 32-bit color target (e.g.
+  `SCF_A8R8G8B8`) with it fails the hardware requirement (asserted by pbkitplusplus) that swizzled surfaces use
+  identically sized color and zeta formats.
+- For swizzled render targets, either use the overload that takes `zeta_address`/`zeta_format` with a zeta format whose
+  size matches the color format (`SZF_Z24S8` for 32-bit color, `SZF_Z16` for 16-bit color), or set the surface format
+  explicitly beforehand. Point `zeta_address` at an unused, appropriately sized region of texture memory when depth is
+  not needed.
+
 ## Texture Generation
 
 - Always prefer direct texture generation functions (e.g., `GenerateRGBACheckerboard`, `GenerateSwizzledRGBACheckerboard`, `GenerateRGBATestPattern`, `GenerateSwizzledRGBATestPattern`, etc.) that write directly into texture memory (`host_.GetTextureMemory()`, `host_.GetTextureMemoryForStage(...)`).
