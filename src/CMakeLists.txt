@@ -97,6 +97,9 @@ generate_nv2a_vshinc_files(
         shaders/rcc_clamp_test.vsh
         shaders/surface_displacement.vsh
         shaders/vertex_shader_mac_independence_tests.vsh
+        shaders/vertex_shader_rounding_dp4.vsh
+        shaders/vertex_shader_rounding_mad.vsh
+        shaders/vertex_shader_rounding_mul.vsh
         shaders/weight_to_color.vsh
 )
 
