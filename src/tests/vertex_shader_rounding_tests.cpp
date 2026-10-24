@@ -2,6 +2,7 @@
 
 #include <pbkit/pbkit.h>
 
+#include <cmath>
 #include <cstring>
 #include <memory>
 #include <utility>
@@ -40,6 +41,14 @@ static constexpr const char kTestTopLeftRasterName[] = "TopLeftRaster";
 static constexpr const char kTestOpRoundingDP4Name[] = "OpRounding_DP4";
 static constexpr const char kTestOpRoundingMADName[] = "OpRounding_MAD";
 static constexpr const char kTestOpRoundingMULName[] = "OpRounding_MUL";
+static constexpr const char kTestOpRoundingADDName[] = "OpRounding_ADD";
+static constexpr const char kTestOpRoundingMADExactProductName[] = "OpRounding_MADExactProduct";
+static constexpr const char kTestOpRoundingDP4SumABName[] = "OpRounding_DP4SumAB";
+static constexpr const char kTestOpRoundingDP4SumACName[] = "OpRounding_DP4SumAC";
+static constexpr const char kTestOpRoundingADDWindowName[] = "OpRounding_ADDWindow";
+static constexpr const char kTestOpRoundingMADExactProductWindowName[] = "OpRounding_MADExactProductWindow";
+static constexpr const char kTestOpRoundingMADInexactBothName[] = "OpRounding_MADInexactBoth";
+static constexpr const char kTestOpRoundingDP4Sum3Name[] = "OpRounding_DP4Sum3";
 
 static const uint32_t kRoundingDP4Vsh[] = {
 #include "vertex_shader_rounding_dp4.vshinc"
@@ -50,22 +59,81 @@ static const uint32_t kRoundingMADVsh[] = {
 static const uint32_t kRoundingMULVsh[] = {
 #include "vertex_shader_rounding_mul.vshinc"
 };
+static const uint32_t kRoundingADDVsh[] = {
+#include "vertex_shader_rounding_add.vshinc"
+};
+static const uint32_t kRoundingMADExactProductVsh[] = {
+#include "vertex_shader_rounding_mad_exact_product.vshinc"
+};
+static const uint32_t kRoundingDP4SumABVsh[] = {
+#include "vertex_shader_rounding_dp4_sum_ab.vshinc"
+};
+static const uint32_t kRoundingDP4SumACVsh[] = {
+#include "vertex_shader_rounding_dp4_sum_ac.vshinc"
+};
+static const uint32_t kRoundingDP4Sum3Vsh[] = {
+#include "vertex_shader_rounding_dp4_sum3.vshinc"
+};
 
 // Operands for the OpRounding tests. `c` is the IEEE float32 round-to-nearest-even value of a * b. The exact product is
 // 0.25, 0.75, 0.25, 0.75 and 0.5 ulp above the representable value below its magnitude, respectively.
-struct RoundingCase {
+struct VertexShaderRoundingTests::RoundingCase {
   const char *label;
   uint32_t a;
   uint32_t b;
   uint32_t c;
+  // Loaded into c[97].y. The MAD exact product shader multiplies a by its negation.
+  uint32_t neg_m{0xBF800000};
+  // Loaded into c[97].z. The third term of the DP4Sum3 shader.
+  uint32_t t2{0};
+  // The shader outputs z = d * 2^scale_log2 + offset.
+  int32_t scale_log2{28};
 };
-static constexpr RoundingCase kRoundingCases[] = {
+static constexpr VertexShaderRoundingTests::RoundingCase kProductRoundingCases[] = {
     {"+0.25", 0x3F800800, 0x3F800400, 0x3F800C00},
     {"+0.75", 0x3F800800, 0x3F800C00, 0x3F801401},
     {"-0.25", 0xBF800800, 0x3F800400, 0xBF800C00},
     {"-0.75", 0xBF800800, 0x3F800C00, 0xBF801401},
     // -1.0014837 * -40 as computed by Rugby 2005's projection (xemu-project/xemu#2388).
     {"Rugby", 0xBF80309E, 0xC2200000, 0x42203CC6},
+};
+
+// Operands for the addition OpRounding tests. `c` is the IEEE float32 round-to-nearest-even value of a + b. The exact
+// sum is 0.25, 0.75, 0.25 and 0.75 ulp beyond the representable value below its magnitude, and for "Tie" exactly 0.5
+// ulp above an odd value, so that round-to-nearest-even rounds up.
+static constexpr VertexShaderRoundingTests::RoundingCase kSumRoundingCases[] = {
+    {"+0.25", 0x3F800000, 0x33000000, 0x3F800000}, {"+0.75", 0x3F800000, 0x33C00000, 0x3F800001},
+    {"-0.25", 0xBF800000, 0xB3000000, 0xBF800000}, {"-0.75", 0xBF800000, 0xB3C00000, 0xBF800001},
+    {"Tie", 0x3F800001, 0x33800000, 0x3F800002},
+};
+
+// Operands probing the alignment window of the nv2a adder, which truncates the smaller addend to a multiple of 2^-28
+// relative to the larger addend's leading bit before summing. `c` is the IEEE float32 round-to-nearest-even value of
+// a + b. "Kept" subtracts 2^-28 from 1, which is inside the window, "Lost" subtracts 2^-29, which is outside it, and
+// "Strad" subtracts 2^-24 + 2^-29, whose low bit falls outside the window.
+static constexpr VertexShaderRoundingTests::RoundingCase kWindowRoundingCases[] = {
+    {"Kept", 0x3F800000, 0xB1800000, 0x3F800000},
+    {"Lost", 0x3F800000, 0xB1000000, 0x3F800000},
+    {"Strad", 0x3F800000, 0xB3840000, 0x3F7FFFFF},
+};
+
+// Operands for MAD(a, m, b) where both the product and the sum are inexact. `neg_m` holds -m, and `c` is the IEEE
+// float32 round-to-nearest-even value of the exact a * m + b.
+static constexpr VertexShaderRoundingTests::RoundingCase kMADInexactBothCases[] = {
+    {"+both", 0x3F800800, 0x33800000, 0x3F801401, 0xBF800C00},
+    {"-both", 0xBF800800, 0xB3800000, 0xBF801401, 0xBF800C00},
+};
+
+// Operands for DP4((a, b, t2, 0), (1, 1, 1, 0)). `c` is the IEEE float32 round-to-nearest-even value of a + b + t2.
+// "+0.75" and "-0.75" have inexact sums, "Kept" and "Strad" probe the alignment window as in kWindowRoundingCases, and
+// "Order" is 2^32 - 2^32 + 2^-32, whose small term is outside the window anchored to the largest term even though the
+// large terms cancel first.
+static constexpr VertexShaderRoundingTests::RoundingCase kDP4Sum3Cases[] = {
+    {"+0.75", 0x3F800000, 0x33C00000, 0x3F800001},
+    {"-0.75", 0xBF800000, 0xB3C00000, 0xBF800001},
+    {"Kept", 0x3F800000, 0x31800000, 0x31800000, 0xBF800000, 0xBF800000, 32},
+    {"Strad", 0x3F800000, 0xB3840000, 0x3F7FFFFF},
+    {"Order", 0x4F800000, 0xCF800000, 0x2F800000, 0xBF800000, 0x2F800000, 36},
 };
 
 static constexpr float kGeometryTestBiases[] = {
@@ -215,13 +283,67 @@ static std::string MakeTopLeftRasterTestName(bool fixed);
  * @tc Geometry_1.0000
  *  As Geometry_0.0000 with a bias of 1.0000 (exactly one pixel).
  *
+ * @tc OpRounding_ADD
+ *  As OpRounding_MUL, but measures the rounding of ADD. Each case uses operands a and b whose exact sum lies 0.25 or
+ *  0.75 ulp beyond a representable float (for positive and negative sums), or exactly 0.5 ulp above an odd one so that
+ *  round-to-nearest-even rounds up ("Tie"), with c the IEEE round-to-nearest-even sum. The shader computes
+ *  d = ADD(a, b) - c. IEEE round to nearest would give d = 0 for every case. Hardware truncates the sum toward zero,
+ *  giving d = 0, -1, 0, 1 and -1 ulp.
+ *
+ * @tc OpRounding_ADDWindow
+ *  As OpRounding_ADD, but with operands that probe the alignment window of the nv2a adder. Hardware aligns the smaller
+ *  operand to the larger one and truncates it to a multiple of 2^-28 relative to the larger operand's leading bit (24
+ *  bits of mantissa plus 5 more, with no sticky bit) before summing exactly and truncating the sum toward zero. The
+ *  cases compute 1 - 2^-28 ("Kept", inside the window), 1 - 2^-29 ("Lost", outside it) and 1 - (2^-24 + 2^-29)
+ *  ("Strad", whose 2^-29 bit is outside it). Hardware gives depth - offset = -16, 0 and 0 (d = -0.5, 0 and 0 ulp).
+ *  Round to nearest gives 0, 0 and 0; truncating the exact sum gives -16, -16 and -16.
+ *
  * @tc OpRounding_DP4
  *  As OpRounding_MUL, but d is computed by a single DP4 of (a, c, 0, 0) and (b, -1, 0, 2^23). On hardware the product
  *  is truncated before it is summed, giving the same results as OpRounding_MUL.
  *
+ * @tc OpRounding_DP4Sum3
+ *  Computes d = DP4((a, b, t2, 0), (1, 1, 1, 0)) - c with c, the IEEE round-to-nearest-even value of a + b + t2,
+ *  subtracted by a separate ADD so that it does not take part in the DP4's accumulation. Hardware truncates each
+ *  product, aligns all of them to the largest one in the same 2^-28 window as ADD (see OpRounding_ADDWindow), sums the
+ *  aligned terms exactly and truncates the result toward zero. "+0.75" and "-0.75" sum to 0.75 ulp beyond +1 and -1,
+ *  "Kept" is 1 + 2^-28 - 1 (scaled by 2^32), "Strad" is 1 - (2^-24 + 2^-29) and "Order" is 2^32 - 2^32 + 2^-32 (scaled
+ *  by 2^36), whose small term is outside the window anchored to the largest term even though the large terms cancel
+ *  first. Hardware gives depth - offset = -32, 32, 0, 0 and -16 (d = -1, 1, 0 and 0 ulp, and d = -c for "Order").
+ *  Round to nearest gives 0, 0, 0, 0 and 0; truncating the exact sum gives -32, 32, 0, -16 and 0; truncating every
+ *  partial sum in order gives -32, 32, -16, -16 and 0.
+ *
+ * @tc OpRounding_DP4SumAB
+ *  As OpRounding_ADD, but d is computed by a single DP4 of (a, b, c, 0) and (1, 1, -1, 0), so all products are exact
+ *  and only the accumulation can round. Summing left to right or pairwise adds a + b first, which would give the
+ *  OpRounding_ADD results if intermediate sums were rounded. Hardware gives the exact distance between a + b and c,
+ *  d = 0.25, -0.25, -0.25, 0.25 and -0.5 ulp, so DP4 does not round intermediate sums. The accumulation is only exact
+ *  within the adder's alignment window (see OpRounding_DP4Sum3).
+ *
+ * @tc OpRounding_DP4SumAC
+ *  As OpRounding_DP4SumAB, but with (a, c, b, 0) and (1, -1, 1, 0). Left to right or pairwise summation computes a - c
+ *  first, which is exact, and then adds b exactly, so d is 0.25, -0.25, -0.25, 0.25 and -0.5 ulp regardless of how
+ *  additions round; any other result would mean the accumulation adds b before subtracting c. Hardware gives these
+ *  values.
+ *
  * @tc OpRounding_MAD
  *  As OpRounding_MUL, but d is computed by a single MAD (a * b - c). On hardware the product is truncated before the
  *  addition (the operation is not fused), giving the same results as OpRounding_MUL.
+ *
+ * @tc OpRounding_MADExactProduct
+ *  As OpRounding_ADD, but d is computed by a single MAD of a * 1 + b, so the product is exact and only MAD's addition
+ *  can round. Hardware gives the same results as OpRounding_ADD: MAD's addition truncates toward zero like ADD.
+ *
+ * @tc OpRounding_MADExactProductWindow
+ *  As OpRounding_MADExactProduct, with the OpRounding_ADDWindow operands. MAD's addition uses the same alignment
+ *  window as ADD, so hardware gives the OpRounding_ADDWindow results: depth - offset = -16, 0 and 0.
+ *
+ * @tc OpRounding_MADInexactBoth
+ *  As OpRounding_MADExactProduct, but with a multiplier m so that both the product and the sum of MAD(a, m, b) are
+ *  inexact: 0x3F800800 * 0x3F800C00 + 2^-24 ("+both") and its negation ("-both"), with c the IEEE
+ *  round-to-nearest-even value of the exact a * m + b. Hardware truncates the product and then the sum, giving
+ *  depth - offset = -32 and 32 (d = -1 and 1 ulp). A fused MAD rounded to nearest gives 0 and 0, and rounding both
+ * steps to nearest gives 32 and -32.
  *
  * @tc OpRounding_MUL
  *  Measures the rounding behavior of the MUL vertex shader instruction. Each case uses operands a and b whose exact
@@ -309,14 +431,52 @@ VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string
     tests_[MakeTopLeftRasterTestName(fixed)] = [this, fixed]() { TestTopLeftRasterization(fixed); };
   }
 
+  static constexpr uint32_t kNumProductCases = sizeof(kProductRoundingCases) / sizeof(kProductRoundingCases[0]);
+  static constexpr uint32_t kNumSumCases = sizeof(kSumRoundingCases) / sizeof(kSumRoundingCases[0]);
   tests_[kTestOpRoundingDP4Name] = [this]() {
-    TestOpRounding(kTestOpRoundingDP4Name, kRoundingDP4Vsh, sizeof(kRoundingDP4Vsh));
+    TestOpRounding(kTestOpRoundingDP4Name, kRoundingDP4Vsh, sizeof(kRoundingDP4Vsh), kProductRoundingCases,
+                   kNumProductCases);
   };
   tests_[kTestOpRoundingMADName] = [this]() {
-    TestOpRounding(kTestOpRoundingMADName, kRoundingMADVsh, sizeof(kRoundingMADVsh));
+    TestOpRounding(kTestOpRoundingMADName, kRoundingMADVsh, sizeof(kRoundingMADVsh), kProductRoundingCases,
+                   kNumProductCases);
   };
   tests_[kTestOpRoundingMULName] = [this]() {
-    TestOpRounding(kTestOpRoundingMULName, kRoundingMULVsh, sizeof(kRoundingMULVsh));
+    TestOpRounding(kTestOpRoundingMULName, kRoundingMULVsh, sizeof(kRoundingMULVsh), kProductRoundingCases,
+                   kNumProductCases);
+  };
+  tests_[kTestOpRoundingADDName] = [this]() {
+    TestOpRounding(kTestOpRoundingADDName, kRoundingADDVsh, sizeof(kRoundingADDVsh), kSumRoundingCases, kNumSumCases);
+  };
+  tests_[kTestOpRoundingMADExactProductName] = [this]() {
+    TestOpRounding(kTestOpRoundingMADExactProductName, kRoundingMADExactProductVsh, sizeof(kRoundingMADExactProductVsh),
+                   kSumRoundingCases, kNumSumCases);
+  };
+  tests_[kTestOpRoundingDP4SumABName] = [this]() {
+    TestOpRounding(kTestOpRoundingDP4SumABName, kRoundingDP4SumABVsh, sizeof(kRoundingDP4SumABVsh), kSumRoundingCases,
+                   kNumSumCases);
+  };
+  tests_[kTestOpRoundingDP4SumACName] = [this]() {
+    TestOpRounding(kTestOpRoundingDP4SumACName, kRoundingDP4SumACVsh, sizeof(kRoundingDP4SumACVsh), kSumRoundingCases,
+                   kNumSumCases);
+  };
+
+  static constexpr uint32_t kNumWindowCases = sizeof(kWindowRoundingCases) / sizeof(kWindowRoundingCases[0]);
+  tests_[kTestOpRoundingADDWindowName] = [this]() {
+    TestOpRounding(kTestOpRoundingADDWindowName, kRoundingADDVsh, sizeof(kRoundingADDVsh), kWindowRoundingCases,
+                   kNumWindowCases);
+  };
+  tests_[kTestOpRoundingMADExactProductWindowName] = [this]() {
+    TestOpRounding(kTestOpRoundingMADExactProductWindowName, kRoundingMADExactProductVsh,
+                   sizeof(kRoundingMADExactProductVsh), kWindowRoundingCases, kNumWindowCases);
+  };
+  tests_[kTestOpRoundingMADInexactBothName] = [this]() {
+    TestOpRounding(kTestOpRoundingMADInexactBothName, kRoundingMADExactProductVsh, sizeof(kRoundingMADExactProductVsh),
+                   kMADInexactBothCases, sizeof(kMADInexactBothCases) / sizeof(kMADInexactBothCases[0]));
+  };
+  tests_[kTestOpRoundingDP4Sum3Name] = [this]() {
+    TestOpRounding(kTestOpRoundingDP4Sum3Name, kRoundingDP4Sum3Vsh, sizeof(kRoundingDP4Sum3Vsh), kDP4Sum3Cases,
+                   sizeof(kDP4Sum3Cases) / sizeof(kDP4Sum3Cases[0]));
   };
 }
 
@@ -1488,17 +1648,16 @@ void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
   FinishDraw(test_name);
 }
 
-void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t *shader, uint32_t shader_size) {
-  // The shaders output z = d * kErrorScale + kDepthOffset. kErrorScale makes 1 unit of least precision of c an integer
-  // number of depth units (2^(exponent + 5)) and kDepthOffset keeps any small error within the depth range.
-  static constexpr float kErrorScale = 268435456.f;  // 2^28
+void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t *shader, uint32_t shader_size,
+                                               const RoundingCase *cases, uint32_t num_cases) {
+  // The shaders output z = d * 2^scale_log2 + kDepthOffset. The scale makes the expected errors an integer number of
+  // depth units and kDepthOffset keeps any small error within the depth range.
   static constexpr int32_t kDepthOffset = 0x800000;
   static constexpr uint32_t kNotDrawn = 0xFFFFFFFF;
   static constexpr uint32_t kSurfaceWidth = 256;
   static constexpr uint32_t kSurfaceHeight = 32;
   static constexpr uint32_t kQuadSize = 16;
   static constexpr uint32_t kQuadSpacing = 48;
-  static constexpr uint32_t kNumCases = sizeof(kRoundingCases) / sizeof(kRoundingCases[0]);
   static constexpr uint32_t kZetaSize = kSurfaceWidth * kSurfaceHeight * 4;
 
   auto as_float = [](uint32_t value) {
@@ -1532,14 +1691,15 @@ void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t 
   Pushbuffer::End();
 
   // Operands are supplied as shader constants, which are passed through verbatim: c[96] = (a, c, 0, scale),
-  // c[97] = (b, -1, 0, offset).
-  for (uint32_t i = 0; i < kNumCases; ++i) {
-    const auto &test_case = kRoundingCases[i];
+  // c[97] = (b, neg_m, t2, offset).
+  for (uint32_t i = 0; i < num_cases; ++i) {
+    const auto &test_case = cases[i];
     Pushbuffer::Begin();
     Pushbuffer::Push(NV097_SET_TRANSFORM_CONSTANT_LOAD, VertexShaderProgram::kShaderUserConstantOffset);
-    Pushbuffer::PushF(NV097_SET_TRANSFORM_CONSTANT, as_float(test_case.a), as_float(test_case.c), 0.f, kErrorScale);
-    Pushbuffer::PushF(NV097_SET_TRANSFORM_CONSTANT + 16, as_float(test_case.b), -1.f, 0.f,
-                      static_cast<float>(kDepthOffset));
+    Pushbuffer::PushF(NV097_SET_TRANSFORM_CONSTANT, as_float(test_case.a), as_float(test_case.c), 0.f,
+                      std::ldexp(1.f, test_case.scale_log2));
+    Pushbuffer::PushF(NV097_SET_TRANSFORM_CONSTANT + 16, as_float(test_case.b), as_float(test_case.neg_m),
+                      as_float(test_case.t2), static_cast<float>(kDepthOffset));
     Pushbuffer::End();
 
     const auto left = static_cast<float>(i * kQuadSpacing);
@@ -1566,10 +1726,10 @@ void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t 
   ASSERT(gpum_copy(readback, zeta, kZetaSize) && "Failed to copy zeta with M2M");
 
   pb_print("%s\n\n", name);
-  pb_print("d = op(a,b) - RN(a*b), IEEE round to nearest: d = 0\n\n");
+  pb_print("d = op(a,b) - RN, IEEE round to nearest: d = 0\n\n");
   pb_print("Case     Depth - offset   d (ulp)\n");
-  for (uint32_t i = 0; i < kNumCases; ++i) {
-    const auto &test_case = kRoundingCases[i];
+  for (uint32_t i = 0; i < num_cases; ++i) {
+    const auto &test_case = cases[i];
     const uint32_t value = readback[(kQuadSize / 2) * kSurfaceWidth + i * kQuadSpacing + kQuadSize / 2];
     if (value == kNotDrawn) {
       pb_print("%s   not drawn\n", test_case.label);
@@ -1578,7 +1738,7 @@ void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t 
 
     const int32_t delta = static_cast<int32_t>(value >> 8) - kDepthOffset;
     const int32_t exponent = static_cast<int32_t>((test_case.c >> 23) & 0xFF) - 127;
-    const auto units_per_ulp = static_cast<float>(1 << (exponent + 5));
+    const auto units_per_ulp = std::ldexp(1.f, exponent - 23 + test_case.scale_log2);
     pb_print("%s   %14d   %.2f\n", test_case.label, delta, static_cast<float>(delta) / units_per_ulp);
   }
   pb_draw_text_screen();
