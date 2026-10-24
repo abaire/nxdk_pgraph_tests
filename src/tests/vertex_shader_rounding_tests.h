@@ -15,6 +15,9 @@ using namespace PBKitPlusPlus;
 
 class VertexShaderRoundingTests : public TestSuite {
  public:
+  //! Operands for the OpRounding tests, see the implementation for details.
+  struct RoundingCase;
+
   VertexShaderRoundingTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
@@ -31,7 +34,8 @@ class VertexShaderRoundingTests : public TestSuite {
   void TestAdjacentGeometry(float bias);
   void TestProjectedAdjacentGeometry(float bias);
   void TestTopLeftRasterization(bool fixed);
-  void TestOpRounding(const char *name, const uint32_t *shader, uint32_t shader_size);
+  void TestOpRounding(const char *name, const uint32_t *shader, uint32_t shader_size, const RoundingCase *cases,
+                      uint32_t num_cases);
 
  private:
   uint8_t *render_target_{nullptr};
