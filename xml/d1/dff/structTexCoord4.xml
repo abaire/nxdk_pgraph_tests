@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d1/dff/structTexCoord4" kind="struct" language="C++" prot="public">
+    <compoundname>TexCoord4</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d1/dff/structTexCoord4_1ae7646585cfa036b5255a6b5486e2ea36" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TexCoord4::s</definition>
+        <argsstring></argsstring>
+        <name>s</name>
+        <qualifiedname>TexCoord4::s</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="11" column="9" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/dff/structTexCoord4_1a65c77e7118e3f68ca2df714b1e9e6894" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TexCoord4::t</definition>
+        <argsstring></argsstring>
+        <name>t</name>
+        <qualifiedname>TexCoord4::t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="11" column="11" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/dff/structTexCoord4_1a7427ce11f4645d75cfafddf31d6fcda4" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TexCoord4::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <qualifiedname>TexCoord4::r</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="11" column="13" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d1/dff/structTexCoord4_1adaa11f77da759a941d28e02a25efedd7" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float TexCoord4::q</definition>
+        <argsstring></argsstring>
+        <name>q</name>
+        <qualifiedname>TexCoord4::q</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_projective_2d_tests.h" line="11" column="15" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/texture_projective_2d_tests.h" line="10" column="1" bodyfile="src/tests/texture_projective_2d_tests.h" bodystart="10" bodyend="12"/>
+    <listofallmembers>
+      <member refid="d1/dff/structTexCoord4_1adaa11f77da759a941d28e02a25efedd7" prot="public" virt="non-virtual"><scope>TexCoord4</scope><name>q</name></member>
+      <member refid="d1/dff/structTexCoord4_1a7427ce11f4645d75cfafddf31d6fcda4" prot="public" virt="non-virtual"><scope>TexCoord4</scope><name>r</name></member>
+      <member refid="d1/dff/structTexCoord4_1ae7646585cfa036b5255a6b5486e2ea36" prot="public" virt="non-virtual"><scope>TexCoord4</scope><name>s</name></member>
+      <member refid="d1/dff/structTexCoord4_1a65c77e7118e3f68ca2df714b1e9e6894" prot="public" virt="non-virtual"><scope>TexCoord4</scope><name>t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

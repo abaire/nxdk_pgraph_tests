@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d12/structMenuItem" kind="struct" language="C++" prot="public">
+    <compoundname>MenuItem</compoundname>
+    <derivedcompoundref refid="d9/d00/structMenuItemCallable" prot="public" virt="non-virtual">MenuItemCallable</derivedcompoundref>
+    <derivedcompoundref refid="d0/d0e/structMenuItemOption" prot="public" virt="non-virtual">MenuItemOption</derivedcompoundref>
+    <derivedcompoundref refid="dc/d52/structMenuItemOptions" prot="public" virt="non-virtual">MenuItemOptions</derivedcompoundref>
+    <derivedcompoundref refid="d7/d64/structMenuItemRoot" prot="public" virt="non-virtual">MenuItemRoot</derivedcompoundref>
+    <derivedcompoundref refid="de/d5e/structMenuItemSuite" prot="public" virt="non-virtual">MenuItemSuite</derivedcompoundref>
+    <derivedcompoundref refid="d8/d0e/structMenuItemTest" prot="public" virt="non-virtual">MenuItemTest</derivedcompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a5223156aba1b53704f58586fb950836e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MenuItem::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>MenuItem::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="48" column="12" bodyfile="src/menu_item.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a9a57af2165f97959149adee20a4eb86d" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MenuItem::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>MenuItem::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="49" column="12" bodyfile="src/menu_item.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a0e46de23f339da33aebb4b14ada546a7" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string MenuItem::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>MenuItem::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="50" column="15" bodyfile="src/menu_item.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a9636ec4c0e64d70d0aaf7618dd1c9050" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MenuItem::cursor_position</definition>
+        <argsstring></argsstring>
+        <name>cursor_position</name>
+        <qualifiedname>MenuItem::cursor_position</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="54" column="12" bodyfile="src/menu_item.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1abb595a376ca6b4d42fb79f0158d3a81a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="d7/d12/structMenuItem" kindref="compound">MenuItem</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;MenuItem&gt; &gt; MenuItem::submenu</definition>
+        <argsstring></argsstring>
+        <name>submenu</name>
+        <qualifiedname>MenuItem::submenu</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="55" column="15" bodyfile="src/menu_item.h" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a3d57d9e9b6fc38b4f8eb9240392ebf48" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="d7/d12/structMenuItem" kindref="compound">MenuItem</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MenuItem&gt; MenuItem::active_submenu</definition>
+        <argsstring></argsstring>
+        <name>active_submenu</name>
+        <qualifiedname>MenuItem::active_submenu</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="56" column="19" bodyfile="src/menu_item.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a7514ab030c91963292036dda32d0b0cc" prot="public" static="no" mutable="no">
+        <type><ref refid="d7/d12/structMenuItem" kindref="compound">MenuItem</ref> *</type>
+        <definition>MenuItem* MenuItem::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <qualifiedname>MenuItem::parent</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="57" column="12" bodyfile="src/menu_item.h" bodystart="57" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="d7/d12/structMenuItem_1a1896433a20c1f876bbb9078d3f083566" prot="public" static="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t MenuItem::menu_background_color_</definition>
+        <argsstring></argsstring>
+        <name>menu_background_color_</name>
+        <qualifiedname>MenuItem::menu_background_color_</qualifiedname>
+        <initializer>= 0xFF3E003E</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="52" column="19" bodyfile="src/menu_item.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a77bd4e666f8432542cde7113ad486366" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MenuItem::MenuItem</definition>
+        <argsstring>(std::string name, uint32_t width, uint32_t height)</argsstring>
+        <name>MenuItem</name>
+        <qualifiedname>MenuItem::MenuItem</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="15" column="3" bodyfile="src/menu_item.h" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a28f03d665c7424c9083adc20a4b59c3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual MenuItem::~MenuItem</definition>
+        <argsstring>()=default</argsstring>
+        <name>~MenuItem</name>
+        <qualifiedname>MenuItem::~MenuItem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="16" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a0d50ee8b9d0f414ab623db5d92dea184" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool MenuItem::IsEnterable</definition>
+        <argsstring>() const</argsstring>
+        <name>IsEnterable</name>
+        <qualifiedname>MenuItem::IsEnterable</qualifiedname>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a2503062495af4abf876b545c9c237d08">IsEnterable</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="21" column="17" bodyfile="src/menu_item.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a2aa4e882bfe3f59f56dda1447e6d64ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::Draw</definition>
+        <argsstring>()</argsstring>
+        <name>Draw</name>
+        <qualifiedname>MenuItem::Draw</qualifiedname>
+        <reimplementedby refid="d9/d00/structMenuItemCallable_1a532da1b84aeeb4458b2a2ac18ae4afab">Draw</reimplementedby>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a2d6d61d34e2419687396d5e47d58ab62">Draw</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1aefd59f84c7b9284c736fc00f9e2492d4">Draw</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1abf8835c41b267696f233257d6a056523">Draw</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="23" column="16" bodyfile="src/menu_item.cpp" bodystart="43" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a1926f4d5fb710557daf011158ad6a116" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::OnEnter</definition>
+        <argsstring>()</argsstring>
+        <name>OnEnter</name>
+        <qualifiedname>MenuItem::OnEnter</qualifiedname>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a4f6ca4ccd28568a2c84ccbf73a563c23">OnEnter</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="26" column="16" bodyfile="src/menu_item.cpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a669389f33ac051bc9e40d4bc77b7f9bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::Activate</definition>
+        <argsstring>()</argsstring>
+        <name>Activate</name>
+        <qualifiedname>MenuItem::Activate</qualifiedname>
+        <reimplementedby refid="d0/d0e/structMenuItemOption_1a932425a0391f3828300622f228d9e5f2">Activate</reimplementedby>
+        <reimplementedby refid="d9/d00/structMenuItemCallable_1aea6c4cf912a999a5d049a37b02f5731c">Activate</reimplementedby>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a8d7c50a0407eccebaff40574afb2c5e8">Activate</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1a9c45ac478442c74b0fada12892019787">Activate</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1a29f588ef0fd7e6e109a459cbb63235b9">Activate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="29" column="16" bodyfile="src/menu_item.cpp" bodystart="89" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a33cb0911168774cdb71453743184be22" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::ActivateCurrentSuite</definition>
+        <argsstring>()</argsstring>
+        <name>ActivateCurrentSuite</name>
+        <qualifiedname>MenuItem::ActivateCurrentSuite</qualifiedname>
+        <reimplementedby refid="d9/d00/structMenuItemCallable_1a6917839c3c6aa19562f8aca695cdc253">ActivateCurrentSuite</reimplementedby>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1adac684803d2855fce5ae4a450d1182b0">ActivateCurrentSuite</reimplementedby>
+        <reimplementedby refid="de/d5e/structMenuItemSuite_1ac1d4ddb0b3a5d74c72e0ce95008258a4">ActivateCurrentSuite</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1ac54d211a67039fc14f4e80deba76fdcd">ActivateCurrentSuite</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1a6812f0c52395c559667c101f16179f67">ActivateCurrentSuite</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="31" column="16" bodyfile="src/menu_item.cpp" bodystart="104" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1af8658a68106074fd149199db606feec1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool MenuItem::Deactivate</definition>
+        <argsstring>()</argsstring>
+        <name>Deactivate</name>
+        <qualifiedname>MenuItem::Deactivate</qualifiedname>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a433b75050d2e3f1eb7a121f31911f035">Deactivate</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1a8cec25815eec82b609e1668478423436">Deactivate</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1a37ac37540ca907abe1061fc4f35bbaa0">Deactivate</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="33" column="16" bodyfile="src/menu_item.cpp" bodystart="113" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a526e3928d3afe426dad05f3f66c0dbc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::CursorUp</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>CursorUp</name>
+        <qualifiedname>MenuItem::CursorUp</qualifiedname>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a18f933319c3975e59a038c9503e73b9f">CursorUp</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1afcc9bd52ff7fe9ecd3efd3e378ef957e">CursorUp</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1ad77818f68d88f5b30d213d6ed821f0b1">CursorUp</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="35" column="16" bodyfile="src/menu_item.cpp" bodystart="125" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a992b1237ace72dc386a5305fd348a8f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::CursorDown</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>CursorDown</name>
+        <qualifiedname>MenuItem::CursorDown</qualifiedname>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1af543f8502770ef2f33adb1b7685a0be4">CursorDown</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1aaf3f12131badaaf3a3e114c5567806f3">CursorDown</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1a10dfa24f75508118aeb84863a7803724">CursorDown</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="36" column="16" bodyfile="src/menu_item.cpp" bodystart="138" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1aa7d56249433e4afeba04d11d0489b995" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::CursorLeft</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>CursorLeft</name>
+        <qualifiedname>MenuItem::CursorLeft</qualifiedname>
+        <reimplementedby refid="d0/d0e/structMenuItemOption_1aa4bf2a18b4e4fb0a0dd7bdb8a4c210c8">CursorLeft</reimplementedby>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1a7df6fa98df63abac9d399d2216e8740a">CursorLeft</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1a6fd9ab2ec69c223f6babebb0570790c6">CursorLeft</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1a31d1fe4618a16a165f5a5ea2571b34bb">CursorLeft</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="37" column="16" bodyfile="src/menu_item.cpp" bodystart="151" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a38b421507ab8ad89270258a75158b070" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void MenuItem::CursorRight</definition>
+        <argsstring>(bool is_repeat)</argsstring>
+        <name>CursorRight</name>
+        <qualifiedname>MenuItem::CursorRight</qualifiedname>
+        <reimplementedby refid="d0/d0e/structMenuItemOption_1a15cd7848ceaf928412777fb345764f1d">CursorRight</reimplementedby>
+        <reimplementedby refid="d8/d0e/structMenuItemTest_1adb8acce21319e0445c2eb61a27bc4a75">CursorRight</reimplementedby>
+        <reimplementedby refid="d7/d64/structMenuItemRoot_1a783a8c071b7da7babd1603d14bcf4818">CursorRight</reimplementedby>
+        <reimplementedby refid="dc/d52/structMenuItemOptions_1aed717217f20c6d83ea3a61b5549c01fc">CursorRight</reimplementedby>
+        <param>
+          <type>bool</type>
+          <declname>is_repeat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="38" column="16" bodyfile="src/menu_item.cpp" bodystart="164" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1aba17e419992b01aac5a69da5ac316afb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MenuItem::CursorUpAndActivate</definition>
+        <argsstring>()</argsstring>
+        <name>CursorUpAndActivate</name>
+        <qualifiedname>MenuItem::CursorUpAndActivate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="40" column="8" bodyfile="src/menu_item.cpp" bodystart="176" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d12/structMenuItem_1adae7ed1dfe85080eeb1be24b93348f6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MenuItem::CursorDownAndActivate</definition>
+        <argsstring>()</argsstring>
+        <name>CursorDownAndActivate</name>
+        <qualifiedname>MenuItem::CursorDownAndActivate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="41" column="8" bodyfile="src/menu_item.cpp" bodystart="183" bodyend="188"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a5db1f67f8202519bd9a2164e500f5a6a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MenuItem::SetBackgroundColor</definition>
+        <argsstring>(uint32_t background_color)</argsstring>
+        <name>SetBackgroundColor</name>
+        <qualifiedname>MenuItem::SetBackgroundColor</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>background_color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="18" column="15" bodyfile="src/menu_item.cpp" bodystart="190" bodyend="190"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="d7/d12/structMenuItem_1aec8652d5bc122cf7de1a4b3bfdabe453" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MenuItem::PrepareDraw</definition>
+        <argsstring>(uint32_t background_color) const</argsstring>
+        <name>PrepareDraw</name>
+        <qualifiedname>MenuItem::PrepareDraw</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>background_color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="44" column="8" bodyfile="src/menu_item.cpp" bodystart="23" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-func">
+      <memberdef kind="function" id="d7/d12/structMenuItem_1a6e267a86c0948a9f5df7cfa4f076cc48" prot="protected" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void MenuItem::Swap</definition>
+        <argsstring>()</argsstring>
+        <name>Swap</name>
+        <qualifiedname>MenuItem::Swap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/menu_item.h" line="45" column="15" bodyfile="src/menu_item.cpp" bodystart="31" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>MenuItem</label>
+        <link refid="d7/d12/structMenuItem"/>
+      </node>
+      <node id="2">
+        <label>MenuItemCallable</label>
+        <link refid="d9/d00/structMenuItemCallable"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>MenuItemOption</label>
+        <link refid="d0/d0e/structMenuItemOption"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>MenuItemOptions</label>
+        <link refid="dc/d52/structMenuItemOptions"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>MenuItemRoot</label>
+        <link refid="d7/d64/structMenuItemRoot"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>MenuItemSuite</label>
+        <link refid="de/d5e/structMenuItemSuite"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>MenuItemTest</label>
+        <link refid="d8/d0e/structMenuItemTest"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>MenuItem</label>
+        <link refid="d7/d12/structMenuItem"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>parent</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/menu_item.h" line="13" column="1" bodyfile="src/menu_item.h" bodystart="13" bodyend="58"/>
+    <listofallmembers>
+      <member refid="d7/d12/structMenuItem_1a669389f33ac051bc9e40d4bc77b7f9bd" prot="public" virt="virtual"><scope>MenuItem</scope><name>Activate</name></member>
+      <member refid="d7/d12/structMenuItem_1a33cb0911168774cdb71453743184be22" prot="public" virt="virtual"><scope>MenuItem</scope><name>ActivateCurrentSuite</name></member>
+      <member refid="d7/d12/structMenuItem_1a3d57d9e9b6fc38b4f8eb9240392ebf48" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>active_submenu</name></member>
+      <member refid="d7/d12/structMenuItem_1a9636ec4c0e64d70d0aaf7618dd1c9050" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>cursor_position</name></member>
+      <member refid="d7/d12/structMenuItem_1a992b1237ace72dc386a5305fd348a8f7" prot="public" virt="virtual"><scope>MenuItem</scope><name>CursorDown</name></member>
+      <member refid="d7/d12/structMenuItem_1adae7ed1dfe85080eeb1be24b93348f6c" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>CursorDownAndActivate</name></member>
+      <member refid="d7/d12/structMenuItem_1aa7d56249433e4afeba04d11d0489b995" prot="public" virt="virtual"><scope>MenuItem</scope><name>CursorLeft</name></member>
+      <member refid="d7/d12/structMenuItem_1a38b421507ab8ad89270258a75158b070" prot="public" virt="virtual"><scope>MenuItem</scope><name>CursorRight</name></member>
+      <member refid="d7/d12/structMenuItem_1a526e3928d3afe426dad05f3f66c0dbc6" prot="public" virt="virtual"><scope>MenuItem</scope><name>CursorUp</name></member>
+      <member refid="d7/d12/structMenuItem_1aba17e419992b01aac5a69da5ac316afb" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>CursorUpAndActivate</name></member>
+      <member refid="d7/d12/structMenuItem_1af8658a68106074fd149199db606feec1" prot="public" virt="virtual"><scope>MenuItem</scope><name>Deactivate</name></member>
+      <member refid="d7/d12/structMenuItem_1a2aa4e882bfe3f59f56dda1447e6d64ff" prot="public" virt="virtual"><scope>MenuItem</scope><name>Draw</name></member>
+      <member refid="d7/d12/structMenuItem_1a9a57af2165f97959149adee20a4eb86d" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>height</name></member>
+      <member refid="d7/d12/structMenuItem_1a0d50ee8b9d0f414ab623db5d92dea184" prot="public" virt="virtual"><scope>MenuItem</scope><name>IsEnterable</name></member>
+      <member refid="d7/d12/structMenuItem_1a1896433a20c1f876bbb9078d3f083566" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>menu_background_color_</name></member>
+      <member refid="d7/d12/structMenuItem_1a77bd4e666f8432542cde7113ad486366" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>MenuItem</name></member>
+      <member refid="d7/d12/structMenuItem_1a0e46de23f339da33aebb4b14ada546a7" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>name</name></member>
+      <member refid="d7/d12/structMenuItem_1a1926f4d5fb710557daf011158ad6a116" prot="public" virt="virtual"><scope>MenuItem</scope><name>OnEnter</name></member>
+      <member refid="d7/d12/structMenuItem_1a7514ab030c91963292036dda32d0b0cc" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>parent</name></member>
+      <member refid="d7/d12/structMenuItem_1aec8652d5bc122cf7de1a4b3bfdabe453" prot="protected" virt="non-virtual"><scope>MenuItem</scope><name>PrepareDraw</name></member>
+      <member refid="d7/d12/structMenuItem_1a5db1f67f8202519bd9a2164e500f5a6a" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>SetBackgroundColor</name></member>
+      <member refid="d7/d12/structMenuItem_1abb595a376ca6b4d42fb79f0158d3a81a" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>submenu</name></member>
+      <member refid="d7/d12/structMenuItem_1a6e267a86c0948a9f5df7cfa4f076cc48" prot="protected" virt="non-virtual"><scope>MenuItem</scope><name>Swap</name></member>
+      <member refid="d7/d12/structMenuItem_1a5223156aba1b53704f58586fb950836e" prot="public" virt="non-virtual"><scope>MenuItem</scope><name>width</name></member>
+      <member refid="d7/d12/structMenuItem_1a28f03d665c7424c9083adc20a4b59c3c" prot="public" virt="virtual"><scope>MenuItem</scope><name>~MenuItem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

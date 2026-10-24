@@ -1,0 +1,641 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dd/de3/texture__palette__tests_8cpp" kind="file" language="C++">
+    <compoundname>texture_palette_tests.cpp</compoundname>
+    <includes refid="df/da0/texture__palette__tests_8h" local="yes">texture_palette_tests.h</includes>
+    <includes local="no">array</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">xbox-swizzle/swizzle.h</includes>
+    <incdepgraph>
+      <node id="12">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texture_palette_tests.cpp</label>
+        <link refid="dd/de3/texture__palette__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texture_palette_tests.h</label>
+        <link refid="df/da0/texture__palette__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>array</label>
+      </node>
+      <node id="5">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="14">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="9">
+        <label>thread</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="13">
+        <label>windows.h</label>
+      </node>
+      <node id="31">
+        <label>xbox-swizzle/swizzle.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="dd/de3/texture__palette__tests_8cpp_1a758f827cf2b23e033811ce08b4cf5faa" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kPaletteSwappingTest[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPaletteSwappingTest</name>
+        <initializer>= &quot;PaletteSwapping&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_palette_tests.cpp" line="8" column="23" bodyfile="src/tests/texture_palette_tests.cpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/de3/texture__palette__tests_8cpp_1a08417ca5b6222236b2389ad7f1eb84aa" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr char</type>
+        <definition>constexpr char kXemu2646Test[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kXemu2646Test</name>
+        <initializer>= &quot;XemuHighPaletteBug&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_palette_tests.cpp" line="9" column="23" bodyfile="src/tests/texture_palette_tests.cpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/de3/texture__palette__tests_8cpp_1a3443a4c17ab95e8b1a1b62372f78ac57" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto kTextureWidth</definition>
+        <argsstring></argsstring>
+        <name>kTextureWidth</name>
+        <initializer>= 128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_palette_tests.cpp" line="11" column="23" bodyfile="src/tests/texture_palette_tests.cpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/de3/texture__palette__tests_8cpp_1a17da84b5c919ece3614a43aaf285131d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto kTextureHeight</definition>
+        <argsstring></argsstring>
+        <name>kTextureHeight</name>
+        <initializer>= 128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_palette_tests.cpp" line="12" column="23" bodyfile="src/tests/texture_palette_tests.cpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/de3/texture__palette__tests_8cpp_1a58e8314762cfe542ee686c7861bfbe10" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto kDefaultPaletteSize</definition>
+        <argsstring></argsstring>
+        <name>kDefaultPaletteSize</name>
+        <initializer>= 256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texture_palette_tests.cpp" line="13" column="23" bodyfile="src/tests/texture_palette_tests.cpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texture_palette_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;array&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;xbox-swizzle/swizzle.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kPaletteSwappingTest[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PaletteSwapping&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>kXemu2646Test[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;XemuHighPaletteBug&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTextureWidth<sp/>=<sp/>128;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kTextureHeight<sp/>=<sp/>128;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kDefaultPaletteSize<sp/>=<sp/>256;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateSwizzledPalettizedGradientSurface(uint8_t<sp/>*gradient_surface,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height,<sp/>uint32_t<sp/>palette_size,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>scale<sp/>=<sp/>1);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GeneratePalette(uint32_t<sp/>*palette,<sp/>uint32_t<sp/>palette_size,<sp/>uint32_t<sp/>mask);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>Size&gt;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>GetPaletteLengthMask()<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(Size<sp/>==<sp/>256<sp/>||<sp/>Size<sp/>==<sp/>128<sp/>||<sp/>Size<sp/>==<sp/>64<sp/>||<sp/>Size<sp/>==<sp/>32,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Error:<sp/>Texture<sp/>palette<sp/>size<sp/>must<sp/>be<sp/>32,<sp/>64,<sp/>128,<sp/>or<sp/>256.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Size<sp/>==<sp/>256)<sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NV097_SET_TEXTURE_PALETTE_LENGTH_256;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Size<sp/>==<sp/>128)<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NV097_SET_TEXTURE_PALETTE_LENGTH_128;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Size<sp/>==<sp/>64)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NV097_SET_TEXTURE_PALETTE_LENGTH_64;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>NV097_SET_TEXTURE_PALETTE_LENGTH_32;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><ref refid="df/df3/classTexturePaletteTests_1a8d8b5b73268f4dfdee35f04edb958515" kindref="member">TexturePaletteTests::TexturePaletteTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texture<sp/>palette&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>tests_[kPaletteSwappingTest]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestPaletteSwapping();<sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>tests_[kXemu2646Test]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">]()<sp/>{<sp/>TestXemu2646();<sp/>};</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="df/df3/classTexturePaletteTests_1a6f0e8872d73308332644cb984a95dc51" kindref="member">TexturePaletteTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/>host_.SetXDKDefaultViewportAndFixedFunctionMatrices();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>host_.SetPaletteSize(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">TestHost::PaletteSize</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kDefaultPaletteSize));</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawPalettes(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_)<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kPaletteWidth<sp/>=<sp/>256.f;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kPaletteHeight<sp/>=<sp/>32.f;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kSpacing<sp/>=<sp/>4.f;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX1);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX1,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(1);</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>texture_stage.SetImageDimensions(kDefaultPaletteSize<sp/>*<sp/>4,<sp/>4);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(1,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_NONE,<sp/>TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>host_.GetFramebufferHeightF()<sp/>-<sp/>((kPaletteHeight<sp/>+<sp/>kSpacing)<sp/>*<sp/>4<sp/>-<sp/>kSpacing);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a6d7644613f0f313c03f990038d995d36" kindref="member">CenterX</ref>(kPaletteWidth);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>0;<sp/>x<sp/>&lt;<sp/>4;<sp/>++x,<sp/>top<sp/>+=<sp/>kPaletteHeight<sp/>+<sp/>kSpacing)<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u_left<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(x)<sp/>*<sp/>kDefaultPaletteSize;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>u_right<sp/>=<sp/>u_left<sp/>+<sp/>kDefaultPaletteSize;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(u_left,<sp/>0.f);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>top);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(u_right,<sp/>0.f);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left<sp/>+<sp/>kPaletteWidth,<sp/>top);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(u_right,<sp/>1.f);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left<sp/>+<sp/>kPaletteWidth,<sp/>top<sp/>+<sp/>kPaletteHeight);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTexCoord1(u_left,<sp/>1.f);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>top<sp/>+<sp/>kPaletteHeight);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>host_.SetTextureStageEnabled(1,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexturePaletteTests::TestPaletteSwapping()<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF333333);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>GenerateSwizzledPalettizedGradientSurface(host_.GetTextureMemoryForStage(0),<sp/>kTextureWidth,<sp/>kTextureHeight,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kDefaultPaletteSize);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8));</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetTextureDimensions(kTextureWidth,<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadSize<sp/>=<sp/>96;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>kQuadSize;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>kQuadSize;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>top);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(right,<sp/>top);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(right,<sp/>bottom);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>bottom);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palettes<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetTextureMemoryForStage(1));</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette0<sp/>=<sp/>palettes;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette1<sp/>=<sp/>palette0<sp/>+<sp/>kDefaultPaletteSize;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette2<sp/>=<sp/>palette1<sp/>+<sp/>kDefaultPaletteSize;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette3<sp/>=<sp/>palette2<sp/>+<sp/>kDefaultPaletteSize;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/>GeneratePalette(palette0,<sp/>kDefaultPaletteSize,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>GeneratePalette(palette1,<sp/>kDefaultPaletteSize,<sp/>0xFF00FFFF);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>GeneratePalette(palette2,<sp/>kDefaultPaletteSize,<sp/>0xFFFF00FF);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/>GeneratePalette(palette3,<sp/>kDefaultPaletteSize,<sp/>0xFFFFFF00);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>DMA_B<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>set_palette<sp/>=<sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*palette)<sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette_addr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uintptr_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(palette);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT((palette_addr<sp/>&amp;<sp/>0x03ffffc0)<sp/>==<sp/>(palette_addr<sp/>&amp;<sp/>0x03ffffff)<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Misaligned<sp/>palette&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_TEXTURE_PALETTE,</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_TEXTURE_PALETTE_CONTEXT_DMA,<sp/>DMA_B)<sp/>|</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_TEXTURE_PALETTE_LENGTH,<sp/>GetPaletteLengthMask&lt;kDefaultPaletteSize&gt;())<sp/>|</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(palette_addr<sp/>&amp;<sp/>0x03ffffc0));</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>quads</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>80.f;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kSpacing<sp/>=<sp/>floorf((host_.GetFramebufferWidthF()<sp/>-<sp/>kQuadSize<sp/>*<sp/>4)<sp/>/<sp/>5);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette0);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette1);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette2);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette3);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>a<sp/>row<sp/>reusing<sp/>the<sp/>same<sp/>palette,<sp/>modifying<sp/>it<sp/>between<sp/>each<sp/>render.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kQuadSize<sp/>+<sp/>8.f;</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>=<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>GeneratePalette(palette0,<sp/>kDefaultPaletteSize,<sp/>0xFFFFFF00);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette0);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>GeneratePalette(palette0,<sp/>kDefaultPaletteSize,<sp/>0xFFFF00FF);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette0);</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>GeneratePalette(palette0,<sp/>kDefaultPaletteSize,<sp/>0xFF00FFFF);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette0);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>GeneratePalette(palette0,<sp/>kDefaultPaletteSize,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette0);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>the<sp/>final<sp/>palettes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>DrawPalettes(host_);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>kPaletteSwappingTest);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;The<sp/>same<sp/>image<sp/>is<sp/>rendered<sp/>with<sp/>different<sp/>palettes\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kPaletteSwappingTest);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexturePaletteTests::TestXemu2646()<sp/>{</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF333333);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/>GenerateSwizzledPalettizedGradientSurface(host_.GetTextureMemoryForStage(0),<sp/>kTextureWidth,<sp/>kTextureHeight,</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kDefaultPaletteSize,<sp/>5);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;texture_stage<sp/>=<sp/>host_.GetTextureStage(0);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_I8_A8R8G8B8));</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>texture_stage.SetTextureDimensions(kTextureWidth,<sp/>kTextureHeight);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetupTextureStages();</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kQuadSize<sp/>=<sp/>96;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>draw_quad<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">](</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top)<sp/>{</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>kQuadSize;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>kQuadSize;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.Begin(TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>top);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.f,<sp/>0.f);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(right,<sp/>top);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(1.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(right,<sp/>bottom);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetTexCoord0(0.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.SetScreenVertex(left,<sp/>bottom);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host_.End();</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uint32_t<sp/>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(host_.GetTextureMemoryForStage(1));</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>GeneratePalette(palette,<sp/>kDefaultPaletteSize,<sp/>0xFFFFFFFF);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>DMA_B<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>set_palette<sp/>=<sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*palette)<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>palette_addr<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">uintptr_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(palette);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>ASSERT((palette_addr<sp/>&amp;<sp/>0x03ffffc0)<sp/>==<sp/>(palette_addr<sp/>&amp;<sp/>0x03ffffff)<sp/>&amp;&amp;<sp/></highlight><highlight class="stringliteral">&quot;Misaligned<sp/>palette&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_TEXTURE_PALETTE,</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_TEXTURE_PALETTE_CONTEXT_DMA,<sp/>DMA_B)<sp/>|</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MASK(NV097_SET_TEXTURE_PALETTE_LENGTH,<sp/>GetPaletteLengthMask&lt;kDefaultPaletteSize&gt;())<sp/>|</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(palette_addr<sp/>&amp;<sp/>0x03ffffc0));</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shift_palette<sp/>=<sp/>[palette]()<sp/>{</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>i<sp/>=<sp/>kDefaultPaletteSize<sp/>/<sp/>4;<sp/>i<sp/>&lt;<sp/>kDefaultPaletteSize;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>color<sp/>=<sp/>palette[i];</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>rgb<sp/>=<sp/>color<sp/>&amp;<sp/>0x00FFFFFF;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>rotated_rgb<sp/>=<sp/>((rgb<sp/>&lt;&lt;<sp/>8)<sp/>|<sp/>(rgb<sp/>&gt;&gt;<sp/>16))<sp/>&amp;<sp/>0x00FFFFFF;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>palette[i]<sp/>=<sp/>0xFF000000<sp/>|<sp/>rotated_rgb;</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>roll_palette<sp/>=<sp/>[palette]()<sp/>{</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>start<sp/>=<sp/>palette<sp/>+<sp/>(kDefaultPaletteSize<sp/>/<sp/>4);</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>end<sp/>=<sp/>palette<sp/>+<sp/>kDefaultPaletteSize;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/>std::rotate(start,<sp/>start<sp/>+<sp/>31,<sp/>end);</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Draw<sp/>a<sp/>row<sp/>reusing<sp/>the<sp/>same<sp/>palette,<sp/>modifying<sp/>only<sp/>the<sp/>entries<sp/>larger<sp/>than<sp/>kDefaultPaletteSize<sp/>/<sp/>4<sp/>to<sp/>exercise</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>xemu<sp/>bug<sp/>where<sp/>palette<sp/>size<sp/>during<sp/>texture<sp/>hashing<sp/>is<sp/>1/4<sp/>what<sp/>it<sp/>should<sp/>be.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>host_.<ref refid="d6/d80/classTestHost_1a20f1c9bc7b1155623f1c0fc470de45a9" kindref="member">CenterY</ref>(kQuadSize);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>kSpacing<sp/>=<sp/>floorf((host_.GetFramebufferWidthF()<sp/>-<sp/>kQuadSize<sp/>*<sp/>4)<sp/>/<sp/>5);</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>roll_palette();</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/>shift_palette();</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette);</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>left<sp/>+=<sp/>kQuadSize<sp/>+<sp/>kSpacing;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/>shift_palette();</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>set_palette(palette);</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_quad(left,<sp/>top);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;%s\n&quot;</highlight><highlight class="normal">,<sp/>kXemu2646Test);</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Image<sp/>is<sp/>rendered<sp/>with<sp/>only<sp/>high<sp/>palette<sp/>entries<sp/>changed\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;Entries<sp/>should<sp/>be<sp/>clearly<sp/>different\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(kXemu2646Test);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GenerateSwizzledPalettizedGradientSurface(uint8_t<sp/>*gradient_surface,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>height,<sp/>uint32_t<sp/>palette_size,</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint32_t<sp/>scale)<sp/>{</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/>std::vector&lt;uint8_t&gt;<sp/>temp_buffer(width<sp/>*<sp/>height);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cx<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(width)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cy<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(height)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>max_distance<sp/>=<sp/>cx<sp/>*<sp/>cx<sp/>+<sp/>cy<sp/>*<sp/>cy;</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>max_value<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(palette_size<sp/>-<sp/>1);</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pixels<sp/>=<sp/>temp_buffer.data();</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>y<sp/>=<sp/>0;<sp/>y<sp/>&lt;<sp/>height;<sp/>++y)<sp/>{</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(y)<sp/>-<sp/>cx;</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dy_squared<sp/>=<sp/>dy<sp/>*<sp/>dy;</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>x<sp/>=<sp/>0;<sp/>x<sp/>&lt;<sp/>width;<sp/>++x,<sp/>++pixels)<sp/>{</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(x)<sp/>-<sp/>cx;</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>distance<sp/>=<sp/>dx<sp/>*<sp/>dx<sp/>+<sp/>dy_squared;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>*pixels<sp/>=<sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint8_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(max_value<sp/>*<sp/>(1.f<sp/>-<sp/>distance<sp/>/<sp/>max_distance))<sp/>*<sp/>scale)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/>swizzle_rect(temp_buffer.data(),<sp/>width,<sp/>height,<sp/>gradient_surface,<sp/>width,<sp/>1);</highlight></codeline>
+<codeline lineno="363"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>GeneratePalette(uint32_t<sp/>*palette,<sp/>uint32_t<sp/>palette_size,<sp/>uint32_t<sp/>mask)<sp/>{</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/>ASSERT(palette<sp/>&amp;&amp;<sp/>palette_size<sp/>&gt;=<sp/>32);</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>divisor<sp/>=<sp/>palette_size<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"></highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>palette_size;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>r<sp/>=<sp/>((i<sp/>*<sp/>255)<sp/>/<sp/>divisor)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>g<sp/>=<sp/>255<sp/>-<sp/>r;</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>b<sp/>=<sp/>(i<sp/>*<sp/>4)<sp/>&amp;<sp/>0xFF;</highlight></codeline>
+<codeline lineno="374"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>color<sp/>=<sp/>0xFF000000<sp/>|<sp/>(r<sp/>&lt;&lt;<sp/>16)<sp/>|<sp/>(g<sp/>&lt;&lt;<sp/>8)<sp/>|<sp/>b;</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/>palette[i]<sp/>=<sp/>color<sp/>&amp;<sp/>mask;</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="378"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal">}<sp/><sp/></highlight><highlight class="comment">//<sp/>namespace</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texture_palette_tests.cpp"/>
+  </compounddef>
+</doxygen>

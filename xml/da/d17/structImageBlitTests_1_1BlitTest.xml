@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="da/d17/structImageBlitTests_1_1BlitTest" kind="struct" language="C++" prot="public">
+    <compoundname>ImageBlitTests::BlitTest</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="da/d17/structImageBlitTests_1_1BlitTest_1a64b909bb4dbd04119a334565638f7948" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageBlitTests::BlitTest::blit_operation</definition>
+        <argsstring></argsstring>
+        <name>blit_operation</name>
+        <qualifiedname>ImageBlitTests::BlitTest::blit_operation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="18" column="14" bodyfile="src/tests/image_blit_tests.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d17/structImageBlitTests_1_1BlitTest_1aed79c0c4e1d993cb8bdafa1327ce2851" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageBlitTests::BlitTest::buffer_color_format</definition>
+        <argsstring></argsstring>
+        <name>buffer_color_format</name>
+        <qualifiedname>ImageBlitTests::BlitTest::buffer_color_format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="19" column="14" bodyfile="src/tests/image_blit_tests.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="da/d17/structImageBlitTests_1_1BlitTest_1a31f9e4b382f88b63e40d648d36d8de3c" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t ImageBlitTests::BlitTest::beta</definition>
+        <argsstring></argsstring>
+        <name>beta</name>
+        <qualifiedname>ImageBlitTests::BlitTest::beta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/image_blit_tests.h" line="20" column="14" bodyfile="src/tests/image_blit_tests.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/image_blit_tests.h" line="17" column="3" bodyfile="src/tests/image_blit_tests.h" bodystart="17" bodyend="21"/>
+    <listofallmembers>
+      <member refid="da/d17/structImageBlitTests_1_1BlitTest_1a31f9e4b382f88b63e40d648d36d8de3c" prot="public" virt="non-virtual"><scope>ImageBlitTests::BlitTest</scope><name>beta</name></member>
+      <member refid="da/d17/structImageBlitTests_1_1BlitTest_1a64b909bb4dbd04119a334565638f7948" prot="public" virt="non-virtual"><scope>ImageBlitTests::BlitTest</scope><name>blit_operation</name></member>
+      <member refid="da/d17/structImageBlitTests_1_1BlitTest_1aed79c0c4e1d993cb8bdafa1327ce2851" prot="public" virt="non-virtual"><scope>ImageBlitTests::BlitTest</scope><name>buffer_color_format</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

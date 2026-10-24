@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d9/df9/classVertexShaderRoundingTests" kind="class" language="C++" prot="public">
+    <compoundname>VertexShaderRoundingTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <innerclass refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase" prot="public">VertexShaderRoundingTests::RoundingCase</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d9/df9/classVertexShaderRoundingTests_1adcd806b1f50ee3dd29a1215e6527526e" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>uint8_t* VertexShaderRoundingTests::render_target_</definition>
+        <argsstring></argsstring>
+        <name>render_target_</name>
+        <qualifiedname>VertexShaderRoundingTests::render_target_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="41" column="11" bodyfile="src/tests/vertex_shader_rounding_tests.h" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/df9/classVertexShaderRoundingTests_1a76f1a1e5cd7d5f586dce13569637b8b5" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>std::shared_ptr&lt;VertexBuffer&gt; VertexShaderRoundingTests::framebuffer_vertex_buffer_</definition>
+        <argsstring></argsstring>
+        <name>framebuffer_vertex_buffer_</name>
+        <qualifiedname>VertexShaderRoundingTests::framebuffer_vertex_buffer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="43" column="19" bodyfile="src/tests/vertex_shader_rounding_tests.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1ac9588155618a4c250e36e33852818516" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexShaderRoundingTests::VertexShaderRoundingTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>VertexShaderRoundingTests</name>
+        <qualifiedname>VertexShaderRoundingTests::VertexShaderRoundingTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para>Geometry*, GeometrySubscreen*, GeometrySuperscreen*, AdjacentGeometry* and ProjAdjacentGeometry* tests are parameterized by a subpixel bias (the numeric suffix) that is added to vertex positions; the biases straddle half pixel and 1/16 subpixel boundaries. Each family is described in its _0.0000 entry.</para>
+<para><simplesect kind="remark"><para>AdjacentGeometry_0.0000 Draws a light grey 400x200 background, then a 4x2 grid of adjacent 100x100 green quads, each offset by the bias in x and y, through a passthrough vertex shader. Grey seams between neighboring quads show inconsistent rounding of shared edges. This case uses no offset.</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.0010 As AdjacentGeometry_0.0000 with a bias of 0.0010 (a tiny offset).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.4999 As AdjacentGeometry_0.0000 with a bias of 0.4999 (just under half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.5000 As AdjacentGeometry_0.0000 with a bias of 0.5000 (exactly half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.5624 As AdjacentGeometry_0.0000 with a bias of 0.5624 (just under the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.5625 As AdjacentGeometry_0.0000 with a bias of 0.5625 (exactly 9/16 of a pixel, a 1/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.5626 As AdjacentGeometry_0.0000 with a bias of 0.5626 (just over the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_0.9990 As AdjacentGeometry_0.0000 with a bias of 0.9990 (just under one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentGeometry_1.0000 As AdjacentGeometry_0.0000 with a bias of 1.0000 (exactly one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>Compositing_-2 As Compositing_-4, but the final full screen quad is drawn at z = -2.</para>
+</simplesect>
+<simplesect kind="remark"><para>Compositing_-4 Fills a framebuffer sized texture with a centered 256x256 checkerboard, points the color surface at that texture and draws the left half of the texture onto itself four times through a passthrough vertex shader, with the combiner outputting the texture&apos;s color and half its alpha. The texture is then drawn to the screen with a fixed function full screen quad at z = -4. Any offset or blurring in the left half shows texel misalignment that accumulates over the repeated self compositing.</para>
+</simplesect>
+<simplesect kind="remark"><para>Compositing_2 As Compositing_-4, but the final full screen quad is drawn at z = 2.</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.0000 For each of four sizes (128x128, 128x32, 32x128 and 16x64), points the color surface at texture memory sized exactly to the quad, fills it with magenta on the CPU and draws a green quad covering the whole surface offset by the bias in x and y through a passthrough vertex shader. Each result is then drawn to the screen as a texture in a 2x2 grid. Magenta shows texels the offset quad did not cover. This case uses no offset.</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.0010 As GeometrySubscreen_0.0000 with a bias of 0.0010 (a tiny offset).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.4999 As GeometrySubscreen_0.0000 with a bias of 0.4999 (just under half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.5000 As GeometrySubscreen_0.0000 with a bias of 0.5000 (exactly half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.5624 As GeometrySubscreen_0.0000 with a bias of 0.5624 (just under the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.5625 As GeometrySubscreen_0.0000 with a bias of 0.5625 (exactly 9/16 of a pixel, a 1/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.5626 As GeometrySubscreen_0.0000 with a bias of 0.5626 (just over the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_0.9990 As GeometrySubscreen_0.0000 with a bias of 0.9990 (just under one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySubscreen_1.0000 As GeometrySubscreen_0.0000 with a bias of 1.0000 (exactly one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.0000 As GeometrySubscreen, but the color surface is always 1024x1024 and only the first width * height texels of it (contiguously, not as a rectangle) are filled with magenta before drawing the offset green quad of each size. The top left width x height region of the surface is drawn to the screen for each size. This case uses no offset.</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.0010 As GeometrySuperscreen_0.0000 with a bias of 0.0010 (a tiny offset).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.4999 As GeometrySuperscreen_0.0000 with a bias of 0.4999 (just under half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.5000 As GeometrySuperscreen_0.0000 with a bias of 0.5000 (exactly half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.5624 As GeometrySuperscreen_0.0000 with a bias of 0.5624 (just under the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.5625 As GeometrySuperscreen_0.0000 with a bias of 0.5625 (exactly 9/16 of a pixel, a 1/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.5626 As GeometrySuperscreen_0.0000 with a bias of 0.5626 (just over the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_0.9990 As GeometrySuperscreen_0.0000 with a bias of 0.9990 (just under one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>GeometrySuperscreen_1.0000 As GeometrySuperscreen_0.0000 with a bias of 1.0000 (exactly one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.0000 Draws a 240x240 magenta quad centered on the screen, then a green quad over it whose top and left edges are offset by the bias (the right and bottom edges are unchanged), both through a passthrough vertex shader. Any magenta left visible along the top or left edge shows how the offset edge was snapped to the 1/16 subpixel grid and rasterized. This case uses no offset.</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.0010 As Geometry_0.0000 with a bias of 0.0010 (a tiny offset).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.4999 As Geometry_0.0000 with a bias of 0.4999 (just under half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.5000 As Geometry_0.0000 with a bias of 0.5000 (exactly half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.5624 As Geometry_0.0000 with a bias of 0.5624 (just under the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.5625 As Geometry_0.0000 with a bias of 0.5625 (exactly 9/16 of a pixel, a 1/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.5626 As Geometry_0.0000 with a bias of 0.5626 (just over the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_0.9990 As Geometry_0.0000 with a bias of 0.9990 (just under one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>Geometry_1.0000 As Geometry_0.0000 with a bias of 1.0000 (exactly one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_ADD As OpRounding_MUL, but measures the rounding of ADD. Each case uses operands a and b whose exact sum lies 0.25 or 0.75 ulp beyond a representable float (for positive and negative sums), or exactly 0.5 ulp above an odd one so that round-to-nearest-even rounds up (&quot;Tie&quot;), with c the IEEE round-to-nearest-even sum. The shader computes d = ADD(a, b) - c. IEEE round to nearest would give d = 0 for every case. Hardware truncates the sum toward zero, giving d = 0, -1, 0, 1 and -1 ulp.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_ADDWindow As OpRounding_ADD, but with operands that probe the alignment window of the nv2a adder. Hardware aligns the smaller operand to the larger one and truncates it to a multiple of 2^-28 relative to the larger operand&apos;s leading bit (24 bits of mantissa plus 5 more, with no sticky bit) before summing exactly and truncating the sum toward zero. The cases compute 1 - 2^-28 (&quot;Kept&quot;, inside the window), 1 - 2^-29 (&quot;Lost&quot;, outside it) and 1 - (2^-24 + 2^-29) (&quot;Strad&quot;, whose 2^-29 bit is outside it). Hardware gives depth - offset = -16, 0 and 0 (d = -0.5, 0 and 0 ulp). Round to nearest gives 0, 0 and 0; truncating the exact sum gives -16, -16 and -16.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_DP4 As OpRounding_MUL, but d is computed by a single DP4 of (a, c, 0, 0) and (b, -1, 0, 2^23). On hardware the product is truncated before it is summed, giving the same results as OpRounding_MUL.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_DP4Sum3 Computes d = DP4((a, b, t2, 0), (1, 1, 1, 0)) - c with c, the IEEE round-to-nearest-even value of a + b + t2, subtracted by a separate ADD so that it does not take part in the DP4&apos;s accumulation. Hardware truncates each product, aligns all of them to the largest one in the same 2^-28 window as ADD (see OpRounding_ADDWindow), sums the aligned terms exactly and truncates the result toward zero. &quot;+0.75&quot; and &quot;-0.75&quot; sum to 0.75 ulp beyond +1 and -1, &quot;Kept&quot; is 1 + 2^-28 - 1 (scaled by 2^32), &quot;Strad&quot; is 1 - (2^-24 + 2^-29) and &quot;Order&quot; is 2^32 - 2^32 + 2^-32 (scaled by 2^36), whose small term is outside the window anchored to the largest term even though the large terms cancel first. Hardware gives depth - offset = -32, 32, 0, 0 and -16 (d = -1, 1, 0 and 0 ulp, and d = -c for &quot;Order&quot;). Round to nearest gives 0, 0, 0, 0 and 0; truncating the exact sum gives -32, 32, 0, -16 and 0; truncating every partial sum in order gives -32, 32, -16, -16 and 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_DP4SumAB As OpRounding_ADD, but d is computed by a single DP4 of (a, b, c, 0) and (1, 1, -1, 0), so all products are exact and only the accumulation can round. Summing left to right or pairwise adds a + b first, which would give the OpRounding_ADD results if intermediate sums were rounded. Hardware gives the exact distance between a + b and c, d = 0.25, -0.25, -0.25, 0.25 and -0.5 ulp, so DP4 does not round intermediate sums. The accumulation is only exact within the adder&apos;s alignment window (see OpRounding_DP4Sum3).</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_DP4SumAC As OpRounding_DP4SumAB, but with (a, c, b, 0) and (1, -1, 1, 0). Left to right or pairwise summation computes a - c first, which is exact, and then adds b exactly, so d is 0.25, -0.25, -0.25, 0.25 and -0.5 ulp regardless of how additions round; any other result would mean the accumulation adds b before subtracting c. Hardware gives these values.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_MAD As OpRounding_MUL, but d is computed by a single MAD (a * b - c). On hardware the product is truncated before the addition (the operation is not fused), giving the same results as OpRounding_MUL.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_MADExactProduct As OpRounding_ADD, but d is computed by a single MAD of a * 1 + b, so the product is exact and only MAD&apos;s addition can round. Hardware gives the same results as OpRounding_ADD: MAD&apos;s addition truncates toward zero like ADD.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_MADExactProductWindow As OpRounding_MADExactProduct, with the OpRounding_ADDWindow operands. MAD&apos;s addition uses the same alignment window as ADD, so hardware gives the OpRounding_ADDWindow results: depth - offset = -16, 0 and 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_MADInexactBoth As OpRounding_MADExactProduct, but with a multiplier m so that both the product and the sum of MAD(a, m, b) are inexact: 0x3F800800 * 0x3F800C00 + 2^-24 (&quot;+both&quot;) and its negation (&quot;-both&quot;), with c the IEEE round-to-nearest-even value of the exact a * m + b. Hardware truncates the product and then the sum, giving depth - offset = -32 and 32 (d = -1 and 1 ulp). A fused MAD rounded to nearest gives 0 and 0, and rounding both steps to nearest gives 32 and -32.</para>
+</simplesect>
+<simplesect kind="remark"><para>OpRounding_MUL Measures the rounding behavior of the MUL vertex shader instruction. Each case uses operands a and b whose exact product lies 0.25 or 0.75 ulp above a representable float (for positive and negative products), or exactly 0.5 ulp above one (the -1.0014837 * -40 product from Rugby 2005, xemu-project/xemu#2388), along with c, the IEEE round-to-nearest-even value of the product, all passed as shader constants. The shader computes d = MUL(a, b) - c (the subtraction is exact) and writes z = d * 2^28 + 2^23 to a Z24S8 surface, which is read back on the CPU. The screen lists, per case, the depth minus 2^23 and d in ulps of c. IEEE round to nearest would give d = 0 for every case. Hardware truncates the product toward zero, giving d = 0, -1, 0, 1 and -1 ulp. Rows whose depth differs from the hardware result are drawn over a red rectangle.</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.0000 As AdjacentGeometry, but positions are unprojected through a D3D style perspective projection with z varying from the top to the bottom of each quad. Quads alternate in a checkerboard between the programmable pipeline (dark green, 0xFF009900) and the fixed function pipeline (light green, 0xFF00BB00), so seams between them show differences in how the two pipelines round projected vertices. This case uses no offset.</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.0010 As ProjAdjacentGeometry_0.0000 with a bias of 0.0010 (a tiny offset).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.4999 As ProjAdjacentGeometry_0.0000 with a bias of 0.4999 (just under half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.5000 As ProjAdjacentGeometry_0.0000 with a bias of 0.5000 (exactly half a pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.5624 As ProjAdjacentGeometry_0.0000 with a bias of 0.5624 (just under the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.5625 As ProjAdjacentGeometry_0.0000 with a bias of 0.5625 (exactly 9/16 of a pixel, a 1/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.5626 As ProjAdjacentGeometry_0.0000 with a bias of 0.5626 (just over the 9/16 subpixel boundary).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_0.9990 As ProjAdjacentGeometry_0.0000 with a bias of 0.9990 (just under one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>ProjAdjacentGeometry_1.0000 As ProjAdjacentGeometry_0.0000 with a bias of 1.0000 (exactly one pixel).</para>
+</simplesect>
+<simplesect kind="remark"><para>RenderTarget Points the color surface at a 128x128 render target that is prefilled with translucent magenta, sets the viewport offset to (320.53125, 240.53125) and the viewport scale to (320, -240, 16777215), and draws a quad from (-1, 1) to (1, -1) with a manually loaded vertex program ending in the XDK screen space epilogue (MUL by c[58], RCC of w, MAD with c[59]). The render target is then drawn to the screen with the fixed function pipeline. Magenta shows texels the quad did not cover.</para>
+</simplesect>
+<simplesect kind="remark"><para>TopLeftRaster Tests the rasterizer&apos;s top-left fill rule and 1/16 subpixel snapping through a passthrough vertex shader. Draws thin vertical quads and triangles whose left edges sit at x + 0.5 (or the next float below it) and step by 1/16 pixel, a 0.2 pixel wide quad that should be invisible without multisampling, quads stacked to share edges at x + 0.5625, black to white horizontal gradient quads whose expected interpolated colors are 0x808080, 0x808080 and 0x000000 from top to bottom, and the same edge patterns rotated to horizontal on the right side of the screen.</para>
+</simplesect>
+<simplesect kind="remark"><para>TopLeftRaster_Fixed As TopLeftRaster, but the geometry is drawn through the fixed function pipeline with identity model view and projection matrices and a zero viewport scale and offset. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="21" column="3" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="414" bodyend="492"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a5bc49a5b7f67b5caf42d136736094607" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>VertexShaderRoundingTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="23" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="494" bodyend="502"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1add51c7b37e4fe70113d5902789634cbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::Deinitialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Deinitialize</name>
+        <qualifiedname>VertexShaderRoundingTests::Deinitialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f">Deinitialize</reimplements>
+        <briefdescription>
+<para>Called to tear down the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="24" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="504" bodyend="509"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a0f04c66247d8a9bc4605041918daacc0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::CreateGeometry</definition>
+        <argsstring>()</argsstring>
+        <name>CreateGeometry</name>
+        <qualifiedname>VertexShaderRoundingTests::CreateGeometry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="27" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="511" bodyend="515"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1ab4c17c67097dda0d5909d22d3e870452" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestRenderTarget</definition>
+        <argsstring>()</argsstring>
+        <name>TestRenderTarget</name>
+        <qualifiedname>VertexShaderRoundingTests::TestRenderTarget</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="29" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="821" bodyend="946"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1acf69d1a02816131d4817ebcf22d6f55b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestGeometry</definition>
+        <argsstring>(float bias)</argsstring>
+        <name>TestGeometry</name>
+        <qualifiedname>VertexShaderRoundingTests::TestGeometry</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="30" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="517" bodyend="563"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1ad8707d0a18c29bdde623c362983c2cb0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestGeometrySubscreen</definition>
+        <argsstring>(float bias)</argsstring>
+        <name>TestGeometrySubscreen</name>
+        <qualifiedname>VertexShaderRoundingTests::TestGeometrySubscreen</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="31" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="565" bodyend="690"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a65fe28f46ce2b0132b09e0def1b587d6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestGeometrySuperscreen</definition>
+        <argsstring>(float draw_width)</argsstring>
+        <name>TestGeometrySuperscreen</name>
+        <qualifiedname>VertexShaderRoundingTests::TestGeometrySuperscreen</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>draw_width</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="32" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="692" bodyend="819"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1aae30f98f553b353f8b44fd07ae5821cb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestCompositingRenderTarget</definition>
+        <argsstring>(int z)</argsstring>
+        <name>TestCompositingRenderTarget</name>
+        <qualifiedname>VertexShaderRoundingTests::TestCompositingRenderTarget</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="33" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="948" bodyend="1065"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a76d2b7a8b8fbe6994fb63bfc23c49365" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestAdjacentGeometry</definition>
+        <argsstring>(float bias)</argsstring>
+        <name>TestAdjacentGeometry</name>
+        <qualifiedname>VertexShaderRoundingTests::TestAdjacentGeometry</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="34" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="1067" bodyend="1124"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a5a9f52ac5c299f1dfa1edb8ff69ec1e6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestProjectedAdjacentGeometry</definition>
+        <argsstring>(float bias)</argsstring>
+        <name>TestProjectedAdjacentGeometry</name>
+        <qualifiedname>VertexShaderRoundingTests::TestProjectedAdjacentGeometry</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>bias</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Draws a light colored quad, then renders quads whose coordinates have had <computeroutput>bias</computeroutput> added to X and Y. Dark green quads are rendered using a programmable vertex shader and light green quads are rendered using the fixed function pipeline.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>amount to shift the green quads relative to the white background. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="35" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="1134" bodyend="1288"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a32b8e73aa618cfc6830df587c3d7c05a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestTopLeftRasterization</definition>
+        <argsstring>(bool fixed)</argsstring>
+        <name>TestTopLeftRasterization</name>
+        <qualifiedname>VertexShaderRoundingTests::TestTopLeftRasterization</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>fixed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="36" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="1296" bodyend="1660"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/df9/classVertexShaderRoundingTests_1a50c6ac442e9ea46ae510772ca6ed5d60" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VertexShaderRoundingTests::TestOpRounding</definition>
+        <argsstring>(const char *name, const uint32_t *shader, uint32_t shader_size, const RoundingCase *cases, uint32_t num_cases, const int32_t *hw_expected)</argsstring>
+        <name>TestOpRounding</name>
+        <qualifiedname>VertexShaderRoundingTests::TestOpRounding</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>shader</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>shader_size</declname>
+        </param>
+        <param>
+          <type>const <ref refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase" kindref="compound">RoundingCase</ref> *</type>
+          <declname>cases</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>num_cases</declname>
+        </param>
+        <param>
+          <type>const int32_t *</type>
+          <declname>hw_expected</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.h" line="37" column="8" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="1662" bodyend="1783"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>VertexShaderRoundingTests</label>
+        <link refid="d9/df9/classVertexShaderRoundingTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>VertexShaderRoundingTests</label>
+        <link refid="d9/df9/classVertexShaderRoundingTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/vertex_shader_rounding_tests.h" line="16" column="1" bodyfile="src/tests/vertex_shader_rounding_tests.h" bodystart="16" bodyend="44"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>allow_saving_</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a0f04c66247d8a9bc4605041918daacc0" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>CreateGeometry</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1add51c7b37e4fe70113d5902789634cbd" prot="public" virt="virtual"><scope>VertexShaderRoundingTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a76f1a1e5cd7d5f586dce13569637b8b5" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>framebuffer_vertex_buffer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>host_</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a5bc49a5b7f67b5caf42d136736094607" prot="public" virt="virtual"><scope>VertexShaderRoundingTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1adcd806b1f50ee3dd29a1215e6527526e" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>render_target_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>VertexShaderRoundingTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>VertexShaderRoundingTests</scope><name>TearDownTest</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a76d2b7a8b8fbe6994fb63bfc23c49365" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestAdjacentGeometry</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1aae30f98f553b353f8b44fd07ae5821cb" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestCompositingRenderTarget</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1acf69d1a02816131d4817ebcf22d6f55b" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestGeometry</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1ad8707d0a18c29bdde623c362983c2cb0" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestGeometrySubscreen</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a65fe28f46ce2b0132b09e0def1b587d6" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestGeometrySuperscreen</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestNames</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a50c6ac442e9ea46ae510772ca6ed5d60" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestOpRounding</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a5a9f52ac5c299f1dfa1edb8ff69ec1e6" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestProjectedAdjacentGeometry</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1ab4c17c67097dda0d5909d22d3e870452" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestRenderTarget</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestSuite</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1a32b8e73aa618cfc6830df587c3d7c05a" prot="private" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>TestTopLeftRasterization</name></member>
+      <member refid="d9/df9/classVertexShaderRoundingTests_1ac9588155618a4c250e36e33852818516" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests</scope><name>VertexShaderRoundingTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>VertexShaderRoundingTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

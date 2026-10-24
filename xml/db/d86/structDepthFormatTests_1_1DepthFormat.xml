@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d86/structDepthFormatTests_1_1DepthFormat" kind="struct" language="C++" prot="public">
+    <compoundname>DepthFormatTests::DepthFormat</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/d86/structDepthFormatTests_1_1DepthFormat_1a7e9a4b092c8a6c6c108751d612f52d2e" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DepthFormatTests::DepthFormat::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>DepthFormatTests::DepthFormat::format</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_tests.h" line="17" column="14" bodyfile="src/tests/depth_format_tests.h" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d86/structDepthFormatTests_1_1DepthFormat_1a38256613ad2ac91ef734e21d2bbb59f9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t DepthFormatTests::DepthFormat::max_depth</definition>
+        <argsstring></argsstring>
+        <name>max_depth</name>
+        <qualifiedname>DepthFormatTests::DepthFormat::max_depth</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_tests.h" line="18" column="14" bodyfile="src/tests/depth_format_tests.h" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d86/structDepthFormatTests_1_1DepthFormat_1ac8a107825c0fd17a686f90978c656254" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool DepthFormatTests::DepthFormat::floating_point</definition>
+        <argsstring></argsstring>
+        <name>floating_point</name>
+        <qualifiedname>DepthFormatTests::DepthFormat::floating_point</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_tests.h" line="19" column="10" bodyfile="src/tests/depth_format_tests.h" bodystart="19" bodyend="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="db/d86/structDepthFormatTests_1_1DepthFormat_1a54b36930418359c261058618e504c8d0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float DepthFormatTests::DepthFormat::fixed_to_float</definition>
+        <argsstring>(uint32_t val) const</argsstring>
+        <name>fixed_to_float</name>
+        <qualifiedname>DepthFormatTests::DepthFormat::fixed_to_float</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/depth_format_tests.h" line="15" column="12" bodyfile="src/tests/depth_format_tests.cpp" bodystart="222" bodyend="232"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/depth_format_tests.h" line="14" column="3" bodyfile="src/tests/depth_format_tests.h" bodystart="14" bodyend="20"/>
+    <listofallmembers>
+      <member refid="db/d86/structDepthFormatTests_1_1DepthFormat_1a54b36930418359c261058618e504c8d0" prot="public" virt="non-virtual"><scope>DepthFormatTests::DepthFormat</scope><name>fixed_to_float</name></member>
+      <member refid="db/d86/structDepthFormatTests_1_1DepthFormat_1ac8a107825c0fd17a686f90978c656254" prot="public" virt="non-virtual"><scope>DepthFormatTests::DepthFormat</scope><name>floating_point</name></member>
+      <member refid="db/d86/structDepthFormatTests_1_1DepthFormat_1a7e9a4b092c8a6c6c108751d612f52d2e" prot="public" virt="non-virtual"><scope>DepthFormatTests::DepthFormat</scope><name>format</name></member>
+      <member refid="db/d86/structDepthFormatTests_1_1DepthFormat_1a38256613ad2ac91ef734e21d2bbb59f9" prot="public" virt="non-virtual"><scope>DepthFormatTests::DepthFormat</scope><name>max_depth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

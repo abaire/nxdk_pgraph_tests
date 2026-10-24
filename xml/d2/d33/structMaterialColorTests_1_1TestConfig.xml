@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d2/d33/structMaterialColorTests_1_1TestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>MaterialColorTests::TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1a00e454e95f82ea196a3ad31de0e061f9" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char MaterialColorTests::TestConfig::name[32]</definition>
+        <argsstring>[32]</argsstring>
+        <name>name</name>
+        <qualifiedname>MaterialColorTests::TestConfig::name</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="21" column="10" bodyfile="src/tests/material_color_tests.h" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1ad84063bf6dffb5b16d763c8f2fbf0bee" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::scene_ambient</definition>
+        <argsstring></argsstring>
+        <name>scene_ambient</name>
+        <qualifiedname>MaterialColorTests::TestConfig::scene_ambient</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="23" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1a69b3fc071ddb3c3be4e79e189ee9c674" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::material_diffuse</definition>
+        <argsstring></argsstring>
+        <name>material_diffuse</name>
+        <qualifiedname>MaterialColorTests::TestConfig::material_diffuse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="25" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1a2736e48ec99c6fd66cc463cd67250547" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::material_specular</definition>
+        <argsstring></argsstring>
+        <name>material_specular</name>
+        <qualifiedname>MaterialColorTests::TestConfig::material_specular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="26" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1ab32add59941d6bfa7297412d424a558e" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::material_ambient</definition>
+        <argsstring></argsstring>
+        <name>material_ambient</name>
+        <qualifiedname>MaterialColorTests::TestConfig::material_ambient</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="27" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1aafcaa0809635ec04420ee503d197abf6" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::material_emissive</definition>
+        <argsstring></argsstring>
+        <name>material_emissive</name>
+        <qualifiedname>MaterialColorTests::TestConfig::material_emissive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="28" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1a9ae8da0536fd08a3fab5cd5743e53dbb" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float MaterialColorTests::TestConfig::material_specular_power</definition>
+        <argsstring></argsstring>
+        <name>material_specular_power</name>
+        <qualifiedname>MaterialColorTests::TestConfig::material_specular_power</qualifiedname>
+        <initializer>{0.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="29" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1acc9b1dccd953c503e8bec1687597a3d0" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::light_diffuse</definition>
+        <argsstring></argsstring>
+        <name>light_diffuse</name>
+        <qualifiedname>MaterialColorTests::TestConfig::light_diffuse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="31" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1a80cfe05bf8bf2a54c8507ca2126bb4ef" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::light_specular</definition>
+        <argsstring></argsstring>
+        <name>light_specular</name>
+        <qualifiedname>MaterialColorTests::TestConfig::light_specular</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="32" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d2/d33/structMaterialColorTests_1_1TestConfig_1a781f0390ec83241ed0e1cc9c12fbf40a" prot="public" static="no" mutable="no">
+        <type>Color</type>
+        <definition>Color MaterialColorTests::TestConfig::light_ambient</definition>
+        <argsstring></argsstring>
+        <name>light_ambient</name>
+        <qualifiedname>MaterialColorTests::TestConfig::light_ambient</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/material_color_tests.h" line="33" column="11" bodyfile="src/tests/material_color_tests.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/material_color_tests.h" line="20" column="3" bodyfile="src/tests/material_color_tests.h" bodystart="20" bodyend="34"/>
+    <listofallmembers>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1a781f0390ec83241ed0e1cc9c12fbf40a" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>light_ambient</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1acc9b1dccd953c503e8bec1687597a3d0" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>light_diffuse</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1a80cfe05bf8bf2a54c8507ca2126bb4ef" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>light_specular</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1ab32add59941d6bfa7297412d424a558e" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>material_ambient</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1a69b3fc071ddb3c3be4e79e189ee9c674" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>material_diffuse</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1aafcaa0809635ec04420ee503d197abf6" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>material_emissive</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1a2736e48ec99c6fd66cc463cd67250547" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>material_specular</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1a9ae8da0536fd08a3fab5cd5743e53dbb" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>material_specular_power</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1a00e454e95f82ea196a3ad31de0e061f9" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>name</name></member>
+      <member refid="d2/d33/structMaterialColorTests_1_1TestConfig_1ad84063bf6dffb5b16d763c8f2fbf0bee" prot="public" virt="non-virtual"><scope>MaterialColorTests::TestConfig</scope><name>scene_ambient</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

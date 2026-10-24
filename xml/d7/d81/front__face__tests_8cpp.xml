@@ -1,0 +1,476 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d7/d81/front__face__tests_8cpp" kind="file" language="C++">
+    <compoundname>front_face_tests.cpp</compoundname>
+    <includes refid="df/d31/front__face__tests_8h" local="yes">front_face_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes local="yes">shaders/passthrough_vertex_shader.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <incdepgraph>
+      <node id="12">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/front_face_tests.cpp</label>
+        <link refid="d7/d81/front__face__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>front_face_tests.h</label>
+        <link refid="df/d31/front__face__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>cstdint</label>
+      </node>
+      <node id="7">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="16">
+        <label>memory</label>
+      </node>
+      <node id="17">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="18">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="14">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="19">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/passthrough_vertex_shader.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="20">
+        <label>texture_format.h</label>
+      </node>
+      <node id="21">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="9">
+        <label>thread</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+      <node id="22">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="13">
+        <label>windows.h</label>
+      </node>
+      <node id="23">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d7/d81/front__face__tests_8cpp_1a518db58e877884d963edcd264246a2d5" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kWindings[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kWindings</name>
+        <initializer>= {
+    NV097_SET_FRONT_FACE_V_CW,
+    NV097_SET_FRONT_FACE_V_CCW,
+    0,   
+    99,  
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/front_face_tests.cpp" line="14" column="27" bodyfile="src/tests/front_face_tests.cpp" bodystart="14" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="variable" id="d7/d81/front__face__tests_8cpp_1a984c6700268e29fb94c75bd171eba12e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr uint32_t</type>
+        <definition>constexpr uint32_t kCullFaces[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kCullFaces</name>
+        <initializer>= {
+    NV097_SET_CULL_FACE_V_FRONT,
+    NV097_SET_CULL_FACE_V_BACK,
+    NV097_SET_CULL_FACE_V_FRONT_AND_BACK,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/front_face_tests.cpp" line="22" column="27" bodyfile="src/tests/front_face_tests.cpp" bodystart="22" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d7/d81/front__face__tests_8cpp_1a707e2f4ce68a5f89cc22cbcddb0eadf2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string WindingName</definition>
+        <argsstring>(uint32_t winding)</argsstring>
+        <name>WindingName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>winding</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/front_face_tests.cpp" line="297" column="20" bodyfile="src/tests/front_face_tests.cpp" bodystart="297" bodyend="307" declfile="src/tests/front_face_tests.cpp" declline="10" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="d7/d81/front__face__tests_8cpp_1a3e6bb5e9a10257a99966d97abc19f02f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string CullFaceName</definition>
+        <argsstring>(uint32_t cull_face)</argsstring>
+        <name>CullFaceName</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>cull_face</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/front_face_tests.cpp" line="309" column="20" bodyfile="src/tests/front_face_tests.cpp" bodystart="309" bodyend="321" declfile="src/tests/front_face_tests.cpp" declline="11" declcolumn="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;front_face_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;shaders/passthrough_vertex_shader.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>WindingName(uint32_t<sp/>winding);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>CullFaceName(uint32_t<sp/>cull_face);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kWindings[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FRONT_FACE_V_CW,</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_FRONT_FACE_V_CCW,</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/>0,<sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>https://github.com/mborgerson/xemu/issues/321</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>99,<sp/><sp/></highlight><highlight class="comment">//<sp/>Random<sp/>value<sp/>to<sp/>verify<sp/>that<sp/>HW<sp/>behavior<sp/>is<sp/>to<sp/>ignore<sp/>unknowns<sp/>and<sp/>retain<sp/>the<sp/>last<sp/>setting.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kCullFaces[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_CULL_FACE_V_FRONT,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_CULL_FACE_V_BACK,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>NV097_SET_CULL_FACE_V_FRONT_AND_BACK,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><ref refid="da/d9a/classFrontFaceTests_1a92f25f7229ced793b3d5411a9d49e53b" kindref="member">FrontFaceTests::FrontFaceTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref>&amp;<sp/>host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config&amp;<sp/>config)</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Front<sp/>face&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>line_mode<sp/>:<sp/>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">})<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>winding<sp/>:<sp/>kWindings)<sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cull_face<sp/>:<sp/>kCullFaces)<sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(winding,<sp/>cull_face,<sp/>line_mode);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>winding,<sp/>cull_face,<sp/>line_mode]()<sp/>{<sp/>Test(winding,<sp/>cull_face,<sp/>line_mode);<sp/>};</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>test;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="da/d9a/classFrontFaceTests_1aa0e62504c326e340bea21de969f478d9" kindref="member">FrontFaceTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_CULL_FACE_ENABLE,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>shader<sp/>=<sp/>std::make_shared&lt;PassthroughVertexShader&gt;();</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/>CreateGeometry();</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FrontFaceTests::CreateGeometry()<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/>host_.GetFramebufferWidthF();</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fb_height<sp/>=<sp/>host_.GetFramebufferHeightF();</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left<sp/>=<sp/>floorf(fb_width<sp/>/<sp/>5.0f);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right<sp/>=<sp/>left<sp/>+<sp/>(fb_width<sp/>-<sp/>left<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>floorf(fb_height<sp/>/<sp/>12.0f);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>bottom<sp/>=<sp/>top<sp/>+<sp/>(fb_height<sp/>-<sp/>top<sp/>*<sp/>2.0f);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>mid_width<sp/>=<sp/>left<sp/>+<sp/>(right<sp/>-<sp/>left)<sp/>*<sp/>0.5f;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>uint32_t<sp/>num_quads<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>uint32_t<sp/>num_tris<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>buffer<sp/>=<sp/>host_.AllocateVertexBuffer(6<sp/>*<sp/>num_quads<sp/>+<sp/>3<sp/>*<sp/>num_tris);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/>Color<sp/>ul{1.0,<sp/>0.0,<sp/>0.0,<sp/>1.0};</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/>Color<sp/>ll{0.0,<sp/>1.0,<sp/>0.0,<sp/>1.0};</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/>Color<sp/>lr{0.0,<sp/>0.0,<sp/>1.0,<sp/>1.0};</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>Color<sp/>ur{0.5,<sp/>0.5,<sp/>0.5,<sp/>1.0};</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>z<sp/>=<sp/>10.0f;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineBiTriCCW(0,<sp/>left<sp/>+<sp/>10,<sp/>top<sp/>+<sp/>4,<sp/>mid_width<sp/>-<sp/>10,<sp/>bottom<sp/>-<sp/>10,<sp/>z,<sp/>z,<sp/>z,<sp/>z,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tri_one[3]<sp/>=<sp/>{left<sp/>+<sp/>5,<sp/>top<sp/>+<sp/>4,<sp/>z};</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tri_two[3]<sp/>=<sp/>{left<sp/>+<sp/>5,<sp/>bottom<sp/>-<sp/>10,<sp/>z};</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tri_three[3]<sp/>=<sp/>{left<sp/>+<sp/>5,<sp/>(top<sp/>+<sp/>bottom<sp/>-<sp/>6)<sp/>/<sp/>2,<sp/>z};</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>normal[3]<sp/>=<sp/>{0.0f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineTriangleCCW(4,<sp/>tri_one,<sp/>tri_two,<sp/>tri_three,<sp/>normal,<sp/>normal,<sp/>normal,<sp/>ul,<sp/>ll,<sp/>lr);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/>buffer-&gt;SetPositionIncludesW();</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vtx<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>vtx[0].pos[3]<sp/>=<sp/>INFINITY;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>vtx[1].pos[3]<sp/>=<sp/>0.980578f;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>vtx[2].pos[3]<sp/>=<sp/>0.0f;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/>vtx[3].pos[3]<sp/>=<sp/>INFINITY;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/>vtx[4].pos[3]<sp/>=<sp/>INFINITY;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>vtx[5].pos[3]<sp/>=<sp/>INFINITY;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/>vtx[12].pos[3]<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>vtx[13].pos[3]<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/>vtx[14].pos[3]<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/>vtx[15].pos[3]<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/>vtx[16].pos[3]<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/>vtx[17].pos[3]<sp/>=<sp/>1.0f;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/>Color<sp/>tmp<sp/>=<sp/>ul;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/>ul<sp/>=<sp/>lr;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/>lr<sp/>=<sp/>tmp;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/>tmp<sp/>=<sp/>ur;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/>ur<sp/>=<sp/>ll;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/>ll<sp/>=<sp/>tmp;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineBiTri(1,<sp/>mid_width<sp/>+<sp/>10,<sp/>top<sp/>+<sp/>4,<sp/>right<sp/>-<sp/>10,<sp/>bottom<sp/>-<sp/>10,<sp/>z,<sp/>z,<sp/>z,<sp/>z,<sp/>ul,<sp/>ll,<sp/>lr,<sp/>ur);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tri2_one[3]<sp/>=<sp/>{right<sp/>-<sp/>5,<sp/>top<sp/>+<sp/>4,<sp/>z};</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tri2_two[3]<sp/>=<sp/>{right<sp/>-<sp/>5,<sp/>bottom<sp/>-<sp/>10,<sp/>z};</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>tri2_three[3]<sp/>=<sp/>{right<sp/>-<sp/>5,<sp/>(top<sp/>+<sp/>bottom<sp/>-<sp/>6)<sp/>/<sp/>2,<sp/>z};</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>buffer-&gt;DefineTriangle(5,<sp/>tri2_one,<sp/>tri2_two,<sp/>tri2_three,<sp/>normal,<sp/>normal,<sp/>normal,<sp/>ul,<sp/>ll,<sp/>lr);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>FrontFaceTests::Test(uint32_t<sp/>front_face,<sp/>uint32_t<sp/>cull_face,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>line_mode)<sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>host_.PrepareDraw();</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>To<sp/>verify<sp/>that<sp/>the<sp/>HW<sp/>is<sp/>simply<sp/>preserving<sp/>a<sp/>previously<sp/>set<sp/>value,<sp/>force<sp/>it<sp/>to<sp/>a<sp/>known<sp/>valid,<sp/>but<sp/>different<sp/>value</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>before<sp/>setting<sp/>the<sp/>value<sp/>under<sp/>test.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Note<sp/>that<sp/>the<sp/>setup<sp/>steps<sp/>done<sp/>by<sp/>host_<sp/>will<sp/>set<sp/>the<sp/>front<sp/>face<sp/>to<sp/>CCW,<sp/>so<sp/>CW<sp/>is<sp/>preferred<sp/>to<sp/>differentiate<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>behavior<sp/>from<sp/>simply<sp/>running<sp/>tests<sp/>in<sp/>sequence.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(front_face<sp/>!=<sp/>NV097_SET_FRONT_FACE_V_CW)<sp/>{</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FRONT_FACE,<sp/>NV097_SET_FRONT_FACE_V_CW);</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FRONT_FACE,<sp/>NV097_SET_FRONT_FACE_V_CCW);</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_FRONT_FACE,<sp/>front_face);</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_CULL_FACE,<sp/>cull_face);</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(line_mode)<sp/>{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_LINE);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/>host_.DrawArrays();</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(line_mode)<sp/>{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_FRONT_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::Push(NV097_SET_BACK_POLYGON_MODE,<sp/>NV097_SET_FRONT_POLYGON_MODE_V_FILL);</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/>pb_print(line_mode<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;Line<sp/>mode\n&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;Fill<sp/>mode\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/>std::string<sp/>winding_name<sp/>=<sp/>WindingName(front_face);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;FF:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>winding_name.c_str());</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/>std::string<sp/>cull_face_name<sp/>=<sp/>CullFaceName(cull_face);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/>pb_print(</highlight><highlight class="stringliteral">&quot;CF:<sp/>%s\n&quot;</highlight><highlight class="normal">,<sp/>cull_face_name.c_str());</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/>pb_printat(8,<sp/>19,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)</highlight><highlight class="stringliteral">&quot;CCW&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/>pb_printat(8,<sp/>38,<sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*)</highlight><highlight class="stringliteral">&quot;CW&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/>std::string<sp/>name<sp/>=<sp/>MakeTestName(front_face,<sp/>cull_face,<sp/>line_mode);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal">std::string<sp/>FrontFaceTests::MakeTestName(uint32_t<sp/>front_face,<sp/>uint32_t<sp/>cull_face,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>line_mode)<sp/>{</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/>std::string<sp/>ret<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;FrontFace_&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/>line_mode<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;LM_&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;FM_&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/>WindingName(front_face);</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/></highlight><highlight class="stringliteral">&quot;_CF_&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/>ret<sp/>+=<sp/>CullFaceName(cull_face);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::move(ret);</highlight></codeline>
+<codeline lineno="295"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>WindingName(uint32_t<sp/>winding)<sp/>{</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(winding<sp/>==<sp/>NV097_SET_FRONT_FACE_V_CW)<sp/>{</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;CW&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(winding<sp/>==<sp/>NV097_SET_FRONT_FACE_V_CCW)<sp/>{</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;CCW&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;0x%02X&quot;</highlight><highlight class="normal">,<sp/>winding);</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string<sp/>CullFaceName(uint32_t<sp/>cull_face)<sp/>{</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cull_face<sp/>==<sp/>NV097_SET_CULL_FACE_V_FRONT)<sp/>{</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;F&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cull_face<sp/>==<sp/>NV097_SET_CULL_FACE_V_BACK)<sp/>{</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;B&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cull_face<sp/>==<sp/>NV097_SET_CULL_FACE_V_FRONT_AND_BACK)<sp/>{</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;FaB&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>buf[16]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/>snprintf(buf,<sp/>15,<sp/></highlight><highlight class="stringliteral">&quot;%X&quot;</highlight><highlight class="normal">,<sp/>cull_face);</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buf;</highlight></codeline>
+<codeline lineno="321"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/front_face_tests.cpp"/>
+  </compounddef>
+</doxygen>

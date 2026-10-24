@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="d5/d7b/structViewportTests_1_1Viewport" kind="struct" language="C++" prot="public">
+    <compoundname>ViewportTests::Viewport</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d5/d7b/structViewportTests_1_1Viewport_1abef3762d95e9af96889f87d1c84b1747" prot="public" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t ViewportTests::Viewport::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>ViewportTests::Viewport::offset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/viewport_tests.h" line="17" column="14" bodyfile="src/tests/viewport_tests.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d5/d7b/structViewportTests_1_1Viewport_1ac34faf2cffcf128985a3eba7762dd5a1" prot="public" static="no" mutable="no">
+        <type>vector_t</type>
+        <definition>vector_t ViewportTests::Viewport::scale</definition>
+        <argsstring></argsstring>
+        <name>scale</name>
+        <qualifiedname>ViewportTests::Viewport::scale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/viewport_tests.h" line="18" column="14" bodyfile="src/tests/viewport_tests.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/viewport_tests.h" line="16" column="3" bodyfile="src/tests/viewport_tests.h" bodystart="16" bodyend="19"/>
+    <listofallmembers>
+      <member refid="d5/d7b/structViewportTests_1_1Viewport_1abef3762d95e9af96889f87d1c84b1747" prot="public" virt="non-virtual"><scope>ViewportTests::Viewport</scope><name>offset</name></member>
+      <member refid="d5/d7b/structViewportTests_1_1Viewport_1ac34faf2cffcf128985a3eba7762dd5a1" prot="public" virt="non-virtual"><scope>ViewportTests::Viewport</scope><name>scale</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

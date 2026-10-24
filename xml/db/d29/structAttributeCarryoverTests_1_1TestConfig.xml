@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="db/d29/structAttributeCarryoverTests_1_1TestConfig" kind="struct" language="C++" prot="public">
+    <compoundname>AttributeCarryoverTests::TestConfig</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/d29/structAttributeCarryoverTests_1_1TestConfig_1a97de6093527554fc16780942e0fafad7" prot="public" static="no" mutable="no">
+        <type>DrawMode</type>
+        <definition>DrawMode AttributeCarryoverTests::TestConfig::draw_mode</definition>
+        <argsstring></argsstring>
+        <name>draw_mode</name>
+        <qualifiedname>AttributeCarryoverTests::TestConfig::draw_mode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="60" column="14" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d29/structAttributeCarryoverTests_1_1TestConfig_1a5aaa1e3ffc5b9bea10e56ccf3b8b7ef9" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float AttributeCarryoverTests::TestConfig::attribute_value[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>attribute_value</name>
+        <qualifiedname>AttributeCarryoverTests::TestConfig::attribute_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/attribute_carryover_tests.h" line="61" column="11" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/attribute_carryover_tests.h" line="59" column="3" bodyfile="src/tests/attribute_carryover_tests.h" bodystart="59" bodyend="62"/>
+    <listofallmembers>
+      <member refid="db/d29/structAttributeCarryoverTests_1_1TestConfig_1a5aaa1e3ffc5b9bea10e56ccf3b8b7ef9" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests::TestConfig</scope><name>attribute_value</name></member>
+      <member refid="db/d29/structAttributeCarryoverTests_1_1TestConfig_1a97de6093527554fc16780942e0fafad7" prot="public" virt="non-virtual"><scope>AttributeCarryoverTests::TestConfig</scope><name>draw_mode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
