@@ -32,6 +32,7 @@ class ZMinMaxControlTests : public TestSuite {
  private:
   void Test(const std::string& name, uint32_t mode, bool w_buffered);
   void TestFixed(const std::string& name, uint32_t mode, bool w_buffered);
+  void TestNearPlaneBoundaryPassthrough();
 
   void DrawBlock(float x_offset, float y_offset, ZMinMaxDrawMode zw_mode, bool projected = false) const;
 

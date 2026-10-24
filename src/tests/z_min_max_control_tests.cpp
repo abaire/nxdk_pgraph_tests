@@ -15,6 +15,7 @@ constexpr uint32_t kStep = kSmallSize + kSmallSpacing;
 
 static constexpr const char kTestName[] = "Ctrl";
 static constexpr const char kTestFixedName[] = "CtrlFixed";
+static constexpr const char kTestNearPlaneBoundaryPassthroughName[] = "NearPlaneBoundaryPassthrough";
 
 static constexpr uint32_t kBackgroundColor = 0xFF222228;
 static constexpr float kZNear = 10.f;
@@ -24,8 +25,162 @@ static constexpr float kWFar = 100.f;
 
 static std::string MakeTestName(const char* prefix, uint32_t mode, bool w_buffered);
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * Ctrl* and CtrlFixed* tests set NV097_SET_ZMIN_MAX_CONTROL to the mode encoded in the test name, set the depth clip
+ * range to 10-100 (in z, or in w for WBuf tests) and draw six blocks of small quads whose z (in depth buffer units,
+ * 0-150) and w values vary as labeled: top left: z increasing, w = 1; top middle: z increasing, w = 0.01 on the left
+ * edge of each quad and 0.0001 on the right; top right: z and w increasing; bottom left: z from 8 (left edge) to 120
+ * (right edge) of each quad, w increasing; bottom middle: z and w from 8 to 120 across each quad; bottom right: z
+ * increasing, w = 10. Ctrl tests pass screen space coordinates through a passthrough vertex shader. CtrlFixed tests
+ * unproject the same screen space points and draw them with the fixed function pipeline using a D3D style orthographic
+ * projection with near/far planes at 10/100.
+ *
+ * Name components: WBuf enables w-buffering; NEARFAR sets CULL_NEAR_FAR_EN_TRUE; ZCLAMP sets ZCLAMP_EN_CLAMP and ZCULL
+ * sets ZCLAMP_EN_CULL; IgnW sets CULL_IGNORE_W_TRUE. Quads (or portions of quads) whose depth falls outside the clip
+ * range are culled or clamped according to the mode.
+ *
+ * @tc CtrlFixed_NEARFAR_ZCLAMP
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_NEARFAR_ZCLAMP_IgnW
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_NEARFAR_ZCULL
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_NEARFAR_ZCULL_IgnW
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_WBuf_NEARFAR_ZCLAMP
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_WBuf_NEARFAR_ZCLAMP_IgnW
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_WBuf_NEARFAR_ZCULL
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_WBuf_NEARFAR_ZCULL_IgnW
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_WBuf_ZCLAMP
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_WBuf_ZCLAMP_IgnW
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_WBuf_ZCULL
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_WBuf_ZCULL_IgnW
+ *  Draws the quad blocks with the fixed function pipeline and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_ZCLAMP
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_ZCLAMP_IgnW
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc CtrlFixed_ZCULL
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc CtrlFixed_ZCULL_IgnW
+ *  Draws the quad blocks with the fixed function pipeline; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_NEARFAR_ZCLAMP
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_NEARFAR_ZCLAMP_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_NEARFAR_ZCULL
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_NEARFAR_ZCULL_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_TRUE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_WBuf_NEARFAR_ZCLAMP
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_WBuf_NEARFAR_ZCLAMP_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_WBuf_NEARFAR_ZCULL
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_WBuf_NEARFAR_ZCULL_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_TRUE | ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_WBuf_ZCLAMP
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_WBuf_ZCLAMP_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_WBuf_ZCULL
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_WBuf_ZCULL_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader and w-buffering enabled; NV097_SET_ZMIN_MAX_CONTROL =
+ *  CULL_NEAR_FAR_EN_FALSE | ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_ZCLAMP
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_ZCLAMP_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CLAMP | CULL_IGNORE_W_TRUE.
+ *
+ * @tc Ctrl_ZCULL
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_FALSE.
+ *
+ * @tc Ctrl_ZCULL_IgnW
+ *  Draws the quad blocks with the passthrough vertex shader; NV097_SET_ZMIN_MAX_CONTROL = CULL_NEAR_FAR_EN_FALSE |
+ *  ZCLAMP_EN_CULL | CULL_IGNORE_W_TRUE.
+ *
+ * @tc NearPlaneBoundaryPassthrough
+ *  Draws three quads through a passthrough vertex shader in screen space with w = 40 and screen z of -0.8, 0 and 0.8
+ *  from left to right, on a Z24S8 surface with the default NV097_SET_ZMIN_MAX_CONTROL (CULL_NEAR_FAR, ZCLAMP_CULL) and
+ *  a clip range of 0-16777215. A z exactly equal to the clip minimum is inside the range, so only the left quad is
+ *  culled. Together with the Vertex shader rounding tests OpRounding_* this shows that Rugby 2005's depth of field quad
+ *  (xemu-project/xemu#2388) is culled on hardware because truncation in the vertex shader places it slightly behind the
+ *  near plane, not because of how the clip boundary is handled.
+ */
 ZMinMaxControlTests::ZMinMaxControlTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "ZMinMaxControl", config) {
+  tests_[kTestNearPlaneBoundaryPassthroughName] = [this]() { TestNearPlaneBoundaryPassthrough(); };
+
   for (auto w_buffered : {false, true}) {
     for (auto cull :
          {NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_FALSE, NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE}) {
@@ -339,6 +494,56 @@ void ZMinMaxControlTests::TestFixed(const std::string& name, uint32_t mode, bool
 
   pb_draw_text_screen();
   FinishDraw(name);
+}
+
+void ZMinMaxControlTests::TestNearPlaneBoundaryPassthrough() {
+  static constexpr float kMaxDepth = 16777215.f;
+  static constexpr float kScreenZs[] = {-0.8f, 0.f, 0.8f};
+  static constexpr float kW = 40.f;
+  static constexpr uint32_t kColors[] = {0xFFCC3333, 0xFF33CC33, 0xFF3333CC};
+  static constexpr float kQuadSize = 120.f;
+
+  host_.SetVertexShaderProgram(std::make_shared<PassthroughVertexShader>());
+  host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
+                         host_.GetFramebufferHeight());
+  host_.PrepareDraw(kBackgroundColor);
+  host_.SetDepthClip(0.f, kMaxDepth);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_ZMIN_MAX_CONTROL, NV097_SET_ZMIN_MAX_CONTROL_CULL_NEAR_FAR_EN_TRUE |
+                                                   NV097_SET_ZMIN_MAX_CONTROL_ZCLAMP_EN_CULL |
+                                                   NV097_SET_ZMIN_MAX_CONTROL_CULL_IGNORE_W_FALSE);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::End();
+
+  host_.Begin(TestHost::PRIMITIVE_QUADS);
+  for (uint32_t i = 0; i < 3; ++i) {
+    const float left = 80.f + static_cast<float>(i) * 180.f;
+    const float right = left + kQuadSize;
+    const float top = 180.f;
+    const float bottom = top + kQuadSize;
+    host_.SetDiffuse(kColors[i]);
+    host_.SetVertex(left, top, kScreenZs[i], kW);
+    host_.SetVertex(right, top, kScreenZs[i], kW);
+    host_.SetVertex(right, bottom, kScreenZs[i], kW);
+    host_.SetVertex(left, bottom, kScreenZs[i], kW);
+  }
+  host_.End();
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, false);
+  Pushbuffer::End();
+
+  pb_print("%s\n", kTestNearPlaneBoundaryPassthroughName);
+  pb_printat(2, 0, "screen z (w = 40, clip min = 0)");
+  pb_printat(13, 11, "-0.8");
+  pb_printat(13, 29, "0.0");
+  pb_printat(13, 47, "0.8");
+  pb_draw_text_screen();
+
+  FinishDraw(kTestNearPlaneBoundaryPassthroughName);
 }
 
 static std::string MakeTestName(const char* prefix, uint32_t mode, bool w_buffered) {
