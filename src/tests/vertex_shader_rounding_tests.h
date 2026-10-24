@@ -35,7 +35,7 @@ class VertexShaderRoundingTests : public TestSuite {
   void TestProjectedAdjacentGeometry(float bias);
   void TestTopLeftRasterization(bool fixed);
   void TestOpRounding(const char *name, const uint32_t *shader, uint32_t shader_size, const RoundingCase *cases,
-                      uint32_t num_cases);
+                      uint32_t num_cases, const int32_t *hw_expected);
 
  private:
   uint8_t *render_target_{nullptr};

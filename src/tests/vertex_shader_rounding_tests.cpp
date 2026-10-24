@@ -136,6 +136,14 @@ static constexpr VertexShaderRoundingTests::RoundingCase kDP4Sum3Cases[] = {
     {"Order", 0x4F800000, 0xCF800000, 0x2F800000, 0xBF800000, 0x2F800000, 36},
 };
 
+// Hardware depth - offset values for each OpRounding case, see the test doccomments.
+static constexpr int32_t kHWProductTruncated[] = {0, -32, 0, 32, -1024};
+static constexpr int32_t kHWSumTruncated[] = {0, -32, 0, 32, -32};
+static constexpr int32_t kHWSumExact[] = {8, -8, -8, 8, -16};
+static constexpr int32_t kHWWindow[] = {-16, 0, 0};
+static constexpr int32_t kHWMADInexactBoth[] = {-32, 32};
+static constexpr int32_t kHWDP4Sum3[] = {-32, 32, 0, 0, -16};
+
 static constexpr float kGeometryTestBiases[] = {
     // Boundaries at 1/16 = 0.0625f
     0.0f, 0.001f, 0.4999f, 0.5f, 0.5624f, 0.5625f, 0.5626f, 0.999f, 1.0f,
@@ -352,7 +360,8 @@ static std::string MakeTopLeftRasterTestName(bool fixed);
  *  round-to-nearest-even value of the product, all passed as shader constants. The shader computes d = MUL(a, b) - c
  *  (the subtraction is exact) and writes z = d * 2^28 + 2^23 to a Z24S8 surface, which is read back on the CPU. The
  *  screen lists, per case, the depth minus 2^23 and d in ulps of c. IEEE round to nearest would give d = 0 for every
- *  case. Hardware truncates the product toward zero, giving d = 0, -1, 0, 1 and -1 ulp.
+ *  case. Hardware truncates the product toward zero, giving d = 0, -1, 0, 1 and -1 ulp. Rows whose depth differs from
+ *  the hardware result are drawn over a red rectangle.
  *
  * @tc ProjAdjacentGeometry_0.0000
  *  As AdjacentGeometry, but positions are unprojected through a D3D style perspective projection with z varying from
@@ -435,48 +444,50 @@ VertexShaderRoundingTests::VertexShaderRoundingTests(TestHost &host, std::string
   static constexpr uint32_t kNumSumCases = sizeof(kSumRoundingCases) / sizeof(kSumRoundingCases[0]);
   tests_[kTestOpRoundingDP4Name] = [this]() {
     TestOpRounding(kTestOpRoundingDP4Name, kRoundingDP4Vsh, sizeof(kRoundingDP4Vsh), kProductRoundingCases,
-                   kNumProductCases);
+                   kNumProductCases, kHWProductTruncated);
   };
   tests_[kTestOpRoundingMADName] = [this]() {
     TestOpRounding(kTestOpRoundingMADName, kRoundingMADVsh, sizeof(kRoundingMADVsh), kProductRoundingCases,
-                   kNumProductCases);
+                   kNumProductCases, kHWProductTruncated);
   };
   tests_[kTestOpRoundingMULName] = [this]() {
     TestOpRounding(kTestOpRoundingMULName, kRoundingMULVsh, sizeof(kRoundingMULVsh), kProductRoundingCases,
-                   kNumProductCases);
+                   kNumProductCases, kHWProductTruncated);
   };
   tests_[kTestOpRoundingADDName] = [this]() {
-    TestOpRounding(kTestOpRoundingADDName, kRoundingADDVsh, sizeof(kRoundingADDVsh), kSumRoundingCases, kNumSumCases);
+    TestOpRounding(kTestOpRoundingADDName, kRoundingADDVsh, sizeof(kRoundingADDVsh), kSumRoundingCases, kNumSumCases,
+                   kHWSumTruncated);
   };
   tests_[kTestOpRoundingMADExactProductName] = [this]() {
     TestOpRounding(kTestOpRoundingMADExactProductName, kRoundingMADExactProductVsh, sizeof(kRoundingMADExactProductVsh),
-                   kSumRoundingCases, kNumSumCases);
+                   kSumRoundingCases, kNumSumCases, kHWSumTruncated);
   };
   tests_[kTestOpRoundingDP4SumABName] = [this]() {
     TestOpRounding(kTestOpRoundingDP4SumABName, kRoundingDP4SumABVsh, sizeof(kRoundingDP4SumABVsh), kSumRoundingCases,
-                   kNumSumCases);
+                   kNumSumCases, kHWSumExact);
   };
   tests_[kTestOpRoundingDP4SumACName] = [this]() {
     TestOpRounding(kTestOpRoundingDP4SumACName, kRoundingDP4SumACVsh, sizeof(kRoundingDP4SumACVsh), kSumRoundingCases,
-                   kNumSumCases);
+                   kNumSumCases, kHWSumExact);
   };
 
   static constexpr uint32_t kNumWindowCases = sizeof(kWindowRoundingCases) / sizeof(kWindowRoundingCases[0]);
   tests_[kTestOpRoundingADDWindowName] = [this]() {
     TestOpRounding(kTestOpRoundingADDWindowName, kRoundingADDVsh, sizeof(kRoundingADDVsh), kWindowRoundingCases,
-                   kNumWindowCases);
+                   kNumWindowCases, kHWWindow);
   };
   tests_[kTestOpRoundingMADExactProductWindowName] = [this]() {
     TestOpRounding(kTestOpRoundingMADExactProductWindowName, kRoundingMADExactProductVsh,
-                   sizeof(kRoundingMADExactProductVsh), kWindowRoundingCases, kNumWindowCases);
+                   sizeof(kRoundingMADExactProductVsh), kWindowRoundingCases, kNumWindowCases, kHWWindow);
   };
   tests_[kTestOpRoundingMADInexactBothName] = [this]() {
     TestOpRounding(kTestOpRoundingMADInexactBothName, kRoundingMADExactProductVsh, sizeof(kRoundingMADExactProductVsh),
-                   kMADInexactBothCases, sizeof(kMADInexactBothCases) / sizeof(kMADInexactBothCases[0]));
+                   kMADInexactBothCases, sizeof(kMADInexactBothCases) / sizeof(kMADInexactBothCases[0]),
+                   kHWMADInexactBoth);
   };
   tests_[kTestOpRoundingDP4Sum3Name] = [this]() {
     TestOpRounding(kTestOpRoundingDP4Sum3Name, kRoundingDP4Sum3Vsh, sizeof(kRoundingDP4Sum3Vsh), kDP4Sum3Cases,
-                   sizeof(kDP4Sum3Cases) / sizeof(kDP4Sum3Cases[0]));
+                   sizeof(kDP4Sum3Cases) / sizeof(kDP4Sum3Cases[0]), kHWDP4Sum3);
   };
 }
 
@@ -1649,7 +1660,8 @@ void VertexShaderRoundingTests::TestTopLeftRasterization(bool fixed) {
 }
 
 void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t *shader, uint32_t shader_size,
-                                               const RoundingCase *cases, uint32_t num_cases) {
+                                               const RoundingCase *cases, uint32_t num_cases,
+                                               const int32_t *hw_expected) {
   // The shaders output z = d * 2^scale_log2 + kDepthOffset. The scale makes the expected errors an integer number of
   // depth units and kDepthOffset keeps any small error within the depth range.
   static constexpr int32_t kDepthOffset = 0x800000;
@@ -1659,6 +1671,9 @@ void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t 
   static constexpr uint32_t kQuadSize = 16;
   static constexpr uint32_t kQuadSpacing = 48;
   static constexpr uint32_t kZetaSize = kSurfaceWidth * kSurfaceHeight * 4;
+  // Text row of the first result line, matching the pb_print calls below.
+  static constexpr uint32_t kFirstResultRow = 5;
+  static constexpr uint32_t kResultTextColumns = 36;
 
   auto as_float = [](uint32_t value) {
     float ret;
@@ -1724,6 +1739,25 @@ void VertexShaderRoundingTests::TestOpRounding(const char *name, const uint32_t 
   auto readback = static_cast<uint32_t *>(MmAllocateContiguousMemoryEx(kZetaSize, 0, MAXRAM, 0, PAGE_READWRITE));
   ASSERT(readback && "Failed to allocate zeta readback buffer");
   ASSERT(gpum_copy(readback, zeta, kZetaSize) && "Failed to copy zeta with M2M");
+
+  host_.SetVertexShaderProgram(std::make_shared<PassthroughVertexShader>());
+  for (uint32_t i = 0; i < num_cases; ++i) {
+    const uint32_t value = readback[(kQuadSize / 2) * kSurfaceWidth + i * kQuadSpacing + kQuadSize / 2];
+    if (value != kNotDrawn && static_cast<int32_t>(value >> 8) - kDepthOffset == hw_expected[i]) {
+      continue;
+    }
+
+    const auto top = static_cast<float>(25 + 25 * (kFirstResultRow + i) - 4);
+    const auto bottom = top + 24.f;
+    const auto right = static_cast<float>(20 + 10 * kResultTextColumns);
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0xFF0000CC);
+    host_.SetVertex(16.f, top, 0.f, 1.f);
+    host_.SetVertex(right, top, 0.f, 1.f);
+    host_.SetVertex(right, bottom, 0.f, 1.f);
+    host_.SetVertex(16.f, bottom, 0.f, 1.f);
+    host_.End();
+  }
 
   pb_print("%s\n\n", name);
   pb_print("d = op(a,b) - RN, IEEE round to nearest: d = 0\n\n");
