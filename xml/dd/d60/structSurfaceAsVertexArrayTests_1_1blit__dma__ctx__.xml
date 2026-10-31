@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dd/d60/structSurfaceAsVertexArrayTests_1_1blit__dma__ctx__" kind="struct" language="C++" prot="private">
+    <compoundname>SurfaceAsVertexArrayTests::blit_dma_ctx_</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/surface_as_vertex_array_tests.h" line="78" column="3" bodyfile="src/tests/surface_as_vertex_array_tests.h" bodystart="78" bodyend="78"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
