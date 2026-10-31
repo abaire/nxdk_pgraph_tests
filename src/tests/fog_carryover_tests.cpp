@@ -19,6 +19,7 @@ static constexpr uint32_t kShader[] = {
 static constexpr uint32_t kFogColor = 0xFF0000FF;
 
 static constexpr char kTestName[] = "FogCarryover";
+static constexpr char kArrayDisabledTestName[] = "CarryoverArrayDisabledFogCoord";
 static constexpr char kNopDrawTestName[] = "CarryoverNopDraw";
 static constexpr char kVertexSlotsTestName[] = "CarryoverVertexSlots";
 static constexpr vector_t kDiffuse{0.f, 0.f, 1.f, 1.f};
@@ -151,6 +152,17 @@ static float ZeroBias(uint32_t fog_mode) {
  *   on k, so the association continues across draws rather than restarting with each one. This is consistent with six
  *   carried values used round robin.
  *
+ * @tc CarryoverArrayDisabledFogCoord
+ *   Fixed function EXP fog with NV097_SET_FOG_GEN_MODE_V_FOG_X (the fog coordinate is consumed directly), drawn with
+ *   NV097_DRAW_ARRAYS. A control row of small immediate mode quads is drawn first: one with fog disabled to show the
+ *   unfogged geometry color, one with the initializer fog coordinate and one with the shared fog coordinate. The
+ *   initializer quad is drawn last so that the context fog coordinate is left at the initializer value, which is not
+ *   used by any other draw. Two rows are then drawn, one per variant fog coordinate, each with three quads:
+ *     1. Reference: the variant fog coordinate is supplied for every vertex via the vertex array.
+ *     2. The vertex array is disabled and SetFogCoord is NOT called, showing which carried value is used.
+ *     3. The vertex array is disabled after SetFogCoord is called with a coordinate shared by both rows.
+ *   The fog coordinates are listed on screen. Comparing quad 2 to the other quads identifies where the fog coordinate
+ *   is taken from when the array is absent.
  */
 FogCarryoverTests::FogCarryoverTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Fog carryover", config) {
@@ -169,6 +181,7 @@ FogCarryoverTests::FogCarryoverTests(TestHost &host, std::string output_dir, con
 
   tests_[kNopDrawTestName] = [this]() { TestNopDraw(); };
   tests_[kVertexSlotsTestName] = [this]() { TestVertexSlots(); };
+  tests_[kArrayDisabledTestName] = [this]() { TestArrayDisabledFogCoord(); };
 }
 
 void FogCarryoverTests::Initialize() {
@@ -910,4 +923,128 @@ void FogCarryoverTests::TestVertexSlots() {
   pb_draw_text_screen();
 
   FinishDraw(kVertexSlotsTestName);
+}
+
+void FogCarryoverTests::TestArrayDisabledFogCoord() {
+  host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
+  host_.SetVertexShaderProgram(nullptr);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_FOG_GEN_MODE, NV097_SET_FOG_GEN_MODE_V_FOG_X);
+  Pushbuffer::Push(NV097_SET_FOG_MODE, NV097_SET_FOG_MODE_V_EXP);
+  // The last parameter never seems to have an effect.
+  Pushbuffer::PushF(NV097_SET_FOG_PARAMS, ZeroBias(NV097_SET_FOG_MODE_V_EXP), -1.f, 0.f);
+  Pushbuffer::End();
+
+  host_.PrepareDraw(0xFF201F20);
+
+  // Values were chosen from the ranges used by the other tests in this suite to be visibly distinct from one another.
+  static constexpr float kInitializerFogCoord = 1.0f;
+  static constexpr float kSharedFogCoord = 0.18f;
+  static constexpr float kVariantFogCoords[] = {0.03f, 0.07f};
+
+  static constexpr float kLeft = 40.f;
+  static constexpr float kWidth = 170.f;
+  static constexpr float kColumnSpacing = 30.f;
+  static constexpr float kHeight = 70.f;
+  static constexpr float kTop = 225.f;
+  static constexpr float kRowSpacing = 20.f;
+  static constexpr float kControlWidth = 60.f;
+  static constexpr float kControlHeight = 40.f;
+  static constexpr float kControlTop = 100.f;
+  static constexpr float kWorldZ = 0.f;
+
+  auto unproject = [this](float x, float y) {
+    vector_t world{0.f, 0.f, 0.f, 1.f};
+    host_.UnprojectPoint(world, vector_t{x, y, kWorldZ, 1.f}, kWorldZ);
+    return world;
+  };
+
+  auto draw_control_quad = [this, &unproject](float left, float fog_coord) {
+    const float right = left + kControlWidth;
+    const float bottom = kControlTop + kControlHeight;
+    host_.SetFogCoord(fog_coord);
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetDiffuse(0.f, 0.f, 1.f);
+    host_.SetVertex(unproject(left, kControlTop));
+    host_.SetVertex(unproject(right, kControlTop));
+    host_.SetVertex(unproject(right, bottom));
+    host_.SetVertex(unproject(left, bottom));
+    host_.End();
+  };
+
+  auto set_fog_enabled = [](bool enabled) {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_FOG_ENABLE, enabled);
+    Pushbuffer::End();
+  };
+
+  static constexpr float kColumn2Left = kLeft + kWidth + kColumnSpacing;
+  static constexpr float kColumn3Left = kColumn2Left + kWidth + kColumnSpacing;
+
+  set_fog_enabled(false);
+  draw_control_quad(kLeft, kInitializerFogCoord);
+  set_fog_enabled(true);
+  draw_control_quad(kColumn3Left, kSharedFogCoord);
+
+  // Intentionally drawn last to prove that the value is not carried over after the first DRAW_ARRAYS that provides a
+  // fog coord.
+  draw_control_quad(kColumn2Left, kInitializerFogCoord);
+
+  auto draw_quad = [this](float left, float top, float fog_coord, bool use_array) {
+    auto buffer = host_.AllocateVertexBuffer(6);
+
+    vector_t ul{0.f, 0.f, 0.f, 1.f};
+    vector_t ll{0.f, 0.f, 0.f, 1.f};
+    vector_t lr{0.f, 0.f, 0.f, 1.f};
+    vector_t ur{0.f, 0.f, 0.f, 1.f};
+    host_.UnprojectPoint(ul, vector_t{left, top, kWorldZ, 1.f}, kWorldZ);
+    host_.UnprojectPoint(ll, vector_t{left, top + kHeight, kWorldZ, 1.f}, kWorldZ);
+    host_.UnprojectPoint(lr, vector_t{left + kWidth, top + kHeight, kWorldZ, 1.f}, kWorldZ);
+    host_.UnprojectPoint(ur, vector_t{left + kWidth, top, kWorldZ, 1.f}, kWorldZ);
+
+    const vector_t *corners[] = {&ul, &ur, &lr, &ul, &lr, &ll};
+    auto vertex = buffer->Lock();
+    for (auto corner : corners) {
+      vertex->SetPosition((*corner)[0], (*corner)[1], (*corner)[2]);
+      vertex->SetDiffuse(0.f, 0.f, 1.f);
+      vertex->SetFogCoord(fog_coord);
+      ++vertex;
+    }
+    buffer->Unlock();
+
+    uint32_t attributes = TestHost::POSITION | TestHost::DIFFUSE;
+    if (use_array) {
+      attributes |= TestHost::FOG_COORD;
+    }
+    host_.DrawArrays(attributes);
+
+    // The vertex buffer is replaced by the next draw, so ensure the GPU is done reading it.
+    host_.PBKitBusyWait();
+  };
+
+  float top = kTop;
+  for (auto variant_fog_coord : kVariantFogCoords) {
+    draw_quad(kLeft, top, variant_fog_coord, true);
+    draw_quad(kColumn2Left, top, variant_fog_coord, false);
+
+    host_.SetFogCoord(kSharedFogCoord);
+    draw_quad(kColumn3Left, top, variant_fog_coord, false);
+
+    top += kHeight + kRowSpacing;
+  }
+
+  // Column c starts at x = 20 + 10 * c, so columns 2, 22 and 42 line up with the quads' left edges.
+  pb_printat(0, 0, "%s\n", kArrayDisabledTestName);
+  pb_print_with_floats("Init %.2f  Shared %.2f\n", kInitializerFogCoord, kSharedFogCoord);
+  pb_print_with_floats("Row 1 %.2f  Row 2 %.2f\n", kVariantFogCoords[0], kVariantFogCoords[1]);
+  pb_printat(5, 2, "No fog");
+  pb_printat(5, 22, "Init");
+  pb_printat(5, 42, "Shared");
+  pb_printat(7, 2, "Array");
+  pb_printat(7, 22, "Array no fog coord");
+  pb_printat(7, 42, "Explicit: shared");
+  pb_draw_text_screen();
+
+  FinishDraw(kArrayDisabledTestName);
 }

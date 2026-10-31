@@ -36,6 +36,7 @@ class FogCarryoverTests : public TestSuite {
   void TestPrimitive(const std::string& name, TestHost::DrawPrimitive primitive);
   void TestNopDraw();
   void TestVertexSlots();
+  void TestArrayDisabledFogCoord();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_FOG_CARRYOVER_TESTS_H
