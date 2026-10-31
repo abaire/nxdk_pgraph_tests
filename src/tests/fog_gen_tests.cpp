@@ -87,6 +87,309 @@ static std::string MakeTestName(uint32_t fog_mode, uint32_t gen_mode, bool use_f
   return std::move(ret);
 }
 
+/**
+ * Constructs the test suite and creates test cases.
+ *
+ * @tc FogGen_VS-linear-spec_alpha
+ *  Renders a grid of blueish quads with linear fog and specular alpha fog generation using a programmable vertex
+ * shader. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the upper left); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp-spec_alpha
+ *  Renders a grid of blueish quads with exponential fog and specular alpha fog generation using a programmable vertex
+ * shader. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the upper left); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp2-spec_alpha
+ *  Renders a grid of blueish quads with exponential squared fog and specular alpha fog generation using a programmable
+ * vertex shader. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the upper left);
+ * each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp_abs-spec_alpha
+ *  Renders a grid of blueish quads with absolute value exponential fog and specular alpha fog generation using a
+ * programmable vertex shader. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the
+ * upper left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp2_abs-spec_alpha
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and specular alpha fog generation using
+ * a programmable vertex shader. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the
+ * upper left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear_abs-spec_alpha
+ *  Renders a grid of blueish quads with absolute value linear fog and specular alpha fog generation using a
+ * programmable vertex shader. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the
+ * upper left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear-radial
+ *  Renders a grid of blueish quads with linear fog and radial fog generation using a programmable vertex shader.
+ *  Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp-radial
+ *  Renders a grid of blueish quads with exponential fog and radial fog generation using a programmable vertex shader.
+ *  Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp2-radial
+ *  Renders a grid of blueish quads with exponential squared fog and radial fog generation using a programmable vertex
+ * shader. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp_abs-radial
+ *  Renders a grid of blueish quads with absolute value exponential fog and radial fog generation using a programmable
+ * vertex shader. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog
+ * color accordingly.
+ *
+ * @tc FogGen_VS-exp2_abs-radial
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and radial fog generation using a
+ * programmable vertex shader. Fog is derived from the radial distance from the eye to the vertex; each quad blends
+ * toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear_abs-radial
+ *  Renders a grid of blueish quads with absolute value linear fog and radial fog generation using a programmable vertex
+ * shader. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-linear-planar
+ *  Renders a grid of blueish quads with linear fog and planar fog generation using a programmable vertex shader.
+ *  Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp-planar
+ *  Renders a grid of blueish quads with exponential fog and planar fog generation using a programmable vertex shader.
+ *  Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp2-planar
+ *  Renders a grid of blueish quads with exponential squared fog and planar fog generation using a programmable vertex
+ * shader. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the fog
+ * color accordingly.
+ *
+ * @tc FogGen_VS-exp_abs-planar
+ *  Renders a grid of blueish quads with absolute value exponential fog and planar fog generation using a programmable
+ * vertex shader. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward
+ * the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp2_abs-planar
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and planar fog generation using a
+ * programmable vertex shader. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear_abs-planar
+ *  Renders a grid of blueish quads with absolute value linear fog and planar fog generation using a programmable vertex
+ * shader. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the fog
+ * color accordingly.
+ *
+ * @tc FogGen_VS-linear-abs_planar
+ *  Renders a grid of blueish quads with linear fog and absolute planar fog generation using a programmable vertex
+ * shader. Fog is derived from the absolute value of the eye space distance from the fog plane (0, 0, 2, 0); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp-abs_planar
+ *  Renders a grid of blueish quads with exponential fog and absolute planar fog generation using a programmable vertex
+ * shader. Fog is derived from the absolute value of the eye space distance from the fog plane (0, 0, 2, 0); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp2-abs_planar
+ *  Renders a grid of blueish quads with exponential squared fog and absolute planar fog generation using a programmable
+ * vertex shader. Fog is derived from the absolute value of the eye space distance from the fog plane (0, 0, 2, 0); each
+ * quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp_abs-abs_planar
+ *  Renders a grid of blueish quads with absolute value exponential fog and absolute planar fog generation using a
+ * programmable vertex shader. Fog is derived from the absolute value of the eye space distance from the fog plane (0,
+ * 0, 2, 0); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp2_abs-abs_planar
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and absolute planar fog generation using
+ * a programmable vertex shader. Fog is derived from the absolute value of the eye space distance from the fog plane (0,
+ * 0, 2, 0); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear_abs-abs_planar
+ *  Renders a grid of blueish quads with absolute value linear fog and absolute planar fog generation using a
+ * programmable vertex shader. Fog is derived from the absolute value of the eye space distance from the fog plane (0,
+ * 0, 2, 0); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear-fog_x
+ *  Renders a grid of blueish quads with linear fog and fog X fog generation using a programmable vertex shader.
+ *  Fog is derived from the supplied fog coordinate (the shader's oFog constant); each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp-fog_x
+ *  Renders a grid of blueish quads with exponential fog and fog X fog generation using a programmable vertex shader.
+ *  Fog is derived from the supplied fog coordinate (the shader's oFog constant); each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_VS-exp2-fog_x
+ *  Renders a grid of blueish quads with exponential squared fog and fog X fog generation using a programmable vertex
+ * shader. Fog is derived from the supplied fog coordinate (the shader's oFog constant); each quad blends toward the fog
+ * color accordingly.
+ *
+ * @tc FogGen_VS-exp_abs-fog_x
+ *  Renders a grid of blueish quads with absolute value exponential fog and fog X fog generation using a programmable
+ * vertex shader. Fog is derived from the supplied fog coordinate (the shader's oFog constant); each quad blends toward
+ * the fog color accordingly.
+ *
+ * @tc FogGen_VS-exp2_abs-fog_x
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and fog X fog generation using a
+ * programmable vertex shader. Fog is derived from the supplied fog coordinate (the shader's oFog constant); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_VS-linear_abs-fog_x
+ *  Renders a grid of blueish quads with absolute value linear fog and fog X fog generation using a programmable vertex
+ * shader. Fog is derived from the supplied fog coordinate (the shader's oFog constant); each quad blends toward the fog
+ * color accordingly.
+ *
+ * @tc FogGen_FF-linear-spec_alpha
+ *  Renders a grid of blueish quads with linear fog and specular alpha fog generation using fixed function vertex
+ * processing. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the upper left); each
+ * quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp-spec_alpha
+ *  Renders a grid of blueish quads with exponential fog and specular alpha fog generation using fixed function vertex
+ * processing. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the upper left); each
+ * quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2-spec_alpha
+ *  Renders a grid of blueish quads with exponential squared fog and specular alpha fog generation using fixed function
+ * vertex processing. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the upper
+ * left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp_abs-spec_alpha
+ *  Renders a grid of blueish quads with absolute value exponential fog and specular alpha fog generation using fixed
+ * function vertex processing. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the
+ * upper left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2_abs-spec_alpha
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and specular alpha fog generation using
+ * fixed function vertex processing. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from
+ * the upper left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear_abs-spec_alpha
+ *  Renders a grid of blueish quads with absolute value linear fog and specular alpha fog generation using fixed
+ * function vertex processing. Fog is derived from the vertex specular alpha (0.0, 1.0, 0.75, 0.25 clockwise from the
+ * upper left); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear-radial
+ *  Renders a grid of blueish quads with linear fog and radial fog generation using fixed function vertex processing.
+ *  Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_FF-exp-radial
+ *  Renders a grid of blueish quads with exponential fog and radial fog generation using fixed function vertex
+ * processing. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_FF-exp2-radial
+ *  Renders a grid of blueish quads with exponential squared fog and radial fog generation using fixed function vertex
+ * processing. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_FF-exp_abs-radial
+ *  Renders a grid of blueish quads with absolute value exponential fog and radial fog generation using fixed function
+ * vertex processing. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the
+ * fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2_abs-radial
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and radial fog generation using fixed
+ * function vertex processing. Fog is derived from the radial distance from the eye to the vertex; each quad blends
+ * toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear_abs-radial
+ *  Renders a grid of blueish quads with absolute value linear fog and radial fog generation using fixed function vertex
+ * processing. Fog is derived from the radial distance from the eye to the vertex; each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_FF-linear-planar
+ *  Renders a grid of blueish quads with linear fog and planar fog generation using fixed function vertex processing.
+ *  Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the fog color
+ * accordingly.
+ *
+ * @tc FogGen_FF-exp-planar
+ *  Renders a grid of blueish quads with exponential fog and planar fog generation using fixed function vertex
+ * processing. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the
+ * fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2-planar
+ *  Renders a grid of blueish quads with exponential squared fog and planar fog generation using fixed function vertex
+ * processing. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the
+ * fog color accordingly.
+ *
+ * @tc FogGen_FF-exp_abs-planar
+ *  Renders a grid of blueish quads with absolute value exponential fog and planar fog generation using fixed function
+ * vertex processing. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends
+ * toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2_abs-planar
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and planar fog generation using fixed
+ * function vertex processing. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear_abs-planar
+ *  Renders a grid of blueish quads with absolute value linear fog and planar fog generation using fixed function vertex
+ * processing. Fog is derived from the eye space distance from the fog plane (0, 0, 2, 0); each quad blends toward the
+ * fog color accordingly.
+ *
+ * @tc FogGen_FF-linear-abs_planar
+ *  Renders a grid of blueish quads with linear fog and absolute planar fog generation using fixed function vertex
+ * processing. Fog is derived from the absolute value of the eye space distance from the fog plane (0, 0, 2, 0); each
+ * quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp-abs_planar
+ *  Renders a grid of blueish quads with exponential fog and absolute planar fog generation using fixed function vertex
+ * processing. Fog is derived from the absolute value of the eye space distance from the fog plane (0, 0, 2, 0); each
+ * quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2-abs_planar
+ *  Renders a grid of blueish quads with exponential squared fog and absolute planar fog generation using fixed function
+ * vertex processing. Fog is derived from the absolute value of the eye space distance from the fog plane (0, 0, 2, 0);
+ * each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp_abs-abs_planar
+ *  Renders a grid of blueish quads with absolute value exponential fog and absolute planar fog generation using fixed
+ * function vertex processing. Fog is derived from the absolute value of the eye space distance from the fog plane (0,
+ * 0, 2, 0); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2_abs-abs_planar
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and absolute planar fog generation using
+ * fixed function vertex processing. Fog is derived from the absolute value of the eye space distance from the fog plane
+ * (0, 0, 2, 0); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear_abs-abs_planar
+ *  Renders a grid of blueish quads with absolute value linear fog and absolute planar fog generation using fixed
+ * function vertex processing. Fog is derived from the absolute value of the eye space distance from the fog plane (0,
+ * 0, 2, 0); each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear-fog_x
+ *  Renders a grid of blueish quads with linear fog and fog X fog generation using fixed function vertex processing.
+ *  Fog is derived from the supplied fog coordinate (the value set via NV097_SET_FOG_COORD); each quad blends toward the
+ * fog color accordingly.
+ *
+ * @tc FogGen_FF-exp-fog_x
+ *  Renders a grid of blueish quads with exponential fog and fog X fog generation using fixed function vertex
+ * processing. Fog is derived from the supplied fog coordinate (the value set via NV097_SET_FOG_COORD); each quad blends
+ * toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2-fog_x
+ *  Renders a grid of blueish quads with exponential squared fog and fog X fog generation using fixed function vertex
+ * processing. Fog is derived from the supplied fog coordinate (the value set via NV097_SET_FOG_COORD); each quad blends
+ * toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp_abs-fog_x
+ *  Renders a grid of blueish quads with absolute value exponential fog and fog X fog generation using fixed function
+ * vertex processing. Fog is derived from the supplied fog coordinate (the value set via NV097_SET_FOG_COORD); each quad
+ * blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-exp2_abs-fog_x
+ *  Renders a grid of blueish quads with absolute value exponential squared fog and fog X fog generation using fixed
+ * function vertex processing. Fog is derived from the supplied fog coordinate (the value set via NV097_SET_FOG_COORD);
+ * each quad blends toward the fog color accordingly.
+ *
+ * @tc FogGen_FF-linear_abs-fog_x
+ *  Renders a grid of blueish quads with absolute value linear fog and fog X fog generation using fixed function vertex
+ * processing. Fog is derived from the supplied fog coordinate (the value set via NV097_SET_FOG_COORD); each quad blends
+ * toward the fog color accordingly.
+ */
 FogGenTests::FogGenTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Fog gen", config) {
   for (auto fixed_function : {false, true}) {
