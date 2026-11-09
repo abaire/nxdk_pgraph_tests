@@ -121,7 +121,7 @@ jobs:
           path: .
 
       - name: Create release
-        uses: softprops/action-gh-release@v3.0.3
+        uses: softprops/action-gh-release@v3.0.4
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: "NV2A PGRAPH tests ${{ steps.tag_version.outputs.new_version }}"
