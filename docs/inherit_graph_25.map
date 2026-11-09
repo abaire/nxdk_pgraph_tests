@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$d7/d12/structMenuItem.html" title=" " alt="" coords="5,136,93,164"/>
+<area shape="rect" id="Node000001" href="$d9/d00/structMenuItemCallable.html" title=" " alt="" coords="141,5,281,33"/>
+<area shape="poly" id="edge2_Node000000_Node000001" title=" " alt="" coords="66,122,97,82,139,44,165,32,161,35,142,48,101,85,70,125"/>
+<area shape="rect" id="Node000002" href="$d0/d0e/structMenuItemOption.html" title=" " alt="" coords="146,57,276,85"/>
+<area shape="poly" id="edge3_Node000000_Node000002" title=" " alt="" coords="84,126,140,95,171,84,167,87,142,100,88,130"/>
+<area shape="rect" id="Node000003" href="$dc/d52/structMenuItemOptions.html" title=" " alt="" coords="142,109,280,137"/>
+<area shape="poly" id="edge4_Node000000_Node000003" title=" " alt="" coords="107,138,144,133,139,136,109,143"/>
+<area shape="rect" id="Node000004" href="$d7/d64/structMenuItemRoot.html" title=" " alt="" coords="152,161,270,189"/>
+<area shape="poly" id="edge5_Node000000_Node000004" title=" " alt="" coords="107,156,154,165,149,167,108,162"/>
+<area shape="rect" id="Node000005" href="$de/d5e/structMenuItemSuite.html" title=" " alt="" coords="151,213,271,241"/>
+<area shape="poly" id="edge6_Node000000_Node000005" title=" " alt="" coords="87,169,142,198,172,212,167,213,140,203,87,174"/>
+<area shape="rect" id="Node000006" href="$d8/d0e/structMenuItemTest.html" title=" " alt="" coords="154,265,268,293"/>
+<area shape="poly" id="edge7_Node000000_Node000006" title=" " alt="" coords="69,174,101,213,142,250,166,265,160,265,139,255,97,217,67,179"/>
+</map>

@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase" kind="struct" language="C++" prot="public">
+    <compoundname>VertexShaderRoundingTests::RoundingCase</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a2986f23e31db3bb784d36cbab2c8337d" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderRoundingTests::RoundingCase::label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="81" column="14" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a693c89ee27e7f59174705a347f449ad7" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderRoundingTests::RoundingCase::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::a</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="82" column="12" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a06ddf43420e741397238fa3a929bd2f1" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderRoundingTests::RoundingCase::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::b</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="83" column="12" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1aa6f2d2a4494ecbc3f3c1edeefe3e1aea" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderRoundingTests::RoundingCase::c</definition>
+        <argsstring></argsstring>
+        <name>c</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::c</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="84" column="12" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a604e226f08d38f7ce505f5df8429ad6b" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderRoundingTests::RoundingCase::neg_m</definition>
+        <argsstring></argsstring>
+        <name>neg_m</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::neg_m</qualifiedname>
+        <initializer>{0xBF800000}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="86" column="12" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a2f49ef5e93f2d27f36b84099ae1a4bf7" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VertexShaderRoundingTests::RoundingCase::t2</definition>
+        <argsstring></argsstring>
+        <name>t2</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::t2</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="88" column="12" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="variable" id="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a68559fd3ac129af479aab79fdbb2eb15" prot="public" static="no" mutable="no">
+        <type>int32_t</type>
+        <definition>int32_t VertexShaderRoundingTests::RoundingCase::scale_log2</definition>
+        <argsstring></argsstring>
+        <name>scale_log2</name>
+        <qualifiedname>VertexShaderRoundingTests::RoundingCase::scale_log2</qualifiedname>
+        <initializer>{28}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_rounding_tests.cpp" line="90" column="11" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/vertex_shader_rounding_tests.cpp" line="80" column="1" bodyfile="src/tests/vertex_shader_rounding_tests.cpp" bodystart="80" bodyend="91"/>
+    <listofallmembers>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a693c89ee27e7f59174705a347f449ad7" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>a</name></member>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a06ddf43420e741397238fa3a929bd2f1" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>b</name></member>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1aa6f2d2a4494ecbc3f3c1edeefe3e1aea" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>c</name></member>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a2986f23e31db3bb784d36cbab2c8337d" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>label</name></member>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a604e226f08d38f7ce505f5df8429ad6b" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>neg_m</name></member>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a68559fd3ac129af479aab79fdbb2eb15" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>scale_log2</name></member>
+      <member refid="dc/d44/structVertexShaderRoundingTests_1_1RoundingCase_1a2f49ef5e93f2d27f36b84099ae1a4bf7" prot="public" virt="non-virtual"><scope>VertexShaderRoundingTests::RoundingCase</scope><name>t2</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
