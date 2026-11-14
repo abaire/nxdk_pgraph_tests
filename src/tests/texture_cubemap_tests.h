@@ -35,6 +35,9 @@ class TextureCubemapTests : public TestSuite {
   void TestCubemap(float q_coord);
   void TestCubemapZeroVector();
   void TestCubemapZeroVectorMipmap(const std::string &name, bool linear_filter, bool wrap);
+  void TestCubemapZeroVectorFilters();
+  void TestCubemapZeroVectorConvolution();
+  void TestCubemapZeroVectorAddressModes();
   void TestDotCubeZeroVector(const std::string &name, DotCubeMode mode);
   void TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping);
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
