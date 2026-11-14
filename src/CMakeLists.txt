@@ -96,6 +96,8 @@ generate_nv2a_vshinc_files(
         shaders/projection_vertex_shader_no_lighting_rcp_fog.vsh
         shaders/rcc_clamp_test.vsh
         shaders/surface_displacement.vsh
+        shaders/texcoord_carryover_prime_t0_t3_attr.vsh
+        shaders/texcoord_carryover_prime_t0_t3_const.vsh
         shaders/vertex_shader_mac_independence_tests.vsh
         shaders/vertex_shader_rounding_add.vsh
         shaders/vertex_shader_rounding_dp4.vsh
@@ -330,6 +332,8 @@ add_executable(
         tests/swath_width_tests.h
         tests/test_suite.cpp
         tests/test_suite.h
+        tests/texcoord_carryover_tests.cpp
+        tests/texcoord_carryover_tests.h
         tests/texgen_matrix_tests.cpp
         tests/texgen_matrix_tests.h
         tests/texgen_normal_map_tests.cpp

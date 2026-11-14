@@ -100,6 +100,7 @@
 #include "tests/surface_format_tests.h"
 #include "tests/surface_pitch_tests.h"
 #include "tests/swath_width_tests.h"
+#include "tests/texcoord_carryover_tests.h"
 #include "tests/texgen_matrix_tests.h"
 #include "tests/texgen_normal_map_tests.h"
 #include "tests/texgen_tests.h"
@@ -544,6 +545,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(SurfaceFormatTests)
   REG_TEST(SurfacePitchTests)
   REG_TEST(SwathWidthTests)
+  REG_TEST(TexcoordCarryoverTests)
   REG_TEST(TexgenMatrixTests)
   REG_TEST(TexgenNormalMapTests)
   REG_TEST(TexgenTests)
