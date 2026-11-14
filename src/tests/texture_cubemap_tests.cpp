@@ -8,10 +8,12 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
+#include "xbox-swizzle/swizzle.h"
 #include "xbox_math_matrix.h"
 #include "xbox_math_types.h"
 
@@ -41,6 +43,7 @@ static constexpr uint32_t kTexturePitch = kTextureWidth * 4;
 static constexpr uint32_t kTextureHeight = 64;
 
 static constexpr char kCubemapTest[] = "Cubemap";
+static constexpr char kZeroVectorTest[] = "CubemapZeroVector";
 
 enum class CubemapGeneratorMode {
   kRadialGradient,
@@ -132,6 +135,16 @@ static std::string MakeCubemapTestName(float q_coord) {
  *
  * @tc Cubemap
  *   Renders two angles of a cube utilizing a cubemap texture.
+ *
+ * @tc CubemapZeroVector
+ *   Renders screen-space quads point sampling a cubemap with a constant texture coordinate per quad. Every texel has a
+ *   unique color that encodes its face and position: R = x * 4 + 2, G = y * 4 + 2, B = face * 40 + 20, with faces
+ *   ordered +X, -X, +Y, -Y, +Z, -Z. The exception is texel (0, 0) of the +X face, which is pure magenta. The large
+ *   quads use zero length directions: (0, 0, 0, 1), (0, 0, 0, 0), and (-0, -0, -0, 1). The small quads below them are
+ *   a self check of the texel encoding, sampling the +/-X, +/-Y, and +/-Z axis directions in pairs.
+ *
+ *   On hardware, all three zero length directions sample texel (0, 0) of the +X face. The self check quads each sample
+ *   texel (32, 32) of the matching face.
  *
  * @tc DotReflectDiffuse_-1to1
  *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
@@ -259,6 +272,8 @@ TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir,
   for (auto q_coord : {-INFINITY, -1.0f, -0.0f, 0.0f, 1.0f, INFINITY}) {
     tests_[MakeCubemapTestName(q_coord)] = [this, q_coord]() { TestCubemap(q_coord); };
   }
+
+  tests_[kZeroVectorTest] = [this]() { TestCubemapZeroVector(); };
 
   for (auto &test : kDotSTRCubeTests) {
     tests_[test.name] = [this, &test] { TestDotSTRCubemap(test.name, test.dot_rgbmapping); };
@@ -413,6 +428,119 @@ void TextureCubemapTests::TestCubemap(float q_coord) {
   pb_draw_text_screen();
 
   FinishDraw(MakeCubemapTestName(q_coord));
+}
+
+void TextureCubemapTests::TestCubemapZeroVector() {
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
+                              TestHost::STAGE_CUBE_MAP);
+
+  // Each texel encodes its face and position so that the exact texel sampled can be identified from the output:
+  // R = x * 4 + 2, G = y * 4 + 2, B = face * 40 + 20 (face order +X, -X, +Y, -Y, +Z, -Z).
+  // Texel (0, 0) of the +X face is instead pure magenta so that it is easily identified. R = 255 is never produced by
+  // the encoding above, so this is unambiguous.
+  {
+    static_assert(kTextureWidth == 64 && kTextureHeight == 64, "Texel encoding assumes a 64x64 texture");
+    static constexpr uint32_t kSliceSize = kTexturePitch * kTextureHeight;
+    auto linear = std::make_unique<uint32_t[]>(kTextureWidth * kTextureHeight);
+    auto texture = host_.GetTextureMemoryForStage(3);
+    for (uint32_t face = 0; face < 6; ++face) {
+      auto texel = linear.get();
+      for (uint32_t y = 0; y < kTextureHeight; ++y) {
+        for (uint32_t x = 0; x < kTextureWidth; ++x) {
+          // A8B8G8R8
+          *texel++ = 0xFF000000 + ((face * 40 + 20) << 16) + ((y * 4 + 2) << 8) + (x * 4 + 2);
+        }
+      }
+      if (!face) {
+        linear[0] = 0xFFFF00FF;
+      }
+      swizzle_rect(reinterpret_cast<const uint8_t *>(linear.get()), kTextureWidth, kTextureHeight, texture,
+                   kTexturePitch, 4);
+      texture += kSliceSize;
+    }
+  }
+  // Point sample so that the output is a single unfiltered texel.
+  host_.GetTextureStage(3).SetFilter();
+  host_.SetupTextureStages();
+
+  auto original_shader = host_.GetShaderProgram();
+  host_.SetVertexShaderProgram(std::make_shared<PassthroughVertexShader>());
+
+  host_.PrepareDraw(0xFE303030);
+
+  auto draw_quad = [this](const float *coord, float left, float top, float size) {
+    static constexpr float kZ = 0.f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left, top, kZ, 1.f);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left + size, top, kZ, 1.f);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left + size, top + size, kZ, 1.f);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left, top + size, kZ, 1.f);
+    host_.End();
+  };
+
+  // The quads under test.
+  {
+    struct ZeroVector {
+      const char *label;
+      float coord[4];
+    };
+    static constexpr ZeroVector kZeroVectors[] = {
+        {"0,0,0,1", {0.f, 0.f, 0.f, 1.f}},
+        {"0,0,0,0", {0.f, 0.f, 0.f, 0.f}},
+        {"-0,-0,-0,1", {-0.f, -0.f, -0.f, 1.f}},
+    };
+    static constexpr float kQuadSize = 64.f;
+    static constexpr float kQuadSpacing = 150.f;
+    static constexpr float kTop = 100.f;
+    static constexpr int kLabelRow = 6;
+
+    float left = 30.f;
+    for (auto &zero_vector : kZeroVectors) {
+      draw_quad(zero_vector.coord, left, kTop, kQuadSize);
+      pb_printat(kLabelRow, static_cast<int>((left - 20.f) / 10.f), "%s", zero_vector.label);
+      left += kQuadSpacing;
+    }
+  }
+
+  // Small self check quads that sample the center of each face, verifying the face order, channel order, and swizzling
+  // assumed by the texel encoding. Drawn as +/- pairs for X, Y, and Z.
+  {
+    static constexpr float kAxisDirections[][4] = {
+        {1.f, 0.f, 0.f, 1.f},  {-1.f, 0.f, 0.f, 1.f}, {0.f, 1.f, 0.f, 1.f},
+        {0.f, -1.f, 0.f, 1.f}, {0.f, 0.f, 1.f, 1.f},  {0.f, 0.f, -1.f, 1.f},
+    };
+    static constexpr float kQuadSize = 16.f;
+    static constexpr float kPairGap = 2.f;
+    static constexpr float kPairSpacing = 50.f;
+    static constexpr float kTop = 405.f;
+
+    float left = 30.f;
+    for (auto i = 0u; i < 6; i += 2) {
+      draw_quad(kAxisDirections[i], left, kTop, kQuadSize);
+      draw_quad(kAxisDirections[i + 1], left + kQuadSize + kPairGap, kTop, kQuadSize);
+      left += kPairSpacing;
+    }
+  }
+
+  // Note: the pbkit text grid is 16 rows by 60 columns.
+  pb_printat(0, 0, "%s", kZeroVectorTest);
+  pb_printat(2, 0, "Zero length directions");
+  pb_printat(7, 0, "x=R/4 y=G/4 face=B/40 (+X,-X,+Y,-Y,+Z,-Z)");
+  pb_printat(8, 0, "+X texel (0,0) is magenta");
+  pb_printat(14, 0, "Decode self check (+/-X, +/-Y, +/-Z face centers)");
+  pb_draw_text_screen();
+
+  FinishDraw(kZeroVectorTest);
+
+  host_.SetVertexShaderProgram(original_shader);
 }
 
 void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping) {
