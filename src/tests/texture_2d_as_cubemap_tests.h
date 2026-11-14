@@ -27,7 +27,10 @@ class Texture2DAsCubemapTests : public TestSuite {
   };
 
  private:
+  void LoadStage3Checkerboard();
+
   void TestCubemap();
+  void TestCubemapZeroVector();
   void TestDotSTR3D(const std::string &name);
   void TestDotSTRCubemap(const std::string &name);
   void TestDotReflect(const std::string &name, ReflectTest mode);

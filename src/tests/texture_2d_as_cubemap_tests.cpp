@@ -8,10 +8,12 @@
 #include <utility>
 
 #include "debug_output.h"
+#include "shaders/passthrough_vertex_shader.h"
 #include "shaders/perspective_vertex_shader_no_lighting.h"
 #include "test_host.h"
 #include "texture_format.h"
 #include "texture_generator.h"
+#include "xbox-swizzle/swizzle.h"
 #include "xbox_math_matrix.h"
 #include "xbox_math_types.h"
 
@@ -44,6 +46,7 @@ static constexpr uint32_t kTextureHeight = 64;
 
 static constexpr uint32_t kDotRGBMapping = 0x111;
 static constexpr char kTestCubemap[] = "Cubemap_Bad2D";
+static constexpr char kTestCubemapZeroVector[] = "CubemapZeroVector_Bad2D";
 static constexpr char kTestDotSTRCube[] = "DotSTRCube_Bad2D";
 static constexpr char kTestDotSTR3D[] = "DotSTR3D_Bad2D";
 static constexpr char kTestDotReflectSpec[] = "DotReflectSpec_Bad2D";
@@ -55,6 +58,14 @@ static constexpr char kTestDotReflectDiffuse[] = "DotReflectDiffuse_Bad2D";
  *
  * @tc Cubemap_Bad2D
  *   Renders two angles of a cube utilizing a cubemap texture.
+ *
+ * @tc CubemapZeroVector_Bad2D
+ *   Renders screen-space quads point sampling a 2D texture in cube map mode (PS_TEXTUREMODES_CUBEMAP) with a constant
+ *   texture coordinate per quad. Every texel has a unique color that encodes its position: R = x * 4 + 2,
+ *   G = y * 4 + 2, B = 128. The exception is texel (0, 0), which is pure magenta. The large quads use zero length
+ *   directions: (0, 0, 0, 1), (0, 0, 0, 0), and (-0, -0, -0, 1). Below them, the same texture is point sampled in
+ *   PS_TEXTUREMODES_PROJECT2D mode across a 192x192 quad (3x3 pixels per texel) with texture coordinates spanning
+ *   (0, 0) to (1, 1), so that texel (0, 0) is shown as the magenta block at the top left.
  *
  * @tc DotReflectDiffuse_Bad2D
  *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode but passing a 2d texture
@@ -79,6 +90,7 @@ static constexpr char kTestDotReflectDiffuse[] = "DotReflectDiffuse_Bad2D";
 Texture2DAsCubemapTests::Texture2DAsCubemapTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Texture 2D as cubemap", config) {
   tests_[kTestCubemap] = [this]() { TestCubemap(); };
+  tests_[kTestCubemapZeroVector] = [this]() { TestCubemapZeroVector(); };
   tests_[kTestDotSTRCube] = [this]() { TestDotSTRCubemap(kTestDotSTRCube); };
   tests_[kTestDotSTR3D] = [this]() { TestDotSTR3D(kTestDotSTR3D); };
   tests_[kTestDotReflectSpec] = [this]() { TestDotReflect(kTestDotReflectSpec, ReflectTest::kSpecular); };
@@ -128,17 +140,17 @@ void Texture2DAsCubemapTests::Initialize() {
     stage.SetCubemapEnable(false);
   }
 
-  // Load a 2D texture into stage3. All shader stages in these tests actually expect a cubemap.
-  {
-    GenerateSwizzledRGBACheckerboard(host_.GetTextureMemoryForStage(3), 0, 0, kTextureWidth, kTextureHeight,
-                                     kTexturePitch, 0xFF44FFFF, 0xFFAA9933, 2);
-    auto &stage = host_.GetTextureStage(3);
-    stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
-    stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
-    stage.SetCubemapEnable(false);
-  }
-
   host_.SetupTextureStages();
+}
+
+void Texture2DAsCubemapTests::LoadStage3Checkerboard() {
+  // Load a 2D texture into stage3. All shader stages in these tests actually expect a cubemap.
+  GenerateSwizzledRGBACheckerboard(host_.GetTextureMemoryForStage(3), 0, 0, kTextureWidth, kTextureHeight,
+                                   kTexturePitch, 0xFF44FFFF, 0xFFAA9933, 2);
+  auto &stage = host_.GetTextureStage(3);
+  stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+  stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+  stage.SetCubemapEnable(false);
 }
 
 void Texture2DAsCubemapTests::Deinitialize() {
@@ -150,6 +162,7 @@ void Texture2DAsCubemapTests::Deinitialize() {
 }
 
 void Texture2DAsCubemapTests::TestCubemap() {
+  LoadStage3Checkerboard();
   host_.SetTextureStageEnabled(0, false);
   host_.SetTextureStageEnabled(1, false);
   host_.SetTextureStageEnabled(2, false);
@@ -206,7 +219,125 @@ void Texture2DAsCubemapTests::TestCubemap() {
   FinishDraw(kTestCubemap);
 }
 
+void Texture2DAsCubemapTests::TestCubemapZeroVector() {
+  host_.SetTextureStageEnabled(0, false);
+  host_.SetTextureStageEnabled(1, false);
+  host_.SetTextureStageEnabled(2, false);
+  host_.SetTextureStageEnabled(3, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
+                              TestHost::STAGE_CUBE_MAP);
+
+  // Each texel encodes its position so that the exact texel sampled can be identified from the output:
+  // R = x * 4 + 2, G = y * 4 + 2, B = 128.
+  // Texel (0, 0) is instead pure magenta so that it is easily identified. R = 255 is never produced by the encoding
+  // above, so this is unambiguous.
+  {
+    static_assert(kTextureWidth == 64 && kTextureHeight == 64, "Texel encoding assumes a 64x64 texture");
+    auto linear = std::make_unique<uint32_t[]>(kTextureWidth * kTextureHeight);
+    auto texel = linear.get();
+    for (uint32_t y = 0; y < kTextureHeight; ++y) {
+      for (uint32_t x = 0; x < kTextureWidth; ++x) {
+        // A8B8G8R8
+        *texel++ = 0xFF800000 + ((y * 4 + 2) << 8) + (x * 4 + 2);
+      }
+    }
+    linear[0] = 0xFFFF00FF;
+    swizzle_rect(reinterpret_cast<const uint8_t *>(linear.get()), kTextureWidth, kTextureHeight,
+                 host_.GetTextureMemoryForStage(3), kTexturePitch, 4);
+  }
+  {
+    auto &stage = host_.GetTextureStage(3);
+    stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+    stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
+    stage.SetCubemapEnable(false);
+  }
+  // Point sample so that the output is a single unfiltered texel.
+  host_.GetTextureStage(3).SetFilter();
+  host_.SetupTextureStages();
+
+  auto original_shader = host_.GetShaderProgram();
+  host_.SetVertexShaderProgram(std::make_shared<PassthroughVertexShader>());
+
+  host_.PrepareDraw(0xFE303030);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
+
+  auto draw_quad = [this](const float *coord, float left, float top, float size) {
+    static constexpr float kZ = 0.f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left, top, kZ, 1.f);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left + size, top, kZ, 1.f);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left + size, top + size, kZ, 1.f);
+    host_.SetTexCoord3(coord[0], coord[1], coord[2], coord[3]);
+    host_.SetVertex(left, top + size, kZ, 1.f);
+    host_.End();
+  };
+
+  // The quads under test.
+  {
+    struct ZeroVector {
+      const char *label;
+      float coord[4];
+    };
+    static constexpr ZeroVector kZeroVectors[] = {
+        {"0,0,0,1", {0.f, 0.f, 0.f, 1.f}},
+        {"0,0,0,0", {0.f, 0.f, 0.f, 0.f}},
+        {"-0,-0,-0,1", {-0.f, -0.f, -0.f, 1.f}},
+    };
+    static constexpr float kQuadSize = 64.f;
+    static constexpr float kQuadSpacing = 150.f;
+    static constexpr float kTop = 100.f;
+    static constexpr int kLabelRow = 6;
+
+    float left = 30.f;
+    for (auto &zero_vector : kZeroVectors) {
+      draw_quad(zero_vector.coord, left, kTop, kQuadSize);
+      pb_printat(kLabelRow, static_cast<int>((left - 20.f) / 10.f), "%s", zero_vector.label);
+      left += kQuadSpacing;
+    }
+  }
+
+  // The texture itself, sampled as a plain 2D texture so that the location of the magenta texel is visible.
+  {
+    host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
+                                TestHost::STAGE_2D_PROJECTIVE);
+
+    // 3 pixels per texel.
+    static constexpr float kQuadSize = 192.f;
+    static constexpr float kLeft = 20.f;
+    static constexpr float kTop = 275.f;
+    static constexpr float kZ = 0.f;
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    host_.SetTexCoord3(0.f, 0.f, 0.f, 1.f);
+    host_.SetVertex(kLeft, kTop, kZ, 1.f);
+    host_.SetTexCoord3(1.f, 0.f, 0.f, 1.f);
+    host_.SetVertex(kLeft + kQuadSize, kTop, kZ, 1.f);
+    host_.SetTexCoord3(1.f, 1.f, 0.f, 1.f);
+    host_.SetVertex(kLeft + kQuadSize, kTop + kQuadSize, kZ, 1.f);
+    host_.SetTexCoord3(0.f, 1.f, 0.f, 1.f);
+    host_.SetVertex(kLeft, kTop + kQuadSize, kZ, 1.f);
+    host_.End();
+  }
+
+  // Note: the pbkit text grid is 16 rows by 60 columns.
+  pb_printat(0, 0, "%s", kTestCubemapZeroVector);
+  pb_printat(2, 0, "Zero length directions, 2D texture");
+  pb_printat(7, 0, "x=R/4 y=G/4");
+  pb_printat(8, 0, "Texel (0,0) is magenta");
+  pb_printat(9, 0, "Texture (texel 0,0 is top left)");
+  pb_draw_text_screen();
+
+  FinishDraw(kTestCubemapZeroVector);
+
+  host_.SetVertexShaderProgram(original_shader);
+}
+
 void Texture2DAsCubemapTests::TestDotSTR3D(const std::string &name) {
+  LoadStage3Checkerboard();
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);
@@ -270,6 +401,7 @@ void Texture2DAsCubemapTests::TestDotSTR3D(const std::string &name) {
 }
 
 void Texture2DAsCubemapTests::TestDotReflect(const std::string &name, ReflectTest mode) {
+  LoadStage3Checkerboard();
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);
@@ -345,6 +477,7 @@ void Texture2DAsCubemapTests::TestDotReflect(const std::string &name, ReflectTes
 }
 
 void Texture2DAsCubemapTests::TestDotSTRCubemap(const std::string &name) {
+  LoadStage3Checkerboard();
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);

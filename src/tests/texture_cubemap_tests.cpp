@@ -44,6 +44,10 @@ static constexpr uint32_t kTextureHeight = 64;
 
 static constexpr char kCubemapTest[] = "Cubemap";
 static constexpr char kZeroVectorTest[] = "CubemapZeroVector";
+static constexpr char kDotSTRCubeZeroVectorTest[] = "DotSTRCubeZeroVector";
+static constexpr char kDotReflectDiffuseZeroVectorTest[] = "DotReflectDiffuseZeroVector";
+static constexpr char kDotReflectSpecZeroVectorTest[] = "DotReflectSpecZeroVector";
+static constexpr char kDotReflectSpecConstZeroVectorTest[] = "DotReflectSpecConstZeroVector";
 
 enum class CubemapGeneratorMode {
   kRadialGradient,
@@ -52,6 +56,8 @@ enum class CubemapGeneratorMode {
 };
 
 static void GenerateCubemap(uint8_t *buffer, CubemapGeneratorMode mode);
+static void GenerateCoordinateEncodedCubemap(uint8_t *buffer);
+static void LoadObjectSpaceNormalMapIntoStage0(TestHost &host);
 
 struct DotProductMappedTest {
   const char *name;
@@ -145,6 +151,40 @@ static std::string MakeCubemapTestName(float q_coord) {
  *
  *   On hardware, all three zero length directions sample texel (0, 0) of the +X face. The self check quads each sample
  *   texel (32, 32) of the matching face.
+ *
+ * @tc DotSTRCubeZeroVector
+ *   Renders screen-space quads using PS_TEXTUREMODES_DOT_STR_CUBE on stage 3 (stage 0 is 2D projective, stages 1 and
+ *   2 are PS_TEXTUREMODES_DOT_PRODUCT), point sampling a cubemap in stage 3. The cubemap texel encoding is the same as
+ *   in CubemapZeroVector. NV097_SET_DOT_RGBMAPPING is set to dotmap_zero_to_one for all stages. Stage 0 is a 4x4
+ *   texture of constant color 0xFFFFFFFF, so the dot products are dot(Ti.xyz, (1, 1, 1)). Each large quad has constant
+ *   texture coordinates and the xyz components of stages 1-3 are all 0, so (dot1, dot2, dot3) = (0, 0, 0). The w
+ *   components of stages 1-3 differ per quad: (0, 0, 0), (1, 1, 1), and (-1, 0.5, 2). NV097_SET_EYE_VECTOR is
+ *   (0, 0, 0). The small quads below them are a self check of the texel encoding. Each sets a single xyz component of
+ *   one stage to +/-1 and the rest to 0 so that (dot1, dot2, dot3) is +/-X, +/-Y, or +/-Z, in pairs.
+ *
+ * @tc DotReflectDiffuseZeroVector
+ *   Renders screen-space quads using PS_TEXTUREMODES_DOT_RFLCT_DIFF on stage 2 (stage 0 is 2D projective, stage 1 is
+ *   PS_TEXTUREMODES_DOT_PRODUCT, stage 3 is PS_TEXTUREMODES_DOT_RFLCT_SPEC), point sampling a cubemap in stage 2 and
+ *   outputting only stage 2. The cubemap texel encoding is the same as in CubemapZeroVector. The dot RGB mapping,
+ *   stage 0 texture, large quad texture coordinates, w components, eye vector, and self check quads are the same as in
+ *   DotSTRCubeZeroVector. The cube direction is the normal N = (dot1, dot2, dot3).
+ *
+ * @tc DotReflectSpecZeroVector
+ *   Renders screen-space quads using PS_TEXTUREMODES_DOT_RFLCT_SPEC on stage 3 (stage 0 is 2D projective, stages 1 and
+ *   2 are PS_TEXTUREMODES_DOT_PRODUCT), point sampling a cubemap in stage 3. The cubemap texel encoding, dot RGB
+ *   mapping, and stage 0 texture are the same as in DotSTRCubeZeroVector. The normal is N = (dot1, dot2, dot3) and the
+ *   eye vector is E = (T1.w, T2.w, T3.w). The cube direction is R = 2 * N * dot(N, E) / dot(N, N) - E.
+ *   NV097_SET_EYE_VECTOR is (0, 0, 0). The large quads, left to right, use N = (0, 0, 0) with E = (0, 0, 0), N = (0, 0,
+ *   0) with E = (1, 0, 0), N = (0, 0, 0) with E = (0, 0, 1), and N = (1, 1, 0) with E = (0, 1, 0), which reflects to
+ * (1, 0, 0). The small quads below them are a self check of the texel encoding. Each has N = +X, +Y, or +Z and E = +/-N
+ *   so that R is +/-X, +/-Y, or +/-Z, in pairs.
+ *
+ * @tc DotReflectSpecConstZeroVector
+ *   Renders screen-space quads using PS_TEXTUREMODES_DOT_RFLCT_SPEC_CONST on stage 3 (stage 0 is 2D projective, stages
+ *   1 and 2 are PS_TEXTUREMODES_DOT_PRODUCT), point sampling a cubemap in stage 3. The cubemap texel encoding, dot RGB
+ *   mapping, stage 0 texture, and quad normals are the same as in DotReflectSpecZeroVector. The eye vector E is
+ *   provided via NV097_SET_EYE_VECTOR, which is set before each quad, and the w components of stages 1-3 are 1. The
+ *   large quads and self check quads use the same N and E as in DotReflectSpecZeroVector.
  *
  * @tc DotReflectDiffuse_-1to1
  *   Renders two angles of a cube utilizing PS_TEXTUREMODES_DOT_RFLCT_DIFF pixel shading mode. The NV097_DOT_RGBMAPPING
@@ -274,6 +314,18 @@ TextureCubemapTests::TextureCubemapTests(TestHost &host, std::string output_dir,
   }
 
   tests_[kZeroVectorTest] = [this]() { TestCubemapZeroVector(); };
+  tests_[kDotSTRCubeZeroVectorTest] = [this]() {
+    TestDotCubeZeroVector(kDotSTRCubeZeroVectorTest, DotCubeMode::kSTRCube);
+  };
+  tests_[kDotReflectDiffuseZeroVectorTest] = [this]() {
+    TestDotCubeZeroVector(kDotReflectDiffuseZeroVectorTest, DotCubeMode::kReflectDiffuse);
+  };
+  tests_[kDotReflectSpecZeroVectorTest] = [this]() {
+    TestDotCubeZeroVector(kDotReflectSpecZeroVectorTest, DotCubeMode::kReflectSpecular);
+  };
+  tests_[kDotReflectSpecConstZeroVectorTest] = [this]() {
+    TestDotCubeZeroVector(kDotReflectSpecConstZeroVectorTest, DotCubeMode::kReflectSpecularConst);
+  };
 
   for (auto &test : kDotSTRCubeTests) {
     tests_[test.name] = [this, &test] { TestDotSTRCubemap(test.name, test.dot_rgbmapping); };
@@ -327,20 +379,9 @@ void TextureCubemapTests::Initialize() {
 
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
 
-  // Load the normal map into stage0
+  // Configure stage2 as a cube map (only used by PS_TEXTUREMODES_DOT_RFLCT_DIFF tests). Tests are responsible for
+  // populating the texture.
   {
-    SDL_Surface *normal_map = IMG_Load("D:\\texture_cubemap\\cube_normals_object_space.png");
-    ASSERT(normal_map && "Failed to load normal map");
-    auto &stage = host_.GetTextureStage(0);
-    stage.SetTextureDimensions(normal_map->w, normal_map->h);
-    stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
-    host_.SetTexture(normal_map);
-    SDL_FreeSurface(normal_map);
-  }
-
-  // Load the diffuse map into stage2 (only used by PS_TEXTUREMODES_DOT_RFLCT_DIFF tests)
-  {
-    GenerateCubemap(host_.GetTextureMemoryForStage(2), CubemapGeneratorMode::kCheckerboard);
     auto &stage = host_.GetTextureStage(2);
     stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
     stage.SetTextureDimensions(kTextureWidth, kTextureHeight);
@@ -438,34 +479,13 @@ void TextureCubemapTests::TestCubemapZeroVector() {
   host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
                               TestHost::STAGE_CUBE_MAP);
 
-  // Each texel encodes its face and position so that the exact texel sampled can be identified from the output:
-  // R = x * 4 + 2, G = y * 4 + 2, B = face * 40 + 20 (face order +X, -X, +Y, -Y, +Z, -Z).
-  // Texel (0, 0) of the +X face is instead pure magenta so that it is easily identified. R = 255 is never produced by
-  // the encoding above, so this is unambiguous.
-  {
-    static_assert(kTextureWidth == 64 && kTextureHeight == 64, "Texel encoding assumes a 64x64 texture");
-    static constexpr uint32_t kSliceSize = kTexturePitch * kTextureHeight;
-    auto linear = std::make_unique<uint32_t[]>(kTextureWidth * kTextureHeight);
-    auto texture = host_.GetTextureMemoryForStage(3);
-    for (uint32_t face = 0; face < 6; ++face) {
-      auto texel = linear.get();
-      for (uint32_t y = 0; y < kTextureHeight; ++y) {
-        for (uint32_t x = 0; x < kTextureWidth; ++x) {
-          // A8B8G8R8
-          *texel++ = 0xFF000000 + ((face * 40 + 20) << 16) + ((y * 4 + 2) << 8) + (x * 4 + 2);
-        }
-      }
-      if (!face) {
-        linear[0] = 0xFFFF00FF;
-      }
-      swizzle_rect(reinterpret_cast<const uint8_t *>(linear.get()), kTextureWidth, kTextureHeight, texture,
-                   kTexturePitch, 4);
-      texture += kSliceSize;
-    }
-  }
+  GenerateCoordinateEncodedCubemap(host_.GetTextureMemoryForStage(3));
   // Point sample so that the output is a single unfiltered texel.
   host_.GetTextureStage(3).SetFilter();
   host_.SetupTextureStages();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
 
   auto original_shader = host_.GetShaderProgram();
   host_.SetVertexShaderProgram(std::make_shared<PassthroughVertexShader>());
@@ -543,6 +563,194 @@ void TextureCubemapTests::TestCubemapZeroVector() {
   host_.SetVertexShaderProgram(original_shader);
 }
 
+void TextureCubemapTests::TestDotCubeZeroVector(const std::string &name, DotCubeMode mode) {
+  // Stage 0 holds a constant white normal, so with dotmap_zero_to_one each dot product is dot(Ti.xyz, (1, 1, 1)). Each
+  // quad sets only the x component of Ti.xyz, making dot(i) equal to that component.
+  static constexpr uint32_t kNormalTextureSize = 4;
+  static constexpr uint32_t kNormalTexel = 0xFFFFFFFF;
+  static constexpr uint32_t kDotRGBMappingZeroToOne = 0x000;
+
+  struct DotCubeQuad {
+    const char *label;
+    // The values of dot1, dot2, and dot3.
+    float dots[3];
+    // The eye vector E. Provided as the w components of stages 1-3, or via NV097_SET_EYE_VECTOR in const mode.
+    float eye[3];
+  };
+
+  static constexpr DotCubeQuad kZeroDirectionQuads[] = {
+      {"w=0,0,0", {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}},
+      {"w=1,1,1", {0.f, 0.f, 0.f}, {1.f, 1.f, 1.f}},
+      {"w=-1,.5,2", {0.f, 0.f, 0.f}, {-1.f, 0.5f, 2.f}},
+  };
+  static constexpr DotCubeQuad kReflectQuads[] = {
+      {"N=0,E=0", {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}},
+      {"N=0,E=+X", {0.f, 0.f, 0.f}, {1.f, 0.f, 0.f}},
+      {"N=0,E=+Z", {0.f, 0.f, 0.f}, {0.f, 0.f, 1.f}},
+      {"N=1,1,0 E=+Y", {1.f, 1.f, 0.f}, {0.f, 1.f, 0.f}},
+  };
+
+  const bool is_reflect = mode == DotCubeMode::kReflectSpecular || mode == DotCubeMode::kReflectSpecularConst;
+  const bool const_eye = mode == DotCubeMode::kReflectSpecularConst;
+  const uint32_t cube_stage = mode == DotCubeMode::kReflectDiffuse ? 2 : 3;
+  const auto cube_source = cube_stage == 2 ? TestHost::SRC_TEX2 : TestHost::SRC_TEX3;
+
+  host_.SetTextureStageEnabled(0, true);
+  host_.SetTextureStageEnabled(1, true);
+  host_.SetTextureStageEnabled(2, true);
+  host_.SetTextureStageEnabled(3, true);
+  switch (mode) {
+    case DotCubeMode::kSTRCube:
+      host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT,
+                                  TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_STR_CUBE);
+      break;
+    case DotCubeMode::kReflectDiffuse:
+      host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT,
+                                  TestHost::STAGE_DOT_REFLECT_DIFFUSE, TestHost::STAGE_DOT_REFLECT_SPECULAR);
+      break;
+    case DotCubeMode::kReflectSpecular:
+      host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT,
+                                  TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_REFLECT_SPECULAR);
+      break;
+    case DotCubeMode::kReflectSpecularConst:
+      host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE, TestHost::STAGE_DOT_PRODUCT,
+                                  TestHost::STAGE_DOT_PRODUCT, TestHost::STAGE_DOT_REFLECT_SPECULAR_CONST);
+      break;
+  }
+
+  // Stage 0 is a constant color texture.
+  {
+    host_.GetTextureStage(0).SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+    uint32_t texels[kNormalTextureSize * kNormalTextureSize];
+    for (auto &texel : texels) {
+      texel = kNormalTexel;
+    }
+    host_.GetTextureStage(0).SetTextureDimensions(kNormalTextureSize, kNormalTextureSize);
+    host_.SetRawTexture(reinterpret_cast<const uint8_t *>(texels), kNormalTextureSize, kNormalTextureSize, 1,
+                        kNormalTextureSize * 4, 4, true, 0);
+  }
+
+  GenerateCoordinateEncodedCubemap(host_.GetTextureMemoryForStage(cube_stage));
+  // Point sample so that the output is a single unfiltered texel.
+  host_.GetTextureStage(cube_stage).SetFilter();
+  host_.SetupTextureStages();
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, kDotRGBMappingZeroToOne);
+  Pushbuffer::PushF(NV097_SET_EYE_VECTOR, 0.f, 0.f, 0.f);
+  Pushbuffer::End();
+
+  host_.SetFinalCombiner0Just(cube_source);
+  host_.SetFinalCombiner1Just(cube_source, true);
+
+  auto original_shader = host_.GetShaderProgram();
+  host_.SetVertexShaderProgram(std::make_shared<PassthroughVertexShader>());
+
+  host_.PrepareDraw(0xFE303030);
+
+  auto draw_quad = [this, const_eye](const DotCubeQuad &quad, float left, float top, float size) {
+    static constexpr float kZ = 0.f;
+
+    if (const_eye) {
+      Pushbuffer::Begin();
+      Pushbuffer::PushF(NV097_SET_EYE_VECTOR, quad.eye[0], quad.eye[1], quad.eye[2]);
+      Pushbuffer::End();
+    }
+
+    auto vertex = [this, &quad, const_eye](float x, float y) {
+      host_.SetTexCoord0(0.5f, 0.5f, 0.f, 1.f);
+      host_.SetTexCoord1(quad.dots[0], 0.f, 0.f, const_eye ? 1.f : quad.eye[0]);
+      host_.SetTexCoord2(quad.dots[1], 0.f, 0.f, const_eye ? 1.f : quad.eye[1]);
+      host_.SetTexCoord3(quad.dots[2], 0.f, 0.f, const_eye ? 1.f : quad.eye[2]);
+      host_.SetVertex(x, y, kZ, 1.f);
+    };
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    vertex(left, top);
+    vertex(left + size, top);
+    vertex(left + size, top + size);
+    vertex(left, top + size);
+    host_.End();
+  };
+
+  // The quads under test.
+  {
+    static constexpr float kQuadSize = 64.f;
+    static constexpr float kQuadSpacing = 150.f;
+    static constexpr float kTop = 100.f;
+    static constexpr int kLabelRow = 6;
+
+    const DotCubeQuad *quads = is_reflect ? kReflectQuads : kZeroDirectionQuads;
+    const size_t num_quads = is_reflect ? sizeof(kReflectQuads) / sizeof(kReflectQuads[0])
+                                        : sizeof(kZeroDirectionQuads) / sizeof(kZeroDirectionQuads[0]);
+
+    float left = 30.f;
+    for (auto i = 0u; i < num_quads; ++i) {
+      draw_quad(quads[i], left, kTop, kQuadSize);
+      pb_printat(kLabelRow, static_cast<int>((left - 20.f) / 10.f), "%s", quads[i].label);
+      left += kQuadSpacing;
+    }
+  }
+
+  // Small self check quads that sample the center of each face, verifying the face order, channel order, and swizzling
+  // assumed by the texel encoding. Drawn as +/- pairs for X, Y, and Z.
+  {
+    static constexpr float kQuadSize = 16.f;
+    static constexpr float kPairGap = 2.f;
+    static constexpr float kPairSpacing = 50.f;
+    static constexpr float kTop = 405.f;
+
+    // Returns a quad whose cube direction is sign * the unit vector along `axis`.
+    auto make_axis_quad = [is_reflect](uint32_t axis, float sign) {
+      DotCubeQuad quad = {nullptr, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}};
+      if (is_reflect) {
+        // N = unit vector along axis and E = sign * N, so R = E.
+        quad.dots[axis] = 1.f;
+        quad.eye[axis] = sign;
+      } else {
+        quad.dots[axis] = sign;
+      }
+      return quad;
+    };
+
+    float left = 30.f;
+    for (auto axis = 0u; axis < 3; ++axis) {
+      draw_quad(make_axis_quad(axis, 1.f), left, kTop, kQuadSize);
+      draw_quad(make_axis_quad(axis, -1.f), left + kQuadSize + kPairGap, kTop, kQuadSize);
+      left += kPairSpacing;
+    }
+  }
+
+  // Note: the pbkit text grid is 16 rows by 60 columns.
+  pb_printat(0, 0, "%s", name.c_str());
+  switch (mode) {
+    case DotCubeMode::kSTRCube:
+      pb_printat(2, 0, "DOT_STR_CUBE: dir=(dot1,dot2,dot3)=0");
+      break;
+    case DotCubeMode::kReflectDiffuse:
+      pb_printat(2, 0, "DOT_REFLECT_DIFFUSE: N=(dot1,dot2,dot3)=0");
+      break;
+    case DotCubeMode::kReflectSpecular:
+      pb_printat(2, 0, "DOT_REFLECT_SPECULAR: E=(T1.w,T2.w,T3.w)");
+      break;
+    case DotCubeMode::kReflectSpecularConst:
+      pb_printat(2, 0, "DOT_REFLECT_SPECULAR_CONST: E=eye constant");
+      break;
+  }
+  pb_printat(7, 0, "x=R/4 y=G/4 face=B/40 (+X,-X,+Y,-Y,+Z,-Z)");
+  pb_printat(8, 0, "+X texel (0,0) is magenta");
+  pb_printat(14, 0, "Decode self check (+/-X, +/-Y, +/-Z face centers)");
+  pb_draw_text_screen();
+
+  FinishDraw(name);
+
+  host_.SetVertexShaderProgram(original_shader);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DOT_RGBMAPPING, 0);
+  Pushbuffer::End();
+}
+
 void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping) {
   /*
    * See https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/texm3x3tex---ps
@@ -554,6 +762,7 @@ void TextureCubemapTests::TestDotSTR3D(const std::string &name, uint32_t dot_rgb
    * - The final value is a lookup from the cube map in t3 using the world adjusted normal.
   */
 
+  LoadObjectSpaceNormalMapIntoStage0(host_);
   GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kNoise);
 
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
@@ -638,6 +847,8 @@ void TextureCubemapTests::TestDotReflect(const std::string &name, uint32_t dot_r
    * - The eye-ray vector is provided via NV097_SET_EYE_VECTOR.
   */
 
+  LoadObjectSpaceNormalMapIntoStage0(host_);
+  GenerateCubemap(host_.GetTextureMemoryForStage(2), CubemapGeneratorMode::kCheckerboard);
   GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kRadialGradient);
 
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
@@ -735,6 +946,7 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
   // The hardware then creates a reflection vector using the normal and eye vectors and uses that to index into the
   // cubemap to find the final pixel value.
 
+  LoadObjectSpaceNormalMapIntoStage0(host_);
   GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kRadialGradient);
 
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
@@ -825,6 +1037,9 @@ void TextureCubemapTests::TestDotSTRCubemap(const std::string &name, uint32_t do
 
 void TextureCubemapTests::TestDotReflectSpec(const std::string &name, uint32_t dot_rgb_mapping, const vector_t &eye_vec,
                                              bool const_eye) {
+  LoadObjectSpaceNormalMapIntoStage0(host_);
+  GenerateCubemap(host_.GetTextureMemoryForStage(3), CubemapGeneratorMode::kCheckerboard);
+
   auto shader = std::static_pointer_cast<PerspectiveVertexShader>(host_.GetShaderProgram());
 
   host_.SetTextureStageEnabled(0, true);
@@ -931,4 +1146,41 @@ static void GenerateCubemap(uint8_t *buffer, CubemapGeneratorMode mode) {
 
     buffer += kSliceSize;
   }
+}
+
+// Fills each face of a cubemap such that every texel's color encodes its face and position.
+static void GenerateCoordinateEncodedCubemap(uint8_t *buffer) {
+  // Each texel encodes its face and position so that the exact texel sampled can be identified from the output:
+  // R = x * 4 + 2, G = y * 4 + 2, B = face * 40 + 20 (face order +X, -X, +Y, -Y, +Z, -Z).
+  // Texel (0, 0) of the +X face is instead pure magenta so that it is easily identified. R = 255 is never produced by
+  // the encoding above, so this is unambiguous.
+  static_assert(kTextureWidth == 64 && kTextureHeight == 64, "Texel encoding assumes a 64x64 texture");
+  static constexpr uint32_t kSliceSize = kTexturePitch * kTextureHeight;
+  auto linear = std::make_unique<uint32_t[]>(kTextureWidth * kTextureHeight);
+  auto texture = buffer;
+  for (uint32_t face = 0; face < 6; ++face) {
+    auto texel = linear.get();
+    for (uint32_t y = 0; y < kTextureHeight; ++y) {
+      for (uint32_t x = 0; x < kTextureWidth; ++x) {
+        // A8B8G8R8
+        *texel++ = 0xFF000000 + ((face * 40 + 20) << 16) + ((y * 4 + 2) << 8) + (x * 4 + 2);
+      }
+    }
+    if (!face) {
+      linear[0] = 0xFFFF00FF;
+    }
+    swizzle_rect(reinterpret_cast<const uint8_t *>(linear.get()), kTextureWidth, kTextureHeight, texture, kTexturePitch,
+                 4);
+    texture += kSliceSize;
+  }
+}
+
+static void LoadObjectSpaceNormalMapIntoStage0(TestHost &host) {
+  SDL_Surface *normal_map = IMG_Load("D:\\texture_cubemap\\cube_normals_object_space.png");
+  ASSERT(normal_map && "Failed to load normal map");
+  auto &stage = host.GetTextureStage(0);
+  stage.SetTextureDimensions(normal_map->w, normal_map->h);
+  stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_SZ_A8B8G8R8));
+  host.SetTexture(normal_map);
+  SDL_FreeSurface(normal_map);
 }
