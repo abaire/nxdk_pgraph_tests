@@ -15,6 +15,7 @@ class TextureCubemapTests : public TestSuite {
   TextureCubemapTests(TestHost &host, std::string output_dir, const Config &config);
 
   void Initialize() override;
+  void SetupTest() override;
 
  private:
   enum class ReflectTest {
@@ -33,6 +34,7 @@ class TextureCubemapTests : public TestSuite {
  private:
   void TestCubemap(float q_coord);
   void TestCubemapZeroVector();
+  void TestCubemapZeroVectorMipmap(const std::string &name, bool linear_filter, bool wrap);
   void TestDotCubeZeroVector(const std::string &name, DotCubeMode mode);
   void TestDotSTR3D(const std::string &name, uint32_t dot_rgb_mapping);
   void TestDotSTRCubemap(const std::string &name, uint32_t dot_rgb_mapping);
