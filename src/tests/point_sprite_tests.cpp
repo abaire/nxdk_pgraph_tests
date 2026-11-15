@@ -9,17 +9,7 @@
 static constexpr char kAlphaTestTest[] = "AlphaTest";
 static constexpr char kAlphaMaskTest[] = "AlphaMask";
 static constexpr char kPolygonModePointTest[] = "PolygonMode_Point";
-
-PointSpriteTests::PointSpriteTests(TestHost &host, std::string output_dir, const Config &config)
-    : TestSuite(host, std::move(output_dir), "Point sprite", config) {
-  tests_[kAlphaTestTest] = [this]() { TestAlphaTest(); };
-  for (auto use_shader : {false, true}) {
-    std::string name = kAlphaMaskTest;
-    name += use_shader ? "_VS" : "_FF";
-    tests_[name] = [this, use_shader]() { TestAlphaMasking(use_shader); };
-  }
-  tests_[kPolygonModePointTest] = [this]() { TestPolygonModePoint(); };
-}
+static constexpr char kLinearTextureTest[] = "LinearTexture";
 
 /**
  * Initializes the test suite and creates test cases.
@@ -43,7 +33,27 @@ PointSpriteTests::PointSpriteTests(TestHost &host, std::string output_dir, const
  * @tc PolygonMode_Point
  *   Demonstrates that setting NV097_SET_FRONT_POLYGON_MODE to NV097_SET_FRONT_POLYGON_MODE_V_POINT produces textured
  *   point sprites honoring point smoothing when rendering non-point geometry (e.g. quads/triangles) except for lines.
+ *
+ * @tc LinearTexture
+ *   Renders point sprites using a non-square (64x32) opaque linear (non-swizzled/rect) A8R8G8B8 texture on stage 3,
+ *   which would normally require texel-space texture coordinates. The top row renders sprites of 16, 32, and 64
+ *   pixels with point params disabled, the second row with point params enabled (which clamps all three to 64px).
+ *   The bottom row contains reference quads (not point sprites) sampling the same texture with texel-space (0-64,
+ *   0-32; "Linear") and normalized (0-1; "Normalized") texture coordinates to show which addressing mode the
+ *   generated point sprite coordinates match.
  */
+PointSpriteTests::PointSpriteTests(TestHost &host, std::string output_dir, const Config &config)
+    : TestSuite(host, std::move(output_dir), "Point sprite", config) {
+  tests_[kAlphaTestTest] = [this]() { TestAlphaTest(); };
+  for (auto use_shader : {false, true}) {
+    std::string name = kAlphaMaskTest;
+    name += use_shader ? "_VS" : "_FF";
+    tests_[name] = [this, use_shader]() { TestAlphaMasking(use_shader); };
+  }
+  tests_[kPolygonModePointTest] = [this]() { TestPolygonModePoint(); };
+  tests_[kLinearTextureTest] = [this]() { TestLinearTexture(); };
+}
+
 void PointSpriteTests::Initialize() {
   TestSuite::Initialize();
   host_.SetXDKDefaultViewportAndFixedFunctionMatrices();
@@ -514,4 +524,108 @@ void PointSpriteTests::TestPolygonModePoint() {
   pb_draw_text_screen();
 
   FinishDraw(kPolygonModePointTest);
+}
+
+void PointSpriteTests::TestLinearTexture() {
+  static constexpr uint32_t kTextureWidth = 64;
+  static constexpr uint32_t kTextureHeight = 32;
+  GenerateRGBTestPattern(host_.GetTextureMemoryForStage(3), kTextureWidth, kTextureHeight);
+
+  host_.PrepareDraw(0xFF333333);
+
+  auto &texture_stage = host_.GetTextureStage(3);
+  texture_stage.SetFormat(GetTextureFormatInfo(NV097_SET_TEXTURE_FORMAT_COLOR_LU_IMAGE_A8R8G8B8));
+  texture_stage.SetEnabled(true);
+  texture_stage.SetImageDimensions(kTextureWidth, kTextureHeight);
+  texture_stage.SetUWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+  texture_stage.SetVWrap(TextureStage::WRAP_CLAMP_TO_EDGE, false);
+  host_.SetupTextureStages();
+
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE, TestHost::STAGE_NONE, TestHost::STAGE_NONE,
+                              TestHost::STAGE_2D_PROJECTIVE);
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);
+  host_.SetFinalCombiner1Just(TestHost::SRC_TEX3, true);
+  host_.SetDiffuse(0xFFFFFFFF);
+  host_.SetBlend();
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, true);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_A, 1.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_B, 0.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_FACTOR_C, 0.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE, 64.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_1, 64.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SIZE_RANGE_DUP_2, 64.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_SCALE_BIAS, 0.f);
+  Pushbuffer::PushF(NV097_SET_POINT_PARAMS_MIN_SIZE, 0.f);
+  Pushbuffer::End();
+
+  auto draw_point = [this](float cx, float cy, float point_size) {
+    vector_t screen_point{cx, cy, 1.f, 1.f};
+    vector_t world_point;
+    host_.UnprojectPoint(world_point, screen_point);
+    host_.SetPointSize(point_size);
+    host_.Begin(TestHost::PRIMITIVE_POINTS);
+    host_.SetVertex(world_point);
+    host_.End();
+  };
+
+  auto draw_quad = [this](float cx, float cy, float max_u, float max_v) {
+    static constexpr float kHalfWidth = kTextureWidth * 0.5f;
+    static constexpr float kHalfHeight = kTextureHeight * 0.5f;
+
+    auto push_vertex = [this](float x, float y, float u, float v) {
+      vector_t screen_point{x, y, 1.f, 1.f};
+      vector_t world_point;
+      host_.SetTexCoord3(u, v);
+      host_.UnprojectPoint(world_point, screen_point);
+      host_.SetVertex(world_point);
+    };
+
+    host_.Begin(TestHost::PRIMITIVE_QUADS);
+    push_vertex(cx - kHalfWidth, cy - kHalfHeight, 0.f, 0.f);
+    push_vertex(cx + kHalfWidth, cy - kHalfHeight, max_u, 0.f);
+    push_vertex(cx + kHalfWidth, cy + kHalfHeight, max_u, max_v);
+    push_vertex(cx - kHalfWidth, cy + kHalfHeight, 0.f, max_v);
+    host_.End();
+  };
+
+  static constexpr float kColX[] = {330.f, 430.f, 530.f};
+  static constexpr float kRowY[] = {150.f, 275.f};
+  static constexpr float kPointSizes[] = {16.f, 32.f, 64.f};
+
+  for (auto row = 0; row < 2; ++row) {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, row == 1);
+    Pushbuffer::End();
+
+    for (auto col = 0; col < std::size(kPointSizes); ++col) {
+      draw_point(kColX[col], kRowY[row], kPointSizes[col]);
+    }
+  }
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+  Pushbuffer::End();
+  host_.SetPointSize(1.f);
+
+  static constexpr float kReferenceY = 420.f;
+  draw_quad(180.f, kReferenceY, static_cast<float>(kTextureWidth), static_cast<float>(kTextureHeight));
+  draw_quad(400.f, kReferenceY, 1.f, 1.f);
+
+  pb_printat(0, 0, "%s", kLinearTextureTest);
+  pb_printat(2, 29, "16px");
+  pb_printat(2, 39, "32px");
+  pb_printat(2, 49, "64px");
+  pb_printat(5, 0, "Point params disabled");
+  pb_printat(6, 0, "Size from SET_POINT_SIZE");
+  pb_printat(10, 0, "Point params enabled");
+  pb_printat(11, 0, "Scale A=1, B=C=0, max 64");
+  pb_printat(14, 13, "Linear");
+  pb_printat(14, 33, "Normalized");
+  pb_draw_text_screen();
+
+  FinishDraw(kLinearTextureTest);
 }

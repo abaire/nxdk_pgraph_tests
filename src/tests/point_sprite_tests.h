@@ -16,6 +16,7 @@ class PointSpriteTests : public TestSuite {
   void TestAlphaTest();
   void TestAlphaMasking(bool use_shader);
   void TestPolygonModePoint();
+  void TestLinearTexture();
 };
 
 #endif  // NXDK_PGRAPH_TESTS_POINT_SPRITE_TESTS_H

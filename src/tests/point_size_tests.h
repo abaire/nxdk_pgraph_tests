@@ -27,6 +27,7 @@ class PointSizeTests : public TestSuite {
   void TestLargestPointSize(const std::string &name, bool use_shader);
   void TestSmallestPointSize(const std::string &name, bool use_shader);
   void TestVertexShaderPointSize();
+  void TestPointSizeInsideBeginEnd();
 };
 
 #endif  // POINTSIZETESTS_H

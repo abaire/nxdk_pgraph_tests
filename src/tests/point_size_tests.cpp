@@ -35,6 +35,7 @@ static const TestConfig testConfigs[]{
 static const char kLargestValueTest[] = "LargestPointSize";
 static const char kSmallestValueTest[] = "SmallestPointSize";
 static const char kVertexShaderPointSizeTest[] = "VSPointSize";
+static const char kPointSizeInsideBeginEndTest[] = "InsideBeginEnd";
 
 /**
  * Initializes the test suite and creates test cases.
@@ -130,6 +131,20 @@ static const char kVertexShaderPointSizeTest[] = "VSPointSize";
  *   Demonstrates that point size is entirely governed by SET_POINT_SIZE when point params is disabled and that it is
  *   not possible for the vertex shader to influence point size. Further demonstrates that point size is entirely
  *   goverened by oPts if point params are enabled.
+ *
+ * @tc InsideBeginEnd
+ *   Using the fixed function pipeline with point smoothing and point params disabled, tests whether
+ *   NV097_SET_POINT_SIZE is honored when sent between NV097_SET_BEGIN_END(POINTS) and NV097_SET_BEGIN_END(END).
+ *   Rows from top to bottom:
+ *     1. SET_POINT_SIZE(32px) before BEGIN. Reference; expected to be 32px.
+ *     2. SET_POINT_SIZE(4px) before BEGIN, SET_POINT_SIZE(32px) after BEGIN and before the vertex. 4px if the in-block
+ *        method is ignored, 32px if it is honored.
+ *     3. A point rendered with no SET_POINT_SIZE at all. 4px if the in-block method from row 2 was discarded, 32px if
+ *        it was latched (immediately or deferred until END).
+ *     4. SET_POINT_SIZE(4px) before BEGIN, then two vertices within a single BEGIN/END with SET_POINT_SIZE(32px)
+ *        between them. Both 4px if the in-block method is ignored, 4px then 32px if it is honored per-vertex.
+ *     5. SET_POINT_SIZE(16px) before BEGIN. Expected to be 16px, verifying that state is not corrupted by the previous
+ *        rows.
  */
 PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Point size", config) {
@@ -150,6 +165,7 @@ PointSizeTests::PointSizeTests(TestHost& host, std::string output_dir, const Con
   }
 
   tests_[kVertexShaderPointSizeTest] = [this]() { TestVertexShaderPointSize(); };
+  tests_[kPointSizeInsideBeginEndTest] = [this]() { TestPointSizeInsideBeginEnd(); };
 }
 
 void PointSizeTests::Initialize() {
@@ -511,4 +527,82 @@ void PointSizeTests::TestVertexShaderPointSize() {
   Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
   Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
   Pushbuffer::End();
+}
+
+void PointSizeTests::TestPointSizeInsideBeginEnd() {
+  host_.SetVertexShaderProgram(nullptr);
+  host_.PrepareDraw(0xFF444444);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_POINT_SMOOTH_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_POINT_PARAMS_ENABLE, false);
+  Pushbuffer::End();
+
+  auto draw_point = [this](float x, float y) {
+    vector_t screen_point{x, y, 1.f, 1.f};
+    vector_t transformed;
+    host_.UnprojectPoint(transformed, screen_point);
+    host_.SetVertex(transformed);
+  };
+
+  // Rows are vertically centered on text rows 3, 5, 7, 9, 11 (Y = 25 + 25 * row + 8).
+  auto row_center = [](int text_row) { return 33.f + 25.f * static_cast<float>(text_row); };
+
+  static constexpr float kPointX = 480.f;
+  static constexpr float kSecondPointX = 560.f;
+  static constexpr float kSmallSize = 4.f;
+  static constexpr float kMedSize = 8.f;
+  static constexpr float kLargeSize = 32.f;
+
+  host_.SetDiffuse(0xFFFFFFFF);
+
+  // 1. Reference
+  host_.SetPointSize(kLargeSize);
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
+  draw_point(kPointX, row_center(3));
+  host_.End();
+
+  // 2. Point size sent inside the BEGIN/END block.
+  host_.SetDiffuse(0xFF00FF00);
+  host_.SetPointSize(kSmallSize);
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
+  host_.SetPointSize(kLargeSize);
+  draw_point(kPointX, row_center(5));
+  host_.End();
+
+  // 3. No point size update; shows whether the in-block value from row 2 was retained.
+  host_.SetDiffuse(0xFF00FFFF);
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
+  draw_point(kPointX, row_center(7));
+  host_.End();
+
+  // 4. Point size sent between two vertices within one block.
+  host_.SetDiffuse(0xFFFFFF00);
+  host_.SetPointSize(kMedSize);
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
+  draw_point(kPointX, row_center(9));
+  host_.SetPointSize(kLargeSize);
+  draw_point(kSecondPointX, row_center(9));
+  host_.End();
+
+  // 5. Sanity check that subsequent out-of-block updates still work.
+  host_.SetDiffuse(0xFFFF00FF);
+  host_.SetPointSize(16.f);
+  host_.Begin(TestHost::PRIMITIVE_POINTS);
+  draw_point(kPointX, row_center(11));
+  host_.End();
+
+  host_.SetPointSize(1.f);
+
+  pb_printat(0, 0, "%s", kPointSizeInsideBeginEndTest);
+  pb_printat(3, 0, "32 before BEGIN");
+  pb_printat(5, 0, "4 before BEGIN, 32 inside");
+  pb_printat(7, 0, "No SET_POINT_SIZE");
+  pb_printat(9, 0, "8 before BEGIN, 32 inside 2 pts");
+  pb_printat(11, 0, "16 before BEGIN");
+
+  pb_printat(14, 0, "SET_POINT_SIZE is ignored inside BEGIN/END block");
+  pb_draw_text_screen();
+
+  FinishDraw(kPointSizeInsideBeginEndTest);
 }
