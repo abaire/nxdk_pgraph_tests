@@ -256,6 +256,8 @@ add_executable(
         tests/fog_carryover_tests.h
         tests/fog_exceptional_value_tests.cpp
         tests/fog_exceptional_value_tests.h
+        tests/fog_eye_space_w_tests.cpp
+        tests/fog_eye_space_w_tests.h
         tests/fog_gen_tests.cpp
         tests/fog_gen_tests.h
         tests/fog_param_tests.cpp

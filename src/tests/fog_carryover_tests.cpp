@@ -954,8 +954,8 @@ void FogCarryoverTests::TestArrayDisabledFogCoord() {
   static constexpr float kControlTop = 100.f;
   static constexpr float kWorldZ = 0.f;
 
-  auto unproject = [this](float x, float y) {
-    vector_t world{0.f, 0.f, 0.f, 1.f};
+  vector_t world{0.f, 0.f, 0.f, 1.f};
+  auto unproject = [this, &world](float x, float y) {
     host_.UnprojectPoint(world, vector_t{x, y, kWorldZ, 1.f}, kWorldZ);
     return world;
   };

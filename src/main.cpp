@@ -63,6 +63,7 @@
 #include "tests/edge_flag_tests.h"
 #include "tests/fog_carryover_tests.h"
 #include "tests/fog_exceptional_value_tests.h"
+#include "tests/fog_eye_space_w_tests.h"
 #include "tests/fog_gen_tests.h"
 #include "tests/fog_param_tests.h"
 #include "tests/fog_tests.h"
@@ -506,6 +507,7 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(FogCarryoverTests)
   REG_TEST(FogCustomShaderTests)
   REG_TEST(FogExceptionalValueTests)
+  REG_TEST(FogEyeSpaceWTests)
   REG_TEST(FogGenTests)
   REG_TEST(FogInfiniteFogCoordinateTests)
   REG_TEST(FogParamTests)
