@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d0/d56/classFogEyeSpaceWTests" kind="class" language="C++" prot="public">
+    <compoundname>FogEyeSpaceWTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="df/dfb/fog__eye__space__w__tests_8h" local="no">fog_eye_space_w_tests.h</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Variant</name>
+        <qualifiedname>FogEyeSpaceWTests::Variant</qualifiedname>
+        <enumvalue id="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6a96b605c85c07b05e298c5498aaace167" prot="public">
+          <name>MV_SCALE</name>
+          <briefdescription>
+<para>The model view matrix is uniformly scaled, so eye-space position = k * (x, y, z, 1). </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6a82d80ad4c1e4a5d52294396f444a824f" prot="public">
+          <name>VERTEX_W</name>
+          <briefdescription>
+<para>Vertices are submitted as k * (x, y, z, 1) with the default matrices. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6ae6e86e2ba9244364ee7728cb4427cc61" prot="public">
+          <name>MV_PROJECTIVE</name>
+          <briefdescription>
+<para>The model view w column is modified so that eye-space w = 1 + a * eye_x, leaving xyz unchanged. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6a4f73ed8de4f5cd894d3547818e3bb804" prot="public">
+          <name>MV_ZERO_W</name>
+          <briefdescription>
+<para>The model view w column is replaced with (0, 0, 0, w) for w at or near zero, leaving xyz unchanged. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.h" line="38" column="3" bodyfile="src/tests/fog_eye_space_w_tests.h" bodystart="38" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d0/d56/classFogEyeSpaceWTests_1aaf0312996bd138311b3323a729fd398e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FogEyeSpaceWTests::FogEyeSpaceWTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>FogEyeSpaceWTests</name>
+        <qualifiedname>FogEyeSpaceWTests::FogEyeSpaceWTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para>The hardware dehomogenizes the eye-space position before fog generation, so in the MVScale and VertexW tests every strip matches the reference (first) strip.</para>
+<para><simplesect kind="remark"><para>MVScale-planar-lin Linear planar fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-planar-exp Exponential planar fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-planar-exp2 Exponential squared planar fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-abs_planar-lin Linear absolute planar fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-abs_planar-exp Exponential absolute planar fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-abs_planar-exp2 Exponential squared absolute planar fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-radial-lin Linear radial fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-radial-exp Exponential radial fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVScale-radial-exp2 Exponential squared radial fog. The model view matrix is scaled by k (eye w = k) for each strip; k = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-planar-lin Linear planar fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-planar-exp Exponential planar fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-planar-exp2 Exponential squared planar fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-abs_planar-lin Linear absolute planar fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-abs_planar-exp Exponential absolute planar fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-abs_planar-exp2 Exponential squared absolute planar fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-radial-lin Linear radial fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-radial-exp Exponential radial fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>VertexW-radial-exp2 Exponential squared radial fog. Vertices are submitted as w * (x, y, z, 1) with default matrices; w = 1 is the reference. All strips are identical to the reference.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-planar-lin Linear planar fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-planar-exp Exponential planar fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-planar-exp2 Exponential squared planar fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-abs_planar-lin Linear absolute planar fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-abs_planar-exp Exponential absolute planar fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-abs_planar-exp2 Exponential squared absolute planar fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-radial-lin Linear radial fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-radial-exp Exponential radial fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVProjective-radial-exp2 Exponential squared radial fog. The model view w column is modified so eye w = 1 + a * eye_x while eye xyz are unchanged; a = 0 is the reference. The fog distance is divided by eye w, so positive a reduces fog right of the screen center (where eye_x &gt; 0) and slightly increases it left of center; negative a does the opposite.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-planar-lin Linear planar fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 1e-6 strip is entirely fogged. The w 0, w -0, w -1e-6, and w 0 xyz 0 strips are entirely unfogged (w 0 behaves like a large negative distance).</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-planar-exp Exponential planar fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 1e-6 strip is entirely fogged. The w 0, w -0, w -1e-6, and w 0 xyz 0 strips are entirely unfogged (w 0 behaves like a large negative distance).</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-planar-exp2 Exponential squared planar fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 0, w -0, w 1e-6, and w -1e-6 strips are entirely fogged. The w 0 xyz 0 strip is entirely unfogged.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-abs_planar-lin Linear absolute planar fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 1e-6 strip is entirely fogged. The w 0, w -0, w -1e-6, and w 0 xyz 0 strips are entirely unfogged (w 0 behaves like a large negative distance). Despite the absolute value gen mode, the sign of w is not discarded.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-abs_planar-exp Exponential absolute planar fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 1e-6 strip is entirely fogged. The w 0, w -0, w -1e-6, and w 0 xyz 0 strips are entirely unfogged (w 0 behaves like a large negative distance). Despite the absolute value gen mode, the sign of w is not discarded.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-abs_planar-exp2 Exponential squared absolute planar fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 0, w -0, w 1e-6, and w -1e-6 strips are entirely fogged. The w 0 xyz 0 strip is entirely unfogged.</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-radial-lin Linear radial fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 0, w -0, and w 0 xyz 0 strips are entirely unfogged. The w 1e-6 and w -1e-6 strips are entirely fogged (the radial distance is positive regardless of the sign of w).</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-radial-exp Exponential radial fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 0, w -0, and w 0 xyz 0 strips are entirely unfogged. The w 1e-6 and w -1e-6 strips are entirely fogged (the radial distance is positive regardless of the sign of w).</para>
+</simplesect>
+<simplesect kind="remark"><para>MVZeroW-radial-exp2 Exponential squared radial fog. The model view w column is replaced with (0, 0, 0, w) so eye xyz are unchanged and eye w is 1 (reference), +0, -0, 1e-6, or -1e-6. The final strip zeroes the entire matrix so eye position is (0, 0, 0, 0). The w 0, w -0, and w 0 xyz 0 strips are entirely unfogged. The w 1e-6 and w -1e-6 strips are entirely fogged (the radial distance is positive regardless of the sign of w). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.h" line="49" column="3" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="280" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="d0/d56/classFogEyeSpaceWTests_1a70f66bfbd2a3146dec918b69212d2534" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void FogEyeSpaceWTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>FogEyeSpaceWTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.h" line="51" column="8" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="292" bodyend="309"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d0/d56/classFogEyeSpaceWTests_1a86863164d9a27085c8c9da5720b9047a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogEyeSpaceWTests::Test</definition>
+        <argsstring>(const std::string &amp;name, Variant variant, uint32_t fog_gen_mode, uint32_t fog_mode)</argsstring>
+        <name>Test</name>
+        <qualifiedname>FogEyeSpaceWTests::Test</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6" kindref="member">Variant</ref></type>
+          <declname>variant</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_gen_mode</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fog_mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.h" line="54" column="8" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="341" bodyend="452"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests fixed function fog generation when the eye-space position has a w component other than 1.0.</para>
+<para>A model view matrix whose w column is not (0, 0, 0, 1) (e.g., a planar projected shadow matrix folded into the world transform) or a vertex position with w != 1 produces a homogeneous eye-space position. The screen position is unaffected since the composite matrix and perspective divide cancel the scale, but the fog distance may or may not be computed from the dehomogenized position.</para>
+<para>Reproduces <ulink url="https://github.com/xemu-project/xemu/issues/3135">https://github.com/xemu-project/xemu/issues/3135</ulink> (Hunter: The Reckoning - Redeemer shadows rendered in the fog color).</para>
+<para>Each test draws a series of horizontal strips. Every strip covers the same screen area at the same eye-space depths (3.0 at the left edge to 40.0 at the right) and the composite matrix is never altered, so only the eye-space position used for fog generation differs between strips. The first strip is the w = 1 reference. Strips blend from a dark diffuse color toward a yellow fog color.</para>
+<para>Observations from HW:<itemizedlist>
+<listitem><para>The eye-space position is divided by its w component before fog generation in planar, absolute planar, and radial modes. Uniformly scaling the model view matrix or the vertex position (including by a negative value) has no effect on fog, while altering only the eye-space w changes the fog distance to (eye.xyz / eye.w).</para>
+</listitem><listitem><para>Eye-space w of +0 and -0 behave identically. For planar and absolute planar generation the result matches a very large negative distance (no fog in linear and exp modes, full fog in exp2). For radial generation the result matches a distance of 0 (no fog in every mode).</para>
+</listitem><listitem><para>An eye-space position of (0, 0, 0, 0) produces no fog in every mode.</para>
+</listitem><listitem><para>Absolute planar generation does not discard the sign of a tiny negative w (-1e-6 matches planar, not radial). </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FogEyeSpaceWTests</label>
+        <link refid="d0/d56/classFogEyeSpaceWTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FogEyeSpaceWTests</label>
+        <link refid="d0/d56/classFogEyeSpaceWTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/fog_eye_space_w_tests.h" line="36" column="1" bodyfile="src/tests/fog_eye_space_w_tests.h" bodystart="36" bodyend="55"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>FogEyeSpaceWTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d0/d56/classFogEyeSpaceWTests_1aaf0312996bd138311b3323a729fd398e" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>FogEyeSpaceWTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>host_</name></member>
+      <member refid="d0/d56/classFogEyeSpaceWTests_1a70f66bfbd2a3146dec918b69212d2534" prot="public" virt="virtual"><scope>FogEyeSpaceWTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>FogEyeSpaceWTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>FogEyeSpaceWTests</scope><name>TearDownTest</name></member>
+      <member refid="d0/d56/classFogEyeSpaceWTests_1a86863164d9a27085c8c9da5720b9047a" prot="private" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>Test</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>TestSuite</name></member>
+      <member refid="d0/d56/classFogEyeSpaceWTests_1a2c22b986f3749ab24ce156db23caa4a6" prot="public" virt="non-virtual"><scope>FogEyeSpaceWTests</scope><name>Variant</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>FogEyeSpaceWTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
