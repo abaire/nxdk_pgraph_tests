@@ -129,6 +129,7 @@
 #include "tests/texture_wrap_mode_tests.h"
 #include "tests/three_d_primitive_tests.h"
 #include "tests/two_d_line_tests.h"
+#include "tests/vertex_shader_exceptional_value_tests.h"
 #include "tests/vertex_shader_independence_tests.h"
 #include "tests/vertex_shader_rounding_tests.h"
 #include "tests/vertex_shader_swizzle_tests.h"
@@ -575,6 +576,10 @@ static void RegisterSuites(TestHost& host, RuntimeConfig& runtime_config,
   REG_TEST(TextureWrapModeTests)
   REG_TEST(ThreeDPrimitiveTests)
   REG_TEST(TwoDLineTests)
+  REG_TEST(VertexShaderExceptionalILUTests)
+  REG_TEST(VertexShaderExceptionalMACTests)
+  REG_TEST(VertexShaderExceptionalMOVTests)
+  REG_TEST(VertexShaderExceptionalPathsTests)
   REG_TEST(VertexShaderIndependenceTests)
   REG_TEST(VertexShaderRoundingTests)
   REG_TEST(VertexShaderSwizzleTests)

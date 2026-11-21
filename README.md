@@ -284,6 +284,23 @@ which would be populated via
   shader->shader->SetUniformF(0, -1.f, 1.5f, 0.f, 1.f);
 ```
 
+### Updating the vertex shader exceptional value expectations
+
+The `Vertex shader exceptional *` suites render results that were measured on Xbox hardware by the `VSH Exceptional *`
+tests in [nxdk_low_level_nv2a_tests](https://github.com/abaire/nxdk_low_level_nv2a_tests).
+
+To update the expectations:
+
+1. Check out `nxdk_low_level_nv2a_tests` and build its `vsh_test_xiso` target.
+1. Run `vsh_test` on hardware, paying attention to the final output indicating where the log file is written.
+1. Copy the `vsh_log.json` log from the Xbox and regenerate the tests:
+
+   ```shell
+   utils/generate_vsh_exceptional_cases.py path/to/vsh_log.json
+   ```
+
+1. Commit the regenerated `src/tests/vertex_shader_exceptional_value_tests_generated.cpp`.
+
 ## Resource preparation
 
 ### .mesh files
