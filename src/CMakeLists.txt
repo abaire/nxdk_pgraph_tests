@@ -99,6 +99,52 @@ generate_nv2a_vshinc_files(
         shaders/texcoord_carryover_prime_t0_t3_attr.vsh
         shaders/texcoord_carryover_prime_t0_t3_const.vsh
         shaders/vertex_shader_mac_independence_tests.vsh
+        shaders/vertex_shader_exceptional/arl.vsh
+        shaders/vertex_shader_exceptional/color.vsh
+        shaders/vertex_shader_exceptional/fog_attr_p.vsh
+        shaders/vertex_shader_exceptional/fog_attr_scalars.vsh
+        shaders/vertex_shader_exceptional/fog_const_p.vsh
+        shaders/vertex_shader_exceptional/fog_const_scalars.vsh
+        shaders/vertex_shader_exceptional/ilu_expp.vsh
+        shaders/vertex_shader_exceptional/ilu_lit.vsh
+        shaders/vertex_shader_exceptional/ilu_logp.vsh
+        shaders/vertex_shader_exceptional/ilu_rcc.vsh
+        shaders/vertex_shader_exceptional/ilu_rcp.vsh
+        shaders/vertex_shader_exceptional/ilu_rsq.vsh
+        shaders/vertex_shader_exceptional/mac_add.vsh
+        shaders/vertex_shader_exceptional/mac_dot.vsh
+        shaders/vertex_shader_exceptional/mac_dst.vsh
+        shaders/vertex_shader_exceptional/mac_mad.vsh
+        shaders/vertex_shader_exceptional/mac_max.vsh
+        shaders/vertex_shader_exceptional/mac_min.vsh
+        shaders/vertex_shader_exceptional/mac_mul.vsh
+        shaders/vertex_shader_exceptional/mac_sge.vsh
+        shaders/vertex_shader_exceptional/mac_slt.vsh
+        shaders/vertex_shader_exceptional/mov_c.vsh
+        shaders/vertex_shader_exceptional/mov_c_wzyx.vsh
+        shaders/vertex_shader_exceptional/mov_neg_c.vsh
+        shaders/vertex_shader_exceptional/mov_neg_c_yxwz.vsh
+        shaders/vertex_shader_exceptional/mov_neg_r0.vsh
+        shaders/vertex_shader_exceptional/mov_neg_v1.vsh
+        shaders/vertex_shader_exceptional/mov_r0.vsh
+        shaders/vertex_shader_exceptional/mov_v1.vsh
+        shaders/vertex_shader_exceptional/paths_attr_add.vsh
+        shaders/vertex_shader_exceptional/paths_attr_dot.vsh
+        shaders/vertex_shader_exceptional/paths_attr_mad_ab.vsh
+        shaders/vertex_shader_exceptional/paths_attr_mad_ba.vsh
+        shaders/vertex_shader_exceptional/paths_attr_max.vsh
+        shaders/vertex_shader_exceptional/paths_attr_min.vsh
+        shaders/vertex_shader_exceptional/paths_attr_mul_ab.vsh
+        shaders/vertex_shader_exceptional/paths_attr_mul_ba.vsh
+        shaders/vertex_shader_exceptional/paths_const_add.vsh
+        shaders/vertex_shader_exceptional/paths_const_dot.vsh
+        shaders/vertex_shader_exceptional/paths_const_mad_ab.vsh
+        shaders/vertex_shader_exceptional/paths_const_mad_ba.vsh
+        shaders/vertex_shader_exceptional/paths_const_max.vsh
+        shaders/vertex_shader_exceptional/paths_const_min.vsh
+        shaders/vertex_shader_exceptional/paths_const_mul_ab.vsh
+        shaders/vertex_shader_exceptional/paths_const_mul_ba.vsh
+        shaders/vertex_shader_exceptional/ref.vsh
         shaders/vertex_shader_rounding_add.vsh
         shaders/vertex_shader_rounding_dp4.vsh
         shaders/vertex_shader_rounding_dp4_sum_ab.vsh
@@ -392,6 +438,9 @@ add_executable(
         tests/two_d_line_tests.h
         tests/vertex_shader_independence_tests.cpp
         tests/vertex_shader_independence_tests.h
+        tests/vertex_shader_exceptional_value_tests.cpp
+        tests/vertex_shader_exceptional_value_tests_generated.cpp
+        tests/vertex_shader_exceptional_value_tests.h
         tests/vertex_shader_rounding_tests.cpp
         tests/vertex_shader_rounding_tests.h
         tests/vertex_shader_swizzle_tests.cpp

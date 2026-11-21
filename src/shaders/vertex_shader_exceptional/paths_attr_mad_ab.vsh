@@ -1,0 +1,13 @@
+; MAD(A, B) with A = v1 (vertex attribute), B = c[97], C = c[98] moved into r1.
+mov oPos, v0
+mov r1, c[98]
+mad r10, v1, c[97], r1
+
+; Shared epilogue, described in VertexShaderExceptionalMACTests. Lane i of r11 is 1 when r10.i has the same bits as
+; c[100].i and 0 otherwise. c[102] selects the lane shown, so only these exact 0 or 1 values pass through DP4.
+sge r9, r10, c[100]
+sge r11, c[100], r10
+mul r11, r9, r11
+dp4 r11.x, r11, c[102]
+mov r8, c[104]
+mad oDiffuse, r11.xxxx, c[103], r8
