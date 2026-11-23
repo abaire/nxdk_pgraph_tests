@@ -75,6 +75,8 @@ static constexpr char kRenderScalePatternTest[] = "RenderScalePattern";
 static constexpr char kDownloadByCPUReadTest[] = "DownloadByCPURead";
 static constexpr char kDownloadByTextureReadTest[] = "DownloadByTextureRead";
 static constexpr char kImageBlitOverVertexArrayTest[] = "ImageBlitOverVertexArray";
+static constexpr char kRenderOverConsumedVertexArrayDirectTest[] = "RenderOverConsumedVertexArrayDirect";
+static constexpr char kSameSurfaceTwoStreamsTest[] = "SameSurfaceTwoStreams";
 
 static constexpr uint32_t kSurfaceWidth = 64;
 static constexpr uint32_t kSurfaceHeight = 64;
@@ -177,6 +179,23 @@ static void DrawArrays(TestHost::DrawPrimitive primitive, uint32_t count, uint32
  *  Expect to see two red quads on top and two green quads on the bottom.
  *  On xemu, the blit does not mark the renderer's copy of VRAM as dirty (the same issue as xemu #859, but not
  *  addressed by xemu PR #2800), so the bottom quads are drawn with the stale red vertex colors.
+ *
+ * @tc RenderOverConsumedVertexArrayDirect
+ *  Writes red into the first row of a linear surface with the CPU and draws the top two quads using it as the diffuse
+ *  stream. Green is then rendered over the same memory, the GPU is idled, and the bottom two quads are drawn from the
+ *  same diffuse stream without reading the surface with the CPU or sampling it as a texture.
+ *  Unlike DynamicUpdateLoop, where the memory is a render target before it is ever consumed as a vertex stream, here
+ *  the render target is created over memory that was CPU-written and already consumed as a vertex stream. This is
+ *  also the control for DownloadByCPURead, DownloadByTextureRead, and ImageBlitOverVertexArray, which share its setup
+ *  but add a CPU read, texture sample, or blit before the second draw.
+ *  Expect to see two red quads on top and two green quads on the bottom.
+ *
+ * @tc SameSurfaceTwoStreams
+ *  Renders red into pixels 8..15 and blue into pixels 24..31 of the first row of a linear A8R8G8B8 surface that is
+ *  otherwise black. The diffuse stream is bound at the offset of pixel 8 and the specular stream at the offset of pixel
+ *  24 of the same surface (neither at the surface base address, both within the same page). A register combiner outputs
+ *  the sum of diffuse and specular, and two quads are drawn using 8 vertices.
+ *  Expect to see two magenta quads (red + blue) on a dark background.
  */
 SurfaceAsVertexArrayTests::SurfaceAsVertexArrayTests(TestHost &host, std::string output_dir, const Config &config)
     : TestSuite(host, std::move(output_dir), "Surface as vertex array", config) {
@@ -188,6 +207,8 @@ SurfaceAsVertexArrayTests::SurfaceAsVertexArrayTests(TestHost &host, std::string
   tests_[kDownloadByCPUReadTest] = [this]() { TestDownloadByCPURead(); };
   tests_[kDownloadByTextureReadTest] = [this]() { TestDownloadByTextureRead(); };
   tests_[kImageBlitOverVertexArrayTest] = [this]() { TestImageBlitOverVertexArray(); };
+  tests_[kRenderOverConsumedVertexArrayDirectTest] = [this]() { TestRenderOverConsumedVertexArrayDirect(); };
+  tests_[kSameSurfaceTwoStreamsTest] = [this]() { TestSameSurfaceTwoStreams(); };
 }
 
 void SurfaceAsVertexArrayTests::AllocateTestSurfaces(bool need_surface_b) {
@@ -331,6 +352,47 @@ void SurfaceAsVertexArrayTests::DrawQuads(const void *diffuse_surface) {
   ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
 }
 
+void SurfaceAsVertexArrayTests::DrawDiffusePlusSpecularQuads(const void *diffuse, const void *specular) {
+  auto shader = std::make_shared<PassthroughVertexShader>();
+  host_.SetVertexShaderProgram(shader);
+  host_.PrepareDraw(0xFF202020);
+
+  host_.SetCombinerControl(1);
+  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_DIFFUSE), TestHost::OneInput(),
+                              TestHost::ColorInput(TestHost::SRC_SPECULAR), TestHost::OneInput());
+  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_DIFFUSE), TestHost::OneInput(),
+                              TestHost::AlphaInput(TestHost::SRC_SPECULAR), TestHost::OneInput());
+  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
+  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_R0, true);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
+  Pushbuffer::End();
+
+  auto v = vertex_buffer_->Lock();
+  SetVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
+                     v[16].pos);
+  vertex_buffer_->Unlock();
+
+  SetVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4, 4, diffuse);
+  SetVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4, 4, specular);
+
+  DrawArrays(TestHost::PRIMITIVE_QUADS, 8);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
+  Pushbuffer::End();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
+  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
+
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
+  ClearVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR);
+}
+
 void SurfaceAsVertexArrayTests::TestLinearDiffuseArray() {
   AllocateTestSurfaces(false);
   memset(surface_a_, 0, kSurfaceSize);
@@ -413,44 +475,7 @@ void SurfaceAsVertexArrayTests::TestMultiStream() {
   host_.DrawScreenQuad(4.f, 0.f, 8.f, 1.f, 0.5f);
   host_.RenderToSurfaceEnd();
 
-  auto shader = std::make_shared<PassthroughVertexShader>();
-  host_.SetVertexShaderProgram(shader);
-  host_.PrepareDraw(0xFF202020);
-
-  host_.SetCombinerControl(1);
-  host_.SetInputColorCombiner(0, TestHost::ColorInput(TestHost::SRC_DIFFUSE), TestHost::OneInput(),
-                              TestHost::ColorInput(TestHost::SRC_SPECULAR), TestHost::OneInput());
-  host_.SetOutputColorCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
-  host_.SetInputAlphaCombiner(0, TestHost::AlphaInput(TestHost::SRC_DIFFUSE), TestHost::OneInput(),
-                              TestHost::AlphaInput(TestHost::SRC_SPECULAR), TestHost::OneInput());
-  host_.SetOutputAlphaCombiner(0, TestHost::DST_DISCARD, TestHost::DST_DISCARD, TestHost::DST_R0);
-  host_.SetFinalCombiner0Just(TestHost::SRC_R0);
-  host_.SetFinalCombiner1Just(TestHost::SRC_R0, true);
-
-  Pushbuffer::Begin();
-  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, true);
-  Pushbuffer::End();
-
-  auto v = vertex_buffer_->Lock();
-  SetVertexAttribute(NV2A_VERTEX_ATTR_POSITION, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_F, 4, sizeof(Vertex),
-                     v[16].pos);
-  vertex_buffer_->Unlock();
-
-  SetVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4, 4, surface_a_);
-  SetVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR, NV097_SET_VERTEX_DATA_ARRAY_FORMAT_TYPE_UB_D3D, 4, 4, surface_b_);
-
-  DrawArrays(TestHost::PRIMITIVE_QUADS, 8);
-
-  Pushbuffer::Begin();
-  Pushbuffer::Push(NV097_SET_SPECULAR_ENABLE, false);
-  Pushbuffer::End();
-
-  host_.SetFinalCombiner0Just(TestHost::SRC_DIFFUSE);
-  host_.SetFinalCombiner1Just(TestHost::SRC_DIFFUSE, true);
-
-  ClearVertexAttribute(NV2A_VERTEX_ATTR_POSITION);
-  ClearVertexAttribute(NV2A_VERTEX_ATTR_DIFFUSE);
-  ClearVertexAttribute(NV2A_VERTEX_ATTR_SPECULAR);
+  DrawDiffusePlusSpecularQuads(surface_a_, surface_b_);
 
   pb_print("%s\n", kMultiStreamTest);
   pb_draw_text_screen();
@@ -658,7 +683,6 @@ void SurfaceAsVertexArrayTests::RenderOverConsumedVertexArray() {
 void SurfaceAsVertexArrayTests::TestDownloadByCPURead() {
   RenderOverConsumedVertexArray();
 
-  host_.WaitForGPU();
   host_.PBKitBusyWait();
   uint32_t cpu_read = reinterpret_cast<volatile uint32_t *>(surface_a_)[8];
 
@@ -760,4 +784,42 @@ void SurfaceAsVertexArrayTests::TestImageBlitOverVertexArray() {
   pb_draw_text_screen();
 
   FinishDraw(kImageBlitOverVertexArrayTest);
+}
+
+void SurfaceAsVertexArrayTests::TestRenderOverConsumedVertexArrayDirect() {
+  RenderOverConsumedVertexArray();
+
+  host_.PBKitBusyWait();
+
+  DrawSurfaceDiffuseQuads(8);
+
+  pb_printat(0, 0, "%s", kRenderOverConsumedVertexArrayDirectTest);
+  pb_printat(8, 0, "Bottom row: Green");
+  pb_draw_text_screen();
+
+  FinishDraw(kRenderOverConsumedVertexArrayDirectTest);
+}
+
+void SurfaceAsVertexArrayTests::TestSameSurfaceTwoStreams() {
+  static constexpr uint32_t kDiffuseStartPixel = 8;
+  static constexpr uint32_t kSpecularStartPixel = 24;
+
+  AllocateTestSurfaces(false);
+  memset(surface_a_, 0, kSurfaceSize);
+
+  host_.SetVertexShaderProgram(nullptr);
+  host_.RenderToSurfaceStart(surface_a_, TestHost::SCF_A8R8G8B8, pb_depth_stencil_buffer(), TestHost::SZF_Z24S8,
+                             kSurfaceWidth, kSurfaceHeight, false);
+  host_.SetDiffuse(1.f, 0.f, 0.f, 1.f);
+  host_.DrawScreenQuad(8.f, 0.f, 16.f, 1.f, 0.5f);
+  host_.SetDiffuse(0.f, 0.f, 1.f, 1.f);
+  host_.DrawScreenQuad(24.f, 0.f, 32.f, 1.f, 0.5f);
+  host_.RenderToSurfaceEnd();
+
+  DrawDiffusePlusSpecularQuads(surface_a_ + kDiffuseStartPixel * 4, surface_a_ + kSpecularStartPixel * 4);
+
+  pb_printat(0, 0, "%s", kSameSurfaceTwoStreamsTest);
+  pb_draw_text_screen();
+
+  FinishDraw(kSameSurfaceTwoStreamsTest);
 }

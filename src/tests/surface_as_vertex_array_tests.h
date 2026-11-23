@@ -39,6 +39,9 @@ class SurfaceAsVertexArrayTests : public TestSuite {
   //! Draws two quads using surface_a_ as the diffuse stream, starting at the given vertex index.
   void DrawSurfaceDiffuseQuads(uint32_t start_index);
 
+  //! Draws the two wide quads with the given memory bound as the diffuse and specular streams, outputting their sum.
+  void DrawDiffusePlusSpecularQuads(const void *diffuse, const void *specular);
+
   //! Draws the top quads from a CPU-written red diffuse stream, then renders green over the same memory.
   void RenderOverConsumedVertexArray();
 
@@ -69,6 +72,13 @@ class SurfaceAsVertexArrayTests : public TestSuite {
 
   //! Image blits over memory previously consumed as a vertex stream, then draws from it again.
   void TestImageBlitOverVertexArray();
+
+  //! Draws from CPU-written memory previously consumed as a vertex stream after rendering over it, with no CPU read,
+  //! texture sample, or blit in between.
+  void TestRenderOverConsumedVertexArrayDirect();
+
+  //! Binds two offsets within the same render target as the diffuse and specular streams of a single draw.
+  void TestSameSurfaceTwoStreams();
 
  private:
   uint8_t *surface_a_{nullptr};
