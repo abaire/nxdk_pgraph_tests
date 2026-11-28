@@ -7,6 +7,7 @@
 #include "debug_output.h"
 #include "pbkit_ext.h"
 #include "test_host.h"
+#include "texture_format.h"
 
 #define SET_MASK(mask, val) (((val) << (__builtin_ffs(mask) - 1)) & (mask))
 
@@ -24,17 +25,78 @@ static constexpr char kDepthIntoColorTestName[] = "ZetaIntoColor";
 static constexpr char kSwapTestName[] = "Swap";
 static constexpr char kXemuAdjacentWithClipOffsetTest[] = "AdjacentWithClipOffset";
 static constexpr char kXemuAdjacentWithAATest[] = "AdjacentWithAA";
+static constexpr char kZetaOntoColorRebindTestName[] = "ZetaOntoColorRebind";
+static constexpr char kColorOntoZetaRebindTestName[] = "ColorOntoZetaRebind";
 
 static constexpr float kLeft = -2.75f;
 static constexpr float kRight = 2.75f;
 static constexpr float kTop = 1.75f;
 static constexpr float kBottom = -1.75f;
 
+/**
+ * Initializes the test suite and creates test cases.
+ *
+ * @tc ColorIntoZeta
+ *   Clears the framebuffer color to 0xFE242424 and zeta to 0, then sets the color context DMA to the zeta DMA object so
+ *   that both targets share the zeta buffer. A quad with diffuse 0x00BFFF00 at Z=0 is drawn with depth test ALWAYS and
+ *   depth writes enabled. The color DMA is restored and the color buffer is cleared again, so the color capture shows
+ *   only the label text on the dark gray background. The result is non-deterministic: within the quad, the zeta capture
+ *   mostly holds the drawn color (labeled ZB~=0x00BFFF00), with a speckled stair-stepped band of other values that
+ *   varies between runs. The zeta buffer outside the quad remains 0.
+ *
+ * @tc ZetaIntoColor
+ *   Clears the framebuffer color to 0xFE242424 and zeta to 0, then sets the zeta context DMA to the color DMA object so
+ *   that both targets share the color buffer. A large quad with diffuse 0xFFFF00FF at Z=192 is drawn with depth test
+ *   ALWAYS and depth writes enabled. The result is non-deterministic: the quad area is mostly light magenta (labeled
+ *   C~=0xFF2454FE) with speckled and striped regions of the pure magenta diffuse color that vary between runs. The zeta
+ *   capture is entirely 0.
+ *
+ * @tc Swap
+ *   Clears the framebuffer color to 0xFE242424 and zeta to 0, then swaps the color and zeta context DMA objects and
+ *   draws a large quad with diffuse 0x00A8BF00 at Z=180 with depth test ALWAYS and depth writes enabled. Both DMA
+ *   objects are then restored. The color capture shows a solid red quad (labeled C=0xFF2416E9) and the zeta capture
+ *   holds the drawn color (labeled ZB=0x00A8BF00) within the quad and 0 elsewhere.
+ *
+ * @tc AdjacentWithClipOffset_l
+ *   Points a 128x128 linear A8R8G8B8 color surface at texture memory, with the Z24S8 zeta surface placed immediately
+ *   after the end of the color surface. The surfaces are cleared, the surface clip is set to (1, 1) with a size of
+ *   126x126, and a quad with diffuse 0x00A8BF00 is drawn into them with depth writes enabled. The surfaces are then
+ *   restored to the framebuffer. Nothing is drawn to the framebuffer, so the capture shows only the label text on a
+ *   dark gray background.
+ *
+ * @tc AdjacentWithClipOffset_sz
+ *   Identical to AdjacentWithClipOffset_l, except that the surfaces are swizzled when the clip offset is applied.
+ *   The capture shows only the label text on a dark gray background.
+ *
+ * @tc AdjacentWithAA
+ *   Points a 64x64 A8R8G8B8 color surface at texture memory with 4x square-offset antialiasing enabled, with the Z24S8
+ *   zeta surface placed immediately after the end of the color surface (based on the non-antialiased size). A quad with
+ *   diffuse 0x00A8BF00 is drawn into them with depth writes enabled and the surfaces are then restored to the
+ *   framebuffer. Nothing is drawn to the framebuffer, so the capture shows only the label text on a dark gray
+ *   background.
+ *
+ * @tc ZetaOntoColorRebind
+ *   Uses a 128x128 A8R8G8B8 color surface (C) and a Z24S8 zeta surface (Z), both linear and located in texture memory.
+ *   C is filled with a red backdrop at far depth, then the left half of Z is set to near depth with color writes
+ *   disabled. The color target is moved to Z's address while the zeta target is moved to an unused address, then the
+ *   zeta target is moved back to Z's address so that both targets share it. Each of these steps issues a zero-area
+ *   draw with color writes, depth test and depth writes enabled, so the surface bindings are evaluated without any
+ *   pixels being written. The color target is then moved back to C without modifying the zeta target and a green quad
+ *   covering the whole surface is drawn at a depth between near and far with depth func LESS. C is rendered to the
+ *   framebuffer at 2x scale. The left (near) half shows the red backdrop and the right (far) half is green.
+ *
+ * @tc ColorOntoZetaRebind
+ *   Identical to ZetaOntoColorRebind, except that the zeta target remains at Z's address throughout and the color
+ *   target is moved onto Z's address directly (a single zero-area draw is issued while both targets share it). The
+ *   left (near) half shows the red backdrop and the right (far) half is green.
+ */
 ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Color zeta overlap", config) {
   tests_[kColorIntoDepthTestName] = [this]() { TestColorIntoDepth(); };
   tests_[kDepthIntoColorTestName] = [this]() { TestDepthIntoColor(); };
   tests_[kSwapTestName] = [this]() { TestSwap(); };
+  tests_[kZetaOntoColorRebindTestName] = [this]() { TestZetaRebindAfterColorMove(false); };
+  tests_[kColorOntoZetaRebindTestName] = [this]() { TestZetaRebindAfterColorMove(true); };
 
   for (auto swizzle : {false, true}) {
     std::string suffix = swizzle ? "_sz" : "_l";
@@ -53,10 +115,11 @@ void ColorZetaOverlapTests::Initialize() {
   host_.SetSurfaceFormat(TestHost::SCF_A8R8G8B8, TestHost::SZF_Z24S8, host_.GetFramebufferWidth(),
                          host_.GetFramebufferHeight());
 
+  host_.SetBlend(false);
+
   // Depth test must be enabled or nothing will be written to the depth target.
   {
     Pushbuffer::Begin();
-    Pushbuffer::Push(NV097_SET_BLEND_ENABLE, false);
     Pushbuffer::Push(NV097_SET_ALPHA_TEST_ENABLE, false);
 
     Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
@@ -168,6 +231,117 @@ void ColorZetaOverlapTests::TestSwap() {
   pb_draw_text_screen();
 
   FinishDraw(kSwapTestName, true);
+}
+
+void ColorZetaOverlapTests::TestZetaRebindAfterColorMove(bool color_onto_zeta) {
+  static constexpr uint32_t kSurfaceSize = 128;
+  static constexpr float kSurfaceSizeF = static_cast<float>(kSurfaceSize);
+  static constexpr float kDisplaySize = kSurfaceSizeF * 2.f;
+  static constexpr uint32_t kBackdropColor = 0xFF3333AA;
+  static constexpr uint32_t kTestColor = 0xFF33FF33;
+  static constexpr float kNearZ = -1.f;
+  static constexpr float kMidZ = 0.f;
+  static constexpr float kFarZ = 1.f;
+  static constexpr uint32_t kAllColorChannels =
+      NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE | NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
+      NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE | NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE;
+
+  host_.PrepareDraw(0xFE242424);
+
+  uint8_t* color_surface = host_.GetTextureMemoryForStage(0);
+  uint8_t* zeta_surface = host_.GetTextureMemoryForStage(1);
+  uint8_t* unused_surface = host_.GetTextureMemoryForStage(2);
+
+  host_.RenderToSurfaceStart(color_surface, TestHost::SCF_A8R8G8B8, zeta_surface, TestHost::SZF_Z24S8, kSurfaceSize,
+                             kSurfaceSize);
+  host_.SetBlend(false);
+  host_.SetDepthClip(0.f, 16777216.f);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::End();
+
+  host_.SetDiffuse(kBackdropColor);
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF, kSurfaceSizeF, kFarZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, 0);
+  Pushbuffer::End();
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF * 0.5f, kSurfaceSizeF, kNearZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, kAllColorChannels);
+  Pushbuffer::End();
+
+  auto draw_zero_area = [this]() { host_.DrawScreenQuad(0.f, 0.f, 0.f, 0.f, kMidZ); };
+
+  if (color_onto_zeta) {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(zeta_surface));
+    Pushbuffer::End();
+    draw_zero_area();
+  } else {
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(zeta_surface));
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(unused_surface));
+    Pushbuffer::End();
+    draw_zero_area();
+
+    Pushbuffer::Begin();
+    Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(zeta_surface));
+    Pushbuffer::End();
+    draw_zero_area();
+  }
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_COLOR_OFFSET, VRAM_ADDR(color_surface));
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+  Pushbuffer::End();
+
+  host_.SetDiffuse(kTestColor);
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF, kSurfaceSizeF, kMidZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::End();
+
+  host_.RenderToSurfaceEnd();
+
+  host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
+  host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
+  host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
+
+  auto& texture_stage = host_.GetTextureStage(0);
+  texture_stage.SetEnabled();
+  texture_stage.SetFormat(GetTextureFormatInfo(TextureFormatForSurfaceFormat(TestHost::SCF_A8R8G8B8, true)));
+  texture_stage.SetImageDimensions(kSurfaceSize, kSurfaceSize);
+  host_.SetupTextureStages();
+
+  const float left = host_.CenterX(kDisplaySize);
+  const float top = host_.CenterY(kDisplaySize);
+  host_.DrawTexturedScreenQuad(left, top, left + kDisplaySize, top + kDisplaySize, 0.f, kSurfaceSize, kSurfaceSize);
+
+  texture_stage.SetEnabled(false);
+  host_.SetupTextureStages();
+  host_.SetShaderStageProgram(TestHost::STAGE_NONE);
+
+  host_.SetFinalCombiner0(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false,
+                          false, TestHost::SRC_R0);
+  host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
+                          false, false, false, true);
+
+  const char* test_name = color_onto_zeta ? kColorOntoZetaRebindTestName : kZetaOntoColorRebindTestName;
+  pb_printat(0, 0, "%s", test_name);
+  pb_printat(1, 0, "Zeta: left near, right far");
+  pb_printat(2, 0, "Green drawn at mid depth with LESS");
+  pb_printat(15, 18, "Near");
+  pb_printat(15, 38, "Far");
+  pb_draw_text_screen();
+
+  FinishDraw(test_name);
 }
 
 void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset(bool swizzle) {

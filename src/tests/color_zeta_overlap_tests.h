@@ -23,6 +23,7 @@ class ColorZetaOverlapTests : public TestSuite {
   void TestColorIntoDepth();
   void TestDepthIntoColor();
   void TestSwap();
+  void TestZetaRebindAfterColorMove(bool color_onto_zeta);
 
   // Tests the behavior identified in xemu #405
   void TestXemuAdjacentSurfaceWithClipOffset(bool swizzle);
