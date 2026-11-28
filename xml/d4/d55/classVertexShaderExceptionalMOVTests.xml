@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d4/d55/classVertexShaderExceptionalMOVTests" kind="class" language="C++" prot="public">
+    <compoundname>VertexShaderExceptionalMOVTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="d4/d55/classVertexShaderExceptionalMOVTests_1ae801ebf22ea0957ca019d8b9c09226c1" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderExceptionalMOVTests::kSuiteName</definition>
+        <argsstring></argsstring>
+        <name>kSuiteName</name>
+        <qualifiedname>VertexShaderExceptionalMOVTests::kSuiteName</qualifiedname>
+        <initializer>= &quot;Vertex shader exceptional MOV&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="118" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d4/d55/classVertexShaderExceptionalMOVTests_1a0c8ca3c7826d250de37751edfdb86b7f" prot="private" static="no" mutable="no">
+        <type><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref></type>
+        <definition>VshExceptionalValueRenderer VertexShaderExceptionalMOVTests::renderer_</definition>
+        <argsstring></argsstring>
+        <name>renderer_</name>
+        <qualifiedname>VertexShaderExceptionalMOVTests::renderer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="119" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="119" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d4/d55/classVertexShaderExceptionalMOVTests_1ae28c5f8dc3d7cc3dd802dacf1a33d0a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexShaderExceptionalMOVTests::VertexShaderExceptionalMOVTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>VertexShaderExceptionalMOVTests</name>
+        <qualifiedname>VertexShaderExceptionalMOVTests::VertexShaderExceptionalMOVTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders MOV results, with negation and swizzles, from constants, temporaries and the v1 attribute. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>.</para>
+<para><simplesect kind="remark"><para>MOV_c_1 MOV c (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw NaN NaNs.y: hw qNaN NaNs.z: hw -qNaN NaNs.w: hw sNaN zeros and infs.x: hw 0 zeros and infs.y: hw -0 zeros and infs.z: hw inf zeros and infs.w: hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_c_2 MOV c (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw MAX range edges.y: hw 2^-126 range edges.z: hw den range edges.w: hw -den mixed.x: hw 1.5 mixed.y: hw -1.5 mixed.z: hw NaN1 mixed.w: hw -NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_c_1 MOV -c (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw -NaN NaNs.y: hw -qNaN NaNs.z: hw qNaN NaNs.w: hw -NaN? zeros and infs.x: hw -0 zeros and infs.y: hw 0 zeros and infs.z: hw -inf zeros and infs.w: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_c_2 MOV -c (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw -MAX range edges.y: hw -2^-126 range edges.z: hw -den range edges.w: hw den mixed.x: hw -1.5 mixed.y: hw 1.5 mixed.z: hw -NaN? mixed.w: hw NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_c_wzyx_1 MOV c.wzyx (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw sNaN NaNs.y: hw -qNaN NaNs.z: hw qNaN NaNs.w: hw NaN zeros and infs.x: hw -inf zeros and infs.y: hw inf zeros and infs.z: hw -0 zeros and infs.w: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_c_wzyx_2 MOV c.wzyx (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw -den range edges.y: hw den range edges.z: hw 2^-126 range edges.w: hw MAX mixed.x: hw -NaN mixed.y: hw NaN1 mixed.z: hw -1.5 mixed.w: hw 1.5</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_c_yxwz_1 MOV -c.yxwz (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw -qNaN NaNs.y: hw -NaN NaNs.z: hw -NaN? NaNs.w: hw qNaN zeros and infs.x: hw 0 zeros and infs.y: hw -0 zeros and infs.z: hw inf zeros and infs.w: hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_c_yxwz_2 MOV -c.yxwz (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw -2^-126 range edges.y: hw -MAX range edges.z: hw den range edges.w: hw -den mixed.x: hw 1.5 mixed.y: hw -1.5 mixed.z: hw NaN mixed.w: hw -NaN?</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_r0_1 MOV r0 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw NaN NaNs.y: hw qNaN NaNs.z: hw -qNaN NaNs.w: hw sNaN zeros and infs.x: hw 0 zeros and infs.y: hw -0 zeros and infs.z: hw inf zeros and infs.w: hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_r0_2 MOV r0 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw MAX range edges.y: hw 2^-126 range edges.z: hw den range edges.w: hw -den mixed.x: hw 1.5 mixed.y: hw -1.5 mixed.z: hw NaN1 mixed.w: hw -NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_r0_1 MOV -r0 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw -NaN NaNs.y: hw -qNaN NaNs.z: hw qNaN NaNs.w: hw -NaN? zeros and infs.x: hw -0 zeros and infs.y: hw 0 zeros and infs.z: hw -inf zeros and infs.w: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_r0_2 MOV -r0 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw -MAX range edges.y: hw -2^-126 range edges.z: hw -den range edges.w: hw den mixed.x: hw -1.5 mixed.y: hw 1.5 mixed.z: hw -NaN? mixed.w: hw NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_v1_1 MOV v1 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw NaN NaNs.y: hw qNaN NaNs.z: hw -qNaN NaNs.w: hw sNaN zeros and infs.x: hw 0 zeros and infs.y: hw -0 zeros and infs.z: hw inf zeros and infs.w: hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_v1_2 MOV v1 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw MAX range edges.y: hw 2^-126 range edges.z: hw den range edges.w: hw -den mixed.x: hw 1.5 mixed.y: hw -1.5 mixed.z: hw NaN1 mixed.w: hw -NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_v1_1 MOV -v1 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaNs.x: hw -NaN NaNs.y: hw -qNaN NaNs.z: hw qNaN NaNs.w: hw -NaN? zeros and infs.x: hw -0 zeros and infs.y: hw 0 zeros and infs.z: hw -inf zeros and infs.w: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MOV_neg_v1_2 MOV -v1 (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): range edges.x: hw -MAX range edges.y: hw -2^-126 range edges.z: hw -den range edges.w: hw den mixed.x: hw -1.5 mixed.y: hw 1.5 mixed.z: hw -NaN? mixed.w: hw NaN </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="113" column="3" bodyfile="src/tests/vertex_shader_exceptional_value_tests_generated.cpp" bodystart="2304" bodyend="2313"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/d55/classVertexShaderExceptionalMOVTests_1a047df63f78453f495b578273a529bb94" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void VertexShaderExceptionalMOVTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>VertexShaderExceptionalMOVTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="115" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="250" bodyend="253"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Renders MOV results, with negation and swizzles, from a constant, a temporary and the v1 attribute on exceptional inputs. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalMOVTests</label>
+        <link refid="d4/d55/classVertexShaderExceptionalMOVTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalMOVTests</label>
+        <link refid="d4/d55/classVertexShaderExceptionalMOVTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="111" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="111" bodyend="120"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>host_</name></member>
+      <member refid="d4/d55/classVertexShaderExceptionalMOVTests_1a047df63f78453f495b578273a529bb94" prot="public" virt="virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d4/d55/classVertexShaderExceptionalMOVTests_1ae801ebf22ea0957ca019d8b9c09226c1" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>kSuiteName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d4/d55/classVertexShaderExceptionalMOVTests_1a0c8ca3c7826d250de37751edfdb86b7f" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>renderer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>TearDownTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>TestSuite</name></member>
+      <member refid="d4/d55/classVertexShaderExceptionalMOVTests_1ae28c5f8dc3d7cc3dd802dacf1a33d0a3" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>VertexShaderExceptionalMOVTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>VertexShaderExceptionalMOVTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

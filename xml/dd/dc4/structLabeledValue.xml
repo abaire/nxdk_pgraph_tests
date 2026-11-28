@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="dd/dc4/structLabeledValue" kind="struct" language="C++" prot="public">
+    <compoundname>LabeledValue</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="dd/dc4/structLabeledValue_1a78cc5a1337c6d4682ef03223c5475b70" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float LabeledValue::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>LabeledValue::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.cpp" line="34" column="9" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/dc4/structLabeledValue_1aa38707688f493d85408dc9571ed9e92b" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* LabeledValue::label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <qualifiedname>LabeledValue::label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.cpp" line="35" column="14" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="dd/dc4/structLabeledValue_1ad99a8abb7c12f11c6ce620f4f5ca4ddd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool LabeledValue::zero_xyz</definition>
+        <argsstring></argsstring>
+        <name>zero_xyz</name>
+        <qualifiedname>LabeledValue::zero_xyz</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>MV_ZERO_W only: also zero the xyz columns so eye xyz = 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_eye_space_w_tests.cpp" line="37" column="8" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/fog_eye_space_w_tests.cpp" line="33" column="1" bodyfile="src/tests/fog_eye_space_w_tests.cpp" bodystart="33" bodyend="38"/>
+    <listofallmembers>
+      <member refid="dd/dc4/structLabeledValue_1aa38707688f493d85408dc9571ed9e92b" prot="public" virt="non-virtual"><scope>LabeledValue</scope><name>label</name></member>
+      <member refid="dd/dc4/structLabeledValue_1a78cc5a1337c6d4682ef03223c5475b70" prot="public" virt="non-virtual"><scope>LabeledValue</scope><name>value</name></member>
+      <member refid="dd/dc4/structLabeledValue_1ad99a8abb7c12f11c6ce620f4f5ca4ddd" prot="public" virt="non-virtual"><scope>LabeledValue</scope><name>zero_xyz</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

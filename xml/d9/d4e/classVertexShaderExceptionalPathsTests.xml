@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d9/d4e/classVertexShaderExceptionalPathsTests" kind="class" language="C++" prot="public">
+    <compoundname>VertexShaderExceptionalPathsTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="d9/d4e/classVertexShaderExceptionalPathsTests_1a185add2accc2ad25ccbc7040706dd26b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderExceptionalPathsTests::kSuiteName</definition>
+        <argsstring></argsstring>
+        <name>kSuiteName</name>
+        <qualifiedname>VertexShaderExceptionalPathsTests::kSuiteName</qualifiedname>
+        <initializer>= &quot;Vertex shader exceptional paths&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="149" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d9/d4e/classVertexShaderExceptionalPathsTests_1a370c8cda595e1f0d1acf4acb8523b5b5" prot="private" static="no" mutable="no">
+        <type><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref></type>
+        <definition>VshExceptionalValueRenderer VertexShaderExceptionalPathsTests::renderer_</definition>
+        <argsstring></argsstring>
+        <name>renderer_</name>
+        <qualifiedname>VertexShaderExceptionalPathsTests::renderer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="150" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d9/d4e/classVertexShaderExceptionalPathsTests_1aacb3c945473c54ebed390d5f5efab4b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexShaderExceptionalPathsTests::VertexShaderExceptionalPathsTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>VertexShaderExceptionalPathsTests</name>
+        <qualifiedname>VertexShaderExceptionalPathsTests::VertexShaderExceptionalPathsTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders MAC results with A from the v1 attribute (Attr_) or a constant (Const_), and the fog distance chain rcp(w), P * rcp(w), d2 = DP3, rsq(d2), d2 * rsq(d2) with P from v1 or a constant. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>.</para>
+<para><simplesect kind="remark"><para>Const_MUL_AB const MUL_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0*inf.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 -0*inf.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 0*qNaN.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 den*inf.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 inf*0.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 -inf*-0.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 qNaN*0.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 1.5*0.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 1.5*2.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3 2*0.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1 -1.5*2.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -3 3*1.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_MUL_BA const MUL_BA (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): inf*0.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 inf*-0.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 qNaN*0.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 inf*den.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 0*inf.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 -0*-inf.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 0*qNaN.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 0*1.5.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 2*1.5.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3 0.5*2.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1 2*-1.5.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -3 1*3.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_MAD_AB const MAD_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0*inf+1.5.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 -0*inf+1.5.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 0*qNaN+1.5.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 den*inf+1.5.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 inf*0+1.5.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 -inf*-0+1.5.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 qNaN*0+1.5.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 1.5*0+1.5.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 1.5*2+1.5.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5 2*0.5+1.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2.5 -1.5*2+1.5.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -1.5 3*1+1.5.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_MAD_BA const MAD_BA (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): inf*0+1.5.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 inf*-0+1.5.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 qNaN*0+1.5.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 inf*den+1.5.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 0*inf+1.5.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 -0*-inf+1.5.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 0*qNaN+1.5.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 0*1.5+1.5.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 2*1.5+1.5.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5 0.5*2+1.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2.5 2*-1.5+1.5.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -1.5 1*3+1.5.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_Dot const Dot (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): DP4 case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 DP4 case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 DP4 case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4 DP3 case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 DP3 case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 DP3 case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1 DPH case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf DPH case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 DPH case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 DPHba case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 DPHba case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 DPHba case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_ADD_AB const ADD_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0+inf.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf -0+inf.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf 0+qNaN.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw NaN den+inf.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf inf+0.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw inf -inf+-0.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw -inf qNaN+0.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw NaN 1.5+0.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 1.5+2.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3.5 2+0.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2.5 -1.5+2.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 0.5 3+1.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_MIN_AB const MIN_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MIN(0,inf).x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 MIN(-0,inf).y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw -0 MIN(0,qNaN).z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 MIN(den,inf).w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw den MIN(inf,0).x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 MIN(-inf,-0).y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw -inf MIN(qNaN,0).z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 MIN(1.5,0).w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 MIN(1.5,2).x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1.5 MIN(2,0.5).y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 0.5 MIN(-1.5,2).z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -1.5 MIN(3,1).w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_MAX_AB const MAX_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MAX(0,inf).x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf MAX(-0,inf).y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf MAX(0,qNaN).z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw qNaN MAX(den,inf).w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf MAX(inf,0).x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw inf MAX(-inf,-0).y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw -0 MAX(qNaN,0).z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw qNaN MAX(1.5,0).w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 MAX(1.5,2).x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 MAX(2,0.5).y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 MAX(-1.5,2).z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 MAX(3,1).w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_MUL_AB attr MUL_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0*inf.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 -0*inf.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 0*qNaN.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 den*inf.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 inf*0.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 -inf*-0.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 qNaN*0.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 1.5*0.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 1.5*2.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3 2*0.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1 -1.5*2.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -3 3*1.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_MUL_BA attr MUL_BA (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): inf*0.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 inf*-0.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 qNaN*0.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 inf*den.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 0*inf.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 -0*-inf.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 0*qNaN.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 0*1.5.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 2*1.5.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3 0.5*2.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1 2*-1.5.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -3 1*3.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_MAD_AB attr MAD_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0*inf+1.5.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 -0*inf+1.5.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 0*qNaN+1.5.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 den*inf+1.5.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 inf*0+1.5.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 -inf*-0+1.5.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 qNaN*0+1.5.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 1.5*0+1.5.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 1.5*2+1.5.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5 2*0.5+1.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2.5 -1.5*2+1.5.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -1.5 3*1+1.5.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_MAD_BA attr MAD_BA (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): inf*0+1.5.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 inf*-0+1.5.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 qNaN*0+1.5.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 inf*den+1.5.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 1.5 0*inf+1.5.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 -0*-inf+1.5.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 0*qNaN+1.5.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 0*1.5+1.5.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 2*1.5+1.5.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5 0.5*2+1.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2.5 2*-1.5+1.5.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -1.5 1*3+1.5.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4.5</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_Dot attr Dot (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): DP4 case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 DP4 case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 DP4 case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4 DP3 case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 DP3 case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 DP3 case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1 DPH case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf DPH case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 DPH case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 DPHba case1 [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 DPHba case2 [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 DPHba case3 [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_ADD_AB attr ADD_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0+inf.x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf -0+inf.y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf 0+qNaN.z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw NaN den+inf.w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf inf+0.x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw inf -inf+-0.y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw -inf qNaN+0.z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw NaN 1.5+0.w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 1.5+2.x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3.5 2+0.5.y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2.5 -1.5+2.z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 0.5 3+1.w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 4</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_MIN_AB attr MIN_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MIN(0,inf).x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 MIN(-0,inf).y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw -0 MIN(0,qNaN).z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw 0 MIN(den,inf).w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw den MIN(inf,0).x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 MIN(-inf,-0).y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw -inf MIN(qNaN,0).z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 MIN(1.5,0).w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 0 MIN(1.5,2).x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1.5 MIN(2,0.5).y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 0.5 MIN(-1.5,2).z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw -1.5 MIN(3,1).w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_MAX_AB attr MAX_AB (12 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MAX(0,inf).x [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf MAX(-0,inf).y [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf MAX(0,qNaN).z [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw qNaN MAX(den,inf).w [(0, -0, 0, denormal) . (+inf, +inf, 0x7FC00000, +inf)]: hw inf MAX(inf,0).x [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw inf MAX(-inf,-0).y [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw -0 MAX(qNaN,0).z [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw qNaN MAX(1.5,0).w [(+inf, -inf, 0x7FC00000, 1.5) . (0, -0, 0, 0)]: hw 1.5 MAX(1.5,2).x [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 MAX(2,0.5).y [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 MAX(-1.5,2).z [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 2 MAX(3,1).w [(1.5, 2, -1.5, 3) . (2, 0.5, 2, 1)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_Fog_Scalars_1 fog chain const Scalars. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): rcp 1,2,3,1 [P = (1, 2, 3, 1)]: hw 1 rcp 1,2,3,0 [P = (1, 2, 3, +0)]: hw inf rcp 1,2,3,-0 [P = (1, 2, 3, -0)]: hw -inf rcp -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw inf rcp 0,0,3,0 [P = (0, 0, 3, +0)]: hw inf rcp 0,0,0,0 [P = (0, 0, 0, +0)]: hw inf rcp -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw -inf d2 1,2,3,1 [P = (1, 2, 3, 1)]: hw 14 d2 1,2,3,0 [P = (1, 2, 3, +0)]: hw inf d2 1,2,3,-0 [P = (1, 2, 3, -0)]: hw inf d2 -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw inf d2 0,0,3,0 [P = (0, 0, 3, +0)]: hw inf d2 0,0,0,0 [P = (0, 0, 0, +0)]: hw 0 d2 -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_Fog_Scalars_2 fog chain const Scalars. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): rsq 1,2,3,1 [P = (1, 2, 3, 1)]: hw 0x3E88D676 rsq 1,2,3,0 [P = (1, 2, 3, +0)]: hw 0 rsq 1,2,3,-0 [P = (1, 2, 3, -0)]: hw 0 rsq -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw 0 rsq 0,0,3,0 [P = (0, 0, 3, +0)]: hw 0 rsq 0,0,0,0 [P = (0, 0, 0, +0)]: hw inf rsq -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw inf d 1,2,3,1 [P = (1, 2, 3, 1)]: hw 0x406F774E d 1,2,3,0 [P = (1, 2, 3, +0)]: hw 0 d 1,2,3,-0 [P = (1, 2, 3, -0)]: hw 0 d -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw 0 d 0,0,3,0 [P = (0, 0, 3, +0)]: hw 0 d 0,0,0,0 [P = (0, 0, 0, +0)]: hw 0 d -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_Fog_P_1 fog chain const P. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): p 1,2,3,1.x [P = (1, 2, 3, 1)]: hw 1 p 1,2,3,1.y [P = (1, 2, 3, 1)]: hw 2 p 1,2,3,1.z [P = (1, 2, 3, 1)]: hw 3 p 1,2,3,1.w [P = (1, 2, 3, 1)]: hw 1 p 1,2,3,0.x [P = (1, 2, 3, +0)]: hw inf p 1,2,3,0.y [P = (1, 2, 3, +0)]: hw inf p 1,2,3,0.z [P = (1, 2, 3, +0)]: hw inf p 1,2,3,0.w [P = (1, 2, 3, +0)]: hw 0 p 1,2,3,-0.x [P = (1, 2, 3, -0)]: hw -inf p 1,2,3,-0.y [P = (1, 2, 3, -0)]: hw -inf p 1,2,3,-0.z [P = (1, 2, 3, -0)]: hw -inf p 1,2,3,-0.w [P = (1, 2, 3, -0)]: hw 0 p -1,2,-3,0.x [P = (-1, 2, -3, +0)]: hw -inf p -1,2,-3,0.y [P = (-1, 2, -3, +0)]: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>Const_Fog_P_2 fog chain const P. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): p -1,2,-3,0.z [P = (-1, 2, -3, +0)]: hw -inf p -1,2,-3,0.w [P = (-1, 2, -3, +0)]: hw 0 p 0,0,3,0.x [P = (0, 0, 3, +0)]: hw 0 p 0,0,3,0.y [P = (0, 0, 3, +0)]: hw 0 p 0,0,3,0.z [P = (0, 0, 3, +0)]: hw inf p 0,0,3,0.w [P = (0, 0, 3, +0)]: hw 0 p 0,0,0,0.x [P = (0, 0, 0, +0)]: hw 0 p 0,0,0,0.y [P = (0, 0, 0, +0)]: hw 0 p 0,0,0,0.z [P = (0, 0, 0, +0)]: hw 0 p 0,0,0,0.w [P = (0, 0, 0, +0)]: hw 0 p -0,-0,-0,-0.x [P = (-0, -0, -0, -0)]: hw 0 p -0,-0,-0,-0.y [P = (-0, -0, -0, -0)]: hw 0 p -0,-0,-0,-0.z [P = (-0, -0, -0, -0)]: hw 0 p -0,-0,-0,-0.w [P = (-0, -0, -0, -0)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_Fog_Scalars_1 fog chain attr Scalars. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): rcp 1,2,3,1 [P = (1, 2, 3, 1)]: hw 1 rcp 1,2,3,0 [P = (1, 2, 3, +0)]: hw inf rcp 1,2,3,-0 [P = (1, 2, 3, -0)]: hw -inf rcp -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw inf rcp 0,0,3,0 [P = (0, 0, 3, +0)]: hw inf rcp 0,0,0,0 [P = (0, 0, 0, +0)]: hw inf rcp -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw -inf d2 1,2,3,1 [P = (1, 2, 3, 1)]: hw 14 d2 1,2,3,0 [P = (1, 2, 3, +0)]: hw inf d2 1,2,3,-0 [P = (1, 2, 3, -0)]: hw inf d2 -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw inf d2 0,0,3,0 [P = (0, 0, 3, +0)]: hw inf d2 0,0,0,0 [P = (0, 0, 0, +0)]: hw 0 d2 -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_Fog_Scalars_2 fog chain attr Scalars. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): rsq 1,2,3,1 [P = (1, 2, 3, 1)]: hw 0x3E88D676 rsq 1,2,3,0 [P = (1, 2, 3, +0)]: hw 0 rsq 1,2,3,-0 [P = (1, 2, 3, -0)]: hw 0 rsq -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw 0 rsq 0,0,3,0 [P = (0, 0, 3, +0)]: hw 0 rsq 0,0,0,0 [P = (0, 0, 0, +0)]: hw inf rsq -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw inf d 1,2,3,1 [P = (1, 2, 3, 1)]: hw 0x406F774E d 1,2,3,0 [P = (1, 2, 3, +0)]: hw 0 d 1,2,3,-0 [P = (1, 2, 3, -0)]: hw 0 d -1,2,-3,0 [P = (-1, 2, -3, +0)]: hw 0 d 0,0,3,0 [P = (0, 0, 3, +0)]: hw 0 d 0,0,0,0 [P = (0, 0, 0, +0)]: hw 0 d -0,-0,-0,-0 [P = (-0, -0, -0, -0)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_Fog_P_1 fog chain attr P. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): p 1,2,3,1.x [P = (1, 2, 3, 1)]: hw 1 p 1,2,3,1.y [P = (1, 2, 3, 1)]: hw 2 p 1,2,3,1.z [P = (1, 2, 3, 1)]: hw 3 p 1,2,3,1.w [P = (1, 2, 3, 1)]: hw 1 p 1,2,3,0.x [P = (1, 2, 3, +0)]: hw inf p 1,2,3,0.y [P = (1, 2, 3, +0)]: hw inf p 1,2,3,0.z [P = (1, 2, 3, +0)]: hw inf p 1,2,3,0.w [P = (1, 2, 3, +0)]: hw 0 p 1,2,3,-0.x [P = (1, 2, 3, -0)]: hw -inf p 1,2,3,-0.y [P = (1, 2, 3, -0)]: hw -inf p 1,2,3,-0.z [P = (1, 2, 3, -0)]: hw -inf p 1,2,3,-0.w [P = (1, 2, 3, -0)]: hw 0 p -1,2,-3,0.x [P = (-1, 2, -3, +0)]: hw -inf p -1,2,-3,0.y [P = (-1, 2, -3, +0)]: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>Attr_Fog_P_2 fog chain attr P. On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): p -1,2,-3,0.z [P = (-1, 2, -3, +0)]: hw -inf p -1,2,-3,0.w [P = (-1, 2, -3, +0)]: hw 0 p 0,0,3,0.x [P = (0, 0, 3, +0)]: hw 0 p 0,0,3,0.y [P = (0, 0, 3, +0)]: hw 0 p 0,0,3,0.z [P = (0, 0, 3, +0)]: hw inf p 0,0,3,0.w [P = (0, 0, 3, +0)]: hw 0 p 0,0,0,0.x [P = (0, 0, 0, +0)]: hw 0 p 0,0,0,0.y [P = (0, 0, 0, +0)]: hw 0 p 0,0,0,0.z [P = (0, 0, 0, +0)]: hw 0 p 0,0,0,0.w [P = (0, 0, 0, +0)]: hw 0 p -0,-0,-0,-0.x [P = (-0, -0, -0, -0)]: hw 0 p -0,-0,-0,-0.y [P = (-0, -0, -0, -0)]: hw 0 p -0,-0,-0,-0.z [P = (-0, -0, -0, -0)]: hw 0 p -0,-0,-0,-0.w [P = (-0, -0, -0, -0)]: hw 0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="144" column="3" bodyfile="src/tests/vertex_shader_exceptional_value_tests_generated.cpp" bodystart="3644" bodyend="3653"/>
+      </memberdef>
+      <memberdef kind="function" id="d9/d4e/classVertexShaderExceptionalPathsTests_1aa6d9d6d714c70312387ec0566e53daeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void VertexShaderExceptionalPathsTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>VertexShaderExceptionalPathsTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="146" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="260" bodyend="263"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Renders MAC results with operand A from the v1 attribute (Attr_ tests) or a constant (Const_ tests), and the fog distance chain rcp(P.w), P * rcp(P.w), d2 = DP3, rsq(d2), d2 * rsq(d2) with P from v1 or a constant. Hardware gives identical results on both paths. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalPathsTests</label>
+        <link refid="d9/d4e/classVertexShaderExceptionalPathsTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalPathsTests</label>
+        <link refid="d9/d4e/classVertexShaderExceptionalPathsTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="142" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="142" bodyend="151"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>host_</name></member>
+      <member refid="d9/d4e/classVertexShaderExceptionalPathsTests_1aa6d9d6d714c70312387ec0566e53daeb" prot="public" virt="virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d9/d4e/classVertexShaderExceptionalPathsTests_1a185add2accc2ad25ccbc7040706dd26b" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>kSuiteName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d9/d4e/classVertexShaderExceptionalPathsTests_1a370c8cda595e1f0d1acf4acb8523b5b5" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>renderer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>TearDownTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>TestSuite</name></member>
+      <member refid="d9/d4e/classVertexShaderExceptionalPathsTests_1aacb3c945473c54ebed390d5f5efab4b3" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>VertexShaderExceptionalPathsTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>VertexShaderExceptionalPathsTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

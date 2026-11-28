@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d4/def/classVertexShaderExceptionalILUTests" kind="class" language="C++" prot="public">
+    <compoundname>VertexShaderExceptionalILUTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="d4/def/classVertexShaderExceptionalILUTests_1a27fec823ea8926bcc3a7513ce320d6c7" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderExceptionalILUTests::kSuiteName</definition>
+        <argsstring></argsstring>
+        <name>kSuiteName</name>
+        <qualifiedname>VertexShaderExceptionalILUTests::kSuiteName</qualifiedname>
+        <initializer>= &quot;Vertex shader exceptional ILU&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="133" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d4/def/classVertexShaderExceptionalILUTests_1a9621ebc722deb12fc99890ccb511a29b" prot="private" static="no" mutable="no">
+        <type><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref></type>
+        <definition>VshExceptionalValueRenderer VertexShaderExceptionalILUTests::renderer_</definition>
+        <argsstring></argsstring>
+        <name>renderer_</name>
+        <qualifiedname>VertexShaderExceptionalILUTests::renderer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="134" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d4/def/classVertexShaderExceptionalILUTests_1a4894b958e8dd27c19deb691b4f2860f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexShaderExceptionalILUTests::VertexShaderExceptionalILUTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>VertexShaderExceptionalILUTests</name>
+        <qualifiedname>VertexShaderExceptionalILUTests::VertexShaderExceptionalILUTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders RCP, RCC, RSQ, EXPP, LOGP and LIT results, and the constants that ARL addresses, on exceptional inputs. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>.</para>
+<para><simplesect kind="remark"><para>RCP_1 RCP (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0 [+0]: hw inf -0: hw -inf inf [+inf]: hw 0 -inf: hw -0 NaN: hw NaN qNaN: hw NaN -qNaN: hw NaN sNaN: hw NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>RCP_2 RCP (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1: hw 1 2: hw 0.5 -2: hw -0.5 MAX: hw 0 -MAX: hw -0 2^-126: hw 2^126 den: hw inf -den: hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>RCC_1 RCC (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0 [+0]: hw 2^64 -0: hw -2^64 inf [+inf]: hw 2^-64 -inf: hw -2^-64 NaN: hw NaN qNaN: hw NaN -qNaN: hw NaN 1: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>RCC_2 RCC (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 2: hw 0.5 -2: hw -0.5 2^-70: hw 2^64 -2^-70: hw -2^64 2^70: hw 2^-64 MAX: hw 2^-64 2^-126: hw 2^64 den: hw 2^64</para>
+</simplesect>
+<simplesect kind="remark"><para>RSQ_1 RSQ (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0 [+0]: hw inf -0: hw inf inf [+inf]: hw 0 -inf: hw 0 NaN: hw NaN qNaN: hw NaN -qNaN: hw NaN sNaN: hw NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>RSQ_2 RSQ (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1: hw 1 4: hw 0.5 -4: hw 0.5 0.25 [0.25]: hw 2 2^-126: hw 2^63 2^126: hw 2^-63 den: hw inf -den: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_1 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0.x [+0]: hw 1 0.y [+0]: hw 0 0.z [+0]: hw 1 0.w [+0]: hw 1 -0.x: hw 1 -0.y: hw 0 -0.z: hw 1 -0.w: hw 1 den.x: hw 1 den.y: hw 0 den.z: hw 1 den.w: hw 1 -1.5.x: hw 0.25 -1.5.y: hw 0.5</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_2 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): -1.5.z: hw 0x3EB50600 -1.5.w: hw 1 2.x: hw 4 2.y: hw 0 2.z: hw 4 2.w: hw 1 -1e-10.x: hw 1 -1e-10.y: hw 1 -1e-10.z: hw 1 -1e-10.w: hw 1 -2^-24.x: hw 1 -2^-24.y: hw 1 -2^-24.z: hw 1 -2^-24.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_3 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): -2^-25.x: hw 1 -2^-25.y: hw 1 -2^-25.z: hw 1 -2^-25.w: hw 1 -2^-23.x: hw 0.5 -2^-23.y: hw 0x3F7FFFFE -2^-23.z: hw 0x3F7FF88A -2^-23.w: hw 1 -2^-22.x: hw 0.5 -2^-22.y: hw 0x3F7FFFFC -2^-22.z: hw 0x3F7FF88A -2^-22.w: hw 1 -2^-20.x: hw 0.5 -2^-20.y: hw 0x3F7FFFF0</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_4 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): -2^-20.z: hw 0x3F7FF88A -2^-20.w: hw 1 0xBF800001.x [-1 - 2^-23]: hw 0.25 0xBF800001.y [-1 - 2^-23]: hw 0x3F7FFFFE 0xBF800001.z [-1 - 2^-23]: hw 0x3EFFF88A 0xBF800001.w [-1 - 2^-23]: hw 1 0xC0000001.x [-2 - 2^-22]: hw 0.125 0xC0000001.y [-2 - 2^-22]: hw 0x3F7FFFFC 0xC0000001.z [-2 - 2^-22]: hw 0x3E7FF88A 0xC0000001.w [-2 - 2^-22]: hw 1 0xB3800001.x: hw 1 0xB3800001.y: hw 1 0xB3800001.z: hw 1 0xB3800001.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_5 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0xB3C00000.x [-1.5 * 2^-24]: hw 1 0xB3C00000.y [-1.5 * 2^-24]: hw 1 0xB3C00000.z [-1.5 * 2^-24]: hw 1 0xB3C00000.w [-1.5 * 2^-24]: hw 1 0xB4400000.x [-1.5 * 2^-23]: hw 0.5 0xB4400000.y [-1.5 * 2^-23]: hw 0x3F7FFFFC 0xB4400000.z [-1.5 * 2^-23]: hw 0x3F7FF88A 0xB4400000.w [-1.5 * 2^-23]: hw 1 0xBF000001.x [-0.5 - 2^-24]: hw 0.5 0xBF000001.y [-0.5 - 2^-24]: hw 0x3EFFFFFC 0xBF000001.z [-0.5 - 2^-24]: hw 0x3F35021E 0xBF000001.w [-0.5 - 2^-24]: hw 1 2^-24.x: hw 1 2^-24.y: hw 2^-24</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_6 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 2^-24.z: hw 1 2^-24.w: hw 1 0xB3F00000.x [-15 * 2^-27]: hw 1 0xB3F00000.y [-15 * 2^-27]: hw 1 0xB3F00000.z [-15 * 2^-27]: hw 1 0xB3F00000.w [-15 * 2^-27]: hw 1 0xB3FFFFFF.x: hw 1 0xB3FFFFFF.y: hw 1 0xB3FFFFFF.z: hw 1 0xB3FFFFFF.w: hw 1 0xB4000001.x: hw 0.5 0xB4000001.y: hw 0x3F7FFFFC 0xB4000001.z: hw 0x3F7FF88A 0xB4000001.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_7 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0xB4080000.x [-17 * 2^-27]: hw 0.5 0xB4080000.y [-17 * 2^-27]: hw 0x3F7FFFFC 0xB4080000.z [-17 * 2^-27]: hw 0x3F7FF88A 0xB4080000.w [-17 * 2^-27]: hw 1 0xB4780000.x [-31 * 2^-27]: hw 0.5 0xB4780000.y [-31 * 2^-27]: hw 0x3F7FFFFC 0xB4780000.z [-31 * 2^-27]: hw 0x3F7FF88A 0xB4780000.w [-31 * 2^-27]: hw 1 0xBE800001.x [-0.25 - 2^-25]: hw 0.5 0xBE800001.y [-0.25 - 2^-25]: hw 0x3F3FFFFE 0xBE800001.z [-0.25 - 2^-25]: hw 0x3F574162 0xBE800001.w [-0.25 - 2^-25]: hw 1 0x3F87FFFF.x [1 + 4/64 - 2^-23]: hw 2 0x3F87FFFF.y [1 + 4/64 - 2^-23]: hw 0x3D7FFFE0</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_8 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0x3F87FFFF.z [1 + 4/64 - 2^-23]: hw 0x4005A724 0x3F87FFFF.w [1 + 4/64 - 2^-23]: hw 1 0x3FBFFFFF.x [1 + 32/64 - 2^-23]: hw 2 0x3FBFFFFF.y [1 + 32/64 - 2^-23]: hw 0x3EFFFFFC 0x3FBFFFFF.z [1 + 32/64 - 2^-23]: hw 0x4035021E 0x3FBFFFFF.w [1 + 32/64 - 2^-23]: hw 1 1.5.x [1 + 32/64]: hw 2 1.5.y [1 + 32/64]: hw 0.5 1.5.z [1 + 32/64]: hw 0x40350600 1.5.w [1 + 32/64]: hw 1 0x3FFA0000.x [1 + 61/64]: hw 2 0x3FFA0000.y [1 + 61/64]: hw 0x3F740000 0x3FFA0000.z [1 + 61/64]: hw 0x4077D700 0x3FFA0000.w [1 + 61/64]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_9 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): inf.x [+inf]: hw inf inf.y [+inf]: hw 0 inf.z [+inf]: hw inf inf.w [+inf]: hw 1 -inf.x: hw 0 -inf.y: hw 0 -inf.z: hw 0 -inf.w: hw 1 NaN.x: hw inf NaN.y: hw NaN NaN.z: hw NaN NaN.w: hw 1 qNaN.x: hw inf qNaN.y: hw qNaN</para>
+</simplesect>
+<simplesect kind="remark"><para>EXPP_10 EXPP (132 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): qNaN.z: hw NaN qNaN.w: hw 1 -qNaN.x: hw inf -qNaN.y: hw -qNaN -qNaN.z: hw NaN -qNaN.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LOGP_1 LOGP (48 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 0.x [+0]: hw -inf 0.y [+0]: hw 1 0.z [+0]: hw -inf 0.w [+0]: hw 1 -0.x: hw -inf -0.y: hw 1 -0.z: hw -inf -0.w: hw 1 den.x: hw -inf den.y: hw 1 den.z: hw -inf den.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LOGP_2 LOGP (48 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1.x: hw 0 1.y: hw 1 1.z: hw 0 1.w: hw 1 8.x: hw 3 8.y: hw 1 8.z: hw 3 8.w: hw 1 -8.x: hw 3 -8.y: hw 1 -8.z: hw 3 -8.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LOGP_3 LOGP (48 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1.5.x: hw 0 1.5.y: hw 1.5 1.5.z: hw 0x3F15C780 1.5.w: hw 1 MAX.x: hw 127 MAX.y: hw 0x3FFFFFFF MAX.z: hw 0x42FFFFF3 MAX.w: hw 1 inf.x [+inf]: hw inf inf.y [+inf]: hw 1 inf.z [+inf]: hw inf inf.w [+inf]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LOGP_4 LOGP (48 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): -inf.x: hw inf -inf.y: hw 1 -inf.z: hw inf -inf.w: hw 1 NaN.x: hw NaN NaN.y: hw NaN NaN.z: hw NaN NaN.w: hw 1 qNaN.x: hw qNaN qNaN.y: hw qNaN qNaN.z: hw qNaN qNaN.w: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_1 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0 p0.x [N.L 1, N.H 0, power 0]: hw 1 L1 H0 p0.y [N.L 1, N.H 0, power 0]: hw 1 L1 H0 p0.z [N.L 1, N.H 0, power 0]: hw 1 L1 H0 p0.w [N.L 1, N.H 0, power 0]: hw 1 L1 H0.5 p0.x [N.L 1, N.H 0.5, power 0]: hw 1 L1 H0.5 p0.y [N.L 1, N.H 0.5, power 0]: hw 1 L1 H0.5 p0.z [N.L 1, N.H 0.5, power 0]: hw 1 L1 H0.5 p0.w [N.L 1, N.H 0.5, power 0]: hw 1 L1 H0 p2.x [N.L 1, N.H 0, power 2]: hw 1 L1 H0 p2.y [N.L 1, N.H 0, power 2]: hw 1 L1 H0 p2.z [N.L 1, N.H 0, power 2]: hw 0 L1 H0 p2.w [N.L 1, N.H 0, power 2]: hw 1 L1 H0 p+inf.x [N.L 1, N.H 0, power +inf]: hw 1 L1 H0 p+inf.y [N.L 1, N.H 0, power +inf]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_2 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0 p+inf.z [N.L 1, N.H 0, power +inf]: hw 0 L1 H0 p+inf.w [N.L 1, N.H 0, power +inf]: hw 1 L1 H0 p-1.x [N.L 1, N.H 0, power -1]: hw 1 L1 H0 p-1.y [N.L 1, N.H 0, power -1]: hw 1 L1 H0 p-1.z [N.L 1, N.H 0, power -1]: hw inf L1 H0 p-1.w [N.L 1, N.H 0, power -1]: hw 1 L1 H0.5 p+inf.x [N.L 1, N.H 0.5, power +inf]: hw 1 L1 H0.5 p+inf.y [N.L 1, N.H 0.5, power +inf]: hw 1 L1 H0.5 p+inf.z [N.L 1, N.H 0.5, power +inf]: hw 0 L1 H0.5 p+inf.w [N.L 1, N.H 0.5, power +inf]: hw 1 L1 H2 p+inf.x [N.L 1, N.H 2, power +inf]: hw 1 L1 H2 p+inf.y [N.L 1, N.H 2, power +inf]: hw 1 L1 H2 p+inf.z [N.L 1, N.H 2, power +inf]: hw 0x7F7FF88A L1 H2 p+inf.w [N.L 1, N.H 2, power +inf]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_3 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L0 H0.5 p1.x [N.L 0, N.H 0.5, power 1]: hw 1 L0 H0.5 p1.y [N.L 0, N.H 0.5, power 1]: hw 0 L0 H0.5 p1.z [N.L 0, N.H 0.5, power 1]: hw 0 L0 H0.5 p1.w [N.L 0, N.H 0.5, power 1]: hw 1 L-0 H0.5 p1.x [N.L -0, N.H 0.5, power 1]: hw 1 L-0 H0.5 p1.y [N.L -0, N.H 0.5, power 1]: hw 0 L-0 H0.5 p1.z [N.L -0, N.H 0.5, power 1]: hw 0 L-0 H0.5 p1.w [N.L -0, N.H 0.5, power 1]: hw 1 L1 H-0.5 p1.x [N.L 1, N.H -0.5, power 1]: hw 1 L1 H-0.5 p1.y [N.L 1, N.H -0.5, power 1]: hw 1 L1 H-0.5 p1.z [N.L 1, N.H -0.5, power 1]: hw 0 L1 H-0.5 p1.w [N.L 1, N.H -0.5, power 1]: hw 1 L1 HqNaN p0.x [N.L 1, N.H 0x7FC00000, power 0]: hw 1 L1 HqNaN p0.y [N.L 1, N.H 0x7FC00000, power 0]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_4 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 HqNaN p0.z [N.L 1, N.H 0x7FC00000, power 0]: hw 1 L1 HqNaN p0.w [N.L 1, N.H 0x7FC00000, power 0]: hw 1 L+inf H0.5 p1.x [N.L +inf, N.H 0.5, power 1]: hw 1 L+inf H0.5 p1.y [N.L +inf, N.H 0.5, power 1]: hw inf L+inf H0.5 p1.z [N.L +inf, N.H 0.5, power 1]: hw 0.5 L+inf H0.5 p1.w [N.L +inf, N.H 0.5, power 1]: hw 1 LqNaN H0.5 p1.x [N.L 0x7FC00000, N.H 0.5, power 1]: hw 1 LqNaN H0.5 p1.y [N.L 0x7FC00000, N.H 0.5, power 1]: hw qNaN LqNaN H0.5 p1.z [N.L 0x7FC00000, N.H 0.5, power 1]: hw 0.5 LqNaN H0.5 p1.w [N.L 0x7FC00000, N.H 0.5, power 1]: hw 1 L1 Hden p0.5.x [N.L 1, N.H denormal, power 0.5]: hw 1 L1 Hden p0.5.y [N.L 1, N.H denormal, power 0.5]: hw 1 L1 Hden p0.5.z [N.L 1, N.H denormal, power 0.5]: hw 0 L1 Hden p0.5.w [N.L 1, N.H denormal, power 0.5]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_5 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0x00000001 p0..x [N.L 1, N.H 0x00000001, power 0.5]: hw 1 L1 H0x00000001 p0..y [N.L 1, N.H 0x00000001, power 0.5]: hw 1 L1 H0x00000001 p0..z [N.L 1, N.H 0x00000001, power 0.5]: hw 0 L1 H0x00000001 p0..w [N.L 1, N.H 0x00000001, power 0.5]: hw 1 L1 Hden p0.x [N.L 1, N.H denormal, power 0]: hw 1 L1 Hden p0.y [N.L 1, N.H denormal, power 0]: hw 1 L1 Hden p0.z [N.L 1, N.H denormal, power 0]: hw 1 L1 Hden p0.w [N.L 1, N.H denormal, power 0]: hw 1 Lden H0.5 p1.x [N.L denormal, N.H 0.5, power 1]: hw 1 Lden H0.5 p1.y [N.L denormal, N.H 0.5, power 1]: hw den Lden H0.5 p1.z [N.L denormal, N.H 0.5, power 1]: hw 0 Lden H0.5 p1.w [N.L denormal, N.H 0.5, power 1]: hw 1 L-den H0.5 p1.x [N.L -denormal, N.H 0.5, power 1]: hw 1 L-den H0.5 p1.y [N.L -denormal, N.H 0.5, power 1]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_6 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L-den H0.5 p1.z [N.L -denormal, N.H 0.5, power 1]: hw 0 L-den H0.5 p1.w [N.L -denormal, N.H 0.5, power 1]: hw 1 L1 H-0 p0.x [N.L 1, N.H -0, power 0]: hw 1 L1 H-0 p0.y [N.L 1, N.H -0, power 0]: hw 1 L1 H-0 p0.z [N.L 1, N.H -0, power 0]: hw 1 L1 H-0 p0.w [N.L 1, N.H -0, power 0]: hw 1 L1 H-0 p-1.x [N.L 1, N.H -0, power -1]: hw 1 L1 H-0 p-1.y [N.L 1, N.H -0, power -1]: hw 1 L1 H-0 p-1.z [N.L 1, N.H -0, power -1]: hw inf L1 H-0 p-1.w [N.L 1, N.H -0, power -1]: hw 1 L1 H-den p0.x [N.L 1, N.H -denormal, power 0]: hw 1 L1 H-den p0.y [N.L 1, N.H -denormal, power 0]: hw 1 L1 H-den p0.z [N.L 1, N.H -denormal, power 0]: hw 1 L1 H-den p0.w [N.L 1, N.H -denormal, power 0]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_7 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H-0.5 p0.x [N.L 1, N.H -0.5, power 0]: hw 1 L1 H-0.5 p0.y [N.L 1, N.H -0.5, power 0]: hw 1 L1 H-0.5 p0.z [N.L 1, N.H -0.5, power 0]: hw 1 L1 H-0.5 p0.w [N.L 1, N.H -0.5, power 0]: hw 1 L1 Hden p-1.x [N.L 1, N.H denormal, power -1]: hw 1 L1 Hden p-1.y [N.L 1, N.H denormal, power -1]: hw 1 L1 Hden p-1.z [N.L 1, N.H denormal, power -1]: hw inf L1 Hden p-1.w [N.L 1, N.H denormal, power -1]: hw 1 L1 H0 pden.x [N.L 1, N.H 0, power denormal]: hw 1 L1 H0 pden.y [N.L 1, N.H 0, power denormal]: hw 1 L1 H0 pden.z [N.L 1, N.H 0, power denormal]: hw 1 L1 H0 pden.w [N.L 1, N.H 0, power denormal]: hw 1 L1 H0 p-den.x [N.L 1, N.H 0, power -denormal]: hw 1 L1 H0 p-den.y [N.L 1, N.H 0, power -denormal]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_8 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0 p-den.z [N.L 1, N.H 0, power -denormal]: hw 1 L1 H0 p-den.w [N.L 1, N.H 0, power -denormal]: hw 1 L1 H-0.5 p-1.x [N.L 1, N.H -0.5, power -1]: hw 1 L1 H-0.5 p-1.y [N.L 1, N.H -0.5, power -1]: hw 1 L1 H-0.5 p-1.z [N.L 1, N.H -0.5, power -1]: hw inf L1 H-0.5 p-1.w [N.L 1, N.H -0.5, power -1]: hw 1 L1 H-qNaN p-1.x [N.L 1, N.H 0xFFC00000, power -1]: hw 1 L1 H-qNaN p-1.y [N.L 1, N.H 0xFFC00000, power -1]: hw 1 L1 H-qNaN p-1.z [N.L 1, N.H 0xFFC00000, power -1]: hw NaN L1 H-qNaN p-1.w [N.L 1, N.H 0xFFC00000, power -1]: hw 1 L-qNaN H0.5 p1.x [N.L 0xFFC00000, N.H 0.5, power 1]: hw 1 L-qNaN H0.5 p1.y [N.L 0xFFC00000, N.H 0.5, power 1]: hw 0 L-qNaN H0.5 p1.z [N.L 0xFFC00000, N.H 0.5, power 1]: hw 0 L-qNaN H0.5 p1.w [N.L 0xFFC00000, N.H 0.5, power 1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_9 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0.5 pqNaN.x [N.L 1, N.H 0.5, power 0x7FC00000]: hw 1 L1 H0.5 pqNaN.y [N.L 1, N.H 0.5, power 0x7FC00000]: hw 1 L1 H0.5 pqNaN.z [N.L 1, N.H 0.5, power 0x7FC00000]: hw NaN L1 H0.5 pqNaN.w [N.L 1, N.H 0.5, power 0x7FC00000]: hw 1 L2^-126 H0.5 p1.x [N.L 2^-126, N.H 0.5, power 1]: hw 1 L2^-126 H0.5 p1.y [N.L 2^-126, N.H 0.5, power 1]: hw 2^-126 L2^-126 H0.5 p1.z [N.L 2^-126, N.H 0.5, power 1]: hw 0.5 L2^-126 H0.5 p1.w [N.L 2^-126, N.H 0.5, power 1]: hw 1 L-1 H0.5 p1.x [N.L -1, N.H 0.5, power 1]: hw 1 L-1 H0.5 p1.y [N.L -1, N.H 0.5, power 1]: hw 0 L-1 H0.5 p1.z [N.L -1, N.H 0.5, power 1]: hw 0 L-1 H0.5 p1.w [N.L -1, N.H 0.5, power 1]: hw 1 L-inf H0.5 p1.x [N.L -inf, N.H 0.5, power 1]: hw 1 L-inf H0.5 p1.y [N.L -inf, N.H 0.5, power 1]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_10 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L-inf H0.5 p1.z [N.L -inf, N.H 0.5, power 1]: hw 0 L-inf H0.5 p1.w [N.L -inf, N.H 0.5, power 1]: hw 1 L0.5 H0.5 p1.x [N.L 0.5, N.H 0.5, power 1]: hw 1 L0.5 H0.5 p1.y [N.L 0.5, N.H 0.5, power 1]: hw 0.5 L0.5 H0.5 p1.z [N.L 0.5, N.H 0.5, power 1]: hw 0.5 L0.5 H0.5 p1.w [N.L 0.5, N.H 0.5, power 1]: hw 1 L2 H0.5 p1.x [N.L 2, N.H 0.5, power 1]: hw 1 L2 H0.5 p1.y [N.L 2, N.H 0.5, power 1]: hw 2 L2 H0.5 p1.z [N.L 2, N.H 0.5, power 1]: hw 0.5 L2 H0.5 p1.w [N.L 2, N.H 0.5, power 1]: hw 1 LMAX H0.5 p1.x [N.L FLT_MAX, N.H 0.5, power 1]: hw 1 LMAX H0.5 p1.y [N.L FLT_MAX, N.H 0.5, power 1]: hw MAX LMAX H0.5 p1.z [N.L FLT_MAX, N.H 0.5, power 1]: hw 0.5 LMAX H0.5 p1.w [N.L FLT_MAX, N.H 0.5, power 1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_11 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L-MAX H0.5 p1.x [N.L -FLT_MAX, N.H 0.5, power 1]: hw 1 L-MAX H0.5 p1.y [N.L -FLT_MAX, N.H 0.5, power 1]: hw 0 L-MAX H0.5 p1.z [N.L -FLT_MAX, N.H 0.5, power 1]: hw 0 L-MAX H0.5 p1.w [N.L -FLT_MAX, N.H 0.5, power 1]: hw 1 LNaN H0.5 p1.x [N.L 0x7FFFFFFF, N.H 0.5, power 1]: hw 1 LNaN H0.5 p1.y [N.L 0x7FFFFFFF, N.H 0.5, power 1]: hw NaN LNaN H0.5 p1.z [N.L 0x7FFFFFFF, N.H 0.5, power 1]: hw 0.5 LNaN H0.5 p1.w [N.L 0x7FFFFFFF, N.H 0.5, power 1]: hw 1 L-qNaN H-0 p-1.x [N.L 0xFFC00000, N.H -0, power -1]: hw 1 L-qNaN H-0 p-1.y [N.L 0xFFC00000, N.H -0, power -1]: hw 0 L-qNaN H-0 p-1.z [N.L 0xFFC00000, N.H -0, power -1]: hw 0 L-qNaN H-0 p-1.w [N.L 0xFFC00000, N.H -0, power -1]: hw 1 L1 H0.5,s.z NaN p1.x [N.L 1, N.H 0.5, s.z NaN, power 1]: hw 1 L1 H0.5,s.z NaN p1.y [N.L 1, N.H 0.5, s.z NaN, power 1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_12 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0.5,s.z NaN p1.z [N.L 1, N.H 0.5, s.z NaN, power 1]: hw 0.5 L1 H0.5,s.z NaN p1.w [N.L 1, N.H 0.5, s.z NaN, power 1]: hw 1 L1 H0.5,s.z +inf p.x [N.L 1, N.H 0.5, s.z +inf, power 1]: hw 1 L1 H0.5,s.z +inf p.y [N.L 1, N.H 0.5, s.z +inf, power 1]: hw 1 L1 H0.5,s.z +inf p.z [N.L 1, N.H 0.5, s.z +inf, power 1]: hw 0.5 L1 H0.5,s.z +inf p.w [N.L 1, N.H 0.5, s.z +inf, power 1]: hw 1 L1 H0.5 p2.x [N.L 1, N.H 0.5, power 2]: hw 1 L1 H0.5 p2.y [N.L 1, N.H 0.5, power 2]: hw 1 L1 H0.5 p2.z [N.L 1, N.H 0.5, power 2]: hw 0.25 L1 H0.5 p2.w [N.L 1, N.H 0.5, power 2]: hw 1 L1 H0.5 p0.5.x [N.L 1, N.H 0.5, power 0.5]: hw 1 L1 H0.5 p0.5.y [N.L 1, N.H 0.5, power 0.5]: hw 1 L1 H0.5 p0.5.z [N.L 1, N.H 0.5, power 0.5]: hw 0x3F350600 L1 H0.5 p0.5.w [N.L 1, N.H 0.5, power 0.5]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_13 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0.5 p-1.x [N.L 1, N.H 0.5, power -1]: hw 1 L1 H0.5 p-1.y [N.L 1, N.H 0.5, power -1]: hw 1 L1 H0.5 p-1.z [N.L 1, N.H 0.5, power -1]: hw 2 L1 H0.5 p-1.w [N.L 1, N.H 0.5, power -1]: hw 1 L1 H2 p3.x [N.L 1, N.H 2, power 3]: hw 1 L1 H2 p3.y [N.L 1, N.H 2, power 3]: hw 1 L1 H2 p3.z [N.L 1, N.H 2, power 3]: hw 8 L1 H2 p3.w [N.L 1, N.H 2, power 3]: hw 1 L1 H2 p0.5.x [N.L 1, N.H 2, power 0.5]: hw 1 L1 H2 p0.5.y [N.L 1, N.H 2, power 0.5]: hw 1 L1 H2 p0.5.z [N.L 1, N.H 2, power 0.5]: hw 0x3FB50600 L1 H2 p0.5.w [N.L 1, N.H 2, power 0.5]: hw 1 L1 H3 p2.x [N.L 1, N.H 3, power 2]: hw 1 L1 H3 p2.y [N.L 1, N.H 3, power 2]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_14 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H3 p2.z [N.L 1, N.H 3, power 2]: hw 0x41100520 L1 H3 p2.w [N.L 1, N.H 3, power 2]: hw 1 L1 H1.5 p2.x [N.L 1, N.H 1.5, power 2]: hw 1 L1 H1.5 p2.y [N.L 1, N.H 1.5, power 2]: hw 1 L1 H1.5 p2.z [N.L 1, N.H 1.5, power 2]: hw 0x40100520 L1 H1.5 p2.w [N.L 1, N.H 1.5, power 2]: hw 1 L1 H0.75 p10.x [N.L 1, N.H 0.75, power 10]: hw 1 L1 H0.75 p10.y [N.L 1, N.H 0.75, power 10]: hw 1 L1 H0.75 p10.z [N.L 1, N.H 0.75, power 10]: hw 0x3D66D73A L1 H0.75 p10.w [N.L 1, N.H 0.75, power 10]: hw 1 L1 H1 p2.x [N.L 1, N.H 1, power 2]: hw 1 L1 H1 p2.y [N.L 1, N.H 1, power 2]: hw 1 L1 H1 p2.z [N.L 1, N.H 1, power 2]: hw 1 L1 H1 p2.w [N.L 1, N.H 1, power 2]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_15 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H1 p-1.x [N.L 1, N.H 1, power -1]: hw 1 L1 H1 p-1.y [N.L 1, N.H 1, power -1]: hw 1 L1 H1 p-1.z [N.L 1, N.H 1, power -1]: hw 1 L1 H1 p-1.w [N.L 1, N.H 1, power -1]: hw 1 L1 H2 p127.x [N.L 1, N.H 2, power 127]: hw 1 L1 H2 p127.y [N.L 1, N.H 2, power 127]: hw 1 L1 H2 p127.z [N.L 1, N.H 2, power 127]: hw 2^127 L1 H2 p127.w [N.L 1, N.H 2, power 127]: hw 1 L1 H2 p127.5.x [N.L 1, N.H 2, power 127.5]: hw 1 L1 H2 p127.5.y [N.L 1, N.H 2, power 127.5]: hw 1 L1 H2 p127.5.z [N.L 1, N.H 2, power 127.5]: hw 0x7F350600 L1 H2 p127.5.w [N.L 1, N.H 2, power 127.5]: hw 1 L1 H2 p128.x [N.L 1, N.H 2, power 128]: hw 1 L1 H2 p128.y [N.L 1, N.H 2, power 128]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_16 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H2 p128.z [N.L 1, N.H 2, power 128]: hw 0x7F7FF88A L1 H2 p128.w [N.L 1, N.H 2, power 128]: hw 1 L1 H2 p-126.x [N.L 1, N.H 2, power -126]: hw 1 L1 H2 p-126.y [N.L 1, N.H 2, power -126]: hw 1 L1 H2 p-126.z [N.L 1, N.H 2, power -126]: hw 2^-126 L1 H2 p-126.w [N.L 1, N.H 2, power -126]: hw 1 L1 H2 p-126.5.x [N.L 1, N.H 2, power -126.5]: hw 1 L1 H2 p-126.5.y [N.L 1, N.H 2, power -126.5]: hw 1 L1 H2 p-126.5.z [N.L 1, N.H 2, power -126.5]: hw 0 L1 H2 p-126.5.w [N.L 1, N.H 2, power -126.5]: hw 1 L1 H2 p-128.x [N.L 1, N.H 2, power -128]: hw 1 L1 H2 p-128.y [N.L 1, N.H 2, power -128]: hw 1 L1 H2 p-128.z [N.L 1, N.H 2, power -128]: hw 0 L1 H2 p-128.w [N.L 1, N.H 2, power -128]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_17 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H4 p64.x [N.L 1, N.H 4, power 64]: hw 1 L1 H4 p64.y [N.L 1, N.H 4, power 64]: hw 1 L1 H4 p64.z [N.L 1, N.H 4, power 64]: hw inf L1 H4 p64.w [N.L 1, N.H 4, power 64]: hw 1 L1 H4 p100.x [N.L 1, N.H 4, power 100]: hw 1 L1 H4 p100.y [N.L 1, N.H 4, power 100]: hw 1 L1 H4 p100.z [N.L 1, N.H 4, power 100]: hw inf L1 H4 p100.w [N.L 1, N.H 4, power 100]: hw 1 L1 H0.25 p100.x [N.L 1, N.H 0.25, power 100]: hw 1 L1 H0.25 p100.y [N.L 1, N.H 0.25, power 100]: hw 1 L1 H0.25 p100.z [N.L 1, N.H 0.25, power 100]: hw 0 L1 H0.25 p100.w [N.L 1, N.H 0.25, power 100]: hw 1 L1 HMAX p1.x [N.L 1, N.H FLT_MAX, power 1]: hw 1 L1 HMAX p1.y [N.L 1, N.H FLT_MAX, power 1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_18 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 HMAX p1.z [N.L 1, N.H FLT_MAX, power 1]: hw 0x7F7FF88A L1 HMAX p1.w [N.L 1, N.H FLT_MAX, power 1]: hw 1 L1 HMAX p2.x [N.L 1, N.H FLT_MAX, power 2]: hw 1 L1 HMAX p2.y [N.L 1, N.H FLT_MAX, power 2]: hw 1 L1 HMAX p2.z [N.L 1, N.H FLT_MAX, power 2]: hw inf L1 HMAX p2.w [N.L 1, N.H FLT_MAX, power 2]: hw 1 L1 Hsqrt(2) p127.x [N.L 1, N.H sqrt(2), power 127]: hw 1 L1 Hsqrt(2) p127.y [N.L 1, N.H sqrt(2), power 127]: hw 1 L1 Hsqrt(2) p127.z [N.L 1, N.H sqrt(2), power 127]: hw 0x5F3570F2 L1 Hsqrt(2) p127.w [N.L 1, N.H sqrt(2), power 127]: hw 1 L1 Hsqrt(2) p127.9.x [N.L 1, N.H sqrt(2), power 127.9961]: hw 1 L1 Hsqrt(2) p127.9.y [N.L 1, N.H sqrt(2), power 127.9961]: hw 1 L1 Hsqrt(2) p127.9.z [N.L 1, N.H sqrt(2), power 127.9961]: hw 0x5F801EDA L1 Hsqrt(2) p127.9.w [N.L 1, N.H sqrt(2), power 127.9961]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_19 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 Hsqrt(2) p127.9.x [N.L 1, N.H sqrt(2), power 127.9998]: hw 1 L1 Hsqrt(2) p127.9.y [N.L 1, N.H sqrt(2), power 127.9998]: hw 1 L1 Hsqrt(2) p127.9.z [N.L 1, N.H sqrt(2), power 127.9998]: hw 0x5F8048EC L1 Hsqrt(2) p127.9.w [N.L 1, N.H sqrt(2), power 127.9998]: hw 1 L1 Hsqrt(2) p128.x [N.L 1, N.H sqrt(2), power 128]: hw 1 L1 Hsqrt(2) p128.y [N.L 1, N.H sqrt(2), power 128]: hw 1 L1 Hsqrt(2) p128.z [N.L 1, N.H sqrt(2), power 128]: hw 0x5F804BBA L1 Hsqrt(2) p128.w [N.L 1, N.H sqrt(2), power 128]: hw 1 L1 Hsqrt(2) p129.x [N.L 1, N.H sqrt(2), power 129]: hw 1 L1 Hsqrt(2) p129.y [N.L 1, N.H sqrt(2), power 129]: hw 1 L1 Hsqrt(2) p129.z [N.L 1, N.H sqrt(2), power 129]: hw 0x5F804BBA L1 Hsqrt(2) p129.w [N.L 1, N.H sqrt(2), power 129]: hw 1 L1 Hsqrt(2) p200.x [N.L 1, N.H sqrt(2), power 200]: hw 1 L1 Hsqrt(2) p200.y [N.L 1, N.H sqrt(2), power 200]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_20 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 Hsqrt(2) p200.z [N.L 1, N.H sqrt(2), power 200]: hw 0x5F804BBA L1 Hsqrt(2) p200.w [N.L 1, N.H sqrt(2), power 200]: hw 1 L1 Hsqrt(2) p+inf.x [N.L 1, N.H sqrt(2), power +inf]: hw 1 L1 Hsqrt(2) p+inf.y [N.L 1, N.H sqrt(2), power +inf]: hw 1 L1 Hsqrt(2) p+inf.z [N.L 1, N.H sqrt(2), power +inf]: hw 0x5F804BBA L1 Hsqrt(2) p+inf.w [N.L 1, N.H sqrt(2), power +inf]: hw 1 L1 Hsqrt(2) p-127..x [N.L 1, N.H sqrt(2), power -127.9961]: hw 1 L1 Hsqrt(2) p-127..y [N.L 1, N.H sqrt(2), power -127.9961]: hw 1 L1 Hsqrt(2) p-127..z [N.L 1, N.H sqrt(2), power -127.9961]: hw 0x1F7FB702 L1 Hsqrt(2) p-127..w [N.L 1, N.H sqrt(2), power -127.9961]: hw 1 L1 Hsqrt(2) p-128.x [N.L 1, N.H sqrt(2), power -128]: hw 1 L1 Hsqrt(2) p-128.y [N.L 1, N.H sqrt(2), power -128]: hw 1 L1 Hsqrt(2) p-128.z [N.L 1, N.H sqrt(2), power -128]: hw 0x1F7F6518 L1 Hsqrt(2) p-128.w [N.L 1, N.H sqrt(2), power -128]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_21 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 Hsqrt(2) p-200.x [N.L 1, N.H sqrt(2), power -200]: hw 1 L1 Hsqrt(2) p-200.y [N.L 1, N.H sqrt(2), power -200]: hw 1 L1 Hsqrt(2) p-200.z [N.L 1, N.H sqrt(2), power -200]: hw 0x1F7F6518 L1 Hsqrt(2) p-200.w [N.L 1, N.H sqrt(2), power -200]: hw 1 L1 Hsqrt(2) p-inf.x [N.L 1, N.H sqrt(2), power -inf]: hw 1 L1 Hsqrt(2) p-inf.y [N.L 1, N.H sqrt(2), power -inf]: hw 1 L1 Hsqrt(2) p-inf.z [N.L 1, N.H sqrt(2), power -inf]: hw 0x1F7F6518 L1 Hsqrt(2) p-inf.w [N.L 1, N.H sqrt(2), power -inf]: hw 1 L1 H0 p-inf.x [N.L 1, N.H 0, power -inf]: hw 1 L1 H0 p-inf.y [N.L 1, N.H 0, power -inf]: hw 1 L1 H0 p-inf.z [N.L 1, N.H 0, power -inf]: hw inf L1 H0 p-inf.w [N.L 1, N.H 0, power -inf]: hw 1 L1 H0.5 p-inf.x [N.L 1, N.H 0.5, power -inf]: hw 1 L1 H0.5 p-inf.y [N.L 1, N.H 0.5, power -inf]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_22 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0.5 p-inf.z [N.L 1, N.H 0.5, power -inf]: hw inf L1 H0.5 p-inf.w [N.L 1, N.H 0.5, power -inf]: hw 1 L1 H2 p-inf.x [N.L 1, N.H 2, power -inf]: hw 1 L1 H2 p-inf.y [N.L 1, N.H 2, power -inf]: hw 1 L1 H2 p-inf.z [N.L 1, N.H 2, power -inf]: hw 0 L1 H2 p-inf.w [N.L 1, N.H 2, power -inf]: hw 1 L1 H1 p+inf.x [N.L 1, N.H 1, power +inf]: hw 1 L1 H1 p+inf.y [N.L 1, N.H 1, power +inf]: hw 1 L1 H1 p+inf.z [N.L 1, N.H 1, power +inf]: hw 1 L1 H1 p+inf.w [N.L 1, N.H 1, power +inf]: hw 1 L1 H1 p-inf.x [N.L 1, N.H 1, power -inf]: hw 1 L1 H1 p-inf.y [N.L 1, N.H 1, power -inf]: hw 1 L1 H1 p-inf.z [N.L 1, N.H 1, power -inf]: hw 1 L1 H1 p-inf.w [N.L 1, N.H 1, power -inf]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_23 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H+inf p1.x [N.L 1, N.H +inf, power 1]: hw 1 L1 H+inf p1.y [N.L 1, N.H +inf, power 1]: hw 1 L1 H+inf p1.z [N.L 1, N.H +inf, power 1]: hw inf L1 H+inf p1.w [N.L 1, N.H +inf, power 1]: hw 1 L1 H+inf p0.x [N.L 1, N.H +inf, power 0]: hw 1 L1 H+inf p0.y [N.L 1, N.H +inf, power 0]: hw 1 L1 H+inf p0.z [N.L 1, N.H +inf, power 0]: hw 1 L1 H+inf p0.w [N.L 1, N.H +inf, power 0]: hw 1 L1 H+inf p-1.x [N.L 1, N.H +inf, power -1]: hw 1 L1 H+inf p-1.y [N.L 1, N.H +inf, power -1]: hw 1 L1 H+inf p-1.z [N.L 1, N.H +inf, power -1]: hw 0 L1 H+inf p-1.w [N.L 1, N.H +inf, power -1]: hw 1 L1 H+inf p0.5.x [N.L 1, N.H +inf, power 0.5]: hw 1 L1 H+inf p0.5.y [N.L 1, N.H +inf, power 0.5]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_24 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H+inf p0.5.z [N.L 1, N.H +inf, power 0.5]: hw inf L1 H+inf p0.5.w [N.L 1, N.H +inf, power 0.5]: hw 1 L1 H-inf p1.x [N.L 1, N.H -inf, power 1]: hw 1 L1 H-inf p1.y [N.L 1, N.H -inf, power 1]: hw 1 L1 H-inf p1.z [N.L 1, N.H -inf, power 1]: hw 0 L1 H-inf p1.w [N.L 1, N.H -inf, power 1]: hw 1 L1 H-inf p0.x [N.L 1, N.H -inf, power 0]: hw 1 L1 H-inf p0.y [N.L 1, N.H -inf, power 0]: hw 1 L1 H-inf p0.z [N.L 1, N.H -inf, power 0]: hw 1 L1 H-inf p0.w [N.L 1, N.H -inf, power 0]: hw 1 L1 H-inf p-1.x [N.L 1, N.H -inf, power -1]: hw 1 L1 H-inf p-1.y [N.L 1, N.H -inf, power -1]: hw 1 L1 H-inf p-1.z [N.L 1, N.H -inf, power -1]: hw inf L1 H-inf p-1.w [N.L 1, N.H -inf, power -1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_25 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H-MAX p-1.x [N.L 1, N.H -FLT_MAX, power -1]: hw 1 L1 H-MAX p-1.y [N.L 1, N.H -FLT_MAX, power -1]: hw 1 L1 H-MAX p-1.z [N.L 1, N.H -FLT_MAX, power -1]: hw inf L1 H-MAX p-1.w [N.L 1, N.H -FLT_MAX, power -1]: hw 1 L1 H-2 p2.x [N.L 1, N.H -2, power 2]: hw 1 L1 H-2 p2.y [N.L 1, N.H -2, power 2]: hw 1 L1 H-2 p2.z [N.L 1, N.H -2, power 2]: hw 0 L1 H-2 p2.w [N.L 1, N.H -2, power 2]: hw 1 L1 HqNaN p1.x [N.L 1, N.H 0x7FC00000, power 1]: hw 1 L1 HqNaN p1.y [N.L 1, N.H 0x7FC00000, power 1]: hw 1 L1 HqNaN p1.z [N.L 1, N.H 0x7FC00000, power 1]: hw NaN L1 HqNaN p1.w [N.L 1, N.H 0x7FC00000, power 1]: hw 1 L1 HqNaN p-1.x [N.L 1, N.H 0x7FC00000, power -1]: hw 1 L1 HqNaN p-1.y [N.L 1, N.H 0x7FC00000, power -1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_26 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 HqNaN p-1.z [N.L 1, N.H 0x7FC00000, power -1]: hw NaN L1 HqNaN p-1.w [N.L 1, N.H 0x7FC00000, power -1]: hw 1 L1 HqNaN pden.x [N.L 1, N.H 0x7FC00000, power denormal]: hw 1 L1 HqNaN pden.y [N.L 1, N.H 0x7FC00000, power denormal]: hw 1 L1 HqNaN pden.z [N.L 1, N.H 0x7FC00000, power denormal]: hw 1 L1 HqNaN pden.w [N.L 1, N.H 0x7FC00000, power denormal]: hw 1 L1 HNaN p0.x [N.L 1, N.H 0x7FFFFFFF, power 0]: hw 1 L1 HNaN p0.y [N.L 1, N.H 0x7FFFFFFF, power 0]: hw 1 L1 HNaN p0.z [N.L 1, N.H 0x7FFFFFFF, power 0]: hw 1 L1 HNaN p0.w [N.L 1, N.H 0x7FFFFFFF, power 0]: hw 1 L1 HsNaN p1.x [N.L 1, N.H 0x7FA5A5A5, power 1]: hw 1 L1 HsNaN p1.y [N.L 1, N.H 0x7FA5A5A5, power 1]: hw 1 L1 HsNaN p1.z [N.L 1, N.H 0x7FA5A5A5, power 1]: hw NaN L1 HsNaN p1.w [N.L 1, N.H 0x7FA5A5A5, power 1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_27 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H-qNaN p0.x [N.L 1, N.H 0xFFC00000, power 0]: hw 1 L1 H-qNaN p0.y [N.L 1, N.H 0xFFC00000, power 0]: hw 1 L1 H-qNaN p0.z [N.L 1, N.H 0xFFC00000, power 0]: hw 1 L1 H-qNaN p0.w [N.L 1, N.H 0xFFC00000, power 0]: hw 1 L1 H-qNaN p1.x [N.L 1, N.H 0xFFC00000, power 1]: hw 1 L1 H-qNaN p1.y [N.L 1, N.H 0xFFC00000, power 1]: hw 1 L1 H-qNaN p1.z [N.L 1, N.H 0xFFC00000, power 1]: hw NaN L1 H-qNaN p1.w [N.L 1, N.H 0xFFC00000, power 1]: hw 1 L1 H-qNaN p-den.x [N.L 1, N.H 0xFFC00000, power -denormal]: hw 1 L1 H-qNaN p-den.y [N.L 1, N.H 0xFFC00000, power -denormal]: hw 1 L1 H-qNaN p-den.z [N.L 1, N.H 0xFFC00000, power -denormal]: hw 1 L1 H-qNaN p-den.w [N.L 1, N.H 0xFFC00000, power -denormal]: hw 1 L1 H0.5 p-qNaN.x [N.L 1, N.H 0.5, power 0xFFC00000]: hw 1 L1 H0.5 p-qNaN.y [N.L 1, N.H 0.5, power 0xFFC00000]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_28 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H0.5 p-qNaN.z [N.L 1, N.H 0.5, power 0xFFC00000]: hw NaN L1 H0.5 p-qNaN.w [N.L 1, N.H 0.5, power 0xFFC00000]: hw 1 L1 H0.5 psNaN.x [N.L 1, N.H 0.5, power 0x7FA5A5A5]: hw 1 L1 H0.5 psNaN.y [N.L 1, N.H 0.5, power 0x7FA5A5A5]: hw 1 L1 H0.5 psNaN.z [N.L 1, N.H 0.5, power 0x7FA5A5A5]: hw NaN L1 H0.5 psNaN.w [N.L 1, N.H 0.5, power 0x7FA5A5A5]: hw 1 L1 H0 pqNaN.x [N.L 1, N.H 0, power 0x7FC00000]: hw 1 L1 H0 pqNaN.y [N.L 1, N.H 0, power 0x7FC00000]: hw 1 L1 H0 pqNaN.z [N.L 1, N.H 0, power 0x7FC00000]: hw NaN L1 H0 pqNaN.w [N.L 1, N.H 0, power 0x7FC00000]: hw 1 L1 H1 pqNaN.x [N.L 1, N.H 1, power 0x7FC00000]: hw 1 L1 H1 pqNaN.y [N.L 1, N.H 1, power 0x7FC00000]: hw 1 L1 H1 pqNaN.z [N.L 1, N.H 1, power 0x7FC00000]: hw NaN L1 H1 pqNaN.w [N.L 1, N.H 1, power 0x7FC00000]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_29 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L1 H-0.5 pqNaN.x [N.L 1, N.H -0.5, power 0x7FC00000]: hw 1 L1 H-0.5 pqNaN.y [N.L 1, N.H -0.5, power 0x7FC00000]: hw 1 L1 H-0.5 pqNaN.z [N.L 1, N.H -0.5, power 0x7FC00000]: hw NaN L1 H-0.5 pqNaN.w [N.L 1, N.H -0.5, power 0x7FC00000]: hw 1 L1 H+inf pqNaN.x [N.L 1, N.H +inf, power 0x7FC00000]: hw 1 L1 H+inf pqNaN.y [N.L 1, N.H +inf, power 0x7FC00000]: hw 1 L1 H+inf pqNaN.z [N.L 1, N.H +inf, power 0x7FC00000]: hw NaN L1 H+inf pqNaN.w [N.L 1, N.H +inf, power 0x7FC00000]: hw 1 L1 HqNaN pqNaN.x [N.L 1, N.H 0x7FC00000, power 0x7FC00000]: hw 1 L1 HqNaN pqNaN.y [N.L 1, N.H 0x7FC00000, power 0x7FC00000]: hw 1 L1 HqNaN pqNaN.z [N.L 1, N.H 0x7FC00000, power 0x7FC00000]: hw NaN L1 HqNaN pqNaN.w [N.L 1, N.H 0x7FC00000, power 0x7FC00000]: hw 1 L0 H0.5 pqNaN.x [N.L 0, N.H 0.5, power 0x7FC00000]: hw 1 L0 H0.5 pqNaN.y [N.L 0, N.H 0.5, power 0x7FC00000]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_30 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L0 H0.5 pqNaN.z [N.L 0, N.H 0.5, power 0x7FC00000]: hw 0 L0 H0.5 pqNaN.w [N.L 0, N.H 0.5, power 0x7FC00000]: hw 1 L-0 H0.5 pqNaN.x [N.L -0, N.H 0.5, power 0x7FC00000]: hw 1 L-0 H0.5 pqNaN.y [N.L -0, N.H 0.5, power 0x7FC00000]: hw 0 L-0 H0.5 pqNaN.z [N.L -0, N.H 0.5, power 0x7FC00000]: hw 0 L-0 H0.5 pqNaN.w [N.L -0, N.H 0.5, power 0x7FC00000]: hw 1 L-1 H0.5 pqNaN.x [N.L -1, N.H 0.5, power 0x7FC00000]: hw 1 L-1 H0.5 pqNaN.y [N.L -1, N.H 0.5, power 0x7FC00000]: hw 0 L-1 H0.5 pqNaN.z [N.L -1, N.H 0.5, power 0x7FC00000]: hw 0 L-1 H0.5 pqNaN.w [N.L -1, N.H 0.5, power 0x7FC00000]: hw 1 Lden H0.5 pqNaN.x [N.L denormal, N.H 0.5, power 0x7FC00000]: hw 1 Lden H0.5 pqNaN.y [N.L denormal, N.H 0.5, power 0x7FC00000]: hw den Lden H0.5 pqNaN.z [N.L denormal, N.H 0.5, power 0x7FC00000]: hw 0 Lden H0.5 pqNaN.w [N.L denormal, N.H 0.5, power 0x7FC00000]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_31 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): L-qNaN H0.5 pqNaN.x [N.L 0xFFC00000, N.H 0.5, power 0x7FC00000]: hw 1 L-qNaN H0.5 pqNaN.y [N.L 0xFFC00000, N.H 0.5, power 0x7FC00000]: hw 0 L-qNaN H0.5 pqNaN.z [N.L 0xFFC00000, N.H 0.5, power 0x7FC00000]: hw 0 L-qNaN H0.5 pqNaN.w [N.L 0xFFC00000, N.H 0.5, power 0x7FC00000]: hw 1 L0 HqNaN p1.x [N.L 0, N.H 0x7FC00000, power 1]: hw 1 L0 HqNaN p1.y [N.L 0, N.H 0x7FC00000, power 1]: hw 0 L0 HqNaN p1.z [N.L 0, N.H 0x7FC00000, power 1]: hw 0 L0 HqNaN p1.w [N.L 0, N.H 0x7FC00000, power 1]: hw 1 L-1 HqNaN p1.x [N.L -1, N.H 0x7FC00000, power 1]: hw 1 L-1 HqNaN p1.y [N.L -1, N.H 0x7FC00000, power 1]: hw 0 L-1 HqNaN p1.z [N.L -1, N.H 0x7FC00000, power 1]: hw 0 L-1 HqNaN p1.w [N.L -1, N.H 0x7FC00000, power 1]: hw 1 Lden HqNaN p1.x [N.L denormal, N.H 0x7FC00000, power 1]: hw 1 Lden HqNaN p1.y [N.L denormal, N.H 0x7FC00000, power 1]: hw den</para>
+</simplesect>
+<simplesect kind="remark"><para>LIT_32 LIT (448 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): Lden HqNaN p1.z [N.L denormal, N.H 0x7FC00000, power 1]: hw 0 Lden HqNaN p1.w [N.L denormal, N.H 0x7FC00000, power 1]: hw 1 L0 H0 p-1.x [N.L 0, N.H 0, power -1]: hw 1 L0 H0 p-1.y [N.L 0, N.H 0, power -1]: hw 0 L0 H0 p-1.z [N.L 0, N.H 0, power -1]: hw 0 L0 H0 p-1.w [N.L 0, N.H 0, power -1]: hw 1 L-1 H0 p-1.x [N.L -1, N.H 0, power -1]: hw 1 L-1 H0 p-1.y [N.L -1, N.H 0, power -1]: hw 0 L-1 H0 p-1.z [N.L -1, N.H 0, power -1]: hw 0 L-1 H0 p-1.w [N.L -1, N.H 0, power -1]: hw 1 L0 H+inf p1.x [N.L 0, N.H +inf, power 1]: hw 1 L0 H+inf p1.y [N.L 0, N.H +inf, power 1]: hw 0 L0 H+inf p1.z [N.L 0, N.H +inf, power 1]: hw 0 L0 H+inf p1.w [N.L 0, N.H +inf, power 1]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>ARL ARL a0, v9 then MOV oD0, c[A0 + 0], with c[0] to c[15] holding distinct marker colors and c[191] magenta. The rd cell shows the color read, the hw cell the color hardware read (black where hardware read zero). On hardware rd matches hw in every row. Rows (input: constant read on hardware): 1: hw reads c[1] 1.5: hw reads c[1] 5: hw reads c[5] 0: hw reads c[0] -0: hw reads c[0] den: hw reads c[0] -den: hw reads c[0] inf: hw reads zero -inf: hw reads zero NaN: hw reads zero qNaN: hw reads zero -qNaN: hw reads zero MAX: hw reads zero -MAX: hw reads zero </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="128" column="3" bodyfile="src/tests/vertex_shader_exceptional_value_tests_generated.cpp" bodystart="3222" bodyend="3237"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/def/classVertexShaderExceptionalILUTests_1ad59c8f5e2223eebdfd2a4405d19e6245" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void VertexShaderExceptionalILUTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>VertexShaderExceptionalILUTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="130" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="255" bodyend="258"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Renders RCP, RCC, RSQ, EXPP, LOGP and LIT results on exceptional inputs, and the constant ARL addresses for them. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalILUTests</label>
+        <link refid="d4/def/classVertexShaderExceptionalILUTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalILUTests</label>
+        <link refid="d4/def/classVertexShaderExceptionalILUTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="126" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="126" bodyend="135"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>VertexShaderExceptionalILUTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>host_</name></member>
+      <member refid="d4/def/classVertexShaderExceptionalILUTests_1ad59c8f5e2223eebdfd2a4405d19e6245" prot="public" virt="virtual"><scope>VertexShaderExceptionalILUTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d4/def/classVertexShaderExceptionalILUTests_1a27fec823ea8926bcc3a7513ce320d6c7" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>kSuiteName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d4/def/classVertexShaderExceptionalILUTests_1a9621ebc722deb12fc99890ccb511a29b" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>renderer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>VertexShaderExceptionalILUTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>VertexShaderExceptionalILUTests</scope><name>TearDownTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>TestSuite</name></member>
+      <member refid="d4/def/classVertexShaderExceptionalILUTests_1a4894b958e8dd27c19deb691b4f2860f6" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalILUTests</scope><name>VertexShaderExceptionalILUTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>VertexShaderExceptionalILUTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

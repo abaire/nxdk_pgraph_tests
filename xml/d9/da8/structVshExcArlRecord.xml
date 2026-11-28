@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d9/da8/structVshExcArlRecord" kind="struct" language="C++" prot="public">
+    <compoundname>VshExcArlRecord</compoundname>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="d9/da8/structVshExcArlRecord_1af0c8a9d87e9f797a8f5a5da700878293" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VshExcArlRecord::label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <qualifiedname>VshExcArlRecord::label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="37" column="14" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/da8/structVshExcArlRecord_1a8997fec31f7fc7073b894f20987fd993" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcArlRecord::a[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>a</name>
+        <qualifiedname>VshExcArlRecord::a</qualifiedname>
+        <briefdescription>
+<para>The ARL input, supplied as v9 (texcoord 0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="39" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/da8/structVshExcArlRecord_1aaf9a5f40fc2179aefa1b10e330825af2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool VshExcArlRecord::reads_zero</definition>
+        <argsstring></argsstring>
+        <name>reads_zero</name>
+        <qualifiedname>VshExcArlRecord::reads_zero</qualifiedname>
+        <briefdescription>
+<para>True if hardware read all zeros instead of one of the marker constants. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="41" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d9/da8/structVshExcArlRecord_1a9455b22520f990d275591e6d9eb65bb9" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcArlRecord::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>VshExcArlRecord::index</qualifiedname>
+        <briefdescription>
+<para>Index of the marker constant read on hardware, when reads_zero is false. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="43" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An ARL input and what MOV oD0, c[A0 + 0] read on hardware. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="36" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="36" bodyend="44"/>
+    <listofallmembers>
+      <member refid="d9/da8/structVshExcArlRecord_1a8997fec31f7fc7073b894f20987fd993" prot="public" virt="non-virtual"><scope>VshExcArlRecord</scope><name>a</name></member>
+      <member refid="d9/da8/structVshExcArlRecord_1a9455b22520f990d275591e6d9eb65bb9" prot="public" virt="non-virtual"><scope>VshExcArlRecord</scope><name>index</name></member>
+      <member refid="d9/da8/structVshExcArlRecord_1af0c8a9d87e9f797a8f5a5da700878293" prot="public" virt="non-virtual"><scope>VshExcArlRecord</scope><name>label</name></member>
+      <member refid="d9/da8/structVshExcArlRecord_1aaf9a5f40fc2179aefa1b10e330825af2" prot="public" virt="non-virtual"><scope>VshExcArlRecord</scope><name>reads_zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

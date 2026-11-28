@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d0/d62/vertex__shader__exceptional__value__tests_8h" kind="file" language="C++">
+    <compoundname>vertex_shader_exceptional_value_tests.h</compoundname>
+    <includes local="no">cstdint</includes>
+    <includes local="no">string</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes refid="d6/d7a/test__suite_8h" local="yes">test_suite.h</includes>
+    <includedby refid="df/d0a/main_8cpp" local="yes">src/main.cpp</includedby>
+    <includedby refid="d5/d89/vertex__shader__exceptional__value__tests_8cpp" local="yes">src/tests/vertex_shader_exceptional_value_tests.cpp</includedby>
+    <includedby refid="d7/db5/vertex__shader__exceptional__value__tests__generated_8cpp" local="yes">src/tests/vertex_shader_exceptional_value_tests_generated.cpp</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/vertex_shader_exceptional_value_tests.h</label>
+        <link refid="d0/d62/vertex__shader__exceptional__value__tests_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>atomic</label>
+      </node>
+      <node id="23">
+        <label>chrono</label>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+      <node id="10">
+        <label>functional</label>
+      </node>
+      <node id="28">
+        <label>list</label>
+      </node>
+      <node id="24">
+        <label>map</label>
+      </node>
+      <node id="14">
+        <label>memory</label>
+      </node>
+      <node id="15">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="16">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="13">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="7">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="17">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="25">
+        <label>set</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="18">
+        <label>texture_format.h</label>
+      </node>
+      <node id="19">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="11">
+        <label>thread</label>
+      </node>
+      <node id="12">
+        <label>vector</label>
+      </node>
+      <node id="20">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="6">
+        <label>windows.h</label>
+      </node>
+      <node id="21">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="db/d0b/structVshExcRecord" prot="public">VshExcRecord</innerclass>
+    <innerclass refid="db/d2f/structVshExcTestCase" prot="public">VshExcTestCase</innerclass>
+    <innerclass refid="d9/da8/structVshExcArlRecord" prot="public">VshExcArlRecord</innerclass>
+    <innerclass refid="df/d06/structVshExcArlTestCase" prot="public">VshExcArlTestCase</innerclass>
+    <innerclass refid="d6/d73/classVshExceptionalValueRenderer" prot="public">VshExceptionalValueRenderer</innerclass>
+    <innerclass refid="d4/dac/classVertexShaderExceptionalMACTests" prot="public">VertexShaderExceptionalMACTests</innerclass>
+    <innerclass refid="d4/d55/classVertexShaderExceptionalMOVTests" prot="public">VertexShaderExceptionalMOVTests</innerclass>
+    <innerclass refid="d4/def/classVertexShaderExceptionalILUTests" prot="public">VertexShaderExceptionalILUTests</innerclass>
+    <innerclass refid="d9/d4e/classVertexShaderExceptionalPathsTests" prot="public">VertexShaderExceptionalPathsTests</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NXDK_PGRAPH_TESTS_VERTEX_SHADER_EXCEPTIONAL_VALUE_TESTS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NXDK_PGRAPH_TESTS_VERTEX_SHADER_EXCEPTIONAL_VALUE_TESTS_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_suite.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="db/d0b/structVshExcRecord" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="db/d0b/structVshExcRecord" kindref="compound">VshExcRecord</ref><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*label;</highlight></codeline>
+<codeline lineno="14" refid="db/d0b/structVshExcRecord_1a1ee57f35893a4f3980e2438e9c535a14" refkind="member"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="db/d0b/structVshExcRecord_1a1ee57f35893a4f3980e2438e9c535a14" kindref="member">a</ref>[4];</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/>uint32_t<sp/>b[4];</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>uint32_t<sp/>c[4];</highlight></codeline>
+<codeline lineno="18" refid="db/d0b/structVshExcRecord_1a3432585d50cdf5a8f194f8b10633e5b8" refkind="member"><highlight class="normal"><sp/><sp/>uint8_t<sp/><ref refid="db/d0b/structVshExcRecord_1a3432585d50cdf5a8f194f8b10633e5b8" kindref="member">lane</ref>;</highlight></codeline>
+<codeline lineno="20" refid="db/d0b/structVshExcRecord_1ad7c890fcf84007acac133fd7632411a4" refkind="member"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="db/d0b/structVshExcRecord_1ad7c890fcf84007acac133fd7632411a4" kindref="member">hw</ref>;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="db/d2f/structVshExcTestCase" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="db/d2f/structVshExcTestCase" kindref="compound">VshExcTestCase</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*test_name;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*title;</highlight></codeline>
+<codeline lineno="29" refid="db/d2f/structVshExcTestCase_1ad0b78bd416cc37b9a73385dc8c057da3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*<ref refid="db/d2f/structVshExcTestCase_1ad0b78bd416cc37b9a73385dc8c057da3" kindref="member">shader</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>uint32_t<sp/>shader_size;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="db/d0b/structVshExcRecord" kindref="compound">VshExcRecord</ref><sp/>*records;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/>uint32_t<sp/>count;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="d9/da8/structVshExcArlRecord" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d9/da8/structVshExcArlRecord" kindref="compound">VshExcArlRecord</ref><sp/>{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*label;</highlight></codeline>
+<codeline lineno="39" refid="d9/da8/structVshExcArlRecord_1a8997fec31f7fc7073b894f20987fd993" refkind="member"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="d9/da8/structVshExcArlRecord_1a8997fec31f7fc7073b894f20987fd993" kindref="member">a</ref>[4];</highlight></codeline>
+<codeline lineno="41" refid="d9/da8/structVshExcArlRecord_1aaf9a5f40fc2179aefa1b10e330825af2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="d9/da8/structVshExcArlRecord_1aaf9a5f40fc2179aefa1b10e330825af2" kindref="member">reads_zero</ref>;</highlight></codeline>
+<codeline lineno="43" refid="d9/da8/structVshExcArlRecord_1a9455b22520f990d275591e6d9eb65bb9" refkind="member"><highlight class="normal"><sp/><sp/>uint32_t<sp/><ref refid="d9/da8/structVshExcArlRecord_1a9455b22520f990d275591e6d9eb65bb9" kindref="member">index</ref>;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="df/d06/structVshExcArlTestCase" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="df/d06/structVshExcArlTestCase" kindref="compound">VshExcArlTestCase</ref><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*test_name;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="d9/da8/structVshExcArlRecord" kindref="compound">VshExcArlRecord</ref><sp/>*records;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>uint32_t<sp/>count;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="d6/d73/classVshExceptionalValueRenderer" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">VshExceptionalValueRenderer<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>VshExceptionalValueRenderer(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host)<sp/>:<sp/>host_(host)<sp/>{}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>Initialize();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d6/d73/classVshExceptionalValueRenderer_1ad4b2364bc742b82a2bbdcbb226d5944e" kindref="member">Draw</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="db/d2f/structVshExcTestCase" kindref="compound">VshExcTestCase</ref><sp/>&amp;test_case);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d6/d73/classVshExceptionalValueRenderer_1ad4b2364bc742b82a2bbdcbb226d5944e" kindref="member">Draw</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="df/d06/structVshExcArlTestCase" kindref="compound">VshExcArlTestCase</ref><sp/>&amp;test_case);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>SetShader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint32_t<sp/>*shader,<sp/>uint32_t<sp/>size);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawComparatorRow();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host_;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="d4/dac/classVertexShaderExceptionalMACTests" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d4/dac/classVertexShaderExceptionalMACTests_1a1c9a9aa262d9674e9262e8f4eadc3c29" kindref="member">VertexShaderExceptionalMACTests</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>TestSuite<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><ref refid="d4/dac/classVertexShaderExceptionalMACTests_1a1c9a9aa262d9674e9262e8f4eadc3c29" kindref="member">VertexShaderExceptionalMACTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref><sp/>&amp;config);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/dac/classVertexShaderExceptionalMACTests_1afda3dd9c7745bf6b75d53d90507bef38" kindref="member">Initialize</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*kSuiteName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Vertex<sp/>shader<sp/>exceptional<sp/>MAC&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref><sp/>renderer_;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="d4/d55/classVertexShaderExceptionalMOVTests" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d4/d55/classVertexShaderExceptionalMOVTests_1ae28c5f8dc3d7cc3dd802dacf1a33d0a3" kindref="member">VertexShaderExceptionalMOVTests</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>TestSuite<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><ref refid="d4/d55/classVertexShaderExceptionalMOVTests_1ae28c5f8dc3d7cc3dd802dacf1a33d0a3" kindref="member">VertexShaderExceptionalMOVTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref><sp/>&amp;config);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/d55/classVertexShaderExceptionalMOVTests_1a047df63f78453f495b578273a529bb94" kindref="member">Initialize</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*kSuiteName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Vertex<sp/>shader<sp/>exceptional<sp/>MOV&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref><sp/>renderer_;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="d4/def/classVertexShaderExceptionalILUTests" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d4/def/classVertexShaderExceptionalILUTests_1a4894b958e8dd27c19deb691b4f2860f6" kindref="member">VertexShaderExceptionalILUTests</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>TestSuite<sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><ref refid="d4/def/classVertexShaderExceptionalILUTests_1a4894b958e8dd27c19deb691b4f2860f6" kindref="member">VertexShaderExceptionalILUTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref><sp/>&amp;config);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d4/def/classVertexShaderExceptionalILUTests_1ad59c8f5e2223eebdfd2a4405d19e6245" kindref="member">Initialize</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*kSuiteName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Vertex<sp/>shader<sp/>exceptional<sp/>ILU&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref><sp/>renderer_;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="d9/d4e/classVertexShaderExceptionalPathsTests" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="d9/d4e/classVertexShaderExceptionalPathsTests_1aacb3c945473c54ebed390d5f5efab4b3" kindref="member">VertexShaderExceptionalPathsTests</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>TestSuite<sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><ref refid="d9/d4e/classVertexShaderExceptionalPathsTests_1aacb3c945473c54ebed390d5f5efab4b3" kindref="member">VertexShaderExceptionalPathsTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref><sp/>&amp;config);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d9/d4e/classVertexShaderExceptionalPathsTests_1aa6d9d6d714c70312387ec0566e53daeb" kindref="member">Initialize</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*kSuiteName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Vertex<sp/>shader<sp/>exceptional<sp/>paths&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref><sp/>renderer_;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/><sp/></highlight><highlight class="comment">//<sp/>NXDK_PGRAPH_TESTS_VERTEX_SHADER_EXCEPTIONAL_VALUE_TESTS_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="df/d06/structVshExcArlTestCase" kind="struct" language="C++" prot="public">
+    <compoundname>VshExcArlTestCase</compoundname>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="df/d06/structVshExcArlTestCase_1ad6879f1b69d67ebc6d9bfb697ef27052" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VshExcArlTestCase::test_name</definition>
+        <argsstring></argsstring>
+        <name>test_name</name>
+        <qualifiedname>VshExcArlTestCase::test_name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="48" column="14" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/d06/structVshExcArlTestCase_1a110e92ef959ea78a9349785ea032dbd8" prot="public" static="no" mutable="no">
+        <type>const <ref refid="d9/da8/structVshExcArlRecord" kindref="compound">VshExcArlRecord</ref> *</type>
+        <definition>const VshExcArlRecord* VshExcArlTestCase::records</definition>
+        <argsstring></argsstring>
+        <name>records</name>
+        <qualifiedname>VshExcArlTestCase::records</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="49" column="25" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="df/d06/structVshExcArlTestCase_1a358319b4d7ae8d7ee73185fa9c240267" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcArlTestCase::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>VshExcArlTestCase::count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="50" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>One registered ARL test, drawn as a single screenshot: up to 14 records. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>VshExcArlRecord</label>
+        <link refid="d9/da8/structVshExcArlRecord"/>
+      </node>
+      <node id="1">
+        <label>VshExcArlTestCase</label>
+        <link refid="df/d06/structVshExcArlTestCase"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>records</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="47" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="47" bodyend="51"/>
+    <listofallmembers>
+      <member refid="df/d06/structVshExcArlTestCase_1a358319b4d7ae8d7ee73185fa9c240267" prot="public" virt="non-virtual"><scope>VshExcArlTestCase</scope><name>count</name></member>
+      <member refid="df/d06/structVshExcArlTestCase_1a110e92ef959ea78a9349785ea032dbd8" prot="public" virt="non-virtual"><scope>VshExcArlTestCase</scope><name>records</name></member>
+      <member refid="df/d06/structVshExcArlTestCase_1ad6879f1b69d67ebc6d9bfb697ef27052" prot="public" virt="non-virtual"><scope>VshExcArlTestCase</scope><name>test_name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

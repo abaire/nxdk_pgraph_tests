@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="db/d92/classColorZetaOverlapTests" kind="class" language="C++" prot="public">
+    <compoundname>ColorZetaOverlapTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="da/dad/color__zeta__overlap__tests_8h" local="no">color_zeta_overlap_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a7fa21c21c3c57ccf19d13d97aa059be1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ColorZetaOverlapTests::ColorZetaOverlapTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>ColorZetaOverlapTests</name>
+        <qualifiedname>ColorZetaOverlapTests::ColorZetaOverlapTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the test suite and creates test cases.</para>
+<para><simplesect kind="remark"><para>ColorIntoZeta Clears the framebuffer color to 0xFE242424 and zeta to 0, then sets the color context DMA to the zeta DMA object so that both targets share the zeta buffer. A quad with diffuse 0x00BFFF00 at Z=0 is drawn with depth test ALWAYS and depth writes enabled. The color DMA is restored and the color buffer is cleared again, so the color capture shows only the label text on the dark gray background. The result is non-deterministic: within the quad, the zeta capture mostly holds the drawn color (labeled ZB~=0x00BFFF00), with a speckled stair-stepped band of other values that varies between runs. The zeta buffer outside the quad remains 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>ZetaIntoColor Clears the framebuffer color to 0xFE242424 and zeta to 0, then sets the zeta context DMA to the color DMA object so that both targets share the color buffer. A large quad with diffuse 0xFFFF00FF at Z=192 is drawn with depth test ALWAYS and depth writes enabled. The result is non-deterministic: the quad area is mostly light magenta (labeled C~=0xFF2454FE) with speckled and striped regions of the pure magenta diffuse color that vary between runs. The zeta capture is entirely 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>Swap Clears the framebuffer color to 0xFE242424 and zeta to 0, then swaps the color and zeta context DMA objects and draws a large quad with diffuse 0x00A8BF00 at Z=180 with depth test ALWAYS and depth writes enabled. Both DMA objects are then restored. The color capture shows a solid red quad (labeled C=0xFF2416E9) and the zeta capture holds the drawn color (labeled ZB=0x00A8BF00) within the quad and 0 elsewhere.</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentWithClipOffset_l Points a 128x128 linear A8R8G8B8 color surface at texture memory, with the Z24S8 zeta surface placed immediately after the end of the color surface. The surfaces are cleared, the surface clip is set to (1, 1) with a size of 126x126, and a quad with diffuse 0x00A8BF00 is drawn into them with depth writes enabled. The surfaces are then restored to the framebuffer. Nothing is drawn to the framebuffer, so the capture shows only the label text on a dark gray background.</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentWithClipOffset_sz Identical to AdjacentWithClipOffset_l, except that the surfaces are swizzled when the clip offset is applied. The capture shows only the label text on a dark gray background.</para>
+</simplesect>
+<simplesect kind="remark"><para>AdjacentWithAA Points a 64x64 A8R8G8B8 color surface at texture memory with 4x square-offset antialiasing enabled, with the Z24S8 zeta surface placed immediately after the end of the color surface (based on the non-antialiased size). A quad with diffuse 0x00A8BF00 is drawn into them with depth writes enabled and the surfaces are then restored to the framebuffer. Nothing is drawn to the framebuffer, so the capture shows only the label text on a dark gray background.</para>
+</simplesect>
+<simplesect kind="remark"><para>ZetaOntoColorRebind Uses a 128x128 A8R8G8B8 color surface (C) and a Z24S8 zeta surface (Z), both linear and located in texture memory. C is filled with a red backdrop at far depth, then the left half of Z is set to near depth with color writes disabled. The color target is moved to Z&apos;s address while the zeta target is moved to an unused address, then the zeta target is moved back to Z&apos;s address so that both targets share it. Each of these steps issues a zero-area draw with color writes, depth test and depth writes enabled, so the surface bindings are evaluated without any pixels being written. The color target is then moved back to C without modifying the zeta target and a green quad covering the whole surface is drawn at a depth between near and far with depth func LESS. C is rendered to the framebuffer at 2x scale. The left (near) half shows the red backdrop and the right (far) half is green.</para>
+</simplesect>
+<simplesect kind="remark"><para>ColorOntoZetaRebind Identical to ZetaOntoColorRebind, except that the zeta target remains at Z&apos;s address throughout and the color target is moved onto Z&apos;s address directly (a single zero-area draw is issued while both targets share it). The left (near) half shows the red backdrop and the right (far) half is green.</para>
+</simplesect>
+<simplesect kind="remark"><para>ColorMaskedZetaOntoColor Uses a 128x128 A8R8G8B8 color surface (C) and a Z24S8 zeta surface (Z), both linear and located in texture memory. C is filled with a red backdrop with color writes, depth test (ALWAYS) and depth writes enabled. The zeta target is then moved onto C&apos;s address without modifying the color target, color writes are disabled, and a quad covering the left half of the surface is drawn with depth test ALWAYS and depth writes enabled. C is rendered to the framebuffer at 2x scale, and the CPU-read values of one pixel from the middle of the left half and one from the middle of the right half are printed below it. The left half is yellow-green and reads 0xDC87FC33: the upper 24 bits hold the written depth and the low byte (stencil in Z24S8) retains the backdrop&apos;s 0x33. The right half retains the red backdrop and reads 0xFFAA3333.</para>
+</simplesect>
+<simplesect kind="remark"><para>ReadOnlyZetaOntoColor Uses the same surfaces as ColorMaskedZetaOntoColor. The left half of C is filled with 0x00000000 and the right half with 0xFFFFFFFF (the minimum and maximum Z24S8 depth values when the memory is interpreted as zeta). The zeta target is then moved onto C&apos;s address, depth writes are disabled, and a green quad covering the whole surface is drawn at a depth between near and far with depth test LESS and color writes enabled. C is rendered to the framebuffer at 2x scale, and the CPU-read values of one pixel from the middle of each half are printed below it. The depth test reads the shared memory: the left half fails the test and remains black (0x00000000) and the right half passes and is green (0xFF33FF33). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="18" column="3" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="118" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a417a0248391ca2c83219efd82cf52156" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>ColorZetaOverlapTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="20" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="137" bodyend="157"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a57a3a48f7b662dd5d4d7cf42c61737dd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestColorIntoDepth</definition>
+        <argsstring>()</argsstring>
+        <name>TestColorIntoDepth</name>
+        <qualifiedname>ColorZetaOverlapTests::TestColorIntoDepth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="23" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="159" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1adc527eb2b20f06aa125cfdce64fef330" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestDepthIntoColor</definition>
+        <argsstring>()</argsstring>
+        <name>TestDepthIntoColor</name>
+        <qualifiedname>ColorZetaOverlapTests::TestDepthIntoColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="24" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="195" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1ae9bf41736f8113117a29a6cb3113256e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestSwap</definition>
+        <argsstring>()</argsstring>
+        <name>TestSwap</name>
+        <qualifiedname>ColorZetaOverlapTests::TestSwap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="25" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="230" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1aa2a256c6313b86693b87621d6c26859b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestZetaRebindAfterColorMove</definition>
+        <argsstring>(bool color_onto_zeta)</argsstring>
+        <name>TestZetaRebindAfterColorMove</name>
+        <qualifiedname>ColorZetaOverlapTests::TestZetaRebindAfterColorMove</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>color_onto_zeta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="26" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="263" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1ad01cdf22626cfed1c77bf8d062ef937f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestColorMaskedZetaOntoColor</definition>
+        <argsstring>()</argsstring>
+        <name>TestColorMaskedZetaOntoColor</name>
+        <qualifiedname>ColorZetaOverlapTests::TestColorMaskedZetaOntoColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="27" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="349" bodyend="404"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a0d385c9881cb8c91e17f9a1a006fc073" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestReadOnlyZetaOntoColor</definition>
+        <argsstring>()</argsstring>
+        <name>TestReadOnlyZetaOntoColor</name>
+        <qualifiedname>ColorZetaOverlapTests::TestReadOnlyZetaOntoColor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="28" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="406" bodyend="469"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a7ce0c372cb93e338dcb510a293a05e08" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::DrawOverlapSurfaceToFramebuffer</definition>
+        <argsstring>(uint8_t *surface)</argsstring>
+        <name>DrawOverlapSurfaceToFramebuffer</name>
+        <qualifiedname>ColorZetaOverlapTests::DrawOverlapSurfaceToFramebuffer</qualifiedname>
+        <param>
+          <type>uint8_t *</type>
+          <declname>surface</declname>
+        </param>
+        <briefdescription>
+<para>Renders the given 128x128 linear A8R8G8B8 surface to the center of the framebuffer at 2x scale. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="31" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="471" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a8a1ae37e289b503e64a1f91c7f847ce8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset</definition>
+        <argsstring>(bool swizzle)</argsstring>
+        <name>TestXemuAdjacentSurfaceWithClipOffset</name>
+        <qualifiedname>ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>swizzle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="34" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="499" bodyend="570"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1ab8652aeb8e4a0911740d7f3e058bdd44" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithAA</definition>
+        <argsstring>()</argsstring>
+        <name>TestXemuAdjacentSurfaceWithAA</name>
+        <qualifiedname>ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithAA</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="35" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="572" bodyend="626"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1af9ad47a3b31104eb6df47daa0704cba7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::SetSurfaceDMAs</definition>
+        <argsstring>() const</argsstring>
+        <name>SetSurfaceDMAs</name>
+        <qualifiedname>ColorZetaOverlapTests::SetSurfaceDMAs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="37" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="628" bodyend="633"/>
+      </memberdef>
+      <memberdef kind="function" id="db/d92/classColorZetaOverlapTests_1a30b1b8dd6c2b9bbdd59c78e59620f7ea" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ColorZetaOverlapTests::RestoreSurfaceDMAs</definition>
+        <argsstring>() const</argsstring>
+        <name>RestoreSurfaceDMAs</name>
+        <qualifiedname>ColorZetaOverlapTests::RestoreSurfaceDMAs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/color_zeta_overlap_tests.h" line="38" column="8" bodyfile="src/tests/color_zeta_overlap_tests.cpp" bodystart="635" bodyend="640"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests behavior when the color buffer and z/stencil buffers overlap in RAM.</para>
+<para>WARNING: These tests are non-deterministic on Xbox hardware. The primary intent of these tests is to verify that emulators do not crash. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ColorZetaOverlapTests</label>
+        <link refid="db/d92/classColorZetaOverlapTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>ColorZetaOverlapTests</label>
+        <link refid="db/d92/classColorZetaOverlapTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/color_zeta_overlap_tests.h" line="16" column="1" bodyfile="src/tests/color_zeta_overlap_tests.h" bodystart="16" bodyend="39"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>allow_saving_</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a7fa21c21c3c57ccf19d13d97aa059be1" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>ColorZetaOverlapTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>ColorZetaOverlapTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>DisableTests</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a7ce0c372cb93e338dcb510a293a05e08" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>DrawOverlapSurfaceToFramebuffer</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>host_</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a417a0248391ca2c83219efd82cf52156" prot="public" virt="virtual"><scope>ColorZetaOverlapTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>pgraph_diff_</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a30b1b8dd6c2b9bbdd59c78e59620f7ea" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>RestoreSurfaceDMAs</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1af9ad47a3b31104eb6df47daa0704cba7" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>SetSurfaceDMAs</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>ColorZetaOverlapTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>ColorZetaOverlapTests</scope><name>TearDownTest</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a57a3a48f7b662dd5d4d7cf42c61737dd" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestColorIntoDepth</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1ad01cdf22626cfed1c77bf8d062ef937f" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestColorMaskedZetaOntoColor</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1adc527eb2b20f06aa125cfdce64fef330" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestDepthIntoColor</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestNames</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a0d385c9881cb8c91e17f9a1a006fc073" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestReadOnlyZetaOntoColor</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestSuite</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1ae9bf41736f8113117a29a6cb3113256e" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestSwap</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1ab8652aeb8e4a0911740d7f3e058bdd44" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestXemuAdjacentSurfaceWithAA</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1a8a1ae37e289b503e64a1f91c7f847ce8" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestXemuAdjacentSurfaceWithClipOffset</name></member>
+      <member refid="db/d92/classColorZetaOverlapTests_1aa2a256c6313b86693b87621d6c26859b" prot="private" virt="non-virtual"><scope>ColorZetaOverlapTests</scope><name>TestZetaRebindAfterColorMove</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>ColorZetaOverlapTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

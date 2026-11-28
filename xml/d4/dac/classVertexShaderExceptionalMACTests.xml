@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d4/dac/classVertexShaderExceptionalMACTests" kind="class" language="C++" prot="public">
+    <compoundname>VertexShaderExceptionalMACTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="d4/dac/classVertexShaderExceptionalMACTests_1ad4e4da3c714de1063a0e9d5ee9edfc4c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VertexShaderExceptionalMACTests::kSuiteName</definition>
+        <argsstring></argsstring>
+        <name>kSuiteName</name>
+        <qualifiedname>VertexShaderExceptionalMACTests::kSuiteName</qualifiedname>
+        <initializer>= &quot;Vertex shader exceptional MAC&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="103" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d4/dac/classVertexShaderExceptionalMACTests_1a73754aff4dbfa5bf4c7d7d06c1718f34" prot="private" static="no" mutable="no">
+        <type><ref refid="d6/d73/classVshExceptionalValueRenderer" kindref="compound">VshExceptionalValueRenderer</ref></type>
+        <definition>VshExceptionalValueRenderer VertexShaderExceptionalMACTests::renderer_</definition>
+        <argsstring></argsstring>
+        <name>renderer_</name>
+        <qualifiedname>VertexShaderExceptionalMACTests::renderer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="104" column="31" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d4/dac/classVertexShaderExceptionalMACTests_1a1c9a9aa262d9674e9262e8f4eadc3c29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>VertexShaderExceptionalMACTests::VertexShaderExceptionalMACTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>VertexShaderExceptionalMACTests</name>
+        <qualifiedname>VertexShaderExceptionalMACTests::VertexShaderExceptionalMACTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Renders MUL, ADD, MAD, MIN, MAX, SLT, SGE, DP3, DPH, DP4 and DST results on exceptional inputs. The layout is described in <ref refid="d4/dac/classVertexShaderExceptionalMACTests" kindref="compound">VertexShaderExceptionalMACTests</ref>.</para>
+<para><simplesect kind="remark"><para>MUL_1 MUL (31 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): +0*+inf: hw 0 +0*-inf: hw 0 -0*+inf: hw 0 -0*-inf: hw 0 +inf*+0: hw 0 -inf*+0: hw 0 +0*NaN: hw 0 +0*qNaN: hw 0 +0*-qNaN: hw 0 -0*sNaN: hw 0 NaN*+0: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>MUL_2 MUL (31 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): -qNaN*-0: hw 0 den*+inf: hw 0 -den*+inf: hw 0 -0*1.5 [-0 * 1.5]: hw 0 +0*-1.5 [+0 * -1.5]: hw 0 1.5*+inf [1.5 * +inf]: hw inf -1.5*+inf [-1.5 * +inf]: hw -inf +inf*+inf: hw inf +inf*-inf: hw -inf MAX*+0: hw 0 2^-126*1.5 [2^-126 * 1.5]: hw 0x00C00000</para>
+</simplesect>
+<simplesect kind="remark"><para>MUL_3 MUL (31 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): NaN*1.5 [0x7FFFFFFF * 1.5]: hw NaN qNaN*1.5 [0x7FC00000 * 1.5]: hw NaN -qNaN*1.5 [0xFFC00000 * 1.5]: hw NaN 1.5*sNaN [1.5 * 0x7FA5A5A5]: hw NaN +inf*qNaN: hw NaN MAX*2: hw MAX MAX*-2: hw -MAX 2^-126*0.5 [2^-126 * 0.5]: hw 0 -2^-126*0.5 [-2^-126 * 0.5]: hw -0</para>
+</simplesect>
+<simplesect kind="remark"><para>ADD_1 ADD (20 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): +inf+-inf: hw NaN -inf++inf: hw NaN +inf++inf: hw inf -inf+-inf: hw -inf +inf+1.5 [+inf + 1.5]: hw inf MAX+-inf: hw -inf -inf+-0: hw -inf 1.5+NaN [1.5 + 0x7FFFFFFF]: hw NaN 1.5+qNaN [1.5 + 0x7FC00000]: hw NaN +inf+-qNaN: hw NaN</para>
+</simplesect>
+<simplesect kind="remark"><para>ADD_2 ADD (20 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): -0+sNaN: hw NaN qNaN++0: hw NaN +0+-0: hw 0 -0++0: hw 0 -0+-0: hw 0 MAX+MAX: hw MAX -MAX+-MAX: hw -MAX den+den: hw 0 2^-126+-den: hw 2^-126 1.5*2^-126-2^-126 [1.5 * 2^-126 - 2^-126]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>MAD_1 MAD (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): +0*+inf+1.5 [+0 * +inf + 1.5]: hw 1.5 +0*-inf+1.5 [+0 * -inf + 1.5]: hw 1.5 +0*qNaN+1.5 [+0 * 0x7FC00000 + 1.5]: hw 1.5 -0*+inf+-0: hw 0 +0*+inf+-0: hw 0 +inf*+0+-inf: hw -inf 1.5*2++inf [1.5 * 2 + +inf]: hw inf 1.5*2+-inf [1.5 * 2 + -inf]: hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MAD_2 MAD (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1*+inf+-inf: hw NaN +inf*+inf+-inf: hw NaN -inf*1.5++inf [-inf * 1.5 + +inf]: hw NaN 1.5*2+sNaN [1.5 * 2 + 0x7FA5A5A5]: hw NaN +0*+inf+qNaN: hw NaN den*+inf+1.5 [denormal * +inf + 1.5]: hw 1.5 MAX*2-MAX: hw 0 MAX*1+MAX: hw MAX</para>
+</simplesect>
+<simplesect kind="remark"><para>MIN_1 MIN (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MIN(NaN,1.5) [MIN(0x7FFFFFFF, 1.5)]: hw 1.5 MIN(1.5,NaN) [MIN(1.5, 0x7FFFFFFF)]: hw 1.5 MIN(qNaN,1.5) [MIN(0x7FC00000, 1.5)]: hw 1.5 MIN(1.5,qNaN) [MIN(1.5, 0x7FC00000)]: hw 1.5 MIN(1.5,-qNaN) [MIN(1.5, 0xFFC00000)]: hw -qNaN MIN(1.5,sNaN) [MIN(1.5, 0x7FA5A5A5)]: hw 1.5 MIN(-inf,qNaN): hw -inf MIN(qNaN,-inf): hw -inf</para>
+</simplesect>
+<simplesect kind="remark"><para>MIN_2 MIN (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MIN(+inf,-inf): hw -inf MIN(-inf,+inf): hw -inf MIN(+inf,MAX): hw MAX MIN(-MAX,-inf): hw -inf MIN(+0,-0): hw -0 MIN(-0,+0): hw -0 MIN(-den,+0): hw -den</para>
+</simplesect>
+<simplesect kind="remark"><para>MAX_1 MAX (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MAX(NaN,1.5) [MAX(0x7FFFFFFF, 1.5)]: hw NaN MAX(1.5,NaN) [MAX(1.5, 0x7FFFFFFF)]: hw NaN MAX(qNaN,1.5) [MAX(0x7FC00000, 1.5)]: hw qNaN MAX(1.5,qNaN) [MAX(1.5, 0x7FC00000)]: hw qNaN MAX(1.5,-qNaN) [MAX(1.5, 0xFFC00000)]: hw 1.5 MAX(1.5,sNaN) [MAX(1.5, 0x7FA5A5A5)]: hw sNaN MAX(+inf,qNaN): hw qNaN MAX(qNaN,+inf): hw qNaN</para>
+</simplesect>
+<simplesect kind="remark"><para>MAX_2 MAX (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): MAX(+inf,-inf): hw inf MAX(-inf,+inf): hw inf MAX(-inf,-MAX): hw -MAX MAX(MAX,+inf): hw inf MAX(+0,-0): hw 0 MAX(-0,+0): hw 0 MAX(den,+0): hw den</para>
+</simplesect>
+<simplesect kind="remark"><para>SLT_1 SLT (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): SLT(NaN,1.5) [SLT(0x7FFFFFFF, 1.5)]: hw 0 SLT(1.5,NaN) [SLT(1.5, 0x7FFFFFFF)]: hw 1 SLT(qNaN,+inf): hw 0 SLT(-inf,qNaN): hw 1 SLT(1.5,-qNaN) [SLT(1.5, 0xFFC00000)]: hw 0 SLT(-inf,+inf): hw 1 SLT(+inf,-inf): hw 0 SLT(+inf,+inf): hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>SLT_2 SLT (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): SLT(-inf,-inf): hw 0 SLT(MAX,+inf): hw 1 SLT(-inf,-MAX): hw 1 SLT(-0,+0): hw 1 SLT(+0,-0): hw 0 SLT(-den,+0): hw 1 SLT(den,2^-126): hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>SGE SGE (14 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): SGE(NaN,1.5) [SGE(0x7FFFFFFF, 1.5)]: hw 1 SGE(1.5,NaN) [SGE(1.5, 0x7FFFFFFF)]: hw 0 SGE(qNaN,qNaN): hw 1 SGE(+inf,-qNaN): hw 1 SGE(sNaN,-inf): hw 1 SGE(+inf,+inf): hw 1 SGE(-inf,-inf): hw 1 SGE(-inf,+inf): hw 0 SGE(+inf,MAX): hw 1 SGE(-MAX,-inf): hw 1 SGE(-0,+0): hw 0 SGE(+0,-0): hw 1 SGE(+0,den): hw 0 SGE(den,2^-126): hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>DP3_1 DP3 (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1:0,1,1,1|inf,1,1,1 [(0, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 2 2:0,1,1,1|-inf,1,1,1 [(0, 1, 1, 1) . (-inf, 1, 1, 1)]: hw 2 3:-0,1,1,1|inf,1,1,1 [(-0, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 2 4:0,1,1,1|qNaN,1,1,1 [(0, 1, 1, 1) . (0x7FC00000, 1, 1, 1)]: hw 2 5:inf,1,1,1|0,1,1,1 [(+inf, 1, 1, 1) . (0, 1, 1, 1)]: hw 2 6:sNaN,1,1,1|-0,1,1, [(0x7FA5A5A5, 1, 1, 1) . (-0, 1, 1, 1)]: hw 2 7:den,1,1,1|inf,1,1, [(denormal, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 2 8:1,1,1,0|1,1,1,inf [(1, 1, 1, 0) . (1, 1, 1, +inf)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>DP3_2 DP3 (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 9:1,1,1,inf|1,1,1,0 [(1, 1, 1, +inf) . (1, 1, 1, 0)]: hw 3 10:1,1,1,qNaN|1,1,1, [(1, 1, 1, 0x7FC00000) . (1, 1, 1, 1)]: hw 3 11:inf,inf,0,0|1,-1, [(+inf, +inf, 0, 0) . (1, -1, 0, 0)]: hw NaN 12:inf,1,0,0|1,0,0,- [(+inf, 1, 0, 0) . (1, 0, 0, -inf)]: hw inf 13:0,0,0,0|inf,-inf, [(0, 0, 0, 0) . (+inf, -inf, 0x7FC00000, +inf)]: hw 0 14:1,1,1,1|1,1,1,inf [(1, 1, 1, 1) . (1, 1, 1, +inf)]: hw 3 15:-0,-0,-0,-0|1,1,1 [(-0, -0, -0, -0) . (1, 1, 1, 1)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>DPH_1 DPH (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1:0,1,1,1|inf,1,1,1 [(0, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 3 2:0,1,1,1|-inf,1,1,1 [(0, 1, 1, 1) . (-inf, 1, 1, 1)]: hw 3 3:-0,1,1,1|inf,1,1,1 [(-0, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 3 4:0,1,1,1|qNaN,1,1,1 [(0, 1, 1, 1) . (0x7FC00000, 1, 1, 1)]: hw 3 5:inf,1,1,1|0,1,1,1 [(+inf, 1, 1, 1) . (0, 1, 1, 1)]: hw 3 6:sNaN,1,1,1|-0,1,1, [(0x7FA5A5A5, 1, 1, 1) . (-0, 1, 1, 1)]: hw 3 7:den,1,1,1|inf,1,1, [(denormal, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 3 8:1,1,1,0|1,1,1,inf [(1, 1, 1, 0) . (1, 1, 1, +inf)]: hw inf</para>
+</simplesect>
+<simplesect kind="remark"><para>DPH_2 DPH (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 9:1,1,1,inf|1,1,1,0 [(1, 1, 1, +inf) . (1, 1, 1, 0)]: hw 3 10:1,1,1,qNaN|1,1,1, [(1, 1, 1, 0x7FC00000) . (1, 1, 1, 1)]: hw 4 11:inf,inf,0,0|1,-1, [(+inf, +inf, 0, 0) . (1, -1, 0, 0)]: hw NaN 12:inf,1,0,0|1,0,0,- [(+inf, 1, 0, 0) . (1, 0, 0, -inf)]: hw NaN 13:0,0,0,0|inf,-inf, [(0, 0, 0, 0) . (+inf, -inf, 0x7FC00000, +inf)]: hw inf 14:1,1,1,1|1,1,1,inf [(1, 1, 1, 1) . (1, 1, 1, +inf)]: hw inf 15:-0,-0,-0,-0|1,1,1 [(-0, -0, -0, -0) . (1, 1, 1, 1)]: hw 1</para>
+</simplesect>
+<simplesect kind="remark"><para>DP4_1 DP4 (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1:0,1,1,1|inf,1,1,1 [(0, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 3 2:0,1,1,1|-inf,1,1,1 [(0, 1, 1, 1) . (-inf, 1, 1, 1)]: hw 3 3:-0,1,1,1|inf,1,1,1 [(-0, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 3 4:0,1,1,1|qNaN,1,1,1 [(0, 1, 1, 1) . (0x7FC00000, 1, 1, 1)]: hw 3 5:inf,1,1,1|0,1,1,1 [(+inf, 1, 1, 1) . (0, 1, 1, 1)]: hw 3 6:sNaN,1,1,1|-0,1,1, [(0x7FA5A5A5, 1, 1, 1) . (-0, 1, 1, 1)]: hw 3 7:den,1,1,1|inf,1,1, [(denormal, 1, 1, 1) . (+inf, 1, 1, 1)]: hw 3 8:1,1,1,0|1,1,1,inf [(1, 1, 1, 0) . (1, 1, 1, +inf)]: hw 3</para>
+</simplesect>
+<simplesect kind="remark"><para>DP4_2 DP4 (15 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 9:1,1,1,inf|1,1,1,0 [(1, 1, 1, +inf) . (1, 1, 1, 0)]: hw 3 10:1,1,1,qNaN|1,1,1, [(1, 1, 1, 0x7FC00000) . (1, 1, 1, 1)]: hw NaN 11:inf,inf,0,0|1,-1, [(+inf, +inf, 0, 0) . (1, -1, 0, 0)]: hw NaN 12:inf,1,0,0|1,0,0,- [(+inf, 1, 0, 0) . (1, 0, 0, -inf)]: hw inf 13:0,0,0,0|inf,-inf, [(0, 0, 0, 0) . (+inf, -inf, 0x7FC00000, +inf)]: hw 0 14:1,1,1,1|1,1,1,inf [(1, 1, 1, 1) . (1, 1, 1, +inf)]: hw inf 15:-0,-0,-0,-0|1,1,1 [(-0, -0, -0, -0) . (1, 1, 1, 1)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>DST_1 DST (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 1:1.x [(NaN, 0, 2, NaN), (NaN, +inf, NaN, 3)]: hw 1 1:0*inf.y [(NaN, 0, 2, NaN), (NaN, +inf, NaN, 3)]: hw 0 1:a.z=2.z [(NaN, 0, 2, NaN), (NaN, +inf, NaN, 3)]: hw 2 1:b.w=3.w [(NaN, 0, 2, NaN), (NaN, +inf, NaN, 3)]: hw 3 2:1.x [(+inf, +inf, +inf, +inf), (0, 0, 0, 0)]: hw 1 2:inf*0.y [(+inf, +inf, +inf, +inf), (0, 0, 0, 0)]: hw 0 2:a.z=inf.z [(+inf, +inf, +inf, +inf), (0, 0, 0, 0)]: hw inf 2:b.w=0.w [(+inf, +inf, +inf, +inf), (0, 0, 0, 0)]: hw 0</para>
+</simplesect>
+<simplesect kind="remark"><para>DST_2 DST (16 values). On hardware the hw and rf cells are green and the SGE row green, red, red. Rows (label: hardware result): 3:1.x [(1, -0, 0x7FA5A5A5, 1), (1, +inf, 1, 0x7FC00000)]: hw 1 3:-0*inf.y [(1, -0, 0x7FA5A5A5, 1), (1, +inf, 1, 0x7FC00000)]: hw 0 3:a.z=sNaN.z [(1, -0, 0x7FA5A5A5, 1), (1, +inf, 1, 0x7FC00000)]: hw sNaN 3:b.w=qNaN.w [(1, -0, 0x7FA5A5A5, 1), (1, +inf, 1, 0x7FC00000)]: hw qNaN 4:1.x [(-inf, 0, -0, 1), (0x7FC00000, 0xFFC00000, 1, -inf)]: hw 1 4:0*-qNaN.y [(-inf, 0, -0, 1), (0x7FC00000, 0xFFC00000, 1, -inf)]: hw 0 4:a.z=-0.z [(-inf, 0, -0, 1), (0x7FC00000, 0xFFC00000, 1, -inf)]: hw -0 4:b.w=-inf.w [(-inf, 0, -0, 1), (0x7FC00000, 0xFFC00000, 1, -inf)]: hw -inf </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="98" column="3" bodyfile="src/tests/vertex_shader_exceptional_value_tests_generated.cpp" bodystart="2097" bodyend="2106"/>
+      </memberdef>
+      <memberdef kind="function" id="d4/dac/classVertexShaderExceptionalMACTests_1afda3dd9c7745bf6b75d53d90507bef38" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void VertexShaderExceptionalMACTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>VertexShaderExceptionalMACTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="100" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="245" bodyend="248"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Renders MUL, ADD, MAD, MIN, MAX, SLT, SGE, DP3, DPH, DP4 and DST results on exceptional inputs (+-0, +-inf, NaN encodings, denormals and FLT_MAX). Expected values were measured bit-exactly on hardware by reading results back from constant registers (the &quot;VSH Exceptional&quot; tests in nxdk_low_level_nv2a_tests). The &quot;Vertex shader exceptional&quot; suites route the same computations to visible outputs so that the GPU shader translation used by emulators is exercised.</para>
+<para>Each test uses one shader that computes the op into r10, then compares all four lanes of r10 with the expected bits in c[100]: lane i of SGE(r, e) * SGE(e, r) is 1 exactly when the bits of lane i match under the hardware&apos;s sign-magnitude ordering. A DP4 with a one-hot constant picks the lane of the record. Only those exact 0 or 1 values pass through the DP4, which would otherwise flush -0, denormals and NaN payloads.</para>
+<para>Each test renders one row per result component, labeled on the left. The cells in each row are:<itemizedlist>
+<listitem><para>hw: green if the result has the same bits as the hardware result, otherwise red.</para>
+</listitem><listitem><para>rf: the expected value compared with itself. Always green on hardware. An emulator that compares IEEE style draws this red when the expected value is a NaN, meaning that its hw cell cannot judge the row.</para>
+</listitem></itemizedlist>
+</para>
+<para>The bottom row draws raw SGE results (green = 1): SGE(NaN, NaN), SGE(-0, +0) and SGE(+0, denormal). Hardware gives 1, 0, 0. An IEEE comparison gives 0, 1, 0 and one that also treats denormals as zero gives 0, 1, 1.</para>
+<para>Hardware values are verified for constant register readback. The rendered output still has to be confirmed on hardware. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalMACTests</label>
+        <link refid="d4/dac/classVertexShaderExceptionalMACTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>VertexShaderExceptionalMACTests</label>
+        <link refid="d4/dac/classVertexShaderExceptionalMACTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="96" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="96" bodyend="105"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>VertexShaderExceptionalMACTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>host_</name></member>
+      <member refid="d4/dac/classVertexShaderExceptionalMACTests_1afda3dd9c7745bf6b75d53d90507bef38" prot="public" virt="virtual"><scope>VertexShaderExceptionalMACTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d4/dac/classVertexShaderExceptionalMACTests_1ad4e4da3c714de1063a0e9d5ee9edfc4c" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>kSuiteName</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d4/dac/classVertexShaderExceptionalMACTests_1a73754aff4dbfa5bf4c7d7d06c1718f34" prot="private" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>renderer_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>VertexShaderExceptionalMACTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>VertexShaderExceptionalMACTests</scope><name>TearDownTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>TestNames</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>TestSuite</name></member>
+      <member refid="d4/dac/classVertexShaderExceptionalMACTests_1a1c9a9aa262d9674e9262e8f4eadc3c29" prot="public" virt="non-virtual"><scope>VertexShaderExceptionalMACTests</scope><name>VertexShaderExceptionalMACTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>VertexShaderExceptionalMACTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

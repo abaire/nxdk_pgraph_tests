@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d8/d17/classTexcoordCarryoverTests" kind="class" language="C++" prot="public">
+    <compoundname>TexcoordCarryoverTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d7/d8a/texcoord__carryover__tests_8h" local="no">texcoord_carryover_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d8/d17/classTexcoordCarryoverTests_1ad85516cb5e02561d30649f561f293661" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PBKitPlusPlus::VertexShaderProgram &gt;</type>
+        <definition>std::shared_ptr&lt;PBKitPlusPlus::VertexShaderProgram&gt; TexcoordCarryoverTests::prime_const_shader_</definition>
+        <argsstring></argsstring>
+        <name>prime_const_shader_</name>
+        <qualifiedname>TexcoordCarryoverTests::prime_const_shader_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="49" column="19" bodyfile="src/tests/texcoord_carryover_tests.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d17/classTexcoordCarryoverTests_1a83adfeba4f6db95a72f6dad01adde222" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PBKitPlusPlus::VertexShaderProgram &gt;</type>
+        <definition>std::shared_ptr&lt;PBKitPlusPlus::VertexShaderProgram&gt; TexcoordCarryoverTests::prime_attr_shader_</definition>
+        <argsstring></argsstring>
+        <name>prime_attr_shader_</name>
+        <qualifiedname>TexcoordCarryoverTests::prime_attr_shader_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="50" column="19" bodyfile="src/tests/texcoord_carryover_tests.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d17/classTexcoordCarryoverTests_1a94515a5b585eb0e83602717e811fb6ff" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; PBKitPlusPlus::VertexShaderProgram &gt;</type>
+        <definition>std::shared_ptr&lt;PBKitPlusPlus::VertexShaderProgram&gt; TexcoordCarryoverTests::position_and_color_shader_</definition>
+        <argsstring></argsstring>
+        <name>position_and_color_shader_</name>
+        <qualifiedname>TexcoordCarryoverTests::position_and_color_shader_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="51" column="19" bodyfile="src/tests/texcoord_carryover_tests.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1ae936dd1b9c5109f1f8e6ce316b40cd18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TexcoordCarryoverTests::TexcoordCarryoverTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>TexcoordCarryoverTests</name>
+        <qualifiedname>TexcoordCarryoverTests::TexcoordCarryoverTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>Stage3Constant For each draw mode, the left quad is drawn twice (so that every vertex output buffer is covered) with a shader that writes oT3 = (0.25, 0.5, 0.75, 1.0) for every vertex. The right quad is then drawn with a shader that does not write oT3. Texture stage 3 is in PASS_THROUGH mode and the combiner outputs TEX3, so each quad shows its texture coordinate as a color. The right quad matches the left if oT3 carries over from the previous draw.</para>
+</simplesect>
+<simplesect kind="remark"><para>Stage3Reprime For each draw mode, the left quad is drawn twice with oT3 = (1.0, 0.25, 0.0, 1.0), the middle quad twice with oT3 = (0.25, 0.5, 0.75, 1.0), then the right quad is drawn with a shader that does not write oT3. Each quad shows its texture coordinate as a color. The right quad matches the middle quad if oT3 carries over from the most recent draw.</para>
+</simplesect>
+<simplesect kind="remark"><para>Stage3PerVertex For each draw mode, draws 12 points on the top row with oT3 taken from a per-vertex attribute (12 distinct colors), then 12 points in the same columns on the bottom row with a shader that does not write oT3. Each point shows its texture coordinate as a color, so the color of a bottom point identifies the primed vertex it inherited from, if any (e.g., the six vertex round robin pattern observed for fog in <ref refid="d1/d48/classFogCarryoverTests" kindref="compound">FogCarryoverTests</ref>).</para>
+</simplesect>
+<simplesect kind="remark"><para>Stage0Constant As Stage3Constant, for oT0 using texture stage 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>Stage0Reprime As Stage3Reprime, for oT0 using texture stage 0.</para>
+</simplesect>
+<simplesect kind="remark"><para>Stage0PerVertex As Stage3PerVertex, for oT0 using texture stage 0. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="35" column="3" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="91" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1a6774b9c1a3121235628fc5e7e65a1bb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>TexcoordCarryoverTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="37" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="104" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1a31c39c08f4dbecc2e56ce0a853886263" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::TearDownTest</definition>
+        <argsstring>() override</argsstring>
+        <name>TearDownTest</name>
+        <qualifiedname>TexcoordCarryoverTests::TearDownTest</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3">TearDownTest</reimplements>
+        <briefdescription>
+<para>Called after running an individual test within this suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="38" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="114" bodyend="123"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1ad35cbacff6c84c7469d61c0152968cc7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::ConfigureStageOutput</definition>
+        <argsstring>(uint32_t stage)</argsstring>
+        <name>ConfigureStageOutput</name>
+        <qualifiedname>TexcoordCarryoverTests::ConfigureStageOutput</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+<para>Configures the given stage to output its texture coordinate directly as the final color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="41" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="132" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1a0ca40ccf0b5a4d38ef5218b423263f63" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::TestConstant</definition>
+        <argsstring>(const std::string &amp;name, uint32_t stage)</argsstring>
+        <name>TestConstant</name>
+        <qualifiedname>TexcoordCarryoverTests::TestConstant</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="42" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="197" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1a964e823407c4cc43cc064f5a2ec2295f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::TestReprime</definition>
+        <argsstring>(const std::string &amp;name, uint32_t stage)</argsstring>
+        <name>TestReprime</name>
+        <qualifiedname>TexcoordCarryoverTests::TestReprime</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="43" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="241" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1ad45e719cf595b71ed329626f8c83817b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::TestPerVertex</definition>
+        <argsstring>(const std::string &amp;name, uint32_t stage)</argsstring>
+        <name>TestPerVertex</name>
+        <qualifiedname>TexcoordCarryoverTests::TestPerVertex</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>stage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="44" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="295" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d17/classTexcoordCarryoverTests_1a303698572d945bfec4b6cca54409eefa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TexcoordCarryoverTests::ActivateShader</definition>
+        <argsstring>(const std::shared_ptr&lt; PBKitPlusPlus::VertexShaderProgram &gt; &amp;shader)</argsstring>
+        <name>ActivateShader</name>
+        <qualifiedname>TexcoordCarryoverTests::ActivateShader</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; PBKitPlusPlus::VertexShaderProgram &gt; &amp;</type>
+          <declname>shader</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.h" line="46" column="8" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="125" bodyend="129"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior when a texture stage consumes a texture coordinate that the vertex shader never wrote.</para>
+<para>This test investigates behavior observed in &quot;Driv3r&quot; <ulink url="https://github.com/xemu-project/xemu/issues/1614">https://github.com/xemu-project/xemu/issues/1614</ulink> The game draws with texture stage 3 in cube map mode, but its vertex shader never writes oT3.</para>
+<para>These tests check whether an unwritten texture coordinate output keeps a stale value from previously processed vertices (as is the case for the fog coordinate, see <ref refid="d1/d48/classFogCarryoverTests" kindref="compound">FogCarryoverTests</ref>) or uses a fixed default. The behavior of a cube map lookup with a zero length direction is covered separately by TextureCubemapTests::CubemapZeroVector.</para>
+<para>The &quot;Stage&lt;N&gt;*&quot; tests render the texture coordinate directly as a color (texture shader mode PASS_THROUGH, with the combiner outputting TEX&lt;N&gt;), so any carried value is visible without any texture lookup. Each row uses a different submission mode: IB (inline buffer), IE (inline elements), IA (inline array), DA (draw arrays). Quads are used except by PerVertex, which uses points so that no interpolation occurs. &lt;N&gt; is 3 (the Driv3r case) or 0 (to see whether oT0 behaves like oT3).</para>
+<para>Observations from HW:<itemizedlist>
+<listitem><para>Unwritten texture coordinate outputs do not carry over. In every test, every quad and point drawn with a shader that does not write oT0 or oT3 renders black, regardless of the values written by the preceding draws. Not writing a texture coordinate from the vertex shader results in (0, 0, 0) for that coordinate. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+      <node id="1">
+        <label>TexcoordCarryoverTests</label>
+        <link refid="d8/d17/classTexcoordCarryoverTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>TexcoordCarryoverTests</label>
+        <link refid="d8/d17/classTexcoordCarryoverTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/texcoord_carryover_tests.h" line="33" column="1" bodyfile="src/tests/texcoord_carryover_tests.h" bodystart="33" bodyend="52"/>
+    <listofallmembers>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a303698572d945bfec4b6cca54409eefa" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>ActivateShader</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>allow_saving_</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1ad35cbacff6c84c7469d61c0152968cc7" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>ConfigureStageOutput</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>TexcoordCarryoverTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>host_</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a6774b9c1a3121235628fc5e7e65a1bb9" prot="public" virt="virtual"><scope>TexcoordCarryoverTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a94515a5b585eb0e83602717e811fb6ff" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>position_and_color_shader_</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a83adfeba4f6db95a72f6dad01adde222" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>prime_attr_shader_</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1ad85516cb5e02561d30649f561f293661" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>prime_const_shader_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>TexcoordCarryoverTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a31c39c08f4dbecc2e56ce0a853886263" prot="public" virt="virtual"><scope>TexcoordCarryoverTests</scope><name>TearDownTest</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a0ca40ccf0b5a4d38ef5218b423263f63" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TestConstant</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TestNames</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1ad45e719cf595b71ed329626f8c83817b" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TestPerVertex</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1a964e823407c4cc43cc064f5a2ec2295f" prot="private" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TestReprime</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TestSuite</name></member>
+      <member refid="d8/d17/classTexcoordCarryoverTests_1ae936dd1b9c5109f1f8e6ce316b40cd18" prot="public" virt="non-virtual"><scope>TexcoordCarryoverTests</scope><name>TexcoordCarryoverTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>TexcoordCarryoverTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

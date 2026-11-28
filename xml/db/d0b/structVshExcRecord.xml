@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="db/d0b/structVshExcRecord" kind="struct" language="C++" prot="public">
+    <compoundname>VshExcRecord</compoundname>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="db/d0b/structVshExcRecord_1a21e9d253d0e196722180730302862429" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* VshExcRecord::label</definition>
+        <argsstring></argsstring>
+        <name>label</name>
+        <qualifiedname>VshExcRecord::label</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="12" column="14" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d0b/structVshExcRecord_1a1ee57f35893a4f3980e2438e9c535a14" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcRecord::a[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>a</name>
+        <qualifiedname>VshExcRecord::a</qualifiedname>
+        <briefdescription>
+<para>Operands A, B and C, loaded into c[96], c[97] and c[98]. A is also supplied as the v1 attribute. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="14" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d0b/structVshExcRecord_1ade6a4e68ec9184b713a969743ce5b09f" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcRecord::b[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>b</name>
+        <qualifiedname>VshExcRecord::b</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="15" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d0b/structVshExcRecord_1a2d75a7d04c10f5de8d74585140514068" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcRecord::c[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>c</name>
+        <qualifiedname>VshExcRecord::c</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="16" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d0b/structVshExcRecord_1a3432585d50cdf5a8f194f8b10633e5b8" prot="public" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t VshExcRecord::lane</definition>
+        <argsstring></argsstring>
+        <name>lane</name>
+        <qualifiedname>VshExcRecord::lane</qualifiedname>
+        <briefdescription>
+<para>Lane of the test case shader&apos;s result that holds this component. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="18" column="11" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="db/d0b/structVshExcRecord_1ad7c890fcf84007acac133fd7632411a4" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t VshExcRecord::hw</definition>
+        <argsstring></argsstring>
+        <name>hw</name>
+        <qualifiedname>VshExcRecord::hw</qualifiedname>
+        <briefdescription>
+<para>Hardware result bits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="20" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>One output component of a vertex shader op on exceptional inputs, as measured on hardware. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="11" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="11" bodyend="21"/>
+    <listofallmembers>
+      <member refid="db/d0b/structVshExcRecord_1a1ee57f35893a4f3980e2438e9c535a14" prot="public" virt="non-virtual"><scope>VshExcRecord</scope><name>a</name></member>
+      <member refid="db/d0b/structVshExcRecord_1ade6a4e68ec9184b713a969743ce5b09f" prot="public" virt="non-virtual"><scope>VshExcRecord</scope><name>b</name></member>
+      <member refid="db/d0b/structVshExcRecord_1a2d75a7d04c10f5de8d74585140514068" prot="public" virt="non-virtual"><scope>VshExcRecord</scope><name>c</name></member>
+      <member refid="db/d0b/structVshExcRecord_1ad7c890fcf84007acac133fd7632411a4" prot="public" virt="non-virtual"><scope>VshExcRecord</scope><name>hw</name></member>
+      <member refid="db/d0b/structVshExcRecord_1a21e9d253d0e196722180730302862429" prot="public" virt="non-virtual"><scope>VshExcRecord</scope><name>label</name></member>
+      <member refid="db/d0b/structVshExcRecord_1a3432585d50cdf5a8f194f8b10633e5b8" prot="public" virt="non-virtual"><scope>VshExcRecord</scope><name>lane</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

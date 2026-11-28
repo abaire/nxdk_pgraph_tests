@@ -1,0 +1,982 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d8/d72/texcoord__carryover__tests_8cpp" kind="file" language="C++">
+    <compoundname>texcoord_carryover_tests.cpp</compoundname>
+    <includes refid="d7/d8a/texcoord__carryover__tests_8h" local="yes">texcoord_carryover_tests.h</includes>
+    <includes local="no">pbkit/pbkit.h</includes>
+    <includes local="no">shaders/vertex_shader_program.h</includes>
+    <includes refid="d3/dc0/debug__output_8h" local="yes">debug_output.h</includes>
+    <includes refid="df/d43/test__host_8h" local="yes">test_host.h</includes>
+    <includes local="yes">vertex_buffer.h</includes>
+    <includes local="yes">texcoord_carryover_prime_t0_t3_const.vshinc</includes>
+    <includes local="yes">texcoord_carryover_prime_t0_t3_attr.vshinc</includes>
+    <includes local="yes">passthrough_just_position_and_color.vshinc</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>debug_output.h</label>
+        <link refid="d3/dc0/debug__output_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ftp_logger.h</label>
+        <link refid="d0/dad/ftp__logger_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>pbkit_ext.h</label>
+        <link refid="d7/d31/pbkit__ext_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>pgraph_diff_token.h</label>
+        <link refid="d3/d11/pgraph__diff__token_8h_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>test_host.h</label>
+        <link refid="df/d43/test__host_8h_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>test_suite.h</label>
+        <link refid="d6/d7a/test__suite_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/tests/texcoord_carryover_tests.cpp</label>
+        <link refid="d8/d72/texcoord__carryover__tests_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>texcoord_carryover_tests.h</label>
+        <link refid="d7/d8a/texcoord__carryover__tests_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>atomic</label>
+      </node>
+      <node id="24">
+        <label>chrono</label>
+      </node>
+      <node id="12">
+        <label>cstdint</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="29">
+        <label>list</label>
+      </node>
+      <node id="25">
+        <label>map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="16">
+        <label>nv2astate.h</label>
+      </node>
+      <node id="17">
+        <label>nxdk_ext.h</label>
+      </node>
+      <node id="33">
+        <label>passthrough_just_position_and_color.vshinc</label>
+      </node>
+      <node id="15">
+        <label>pbkit/pbkit.h</label>
+      </node>
+      <node id="9">
+        <label>printf/printf.h</label>
+      </node>
+      <node id="18">
+        <label>pushbuffer.h</label>
+      </node>
+      <node id="26">
+        <label>set</label>
+      </node>
+      <node id="30">
+        <label>shaders/vertex_shader_program.h</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="32">
+        <label>texcoord_carryover_prime_t0_t3_attr.vshinc</label>
+      </node>
+      <node id="31">
+        <label>texcoord_carryover_prime_t0_t3_const.vshinc</label>
+      </node>
+      <node id="19">
+        <label>texture_format.h</label>
+      </node>
+      <node id="20">
+        <label>texture_stage.h</label>
+      </node>
+      <node id="14">
+        <label>thread</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="21">
+        <label>vertex_buffer.h</label>
+      </node>
+      <node id="7">
+        <label>windows.h</label>
+      </node>
+      <node id="22">
+        <label>xbox_math_types.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="d1/def/structLabeledDrawMode" prot="public">LabeledDrawMode</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="d8/d72/texcoord__carryover__tests_8cpp_1a9a325db332d24e6105fe3b48a94604c3" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>DrawMode</name>
+        <enumvalue id="d8/d72/texcoord__carryover__tests_8cpp_1a9a325db332d24e6105fe3b48a94604c3ab04568ac318195cbd402c4bfbcc5a834" prot="public">
+          <name>DRAW_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d72/texcoord__carryover__tests_8cpp_1a9a325db332d24e6105fe3b48a94604c3a0843f7a43918ae5bda6160195bdde8a5" prot="public">
+          <name>DRAW_INLINE_BUFFERS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d72/texcoord__carryover__tests_8cpp_1a9a325db332d24e6105fe3b48a94604c3ab67bc5e1b697b99d381001313321fe2f" prot="public">
+          <name>DRAW_INLINE_ELEMENTS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="d8/d72/texcoord__carryover__tests_8cpp_1a9a325db332d24e6105fe3b48a94604c3a671d51935069f8ae8eb51aa9f51b4b6f" prot="public">
+          <name>DRAW_INLINE_ARRAYS</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="25" column="1" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a5392d7e30e05b4e5fc8155e1a0236509" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kPrimeConstShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPrimeConstShader</name>
+        <initializer>= {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="11" column="27" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="11" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a98b0d8ab3421985bef24acc7e04554f9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kPrimeAttrShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPrimeAttrShader</name>
+        <initializer>= {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="15" column="27" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="15" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a6e23e1b805652a4c20453847d5ddd3b2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kPositionAndColorShader[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPositionAndColorShader</name>
+        <initializer>= {
+
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="20" column="27" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a61bc3eab8d3c57820f34154831a9c767" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="d1/def/structLabeledDrawMode" kindref="compound">LabeledDrawMode</ref></type>
+        <definition>LabeledDrawMode kDrawModes[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kDrawModes</name>
+        <initializer>= {
+    {DrawMode::DRAW_INLINE_BUFFERS, &quot;IB&quot;},
+    {DrawMode::DRAW_INLINE_ELEMENTS, &quot;IE&quot;},
+    {DrawMode::DRAW_INLINE_ARRAYS, &quot;IA&quot;},
+    {DrawMode::DRAW_ARRAYS, &quot;DA&quot;},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="32" column="34" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="32" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a89a15adac21b48ac6c7b65cca1e547b3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kBasicAttributes</definition>
+        <argsstring></argsstring>
+        <name>kBasicAttributes</name>
+        <initializer>= TestHost::POSITION | TestHost::DIFFUSE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="39" column="27" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a98988de6ff22bf3d2d1610bb8199b7ca" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kTexcoordAttributes</definition>
+        <argsstring></argsstring>
+        <name>kTexcoordAttributes</name>
+        <initializer>= kBasicAttributes | TestHost::TEXCOORD0 | TestHost::TEXCOORD3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="40" column="27" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a559ead7ff23765865c4d97bc3ff70040" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kPrimeValue[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kPrimeValue</name>
+        <initializer>= {0.25f, 0.5f, 0.75f, 1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="42" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a3b11341c8f1622e185039a9b9511bd1b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kOtherPrimeValue[]</definition>
+        <argsstring>[]</argsstring>
+        <name>kOtherPrimeValue</name>
+        <initializer>= {1.0f, 0.25f, 0.0f, 1.0f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="43" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1abad5d3c0079222e247f918a619a935dd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kQuadSize</definition>
+        <argsstring></argsstring>
+        <name>kQuadSize</name>
+        <initializer>= 64.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="45" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1af964d840ae96eb88074a94e24be23ccf" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kRowSpacing</definition>
+        <argsstring></argsstring>
+        <name>kRowSpacing</name>
+        <initializer>= 100.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="46" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a6f5253bcc409cd30c16fb644f0ae4bc1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kFirstRowTop</definition>
+        <argsstring></argsstring>
+        <name>kFirstRowTop</name>
+        <initializer>= 80.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="47" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1ac5fb8df160ab7abe6c6efd5541b7d342" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>int</type>
+        <definition>int kFirstRowTextRow</definition>
+        <argsstring></argsstring>
+        <name>kFirstRowTextRow</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="49" column="22" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1ace24fe31cf8634017470aeee53da12b1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>int</type>
+        <definition>int kTextRowsPerRow</definition>
+        <argsstring></argsstring>
+        <name>kTextRowsPerRow</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="50" column="22" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1ae71e91ffef9f75ac6d74057aa9bcc9d3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t kNumPoints</definition>
+        <argsstring></argsstring>
+        <name>kNumPoints</name>
+        <initializer>= 12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="52" column="27" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1a6444ecd925977c2760bbedc97d9b0a3e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kPointSize</definition>
+        <argsstring></argsstring>
+        <name>kPointSize</name>
+        <initializer>= 16.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="53" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1ac6c5df1cb1a1462bf4413ccbf453a7fc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kPointsLeft</definition>
+        <argsstring></argsstring>
+        <name>kPointsLeft</name>
+        <initializer>= 100.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="54" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1aac51115eca55f0a827e29d4ae0d2c6c3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kPointsSpacing</definition>
+        <argsstring></argsstring>
+        <name>kPointsSpacing</name>
+        <initializer>= 40.f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="55" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="d8/d72/texcoord__carryover__tests_8cpp_1af35350b9c0442b1b728852ffa2f57e60" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>float</type>
+        <definition>float kPointColors[kNumPoints][4]</definition>
+        <argsstring>[kNumPoints][4]</argsstring>
+        <name>kPointColors</name>
+        <initializer>= {
+    {1.0f, 0.0f, 0.0f, 1.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f, 0.0f, 1.0f},
+    {0.0f, 1.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}, {0.5f, 0.0f, 0.0f, 1.0f},
+    {0.0f, 0.5f, 0.0f, 1.0f}, {0.0f, 0.0f, 0.5f, 1.0f}, {1.0f, 0.5f, 0.0f, 1.0f}, {0.5f, 0.5f, 0.5f, 1.0f},
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="57" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="57" bodyend="61"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d8/d72/texcoord__carryover__tests_8cpp_1a7f5c4f6c06a44648ce3dac3a99d0de9e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void DrawBuffer</definition>
+        <argsstring>(TestHost &amp;host, DrawMode draw_mode, const std::shared_ptr&lt; VertexBuffer &gt; &amp;buffer, const std::vector&lt; uint32_t &gt; &amp;indices, uint32_t attributes, TestHost::DrawPrimitive primitive)</argsstring>
+        <name>DrawBuffer</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>DrawMode</type>
+          <declname>draw_mode</declname>
+        </param>
+        <param>
+          <type>const std::shared_ptr&lt; VertexBuffer &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint32_t &gt; &amp;</type>
+          <declname>indices</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>attributes</declname>
+        </param>
+        <param>
+          <type>TestHost::DrawPrimitive</type>
+          <declname>primitive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="154" column="13" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="154" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d72/texcoord__carryover__tests_8cpp_1a19ec3767fe8a43dc1d61632bfeecc061" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; VertexBuffer &gt;</type>
+        <definition>static std::shared_ptr&lt; VertexBuffer &gt; CreateQuad</definition>
+        <argsstring>(TestHost &amp;host)</argsstring>
+        <name>CreateQuad</name>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="173" column="24" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="173" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d72/texcoord__carryover__tests_8cpp_1ae300f1e9ff7135ad1e691977e6374086" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void PositionQuad</definition>
+        <argsstring>(const std::shared_ptr&lt; VertexBuffer &gt; &amp;buffer, float left, float top, float width, float height)</argsstring>
+        <name>PositionQuad</name>
+        <param>
+          <type>const std::shared_ptr&lt; VertexBuffer &gt; &amp;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>left</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>top</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="183" column="13" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="183" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="d8/d72/texcoord__carryover__tests_8cpp_1a749442dffa44cf4ea313dfb2dd73f4e2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int TextColumn</definition>
+        <argsstring>(float x)</argsstring>
+        <name>TextColumn</name>
+        <param>
+          <type>float</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Returns the column at which text will start at the given X coordinate (columns start at X = 20 + 10 * col). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/texcoord_carryover_tests.cpp" line="195" column="12" bodyfile="src/tests/texcoord_carryover_tests.cpp" bodystart="195" bodyend="195"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;texcoord_carryover_tests.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pbkit/pbkit.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;shaders/vertex_shader_program.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;debug_output.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;test_host.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vertex_buffer.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>off</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPrimeConstShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texcoord_carryover_prime_t0_t3_const.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPrimeAttrShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;texcoord_carryover_prime_t0_t3_attr.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Writes<sp/>position<sp/>and<sp/>colors<sp/>only,<sp/>leaving<sp/>all<sp/>texture<sp/>coordinate<sp/>outputs<sp/>unwritten.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kPositionAndColorShader[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;passthrough_just_position_and_color.vshinc&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/>clang-format<sp/>on</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/>DrawMode<sp/>{<sp/>DRAW_ARRAYS,<sp/>DRAW_INLINE_BUFFERS,<sp/>DRAW_INLINE_ELEMENTS,<sp/>DRAW_INLINE_ARRAYS<sp/>};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="d1/def/structLabeledDrawMode" kindref="compound">LabeledDrawMode</ref><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>DrawMode<sp/>mode;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="d1/def/structLabeledDrawMode" kindref="compound">LabeledDrawMode</ref><sp/>kDrawModes[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>{DrawMode::DRAW_INLINE_BUFFERS,<sp/></highlight><highlight class="stringliteral">&quot;IB&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>{DrawMode::DRAW_INLINE_ELEMENTS,<sp/></highlight><highlight class="stringliteral">&quot;IE&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{DrawMode::DRAW_INLINE_ARRAYS,<sp/></highlight><highlight class="stringliteral">&quot;IA&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>{DrawMode::DRAW_ARRAYS,<sp/></highlight><highlight class="stringliteral">&quot;DA&quot;</highlight><highlight class="normal">},</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kBasicAttributes<sp/>=<sp/>TestHost::POSITION<sp/>|<sp/>TestHost::DIFFUSE;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kTexcoordAttributes<sp/>=<sp/>kBasicAttributes<sp/>|<sp/>TestHost::TEXCOORD0<sp/>|<sp/>TestHost::TEXCOORD3;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kPrimeValue[]<sp/>=<sp/>{0.25f,<sp/>0.5f,<sp/>0.75f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kOtherPrimeValue[]<sp/>=<sp/>{1.0f,<sp/>0.25f,<sp/>0.0f,<sp/>1.0f};</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kQuadSize<sp/>=<sp/>64.f;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kRowSpacing<sp/>=<sp/>100.f;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kFirstRowTop<sp/>=<sp/>80.f;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Text<sp/>rows<sp/>are<sp/>25<sp/>pixels<sp/>apart,<sp/>starting<sp/>at<sp/>Y<sp/>=<sp/>25<sp/>(row<sp/>0).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kFirstRowTextRow<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>kTextRowsPerRow<sp/>=<sp/>4;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>kNumPoints<sp/>=<sp/>12;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kPointSize<sp/>=<sp/>16.f;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kPointsLeft<sp/>=<sp/>100.f;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kPointsSpacing<sp/>=<sp/>40.f;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>kPointColors[kNumPoints][4]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{1.0f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f},<sp/>{0.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f},<sp/>{0.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f},<sp/>{1.0f,<sp/>1.0f,<sp/>0.0f,<sp/>1.0f},</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>{0.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f},<sp/>{1.0f,<sp/>0.0f,<sp/>1.0f,<sp/>1.0f},<sp/>{1.0f,<sp/>1.0f,<sp/>1.0f,<sp/>1.0f},<sp/>{0.5f,<sp/>0.0f,<sp/>0.0f,<sp/>1.0f},</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>{0.0f,<sp/>0.5f,<sp/>0.0f,<sp/>1.0f},<sp/>{0.0f,<sp/>0.0f,<sp/>0.5f,<sp/>1.0f},<sp/>{1.0f,<sp/>0.5f,<sp/>0.0f,<sp/>1.0f},<sp/>{0.5f,<sp/>0.5f,<sp/>0.5f,<sp/>1.0f},</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><ref refid="d8/d17/classTexcoordCarryoverTests_1ae936dd1b9c5109f1f8e6ce316b40cd18" kindref="member">TexcoordCarryoverTests::TexcoordCarryoverTests</ref>(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>std::string<sp/>output_dir,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Config<sp/>&amp;config)</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="d2/d3e/classTestSuite" kindref="compound">TestSuite</ref>(host,<sp/>std::move(output_dir),<sp/></highlight><highlight class="stringliteral">&quot;Texcoord<sp/>carryover&quot;</highlight><highlight class="normal">,<sp/>config)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>stage<sp/>:<sp/>{3u,<sp/>0u})<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>prefix<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Stage&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(stage);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>name<sp/>=<sp/>prefix<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;Constant&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>stage]()<sp/>{<sp/>TestConstant(name,<sp/>stage);<sp/>};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>name<sp/>=<sp/>prefix<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;Reprime&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>stage]()<sp/>{<sp/>TestReprime(name,<sp/>stage);<sp/>};</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>name<sp/>=<sp/>prefix<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;PerVertex&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>tests_[name]<sp/>=<sp/>[</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>name,<sp/>stage]()<sp/>{<sp/>TestPerVertex(name,<sp/>stage);<sp/>};</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/d17/classTexcoordCarryoverTests_1a6774b9c1a3121235628fc5e7e65a1bb9" kindref="member">TexcoordCarryoverTests::Initialize</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38" kindref="member">TestSuite::Initialize</ref>();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>prime_const_shader_<sp/>=</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::make_shared&lt;PBKitPlusPlus::VertexShaderProgram&gt;(kPrimeConstShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kPrimeConstShader));</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>prime_attr_shader_<sp/>=<sp/>std::make_shared&lt;PBKitPlusPlus::VertexShaderProgram&gt;(kPrimeAttrShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kPrimeAttrShader));</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/>position_and_color_shader_<sp/>=</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::make_shared&lt;PBKitPlusPlus::VertexShaderProgram&gt;(kPositionAndColorShader,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(kPositionAndColorShader));</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="d8/d17/classTexcoordCarryoverTests_1a31c39c08f4dbecc2e56ce0a853886263" kindref="member">TexcoordCarryoverTests::TearDownTest</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" kindref="member">TestSuite::TearDownTest</ref>();</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/>host_.DisableTextureStages();</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>host_.SetBlend(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_POINT_SIZE,<sp/>8);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="123"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexcoordCarryoverTests::ActivateShader(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;PBKitPlusPlus::VertexShaderProgram&gt;<sp/>&amp;shader)<sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(shader);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>shader-&gt;PrepareDraw();</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>shader-&gt;Activate();</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexcoordCarryoverTests::ConfigureStageOutput(uint32_t<sp/>stage)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/>ASSERT(stage<sp/>==<sp/>0<sp/>||<sp/>stage<sp/>==<sp/>3);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(uint32_t<sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>4;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetTextureStageEnabled(i,<sp/>i<sp/>==<sp/>stage);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stage<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_PASS_THROUGH);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX0,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetShaderStageProgram(TestHost::STAGE_NONE,<sp/>TestHost::STAGE_NONE,<sp/>TestHost::STAGE_NONE,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TestHost::STAGE_PASS_THROUGH);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner0Just(TestHost::SRC_TEX3);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.SetFinalCombiner1Just(TestHost::SRC_TEX3,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Ensure<sp/>that<sp/>the<sp/>alpha<sp/>of<sp/>the<sp/>texture<sp/>coordinate<sp/>does<sp/>not<sp/>affect<sp/>the<sp/>output<sp/>color.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/>host_.SetBlend(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DrawBuffer(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host,<sp/>DrawMode<sp/>draw_mode,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;buffer,</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;uint32_t&gt;<sp/>&amp;indices,<sp/>uint32_t<sp/>attributes,<sp/>TestHost::DrawPrimitive<sp/>primitive)<sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/>host.SetVertexBuffer(buffer);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(draw_mode)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DrawMode::DRAW_ARRAYS:</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host.DrawArrays(attributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DrawMode::DRAW_INLINE_BUFFERS:</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host.DrawInlineBuffer(attributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DrawMode::DRAW_INLINE_ELEMENTS:</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host.DrawInlineElements16(indices,<sp/>attributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>DrawMode::DRAW_INLINE_ARRAYS:</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>host.DrawInlineArray(attributes,<sp/>primitive);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>CreateQuad(<ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref><sp/>&amp;host)<sp/>{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>buffer<sp/>=<sp/>host.AllocateVertexBuffer(4);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>4;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(1.f,<sp/>1.f,<sp/>1.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>buffer;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PositionQuad(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;buffer,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>width,</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>height)<sp/>{</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>xs[]<sp/>=<sp/>{left,<sp/>left<sp/>+<sp/>width,<sp/>left<sp/>+<sp/>width,<sp/>left};</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ys[]<sp/>=<sp/>{top,<sp/>top,<sp/>top<sp/>+<sp/>height,<sp/>top<sp/>+<sp/>height};</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>4;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(xs[i],<sp/>ys[i],<sp/>0.f);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="192"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>TextColumn(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>x)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">((x<sp/>-<sp/>20.f)<sp/>/<sp/>10.f);<sp/>}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexcoordCarryoverTests::TestConstant(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/>uint32_t<sp/>stage)<sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/>ConfigureStageOutput(stage);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(prime_const_shader_);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF202020);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>left_x<sp/>=<sp/>floorf(host_.GetFramebufferWidthF()<sp/>*<sp/>0.25f<sp/>-<sp/>kQuadSize<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>right_x<sp/>=<sp/>floorf(host_.GetFramebufferWidthF()<sp/>*<sp/>0.75f<sp/>-<sp/>kQuadSize<sp/>*<sp/>0.5f);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prime_buffer<sp/>=<sp/>CreateQuad(host_);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test_buffer<sp/>=<sp/>CreateQuad(host_);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;uint32_t&gt;<sp/>indices{0,<sp/>1,<sp/>2,<sp/>3};</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/>prime_const_shader_-&gt;SetUniform4F(0,<sp/>kPrimeValue);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>kFirstRowTextRow;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>kFirstRowTop;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;mode<sp/>:<sp/>kDrawModes)<sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>PositionQuad(prime_buffer,<sp/>left_x,<sp/>top,<sp/>kQuadSize,<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>PositionQuad(test_buffer,<sp/>right_x,<sp/>top,<sp/>kQuadSize,<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Prime<sp/>twice<sp/>to<sp/>ensure<sp/>that<sp/>every<sp/>vertex<sp/>output<sp/>slot<sp/>has<sp/>been<sp/>written.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(prime_const_shader_);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>prime_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>prime_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(position_and_color_shader_);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>test_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>1,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>mode.name);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>kTextRowsPerRow;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kRowSpacing;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>TextColumn(left_x),<sp/></highlight><highlight class="stringliteral">&quot;primed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>TextColumn(right_x),<sp/></highlight><highlight class="stringliteral">&quot;oT%u<sp/>unwritten&quot;</highlight><highlight class="normal">,<sp/>stage);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="239"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexcoordCarryoverTests::TestReprime(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/>uint32_t<sp/>stage)<sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/>ConfigureStageOutput(stage);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(prime_const_shader_);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF202020);</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>fb_width<sp/>=<sp/>host_.GetFramebufferWidthF();</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>xs[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>floorf(fb_width<sp/>*<sp/>(1.f<sp/>/<sp/>6.f)<sp/>-<sp/>kQuadSize<sp/>*<sp/>0.5f),</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>floorf(fb_width<sp/>*<sp/>0.5f<sp/>-<sp/>kQuadSize<sp/>*<sp/>0.5f),</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>floorf(fb_width<sp/>*<sp/>(5.f<sp/>/<sp/>6.f)<sp/>-<sp/>kQuadSize<sp/>*<sp/>0.5f),</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>};</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>first_buffer<sp/>=<sp/>CreateQuad(host_);</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>second_buffer<sp/>=<sp/>CreateQuad(host_);</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test_buffer<sp/>=<sp/>CreateQuad(host_);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;uint32_t&gt;<sp/>indices{0,<sp/>1,<sp/>2,<sp/>3};</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>kFirstRowTextRow;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>kFirstRowTop;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;mode<sp/>:<sp/>kDrawModes)<sp/>{</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>PositionQuad(first_buffer,<sp/>xs[0],<sp/>top,<sp/>kQuadSize,<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>PositionQuad(second_buffer,<sp/>xs[1],<sp/>top,<sp/>kQuadSize,<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>PositionQuad(test_buffer,<sp/>xs[2],<sp/>top,<sp/>kQuadSize,<sp/>kQuadSize);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/>prime_const_shader_-&gt;SetUniform4F(0,<sp/>kOtherPrimeValue);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(prime_const_shader_);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>first_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>first_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>prime_const_shader_-&gt;SetUniform4F(0,<sp/>kPrimeValue);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(prime_const_shader_);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>second_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>second_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(position_and_color_shader_);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>test_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_QUADS);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>1,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>mode.name);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>kTextRowsPerRow;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kRowSpacing;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>TextColumn(xs[0]),<sp/></highlight><highlight class="stringliteral">&quot;prime<sp/>1&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>TextColumn(xs[1]),<sp/></highlight><highlight class="stringliteral">&quot;prime<sp/>2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>TextColumn(xs[2]),<sp/></highlight><highlight class="stringliteral">&quot;oT%u<sp/>unwritten&quot;</highlight><highlight class="normal">,<sp/>stage);</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="293"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>TexcoordCarryoverTests::TestPerVertex(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name,<sp/>uint32_t<sp/>stage)<sp/>{</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/>ConfigureStageOutput(stage);</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/>host_.SetVertexShaderProgram(prime_attr_shader_);</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/>host_.PrepareDraw(0xFF202020);</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/>Pushbuffer::Begin();</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Point<sp/>size<sp/>is<sp/>in<sp/>1/8th<sp/>pixel<sp/>units.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/>Pushbuffer::Push(NV097_SET_POINT_SIZE,<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">uint32_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(kPointSize<sp/>*<sp/>8.f));</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/>Pushbuffer::End();</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>prime_buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumPoints);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/>prime_buffer-&gt;SetTexCoord0Count(4);</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/>prime_buffer-&gt;SetTexCoord3Count(4);</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>prime_buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0u;<sp/>i<sp/>&lt;<sp/>kNumPoints;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(1.f,<sp/>1.f,<sp/>1.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;SetTexCoord0(kPointColors[i][0],<sp/>kPointColors[i][1],<sp/>kPointColors[i][2],<sp/>kPointColors[i][3]);</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;SetTexCoord3(kPointColors[i][0],<sp/>kPointColors[i][1],<sp/>kPointColors[i][2],<sp/>kPointColors[i][3]);</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/>prime_buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>test_buffer<sp/>=<sp/>host_.AllocateVertexBuffer(kNumPoints);</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>test_buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0u;<sp/>i<sp/>&lt;<sp/>kNumPoints;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;SetDiffuse(1.f,<sp/>1.f,<sp/>1.f,<sp/>1.f);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/>test_buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/>std::vector&lt;uint32_t&gt;<sp/>indices;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0u;<sp/>i<sp/>&lt;<sp/>kNumPoints;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/>indices.push_back(i);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>text_row<sp/>=<sp/>kFirstRowTextRow;</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>top<sp/>=<sp/>kFirstRowTop;</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;mode<sp/>:<sp/>kDrawModes)<sp/>{</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>prime_y<sp/>=<sp/>top;</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>test_y<sp/>=<sp/>top<sp/>+<sp/>28.f;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>position<sp/>=<sp/>[](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;VertexBuffer&gt;<sp/>&amp;buffer,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>y)<sp/>{</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>vertex<sp/>=<sp/>buffer-&gt;Lock();</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0u;<sp/>i<sp/>&lt;<sp/>kNumPoints;<sp/>++i,<sp/>++vertex)<sp/>{</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vertex-&gt;SetPosition(kPointsLeft<sp/>+<sp/>kPointsSpacing<sp/>*<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i),<sp/>y,<sp/>0.f);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>buffer-&gt;Unlock();</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/>position(prime_buffer,<sp/>prime_y);</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/>position(test_buffer,<sp/>test_y);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(prime_attr_shader_);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>prime_buffer,<sp/>indices,<sp/>kTexcoordAttributes,<sp/>TestHost::PRIMITIVE_POINTS);</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>ActivateShader(position_and_color_shader_);</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>DrawBuffer(host_,<sp/>mode.mode,<sp/>test_buffer,<sp/>indices,<sp/>kBasicAttributes,<sp/>TestHost::PRIMITIVE_POINTS);</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>pb_printat(text_row,<sp/>1,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>mode.name);</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>host_.PBKitBusyWait();</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/>text_row<sp/>+=<sp/>kTextRowsPerRow;</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/>top<sp/>+=<sp/>kRowSpacing;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/>pb_printat(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/>name.c_str());</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/>pb_printat(1,<sp/>1,<sp/></highlight><highlight class="stringliteral">&quot;Top:<sp/>oT%u<sp/>primed<sp/>per<sp/>vertex.<sp/>Bottom:<sp/>unwritten&quot;</highlight><highlight class="normal">,<sp/>stage);</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/>pb_draw_text_screen();</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><ref refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" kindref="member">FinishDraw</ref>(name);</highlight></codeline>
+<codeline lineno="367"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="src/tests/texcoord_carryover_tests.cpp"/>
+  </compounddef>
+</doxygen>

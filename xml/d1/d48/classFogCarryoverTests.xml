@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d1/d48/classFogCarryoverTests" kind="class" language="C++" prot="public">
+    <compoundname>FogCarryoverTests</compoundname>
+    <basecompoundref refid="d2/d3e/classTestSuite" prot="public" virt="non-virtual">TestSuite</basecompoundref>
+    <includes refid="d2/d3f/fog__carryover__tests_8h" local="no">fog_carryover_tests.h</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1a3ffed5068a7e012b6afb91a4862d877e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FogCarryoverTests::FogCarryoverTests</definition>
+        <argsstring>(TestHost &amp;host, std::string output_dir, const Config &amp;config)</argsstring>
+        <name>FogCarryoverTests</name>
+        <qualifiedname>FogCarryoverTests::FogCarryoverTests</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>output_dir</declname>
+        </param>
+        <param>
+          <type>const <ref refid="da/d85/structTestSuite_1_1Config" kindref="compound">Config</ref> &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="remark"><para>FogCarryover The left column triangles are rendered with the fog coordinate explicitly passed through from the vertex by the shader. The right column triangles do not specify the fog coordinate at all.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverPoints Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverLines Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverLineLoop Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverLineStrip Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverTris Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverTriStrip Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverTriFan Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverQuads Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverQuadStrip Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverPoly Renders a series of primitives using various draw modes on the left, setting fog coordinates. Then renders a quad using the same draw mode on the right without specifying a fog coordinate at all. The fog mode is set to EXP.</para>
+</simplesect>
+<simplesect kind="remark"><para>CarryoverNopDraw For each draw mode, renders a row of three quads. The left quad is a reference drawn with the nop draw&apos;s fog coordinate (red). The middle quad is drawn normally with a fog coordinate that produces no fog (blue). The middle quad is then drawn again with the nop draw&apos;s fog coordinate while color writes, depth writes, depth test, and stencil test are all disabled, so the draw produces no visible output. Finally a quad on the right is drawn without specifying a fog coordinate. If the right quad matches the middle quad, the nop draw did not update the carried fog; if it matches the left quad, the nop draw updated it. The color/zeta limit error check is disabled around the nop draw, with waits for the pushbuffer to become idle on either side.</para>
+</simplesect>
+On HW, the right quad is red in every row, so the nop draw updates the carried fog even though it cannot write anything.</para>
+<para>Carried fog is tracked per vertex (see CarryoverVertexSlots), so every primitive has the same number of vertices as the right quad. When the nop draw was a 3-vertex triangle, the right quad on HW was red with a blue gradient from its first vertex, i.e., one of its vertices inherited from the visible draw instead of the nop draw. Because of the idle waits, the results do not follow the six vertex pattern seen in CarryoverVertexSlots.</para>
+<para><simplesect kind="remark"><para>CarryoverVertexSlots Probes how carried fog values are associated with vertices. Each row draws a single priming batch of points, all stacked at the leftmost position: 8 + k blue (unfogged) points followed by one red (fogged) marker point, where k is the row label. Sixteen points are then drawn in a separate batch to the right without specifying a fog coordinate, so each shows the fog value it inherited. Points are used so that every inherited value is visible without interpolation.</para>
+</simplesect>
+On HW, points 5 and 11 (counting from 0) are red in every row and the rest are blue. The result does not depend on k, so the association continues across draws rather than restarting with each one. This is consistent with six carried values used round robin.</para>
+<para><simplesect kind="remark"><para>CarryoverArrayDisabledFogCoord Fixed function EXP fog with NV097_SET_FOG_GEN_MODE_V_FOG_X (the fog coordinate is consumed directly), drawn with NV097_DRAW_ARRAYS. A control row of small immediate mode quads is drawn first: one with fog disabled to show the unfogged geometry color, one with the initializer fog coordinate and one with the shared fog coordinate. The initializer quad is drawn last so that the context fog coordinate is left at the initializer value, which is not used by any other draw. Two rows are then drawn, one per variant fog coordinate, each with three quads:<orderedlist>
+<listitem><para>Reference: the variant fog coordinate is supplied for every vertex via the vertex array.</para>
+</listitem><listitem><para>The vertex array is disabled and SetFogCoord is NOT called, showing which carried value is used.</para>
+</listitem><listitem><para>The vertex array is disabled after SetFogCoord is called with a coordinate shared by both rows. The fog coordinates are listed on screen. Comparing quad 2 to the other quads identifies where the fog coordinate is taken from when the array is absent. </para>
+</listitem></orderedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="30" column="3" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="167" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1a7c5c387322f3838a6732b20b0fbacacb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void FogCarryoverTests::Initialize</definition>
+        <argsstring>() override</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>FogCarryoverTests::Initialize</qualifiedname>
+        <reimplements refid="d2/d3e/classTestSuite_1a1c4756eb905d6d4d35e1630107396c38">Initialize</reimplements>
+        <briefdescription>
+<para>Called to initialize the test suite. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="32" column="8" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="187" bodyend="209"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1a021cd14a9dc57ef354d9dfb6443119a3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogCarryoverTests::Test</definition>
+        <argsstring>()</argsstring>
+        <name>Test</name>
+        <qualifiedname>FogCarryoverTests::Test</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="35" column="8" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="211" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1ac06e4d5daf4ecf1f5c1df4e980321d04" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogCarryoverTests::TestPrimitive</definition>
+        <argsstring>(const std::string &amp;name, TestHost::DrawPrimitive primitive)</argsstring>
+        <name>TestPrimitive</name>
+        <qualifiedname>FogCarryoverTests::TestPrimitive</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>TestHost::DrawPrimitive</type>
+          <declname>primitive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="36" column="8" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="601" bodyend="734"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1a1612ea1daeb3de0974e3b670c9892cb0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogCarryoverTests::TestNopDraw</definition>
+        <argsstring>()</argsstring>
+        <name>TestNopDraw</name>
+        <qualifiedname>FogCarryoverTests::TestNopDraw</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="37" column="8" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="736" bodyend="850"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1a99032e59e53392d76fd1784b9af5a314" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogCarryoverTests::TestVertexSlots</definition>
+        <argsstring>()</argsstring>
+        <name>TestVertexSlots</name>
+        <qualifiedname>FogCarryoverTests::TestVertexSlots</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="38" column="8" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="852" bodyend="926"/>
+      </memberdef>
+      <memberdef kind="function" id="d1/d48/classFogCarryoverTests_1ac998d647ad536a5d758cf47372ea8e56" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void FogCarryoverTests::TestArrayDisabledFogCoord</definition>
+        <argsstring>()</argsstring>
+        <name>TestArrayDisabledFogCoord</name>
+        <qualifiedname>FogCarryoverTests::TestArrayDisabledFogCoord</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/fog_carryover_tests.h" line="39" column="8" bodyfile="src/tests/fog_carryover_tests.cpp" bodystart="928" bodyend="1050"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Tests the behavior when fog is enabled but the fog coordinate is not specified by the shader.</para>
+<para>This test reproduces behavior observed in &quot;Blade 2&quot; <ulink url="https://github.com/xemu-project/xemu/issues/1852">https://github.com/xemu-project/xemu/issues/1852</ulink></para>
+<para>Observations from HW:<itemizedlist>
+<listitem><para>A draw that cannot write anything (color, depth, and stencil all disabled) still updates the carried fog values.</para>
+</listitem><listitem><para>Carried fog is tracked per vertex rather than as a single value. For vertices submitted inline (immediate mode SET_VERTEX, inline buffers, and inline arrays) a vertex that does not write fog inherits the fog of the vertex six positions earlier in submission order. The association continues across draws and does not depend on whether the primitives are points or triangles. This is consistent with six vertex output buffers used round robin.</para>
+</listitem><listitem><para>For vertices fetched from memory (draw arrays and inline elements) the inherited values have no stable pattern and differ between runs, presumably depending on the timing of vertex fetch relative to shader execution.</para>
+</listitem><listitem><para>Waiting for the pushbuffer to become idle between draws changes the association; the six vertex pattern above does not predict the results of CarryoverNopDraw, which waits between its draws. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FogCarryoverTests</label>
+        <link refid="d1/d48/classFogCarryoverTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FogCarryoverTests</label>
+        <link refid="d1/d48/classFogCarryoverTests"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NV2AState</label>
+      </node>
+      <node id="5">
+        <label>PGRAPHDiffToken</label>
+        <link refid="dd/df8/structPGRAPHDiffToken"/>
+      </node>
+      <node id="3">
+        <label>TestHost</label>
+        <link refid="d6/d80/classTestHost"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TestSuite</label>
+        <link refid="d2/d3e/classTestSuite"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>host_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>pgraph_diff_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/tests/fog_carryover_tests.h" line="28" column="1" bodyfile="src/tests/fog_carryover_tests.h" bodystart="28" bodyend="40"/>
+    <listofallmembers>
+      <member refid="d2/d3e/classTestSuite_1a1bb705ad4344ceb8237e0cb60f1c352d" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>allow_saving_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a28742e0a5438926d43d0814c9694836f" prot="public" virt="virtual"><scope>FogCarryoverTests</scope><name>Deinitialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7ce09368bd59391f6a9685224cdb8a43" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>delay_milliseconds_between_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a165d9da1dec525ffdd299e2dcfaec2ef" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>DisableTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac65ad3a2e3cfa4fe555fc1fa95e0a60b" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>enable_pgraph_region_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a391930dfd9c57a4e7cbe8734120dfc73" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>enable_progress_log_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac2af46c389b567bb3c2aed2829e7450e" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>FinishDraw</name></member>
+      <member refid="d2/d3e/classTestSuite_1a9208c80e870bdb3e0f7fa6d53053c15a" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>FinishDrawNoSave</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1a3ffed5068a7e012b6afb91a4862d877e" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>FogCarryoverTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a518ce9987a1a5037f9083651c056c746" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>ftp_logger_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a7059e61572d914cff83ae22da3ea1957" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>HasEnabledTests</name></member>
+      <member refid="d2/d3e/classTestSuite_1a454f5c2050b66b598a2f2fcffd45ae48" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>host_</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1a7c5c387322f3838a6732b20b0fbacacb" prot="public" virt="virtual"><scope>FogCarryoverTests</scope><name>Initialize</name></member>
+      <member refid="d2/d3e/classTestSuite_1ad87fbc52b4011398c9adb39ab62bb018" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>interactive_only_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a3158c3988345729a898ef5f9290ad00f" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>interactive_only_tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac26e1edd73faf7d732c0e41e816d654e" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>IsInteractiveOnly</name></member>
+      <member refid="d2/d3e/classTestSuite_1a15144024801f2f885727f7926c826c87" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>Name</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2e81678d3ac733d517616bd67a837465" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>output_dir_</name></member>
+      <member refid="d2/d3e/classTestSuite_1adc29cb178f12adee9cbabd1451a0d3b1" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>pgraph_diff_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a2ac26a0f362b04bdf3b29c2e68e24cb9" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>Run</name></member>
+      <member refid="d2/d3e/classTestSuite_1a35c74b1c3e18a066517b885c23323dd9" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>RunAll</name></member>
+      <member refid="d2/d3e/classTestSuite_1a0d580dbb0e1630ecdc989d5c852e8f91" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>SetDefaultTextureFormat</name></member>
+      <member refid="d2/d3e/classTestSuite_1a94c9bf323dd57396c2768e21690bf0d7" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>SetSavingAllowed</name></member>
+      <member refid="d2/d3e/classTestSuite_1af001b219ae1d7798d9df21b5bb8b9976" prot="public" virt="virtual"><scope>FogCarryoverTests</scope><name>SetupTest</name></member>
+      <member refid="d2/d3e/classTestSuite_1ac59f02a9549a146ed62e6185c0acec8b" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>suite_name_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a92d01e0978cf79ad0883532c73434515" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TagNV2ATrace</name></member>
+      <member refid="d2/d3e/classTestSuite_1a4a67d49ad17fafd018be9871cc0910c3" prot="public" virt="virtual"><scope>FogCarryoverTests</scope><name>TearDownTest</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1a021cd14a9dc57ef354d9dfb6443119a3" prot="private" virt="non-virtual"><scope>FogCarryoverTests</scope><name>Test</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1ac998d647ad536a5d758cf47372ea8e56" prot="private" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestArrayDisabledFogCoord</name></member>
+      <member refid="d2/d3e/classTestSuite_1a80f0bc74d8d511547708827e5a549a63" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestNames</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1a1612ea1daeb3de0974e3b670c9892cb0" prot="private" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestNopDraw</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1ac06e4d5daf4ecf1f5c1df4e980321d04" prot="private" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestPrimitive</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1eaaf3893135b062cd0a09d2a1a2ac0f" prot="protected" virt="non-virtual"><scope>FogCarryoverTests</scope><name>tests_</name></member>
+      <member refid="d2/d3e/classTestSuite_1a57b1ed01dd40328456bf0854043ca68b" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestSuite</name></member>
+      <member refid="d2/d3e/classTestSuite_1a5957b74827526f04ff525b750decafd7" prot="public" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestSuite</name></member>
+      <member refid="d1/d48/classFogCarryoverTests_1a99032e59e53392d76fd1784b9af5a314" prot="private" virt="non-virtual"><scope>FogCarryoverTests</scope><name>TestVertexSlots</name></member>
+      <member refid="d2/d3e/classTestSuite_1a1743f0a04119de901cb819111d51192d" prot="public" virt="virtual"><scope>FogCarryoverTests</scope><name>~TestSuite</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

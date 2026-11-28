@@ -1,0 +1,5 @@
+<map id="FlatMeshGridModel" name="FlatMeshGridModel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="23,98,172,126"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,190,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,64,100,98,95,96,96,68"/>
+</map>

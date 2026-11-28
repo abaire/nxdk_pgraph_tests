@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.15.0" xml:lang="en-US">
+  <compounddef id="d6/d73/classVshExceptionalValueRenderer" kind="class" language="C++" prot="public">
+    <compoundname>VshExceptionalValueRenderer</compoundname>
+    <includes refid="d0/d62/vertex__shader__exceptional__value__tests_8h" local="no">vertex_shader_exceptional_value_tests.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="d6/d73/classVshExceptionalValueRenderer_1af33d72c770d47e55faf61ea96747d9c1" prot="private" static="no" mutable="no">
+        <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+        <definition>TestHost&amp; VshExceptionalValueRenderer::host_</definition>
+        <argsstring></argsstring>
+        <name>host_</name>
+        <qualifiedname>VshExceptionalValueRenderer::host_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="71" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="d6/d73/classVshExceptionalValueRenderer_1a66e72d09e7c652494a50b1d7392ffbfe" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VshExceptionalValueRenderer::VshExceptionalValueRenderer</definition>
+        <argsstring>(TestHost &amp;host)</argsstring>
+        <name>VshExceptionalValueRenderer</name>
+        <qualifiedname>VshExceptionalValueRenderer::VshExceptionalValueRenderer</qualifiedname>
+        <param>
+          <type><ref refid="d6/d80/classTestHost" kindref="compound">TestHost</ref> &amp;</type>
+          <declname>host</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="56" column="12" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d73/classVshExceptionalValueRenderer_1a17646ce014422387bf223e5ad37efe71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VshExceptionalValueRenderer::Initialize</definition>
+        <argsstring>()</argsstring>
+        <name>Initialize</name>
+        <qualifiedname>VshExceptionalValueRenderer::Initialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="58" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d73/classVshExceptionalValueRenderer_1ad4b2364bc742b82a2bbdcbb226d5944e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VshExceptionalValueRenderer::Draw</definition>
+        <argsstring>(const VshExcTestCase &amp;test_case)</argsstring>
+        <name>Draw</name>
+        <qualifiedname>VshExceptionalValueRenderer::Draw</qualifiedname>
+        <param>
+          <type>const <ref refid="db/d2f/structVshExcTestCase" kindref="compound">VshExcTestCase</ref> &amp;</type>
+          <declname>test_case</declname>
+        </param>
+        <briefdescription>
+<para>Renders <computeroutput>test_case</computeroutput>. The caller is responsible for calling FinishDraw. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="61" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="157" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d73/classVshExceptionalValueRenderer_1a0ec885e69233fb42acdc07a5460ad8a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VshExceptionalValueRenderer::Draw</definition>
+        <argsstring>(const VshExcArlTestCase &amp;test_case)</argsstring>
+        <name>Draw</name>
+        <qualifiedname>VshExceptionalValueRenderer::Draw</qualifiedname>
+        <param>
+          <type>const <ref refid="df/d06/structVshExcArlTestCase" kindref="compound">VshExcArlTestCase</ref> &amp;</type>
+          <declname>test_case</declname>
+        </param>
+        <briefdescription>
+<para>Renders <computeroutput>test_case</computeroutput>. The caller is responsible for calling FinishDraw. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="64" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="194" bodyend="243"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="d6/d73/classVshExceptionalValueRenderer_1a8dd8dc16b54183d95b18fba1ff96034b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VshExceptionalValueRenderer::SetShader</definition>
+        <argsstring>(const uint32_t *shader, uint32_t size)</argsstring>
+        <name>SetShader</name>
+        <qualifiedname>VshExceptionalValueRenderer::SetShader</qualifiedname>
+        <param>
+          <type>const uint32_t *</type>
+          <declname>shader</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="67" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="83" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="d6/d73/classVshExceptionalValueRenderer_1af1e64d09d8ab566d0b647ebe31d585c6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void VshExceptionalValueRenderer::DrawComparatorRow</definition>
+        <argsstring>()</argsstring>
+        <name>DrawComparatorRow</name>
+        <qualifiedname>VshExceptionalValueRenderer::DrawComparatorRow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="68" column="8" bodyfile="src/tests/vertex_shader_exceptional_value_tests.cpp" bodystart="127" bodyend="155"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Draws one test of exceptional value records. Shared by the &quot;Vertex shader exceptional&quot; suites. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/tests/vertex_shader_exceptional_value_tests.h" line="54" column="1" bodyfile="src/tests/vertex_shader_exceptional_value_tests.h" bodystart="54" bodyend="72"/>
+    <listofallmembers>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1ad4b2364bc742b82a2bbdcbb226d5944e" prot="public" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>Draw</name></member>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1a0ec885e69233fb42acdc07a5460ad8a2" prot="public" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>Draw</name></member>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1af1e64d09d8ab566d0b647ebe31d585c6" prot="private" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>DrawComparatorRow</name></member>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1af33d72c770d47e55faf61ea96747d9c1" prot="private" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>host_</name></member>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1a17646ce014422387bf223e5ad37efe71" prot="public" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>Initialize</name></member>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1a8dd8dc16b54183d95b18fba1ff96034b" prot="private" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>SetShader</name></member>
+      <member refid="d6/d73/classVshExceptionalValueRenderer_1a66e72d09e7c652494a50b1d7392ffbfe" prot="public" virt="non-virtual"><scope>VshExceptionalValueRenderer</scope><name>VshExceptionalValueRenderer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
