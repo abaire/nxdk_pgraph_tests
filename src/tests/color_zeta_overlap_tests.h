@@ -24,6 +24,11 @@ class ColorZetaOverlapTests : public TestSuite {
   void TestDepthIntoColor();
   void TestSwap();
   void TestZetaRebindAfterColorMove(bool color_onto_zeta);
+  void TestColorMaskedZetaOntoColor();
+  void TestReadOnlyZetaOntoColor();
+
+  //! Renders the given 128x128 linear A8R8G8B8 surface to the center of the framebuffer at 2x scale.
+  void DrawOverlapSurfaceToFramebuffer(uint8_t* surface);
 
   // Tests the behavior identified in xemu #405
   void TestXemuAdjacentSurfaceWithClipOffset(bool swizzle);

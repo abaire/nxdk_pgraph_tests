@@ -27,11 +27,17 @@ static constexpr char kXemuAdjacentWithClipOffsetTest[] = "AdjacentWithClipOffse
 static constexpr char kXemuAdjacentWithAATest[] = "AdjacentWithAA";
 static constexpr char kZetaOntoColorRebindTestName[] = "ZetaOntoColorRebind";
 static constexpr char kColorOntoZetaRebindTestName[] = "ColorOntoZetaRebind";
+static constexpr char kColorMaskedZetaOntoColorTestName[] = "ColorMaskedZetaOntoColor";
+static constexpr char kReadOnlyZetaOntoColorTestName[] = "ReadOnlyZetaOntoColor";
 
 static constexpr float kLeft = -2.75f;
 static constexpr float kRight = 2.75f;
 static constexpr float kTop = 1.75f;
 static constexpr float kBottom = -1.75f;
+
+static constexpr uint32_t kAllColorChannels =
+    NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE | NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
+    NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE | NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE;
 
 /**
  * Initializes the test suite and creates test cases.
@@ -89,6 +95,25 @@ static constexpr float kBottom = -1.75f;
  *   Identical to ZetaOntoColorRebind, except that the zeta target remains at Z's address throughout and the color
  *   target is moved onto Z's address directly (a single zero-area draw is issued while both targets share it). The
  *   left (near) half shows the red backdrop and the right (far) half is green.
+ *
+ * @tc ColorMaskedZetaOntoColor
+ *   Uses a 128x128 A8R8G8B8 color surface (C) and a Z24S8 zeta surface (Z), both linear and located in texture memory.
+ *   C is filled with a red backdrop with color writes, depth test (ALWAYS) and depth writes enabled. The zeta target is
+ *   then moved onto C's address without modifying the color target, color writes are disabled, and a quad covering the
+ *   left half of the surface is drawn with depth test ALWAYS and depth writes enabled. C is rendered to the framebuffer
+ *   at 2x scale, and the CPU-read values of one pixel from the middle of the left half and one from the middle of the
+ *   right half are printed below it. The left half is yellow-green and reads 0xDC87FC33: the upper 24 bits hold the
+ *   written depth and the low byte (stencil in Z24S8) retains the backdrop's 0x33. The right half retains the red
+ *   backdrop and reads 0xFFAA3333.
+ *
+ * @tc ReadOnlyZetaOntoColor
+ *   Uses the same surfaces as ColorMaskedZetaOntoColor. The left half of C is filled with 0x00000000 and the right half
+ *   with 0xFFFFFFFF (the minimum and maximum Z24S8 depth values when the memory is interpreted as zeta). The zeta
+ *   target is then moved onto C's address, depth writes are disabled, and a green quad covering the whole surface is
+ *   drawn at a depth between near and far with depth test LESS and color writes enabled. C is rendered to the
+ *   framebuffer at 2x scale, and the CPU-read values of one pixel from the middle of each half are printed below it.
+ *   The depth test reads the shared memory: the left half fails the test and remains black (0x00000000) and the right
+ *   half passes and is green (0xFF33FF33).
  */
 ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost& host, std::string output_dir, const Config& config)
     : TestSuite(host, std::move(output_dir), "Color zeta overlap", config) {
@@ -97,6 +122,8 @@ ColorZetaOverlapTests::ColorZetaOverlapTests(TestHost& host, std::string output_
   tests_[kSwapTestName] = [this]() { TestSwap(); };
   tests_[kZetaOntoColorRebindTestName] = [this]() { TestZetaRebindAfterColorMove(false); };
   tests_[kColorOntoZetaRebindTestName] = [this]() { TestZetaRebindAfterColorMove(true); };
+  tests_[kColorMaskedZetaOntoColorTestName] = [this]() { TestColorMaskedZetaOntoColor(); };
+  tests_[kReadOnlyZetaOntoColorTestName] = [this]() { TestReadOnlyZetaOntoColor(); };
 
   for (auto swizzle : {false, true}) {
     std::string suffix = swizzle ? "_sz" : "_l";
@@ -236,15 +263,11 @@ void ColorZetaOverlapTests::TestSwap() {
 void ColorZetaOverlapTests::TestZetaRebindAfterColorMove(bool color_onto_zeta) {
   static constexpr uint32_t kSurfaceSize = 128;
   static constexpr float kSurfaceSizeF = static_cast<float>(kSurfaceSize);
-  static constexpr float kDisplaySize = kSurfaceSizeF * 2.f;
   static constexpr uint32_t kBackdropColor = 0xFF3333AA;
   static constexpr uint32_t kTestColor = 0xFF33FF33;
   static constexpr float kNearZ = -1.f;
   static constexpr float kMidZ = 0.f;
   static constexpr float kFarZ = 1.f;
-  static constexpr uint32_t kAllColorChannels =
-      NV097_SET_COLOR_MASK_ALPHA_WRITE_ENABLE | NV097_SET_COLOR_MASK_RED_WRITE_ENABLE |
-      NV097_SET_COLOR_MASK_GREEN_WRITE_ENABLE | NV097_SET_COLOR_MASK_BLUE_WRITE_ENABLE;
 
   host_.PrepareDraw(0xFE242424);
 
@@ -310,6 +333,145 @@ void ColorZetaOverlapTests::TestZetaRebindAfterColorMove(bool color_onto_zeta) {
 
   host_.RenderToSurfaceEnd();
 
+  DrawOverlapSurfaceToFramebuffer(color_surface);
+
+  const char* test_name = color_onto_zeta ? kColorOntoZetaRebindTestName : kZetaOntoColorRebindTestName;
+  pb_printat(0, 0, "%s", test_name);
+  pb_printat(1, 0, "Zeta: left near, right far");
+  pb_printat(2, 0, "Green drawn at mid depth with LESS");
+  pb_printat(15, 18, "Near");
+  pb_printat(15, 38, "Far");
+  pb_draw_text_screen();
+
+  FinishDraw(test_name);
+}
+
+void ColorZetaOverlapTests::TestColorMaskedZetaOntoColor() {
+  static constexpr uint32_t kSurfaceSize = 128;
+  static constexpr float kSurfaceSizeF = static_cast<float>(kSurfaceSize);
+  static constexpr uint32_t kBackdropColor = 0xFF3333AA;
+  static constexpr float kMidZ = 0.f;
+  static constexpr float kFarZ = 1.f;
+
+  host_.PrepareDraw(0xFE242424);
+
+  uint8_t* color_surface = host_.GetTextureMemoryForStage(0);
+  uint8_t* zeta_surface = host_.GetTextureMemoryForStage(1);
+
+  host_.RenderToSurfaceStart(color_surface, TestHost::SCF_A8R8G8B8, zeta_surface, TestHost::SZF_Z24S8, kSurfaceSize,
+                             kSurfaceSize);
+  host_.SetBlend(false);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::End();
+
+  host_.SetDiffuse(kBackdropColor);
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF, kSurfaceSizeF, kFarZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, 0);
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(color_surface));
+  Pushbuffer::End();
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF * 0.5f, kSurfaceSizeF, kMidZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_COLOR_MASK, kAllColorChannels);
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(zeta_surface));
+  Pushbuffer::End();
+
+  host_.RenderToSurfaceEnd();
+
+  host_.PBKitBusyWait();
+  auto pixels = reinterpret_cast<volatile uint32_t*>(color_surface);
+  const uint32_t middle_row = (kSurfaceSize / 2) * kSurfaceSize;
+  const uint32_t left_pixel = pixels[middle_row + kSurfaceSize / 4];
+  const uint32_t right_pixel = pixels[middle_row + (kSurfaceSize * 3) / 4];
+
+  DrawOverlapSurfaceToFramebuffer(color_surface);
+
+  pb_printat(0, 0, "%s", kColorMaskedZetaOntoColorTestName);
+  pb_printat(1, 0, "Zeta moved onto bound color, color masked");
+  pb_printat(2, 0, "Left half drawn with depth writes only");
+  pb_printat(15, 18, "0x%08X", left_pixel);
+  pb_printat(15, 32, "0x%08X", right_pixel);
+  pb_draw_text_screen();
+
+  FinishDraw(kColorMaskedZetaOntoColorTestName);
+}
+
+void ColorZetaOverlapTests::TestReadOnlyZetaOntoColor() {
+  static constexpr uint32_t kSurfaceSize = 128;
+  static constexpr float kSurfaceSizeF = static_cast<float>(kSurfaceSize);
+  static constexpr uint32_t kMinDepthColor = 0x00000000;
+  static constexpr uint32_t kMaxDepthColor = 0xFFFFFFFF;
+  static constexpr uint32_t kTestColor = 0xFF33FF33;
+  static constexpr float kMidZ = 0.f;
+  static constexpr float kFarZ = 1.f;
+
+  host_.PrepareDraw(0xFE242424);
+
+  uint8_t* color_surface = host_.GetTextureMemoryForStage(0);
+  uint8_t* zeta_surface = host_.GetTextureMemoryForStage(1);
+
+  host_.RenderToSurfaceStart(color_surface, TestHost::SCF_A8R8G8B8, zeta_surface, TestHost::SZF_Z24S8, kSurfaceSize,
+                             kSurfaceSize);
+  host_.SetBlend(false);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_STENCIL_TEST_ENABLE, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_TEST_ENABLE, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::End();
+
+  host_.SetDiffuse(kMinDepthColor);
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF * 0.5f, kSurfaceSizeF, kFarZ);
+  host_.SetDiffuse(kMaxDepthColor);
+  host_.DrawScreenQuad(kSurfaceSizeF * 0.5f, 0.f, kSurfaceSizeF, kSurfaceSizeF, kFarZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(color_surface));
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, false);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_LESS);
+  Pushbuffer::End();
+
+  host_.SetDiffuse(kTestColor);
+  host_.DrawScreenQuad(0.f, 0.f, kSurfaceSizeF, kSurfaceSizeF, kMidZ);
+
+  Pushbuffer::Begin();
+  Pushbuffer::Push(NV097_SET_DEPTH_MASK, true);
+  Pushbuffer::Push(NV097_SET_DEPTH_FUNC, NV097_SET_DEPTH_FUNC_V_ALWAYS);
+  Pushbuffer::Push(NV097_SET_SURFACE_ZETA_OFFSET, VRAM_ADDR(zeta_surface));
+  Pushbuffer::End();
+
+  host_.RenderToSurfaceEnd();
+
+  host_.PBKitBusyWait();
+  auto pixels = reinterpret_cast<volatile uint32_t*>(color_surface);
+  const uint32_t middle_row = (kSurfaceSize / 2) * kSurfaceSize;
+  const uint32_t left_pixel = pixels[middle_row + kSurfaceSize / 4];
+  const uint32_t right_pixel = pixels[middle_row + (kSurfaceSize * 3) / 4];
+
+  DrawOverlapSurfaceToFramebuffer(color_surface);
+
+  pb_printat(0, 0, "%s", kReadOnlyZetaOntoColorTestName);
+  pb_printat(1, 0, "Zeta moved onto color, depth writes off");
+  pb_printat(2, 0, "Green drawn at mid depth with LESS");
+  pb_printat(15, 18, "0x%08X", left_pixel);
+  pb_printat(15, 32, "0x%08X", right_pixel);
+  pb_draw_text_screen();
+
+  FinishDraw(kReadOnlyZetaOntoColorTestName);
+}
+
+void ColorZetaOverlapTests::DrawOverlapSurfaceToFramebuffer(uint8_t* surface) {
+  static constexpr uint32_t kSurfaceSize = 128;
+  static constexpr float kDisplaySize = static_cast<float>(kSurfaceSize) * 2.f;
+
   host_.SetFinalCombiner0Just(TestHost::SRC_TEX0);
   host_.SetFinalCombiner1Just(TestHost::SRC_ZERO, true, true);
   host_.SetShaderStageProgram(TestHost::STAGE_2D_PROJECTIVE);
@@ -332,16 +494,6 @@ void ColorZetaOverlapTests::TestZetaRebindAfterColorMove(bool color_onto_zeta) {
                           false, TestHost::SRC_R0);
   host_.SetFinalCombiner1(TestHost::SRC_ZERO, false, false, TestHost::SRC_ZERO, false, false, TestHost::SRC_R0, true,
                           false, false, false, true);
-
-  const char* test_name = color_onto_zeta ? kColorOntoZetaRebindTestName : kZetaOntoColorRebindTestName;
-  pb_printat(0, 0, "%s", test_name);
-  pb_printat(1, 0, "Zeta: left near, right far");
-  pb_printat(2, 0, "Green drawn at mid depth with LESS");
-  pb_printat(15, 18, "Near");
-  pb_printat(15, 38, "Far");
-  pb_draw_text_screen();
-
-  FinishDraw(test_name);
 }
 
 void ColorZetaOverlapTests::TestXemuAdjacentSurfaceWithClipOffset(bool swizzle) {
